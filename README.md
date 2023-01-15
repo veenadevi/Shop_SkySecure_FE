@@ -1,2 +1,0 @@
-# altsys_frontend
-altsys
