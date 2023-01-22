@@ -2,7 +2,19 @@
 
 /* Global Colors Declaration */
 
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../node_modules/font-awesome/css/font-awesome.css";
+
 :root {
     --neutral: #0B0B0B;
+    --primary: #F2F2F2;
+    --white : #FFFFFF;
   }
+
+
+
+body{
+  margin: 0px !important;
+}
 

@@ -1,0 +1,19 @@
+
+.toolbar{
+    background-color: var(--neutral);
+    height: 72px;
+}
+
+.altsys-logo{
+    position: absolute;
+    left: 32px;
+}
+
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+.toolbar-icon {
+    padding-right: 3em;
+}

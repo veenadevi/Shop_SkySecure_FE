@@ -2,6 +2,7 @@
 import { NgModule }                       from '@angular/core';
 import { CommonModule }                   from '@angular/common';
 import { RouterModule }                   from '@angular/router';
+import { MaterialModule } from '../material.module';
 
 
 /** Angular Material Imports */
@@ -35,6 +36,7 @@ import { LayoutModule  } from '../layout/layout.module';
     CommonModule,
     InterfaceRoutingModule,
     LayoutModule,
+    MaterialModule
   ],
 
   declarations: [
@@ -49,6 +51,7 @@ import { LayoutModule  } from '../layout/layout.module';
 
   exports: [
     RouterModule,
+    MaterialModule
     /*MatButtonModule,
     MatSidenavModule,
     MatMenuModule,

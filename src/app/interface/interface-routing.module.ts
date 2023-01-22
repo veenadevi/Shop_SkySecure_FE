@@ -15,13 +15,13 @@ const INTERFACE_ROUTES: Routes = [
   {
     path: '',
     component: InterfaceComponent,
-    /*children: [
+    children: [
       {
         canActivate: [],
         path: '',
-        loadChildren: () => import('').then(m => m.HomeModule)
+        loadChildren: () => import('../routes/home-page/home-page.module').then(m => m.HomePageModule)
       }
-    ]*/
+    ]
   }
 
 ];

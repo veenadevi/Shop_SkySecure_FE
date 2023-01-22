@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MaterialModule } from './material.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 /** Angular Material Imports */
@@ -19,19 +21,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule} from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { InterfaceModule } from './interface/interface.module';
+
 
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    MaterialModule,
+    InterfaceModule,
+    BrowserAnimationsModule
   ],
   providers: [],
+  declarations: [
+    AppComponent,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

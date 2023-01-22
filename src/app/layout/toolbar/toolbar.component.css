@@ -1,0 +1,14 @@
+.toolbar{
+    background-color: var(--primary);
+    height: 72px;
+    justify-content: center;
+}
+
+button{
+    padding-right: 2em;
+}
+
+button i {
+    margin-left: 0.2em;
+}
+

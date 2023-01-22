@@ -7,7 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 
-
 export class HeaderComponent {
+
+
+
+  /**
+   * Click Functions
+   */
+
+  // Cart Click
+
+  public cartFynction(){
+    
+  }
 
 }
