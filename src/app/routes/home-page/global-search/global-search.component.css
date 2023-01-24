@@ -15,4 +15,27 @@
 .header{
     color: var(--white);
     padding-bottom: 20px;
+    font-family: 'Merriweather';
+    font-size: 2.4em;
+}
+.search-box{
+    width: 50%;
+}
+.search-box .form-control {
+    padding-left: 3.7rem;
+    font-size: 20px;
+    border-radius: 0.775em;
+}
+
+.search-box .search-icon{
+    font-size: 20px;
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 3.375rem;
+    height: 2.375rem;
+    line-height: 2.7rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
 }
