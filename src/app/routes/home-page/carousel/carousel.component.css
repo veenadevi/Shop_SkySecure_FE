@@ -1,0 +1,23 @@
+.carousel-container{
+    height: 322px;
+    width: 100%;
+    background : var(--white);
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+
+ngb-carousel .wrapper {
+    position: relative;
+    height: 0;
+    padding-top: 55%; /* Keep ratio for 900x500 images */
+  }
+  
+  ngb-carousel .wrapper>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }

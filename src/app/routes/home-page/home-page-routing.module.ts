@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GlobalSearchComponent } from './global-search/global-search.component';
+import { HomePgaeComponent } from './home-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: GlobalSearchComponent,
+    component: HomePgaeComponent,
     /*data: {
       title: 'Backlog'
     }*/
@@ -17,3 +17,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class HomePageRoutingModule { }
+
+/* Export Feature Components */
+export const ROUTED_COMPONENTS = [ HomePgaeComponent ];

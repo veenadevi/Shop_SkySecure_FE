@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 /** Angular Material Imports */
 // import { MatButtonModule } from '@angular/material/button';
@@ -34,7 +36,8 @@ import { InterfaceModule } from './interface/interface.module';
     RouterModule,
     MaterialModule,
     InterfaceModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [],
   declarations: [
