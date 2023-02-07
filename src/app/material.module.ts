@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   imports: [ 
@@ -16,7 +15,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     MatMenuModule,
     MatToolbarModule,
     MatDividerModule,
-    NgbModule
   ],
   exports: [
     MatButtonModule, 
@@ -24,7 +22,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     MatMenuModule,
     MatToolbarModule,
     MatDividerModule,
-    NgbModule,
   ]    
 })
 
