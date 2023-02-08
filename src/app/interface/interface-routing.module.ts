@@ -23,7 +23,7 @@ const INTERFACE_ROUTES: Routes = [
       },
       {
         canActivate: [],
-        path: 'product',
+        path: 'products',
         loadChildren: () => import('../routes/product-page/product-page.module').then(m=>m.ProductPageModule)
       }
     ]
