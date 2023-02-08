@@ -1,0 +1,29 @@
+.container{
+    height: 322px;
+    width: 100%;
+    background : var(--white);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    max-width: 1620px !important;
+}
+
+.card-container{
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-top: -5px;
+}
+
+.card-item{
+    border: 2px solid var(--light_border);
+    border-radius: 5px;
+    height: 11.5rem;
+    width: 11.5rem;
+}
+
+.d-flex{
+    display: flex!important;
+}

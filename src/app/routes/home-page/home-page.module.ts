@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomePageRoutingModule,  ROUTED_COMPONENTS} from './home-page-routing.module';
 import { GlobalSearchComponent } from './global-search/global-search.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { ProductsByCategoryComponent } from './products-by-category/products-by-category.component';
 
 
 
@@ -14,7 +15,8 @@ import { CarouselComponent } from './carousel/carousel.component';
   declarations: [
     ROUTED_COMPONENTS,
     GlobalSearchComponent,
-    CarouselComponent
+    CarouselComponent,
+    ProductsByCategoryComponent
   ],
   imports: [
     CommonModule,

@@ -1,13 +1,16 @@
 
   
   <div class="container">
+
+    <div>
+        <span class="text-header">The best brand & product deals for you..hurry!! </span>
+    </div>
     <div class="row">
       <div class="col-md-12 py-3">
         
         <ngb-carousel *ngIf="event_list">
-          <h4>The best brand & product deals for you..hurry!!</h4>
           <ng-template ngbSlide *ngFor="let event of past_events">
-            <img [src]="event.img" alt="Random slide">
+            <img [src]="event.img" alt="Random slide" class="mh-100" style="width: 100%; height:25vh">
             <div class="carousel-caption">
               <h3>{{ event.eventLocation }}</h3>
               <p [innerText]="event.eventDescription"></p>
@@ -17,6 +20,3 @@
       </div>
     </div>
   </div>
-
-
-  

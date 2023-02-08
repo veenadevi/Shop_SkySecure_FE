@@ -10,6 +10,7 @@
     --neutral: #0B0B0B;
     --primary: #F2F2F2;
     --white : #FFFFFF;
+    --light_border : #EFEFEF;
   }
 
 
@@ -18,3 +19,10 @@ body{
   margin: 0px !important;
 }
 
+
+/** Custom Class for Text  **/
+.text-header{
+  font-family: 'Merriweather';
+  font-size: 1.3em;
+  font-weight: 600;
+}
