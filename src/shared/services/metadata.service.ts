@@ -9,20 +9,22 @@ import { CatrgoryResponse } from '../models/interface/response/category-response
 
 @Injectable({ providedIn: 'root' })
 export class MetadataService {
-  private baseUri: string;
+  private baseUrl: string;
+  private fetchCategoryUrl : string;
 
 
   constructor(
     private http: HttpClient,
   ) {
-    this.baseUri = AppService.localhost.appUri + 'api/category';
+    this.baseUrl = AppService.gatewayUrl.localhost;
+    this.fetchCategoryUrl = AppService.appUrl.category;
     //this.quotaDetailsUri = this.ouxConfigSvc.getAppConfigValue('apiUri').e2eQuotaACV;
   }
 
   //fetchRefreshDate
   public fetchCategory(): Observable<any> {
 
-    let url = this.baseUri;
+    let url = this.baseUrl + this.fetchCategoryUrl;
     //let options = this.getOptions();
 
     let request$ = this.http.get<CatrgoryResponse>(url)

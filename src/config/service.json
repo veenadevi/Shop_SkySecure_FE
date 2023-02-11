@@ -1,6 +1,10 @@
 {
-    "localhost":{
-        "appUri": "http://localhost:8002/"
+
+    "gatewayUrl" : {
+        "localhost" : "http://localhost:8002/"
+    },
+    "appUrl" : {
+        "category" : "api/category"
     }
     
 }
