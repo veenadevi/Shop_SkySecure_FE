@@ -1,0 +1,6 @@
+{
+    "localhost":{
+        "appUri": "http://localhost:8002/"
+    }
+    
+}

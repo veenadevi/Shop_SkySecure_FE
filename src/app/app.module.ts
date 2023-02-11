@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from './material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
@@ -24,6 +25,8 @@ import { AppRoutingModule} from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { InterfaceModule } from './interface/interface.module';
+import { LoaderService } from 'src/shared/services/loader.service'; 
+
 
 
 
@@ -37,9 +40,12 @@ import { InterfaceModule } from './interface/interface.module';
     MaterialModule,
     InterfaceModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    LoaderService
+  ],
   declarations: [
     AppComponent,
   ],

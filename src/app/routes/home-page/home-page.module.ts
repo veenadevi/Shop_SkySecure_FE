@@ -11,6 +11,8 @@ import { ProductsByCategoryComponent } from './products-by-category/products-by-
 
 
 
+
+
 @NgModule({
   declarations: [
     ROUTED_COMPONENTS,
@@ -27,4 +29,9 @@ import { ProductsByCategoryComponent } from './products-by-category/products-by-
     RouterModule
   ]
 })
-export class HomePageModule { }
+export class HomePageModule { 
+
+ 
+
+  
+}

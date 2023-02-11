@@ -12,3 +12,12 @@ button i {
     margin-left: 0.2em;
 }
 
+.mat-mdc-menu-item.mdc-list-item {
+    border-bottom: 2px solid var(--primary) !important;
+    padding-bottom: 4px;
+}
+
+.mat-mdc-menu-item.mdc-list-item:last-child {
+    border-bottom: none !important
+}
+
