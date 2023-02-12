@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
 import { MetadataService } from 'src/shared/services/metadata.service';
 
 @Component({
-  selector: 'products-by-category',
-  templateUrl: './products-by-category.component.html',
-  styleUrls: ['./products-by-category.component.css']
+  selector: 'products-by-brand',
+  templateUrl: './products-by-brand.component.html',
+  styleUrls: ['./products-by-brand.component.css']
 })
-export class ProductsByCategoryComponent {
+export class ProductsByBrandComponent {
 
   private subscriptions : Subscription[] = [];
 
@@ -40,8 +39,8 @@ export class ProductsByCategoryComponent {
 
     this.subscriptions.push(
       this.metadataSvc.fetchCategoryMock().subscribe( response => {
-        console.log("*** res ", response.category);
-        this.mockCategories = response.category;
+        console.log("*** res ", response.brands);
+        this.mockCategories = response.brands;
       })
       
     );

@@ -26,6 +26,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { InterfaceModule } from './interface/interface.module';
 import { LoaderService } from 'src/shared/services/loader.service'; 
+import { SharedModule } from 'src/shared/shared.module';
 
 
 
@@ -41,7 +42,8 @@ import { LoaderService } from 'src/shared/services/loader.service';
     InterfaceModule,
     BrowserAnimationsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [
     LoaderService

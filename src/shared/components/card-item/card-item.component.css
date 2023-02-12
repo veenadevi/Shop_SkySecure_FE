@@ -1,0 +1,21 @@
+.card-item{
+    border: 2px solid var(--light_border);
+    border-radius: 5px;
+    height: 11.5rem;
+    width: 11.5rem;
+    background: var(--secondary);
+}
+
+.d-flex{
+    display: flex!important;
+    row-gap: 10%;
+}
+.ellipse{
+    background: var(--white);
+    border-radius: 50%;
+}
+
+.card-item img{
+    width: 3em;
+    height: 3em;
+}

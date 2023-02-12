@@ -47,4 +47,11 @@ export class MetadataService {
   }
 
 
+  public fetchCategoryMock() : Observable<any> {
+    
+      return this.http.get('/assets/mock-data/category.json');
+    
+  }
+
+
 }

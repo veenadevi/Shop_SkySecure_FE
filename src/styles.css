@@ -11,6 +11,9 @@
     --primary: #F2F2F2;
     --white : #FFFFFF;
     --light_border : #EFEFEF;
+    --secondary : #EBECF6;
+
+    --brown : #BA6064;
   }
 
 
@@ -24,5 +27,12 @@ body{
 .text-header{
   font-family: 'Merriweather';
   font-size: 1.3em;
+  font-weight: 600;
+}
+
+
+.text-normal {
+  font-family: 'Merriweather';
+  font-size: 0.9em;
   font-weight: 600;
 }

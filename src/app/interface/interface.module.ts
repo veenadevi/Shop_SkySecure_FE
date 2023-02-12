@@ -3,17 +3,9 @@ import { NgModule }                       from '@angular/core';
 import { CommonModule }                   from '@angular/common';
 import { RouterModule }                   from '@angular/router';
 import { MaterialModule } from '../material.module';
+import { SharedModule } from 'src/shared/shared.module';
 
 
-/** Angular Material Imports */
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 /* Feature Imports */
 
@@ -36,7 +28,8 @@ import { LayoutModule  } from '../layout/layout.module';
     CommonModule,
     InterfaceRoutingModule,
     LayoutModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ],
 
   declarations: [

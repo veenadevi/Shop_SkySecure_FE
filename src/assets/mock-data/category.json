@@ -1,0 +1,65 @@
+{
+    "category" : [
+        {
+            "name": "Users",
+            "imageSrc" : "/assets/icons/Users.svg"
+        },
+        {
+            "name": "Devices",
+            "imageSrc" : "/assets/icons/Devices.svg"
+        },
+        {
+            "name": "Netwrok",
+            "imageSrc" : "/assets/icons/Networks.svg"
+        },
+        {
+            "name": "Cloud",
+            "imageSrc" : "/assets/icons/Cloud.svg"
+        },
+        {
+            "name": "Data",
+            "imageSrc" : "/assets/icons/data.svg"
+        },
+        {
+            "name": "Applications",
+            "imageSrc" : "/assets/icons/ApplicationSecurityTool.svg"
+        },
+        {
+            "name": "Support",
+            "imageSrc" : "/assets/icons/Support.svg"
+        }
+    ],
+
+    "brands" : [
+        {
+            "name": "Microsoft",
+            "imageSrc" : "/assets/icons/Microsoft.svg"
+        },
+        {
+            "name": "CloudStrike",
+            "imageSrc" : "/assets/icons/cloudstrike.svg"
+        },
+        {
+            "name": "Okta",
+            "imageSrc" : "/assets/icons/okta.svg"
+        },
+        {
+            "name": "Palo Alto",
+            "imageSrc" : "/assets/icons/oem1.svg"
+        },
+        {
+            "name": "Tanium",
+            "imageSrc" : "/assets/icons/tanium.svg"
+        },
+        {
+            "name": "Dark Trace",
+            "imageSrc" : "/assets/icons/Networks.svg"
+        },
+        {
+            "name": "Google",
+            "imageSrc" : "/assets/icons/Google.svg"
+        }
+    ]
+
+    
+}
