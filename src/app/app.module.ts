@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from './material.module';
+import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 
 
@@ -38,12 +40,13 @@ import { SharedModule } from 'src/shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
+    FormsModule,
     MaterialModule,
     InterfaceModule,
     BrowserAnimationsModule,
     NgbModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     LoaderService

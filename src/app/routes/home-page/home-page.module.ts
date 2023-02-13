@@ -30,7 +30,8 @@ import { ProductsByBrandComponent } from './products-by-brand/products-by-brand.
     SharedModule
   ],
   exports: [
-    RouterModule
+    RouterModule,
+    SharedModule
   ]
 })
 export class HomePageModule { 
