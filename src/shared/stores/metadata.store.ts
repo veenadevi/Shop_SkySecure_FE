@@ -22,7 +22,7 @@ export class MetadataStore {
     public categoryDetails$ = this.categoryDetailsSubject.asObservable();
 
     private productsDetailsSubject = new BehaviorSubject<ProductsDetails[]>(null);
-    public productsDetails$ = this.categoryDetailsSubject.asObservable();
+    public productsDetails$ = this.productsDetailsSubject.asObservable();
 
   constructor() {
   }
@@ -57,7 +57,7 @@ export class MetadataStore {
   /**
    * Return User Details
    */
-  public getProductsDetails(): CategoryDetails {
+  public getProductsDetails(): ProductsDetails {
     return this.productsDetails;
   }
 

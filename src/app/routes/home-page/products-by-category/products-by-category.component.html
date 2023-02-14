@@ -11,7 +11,7 @@
 
         <ng-container *ngIf="mockCategories.length > 0" >
             <ng-container *ngFor="let category of mockCategories">
-                <card-item [imageSrc]="category.imageSrc" [name]="category.name"></card-item>
+                <card-item [imageSrc]="category.imageSrc" [name]="category.name" (click)="goToProductsPage()"></card-item>
             </ng-container>
         </ng-container>
     </div>

@@ -1,0 +1,19 @@
+<div class="container-holder text-style p-3">
+
+    <ng-container>
+        <div class="list-row"> 
+            <div class="text-header">
+                <span>Products</span>
+            </div>
+            <ng-container *ngFor="let item of (searchResults$ | async)">
+                <div (click)="goToProductsPage()" class="list-item p-1">
+                    <span>{{item.name}}</span>
+                </div>
+                
+            </ng-container>
+            
+        </div>
+    </ng-container>
+    
+
+</div>

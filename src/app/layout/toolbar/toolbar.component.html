@@ -3,11 +3,39 @@
         ALL CATEGORIES
         <i class="fa fa-caret-down" aria-hidden="true"></i>
     </button>
-        <mat-menu #aboveMenu="matMenu" yPosition="below">
+        <!-- <mat-menu #aboveMenu="matMenu" yPosition="below">
         <ng-container *ngFor="let category of categories">
             <button mat-menu-item>{{category.name}}</button>
         </ng-container>
         
+        </mat-menu> -->
+        
+        <mat-menu #aboveMenu="matMenu" yPosition="below">
+
+            <button mat-menu-item [matMenuTriggerFor]="softwares">
+                <div class="menu-width">
+                    Software
+                </div>
+            </button>
+            <button mat-menu-item [matMenuTriggerFor]="hardware">
+                <div class="menu-width">
+                    Hardware
+                </div>
+            </button>
+            
+        </mat-menu>
+        
+
+        <mat-menu #softwares="matMenu" xPosition="after">
+            <ng-container *ngFor="let category of softwareCategories">
+                <button (click)="goToProductsPage()" mat-menu-item>{{category.name}}</button>
+            </ng-container>
+        </mat-menu>
+          
+        <mat-menu #hardware="matMenu">
+            <ng-container *ngFor="let category of hardwareCategories">
+                <button (click)="goToProductsPage()" mat-menu-item>{{category.name}}</button>
+            </ng-container>
         </mat-menu>
 
     <button mat-button [matMenuTriggerFor]="belowMenu">

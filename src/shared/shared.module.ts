@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { PopularCategoryComponent } from './components/search/partials/popular-category/popular-category.component';
 import { TrendingProductsComponent } from './components/search/partials/trending-products/trending-products.component';
 import { RecentlySearchedComponent } from './components/search/partials/recently-searched/recently-searched.component';
+import { SearchListComponent } from './components/search/partials/search-list/search-list.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { RecentlySearchedComponent } from './components/search/partials/recently
     SearchComponent,
     PopularCategoryComponent,
     TrendingProductsComponent,
-    RecentlySearchedComponent
+    RecentlySearchedComponent,
+    SearchListComponent
   ],
 
   providers: [

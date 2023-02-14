@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, Subscription } from 'rxjs';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 
@@ -14,7 +15,8 @@ export class TrendingProductsComponent {
   
 
   constructor( 
-    private metadataStore : MetadataStore
+    private metadataStore : MetadataStore,
+    private router : Router
   ){}
 
   public trendingProducts$ = this.metadataStore.productsDetails$
@@ -36,6 +38,11 @@ export class TrendingProductsComponent {
     // this.subscriptions.push(this.popularCategory$.subscribe(res => {
     //   console.log("RES ", res);
     // }));
+  }
+
+  public goToProductsPage(){
+    console.log("Came here in Routing");
+    this.router.navigate(['/products']);
   }
 
 }

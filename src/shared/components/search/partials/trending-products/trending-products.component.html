@@ -6,7 +6,7 @@
     <div class="product-holder">
         <ng-container *ngFor="let category of (trendingProducts$ | async)">
             
-            <div class="product-item">
+            <div class="product-item " (click)="goToProductsPage()">
                 <img src="../../../../../assets/icons/trending_up.svg">
                 {{category.name}} 
             </div>

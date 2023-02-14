@@ -7,9 +7,12 @@
             class="form-control" 
             placeholder="Search by products, categories, brands & more"
             (click) = "onSearchClicked()"
+            
             (focusout)="onFocusOutEvent($event)"
+            
             (input)="onSearchQueryInput($event)"
             >
+            <!-- (focusout)="onFocusOutEvent($event)" -->
     </div>
     <ng-container *ngIf="isOpen">
         <div class="search-result-container p-1">
@@ -21,7 +24,7 @@
                     <recently-searched></recently-searched>
                 </ng-container>
                 <ng-container *ngIf="keywordSearchOpen">
-                    <popular-category></popular-category>
+                    <search-list [searchResults] = "searchResults"></search-list>
                 </ng-container>
                 
             </div>

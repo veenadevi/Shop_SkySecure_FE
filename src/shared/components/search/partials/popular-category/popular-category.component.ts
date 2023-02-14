@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, filter, Subscription } from 'rxjs';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 
@@ -14,7 +15,8 @@ export class PopularCategoryComponent {
   
 
   constructor( 
-    private metadataStore : MetadataStore
+    private metadataStore : MetadataStore,
+    private router : Router
   ){}
 
   public popularCategory$ = this.metadataStore.categoryDetails$
@@ -36,6 +38,10 @@ export class PopularCategoryComponent {
     // this.subscriptions.push(this.popularCategory$.subscribe(res => {
     //   console.log("RES ", res);
     // }));
+  }
+
+  public goToProductsPage(){
+    this.router.navigate(['/products']);
   }
 
 }

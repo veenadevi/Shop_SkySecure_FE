@@ -21,3 +21,7 @@ button i {
     border-bottom: none !important
 }
 
+.menu-width {
+    width: 400px !important;
+}
+

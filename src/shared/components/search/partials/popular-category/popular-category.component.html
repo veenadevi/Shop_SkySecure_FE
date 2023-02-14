@@ -5,7 +5,7 @@
 
     <div class="product-holder">
         <ng-container *ngFor="let category of (popularCategory$ | async)">
-            <div class="product-item">{{category.name}} </div>
+            <div class="product-item" (click)="goToProductsPage()">{{category.name}} </div>
         </ng-container>
     </div>
 

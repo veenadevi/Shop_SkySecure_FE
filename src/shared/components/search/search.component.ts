@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { debounceTime, distinctUntilChanged, Subscription, switchMap } from 'rxjs';
 import { Subject } from 'rxjs';
+import { ProductsDetails } from 'src/shared/models/interface/partials/products-details';
 import { GlobalSearchService } from 'src/shared/services/global-search.service';
+import { SearchResultStore } from 'src/shared/stores/search-results.store';
 
 @Component({
   selector: 'search-box',
@@ -17,8 +19,11 @@ export class SearchComponent {
   private searchSubscription?: Subscription;
   private searchSubject = new Subject<string | undefined>();
 
+  public searchResults : ProductsDetails[];
+
   constructor(
-    private globalSearchSvc : GlobalSearchService
+    private globalSearchSvc : GlobalSearchService,
+    private searchResultsStore : SearchResultStore
   ) { }
 
   public onSearchClicked() {
@@ -28,10 +33,19 @@ export class SearchComponent {
   }
 
   public onFocusOutEvent(event: any){
-    console.log(event.target.value);
-    this.isOpen = false;
-    this.generalSearchOpen = false;
-    this.keywordSearchOpen = false;
+    
+
+    setTimeout(()=>{       
+      console.log(event.target.value);
+      this.isOpen = false;
+      this.generalSearchOpen = false;
+      this.keywordSearchOpen = false;                    
+      
+    }, 300);
+
+    // this.isOpen = true;
+    // this.generalSearchOpen = false;
+    // this.keywordSearchOpen = true
   }
 
   public onSearchQueryInput(event: Event): void {
@@ -52,6 +66,8 @@ export class SearchComponent {
         this.keywordSearchOpen = true;
         this.globalSearchSvc.fetchSearchResults(results).subscribe(res => {
           console.log("&&&& Resp");
+          this.searchResults = res;
+          this.searchResultsStore.setSearchResults(res.products);
         });
       }
       else{
@@ -66,6 +82,11 @@ export class SearchComponent {
 
     this.getSearchResults();
     
+  }
+
+  public mouseInside(event : any){
+    
+    event.preventDefault();
   }
 
 }

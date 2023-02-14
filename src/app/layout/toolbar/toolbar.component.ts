@@ -7,6 +7,7 @@ import { CatrgoryResponse } from 'src/shared/models/interface/response/category-
 import { CategoryDetails } from 'src/shared/models/interface/partials/category-details';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { ProductsDetails } from 'src/shared/models/interface/partials/products-details';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -18,13 +19,17 @@ export class ToolbarComponent {
   constructor(
     private metaDataSvc : MetadataService,
     private loaderService : LoaderService,
-    private metadataStore : MetadataStore
+    private metadataStore : MetadataStore,
+    private router : Router
   ){}
 
   private subscriptions: Subscription[] = [];
 
   public categories : CategoryDetails[] = [];
-  
+
+  public softwareCategories : CategoryDetails[] = [];
+
+  public hardwareCategories : CategoryDetails[] = [];
 
 
   private getCategories(): CategoryDetails[]{
@@ -32,7 +37,9 @@ export class ToolbarComponent {
     this.subscriptions.push(
       this.metaDataSvc.fetchCategory().subscribe( response => {
         this.metadataStore.setCategoryDetails(response.categorys);
-        this.categories = response.categorys;
+        this.categories = response.categorys.splice(0,10);
+        this.softwareCategories = response.categorys.splice(0,10);
+        this.hardwareCategories = response.categorys.splice(0, 10, 15);
       })
       
     );
@@ -43,8 +50,8 @@ export class ToolbarComponent {
     let categoryResponse = null;
     this.subscriptions.push(
       this.metaDataSvc.fetchProducts().subscribe( response => {
-        this.metadataStore.setProductsDetails(response.categorys);
-        this.categories = response.products;
+        this.metadataStore.setProductsDetails(response.products);
+        //this.categories = response.products;
       })
       
     );
@@ -57,6 +64,10 @@ export class ToolbarComponent {
     this.getCategories();
     this.getProducts();
     
+  }
+
+  public goToProductsPage(){
+    this.router.navigate(['/products']);
   }
 
 }
