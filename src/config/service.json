@@ -5,7 +5,8 @@
     },
     "appUrl" : {
         "allCategory" : "api/category", 
-        "allProducts" : "api/product"
+        "allProducts" : "api/product",
+        "globalSearchByKey" : "api/products/search"
     }
     
 }

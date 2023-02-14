@@ -9,55 +9,33 @@ import { CatrgoryResponse } from '../models/interface/response/category-response
 import { ProductsResponse } from '../models/interface/response/products-response';
 
 @Injectable({ providedIn: 'root' })
-export class MetadataService {
+export class GlobalSearchService {
   private baseUrl: string;
-  private fetchCategoryUrl : string;
-  private fetchProductsUrl : string;
+  private globalSearchUrl : string;
 
 
   constructor(
     private http: HttpClient,
   ) {
     this.baseUrl = AppService.gatewayUrl.localhost;
-    this.fetchCategoryUrl = AppService.appUrl.allCategory;
-    this.fetchProductsUrl = AppService.appUrl.allProducts;
+    this.globalSearchUrl = AppService.appUrl.globalSearchByKey;
 
     //this.quotaDetailsUri = this.ouxConfigSvc.getAppConfigValue('apiUri').e2eQuotaACV;
   }
 
-  //fetch All Category
-  public fetchCategory(): Observable<any> {
 
-    let url = this.baseUrl + this.fetchCategoryUrl;
+
+  //fetch All Products by search
+  public fetchSearchResults(searchKey : string): Observable<any> {
+
+    let url = this.baseUrl + this.globalSearchUrl;
     //let options = this.getOptions();
-    
+    const OPTIONS = {
+        params: new HttpParams()
+          .set('search', searchKey)
+      };
 
-    let request$ = this.http.get<CatrgoryResponse>(url)
-      .pipe(
-        map(response => {
-          if (!response) {
-            return null;
-          }
-          //this.orderStore.setOrderRefreshDate(response);
-          console.log("&&&& Response ", response);
-          return response;
-        }),
-        catchError(error => {
-          // create operation mapping for http exception handling 
-          return (error);
-        })
-      );
-
-    return request$;
-  }
-
-  //fetch All Products
-  public fetchProducts(): Observable<any> {
-
-    let url = this.baseUrl + this.fetchProductsUrl;
-    //let options = this.getOptions();
-
-    let request$ = this.http.get<ProductsResponse>(url)
+    let request$ = this.http.get<ProductsResponse>(url, OPTIONS)
       .pipe(
         map(response => {
           if (!response) {

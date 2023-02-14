@@ -8,35 +8,28 @@
             placeholder="Search by products, categories, brands & more"
             (click) = "onSearchClicked()"
             (focusout)="onFocusOutEvent($event)"
+            (input)="onSearchQueryInput($event)"
             >
-
-            <!-- <ng-container>
-                <div class="search-result-container p-1">
-                    <div class="search-component-holder p-1">
-
-                    
-                        <popular-category></popular-category>
-                        <trending-products></trending-products>
-                        <recently-searched></recently-searched>
-                    </div>
-                    
-                    
-                </div>
-            </ng-container> -->
     </div>
     <ng-container *ngIf="isOpen">
         <div class="search-result-container p-1">
             <div class="search-component-holder p-1">
 
-            
-                <popular-category></popular-category>
-                <trending-products></trending-products>
-                <recently-searched></recently-searched>
+                <ng-container *ngIf="generalSearchOpen">
+                    <popular-category></popular-category>
+                    <trending-products></trending-products>
+                    <recently-searched></recently-searched>
+                </ng-container>
+                <ng-container *ngIf="keywordSearchOpen">
+                    <popular-category></popular-category>
+                </ng-container>
+                
             </div>
             
             
         </div>
     </ng-container>
+
 
 
 </ng-container>
