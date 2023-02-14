@@ -1,0 +1,19 @@
+.product-page-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.filter-container {
+    width:26vw;
+    height: auto;
+    background-color: var(--primary);
+    margin:2% 0%;
+}
+
+app-product {
+    margin:2%;
+}
+
+.oem-tilte {
+    margin:2rem auto auto 1rem;
+}
