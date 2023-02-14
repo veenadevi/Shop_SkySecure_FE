@@ -5,6 +5,7 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { LoadingType } from 'src/shared/models/constnts/loading-type.enum';
 import { CatrgoryResponse } from 'src/shared/models/interface/response/category-response';
 import { CategoryDetails } from 'src/shared/models/interface/partials/category-details';
+import { MetadataStore } from 'src/shared/stores/metadata.store';
 
 @Component({
   selector: 'app-toolbar',
@@ -15,7 +16,8 @@ export class ToolbarComponent {
 
   constructor(
     private metaDataSvc : MetadataService,
-    private loaderService : LoaderService
+    private loaderService : LoaderService,
+    private metadataStore : MetadataStore
   ){}
 
   private subscriptions: Subscription[] = [];
@@ -28,6 +30,7 @@ export class ToolbarComponent {
     let categoryResponse = null;
     this.subscriptions.push(
       this.metaDataSvc.fetchCategory().subscribe( response => {
+        this.metadataStore.setCategoryDetails(response.categorys);
         this.categories = response.categorys;
       })
       
