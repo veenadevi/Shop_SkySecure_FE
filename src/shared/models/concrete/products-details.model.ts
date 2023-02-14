@@ -1,0 +1,19 @@
+import { ProductDetails } from "../interface/partials/products-details";
+
+
+export class ProductsDetailsModel implements ProductDetails {
+  
+    public _id: string;
+    public name: string;
+    public description: string;
+    public createdBy: string;
+    public updatedBy: string;
+    public createdAt: Date;
+    public updatedAt: Date;
+    public __v: number;
+
+  constructor(args : Partial<ProductsDetailsModel>) {
+    Object.assign(this, args);
+  }
+
+}

@@ -7,6 +7,16 @@ import { Component } from '@angular/core';
 })
 export class SearchComponent {
 
-  public isOpen = true;
+  public isOpen = false;
+
+  public onSearchClicked() {
+    console.log("Show");
+    this.isOpen = true;
+  }
+
+  public onFocusOutEvent(event: any){
+    console.log(event.target.value);
+    this.isOpen = false;
+  }
 
 }

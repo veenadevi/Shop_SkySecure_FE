@@ -3,6 +3,7 @@ import { Injectable }             from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CategoryDetailsModel } from '../models/concrete/category-details.model';
 import { CategoryDetails } from '../models/interface/partials/category-details';
+import { ProductsDetails } from '../models/interface/partials/products-details';
 /* Feature Imports */
 
 
@@ -15,9 +16,13 @@ import { CategoryDetails } from '../models/interface/partials/category-details';
 export class MetadataStore {
 
     public categoryDetails : CategoryDetails ;
+    public productsDetails : ProductsDetails ;
   
     private categoryDetailsSubject = new BehaviorSubject<CategoryDetails[]>(null);
     public categoryDetails$ = this.categoryDetailsSubject.asObservable();
+
+    private productsDetailsSubject = new BehaviorSubject<ProductsDetails[]>(null);
+    public productsDetails$ = this.categoryDetailsSubject.asObservable();
 
   constructor() {
   }
@@ -32,12 +37,28 @@ export class MetadataStore {
     this.categoryDetailsSubject.next(data);
   }
 
+  /**
+   * ============================================================
+   * Set Products
+   */
+  public setProductsDetails(data : ProductsDetails[]) : void {
+
+    this.productsDetailsSubject.next(data);
+  }
+
   
   /**
    * Return User Details
    */
    public getCategoryDetails(): CategoryDetails {
     return this.categoryDetails;
+  }
+
+  /**
+   * Return User Details
+   */
+  public getProductsDetails(): CategoryDetails {
+    return this.productsDetails;
   }
 
   

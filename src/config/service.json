@@ -4,7 +4,8 @@
         "localhost" : "http://localhost:8002/"
     },
     "appUrl" : {
-        "category" : "api/category"
+        "allCategory" : "api/category", 
+        "allProducts" : "api/product"
     }
     
 }

@@ -6,6 +6,8 @@
         <input type="text" 
             class="form-control" 
             placeholder="Search by products, categories, brands & more"
+            (click) = "onSearchClicked()"
+            (focusout)="onFocusOutEvent($event)"
             >
 
             <!-- <ng-container>
@@ -22,7 +24,7 @@
                 </div>
             </ng-container> -->
     </div>
-    <ng-container>
+    <ng-container *ngIf="isOpen">
         <div class="search-result-container p-1">
             <div class="search-component-holder p-1">
 

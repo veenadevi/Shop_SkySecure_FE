@@ -17,7 +17,7 @@ export class TrendingProductsComponent {
     private metadataStore : MetadataStore
   ){}
 
-  public popularCategory$ = this.metadataStore.categoryDetails$
+  public trendingProducts$ = this.metadataStore.productsDetails$
     .pipe(
       map(data => {
         if(data && data.length > 10){

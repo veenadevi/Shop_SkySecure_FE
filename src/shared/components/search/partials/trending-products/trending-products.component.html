@@ -4,8 +4,12 @@
     </span>
 
     <div class="product-holder">
-        <ng-container *ngFor="let category of (popularCategory$ | async)">
-            <div class="product-item">{{category.name}} </div>
+        <ng-container *ngFor="let category of (trendingProducts$ | async)">
+            
+            <div class="product-item">
+                <img src="../../../../../assets/icons/trending_up.svg">
+                {{category.name}} 
+            </div>
         </ng-container>
     </div>
 
