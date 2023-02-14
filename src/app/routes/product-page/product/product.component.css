@@ -1,0 +1,111 @@
+.product-container {
+    display: flex;
+    width: 73vw;
+    height: fit-content;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
+
+.mat-card-hero {
+    width: 100%;
+    margin:1%;
+    background-color:#FAFAFA;
+    border-radius: 2px 12px 0px 0px;
+}
+
+mat-card-header {
+    padding: 0 !important;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.57) 0%, rgba(0, 0, 0, 0.1) 26.45%, rgba(0, 0, 0, 0) 47.08%);
+    
+}
+
+img {
+    width:100%;
+}
+
+.product-actions {
+    display: flex;
+    justify-content: space-between;
+}
+.compare-btn {
+    background: #F6EBEC;
+    border: 1px solid #A9383D;
+    border-radius: 8px;
+    text-align: center;
+    color: #A9383D;
+}
+
+.request-btn {
+    background: linear-gradient(90deg, #A9383D 35.42%, #D58583 100%);
+    border-radius: 8px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+}
+
+mat-card-title , .product-descirption , mat-card-subtitle , .solution-link,
+.product-actions {
+    padding: 2% 0;
+}
+a {
+    color:#383DA9;
+    text-transform: capitalize;
+}
+
+mat-card-title {
+   color: #010209;
+   font-weight: 500;
+   line-height: 2rem;
+   font-size: 1.2rem;
+   padding: 3% 0;
+}
+
+.product-descirption {
+   color: #36384A;
+   font-size: 14px;
+}
+
+mat-card-header {
+    position: relative;
+}
+
+.review-header {
+    display: flex;
+    position:absolute;
+    top: 10rem;
+    left: 1rem;
+}
+
+.review-box {
+    padding:0.2rem 1.2rem 0.2rem 0.5rem;
+    background-color: #0B0B0B;
+    color: #FAFAFA;
+    border-radius:4px;
+}
+.review {
+    padding: 1rem;
+    color:  #FFFFFF;
+}
+mat-card-subtitle {
+   color:  #36384A;
+}
+
+.review-icon {
+    color: orange;
+    padding-top: 5px;
+}
+
+.title-container {
+    display: flex;
+    justify-content: space-between;
+}
+.product-bookmark {
+    font-size:1.5rem;
+    padding-top: 3%;
+    overflow: visible;
+}
+
+@media (min-width: 768px) {
+    .mat-card-hero {
+      width: calc(33.33% - 30px);
+    }
+}
