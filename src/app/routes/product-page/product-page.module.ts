@@ -8,20 +8,25 @@ import { ProductPageRoutingModule,  ROUTED_COMPONENTS} from './product-page-rout
 import { ProductComponent } from './product/product.component';
 import { MatCard, MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-
-
-
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MultiSelectDropdownComponent } from './multi-select-dropdown/multi-select-dropdown.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ROUTED_COMPONENTS,
-    ProductComponent
+    ProductComponent,
+    ProductDetailComponent,
+    MultiSelectDropdownComponent
   ],
   imports: [
     CommonModule,
     ProductPageRoutingModule,
     NgbModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    NgMultiSelectDropDownModule
   ],
   exports: [
     RouterModule

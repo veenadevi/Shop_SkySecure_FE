@@ -1,9 +1,12 @@
 <div class="product-page-container">
     <div class="filter-container">
-        <h4>Filter Container</h4>
+        <h6>Filter</h6>
+        <app-multi-select-dropdown></app-multi-select-dropdown>
+        <app-multi-select-dropdown></app-multi-select-dropdown>
+        <app-multi-select-dropdown></app-multi-select-dropdown>
     </div>
     <div class="product-list-container">
         <h4 class="oem-tilte">Microsoft Products</h4>
-        <app-product></app-product>
+        <app-product [products]="products"></app-product>
     </div>
 </div>

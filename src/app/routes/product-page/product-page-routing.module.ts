@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 //import { HomePgaeComponent } from './home-page.component';
 import { ProductPgaeComponent } from './product-page.component';
 
@@ -10,6 +11,9 @@ const routes: Routes = [
     /*data: {
       title: 'Backlog'
     }*/
+  },
+  { path: ':id', 
+  component: ProductDetailComponent 
   }
 ];
 
