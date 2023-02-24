@@ -10,11 +10,12 @@
 .filter-container {
     width:26vw;
     height: auto;
-    margin:2% 0%;
-    background: #FFFFFF;
+    margin:2%;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
     border-radius: 12px;
-    padding:2%;
+    padding:2% 2% 2% 0;
+    background: #FAFAFA;
+    border-radius: 12px;
 }
 
 app-product {
@@ -25,6 +26,12 @@ app-product {
     margin:2rem auto auto 1rem;
 }
 
-app-multi-select-dropdown {
-    margin: 2%;
+.drop-down-container {
+    margin:6% 4%;
+    background: #FFFFFF;
+    padding: 0 !important;
 }
+.filter-title {
+    margin:4%;
+}
+

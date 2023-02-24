@@ -1,7 +1,6 @@
 /* Angular Import */
 import { Injectable }             from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CategoryDetailsModel } from '../models/concrete/category-details.model';
 import { CategoryDetails } from '../models/interface/partials/category-details';
 import { ProductsDetails } from '../models/interface/partials/products-details';
 /* Feature Imports */

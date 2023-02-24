@@ -1,7 +1,7 @@
 <div class="product-details-container">
-    <div class="pd-header">
+    <div class="pd-header" *ngIf="onProductLoad">
         <div class="pd-header-title">
-            <h3>Microsoft 365 E3</h3>
+            <h3>{{product.name}}</h3>
             <div class="pd-header-reviews">
                 <mat-icon class="review-icon">star</mat-icon>
                 <mat-icon class="review-icon">star</mat-icon>
@@ -11,6 +11,7 @@
             </div>
             <div class="pd-header-desc">
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate molestiae ipsam debitis voluptate aliquid iure quis? Consequuntur provident eaque</p>
+                <p>{{product.description}}</p>
             </div>
             <div class="pd-header-actions">
                 <button class="btn request-btn">Request quote</button>
@@ -25,15 +26,12 @@
         </div>
     </div>
     <div class="pd-features">
-        <h4 class="heading-text">Microsoft 365 product details</h4>
+        <h4 class="heading-text">{{product.name}} product details</h4>
         <div class="card-pdf">
           <div class="card-pdf-left">
-          <h5>Microsoft 365  Features</h5>
-          <ul class="card-list-pdf">
-            <li>Lorem, ipsum dolor sit amet consectetur amet consectetur</li>
-            <li>Lorem, ipsum dolor sit amet consectetur amet consectetur</li>
-            <li>Lorem, ipsum dolor sit amet consectetur amet consectetur</li>
-
+          <h5>{{product.name}} Features</h5>
+          <ul class="card-list-pdf" *ngFor="let feature of product.featureList" >
+            <li>{{feature.name}}</li>
           </ul>
         </div>
         <div class="card-pdf-right">
@@ -53,7 +51,7 @@
         </div>
     </div>
     <div class="pd-pricing">
-        <h4 class="heading-text">Microsoft 365 pricing</h4>
+        <h4 class="heading-text">{{product.name}} pricing</h4>
         <div class="pricing-cards">
             <div class="card">
                 <div class="card-header">
@@ -119,22 +117,22 @@
         <h4 class="heading-text">Official screenshots</h4>
         <div class="pd-images-items">
             <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg" alt="Photo of test title" />
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr87KBGwSmwLUIZRsEY5Im5ZMyt9ILgIHn9zUTBDS9rZfPZwWZ-UCsCfUER4MG5dm9TwI&usqp=CAU" alt="Photo of test title" />
             </div>
             <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg" alt="Photo of test title" />
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr87KBGwSmwLUIZRsEY5Im5ZMyt9ILgIHn9zUTBDS9rZfPZwWZ-UCsCfUER4MG5dm9TwI&usqp=CAU" alt="Photo of test title" />
             </div>
             <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg" alt="Photo of test title" />
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://support.content.office.net/en-us/media/f1d13c33-fe72-45dc-9dc3-6c27de9fec90.png" alt="Photo of test title" />
             </div>
             <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg" alt="Photo of test title" />
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://support.content.office.net/en-us/media/f1d13c33-fe72-45dc-9dc3-6c27de9fec90.png" alt="Photo of test title" />
             </div>
             <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg" alt="Photo of test title" />
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://www.pure-ip.com/hs-fs/hubfs/Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png?width=2283&name=Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png" alt="Photo of test title" />
             </div>
             <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg" alt="Photo of test title" />
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://www.pure-ip.com/hs-fs/hubfs/Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png?width=2283&name=Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png" alt="Photo of test title" />
             </div>
         </div>
     </div>

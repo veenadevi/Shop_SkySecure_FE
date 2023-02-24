@@ -1,9 +1,31 @@
 <div class="product-page-container">
     <div class="filter-container">
-        <h6>Filter</h6>
-        <app-multi-select-dropdown></app-multi-select-dropdown>
-        <app-multi-select-dropdown></app-multi-select-dropdown>
-        <app-multi-select-dropdown></app-multi-select-dropdown>
+        <h6 class="filter-title">Filter</h6>
+        <div *ngIf="subCategories.length > 0" class="container drop-down-container">
+            <ng-multiselect-dropdown
+            [placeholder]="'Categories:'"
+            [settings]="dropdownSettings"
+            [data]="subCategories"
+            [(ngModel)]="selectedItems"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+            (onDeSelect)="onItemDeSelect($event)"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div *ngIf="subCategories.length > 0" class="container drop-down-container">
+            <ng-multiselect-dropdown
+            [placeholder]="'Brands:'"
+            [settings]="dropdownSettings"
+            [data]="subCategories"
+            [(ngModel)]="selectedItems"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+            (onDeSelect)="onItemDeSelect($event)"
+          >
+          </ng-multiselect-dropdown>
+        </div>
     </div>
     <div class="product-list-container">
         <h4 class="oem-tilte">Microsoft Products</h4>
