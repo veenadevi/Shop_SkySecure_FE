@@ -6,5 +6,6 @@ export interface CategoryDetails{
     updatedBy: string,
     createdAt: Date,
     updatedAt: Date,
-    __v: number
+    __v: number,
+    subCategories: Array<any>
 }

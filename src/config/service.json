@@ -6,7 +6,10 @@
     "appUrl" : {
         "allCategory" : "api/category", 
         "allProducts" : "api/product",
-        "globalSearchByKey" : "api/products/search"
+        "globalSearchByKey" : "api/products/search",
+        "subCategoryByCategory" : "api/sub-category/",
+        "getProductsBySubCategoryIds" : "api/products",
+        "getSingleProduct": "api/product/"
     }
     
 }

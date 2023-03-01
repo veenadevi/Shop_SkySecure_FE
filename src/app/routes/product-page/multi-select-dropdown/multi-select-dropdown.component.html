@@ -1,0 +1,34 @@
+<!-- <hello></hello> -->
+<form>
+  <ng-multiselect-dropdown
+    id="two"
+    name="city"
+    [settings]="dropdownSettings2"
+    [data]="allItems"
+    [(ngModel)]="selectedItems2"
+  >
+    <ng-template
+      #optionsTemplate
+      let-item
+      let-option="option"
+      let-id="id"
+      let-isSelected="isSelected"
+    >
+      <div style="padding:1px 10px;margin-right:10px;right:2px;top:-2px">
+        <label
+          style="color: #222565;min-width: 130px;font-weight:normal;margin:5px 16px;"
+          [ngStyle]="{
+            'font-weight': isSelected ? 'bold' : ' normal',
+            color: getItems[id].isDisabled ? 'lightgrey' : ''
+          }"
+          >{{ getItems[id].item_text }}</label
+        >
+      </div>
+    </ng-template>
+    <ng-template class="selection-item" #optionSelectedTemplate let-option="option" let-id="id">
+      <div class="selected-items">
+        {{ option }}
+      </div>
+    </ng-template>
+  </ng-multiselect-dropdown>
+</form>

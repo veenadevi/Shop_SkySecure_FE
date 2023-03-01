@@ -29,10 +29,7 @@ import { AppComponent } from './app.component';
 import { InterfaceModule } from './interface/interface.module';
 import { LoaderService } from 'src/shared/services/loader.service'; 
 import { SharedModule } from 'src/shared/shared.module';
-
-
-
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   
@@ -47,12 +44,13 @@ import { SharedModule } from 'src/shared/shared.module';
     NgbModule,
     HttpClientModule,
     SharedModule,
+    NgMultiSelectDropDownModule
   ],
   providers: [
     LoaderService
   ],
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   bootstrap: [AppComponent]
 })
