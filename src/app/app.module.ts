@@ -6,6 +6,12 @@ import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+import { IPublicClientApplication, PublicClientApplication, InteractionType } from '@azure/msal-browser';
+import {
+    MsalGuard, MsalBroadcastService, MsalService,
+    MSAL_GUARD_CONFIG, MSAL_INSTANCE, MsalGuardConfiguration, MsalRedirectComponent, MsalModule
+} from '@azure/msal-angular';
+
 
 
 
@@ -31,6 +37,27 @@ import { LoaderService } from 'src/shared/services/loader.service';
 import { SharedModule } from 'src/shared/shared.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
+import { loginRequest, msalConfig } from './auth-config';
+
+/**
+ * Here we pass the configuration parameters to create an MSAL instance.
+ * For more info, visit: https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/docs/v2-docs/configuration.md
+ */
+export function MSALInstanceFactory(): IPublicClientApplication {
+  return new PublicClientApplication(msalConfig);
+}
+
+/**
+* Set your default interaction type for MSALGuard here. If you have any
+* additional scopes you want the user to consent upon login, add them here as well.
+*/
+export function MSALGuardConfigFactory(): MsalGuardConfiguration {
+  return {
+      interactionType: InteractionType.Redirect,
+      authRequest: loginRequest
+  };
+}
+
 @NgModule({
   
   imports: [
@@ -44,14 +71,26 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NgbModule,
     HttpClientModule,
     SharedModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    MsalModule
   ],
   providers: [
+    {
+      provide: MSAL_INSTANCE,
+      useFactory: MSALInstanceFactory
+    },
+    {
+        provide: MSAL_GUARD_CONFIG,
+        useFactory: MSALGuardConfigFactory
+    },
+    MsalService,
+    MsalGuard,
+    MsalBroadcastService,
     LoaderService
   ],
   declarations: [
     AppComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, MsalRedirectComponent]
 })
 export class AppModule { }
