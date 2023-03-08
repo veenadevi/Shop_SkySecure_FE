@@ -14,8 +14,11 @@
   <button mat-icon-button class="toolbar-icon">
     <img src="../../../assets/icons/Bell.svg"/>
   </button>
-  <button mat-icon-button class="toolbar-icon">
+  <button *ngIf="!userLoggedIn" mat-icon-button class="toolbar-icon" (click)="login()">
     <img src="../../../assets/icons/User_icon.svg"/>
+  </button>
+  <button *ngIf= "userLoggedIn" mat-icon-button class="toolbar-icon" (click)="logout()">
+    <img src="../../../assets/icons/Users.svg"/>
   </button>
   
 </mat-toolbar>

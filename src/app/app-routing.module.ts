@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MsalGuard, MsalRedirectComponent } from '@azure/msal-angular';
 
 import { InterfaceModule  } from './interface/interface.module';
 
@@ -16,6 +17,12 @@ const appRoutes : Routes = [
     redirectTo: 'login'
   },
 
+  {
+    // Needed for handling redirect after login
+    path: 'auth',
+    component: MsalRedirectComponent
+  },
+
   /**
    * The InterfaceModule is the acting root entry point for all feature routes
    * and layout components.
@@ -30,6 +37,8 @@ const appRoutes : Routes = [
       //activities: ['Admin']
     }
   },
+
+  
 
   
 
