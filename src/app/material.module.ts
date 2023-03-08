@@ -10,6 +10,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
+
 
 
 
@@ -23,7 +26,8 @@ import { MatCardModule } from '@angular/material/card';
     MatDividerModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    MatSidenavModule,
   ],
   exports: [
     MatButtonModule, 
@@ -33,7 +37,9 @@ import { MatCardModule } from '@angular/material/card';
     MatDividerModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    MatSidenavModule,
+    
   ]    
 })
 

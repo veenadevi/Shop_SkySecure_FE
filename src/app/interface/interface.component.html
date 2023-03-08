@@ -7,9 +7,23 @@
     <!-- Toolbar Component-->
     <app-toolbar></app-toolbar>
 
+    <ng-container *ngIf="userLoggedIn">
+        <mat-sidenav-container>
+            <mat-sidenav opened=true mode="side">drawer</mat-sidenav>
+            <mat-sidenav-content>
+                <router-outlet></router-outlet>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </ng-container>
+
+    <ng-container *ngIf="!userLoggedIn">
+        <router-outlet></router-outlet>
+    </ng-container>
+    
+
     <!-- Other Routes-->
 
-    <router-outlet></router-outlet>
+    <!-- <router-outlet></router-outlet> -->
 
 
     <!-- Footer Component -->

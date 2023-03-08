@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { LoaderService } from 'src/shared/services/loader.service';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { LoadingType } from 'src/shared/models/constnts/loading-type.enum';
@@ -8,6 +8,7 @@ import { CategoryDetails } from 'src/shared/models/interface/partials/category-d
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { ProductsDetails } from 'src/shared/models/interface/partials/products-details';
 import { Router } from '@angular/router';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'app-toolbar',
@@ -20,6 +21,7 @@ export class ToolbarComponent {
     private metaDataSvc : MetadataService,
     private loaderService : LoaderService,
     private metadataStore : MetadataStore,
+    private userAccountStore : UserAccountStore,
     private router : Router
   ){}
 
@@ -51,19 +53,18 @@ export class ToolbarComponent {
     this.subscriptions.push(
       this.metaDataSvc.fetchProducts().subscribe( response => {
         this.metadataStore.setProductsDetails(response.products);
-        //this.categories = response.products;
       })
       
     );
     return categoryResponse;
   }
 
+
+
   public ngOnInit() : void {
 
-    
     this.getCategories();
     this.getProducts();
-    
   }
 
   public goToProductsPage(){

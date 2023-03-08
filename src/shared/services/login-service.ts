@@ -5,6 +5,7 @@ import { IdTokenClaims, PromptValue } from '@azure/msal-common';
 import { AccountInfo, AuthenticationResult, EventMessage, EventType, InteractionStatus, InteractionType, PopupRequest, RedirectRequest, SsoSilentRequest } from '@azure/msal-browser';
 import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
 import { b2cPolicies } from '../../app/auth-config';
+import { UserAccountStore } from '../stores/user-account.store';
 
 
 
@@ -18,23 +19,28 @@ export class LoginService {
     private http: HttpClient,
     @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
     private authService: MsalService,
+    private userAccountStore : UserAccountStore,
     private msalBroadcastService: MsalBroadcastService
   ) {}
 
   login(userFlowRequest?: RedirectRequest | PopupRequest) {
         if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
+            console.log("---------> Called If MSAL");
             if (this.msalGuardConfig.authRequest) {
                 this.authService.loginPopup({ ...this.msalGuardConfig.authRequest, ...userFlowRequest } as PopupRequest)
                     .subscribe((response: AuthenticationResult) => {
                         this.authService.instance.setActiveAccount(response.account);
+                        this.userAccountStore.setuserAccountDetails(response.account);
                     });
             } else {
                 this.authService.loginPopup(userFlowRequest)
                     .subscribe((response: AuthenticationResult) => {
                         this.authService.instance.setActiveAccount(response.account);
+                        this.userAccountStore.setuserAccountDetails(response.account);
                     });
             }
         } else {
+            console.log("---------> Called If Else");
                 if (this.msalGuardConfig.authRequest) {
                     this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest, ...userFlowRequest } as RedirectRequest);
                 } else {
