@@ -38,13 +38,22 @@
             </ng-container>
         </mat-menu>
 
+
+        
+
     <button mat-button [matMenuTriggerFor]="belowMenu">
         ALL BRANDS
         <i class="fa fa-caret-down" aria-hidden="true"></i>
     </button>
-        <mat-menu #belowMenu="matMenu" yPosition="below">
+        <!-- <mat-menu #belowMenu="matMenu" yPosition="below">
         <button mat-menu-item>Item 1</button>
         <button mat-menu-item>Item 2</button>
+        </mat-menu> -->
+
+        <mat-menu #belowMenu="matMenu" yPosition="below">
+            <ng-container *ngFor="let oem of oemList">
+                <button (click)="goToProductsPage()" mat-menu-item>{{oem.name}}</button>
+            </ng-container>
         </mat-menu>
 
     <button mat-button [matMenuTriggerFor]="beforeMenu">

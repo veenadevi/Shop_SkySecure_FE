@@ -2,6 +2,7 @@
 import { Injectable }             from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CategoryDetails } from '../models/interface/partials/category-details';
+import { OEMDetails } from '../models/interface/partials/oem-details';
 import { ProductsDetails } from '../models/interface/partials/products-details';
 /* Feature Imports */
 
@@ -15,10 +16,14 @@ import { ProductsDetails } from '../models/interface/partials/products-details';
 export class MetadataStore {
 
     public categoryDetails : CategoryDetails ;
+    public oemDetails : OEMDetails ;
     public productsDetails : ProductsDetails ;
   
     private categoryDetailsSubject = new BehaviorSubject<CategoryDetails[]>(null);
     public categoryDetails$ = this.categoryDetailsSubject.asObservable();
+
+    private oemDetailsSubject = new BehaviorSubject<OEMDetails[]>(null);
+    public oemDetails$ = this.oemDetailsSubject.asObservable();
 
     private productsDetailsSubject = new BehaviorSubject<ProductsDetails[]>(null);
     public productsDetails$ = this.productsDetailsSubject.asObservable();
@@ -38,6 +43,14 @@ export class MetadataStore {
 
   /**
    * ============================================================
+   * Set OEM
+   */
+  public setOEMDetails(data : OEMDetails[]) : void {
+
+    this.oemDetailsSubject.next(data);
+  }
+  /**
+   * ============================================================
    * Set Products
    */
   public setProductsDetails(data : ProductsDetails[]) : void {
@@ -53,6 +66,13 @@ export class MetadataStore {
     return this.categoryDetails;
   }
 
+
+  /**
+   * Return OEM Details
+   */
+  public getOEMDetails(): OEMDetails {
+    return this.oemDetails;
+  }
   /**
    * Return User Details
    */

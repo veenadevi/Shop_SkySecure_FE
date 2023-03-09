@@ -7,6 +7,7 @@ import AppService  from '../../config/service.json';
 
 import { CatrgoryResponse } from '../models/interface/response/category-response';
 import { ProductsResponse } from '../models/interface/response/products-response';
+import { OEMResponse } from '../models/interface/response/oem-response';
 
 @Injectable({ providedIn: 'root' })
 export class GlobalSearchService {
