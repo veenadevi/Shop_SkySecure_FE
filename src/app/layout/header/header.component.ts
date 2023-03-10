@@ -98,7 +98,7 @@ export class HeaderComponent implements OnInit{
   }
 
   public cartFynction(){
-    
+    this.router.navigate(['/cart']);
   }
 
   public goToHomePage(){

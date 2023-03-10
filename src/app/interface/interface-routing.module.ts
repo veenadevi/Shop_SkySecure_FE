@@ -25,6 +25,11 @@ const INTERFACE_ROUTES: Routes = [
         canActivate: [],
         path: 'products',
         loadChildren: () => import('../routes/product-page/product-page.module').then(m=>m.ProductPageModule)
+      },
+      {
+        canActivate: [],
+        path: 'cart',
+        loadChildren: () => import('../routes/cart-view/cart-view.module').then(m=>m.CartViewModule)
       }
     ]
   }
