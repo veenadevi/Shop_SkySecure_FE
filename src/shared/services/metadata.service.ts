@@ -6,12 +6,14 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import AppService  from '../../config/service.json';
 
 import { CatrgoryResponse } from '../models/interface/response/category-response';
+import { OEMResponse } from '../models/interface/response/oem-response';
 import { ProductsResponse } from '../models/interface/response/products-response';
 
 @Injectable({ providedIn: 'root' })
 export class MetadataService {
   private baseUrl: string;
   private fetchCategoryUrl : string;
+  private fetchOEMUrl : string;
   private fetchProductsUrl : string;
   private fetchSubCategoriesUrl : string;
   private fetchProductsBySubCategoryIds : string;
@@ -22,6 +24,7 @@ export class MetadataService {
   ) {
     this.baseUrl = AppService.gatewayUrl.localhost;
     this.fetchCategoryUrl = AppService.appUrl.allCategory;
+    this.fetchOEMUrl = AppService.appUrl.allOEM;
     this.fetchProductsUrl = AppService.appUrl.allProducts;
     this.fetchSubCategoriesUrl = AppService.appUrl.subCategoryByCategory;
     this.fetchProductsBySubCategoryIds = AppService.appUrl.getProductsBySubCategoryIds;
@@ -51,7 +54,34 @@ export class MetadataService {
           return (error);
         })
       );
+      console.log("category request"+request$)
+    return request$;
+  }
+//Fetch all OEM
 
+  public fetchOEM(): Observable<any> {
+
+    let url = this.baseUrl + this.fetchOEMUrl;
+    console.log("oem url"+url)
+    //let options = this.getOptions();
+    
+
+    let request$ = this.http.get<OEMResponse>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+         
+          console.log("&&&& OEM Response ", response);
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+      console.log("oem request"+request$)
     return request$;
   }
 

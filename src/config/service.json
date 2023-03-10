@@ -5,6 +5,7 @@
     },
     "appUrl" : {
         "allCategory" : "api/category", 
+        "allOEM" : "api/oem", 
         "allProducts" : "api/product",
         "globalSearchByKey" : "api/products/search",
         "subCategoryByCategory" : "api/sub-category/",
