@@ -1,0 +1,36 @@
+.user-panelcontainer{
+    width: 100%;
+    background : var(--primary);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: 100%;
+    row-gap: 2%;
+    
+}
+
+.user-panel-row {
+    display: flex;
+    flex-direction: row;
+    column-gap: 6%;
+    white-space: nowrap !important;
+    align-items: center;
+    
+}
+
+.img-holder {
+    
+    width: 40px;
+    height: 40px;
+    left: 17px;
+    top: 25px;
+    border-radius: 8px;
+}
+
+.text-style {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.1 em;
+    line-height: 21px;
+}

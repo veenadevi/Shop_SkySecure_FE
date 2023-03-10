@@ -17,6 +17,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatToolbar } from '@angular/material/toolbar';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { UserPanelComponent } from './user-panel/user-panel.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     ToolbarComponent,
     FooterComponent,
+    UserPanelComponent,
     
   ],
 
@@ -50,7 +52,8 @@ import { FooterComponent } from './footer/footer.component';
 
     HeaderComponent,
     ToolbarComponent,
-    FooterComponent
+    FooterComponent,
+    UserPanelComponent
   ]
 
 })

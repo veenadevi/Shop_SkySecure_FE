@@ -1,26 +1,10 @@
-
-.example-container {
-    width: 500px;
-    height: 300px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-  }
-  
-  .example-sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .example-sidenav {
-    padding: 20px;
+mat-sidenav {
+    width: 15% !important;
+    
   }
 
-  .inner-sidenav-content {
-    overflow: auto;
-    position: absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    top:64px;
+  mat-sidenav-content {
+
+    
+    overflow-y: hidden;
   }

@@ -58,6 +58,7 @@ export class HeaderComponent implements OnInit{
 
     this.subscriptions.push(this.userDetails$.subscribe(res => {
       this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
+      console.log("**** --> Looged in details ", this.authService.instance.getAllAccounts());
     }));
 
 
