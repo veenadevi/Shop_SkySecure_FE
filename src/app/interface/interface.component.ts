@@ -15,6 +15,8 @@ export class InterfaceComponent {
 
   public userLoggedIn : boolean = false;
 
+  public isExapnded : boolean = false;
+
   constructor(
     private userAccountStore : UserAccountStore,
     private authService : MsalService
@@ -43,6 +45,11 @@ export class InterfaceComponent {
     }));
   }
 
+
+  public exapndCollapse () {
+
+   this.isExapnded = this.isExapnded ? false : true;
+  }
   
 
   

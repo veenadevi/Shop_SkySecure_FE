@@ -10,7 +10,10 @@
     <ng-container *ngIf="userLoggedIn">
         <mat-sidenav-container>
             <mat-sidenav opened=true mode="side">
-                <user-panel></user-panel>
+                <div style="float:right" (click)="exapndCollapse()">
+                    <img src="../../assets/icons/arrow-right-1.svg">
+                </div>
+                <user-panel [isExpanded] = "isExapnded"></user-panel>
             </mat-sidenav>
             <mat-sidenav-content>
 

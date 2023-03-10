@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { LoginService } from 'src/shared/services/login-service';
 
 @Component({
@@ -6,9 +6,14 @@ import { LoginService } from 'src/shared/services/login-service';
   templateUrl: './user-panel.component.html',
   styleUrls: ['./user-panel.component.css']
 })
+
 export class UserPanelComponent implements OnInit{
 
+  @Input('isExpanded')
+  public isExpanded : any;
 
+
+  
   public navExpanded : boolean = false;
 
   constructor(
@@ -16,10 +21,23 @@ export class UserPanelComponent implements OnInit{
   ){}
 
     public ngOnInit(): void {
-      this.navExpanded = true;
+      //this.navExpanded = false;
+      //this.navExpanded = this.isExpanded;
     }
 
     public logout() {
       this.loginService.logout();
     }
+
+    ngOnChanges(changes: SimpleChanges) {
+        
+      
+        this.navExpanded = changes.isExpanded.currentValue;
+        console.log("**** Changed" , this.isExpanded);
+      
+      
+      // You can also use categoryId.previousValue and 
+      // categoryId.firstChange for comparing old and new values
+      
+  }
 }
