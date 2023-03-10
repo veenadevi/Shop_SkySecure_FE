@@ -1,0 +1,18 @@
+{
+    "category" : [
+        {
+            "name": "Microsoft Teams",
+            "oem": "Microsoft",
+            "quantity" : null,
+            "imageSrc" : "/assets/icons/Users.svg"
+        },
+        {
+            "name": "Microsoft Excel",
+            "oem": "Microsoft",
+            "quantity" : null,
+            "imageSrc" : "/assets/icons/Users.svg"
+        }
+        
+    ]
+    
+}

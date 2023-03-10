@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GlobalSearchService } from 'src/shared/services/global-search.service';
-import { MetadataService } from 'src/shared/services/metadata.service';
 
 @Component({
-  selector: 'app-cart-view',
-  templateUrl: './cart-view.component.html',
-  styleUrls: ['./cart-view.component.css']
+  selector: 'app-cart-items',
+  templateUrl: './cart-items.component.html',
+  styleUrls: ['./cart-items.component.css']
 })
-export class CartViewComponent {
-
+export class CartItemsComponent {
   private subscriptions : Subscription[] = [];
 
   public cartItems : any;
@@ -33,5 +31,6 @@ export class CartViewComponent {
       
     );
   
-}
+  }
+
 }

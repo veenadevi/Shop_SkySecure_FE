@@ -1,0 +1,59 @@
+<div class="cart-view-container">
+    <div class="text-header">
+        Cart
+    </div>
+
+    <!-- If Cart is Empty -->
+
+    <!-- If Cart items is present -->
+    <ng-container>
+        <div>
+            <table class="table table-borderless">
+                <thead class="table-header">
+                  <tr>
+                    <th scope="col">PRODUCTS</th>
+                    <th scope="col">QUANTITY OF LISCENCE </th>
+                    <th scope="col">ACTION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let item of cartItems">
+                    <tr>
+                      <th scope="row">{{item.name}}</th>
+                      <!-- Item Quantity -->
+                      <td>
+                        <div class="td-column">
+                          <span>
+                            <img src="../../../assets/icons/Minus.svg">
+                          </span>
+                          <span>
+                            <input 
+                              class="input-field"
+                              >
+                          </span>
+                          <span>
+                            <img src="../../../assets/icons/Add.svg">
+                          </span>
+                        </div>
+                      </td>
+
+                      <!-- Action -->
+                      <td>
+                        <div class="td-column">
+                          <span>
+                            <img src="../../../assets/icons/Delete.svg">
+                          </span>
+                          <span class="delete-text">
+                            Remove
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  
+                 
+                </tbody>
+              </table>
+        </div>
+    </ng-container>
+</div>

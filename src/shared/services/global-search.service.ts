@@ -62,5 +62,11 @@ export class GlobalSearchService {
     
   }
 
+  public fetchCartMock() : Observable<any> {
+    
+    return this.http.get('/assets/mock-data/cart-items.json');
+  
+}
+
 
 }

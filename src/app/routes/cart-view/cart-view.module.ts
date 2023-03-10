@@ -6,6 +6,9 @@ import { SharedModule } from 'src/shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CartViewRoutingModule ,  ROUTED_COMPONENTS} from './cart-view-routing.module';
+import { CartItemsComponent } from './partials/cart-items/cart-items.component';
+import { CartEmptyComponent } from './partials/cart-empty/cart-empty.component';
+import { CartSubmitComponent } from './partials/cart-submit/cart-submit.component';
 
 
 
@@ -13,7 +16,10 @@ import { CartViewRoutingModule ,  ROUTED_COMPONENTS} from './cart-view-routing.m
 
 @NgModule({
   declarations: [
-    ROUTED_COMPONENTS
+    ROUTED_COMPONENTS,
+    CartItemsComponent,
+    CartEmptyComponent,
+    CartSubmitComponent
   ],
   imports: [
     CommonModule,

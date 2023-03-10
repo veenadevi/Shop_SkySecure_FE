@@ -1,0 +1,49 @@
+.cart-view-container {
+    min-height: 30em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+}
+
+.table-header {
+
+    background: var(--light_border);
+    border-radius: 18px;
+
+}
+
+.table tr th {
+    vertical-align: middle;
+    text-align: center;
+    height: 4em !important;
+}
+
+.table th:first-child {
+    text-align: left !important;
+  }
+
+.table td {
+    text-align: center;
+}
+
+.td-column {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1em;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.input-field {
+    background: var(--white);
+    border: 1px solid #918F90;
+    border-radius: 8px;
+    width: 6em;
+    height: 2em;
+    text-align: center;
+}
+
+.delete-text {
+    color: var(--red);
+}
