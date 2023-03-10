@@ -1,6 +1,7 @@
 <div class="user-panelcontainer">
     <!-- User-->
     <div class="user-panel-row">
+ 
         <div>
             <img class="img-holder" src="../../../assets/images/img_avatar.png">
         </div>
@@ -12,14 +13,24 @@
                 Admin
             </div>
         </div>
+        
     </div>
     <!-- Dashboard -->
     <div class="user-panel-row">
         <div>
-            <img class="img-holder" src="../../../assets//icons/Dashboard.svg">
+            <img class="img-holder" src="../../../assets/icons/Dashboard.svg">
         </div>
         <div *ngIf="navExpanded">
             Dashboard
+        </div>
+    </div>
+
+    <div class="user-panel-row" (click)="logout()">
+        <div>
+            <img class="img-holder" src="../../../assets/icons/User_icon.svg">
+        </div>
+        <div *ngIf="navExpanded" >
+            Logout
         </div>
     </div>
 </div>

@@ -9,6 +9,13 @@
     
 }
 
+.nav-arrow {
+    position:relative;
+    float: right;
+    top:-40px;
+    left:-10px;
+}
+
 .user-panel-row {
     display: flex;
     flex-direction: row;
