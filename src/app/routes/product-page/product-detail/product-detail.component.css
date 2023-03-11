@@ -110,7 +110,7 @@ color: #ffff;
   }
   
   .price {
-    font-size: 30px;
+    font-size: 1.8rem;
     margin-top: 5px;
   }
   
@@ -118,11 +118,10 @@ color: #ffff;
     list-style-type: none;
     margin: 0;
     padding: 0;
-    padding: 4%;
   }
   
   li {
-    padding: 12px 0;
+    padding: 2px 0;
     display: flex;
   }
   
@@ -177,7 +176,7 @@ color: #ffff;
 
 
   .price-cost {
-    font-size: 0.7rem !important;
+    font-size: 0.8rem !important;
     color: #7E916C;
   }
   .price-item {
@@ -265,7 +264,7 @@ color: #ffff;
   }
 
   .price-item {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 
   .features-item {

@@ -7,7 +7,7 @@ import { CatrgoryResponse } from 'src/shared/models/interface/response/category-
 import { CategoryDetails } from 'src/shared/models/interface/partials/category-details';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { ProductsDetails } from 'src/shared/models/interface/partials/products-details';
-import { Router } from '@angular/router';
+import { Router , NavigationExtras} from '@angular/router';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { OEMDetails } from 'src/shared/models/interface/partials/oem-details';
 import { OEMResponse } from 'src/shared/models/interface/response/oem-response';
@@ -90,8 +90,16 @@ export class ToolbarComponent {
     this.getOEMs();
   }
 
-  public goToProductsPage(){
+
+  public goToProductsPage() {
     this.router.navigate(['/products']);
   }
 
+  public goToProductsPageWithCategorySelection(category) {
+    this.router.navigate([`/products/category/${category._id}`]);
+  }
+
+  public goToProductsPageWithSubCategorySelection(category) {
+    this.router.navigate([`/products/sub-category/${category._id}`]);
+  }
 }

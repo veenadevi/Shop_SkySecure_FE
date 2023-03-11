@@ -6,14 +6,19 @@ import { ProductPgaeComponent } from './product-page.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: ProductPgaeComponent,
-    /*data: {
-      title: 'Backlog'
-    }*/
+    path: 'category/:id',
+    component: ProductPgaeComponent
+  },
+  {
+    path: 'sub-category/:id',
+    component: ProductPgaeComponent
+  },
+  {
+    path: 'brand/:id',
+    component: ProductPgaeComponent
   },
   { path: ':id', 
-  component: ProductDetailComponent 
+    component: ProductDetailComponent 
   }
 ];
 
