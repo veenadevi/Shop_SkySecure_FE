@@ -28,16 +28,31 @@
 
         <mat-menu #softwares="matMenu" xPosition="after">
             <ng-container *ngFor="let category of softwareCategories">
-                <button (click)="goToProductsPage()" mat-menu-item>{{category.name}}</button>
+                <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="categoryItems" mat-menu-item>{{category.name}}</button>
+                <mat-menu #categoryItems="matMenu" xPosition="after">
+                    <ng-container *ngFor="let subCategory of category.subCategories">
+                        <button (click)="goToProductsPageWithSubCategorySelection(category)" mat-menu-item>{{subCategory.name}}</button>
+                    </ng-container>
+                </mat-menu>        
             </ng-container>
         </mat-menu>
           
-        <mat-menu #hardware="matMenu">
+        <mat-menu #hardware="matMenu" xPosition="after">
             <ng-container *ngFor="let category of hardwareCategories">
-                <button (click)="goToProductsPage()" mat-menu-item>{{category.name}}</button>
+                <button (click)="goToProductsPageWithCategorySelection(category)"  [matMenuTriggerFor]="categoryItems" mat-menu-item>{{category.name}}</button>
+                <mat-menu #categoryItems="matMenu" xPosition="after">
+                    <ng-container *ngFor="let subCategory of category.subCategories">
+                        <button (click)="goToProductsPageWithSubCategorySelection(category)" mat-menu-item>{{subCategory.name}}</button>
+                    </ng-container>
+                </mat-menu>
             </ng-container>
         </mat-menu>
 
+        <!-- <mat-menu #categoryItems="matMenu" xPosition="after">
+            <ng-container *ngFor="let category of softwareCategories">
+                <button (click)="goToProductsPageWithCategorySelection(category)" mat-menu-item>{{category.name}}</button>
+            </ng-container>
+        </mat-menu> -->
 
         
 

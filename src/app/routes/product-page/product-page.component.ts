@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CategoryDetails } from 'src/shared/models/interface/partials/category-details';
 import { MetadataService } from 'src/shared/services/metadata.service';
@@ -12,7 +12,6 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   styleUrls: ['./product-page.component.css']
 })
 export class ProductPgaeComponent implements OnInit{
-
 
   products = [
     {
@@ -55,19 +54,21 @@ export class ProductPgaeComponent implements OnInit{
   staticProductimageUrl = 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg';
   selectedItems : Array<any> = [];
   dropdownSettings : IDropdownSettings = {};
+  category : String;
   
   constructor(
     private metaDataSvc : MetadataService,
     private metadataStore : MetadataStore,
-    private router : Router
+    private router : Router,
+    private activeRoute: ActivatedRoute
   ){}
 
   private subscriptions: Subscription[] = [];
   public subCategories : Array<any> = [];
   
 
-  private getCategories(): void {
-    let categoryId = '63ea6ef98e58e64acc785891';
+  private getCategories(categoryId: String): void {
+    console.log("++++categoryId+++++",categoryId);
     this.subscriptions.push(
        this.metaDataSvc.fetchSubCategories(categoryId).subscribe( response => {
         this.subCategories = response.subCategories;
@@ -76,7 +77,6 @@ export class ProductPgaeComponent implements OnInit{
   }
 
   private getProducts(): void {
-    let categoryId = '63ea6ef98e58e64acc785891';
     this.subscriptions.push(
        this.metaDataSvc.fetchProducts().subscribe( response => {
         this.products = response.products.map((data: any )=> {
@@ -110,7 +110,11 @@ export class ProductPgaeComponent implements OnInit{
 
 
   public ngOnInit() : void {
-    this.getCategories();
+    this.activeRoute.paramMap.subscribe(params => {
+      this.category = params.get('id');
+      // fetch products based on category or brand here
+    });
+    this.getCategories(this.category);
     this.getProducts();
     this.selectedItems = [
     ];
