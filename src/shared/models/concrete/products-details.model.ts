@@ -1,7 +1,7 @@
-import { ProductDetails } from "../interface/partials/products-details";
+import { ProductsDetails } from "../interface/partials/products-details";
 
 
-export class ProductsDetailsModel implements ProductDetails {
+export class ProductsDetailsModel implements ProductsDetails {
   
     public _id: string;
     public name: string;

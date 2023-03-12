@@ -5,7 +5,7 @@
             <div>
                 <img class="img-holder" src="../../../assets/images/img_avatar.png">
             </div>
-            <div *ngIf="navExpanded">
+            <div *ngIf="navExpanded" class="expanded">
                 <div class="text-style">
                     Hulk
                 </div>
@@ -31,12 +31,12 @@
         <div>
             <img class="img-holder" src="../../../assets/icons/User_icon.svg">
         </div>
-        <div *ngIf="navExpanded" >
+        <div *ngIf="navExpanded" class="expanded">
             
-            <button mat-button [matMenuTriggerFor]="aboveMenu">
-                Logout
+            <div mat-button [matMenuTriggerFor]="aboveMenu" class="style-menu">
+                Profile
                 <i class="fa fa-caret-right" aria-hidden="true"></i>
-            </button>
+            </div>
                 <!-- <mat-menu #aboveMenu="matMenu" yPosition="below">
                 <ng-container *ngFor="let category of categories">
                     <button mat-menu-item>{{category.name}}</button>

@@ -1,10 +1,7 @@
-mat-sidenav {
-    /* width: 15% !important; */
-    
-  }
-
-  mat-sidenav-content {
-
-    
+mat-sidenav-content {
     overflow-y: hidden;
-  }
+}
+
+.user-panel-nav-icon {
+  float: right;
+}

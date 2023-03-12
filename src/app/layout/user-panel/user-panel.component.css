@@ -41,3 +41,16 @@
     font-size: 1.1 em;
     line-height: 21px;
 }
+
+.expanded {
+   
+    width:100%;
+    cursor: pointer;
+
+}
+
+.style-menu {
+    display : flex;
+    align-items: center;
+    justify-content: space-between;
+}
