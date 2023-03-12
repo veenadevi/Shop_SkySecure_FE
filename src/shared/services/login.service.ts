@@ -4,7 +4,7 @@ import { Inject, Injectable } from '@angular/core';
 import { IdTokenClaims, PromptValue } from '@azure/msal-common';
 import { AccountInfo, AuthenticationResult, EventMessage, EventType, InteractionStatus, InteractionType, PopupRequest, RedirectRequest, SsoSilentRequest } from '@azure/msal-browser';
 import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
-import { b2cPolicies } from '../../app/auth-config';
+import { b2cPolicies, silentRequest } from '../../app/auth-config';
 import { UserAccountStore } from '../stores/user-account.store';
 
 
@@ -31,12 +31,14 @@ export class LoginService {
                     .subscribe((response: AuthenticationResult) => {
                         this.authService.instance.setActiveAccount(response.account);
                         this.userAccountStore.setuserAccountDetails(response.account);
+                        this.retrieveAccessIdToken();
                     });
             } else {
                 this.authService.loginPopup(userFlowRequest)
                     .subscribe((response: AuthenticationResult) => {
                         this.authService.instance.setActiveAccount(response.account);
                         this.userAccountStore.setuserAccountDetails(response.account);
+                        this.retrieveAccessIdToken();
                     });
             }
         } else {
@@ -60,6 +62,14 @@ export class LoginService {
         };
 
         this.login(editProfileFlowRequest);
+    }
+
+
+    public retrieveAccessIdToken() : any {
+        this.authService.acquireTokenSilent(silentRequest).subscribe( res => {
+            console.log("------>>>>>> ", res.idToken);
+            this.userAccountStore.setAccessIdToken(res.idToken);
+          })
     }
 
 

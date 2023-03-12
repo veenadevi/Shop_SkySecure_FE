@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
-import { LoginService } from 'src/shared/services/login-service';
+import { LoginService } from 'src/shared/services/login.service';
 
 @Component({
   selector: 'user-panel',

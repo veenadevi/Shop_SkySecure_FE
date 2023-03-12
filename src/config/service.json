@@ -3,6 +3,9 @@
     "gatewayUrl" : {
         "localhost" : "http://localhost:8002/"
     },
+    "gatewayUrlForUserProfile" : {
+        "localhost" : "http://localhost:2003/api/user/signin"
+    },
     "appUrl" : {
         "allCategory" : "api/category", 
         "allOEM" : "api/oem", 

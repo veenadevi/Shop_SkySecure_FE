@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { MsalService } from '@azure/msal-angular';
 import { map, Subscription } from 'rxjs';
+import { silentRequest } from '../auth-config';
+import { b2cPolicies } from '../../app/auth-config';
+import { SsoSilentRequest } from '@azure/msal-browser';
+import { UserProfileService } from 'src/shared/services/user-profile.service';
 
 
 @Component({
@@ -19,7 +23,8 @@ export class InterfaceComponent {
 
   constructor(
     private userAccountStore : UserAccountStore,
-    private authService : MsalService
+    private authService : MsalService,
+    private userProfileService : UserProfileService 
   ){
 
   }
@@ -28,11 +33,9 @@ export class InterfaceComponent {
   .pipe(
     map(data => {
       if(data){
-        
         return data;
       }
       else{
-        
         return data;
       }
     }
@@ -44,7 +47,6 @@ export class InterfaceComponent {
       this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
     }));
   }
-
 
   public exapndCollapse () {
 

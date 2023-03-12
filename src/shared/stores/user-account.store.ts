@@ -24,9 +24,13 @@ export class UserAccountStore {
     public productsDetails$ = this.productsDetailsSubject.asObservable(); */
 
     public userAccountDetails : any;
+    public accessIdToken : any;
 
     private userAccountDetailsSubject = new BehaviorSubject<any>(null);
     public userAccountDetails$ = this.userAccountDetailsSubject.asObservable();
+
+    private accessIdTokenSubject = new BehaviorSubject<any>(null);
+    public accessIdToken$ = this.accessIdTokenSubject.asObservable();
 
 
   constructor() {
@@ -38,9 +42,17 @@ export class UserAccountStore {
    * Set Product Category
    */
    public setuserAccountDetails(data : any) : void {
-
-    console.log("---------> Called set");
     this.userAccountDetailsSubject.next(data);
+  }
+
+  /**
+   * ============================================================
+   * Set Product Category
+   */
+  public setAccessIdToken(data : any) : void {
+    console.log("*************&&&&&&&&&&&&& Set ", data);
+    this.accessIdToken = data;
+    this.accessIdTokenSubject.next(data);
   }
 
   
@@ -49,8 +61,16 @@ export class UserAccountStore {
    * Return User Details
    */
    public getuserAccountDetails(): CategoryDetails {
-    console.log("---------> Called get");
     return this.userAccountDetails;
+  }
+
+
+
+  /**
+   * Return AccessIdToken
+   */
+  public getAccessIdToken(): string {
+    return this.accessIdToken;
   }
 
   

@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MsalService, MsalBroadcastService } from '@azure/msal-angular';
 import { AppComponent } from 'src/app/app.component';
-import { LoginService } from 'src/shared/services/login-service';
+import { LoginService } from 'src/shared/services/login.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { map, filter, Subscription } from 'rxjs';
 import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
+import { b2cPolicies, silentRequest } from 'src/app/auth-config';
+import { UserProfileService } from 'src/shared/services/user-profile.service';
 
 
 @Component({
@@ -29,6 +31,7 @@ export class HeaderComponent implements OnInit{
     private authService: MsalService,
     private userAccountStore : UserAccountStore,
     private msalBroadcastService: MsalBroadcastService,
+    private userProfileService : UserProfileService,
     private router : Router
   ){}
 
@@ -42,7 +45,7 @@ export class HeaderComponent implements OnInit{
   .pipe(
     map(data => {
       if(data){
-        
+        console.log("&&&&&&&&&& ---------- ", data);
         return data;
       }
       else{
@@ -58,6 +61,9 @@ export class HeaderComponent implements OnInit{
 
     this.subscriptions.push(this.userDetails$.subscribe(res => {
       this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
+      if(this.userLoggedIn){
+        this.getAccessIdToken();
+      }
       console.log("**** --> Looged in details ", this.authService.instance.getAllAccounts());
     }));
 
@@ -70,7 +76,8 @@ export class HeaderComponent implements OnInit{
             .subscribe((result: EventMessage) => {
                 const payload = result.payload as AuthenticationResult;
                 this.authService.instance.setActiveAccount(payload.account);
-                this.userAccountStore.setuserAccountDetails(this.authService.instance.getAllAccounts())
+                this.userAccountStore.setuserAccountDetails(this.authService.instance.getAllAccounts());
+                this.loginService.retrieveAccessIdToken();
             });
 
         this.msalBroadcastService.inProgress$
@@ -111,6 +118,15 @@ export class HeaderComponent implements OnInit{
 
   public logout() {
     this.loginService.logout();
+  }
+
+  public getAccessIdToken() {
+    this.authService.acquireTokenSilent(silentRequest).subscribe( res => {
+      console.log(" Inside get cart function------>>>>>> ", res.idToken);
+      this.userAccountStore.setAccessIdToken(res.idToken);
+      this.userProfileService.fetchUserProfile().subscribe();
+      //this.userProfileService.fetchData().subscribe();
+    })
   }
 
 }

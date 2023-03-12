@@ -54,7 +54,7 @@ export const b2cPolicies = {
         },
     },
     //authorityDomain: "altsysRealizeB2C.onmicrosoft.com",
-    authorityDomain: "altsysrealizeappdev.b2clogin.com"
+    authorityDomain: "altsysrealizeappdev.b2clogin.com",
 };
 
 /**
