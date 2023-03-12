@@ -59,11 +59,11 @@ export class UserProfileService {
           if (!response) {
             return throwError(response);
           }
-
+          //this.userAccountStore.setUserProfileDetails(response);
           return of(response);
         }),
         map((response: any) => {
-          
+          //this.userAccountStore.setUserProfileDetails(response);
           return response;
         }),
         catchError(error => {

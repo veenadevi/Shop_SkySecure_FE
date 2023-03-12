@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { LoginService } from 'src/shared/services/login.service';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'user-panel',
@@ -17,12 +19,28 @@ export class UserPanelComponent implements OnInit{
   public navExpanded : boolean = false;
 
   constructor(
-    private loginService: LoginService
+    private loginService: LoginService,
+    private userAccountStore : UserAccountStore
   ){}
 
+
+  public userProfileDetails$ = this.userAccountStore.userProfileDetails$
+  .pipe(
+    map(data => {
+      if(data){
+        console.log("(((((((((((((((((( ", data);
+        return data;
+        
+      }
+      else{
+        return data;
+      }
+    }
+    )
+  )
+
     public ngOnInit(): void {
-      //this.navExpanded = false;
-      //this.navExpanded = this.isExpanded;
+      
     }
 
     public logout() {
@@ -32,7 +50,8 @@ export class UserPanelComponent implements OnInit{
     ngOnChanges(changes: SimpleChanges) {
         
       
-        this.navExpanded = changes.isExpanded.currentValue;
+      this.navExpanded = true;
+        //this.navExpanded = changes.isExpanded.currentValue;
         console.log("**** Changed" , this.isExpanded);
       
       

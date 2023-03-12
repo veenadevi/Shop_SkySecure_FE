@@ -30,6 +30,11 @@ const INTERFACE_ROUTES: Routes = [
         canActivate: [],
         path: 'cart',
         loadChildren: () => import('../routes/cart-view/cart-view.module').then(m=>m.CartViewModule)
+      },
+      {
+        canActivate: [],
+        path: 'user-profile',
+        loadChildren: () => import('../routes/user-profile/user-profile.module').then(m=>m.UserProfileModule)
       }
     ]
   }

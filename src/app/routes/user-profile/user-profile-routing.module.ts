@@ -1,11 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { QuotationHistoryComponent } from './partials/quotation-history/quotation-history.component';
 import { UserProfileComponent } from './user-profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: UserProfileComponent,
+    children: [
+      {
+        canActivate: [],
+        path: 'quotation-history',
+        component : QuotationHistoryComponent
+      },
+      
+    ]
     /*data: {
       title: 'Backlog'
     }*/

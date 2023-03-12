@@ -1,18 +1,20 @@
 <div class="user-panelcontainer">
     <!-- User-->
     <div class="user-panel-row">
- 
-        <div>
-            <img class="img-holder" src="../../../assets/images/img_avatar.png">
-        </div>
-        <div *ngIf="navExpanded">
-            <div class="text-style">
-                Hulk
+        <!-- <ng-container *ngIf="(userProfileDetails$ | async) as data">
+            <div>
+                <img class="img-holder" src="../../../assets/images/img_avatar.png">
             </div>
-            <div >
-                Admin
+            <div *ngIf="navExpanded">
+                <div class="text-style">
+                    Hulk
+                </div>
+                <div >
+                    Admin
+                </div>
             </div>
-        </div>
+        </ng-container> -->
+        
         
     </div>
     <!-- Dashboard -->
@@ -25,12 +27,37 @@
         </div>
     </div>
 
-    <div class="user-panel-row" (click)="logout()">
+    <div class="user-panel-row">
         <div>
             <img class="img-holder" src="../../../assets/icons/User_icon.svg">
         </div>
         <div *ngIf="navExpanded" >
-            Logout
+            
+            <button mat-button [matMenuTriggerFor]="aboveMenu">
+                Logout
+                <i class="fa fa-caret-right" aria-hidden="true"></i>
+            </button>
+                <!-- <mat-menu #aboveMenu="matMenu" yPosition="below">
+                <ng-container *ngFor="let category of categories">
+                    <button mat-menu-item>{{category.name}}</button>
+                </ng-container>
+                
+                </mat-menu> -->
+                
+                <mat-menu #aboveMenu="matMenu" yPosition="below" xPosition="after">
+        
+                    <button mat-menu-item [routerLink]="['user-profile/quotation-history']">
+                        <div class="menu-width">
+                            Quotation History
+                        </div>
+                    </button>
+                    <button mat-menu-item (click)="logout()">
+                        <div class="menu-width">
+                            Logout
+                        </div>
+                    </button>
+                    
+                </mat-menu>
         </div>
     </div>
 </div>

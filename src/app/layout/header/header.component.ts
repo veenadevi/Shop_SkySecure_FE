@@ -124,7 +124,9 @@ export class HeaderComponent implements OnInit{
     this.authService.acquireTokenSilent(silentRequest).subscribe( res => {
       console.log(" Inside get cart function------>>>>>> ", res.idToken);
       this.userAccountStore.setAccessIdToken(res.idToken);
-      this.userProfileService.fetchUserProfile().subscribe();
+      this.userProfileService.fetchUserProfile().subscribe(res => {
+        //this.userAccountStore.setUserProfileDetails(res);
+      });
       //this.userProfileService.fetchData().subscribe();
     })
   }

@@ -5,3 +5,13 @@
     row-gap: 1em;
     padding: 40px;
 }
+
+.notify-button {
+    width: 5em;
+    background: #F6EBEC;
+    border: 1px solid #A9383D;
+    /* Style 2 */
+
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+}
