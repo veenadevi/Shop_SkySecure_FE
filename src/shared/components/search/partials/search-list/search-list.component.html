@@ -6,7 +6,7 @@
                 <span>Products</span>
             </div>
             <ng-container *ngFor="let item of (searchResults$ | async)">
-                <div (click)="goToProductsPage()" class="list-item p-1">
+                <div (click)="goToProductsPage(item)" class="list-item p-1">
                     <span>{{item.name}}</span>
                 </div>
                 

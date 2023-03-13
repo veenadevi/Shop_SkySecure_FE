@@ -40,9 +40,8 @@ export class TrendingProductsComponent {
     // }));
   }
 
-  public goToProductsPage(){
-    console.log("Came here in Routing");
-    this.router.navigate(['/products']);
+  public goToProductsPage(category){
+    this.router.navigate([`/products/${category._id}`]);
   }
 
 }

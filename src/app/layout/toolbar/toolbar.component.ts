@@ -12,6 +12,8 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { OEMDetails } from 'src/shared/models/interface/partials/oem-details';
 import { OEMResponse } from 'src/shared/models/interface/response/oem-response';
 import { CloseScrollStrategy } from '@angular/cdk/overlay';
+import { ProductListService } from 'src/shared/services/product-list-page.service';
+import { MatMenu } from '@angular/material/menu';
 
 @Component({
   selector: 'app-toolbar',
@@ -25,7 +27,8 @@ export class ToolbarComponent {
     private loaderService : LoaderService,
     private metadataStore : MetadataStore,
     private userAccountStore : UserAccountStore,
-    private router : Router
+    private router : Router,
+    private productListService: ProductListService
   ){}
 
   private subscriptions: Subscription[] = [];
@@ -96,10 +99,17 @@ export class ToolbarComponent {
   }
 
   public goToProductsPageWithCategorySelection(category) {
+    this.productListService.setCategoryIdSelection(category._id);
     this.router.navigate([`/products/category/${category._id}`]);
   }
 
   public goToProductsPageWithSubCategorySelection(category) {
+    this.productListService.setCategoryIdSelection(category._id);
     this.router.navigate([`/products/sub-category/${category._id}`]);
   }
+
+  goToProductsPageByBrand(oem) {
+    this.router.navigate([`/products/brand/${oem._id}`]);
+  }
+
 }

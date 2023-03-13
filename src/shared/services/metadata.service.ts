@@ -17,6 +17,7 @@ export class MetadataService {
   private fetchProductsUrl : string;
   private fetchSubCategoriesUrl : string;
   private fetchProductsBySubCategoryIds : string;
+  private fetchProductsByBrandIds : string;
   private getSingleProduct : string;
 
   constructor(
@@ -29,6 +30,7 @@ export class MetadataService {
     this.fetchSubCategoriesUrl = AppService.appUrl.subCategoryByCategory;
     this.fetchProductsBySubCategoryIds = AppService.appUrl.getProductsBySubCategoryIds;
     this.getSingleProduct = AppService.appUrl.getSingleProduct;
+    this.fetchProductsByBrandIds = AppService.appUrl.getProductsByBrandIds;
     //this.quotaDetailsUri = this.ouxConfigSvc.getAppConfigValue('apiUri').e2eQuotaACV;
   }
 
@@ -148,6 +150,28 @@ export class MetadataService {
             return null;
           }
           console.log("&&&& Response products by subcategories", response);
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+
+    return request$;
+  }
+
+  public fetchAllProductsByBrandIds(brandIds: Array<String>) : Observable<any> {
+    let url = this.baseUrl + this.fetchProductsByBrandIds;
+    //let options = this.getOptions();
+
+    let request$ = this.http.post(url,{oemIds:brandIds})
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          console.log("&&&& Response products by brand ids", response);
           return response;
         }),
         catchError(error => {

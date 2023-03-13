@@ -13,7 +13,8 @@
         "globalSearchByKey" : "api/products/search",
         "subCategoryByCategory" : "api/sub-category/",
         "getProductsBySubCategoryIds" : "api/products",
-        "getSingleProduct": "api/product/"
+        "getSingleProduct": "api/product/",
+        "getProductsByBrandIds": "api/products/oems"
     }
     
 }

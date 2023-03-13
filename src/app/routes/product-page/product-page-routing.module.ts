@@ -6,15 +6,15 @@ import { ProductPgaeComponent } from './product-page.component';
 
 const routes: Routes = [
   {
-    path: 'category/:id',
+    path: 'category/:categoryId',
     component: ProductPgaeComponent
   },
   {
-    path: 'sub-category/:id',
+    path: 'sub-category/:subcategoryId',
     component: ProductPgaeComponent
   },
   {
-    path: 'brand/:id',
+    path: 'brand/:brandId',
     component: ProductPgaeComponent
   },
   { path: ':id', 

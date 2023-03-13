@@ -14,15 +14,15 @@
           </ng-multiselect-dropdown>
         </div>
 
-        <div *ngIf="subCategories.length > 0" class="container drop-down-container">
+        <div *ngIf="brands.length > 0" class="container drop-down-container">
             <ng-multiselect-dropdown
             [placeholder]="'Brands:'"
             [settings]="dropdownSettings"
-            [data]="subCategories"
-            [(ngModel)]="selectedItems"
-            (onSelect)="onItemSelect($event)"
-            (onSelectAll)="onSelectAll($event)"
-            (onDeSelect)="onItemDeSelect($event)"
+            [data]="brands"
+            [(ngModel)]="selectedBrandItems"
+            (onSelect)="onBrandSelect($event)"
+            (onSelectAll)="onBrandSelectAll($event)"
+            (onDeSelect)="onIBrandDeSelect($event)"
           >
           </ng-multiselect-dropdown>
         </div>

@@ -5,6 +5,7 @@ import { CategoryDetails } from 'src/shared/models/interface/partials/category-d
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ProductListService } from 'src/shared/services/product-list-page.service';
 
 @Component({
   selector: 'app-product-page',
@@ -53,25 +54,53 @@ export class ProductPgaeComponent implements OnInit{
   ]
   staticProductimageUrl = 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg';
   selectedItems : Array<any> = [];
+  selectedBrandItems : Array<any> = [];
   dropdownSettings : IDropdownSettings = {};
   category : String;
+  subCategory : String;
+  allCategories : Array<any> = [];
   
   constructor(
     private metaDataSvc : MetadataService,
-    private metadataStore : MetadataStore,
-    private router : Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private productListService : ProductListService
   ){}
 
   private subscriptions: Subscription[] = [];
   public subCategories : Array<any> = [];
+  public brands : Array<any> = [];
+  public brand : String;
   
 
   private getCategories(categoryId: String): void {
-    console.log("++++categoryId+++++",categoryId);
     this.subscriptions.push(
        this.metaDataSvc.fetchSubCategories(categoryId).subscribe( response => {
         this.subCategories = response.subCategories;
+        this.selectedItems = this.subCategories.filter((data) => {
+          if(data.categoryId == categoryId) return data;
+        });
+      })
+    );
+  }
+
+  private getBrands(): void {
+    this.subscriptions.push(
+       this.metaDataSvc.fetchOEM().subscribe( response => {
+        this.brands = response.oems;
+        this.selectedBrandItems = [];
+        this.getProductsByBrandIds([this.brand]);
+      })
+    );
+  }
+
+
+  private getSubCategories(categoryId: String): void {
+    this.subscriptions.push(
+       this.metaDataSvc.fetchSubCategories(categoryId).subscribe( response => {
+        this.subCategories = response.subCategories;
+        this.selectedItems = this.subCategories.filter((data) => {
+          if(data._id == categoryId) return data;
+        })
       })
     );
   }
@@ -108,16 +137,51 @@ export class ProductPgaeComponent implements OnInit{
     );
   }
 
+  private getProductsByBrandIds(brandIds: Array<String>): void {
+    this.subscriptions.push(
+       this.metaDataSvc.fetchAllProductsByBrandIds(brandIds).subscribe(response => {
+        this.selectedBrandItems = this.brands.filter((data)=> {
+          console.log("KJNKJNKBB",brandIds,data._id);
+          if(brandIds.includes(data._id)) return data;
+        })
+        console.log("+++brandIds++++++++",this.brands,this.selectedBrandItems);
+         this.products = response.products.map((data: any )=> {
+          return { 
+            name: data.name , 
+            description: data.description ,
+            imageUrl: this.staticProductimageUrl ,
+            solutionLink: data.description,
+            _id: data._id
+          }
+         })
+      })
+    );
+  }
+
 
   public ngOnInit() : void {
-    this.activeRoute.paramMap.subscribe(params => {
-      this.category = params.get('id');
-      // fetch products based on category or brand here
+      this.getBrands();
+      this.activeRoute.paramMap.subscribe(params => {
+      this.category = params.get('categoryId') || '63ea6f258e58e64acc7858ad';
+      this.subCategory = params.get('subcategoryId');
+      this.brand = params.get('brandId');
+      if(this.category)
+      this.getCategories(this.category);
+
+      if(this.subCategory)
+      this.getSubCategories(this.subCategory);
+
+      if(this.brand) {
+         this.getProductsByBrandIds([this.brand]);
+      }
+
     });
-    this.getCategories(this.category);
+    this.productListService.categoryIdSelectionSubject$.subscribe((data) => {
+      this.category = data;
+      this.getCategories(this.category);
+    })
     this.getProducts();
-    this.selectedItems = [
-    ];
+    this.selectedItems = [];
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -147,6 +211,19 @@ export class ProductPgaeComponent implements OnInit{
     this.getProductsBySubcategoryIds(selectedItemsIds);
   }
 
+  onBrandSelect(item: any) {
+    let selectedBrandItems = this.selectedBrandItems.map((data)=> { return data._id });
+    this.getProductsByBrandIds(selectedBrandItems);
+ }
 
+ onBrandSelectAll(items: any) {
+   this.selectedBrandItems = items;
+   let selectedBrandIds = this.selectedBrandItems.map((data)=> { return data._id });
+   this.getProductsByBrandIds(selectedBrandIds);
+ }
 
+ onIBrandDeSelect(item: any) {
+   let selectedBrandIds = this.selectedBrandItems.map((data)=> { return data._id });
+   this.getProductsByBrandIds(selectedBrandIds);
+ }
 }

@@ -32,8 +32,8 @@ export class SearchListComponent {
     console.log("Search Results in last page ", this.searchResults);
   }
 
-  public goToProductsPage(){
-    this.router.navigate(['/products']);
+  public goToProductsPage(item){
+    this.router.navigate([`/products/${item._id}`]);
   }
 
 }
