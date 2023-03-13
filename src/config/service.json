@@ -1,10 +1,11 @@
 {
 
     "gatewayUrl" : {
-        "localhost" : "http://localhost:8002/"
+     
+      "localhost" :"https://dev-altsys-realize-api.azurewebsites.net/"
     },
     "gatewayUrlForUserProfile" : {
-        "localhost" : "http://localhost:2003/api/user/signin"
+        "localhost" : "https://dev-altsys-realize-users-api.azurewebsites.net/api/user/signin"
     },
     "appUrl" : {
         "allCategory" : "api/category", 
