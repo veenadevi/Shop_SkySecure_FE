@@ -7,7 +7,7 @@
       "type": "pwa-chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "https://localhost:8080/"
+      "url": "https://dev-realizeweb.azurewebsites.net"
     },
     {
       "name": "ng test",
