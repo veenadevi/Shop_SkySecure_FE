@@ -109,6 +109,7 @@ export class ToolbarComponent {
   }
 
   public goToProductsPageWithSubCategorySelection(category) {
+    console.log("**** Came here");
     this.productListService.setCategoryIdSelection(category._id);
     this.router.navigate([`/products/sub-category/${category._id}`]);
   }

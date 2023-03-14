@@ -98,6 +98,7 @@ export class ProductPgaeComponent implements OnInit{
     this.subscriptions.push(
        this.metaDataSvc.fetchSubCategories(categoryId).subscribe( response => {
         this.subCategories = response.subCategories;
+        console.log("****** Got here ", this.subCategories);
         this.selectedItems = this.subCategories.filter((data) => {
           if(data._id == categoryId) return data;
         })
@@ -161,6 +162,7 @@ export class ProductPgaeComponent implements OnInit{
 
   public ngOnInit() : void {
       this.getBrands();
+      
       this.activeRoute.paramMap.subscribe(params => {
       this.category = params.get('categoryId') || '63ea6f258e58e64acc7858ad';
       this.subCategory = params.get('subcategoryId');
@@ -171,9 +173,14 @@ export class ProductPgaeComponent implements OnInit{
       if(this.subCategory)
       this.getSubCategories(this.subCategory);
 
+      console.log("****** All brands ", this.brands);
+      console.log("****** All Slecetd brands ", this.brands);
       if(this.brand) {
+        console.log("****** Came inside ", this.brands);
          this.getProductsByBrandIds([this.brand]);
+         
       }
+      
 
     });
     this.productListService.categoryIdSelectionSubject$.subscribe((data) => {
@@ -212,17 +219,20 @@ export class ProductPgaeComponent implements OnInit{
   }
 
   onBrandSelect(item: any) {
+    console.log("******* Called select Brad");
     let selectedBrandItems = this.selectedBrandItems.map((data)=> { return data._id });
     this.getProductsByBrandIds(selectedBrandItems);
  }
 
  onBrandSelectAll(items: any) {
+  console.log("******* Called select Brad ALL");
    this.selectedBrandItems = items;
    let selectedBrandIds = this.selectedBrandItems.map((data)=> { return data._id });
    this.getProductsByBrandIds(selectedBrandIds);
  }
 
  onIBrandDeSelect(item: any) {
+  console.log("******* Called select Brad Deselect");
    let selectedBrandIds = this.selectedBrandItems.map((data)=> { return data._id });
    this.getProductsByBrandIds(selectedBrandIds);
  }
