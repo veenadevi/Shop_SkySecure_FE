@@ -53,5 +53,5 @@ jobs:
           app-name: 'dev-realizeweb'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D4927A8D060346E9B3D0866F760E5114 }}
-          package: ./altsys_frontend
+          package: ./dist
           
