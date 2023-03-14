@@ -6,7 +6,8 @@
     <!-- If Cart is Empty -->
 
     <!-- If Cart items is present -->
-    <ng-container>
+    
+      <ng-container>
         <div>
             <table class="table table-borderless">
                 <thead class="table-header">
@@ -17,21 +18,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <ng-container *ngFor="let item of cartItems">
+                  <ng-container *ngFor="let item of (cartItems$ | async); index as i">
                     <tr>
-                      <th scope="row">{{item.name}}</th>
+                      <th scope="row">{{item.productId}}</th>
                       <!-- Item Quantity -->
                       <td>
                         <div class="td-column">
-                          <span>
+                          <span (click) = "quantityEdit(i,  'minus')">
                             <img src="../../../assets/icons/Minus.svg">
                           </span>
                           <span>
                             <input 
-                              class="input-field"
+                              class="input-field" [(ngModel)]="item.quantity" value="{{item.quantity}}"
                               >
                           </span>
-                          <span>
+                          <span (click) = "quantityEdit(i , 'plus')">
                             <img src="../../../assets/icons/Add.svg">
                           </span>
                         </div>

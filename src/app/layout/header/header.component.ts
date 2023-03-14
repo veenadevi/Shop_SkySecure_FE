@@ -4,10 +4,12 @@ import { MsalService, MsalBroadcastService } from '@azure/msal-angular';
 import { AppComponent } from 'src/app/app.component';
 import { LoginService } from 'src/shared/services/login.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
-import { map, filter, Subscription } from 'rxjs';
+import { map, filter, Subscription, switchMap, forkJoin } from 'rxjs';
 import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
 import { b2cPolicies, silentRequest } from 'src/app/auth-config';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
+import { CartStore } from 'src/shared/stores/cart.store';
+import { CartService } from 'src/shared/services/cart.service';
 
 
 @Component({
@@ -32,6 +34,7 @@ export class HeaderComponent implements OnInit{
     private userAccountStore : UserAccountStore,
     private msalBroadcastService: MsalBroadcastService,
     private userProfileService : UserProfileService,
+    private cartService : CartService,
     private router : Router
   ){}
 
@@ -45,7 +48,6 @@ export class HeaderComponent implements OnInit{
   .pipe(
     map(data => {
       if(data){
-        console.log("&&&&&&&&&& ---------- ", data);
         return data;
       }
       else{
@@ -64,7 +66,6 @@ export class HeaderComponent implements OnInit{
       if(this.userLoggedIn){
         this.getAccessIdToken();
       }
-      console.log("**** --> Looged in details ", this.authService.instance.getAllAccounts());
     }));
 
 
@@ -89,7 +90,7 @@ export class HeaderComponent implements OnInit{
             })
 
     // setTimeout(() => {
-    //   console.log("****** -----> After 5 sec", this.authService.instance.getAllAccounts().length);
+    //   
     // }, 5000);
 
 
@@ -122,13 +123,45 @@ export class HeaderComponent implements OnInit{
 
   public getAccessIdToken() {
     this.authService.acquireTokenSilent(silentRequest).subscribe( res => {
-      console.log(" Inside get cart function------>>>>>> ", res.idToken);
       this.userAccountStore.setAccessIdToken(res.idToken);
       this.userProfileService.fetchUserProfile().subscribe(res => {
-        //this.userAccountStore.setUserProfileDetails(res);
+        this.setCartItems(res);
+        
       });
-      //this.userProfileService.fetchData().subscribe();
+
+      
+
+
+      /*this.userProfileService.fetchUserProfile()
+        .pipe(
+          switchMap ( (response) => {
+            this.setCartItems(response);
+            return response;
+          })
+        ).subscribe( res => {
+          console.log("--------------------***** res ", res);
+        })*/
+      
     })
+
+
+    
+  }
+
+
+  public setCartItems(data) {
+
+    console.log("***** response in cart items ", data.userDetails._id);
+    
+      // this.cartService.getCartItems(data.userDetails._id).subscribe( response => {
+      //   console.log("***** Response after init ", response);
+      // })
+
+
+      this.cartService.getCartItems(null).subscribe();
+      
+    
+
   }
 
 }

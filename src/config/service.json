@@ -7,6 +7,9 @@
     "gatewayUrlForUserProfile" : {
         "localhost" : "https://dev-altsys-realize-users-api.azurewebsites.net/api/user/signin"
     },
+    "gatewayUrlForOrders" : {
+        "localhost" : "http://localhost:8080/"
+    },
     "appUrl" : {
         "allCategory" : "api/category", 
         "allOEM" : "api/oem", 
@@ -15,7 +18,9 @@
         "subCategoryByCategory" : "api/sub-category/",
         "getProductsBySubCategoryIds" : "api/products",
         "getSingleProduct": "api/product/",
-        "getProductsByBrandIds": "api/products/oems"
+        "getProductsByBrandIds": "api/products/oems",
+
+        "userCart" : "api/user-cart"
     }
     
 }

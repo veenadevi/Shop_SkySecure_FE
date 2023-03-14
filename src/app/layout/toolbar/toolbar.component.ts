@@ -14,6 +14,8 @@ import { OEMResponse } from 'src/shared/models/interface/response/oem-response';
 import { CloseScrollStrategy } from '@angular/cdk/overlay';
 import { ProductListService } from 'src/shared/services/product-list-page.service';
 import { MatMenu } from '@angular/material/menu';
+import { CartService } from 'src/shared/services/cart.service';
+import { HttpResponseBase } from '@angular/common/http';
 
 @Component({
   selector: 'app-toolbar',
@@ -25,6 +27,7 @@ export class ToolbarComponent {
   constructor(
     private metaDataSvc : MetadataService,
     private loaderService : LoaderService,
+    private cartService : CartService,
     private metadataStore : MetadataStore,
     private userAccountStore : UserAccountStore,
     private router : Router,
@@ -84,6 +87,7 @@ export class ToolbarComponent {
     return categoryResponse;
   }
 
+  
 
 
   public ngOnInit() : void {
@@ -91,6 +95,7 @@ export class ToolbarComponent {
     this.getCategories();
     this.getProducts();
     this.getOEMs();
+    //this.getCartId();
   }
 
 

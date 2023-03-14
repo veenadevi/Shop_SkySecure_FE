@@ -28,7 +28,6 @@ export class UserPanelComponent implements OnInit{
   .pipe(
     map(data => {
       if(data){
-        console.log("(((((((((((((((((( ", data);
         return data;
         
       }
@@ -52,7 +51,6 @@ export class UserPanelComponent implements OnInit{
       
       this.navExpanded = true;
         //this.navExpanded = changes.isExpanded.currentValue;
-        console.log("**** Changed" , this.isExpanded);
       
       
       // You can also use categoryId.previousValue and 

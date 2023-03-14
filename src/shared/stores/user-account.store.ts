@@ -63,7 +63,6 @@ export class UserAccountStore {
    * Set Product AccessIdToken
    */
   public setAccessIdToken(data : any) : void {
-    console.log("*************&&&&&&&&&&&&& Set ", data);
     this.accessIdToken = data;
     this.accessIdTokenSubject.next(data);
   }

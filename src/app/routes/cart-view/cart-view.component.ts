@@ -27,7 +27,6 @@ export class CartViewComponent {
     
     this.subscriptions.push(
       this.globalSearch.fetchCartMock().subscribe( response => {
-        console.log("*** res ", response.category);
         this.cartItems = response.category;
       })
       
