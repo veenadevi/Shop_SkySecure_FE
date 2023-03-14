@@ -88,6 +88,7 @@ export class ProductPgaeComponent implements OnInit{
        this.metaDataSvc.fetchOEM().subscribe( response => {
         this.brands = response.oems;
         this.selectedBrandItems = [];
+       // this.getProductsByBrandIds(this.brand);
         this.getProductsByBrandIds([this.brand]);
       })
     );
@@ -161,7 +162,8 @@ export class ProductPgaeComponent implements OnInit{
 
 
   public ngOnInit() : void {
-      this.getBrands();
+      
+   // this.getBrands();
       
       this.activeRoute.paramMap.subscribe(params => {
       this.category = params.get('categoryId') || '63ea6f258e58e64acc7858ad';
