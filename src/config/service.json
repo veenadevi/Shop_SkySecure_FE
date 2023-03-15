@@ -8,7 +8,7 @@
         "localhost" : "https://dev-altsys-realize-users-api.azurewebsites.net/api/user/signin"
     },
     "gatewayUrlForOrders" : {
-        "localhost" : "http://localhost:8080/"
+        "localhost" : "https://dev-altsys-realize-order.azurewebsites.net/"
     },
     "appUrl" : {
         "allCategory" : "api/category", 
