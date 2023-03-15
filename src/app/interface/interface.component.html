@@ -4,33 +4,77 @@
     <app-header></app-header>
 
 
-    
-    <!-- Container If Logged In-->
-
     <ng-container *ngIf="userLoggedIn">
-        <mat-sidenav-container>
-            <mat-sidenav opened=true mode="side">
-                <div class="user-panel-nav-icon" (click)="exapndCollapse()">
-                    <img src="../../assets/icons/arrow-right-1.svg">
+
+        
+        <mat-drawer-container class="" autosize>
+            <mat-drawer #drawer class="sidebar-main-container" [style]="isExapnded ? 'width: 13%;': ''" mode="side" [opened]="collapseService.isOpen$ | async">
+                
+               
+                <div class="nav-item" (click)="exapndCollapse()">
+                    <span style="font-size: 25px; margin-left:8px">
+                        <i class="user-img" class="fa fa-solid fa-bars"></i>
+                    </span>
                 </div>
                 
-                <user-panel [isExpanded] = "isExapnded"></user-panel>
-            </mat-sidenav>
-            <mat-sidenav-content>
 
+                <div class="nav-item">
+                    <span>
+                        <img class="user-img" src="../../assets/images/img_avatar.png" alt="home">
+                    </span>
+                    <div *ngIf="isExapnded" class="user-name">
+                        <div class="icon-description">
+                            Sample
+                        </div>
+                        <!-- <div >
+                            Admin
+                        </div> -->
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <span>
+                        <img class="user-img" src="../../../assets/icons/Dashboard.svg">
+                    </span>
+                    <div class="icon-description" *ngIf="isExapnded">
+                        Dashboard
+                    </div>
+                </div>
+                <div class="nav-item" mat-button [matMenuTriggerFor]="aboveMenu">
+                    <span class="nav-arrow" >
+                        <img class="user-img" src="../../assets/icons/Profile(1).svg">
+                        <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true"></i>
+                    </span>
+                   
+                    <div  class="icon-description" *ngIf="isExapnded">
+                        Profile
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    </div>
+                       
+                        <mat-menu #aboveMenu="matMenu" yPosition="below" xPosition="after">
+                
+                            <button mat-menu-item [routerLink]="['user-profile/quotation-history']">
+                                <div class="menu-width">
+                                    Quotation History
+                                </div>
+                            </button>
+                            <button mat-menu-item (click)="logout()">
+                                <div class="menu-width">
+                                    Logout
+                                </div>
+                            </button>
+                            
+                        </mat-menu>
+                </div>
 
-                <!-- Toolbar Component-->
-                <app-toolbar></app-toolbar>
-
-
-                <!-- Other Routes-->
-                <router-outlet></router-outlet>
-
-
-            </mat-sidenav-content>
-        </mat-sidenav-container>
+            </mat-drawer>
+        
+            <div class="example-sidenav-content">
+            <app-toolbar></app-toolbar>
+            <router-outlet></router-outlet>
+            </div>
+        
+        </mat-drawer-container>
     </ng-container>
-
 
     <!-- Container If not Logged In -->
 
@@ -45,12 +89,8 @@
 
 
     </ng-container>
-    
-
-    <!-- Other Routes-->
-
-    <!-- <router-outlet></router-outlet> -->
 
 
-    <!-- Footer Component -->
+
+
     <app-footer></app-footer>

@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { MsalService } from '@azure/msal-angular';
-import { map, Subscription } from 'rxjs';
+import { BehaviorSubject, map, Subscription } from 'rxjs';
 import { silentRequest } from '../auth-config';
 import { b2cPolicies } from '../../app/auth-config';
 import { SsoSilentRequest } from '@azure/msal-browser';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
+import { LoginService } from 'src/shared/services/login.service';
 
 
 @Component({
@@ -24,7 +25,9 @@ export class InterfaceComponent {
   constructor(
     private userAccountStore : UserAccountStore,
     private authService : MsalService,
-    private userProfileService : UserProfileService 
+    private userProfileService : UserProfileService ,
+    public collapseService: CollapseService,
+    private loginService : LoginService
   ){
 
   }
@@ -51,9 +54,34 @@ export class InterfaceComponent {
   public exapndCollapse () {
 
    this.isExapnded = this.isExapnded ? false : true;
+   //return this.isExapnded;
+  }
+
+  public logout() {
+    this.loginService.logout();
   }
   
 
   
 
+}
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CollapseService {
+
+  isOpen$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  isSidenavBig$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+  constructor() { }
+  
+  toggleSidenav() {
+    this.isOpen$.next(!this.isOpen$.getValue())
+  }
+
+  toggleSidenavContentSize() {
+    this.isSidenavBig$.next(!this.isSidenavBig$.getValue())
+  }
 }
