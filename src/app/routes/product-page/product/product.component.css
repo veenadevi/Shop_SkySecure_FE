@@ -2,7 +2,6 @@
     display: flex;
     width: auto;
     height: fit-content;
-    justify-content: space-between;
     flex-flow: row wrap;
 }
 

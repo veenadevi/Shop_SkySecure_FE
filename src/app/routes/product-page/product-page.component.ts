@@ -107,6 +107,16 @@ export class ProductPgaeComponent implements OnInit{
     );
   }
 
+  private getSubCategoriesByDefault(categoryId: String): void {
+    this.subscriptions.push(
+       this.metaDataSvc.fetchSubCategories(categoryId).subscribe( response => {
+        this.subCategories = response.subCategories;
+        console.log("****** Got here ", this.subCategories);
+        this.selectedItems = [];
+      })
+    );
+  }
+
   private getProducts(): void {
     this.subscriptions.push(
        this.metaDataSvc.fetchProducts().subscribe( response => {
@@ -163,15 +173,17 @@ export class ProductPgaeComponent implements OnInit{
 
   public ngOnInit() : void {
       
-   // this.getBrands();
-      
+      this.getBrands();   
       this.activeRoute.paramMap.subscribe(params => {
-      this.category = params.get('categoryId') || '63ea6f258e58e64acc7858ad';
+      this.category = params.get('categoryId');
       this.subCategory = params.get('subcategoryId');
       this.brand = params.get('brandId');
       if(this.category)
       this.getCategories(this.category);
-
+      else 
+      {
+        this.getSubCategoriesByDefault('63ea6f258e58e64acc7858ad');
+      }
       if(this.subCategory)
       this.getSubCategories(this.subCategory);
 
@@ -186,8 +198,11 @@ export class ProductPgaeComponent implements OnInit{
 
     });
     this.productListService.categoryIdSelectionSubject$.subscribe((data) => {
+      console.log("++++++DATA+++++++",data);
       this.category = data;
       this.getCategories(this.category);
+      let selectedItemsIds = this.selectedItems.map((data)=> { return data._id });
+      this.getProductsBySubcategoryIds(selectedItemsIds);
     })
     this.getProducts();
     this.selectedItems = [];
@@ -233,9 +248,16 @@ export class ProductPgaeComponent implements OnInit{
    this.getProductsByBrandIds(selectedBrandIds);
  }
 
- onIBrandDeSelect(item: any) {
+ onBrandDeSelect(item: any) {
   console.log("******* Called select Brad Deselect");
-   let selectedBrandIds = this.selectedBrandItems.map((data)=> { return data._id });
+   let selectedBrandIds =  this.selectedBrandItems.map((data)=> { return data._id });
    this.getProductsByBrandIds(selectedBrandIds);
  }
+
+ onBrandDeSelectAll(item: any) {
+  console.log("******* Called select Brand Deselect all");
+   let selectedBrandIds = [];
+   this.getProductsByBrandIds(selectedBrandIds);
+ }
+
 }
