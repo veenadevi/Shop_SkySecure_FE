@@ -66,9 +66,10 @@ export class ToolbarComponent {
     let OEMResponse = null;
     this.subscriptions.push(
       this.metaDataSvc.fetchOEM().subscribe( response => {
-        console.log("Settign up splice before"+response.oem);
-        this.metadataStore.setOEMDetails(response.oem);
+        console.log("Settign up splice before",Array(response.oems));
+        this.metadataStore.setOEMDetails(response.oems);
         this.oemList = response.oems.splice(0,10);
+        console.log("&&&&&&&&&&&&& Settign up splice before",this.oemList);
         
       })
       

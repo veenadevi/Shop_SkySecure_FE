@@ -9,8 +9,8 @@
 
     <div class="card-container">
 
-        <ng-container *ngIf="mockCategories.length > 0" >
-            <ng-container *ngFor="let category of mockCategories">
+        <ng-container *ngIf="oems.length > 0">
+            <ng-container *ngFor="let category of oems">
                 <card-item [imageSrc]="category.imageSrc" [name]="category.name" (click)="goToProductsPage()"></card-item>
             </ng-container>
         </ng-container>
