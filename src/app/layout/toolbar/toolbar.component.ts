@@ -50,14 +50,12 @@ export class ToolbarComponent {
     this.subscriptions.push(
       this.metaDataSvc.fetchCategory().subscribe( response => {
         this.metadataStore.setCategoryDetails(response.categorys);
-        console.log("Settign up response.categorys splice before"+response.categorys);
         this.categories = response.categorys.splice(0,10);
         this.softwareCategories = response.categorys.splice(0,10);
         this.hardwareCategories = response.categorys.splice(0, 10, 15);
       })
       
     );
-    console.log("categoryResponse "+categoryResponse)
     return categoryResponse;
   }
 
@@ -66,15 +64,12 @@ export class ToolbarComponent {
     let OEMResponse = null;
     this.subscriptions.push(
       this.metaDataSvc.fetchOEM().subscribe( response => {
-        console.log("Settign up splice before",Array(response.oems));
         this.metadataStore.setOEMDetails(response.oems);
         this.oemList = response.oems.splice(0,10);
-        console.log("&&&&&&&&&&&&& Settign up splice before",this.oemList);
         
       })
       
     );
-    console.log("OEMResponse "+OEMResponse)
     return OEMResponse;
   }
   private getProducts(): ProductsDetails[]{
@@ -110,7 +105,6 @@ export class ToolbarComponent {
   }
 
   public goToProductsPageWithSubCategorySelection(category) {
-    console.log("**** Came here");
     this.productListService.setCategoryIdSelection(category._id);
     this.router.navigate([`/products/sub-category/${category._id}`]);
   }

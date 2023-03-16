@@ -47,8 +47,7 @@ export class MetadataService {
           if (!response) {
             return null;
           }
-          //this.orderStore.setOrderRefreshDate(response);
-          console.log("&&&& Response ", response);
+          
           return response;
         }),
         catchError(error => {
@@ -56,7 +55,7 @@ export class MetadataService {
           return (error);
         })
       );
-      console.log("category request"+request$)
+      
     return request$;
   }
 //Fetch all OEM
@@ -64,7 +63,7 @@ export class MetadataService {
   public fetchOEM(): Observable<any> {
 
     let url = this.baseUrl + this.fetchOEMUrl;
-    console.log("oem url"+url)
+   
     //let options = this.getOptions();
     
 
@@ -75,7 +74,7 @@ export class MetadataService {
             return null;
           }
          
-          console.log("&&&& OEM Response ", response);
+         
           return response;
         }),
         catchError(error => {
@@ -83,7 +82,7 @@ export class MetadataService {
           return (error);
         })
       );
-      console.log("oem request"+request$)
+    
     return request$;
   }
 
@@ -99,8 +98,7 @@ export class MetadataService {
           if (!response) {
             return null;
           }
-          //this.orderStore.setOrderRefreshDate(response);
-          console.log("&&&& Response Products", response);
+   
           return response;
         }),
         catchError(error => {
@@ -125,8 +123,7 @@ export class MetadataService {
           if (!response) {
             return null;
           }
-          //this.orderStore.setOrderRefreshDate(response);
-          console.log("&&&& Response subcategories", response);
+        
           return response;
         }),
         catchError(error => {
@@ -149,7 +146,7 @@ export class MetadataService {
           if (!response) {
             return null;
           }
-          console.log("&&&& Response products by subcategories", response);
+    
           return response;
         }),
         catchError(error => {
@@ -171,7 +168,7 @@ export class MetadataService {
           if (!response) {
             return null;
           }
-          console.log("&&&& Response products by brand ids", response);
+  
           return response;
         }),
         catchError(error => {
@@ -193,7 +190,7 @@ export class MetadataService {
           if (!response) {
             return null;
           }
-          console.log("&&&& Response products details by id", response);
+  
           return response;
         }),
         catchError(error => {

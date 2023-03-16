@@ -43,7 +43,6 @@ export class GlobalSearchService {
             return null;
           }
           //this.orderStore.setOrderRefreshDate(response);
-          console.log("&&&& Response Products", response);
           return response;
         }),
         catchError(error => {

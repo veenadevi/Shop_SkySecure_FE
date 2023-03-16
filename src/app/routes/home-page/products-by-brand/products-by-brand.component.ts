@@ -47,7 +47,7 @@ public oems$ = this.metadataStore.oemDetails$
   private getBrands(): void {
     this.subscriptions.push(
        this.metadataSvc.fetchOEM().subscribe( response => {
-        console.log("***********-------------- ", response);
+    
         this.oems = response.oems;
         //this.selectedBrandItems = [];
        // this.getProductsByBrandIds(this.brand);
@@ -64,7 +64,7 @@ public oems$ = this.metadataStore.oemDetails$
 
     this.getBrands();
     this.setCategoriesGrid();
-    console.log("*** Resposne in category", this.mockCategories);
+   
   }
 
   public setCategoriesGrid(){

@@ -26,7 +26,6 @@ public cartData : any[] = [];
   .pipe(
     map(data => {
       if(data){
-        console.log("***** Inside promise ", data);
         this.cartData = data.usercart[0].userCartDetails;
         return this.cartData;
       }
@@ -48,8 +47,6 @@ public cartData : any[] = [];
 
 
     this.fetchCategoryMock();
-
-    console.log("******* Got in store ", this.cartStore.getCartItems());
 
   }
 
@@ -82,8 +79,6 @@ public cartData : any[] = [];
     }
 
 
-    console.log("******* Cart Items ", this.cartStore.getCartItems());
-
     this.cartService.addCartItems(re)
         .pipe(
           //Use switchMap to call another API(s)
@@ -97,7 +92,7 @@ public cartData : any[] = [];
         ).subscribe((forkJoinResponse) => {
           //forkJoinResponse will be an array of responses for each of the this.serviceTwo.getAllServiceTwoData CALL
           //Do whatever you want to do with this array
-          console.log("******* Final Response ", forkJoinResponse);
+        
         });
     // productService.GetAllProducts()
     // .switchMap(
@@ -114,7 +109,7 @@ public cartData : any[] = [];
 
   public quantityEdit(i, opr) : void {
 
-    console.log("*** Came here");
+
     if(opr === 'plus'){
       this.cartData[i].quantity = this.cartData[i].quantity + 1;
     }

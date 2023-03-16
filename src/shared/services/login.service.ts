@@ -25,7 +25,6 @@ export class LoginService {
 
   login(userFlowRequest?: RedirectRequest | PopupRequest) {
         if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
-            console.log("---------> Called If MSAL");
             if (this.msalGuardConfig.authRequest) {
                 this.authService.loginPopup({ ...this.msalGuardConfig.authRequest, ...userFlowRequest } as PopupRequest)
                     .subscribe((response: AuthenticationResult) => {
@@ -42,7 +41,6 @@ export class LoginService {
                     });
             }
         } else {
-            console.log("---------> Called If Else");
                 if (this.msalGuardConfig.authRequest) {
                     this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest, ...userFlowRequest } as RedirectRequest);
                 } else {
@@ -67,7 +65,6 @@ export class LoginService {
 
     public retrieveAccessIdToken() : any {
         this.authService.acquireTokenSilent(silentRequest).subscribe( res => {
-            console.log("------>>>>>> ", res.idToken);
             this.userAccountStore.setAccessIdToken(res.idToken);
           })
     }

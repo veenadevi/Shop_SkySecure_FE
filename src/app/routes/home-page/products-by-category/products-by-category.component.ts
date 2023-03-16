@@ -51,7 +51,6 @@ export class ProductsByCategoryComponent {
   public ngOnInit() : void {
 
     this.setCategoriesGrid();
-    console.log("*** Resposne in category", this.mockCategories);
   }
 
   public setCategoriesGrid(){

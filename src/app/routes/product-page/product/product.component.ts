@@ -34,7 +34,6 @@ export class ProductComponent {
         "quantity" : 1
       });
     }
-console.log("********* Cart Items got ", existingItems.usercart[0]);
     //this.cartStore.setCartItems(product);
     //this.router.navigate(['/cart']);
 

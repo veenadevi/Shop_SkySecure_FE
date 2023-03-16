@@ -1,6 +1,7 @@
 /* Angular Import */
 import { Injectable }             from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { UserCartDetailsModel } from '../models/concrete/user-cart-details.model';
 import { CategoryDetails } from '../models/interface/partials/category-details';
 import { ProductsDetails } from '../models/interface/partials/products-details';
 /* Feature Imports */
@@ -17,6 +18,8 @@ export class CartStore {
     
 
     public cartItems : any ;
+
+    public productList : any[];
 
     public cartRefreneceId : string;
 
@@ -43,9 +46,54 @@ export class CartStore {
    */
    public setCartItems(data : any) : void {
     
-    this.cartItems = data;
+    this.cartItems = data.usercart[0].userCartDetails;
     console.log("******-------> Set Items here ", this.cartItems);
+
+    // data.usercart[0].userCartDetails.forEach( element=> {
+    //   this.productList.push({
+    //       "productId": element.productId,
+    //       "quantity" : element.quantity
+    //   })
+
+    // })
+
+    // console.log("******-------> Set Products here ", this.productList);
     this.cartItemsSubject.next(data);
+
+    
+
+    
+        // let re = new UserCartRequestModel({
+    //     userId : "12345",
+    //     createdBy : "ADMIN",
+    //     products : [{
+    //         "productId":"6408c67ebc262d784813b71f",
+    //         "quantity" :4
+    //     }
+    //     ]
+    //   })
+  }
+
+  public setProductList(data : any) : void {
+    
+    let tempList = data.usercart[0].userCartDetails;
+    console.log("******-------> Set Items here ", this.cartItems);
+
+    tempList.forEach( element=> {
+      this.productList.push({
+          "productId": element.productId,
+          "quantity" : element.quantity
+      })
+
+    })
+
+    console.log("******-------> Set Products here ", this.productList);
+    //this.cartItemsSubject.next(data);
+
+    
+
+    
+        
   }
 
   /**
@@ -53,7 +101,6 @@ export class CartStore {
    * Set Cart Ref
    */
   public setCartRefreneceId(data : any) : void {
-    console.log("***** Cart STore ", data.usercart[0].cart_ref_id);
     this.cartItems = data;
     this.cartItemsSubject.next(data);
     this.cartRefreneceId = data.usercart[0].cart_ref_id;

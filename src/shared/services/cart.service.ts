@@ -59,7 +59,6 @@ export class CartService {
           if (!response) {
             return throwError(response);
           }
-          console.log("**** Res from Cart ", response);
           //this.userAccountStore.setUserProfileDetails(response);
           return of(response);
         }),
@@ -78,7 +77,7 @@ export class CartService {
 
   public getCartItems(userId: String): Observable<any> {
 
-    console.log("((((((((((( came in");
+  
     let url = this.baseUrl + this.userCartUrl + '/1001';
     //let options = this.getOptions();
 
@@ -89,8 +88,10 @@ export class CartService {
             return null;
           }
           this.cartStore.setCartRefreneceId(response);
-          //this.cartStore.setCartItems(response);
-          console.log("****** (((((( Value set");
+          this.cartStore.setCartItems(response);
+          //this.cartStore.setProductList(response);
+          this.setProductList(response);
+         
           return response;
         }),
         catchError(error => {
@@ -100,6 +101,30 @@ export class CartService {
       );
 
     return request$;
+  }
+
+
+  public setProductList(data : any) : void {
+    
+    let tempList = data.usercart[0].userCartDetails;
+    let productList = [];
+    //console.log("******-------> Set Items here ", );
+
+    tempList.forEach( element=> {
+      productList.push({
+          "productId": element.productId,
+          "quantity" : element.quantity
+      })
+
+    })
+
+    console.log("******-------> Set Products here ", productList);
+    //this.cartItemsSubject.next(data);
+
+    
+
+    
+        
   }
 
 

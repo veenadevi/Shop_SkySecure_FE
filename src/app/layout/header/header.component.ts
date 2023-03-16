@@ -125,7 +125,7 @@ export class HeaderComponent implements OnInit{
     this.authService.acquireTokenSilent(silentRequest).subscribe( res => {
       this.userAccountStore.setAccessIdToken(res.idToken);
       this.userProfileService.fetchUserProfile().subscribe(res => {
-        this.setCartItems(res);
+        this.retrieveCarttItems(res);
         
       });
 
@@ -149,13 +149,7 @@ export class HeaderComponent implements OnInit{
   }
 
 
-  public setCartItems(data) {
-
-    console.log("***** response in cart items ", data.userDetails._id);
-    
-      // this.cartService.getCartItems(data.userDetails._id).subscribe( response => {
-      //   console.log("***** Response after init ", response);
-      // })
+  public retrieveCarttItems(data) {
 
 
       this.cartService.getCartItems(null).subscribe();
