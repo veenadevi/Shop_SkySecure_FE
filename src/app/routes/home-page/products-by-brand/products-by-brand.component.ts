@@ -24,7 +24,7 @@ export class ProductsByBrandComponent {
   constructor(
     private router: Router,
     private metadataSvc : MetadataService,
-    private metadataStore : MetadataStore
+    private metadataStore : MetadataStore 
     ) {
 }
 
@@ -74,6 +74,7 @@ public oems$ = this.metadataStore.oemDetails$
         
       })
     )
+    
 
     // this.subscriptions.push(
     //   this.metadataSvc.fetchCategoryMock().subscribe( response => {
@@ -84,5 +85,10 @@ public oems$ = this.metadataStore.oemDetails$
     // );
 
   }
+
+  goToProductsPageByBrand(oem) {
+    this.router.navigate([`/products/brand/${oem._id}`]);
+  }
+
 
 }

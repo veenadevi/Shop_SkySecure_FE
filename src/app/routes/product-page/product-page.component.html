@@ -31,6 +31,8 @@
     </div>
     <div class="product-list-container">
         <h4 class="oem-tilte">Microsoft Products</h4>
+        <div  *ngIf="products.length > 0">
         <app-product [products]="products"></app-product>
+      </div>
     </div>
 </div>

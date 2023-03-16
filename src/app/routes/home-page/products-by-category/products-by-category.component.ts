@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { map, Subscription } from 'rxjs';
 
 import { MetadataService } from 'src/shared/services/metadata.service';
+import { ProductListService } from 'src/shared/services/product-list-page.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 
 @Component({
@@ -25,7 +26,8 @@ export class ProductsByCategoryComponent {
   constructor(
     private router: Router,
     private metadataSvc : MetadataService,
-    private metadataStore : MetadataStore
+    private metadataStore : MetadataStore,
+    private productListService : ProductListService
     ) {
 }
 
@@ -68,6 +70,11 @@ export class ProductsByCategoryComponent {
       
     // );
 
+  }
+
+  public goToProductsPageWithCategorySelection(category) {
+    this.productListService.setCategoryIdSelection(category._id);
+    this.router.navigate([`/products/category/${category._id}`]);
   }
 
 }

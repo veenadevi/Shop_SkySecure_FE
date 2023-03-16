@@ -14,44 +14,7 @@ import { ProductListService } from 'src/shared/services/product-list-page.servic
 })
 export class ProductPgaeComponent implements OnInit{
 
-  products = [
-    {
-      name: 'Microsoft Teams',
-      solutionLink: 'Lorem Ipsum is simply dummy text',
-      imageUrl: 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-      name: 'Microsoft Azure',
-      solutionLink: 'Lorem Ipsum is simply dummy text',
-      imageUrl: 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-      name: 'Microsoft Outlook',
-      solutionLink: 'Lorem Ipsum is simply dummy text',
-      imageUrl: 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-      name: 'Microsoft Teams',
-      solutionLink: 'Lorem Ipsum is simply dummy text',
-      imageUrl: 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-      name: 'Microsoft Azure',
-      solutionLink: 'Lorem Ipsum is simply dummy text',
-      imageUrl: 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-      name: 'Microsoft Outlook',
-      solutionLink: 'Lorem Ipsum is simply dummy text',
-      imageUrl: 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-  ]
+  products = []
   staticProductimageUrl = 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg';
   selectedItems : Array<any> = [];
   selectedBrandItems : Array<any> = [];
@@ -79,6 +42,9 @@ export class ProductPgaeComponent implements OnInit{
         this.selectedItems = this.subCategories.filter((data) => {
           if(data.categoryId == categoryId) return data;
         });
+        let selectedItemsIds = this.selectedItems.map((data)=> { return data._id });
+        if(selectedItemsIds)
+        this.getProductsBySubcategoryIds(selectedItemsIds);
       })
     );
   }
@@ -89,6 +55,7 @@ export class ProductPgaeComponent implements OnInit{
         this.brands = response.oems;
         this.selectedBrandItems = [];
        // this.getProductsByBrandIds(this.brand);
+        if(this.brand)
         this.getProductsByBrandIds([this.brand]);
       })
     );
@@ -103,6 +70,9 @@ export class ProductPgaeComponent implements OnInit{
         this.selectedItems = this.subCategories.filter((data) => {
           if(data._id == categoryId) return data;
         })
+        let selectedItemsIds = this.selectedItems.map((data)=> { return data._id });
+        if(selectedItemsIds)
+        this.getProductsBySubcategoryIds(selectedItemsIds);
       })
     );
   }
@@ -136,6 +106,7 @@ export class ProductPgaeComponent implements OnInit{
   private getProductsBySubcategoryIds(subCategoryIds: Array<string>): void {
     this.subscriptions.push(
        this.metaDataSvc.fetchAllProductsBySubCategoryIds(subCategoryIds).subscribe(response => {
+        console.log("+++++++++++",response.products)
          this.products = response.products.map((data: any )=> {
           return { 
             name: data.name , 
@@ -145,6 +116,7 @@ export class ProductPgaeComponent implements OnInit{
             _id: data._id
           }
          })
+         console.log("+++++++++products+++++++++",this.products);
       })
     );
   }
@@ -191,7 +163,7 @@ export class ProductPgaeComponent implements OnInit{
       console.log("****** All Slecetd brands ", this.brands);
       if(this.brand) {
         console.log("****** Came inside ", this.brands);
-         this.getProductsByBrandIds([this.brand]);
+        this.getProductsByBrandIds([this.brand]);
          
       }
       
@@ -201,10 +173,7 @@ export class ProductPgaeComponent implements OnInit{
       console.log("++++++DATA+++++++",data);
       this.category = data;
       this.getCategories(this.category);
-      let selectedItemsIds = this.selectedItems.map((data)=> { return data._id });
-      this.getProductsBySubcategoryIds(selectedItemsIds);
     })
-    this.getProducts();
     this.selectedItems = [];
 
     this.dropdownSettings = {
