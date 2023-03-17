@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, forkJoin, Subscription, switchMap } from 'rxjs';
 import { UserCartRequestModel } from 'src/shared/models/concrete/user-cart.model';
 import { CartService } from 'src/shared/services/cart.service';
@@ -26,7 +26,8 @@ export class CartItemsComponent {
     private cartStore : CartStore,
     private cartService : CartService,
     private route : ActivatedRoute,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private router : Router
   ) {}
 
 public cartData : any[] = [];
@@ -151,7 +152,7 @@ public cartData : any[] = [];
     }
 
 
-    this.addCartItemsService(req);
+    this.addCartItemsService(req, 'add');
 
     /*this.cartService.addCartItems(req)
         .pipe(
@@ -183,7 +184,7 @@ public cartData : any[] = [];
   }
 
   public requestQuote(){
-
+    this.router.navigate(['/cart/cart-submit']);
   }
 
   public saveCart() {
@@ -199,7 +200,7 @@ public cartData : any[] = [];
       cart_ref_id : cartRefId
     });
 
-    this.addCartItemsService(req);
+    this.addCartItemsService(req, 'save');
   }
 
 
@@ -218,11 +219,11 @@ public cartData : any[] = [];
       cart_ref_id : cartRefId
     });
 
-    this.addCartItemsService(req);
+    this.addCartItemsService(req, 'remove');
   }
 
 
-  public addCartItemsService(req) {
+  public addCartItemsService(req, state) {
 
     this.cartService.addCartItems(req)
         .pipe(
