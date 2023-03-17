@@ -19,6 +19,8 @@ export class CartItemsComponent {
 
   public params : any;
 
+ 
+
   constructor(
     private globalSearch : GlobalSearchService,
     private cartStore : CartStore,
@@ -63,7 +65,11 @@ public cartData : any[] = [];
 
     this.params = this.route.snapshot.queryParamMap;
 
-    this.getCartItems();
+    if(this.params.has('productId')){
+      this.getCartItems();
+    }
+
+    
 
     this.fetchCategoryMock();
 
@@ -145,7 +151,78 @@ public cartData : any[] = [];
     }
 
 
+    this.addCartItemsService(req);
+
+    /*this.cartService.addCartItems(req)
+        .pipe(
+          //Use switchMap to call another API(s)
+          switchMap((dataFromServiceOne) => {
+            //Lets map so to an observable of API call
+            const allObs$ = this.cartService.getCartItems(null);
+
+            //forkJoin will wait for the response to come for all of the observables
+            return forkJoin(allObs$);
+          })
+        ).subscribe((forkJoinResponse) => {
+          //forkJoinResponse will be an array of responses for each of the this.serviceTwo.getAllServiceTwoData CALL
+          //Do whatever you want to do with this array
+        
+        });*/
+
+  }
+
+  public quantityEdit(i, opr) : void {
+
+
+    if(opr === 'plus'){
+      this.cartData[i].quantity = this.cartData[i].quantity + 1;
+    }
+    else if(opr === 'minus'){
+      this.cartData[i].quantity = this.cartData[i].quantity - 1;
+    }
+  }
+
+  public requestQuote(){
+
+  }
+
+  public saveCart() {
+
+    console.log("***** Saved Cart ", this.cartData);
+    let cartRefId = this.cartStore.getCartRefreneceId();
+    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let req = new UserCartRequestModel({
+      //userId : userAccountdetails._id,
+      userId : '2222',
+      createdBy : userAccountdetails.firstName,
+      products : this.cartData,
+      cart_ref_id : cartRefId
+    });
+
+    this.addCartItemsService(req);
+  }
+
+
+  public removeCartItem(i) : void {
     
+
+    this.cartData.splice(i, 1);
+    console.log("***** Saved Cart ", this.cartData);
+    let cartRefId = this.cartStore.getCartRefreneceId();
+    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let req = new UserCartRequestModel({
+      //userId : userAccountdetails._id,
+      userId : '2222',
+      createdBy : userAccountdetails.firstName,
+      products : this.cartData,
+      cart_ref_id : cartRefId
+    });
+
+    this.addCartItemsService(req);
+  }
+
+
+  public addCartItemsService(req) {
 
     this.cartService.addCartItems(req)
         .pipe(
@@ -162,18 +239,6 @@ public cartData : any[] = [];
           //Do whatever you want to do with this array
         
         });
-
-  }
-
-  public quantityEdit(i, opr) : void {
-
-
-    if(opr === 'plus'){
-      this.cartData[i].quantity = this.cartData[i].quantity + 1;
-    }
-    else if(opr === 'minus'){
-      this.cartData[i].quantity = this.cartData[i].quantity - 1;
-    }
   }
 
 }

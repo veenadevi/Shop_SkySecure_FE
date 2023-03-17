@@ -40,11 +40,11 @@
 
                       <!-- Action -->
                       <td>
-                        <div class="td-column">
+                        <div class="td-column delete-button" (click)="removeCartItem(i)">
                           <span>
                             <img src="../../../assets/icons/Delete.svg">
                           </span>
-                          <span class="delete-text">
+                          <span class="delete-text" >
                             Remove
                           </span>
                         </div>
@@ -55,6 +55,15 @@
                  
                 </tbody>
               </table>
+        </div>
+        <div class="submit-quote">
+          <span class="text-style">
+            Enter the quantity of licenses required before proceeding to submit request
+          </span>
+          <span>
+            <button class="btn compare-btn" (click)="saveCart()">Save Cart</button>
+            <button class="btn request-btn" (click)="requestQuote()">Request quote</button>
+          </span>
         </div>
     </ng-container>
 </div>
