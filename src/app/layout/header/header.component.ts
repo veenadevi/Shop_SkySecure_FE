@@ -152,7 +152,7 @@ export class HeaderComponent implements OnInit{
   public retrieveCarttItems(data) {
 
 
-      this.cartService.getCartItems(null).subscribe();
+      this.cartService.getCartItems(data).subscribe();
       
     
 

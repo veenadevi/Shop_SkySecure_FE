@@ -3,6 +3,7 @@ import { Injectable }             from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CategoryDetails } from '../models/interface/partials/category-details';
 import { ProductsDetails } from '../models/interface/partials/products-details';
+import { UserDetails } from '../models/interface/partials/user-details';
 /* Feature Imports */
 
 
@@ -46,6 +47,7 @@ export class UserAccountStore {
    * Set Product Category
    */
    public setuserAccountDetails(data : any) : void {
+    //this.userAccountDetails = data;
     this.userAccountDetailsSubject.next(data);
   }
 
@@ -54,8 +56,9 @@ export class UserAccountStore {
    * Set User Profile
    */
   public setUserProfileDetails(data : any) : void {
-    //this.userProfileDetails = data;
-    this.userAccountDetailsSubject.next(data);
+    console.log("(((((((((((())))))) ", data);
+    this.userProfileDetails = data;
+    this.userProfileDetailsSubject.next(data);
   }
 
   /**
@@ -79,8 +82,9 @@ export class UserAccountStore {
   /**
    * Return User Profile
    */
-  public getUserProfileDetails(): string {
-    return this.userProfileDetails;
+  public getUserProfileDetails(): UserDetails {
+    console.log("(((((((((((())))))) ", this.userProfileDetails);
+    return this.userProfileDetails.userDetails;    ;
   }
 
 

@@ -63,7 +63,8 @@ export class UserProfileService {
           return of(response);
         }),
         map((response: any) => {
-          //this.userAccountStore.setUserProfileDetails(response);
+          console.log("*****(((((((((((()))))))))))) User Profile res ", response);
+          this.userAccountStore.setUserProfileDetails(response);
           return response;
         }),
         catchError(error => {

@@ -75,10 +75,13 @@ export class CartService {
     return REQUEST$;
   }
 
-  public getCartItems(userId: String): Observable<any> {
+  public getCartItems(userData: any): Observable<any> {
 
   
-    let url = this.baseUrl + this.userCartUrl + '/1001';
+  //console.log("*******&&&&&&&&&%%%%% User Data ", userData.userDetails._id);
+    //let url = this.baseUrl + this.userCartUrl + '/1001';
+    let url = this.baseUrl + this.userCartUrl + '/2222';
+    //let url = this.baseUrl + this.userCartUrl + '/' + userData.userDetails._id;
     //let options = this.getOptions();
 
     let request$ = this.http.get<Observable<any>>(url)
@@ -113,11 +116,13 @@ export class CartService {
     tempList.forEach( element=> {
       productList.push({
           "productId": element.productId,
-          "quantity" : element.quantity
+          "quantity" : element.quantity,
+          "productName" : element.productName
       })
 
     })
 
+    this.cartStore.setProductListItems(productList);
     console.log("******-------> Set Products here ", productList);
     //this.cartItemsSubject.next(data);
 

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { map, forkJoin, Subscription, switchMap } from 'rxjs';
 import { UserCartRequestModel } from 'src/shared/models/concrete/user-cart.model';
 import { CartService } from 'src/shared/services/cart.service';
 import { GlobalSearchService } from 'src/shared/services/global-search.service';
 import { CartStore } from 'src/shared/stores/cart.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'app-cart-items',
@@ -15,14 +17,18 @@ export class CartItemsComponent {
 
   public cartItems : any;
 
+  public params : any;
+
   constructor(
     private globalSearch : GlobalSearchService,
     private cartStore : CartStore,
-    private cartService : CartService
+    private cartService : CartService,
+    private route : ActivatedRoute,
+    private userAccountStore : UserAccountStore
   ) {}
 
 public cartData : any[] = [];
-  public cartItems$ = this.cartStore.cartItems$
+  public qcartItems$ = this.cartStore.cartItems$
   .pipe(
     map(data => {
       if(data){
@@ -36,15 +42,28 @@ public cartData : any[] = [];
     )
   )
 
+  public cartItems$ = this.cartStore.productList$
+  .pipe(
+    map(data => {
+      if(data){
+        //this.cartData = data.usercart[0].userCartDetails;
+        this.cartData = data;
+        console.log("******* %%%%%%% ", data);
+        return this.cartData;
+      }
+      else{
+        return data;
+      }
+    }
+    )
+  )
+
+
   public ngOnInit() : void {
 
-
-    /** 
-     * FUnction call to set and get Cart Items
-     */
+    this.params = this.route.snapshot.queryParamMap;
 
     this.getCartItems();
-
 
     this.fetchCategoryMock();
 
@@ -61,25 +80,74 @@ public cartData : any[] = [];
   
   }
 
-  public getCartItems() : void {
-
+  public getCartItems2() {
     let cartRefId = this.cartStore.getCartRefreneceId();
+    let productsList = this.cartStore.getProductListItems();
+    console.log("((((((( ------> Inside Cart Get ", productsList); 
     let re = new UserCartRequestModel({
       userId : "1001",
       createdBy : "ADMIN",
       products : [{
           "productId":"6408c67ebc262d784813b71f",
-          "quantity" :4
+          "quantity" :10
       }
       ]
     });
-
     if(cartRefId !== '' || cartRefId !== null){
       re.cart_ref_id = cartRefId;
     }
+    else {
+      re.products.push(productsList);
+    }
 
 
-    this.cartService.addCartItems(re)
+  }
+
+  public getCartItems() : void {
+
+    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    console.log("((((((( ------> Details ", userAccountdetails); 
+    let cartRefId = this.cartStore.getCartRefreneceId();
+    let productsList = this.cartStore.getProductListItems() ? this.cartStore.getProductListItems() : [];
+    /*let req = new UserCartRequestModel({
+      //userId : userAccountdetails._id,
+      userId : '2222',
+      createdBy : userAccountdetails.firstName,
+      products : [{
+          "productId": this.params.get('productId'),
+          "productName" : this.params.get('productName'),
+          "quantity" : this.params.get('quantity')
+      }
+      ]
+    });*/
+    let req = new UserCartRequestModel({
+      //userId : userAccountdetails._id,
+      userId : '2222',
+      createdBy : userAccountdetails.firstName,
+      products : productsList
+    });
+
+    
+    productsList.push({
+      "productId": this.params.get('productId'),
+      "productName" : this.params.get('productName'),
+      "quantity" : this.params.get('quantity')
+  });
+    console.log("***** Pushed Items Old", productsList);
+
+    //console.log("***** Pushed Items ", req.products);
+    if(cartRefId !== '' || cartRefId !== null){
+      req.cart_ref_id = cartRefId;
+      //req.products.push(productsList);
+    }
+    else {
+      //req.products.push(productsList);
+    }
+
+
+    
+
+    this.cartService.addCartItems(req)
         .pipe(
           //Use switchMap to call another API(s)
           switchMap((dataFromServiceOne) => {
@@ -94,16 +162,6 @@ public cartData : any[] = [];
           //Do whatever you want to do with this array
         
         });
-    // productService.GetAllProducts()
-    // .switchMap(
-    //   products => forkJoin(products.map(product => productService.DeleteProduct(product)))
-    // )
-    // .switchMap(() => productService.GetCategories())
-    // .switchMap(
-    //   categories => forkJoin(categories.map(category => productService.DeleteCategory(category)))
-    // )
-    // .subscribe(() => console.log('done'))
-    //   
 
   }
 

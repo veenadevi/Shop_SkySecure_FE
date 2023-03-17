@@ -33,6 +33,9 @@ export class CartStore {
     private cartRefreneceIdSubject = new BehaviorSubject<any>(null);
     public cartRefreneceId$ = this.cartRefreneceIdSubject.asObservable();
 
+    private productListSubject = new BehaviorSubject<any>(null);
+    public productList$ = this.productListSubject.asObservable();
+
     
 
 
@@ -74,25 +77,10 @@ export class CartStore {
     //   })
   }
 
-  public setProductList(data : any) : void {
-    
-    let tempList = data.usercart[0].userCartDetails;
-    console.log("******-------> Set Items here ", this.cartItems);
+  public setProductListItems(data : any[]) : void {
 
-    tempList.forEach( element=> {
-      this.productList.push({
-          "productId": element.productId,
-          "quantity" : element.quantity
-      })
-
-    })
-
-    console.log("******-------> Set Products here ", this.productList);
-    //this.cartItemsSubject.next(data);
-
-    
-
-    
+    this.productList = data;
+    this.productListSubject.next(data);
         
   }
 
@@ -125,6 +113,10 @@ export class CartStore {
     return this.cartRefreneceId;
   }
 
+
+  public getProductListItems() : any {
+    return this.productList;
+  }
 
 
 
