@@ -36,6 +36,11 @@ const INTERFACE_ROUTES: Routes = [
         canActivate: [],
         path: 'user-profile',
         loadChildren: () => import('../routes/user-profile/user-profile.module').then(m=>m.UserProfileModule)
+      },
+      {
+        canActivate: [],
+        path: 'security-view',
+        loadChildren: () => import('../routes/security-view/security-view.module').then(m=>m.SecurityViewModule)
       }
     ]
   }

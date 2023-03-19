@@ -39,6 +39,26 @@
                         Dashboard
                     </div>
                 </div>
+                <div class="nav-item" (click)="exapndCollapse()">
+                    <span class="nav-arrow" >
+                        <img class="user-img" src="../../assets/icons/Security(1).svg">
+                        <i *ngIf="!isExapnded" class="fa fa-caret-down" aria-hidden="true"></i>
+                    </span>
+                    <div class="icon-description" *ngIf="isExapnded">
+                        Security
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                    </div>
+                    
+                </div>
+                <!-- If Security Expanded -->
+                <div class="nav-item" *ngIf="isExapnded">
+                   
+                    <div class="icon-description"[routerLink]="['security-view/recommendations']" >
+                        Recommendations
+                    </div>
+                    
+                </div>
+                <!-- If Security Expanded Ends-->
                 <div class="nav-item" mat-button [matMenuTriggerFor]="aboveMenu">
                     <span class="nav-arrow" >
                         <img class="user-img" src="../../assets/icons/Profile(1).svg">
