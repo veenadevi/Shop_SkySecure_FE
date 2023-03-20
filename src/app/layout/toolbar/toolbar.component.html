@@ -1,6 +1,6 @@
 <mat-toolbar color="var(--primary)" class="toolbar">
     <button mat-button [matMenuTriggerFor]="aboveMenu">
-        ALL CATEGORIES
+        <span class="text-normal">ALL CATEGORIES</span>
         <i class="fa fa-caret-down" aria-hidden="true"></i>
     </button>
         <!-- <mat-menu #aboveMenu="matMenu" yPosition="below">
@@ -14,12 +14,12 @@
 
             <button mat-menu-item [matMenuTriggerFor]="softwares">
                 <div class="menu-width">
-                    Software
+                    <span class="text-normal">Software</span>
                 </div>
             </button>
             <button mat-menu-item [matMenuTriggerFor]="hardware">
                 <div class="menu-width">
-                    Hardware
+                    <span class="text-normal">Hardware</span>
                 </div>
             </button>
             
@@ -28,7 +28,7 @@
 
         <mat-menu #softwares="matMenu" xPosition="after">
             <ng-container *ngFor="let category of softwareCategories">
-              <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="categoryItems"
+              <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="category.subCategories.length>0 ? categoryItems : null"
                 mat-menu-item>{{category.name}}</button>
                 <mat-menu #categoryItems="matMenu" xPosition="after">
                   <ng-container *ngFor="let subCategory of category.subCategories">
@@ -40,7 +40,7 @@
           
         <mat-menu #hardware="matMenu" xPosition="after">
             <ng-container *ngFor="let category of hardwareCategories">
-                <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="categoryItems" mat-menu-item>{{category.name}}</button>
+                <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="category.subCategories.length>0 ? categoryItems : null" mat-menu-item>{{category.name}}</button>
                 <mat-menu #categoryItems="matMenu" xPosition="after">
                     <ng-container *ngFor="let subCategory of category.subCategories">
                         <button (click)="goToProductsPageWithSubCategorySelection(subCategory)" mat-menu-item>{{subCategory.name}}</button>
@@ -58,7 +58,7 @@
         
 
     <button mat-button [matMenuTriggerFor]="belowMenu">
-        ALL BRANDS
+        <span class="text-normal">ALL BRANDS</span>
         <i class="fa fa-caret-down" aria-hidden="true"></i>
     </button>
         <!-- <mat-menu #belowMenu="matMenu" yPosition="below">
@@ -73,7 +73,7 @@
         </mat-menu>
 
     <button mat-button [matMenuTriggerFor]="beforeMenu">
-        COMPARE PRODUCT
+        <span class="text-normal">COMPARE PRODUCT</span>
         <i class="fa fa-caret-down" aria-hidden="true"></i>
     </button>
         <mat-menu #beforeMenu="matMenu" yPosition="below">
@@ -83,7 +83,7 @@
 
 
     <button mat-button [matMenuTriggerFor]="afterMenu">
-        OFFER
+        <span class="text-normal">OFFER</span>
         <i class="fa fa-caret-down" aria-hidden="true"></i>
     </button>
         <mat-menu #afterMenu="matMenu" yPosition="below">

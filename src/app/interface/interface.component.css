@@ -153,7 +153,6 @@ mat-sidenav-content {
   width: 90px;
   background-color: var(--primary);
   padding: 15px 15px;
-  height: 93vh;
   transition: all 200ms ease-out;
   color: black;
   box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
@@ -170,12 +169,12 @@ mat-sidenav-content {
 
 .user-img {
  
-    font-size: 25px;
+    font-size: 22px;
     width: 1.6em;
 }
 
 .icon-img {
-  font-size: 25px;
+  font-size: 22px;
   width: 1.2em
 }
 

@@ -7,4 +7,12 @@
     max-width: 1620px !important;
 }
 
+.text-style {
+    font-family: "Merriweather", sans-serif;
+    font-weight: 400;
+    line-height: 1.8;
+    font-size: 16px;
+    font-kerning: auto;
+}
+
 
