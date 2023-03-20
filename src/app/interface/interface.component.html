@@ -8,7 +8,7 @@
 
         
         <mat-drawer-container class="" autosize>
-            <mat-drawer #drawer class="sidebar-main-container" [style]="isExapnded ? 'width: 13%;': ''" mode="side" [opened]="collapseService.isOpen$ | async">
+            <mat-drawer #drawer class="sidebar-main-container" [style]="isExapnded ? 'width: 14%;': ''" mode="side" [opened]="collapseService.isOpen$ | async">
                 
                
                 <div class="nav-item" (click)="exapndCollapse()">
@@ -53,7 +53,7 @@
                 <!-- If Security Expanded -->
                 <div class="nav-item" *ngIf="isExapnded">
                    
-                    <div class="icon-description"[routerLink]="['security-view/recommendations']" >
+                    <div class="icon-description sub-menu"[routerLink]="['security-view/recommendations']" >
                         Recommendations
                     </div>
                     

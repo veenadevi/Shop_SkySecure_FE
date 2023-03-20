@@ -201,3 +201,7 @@ mat-sidenav-content {
   display: flex;
   align-items: center;
 }
+
+.sub-menu {
+  margin-left: 65px;
+}
