@@ -33,13 +33,13 @@ body{
 /** Custom Class for Text  **/
 .text-header{
   font-family: 'Merriweather';
-  font-size: 1.3em;
+  font-size: 14px;
   font-weight: 600;
 }
 
 
 .text-normal {
   font-family: 'Merriweather';
-  font-size: 0.9em;
+  font-size: 12px;
   font-weight: 600;
 }

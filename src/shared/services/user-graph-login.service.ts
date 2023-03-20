@@ -9,6 +9,7 @@ import { GraphAuthPolicies } from '../../config/graph-auth.config';
 import { UserAccountStore } from '../stores/user-account.store';
 
 import { msalConfigAd, connectToTenantLoginRequestAD } from '../../config/graph-auth.config'; 
+import { AdGraphUserStore } from '../stores/ad-graph-user.store';
 
 
 
@@ -27,18 +28,21 @@ export class UserGraphLoginService {
     @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
     private authService: MsalService,
     private userAccountStore : UserAccountStore,
-    private msalBroadcastService: MsalBroadcastService
+    private msalBroadcastService: MsalBroadcastService,
+    private adGraphUserStore : AdGraphUserStore
   ) {}
 
   // Prompt the user to sign in and
   // grant consent to the requested permission scopes
   adLogin() {
     this.connectToTenantMsalInstance.loginPopup(GraphAuthPolicies).then(res => {
-        console.log("*********$$$$$$$$$$$$$ Login Response ", res);
+        //console.log("*********$$$$$$$$$$$$$ Login Response ", res);
+        this.adGraphUserStore.setAdUserDetails(res);
         this.authService.instance.setActiveAccount(res.account);
     })
     //this.connectToTenantMsalInstance.loginRedirect(GraphAuthPolicies);
   }
+
   /*async signIn(): Promise<void> {
     try {
       const result = await lastValueFrom(
