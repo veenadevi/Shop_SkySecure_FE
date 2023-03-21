@@ -19,7 +19,9 @@ export class CardItemComponent {
 
   public ngOnInit() : void {
     
+    
     if(!this.imageSrc){
+      
       this.imageSrc = "/assets/icons/Archieve.svg"
     }
   }
