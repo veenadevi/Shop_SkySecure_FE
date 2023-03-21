@@ -7,5 +7,7 @@ export interface CategoryDetails{
     createdAt: Date,
     updatedAt: Date,
     __v: number,
+    imageURL :string,
+    parentCategoryId:string,
     subCategories: Array<any>
 }
