@@ -50,8 +50,26 @@ export class UserGraphLoginService {
         this.connectToTenantMsalInstance.acquireTokenSilent(silentRequest).then( res => {
           console.log("********%%%%%%%%%%%% res", res);
         }
-    
         )
+  }
+
+
+  getRefreshIDTokenByAccessToken() {
+    console.log("*******((((((((((( All Accounts ", this.connectToTenantMsalInstance.getAllAccounts());
+    //"admin@skysecurelab.onmicrosoft.com"
+    var currentAccount = this.connectToTenantMsalInstance.getAccountByUsername("admin@skysecurelab.onmicrosoft.com");
+    console.log("*******((((((((((( All Accounts ", currentAccount);
+    var silentRequest2 = {
+    scopes: [],
+    account: currentAccount,
+    forceRefresh: false
+    };
+
+    this.connectToTenantMsalInstance.acquireTokenSilent(silentRequest2).then( res => {
+      console.log("********%%%%%%%%%%%% res", res);
+    }
+    )
+
   }
 
 

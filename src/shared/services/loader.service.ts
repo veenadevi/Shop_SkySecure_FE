@@ -1,6 +1,6 @@
 import { Injectable }           from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { LoadingType } from '../models/constnts/loading-type.enum'; 
+import { LoadingType } from '../constants/loading-type.enum'; 
 
 @Injectable()
 export class LoaderService {

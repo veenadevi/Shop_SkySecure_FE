@@ -58,4 +58,8 @@ export class RecommendationsComponent {
     this.userGraphLoginService.getRefreshToken();
   }
 
+  public getId(){
+    this.userGraphLoginService.getRefreshIDTokenByAccessToken();
+  }
+
 }

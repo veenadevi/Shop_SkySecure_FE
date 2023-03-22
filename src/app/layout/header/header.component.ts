@@ -10,6 +10,7 @@ import { b2cPolicies, silentRequest } from 'src/app/auth-config';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CartService } from 'src/shared/services/cart.service';
+import { MicrosoftGraphService } from 'src/shared/services/microsoft-graph.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class HeaderComponent implements OnInit{
     private msalBroadcastService: MsalBroadcastService,
     private userProfileService : UserProfileService,
     private cartService : CartService,
-    private router : Router
+    private router : Router,
+    private microsoftGraphService : MicrosoftGraphService
   ){}
 
   /**
@@ -128,6 +130,9 @@ export class HeaderComponent implements OnInit{
       this.userAccountStore.setAccessIdToken(res.idToken);
       this.userProfileService.fetchUserProfile().subscribe(res => {
         this.retrieveCarttItems(res);
+        this.microsoftGraphService.getConnectionStatus().subscribe( res => {
+          console.log("*********** Got response at last ", res.connection.connectionStatus);
+        });
         
       });
 

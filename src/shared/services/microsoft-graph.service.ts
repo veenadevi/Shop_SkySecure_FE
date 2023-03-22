@@ -1,10 +1,11 @@
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { map, Observable, catchError } from 'rxjs';
 import { UserAccountStore } from '../stores/user-account.store';
 import AppService  from '../../config/service.json';
 import { AdGraphUserStore } from '../stores/ad-graph-user.store';
+import { ConnectionStatusResponse } from '../models/interface/response/connection-status-response';
 
 
 
@@ -18,6 +19,7 @@ export class MicrosoftGraphService {
   
     public baseUrl : string;
     public appRegistrationUrl : string;
+    public getConnectionUrl : string;
 
 
   constructor(
@@ -27,6 +29,7 @@ export class MicrosoftGraphService {
   ) {
     this.baseUrl = AppService.gatewayUrlForUserProfile.localhost;
     this.appRegistrationUrl = AppService.appUrl['app-registration'];
+    this.getConnectionUrl = AppService.appUrl.getConnection;
   }
 
   public accessIdToken$ = this.userAccountStore.accessIdToken$
@@ -79,6 +82,40 @@ export class MicrosoftGraphService {
     return REQUEST$;
   }
 
+
+  /**
+   * Service to Check for Connection Status
+   */
+
+  public getConnectionStatus(): Observable<any> {
+
+    
+    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    console.log("((((((((( ****** Got resposne ",userAccountdetails);
+      let url = this.baseUrl + this.getConnectionUrl;
+      const OPTIONS = {
+        params: new HttpParams()
+          .set('userId', userAccountdetails._id)
+      };
+  
+      let request$ = this.http.get<Observable<ConnectionStatusResponse>>(url, OPTIONS)
+        .pipe(
+          map(response => {
+            if (!response) {
+              return null;
+            }
+            console.log("((((((((( ****** Got resposne ", response);
+            
+            return response;
+          }),
+          catchError(error => {
+            // create operation mapping for http exception handling 
+            return (error);
+          })
+        );
+  
+      return request$;
+    }
 
   /**
    * Stages our Http Request Headers

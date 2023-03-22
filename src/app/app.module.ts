@@ -11,6 +11,7 @@ import {
     MsalGuard, MsalBroadcastService, MsalService,
     MSAL_GUARD_CONFIG, MSAL_INSTANCE, MsalGuardConfiguration, MsalRedirectComponent, MsalModule
 } from '@azure/msal-angular';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -72,7 +73,9 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HttpClientModule,
     SharedModule,
     NgMultiSelectDropDownModule,
-    MsalModule
+    MsalModule,
+    NgxSpinnerModule,
+    
   ],
   providers: [
     {
@@ -83,6 +86,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
         provide: MSAL_GUARD_CONFIG,
         useFactory: MSALGuardConfigFactory
     },
+    LoaderService,
     MsalService,
     MsalGuard,
     MsalBroadcastService,

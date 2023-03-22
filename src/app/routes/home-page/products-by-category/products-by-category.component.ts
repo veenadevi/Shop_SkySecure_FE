@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
 import { map, Subscription } from 'rxjs';
+import { LoaderService } from 'src/shared/services/loader.service';
 
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { ProductListService } from 'src/shared/services/product-list-page.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
+
+import { LoadingType } from '../../../../shared//constants/loading-type.enum'; 
 
 @Component({
   selector: 'products-by-category',
@@ -27,18 +31,23 @@ export class ProductsByCategoryComponent {
     private router: Router,
     private metadataSvc : MetadataService,
     private metadataStore : MetadataStore,
-    private productListService : ProductListService
+    private productListService : ProductListService,
+    private loaderService : LoaderService,
+    private spinner : NgxSpinnerService
     ) {
 }
 
   public categories$ = this.metadataStore.categoryDetails$
   .pipe(
     map(data => {
+      this.loaderService.show(LoadingType.Full);
       if(data && data.length >7){
+        //this.loaderService.hide(LoadingType.Full)
         return data;
         //return data.splice(0,7);
       }
       else{
+        //this.loaderService.hide(LoadingType.Full)
         return data;
       }
     }
@@ -51,7 +60,6 @@ export class ProductsByCategoryComponent {
   }
 
   public ngOnInit() : void {
-
     this.setCategoriesGrid();
   }
 

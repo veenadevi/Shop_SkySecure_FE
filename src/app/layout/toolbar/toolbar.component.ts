@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { map, Subscription } from 'rxjs';
 import { LoaderService } from 'src/shared/services/loader.service';
 import { MetadataService } from 'src/shared/services/metadata.service';
-import { LoadingType } from 'src/shared/models/constnts/loading-type.enum';
+import { LoadingType } from 'src/shared/constants/loading-type.enum';
 import { CatrgoryResponse } from 'src/shared/models/interface/response/category-response';
 import { CategoryDetails } from 'src/shared/models/interface/partials/category-details';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
