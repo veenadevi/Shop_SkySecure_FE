@@ -54,4 +54,8 @@ export class RecommendationsComponent {
     }))
   }
 
+  public getRefreshToken() : void {
+    this.userGraphLoginService.getRefreshToken();
+  }
+
 }

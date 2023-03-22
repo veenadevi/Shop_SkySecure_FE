@@ -230,4 +230,17 @@ export const protectedResources = {
 export const loginRequest = {
  scopes: ["email"]
 };
+
+/**
+ * An optional silentRequest object can be used to achieve silent SSO
+ * between applications by providing a "loginHint" property (such as a username). For more, visit:
+ * https://learn.microsoft.com/en-us/azure/active-directory/develop/msal-js-sso#sso-between-different-apps
+ * If you do not receive the username claim in ID tokens, see also:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/FAQ.md#why-is-getaccountbyusername-returning-null-even-though-im-signed-in
+ */
+export const silentRequest = {
+  scopes: [],
+  loginHint: "example@domain.net"
+};
+
   

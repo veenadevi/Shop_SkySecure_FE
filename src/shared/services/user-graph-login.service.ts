@@ -26,7 +26,7 @@ export class UserGraphLoginService {
   constructor(
     private http: HttpClient,
     @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
-    private authService: MsalService,
+    private authServiceAd: MsalService,
     private userAccountStore : UserAccountStore,
     private msalBroadcastService: MsalBroadcastService,
     private adGraphUserStore : AdGraphUserStore
@@ -38,11 +38,23 @@ export class UserGraphLoginService {
     this.connectToTenantMsalInstance.loginPopup(GraphAuthPolicies).then(res => {
 
         this.adGraphUserStore.setAdUserDetails(res);
-        //this.authService.instance.setActiveAccount(res.account);
+        this.connectToTenantMsalInstance.setActiveAccount(res.account);
+        
 
     })
-    //this.connectToTenantMsalInstance.loginRedirect(GraphAuthPolicies);
+
   }
+
+  getRefreshToken(){
+        //this.connectToTenantMsalInstance.loginRedirect(GraphAuthPolicies);
+        this.connectToTenantMsalInstance.acquireTokenSilent(silentRequest).then( res => {
+          console.log("********%%%%%%%%%%%% res", res);
+        }
+    
+        )
+  }
+
+
 
 
 }
