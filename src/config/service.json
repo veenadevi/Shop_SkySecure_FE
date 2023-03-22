@@ -5,7 +5,8 @@
       "localhost" :"https://dev-altsys-realize-api.azurewebsites.net/"
     },
     "gatewayUrlForUserProfile" : {
-        "localhost" : "https://dev-altsys-realize-users-api.azurewebsites.net/api/user/signin"
+        
+        "localhost": "http://localhost:2003/"
     },
     "gatewayUrlForOrders" : {
         "localhost" : "https://dev-altsys-realize-order.azurewebsites.net/"
@@ -20,7 +21,13 @@
         "getSingleProduct": "api/product/",
         "getProductsByBrandIds": "api/products/oems",
 
-        "userCart" : "api/user-cart"
+        
+        "userCart" : "api/user-cart",
+        "userSignin" : "api/user/signin",
+
+
+        "app-registration" : "api/user/azure/app-registration"
     }
     
 }
+

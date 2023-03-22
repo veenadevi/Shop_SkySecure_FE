@@ -41,7 +41,7 @@ export class AdGraphUserStore {
   /**
    * Return Search Result Details
    */
-  public getAdUserDetails(): ProductsDetails {
+  public getAdUserDetails(): any {
     return this.adUserDetails;
   }
 

@@ -16,6 +16,7 @@ import { UserAccountStore } from '../stores/user-account.store';
 @Injectable({ providedIn: 'root' })
 export class UserProfileService {
   private baseUrl: string;
+  private userSignInUrl : string;
   
 
 
@@ -26,6 +27,8 @@ export class UserProfileService {
     private userAccountStore : UserAccountStore
   ) {
     this.baseUrl = AppService.gatewayUrlForUserProfile.localhost;
+    this.userSignInUrl = AppService.appUrl.userSignin;
+    
     
   }
 
@@ -48,7 +51,7 @@ export class UserProfileService {
 
   public fetchUserProfile(): Observable<any> {
 
-    const URL = this.baseUrl;
+    const URL = this.baseUrl + this.userSignInUrl;
     const OPTIONS = this.getOptions();
 
     let request = null;
