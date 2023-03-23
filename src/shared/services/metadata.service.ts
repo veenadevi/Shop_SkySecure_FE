@@ -18,6 +18,7 @@ export class MetadataService {
   private fetchSubCategoriesUrl : string;
   private fetchProductsBySubCategoryIds : string;
   private fetchProductsByBrandIds : string;
+  private fetchTrendingProductsUrl : string
   private getSingleProduct : string;
 
   constructor(
@@ -31,6 +32,7 @@ export class MetadataService {
     this.fetchProductsBySubCategoryIds = AppService.appUrl.getProductsBySubCategoryIds;
     this.getSingleProduct = AppService.appUrl.getSingleProduct;
     this.fetchProductsByBrandIds = AppService.appUrl.getProductsByBrandIds;
+    this.fetchTrendingProductsUrl = AppService.appUrl.getTrendingProducts;
     //this.quotaDetailsUri = this.ouxConfigSvc.getAppConfigValue('apiUri').e2eQuotaACV;
   }
 
@@ -136,6 +138,7 @@ export class MetadataService {
   }
 
 
+
   public fetchAllProductsBySubCategoryIds(subCategoryIds: Array<String>) : Observable<any> {
     let url = this.baseUrl + this.fetchProductsBySubCategoryIds;
     //let options = this.getOptions();
@@ -202,6 +205,28 @@ export class MetadataService {
     return request$;
   }
 
+  public fetchTrendingProducts(): Observable<any> {
+
+    let url = this.baseUrl + this.fetchTrendingProductsUrl;
+    //let options = this.getOptions();
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+        
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+
+    return request$;
+  }
 
   public fetchCategoryMock() : Observable<any> {
     

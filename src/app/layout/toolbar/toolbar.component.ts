@@ -86,6 +86,17 @@ export class ToolbarComponent {
     return categoryResponse;
   }
 
+  private getTrendingProducts() : void {
+    console.log("*****(((((( )))))) Called in ",);
+    this.subscriptions.push(
+      this.metaDataSvc.fetchTrendingProducts().subscribe( response => {
+        console.log("***** Trending products ", response.products);
+        this.metadataStore.setTrendingProducts(response.products);
+        //this.metadataStore.setProductsDetails(response.products);
+      })
+      
+    );
+  }
   
 
 
@@ -94,6 +105,7 @@ export class ToolbarComponent {
     this.getCategories();
     this.getProducts();
     this.getOEMs();
+    this.getTrendingProducts();
     //this.getCartId();
   }
 

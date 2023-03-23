@@ -20,6 +20,7 @@
         "getProductsBySubCategoryIds" : "api/products",
         "getSingleProduct": "api/product/",
         "getProductsByBrandIds": "api/products/oems",
+        "getTrendingProducts" : "api/products/trending",
 
         
         "userCart" : "api/user-cart",
