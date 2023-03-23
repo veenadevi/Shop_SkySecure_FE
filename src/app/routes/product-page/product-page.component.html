@@ -30,9 +30,23 @@
         </div>
     </div>
     <div class="product-list-container">
-        <h4 class="oem-tilte">Microsoft Products</h4>
-        <div  *ngIf="products.length > 0">
-        <app-product [products]="products"></app-product>
-      </div>
+        <ng-container *ngIf="!products || products.length <= 0">
+          <div class="empty-container">
+            <div>
+                <img class="success-state-img" src="../../../../../assets/images/emptystage.svg" alt="home">
+            </div>
+            <div class="text-header">
+                No Products Found
+            </div>
+            
+          </div>
+        </ng-container>
+        <ng-container *ngIf="products.length > 0">
+          <h4 class="oem-tilte">Microsoft Products</h4>
+          <div  *ngIf="products.length > 0">
+          <app-product [products]="products"></app-product>
+        </div>
+        </ng-container>
+        
     </div>
 </div>

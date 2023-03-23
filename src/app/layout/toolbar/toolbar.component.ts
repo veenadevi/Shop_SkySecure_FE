@@ -52,7 +52,7 @@ export class ToolbarComponent {
         this.metadataStore.setCategoryDetails(response.categorys);
         this.categories = response.categorys;
         this.softwareCategories = response.categorys;
-        this.hardwareCategories = [];
+        this.hardwareCategories = null;
         // this.categories = response.categorys.splice(0,10);
         // this.softwareCategories = response.categorys.splice(0,10);
         // this.hardwareCategories = response.categorys.splice(0, 10, 15);

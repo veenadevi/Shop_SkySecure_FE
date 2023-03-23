@@ -17,7 +17,7 @@
                     <span class="text-normal">Software</span>
                 </div>
             </button>
-            <button mat-menu-item [matMenuTriggerFor]="hardware">
+            <button mat-menu-item [matMenuTriggerFor]=" hardwareCategories &&  hardwareCategories.length > 0 ? hardware : null">
                 <div class="menu-width">
                     <span class="text-normal">Hardware</span>
                 </div>

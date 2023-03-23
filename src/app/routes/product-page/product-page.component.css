@@ -35,3 +35,15 @@ app-product {
     margin:4%;
 }
 
+.empty-container {
+    min-height: 40em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+    background: var(--primary);
+    align-items: center;
+    justify-content: center;
+   
+}
+
