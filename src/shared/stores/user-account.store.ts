@@ -85,7 +85,7 @@ export class UserAccountStore {
    */
   public getUserProfileDetails(): UserDetails {
     console.log("(((((((((((())))))) ", this.userProfileDetails);
-    return this.userProfileDetails.userDetails;    ;
+    return this.userProfileDetails.userDetails;
   }
 
 

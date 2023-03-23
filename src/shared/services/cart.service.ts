@@ -97,10 +97,6 @@ export class CartService {
          
           return response;
         }),
-        catchError(error => {
-          // create operation mapping for http exception handling 
-          return (error);
-        })
       );
 
     return request$;

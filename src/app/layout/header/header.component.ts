@@ -130,9 +130,9 @@ export class HeaderComponent implements OnInit{
       this.userAccountStore.setAccessIdToken(res.idToken);
       this.userProfileService.fetchUserProfile().subscribe(res => {
         this.retrieveCarttItems(res);
-        this.microsoftGraphService.getConnectionStatus().subscribe( res => {
-          console.log("*********** Got response at last ", res.connection.connectionStatus);
-        });
+        // this.microsoftGraphService.getConnectionStatus().subscribe( res => {
+        //   console.log("*********** Got response at last ", res.connection.connectionStatus);
+        // });
         
       });
 

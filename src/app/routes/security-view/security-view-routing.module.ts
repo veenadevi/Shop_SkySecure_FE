@@ -15,9 +15,7 @@ const routes: Routes = [
       },
       
     ]
-    /*data: {
-      title: 'Backlog'
-    }*/
+    
   }
 ];
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { map, Subscription } from 'rxjs';
 import { MicrosoftGraphService } from 'src/shared/services/microsoft-graph.service';
 import { UserGraphLoginService } from 'src/shared/services/user-graph-login.service';
@@ -10,6 +10,9 @@ import { AdGraphUserStore } from 'src/shared/stores/ad-graph-user.store';
   styleUrls: ['./recommendations.component.css']
 })
 export class RecommendationsComponent {
+
+  @Input('connectionStatus')
+  public connectionStatus: string;
 
   private subscriptions : Subscription[] = [];
   public userName : string;
@@ -61,5 +64,26 @@ export class RecommendationsComponent {
   public getId(){
     this.userGraphLoginService.getRefreshIDTokenByAccessToken();
   }
+
+
+  ngOnInit(): void {
+    
+
+    setTimeout(()=>{                           
+      this.checkConnectionStatus();
+    }, 2000);
+    
+  }
+
+  public checkConnectionStatus() : void {
+
+    this.microsoftGraphService.getConnectionStatus().subscribe( res => {
+     this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
+      console.log("*********** Got response at last ", res.connection.connectionStatus);
+    });
+ 
+   }
+
+
 
 }

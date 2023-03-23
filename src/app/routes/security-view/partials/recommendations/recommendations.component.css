@@ -15,9 +15,21 @@
     border: 1px solid #6064BA;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
     border-radius: 12px;
+    flex-direction: column;
+    
+}
+.tenant-text-container {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.tenant-list-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    column-gap: 2%;
 }
 
 .text-style {
@@ -34,4 +46,8 @@
     color: var(--white);
     border: none;
     height: 40px;
+}
+
+.tenant-list {
+    color: var(--white);
 }

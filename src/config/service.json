@@ -6,7 +6,7 @@
     },
     "gatewayUrlForUserProfile" : {
         
-        "localhost" : "https://dev-altsys-realize-users-api.azurewebsites.net/"
+        "localhost" : "http://localhost:2003/"
     },
     "gatewayUrlForOrders" : {
         "localhost" : "https://dev-altsys-realize-order.azurewebsites.net/"
