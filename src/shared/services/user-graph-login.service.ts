@@ -48,17 +48,17 @@ export class UserGraphLoginService {
   getRefreshToken(){
         //this.connectToTenantMsalInstance.loginRedirect(GraphAuthPolicies);
         this.connectToTenantMsalInstance.acquireTokenSilent(silentRequest).then( res => {
-          console.log("********%%%%%%%%%%%% res", res);
+          
         }
         )
   }
 
 
   getRefreshIDTokenByAccessToken() {
-    //console.log("*******((((((((((( All Accounts ", this.connectToTenantMsalInstance.getAllAccounts());
+    
     //"admin@skysecurelab.onmicrosoft.com"
     var currentAccount = this.connectToTenantMsalInstance.getAccountByUsername("admin@skysecurelab.onmicrosoft.com");
-    console.log("******** Type of ", typeof(currentAccount));
+    
     var cc = {
       "homeAccountId": "49cfb63d-cf54-43ad-a32a-3cfbd71d51c8.d7ab1225-4649-4cb3-abd5-bc732bed3203",
       "environment": "login.windows.net",
@@ -83,7 +83,6 @@ export class UserGraphLoginService {
           "ver": "2.0"
       }
   }
-    console.log("*******((((((((((( All Accounts ", currentAccount);
     var silentRequest2 = {
     scopes: [],
     account: cc,
@@ -91,7 +90,6 @@ export class UserGraphLoginService {
     };
 
     this.connectToTenantMsalInstance.acquireTokenSilent(silentRequest2).then( res => {
-      console.log("********%%%%%%%%%%%% res", res);
     }
     )
 

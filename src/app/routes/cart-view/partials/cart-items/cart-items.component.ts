@@ -51,7 +51,6 @@ public cartData : any[] = [];
       if(data){
         //this.cartData = data.usercart[0].userCartDetails;
         this.cartData = data;
-        console.log("******* %%%%%%% ", data);
         return this.cartData;
       }
       else{
@@ -90,7 +89,6 @@ public cartData : any[] = [];
   public getCartItems2() {
     let cartRefId = this.cartStore.getCartRefreneceId();
     let productsList = this.cartStore.getProductListItems();
-    console.log("((((((( ------> Inside Cart Get ", productsList); 
     let re = new UserCartRequestModel({
       userId : "1001",
       createdBy : "ADMIN",
@@ -113,7 +111,6 @@ public cartData : any[] = [];
   public getCartItems() : void {
 
     let userAccountdetails = this.userAccountStore.getUserProfileDetails();
-    console.log("((((((( ------> Details ", userAccountdetails); 
     let cartRefId = this.cartStore.getCartRefreneceId();
     let productsList = this.cartStore.getProductListItems() ? this.cartStore.getProductListItems() : [];
     /*let req = new UserCartRequestModel({
@@ -140,9 +137,8 @@ public cartData : any[] = [];
       "productName" : this.params.get('productName'),
       "quantity" : this.params.get('quantity')
   });
-    console.log("***** Pushed Items Old", productsList);
 
-    //console.log("***** Pushed Items ", req.products);
+    
     if(cartRefId !== '' || cartRefId !== null){
       req.cart_ref_id = cartRefId;
       //req.products.push(productsList);
@@ -189,7 +185,7 @@ public cartData : any[] = [];
 
   public saveCart() {
 
-    console.log("***** Saved Cart ", this.cartData);
+  
     let cartRefId = this.cartStore.getCartRefreneceId();
     let userAccountdetails = this.userAccountStore.getUserProfileDetails();
     let req = new UserCartRequestModel({
@@ -208,7 +204,6 @@ public cartData : any[] = [];
     
 
     this.cartData.splice(i, 1);
-    console.log("***** Saved Cart ", this.cartData);
     let cartRefId = this.cartStore.getCartRefreneceId();
     let userAccountdetails = this.userAccountStore.getUserProfileDetails();
     let req = new UserCartRequestModel({

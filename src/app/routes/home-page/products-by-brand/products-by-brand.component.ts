@@ -75,15 +75,6 @@ public oems$ = this.metadataStore.oemDetails$
       })
     )
     
-
-    // this.subscriptions.push(
-    //   this.metadataSvc.fetchCategoryMock().subscribe( response => {
-    //     console.log("*** res ", response.brands);
-    //     this.mockCategories = response.brands;
-    //   })
-      
-    // );
-
   }
 
   goToProductsPageByBrand(oem) {

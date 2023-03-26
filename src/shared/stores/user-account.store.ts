@@ -56,7 +56,6 @@ export class UserAccountStore {
    * Set User Profile
    */
   public setUserProfileDetails(data : any) : void {
-    console.log("(((((((((((())))))) ", data);
     this.userProfileDetails = data;
     this.userProfileDetailsSubject.next(data);
   }
@@ -66,7 +65,6 @@ export class UserAccountStore {
    * Set Product AccessIdToken
    */
   public setAccessIdToken(data : any) : void {
-    console.log("(((((((((((())))))) Set Token", this.accessIdToken);
     this.accessIdToken = data;
     this.accessIdTokenSubject.next(data);
   }
@@ -84,7 +82,7 @@ export class UserAccountStore {
    * Return User Profile
    */
   public getUserProfileDetails(): UserDetails {
-    console.log("(((((((((((())))))) ", this.userProfileDetails);
+    
     return this.userProfileDetails.userDetails;
   }
 
@@ -93,7 +91,6 @@ export class UserAccountStore {
    * Return AccessIdToken
    */
   public getAccessIdToken(): string {
-    console.log("(((((((((((())))))) ", this.accessIdToken);
     return this.accessIdToken;
   }
 

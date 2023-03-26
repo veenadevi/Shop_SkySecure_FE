@@ -66,7 +66,6 @@ export class ProductPgaeComponent implements OnInit{
     this.subscriptions.push(
        this.metaDataSvc.fetchSubCategories(categoryId).subscribe( response => {
         this.subCategories = response.subCategories;
-        console.log("****** Got here ", this.subCategories);
         this.selectedItems = this.subCategories.filter((data) => {
           if(data._id == categoryId) return data;
         })
@@ -81,7 +80,6 @@ export class ProductPgaeComponent implements OnInit{
     this.subscriptions.push(
        this.metaDataSvc.fetchSubCategories(categoryId).subscribe( response => {
         this.subCategories = response.subCategories;
-        console.log("****** Got here ", this.subCategories);
         this.selectedItems = [];
       })
     );
@@ -106,7 +104,7 @@ export class ProductPgaeComponent implements OnInit{
   private getProductsBySubcategoryIds(subCategoryIds: Array<string>): void {
     this.subscriptions.push(
        this.metaDataSvc.fetchAllProductsBySubCategoryIds(subCategoryIds).subscribe(response => {
-        console.log("+++++++++++",response.products)
+     
          this.products = response.products.map((data: any )=> {
           return { 
             name: data.name , 
@@ -116,7 +114,6 @@ export class ProductPgaeComponent implements OnInit{
             _id: data._id
           }
          })
-         console.log("+++++++++products+++++++++",this.products);
       })
     );
   }
@@ -125,10 +122,9 @@ export class ProductPgaeComponent implements OnInit{
     this.subscriptions.push(
        this.metaDataSvc.fetchAllProductsByBrandIds(brandIds).subscribe(response => {
         this.selectedBrandItems = this.brands.filter((data)=> {
-          console.log("KJNKJNKBB",brandIds,data._id);
+        
           if(brandIds.includes(data._id)) return data;
         })
-        console.log("+++brandIds++++++++",this.brands,this.selectedBrandItems);
          this.products = response.products.map((data: any )=> {
           return { 
             name: data.name , 
@@ -159,10 +155,8 @@ export class ProductPgaeComponent implements OnInit{
       if(this.subCategory)
       this.getSubCategories(this.subCategory);
 
-      console.log("****** All brands ", this.brands);
-      console.log("****** All Slecetd brands ", this.brands);
       if(this.brand) {
-        console.log("****** Came inside ", this.brands);
+        
         this.getProductsByBrandIds([this.brand]);
          
       }
@@ -170,7 +164,7 @@ export class ProductPgaeComponent implements OnInit{
 
     });
     this.productListService.categoryIdSelectionSubject$.subscribe((data) => {
-      console.log("++++++DATA+++++++",data);
+    
       this.category = data;
       this.getCategories(this.category);
     })
@@ -205,26 +199,23 @@ export class ProductPgaeComponent implements OnInit{
   }
 
   onBrandSelect(item: any) {
-    console.log("******* Called select Brad");
+    
     let selectedBrandItems = this.selectedBrandItems.map((data)=> { return data._id });
     this.getProductsByBrandIds(selectedBrandItems);
  }
 
  onBrandSelectAll(items: any) {
-  console.log("******* Called select Brad ALL");
    this.selectedBrandItems = items;
    let selectedBrandIds = this.selectedBrandItems.map((data)=> { return data._id });
    this.getProductsByBrandIds(selectedBrandIds);
  }
 
  onBrandDeSelect(item: any) {
-  console.log("******* Called select Brad Deselect");
    let selectedBrandIds =  this.selectedBrandItems.map((data)=> { return data._id });
    this.getProductsByBrandIds(selectedBrandIds);
  }
 
  onBrandDeSelectAll(item: any) {
-  console.log("******* Called select Brand Deselect all");
    let selectedBrandIds = [];
    this.getProductsByBrandIds(selectedBrandIds);
  }

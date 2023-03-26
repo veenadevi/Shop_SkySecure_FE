@@ -87,10 +87,8 @@ export class ToolbarComponent {
   }
 
   private getTrendingProducts() : void {
-    console.log("*****(((((( )))))) Called in ",);
     this.subscriptions.push(
       this.metaDataSvc.fetchTrendingProducts().subscribe( response => {
-        console.log("***** Trending products ", response.products);
         this.metadataStore.setTrendingProducts(response.products);
         //this.metadataStore.setProductsDetails(response.products);
       })

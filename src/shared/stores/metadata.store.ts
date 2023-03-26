@@ -69,7 +69,6 @@ export class MetadataStore {
   public setTrendingProducts(data : any[]) : void {
 
     this.trendingProducts = data;
-    console.log("*****(((((( )))))) Called in ", data);
     this.trendingProductsSubject.next(data);
   }
 

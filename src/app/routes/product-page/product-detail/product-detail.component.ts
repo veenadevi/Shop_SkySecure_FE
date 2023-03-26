@@ -29,7 +29,6 @@ export class ProductDetailComponent implements OnInit{
           featureList = response.productVariants[response.productVariants.length -1].featureList.slice(0,5);
           this.productSubCategoryId = response.productVariants[0].featureList[0].subCategoryId;
         }
-        console.log("+++productSubCategoryId+++++",this.productSubCategoryId);
         if(this.productSubCategoryId) {
           this.getSimilerProducts(this.productSubCategoryId);
         }
@@ -42,7 +41,6 @@ export class ProductDetailComponent implements OnInit{
   private getSimilerProducts(subCategoryId: String) {
     this.subscriptions.push(
       this.metaDataSvc.fetchAllProductsBySubCategoryIds([subCategoryId]).subscribe(response => {
-        console.log("___fetchAllProductsBySubCategoryIds________", response);
         this.products = response.products.map((data: any) => {
           return {
             name: data.name,
@@ -51,7 +49,6 @@ export class ProductDetailComponent implements OnInit{
             description: data.description
           }
         })
-        console.log("___PRODUCTS RESPONSE_____",this.products);
       })
     );
   }

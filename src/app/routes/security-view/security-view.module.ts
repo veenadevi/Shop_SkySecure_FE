@@ -7,13 +7,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { RecommendationsComponent } from './partials/recommendations/recommendations.component';
 import { SecurityViewRoutingModule, ROUTED_COMPONENTS } from './security-view-routing.module';
+import { SegmentationComponent } from './partials/recommendations/partials/segmentation/segmentation.component';
 
 
 
 @NgModule({
   declarations: [
     ROUTED_COMPONENTS,
-    RecommendationsComponent
+    RecommendationsComponent,
+    SegmentationComponent
   ],
   imports: [
     CommonModule,

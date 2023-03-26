@@ -50,7 +50,6 @@ export class CartStore {
    public setCartItems(data : any) : void {
     
     this.cartItems = data.usercart[0].userCartDetails;
-    console.log("******-------> Set Items here ", this.cartItems);
 
     // data.usercart[0].userCartDetails.forEach( element=> {
     //   this.productList.push({
@@ -60,7 +59,7 @@ export class CartStore {
 
     // })
 
-    // console.log("******-------> Set Products here ", this.productList);
+    
     this.cartItemsSubject.next(data);
 
     

@@ -78,7 +78,7 @@ export class CartService {
   public getCartItems(userData: any): Observable<any> {
 
   
-  //console.log("*******&&&&&&&&&%%%%% User Data ", userData.userDetails._id);
+ 
     //let url = this.baseUrl + this.userCartUrl + '/1001';
     //let url = this.baseUrl + this.userCartUrl + '/2222';
     let url = this.baseUrl + this.userCartUrl + '/' + userData.userDetails._id;
@@ -107,7 +107,7 @@ export class CartService {
     
     let tempList = data.usercart[0].userCartDetails;
     let productList = [];
-    //console.log("******-------> Set Items here ", );
+   
 
     tempList.forEach( element=> {
       productList.push({
@@ -119,7 +119,7 @@ export class CartService {
     })
 
     this.cartStore.setProductListItems(productList);
-    console.log("******-------> Set Products here ", productList);
+    
     //this.cartItemsSubject.next(data);
 
     

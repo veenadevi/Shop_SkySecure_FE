@@ -27,7 +27,6 @@ export class SearchComponent {
   ) { }
 
   public onSearchClicked() {
-    console.log("Show");
     this.isOpen = true;
     this.generalSearchOpen = true;
   }
@@ -35,8 +34,7 @@ export class SearchComponent {
   public onFocusOutEvent(event: any){
     
 
-    setTimeout(()=>{       
-      console.log(event.target.value);
+    setTimeout(()=>{  
       this.isOpen = false;
       this.generalSearchOpen = false;
       this.keywordSearchOpen = false;                    
@@ -60,12 +58,11 @@ export class SearchComponent {
       distinctUntilChanged(),
     )
     .subscribe((results) => {
-      console.log("*** results ", results);
       if(results.length>2){
         this.generalSearchOpen = false;
         this.keywordSearchOpen = true;
         this.globalSearchSvc.fetchSearchResults(results).subscribe(res => {
-          console.log("&&&& Resp");
+         
           this.searchResults = res;
           this.searchResultsStore.setSearchResults(res.products);
         });

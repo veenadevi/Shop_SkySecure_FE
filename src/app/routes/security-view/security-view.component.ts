@@ -27,7 +27,6 @@ export class SecurityViewComponent implements OnInit{
 
    this.microsoftGraphService.getConnectionStatus().subscribe( res => {
     this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
-     console.log("*********** Got response at last ", res.connection.connectionStatus);
    });
 
   }

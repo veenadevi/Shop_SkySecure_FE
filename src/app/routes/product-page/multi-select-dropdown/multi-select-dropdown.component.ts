@@ -30,7 +30,6 @@ export class MultiSelectDropdownComponent {
     };
 
     document.querySelector('.ng-star-inserted');
-    console.log("___TEST____");
 
     this.allItems = [
       {
@@ -80,8 +79,6 @@ export class MultiSelectDropdownComponent {
   }
 
   onItemSelect(item: any) {
-    console.log('onItemSelect', item);
-    console.log('selectedItem', this.selectedItem);
   }
 
   handleReset() {

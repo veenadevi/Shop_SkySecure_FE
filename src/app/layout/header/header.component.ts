@@ -65,7 +65,6 @@ export class HeaderComponent implements OnInit{
 
     this.subscriptions.push(this.userDetails$.subscribe(res => {
       this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
-      console.log("******** vTotalal ",this.authService.instance.getAllAccounts());
       if(this.userLoggedIn){
         this.getAccessIdToken();
       }
@@ -126,13 +125,9 @@ export class HeaderComponent implements OnInit{
 
   public getAccessIdToken() {
     this.authService.acquireTokenSilent(silentRequest).subscribe( res => {
-      console.log("********(((()))))))))) Response Silent req", res);
       this.userAccountStore.setAccessIdToken(res.idToken);
-      this.userProfileService.fetchUserProfile().subscribe(res => {
-        this.retrieveCarttItems(res);
-        // this.microsoftGraphService.getConnectionStatus().subscribe( res => {
-        //   console.log("*********** Got response at last ", res.connection.connectionStatus);
-        // });
+      this.userProfileService.fetchUserProfile().subscribe(response => {
+        this.retrieveCarttItems(response);
         
       });
 
@@ -146,7 +141,6 @@ export class HeaderComponent implements OnInit{
             return response;
           })
         ).subscribe( res => {
-          console.log("--------------------***** res ", res);
         })*/
       
     })

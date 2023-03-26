@@ -36,7 +36,7 @@ export class TrendingProductsComponent {
   public ngOnInit(){
     
     // this.subscriptions.push(this.popularCategory$.subscribe(res => {
-    //   console.log("RES ", res);
+    
     // }));
   }
 

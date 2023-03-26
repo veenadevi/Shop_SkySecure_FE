@@ -70,13 +70,7 @@ export class ProductsByCategoryComponent {
         this.categories = response.slice(0,6);
       })
     )
-    // this.subscriptions.push(
-    //   this.metadataSvc.fetchCategoryMock().subscribe( response => {
-    //     console.log("*** res ", response.category);
-    //     this.mockCategories = response.category;
-    //   })
-      
-    // );
+    
 
   }
 

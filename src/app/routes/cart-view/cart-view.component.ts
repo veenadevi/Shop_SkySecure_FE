@@ -33,16 +33,6 @@ export class CartViewComponent {
 
     this.params = this.route.snapshot.queryParamMap;
 
-    // console.log("********* Pamars ", paramss);
-    // console.log("********* Pamars ", paramss.get('productName'));
-    
-    // this.route.queryParamMap
-    //   .subscribe((params) => {
-    //       console.log("********* Params ", params);
-    //       console.log("********* Params ", params.get('params'));
-    //       this.params = params.get('params');
-    //       }
-    //   );
     this.subscriptions.push(
       this.globalSearch.fetchCartMock().subscribe( response => {
         this.cartItems = response.category;

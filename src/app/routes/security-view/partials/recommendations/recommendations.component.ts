@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { map, Subscription } from 'rxjs';
 import { MicrosoftGraphService } from 'src/shared/services/microsoft-graph.service';
 import { UserGraphLoginService } from 'src/shared/services/user-graph-login.service';
 import { AdGraphUserStore } from 'src/shared/stores/ad-graph-user.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'recommendations',
@@ -16,17 +18,27 @@ export class RecommendationsComponent {
 
   private subscriptions : Subscription[] = [];
   public userName : string;
+  public pageReloading : boolean = false;
   constructor (
     private userGraphLoginService : UserGraphLoginService,
     private adGraphUserStore : AdGraphUserStore,
-    private microsoftGraphService : MicrosoftGraphService
-  ){}
+    private microsoftGraphService : MicrosoftGraphService,
+    private userAccountStore : UserAccountStore,
+    private router : Router
+  ){
+      console.log("**** Being called");
+        this.subscriptions.push(router.events.subscribe((event) => {
+        if (event instanceof NavigationStart) {
+          this.pageReloading = !router.navigated;
+          console.log("(((((((( page ",this.pageReloading)
+        }
+    }));
+  }
 
   public adUserDetails$ = this.adGraphUserStore.adUserDetails$
   .pipe(
     map(data => {
       if(data){
-        console.log("*********$$$$$$$$$$$$$ Login Response ", data);
         return data;
       }
       else{
@@ -36,10 +48,24 @@ export class RecommendationsComponent {
     )
   )
 
+  public userProfileDetails$ = this.userAccountStore.userProfileDetails$
+  .pipe(
+    map(data => {
+      if(data){
+        this.checkConnectionStatus();
+        //return data;
+      }
+      else{
+        this.checkConnectionStatus();
+        //return data;
+      }
+    }
+    )
+  )
+
   public connectToTenant() : void {
     this.userGraphLoginService.adLogin();
     this.subscriptions.push(this.adUserDetails$.subscribe(data => {
-      console.log("*********$$$$$$$$$$$$$ Inside subs", data);
       this.appRegister(data);
 
     }))
@@ -50,7 +76,7 @@ export class RecommendationsComponent {
   public appRegister(data) : void {
     //this.microsoftGraphService.msAppRegistration().subscribe();
     this.subscriptions.push(this.microsoftGraphService.msAppRegistration(data).subscribe(res => {
-      console.log("****&&&&& Val AT Last", res);
+      
       if(res){
         this.userName = res.userDetails;
       }
@@ -68,10 +94,11 @@ export class RecommendationsComponent {
 
   ngOnInit(): void {
     
-
-    setTimeout(()=>{                           
-      this.checkConnectionStatus();
-    }, 2000);
+    //this.subscriptions.push(this.userProfileDetails$.subscribe());
+    this.checkConnectionStatus();
+    // setTimeout(()=>{                           
+    //   this.checkConnectionStatus();
+    // }, 2000);
     
   }
 
@@ -79,10 +106,22 @@ export class RecommendationsComponent {
 
     this.microsoftGraphService.getConnectionStatus().subscribe( res => {
      this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
-      console.log("*********** Got response at last ", res.connection.connectionStatus);
     });
  
    }
+
+//    subscription: Subscription;
+// pageReloading: boolean = false;
+
+// constructor(private router: Router){
+//     this.subscription = router.events.subscribe((event) => {
+//         if (event instanceof NavigationStart) {
+//           this.pageReloading = !router.navigated;
+//           console.log(this.pageReloading)
+//         }
+//     });
+// }
+
 
 
 

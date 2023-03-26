@@ -27,13 +27,13 @@ export class ProductsByTrendingComponent {
       
       if(data){
         //this.loaderService.hide(LoadingType.Full)
-        console.log("((((()))))))))))******* data.length", data);
+       
         return data;
         //return data.splice(0,7);
       }
       else{
         //this.loaderService.hide(LoadingType.Full)
-        console.log("((((()))))))))))******* data.length", data);
+       
         return data;
       }
     }
@@ -51,14 +51,7 @@ export class ProductsByTrendingComponent {
         this.trendingProductsList = response;
       })
     )
-    // this.subscriptions.push(
-    //   this.metadataSvc.fetchCategoryMock().subscribe( response => {
-    //     console.log("*** res ", response.category);
-    //     this.mockCategories = response.category;
-    //   })
-      
-    // );
-
+    
   }
 
   public requestQuote(product) {
