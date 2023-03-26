@@ -61,7 +61,10 @@
             
         </div>
 
-        <segmentation></segmentation>
+        <ng-container *ngIf="segmentationsList">
+            <segmentation [segmentationsList]="segmentationsList"></segmentation>
+        </ng-container>
+        
 
     </div>
 

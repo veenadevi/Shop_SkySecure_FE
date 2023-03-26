@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/shared/shared.module'; 
+import { MaterialModule } from 'src/app/material.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,11 +22,13 @@ import { SegmentationComponent } from './partials/recommendations/partials/segme
     CommonModule,
     NgbModule,
     SharedModule,
-    SecurityViewRoutingModule
+    SecurityViewRoutingModule,
+    MaterialModule
   ],
   exports: [
     RouterModule,
-    SharedModule
+    SharedModule,
+    MaterialModule
   ]
 })
 export class SecurityViewModule { }

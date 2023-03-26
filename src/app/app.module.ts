@@ -12,7 +12,8 @@ import {
     MSAL_GUARD_CONFIG, MSAL_INSTANCE, MsalGuardConfiguration, MsalRedirectComponent, MsalModule
 } from '@azure/msal-angular';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { NgChartsModule } from 'ng2-charts';
+
+
 
 
 
@@ -76,7 +77,6 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     NgMultiSelectDropDownModule,
     MsalModule,
     NgxSpinnerModule,
-    NgChartsModule
     
   ],
   providers: [

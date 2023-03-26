@@ -1,1 +1,98 @@
-<p>segmentation works!</p>
+<div class="segmentation-container">
+    <div class="text-header">
+        AWS CHIME - Security Overview
+    </div>
+
+    <div class="graph-container">
+        
+            <div class="segmentation-headers">
+                <ng-container *ngFor="let segmentation of segmentationsList.segmentations">
+                    <div class="headers-style" (click)="selectedSegmentation(segmentation)">
+                        {{segmentation.name}}
+                    </div>
+                </ng-container>
+
+            </div>
+
+        <div class="canvas-container">
+
+            <div>
+                <canvas baseChart
+                    [labels]="doughnutChartLabels"
+                    [datasets]="doughnutChartDatasets"
+                    [options]="doughnutChartOptions"
+                    [legend]="true"
+                    [type]="'doughnut'">
+                </canvas>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <!-- Segmentation by Category -->
+    
+    <ng-container *ngIf="selected === 'Users'">
+        <div class="text-header">
+            Recommendations - Users
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="selected === 'Cloud'">
+        <div class="text-header">
+            Recommendations - Cloud
+        </div>
+
+
+
+
+        <table mat-table [dataSource]="dataSource">
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="weight">
+              <th mat-header-cell *matHeaderCellDef> Weight </th>
+              <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="symbol">
+              <th mat-header-cell *matHeaderCellDef> Symbol </th>
+              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="selection.toggle(row)">
+            </tr>
+          </table>
+    </ng-container>
+
+</div>

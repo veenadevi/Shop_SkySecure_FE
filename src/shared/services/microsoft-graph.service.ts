@@ -6,6 +6,7 @@ import { UserAccountStore } from '../stores/user-account.store';
 import AppService  from '../../config/service.json';
 import { AdGraphUserStore } from '../stores/ad-graph-user.store';
 import { ConnectionStatusResponse } from '../models/interface/response/connection-status-response';
+import { SegmentationsModal } from '../models/interface/response/segmentations-response';
 
 
 
@@ -20,6 +21,8 @@ export class MicrosoftGraphService {
     public baseUrl : string;
     public appRegistrationUrl : string;
     public getConnectionUrl : string;
+    public getAllSegmentationsUrl : string;
+    public getRecommendationBySegmentIdUrl : string
 
 
   constructor(
@@ -30,6 +33,8 @@ export class MicrosoftGraphService {
     this.baseUrl = AppService.gatewayUrlForUserProfile.localhost;
     this.appRegistrationUrl = AppService.appUrl['app-registration'];
     this.getConnectionUrl = AppService.appUrl.getConnection;
+    this.getAllSegmentationsUrl = AppService.appUrl.getAllSegmentation;
+    this.getRecommendationBySegmentIdUrl = AppService.appUrl.getRecommandationsBySegmentId;
   }
 
   public accessIdToken$ = this.userAccountStore.accessIdToken$
@@ -115,6 +120,68 @@ export class MicrosoftGraphService {
   
       return request$;
     }
+
+    /**
+     * Get All Segmentations
+     */
+
+    public getAllSegmentations(): Observable<any> {
+
+    
+      
+        let url = this.baseUrl + this.getAllSegmentationsUrl;
+        
+    
+        let request$ = this.http.get<Observable<SegmentationsModal>>(url)
+          .pipe(
+            map(response => {
+              if (!response) {
+                return null;
+              }
+              console.log("********* Response in All Segmenation");
+              return response;
+            }),
+            catchError(error => {
+              // create operation mapping for http exception handling 
+              return (error);
+            })
+          );
+    
+        return request$;
+      }
+
+  /**
+   * Get Recommendations List by Segment Id
+   */
+
+  public getRecommendationsList(segmentationId): Observable<any> {
+
+    
+      
+    let url = this.baseUrl + this.getRecommendationBySegmentIdUrl;
+    
+
+    let request = {
+      "segmentationId": segmentationId,
+    };
+
+    let request$ = this.http.post<Observable<any>>(url, request)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          console.log("********* Response in All Segmenation");
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+
+    return request$;
+  }
 
   /**
    * Stages our Http Request Headers

@@ -28,7 +28,11 @@
 
 
         "app-registration" : "api/user/azure/app-registration",
-        "getConnection" : "api/user/get-connection"
+        "getConnection" : "api/user/get-connection",
+        
+
+        "getAllSegmentation" : "api/segmentations",
+        "getRecommandationsBySegmentId" : "api/recommandations/list"
     }
     
 }

@@ -19,6 +19,7 @@ export class RecommendationsComponent {
   private subscriptions : Subscription[] = [];
   public userName : string;
   public pageReloading : boolean = false;
+  public segmentationsList : any;
   constructor (
     private userGraphLoginService : UserGraphLoginService,
     private adGraphUserStore : AdGraphUserStore,
@@ -106,6 +107,10 @@ export class RecommendationsComponent {
 
     this.microsoftGraphService.getConnectionStatus().subscribe( res => {
      this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
+     this.microsoftGraphService.getAllSegmentations().subscribe(response => {
+      console.log("*******^^^^  got Respons ", response);
+      this.segmentationsList = response;
+     });
     });
  
    }
