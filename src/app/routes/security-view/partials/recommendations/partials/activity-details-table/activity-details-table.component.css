@@ -1,0 +1,43 @@
+.mat-mdc-table{
+    background: none;
+}
+
+.mat-mdc-table .mdc-data-table__header-row{
+    background: var(--light_border);
+    
+}
+
+.mat-mdc-table .mdc-data-table__header-row th{
+    border-radius: 0px;
+}
+
+/* Table Styles  */
+
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+    border-bottom-width: none;
+    border-bottom-style: none;
+}
+
+.mat-column-select {
+    width: 5%;
+}
+
+.mat-column-severity {
+    width: 12%;
+}
+.mat-column-progress {
+    width: 10%;
+}
+
+.mat-column-assess {
+    width: 12%;
+}
+
+.assess-btn {
+    background: #F6EBEC;
+    border: 1px solid #A9383D;
+    border-radius: 8px;
+    text-align: center;
+    color: #A9383D;
+    margin-right: 10px;
+}

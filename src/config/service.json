@@ -33,6 +33,10 @@
 
         "getAllSegmentation" : "api/segmentations",
         "getRecommandationsBySegmentId" : "api/recommandations/list"
+    },
+
+    "policiesUrl" : {
+        "conditionalPolicy" :  "api/user/azure-active-directory/create/conditional-policy"
     }
     
 }

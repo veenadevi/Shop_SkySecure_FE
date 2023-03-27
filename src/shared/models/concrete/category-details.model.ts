@@ -12,7 +12,11 @@ export class CategoryDetailsModel implements CategoryDetails {
     public createdAt: Date;
     public updatedAt: Date;
     public __v: number;
+    public imageURL :string ;
+    public parentCategoryId:string ;
     public subCategories: Array<any>;
+
+
 
   constructor(args : Partial<CategoryDetailsModel>) {
     Object.assign(this, args);

@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecommendationsComponent } from './partials/recommendations/recommendations.component';
 import { SecurityViewRoutingModule, ROUTED_COMPONENTS } from './security-view-routing.module';
 import { SegmentationComponent } from './partials/recommendations/partials/segmentation/segmentation.component';
+import { ActivityDetailsTableComponent } from './partials/recommendations/partials/activity-details-table/activity-details-table.component';
 
 
 
@@ -16,7 +17,8 @@ import { SegmentationComponent } from './partials/recommendations/partials/segme
   declarations: [
     ROUTED_COMPONENTS,
     RecommendationsComponent,
-    SegmentationComponent
+    SegmentationComponent,
+    ActivityDetailsTableComponent
   ],
   imports: [
     CommonModule,
