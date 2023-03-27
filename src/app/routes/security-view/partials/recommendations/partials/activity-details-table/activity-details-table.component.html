@@ -1,7 +1,62 @@
-<ng-container>
+<div *ngIf="recomArray; else elseBlock">
+	<table class="recomTable">
+		<thead>
+			<tr class="table-header">
+				<th style="width:6%"><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
+				<th>Activity Details</th>
+				<th style="width:13%">Severity</th>
+                <th style="width:13%">Status</th>
+				<th style="width:13%">Progress</th>
+				<th style="width:13%"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of activityDetailsList; let i=index; let odd = odd">
+				<td class="align-top"><input type="checkbox" value="{{item.title}}" [(ngModel)]="item.checked"></td>
+				<td class="align-top">
+                    <div class="details-container">
+                        <div class="activity-header">
+                            {{item.title}}
+                        </div>
+                        <div class="activity-dsec">
+                            {{item.details}}
+                        </div>
+                    </div>
+                </td>
+				<td>
+                    <div class="priority-container">
+                        <div [ngClass]="{'high': item.priority ==='High',
+                                    'medium': item.priority ==='Medium',
+                                    'low': item.priority ==='Low'}">
+                        </div>
+                        <div>
+                            High
+                        </div>
+                    </div>
+                    
+                </td>
+                <td>
+                    Not Configured
+                </td>
+				<td>
+                    <mat-progress-bar mode="indeterminate" *ngIf="item.isCompleted"></mat-progress-bar>
+                </td>
+				<td><button class="btn assess-btn" (click)="assess(item)">Assess</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<ng-template #elseBlock>No record found</ng-template>
+
+
+
+
+
+
+<!-- <ng-container>
     <table mat-table [dataSource]="dataSource">
 
-        <!-- Checkbox Column -->
+        
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>
             <mat-checkbox (change)="$event ? masterToggle() : null"
@@ -17,25 +72,25 @@
           </td>
         </ng-container>
       
-        <!-- Position Column -->
+        
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> No. </th>
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
       
-        <!-- Name Column -->
+        
         <ng-container matColumnDef="severity">
           <th mat-header-cell *matHeaderCellDef> Name </th>
           <td mat-cell *matCellDef="let element"> {{element.severity}} </td>
         </ng-container>
       
-        <!-- Weight Column -->
+        
         <ng-container matColumnDef="progress">
           <th mat-header-cell *matHeaderCellDef> Weight </th>
           <td mat-cell *matCellDef="let element"> {{element.progress}} </td>
         </ng-container>
       
-        <!-- Symbol Column -->
+        
         <ng-container matColumnDef="assess">
             <th mat-header-cell *matHeaderCellDef> Symbol </th>
             <td mat-cell *matCellDef="let element"> 
@@ -48,4 +103,6 @@
             (click)="selection.toggle(row)">
         </tr>
       </table>
-</ng-container>
+</ng-container> -->
+
+

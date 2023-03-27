@@ -1,37 +1,4 @@
-.mat-mdc-table{
-    background: none;
-}
 
-.mat-mdc-table .mdc-data-table__header-row{
-    background: var(--light_border);
-    
-}
-
-.mat-mdc-table .mdc-data-table__header-row th{
-    border-radius: 0px;
-}
-
-/* Table Styles  */
-
-.mdc-data-table__cell, .mdc-data-table__header-cell {
-    border-bottom-width: none;
-    border-bottom-style: none;
-}
-
-.mat-column-select {
-    width: 5%;
-}
-
-.mat-column-severity {
-    width: 12%;
-}
-.mat-column-progress {
-    width: 10%;
-}
-
-.mat-column-assess {
-    width: 12%;
-}
 
 .assess-btn {
     background: #F6EBEC;
@@ -41,3 +8,77 @@
     color: #A9383D;
     margin-right: 10px;
 }
+
+
+.recomTable {
+    width: 100%
+}
+/* .table-header {
+    background: var(--light_border);
+    
+} */
+
+thead{
+    background: var(--light_border);
+    height: 60px;
+}
+
+.table-header th{
+    padding: 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.1rem;
+    line-height: 21px;
+    color: #010209;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 10px;
+}
+
+.align-top {
+    vertical-align: top;
+}
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.priority-container{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.activity-header {
+   
+    /* color: #010209; */
+    color : var(--text-dark);
+    font-weight: bold;
+    
+    font-size: 1rem;
+}
+
+.activity-dsec {
+    color : var(--text-dark);
+    font-size: 0.9rem;
+}
+
+.high {
+    width: 20px;
+    height: 8px;
+    left: 600px;
+    top: 9px;
+
+    /* Error/500(Main) */
+
+    background: #B82727;
+    border-radius: 4px;
+}
+
+.mat-mdc-progress-bar {
+    width: 50%
+}
+

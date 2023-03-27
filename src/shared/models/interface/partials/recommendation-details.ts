@@ -9,5 +9,7 @@ export interface RecommendationDetails {
     segmentationId: string,
     createdAt: string,
     updatedAt: string,
-    __v: number
+    __v: number,
+    isCompleted: boolean
+    checked : string
 }

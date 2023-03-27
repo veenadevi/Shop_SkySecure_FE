@@ -15,6 +15,8 @@ export class RecommendationDetailsModel implements RecommendationDetails {
     public createdAt: string;
     public updatedAt: string;
     public __v: number;
+    public isCompleted: boolean;
+    public checked: string;
 
 
 

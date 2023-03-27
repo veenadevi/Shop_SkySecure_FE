@@ -105,13 +105,19 @@ export class RecommendationsComponent {
 
   public checkConnectionStatus() : void {
 
-    this.microsoftGraphService.getConnectionStatus().subscribe( res => {
-     this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
-     this.microsoftGraphService.getAllSegmentations().subscribe(response => {
+    this.connectionStatus = 'Y';
+    this.microsoftGraphService.getAllSegmentations().subscribe(response => {
       console.log("*******^^^^  got Respons ", response);
       this.segmentationsList = response;
      });
-    });
+
+    // this.microsoftGraphService.getConnectionStatus().subscribe( res => {
+    //  this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
+    //  this.microsoftGraphService.getAllSegmentations().subscribe(response => {
+    //   console.log("*******^^^^  got Respons ", response);
+    //   this.segmentationsList = response;
+    //  });
+    // });
  
    }
 

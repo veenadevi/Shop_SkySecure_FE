@@ -17,6 +17,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 
@@ -88,6 +89,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatBadgeModule,
     MatTableModule,
     MatCheckboxModule,
+    MatProgressBarModule,
 
 
 
@@ -108,6 +110,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatBadgeModule,
     MatTableModule,
     MatCheckboxModule,
+    MatProgressBarModule,
 
 
 

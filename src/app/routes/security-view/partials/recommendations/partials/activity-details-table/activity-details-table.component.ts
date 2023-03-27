@@ -21,6 +21,7 @@ export class ActivityDetailsTableComponent implements OnInit{
 
   public recomArray = [];
 
+  public isCompleted : boolean = false;
 
   public selected : any;
 
@@ -64,17 +65,24 @@ constructor(
     this.recomArray = [];
 
     data.forEach(element => {
-      let arrayItem = {
-        name: element.category, 
-        severity: 'Hydrogen', 
-        progress: 1.0079, 
-        assess: 'H',
-        details: element
-      }
-      this.recomArray.push(arrayItem)
+      this.activityDetailsList[element]
+      // let arrayItem = {
+      //   name: element.category, 
+      //   severity: 'Hydrogen', 
+      //   progress: 1.0079, 
+      //   assess: 'H',
+      //   details: element
+      // }
+      // this.recomArray.push(arrayItem)
     });
+
+    this.activityDetailsList.forEach(ele => {
+      ele['isCompleted'] = false;
+    })
+
+  
     
-    console.log("******** Recomm Array ", this.recomArray);
+    console.log("******** Recomm Array ", this.activityDetailsList);
     
   }
 
@@ -82,9 +90,14 @@ constructor(
   public assess(details) {
     console.log("******** ", details);
 
+    this.isCompleted = true;
+    details.isCompleted = true;
     this.subscriptions.push(
+      
       this.msUsersPoliciesService.msCreateConditionalPolicy(details).subscribe( res => {
         console.log("&&&& Res", res);
+        this.isCompleted = false;
+        details.isCompleted = false;
       })
     )
   }
@@ -108,5 +121,15 @@ constructor(
   logSelection() {
     this.selection.selected.forEach(s => console.log(s.name));
   }
+
+  checkAllCheckBox(ev: any) { // Angular 13
+		//this.products.forEach(x => x.checked = ev.target.checked)
+    this.recomArray.forEach(x => x.checked = ev.target.checked);
+	}
+
+	isAllCheckBoxChecked() {
+		//return this.products.every(p => p.checked);
+    return this.recomArray.every(p => p.checked);
+	}
 
 }
