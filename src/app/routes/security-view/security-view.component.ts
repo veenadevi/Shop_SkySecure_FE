@@ -25,10 +25,10 @@ export class SecurityViewComponent implements OnInit{
 
   public checkConnectionStatus() : void {
 
-    this.connectionStatus = 'Y';
-  //  this.microsoftGraphService.getConnectionStatus().subscribe( res => {
-  //   this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
-  //  });
+    //this.connectionStatus = 'Y';
+   this.microsoftGraphService.getConnectionStatus().subscribe( res => {
+    this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
+   });
 
   }
 

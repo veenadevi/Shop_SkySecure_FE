@@ -88,9 +88,9 @@ export class RecommendationsComponent {
     this.userGraphLoginService.getRefreshToken();
   }
 
-  public getId(){
-    this.userGraphLoginService.getRefreshIDTokenByAccessToken();
-  }
+  // public getId(){
+  //   this.userGraphLoginService.getRefreshIDTokenByAccessToken();
+  // }
 
 
   ngOnInit(): void {
@@ -105,19 +105,22 @@ export class RecommendationsComponent {
 
   public checkConnectionStatus() : void {
 
-    this.connectionStatus = 'Y';
-    this.microsoftGraphService.getAllSegmentations().subscribe(response => {
-      console.log("*******^^^^  got Respons ", response);
-      this.segmentationsList = response;
-     });
-
-    // this.microsoftGraphService.getConnectionStatus().subscribe( res => {
-    //  this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
-    //  this.microsoftGraphService.getAllSegmentations().subscribe(response => {
+    // this.connectionStatus = 'Y';
+    // this.microsoftGraphService.getAllSegmentations().subscribe(response => {
     //   console.log("*******^^^^  got Respons ", response);
     //   this.segmentationsList = response;
     //  });
-    // });
+
+    this.microsoftGraphService.getConnectionStatus().subscribe( res => {
+     this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
+     this.microsoftGraphService.getAllSegmentations().subscribe(response => {
+      console.log("*******^^^^  got Respons ", response);
+      this.segmentationsList = response;
+     });
+     if(this.connectionStatus){
+      this.userGraphLoginService.getRefreshIDTokenByAccessToken(res);
+     }
+    });
  
    }
 
