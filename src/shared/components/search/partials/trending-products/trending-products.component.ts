@@ -19,19 +19,37 @@ export class TrendingProductsComponent {
     private router : Router
   ){}
 
-  public trendingProducts$ = this.metadataStore.productsDetails$
+  // public trendingProducts$ = this.metadataStore.productsDetails$
+  //   .pipe(
+  //     map(data => {
+  //       if(data && data.length > 10){
+  //         return data.splice(0,7);
+  //       }
+  //       else{
+  //         return data;
+  //       }
+  //     }
+  //     )
+  //   )
+
+  public trendingProducts$ = this.metadataStore.trendingProducts$
     .pipe(
       map(data => {
-        if(data && data.length > 10){
-          return data.splice(0,7);
+        
+        if(data){
+          //this.loaderService.hide(LoadingType.Full)
+        
+          return data;
+          //return data.splice(0,7);
         }
         else{
+          //this.loaderService.hide(LoadingType.Full)
+        
           return data;
         }
       }
       )
-    )
-
+  )
 
   public ngOnInit(){
     
@@ -41,6 +59,7 @@ export class TrendingProductsComponent {
   }
 
   public goToProductsPage(category){
+    console.log("******* Id ", category);
     this.router.navigate([`/products/${category._id}`]);
   }
 

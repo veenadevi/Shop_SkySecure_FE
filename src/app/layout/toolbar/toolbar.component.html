@@ -29,10 +29,10 @@
         <mat-menu #softwares="matMenu" xPosition="after">
             <ng-container *ngFor="let category of softwareCategories">
               <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="category.subCategories.length>0 ? categoryItems : null"
-                mat-menu-item>{{category.name}}</button>
+                mat-menu-item><span class="text-normal">{{category.name}}</span></button>
                 <mat-menu #categoryItems="matMenu" xPosition="after">
                   <ng-container *ngFor="let subCategory of category.subCategories">
-                    <button (click)="goToProductsPageWithSubCategorySelection(subCategory)" mat-menu-item>{{subCategory.name}}</button>
+                    <button (click)="goToProductsPageWithSubCategorySelection(subCategory)" mat-menu-item><span class="text-normal">{{subCategory.name}}</span></button>
                   </ng-container>
                 </mat-menu>
             </ng-container>
@@ -40,10 +40,10 @@
           
         <mat-menu #hardware="matMenu" xPosition="after">
             <ng-container *ngFor="let category of hardwareCategories">
-                <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="category.subCategories.length>0 ? categoryItems : null" mat-menu-item>{{category.name}}</button>
+                <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="category.subCategories.length>0 ? categoryItems : null" mat-menu-item><span class="text-normal">{{category.name}}</span></button>
                 <mat-menu #categoryItems="matMenu" xPosition="after">
                     <ng-container *ngFor="let subCategory of category.subCategories">
-                        <button (click)="goToProductsPageWithSubCategorySelection(subCategory)" mat-menu-item>{{subCategory.name}}</button>
+                        <button (click)="goToProductsPageWithSubCategorySelection(subCategory)" mat-menu-item class="text-normal"><span class="text-normal">{{subCategory.name}}</span></button>
                     </ng-container>
                 </mat-menu>
             </ng-container>
@@ -68,7 +68,7 @@
 
         <mat-menu #belowMenu="matMenu" yPosition="below">
             <ng-container *ngFor="let oem of oemList">
-                <button (click)="goToProductsPageByBrand(oem)" mat-menu-item>{{oem.name}}</button>
+                <button (click)="goToProductsPageByBrand(oem)" mat-menu-item class="text-normal"><span class="text-normal">{{oem.name}}</span></button>
             </ng-container>
         </mat-menu>
 
