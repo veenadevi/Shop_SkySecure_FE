@@ -36,7 +36,25 @@
                     
                 </td>
                 <td>
-                    Not Configured
+                    <div class="priority-container">
+                        <ng-container *ngIf="(item.userConfigStatus && item.userConfigStatus.length>0); else notConfiguredBlock">
+                            <div>
+                                <img src="../../../../../../../assets/icons/checkcircle.svg">
+                            </div>
+                            <div>
+                                {{item.userConfigStatus[0].status}}
+                            </div>
+                        </ng-container>
+                        
+                        <ng-template #notConfiguredBlock>
+                            <div>
+                                <img src="../../../../../../../assets/icons/closecircle.svg">
+                            </div>
+                            <div>
+                                Not Configured
+                            </div>
+                        </ng-template>
+                    </div>
                 </td>
 				<td>
                     <mat-progress-bar mode="indeterminate" *ngIf="item.isCompleted"></mat-progress-bar>

@@ -56,6 +56,11 @@ export class SegmentationComponent implements OnInit{
 
     public ngOnInit(): void {
       console.log("***** Value at last ", this.segmentationsList);
+      if(this.segmentationsList && this.segmentationsList.segmentations.length> 0){
+        console.log("**** Inside ", this.segmentationsList);
+        this.selectedSegmentation(this.segmentationsList.segmentations[0]);
+      }
+      
 
       //this.dataSource.paginator = this.paginator;
     }

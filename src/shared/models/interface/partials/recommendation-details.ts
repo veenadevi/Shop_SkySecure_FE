@@ -12,4 +12,5 @@ export interface RecommendationDetails {
     __v: number,
     isCompleted: boolean
     checked : string
+    userConfigStatus : any[];
 }

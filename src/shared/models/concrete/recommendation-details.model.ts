@@ -17,6 +17,7 @@ export class RecommendationDetailsModel implements RecommendationDetails {
     public __v: number;
     public isCompleted: boolean;
     public checked: string;
+    public userConfigStatus : any[];
 
 
 

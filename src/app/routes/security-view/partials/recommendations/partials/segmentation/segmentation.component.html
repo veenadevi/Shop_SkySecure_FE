@@ -32,21 +32,21 @@
 
     <!-- Segmentation by Category -->
     
-    <ng-container *ngIf="selected === 'Cloud'">
+    <!-- <ng-container *ngIf="selected === 'Cloud'">
         <div class="text-header">
             Recommendations - Users
         </div>
-    </ng-container>
+    </ng-container> -->
 
-    <ng-container *ngIf="selected === 'Users'">
+    <ng-container>
         <div class="text-header">
-            Recommendations - Cloud
+            Recommendations - {{selected}}
         </div>
 
         <ng-container *ngIf="activityDetailsList && activityDetailsList.length >0 ">
-
+            <activity-details-table [datasource] = "ELEMENT_DATA" [activityDetailsList]="activityDetailsList"></activity-details-table>
         </ng-container>
-        <activity-details-table [datasource] = "ELEMENT_DATA" [activityDetailsList]="activityDetailsList"></activity-details-table>
+        
 
 
 
