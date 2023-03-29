@@ -172,10 +172,10 @@ public cartData : any[] = [];
 
 
     if(opr === 'plus'){
-      this.cartData[i].quantity = this.cartData[i].quantity + 1;
+      this.cartData[i].quantity = Number(this.cartData[i].quantity) + 1;
     }
     else if(opr === 'minus'){
-      this.cartData[i].quantity = this.cartData[i].quantity - 1;
+      this.cartData[i].quantity = Number(this.cartData[i].quantity) - 1;
     }
   }
 

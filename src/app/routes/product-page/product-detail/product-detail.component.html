@@ -13,7 +13,7 @@
                 <p>{{product.description}}</p>
             </div>
             <div class="pd-header-actions">
-                <button class="btn request-btn">Request quote</button>
+                <button class="btn request-btn" (click)="requestQuote(product)">Request quote</button>
                 <button class="btn compare-btn">Try free trail</button>
             </div>
         </div>
@@ -68,7 +68,7 @@
             </div>
             <div class="pd-pricing-footer">
                 <h5>Request a exclusive deal for your company</h5>
-                <button class="btn request-btn">Request quote</button>
+                <button class="btn request-btn" (click)="requestQuote(product)">Request quote</button>
             </div>
         </div>
     </div>

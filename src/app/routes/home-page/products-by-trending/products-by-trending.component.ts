@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, Subscription } from 'rxjs';
+import { ProductsDetails } from 'src/shared/models/interface/partials/products-details';
+import { CartStore } from 'src/shared/stores/cart.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 
 @Component({
@@ -16,6 +19,8 @@ export class ProductsByTrendingComponent {
 
   constructor(
     private metadataStore : MetadataStore,
+    private cartStore : CartStore,
+    private router : Router
     
   ) {
 
@@ -54,7 +59,30 @@ export class ProductsByTrendingComponent {
     
   }
 
-  public requestQuote(product) {
+  
+  public requestQuote (product : ProductsDetails) : void {
+
+    
+    var existingItems = this.cartStore.getCartItems();
+    // if(existingItems && existingItems.usercart.length > 0){
+      
+    //   existingItems.usercart[0].userCartDetails.push({
+    //     "productId": product,
+    //     "quantity" : 1
+    //   });
+    // }
+    //this.cartStore.setCartItems(product);
+    this.router.navigate(['/cart']);
+
+    let queryParams = {
+      productName : product.name,
+      productId : product._id,
+      quantity : 1,
+    };
+    this.router.navigate(['/cart'], {queryParams: queryParams});
+
+
+
 
   }
 
