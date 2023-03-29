@@ -2,7 +2,7 @@
 
     "gatewayUrl" : {
      
-      "localhost" :"http://localhost:8002/"
+        "localhost" :"https://dev-altsys-realize-api.azurewebsites.net/"
     },
     "gatewayUrlForUserProfile" : {
         

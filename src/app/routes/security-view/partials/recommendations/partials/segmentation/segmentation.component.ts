@@ -31,7 +31,8 @@ export class SegmentationComponent implements OnInit{
       ];
   
     public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
-      responsive: false
+      responsive: false,
+      cutout: '70%'
     };
 
 

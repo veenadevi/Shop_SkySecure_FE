@@ -79,6 +79,30 @@ td {
     border-radius: 4px;
 }
 
+.medium {
+    width: 20px;
+    height: 8px;
+    left: 600px;
+    top: 9px;
+
+    /* Error/500(Main) */
+
+    background: #FE9F4C;
+    border-radius: 4px;
+}
+
+.low {
+    width: 20px;
+    height: 8px;
+    left: 600px;
+    top: 9px;
+
+    /* Error/500(Main) */
+
+    background: #FE9F4C;
+    border-radius: 4px;
+}
+
 .mat-mdc-progress-bar {
     width: 50%
 }
@@ -120,6 +144,7 @@ td {
     background: #EFEFEF;
     border-radius: 8px;
     margin-left: 20px;
+    padding: 8px;
 }
 
 .container-right {

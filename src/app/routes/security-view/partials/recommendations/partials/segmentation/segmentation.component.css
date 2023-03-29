@@ -40,3 +40,6 @@
     display:flex;
 }
 
+.chart-container {
+    padding: 40px;
+}
