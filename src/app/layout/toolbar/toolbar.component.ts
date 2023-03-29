@@ -117,12 +117,13 @@ export class ToolbarComponent {
     this.router.navigate([`/products/category/${category._id}`]);
   }
 
-  public goToProductsPageWithSubCategorySelection(category) {
-    this.productListService.setCategoryIdSelection(category._id);
-    this.router.navigate([`/products/sub-category/${category._id}`]);
+  public goToProductsPageWithSubCategorySelection(category,subCategory) {
+    this.productListService.setSubCategoryIdSelection(category._id, subCategory._id);
+    this.router.navigate([`/products/sub-category/${category._id}-${subCategory._id}`], { state: { category , subCategory} });
   }
 
   goToProductsPageByBrand(oem) {
+    this.productListService.setBrandIdSelection(oem._id);
     this.router.navigate([`/products/brand/${oem._id}`]);
   }
 

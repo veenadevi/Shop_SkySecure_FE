@@ -33,6 +33,7 @@
                 <mat-menu #categoryItems="matMenu" xPosition="after">
                   <ng-container *ngFor="let subCategory of category.subCategories">
                     <button (click)="goToProductsPageWithSubCategorySelection(subCategory)" mat-menu-item><span class="text-normal">{{subCategory.name}}</span></button>
+                    <button (click)="goToProductsPageWithSubCategorySelection(category,subCategory)" mat-menu-item>{{subCategory.name}}</button>
                   </ng-container>
                 </mat-menu>
             </ng-container>
@@ -44,6 +45,7 @@
                 <mat-menu #categoryItems="matMenu" xPosition="after">
                     <ng-container *ngFor="let subCategory of category.subCategories">
                         <button (click)="goToProductsPageWithSubCategorySelection(subCategory)" mat-menu-item class="text-normal"><span class="text-normal">{{subCategory.name}}</span></button>
+                        <button (click)="goToProductsPageWithSubCategorySelection(category,subCategory)" mat-menu-item>{{subCategory.name}}</button>
                     </ng-container>
                 </mat-menu>
             </ng-container>

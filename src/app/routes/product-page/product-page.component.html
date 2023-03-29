@@ -1,15 +1,29 @@
 <div class="product-page-container">
     <div class="filter-container">
         <h6 class="filter-title">Filter</h6>
+        <div *ngIf="categories.length > 0" class="container drop-down-container">
+          <ng-multiselect-dropdown
+          [placeholder]="'Categories:'"
+          [settings]="dropdownSettings"
+          [data]="categories"
+          [(ngModel)]="selectedCategoryItems"
+          (onSelect)="onCategoryItemSelect($event)"
+          (onSelectAll)="onCategorySelectAll($event)"
+          (onDeSelect)="onCategoryItemDeSelect($event)"
+          (onDeSelectAll)="onCategoryDeSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
         <div *ngIf="subCategories.length > 0" class="container drop-down-container">
             <ng-multiselect-dropdown
-            [placeholder]="'Categories:'"
+            [placeholder]="'Sub Categories:'"
             [settings]="dropdownSettings"
             [data]="subCategories"
-            [(ngModel)]="selectedItems"
-            (onSelect)="onItemSelect($event)"
-            (onSelectAll)="onSelectAll($event)"
-            (onDeSelect)="onItemDeSelect($event)"
+            [(ngModel)]="selectedSubCategoryItems"
+            (onSelect)="onSubCategoryItemSelect($event)"
+            (onSelectAll)="onSubCategorySelectAll($event)"
+            (onDeSelect)="onSubCategoryItemDeSelect($event)"
+            (onDeSelectAll)="onSubCategoryDeSelectAll($event)"
           >
           </ng-multiselect-dropdown>
         </div>

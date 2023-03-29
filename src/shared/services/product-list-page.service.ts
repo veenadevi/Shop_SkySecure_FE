@@ -17,7 +17,10 @@ export class ProductListService {
     public categoryId : String ;
     private categoryIdSelectionSubject = new Subject<String>();
     public categoryIdSelectionSubject$ = this.categoryIdSelectionSubject.asObservable();
-
+    private subCategoryIdSelectionSubject = new Subject<Object>();
+    public subCategoryIdSelectionSubject$ = this.subCategoryIdSelectionSubject.asObservable();
+    private brandIdSelectionSubject = new Subject<String>();
+    public brandIdSelectionSubject$ = this.brandIdSelectionSubject.asObservable();
   constructor() {}
   
 
@@ -25,9 +28,17 @@ export class ProductListService {
    * ============================================================
    * Set Product Category
    */
-   public setCategoryIdSelection(data : String) : void {
+   public setCategoryIdSelection(categoryId : String) : void {
 
-    this.categoryIdSelectionSubject.next(data);
+    this.categoryIdSelectionSubject.next(categoryId);
+  }
+
+  public setSubCategoryIdSelection(categoryId : String,subcategoryId : String) : void {
+    this.subCategoryIdSelectionSubject.next({categoryId,subcategoryId});
+  }
+
+  public setBrandIdSelection(brandId : String) : void {
+    this.brandIdSelectionSubject.next(brandId);
   }
 
 }
