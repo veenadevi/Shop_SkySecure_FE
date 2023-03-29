@@ -18,6 +18,8 @@ export class RecommendationDetailsModel implements RecommendationDetails {
     public isCompleted: boolean;
     public checked: string;
     public userConfigStatus : any[];
+    public apiData : any;
+    public checkBox : boolean;
 
 
 

@@ -13,4 +13,7 @@ export interface RecommendationDetails {
     isCompleted: boolean
     checked : string
     userConfigStatus : any[];
+    apiData : any;
+    checkBox : boolean;
+
 }

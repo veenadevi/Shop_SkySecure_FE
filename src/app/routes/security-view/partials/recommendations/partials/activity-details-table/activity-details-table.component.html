@@ -1,14 +1,32 @@
 <div *ngIf="recomArray; else elseBlock">
     <div class="filter-container">
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-              <li><a href="#">HTML</a></li>
-              <li><a href="#">CSS</a></li>
-              <li><a href="#">JavaScript</a></li>
-            </ul>
-          </div>
+        <div class="container-left">
+            <select class="form-select recom-type" aria-label="Default select example">
+                <option selected>Recommendation Type - OEM</option>
+                <option value="1">OEM</option>
+                <option value="2">Securty</option>
+            </select>
+            <div class="secure-score">
+                Sample
+            </div>
+        </div>
+        <div class="container-right">
+            <span>
+                <img src="../../../../../../../assets/icons/checkcircle.svg">Group Policy Created
+            </span>
+            <select class="form-select severity" aria-label="Default select example">
+                <option selected>Severity - High</option>
+                <option value="1">High</option>
+                <option value="2">Medium</option>
+                <option value="3">Low</option>
+            </select>
+            <select class="form-select industry" aria-label="Default select example">
+                <option selected>Industry - All</option>
+                <option value="1">All</option>
+            </select>
+            <button class="btn assess-btn" (click)="autoConfigureSelected()">Auto Configure</button>
+        </div>
+        
     </div>
 	<table class="recomTable">
 		<thead>
@@ -25,7 +43,9 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let item of activityDetailsList; let i=index; let odd = odd">
-				<td class="align-top"><input type="checkbox" value="{{item.title}}" [(ngModel)]="item.checked"></td>
+				<td class="align-top">
+                    <input type="checkbox" disabled="{{item.checkBox}}" value="{{item.title}}" [(ngModel)]="item.checked">
+                </td>
 				<td class="align-top">
                     <div class="details-container">
                         <div class="activity-header">
@@ -54,16 +74,16 @@
                             <div>
                                 <img src="../../../../../../../assets/icons/checkcircle.svg">
                             </div>
-                            <div>
+                            <div style="color: #25BC9D">
                                 {{item.userConfigStatus[0].status}}
                             </div>
                         </ng-container>
                         
                         <ng-template #notConfiguredBlock>
                             <div>
-                                <img src="../../../../../../../assets/icons/closecircle.svg">
+                                <img src="../../../../../../../assets/icons/warning.svg">
                             </div>
-                            <div>
+                            <div style="color: #FE9F4C;">
                                 Not Configured
                             </div>
                         </ng-template>

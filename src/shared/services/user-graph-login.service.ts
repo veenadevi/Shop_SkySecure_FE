@@ -64,9 +64,10 @@ export class UserGraphLoginService {
   getRefreshIDTokenByAccessToken(data) {
 
     
-
+    console.log("****** Current Details ", data);
     let currentAccountDetails = data.connection.userAccessDetails;
     
+    //this.connectToTenantMsalInstance.setActiveAccount(res.account);
     //"admin@skysecurelab.onmicrosoft.com"
     var currentAccount = this.connectToTenantMsalInstance.getAccountByUsername("admin@skysecurelab.onmicrosoft.com");
     
@@ -97,17 +98,31 @@ export class UserGraphLoginService {
     var silentRequest2 = {
     scopes: [],
     account: currentAccountDetails,
-    forceRefresh: false
+    forceRefresh: false,
+    loginHint: currentAccountDetails.username
     };
 
     let refreshToken = data.connection.refreshToken;
-    this.connectToTenantMsalInstance.acquireTokenSilent(silentRequest2).then( res => {
+    // this.connectToTenantMsalInstance.acquireTokenSilent(silentRequest2).then( res => {
+    //   console.log("((((((((((((((( ******* Value hit ", res);
+    //   this.adGraphUserStore.setAdUserDetails(res);
+    //   this.connectToTenantMsalInstance.setActiveAccount(res.account);
+    //   this.updateTenant(data, res.account).subscribe();
+    // }
+    // )
+
+    this.connectToTenantMsalInstance.acquireTokenSilent(silentRequest2)
+      .then((res) => {
+        console.log("((((((((((((((( ******* Value hit ", res);
+        this.adGraphUserStore.setAdUserDetails(res);
+        this.connectToTenantMsalInstance.setActiveAccount(res.account);
+        this.updateTenant(data, res.account).subscribe();
+      })
+      .catch((error) => {
+        console.log("Promise rejected with " + error);
+        this.adLogin();
+      });
       
-      this.adGraphUserStore.setAdUserDetails(res);
-      this.connectToTenantMsalInstance.setActiveAccount(res.account);
-      this.updateTenant(data, res.account).subscribe();
-    }
-    )
 
   }
 

@@ -27,6 +27,14 @@ export class ActivityDetailsTableComponent implements OnInit{
 
   public subscriptions : Subscription[] = [];
 
+  cities = [
+    {id: 1, name: 'Vilnius'},
+    {id: 2, name: 'Kaunas'},
+    {id: 3, name: 'Pavilnys', disabled: true},
+    {id: 4, name: 'Pabradė'},
+    {id: 5, name: 'Klaipėda'}
+  ];
+
   //public ELEMENT_DATA = this.dataSource;
   /*public ELEMENT_DATA: any[] = [
     {name: 1, severity: 'Hydrogen', progress: 1.0079, assess: 'H'},
@@ -78,6 +86,14 @@ constructor(
 
     this.activityDetailsList.forEach(ele => {
       ele['isCompleted'] = false;
+      if(ele.apiData && ele.apiData.body){
+        console.log("***** False");
+        ele['checkBox'] = false;
+      }
+      else {
+        console.log("***** True");
+        ele['checkBox'] = true;
+      }
     })
 
   
@@ -131,5 +147,24 @@ constructor(
 		//return this.products.every(p => p.checked);
     return this.recomArray.every(p => p.checked);
 	}
+
+  public autoConfigureSelected() : void {
+    
+    let filteredArray =  this.activityDetailsList.filter( event => (event.checked));
+    console.log("******* Selected Items ", filteredArray);
+
+    filteredArray.forEach(details => {
+      this.isCompleted = true;
+      details.isCompleted = true;
+      this.subscriptions.push(
+        
+        this.msUsersPoliciesService.msCreateConditionalPolicy(details).subscribe( res => {
+          console.log("&&&& Res", res);
+          this.isCompleted = false;
+          details.isCompleted = false;
+        })
+      )
+    });
+  }
 
 }

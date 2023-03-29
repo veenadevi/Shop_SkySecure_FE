@@ -7,6 +7,7 @@
     text-align: center;
     color: #A9383D;
     margin-right: 10px;
+    min-width: 140px;
 }
 
 
@@ -86,6 +87,47 @@ td {
 /* Filter Styles */
 .filter-container {
     display: flex;
+    margin-bottom: 15px;
+    
 
+}
+
+.container-left {
+    width: 35%;
+    display: flex;
+    align-items: center;
+}
+
+.form-select {
+    border: 1px solid #918F90 !important;
+    border-radius: 8px !important;
+}
+
+.recom-type{
+    width: 50% !important;
+}
+
+.severity{
+    width: 20% !important;
+}
+
+.industry{
+    width: 20% !important;
+}
+
+.secure-score {
+    
+    background: #EFEFEF;
+    border-radius: 8px;
+    margin-left: 20px;
+}
+
+.container-right {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    width:100%;
+    justify-content: end;
+    
 }
 

@@ -76,8 +76,11 @@ export class MSUsersPoliciesService {
     // let xAccessToken = this.adGraphUserStore.getAdUserDetails();
     // let refreshToken = "0.AXEAJRKr10lGs0yr1bxzK-0yA9XkpSVvtK1CtVafGYSwuDdxACI.AgABAAEAAAD--DLA3VO7QrddgJg7WevrAgDs_wUA9P_81JEypTiuoU9WaH3AA0OfEHE2JorlmOdTNGG0sCp1wSfIzH_QkGA80S3p-fq2JOvzTvAj0JexImylUIoA8enqyORbHmSM_9Rhtw2Vayb5d1G4GFuhoTve5Oog6gxyY0ffTYownbwOoAcghCPHEe8hNOBBAYd9YFgYjT-SHfcIyT_UMGF8OIpYqcBYdvicL3RpykcoV37w1R0i8IaPDlEHliijGI3pAUz7dbBPvPSDRfDPK-o86EvfjMP-XIMebhoF9NQZg5c1bIgwOKpzmaS9GQg6S94haPsAAupyxB8q4Wx6197L09U0_GOwNf9ZWpeUSgip1brKxHYKFEq7jp8ABHU5we8j1Rai9iffcP9m5XtaUefQddbRBjuezZRnBZnqlDWKca4CMAUxVyQ0QY-897skDBMFoZ29vocN6c-t-D94tj9GXVQanq8jb_8enkQkCSPTw3VmobH2AqIuLwA93gI-JauHMzhwFkoKu2iT8oHEWfPJL5yng0WaXJlayuDpNBJcy_gyyr0hvqRtkNe2s2JCoOfN9yxtD6MB9rh6_qdBtHIqSBSx4zUTA4UECSkr8qNiXbSHx-oAa_dPOJR1F-j1J8b02MpcN6q8SYnoZN2E6SvfUah_lqqhjvnQ1Qx-nvZ2Vts_LHZgZ4GWkbgazScmXE-e3dWpWY0DjDfyros7XtsCXF8MhAabhthIuC08f-hlva5dB_ZPTGI4I1USMT-cPFtCtiwAhPvqpIGA3YKmPx_XaVI3JnJqM1pcoRBRKyADbp582Jb9L5nl0dhdwhe2YusNwrek_uNKayNYx78yoRL-_4dVyi5KLmt9_loKe1aSC2kk9BwywK8fAmaUwFl1695TFFrve7llhNE0hR3lE6NG"
 
+    console.log("********* ", this.adGraphUserStore.getAdUserDetails());
     let token = this.userAccountStore.getAccessIdToken();
     let xAccessToken = this.adGraphUserStore.getAdUserDetails().accessToken;
+
+    
 
     // console.log("*****((((((( ", token);
     // console.log("*****((((((( ", this.adGraphUserStore.getAdUserDetails());
