@@ -1,13 +1,26 @@
 <div *ngIf="recomArray; else elseBlock">
+    <div class="filter-container">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">HTML</a></li>
+              <li><a href="#">CSS</a></li>
+              <li><a href="#">JavaScript</a></li>
+            </ul>
+          </div>
+    </div>
 	<table class="recomTable">
 		<thead>
 			<tr class="table-header">
-				<th style="width:6%"><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
+				<th style="width:5%">
+                    <!-- <input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"> -->
+                </th>
 				<th>Activity Details</th>
-				<th style="width:13%">Severity</th>
-                <th style="width:13%">Status</th>
-				<th style="width:13%">Progress</th>
-				<th style="width:13%"></th>
+				<th style="width:15%">Severity</th>
+                <th style="width:15%">Status</th>
+				<th style="width:15%">Progress</th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -59,7 +72,7 @@
 				<td>
                     <mat-progress-bar mode="indeterminate" *ngIf="item.isCompleted"></mat-progress-bar>
                 </td>
-				<td><button class="btn assess-btn" (click)="assess(item)">Assess</button></td>
+				<!-- <td><button class="btn assess-btn" (click)="assess(item)">Assess</button></td> -->
 			</tr>
 		</tbody>
 	</table>

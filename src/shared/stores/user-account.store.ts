@@ -85,22 +85,22 @@ export class UserAccountStore {
     
     
 
-    let aa = {
-      "_id": "640c561bd17e9ca1ca6e4ced",
-      "firstName": "Vignesh",
-      "lastName": "Sankaran",
-      "email": "vignesh4apps@gmail.com",
-      "role": null,
-      "company": null,
-      "createdBy": "Client",
-      "updatedBy": "Client",
-      "createdAt": "2023-03-11T10:21:15.917Z",
-      "updatedAt": "2023-03-11T10:21:15.917Z",
-      "__v": 0
-    }
+    // let aa = {
+    //   "_id": "640c561bd17e9ca1ca6e4ced",
+    //   "firstName": "Vignesh",
+    //   "lastName": "Sankaran",
+    //   "email": "vignesh4apps@gmail.com",
+    //   "role": null,
+    //   "company": null,
+    //   "createdBy": "Client",
+    //   "updatedBy": "Client",
+    //   "createdAt": "2023-03-11T10:21:15.917Z",
+    //   "updatedAt": "2023-03-11T10:21:15.917Z",
+    //   "__v": 0
+    // }
 
-    //return this.userProfileDetails.userDetails;
-    return aa;
+    return this.userProfileDetails.userDetails;
+    //return aa;
   }
 
 
