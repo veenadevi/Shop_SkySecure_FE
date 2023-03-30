@@ -19,7 +19,7 @@ export class SearchComponent {
   private searchSubscription?: Subscription;
   private searchSubject = new Subject<string | undefined>();
 
-  public searchResults : ProductsDetails[];
+  public searchResults : [];
 
   constructor(
     private globalSearchSvc : GlobalSearchService,
@@ -60,11 +60,10 @@ export class SearchComponent {
     .subscribe((results) => {
       if(results.length>2){
         this.generalSearchOpen = false;
-        this.keywordSearchOpen = true;
         this.globalSearchSvc.fetchSearchResults(results).subscribe(res => {
-         
           this.searchResults = res;
-          this.searchResultsStore.setSearchResults(res.products);
+          this.searchResultsStore.setSearchResults(this.searchResults);
+          this.keywordSearchOpen = true;
         });
       }
       else{

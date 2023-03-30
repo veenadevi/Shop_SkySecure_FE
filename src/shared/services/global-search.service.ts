@@ -36,7 +36,7 @@ export class GlobalSearchService {
           .set('search', searchKey)
       };
 
-    let request$ = this.http.get<ProductsResponse>(url, OPTIONS)
+    let request$ = this.http.get<any>(url, OPTIONS)
       .pipe(
         map(response => {
           if (!response) {

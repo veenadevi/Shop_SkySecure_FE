@@ -1,7 +1,7 @@
 <div class="container-holder text-style p-3">
 
     <ng-container>
-        <div class="list-row"> 
+        <div class="list-row" *ngIf="searchResultsProducts.length > 0"> 
             <div class="text-header">
                 <span>Products</span>
             </div>
@@ -12,6 +12,28 @@
                 
             </ng-container>
             
+        </div>
+        <div class="list-row"  *ngIf="searchResultsCategoryList.length > 0"> 
+            <div class="text-header">
+                <span>Categories</span>
+            </div>
+            <ng-container *ngFor="let item of (searchResults$ | async)">
+                <div (click)="goToProductsPageWithCategorySelection(item.data)" class="list-item p-1">
+                    <span>{{item.data.name}}</span>
+                    <span>{{item.products.length}} Products</span>
+                </div>
+            </ng-container>
+        </div>
+        <div class="list-row"  *ngIf="searchResultsSubCategoryList.length > 0 "> 
+            <div class="text-header">
+                <span>SubCategories</span>
+            </div>
+            <ng-container *ngFor="let item of (searchResults$ | async)">
+                <div (click)="goToProductsPageWithSubCategorySelection(item.data,item.data)" class="list-item p-1">
+                    <span>{{item.data.name}}</span>
+                    <span>{{item.products.length}} Products</span>
+                </div>
+            </ng-container>
         </div>
     </ng-container>
     

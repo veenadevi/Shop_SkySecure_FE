@@ -14,11 +14,11 @@ import { ProductsDetails } from '../models/interface/partials/products-details';
 export class SearchResultStore {
 
    
-    public searchResults : ProductsDetails ;
+    public searchResults : any ;
   
   
 
-    private searchResultsSubject = new BehaviorSubject<ProductsDetails[]>(null);
+    private searchResultsSubject = new BehaviorSubject<ProductsDetails[] | any>(null);
     public searchResults$ = this.searchResultsSubject.asObservable();
 
   constructor() {
@@ -30,7 +30,7 @@ export class SearchResultStore {
    * ============================================================
    * Set Search Results
    */
-  public setSearchResults(data : ProductsDetails[]) : void {
+  public setSearchResults(data : ProductsDetails[] | any) : void {
 
     this.searchResultsSubject.next(data);
   }
@@ -41,7 +41,7 @@ export class SearchResultStore {
   /**
    * Return Search Result Details
    */
-  public getSearchResults(): ProductsDetails {
+  public getSearchResults(): any {
     return this.searchResults;
   }
 
