@@ -41,7 +41,12 @@ const INTERFACE_ROUTES: Routes = [
         canActivate: [],
         path: 'security-view',
         loadChildren: () => import('../routes/security-view/security-view.module').then(m=>m.SecurityViewModule)
-      }
+      },
+      {
+        canActivate: [],
+        path: 'category-view',
+        loadChildren: () => import('../routes/category-view/category-view.module').then(m=>m.CategoryViewModule)
+      },
     ]
   }
 

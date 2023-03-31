@@ -12,14 +12,12 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MultiSelectDropdownComponent } from './multi-select-dropdown/multi-select-dropdown.component';
 import { FormsModule } from '@angular/forms';
-import { CategoryViewComponent } from './category-view/category-view.component';
 @NgModule({
   declarations: [
     ROUTED_COMPONENTS,
     ProductComponent,
     ProductDetailComponent,
     MultiSelectDropdownComponent,
-    CategoryViewComponent
   ],
   imports: [
     CommonModule,
