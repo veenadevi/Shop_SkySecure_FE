@@ -66,7 +66,9 @@ export class HeaderComponent implements OnInit{
     this.subscriptions.push(this.userDetails$.subscribe(res => {
       this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
       if(this.userLoggedIn){
+        console.log("****** Check whetehr called");
         this.getAccessIdToken();
+        //this.sample();
       }
     }));
 
@@ -123,30 +125,48 @@ export class HeaderComponent implements OnInit{
     this.loginService.logout();
   }
 
-  public getAccessIdToken() {
-    this.authService.acquireTokenSilent(silentRequest).subscribe( res => {
+  public getAccessIdToken1(userData) {
+    
+
+    let currentAccount = userData.filter(event => (event.environment !== "login.windows.net"))
+    console.log("******* 111111111", currentAccount);
+    let silentRequest1 = {
+      scopes: [],
+      loginHint: currentAccount[0].username
+    };
+    this.authService.acquireTokenSilent(silentRequest1).subscribe( res => {
       this.userAccountStore.setAccessIdToken(res.idToken);
       this.userProfileService.fetchUserProfile().subscribe(response => {
         this.retrieveCarttItems(response);
         
       });
-
       
+    });
 
-
-      /*this.userProfileService.fetchUserProfile()
-        .pipe(
-          switchMap ( (response) => {
-            this.setCartItems(response);
-            return response;
-          })
-        ).subscribe( res => {
-        })*/
-      
-    })
 
 
     
+  }
+
+  public getAccessIdToken() {
+    this.authService.acquireTokenSilent(silentRequest)
+    .subscribe(
+      res => {
+        this.userAccountStore.setAccessIdToken(res.idToken);
+        this.userProfileService.fetchUserProfile().subscribe(response => {
+        this.retrieveCarttItems(response);
+        
+      });
+      },
+      error => {
+        this.login();
+         console.log(error);
+      },
+      () => {
+        // 'onCompleted' callback.
+        // No errors, route to new page here
+      }
+    );
   }
 
 
