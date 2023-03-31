@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { map, Subscription } from 'rxjs';
 import { LoaderService } from 'src/shared/services/loader.service';
 import { MetadataService } from 'src/shared/services/metadata.service';
@@ -13,7 +13,7 @@ import { OEMDetails } from 'src/shared/models/interface/partials/oem-details';
 import { OEMResponse } from 'src/shared/models/interface/response/oem-response';
 import { CloseScrollStrategy } from '@angular/cdk/overlay';
 import { ProductListService } from 'src/shared/services/product-list-page.service';
-import { MatMenu } from '@angular/material/menu';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { CartService } from 'src/shared/services/cart.service';
 import { HttpResponseBase } from '@angular/common/http';
 
@@ -44,6 +44,10 @@ export class ToolbarComponent {
 
   public oemList : OEMDetails[]=[];
 
+  @ViewChild('matMenuTrigger') matMenuTrigger: MatMenuTrigger;
+  
+  @ViewChild('categoriesMenu') categoriesMenu : MatMenuTrigger;
+  
 
   private getCategories(): CategoryDetails[]{
     let categoryResponse = null;
@@ -113,6 +117,8 @@ export class ToolbarComponent {
   }
 
   public goToProductsPageWithCategorySelection(category) {
+    this.matMenuTrigger.closeMenu();
+    this.categoriesMenu.closeMenu();
     this.productListService.setCategoryIdSelection(category._id);
     this.router.navigate([`/products/category/${category._id}`]);
   }

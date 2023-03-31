@@ -1,5 +1,5 @@
 <mat-toolbar color="var(--primary)" class="toolbar">
-    <button mat-button [matMenuTriggerFor]="aboveMenu">
+    <button #categoriesMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="aboveMenu">
         <span class="text-normal">ALL CATEGORIES</span>
         <i class="fa fa-caret-down" aria-hidden="true"></i>
     </button>
@@ -12,7 +12,7 @@
         
         <mat-menu #aboveMenu="matMenu" yPosition="below">
 
-            <button mat-menu-item [matMenuTriggerFor]="softwares">
+            <button #matMenuTrigger="matMenuTrigger" mat-menu-item [matMenuTriggerFor]="softwares">
                 <div class="menu-width">
                     <span class="text-normal">Software</span>
                 </div>
