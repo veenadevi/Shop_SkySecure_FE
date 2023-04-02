@@ -1,6 +1,22 @@
 .list-container {
     width:100%;
     padding: 10px;
-    float: left;
+}
 
+ul{
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.product-holder {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 10px;
+    margin-top: 10px;
 }

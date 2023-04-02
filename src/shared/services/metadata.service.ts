@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import AppService  from '../../config/service.json';
+import { environment } from 'src/environments/environment';
 
 import { CatrgoryResponse } from '../models/interface/response/category-response';
 import { OEMResponse } from '../models/interface/response/oem-response';
@@ -25,7 +26,8 @@ export class MetadataService {
   constructor(
     private http: HttpClient,
   ) {
-    this.baseUrl = AppService.gatewayUrl.localhost;
+    //this.baseUrl = AppService.gatewayUrl.localhost;
+    this.baseUrl = environment.gatewayUrl
     this.fetchCategoryUrl = AppService.appUrl.allCategory;
     this.fetchOEMUrl = AppService.appUrl.allOEM;
     this.fetchProductsUrl = AppService.appUrl.allProducts;

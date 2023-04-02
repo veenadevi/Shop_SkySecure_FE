@@ -9,6 +9,7 @@ import { CatrgoryResponse } from '../models/interface/response/category-response
 import { ProductsResponse } from '../models/interface/response/products-response';
 import { OEMResponse } from '../models/interface/response/oem-response';
 import { MsalService } from '@azure/msal-angular';
+import { environment } from 'src/environments/environment';
 
 import { b2cPolicies, silentRequest } from 'src/app/auth-config';
 import { UserAccountStore } from '../stores/user-account.store';
@@ -29,7 +30,8 @@ export class CartService {
     private userAccountStore : UserAccountStore,
     private cartStore : CartStore
   ) {
-    this.baseUrl = AppService.gatewayUrlForOrders.localhost;
+    //this.baseUrl = AppService.gatewayUrlForOrders.localhost;
+    this.baseUrl = environment.gatewayUrl;
     this.userCartUrl = AppService.appUrl.userCart;
 
     

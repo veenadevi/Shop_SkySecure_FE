@@ -5,5 +5,8 @@
     margin: 4em 7em 4em 7em;
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.header-style {
+    text-align: center;
 }
