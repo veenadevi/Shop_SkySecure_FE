@@ -5,6 +5,7 @@ import { map, Observable, catchError } from 'rxjs';
 import { AdGraphUserStore } from 'src/shared/stores/ad-graph-user.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import AppService  from '../../../config/service.json';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -26,7 +27,8 @@ export class MSUsersPoliciesService {
     private userAccountStore : UserAccountStore,
     private adGraphUserStore : AdGraphUserStore
   ) {
-    this.baseUrl = AppService.gatewayUrlForUserProfile.localhost;
+    
+    this.baseUrl = environment.gatewayUrlForUserProfile;
     this.conditionalPolicyUrl = AppService.policiesUrl.conditionalPolicy
     
   }

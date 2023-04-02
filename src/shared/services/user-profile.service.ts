@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import AppService  from '../../config/service.json';
+import { environment } from 'src/environments/environment';
 
 import { CatrgoryResponse } from '../models/interface/response/category-response';
 import { ProductsResponse } from '../models/interface/response/products-response';
@@ -26,7 +27,8 @@ export class UserProfileService {
     private authService : MsalService,
     private userAccountStore : UserAccountStore
   ) {
-    this.baseUrl = AppService.gatewayUrlForUserProfile.localhost;
+    
+    this.baseUrl = environment.gatewayUrlForUserProfile;
     this.userSignInUrl = AppService.appUrl.userSignin;
     
     

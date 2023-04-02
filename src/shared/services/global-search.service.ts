@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import AppService  from '../../config/service.json';
+import { environment } from 'src/environments/environment';
 
 import { CatrgoryResponse } from '../models/interface/response/category-response';
 import { ProductsResponse } from '../models/interface/response/products-response';
@@ -18,7 +19,7 @@ export class GlobalSearchService {
   constructor(
     private http: HttpClient,
   ) {
-    this.baseUrl = AppService.gatewayUrl.localhost;
+    this.baseUrl = environment.gatewayUrl;
     this.globalSearchUrl = AppService.appUrl.globalSearchByKey;
 
     //this.quotaDetailsUri = this.ouxConfigSvc.getAppConfigValue('apiUri').e2eQuotaACV;

@@ -4,6 +4,7 @@ import { Inject, Injectable } from '@angular/core';
 import { map, Observable, catchError } from 'rxjs';
 import { UserAccountStore } from '../stores/user-account.store';
 import AppService  from '../../config/service.json';
+import { environment } from 'src/environments/environment';
 import { AdGraphUserStore } from '../stores/ad-graph-user.store';
 import { ConnectionStatusResponse } from '../models/interface/response/connection-status-response';
 import { SegmentationsModal } from '../models/interface/response/segmentations-response';
@@ -30,7 +31,7 @@ export class MicrosoftGraphService {
     private userAccountStore : UserAccountStore,
     private adGraphUserStore : AdGraphUserStore
   ) {
-    this.baseUrl = AppService.gatewayUrlForUserProfile.localhost;
+    this.baseUrl = environment.gatewayUrlForUserProfile
     this.appRegistrationUrl = AppService.appUrl['app-registration'];
     this.getConnectionUrl = AppService.appUrl.getConnection;
     this.getAllSegmentationsUrl = AppService.appUrl.getAllSegmentation;

@@ -30,8 +30,7 @@ export class CartService {
     private userAccountStore : UserAccountStore,
     private cartStore : CartStore
   ) {
-    //this.baseUrl = AppService.gatewayUrlForOrders.localhost;
-    this.baseUrl = environment.gatewayUrl;
+    this.baseUrl = environment.gatewayUrlForOrders;
     this.userCartUrl = AppService.appUrl.userCart;
 
     

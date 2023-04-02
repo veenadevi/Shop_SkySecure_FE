@@ -26,7 +26,6 @@ export class MetadataService {
   constructor(
     private http: HttpClient,
   ) {
-    //this.baseUrl = AppService.gatewayUrl.localhost;
     this.baseUrl = environment.gatewayUrl
     this.fetchCategoryUrl = AppService.appUrl.allCategory;
     this.fetchOEMUrl = AppService.appUrl.allOEM;

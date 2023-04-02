@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 
 import  AppService  from '../../config/service.json';
+import { environment } from 'src/environments/environment';
 
 import { IdTokenClaims, PromptValue } from '@azure/msal-common';
 import { AccountInfo, AuthenticationResult, EventMessage, EventType, InteractionStatus, InteractionType, PopupRequest, PublicClientApplication, RedirectRequest, SsoSilentRequest } from '@azure/msal-browser';
@@ -35,7 +36,8 @@ export class UserGraphLoginService {
     private msalBroadcastService: MsalBroadcastService,
     private adGraphUserStore : AdGraphUserStore
   ) {
-    this.baseUrl = AppService.gatewayUrlForUserProfile.localhost;
+    
+    this.baseUrl = environment.gatewayUrlForUserProfile;
     this.tenantUpdateUrl = AppService.appUrl.tenantUpdate;
   }
 
