@@ -22,6 +22,8 @@ export class InterfaceComponent {
 
   public isExapnded : boolean = false;
 
+  public userName : string;
+
   constructor(
     private userAccountStore : UserAccountStore,
     private authService : MsalService,
@@ -32,10 +34,11 @@ export class InterfaceComponent {
 
   }
 
-  public userDetails$ = this.userAccountStore.userAccountDetails$
+  public userDetails$ = this.userAccountStore.userProfileDetails$
   .pipe(
     map(data => {
       if(data){
+        this.userName = data.userDetails.firstName + ' ' +data.userDetails.lastName;
         return data;
       }
       else{
@@ -46,9 +49,14 @@ export class InterfaceComponent {
   )
 
   public ngOnInit() : void {
-    this.subscriptions.push(this.userDetails$.subscribe(res => {
-      this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
-    }));
+    // this.subscriptions.push(this.userDetails$.subscribe(res => {
+    //   this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
+    //   console.log("********* ****** ((((((", this.userAccountStore.getUserProfileDetails());
+    // }));
+    this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
+    if(this.userLoggedIn){
+      this.userDetails$.subscribe();
+    }
   }
 
   public exapndCollapse () {

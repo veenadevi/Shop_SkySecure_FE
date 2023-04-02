@@ -25,13 +25,18 @@ export class SegmentationComponent implements OnInit{
   public selected : any;
 
     // Doughnut
-    public doughnutChartLabels: string[] = [ 'Download Sales'];
-    public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
-        { data: [ 350, 450], label: 'Series A' },
-      ];
+    public doughnutChartLabels: string[] = [ 'Success', 'Not Configured'];
+    // public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
+    //     { data: [ 350, 450], label: 'Series A' },
+    //   ];
+
+    public doughnutChartColors = ["#EBF8DE", "#5F6BDD"]
+    public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'];
+
+    
   
     public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
-      responsive: false,
+      responsive: true,
       cutout: '70%'
     };
 
@@ -73,11 +78,65 @@ export class SegmentationComponent implements OnInit{
           console.log("****** %%%%% Data in last ", data);
           this.activityDetailsList = data.recommandations;
           this.selected = segmentation.name;
+          this.setGraphData(data.recommandations);
         })
         );
       
     }
 
-
+    public setGraphData(recomList){
+      console.log("******^^^^^^^^^ Recom List", recomList);
+      let total = recomList.length;
+      //let successData =  recomList.filter( event => (event.userConfigStatus[0].status === 'Success'));
+      let successData =  recomList.filter( event => {
+        if(event.userConfigStatus && event.userConfigStatus.length > 0){
+          if(event.userConfigStatus[0].status === 'Success'){
+            return event;
+          }
+        }
+      }
+        );
+      let successLength = successData.length;
+      this.doughnutChartDatasets = [
+        { 
+          data: [ successLength, total-successLength], 
+          backgroundColor : ["#25BC9D", "#5F6BDD"]
+        },
+      ];
+      /*public doughnutChartPlugins: PluginServiceGlobalRegistrationAndOptions[] = [{
+        beforeDraw(chart) {
+          const ctx = chart.ctx;
+          const txt = 'Center Text';
+    
+          //Get options from the center object in options
+          const sidePadding = 60;
+          const sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2)
+    
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          const centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+          const centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+    
+          //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+          const stringWidth = ctx.measureText(txt).width;
+          const elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
+    
+          // Find out how much the font can grow in width.
+          const widthRatio = elementWidth / stringWidth;
+          const newFontSize = Math.floor(30 * widthRatio);
+          const elementHeight = (chart.innerRadius * 2);
+    
+          // Pick a new font size so it will not be larger than the height of label.
+          const fontSizeToUse = Math.min(newFontSize, elementHeight);
+    
+          ctx.font = fontSizeToUse + 'px Arial';
+          ctx.fillStyle = 'blue';
+    
+          // Draw text in center
+          ctx.fillText('Center Text', centerX, centerY);
+        }
+      }];*/
+      
+    }
 
 }
