@@ -1,22 +1,35 @@
-<div class="list-container">
-    <ng-container>
-        <div>
-            <span>Data Software</span>
-        </div>
-
-        <div class="product-holder">
-            <!-- <ng-container *ngFor="let category of (trendingProducts$ | async)"> -->
+<ng-container *ngFor="let category of (categories$ | async)">
+    <div class="list-container">
+        <div class="">
+            <div class="category-header">
+                <span>{{category.name}} <i class="fa fa-chevron-right arrow-right-style"></i></span> 
+            </div>
+            <ng-container>
                 
-                <div class="product-item ">
+            </ng-container>
+            <div class="product-holder">
+
+                <ng-container *ngIf="category.subCategories && category.subCategories.length>0; else noProductsBlock">
+                   <ng-container *ngFor="let subCategory of category.subCategories">
+                        <div>
+                            <span class="product-item" (click)="goToProductsPageWithSubCategorySelection(category, subCategory)">{{subCategory.name}}</span>
+                        </div>
                     
-                    Sample
-                </div>
-                <div class="product-item ">
+                    </ng-container>
+                </ng-container>
+                <ng-template #noProductsBlock>
+                    <div>
+                        <span>No Products</span>
+                    </div>
+                </ng-template>
+                <!-- <ng-container *ngFor="let subCategory of category.subCategories">
+                        <div class="product-item ">
+                            {{subCategory.name}}
+                        </div>
                     
-                    Sample 2
-                </div>
-            <!-- </ng-container> -->
+                </ng-container> -->
+            </div>
         </div>
-        
-    </ng-container>
-</div>
+    </div>
+    
+</ng-container>

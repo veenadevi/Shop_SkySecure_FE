@@ -1,6 +1,6 @@
 .category-view-container {
     padding: 40px;
-    background: aqua;
+    background: var(--primary);
     min-height: 30em;
     margin: 4em 7em 4em 7em;
     display: flex;
