@@ -5,6 +5,10 @@
     <ngx-spinner size="medium" type="ball-atom"></ngx-spinner>
 
 
+    <ng-container *ngIf="(userDetails$ | async)">
+
+    </ng-container>
+   
     <ng-container *ngIf="userLoggedIn">
 
         
@@ -110,6 +114,7 @@
         
         </mat-drawer-container>
     </ng-container>
+    
 
     <!-- Container If not Logged In -->
 

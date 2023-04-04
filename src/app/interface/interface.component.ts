@@ -45,8 +45,10 @@ export class InterfaceComponent {
   public userDetails$ = this.userAccountStore.userProfileDetails$
   .pipe(
     map(data => {
+      console.log("*******%%%%%%%%%% Called here");
       if(data){
         this.userName = data.userDetails.firstName + ' ' +data.userDetails.lastName;
+        this.userLoggedIn = true;
         return data;
       }
       else{
@@ -62,11 +64,10 @@ export class InterfaceComponent {
     //   this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
     //   console.log("********* ****** ((((((", this.userAccountStore.getUserProfileDetails());
     // }));
-    this.spinnerService.show();
+    
     this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
     if(this.userLoggedIn){
       this.userDetails$.subscribe();
-      this.spinnerService.hide();
     }
   }
 
