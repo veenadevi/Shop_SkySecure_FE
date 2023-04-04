@@ -47,7 +47,7 @@ export class InterfaceComponent {
     map(data => {
       console.log("*******%%%%%%%%%% Called here");
       if(data){
-        this.userName = data.userDetails.firstName + ' ' +data.userDetails.lastName;
+        this.userName ="Altsys User" || data.userDetails.firstName + ' ' +data.userDetails.lastName;
         this.userLoggedIn = true;
         return data;
       }

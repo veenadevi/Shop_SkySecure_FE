@@ -198,7 +198,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
           return { 
             name: data.name , 
             description: data.description ,
-            imageUrl: this.staticProductimageUrl ,
+            imageUrl: data.imageURL || this.staticProductimageUrl ,
             solutionLink: data.description,
             _id: data._id
           }
