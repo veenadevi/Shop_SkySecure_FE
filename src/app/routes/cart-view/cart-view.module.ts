@@ -29,7 +29,8 @@ import { CartSubmitComponent } from './partials/cart-submit/cart-submit.componen
   ],
   exports: [
     RouterModule,
-    SharedModule
+    SharedModule,
+    CommonModule
   ]
 })
 export class CartViewModule { 

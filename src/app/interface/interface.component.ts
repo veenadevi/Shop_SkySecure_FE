@@ -7,6 +7,7 @@ import { b2cPolicies } from '../../app/auth-config';
 import { SsoSilentRequest } from '@azure/msal-browser';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { LoginService } from 'src/shared/services/login.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -24,14 +25,21 @@ export class InterfaceComponent {
 
   public userName : string;
 
+  public typeSelected : string;
+
+  // constructor(private spinnerService: NgxSpinnerService) {
+  //   this.typeSelected = 'ball-fussion';
+  // }
+
   constructor(
     private userAccountStore : UserAccountStore,
     private authService : MsalService,
     private userProfileService : UserProfileService ,
     public collapseService: CollapseService,
-    private loginService : LoginService
+    private loginService : LoginService,
+    private spinnerService : NgxSpinnerService
   ){
-
+    this.typeSelected = 'ball-atom';
   }
 
   public userDetails$ = this.userAccountStore.userProfileDetails$
@@ -49,13 +57,16 @@ export class InterfaceComponent {
   )
 
   public ngOnInit() : void {
+   
     // this.subscriptions.push(this.userDetails$.subscribe(res => {
     //   this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
     //   console.log("********* ****** ((((((", this.userAccountStore.getUserProfileDetails());
     // }));
+    this.spinnerService.show();
     this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
     if(this.userLoggedIn){
       this.userDetails$.subscribe();
+      this.spinnerService.hide();
     }
   }
 
@@ -67,6 +78,14 @@ export class InterfaceComponent {
 
   public logout() {
     this.loginService.logout();
+  }
+
+  public showSpinner(): void {
+    this.spinnerService.show();
+
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 5000); // 5 seconds
   }
   
 

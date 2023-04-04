@@ -16,6 +16,7 @@ import { ProductListService } from 'src/shared/services/product-list-page.servic
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { CartService } from 'src/shared/services/cart.service';
 import { HttpResponseBase } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-toolbar',
@@ -31,7 +32,8 @@ export class ToolbarComponent {
     private metadataStore : MetadataStore,
     private userAccountStore : UserAccountStore,
     private router : Router,
-    private productListService: ProductListService
+    private productListService: ProductListService,
+    private spinnerService : NgxSpinnerService
   ){}
 
   private subscriptions: Subscription[] = [];
@@ -50,6 +52,7 @@ export class ToolbarComponent {
   
 
   private getCategories(): CategoryDetails[]{
+    this.spinnerService.show();
     let categoryResponse = null;
     this.subscriptions.push(
       this.metaDataSvc.fetchCategory().subscribe( response => {
@@ -63,23 +66,26 @@ export class ToolbarComponent {
       })
       
     );
+    this.spinnerService.hide();
     return categoryResponse;
   }
 
 
   private getOEMs(): OEMDetails[]{
+    this.spinnerService.show();
     let OEMResponse = null;
     this.subscriptions.push(
       this.metaDataSvc.fetchOEM().subscribe( response => {
         this.metadataStore.setOEMDetails(response.oems);
         this.oemList = response.oems.splice(0,10);
-        
+        this.spinnerService.hide();
       })
       
     );
     return OEMResponse;
   }
   private getProducts(): ProductsDetails[]{
+    this.spinnerService.show();
     let categoryResponse = null;
     this.subscriptions.push(
       this.metaDataSvc.fetchProducts().subscribe( response => {
@@ -87,13 +93,16 @@ export class ToolbarComponent {
       })
       
     );
+    this.spinnerService.hide();
     return categoryResponse;
   }
 
   private getTrendingProducts() : void {
+    this.spinnerService.show();
     this.subscriptions.push(
       this.metaDataSvc.fetchTrendingProducts().subscribe( response => {
         this.metadataStore.setTrendingProducts(response.products);
+        this.spinnerService.hide();
         //this.metadataStore.setProductsDetails(response.products);
       })
       

@@ -11,6 +11,7 @@ import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CartService } from 'src/shared/services/cart.service';
 import { MicrosoftGraphService } from 'src/shared/services/microsoft-graph.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class HeaderComponent implements OnInit{
     private userProfileService : UserProfileService,
     private cartService : CartService,
     private router : Router,
-    private microsoftGraphService : MicrosoftGraphService
+    private microsoftGraphService : MicrosoftGraphService,
+    private spinnerService : NgxSpinnerService
   ){}
 
   /**
@@ -62,12 +64,13 @@ export class HeaderComponent implements OnInit{
 
   public ngOnInit(): void {
 
-
+    this.spinnerService.show();
     this.subscriptions.push(this.userDetails$.subscribe(res => {
       this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
       if(this.userLoggedIn){
         console.log("****** Check whetehr called");
         this.getAccessIdToken();
+        this.spinnerService.hide();
         //this.sample();
       }
     }));

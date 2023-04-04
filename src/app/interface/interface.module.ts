@@ -43,6 +43,7 @@ import { LayoutModule  } from '../layout/layout.module';
   ],
 
   exports: [
+    CommonModule,
     RouterModule,
     MaterialModule
     /*MatButtonModule,

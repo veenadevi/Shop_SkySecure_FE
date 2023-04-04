@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 
@@ -18,6 +18,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -90,7 +91,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatTableModule,
     MatCheckboxModule,
     MatProgressBarModule,
-
+    NgxSpinnerModule,
 
 
 
@@ -111,13 +112,14 @@ import { NgChartsModule } from 'ng2-charts';
     MatTableModule,
     MatCheckboxModule,
     MatProgressBarModule,
-
+    NgxSpinnerModule,
 
 
 
     NgChartsModule
     
-  ]    
+  ] ,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]   
 })
 
 export class MaterialModule {}

@@ -48,7 +48,7 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
   exports: [
     RouterModule,
     MaterialModule,
-
+    CommonModule,
 
     HeaderComponent,
     ToolbarComponent,
