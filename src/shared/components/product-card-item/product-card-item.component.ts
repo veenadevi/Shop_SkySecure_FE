@@ -12,6 +12,9 @@ export class ProductCardItemComponent {
   @Input('productList')
   public productList : any[];
 
+  @Input('routePath')
+  public routePath : string;
+
   constructor(
     private router: Router
   ){}

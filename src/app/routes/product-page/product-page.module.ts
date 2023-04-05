@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import { SharedModule } from 'src/shared/shared.module'; 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProductPageRoutingModule,  ROUTED_COMPONENTS} from './product-page-routing.module';
@@ -26,10 +26,12 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatIconModule,
     FormsModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    SharedModule
   ],
   exports: [
-    RouterModule
+    RouterModule,
+    SharedModule
   ]
 })
 export class ProductPageModule { }

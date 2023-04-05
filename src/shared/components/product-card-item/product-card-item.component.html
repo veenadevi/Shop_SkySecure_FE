@@ -16,7 +16,8 @@
         <div class="product-container">
             <div class="row">
                 <ng-container *ngFor="let product of productList">
-                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <!-- <div class="col-xs-12 col-sm-6 col-md-3 col-lg-4"> -->
+                    <div [ngClass]=" (routePath === 'home') ? 'col-xs-12 col-sm-6 col-md-3 col-lg-3' : 'col-xs-12 col-sm-6 col-md-3 col-lg-4'">
                         <div href="">
                             <div class="card-flyer">
                                 <div class="text-box">

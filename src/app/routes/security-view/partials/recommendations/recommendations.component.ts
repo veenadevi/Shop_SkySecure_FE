@@ -68,6 +68,8 @@ export class RecommendationsComponent {
     this.userGraphLoginService.adLogin();
     this.subscriptions.push(this.adUserDetails$.subscribe(data => {
       this.appRegister(data);
+      this.connectionStatus = 'Y';
+      this.getAllSegmentations();
 
     }))
     
@@ -96,10 +98,10 @@ export class RecommendationsComponent {
   ngOnInit(): void {
     
     //this.subscriptions.push(this.userProfileDetails$.subscribe());
+    
+    
     this.checkConnectionStatus();
-    // setTimeout(()=>{                           
-    //   this.checkConnectionStatus();
-    // }, 2000);
+    
     
   }
 
@@ -113,10 +115,7 @@ export class RecommendationsComponent {
 
     this.microsoftGraphService.getConnectionStatus().subscribe( res => {
      this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
-     this.microsoftGraphService.getAllSegmentations().subscribe(response => {
-      console.log("*******^^^^  got Respons ", response);
-      this.segmentationsList = response;
-     });
+     this.getAllSegmentations();
      if(this.connectionStatus){
       this.userGraphLoginService.getRefreshIDTokenByAccessToken(res);
      }
@@ -124,17 +123,13 @@ export class RecommendationsComponent {
  
    }
 
-//    subscription: Subscription;
-// pageReloading: boolean = false;
 
-// constructor(private router: Router){
-//     this.subscription = router.events.subscribe((event) => {
-//         if (event instanceof NavigationStart) {
-//           this.pageReloading = !router.navigated;
-//           console.log(this.pageReloading)
-//         }
-//     });
-// }
+   public getAllSegmentations(){
+    this.microsoftGraphService.getAllSegmentations().subscribe(response => {
+      console.log("*******^^^^  got Respons ", response);
+      this.segmentationsList = response;
+     });
+   }
 
 
 
