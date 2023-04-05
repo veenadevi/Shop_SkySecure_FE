@@ -8,6 +8,7 @@ import { PopularCategoryComponent } from './components/search/partials/popular-c
 import { TrendingProductsComponent } from './components/search/partials/trending-products/trending-products.component';
 import { RecentlySearchedComponent } from './components/search/partials/recently-searched/recently-searched.component';
 import { SearchListComponent } from './components/search/partials/search-list/search-list.component';
+import { ProductCardItemComponent } from './components/product-card-item/product-card-item.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { SearchListComponent } from './components/search/partials/search-list/se
     PopularCategoryComponent,
     TrendingProductsComponent,
     RecentlySearchedComponent,
-    SearchListComponent
+    SearchListComponent,
+    ProductCardItemComponent
   ],
 
   providers: [
@@ -42,8 +44,10 @@ import { SearchListComponent } from './components/search/partials/search-list/se
     SearchComponent,
     PopularCategoryComponent,
     TrendingProductsComponent,
-    RecentlySearchedComponent
-  ]
+    RecentlySearchedComponent,
+    ProductCardItemComponent
+  ],
+  
 
 })
 

@@ -1,4 +1,8 @@
-<div class="container">
+<ng-container *ngIf="trendingProductsList && trendingProductsList.length > 0">
+  <product-card-item [productList] = trendingProductsList></product-card-item>
+</ng-container>
+
+<!-- <div class="container">
     <div>
         <span class="text-header alignLeft">Trending Products</span>
         <span class="text-normal brown-color alignRight">
@@ -36,4 +40,4 @@
         
     </div>
 
-</div>
+</div> -->

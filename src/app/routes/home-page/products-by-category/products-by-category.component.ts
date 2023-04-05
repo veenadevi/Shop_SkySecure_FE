@@ -67,7 +67,7 @@ export class ProductsByCategoryComponent {
 
     this.subscriptions.push(
       this.categories$.subscribe( response => {
-        this.categories = response.slice(0,6);
+        this.categories = response.slice(0,7);
       })
     )
     

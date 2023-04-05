@@ -35,7 +35,7 @@ export class ProductComponent {
     //   });
     // }
     //this.cartStore.setCartItems(product);
-    this.router.navigate(['/cart']);
+    // this.router.navigate(['/cart']);
 
     let queryParams = {
       productName : product.name,
