@@ -79,11 +79,27 @@ export class ProductsByTrendingComponent {
       productId : product._id,
       quantity : 1,
     };
+
+    
     this.router.navigate(['/cart'], {queryParams: queryParams});
 
 
 
 
   }
+
+  public navigateToProducts(product: any): void {
+    console.log("***** Product ID ", product);
+    this.requestQuote(product);
+  }
+
+  public navigateToCart(cart : any) {
+    console.log("***** Cart ", cart);
+  }
+
+  public navigateToProductDetails(product:any){
+    //['/products', product._id]
+  }
+  
 
 }

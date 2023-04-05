@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
@@ -18,6 +18,7 @@ export class ProductCardItemComponent {
 
 
   public requestQuote(product:any){
+
     let queryParams = {
       productName : product.name,
       productId : product._id,
@@ -27,7 +28,8 @@ export class ProductCardItemComponent {
   }
 
   public navigateToProductDetails(product:any){
-    this.router.navigate(['http://localhost:4200/products', product._id]);
+    
+    this.router.navigate(['/products', product._id]);
   }
 
 }
