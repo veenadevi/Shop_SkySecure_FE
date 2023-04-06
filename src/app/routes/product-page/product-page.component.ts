@@ -31,6 +31,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public subCategories : Array<any> = [];
   public brands : Array<any> = [];
   public brand : String;
+  public productList : any[] = [];
   
   constructor(
     private metaDataSvc : MetadataService,
@@ -194,6 +195,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     this.subscriptions.push(
        this.metaDataSvc.fetchProductsByFilters({subCategoryIds,brandIds}).subscribe(response => {
         console.log("+++++++++++",response.products)
+        this.productList = response.products;
          this.products = response.products.map((data: any )=> {
           return { 
             name: data.name , 

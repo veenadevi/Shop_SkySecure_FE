@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './product-card-item.component.html',
   styleUrls: ['./product-card-item.component.css']
 })
-export class ProductCardItemComponent {
+export class ProductCardItemComponent implements OnInit{
 
   @Input('productList')
   public productList : any[];
@@ -18,6 +18,11 @@ export class ProductCardItemComponent {
   constructor(
     private router: Router
   ){}
+
+
+  public ngOnInit(): void {
+    console.log("********** productList", this.productList);
+  }
 
 
   public requestQuote(product:any){
