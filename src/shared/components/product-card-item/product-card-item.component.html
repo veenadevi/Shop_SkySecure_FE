@@ -36,12 +36,12 @@
                                         
                                         <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p> -->
                                     </div>
-                                    <div class="text-container text-solution">
+                                    <div *ngIf="product.subcategories && product.subcategories.length > 0" class="text-container text-solution">
                                         <span class="text-style">
                                             SOLUTION
                                         </span>
                                         <div class="solution-link">
-                                            {{product.name}}
+                                            {{product.subcategories[0].name}}
                                         </div>
                                         
                                     </div>
