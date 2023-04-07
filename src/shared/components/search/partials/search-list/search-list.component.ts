@@ -19,6 +19,7 @@ export class SearchListComponent {
   searchResultsProducts : ProductsDetails[] = [];
   searchResultsCategoryList : any[] = [];
   searchResultsSubCategoryList : any[] = [];
+  searchResultsProductBundleList : any[] = [];
 
   constructor(
     private searchResultStore : SearchResultStore,
@@ -40,6 +41,7 @@ export class SearchListComponent {
     this.searchResultsProducts = this.searchResults?.products || [];
     this.searchResultsCategoryList = this.searchResults?.categoryList || [];
     this.searchResultsSubCategoryList = this.searchResults?.subCategoryList || [];
+    this.searchResultsProductBundleList = this.searchResults?.productBundles || [];
   }
 
   public goToProductsPage(item){
