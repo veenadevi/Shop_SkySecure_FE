@@ -1,21 +1,29 @@
 .product-page-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .product-list-container {
-    width: 73vw;
+    /* width: 73vw; */
 }
 
 .filter-container {
-    width:26vw;
+    /* width:26vw;
     height: auto;
     margin:2%;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
     border-radius: 12px;
     padding:2% 2% 2% 0;
     background: #FAFAFA;
-    border-radius: 12px;
+    border-radius: 12px; */
+
+    
+    display: flex;           /* establish flex container */
+    flex-direction: row;  /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center;     /* center items horizontally, in this case */
+    padding: 20px;
+    column-gap: 2%;
 }
 
 app-product {
@@ -34,6 +42,9 @@ app-product {
 .filter-title {
     margin:4%;
 }
+.filter-dropdown {
+    width: 250px;
+}
 
 .empty-container {
     min-height: 40em;
@@ -45,5 +56,15 @@ app-product {
     align-items: center;
     justify-content: center;
    
+}
+
+
+
+.selected {
+    display: none !important
+}
+
+ng-select select-dropdown .selected {
+    display: none !important
 }
 

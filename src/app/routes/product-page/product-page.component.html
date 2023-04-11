@@ -1,5 +1,5 @@
 <div class="product-page-container">
-    <div class="filter-container">
+    <!-- <div class="filter-container">
         <h6 class="filter-title">Filter</h6>
         <div *ngIf="categories.length > 0" class="container drop-down-container">
           <ng-multiselect-dropdown
@@ -42,6 +42,52 @@
           >
           </ng-multiselect-dropdown>
         </div>
+    </div> -->
+    <div class="filter-container">
+      <span>Filter</span>
+      <div *ngIf="categories.length > 0" class="filter-dropdown">
+        <ng-multiselect-dropdown
+        [placeholder]="'Categories:'"
+        [settings]="dropdownSettings"
+        [data]="categories"
+        [(ngModel)]="selectedCategoryItems"
+        (onSelect)="onCategoryItemSelect($event)"
+        (onSelectAll)="onCategorySelectAll($event)"
+        (onDeSelect)="onCategoryItemDeSelect($event)"
+        (onDeSelectAll)="onCategoryDeSelectAll($event)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+      <div *ngIf="subCategories.length > 0" class="filter-dropdown">
+          <ng-multiselect-dropdown
+          [placeholder]="'Sub Categories:'"
+          [settings]="dropdownSettings"
+          [data]="subCategories"
+          [(ngModel)]="selectedSubCategoryItems"
+          (onSelect)="onSubCategoryItemSelect($event)"
+          (onSelectAll)="onSubCategorySelectAll($event)"
+          (onDeSelect)="onSubCategoryItemDeSelect($event)"
+          (onDeSelectAll)="onSubCategoryDeSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+
+
+      <div *ngIf="brands.length > 0" class="filter-dropdown">
+          <ng-multiselect-dropdown
+          [placeholder]="'Brands:'"
+          [settings]="dropdownSettings"
+          [data]="brands"
+          [(ngModel)]="selectedBrandItems"
+          (onSelect)="onBrandSelect($event)"
+          (onSelectAll)="onBrandSelectAll($event)"
+          (onDeSelect)="onBrandDeSelect($event)"
+          (onDeSelectAll)="onBrandDeSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+
+
     </div>
     <div class="product-list-container">
         <ng-container *ngIf="!products || products.length <= 0">
