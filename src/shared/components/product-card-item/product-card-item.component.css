@@ -104,8 +104,8 @@
     
   } */
   #cards_landscape_wrap-2 .card-flyer .text-box .text-container{
-    padding: 30px 18px 0px 18px;
-    min-height: 121px;
+    padding: 20px 18px 0px 18px;
+    min-height: 98px;
   }
   #cards_landscape_wrap-2 .card-flyer{
     background: #FFFFFF;
@@ -176,11 +176,11 @@
   }
 
   .text-solution {
-    min-height: 102px !important;
+    min-height: 70px !important;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; 
+    -webkit-line-clamp: 1; 
     -webkit-box-orient: vertical;
   }
 
@@ -213,5 +213,10 @@
   }
 
   .bg-image{
+    
+  }
+
+  .button-container {
+    padding: 20px 18px 0px 18px;
     
   }

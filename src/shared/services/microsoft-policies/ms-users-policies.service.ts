@@ -47,9 +47,12 @@ export class MSUsersPoliciesService {
         "userId": userAccountdetails._id,
         "recommandationId": data._id
     }
+
+    console.log("****** details", data);
+    console.log("****** url", this.conditionalPolicyUrl);
     
 
-      let REQUEST$ = this.http.post<Observable<any>>(URL, requestParams, OPTIONS)
+      /*let REQUEST$ = this.http.post<Observable<any>>(URL, requestParams, OPTIONS)
       .pipe(
         map(response => {
           if (!response) {
@@ -60,7 +63,9 @@ export class MSUsersPoliciesService {
         }),
       );
 
-    return REQUEST$; 
+    return REQUEST$; */
+
+    return null;
 
     
   }
