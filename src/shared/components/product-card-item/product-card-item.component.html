@@ -23,6 +23,15 @@
                                 <div class="text-box">
                                     <div class="image-box" (click)="navigateToProductDetails(product)">
                                         <img src="{{(product.imageURL && product.imageURL !== null) ? product.imageURL : 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg'}}">
+                                        <div class="overlay">
+                                            <div class="review-container">
+                                                <span>4.3</span>
+                                                <mat-icon class="review-icon">star</mat-icon>
+                                            </div>
+                                            <div>
+                                                <span style="text-decoration: underline;">See Reviews</span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- <div class="bg-image">
 
