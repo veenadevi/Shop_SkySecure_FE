@@ -76,12 +76,31 @@ export class SegmentationComponent implements OnInit{
       this.subscriptions.push(
         this.microsoftFraphService.getRecommendationsList(segmentation._id).subscribe(data => {
           console.log("****** %%%%% Data in last ", data);
-          this.activityDetailsList = data.recommandations;
+          //this.activityDetailsList = data.recommandations;
+          this.activityDetailsList = this.setCustomActivityDetailsList(data.recommandations);
+
           this.selected = segmentation.name;
           this.setGraphData(data.recommandations);
         })
         );
       
+    }
+
+
+    public setCustomActivityDetailsList(dataList){
+      dataList.forEach(ele => {
+        ele['isCompleted'] = false;
+        if(ele.apiData && ele.apiData.body){
+          console.log("***** False");
+          ele['checkBox'] = false;
+        }
+        else {
+          console.log("***** True");
+          ele['checkBox'] = true;
+        }
+      })
+
+      return dataList;
     }
 
     public setGraphData(recomList){

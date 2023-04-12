@@ -84,7 +84,7 @@ constructor(
       // this.recomArray.push(arrayItem)
     });
 
-    this.activityDetailsList.forEach(ele => {
+    /*this.activityDetailsList.forEach(ele => {
       ele['isCompleted'] = false;
       if(ele.apiData && ele.apiData.body){
         console.log("***** False");
@@ -94,7 +94,7 @@ constructor(
         console.log("***** True");
         ele['checkBox'] = true;
       }
-    })
+    })*/
 
   
     
