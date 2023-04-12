@@ -68,7 +68,6 @@ export class HeaderComponent implements OnInit{
     this.subscriptions.push(this.userDetails$.subscribe(res => {
       this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
       if(this.userLoggedIn){
-        console.log("****** Check whetehr called");
         this.getAccessIdToken();
         this.spinnerService.hide();
         //this.sample();
@@ -132,7 +131,6 @@ export class HeaderComponent implements OnInit{
     
 
     let currentAccount = userData.filter(event => (event.environment !== "login.windows.net"))
-    console.log("******* 111111111", currentAccount);
     let silentRequest1 = {
       scopes: [],
       loginHint: currentAccount[0].username

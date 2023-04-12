@@ -89,12 +89,10 @@ export class ProductsByTrendingComponent {
   }
 
   public navigateToProducts(product: any): void {
-    console.log("***** Product ID ", product);
     this.requestQuote(product);
   }
 
   public navigateToCart(cart : any) {
-    console.log("***** Cart ", cart);
   }
 
   public navigateToProductDetails(product:any){

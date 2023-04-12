@@ -131,22 +131,31 @@ public cartData : any[] = [];
       products : productsList
     });
 
+
+    var index = productsList.findIndex(el => el.productId === this.params.get('productId'));
     
-    productsList.push({
-      "productId": this.params.get('productId'),
-      "productName" : this.params.get('productName'),
-      "quantity" : this.params.get('quantity')
-  });
+
+    if(index >=0){
+      productsList[index].quantity = Number(productsList[index].quantity) + 1;
+    }
+    else {
+      productsList.push({
+        "productId": this.params.get('productId'),
+        "productName" : this.params.get('productName'),
+        "quantity" : this.params.get('quantity')
+    });
+    }
+    
 
     
     if(cartRefId !== '' || cartRefId !== null){
       req.cart_ref_id = cartRefId;
       //req.products.push(productsList);
+      req.products = productsList;
     }
     else {
-      //req.products.push(productsList);
+      req.products.push(productsList);
     }
-
 
     this.addCartItemsService(req, 'add');
 

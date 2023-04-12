@@ -45,7 +45,6 @@ export class InterfaceComponent {
   public userDetails$ = this.userAccountStore.userProfileDetails$
   .pipe(
     map(data => {
-      console.log("*******%%%%%%%%%% Called here");
       if(data){
         this.userName ="Altsys User" || data.userDetails.firstName + ' ' +data.userDetails.lastName;
         this.userLoggedIn = true;
