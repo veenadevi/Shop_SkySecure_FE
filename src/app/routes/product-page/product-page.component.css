@@ -72,10 +72,12 @@ ng-select select-dropdown .selected {
 
 :host ::ng-deep .multiselect-dropdown .dropdown-btn .selected-item{
     
-    overflow: hidden !important;
+    /* overflow: hidden !important;
     text-overflow: ellipsis !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 1 !important; 
-    -webkit-box-orient: vertical !important;
+    -webkit-box-orient: vertical !important; */
+    
+    
 }
 

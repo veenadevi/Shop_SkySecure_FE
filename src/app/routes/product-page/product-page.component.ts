@@ -228,17 +228,17 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         textField: 'name',
         selectAllText: 'Select All',
         unSelectAllText: 'UnSelect All',
-        itemsShowLimit: 1,
+        itemsShowLimit: 0,
         allowSearchFilter: true
       };
   
       this.subCategoryDropdownSettings = {
         singleSelection: false,
         idField: '_id',
-        textField: 'name',
+        textField: 'name', 
         selectAllText: 'Select All',
         unSelectAllText: 'UnSelect All',
-        itemsShowLimit: 1,
+        itemsShowLimit: 0,
         allowSearchFilter: true
       }
       this.activeRoute.paramMap.subscribe(params => {
