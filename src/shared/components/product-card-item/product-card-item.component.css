@@ -230,7 +230,7 @@
     transition: .5s ease;
     opacity:1;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     padding: 10px;
     text-align: center;
     display: flex;
@@ -240,7 +240,7 @@
 
   .review-container{
     background: var(--neutral);
-    padding: 5px 5px 5px 8px;
+    padding: 5px 5px 3px 8px;
     display: flex;
     border-radius: 5px;
   }
@@ -248,4 +248,5 @@
   .review-icon {
     color: orange;
     padding-left: 3px;
+    font-size: 18px;
 }
