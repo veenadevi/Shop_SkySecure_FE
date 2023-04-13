@@ -16,6 +16,7 @@ export class SearchComponent {
   public keywordSearchOpen = false;
   public generalSearchOpen = false;
 
+  public inputText = '';
   private searchSubscription?: Subscription;
   private searchSubject = new Subject<string | undefined>();
 
@@ -27,8 +28,17 @@ export class SearchComponent {
   ) { }
 
   public onSearchClicked() {
-    this.isOpen = true;
-    this.generalSearchOpen = true;
+    
+    if(this.inputText && this.inputText.length>2){
+      this.isOpen = true;
+      this.generalSearchOpen = false;
+      this.keywordSearchOpen = true;
+    }
+    else{
+      this.isOpen = true;
+      this.generalSearchOpen = true;
+    }
+    
   }
 
   public onFocusOutEvent(event: any){

@@ -7,7 +7,7 @@
             class="form-control" 
             placeholder="Search by products, categories, brands & more"
             (click) = "onSearchClicked()"
-            
+            [(ngModel)]="inputText"
             (focusout)="onFocusOutEvent($event)"
             
             (input)="onSearchQueryInput($event)"
