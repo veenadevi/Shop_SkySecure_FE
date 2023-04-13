@@ -21,6 +21,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   selectedCategoryItems : Array<any> = [];
   selectedSubCategoryItems : Array<any> = [];
   dropdownSettings : IDropdownSettings = {};
+  subCategoryDropdownSettings : IDropdownSettings = {};
   category : String;
   subCategory : String;
   allCategories : Array<any> = [];
@@ -221,6 +222,25 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   }
   public ngOnInit() : void { 
       this.getAllCategories();
+      this.dropdownSettings = {
+        singleSelection: false,
+        idField: '_id',
+        textField: 'name',
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 1,
+        allowSearchFilter: true
+      };
+  
+      this.subCategoryDropdownSettings = {
+        singleSelection: false,
+        idField: '_id',
+        textField: 'name',
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 1,
+        allowSearchFilter: true
+      }
       this.activeRoute.paramMap.subscribe(params => {
       this.category =  params.get('categoryId');
       if(this.category) {
@@ -280,15 +300,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
     this.selectedItems = [];
 
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: '_id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
+    
     this.getSubCategoriesByCategoryIds();
   }
 

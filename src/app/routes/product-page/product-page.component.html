@@ -61,7 +61,7 @@
       <div *ngIf="subCategories.length > 0" class="filter-dropdown">
           <ng-multiselect-dropdown
           [placeholder]="'Sub Categories:'"
-          [settings]="dropdownSettings"
+          [settings]="subCategoryDropdownSettings"
           [data]="subCategories"
           [(ngModel)]="selectedSubCategoryItems"
           (onSelect)="onSubCategoryItemSelect($event)"
