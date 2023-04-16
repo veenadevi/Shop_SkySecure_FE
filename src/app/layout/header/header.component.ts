@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { MsalService, MsalBroadcastService } from '@azure/msal-angular';
 import { AppComponent } from 'src/app/app.component';
@@ -23,6 +23,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 export class HeaderComponent implements OnInit{
 
+  @Output() loginEvent = new EventEmitter();
   
 
   public userLoggedIn = false;
@@ -120,7 +121,8 @@ export class HeaderComponent implements OnInit{
   }
 
   public login(){
-    this.loginService.login();
+    //this.loginService.login();
+    this.loginEvent.emit('Log In');
   }
 
   public logout() {

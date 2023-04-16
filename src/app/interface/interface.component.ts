@@ -1,10 +1,10 @@
 import { Component, Injectable } from '@angular/core';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
-import { MsalService } from '@azure/msal-angular';
-import { BehaviorSubject, map, Subscription } from 'rxjs';
+import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
+import { BehaviorSubject, filter, map, Subscription } from 'rxjs';
 import { silentRequest } from '../auth-config';
 import { b2cPolicies } from '../../app/auth-config';
-import { SsoSilentRequest } from '@azure/msal-browser';
+import { AuthenticationResult, EventMessage, EventType, InteractionStatus, SsoSilentRequest } from '@azure/msal-browser';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { LoginService } from 'src/shared/services/login.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -37,7 +37,8 @@ export class InterfaceComponent {
     private userProfileService : UserProfileService ,
     public collapseService: CollapseService,
     private loginService : LoginService,
-    private spinnerService : NgxSpinnerService
+    private spinnerService : NgxSpinnerService,
+    private msalBroadcastService: MsalBroadcastService
   ){
     this.typeSelected = 'ball-atom';
   }
@@ -46,6 +47,7 @@ export class InterfaceComponent {
   .pipe(
     map(data => {
       if(data){
+        console.log("(((((((( ****** %%%%%% ",this.authService.instance.getAllAccounts() );
         this.userName ="Altsys User" || data.userDetails.firstName + ' ' +data.userDetails.lastName;
         this.userLoggedIn = true;
         return data;
@@ -68,8 +70,39 @@ export class InterfaceComponent {
     if(this.userLoggedIn){
       this.userDetails$.subscribe();
     }
+
+
+        
+    this.msalBroadcastService.msalSubject$
+            .pipe(
+                filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
+            )
+            .subscribe((result: EventMessage) => {
+              console.log("*******%%%%%%%%%(((( ",this.authService.instance.getAllAccounts() );
+              let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"))
+              if(loggedinData.length > 0 ){
+                this.userLoggedIn = true;
+              }
+                const payload = result.payload as AuthenticationResult;
+                this.authService.instance.setActiveAccount(payload.account);
+                this.userAccountStore.setuserAccountDetails(this.authService.instance.getAllAccounts());
+                this.loginService.retrieveAccessIdToken();
+            });
+
+        this.msalBroadcastService.inProgress$
+            .pipe(
+                filter((status: InteractionStatus) => status === InteractionStatus.None)
+            )
+            .subscribe(() => {
+                
+            })
   }
 
+
+  public loginEvent(event){
+    console.log("*******$$$$$$$ Event ", event);
+    this.loginService.login();
+  }
   public exapndCollapse () {
 
    this.isExapnded = this.isExapnded ? false : true;
