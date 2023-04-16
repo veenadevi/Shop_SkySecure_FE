@@ -46,6 +46,10 @@ export class ToolbarComponent {
 
   public oemList : OEMDetails[]=[];
 
+  public compareProducts : any[] = [];
+
+  public offers : any[] = [];
+
   @ViewChild('matMenuTrigger') matMenuTrigger: MatMenuTrigger;
   
   @ViewChild('categoriesMenu') categoriesMenu : MatMenuTrigger;
@@ -140,6 +144,14 @@ export class ToolbarComponent {
   goToProductsPageByBrand(oem) {
     this.productListService.setBrandIdSelection(oem._id);
     this.router.navigate([`/products/brand/${oem._id}`]);
+  }
+
+  public openMenu(menuTrigger: MatMenuTrigger){
+    menuTrigger.openMenu();
+  }
+
+  public closeMenu(menuTrigger: MatMenuTrigger){
+    menuTrigger.closeMenu();
   }
 
 }

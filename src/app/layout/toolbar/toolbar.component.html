@@ -1,7 +1,13 @@
 <mat-toolbar color="var(--primary)" class="toolbar">
     <button #categoriesMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="aboveMenu">
-        <span class="text-normal">ALL CATEGORIES</span>
-        <i class="fa fa-caret-down" aria-hidden="true"></i>
+        
+        <div>
+            <span class="text-normal">ALL CATEGORIES</span>
+            <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </div>
+            
+        
+        
     </button>
         <!-- <mat-menu #aboveMenu="matMenu" yPosition="below">
         <ng-container *ngFor="let category of categories">
@@ -72,7 +78,7 @@
             </ng-container>
         </mat-menu>
 
-    <button mat-button [matMenuTriggerFor]="beforeMenu">
+    <button mat-button [matMenuTriggerFor]="compareProducts &&  compareProducts.length > 0 ? beforeMenu : null">
         <span class="text-normal">COMPARE PRODUCT</span>
         <i class="fa fa-caret-down" aria-hidden="true"></i>
     </button>
@@ -82,7 +88,7 @@
         </mat-menu>
 
 
-    <button mat-button [matMenuTriggerFor]="afterMenu">
+    <button mat-button [matMenuTriggerFor]="offers &&  offers.length > 0 ? afterMenu : null">
         <span class="text-normal">OFFER</span>
         <i class="fa fa-caret-down" aria-hidden="true"></i>
     </button>
