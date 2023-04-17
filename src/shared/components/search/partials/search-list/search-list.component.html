@@ -5,7 +5,7 @@
             <div class="text-header">
                 <span>Products</span>
             </div>
-            <ng-container *ngFor="let item of (searchResults$ | async)">
+            <ng-container *ngFor="let item of searchResultsProducts">
                 <div (click)="goToProductsPage(item)" class="list-item p-1">
                     <span>{{item.name}}</span>
                 </div>
@@ -17,7 +17,7 @@
             <div class="text-header">
                 <span>Categories</span>
             </div>
-            <ng-container *ngFor="let item of (searchResults$ | async)">
+            <ng-container *ngFor="let item of searchResultsCategoryList">
                 <div (click)="goToProductsPageWithCategorySelection(item.data)" class="list-item p-1">
                     <span>{{item.data.name}}</span>
                     <span>{{item.products.length}} Products</span>
@@ -28,7 +28,7 @@
             <div class="text-header">
                 <span>SubCategories</span>
             </div>
-            <ng-container *ngFor="let item of (searchResults$ | async)">
+            <ng-container *ngFor="let item of searchResultsSubCategoryList">
                 <div (click)="goToProductsPageWithSubCategorySelection(item.data,item.data)" class="list-item p-1">
                     <span>{{item.data.name}}</span>
                     <span>{{item.products.length}} Products</span>

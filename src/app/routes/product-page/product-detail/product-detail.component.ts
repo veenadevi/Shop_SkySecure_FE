@@ -17,6 +17,7 @@ export class ProductDetailComponent implements OnInit{
   public product : any = {};
   public onProductLoad = true;
   public productSubCategoryId : String;
+  public similarProducts : Array<any> = [];
 
   private getProductDetails(productId: string): void {
     this.onProductLoad = false;
@@ -31,9 +32,7 @@ export class ProductDetailComponent implements OnInit{
           featureList = response.productVariants[response.productVariants.length -1].featureList.slice(0,5);
           this.productSubCategoryId = response.productVariants[0].featureList[0].subCategoryId;
         }
-        if(this.productSubCategoryId) {
-          this.getSimilerProducts(this.productSubCategoryId);
-        }
+        this.similarProducts = response.productBundles;
         this.product = { ...response.products , featureList : featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants } ;
         this.onProductLoad = true;
       })

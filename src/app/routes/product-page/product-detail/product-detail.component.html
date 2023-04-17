@@ -95,10 +95,10 @@
             </div>
         </div>
     </div>
-    <div class="pd-similar-products" *ngIf="products.length != 0">
+    <div class="pd-similar-products" *ngIf="similarProducts.length != 0">
         <h4 class="heading-text">Similer products</h4>
         <div class="similar-products-cards">
-            <app-product [products]="products"></app-product>
+            <app-similar-products [similarProducts]="similarProducts"></app-similar-products>
         </div>
     </div>
 </div>

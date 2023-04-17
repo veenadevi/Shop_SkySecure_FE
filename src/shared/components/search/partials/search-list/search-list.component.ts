@@ -30,7 +30,10 @@ export class SearchListComponent {
   public searchResults$ = this.searchResultStore.searchResults$
   .pipe(
     map(data => {
-      data = data?.categoryList ?  data?.categoryList : ( data?.subCategoryList ? data?.subCategoryList : data?.products )
+      this.searchResultsProducts = data?.products || [];
+      this.searchResultsCategoryList = data?.categoryList || [];
+      this.searchResultsSubCategoryList = data?.subCategoryList || [];
+      this.searchResultsProductBundleList = data?.productBundles || [];
       return data;
     }
     )
