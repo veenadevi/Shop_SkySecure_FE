@@ -6,13 +6,15 @@ import { SharedModule } from 'src/shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuotationHistoryComponent } from './partials/quotation-history/quotation-history.component';
 import { ROUTED_COMPONENTS, UserProfileRoutingModule } from './user-profile-routing.module';
+import { ProfileViewComponent } from './partials/profile-view/profile-view.component';
 
 
 
 @NgModule({
   declarations: [
     ROUTED_COMPONENTS,
-    QuotationHistoryComponent
+    QuotationHistoryComponent,
+    ProfileViewComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { ROUTED_COMPONENTS, UserProfileRoutingModule } from './user-profile-rout
   ],
   exports: [
     RouterModule,
-    SharedModule
+    SharedModule,
+    ProfileViewComponent
   ]
 })
 export class UserProfileModule { }

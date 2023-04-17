@@ -91,6 +91,11 @@
                        
                         <mat-menu #aboveMenu="matMenu" yPosition="below" xPosition="after">
                 
+                            <button mat-menu-item [routerLink]="['user-profile/profile-view']">
+                                <div class="menu-width">
+                                    User Profile
+                                </div>
+                            </button>
                             <button mat-menu-item [routerLink]="['user-profile/quotation-history']">
                                 <div class="menu-width">
                                     Quotation History

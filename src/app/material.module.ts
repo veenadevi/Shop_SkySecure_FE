@@ -20,6 +20,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgxSpinnerModule } from "ngx-spinner";
 
+import { MatStepperModule } from '@angular/material/stepper';
+
+import { MatInputModule } from '@angular/material/input';
+
 
 
 
@@ -93,6 +97,14 @@ import { NgChartsModule } from 'ng2-charts';
     MatProgressBarModule,
     NgxSpinnerModule,
 
+    MatToolbarModule, 
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule ,
+    MatStepperModule,
+    MatInputModule,
+
 
 
     NgChartsModule
@@ -113,6 +125,13 @@ import { NgChartsModule } from 'ng2-charts';
     MatCheckboxModule,
     MatProgressBarModule,
     NgxSpinnerModule,
+    MatToolbarModule, 
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule ,
+    MatStepperModule,
+    MatInputModule,
 
 
 

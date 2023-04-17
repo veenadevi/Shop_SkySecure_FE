@@ -1,0 +1,205 @@
+<!-- <div class="profile-view-container">
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-danger">
+                            <h4 class="card-title">Profile</h4>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                      <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Company (disabled)" disabled>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Username">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Email address" type="email">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Fist Name" type="text">
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Last Name" type="text">
+                                      </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Adress" type="text">
+                                      </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="City" type="text">
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Country" type="text">
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Postal Code" type="text">
+                                      </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                      <label>About Me</label>
+                                      <mat-form-field class="example-full-width">
+                                         <textarea matInput placeholder="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."></textarea>
+                                       </mat-form-field>
+                                        <div class="form-group">
+      
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                                <textarea class="form-control" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-profile">
+                        <div class="card-avatar">
+                            <a href="javascript:void(0)">
+                                <img class="img" src="./assets/img/faces/marc.jpg" />
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                            <h4 class="card-title">Alec Thompson</h4>
+                            <p class="card-description">
+                                Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                            </p>
+                            <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+</div> -->
+
+<div class="profile-view-container">
+    <div class="box-body">
+        <form novalidate #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label>First name</label>
+                    <input type="text" class="form-control" name="firstName" ngModel #firstNameRef="ngModel" required [class.ctrl-error] = "firstNameRef.touched &&
+    firstNameRef?.errors?.required" minlength="3"> 
+            <div *ngIf="firstNameRef.touched &&
+    firstNameRef?.errors?.required" class="error-message">
+    The first name is required.
+    </div>
+    <div class="error-message" *ngIf="firstNameRef.touched &&
+    firstNameRef?.errors?.minlength">
+    You should enter minimum
+    {{firstNameRef?.errors?.minlength.requiredLength}}
+    characters into first name, but you entered only
+    {{firstNameRef?.errors?.minlength.actualLength}} character(s).
+    </div>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Last name</label>
+                    <input type="text" class="form-control" name="lastName" ngModel #lastNameRef="ngModel">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" name="email" ngModel #emailRef="ngModel">
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label>Enter Password</label>
+                    <input type="password" class="form-control" name="password" ngModel #passwordRef="ngModel">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" class="form-control" name="confirmPassword" ngModel #confirmPassRef="ngModel">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label>Street</label>
+                    <input type="text" class="form-control" name="street" ngModel #streetRef="ngModel">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control" name="city" ngModel #cityRef="ngModel">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label>State</label>
+                    <input type="text" class="form-control" name="state" ngModel #stateRef="ngModel">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>Zip</label>
+                    <input type="text" class="form-control" name="zip" ngModel #zipRef="ngModel">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Country</label>
+                <select class="form-control" name="country" ngModel="" #countryRef="ngModel">
+    <option value="IN">India</option>
+    <option value="US">United States of America</option>
+    </select>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label>Gender</label>
+                    <div>
+                        <label class="check-label">
+    <input type="radio" name="gender" value="Male"
+    ngModel #genderRef="ngModel"><i class="blue"></i> Male
+    </label>
+                        <div class="spacer"></div>
+                        <label class="check-label">
+    <input type="radio" name="gender" value="Female"
+    ngModel #genderRef="ngModel"><i class="blue"></i> Female
+    </label>
+                        <div class="spacer"></div>
+                        <label class="check-label">
+    <input type="radio" name="gender" value="Other"
+    ngModel #genderRef="ngModel"><i class="blue"></i> Other
+    </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="check-label">
+    <input type="checkbox" name="agreement" value=""
+    ngModel #agreementRef="ngModel"><i class="blue"></i>
+    I agree to the Terms of Service
+    </label>
+            </div>
+            <button type="submit" class="btn btn-secondary" [disabled]="formRef.invalid">Submit</button>
+        </form>
+    </div>
+</div>
