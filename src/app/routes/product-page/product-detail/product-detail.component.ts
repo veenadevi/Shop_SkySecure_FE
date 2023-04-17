@@ -47,7 +47,7 @@ export class ProductDetailComponent implements OnInit{
           return {
             name: data.name,
             solutionLink: data.name,
-            imageUrl: 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg',
+            imageUrl: 'https://csg1003200209655332.blob.core.windows.net/images/1681726563-Microsofticon.png',
             description: data.description
           }
         })

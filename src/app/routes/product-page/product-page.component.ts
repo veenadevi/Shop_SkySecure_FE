@@ -15,7 +15,7 @@ import { ProductListService } from 'src/shared/services/product-list-page.servic
 export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   products = []
-  staticProductimageUrl = 'https://desktoptowork.com/wp-content/uploads/2021/11/Microsoft-Teams-1-1204x800.jpeg';
+  staticProductimageUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1681726563-Microsofticon.png';
   selectedItems : Array<any> = [];
   selectedBrandItems : Array<any> = [];
   selectedCategoryItems : Array<any> = [];
