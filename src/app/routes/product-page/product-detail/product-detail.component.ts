@@ -47,7 +47,7 @@ export class ProductDetailComponent implements OnInit{
           return {
             name: data.name,
             solutionLink: data.name,
-            imageUrl: 'https://csg1003200209655332.blob.core.windows.net/images/1681726563-Microsofticon.png',
+            imageUrl: 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png',
             description: data.description
           }
         })

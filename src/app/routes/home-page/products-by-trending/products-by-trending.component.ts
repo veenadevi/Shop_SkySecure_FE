@@ -15,7 +15,7 @@ export class ProductsByTrendingComponent {
   private subscriptions : Subscription[] = [];
   public trendingProductsList : any[] = [];
 
-  public staticProductimageUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1681726563-Microsofticon.png';
+  public staticProductimageUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png';
 
   constructor(
     private metadataStore : MetadataStore,
