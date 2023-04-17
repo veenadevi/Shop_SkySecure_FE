@@ -106,7 +106,7 @@
   } */
   #cards_landscape_wrap-2 .card-flyer .text-box .text-container{
     padding: 20px 18px 0px 18px;
-    min-height: 118px;
+    /* min-height: 118px; */
   }
   #cards_landscape_wrap-2 .card-flyer{
     background: #FFFFFF;
@@ -171,8 +171,12 @@
   .title-container {
       display: flex;
       justify-content: space-between;
+      min-height: 55px;
   }
 
+  .description-container{
+    min-height: 50px;
+  }
   .title-header{
     /* min-height: 192px !important; */
   }
@@ -186,8 +190,8 @@
     -webkit-box-orient: vertical;
   }
 
-  .solution-link:hover {
-    
+  .solution-link {
+    min-height: 25px;
   }
 
   .product-actions {
