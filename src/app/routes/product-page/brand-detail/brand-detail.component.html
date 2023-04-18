@@ -1,1 +1,114 @@
-<p>brand-detail works!</p>
+
+<div class="brand-details-container">
+    <div class="pd-header" *ngIf="onPageLoad">
+        <div class="pd-header-title">
+            <h3>{{bundleSku.name}}</h3>
+            <div class="pd-header-reviews">
+                <mat-icon class="review-icon">star</mat-icon>
+                <mat-icon class="review-icon">star</mat-icon>
+                <mat-icon class="review-icon">star</mat-icon>
+                <mat-icon class="review-icon">star</mat-icon>
+                <mat-icon class="review-icon">star</mat-icon>
+            </div>
+            <div class="pd-header-desc">
+                <p>{{bundleSku.description}}</p>
+            </div>
+            <div class="pd-header-actions">
+                <button class="btn request-btn" (click)="requestQuote(bundleSku)">Request quote</button>
+                <button class="btn compare-btn">Try free trail</button>
+            </div>
+        </div>
+        <div class="pd-header-right">
+            <img class="mat-card-img pd-header-right-img" mat-card-image src="https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png" alt="Photo of test title" />
+            <div class="pd-header-actions">
+                <button class="btn compare-btn add-to-compare-btn">Add to compare</button>
+            </div>
+        </div>
+    </div>
+    <div class="pd-features">
+        <h4 class="heading-text">{{bundleSku.name}} product details</h4>
+        <div class="card-pdf">
+          <div class="card-pdf-left">
+          <h5>{{bundleSku.name}} Features</h5>
+          <ng-container *ngIf="bundleSku.featureList">
+            <ul class="card-list-pdf" *ngFor="let feature of bundleSku.featureList" >
+                <li>{{feature.name}}</li>
+            </ul>
+          </ng-container>
+        </div>
+        <div class="card-pdf-right">
+            <div class="pdf-right-item">
+                <mat-icon class="price-item features-item">input</mat-icon>
+                <h6 class="item-title">WEBSITE <br><span class="item-value">Microsft 365</span></h6>
+            </div>
+            <div class="pdf-right-item">
+                <mat-icon class="price-item features-item">input</mat-icon>
+                <h6 class="item-title">LANGUAGES<br><span class="item-value">English , Spanish </span></h6>
+            </div>
+            <div class="pdf-right-item">
+                <mat-icon class="price-item features-item">input</mat-icon>
+                <h6 class="item-title">DISCUSSION<br><span class="item-value">Microsft 365</span></h6>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="pd-pricing">
+        <h4 class="heading-text">{{product.name}} pricing</h4>
+        <div class="pricing-cards">
+            <div class="card" *ngFor="let productVariant of product.productVariants">
+                <div class="card-header">
+                    <div class="price-header"><h3>{{productVariant.name}}</h3></div>
+                    <div class="price-details" *ngIf="productVariant.priceList.length != 0">
+                        <p class="price">Rs {{productVariant.priceList[0].price}}</p>
+                        <p class="price-cost">{{productVariant.priceList[0].priceType}}</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul *ngFor="let productVariantfeatureList of productVariant.featureList">
+                        <li><mat-icon class="price-item">check_circle</mat-icon><p>{{productVariantfeatureList.name}}</p></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pd-pricing-footer">
+                <h5>Request a exclusive deal for your company</h5>
+                <button class="btn request-btn" (click)="requestQuote(product)">Request quote</button>
+            </div>
+        </div>
+    </div> -->
+
+
+    <!-- <div class="pd-images">
+        <h4 class="heading-text">Official screenshots</h4>
+        <div class="pd-images-items">
+            <div class="imgae-item">
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr87KBGwSmwLUIZRsEY5Im5ZMyt9ILgIHn9zUTBDS9rZfPZwWZ-UCsCfUER4MG5dm9TwI&usqp=CAU" alt="Photo of test title" />
+            </div>
+            <div class="imgae-item">
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr87KBGwSmwLUIZRsEY5Im5ZMyt9ILgIHn9zUTBDS9rZfPZwWZ-UCsCfUER4MG5dm9TwI&usqp=CAU" alt="Photo of test title" />
+            </div>
+            <div class="imgae-item">
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://support.content.office.net/en-us/media/f1d13c33-fe72-45dc-9dc3-6c27de9fec90.png" alt="Photo of test title" />
+            </div>
+            <div class="imgae-item">
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://support.content.office.net/en-us/media/f1d13c33-fe72-45dc-9dc3-6c27de9fec90.png" alt="Photo of test title" />
+            </div>
+            <div class="imgae-item">
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://www.pure-ip.com/hs-fs/hubfs/Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png?width=2283&name=Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png" alt="Photo of test title" />
+            </div>
+            <div class="imgae-item">
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://www.pure-ip.com/hs-fs/hubfs/Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png?width=2283&name=Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png" alt="Photo of test title" />
+            </div>
+        </div>
+    </div> -->
+
+
+    <!-- <div class="pd-similar-products" *ngIf="similarProducts.length != 0">
+        <h4 class="heading-text">Similer products</h4>
+        <div class="similar-products-cards">
+            <app-similar-products [similarProducts]="similarProducts"></app-similar-products>
+        </div>
+    </div> -->
+</div>
+<ngx-spinner size="medium" type="ball-atom"></ngx-spinner>

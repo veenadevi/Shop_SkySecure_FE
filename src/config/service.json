@@ -22,6 +22,7 @@
         "getProductsByBrandIds": "api/products/oems",
         "getTrendingProducts" : "api/products/trending",
         "getProductsByFilter": "api/products/filter",
+        "getSingleBrandDetails" : "api/bundle/",
 
         
         "userCart" : "api/user-cart",

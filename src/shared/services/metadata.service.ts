@@ -21,6 +21,7 @@ export class MetadataService {
   private fetchProductsByBrandIds : string;
   private fetchTrendingProductsUrl : string
   private getSingleProduct : string;
+  private fetchSignleBrandDetailsUrl : string;
   private fetchProductsByFilter : string;
 
   constructor(
@@ -36,6 +37,7 @@ export class MetadataService {
     this.fetchProductsByBrandIds = AppService.appUrl.getProductsByBrandIds;
     this.fetchTrendingProductsUrl = AppService.appUrl.getTrendingProducts;
     this.fetchProductsByFilter = AppService.appUrl.getProductsByFilter;
+    this.fetchSignleBrandDetailsUrl = AppService.appUrl.getSingleBrandDetails;
     //this.quotaDetailsUri = this.ouxConfigSvc.getAppConfigValue('apiUri').e2eQuotaACV;
   }
 
@@ -207,6 +209,32 @@ export class MetadataService {
 
     return request$;
   }
+
+  public fetchSingleBrandDetails(id: string) : Observable<any> {
+    //id = "63eb236c53c21de2f6841bca";
+    let url = this.baseUrl+ this.fetchSignleBrandDetailsUrl + String(id);
+
+    //let url = "http://localhost:8002/api/bundle/63eb236c53c21de2f6841bca";
+    //let options = this.getOptions();
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+  
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+
+    return request$;
+  }
+
 
   public fetchTrendingProducts(): Observable<any> {
 

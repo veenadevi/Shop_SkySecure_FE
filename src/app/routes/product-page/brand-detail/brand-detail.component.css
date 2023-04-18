@@ -1,0 +1,308 @@
+.brand-details-container {
+    display: flex;
+    padding: 1%;
+    margin: 1%;
+    flex-direction: column;
+}
+
+.pd-header {
+    display: flex;
+    justify-content: space-between;
+    background:#081539;
+    padding: 2%;
+    border-radius: 1rem;
+    color: #ffff;
+}
+
+.pd-header-title {
+    min-width: 500px;
+}
+.pd-header-title h3 {
+color: #010209;
+font-weight: 500;
+line-height: 2rem;
+font-size: 1.5rem;
+color: #ffff;
+}
+
+
+
+.review-icon {
+    color: orange;
+    padding-top: 5px;
+    line-height:2rem;
+    overflow: visible;
+}
+
+.pd-header-actions {
+    padding: 2% 0;
+}
+
+.compare-btn {
+    background: #F6EBEC;
+    border: 1px solid #A9383D;
+    border-radius: 8px;
+    text-align: center;
+    color: #A9383D;
+    padding:0.5% 3%;
+}
+
+
+.request-btn {
+    background: linear-gradient(90deg, #A9383D 35.42%, #D58583 100%);
+    border-radius: 8px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    padding:0.5% 3%;
+    margin-right: 3%;
+}
+
+.pd-header-desc {
+    width: 60%;
+}
+
+.pd-header-right-img {
+    height: 23vh;
+    width: 13vw;
+    border-radius: 1rem;
+}
+
+.pd-header-right {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.add-to-compare-btn {
+    margin-top: 7%;
+    padding:0.5% 5%;
+    color: #ffff;
+    background-color: transparent;
+    border: transparent;
+}
+
+
+
+
+* {
+    box-sizing: border-box;
+  }
+  
+  .pricing-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    padding:2%;
+  }
+  
+  .card {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    width: 30%;
+    margin-bottom: 30px;
+  }
+  
+  .card-header {
+    background-color: #FFFFFF;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .card-body {
+    padding: 10px;
+  }
+  
+  .price {
+    font-size: 1.8rem;
+    margin-top: 5px;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    padding: 2px 0;
+    display: flex;
+  }
+  
+  .btn {
+    border: none;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .card {
+      width: 45%;
+    }
+  }
+  
+  .card-header {
+    display: flex;
+    flex-direction: row;
+    color: #010209;
+    justify-content: space-between;
+    border: 1px solid #E9E9E9;
+  }
+
+  .card-header > h3 {
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 2rem;
+    color: #1D1F34;
+  }
+
+  .price-details {
+    color: #010209;
+    font-weight: 500;
+    padding:0 1%;
+    background: #EBF8DE;
+    border-radius: 8px;
+  }
+
+  .price-details  p {
+    font-size: 1rem;
+  }
+
+  .price-header {
+    width: 50%;
+    text-align: left;
+  }
+
+
+  .price-cost {
+    font-size: 0.8rem !important;
+    color: #7E916C;
+  }
+  .price-item {
+    color: #222565;
+    padding-right: 2rem;
+  }
+
+  .pd-pricing-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .heading-text {
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    letter-spacing: 0.02em;
+    color: #0B0C22;
+    margin:2% 0%;
+  }
+
+  /*------FEATURES------*/
+
+  .card-pdf {
+    border-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    width: 400px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .card-header-pdf {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .card-header-pdf h5 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .card-list-pdf {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .card-list-pdf li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    color: #36384A;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 21px;
+  }
+  
+  .card-list-pdf li:before {
+    content: "\2022";
+    color: black;
+    font-weight: bold;
+    display: inline-block;
+    width: 2em;
+    margin-left: -1em;
+    position: absolute;
+  }
+
+  .card-pdf-right {
+    width: 30vw;
+    background: #F7F7FF;
+    border-radius: 8px;
+  }
+  
+  .pdf-right-item {
+    display: flex;
+    padding: 2%;
+  }
+
+  .price-item {
+    font-size: 1.3rem;
+  }
+
+  .features-item {
+    background: linear-gradient(90deg, #EBECF6 0%, #AEB2DC 100%);
+    margin:2% 4%;
+  }
+
+  .item-value {
+    color: #010209;
+  }
+
+
+  /*--IMAGES---*/
+
+  .pd-images-items {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    padding:2%;
+  }
+  .imgae-item > img {
+    width:30vw;
+    height:40vh;
+    margin:2%;
+  }
+
+  .similar-products-cards {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    padding:2%;
+  }
