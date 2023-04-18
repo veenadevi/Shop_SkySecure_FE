@@ -1,8 +1,11 @@
 
 <div class="brand-details-container">
-    <div class="pd-header" *ngIf="onPageLoad">
+<ng-container *ngIf="onPageLoad">
+
+
+    <div class="pd-header" >
         <div class="pd-header-title">
-            <h3>{{bundleSku.name}}</h3>
+            <h3>{{productFamily.name}}</h3>
             <div class="pd-header-reviews">
                 <mat-icon class="review-icon">star</mat-icon>
                 <mat-icon class="review-icon">star</mat-icon>
@@ -11,10 +14,10 @@
                 <mat-icon class="review-icon">star</mat-icon>
             </div>
             <div class="pd-header-desc">
-                <p>{{bundleSku.description}}</p>
+                <p>{{productFamily.description}}</p>
             </div>
             <div class="pd-header-actions">
-                <button class="btn request-btn" (click)="requestQuote(bundleSku)">Request quote</button>
+                <button class="btn request-btn" (click)="requestQuote(productFamily)">Request quote</button>
                 <button class="btn compare-btn">Try free trail</button>
             </div>
         </div>
@@ -26,12 +29,12 @@
         </div>
     </div>
     <div class="pd-features">
-        <h4 class="heading-text">{{bundleSku.name}} product details</h4>
+        <h4 class="heading-text">{{productFamily.name}} product details</h4>
         <div class="card-pdf">
           <div class="card-pdf-left">
-          <h5>{{bundleSku.name}} Features</h5>
-          <ng-container *ngIf="bundleSku.featureList">
-            <ul class="card-list-pdf" *ngFor="let feature of bundleSku.featureList" >
+          <h5>{{productFamily.name}} Features</h5>
+          <ng-container *ngIf="features">
+            <ul class="card-list-pdf" *ngFor="let feature of features" >
                 <li>{{feature.name}}</li>
             </ul>
           </ng-container>
@@ -50,6 +53,39 @@
                 <h6 class="item-title">DISCUSSION<br><span class="item-value">Microsft 365</span></h6>
             </div>
         </div>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="product-family-container">
+            <div class="family-product" href="">
+                <card-flyer [product]="productFamily"></card-flyer>
+            </div>
+
+            <div class="math-symbol">
+                <span>
+                    <i class='fas fa-equals' style='font-size:24px' aria-hidden="true"></i>
+                </span>
+            </div>
+            <ng-container *ngFor="let product of products; let last = last">
+                <div class="family-product" href="">
+                    <card-flyer [product]="product"></card-flyer>
+                </div>
+                <div class="math-symbol" *ngIf="!last">
+                    <span>
+                        <i class="fa fa-plus" style='font-size:24px' aria-hidden="true"></i>
+                    </span>
+                </div>
+            </ng-container>
+            <!-- <div class="row">
+                <ng-container *ngFor="let product of productList">
+                    <div style="margin-bottom: 40px;">
+                        <div href="">
+                            <card-flyer [product]="product" [routePath]="routePath"></card-flyer>
+                        </div>
+                    </div>
+                </ng-container>
+            </div> -->
         </div>
     </div>
 
@@ -110,5 +146,6 @@
             <app-similar-products [similarProducts]="similarProducts"></app-similar-products>
         </div>
     </div> -->
+</ng-container>
 </div>
 <ngx-spinner size="medium" type="ball-atom"></ngx-spinner>

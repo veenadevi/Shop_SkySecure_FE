@@ -21,7 +21,15 @@ export class BrandDetailComponent implements OnInit{
 
   public subscriptions : Subscription[] = [];
 
-  public bundleSku : any;
+  // public bundleSku : any;
+
+  // public productFamilylist : any[] = [];
+
+  public productFamily : any;
+
+  public products : any[] = [];
+
+  public features : any[] = [];
 
 
 
@@ -34,13 +42,17 @@ export class BrandDetailComponent implements OnInit{
 
   public getBrandDetails(id){
     console.log("**** Id ,", id);
-    id = '63eb236c53c21de2f6841bca';
+    id = '6412ac15bdb764f8d6a252a5';
     this.onPageLoad = false;
     this.subscriptions.push(
        this.metaDataSvc.fetchSingleBrandDetails(id).subscribe( response => {
 
         console.log(")))))))))) Respo ", response);
-        this.bundleSku = response.bundleSku;
+        this.productFamily = response.productFamily;
+        this.products = response.products;
+        this.features = response.features.slice(0,5);
+        //this.bundleSku = response.bundleSku;
+        //this.productFamilylist = response.productFamilylist;
 
         /*let featureList = [];
         if(response.productFeatureList?.length > 0) {

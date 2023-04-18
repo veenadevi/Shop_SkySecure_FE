@@ -306,3 +306,19 @@ color: #ffff;
     border-radius: 12px;
     padding:2%;
   }
+
+
+ .product-family-container {
+    padding: 20px;
+    display: flex;
+    column-gap: 2%;
+ }
+
+  .family-product{
+    width:25%;
+  }
+
+  .math-symbol {
+    display: flex;
+    align-items: center;
+  }
