@@ -132,14 +132,14 @@
     margin-top: 10px;
     margin-bottom: 0px;
     padding-bottom: 0px; 
-    font-size: 15px;
+    font-size: 14px;
     letter-spacing: 1px;
     color: var(--text-dark);
     /* min-height: 66px; */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; 
+    -webkit-line-clamp: 3; 
     -webkit-box-orient: vertical;
   }
   #cards_landscape_wrap-2 .card-flyer .text-box h4{
@@ -175,7 +175,7 @@
   }
 
   .description-container{
-    min-height: 50px;
+    min-height: 63px;
   }
   .title-header{
     /* min-height: 192px !important; */
