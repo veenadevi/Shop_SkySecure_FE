@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { ProductsDetails } from 'src/shared/models/interface/partials/products-details';
 import { ProductListService } from 'src/shared/services/product-list-page.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
@@ -21,6 +21,8 @@ export class SearchListComponent {
   searchResultsSubCategoryList : any[] = [];
   searchResultsProductBundleList : any[] = [];
 
+  private subscriptions : Subscription[] = [];
+
   constructor(
     private searchResultStore : SearchResultStore,
     private router : Router,
@@ -30,6 +32,7 @@ export class SearchListComponent {
   public searchResults$ = this.searchResultStore.searchResults$
   .pipe(
     map(data => {
+      console.log("******* Called when chanegd", data);
       this.searchResultsProducts = data?.products || [];
       this.searchResultsCategoryList = data?.categoryList || [];
       this.searchResultsSubCategoryList = data?.subCategoryList || [];
@@ -40,11 +43,13 @@ export class SearchListComponent {
   )
 
   public ngOnInit() : void{
-    console.log("Search Results in last page ", this.searchResults);
-    this.searchResultsProducts = this.searchResults?.products || [];
-    this.searchResultsCategoryList = this.searchResults?.categoryList || [];
-    this.searchResultsSubCategoryList = this.searchResults?.subCategoryList || [];
-    this.searchResultsProductBundleList = this.searchResults?.productBundles || [];
+
+    this.subscriptions.push(this.searchResults$.subscribe());
+    // console.log("Search Results in last page ", this.searchResults);
+    // this.searchResultsProducts = this.searchResults?.products || [];
+    // this.searchResultsCategoryList = this.searchResults?.categoryList || [];
+    // this.searchResultsSubCategoryList = this.searchResults?.subCategoryList || [];
+    // this.searchResultsProductBundleList = this.searchResults?.productBundles || [];
   }
 
   public goToProductsPage(item){
