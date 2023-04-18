@@ -13,13 +13,15 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MultiSelectDropdownComponent } from './multi-select-dropdown/multi-select-dropdown.component';
 import { FormsModule } from '@angular/forms';
 import { SimilarProductsComponent } from './similar-products/similar-products.component';
+import { BrandDetailComponent } from './brand-detail/brand-detail.component';
 @NgModule({
   declarations: [
     ROUTED_COMPONENTS,
     ProductComponent,
     ProductDetailComponent,
     MultiSelectDropdownComponent,
-    SimilarProductsComponent
+    SimilarProductsComponent,
+    BrandDetailComponent
   ],
   imports: [
     CommonModule,

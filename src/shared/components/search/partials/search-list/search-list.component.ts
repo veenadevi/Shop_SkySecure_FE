@@ -66,8 +66,10 @@ export class SearchListComponent {
     this.router.navigate([`/products/sub-category/${category._id}-${subCategory._id}`], { state: { category , subCategory} });
   }
 
-  public goToProductBundle() {
-    
+  public goToProductBundle(item) {
+    console.log("***** ^^ Item ", item);
+    //this.router.navigate([`/products/category/${category._id}`]);
+    this.router.navigate(['/products/brand-detail', item._id]);
   }
 
 }
