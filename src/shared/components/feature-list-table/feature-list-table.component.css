@@ -97,7 +97,7 @@ body {
     background-color: #FFFFFF;
     text-align: center;
     padding: 20px;
-    width:250px;
+    width:300px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
   }
   
@@ -134,13 +134,21 @@ body {
   }
 
 
+  .align-center{
+    text-align: center !important;
+  }
 
 
 
   .feature-header{
-    width:300px !important
+    width:500px !important
   }
 
+
+  .image-icon{
+    width:25px;
+    height: 25px;
+  }
 
   /* Table from MS */
 

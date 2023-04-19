@@ -29,7 +29,7 @@
         <div class="card-pdf">
           <div class="card-pdf-left">
           <h5>{{product.name}} Features</h5>
-          <ul class="card-list-pdf" *ngFor="let feature of product.featureList" >
+          <ul class="card-list-pdf" *ngFor="let feature of (product.featureList.slice(0,3))" >
             <li>{{feature.name}}</li>
           </ul>
         </div>
@@ -50,11 +50,11 @@
         </div>
     </div>
 
-    <!-- <ng-container *ngIf="product && product.productVariants">
+    <ng-container *ngIf="product && product.productVariants">
         <feature-list-table [product]="product"></feature-list-table>
-    </ng-container> -->
+    </ng-container>
     
-    <div class="pd-pricing">
+    <!-- <div class="pd-pricing">
         <h4 class="heading-text">{{product.name}} pricing</h4>
         <div class="pricing-cards">
             <div class="card" *ngFor="let productVariant of product.productVariants">
@@ -69,6 +69,11 @@
                     <ul *ngFor="let productVariantfeatureList of productVariant.featureList">
                         <li><mat-icon class="price-item">check_circle</mat-icon><p>{{productVariantfeatureList.name}}</p></li>
                     </ul>
+                    <ul *ngFor="let productVariantfeatureList of product.featureList">
+                        <li><mat-icon class="price-item">check_circle</mat-icon><p>{{productVariantfeatureList.name}}</p></li>
+                    </ul>
+                    
+                    
                 </div>
             </div>
             <div class="pd-pricing-footer">
@@ -76,7 +81,7 @@
                 <button class="btn request-btn" (click)="requestQuote(product)">Request quote</button>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="pd-images">
         <h4 class="heading-text">Official screenshots</h4>
         <div class="pd-images-items">

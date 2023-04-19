@@ -12,15 +12,38 @@ export class FeatureListTableComponent implements OnInit{
 
   public productVarients : any[] = [];
 
+  public featureList : any[] = [];
+
   ngOnInit(): void {
     console.log("***** This ", this.product);
 
-    this.setProductVarients(this.product.productVariants)
+    this.setProductVarients(this.product);
+    this.setFeatureList(this.product.featureList);
   }
 
-  productVariants
-  public setProductVarients(productVarients){
-    this.productVariants = productVarients;
+  public setProductVarients(product){
+    this.productVarients = product.productVariants;
+
+    let featureList = product.featureList;
+    let featureListByProductVariants = product.featureListByProductVariants;
+
+    for(let i=0;i<this.productVarients.length;i++){
+      this.productVarients[i]['featureListArray'] = [];
+      for(let j=0;j<featureListByProductVariants.length;j++){
+        if(featureListByProductVariants[j].productVariantId === this.productVarients[i]._id){
+          this.productVarients[i].featureListArray.push(featureListByProductVariants[j]._id);
+        }
+
+      }
+    }
+
+    console.log("****++++++++ After calc ", this.productVarients);
+    this.productVarients
+    
+  }
+
+  public setFeatureList(featureList){
+    this.featureList = featureList;
   }
   
 

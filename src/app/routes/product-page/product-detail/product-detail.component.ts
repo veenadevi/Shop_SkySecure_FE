@@ -24,16 +24,22 @@ export class ProductDetailComponent implements OnInit{
     this.subscriptions.push(
        this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( response => {
         let featureList = [];
-        if(response.productFeatureList?.length > 0) {
-          featureList = response.productFeatureList;
-          this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
+        // if(response.productFeatureList?.length > 0) {
+        //   //featureList = response.productFeatureList;
+        //   featureList = response.featureList;
+        //   this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
+        // }
+        if(response.featureList?.length > 0) {
+          //featureList = response.productFeatureList;
+          featureList = response.featureList.splice(0,3);
+          //this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
         }
         else if(response.productVariants.length> 0 ){
           featureList = response.productVariants[response.productVariants.length -1].featureList.slice(0,5);
           //this.productSubCategoryId = response.productVariants[0].featureList[0].subCategoryId;
         }
         this.similarProducts = response.productBundles;
-        this.product = { ...response.products , featureList : featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants } ;
+        this.product = { ...response.products , featureList : response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants : response.featureListByProductVariants } ;
         this.onProductLoad = true;
       })
     );
