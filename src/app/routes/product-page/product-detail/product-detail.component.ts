@@ -30,7 +30,7 @@ export class ProductDetailComponent implements OnInit{
         }
         else if(response.productVariants.length> 0 ){
           featureList = response.productVariants[response.productVariants.length -1].featureList.slice(0,5);
-          this.productSubCategoryId = response.productVariants[0].featureList[0].subCategoryId;
+          //this.productSubCategoryId = response.productVariants[0].featureList[0].subCategoryId;
         }
         this.similarProducts = response.productBundles;
         this.product = { ...response.products , featureList : featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants } ;

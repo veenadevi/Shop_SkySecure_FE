@@ -1,0 +1,147 @@
+.table-container{
+    padding: 10px;
+}
+
+
+
+
+/* ----------------------------- */
+.table{
+    table-layout: fixed;
+    width: auto !important;
+}
+.table-holder{
+    /* width:100%; */
+}
+
+.table th {
+    /* width:90px; */
+}
+
+td{
+    width: 60px
+}
+
+.table td {
+    /* width:90px; */
+}
+
+.table-fixed tbody {
+    height: 300px;
+    overflow-y: auto;
+    /* width: 100%; */
+}
+
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+    display: block;
+
+}
+
+.table-fixed tbody td,
+.table-fixed tbody th,
+.table-fixed thead > tr > th {
+    float: left;
+    position: relative;
+
+    /* &::after {
+        content: '';
+        clear: both;
+        display: block;
+    } */
+}
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+
+body {
+    background: #74ebd5;
+    background: -webkit-linear-gradient(to right, #74ebd5, #ACB6E5);
+    background: linear-gradient(to right, #74ebd5, #ACB6E5);
+    min-height: 100vh;
+
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Card Styles ------------ */
+.pricing-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    padding:2%;
+  }
+
+  .card {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    /* width: 30%; */
+    margin-bottom: 30px;
+  }
+  
+  .card-header {
+    background-color: #FFFFFF;
+    text-align: center;
+    padding: 20px;
+    width:250px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+  }
+  
+  .card-body {
+    padding: 10px;
+  }
+  
+  .price {
+    font-size: 1.8rem;
+    margin-top: 5px;
+  }
+
+  .price-details {
+    color: #010209;
+    font-weight: 500;
+    padding:0 1%;
+    background: #EBF8DE;
+    border-radius: 8px;
+  }
+
+  .price-details {
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+
+  .price-header {
+    text-align: center;
+    font-size: 1 rem;
+  }
+
+  .price-cost {
+    font-size: 0.8rem !important;
+    color: #7E916C;
+  }
+
+
+
+
+
+  .feature-header{
+    width:300px !important
+  }
+
+
+  /* Table from MS */
+
+ 

@@ -10,6 +10,7 @@ import { RecentlySearchedComponent } from './components/search/partials/recently
 import { SearchListComponent } from './components/search/partials/search-list/search-list.component';
 import { ProductCardItemComponent } from './components/product-card-item/product-card-item.component';
 import { CardFlyerComponent } from './components/card-flyer/card-flyer.component';
+import { FeatureListTableComponent } from './components/feature-list-table/feature-list-table.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { CardFlyerComponent } from './components/card-flyer/card-flyer.component
     RecentlySearchedComponent,
     SearchListComponent,
     ProductCardItemComponent,
-    CardFlyerComponent
+    CardFlyerComponent,
+    FeatureListTableComponent
   ],
 
   providers: [
@@ -48,7 +50,8 @@ import { CardFlyerComponent } from './components/card-flyer/card-flyer.component
     TrendingProductsComponent,
     RecentlySearchedComponent,
     ProductCardItemComponent,
-    CardFlyerComponent
+    CardFlyerComponent,
+    FeatureListTableComponent
   ],
   
 

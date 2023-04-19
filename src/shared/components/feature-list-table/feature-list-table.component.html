@@ -1,0 +1,50 @@
+<div class="table-container">
+
+    <div style="overflow-x:auto;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="feature-header"> Feature</th>
+                    <ng-container *ngFor="let item of productVariants">
+                                    
+                        <th scope="" class="">
+                            
+                            <div class="card-header">
+                                <div class="price-header">
+                                    <span>{{item.name}}</span>
+                                </div>
+                                <div class="price-details">
+                                    <div>Rs {{item.priceList[0].price}}</div>
+                                    <div>{{item.priceList[0].priceType}}</div>
+                                </div>
+                                <!-- <div class="price-details" *ngIf="item.priceList.length != 0">
+                                    <p class="price">Rs {{item.priceList[0].price}}</p>
+                                    <p class="price-cost">{{item.priceList[0].priceType}}</p>
+                                </div> -->
+                            </div>
+                                
+                        </th>
+                        
+
+                    </ng-container>
+
+
+                  </tr>
+            </thead>
+          
+            <tbody>
+
+                <tr>
+                    <td>Jill</td>
+                    <td>Jack</td>
+                    <td>John</td>
+                    
+                  </tr>
+            </tbody>
+          
+        </table>
+      </div>
+</div>
+
+   
+
