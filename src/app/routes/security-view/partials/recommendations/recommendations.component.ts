@@ -27,11 +27,9 @@ export class RecommendationsComponent {
     private userAccountStore : UserAccountStore,
     private router : Router
   ){
-      console.log("**** Being called");
         this.subscriptions.push(router.events.subscribe((event) => {
         if (event instanceof NavigationStart) {
           this.pageReloading = !router.navigated;
-          console.log("(((((((( page ",this.pageReloading)
         }
     }));
   }
@@ -126,7 +124,6 @@ export class RecommendationsComponent {
 
    public getAllSegmentations(){
     this.microsoftGraphService.getAllSegmentations().subscribe(response => {
-      console.log("*******^^^^  got Respons ", response);
       this.segmentationsList = response;
      });
    }

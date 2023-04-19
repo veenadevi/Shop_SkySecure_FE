@@ -41,13 +41,12 @@ export class BrandDetailComponent implements OnInit{
 
 
   public getBrandDetails(id){
-    console.log("**** Id ,", id);
     id = '6412ac15bdb764f8d6a252a5';
     this.onPageLoad = false;
     this.subscriptions.push(
        this.metaDataSvc.fetchSingleBrandDetails(id).subscribe( response => {
 
-        console.log(")))))))))) Respo ", response);
+
         this.productFamily = response.productFamily;
         this.products = response.products;
         this.features = response.features.slice(0,5);

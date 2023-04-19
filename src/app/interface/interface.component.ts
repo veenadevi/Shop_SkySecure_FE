@@ -47,7 +47,6 @@ export class InterfaceComponent {
   .pipe(
     map(data => {
       if(data){
-        console.log("(((((((( ****** %%%%%% ",this.authService.instance.getAllAccounts() );
         this.userName ="Altsys User" || data.userDetails.firstName + ' ' +data.userDetails.lastName;
         this.userLoggedIn = true;
         return data;
@@ -60,12 +59,7 @@ export class InterfaceComponent {
   )
 
   public ngOnInit() : void {
-   
-    // this.subscriptions.push(this.userDetails$.subscribe(res => {
-    //   this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
-    //   console.log("********* ****** ((((((", this.userAccountStore.getUserProfileDetails());
-    // }));
-    
+
     this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
     if(this.userLoggedIn){
       this.userDetails$.subscribe();
@@ -78,7 +72,6 @@ export class InterfaceComponent {
                 filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
             )
             .subscribe((result: EventMessage) => {
-              console.log("*******%%%%%%%%%(((( ",this.authService.instance.getAllAccounts() );
               let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"))
               if(loggedinData.length > 0 ){
                 this.userLoggedIn = true;
@@ -100,7 +93,6 @@ export class InterfaceComponent {
 
 
   public loginEvent(event){
-    console.log("*******$$$$$$$ Event ", event);
     this.loginService.login();
   }
   public exapndCollapse () {

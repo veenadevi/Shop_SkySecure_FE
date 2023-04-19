@@ -61,9 +61,8 @@ export class SegmentationComponent implements OnInit{
     ){}
 
     public ngOnInit(): void {
-      console.log("***** Value at last ", this.segmentationsList);
       if(this.segmentationsList && this.segmentationsList.segmentations.length> 0){
-        console.log("**** Inside ", this.segmentationsList);
+       
         this.selectedSegmentation(this.segmentationsList.segmentations[0]);
       }
       
@@ -75,7 +74,7 @@ export class SegmentationComponent implements OnInit{
 
       this.subscriptions.push(
         this.microsoftFraphService.getRecommendationsList(segmentation._id).subscribe(data => {
-          console.log("****** %%%%% Data in last ", data);
+      
           //this.activityDetailsList = data.recommandations;
           this.activityDetailsList = this.setCustomActivityDetailsList(data.recommandations);
 
@@ -91,11 +90,11 @@ export class SegmentationComponent implements OnInit{
       dataList.forEach(ele => {
         ele['isCompleted'] = false;
         if(ele.apiData && ele.apiData.body){
-          console.log("***** False");
+         
           ele['checkBox'] = false;
         }
         else {
-          console.log("***** True");
+        
           ele['checkBox'] = true;
         }
       })
@@ -104,7 +103,7 @@ export class SegmentationComponent implements OnInit{
     }
 
     public setGraphData(recomList){
-      console.log("******^^^^^^^^^ Recom List", recomList);
+      
       let total = recomList.length;
       //let successData =  recomList.filter( event => (event.userConfigStatus[0].status === 'Success'));
       let successData =  recomList.filter( event => {

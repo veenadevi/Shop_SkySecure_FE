@@ -61,7 +61,6 @@ constructor(
 ){}
 
   public ngOnInit(): void {
-    console.log("((((((((( ", this.activityDetailsList);
     this.setActivityListArray(this.activityDetailsList);
     this.displayedColumns= ['select', 'name', 'severity', 'progress', 'assess'];
     this.dataSource = new MatTableDataSource<any>(this.recomArray);
@@ -95,10 +94,6 @@ constructor(
         ele['checkBox'] = true;
       }
     })*/
-
-  
-    
-    console.log("******** Recomm Array ", this.activityDetailsList);
     
   }
 
@@ -111,7 +106,7 @@ constructor(
     this.subscriptions.push(
       
       this.msUsersPoliciesService.msCreateConditionalPolicy(details).subscribe( res => {
-        console.log("&&&& Res", res);
+  
         this.isCompleted = false;
         details.isCompleted = false;
       })
@@ -151,7 +146,7 @@ constructor(
   public autoConfigureSelected() : void {
     
     let filteredArray =  this.activityDetailsList.filter( event => (event.checked));
-    console.log("******* Selected Items ", filteredArray);
+  
 
     filteredArray.forEach(details => {
       this.isCompleted = true;
@@ -159,7 +154,7 @@ constructor(
       this.subscriptions.push(
         
         this.msUsersPoliciesService.msCreateConditionalPolicy(details).subscribe( res => {
-          console.log("&&&& Res", res);
+         
           this.isCompleted = false;
           details.isCompleted = false;
         })

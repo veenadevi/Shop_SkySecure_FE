@@ -59,7 +59,6 @@ export class TrendingProductsComponent {
   }
 
   public goToProductsPage(category){
-    console.log("******* Id ", category);
     this.router.navigate([`/products/${category._id}`]);
   }
 

@@ -32,7 +32,6 @@ export class SearchListComponent {
   public searchResults$ = this.searchResultStore.searchResults$
   .pipe(
     map(data => {
-      console.log("******* Called when chanegd", data);
       this.searchResultsProducts = data?.products || [];
       this.searchResultsCategoryList = data?.categoryList || [];
       this.searchResultsSubCategoryList = data?.subCategoryList || [];
@@ -67,7 +66,6 @@ export class SearchListComponent {
   }
 
   public goToProductBundle(item) {
-    console.log("***** ^^ Item ", item);
     //this.router.navigate([`/products/category/${category._id}`]);
     this.router.navigate(['/products/brand-detail', item._id]);
   }

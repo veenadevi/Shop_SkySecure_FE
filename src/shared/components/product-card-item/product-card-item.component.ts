@@ -21,7 +21,6 @@ export class ProductCardItemComponent implements OnInit{
 
 
   public ngOnInit(): void {
-    console.log("********** productList", this.productList);
   }
 
 
