@@ -41,7 +41,7 @@ export class BrandDetailComponent implements OnInit{
 
 
   public getBrandDetails(id){
-    id = '6412ac15bdb764f8d6a252a5';
+    //id = '6412ac15bdb764f8d6a252a5';
     this.onPageLoad = false;
     this.subscriptions.push(
        this.metaDataSvc.fetchSingleBrandDetails(id).subscribe( response => {
