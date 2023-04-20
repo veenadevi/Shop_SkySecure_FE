@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { CatrgoryResponse } from '../models/interface/response/category-response';
 import { OEMResponse } from '../models/interface/response/oem-response';
 import { ProductsResponse } from '../models/interface/response/products-response';
+import { MetadataStore } from '../stores/metadata.store';
 
 @Injectable({ providedIn: 'root' })
 export class MetadataService {
@@ -26,6 +27,7 @@ export class MetadataService {
 
   constructor(
     private http: HttpClient,
+    private metadataStore : MetadataStore
   ) {
     this.baseUrl = environment.gatewayUrl
     this.fetchCategoryUrl = AppService.appUrl.allCategory;
@@ -192,14 +194,25 @@ export class MetadataService {
     let url = this.baseUrl + this.getSingleProduct + productId;
     //let options = this.getOptions();
 
-    let request$ = this.http.get<Observable<any>>(url)
+    // return this.http.get(url)
+    // .pipe(
+    //   map(res => {
+
+    //     console.log("############ REs", res);
+
+    //     return res;
+        
+    //   }) );
+
+    let request$ = this.http.get<any>(url)
       .pipe(
         map(response => {
           if (!response) {
             return null;
           }
-  
-          return response;
+          console.log("++++ ** ", response);
+          this.metadataStore.setIndividualProductDetail(response);
+          return (response);
         }),
         catchError(error => {
           // create operation mapping for http exception handling 

@@ -14,8 +14,11 @@ export class FeatureListTableComponent implements OnInit{
 
   public featureList : any[] = [];
 
+  public onLoad = true;
+
   ngOnInit(): void {
-    console.log("***** This ", this.product);
+    this.onLoad = false;
+    console.log("****++++++++ After calc", this.product);
 
     this.setProductVarients(this.product);
     this.setFeatureList(this.product.featureList);
@@ -24,7 +27,7 @@ export class FeatureListTableComponent implements OnInit{
   public setProductVarients(product){
     this.productVarients = product.productVariants;
 
-    let featureList = product.featureList;
+    this.featureList = product.featureList;
     let featureListByProductVariants = product.featureListByProductVariants;
 
     for(let i=0;i<this.productVarients.length;i++){
@@ -38,7 +41,8 @@ export class FeatureListTableComponent implements OnInit{
     }
 
     console.log("****++++++++ After calc ", this.productVarients);
-    this.productVarients
+    this.productVarients;
+    this.onLoad = true;
     
   }
 

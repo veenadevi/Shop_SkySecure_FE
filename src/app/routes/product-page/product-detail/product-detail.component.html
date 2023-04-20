@@ -29,9 +29,14 @@
         <div class="card-pdf">
           <div class="card-pdf-left">
           <h5>{{product.name}} Features</h5>
-          <ul class="card-list-pdf" *ngFor="let feature of (product.featureList.slice(0,3))" >
+          <ng-container *ngIf="product.featureList && product.featureList.length>0">
+            <ul class="card-list-pdf" *ngFor="let feature of (product.featureList.slice(0,3))" >
+                <li>{{feature.name}}</li>
+              </ul>
+          </ng-container>
+          <!-- <ul class="card-list-pdf" *ngFor="let feature of (product.featureList.slice(0,3))" >
             <li>{{feature.name}}</li>
-          </ul>
+          </ul> -->
         </div>
         <div class="card-pdf-right">
             <div class="pdf-right-item">

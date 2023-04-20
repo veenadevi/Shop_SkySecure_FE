@@ -19,6 +19,9 @@ export class MetadataStore {
     public oemDetails : OEMDetails ;
     public productsDetails : ProductsDetails ;
     public trendingProducts : any;
+
+    public individualProductDetail : any;
+    
   
     private categoryDetailsSubject = new BehaviorSubject<CategoryDetails[]>(null);
     public categoryDetails$ = this.categoryDetailsSubject.asObservable();
@@ -31,6 +34,12 @@ export class MetadataStore {
 
     private trendingProductsSubject = new BehaviorSubject<any[]>(null);
     public trendingProducts$ = this.trendingProductsSubject.asObservable();
+
+    private individualProductDetailSubject = new BehaviorSubject<any[]>(null);
+    public individualProductDetail$ = this.individualProductDetailSubject.asObservable();
+
+
+
 
   constructor() {
   }
@@ -72,6 +81,18 @@ export class MetadataStore {
     this.trendingProductsSubject.next(data);
   }
 
+
+    /**
+   * ============================================================
+   * Set Individual Product Detail Products
+   */
+    public setIndividualProductDetail(data : any) : void {
+
+      console.log("+++++++++++ in store", data);
+      this.individualProductDetail = data;
+      this.individualProductDetailSubject.next(data);
+    }
+
   
   /**
    * Return User Details
@@ -99,6 +120,13 @@ export class MetadataStore {
    */
    public getTrendingProducts(): ProductsDetails {
     return this.trendingProducts;
+  }
+
+  /**
+   * Return IndividualProduct Details
+   */
+  public getIndividualProductDetail(): ProductsDetails {
+    return this.individualProductDetail;
   }
 
   
