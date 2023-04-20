@@ -46,12 +46,20 @@ export class InterfaceComponent {
   public userDetails$ = this.userAccountStore.userProfileDetails$
   .pipe(
     map(data => {
+      
       if(data){
-        this.userName ="Altsys User" || data.userDetails.firstName + ' ' +data.userDetails.lastName;
+        if(data.userDetails.firstName){
+          this.userName = data.userDetails.firstName + ' ' + (data.userDetails.lastName ? data.userDetails.lastName : '');
+        }
+        else {
+          this.userName ="Altsys User" 
+        }
+        
         this.userLoggedIn = true;
         return data;
       }
       else{
+        this.userName ="Altsys User" 
         return data;
       }
     }
