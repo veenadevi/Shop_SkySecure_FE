@@ -10,21 +10,15 @@
     table-layout: fixed;
     width: auto !important;
 }
-.table-holder{
-    /* width:100%; */
-}
 
-.table th {
-    /* width:90px; */
-}
+
+
 
 td{
     width: 60px
 }
 
-.table td {
-    /* width:90px; */
-}
+
 
 .table-fixed tbody {
     height: 300px;
