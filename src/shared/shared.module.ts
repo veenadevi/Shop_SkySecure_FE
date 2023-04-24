@@ -12,6 +12,7 @@ import { ProductCardItemComponent } from './components/product-card-item/product
 import { CardFlyerComponent } from './components/card-flyer/card-flyer.component';
 import { FeatureListTableComponent } from './components/feature-list-table/feature-list-table.component';
 import { MultiSelectDropdownComponent } from './components/multi-select-dropdown/multi-select-dropdown.component';
+import { ProductVariantModalComponent } from './components/product-variant-modal/product-variant-modal.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MultiSelectDropdownComponent } from './components/multi-select-dropdown
     ProductCardItemComponent,
     CardFlyerComponent,
     FeatureListTableComponent,
-    MultiSelectDropdownComponent
+    MultiSelectDropdownComponent,
+    ProductVariantModalComponent
   ],
 
   providers: [
@@ -54,7 +56,8 @@ import { MultiSelectDropdownComponent } from './components/multi-select-dropdown
     ProductCardItemComponent,
     CardFlyerComponent,
     FeatureListTableComponent,
-    MultiSelectDropdownComponent
+    MultiSelectDropdownComponent,
+    ProductVariantModalComponent
   ],
   
 

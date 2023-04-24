@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductVariantModalComponent } from '../product-variant-modal/product-variant-modal.component';
 
 @Component({
   selector: 'feature-list-table',
@@ -15,6 +17,10 @@ export class FeatureListTableComponent implements OnInit{
   public featureList : any[] = [];
 
   public onLoad = true;
+
+  constructor(
+    private modalService : NgbModal
+  ){}
 
   ngOnInit(): void {
     this.onLoad = false;
@@ -51,7 +57,8 @@ export class FeatureListTableComponent implements OnInit{
   }
 
   public requestQuote(item){
-    
+    const modalRef = this.modalService.open(ProductVariantModalComponent);
+    modalRef.componentInstance.productVariant = item;
   }
   
 

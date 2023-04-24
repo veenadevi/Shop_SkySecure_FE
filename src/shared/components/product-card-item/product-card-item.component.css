@@ -51,15 +51,15 @@
 
 
 /*----  Main Style  ----*/
-#cards_landscape_wrap-2{
+/* #cards_landscape_wrap-2{
     
-    /* background: #F7F7F7; */
-  }
-  #cards_landscape_wrap-2 .product-container{
-    /* padding-top: 80px; 
-    padding-bottom: 100px; */
-    /* padding:  40px; */
-  }
+    background: #F7F7F7;
+  } */
+  /* #cards_landscape_wrap-2 .product-container{
+    padding-top: 80px; 
+    padding-bottom: 100px;
+    padding:  40px;
+  } */
   #cards_landscape_wrap-2 a{
     text-decoration: none;
     outline: none;
@@ -177,9 +177,7 @@
   .description-container{
     min-height: 63px;
   }
-  .title-header{
-    /* min-height: 192px !important; */
-  }
+
 
   .text-solution {
     min-height: 70px !important;
@@ -218,9 +216,7 @@
       
   }
 
-  .bg-image{
-    
-  }
+
 
   .button-container {
     padding: 20px 18px 0px 18px;
