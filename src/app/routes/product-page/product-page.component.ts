@@ -33,6 +33,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public brands : Array<any> = [];
   public brand : String;
   public productList : any[] = [];
+
+  public initialProducts : any[] = [];
   
   constructor(
     private metaDataSvc : MetadataService,
@@ -210,6 +212,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   private getFilterQuery() {
     this.filterQuery['subCategoryIds'] = this.selectedSubCategoryItems.length > 0 ? this.selectedSubCategoryItems.map((data) => {return data._id }) : []
     this.filterQuery['brandIds'] = this.selectedBrandItems.length > 0 ? this.selectedBrandItems.map((data) => {return data._id }) : []
+    console.log("***** this.filters", this.filterQuery);
     this.getProductsByFilter(this.filterQuery['subCategoryIds'], this.filterQuery['brandIds']);
   }
 
@@ -294,6 +297,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
     
     this.getSubCategoriesByCategoryIds();
+
+    this.initialProducts = [...this.selectedCategoryItems, ...this.selectedSubCategoryItems, ...this.selectedBrandItems];
   }
 
   private getSubCategoriesByCategoryIds(): void {
@@ -378,6 +383,32 @@ onCategoryDeSelectAll(items: any) {
   this.selectedBrandItems = [];
   this.getFilterQuery();
  }
+
+
+
+ public selecteCategories(item:any){
+    
+    this.selectedCategoryItems = item;
+    this.getFilterQuery();
+    //console.log("++++++++ All",this.selectedBrandItems);
+  }
+
+public selectedSubCategories(item:any){
+    
+    this.selectedSubCategoryItems = item;
+    this.getFilterQuery();
+    //console.log("++++++++ All",this.selectedBrandItems);
+  }
+
+  public selectedBrands(item:any){
+    
+    this.selectedBrandItems = item;
+    this.getFilterQuery();
+    //console.log("++++++++ All",this.selectedBrandItems);
+  }
+  public shareIndividualCheckedList(item:{}){
+    //console.log("++++++++ Individual",item);
+  }
 
  ngOnDestroy(): void {
   this.subscriptions.forEach((data) => {

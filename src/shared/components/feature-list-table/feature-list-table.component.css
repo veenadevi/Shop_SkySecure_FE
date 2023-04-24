@@ -9,13 +9,27 @@
 .table{
     table-layout: fixed;
     width: auto !important;
+    /* background: #F1F2FD; */
+    border-spacing:30px 0px;
+    
 }
 
 
 
 
 td{
-    width: 60px
+    /* width: 60px; */
+    /* padding: 10px 10px 10px 10px; */
+    /* background: aqua; */
+    
+}
+
+
+
+
+
+.td-style{
+  
 }
 
 
@@ -88,7 +102,8 @@ body {
   }
   
   .card-header {
-    background-color: #FFFFFF;
+    background-color: #F1F2FD;
+    
     text-align: center;
     padding: 20px;
     width:300px;
@@ -105,17 +120,20 @@ body {
   }
 
   .price-details {
-    color: #010209;
-    font-weight: 500;
-    padding:0 1%;
-    background: #EBF8DE;
-    border-radius: 8px;
-  }
-
-  .price-details {
-    font-size: 0.9rem;
+    width: 100%;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
     margin-top: 10px;
   }
+
+.price-details span {
+  font-weight: 200;
+  margin-left: 5px;
+}
 
   .price-header {
     text-align: center;
@@ -144,6 +162,23 @@ body {
     height: 25px;
   }
 
-  /* Table from MS */
+  td {
+    width: 60px;
+    background-color: #F1F2FD;
+  }
+  
+  table, th, td {
+    border: 5px solid white;
+    border-collapse: collapse;
+  }
+
+  .request-btn {
+    background: linear-gradient(90deg, #A9383D 35.42%, #D58583 100%);
+    border-radius: 8px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    height: 40px;
+    width: 75%
+}
 
  

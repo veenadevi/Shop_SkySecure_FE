@@ -11,6 +11,7 @@ import { SearchListComponent } from './components/search/partials/search-list/se
 import { ProductCardItemComponent } from './components/product-card-item/product-card-item.component';
 import { CardFlyerComponent } from './components/card-flyer/card-flyer.component';
 import { FeatureListTableComponent } from './components/feature-list-table/feature-list-table.component';
+import { MultiSelectDropdownComponent } from './components/multi-select-dropdown/multi-select-dropdown.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { FeatureListTableComponent } from './components/feature-list-table/featu
     SearchListComponent,
     ProductCardItemComponent,
     CardFlyerComponent,
-    FeatureListTableComponent
+    FeatureListTableComponent,
+    MultiSelectDropdownComponent
   ],
 
   providers: [
@@ -51,7 +53,8 @@ import { FeatureListTableComponent } from './components/feature-list-table/featu
     RecentlySearchedComponent,
     ProductCardItemComponent,
     CardFlyerComponent,
-    FeatureListTableComponent
+    FeatureListTableComponent,
+    MultiSelectDropdownComponent
   ],
   
 

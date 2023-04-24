@@ -1,0 +1,63 @@
+<div>
+    <div (mouseleave)="showDropDown = false">
+        <button class="drop-toggle btn flat" (click)="showDropDown=!showDropDown">
+            <!-- <span *ngIf="checkedList.length<=0">{{filterName}}</span> -->
+            <!-- <span>{{filterName}}</span> -->
+            <div class="selected-list">
+                <ng-container *ngIf="checkedList.length<=0 ; else filterDataTemplate">
+                    {{filterName}}
+                </ng-container>
+                <ng-template #filterDataTemplate>
+                    <ng-container *ngIf="checkedList.length>1 ; else singleItem">
+                        <span class="list-style2">
+                            {{checkedList[0].name}}
+                        </span>
+                        <span style="margin-left:2px"> +{{checkedList.length - 1}}</span>
+                        
+                    </ng-container> 
+                    <ng-template #singleItem>
+                        <span class="list-style2">
+                            {{checkedList[0].name}}
+                        </span>
+                    </ng-template>
+                </ng-template>
+                <i class="fa fa-angle-down"></i>
+            </div>
+            
+            
+            <!-- <span *ngIf="checkedList.length>0">{{checkedList.join(', ')}}</span> -->
+            
+        </button>
+        <div class="drop-show" *ngIf="showDropDown">
+            <!-- <label *ngFor="let a of list">
+                <input type="checkbox" [(ngModel)]="a.checked" 
+                    (change)="getSelectedValue(a.checked,a)" />
+                <span>{{a.name}}</span>
+            </label> -->
+            <ng-container *ngFor="let a of list">
+                <div class="item-list">
+                    <input type="checkbox" [(ngModel)]="a.checked" 
+                    (change)="getSelectedValue(a.checked,a)" />
+                    <span>{{a.name}}</span>
+                </div>
+                
+            </ng-container>
+        </div>
+    </div>
+    <!-- <div class="selected-list" *ngIf="checkedList.length>0">
+        <ng-container *ngIf="checkedList.length>1 ; else singleItem">
+            <span class="list-style">
+                {{checkedList[0].name}}
+            </span>
+            <span style="margin-left:2px"> +{{checkedList.length - 1}}</span>
+            
+        </ng-container> 
+        <ng-template #singleItem>
+            <span class="list-style">
+                {{checkedList[0].name}}
+            </span>
+        </ng-template>
+        
+    </div> -->
+    
+</div>

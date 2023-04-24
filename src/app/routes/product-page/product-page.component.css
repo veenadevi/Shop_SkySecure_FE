@@ -21,7 +21,7 @@
     display: flex;           /* establish flex container */
     flex-direction: row;  /* make main axis vertical */
     justify-content: center; /* center items vertically, in this case */
-    align-items: center;     /* center items horizontally, in this case */
+    align-items: baseline;     /* align items top horizontally, in this case */
     padding: 20px;
     column-gap: 2%;
 }

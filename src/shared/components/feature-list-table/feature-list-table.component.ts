@@ -49,6 +49,10 @@ export class FeatureListTableComponent implements OnInit{
   public setFeatureList(featureList){
     this.featureList = featureList;
   }
+
+  public requestQuote(item){
+    
+  }
   
 
 }

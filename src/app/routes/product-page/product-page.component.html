@@ -45,7 +45,31 @@
     </div> -->
     <div class="filter-container">
       <span>Filter</span>
-      <div *ngIf="categories.length > 0" class="filter-dropdown">
+
+      <multi-select-dropdown
+        [list]="categories"
+        [filterName] = "'Category'"
+        (selectedList)="selecteCategories($event)" 
+        (shareIndividualCheckedList)="shareIndividualCheckedList($event)">
+      </multi-select-dropdown>
+
+      <multi-select-dropdown
+        [list]="subCategories"
+        [filterName] = "'Sub Category'"
+        (selectedList)="selectedSubCategories($event)" 
+        (shareIndividualCheckedList)="shareIndividualCheckedList($event)">
+      </multi-select-dropdown>
+
+      <multi-select-dropdown
+        [list]="brands"
+        [filterName] = "'Brand'"
+        (selectedList)="selectedBrands($event)" 
+        (shareIndividualCheckedList)="shareIndividualCheckedList($event)">
+      </multi-select-dropdown>
+
+
+
+      <!-- <div *ngIf="categories.length > 0" class="filter-dropdown">
         <ng-multiselect-dropdown
         [placeholder]="'Categories:'"
         [settings]="dropdownSettings"
@@ -70,10 +94,10 @@
           (onDeSelectAll)="onSubCategoryDeSelectAll($event)"
         >
         </ng-multiselect-dropdown>
-      </div>
+      </div> -->
 
 
-      <div *ngIf="brands.length > 0" class="filter-dropdown">
+      <!-- <div *ngIf="brands.length > 0" class="filter-dropdown">
           <ng-multiselect-dropdown
           [placeholder]="'Brands:'"
           [settings]="dropdownSettings"
@@ -85,7 +109,7 @@
           (onDeSelectAll)="onBrandDeSelectAll($event)"
         >
         </ng-multiselect-dropdown>
-      </div>
+      </div> -->
 
 
     </div>

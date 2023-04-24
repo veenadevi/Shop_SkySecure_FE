@@ -14,9 +14,16 @@
                                     <span>{{item.name}}</span>
                                 </div>
                                 <div class="price-details">
-                                    <div>Rs {{item.priceList[0].price}}</div>
-                                    <div>{{item.priceList[0].priceType}}</div>
+                                    <h2>
+                                        $ {{item.priceList[0].price}}
+                                    </h2>
+                                    <span>
+                                        {{item.priceList[0].priceType}}
+                                    </span>
+                                    <!-- <div>Rs {{item.priceList[0].price}}</div>
+                                    <div></div> -->
                                 </div>
+                                <button class="btn request-btn" (click)="requestQuote(item)">Request quote</button>
                                 <!-- <div class="price-details" *ngIf="item.priceList.length != 0">
                                     <p class="price">Rs {{item.priceList[0].price}}</p>
                                     <p class="price-cost">{{item.priceList[0].priceType}}</p>
@@ -36,11 +43,16 @@
                 <ng-container *ngFor="let features of featureList">
                 <tr>
                     
-                    <td>{{features.name}}</td>
+                    <td>
+                        <span class="td-style">
+                            {{features.name}}
+                        </span>
+                        
+                    </td>
                     <ng-container *ngFor="let item of productVarients">
                         <ng-container *ngIf="item.featureListArray.includes(features._id) ; else notFoundBlock">
                             <td class="align-center">
-                                <img class="image-icon" src="../../../assets/images/tick2.png">
+                                <img class="image-icon" src="../../../assets/icons/tickiconblue.svg">
                             </td>
                         </ng-container>
                         <ng-template #notFoundBlock>
