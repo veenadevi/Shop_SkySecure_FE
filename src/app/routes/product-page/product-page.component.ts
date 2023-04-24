@@ -44,8 +44,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     private cdr: ChangeDetectorRef
   ){
     const navigation = this.router.getCurrentNavigation();
-    //const state = navigation.extras.state as { data: Object };
-    //const data = state;
+    const state = navigation.extras.state as { data: Object };
+    const data = state;
   }
 
   private getCategories(categoryId: String): void {
