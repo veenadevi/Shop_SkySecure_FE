@@ -53,7 +53,7 @@
 /*----  Main Style  ----*/
 #cards_landscape_wrap-2{
     
-    background: #F7F7F7;
+    /* background: #F7F7F7; */
   }
   #cards_landscape_wrap-2 .product-container{
     /* padding-top: 80px; 
@@ -78,6 +78,7 @@
     /* border-bottom: 1px solid rgba(0, 0, 0, 0.50); */
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.50);
     position: relative;
+    cursor: pointer;
     /* background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
