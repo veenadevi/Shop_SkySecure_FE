@@ -26,7 +26,11 @@ export const GraphAuthPolicies = {
         "RoleManagement.ReadWrite.Directory",
         "UserAuthenticationMethod.ReadWrite.All",
         "DeviceManagementConfiguration.ReadWrite.All", //MDE
-        "DeviceManagementApps.ReadWrite.All"
+        "DeviceManagementApps.ReadWrite.All",
+        "SecurityActions.Read.All",
+        "SecurityActions.ReadWrite.All",
+        "SecurityEvents.ReadWrite.All"
+
       ],
   };
 
