@@ -65,8 +65,15 @@ public cartData : any[] = [];
 
     this.params = this.route.snapshot.queryParamMap;
 
+
+
+
     if(this.params.has('productId')){
-      this.getCartItems();
+      this.getCartItems(false);
+    }
+    else if(this.params.has('productVariant')){
+      //var list = JSON.parse(this.params.get('productList'));
+      this.getCartItems(true);
     }
 
     
@@ -108,7 +115,7 @@ public cartData : any[] = [];
 
   }
 
-  public getCartItems() : void {
+  public getCartItems(multipleProduct) : void {
 
     let userAccountdetails = this.userAccountStore.getUserProfileDetails();
     let cartRefId = this.cartStore.getCartRefreneceId();
@@ -132,19 +139,76 @@ public cartData : any[] = [];
     });
 
 
-    var index = productsList.findIndex(el => el.productId === this.params.get('productId'));
+    if(multipleProduct){
+
+      let productVariant = JSON.parse(this.params.get('productVariant'));
+      
+      let productListArray = productVariant.requiredAddOns;
+      console.log("**** +++++ Multiple products ", productVariant);
+
+      productsList.push({
+        "productId": productVariant._id,
+        "productName" : productVariant.name,
+        "quantity" : 1
+      })
+
+
+      if(productListArray.requiredBundles.length > 0){
+        productListArray.requiredBundles.forEach(item => {
+          var index = productsList.findIndex(el => el.productId === item._id);
+  
+          if(index >=0){
+            productsList[index].quantity = Number(productsList[index].quantity) + 1;
+          }
+          else {
+            productsList.push({
+              "productId": item._id,
+              "productName" : item.name,
+              "quantity" : 1
+          });
+          }
+        });
+      }
+
+      if(productListArray.requiredProductVariants.length){
+        productListArray.requiredProductVariants.forEach(item => {
+          var index = productsList.findIndex(el => el.productId === item._id);
+  
+          if(index >=0){
+            productsList[index].quantity = Number(productsList[index].quantity) + 1;
+          }
+          else {
+            productsList.push({
+              "productId": item._id,
+              "productName" : item.name,
+              "quantity" : 1
+          });
+          }
+        });
+      }
+      
+
+    }
+
+    else {
+      var index = productsList.findIndex(el => el.productId === this.params.get('productId'));
     
 
-    if(index >=0){
-      productsList[index].quantity = Number(productsList[index].quantity) + 1;
+      if(index >=0){
+        productsList[index].quantity = Number(productsList[index].quantity) + 1;
+      }
+      else {
+        productsList.push({
+          "productId": this.params.get('productId'),
+          "productName" : this.params.get('productName'),
+          "quantity" : this.params.get('quantity')
+      });
+      }
+
     }
-    else {
-      productsList.push({
-        "productId": this.params.get('productId'),
-        "productName" : this.params.get('productName'),
-        "quantity" : this.params.get('quantity')
-    });
-    }
+
+
+
     
 
     
@@ -157,23 +221,10 @@ public cartData : any[] = [];
       req.products.push(productsList);
     }
 
+    console.log("+++++++ Final Req ", req);
     this.addCartItemsService(req, 'add');
 
-    /*this.cartService.addCartItems(req)
-        .pipe(
-          //Use switchMap to call another API(s)
-          switchMap((dataFromServiceOne) => {
-            //Lets map so to an observable of API call
-            const allObs$ = this.cartService.getCartItems(null);
 
-            //forkJoin will wait for the response to come for all of the observables
-            return forkJoin(allObs$);
-          })
-        ).subscribe((forkJoinResponse) => {
-          //forkJoinResponse will be an array of responses for each of the this.serviceTwo.getAllServiceTwoData CALL
-          //Do whatever you want to do with this array
-        
-        });*/
 
   }
 

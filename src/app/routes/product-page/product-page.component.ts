@@ -212,7 +212,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   private getFilterQuery() {
     this.filterQuery['subCategoryIds'] = this.selectedSubCategoryItems.length > 0 ? this.selectedSubCategoryItems.map((data) => {return data._id }) : []
     this.filterQuery['brandIds'] = this.selectedBrandItems.length > 0 ? this.selectedBrandItems.map((data) => {return data._id }) : []
-    console.log("***** this.filters", this.filterQuery);
+
     this.getProductsByFilter(this.filterQuery['subCategoryIds'], this.filterQuery['brandIds']);
   }
 

@@ -40,7 +40,6 @@ export class ProductDetailComponent implements OnInit{
     this.onProductLoad = false;
     this.subscriptions.push(this.metaDataSvc.fetchSingleProductDetails(productId).subscribe(response => {
       this.individualProductDetail$.subscribe(data => {
-        console.log("++++++++++++++++++ Data in individual Product ", data);
       });
     }))
   }
@@ -73,7 +72,6 @@ export class ProductDetailComponent implements OnInit{
     this.subscriptions.push(
        this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( response => {
         this.individualProductDetail$.subscribe();
-        console.log("++++++++++ ________ ", response);
 
         let fList = [];
         if(response.featureList?.length > 0) {
