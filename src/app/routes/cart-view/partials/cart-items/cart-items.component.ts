@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, forkJoin, Subscription, switchMap } from 'rxjs';
+import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
+import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
+import { map, forkJoin, Subscription, switchMap, filter } from 'rxjs';
 import { UserCartRequestModel } from 'src/shared/models/concrete/user-cart.model';
 import { CartService } from 'src/shared/services/cart.service';
 import { GlobalSearchService } from 'src/shared/services/global-search.service';
+import { LoginService } from 'src/shared/services/login.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
@@ -27,7 +30,10 @@ export class CartItemsComponent {
     private cartService : CartService,
     private route : ActivatedRoute,
     private userAccountStore : UserAccountStore,
-    private router : Router
+    private router : Router,
+    private msalBroadcastService: MsalBroadcastService,
+    private authService : MsalService,
+    private loginService : LoginService,
   ) {}
 
 public cartData : any[] = [];
@@ -63,7 +69,19 @@ public cartData : any[] = [];
 
   public ngOnInit() : void {
 
+ 
+    // let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"))
+    // if(loggedinData.length > 0 ){
+    //   //this.userLoggedIn = true;
+    // }
+
+    // else{
+    //   this.loginService.login();
+    // }
+    
+
     this.params = this.route.snapshot.queryParamMap;
+
 
 
 
@@ -82,6 +100,35 @@ public cartData : any[] = [];
 
   }
 
+
+
+
+
+  public checkForAuthentication(){
+    
+      this.msalBroadcastService.msalSubject$
+      .pipe(
+          filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
+      )
+      .subscribe((result: EventMessage) => {
+        let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"))
+        if(loggedinData.length > 0 ){
+          //this.userLoggedIn = true;
+        }
+          const payload = result.payload as AuthenticationResult;
+          this.authService.instance.setActiveAccount(payload.account);
+          this.userAccountStore.setuserAccountDetails(this.authService.instance.getAllAccounts());
+          this.loginService.retrieveAccessIdToken();
+      });
+
+    this.msalBroadcastService.inProgress$
+      .pipe(
+          filter((status: InteractionStatus) => status === InteractionStatus.None)
+      )
+      .subscribe(() => {
+          
+      })
+  }
   public fetchCategoryMock() : void{
     
     this.subscriptions.push(

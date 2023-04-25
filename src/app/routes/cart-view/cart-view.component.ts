@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MsalService } from '@azure/msal-angular';
 import { Subscription } from 'rxjs';
 import { GlobalSearchService } from 'src/shared/services/global-search.service';
+import { LoginService } from 'src/shared/services/login.service';
 import { MetadataService } from 'src/shared/services/metadata.service';
 
 @Component({
@@ -19,12 +21,26 @@ export class CartViewComponent {
 
   constructor(
     private globalSearch : GlobalSearchService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private authService : MsalService,
+    private loginService : LoginService,
   ) {}
 
 
   public ngOnInit() : void {
-    this.fetchCategoryMock();
+    console.log("(((((((( ****** ++++++ HElloooooooo ");
+
+        let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"))
+    if(loggedinData.length > 0 ){
+      //this.userLoggedIn = true;
+      this.fetchCategoryMock();
+    }
+
+    else{
+      this.loginService.login();
+      this.fetchCategoryMock();
+    }
+    
   }
 
   public fetchCategoryMock() : void{

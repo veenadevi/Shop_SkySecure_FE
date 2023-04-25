@@ -28,7 +28,7 @@ const INTERFACE_ROUTES: Routes = [
         loadChildren: () => import('../routes/product-page/product-page.module').then(m=>m.ProductPageModule)
       },
       {
-        canActivate: [MsalGuard],
+        canActivate: [],
         path: 'cart',
         loadChildren: () => import('../routes/cart-view/cart-view.module').then(m=>m.CartViewModule)
       },
