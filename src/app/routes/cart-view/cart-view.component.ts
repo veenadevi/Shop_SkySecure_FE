@@ -28,17 +28,17 @@ export class CartViewComponent {
 
 
   public ngOnInit() : void {
-    console.log("(((((((( ****** ++++++ HElloooooooo ");
+    //console.log("(((((((( ****** ++++++ HElloooooooo ");
 
         let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"))
     if(loggedinData.length > 0 ){
       //this.userLoggedIn = true;
-      this.fetchCategoryMock();
+      //this.fetchCategoryMock();
     }
 
     else{
       this.loginService.login();
-      this.fetchCategoryMock();
+      //this.fetchCategoryMock();
     }
     
   }

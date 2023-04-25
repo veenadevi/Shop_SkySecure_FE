@@ -4,6 +4,7 @@ import { CartViewComponent } from './cart-view.component';
 import { CartEmptyComponent } from './partials/cart-empty/cart-empty.component';
 import { CartItemsComponent } from './partials/cart-items/cart-items.component';
 import { CartSubmitComponent } from './partials/cart-submit/cart-submit.component';
+import { MsalGuard } from '@azure/msal-angular';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
       // },
       {
         path: '',
-        component : CartItemsComponent
+        component : CartItemsComponent,
+        canActivate : []
       },
       {
         path: 'cart-empty',

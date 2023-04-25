@@ -96,7 +96,7 @@ public cartData : any[] = [];
 
     
 
-    this.fetchCategoryMock();
+    // this.fetchCategoryMock();
 
   }
 
