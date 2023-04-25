@@ -76,11 +76,16 @@ export class ProductVariantModalComponent {
 
     }
 
+    this.activeModal.close();
     this.router.navigate(['/cart'], {queryParams: queryParams});
 
   }
 
   public closeModal(){
     this.activeModal.close();
+  }
+
+  ngOnDestroy() {
+    
   }
 }
