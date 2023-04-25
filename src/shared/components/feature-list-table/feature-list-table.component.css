@@ -179,4 +179,13 @@ body {
     width: 75%
 }
 
+.feature-list-bold {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.feature-list {
+  font-size: 0.8rem;
+}
+
  

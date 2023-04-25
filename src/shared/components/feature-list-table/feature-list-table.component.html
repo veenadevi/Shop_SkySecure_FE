@@ -11,7 +11,7 @@
                             
                             <div class="card-header">
                                 <div class="price-header">
-                                    <span>{{item.name}}</span>
+                                    <span>{{item.name ? item.name : ''}}</span>
                                 </div>
                                 <div class="price-details">
                                     <h5>
@@ -44,9 +44,10 @@
                 <tr>
                     
                     <td>
-                        <span class="td-style">
-                            {{features.name}}
-                        </span>
+                        <span class="feature-list-bold">
+                            {{features.name ? features.name : ''}} :
+                        </span> 
+                        <span class="feature-list">{{features.description ? features.description : ''}}</span>
                         
                     </td>
                     <ng-container *ngFor="let item of productVarients">

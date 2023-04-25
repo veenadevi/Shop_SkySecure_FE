@@ -82,7 +82,7 @@ public cartData : any[] = [];
 
     this.params = this.route.snapshot.queryParamMap;
 
-
+    console.log("+++++ ((( ))) ******", this.params);
 
 
 
