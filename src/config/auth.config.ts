@@ -43,9 +43,9 @@ export const b2cPolicies = {
         clientId: '400805fb-213f-4c6b-a346-8cdea9975a88', // This is the ONLY mandatory field that you need to supply.
         authority: b2cPolicies.authorities.signUpSignIn.authority, // Defaults to "https://login.microsoftonline.com/common"
         knownAuthorities: [b2cPolicies.authorityDomain], // Mark your B2C tenant's domain as trusted.
-        redirectUri:"/" // Points to window.location.origin. You must register this URI on Azure portal/App Registration.
-       //  postLogoutRedirectUri:'/',
-       //  navigateToLoginRequestUrl:true
+        redirectUri:"/", // Points to window.location.origin. You must register this URI on Azure portal/App Registration.
+       //postLogoutRedirectUri:'/',
+        navigateToLoginRequestUrl:true
     },
     cache: {
         cacheLocation: BrowserCacheLocation.LocalStorage, // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.

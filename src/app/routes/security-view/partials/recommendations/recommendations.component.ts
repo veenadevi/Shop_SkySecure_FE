@@ -18,7 +18,7 @@ export class RecommendationsComponent {
 
   private subscriptions : Subscription[] = [];
   public userName : string;
-  public pageReloading : boolean = false;
+  public pageReloading : boolean;
   public segmentationsList : any;
   constructor (
     private userGraphLoginService : UserGraphLoginService,
@@ -30,7 +30,13 @@ export class RecommendationsComponent {
         this.subscriptions.push(router.events.subscribe((event) => {
         if (event instanceof NavigationStart) {
           this.pageReloading = !router.navigated;
+          //this.pageReloading = 'y';
+          
         }
+        else{
+          //this.pageReloading = 'n';
+        }
+        console.log("++++++++++ Page Relaoding", this.pageReloading);
     }));
   }
 
@@ -55,7 +61,7 @@ export class RecommendationsComponent {
         //return data;
       }
       else{
-        this.checkConnectionStatus();
+        //this.checkConnectionStatus();
         //return data;
       }
     }
@@ -96,9 +102,18 @@ export class RecommendationsComponent {
   ngOnInit(): void {
     
     //this.subscriptions.push(this.userProfileDetails$.subscribe());
+    console.log("+++++++++ Page Reloading ",this.pageReloading);
+    if(this.pageReloading === false){
+      this.checkConnectionStatus();
+    }
+    else{
+      //this.checkConnectionStatus();
+      console.log("+++++++++ Inside here ");
+      this.userProfileDetails$.subscribe(data=> {
+        //this.checkConnectionStatus();
+      })
+    }
     
-    
-    this.checkConnectionStatus();
     
     
   }
@@ -116,6 +131,7 @@ export class RecommendationsComponent {
      this.getAllSegmentations();
      if(this.connectionStatus){
       this.userGraphLoginService.getRefreshIDTokenByAccessToken(res);
+      //this.getAllSegmentations();
      }
     });
  
