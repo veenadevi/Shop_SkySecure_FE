@@ -100,12 +100,12 @@ body {
   }
   
   .card-header {
-    background-color: #F1F2FD;
+    /* background-color: #F1F2FD; */
     
     text-align: center;
     padding: 20px;
     width:300px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    /* box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06); */
   }
   
   .card-body {
@@ -136,6 +136,7 @@ body {
   .price-header {
     text-align: center;
     font-size: 1 rem;
+    height: 50px;
   }
 
   .price-cost {
@@ -150,7 +151,6 @@ body {
   }
 
 
-
   .feature-header{
     width:500px !important
   }
@@ -163,6 +163,10 @@ body {
 
   td {
     width: 60px;
+    background-color: #F1F2FD;
+  }
+
+  th {
     background-color: #F1F2FD;
   }
   
