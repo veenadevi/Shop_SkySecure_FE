@@ -32,10 +32,12 @@
         "app-registration" : "api/user/azure/app-registration",
         "tenantUpdate" : "api/user/tenant/update",
         "getConnection" : "api/user/get-connection",
+         
         
 
         "getAllSegmentation" : "api/segmentations",
-        "getRecommandationsBySegmentId" : "api/recommandations/list"
+        "getRecommandationsBySegmentId" : "api/recommandations/list",
+        "getSecureScore" : "api/user/security/getSecureScore"
     },
 
     "policiesUrl" : {

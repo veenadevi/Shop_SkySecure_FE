@@ -25,6 +25,8 @@ export class MicrosoftGraphService {
     public getAllSegmentationsUrl : string;
     public getRecommendationBySegmentIdUrl : string
 
+    public getSecureScoreUrl : string;
+
 
   constructor(
     private http: HttpClient,
@@ -36,6 +38,7 @@ export class MicrosoftGraphService {
     this.getConnectionUrl = AppService.appUrl.getConnection;
     this.getAllSegmentationsUrl = AppService.appUrl.getAllSegmentation;
     this.getRecommendationBySegmentIdUrl = AppService.appUrl.getRecommandationsBySegmentId;
+    this.getSecureScoreUrl = AppService.appUrl.getSecureScore;
   }
 
   public accessIdToken$ = this.userAccountStore.accessIdToken$
@@ -150,6 +153,50 @@ export class MicrosoftGraphService {
     
         return request$;
       }
+
+
+  /**
+   * Get Secure Score
+   */
+
+  public getSecureScore(): Observable<any> {
+
+    
+      
+    let url = this.baseUrl + this.getSecureScoreUrl;
+    
+
+    // let request = {
+    //   "segmentationId": segmentationId,
+    // };
+
+    let tokenForSecureScore = this.userAccountStore.getAccessIdToken();
+    let xAccessTokenForSecureScore = this.adGraphUserStore.getAdUserDetails().accessToken;
+    
+    const OPTIONS : { headers : HttpHeaders } = { 
+      headers : new HttpHeaders() 
+        .set('authorization', tokenForSecureScore) 
+        .append('Content-Type', 'application/json')
+        .append('x-access-token' , xAccessTokenForSecureScore)
+    }; 
+
+    let request$ = this.http.get<Observable<any>>(url, OPTIONS)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          console.log("********* Response in Secure Score");
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+
+    return request$;
+  }
 
   /**
    * Get Recommendations List by Segment Id

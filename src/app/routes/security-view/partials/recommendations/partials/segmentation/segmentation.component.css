@@ -38,8 +38,58 @@
 
 .canvas-container {
     display:flex;
+    justify-content: space-between;
 }
 
 .chart-container {
     padding: 40px;
+}
+
+
+.secure-score-container{
+    padding: 40px;
+
+    
+}
+
+.score-box{
+    background : #EBEBFF;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2%;
+    min-width: 25rem;
+    padding: 20px;
+}
+
+.secure-score-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+
+.secure-score-val{
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
+.secure-score-metrics {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.secure-score-graph{
+    margin-top: 1.5rem;
+}
+
+.progress {
+    background: var(--white);
+    padding: 3px 0px 3px 2px;
+}
+
+
+.progress-bar {
+    background-color: #8284C5 !important;
 }

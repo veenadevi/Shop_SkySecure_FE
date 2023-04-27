@@ -24,6 +24,8 @@ export class SegmentationComponent implements OnInit{
 
   public selected : any;
 
+  public secureScore : any;
+
     // Doughnut
     public doughnutChartLabels: string[] = [ 'Success', 'Not Configured'];
     // public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
@@ -57,7 +59,7 @@ export class SegmentationComponent implements OnInit{
 
 
     constructor(
-      private microsoftFraphService : MicrosoftGraphService
+      private microsoftGraphService : MicrosoftGraphService
     ){}
 
     public ngOnInit(): void {
@@ -73,8 +75,9 @@ export class SegmentationComponent implements OnInit{
     public selectedSegmentation (segmentation) {
 
       this.subscriptions.push(
-        this.microsoftFraphService.getRecommendationsList(segmentation._id).subscribe(data => {
+        this.microsoftGraphService.getRecommendationsList(segmentation._id).subscribe(data => {
       
+          console.log("**** +++++ Recom data", data);
           //this.activityDetailsList = data.recommandations;
           this.activityDetailsList = this.setCustomActivityDetailsList(data.recommandations);
 
@@ -82,6 +85,8 @@ export class SegmentationComponent implements OnInit{
           this.setGraphData(data.recommandations);
         })
         );
+
+
       
     }
 
@@ -104,6 +109,12 @@ export class SegmentationComponent implements OnInit{
 
     public setGraphData(recomList){
       
+      this.subscriptions.push(
+        this.microsoftGraphService.getSecureScore().subscribe( res => {
+          console.log("+++++++++++ Inside the api ", res);
+          this.secureScore = res;
+        })
+      )
       let total = recomList.length;
       //let successData =  recomList.filter( event => (event.userConfigStatus[0].status === 'Success'));
       let successData =  recomList.filter( event => {
@@ -121,6 +132,8 @@ export class SegmentationComponent implements OnInit{
           backgroundColor : ["#25BC9D", "#5F6BDD"]
         },
       ];
+
+
       /*public doughnutChartPlugins: PluginServiceGlobalRegistrationAndOptions[] = [{
         beforeDraw(chart) {
           const ctx = chart.ctx;

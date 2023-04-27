@@ -14,19 +14,58 @@
 
             </div>
 
+            
         <div class="canvas-container">
 
-            <div class="chart-container">
-                <canvas baseChart
-                    height="160px" 
-                    width="160px"
-                    [labels]="doughnutChartLabels"
-                    [datasets]="doughnutChartDatasets"
-                    [options]="doughnutChartOptions"
-                    [legend]="false"
-                    [type]="'doughnut'">
-                </canvas>
+            <div class="chart-section">
+                <div class="chart-container">
+                    <canvas baseChart
+                        height="160px" 
+                        width="160px"
+                        [labels]="doughnutChartLabels"
+                        [datasets]="doughnutChartDatasets"
+                        [options]="doughnutChartOptions"
+                        [legend]="false"
+                        [type]="'doughnut'">
+                    </canvas>
+                </div>
+                
             </div>
+            <div class="secure-score-container">
+                <div class="score-box">
+                    <div class="secure-score-text">
+                        <span>
+                            Your Secure Score
+                        </span>
+                    </div>
+                    <ng-container *ngIf="secureScore && secureScore.SecureScoreValues ; else noSecureData">
+                        <div class="secure-score-val">
+                            <span>
+                                Secure Score - {{secureScore.SecureScorePercentage ? secureScore.SecureScorePercentage : '-'}} %
+                            </span>
+                        </div>
+                        <div class="secure-score-metrics">
+                            <span>
+                                {{secureScore.SecureScoreValues.currentScore ? secureScore.SecureScoreValues.currentScore : '-'}}
+                                /
+                                {{secureScore.SecureScoreValues.maxScore ? secureScore.SecureScoreValues.maxScore : '-'}}
+                                Acheived
+                            </span>
+                        </div>
+                        <div class="secure-score-graph">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': secureScore.SecureScorePercentage+'%'}"></div>
+                              </div>
+                        </div>
+                    </ng-container>
+                    <ng-template #noSecureData>
+                        -
+                    </ng-template>
+
+                </div>
+            </div>
+
+            
             
         </div>
 
