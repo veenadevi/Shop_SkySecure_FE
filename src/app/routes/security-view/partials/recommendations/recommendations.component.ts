@@ -128,10 +128,10 @@ export class RecommendationsComponent {
 
     this.microsoftGraphService.getConnectionStatus().subscribe( res => {
      this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
-     this.getAllSegmentations();
+     //this.getAllSegmentations();
      if(this.connectionStatus){
       this.userGraphLoginService.getRefreshIDTokenByAccessToken(res);
-      //this.getAllSegmentations();
+      this.getAllSegmentations();
      }
     });
  
