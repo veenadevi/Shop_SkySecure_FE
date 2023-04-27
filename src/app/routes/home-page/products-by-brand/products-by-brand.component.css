@@ -9,7 +9,9 @@
     row-gap: 1em;
     overflow: scroll;
 }
-
+::-webkit-scrollbar {
+    display: none;
+}
 .card-container{
     display: flex;
     flex-grow: 1;
