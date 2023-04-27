@@ -9,7 +9,8 @@ button{
 }
 
 button i {
-    margin-left: 0.2em;
+    margin-left: 0.6em;
+    color: #686A77;
 }
 
 .mat-mdc-menu-item.mdc-list-item {

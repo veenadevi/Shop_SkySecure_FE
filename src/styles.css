@@ -41,7 +41,8 @@ body{
 
 
 .text-normal {
-  font-family: 'Merriweather';
+  font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 600;
+  color: #686A77;
 }
