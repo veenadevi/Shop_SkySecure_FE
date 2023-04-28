@@ -46,8 +46,9 @@ export class InterfaceComponent {
   public userDetails$ = this.userAccountStore.userProfileDetails$
   .pipe(
     map(data => {
-      
+      console.log("++++++++++ Came inside User", data);
       if(data){
+        console.log("++++++++++ Came inside User Data", data);
         if(data.userDetails.firstName){
           this.userName = data.userDetails.firstName + ' ' + (data.userDetails.lastName ? data.userDetails.lastName : '');
         }
@@ -68,10 +69,12 @@ export class InterfaceComponent {
 
   public ngOnInit() : void {
 
+    console.log("++++++++++ Called NGONInit");
     this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
-    if(this.userLoggedIn){
-      this.userDetails$.subscribe();
-    }
+    this.userDetails$.subscribe();
+    // if(this.userLoggedIn){
+    //   this.userDetails$.subscribe();
+    // }
 
 
         
@@ -83,6 +86,7 @@ export class InterfaceComponent {
               let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"))
               if(loggedinData.length > 0 ){
                 this.userLoggedIn = true;
+                //this.userDetails$.subscribe();
               }
                 const payload = result.payload as AuthenticationResult;
                 this.authService.instance.setActiveAccount(payload.account);
