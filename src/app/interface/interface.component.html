@@ -13,14 +13,17 @@
 
         
         <mat-drawer-container class="" autosize>
+            
             <mat-drawer #drawer class="sidebar-main-container" [style]="isExapnded ? 'width: 14%;': ''" mode="side" [opened]="collapseService.isOpen$ | async">
-                
+
                
                 <div class="nav-item" (click)="exapndCollapse()">
-                    <span style="font-size: 22px; margin-left:8px">
-                        <i class="user-img" class="fa fa-solid fa-bars"></i>
+                    <span style="font-size: 20px; margin-left:8px">
+                        <!-- <i class="user-img" class="fa fa-solid fa-bars"></i> -->
+                        <i class="user-img" id="nav-sidebar-icon"  class="fa-solid fa-caret-right"></i>
                     </span>
                 </div>
+
                 
 
                 <div class="nav-item">
@@ -38,7 +41,7 @@
                 </div>
                 <div class="nav-item">
                     <span>
-                        <img class="user-img" src="../../../assets/icons/Dashboard.svg">
+                        <img alt="DashboardIcon" class="user-img" src="../../../assets/icons/Dashboard.svg">
                     </span>
                     <div class="icon-description" *ngIf="isExapnded">
                         Dashboard
@@ -47,7 +50,7 @@
                 <!-- <div class="nav-item" (click)="exapndCollapse()" > -->
                 <div class="nav-item" mat-button [matMenuTriggerFor]="securityMenu" >
                     <span class="nav-arrow" >
-                        <img class="user-img" src="../../assets/icons/Security(1).svg">
+                        <img alt="SecurityIcon" class="user-img" src="../../assets/icons/Security(1).svg">
                         <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true"></i>
                     </span>
                     <div class="icon-description" *ngIf="isExapnded">
@@ -80,7 +83,7 @@
                 <!-- If Security Expanded Ends-->
                 <div class="nav-item" mat-button [matMenuTriggerFor]="aboveMenu">
                     <span class="nav-arrow" >
-                        <img class="user-img" src="../../assets/icons/Profile(1).svg">
+                        <img alt="ProfileIcon" class="user-img" src="../../assets/icons/Profile(1).svg">
                         <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true"></i>
                     </span>
                    
@@ -109,6 +112,8 @@
                             
                         </mat-menu>
                 </div>
+
+                
 
             </mat-drawer>
         

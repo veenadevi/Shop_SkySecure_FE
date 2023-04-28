@@ -1,20 +1,20 @@
 .search-box .form-control {
-    padding-left: 3.7rem;
-    font-size: 20px;
-    border-radius: 0.775em;
+    padding-left: 3rem;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 20px;
+    border-style: none;
+
 }
 
 .search-box .search-icon{
-    font-size: 20px;
     position: absolute;
     z-index: 2;
     display: block;
     width: 3.375rem;
-    height: 2.375rem;
-    line-height: 2.7rem;
+    line-height: 2.2rem;
     text-align: center;
     pointer-events: none;
-    color: #aaa;
 }
 
 .search-result-container {

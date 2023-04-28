@@ -156,6 +156,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 2; 
     -webkit-box-orient: vertical;
+    max-width: 200px;
   }
 
   .text-style {
@@ -173,6 +174,7 @@
       display: flex;
       justify-content: space-between;
       min-height: 55px;
+      align-items: flex-start;
   }
 
   .description-container{
@@ -225,14 +227,15 @@
 
   .overlay {
     position: absolute; 
-    top:63%; 
+    bottom: 8px;
+    left: 8px; 
     color: #f1f1f1; 
-    width: 100%;
+    /* width: 100%; */
     transition: .5s ease;
     opacity:1;
     color: white;
     font-size: 14px;
-    padding: 10px;
+    /* padding: 10px; */
     text-align: center;
     display: flex;
     align-items: center;
@@ -249,7 +252,9 @@
 
   .review-icon {
     color: orange;
-    padding-left: 3px;
+    padding-left: 5px;
     font-size: 18px;
-    margin-top: 4px;
+    /* margin-top: 4px; */
+    display: flex;
+    align-items: center;
 }

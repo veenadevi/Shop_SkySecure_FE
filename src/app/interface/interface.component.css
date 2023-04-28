@@ -39,6 +39,16 @@ mat-sidenav-content {
 }
 
 
+#nav-sidebar-icon {
+  background-color: #EBF8DE; 
+  width:24px; 
+  height: 24px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 
 

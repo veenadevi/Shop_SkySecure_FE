@@ -3,7 +3,7 @@
     border-radius: 5px;
     height: 11.5rem;
     width: 11.5rem;
-    background: var(--secondary);
+    /* background: var(--secondary); */
     cursor: pointer;
 }
 
@@ -17,8 +17,8 @@
 }
 
 .card-item img{
-    width: 3em;
-    height: 3em;
+    width: 4em;
+    height: 4em;
 }
 
 .j_Y {
