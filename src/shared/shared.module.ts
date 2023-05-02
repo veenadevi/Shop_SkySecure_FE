@@ -13,6 +13,7 @@ import { CardFlyerComponent } from './components/card-flyer/card-flyer.component
 import { FeatureListTableComponent } from './components/feature-list-table/feature-list-table.component';
 import { MultiSelectDropdownComponent } from './components/multi-select-dropdown/multi-select-dropdown.component';
 import { ProductVariantModalComponent } from './components/product-variant-modal/product-variant-modal.component';
+import { LoginAlertModalComponent } from './components/login-alert-modal/login-alert-modal.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ProductVariantModalComponent } from './components/product-variant-modal
     CardFlyerComponent,
     FeatureListTableComponent,
     MultiSelectDropdownComponent,
-    ProductVariantModalComponent
+    ProductVariantModalComponent,
+    LoginAlertModalComponent
   ],
 
   providers: [
@@ -57,7 +59,8 @@ import { ProductVariantModalComponent } from './components/product-variant-modal
     CardFlyerComponent,
     FeatureListTableComponent,
     MultiSelectDropdownComponent,
-    ProductVariantModalComponent
+    ProductVariantModalComponent,
+    LoginAlertModalComponent
   ],
   
 
