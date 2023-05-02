@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from 'src/shared/services/login.service';
+import { LoginAlertModalComponent } from '../login-alert-modal/login-alert-modal.component';
 
 @Component({
   selector: 'card-flyer',
@@ -16,10 +18,13 @@ export class CardFlyerComponent {
   @Input('routePath')
   public routePath : string;
 
+  public showModal : boolean = false;
+
   constructor(
     private router: Router,
     private authService : MsalService,
     private loginService : LoginService,
+    private modalService : NgbModal
   ){}
 
   public requestQuote(product:any){
@@ -29,7 +34,21 @@ export class CardFlyerComponent {
       productId : product._id,
       quantity : 1,
     };
-    this.router.navigate(['/cart'], {queryParams: queryParams});
+
+    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"));
+
+    if(loggedinData.length > 0 ){
+      //this.userLoggedIn = true;
+      this.router.navigate(['/cart'], {queryParams: queryParams});
+    }
+
+    else{
+      //this.showModal = !this.showModal;
+      this.viewModal();
+    }
+
+    
+    //this.router.navigate(['/cart'], {queryParams: queryParams});
 
     // let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"));
     // console.log("++++ ((( ", loggedinData);
@@ -43,9 +62,18 @@ export class CardFlyerComponent {
     // }
   }
 
+
+  public viewModal() {
+    const modalRef = this.modalService.open(LoginAlertModalComponent);
+  }
+
   public navigateToProductDetails(product:any){
     
     this.router.navigate(['/products', product._id]);
+  }
+
+  public closeModal() {
+    this.showModal = false;
   }
 
 }
