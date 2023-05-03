@@ -28,11 +28,12 @@ export class CardFlyerComponent {
   ){}
 
   public requestQuote(product:any){
-
+    console.log("***** Sample Product", product);
     let queryParams = {
       productName : product.name,
       productId : product._id,
       quantity : 1,
+      // price : 
     };
 
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"));

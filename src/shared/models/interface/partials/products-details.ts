@@ -6,5 +6,7 @@ export interface ProductsDetails{
     updatedBy: string,
     createdAt: Date,
     updatedAt: Date,
-    __v: number
+    __v: number,
+    productVariants : any[]
+    
 }

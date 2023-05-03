@@ -149,11 +149,23 @@ export class ProductDetailComponent implements OnInit{
     //this.cartStore.setCartItems(product);
     // this.router.navigate(['/cart']);
 
-    let queryParams = {
-      productName : product.name,
-      productId : product._id,
-      quantity : 1,
-    };
+    // let queryParams = {
+    //   productName : product.name,
+    //   productId : product._id,
+    //   quantity : 1,
+    // };
+
+    let queryParams;
+    if(product.productVariants.length>0){
+      queryParams = {
+        productName : product.productVariants[0].name,
+        productId : product.productVariants[0]._id,
+        quantity : 1,
+        price : product.productVariants[0].priceList[0].price,
+      };
+    }
+    
+    console.log("((( ((#### ", product);
     this.router.navigate(['/cart'], {queryParams: queryParams});
 
 

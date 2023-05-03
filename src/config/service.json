@@ -27,6 +27,7 @@
         
         "userCart" : "api/user-cart",
         "userSignin" : "api/user/signin",
+        "createQuotation" : "api/user/createQuotation",
 
 
         "app-registration" : "api/user/azure/app-registration",

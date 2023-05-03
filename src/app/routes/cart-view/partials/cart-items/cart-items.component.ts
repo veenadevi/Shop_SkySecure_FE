@@ -42,6 +42,7 @@ public cartData : any[] = [];
     map(data => {
       if(data){
         this.cartData = data.usercart[0].userCartDetails;
+        
         return this.cartData;
       }
       else{
@@ -57,6 +58,7 @@ public cartData : any[] = [];
       if(data){
         //this.cartData = data.usercart[0].userCartDetails;
         this.cartData = data;
+        console.log("**** Data here ", data);
         return this.cartData;
       }
       else{
@@ -140,44 +142,14 @@ public cartData : any[] = [];
   
   }
 
-  public getCartItems2() {
-    let cartRefId = this.cartStore.getCartRefreneceId();
-    let productsList = this.cartStore.getProductListItems();
-    let re = new UserCartRequestModel({
-      userId : "1001",
-      createdBy : "ADMIN",
-      products : [{
-          "productId":"6408c67ebc262d784813b71f",
-          "quantity" :10
-      }
-      ]
-    });
-    if(cartRefId !== '' || cartRefId !== null){
-      re.cart_ref_id = cartRefId;
-    }
-    else {
-      re.products.push(productsList);
-    }
 
-
-  }
 
   public getCartItems(multipleProduct) : void {
 
     let userAccountdetails = this.userAccountStore.getUserProfileDetails();
     let cartRefId = this.cartStore.getCartRefreneceId();
     let productsList = this.cartStore.getProductListItems() ? this.cartStore.getProductListItems() : [];
-    /*let req = new UserCartRequestModel({
-      //userId : userAccountdetails._id,
-      userId : '2222',
-      createdBy : userAccountdetails.firstName,
-      products : [{
-          "productId": this.params.get('productId'),
-          "productName" : this.params.get('productName'),
-          "quantity" : this.params.get('quantity')
-      }
-      ]
-    });*/
+    
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
       //userId : '2222',
@@ -196,7 +168,8 @@ public cartData : any[] = [];
       productsList.push({
         "productId": productVariant._id,
         "productName" : productVariant.name,
-        "quantity" : 1
+        "quantity" : 1,
+        "price" : productVariant.price ? productVariant.price : 20
       })
 
 
@@ -211,7 +184,8 @@ public cartData : any[] = [];
             productsList.push({
               "productId": item._id,
               "productName" : item.name,
-              "quantity" : 1
+              "quantity" : 1,
+              "price" : item.price ? item.price : 20
           });
           }
         });
@@ -228,7 +202,8 @@ public cartData : any[] = [];
             productsList.push({
               "productId": item._id,
               "productName" : item.name,
-              "quantity" : 1
+              "quantity" : 1,
+              "price" : item.price ? item.price : 20
           });
           }
         });
@@ -248,7 +223,8 @@ public cartData : any[] = [];
         productsList.push({
           "productId": this.params.get('productId'),
           "productName" : this.params.get('productName'),
-          "quantity" : this.params.get('quantity')
+          "quantity" : this.params.get('quantity'),
+          "price" : this.params.has('price') ? this.params.get('price') : 20
       });
       }
 
@@ -287,7 +263,26 @@ public cartData : any[] = [];
   }
 
   public requestQuote(){
-    this.router.navigate(['/cart/cart-submit']);
+    //this.router.navigate(['/cart/cart-submit']);
+    let cartRefId = this.cartStore.getCartRefreneceId();
+    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let req = {
+      userId : userAccountdetails._id,
+      createdBy : userAccountdetails.firstName,
+      products : this.cartData,
+      companyName : 'Altsystech',
+      cart_ref_id : cartRefId ? cartRefId : '0001111'
+    };
+
+    // this.cartService.createQuotation(req);
+
+    this.subscriptions.push(
+      this.cartService.createQuotation(req).subscribe( response => {
+        console.log("**** ++++++++  response is ", response);
+      })
+    )
+    //console.log("****** Final Products", this.cartData);
+
   }
 
   public saveCart() {
@@ -303,6 +298,8 @@ public cartData : any[] = [];
       cart_ref_id : cartRefId
     });
 
+
+    console.log("******* +++++++ ", this.cartData);
     this.addCartItemsService(req, 'save');
   }
 

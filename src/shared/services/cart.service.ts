@@ -22,6 +22,8 @@ export class CartService {
   private baseUrl: string;
   private userCartUrl : string;
 
+  private createQuotationUrl : string;
+
 
 
   constructor(
@@ -32,6 +34,7 @@ export class CartService {
   ) {
     this.baseUrl = environment.gatewayUrlForOrders;
     this.userCartUrl = AppService.appUrl.userCart;
+    this.createQuotationUrl = AppService.appUrl.createQuotation;
 
     
   }
@@ -117,7 +120,8 @@ export class CartService {
       productList.push({
           "productId": element.productId,
           "quantity" : element.quantity,
-          "productName" : element.productName
+          "productName" : element.productName,
+          "price" : element.price ? element.price : 0
       })
 
     })
@@ -132,6 +136,43 @@ export class CartService {
         
   }
 
+  /**
+   * Service for Creating Quotation
+   */
+
+  public createQuotation( request : any): Observable<any> {
+
+    const URL = this.baseUrl + this.createQuotationUrl;
+
+  //   let request = {
+  //     companyName: "TestAltsys_new",
+  //     userId : "640c46225cd0c77a80ce3e03",
+  //     cart_ref_id :206,
+  //     products: product
+  
+  // }
+    
+    const REQUEST$ = this.http.post<any>(URL, request)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          //this.userAccountStore.setUserProfileDetails(response);
+          return of(response);
+        }),
+        map((response: any) => {
+          //this.userAccountStore.setUserProfileDetails(response);
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling
+          return error
+        })
+      );
+
+    return REQUEST$;
+  }
 
   /**
    * Stages our Http Request Headers
