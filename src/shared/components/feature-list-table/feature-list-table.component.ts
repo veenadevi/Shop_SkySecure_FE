@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductVariantModalComponent } from '../product-variant-modal/product-variant-modal.component';
+import { LoginAlertModalComponent } from '../login-alert-modal/login-alert-modal.component';
+import { MsalService } from '@azure/msal-angular';
 
 @Component({
   selector: 'feature-list-table',
@@ -19,7 +21,8 @@ export class FeatureListTableComponent implements OnInit{
   public onLoad = true;
 
   constructor(
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private authService : MsalService,
   ){}
 
   ngOnInit(): void {
@@ -57,8 +60,22 @@ export class FeatureListTableComponent implements OnInit{
   }
 
   public requestQuote(item){
-    const modalRef = this.modalService.open(ProductVariantModalComponent);
-    modalRef.componentInstance.productVariant = item;
+
+    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"));
+
+    if(loggedinData.length > 0 ){
+      const modalRef = this.modalService.open(ProductVariantModalComponent);
+      modalRef.componentInstance.productVariant = item;
+    }
+
+    else{
+      this.viewModal();
+    }
+    
+  }
+
+  public viewModal() {
+    const modalRef = this.modalService.open(LoginAlertModalComponent);
   }
   
 
