@@ -14,6 +14,7 @@ import { FeatureListTableComponent } from './components/feature-list-table/featu
 import { MultiSelectDropdownComponent } from './components/multi-select-dropdown/multi-select-dropdown.component';
 import { ProductVariantModalComponent } from './components/product-variant-modal/product-variant-modal.component';
 import { LoginAlertModalComponent } from './components/login-alert-modal/login-alert-modal.component';
+import { CompanyPromptModalComponent } from './components/modals/company-prompt-modal/company-prompt-modal.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { LoginAlertModalComponent } from './components/login-alert-modal/login-a
     FeatureListTableComponent,
     MultiSelectDropdownComponent,
     ProductVariantModalComponent,
-    LoginAlertModalComponent
+    LoginAlertModalComponent,
+    CompanyPromptModalComponent
   ],
 
   providers: [
@@ -60,7 +62,8 @@ import { LoginAlertModalComponent } from './components/login-alert-modal/login-a
     FeatureListTableComponent,
     MultiSelectDropdownComponent,
     ProductVariantModalComponent,
-    LoginAlertModalComponent
+    LoginAlertModalComponent,
+    CompanyPromptModalComponent
   ],
   
 

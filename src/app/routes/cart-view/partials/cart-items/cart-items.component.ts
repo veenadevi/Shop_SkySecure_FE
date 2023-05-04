@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map, forkJoin, Subscription, switchMap, filter } from 'rxjs';
+import { CompanyPromptModalComponent } from 'src/shared/components/modals/company-prompt-modal/company-prompt-modal.component';
 import { UserCartRequestModel } from 'src/shared/models/concrete/user-cart.model';
 import { CartService } from 'src/shared/services/cart.service';
 import { GlobalSearchService } from 'src/shared/services/global-search.service';
@@ -34,6 +36,7 @@ export class CartItemsComponent {
     private msalBroadcastService: MsalBroadcastService,
     private authService : MsalService,
     private loginService : LoginService,
+    private modalService : NgbModal
   ) {}
 
 public cartData : any[] = [];
@@ -270,12 +273,33 @@ public cartData : any[] = [];
       userId : userAccountdetails._id,
       createdBy : userAccountdetails.firstName,
       products : this.cartData,
-      companyName : 'Altsystech',
+      companyName : '',
       cart_ref_id : cartRefId ? cartRefId : '0001111'
     };
 
     // this.cartService.createQuotation(req);
 
+    if(userAccountdetails.company){
+      req.companyName = userAccountdetails.company;
+      this.createQuotationService(req);
+      
+    }
+    else{
+      this.viewModal(req);
+    }
+
+    
+
+    //console.log("****** Final Products", this.cartData);
+
+  }
+
+  public viewModal(req) {
+    const modalRef = this.modalService.open(CompanyPromptModalComponent);
+    modalRef.componentInstance.request = req;
+  }
+
+  public createQuotationService(req){
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
         console.log("**** ++++++++  response is ", response);
@@ -293,10 +317,7 @@ public cartData : any[] = [];
         
       })
     )
-    //console.log("****** Final Products", this.cartData);
-
   }
-
   public saveCart() {
 
   
