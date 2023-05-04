@@ -279,6 +279,18 @@ public cartData : any[] = [];
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
         console.log("**** ++++++++  response is ", response);
+        if(response && response.Accounts && response.Accounts.data && response.Accounts.data.length > 0){
+          if(response.Accounts.data[0].code === 'SUCCESS'){
+            this.router.navigate(['/cart/cart-submit']);
+          } 
+          else {
+            console.log("/**** Some error occurred ****/ ");
+          }
+        }
+        else{
+          console.log("/**** Some error occurred ****/ ");
+        }
+        
       })
     )
     //console.log("****** Final Products", this.cartData);
