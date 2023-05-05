@@ -166,7 +166,10 @@ body {
 
 
   .feature-header{
-    width:500px !important
+    width:500px !important;
+    vertical-align: middle;
+    text-align: center;
+    
   }
 
 

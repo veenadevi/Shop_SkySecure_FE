@@ -26,10 +26,10 @@
         </div>
     </div>
     <div class="pd-features">
-        <h4 class="heading-text">{{product.name}} product details</h4>
+        <h4 class="heading-text">{{product.name}} Product details</h4>
         <div class="card-pdf">
           <div class="card-pdf-left">
-          <h5>{{product.name}} Features</h5>
+          <h5>{{product.name}} Key Features</h5>
           <ng-container *ngIf="product.featureList && product.featureList.length>0">
             <ul class="card-list-pdf" *ngFor="let feature of (product.featureList.slice(0,3))" >
                 <li>{{feature.name}}</li>
