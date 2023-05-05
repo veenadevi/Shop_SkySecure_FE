@@ -9,7 +9,7 @@
     display: flex;
     justify-content: space-between;
     /* background:#081539; */
-    padding: 2%;
+    padding: 2% 2% 1% 2%;
     border-radius: 1rem;
     color: #ffff;
     color: var(--neutral);
@@ -31,7 +31,7 @@ color: var(--neutral);
 }
 
 .pd-header-actions {
-    padding: 2% 0;
+    padding: 0% 0;
 }
 
 .compare-btn {
@@ -66,6 +66,7 @@ color: var(--neutral);
 .pd-header-right {
     display: flex;
     flex-direction: column;
+    width:18%;
 
 }
 
