@@ -1,5 +1,5 @@
 <div class="product-details-container">
-    <div class="pd-header" *ngIf="onProductLoad">
+    <div class="pd-header" [ngStyle]="{'background': 'url(' + bannerUrl + ') no-repeat 0 0 / cover'}" *ngIf="onProductLoad" >
         <div class="pd-header-title">
             <h3>{{product.name}}</h3>
             <div class="pd-header-reviews">
@@ -18,10 +18,11 @@
             </div>
         </div>
         <div class="pd-header-right">
-            <img class="mat-card-img pd-header-right-img" mat-card-image src="https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png" alt="Photo of test title" />
-            <div class="pd-header-actions">
+            <!-- <img class="mat-card-img pd-header-right-img" mat-card-image src="https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png" alt="Photo of test title" /> -->
+            <img class="mat-card-img pd-header-right-img" mat-card-image src="{{product.bannerLogo ? product.bannerLogo : alternateLogo}}" alt="Microsoft" />
+            <!-- <div class="pd-header-actions">
                 <button class="btn compare-btn add-to-compare-btn">Add to compare</button>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="pd-features">

@@ -8,17 +8,19 @@
 .pd-header {
     display: flex;
     justify-content: space-between;
-    background:#081539;
+    /* background:#081539; */
     padding: 2%;
     border-radius: 1rem;
     color: #ffff;
+    color: var(--neutral);
 }
 .pd-header-title h3 {
 color: #010209;
 font-weight: 500;
 line-height: 2rem;
 font-size: 1.5rem;
-color: #ffff;
+/* color: #ffff; */
+color: var(--neutral);
 }
 
 .review-icon {
@@ -56,8 +58,8 @@ color: #ffff;
 }
 
 .pd-header-right-img {
-    height: 23vh;
-    width: 13vw;
+    /* height: 23vh;
+    width: 13vw; */
     border-radius: 1rem;
 }
 
