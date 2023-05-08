@@ -28,7 +28,7 @@
 
                 <div class="nav-item">
                     <span>
-                        <img class="user-img" src="../../assets/images/img_avatar.png" alt="home">
+                        <img class="user-img" src="../../assets/icons/illustration_icons/DefaultUserIconIllustration.svg" alt="home">
                     </span>
                     <div *ngIf="isExapnded" class="user-name">
                         <div class="icon-description">
@@ -41,7 +41,7 @@
                 </div>
                 <div class="nav-item">
                     <span>
-                        <img alt="DashboardIcon" class="user-img" src="../../../assets/icons/Dashboard.svg">
+                        <img alt="DashboardIcon" class="user-img" src="../../assets/icons/illustration_icons/DashboardIconIllustration.svg">
                     </span>
                     <div class="icon-description" *ngIf="isExapnded">
                         Dashboard
@@ -50,12 +50,12 @@
                 <!-- <div class="nav-item" (click)="exapndCollapse()" > -->
                 <div class="nav-item" mat-button [matMenuTriggerFor]="securityMenu" >
                     <span class="nav-arrow" >
-                        <img alt="SecurityIcon" class="user-img" src="../../assets/icons/Security(1).svg">
-                        <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true"></i>
+                        <img alt="SecurityIcon" class="user-img" src="../../assets/icons/illustration_icons/SecurityIconIllustration.svg">
+                        <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true" style="color:#383536"></i>
                     </span>
                     <div class="icon-description" *ngIf="isExapnded">
                         Security
-                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        <i class="fa fa-caret-right" aria-hidden="true" style="color:#383536"></i>
                     </div>
                     <mat-menu #securityMenu="matMenu" yPosition="below" xPosition="after">
                 
@@ -83,13 +83,13 @@
                 <!-- If Security Expanded Ends-->
                 <div class="nav-item" mat-button [matMenuTriggerFor]="aboveMenu">
                     <span class="nav-arrow" >
-                        <img alt="ProfileIcon" class="user-img" src="../../assets/icons/Profile(1).svg">
-                        <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true"></i>
+                        <img alt="ProfileIcon" class="user-img" src="../../assets/icons/illustration_icons/UserIconIllustration.svg">
+                        <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true" style="color:#383536"></i>
                     </span>
                    
                     <div  class="icon-description" *ngIf="isExapnded">
                         Profile
-                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        <i class="fa fa-caret-right" aria-hidden="true" style="color:#383536"></i>
                     </div>
                        
                         <mat-menu #aboveMenu="matMenu" yPosition="below" xPosition="after">

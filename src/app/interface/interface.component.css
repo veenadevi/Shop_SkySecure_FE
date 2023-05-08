@@ -160,9 +160,9 @@ mat-sidenav-content {
 
 
 .sidebar-main-container {
-  width: 90px;
+  width: 72px;
   background-color: var(--primary);
-  padding: 15px 15px;
+  padding: 15px 10px;
   transition: all 200ms ease-out;
   color: black;
   box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
@@ -179,7 +179,7 @@ mat-sidenav-content {
 
 .user-img {
  
-    font-size: 22px;
+    font-size: 18px;
     width: 1.6em;
 }
 
@@ -205,6 +205,10 @@ mat-sidenav-content {
 
 .icon-description {
   margin-left: 2em;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+  color: #383536;
 }
 
 .nav-arrow {

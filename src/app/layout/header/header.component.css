@@ -9,6 +9,11 @@
     left: 32px;
 }
 
+.altsys-logo-navbar {
+    width: 100%;
+    height: 50px;
+}
+
 
 .spacer {
     flex: 1 1 auto;
