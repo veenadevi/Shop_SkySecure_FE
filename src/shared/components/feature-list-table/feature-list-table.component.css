@@ -206,6 +206,10 @@ body {
   font-weight: bold;
 }
 
+.feature-list-bold:hover{
+  cursor: pointer;
+}
+
 .feature-list {
   font-size: 0.8rem;
 }
