@@ -47,7 +47,7 @@
             <tbody>
                 <ng-container *ngFor="let features of featureList">
                 <tr>
-                    <td>
+                    <td class="feature-header">
                         <span [ngClass]="(features.hyperLinkURL) ? 'feature-list-bold-link' : 'feature-list-bold'" (click)="onNavigateTo(features.hyperLinkURL)">
                             {{features.name ? features.name : ''}} :
                         </span> 
@@ -57,12 +57,18 @@
                     <ng-container *ngFor="let item of productVarients">
                         <ng-container *ngIf="item.featureListArray.includes(features._id) ; else notFoundBlock">
                             <td class="align-center">
-                                <img class="image-icon" src="../../../assets/icons/tickiconblue.svg">
+                                <span class="card-header">
+                                    <img class="image-icon" src="../../../assets/icons/tickiconblue.svg">
+                                </span>
+                                
                             </td>
                         </ng-container>
                         <ng-template #notFoundBlock>
                             <td class="align-center">
-                                -
+                                <span class="card-header">
+                                    -
+                                </span>
+                                
                             </td>
                         </ng-template>
                     </ng-container>

@@ -16,6 +16,26 @@
 
 
 
+table thead, table tbody tr {
+  display: table;
+  /* width: 100%; */
+  table-layout: fixed;
+}
+
+tbody{
+  height: 700px;
+  overflow-y: auto;
+  display: block;
+  
+}
+
+thead, tbody tr{
+  display: table;
+  
+  
+}
+
+
 /* 
 td{
     width: 60px; 
@@ -179,7 +199,7 @@ body {
   }
 
   td {
-    width: 60px;
+    width: 237px;
     background-color: #F1F2FD;
   }
 
