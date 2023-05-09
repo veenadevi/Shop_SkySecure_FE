@@ -173,6 +173,15 @@ body {
     min-height: 35px;
   }
 
+  .price-description span{
+    min-height: 51px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+  }
+
   .price-cost {
     font-size: 0.8rem !important;
     color: #7E916C;

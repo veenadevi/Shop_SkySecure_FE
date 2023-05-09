@@ -7,38 +7,55 @@
                     <th class="feature-header">
                         {{product.name}} Features
                     </th>
-                    <ng-container *ngFor="let item of productVarients">
+                    <ng-container *ngIf="productVarients && productVarients.length>0; else emptyProductVarientsHeader">
+                        <ng-container *ngFor="let item of productVarients ">
                                     
-                        <th scope="" class="">
-                            
-                            <div class="card-header">
-                                <div class="price-header">
-                                    <span>{{item.name ? item.name : ''}}</span>
-                                </div>
-                                <div class="price-description">
-                                    <span>{{item.description ? item.description : ''}}</span>
-                                </div>
-                                <div class="price-details">
-                                    <h5>
-                                        $ {{item.priceList[0].price}}
-                                    </h5>
-                                    <span>
-                                        {{item.priceList[0].priceType}}
-                                    </span>
-                                    <!-- <div>Rs {{item.priceList[0].price}}</div>
-                                    <div></div> -->
-                                </div>
-                                <button class="btn request-btn" (click)="requestQuote(item)">Request quote</button>
-                                <!-- <div class="price-details" *ngIf="item.priceList.length != 0">
-                                    <p class="price">Rs {{item.priceList[0].price}}</p>
-                                    <p class="price-cost">{{item.priceList[0].priceType}}</p>
-                                </div> -->
-                            </div>
+                            <th scope="" class="">
                                 
-                        </th>
-                        
-
+                                <div class="card-header">
+                                    <div class="price-header">
+                                        <span>{{item.name ? item.name : ''}}</span>
+                                    </div>
+                                    <div class="price-description">
+                                        <span>{{item.description ? item.description : ''}}</span>
+                                    </div>
+                                    <div class="price-details">
+                                        <h5>
+                                            $ {{item.priceList[0].price}}
+                                        </h5>
+                                        <span>
+                                            {{item.priceList[0].priceType}}
+                                        </span>
+                                    </div>
+                                    <button class="btn request-btn" (click)="requestQuote(item)">Request quote</button>
+                                </div>
+                            </th>
+                        </ng-container>
                     </ng-container>
+                    <ng-template #emptyProductVarientsHeader>
+                        <ng-container>
+                            <th scope="" class="">
+                                <div class="card-header">
+                                    <div class="price-header">
+                                        <span>{{product.name ? product.name : ''}}</span>
+                                    </div>
+                                    <div class="price-description">
+                                        <span>{{product.description ? product.description : ''}}</span>
+                                    </div>
+                                    <div class="price-details">
+                                        <h5>
+                                            $ {{product.priceList[0].price}}
+                                        </h5>
+                                        <span>
+                                            {{product.priceList[0].priceType}}
+                                        </span>
+                                    </div>
+                                    <button class="btn request-btn" (click)="requestQuote(product)">Request quote</button>
+                                </div>
+                            </th>
+                        </ng-container>
+                    </ng-template>
+                    
 
 
                   </tr>
@@ -54,8 +71,28 @@
                         <span class="feature-list">{{features.description ? features.description : ''}}</span>
                         
                     </td>
-                    <ng-container *ngFor="let item of productVarients">
-                        <ng-container *ngIf="item.featureListArray.includes(features._id) ; else notFoundBlock">
+                    <ng-container *ngIf="productVarients && productVarients.length>0; else emptyProductVarients">
+                        <ng-container *ngFor="let item of productVarients">
+                            <ng-container *ngIf="item.featureListArray.includes(features._id) ; else notFoundBlock">
+                                <td class="align-center">
+                                    <span class="card-header">
+                                        <img class="image-icon" src="../../../assets/icons/tickiconblue.svg">
+                                    </span>
+                                    
+                                </td>
+                            </ng-container>
+                            <ng-template #notFoundBlock>
+                                <td class="align-center">
+                                    <span class="card-header">
+                                        -
+                                    </span>
+                                    
+                                </td>
+                            </ng-template>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #emptyProductVarients>
+                        <ng-container>
                             <td class="align-center">
                                 <span class="card-header">
                                     <img class="image-icon" src="../../../assets/icons/tickiconblue.svg">
@@ -63,15 +100,8 @@
                                 
                             </td>
                         </ng-container>
-                        <ng-template #notFoundBlock>
-                            <td class="align-center">
-                                <span class="card-header">
-                                    -
-                                </span>
-                                
-                            </td>
-                        </ng-template>
-                    </ng-container>
+                    </ng-template>
+   
                     
                 </tr>
             </ng-container>
