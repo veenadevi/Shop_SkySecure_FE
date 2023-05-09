@@ -206,12 +206,19 @@ body {
   font-weight: bold;
 }
 
-.feature-list-bold:hover{
-  cursor: pointer;
-}
+
 
 .feature-list {
   font-size: 0.8rem;
+}
+
+.feature-list-bold-link {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.feature-list-bold-link:hover{
+  cursor: pointer;
 }
 
  

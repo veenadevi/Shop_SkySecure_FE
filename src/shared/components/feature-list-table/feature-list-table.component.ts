@@ -80,7 +80,10 @@ export class FeatureListTableComponent implements OnInit{
 
   public onNavigateTo(link){
     const url = link;
-    window.open(url, "'"+link+"'");
+    if(link){
+      window.open(url, "'"+link+"'");
+    }
+    
   }
   
 

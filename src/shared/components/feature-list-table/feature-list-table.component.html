@@ -48,7 +48,7 @@
                 <ng-container *ngFor="let features of featureList">
                 <tr>
                     <td>
-                        <span class="feature-list-bold" (click)="onNavigateTo(features.hyperLinkURL)">
+                        <span [ngClass]="(features.hyperLinkURL) ? 'feature-list-bold-link' : 'feature-list-bold'" (click)="onNavigateTo(features.hyperLinkURL)">
                             {{features.name ? features.name : ''}} :
                         </span> 
                         <span class="feature-list">{{features.description ? features.description : ''}}</span>
