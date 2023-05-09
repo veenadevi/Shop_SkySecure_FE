@@ -192,6 +192,12 @@ body {
     
   }
 
+  .feature-td{
+    width:500px !important;
+    vertical-align: middle;
+    text-align: left;
+  }
+
 
   .image-icon{
     width:25px;
