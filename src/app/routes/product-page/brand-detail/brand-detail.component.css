@@ -312,10 +312,12 @@ color: #ffff;
     padding: 20px;
     display: flex;
     column-gap: 2%;
+    overflow: scroll;
  }
 
   .family-product{
     width:25%;
+    min-width: 25%;
   }
 
   .math-symbol {

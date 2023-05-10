@@ -77,6 +77,43 @@
                     </span>
                 </div>
             </ng-container>
+            <ng-container *ngIf="productVarients && productVarients.length>0">
+                <div class="math-symbol">
+                    <span>
+                        <i class="fa fa-plus" style='font-size:24px' aria-hidden="true"></i>
+                    </span>
+                </div>
+                <ng-container *ngFor="let productVarient of productVarients; let last = last">
+                    <div class="family-product" href="">
+                        <card-flyer [product]="productVarient"></card-flyer>
+                    </div>
+                    <div class="math-symbol" *ngIf="!last">
+                        <span>
+                            <i class="fa fa-plus" style='font-size:24px' aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="productVarients && productVarients.length>0">
+                <div class="math-symbol">
+                    <span>
+                        <i class="fa fa-plus" style='font-size:24px' aria-hidden="true"></i>
+                    </span>
+                </div>
+                <ng-container *ngFor="let productVarient of productVarients; let last = last">
+                    <div class="family-product" href="">
+                        <card-flyer [product]="productVarient"></card-flyer>
+                    </div>
+                    <div class="math-symbol" *ngIf="!last">
+                        <span>
+                            <i class="fa fa-plus" style='font-size:24px' aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </ng-container>
+            </ng-container>
+            
+
             <!-- <div class="row">
                 <ng-container *ngFor="let product of productList">
                     <div style="margin-bottom: 40px;">
