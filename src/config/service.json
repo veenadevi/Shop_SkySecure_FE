@@ -27,6 +27,7 @@
         
         "userCart" : "api/user-cart",
         "userSignin" : "api/user/signin",
+        "profileUpdate" : "api/user/profile-update",
         "createQuotation" : "api/user/createQuotation",
 
 
