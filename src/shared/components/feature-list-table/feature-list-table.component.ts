@@ -77,6 +77,14 @@ export class FeatureListTableComponent implements OnInit{
   public viewModal() {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
   }
+
+  public onNavigateTo(link){
+    const url = link;
+    if(link){
+      window.open(url, "'"+link+"'");
+    }
+    
+  }
   
 
 }

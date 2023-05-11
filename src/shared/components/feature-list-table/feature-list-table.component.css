@@ -16,6 +16,26 @@
 
 
 
+table thead, table tbody tr {
+  display: table;
+  /* width: 100%; */
+  table-layout: fixed;
+}
+
+tbody{
+  height: 700px;
+  overflow-y: auto;
+  display: block;
+  
+}
+
+thead, tbody tr{
+  display: table;
+  
+  
+}
+
+
 /* 
 td{
     width: 60px; 
@@ -153,6 +173,15 @@ body {
     min-height: 35px;
   }
 
+  .price-description span{
+    min-height: 51px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+  }
+
   .price-cost {
     font-size: 0.8rem !important;
     color: #7E916C;
@@ -172,6 +201,12 @@ body {
     
   }
 
+  .feature-td{
+    width:500px !important;
+    vertical-align: middle;
+    text-align: left;
+  }
+
 
   .image-icon{
     width:25px;
@@ -179,7 +214,7 @@ body {
   }
 
   td {
-    width: 60px;
+    width: 237px;
     background-color: #F1F2FD;
   }
 
@@ -206,8 +241,19 @@ body {
   font-weight: bold;
 }
 
+
+
 .feature-list {
   font-size: 0.8rem;
+}
+
+.feature-list-bold-link {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.feature-list-bold-link:hover{
+  cursor: pointer;
 }
 
  

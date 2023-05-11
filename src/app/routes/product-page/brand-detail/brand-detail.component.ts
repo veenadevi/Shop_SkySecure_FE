@@ -31,6 +31,8 @@ export class BrandDetailComponent implements OnInit{
 
   public features : any[] = [];
 
+  public productVarients : any[] = [];
+
 
 
 
@@ -49,6 +51,7 @@ export class BrandDetailComponent implements OnInit{
 
         this.productFamily = response.productFamily;
         this.products = response.products;
+        this.productVarients = response.productVarients;
         this.features = response.features.slice(0,5);
         //this.bundleSku = response.bundleSku;
         //this.productFamilylist = response.productFamilylist;

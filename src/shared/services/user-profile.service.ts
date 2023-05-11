@@ -18,6 +18,7 @@ import { UserAccountStore } from '../stores/user-account.store';
 export class UserProfileService {
   private baseUrl: string;
   private userSignInUrl : string;
+  private profileUpdateUrl : string;
   
 
 
@@ -30,6 +31,7 @@ export class UserProfileService {
     
     this.baseUrl = environment.gatewayUrlForUserProfile;
     this.userSignInUrl = AppService.appUrl.userSignin;
+    this.profileUpdateUrl = AppService.appUrl.profileUpdate;
     
     
   }
@@ -81,6 +83,39 @@ export class UserProfileService {
     return REQUEST$;
   }
 
+  /**
+   * Service to update User Profile
+   */
+
+  public updateUserProfile(req): Observable<any> {
+
+    const URL = this.baseUrl + this.profileUpdateUrl;
+    const OPTIONS = this.getOptions();
+
+    let request = req;
+    
+    const REQUEST$ = this.http.patch<any>(URL, request, OPTIONS)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          this.userAccountStore.setUserProfileDetails(response);
+          //this.userAccountStore.setUserProfileDetails(response);
+          return of(response);
+        }),
+        map((response: any) => {
+          this.userAccountStore.setUserProfileDetails(response);
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling
+          return error;
+        })
+      );
+
+    return REQUEST$;
+  }
 
   /**
    * Stages our Http Request Headers
