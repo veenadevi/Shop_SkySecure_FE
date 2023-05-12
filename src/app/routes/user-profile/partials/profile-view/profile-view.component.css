@@ -69,10 +69,10 @@
     float: right;
     /* font-size: 1.75rem; */
     font-family: 'Merriweather';
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 34px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 34px;
   }
   .content{
     display: flex;
@@ -100,7 +100,7 @@ line-height: 34px;
     padding: 10px;
   }
   .lastname{
-    width: 30%;
+    width: 35%;
     padding: 10px;
   }
   .email{
@@ -136,7 +136,7 @@ line-height: 34px;
     padding: 10px;
   }
   .country{
-    width: 30%;
+    width: 35%;
     padding: 10px;
   }
   .address{
@@ -151,11 +151,11 @@ line-height: 34px;
     width: 100%;
   }
   .industry{
-    width: 30%;
+    width: 40%;
     padding: 10px;
   }
   .organisation{
-    width: 39%;
+    width: 35%;
     padding: 10px;
   }
   .strength{
@@ -220,3 +220,4 @@ line-height: 34px;
     text-decoration: none;
   color: black;
   }
+ 
