@@ -17,8 +17,10 @@ import { UserAccountStore } from '../stores/user-account.store';
 @Injectable({ providedIn: 'root' })
 export class UserProfileService {
   private baseUrl: string;
+  private baseUrlForQuote : string;
   private userSignInUrl : string;
   private profileUpdateUrl : string;
+  private getQuotationUrl : string;
   
 
 
@@ -32,6 +34,8 @@ export class UserProfileService {
     this.baseUrl = environment.gatewayUrlForUserProfile;
     this.userSignInUrl = AppService.appUrl.userSignin;
     this.profileUpdateUrl = AppService.appUrl.profileUpdate;
+    this.getQuotationUrl = AppService.appUrl.getQuoteHistory;
+    this.baseUrlForQuote = environment.gatewayUrlForOrders;
     
     
   }
@@ -115,6 +119,38 @@ export class UserProfileService {
       );
 
     return REQUEST$;
+  }
+
+  /**
+   * Fetch QUotation History
+   */
+
+  public getQuotationHistory(): Observable<any> {
+
+  
+    
+    
+    
+    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    
+
+    
+    //let url = this.baseUrlForQuote + this.getQuotationUrl + '/' + userAccountdetails._id;
+    let url = this.baseUrlForQuote + this.getQuotationUrl + '/640f59c83d2d10005c34023e';
+    
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+         
+          return response;
+        }),
+      );
+
+    return request$;
   }
 
   /**

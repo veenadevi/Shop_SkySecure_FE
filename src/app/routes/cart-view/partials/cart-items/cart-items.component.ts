@@ -303,8 +303,8 @@ public cartData : any[] = [];
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
         console.log("**** ++++++++  response is ", response);
-        if(response && response.Accounts && response.Accounts.data && response.Accounts.data.length > 0){
-          if(response.Accounts.data[0].code === 'SUCCESS'){
+        if(response && response.Accounts && response.Accounts){
+          if(response.Accounts.code === 'SUCCESS'){
             this.router.navigate(['/cart/cart-submit']);
           } 
           else {

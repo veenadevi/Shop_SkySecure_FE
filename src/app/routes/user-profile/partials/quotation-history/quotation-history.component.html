@@ -20,7 +20,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  
+                  <ng-container *ngFor="let item of quotationList">
+                    <tr>
+                      <th scope="row">{{item.requestId}}</th>
+                      <td>{{item.closingDate ? item.closingDate : ''}}</td>
+                      <td>{{item.name ? item.name : ''}}</td>
+                      <td>{{item.quantity ? item.quantity : ''}}</td>
+                      <td>
+                        <button class="notify-button">
+                          Notify
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <!-- <tr>
                     <th scope="row">123456789</th>
                     <td>02/12/2022</td>
                     <td>Microsoft</td>
@@ -41,18 +55,7 @@
                         Notify
                       </button>
                     </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">123456789</th>
-                    <td>02/12/2022</td>
-                    <td>Microsoft</td>
-                    <td>200</td>
-                    <td>
-                      <button class="notify-button">
-                        Notify
-                      </button>
-                    </td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
         </div>

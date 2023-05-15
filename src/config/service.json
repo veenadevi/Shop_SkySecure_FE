@@ -30,6 +30,7 @@
         "userSignin" : "api/user/signin",
         "profileUpdate" : "api/user/profile-update",
         "createQuotation" : "api/user/createQuotation",
+        "getQuoteHistory" : "api/user/getQuoteHistory",
 
 
         "app-registration" : "api/user/azure/app-registration",
