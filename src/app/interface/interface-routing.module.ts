@@ -47,6 +47,11 @@ const INTERFACE_ROUTES: Routes = [
         path: 'category-view',
         loadChildren: () => import('../routes/category-view/category-view.module').then(m=>m.CategoryViewModule)
       },
+      {
+        canActivate: [],
+        path: 'licence-catalogue',
+        loadChildren: () => import('../routes/licence-catalogue/licence-catalogue.module').then(m=>m.LicenceCatalogueModule)
+      },
     ]
   }
 
