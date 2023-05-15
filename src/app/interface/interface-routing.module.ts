@@ -52,6 +52,11 @@ const INTERFACE_ROUTES: Routes = [
         path: 'licence-catalogue',
         loadChildren: () => import('../routes/licence-catalogue/licence-catalogue.module').then(m=>m.LicenceCatalogueModule)
       },
+      {
+        canActivate: [],
+        path: 'admin-page',
+        loadChildren: () => import('../routes/admin-page/admin-page.module').then(m=>m.AdminPageModule)
+      },
     ]
   }
 

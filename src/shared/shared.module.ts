@@ -15,6 +15,7 @@ import { MultiSelectDropdownComponent } from './components/multi-select-dropdown
 import { ProductVariantModalComponent } from './components/product-variant-modal/product-variant-modal.component';
 import { LoginAlertModalComponent } from './components/login-alert-modal/login-alert-modal.component';
 import { CompanyPromptModalComponent } from './components/modals/company-prompt-modal/company-prompt-modal.component';
+import { SelectOemModalComponent } from './components/modals/select-oem-modal/select-oem-modal.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { CompanyPromptModalComponent } from './components/modals/company-prompt-
     MultiSelectDropdownComponent,
     ProductVariantModalComponent,
     LoginAlertModalComponent,
-    CompanyPromptModalComponent
+    CompanyPromptModalComponent,
+    SelectOemModalComponent
   ],
 
   providers: [
@@ -63,7 +65,8 @@ import { CompanyPromptModalComponent } from './components/modals/company-prompt-
     MultiSelectDropdownComponent,
     ProductVariantModalComponent,
     LoginAlertModalComponent,
-    CompanyPromptModalComponent
+    CompanyPromptModalComponent,
+    SelectOemModalComponent
   ],
   
 

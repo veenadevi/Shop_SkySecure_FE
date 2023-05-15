@@ -23,6 +23,7 @@
         "getTrendingProducts" : "api/products/trending",
         "getProductsByFilter": "api/products/filter",
         "getSingleBrandDetails" : "api/product-family/",
+        "addFeature" : "api/feature",
 
         
         "userCart" : "api/user-cart",

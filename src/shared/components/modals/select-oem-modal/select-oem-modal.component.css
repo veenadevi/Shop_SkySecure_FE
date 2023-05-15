@@ -1,0 +1,64 @@
+.modal-content{
+    -webkit-border-radius: 12px !important;
+    -moz-border-radius: 12px !important;
+    border-radius: 12px !important; 
+}
+.modal-container {
+    /* width: 600px;
+    height: 340px; */
+    background-color: #080F24;
+    /* border-radius: 12px; */
+    justify-content: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.modal-header{
+    border: none !important;
+}
+.modal-footer{
+    border: none !important;
+}
+.altsyslogo-alert {
+    margin-bottom: 10px;
+}
+
+.modal-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url(../../../../assets/images/BackgroundGradient.png);
+    background: fixed;
+    background-repeat: no-repeat;
+}
+
+.altsyslogo-alert {
+    width: 90px;
+}
+
+.request-btn {
+    background: linear-gradient(90deg, #A9383D 35.42%, #D58583 100%);
+    border-radius: 8px;
+    color: #FFFFFF;
+    /* border: 1px solid #EFEFEF; */
+    height: 40px;
+    width: 200px;
+}
+
+.compare-btn {
+    background: #F6EBEC;
+    border: 1px solid #A9383D;
+    border-radius: 8px;
+    text-align: center;
+    color: #A9383D;
+    margin-right: 10px;
+    width: 200px;
+}
+
+.input-field{
+    width: 70%;
+}
+
