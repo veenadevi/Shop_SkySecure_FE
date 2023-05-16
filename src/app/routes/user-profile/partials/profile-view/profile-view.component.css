@@ -220,4 +220,15 @@
     text-decoration: none;
   color: black;
   }
+
+
+  
+
+  .form-select:disabled{
+    background-color: #E0E0E0;
+  }
+
+  input:disabled{
+    background-color: #E0E0E0;
+  }
  

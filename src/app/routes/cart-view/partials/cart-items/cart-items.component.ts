@@ -305,6 +305,7 @@ public cartData : any[] = [];
         console.log("**** ++++++++  response is ", response);
         if(response && response.Accounts && response.Accounts){
           if(response.Accounts.code === 'SUCCESS'){
+            this.cartService.getCartItems(null).subscribe();
             this.router.navigate(['/cart/cart-submit']);
           } 
           else {

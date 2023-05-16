@@ -15,6 +15,8 @@ export class ProfileViewComponent implements OnInit{
 
   public userDetails : any;
 
+  public edit = true;
+
   public subscriptions : Subscription[] = [];
 
   constructor(
@@ -65,6 +67,18 @@ export class ProfileViewComponent implements OnInit{
         console.log("***** ++++++ Updated ", response);
       })
     )
+  }
+
+  public editClick(val) : void {
+
+    this.edit = val;
+    
+    // if(val === 'true'){
+    //   this.edit = true;
+    // }
+    // else{
+    //   this.edit = false;
+    // }
   }
 
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/shared/services/cart.service';
+import { UserProfileService } from 'src/shared/services/user-profile.service';
 
 @Component({
   selector: 'app-company-prompt-modal',
@@ -22,7 +23,8 @@ export class CompanyPromptModalComponent {
   constructor(
     private cartService : CartService,
     private router : Router,
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal,
+    public userProfileService : UserProfileService
   ){
 
   }
@@ -36,12 +38,15 @@ export class CompanyPromptModalComponent {
   public createQuotationService(){
     let req = this.request;
     req.companyName = this.companyName;
+
     this.activeModal.close();
+    this.updateProfile(this.companyName);
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
         console.log("**** ++++++++  response is ", response);
-        if(response && response.Accounts && response.Accounts.data && response.Accounts.data.length > 0){
-          if(response.Accounts.data[0].code === 'SUCCESS'){
+        if(response && response.Accounts && response.Accounts){
+          if(response.Accounts.code === 'SUCCESS'){
+            this.cartService.getCartItems(null).subscribe();
             this.router.navigate(['/cart/cart-submit']);
           } 
           else {
@@ -52,6 +57,22 @@ export class CompanyPromptModalComponent {
           console.log("/**** Some error occurred ****/ ");
         }
         
+      })
+    )
+  }
+
+  public updateProfile(companyName){
+    
+
+    let req = {
+     
+      "company" : companyName,
+      
+    }
+
+    this.subscriptions.push(
+      this.userProfileService.updateUserProfile(req).subscribe( response => {
+        console.log("***** ++++++ Updated ", response);
       })
     )
   }
