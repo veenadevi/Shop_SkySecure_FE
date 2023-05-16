@@ -112,19 +112,24 @@ export class CartService {
 
   public setProductList(data : any) : void {
     
-    let tempList = data.usercart[0].userCartDetails;
     let productList = [];
-   
-
-    tempList.forEach( element=> {
-      productList.push({
-          "productId": element.productId,
-          "quantity" : element.quantity,
-          "productName" : element.productName,
-          "price" : element.price ? element.price : 0
+    if(data && data.usercart.length>0){
+      let tempList = data.usercart[0].userCartDetails;
+      
+     
+  
+      tempList.forEach( element=> {
+        productList.push({
+            "productId": element.productId,
+            "quantity" : element.quantity,
+            "productName" : element.productName,
+            "price" : element.price ? element.price : 0
+        })
+  
       })
 
-    })
+    }
+
 
     this.cartStore.setProductListItems(productList);
     

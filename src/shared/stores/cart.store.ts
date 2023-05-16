@@ -49,31 +49,21 @@ export class CartStore {
    */
    public setCartItems(data : any) : void {
     
-    this.cartItems = data.usercart[0].userCartDetails;
+    console.log("**** Cart ITEMS Service Page");
+    
 
-    // data.usercart[0].userCartDetails.forEach( element=> {
-    //   this.productList.push({
-    //       "productId": element.productId,
-    //       "quantity" : element.quantity
-    //   })
-
-    // })
+    if(data && data.usercart.length>0 && data.usercart[0].userCartDetails){
+      this.cartItems = data.usercart[0].userCartDetails;
+    }
+    else{
+      this.cartItems = [];
+    }
 
     
     this.cartItemsSubject.next(data);
 
     
 
-    
-        // let re = new UserCartRequestModel({
-    //     userId : "12345",
-    //     createdBy : "ADMIN",
-    //     products : [{
-    //         "productId":"6408c67ebc262d784813b71f",
-    //         "quantity" :4
-    //     }
-    //     ]
-    //   })
   }
 
   public setProductListItems(data : any[]) : void {
@@ -90,7 +80,10 @@ export class CartStore {
   public setCartRefreneceId(data : any) : void {
     this.cartItems = data;
     this.cartItemsSubject.next(data);
-    this.cartRefreneceId = data.usercart[0].cart_ref_id;
+    if(data && data.usercart.length>0){
+      this.cartRefreneceId = data.usercart[0].cart_ref_id;
+    }
+    
     this.cartRefreneceIdSubject.next(data);
   }
 

@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/shared/services/cart.service';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'app-company-prompt-modal',
@@ -24,7 +25,8 @@ export class CompanyPromptModalComponent {
     private cartService : CartService,
     private router : Router,
     public activeModal: NgbActiveModal,
-    public userProfileService : UserProfileService
+    public userProfileService : UserProfileService,
+    private userAccountStore : UserAccountStore
   ){
 
   }
@@ -63,9 +65,12 @@ export class CompanyPromptModalComponent {
 
   public updateProfile(companyName){
     
+    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+
+    console.log("++++++++ Details ", userAccountdetails);
 
     let req = {
-     
+      "email" : userAccountdetails.email,
       "company" : companyName,
       
     }
