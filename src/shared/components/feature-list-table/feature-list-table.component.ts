@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductVariantModalComponent } from '../product-variant-modal/product-variant-modal.component';
 import { LoginAlertModalComponent } from '../login-alert-modal/login-alert-modal.component';
 import { MsalService } from '@azure/msal-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'feature-list-table',
@@ -23,6 +24,7 @@ export class FeatureListTableComponent implements OnInit{
   constructor(
     private modalService : NgbModal,
     private authService : MsalService,
+    private router : Router
   ){}
 
   ngOnInit(): void {
@@ -61,17 +63,44 @@ export class FeatureListTableComponent implements OnInit{
 
   public requestQuote(item){
 
-    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"));
 
-    if(loggedinData.length > 0 ){
-      const modalRef = this.modalService.open(ProductVariantModalComponent);
-      modalRef.componentInstance.productVariant = item;
+    if(!item.isAddOn){
+      this.addQuote(item);
     }
 
     else{
-      this.viewModal();
+      let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"));
+
+      if(loggedinData.length > 0 ){
+        const modalRef = this.modalService.open(ProductVariantModalComponent);
+        modalRef.componentInstance.productVariant = item;
+      }
+
+      else{
+        this.viewModal();
+      }
+
     }
     
+  }
+
+  public addQuote(productVariant){
+    
+    let queryParams;
+    // if(!productVariant.isAddOn){
+      queryParams = {
+        productName : productVariant.name,
+        productId : productVariant._id,
+        quantity : 1,
+      };
+      
+    //}
+
+ 
+
+    
+    this.router.navigate(['/cart'], {queryParams: queryParams});
+
   }
 
   public viewModal() {
