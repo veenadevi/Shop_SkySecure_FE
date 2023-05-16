@@ -17,7 +17,7 @@
                                         <span>{{item.name ? item.name : ''}}</span>
                                     </div>
                                     <div class="price-description">
-                                        <span>{{item.description ? item.description : ''}}</span>
+                                        <span>{{item.addOnText ? item.addOnText : ''}}</span>
                                     </div>
                                     <div class="price-details">
                                         <h5>
@@ -65,10 +65,13 @@
                 <ng-container *ngFor="let features of featureList">
                 <tr>
                     <td class="feature-td">
-                        <span [ngClass]="(features.hyperLinkURL) ? 'feature-list-bold-link' : 'feature-list-bold'" (click)="onNavigateTo(features.hyperLinkURL)">
-                            {{features.name ? features.name : ''}} :
-                        </span> 
-                        <span class="feature-list">{{features.description ? features.description : ''}}</span>
+                        <span (click)="onNavigateTo(features.hyperLinkURL)">
+                            <span [ngClass]="(features.hyperLinkURL) ? 'feature-list-bold-link' : 'feature-list-bold'">
+                                {{features.name ? features.name : ''}}
+                            </span> 
+                            <span [ngClass]="(features.hyperLinkURL) ? 'feature-list-link' : 'feature-list'" class="feature-list">{{features.description ? ': '+features.description : ''}}</span>
+                            
+                        </span>
                         
                     </td>
                     <ng-container *ngIf="productVarients && productVarients.length>0; else emptyProductVarients">

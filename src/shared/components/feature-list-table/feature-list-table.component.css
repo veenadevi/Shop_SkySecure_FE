@@ -24,9 +24,20 @@ table thead, table tbody tr {
 
 tbody{
   height: 700px;
-  overflow-y: auto;
+  overflow-y: scroll;
   display: block;
   
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
 thead, tbody tr{
@@ -97,7 +108,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    display: none;
+    /* display:block */
 }
 
 
@@ -245,6 +256,11 @@ body {
 
 .feature-list {
   font-size: 0.8rem;
+}
+
+.feature-list-link{
+  font-size: 0.8rem;
+  cursor: pointer;
 }
 
 .feature-list-bold-link {
