@@ -14,7 +14,9 @@ import { ProductListService } from 'src/shared/services/product-list-page.servic
 })
 export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
-  products = []
+  public products = []
+  public productBundles = [];
+  public selectedCat = [];
   staticProductimageUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png';
   selectedItems : Array<any> = [];
   selectedBrandItems : Array<any> = [];
@@ -35,6 +37,10 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public productList : any[] = [];
 
   public initialProducts : any[] = [];
+
+  public selectedTab = 'products';
+
+  public tabIndex = 0;
   
   constructor(
     private metaDataSvc : MetadataService,
@@ -205,6 +211,18 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
             _id: data._id
           }
          })
+
+         this.productBundles = [];
+         /*this.productBundles = response.productBundles.map((data: any )=> {
+          return { 
+            name: data.name , 
+            description: data.description ,
+            imageUrl: data.imageURL || this.staticProductimageUrl ,
+            solutionLink: data.description,
+            _id: data._id
+          }
+         })*/
+
       })
     );
   }
@@ -408,6 +426,30 @@ public selectedSubCategories(item:any){
   }
   public shareIndividualCheckedList(item:{}){
     //console.log("++++++++ Individual",item);
+  }
+
+
+  public tabClick(val){
+
+    this.selectedTab = val;
+
+    if(val === 'products'){
+      //this.products = this.productList;
+    }
+    else if(val === 'productBundles'){
+      //this.products = this.productBundles;
+    }
+  }
+
+  public changeTab(event){
+    console.log(event.index)
+    this.tabIndex = event.index;
+    if(event.index === 0){
+      this.selectedTab = 'products';
+    }
+    else{
+      this.selectedTab = 'productBundles';
+    }
   }
 
  ngOnDestroy(): void {

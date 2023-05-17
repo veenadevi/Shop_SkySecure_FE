@@ -24,6 +24,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 
 import { MatInputModule } from '@angular/material/input';
 
+import { MatTabsModule } from '@angular/material/tabs';
+
+
+
 
 
 
@@ -104,6 +108,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatListModule ,
     MatStepperModule,
     MatInputModule,
+    MatTabsModule,
 
 
 
@@ -132,6 +137,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatListModule ,
     MatStepperModule,
     MatInputModule,
+    MatTabsModule,
 
 
 
