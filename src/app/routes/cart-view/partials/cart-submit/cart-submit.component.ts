@@ -10,14 +10,21 @@ export class CartSubmitComponent {
 
   public display : any;
 
+  public timer;
+
   constructor(
     private router : Router
   ){
-    this.timer(5);
+    this.timerFunc(5);
   }
 
 
-  public timer(sec) {
+  public navigateTo(url){
+    this.clearTimer();
+    this.router.navigate([url]);
+  }
+
+  public timerFunc(sec) {
     // let minute = 1;
     //let seconds: number = sec * 60;
     let seconds: number = sec;
@@ -26,7 +33,7 @@ export class CartSubmitComponent {
 
     const prefix = sec < 10 ? '0' : '';
 
-    const timer = setInterval(() => {
+    this.timer = setInterval(() => {
       seconds--;
       if (statSec != 0) statSec--;
       // else statSec = 59;
@@ -41,10 +48,14 @@ export class CartSubmitComponent {
       this.display = seconds+1;
 
       if (seconds == 0) {
-        clearInterval(timer);
+        clearInterval(this.timer);
         this.router.navigate(['/']);
       }
     }, 1000);
+  }
+
+  public clearTimer(){
+    clearInterval(this.timer);
   }
 
 }
