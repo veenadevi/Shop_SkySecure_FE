@@ -22,6 +22,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 
 export class HeaderComponent implements OnInit{
+ 
 
   @Output() loginEvent = new EventEmitter();
   
@@ -29,6 +30,8 @@ export class HeaderComponent implements OnInit{
   public userLoggedIn = false;
 
   public subscriptions : Subscription[] = [];
+
+  cartItemCounts:number;
 
   constructor(
     private appComponent : AppComponent,
