@@ -8,8 +8,10 @@
     />
   </span>
   <span class="spacer"></span>
-  <button title="Cart" mat-icon-button class="toolbar-icon" (click)="cartFynction()">
-    <img alt="" src="../../../assets/icons/Cart.svg"/>
+  <button title="Cart" [matBadge]="cartItemCounts"  matBadgeColor="accent" mat-icon-button class="toolbar-icon-01" (click)="cartFynction()" >
+    <img src="../../../assets/icons/Cart.svg"/>
+    <!-- <button class="badge bg-danger">0</button> -->
+    <span class="icon-button__badge">2</span>
   </button>
   <button title="Bell" mat-icon-button class="toolbar-icon">
     <img alt="" src="../../../assets/icons/Bell.svg"/>
