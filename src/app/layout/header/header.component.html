@@ -3,19 +3,19 @@
     <mat-icon>menu</mat-icon>
   </button> -->
   <span class="altsys-logo" (click)="goToHomePage()"> 
-    <img class="altsys-logo-navbar"
-    src="../../../assets/Logos/AltsysLogo.png" 
+    <img class="altsys-logo-navbar" alt=""
+    src="../../../assets/Realize/logos/RealizeLogo.svg" 
     />
   </span>
   <span class="spacer"></span>
-  <button mat-icon-button class="toolbar-icon" (click)="cartFynction()">
-    <img src="../../../assets/icons/Cart.svg"/>
+  <button title="Cart" mat-icon-button class="toolbar-icon" (click)="cartFynction()">
+    <img alt="" src="../../../assets/icons/Cart.svg"/>
   </button>
-  <button mat-icon-button class="toolbar-icon">
-    <img src="../../../assets/icons/Bell.svg"/>
+  <button title="Bell" mat-icon-button class="toolbar-icon">
+    <img alt="" src="../../../assets/icons/Bell.svg"/>
   </button>
-  <button *ngIf="!userLoggedIn"  mat-icon-button class="toolbar-icon" (click)="login()">
-    <img src="../../../assets/icons/User_icon.svg"/>
+  <button title="User-icon" *ngIf="!userLoggedIn"  mat-icon-button class="toolbar-icon" (click)="login()">
+    <img alt="" src="../../../assets/icons/User_icon.svg"/>
   </button>
   <!-- <button *ngIf= "userLoggedIn" mat-icon-button class="toolbar-icon" (click)="logout()">
     <img src="../../../assets/icons/Users.svg"/>
