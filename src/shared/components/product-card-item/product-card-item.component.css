@@ -44,7 +44,12 @@
 }
 
 .brown-color{
-    color: var(--brown);
+    /* color: var(--brown); */
+    color: #003388;
+}
+
+.brown-color img {
+  height: 20px;
 }
 
 

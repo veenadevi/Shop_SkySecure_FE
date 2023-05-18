@@ -18,6 +18,7 @@
 .drop-show {
     padding: 4px;
     width: 222px;
+    /* height: 400px; */
     background-color: #FFF;
     border: 1px solid #BABABA;
     position: absolute;

@@ -25,8 +25,14 @@
 }
 
 .brown-color{
-    color: var(--brown);
+    /* color: var(--brown); */
+    color: #003388;
 }
+
+.brown-color img {
+    height: 20px;
+}
+
 .product-descirption {
     color: #36384A;
     font-size: 14px;
@@ -75,7 +81,7 @@ mat-card-header {
 }
 
 .request-btn {
-    background: linear-gradient(90deg, #A9383D 35.42%, #D58583 100%);
+    background: linear-gradient(0deg, #9BC5E8 -119.05%, #0047BD 100%);
     border-radius: 8px;
     color: #FFFFFF;
     border: 1px solid #EFEFEF;

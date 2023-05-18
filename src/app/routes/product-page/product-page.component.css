@@ -42,6 +42,17 @@ app-product {
 .filter-title {
     margin:4%;
 }
+
+.filter-section {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.filter-section img {
+    margin-right: 8px;
+    height: 20px;
+}
+
 .filter-dropdown {
     width: 250px;
 }
