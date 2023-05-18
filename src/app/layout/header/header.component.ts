@@ -31,6 +31,8 @@ export class HeaderComponent implements OnInit{
 
   public subscriptions : Subscription[] = [];
 
+  public numberOfCartItems = 0;
+
   cartItemCounts:number;
 
   constructor(
@@ -43,7 +45,8 @@ export class HeaderComponent implements OnInit{
     private cartService : CartService,
     private router : Router,
     private microsoftGraphService : MicrosoftGraphService,
-    private spinnerService : NgxSpinnerService
+    private spinnerService : NgxSpinnerService,
+    private cartStore : CartStore
   ){}
 
   /**
@@ -60,6 +63,27 @@ export class HeaderComponent implements OnInit{
       }
       else{
         
+        return data;
+      }
+    }
+    )
+  )
+
+  /**
+   * Service for Cart Number
+   */
+
+  public cartItems$ = this.cartStore.productList$
+  .pipe(
+    map(data => {
+      if(data){
+        
+        
+        this.numberOfCartItems = data.length;
+        console.log("++++++ (((((((((((((((((())))))))))))))))))Cart OutPut", data.length);
+        return data;
+      }
+      else{
         return data;
       }
     }

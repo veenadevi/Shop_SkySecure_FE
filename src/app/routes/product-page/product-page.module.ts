@@ -14,6 +14,10 @@ import { MultiSelectDropdownComponent } from './multi-select-dropdown/multi-sele
 import { FormsModule } from '@angular/forms';
 import { SimilarProductsComponent } from './similar-products/similar-products.component';
 import { BrandDetailComponent } from './brand-detail/brand-detail.component';
+
+
+
+
 @NgModule({
   declarations: [
     ROUTED_COMPONENTS,
@@ -31,7 +35,7 @@ import { BrandDetailComponent } from './brand-detail/brand-detail.component';
     MatIconModule,
     FormsModule,
     NgMultiSelectDropDownModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [
     RouterModule,

@@ -11,7 +11,13 @@
   <button title="Cart" [matBadge]="cartItemCounts"  matBadgeColor="accent" mat-icon-button class="toolbar-icon-01" (click)="cartFynction()" >
     <img src="../../../assets/icons/Cart.svg"/>
     <!-- <button class="badge bg-danger">0</button> -->
-    <span class="icon-button__badge">2</span>
+    <ng-container *ngIf="(cartItems$ | async) as cartItems">
+      <ng-container *ngIf="cartItems.length > 0">
+        <span class="icon-button__badge">{{numberOfCartItems}}</span>
+      </ng-container>
+      
+    </ng-container>
+    
   </button>
   <button title="Bell" mat-icon-button class="toolbar-icon">
     <img alt="" src="../../../assets/icons/Bell.svg"/>
