@@ -25,6 +25,7 @@ export class ProductDetailComponent implements OnInit{
   public onProductLoad = true;
   public productSubCategoryId : String;
   public similarProducts : Array<any> = [];
+  public bannerText: '#FFFFFF';
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
@@ -93,6 +94,7 @@ export class ProductDetailComponent implements OnInit{
         this.product = { ...response.products , featureList : response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants : response.featureListByProductVariants } ;
         this.onProductLoad = true;
         this.bannerUrl = this.product.bannerURL;
+       
         
         /*let featureList = [];
         // if(response.productFeatureList?.length > 0) {
@@ -189,6 +191,9 @@ export class ProductDetailComponent implements OnInit{
     const modalRef = this.modalService.open(LoginAlertModalComponent);
   }
 
+  public getColor(val){
+    return val.toLowerCase();
+  }
 
   ngOnDestroy(){
     
