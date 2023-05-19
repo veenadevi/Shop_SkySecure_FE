@@ -1,5 +1,7 @@
 .table-container{
     padding: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 
