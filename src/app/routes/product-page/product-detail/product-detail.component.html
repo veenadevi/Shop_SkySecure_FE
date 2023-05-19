@@ -1,7 +1,7 @@
 <div class="product-details-container">
     <div class="pd-header" [ngStyle]="{'background': 'url(' + bannerUrl + ') no-repeat 0 0 / cover'}" *ngIf="onProductLoad" >
         <div class="pd-header-title">
-            <h3>{{product.name}}</h3>
+            <h3 [style.color]="getColor(product.bannerTextColor)" *ngIf="onProductLoad" >{{product.name}}</h3>
             <div class="pd-header-reviews">
                 <mat-icon class="review-icon">star</mat-icon>
                 <mat-icon class="review-icon">star</mat-icon>
@@ -10,7 +10,7 @@
                 <mat-icon class="review-icon">star</mat-icon>
             </div>
             <div class="pd-header-desc">
-                <p>{{product.description}}</p>
+                <p [style.color]="getColor(product.bannerTextColor)">{{product.description}}</p>
             </div>
             <div class="pd-header-actions">
                 <button class="btn request-btn" (click)="requestQuote(product)">Request quote</button>
