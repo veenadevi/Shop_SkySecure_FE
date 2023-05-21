@@ -317,19 +317,23 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public selecteCategories(item:any){
     
     this.selectedCategoryItems = item;
+    this.getFilteredData();
 
     
   }
 
   public selectedSubCategories(item:any){
     
+    this.selectedSubCategoryItems = item;
+    this.getFilteredData();
 
     
   }
 
   public selectedBrands(item:any){
     
-    
+    this.selectedBrandItems = item;
+    this.getFilteredData();
   }
 
 
