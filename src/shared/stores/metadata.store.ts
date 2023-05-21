@@ -59,7 +59,7 @@ export class MetadataStore {
    * Set OEM
    */
   public setOEMDetails(data : OEMDetails[]) : void {
-
+    console.log("**************** OEM ",data);
     this.oemDetailsSubject.next(data);
   }
   /**

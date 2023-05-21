@@ -80,8 +80,9 @@ export class ToolbarComponent {
     let OEMResponse = null;
     this.subscriptions.push(
       this.metaDataSvc.fetchOEM().subscribe( response => {
+        console.log("**************** OEM aaa ",response);
         this.metadataStore.setOEMDetails(response.oems);
-        this.oemList = response.oems.splice(0,10);
+        this.oemList = response.oems;
         this.spinnerService.hide();
       })
       

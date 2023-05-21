@@ -50,10 +50,11 @@ export class MetadataService {
     //let options = this.getOptions();
     
 
-    let request$ = this.http.get<CatrgoryResponse>(url)
+    let request$ = this.http.get<any>(url)
       .pipe(
         map(response => {
           if (!response) {
+            
             return null;
           }
           
@@ -76,13 +77,14 @@ export class MetadataService {
     //let options = this.getOptions();
     
 
-    let request$ = this.http.get<OEMResponse>(url)
+    let request$ = this.http.get<any>(url)
       .pipe(
         map(response => {
           if (!response) {
             return null;
           }
          
+          console.log("++++++ )))  Res", response.oems);
          
           return response;
         }),

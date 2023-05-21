@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, combineLatest, forkJoin, map } from 'rxjs';
 import { CategoryDetails } from 'src/shared/models/interface/partials/category-details';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ProductListService } from 'src/shared/services/product-list-page.service';
+
 
 @Component({
   selector: 'app-product-page',
@@ -14,191 +15,241 @@ import { ProductListService } from 'src/shared/services/product-list-page.servic
 })
 export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
-  public products = []
-  public productBundles = [];
-  public selectedCat = [];
-  staticProductimageUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png';
-  selectedItems : Array<any> = [];
-  selectedBrandItems : Array<any> = [];
-  selectedCategoryItems : Array<any> = [];
-  selectedSubCategoryItems : Array<any> = [];
-  dropdownSettings : IDropdownSettings = {};
-  subCategoryDropdownSettings : IDropdownSettings = {};
-  category : String;
-  subCategory : String;
-  allCategories : Array<any> = [];
-  filterQuery : Object = { subCategoryIds : [], brandIds : [] }
-  loadAllCategories = false;
-  private subscriptions: Subscription[] = [];
-  public categories : Array<any> = [];
-  public subCategories : Array<any> = [];
-  public brands : Array<any> = [];
-  public brand : String;
-  public productList : any[] = [];
 
-  public initialProducts : any[] = [];
+  public dropdownSettings : IDropdownSettings = {};
+  public subCategoryDropdownSettings : IDropdownSettings = {};
+
+  
+  public categories : any[] = [];
+  public subCategories : any[] = [];
+  public brands : any[] = [];
+
+  public selectedCategoryItems : any[] = [];
+  public selectedSubCategoryItems : any[] = [];
+  public selectedBrandItems : any[] = [];
+
+  public productList : any[] = [];
+  public products = [];
+  public productBundles = [];
+
+  public staticProductimageUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png';
+
+  private subscriptions: Subscription[] = [];
+
+  // public products = [];
+  // public productBundles = [];
+  // public selectedCat = [];
+  // staticProductimageUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png';
+  // selectedItems : Array<any> = [];
+  // selectedBrandItems : Array<any> = [];
+  // selectedCategoryItems : Array<any> = [];
+  // selectedSubCategoryItems : Array<any> = [];
+  // dropdownSettings : IDropdownSettings = {};
+  // subCategoryDropdownSettings : IDropdownSettings = {};
+  // category : String;
+  // subCategory : String;
+  // allCategories : Array<any> = [];
+  // filterQuery : Object = { subCategoryIds : [], brandIds : [] }
+  // loadAllCategories = false;
+  // private subscriptions: Subscription[] = [];
+  // public categories : Array<any> = [];
+  // public subCategories : Array<any> = [];
+  // public brands : Array<any> = [];
+  // public brand : String;
+  // public productList : any[] = [];
+
+  // public initialProducts : any[] = [];
 
   public selectedTab = 'products';
 
   public tabIndex = 0;
+
+
+  public filters : any;
   
   constructor(
     private metaDataSvc : MetadataService,
     private activeRoute: ActivatedRoute,
     private productListService : ProductListService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private metadadataStore : MetadataStore
   ){
     const navigation = this.router.getCurrentNavigation();
     // const state = navigation.extras.state as { data: Object };
     // const data = state;
   }
 
-  private getCategories(categoryId: String): void {
-    // this.subscriptions.push(
-    //    this.metaDataSvc.fetchSubCategories(categoryId).subscribe( response => {
-    //     this.subCategories = response.subCategories;
-    //     this.selectedItems = this.subCategories.filter((data) => {
-    //       if(data.categoryId == categoryId) return data;
-    //     });
-    //     let selectedItemsIds = this.selectedItems.map((data)=> { return data._id });
-    //     if(selectedItemsIds)
-    //     this.getProductsBySubcategoryIds(selectedItemsIds);
-    //   })
-    // );
-    // this.selectedCategoryItems = this.categories.filter((data) => {
-    //   if(data._id == categoryId) return data;
-    // })
-    // console.log("+++selectedCategoryItems++++NEW",this.selectedCategoryItems);
+  public getAllCategories$ = this.metadadataStore.categoryDetails$
+  .pipe(
+    map(data => {
+      if(data){
+        
+        this.categories = data;
+        
+        data.forEach(element => {
+          console.log("**************** Cat ", element.subCategories);
+          this.subCategories = [...element.subCategories];
+        });
+        return data;
+
+      }
+      else{
+        
+        return data;
+      }
+    }
+    )
+  )
+
+  public getAllOEM$ = this.metadadataStore.oemDetails$
+  .pipe(
+    map(data => {
+      if(data){
+        console.log("**************** Cat ",data);
+        this.brands = data;
+        return data;
+      }
+      else{
+        
+        return data;
+      }
+    }
+    )
+  )
+
+  public ngOnInit() : void { 
+
+    
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: '_id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 0,
+      allowSearchFilter: true
+    };
+
+    this.subCategoryDropdownSettings = {
+      singleSelection: false,
+      idField: '_id',
+      textField: 'name', 
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 0,
+      allowSearchFilter: true
+    }
+
+    this.setFilters();
+    this.loadDropdownValues();
+    //this.getAllCategories();
+
+
+
+
 
   }
 
-  private getAllCategories(): void {
-    this.subscriptions.push(
-       this.metaDataSvc.fetchCategory().subscribe( response => {
-         this.categories = response.categorys;
-         this.selectedCategoryItems = this.categories.filter((data) => {
-          if(data._id == this.category) return data;
-        })
-      })
-    );
-  }
+  public initializeData(){
 
-  private getAllSubCategories(): void {
-    this.metaDataSvc.fetchCategory().subscribe(response => {
-      this.categories = response.categorys;
-      this.categories.forEach(data => {
-        this.subCategories = [...this.subCategories, ...data.subCategories];
-        this.selectedSubCategoryItems = [];
-        this.cdr.detectChanges();
-      });
-      this.getFilterQuery()
+    this.activeRoute.paramMap.subscribe(params => {
+      if(this.categories.length >0 && this.brands.length>0){
+        console.log("++++++ Came in ", params.get('categoryId'));
+        if(params.has('categoryId')){
+          this.setCategoryChecked(params.get('categoryId'));
+          this.getSubCategoriesByID(params.get('categoryId'));
+  
+        }
+        else if(params.has('subcategoryId')){
+  
+          this.setSubCategoryChecked(params.get('subcategoryId'));
+          this.selectedSubCategoryItems.push({'_id' : params.get('subcategoryId').split('-')[1]});
+          //this.selectedSubCategoryItems.push(params.get('subcategoryId').split('-')[1]);
+          console.log("++++++ SYB Category ", this.selectedSubCategoryItems.length);
+          this.getFilteredData();
+          
+  
+        }
+        else if(params.has('brandId')){
+          let brand = params.get('brandId');
+          this.setBrandChecked(brand);
+          
+          this.selectedBrandItems = this.brands.filter((data) => {
+            if(data._id == brand) return data;
+          })
+          this.getFilteredData();
+
+          console.log("++++++ Brand ", params.get('brandId'));
+  
+        }
+      }
+      
     })
   }
 
-  private getBrands(): void {
+
+  public loadDropdownValues() : void {
+    //this.subscriptions.push(this.getAllCategories$.subscribe());
+    //this.subscriptions.push(this.getAllOEM$.subscribe());
+
+
+    
+
+    combineLatest([
+      this.getAllCategories$,
+      this.getAllOEM$
+    ]).subscribe(([catArray, brandArray]) => {
+
+
+      if(catArray.length >0 && brandArray.length > 0){
+        this.initializeData();
+      }
+    });
+
+  }
+
+  // private getAllCategories(): void {
+  //   this.subscriptions.push(
+  //      this.metaDataSvc.fetchCategory().subscribe( response => {
+  //        this.categories = response.categorys;
+         
+
+  //       //  this.categories.forEach(element => {
+  //       //     element['checked'] = true;
+  //       //  });
+  //       //  console.log("+++++++ Selected ",this.categories);
+  //       //  this.getSubCategories(this.categories[0]._id);
+  //     })
+  //   );
+  // }
+
+
+  public getSubCategoriesByID(categoryID){
     this.subscriptions.push(
-       this.metaDataSvc.fetchOEM().subscribe( response => {
-        this.brands = response.oems;
-        if(this.brand) {
-          this.selectedBrandItems =  this.brands.filter(data => {
-            if(data._id == this.brand) return data;
-          })
-        }
-        else 
-        this.selectedBrandItems = [];
-      })
-    );
+      this.metaDataSvc.fetchSubCategories(categoryID).subscribe( response => {
+       this.subCategories = response.subCategories;
+       console.log("+++++++ ++++ Inside Get Filters", response);
+       this.selectedSubCategoryItems = this.subCategories;
+       //this.setAllChecked(this.subCategories);
+       this.getFilteredData();
+     })
+   );
   }
 
 
-  // private getSubCategories(categoryId: String): void {
-  //   this.subscriptions.push(
-  //      this.metaDataSvc.fetchSubCategories(categoryId).subscribe( response => {
-  //       this.subCategories = response.subCategories;
-  //       console.log("****** Got here ", this.subCategories);
-  //       this.selectedItems = this.subCategories.filter((data) => {
-  //         if(data._id == categoryId) return data;
-  //       })
-  //       let selectedItemsIds = this.selectedItems.map((data)=> { return data._id });
-  //       if(selectedItemsIds)
-  //       this.getProductsBySubcategoryIds(selectedItemsIds);
-  //     })
-  //   );
-  // }
+  public getFilteredData(){
+    this.filters.brandIds = this.selectedBrandItems.length > 0 ? this.selectedBrandItems.map((data) => {return data._id }) : []
+    this.filters.subCategoryIds = this.selectedSubCategoryItems.length > 0 ? this.selectedSubCategoryItems.map((data) => {
+      console.log("(((((((( data._id", data);
+      return data._id 
+    }) : []
 
-  private getSubCategoriesByDefault(categoryId: String, subcategoryId = null): void {
-    this.subscriptions.push(
-       this.metaDataSvc.fetchSubCategories(categoryId).subscribe( response => {
-        this.subCategories = response.subCategories;
-        if(subcategoryId == null)
-        this.selectedSubCategoryItems = this.subCategories;
-        else {
-          this.selectedSubCategoryItems = this.subCategories.filter((data) => { return data._id == subcategoryId});
-        }
-        this.getFilterQuery();
-      })
-      
-    );
+    console.log("+++++++ ++++ Inside Get Filters", this.filters);
+    this.getProductsByFilter(this.filters.subCategoryIds,this.filters.brandIds);
   }
 
-
-  // private getProducts(): void {
-  //   this.subscriptions.push(
-  //      this.metaDataSvc.fetchProducts().subscribe( response => {
-  //       this.products = response.products.map((data: any )=> {
-  //         return { 
-  //           name: data.name , 
-  //           description: data.description ,
-  //           imageUrl: this.staticProductimageUrl ,
-  //           solutionLink: data.description,
-  //           _id: data._id
-  //         }
-  //        })
-  //     })
-  //   );
-  // }
-
-  // private getProductsBySubcategoryIds(subCategoryIds: Array<string>): void {
-  //   this.subscriptions.push(
-  //      this.metaDataSvc.fetchAllProductsBySubCategoryIds(subCategoryIds).subscribe(response => {
-  //       console.log("+++++++++++",response.products)
-  //        this.products = response.products.map((data: any )=> {
-  //         return { 
-  //           name: data.name , 
-  //           description: data.description ,
-  //           imageUrl: this.staticProductimageUrl ,
-  //           solutionLink: data.description,
-  //           _id: data._id
-  //         }
-  //        })
-  //        console.log("+++++++++products+++++++++",this.products);
-  //     })
-  //   );
-  // }
-
-  // private getProductsByBrandIds(brandIds: Array<String>): void {
-  //   this.subscriptions.push(
-  //      this.metaDataSvc.fetchAllProductsByBrandIds(brandIds).subscribe(response => {
-  //       this.selectedBrandItems = this.brands.filter((data)=> {
-  //         console.log("KJNKJNKBB",brandIds,data._id);
-  //         if(brandIds.includes(data._id)) return data;
-  //       })
-  //       console.log("+++brandIds++++++++",this.brands,this.selectedBrandItems);
-  //        this.products = response.products.map((data: any )=> {
-  //         return { 
-  //           name: data.name , 
-  //           description: data.description ,
-  //           imageUrl: this.staticProductimageUrl ,
-  //           solutionLink: data.description,
-  //           _id: data._id
-  //         }
-  //        })
-  //     })
-  //   );
-  // }
-
-   private getProductsByFilter(subCategoryIds, brandIds): void {
+  private getProductsByFilter(subCategoryIds, brandIds): void {
     this.subscriptions.push(
        this.metaDataSvc.fetchProductsByFilters({subCategoryIds,brandIds}).subscribe(response => {
         this.productList = response.products;
@@ -213,233 +264,74 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
          })
 
          this.productBundles = [];
-         /*this.productBundles = response.productBundles.map((data: any )=> {
-          return { 
-            name: data.name , 
-            description: data.description ,
-            imageUrl: data.imageURL || this.staticProductimageUrl ,
-            solutionLink: data.description,
-            _id: data._id
-          }
-         })*/
-
       })
     );
   }
 
-  private getFilterQuery() {
-    this.filterQuery['subCategoryIds'] = this.selectedSubCategoryItems.length > 0 ? this.selectedSubCategoryItems.map((data) => {return data._id }) : []
-    this.filterQuery['brandIds'] = this.selectedBrandItems.length > 0 ? this.selectedBrandItems.map((data) => {return data._id }) : []
-
-    this.getProductsByFilter(this.filterQuery['subCategoryIds'], this.filterQuery['brandIds']);
+  public setAllChecked(items) :void {
+      items.forEach(element => {
+        element['checked'] = true;
+      });
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    
-  }
-  public ngOnInit() : void { 
-      this.getAllCategories();
-      this.dropdownSettings = {
-        singleSelection: false,
-        idField: '_id',
-        textField: 'name',
-        selectAllText: 'Select All',
-        unSelectAllText: 'UnSelect All',
-        itemsShowLimit: 0,
-        allowSearchFilter: true
-      };
-  
-      this.subCategoryDropdownSettings = {
-        singleSelection: false,
-        idField: '_id',
-        textField: 'name', 
-        selectAllText: 'Select All',
-        unSelectAllText: 'UnSelect All',
-        itemsShowLimit: 0,
-        allowSearchFilter: true
-      }
-      this.activeRoute.paramMap.subscribe(params => {
-      this.category =  params.get('categoryId');
-      if(this.category) {
-        this.getSubCategoriesByDefault(this.category);
-      }
-      this.subCategory = params.get('subcategoryId');
-      if(this.subCategory) {
-        this.category = this.subCategory.split('-')[0];
-        this.subCategory = this.subCategory.split('-')[1];
-        this.getSubCategoriesByDefault(this.category,this.subCategory);
-        this.selectedSubCategoryItems = this.subCategories.filter((data) => {
-          if(data._id == this.subCategory) return data;
-        })
-      }
-      this.brand = params.get('brandId');
-      this.getBrands();
-      if(this.brand) {
+  public setCategoryChecked(catId) : void {
 
-        this.getSubCategoriesByCategoryIds();
-        this.getAllSubCategories()
-        this.selectedBrandItems = this.brands.filter((data) => {
-          if(data._id == this.brand) return data;
-        })
-        this.getFilterQuery();
-      }
-    });
-
-    this.productListService.categoryIdSelectionSubject$.subscribe((categoryId) => {
-      this.category = categoryId;
-      this.selectedCategoryItems = this.categories.filter((data) => {
-        if(data._id == categoryId) return data;
-      })
-      this.getFilterQuery();
-    })
-
-  this.productListService.subCategoryIdSelectionSubject$.subscribe((data:any) => {
-      this.category = data.categoryId;
-      this.getAllCategories();
-      this.selectedSubCategoryItems = this.subCategories.filter((data) => {
-        if(data._id == this.category) return data;
-      })
-      this.getFilterQuery();
-    })
-
-    this.productListService.brandIdSelectionSubject$.subscribe((data:any) => {
-      this.brand = data;
-      this.getBrands();
-      this.selectedBrandItems = this.brands.filter((data) => {
-        if(data._id == this.brand) return data;
-      })
-      this.getFilterQuery();
-    })
-
-    this.selectedItems = [];
-
-    
-    this.getSubCategoriesByCategoryIds();
-
-    this.initialProducts = [...this.selectedCategoryItems, ...this.selectedSubCategoryItems, ...this.selectedBrandItems];
-  }
-
-  private getSubCategoriesByCategoryIds(): void {
-    let categoryIds = this.selectedCategoryItems.map((data) => { return data._id });
-    if(categoryIds.length == 0) {
-      this.selectedSubCategoryItems = [];
-      this.categories.forEach((data) => {
-          this.subCategories = [...this.subCategories,...data.subCategories];
-      })
+    let indexToUpdate = this.categories.findIndex(item => item._id === catId);
+    if(indexToUpdate !== -1){
+      this.categories[indexToUpdate]['checked'] = true;
     }
-    else {
-      this.selectedSubCategoryItems = [];
-      this.subCategories = [];
-      this.categories.forEach(data => {
-        if(categoryIds.includes(data._id)) {
-          this.subCategories = [...this.subCategories, ...data.subCategories];
-          this.selectedSubCategoryItems = [...this.selectedSubCategoryItems, ...data.subCategories];
-          this.cdr.detectChanges();
-        }
-    });
-    this.getFilterQuery();
-  }
+    
+    
   }
 
-
-  onCategoryItemSelect(item: any) {
-     this.selectedCategoryItems.push(item);
-     this.getSubCategoriesByCategoryIds();
-     this.getFilterQuery();
+  public setSubCategoryChecked(subCatId) : void {
+    console.log("********* ((((((( ))))))))", this.subCategories);
+    let indexToUpdate = this.subCategories.findIndex(item => item._id === subCatId.split('-')[1]);
+    if(indexToUpdate !== -1){
+      this.subCategories[indexToUpdate]['checked'] = true;
+    }
   }
 
-  onCategorySelectAll(items: any) {
-    this.selectedCategoryItems = items;
-    this.getFilterQuery();
+  public setBrandChecked(brandId) : void {
+    let indexToUpdate = this.brands.findIndex(item => item._id === brandId);
+    if(indexToUpdate !== -1){
+      this.brands[indexToUpdate]['checked'] = true;
+    }
   }
 
-  onCategoryItemDeSelect(item: any) {
-    this.selectedCategoryItems = this.selectedCategoryItems.filter((data) => {
-        if(data._id != item._id) return data;
-    })
-    this.getSubCategoriesByCategoryIds();
-    this.getFilterQuery();
+
+  public setFilters(){
+    this.filters = {
+      brandIds : [],
+      subCategoryIds : []
+    }
   }
 
-  onSubCategoryItemSelect(item: any) {
-    this.getFilterQuery();
- }
+  ngOnChanges(changes: SimpleChanges): void {
+    
 
- onSubCategorySelectAll(items: any) {
-   this.selectedSubCategoryItems = items;
-   this.getFilterQuery();
- }
-
- onSubCategoryItemDeSelect(item: any) {
-   this.getFilterQuery();
- }
-
- onSubCategoryDeSelectAll(items: any) {
-  this.selectedSubCategoryItems = [];
-  this.getFilterQuery();
-}
-
-onCategoryDeSelectAll(items: any) {
-  this.selectedCategoryItems = [];
-  this.getFilterQuery();
-}
-
-  onBrandSelect(item: any) {
-    this.getFilterQuery();
- }
-
- onBrandSelectAll(items: any) {
-   this.selectedBrandItems = items;
-   this.getFilterQuery();
- }
-
- onBrandDeSelect(item: any) {
-  this.getFilterQuery();
- }
-
- onBrandDeSelectAll(item: any) {
-  this.selectedBrandItems = [];
-  this.getFilterQuery();
- }
+  }
 
 
 
- public selecteCategories(item:any){
+  public selecteCategories(item:any){
     
     this.selectedCategoryItems = item;
-    this.getFilterQuery();
-    //console.log("++++++++ All",this.selectedBrandItems);
+
+    
   }
 
-public selectedSubCategories(item:any){
+  public selectedSubCategories(item:any){
     
-    this.selectedSubCategoryItems = item;
-    this.getFilterQuery();
-    //console.log("++++++++ All",this.selectedBrandItems);
+
+    
   }
 
   public selectedBrands(item:any){
     
-    this.selectedBrandItems = item;
-    this.getFilterQuery();
-    //console.log("++++++++ All",this.selectedBrandItems);
-  }
-  public shareIndividualCheckedList(item:{}){
-    //console.log("++++++++ Individual",item);
+    
   }
 
-
-  public tabClick(val){
-
-    this.selectedTab = val;
-
-    if(val === 'products'){
-      //this.products = this.productList;
-    }
-    else if(val === 'productBundles'){
-      //this.products = this.productBundles;
-    }
-  }
 
   public changeTab(event){
     console.log(event.index)
@@ -452,10 +344,13 @@ public selectedSubCategories(item:any){
     }
   }
 
- ngOnDestroy(): void {
-  this.subscriptions.forEach((data) => {
-    data.unsubscribe();
-  })
-}
+  public shareIndividualCheckedList(item:{}){
+  }
+
+
+  ngOnDestroy(): void {
+    
+  }
+
 
 }
