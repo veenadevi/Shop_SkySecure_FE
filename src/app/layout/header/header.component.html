@@ -4,12 +4,12 @@
   </button> -->
   <span class="altsys-logo" (click)="goToHomePage()"> 
     <img class="altsys-logo-navbar" alt=""
-    src="../../../assets/Realize/logos/RealizeLogo.svg" 
+    src="../../../assets/Realize/logos/Realize_Logo.svg" 
     />
   </span>
   <span class="spacer"></span>
   <button title="Cart" [matBadge]="cartItemCounts"  matBadgeColor="accent" mat-icon-button class="toolbar-icon-01" (click)="cartFynction()" >
-    <img src="../../../assets/icons/Cart.svg"/>
+    <img alt="" src="../../../assets/icons/Cart.svg"/>
     <!-- <button class="badge bg-danger">0</button> -->
     <ng-container *ngIf="(cartItems$ | async) as cartItems">
       <ng-container *ngIf="cartItems.length > 0">
@@ -19,7 +19,7 @@
     </ng-container>
     
   </button>
-  <button title="Bell" mat-icon-button class="toolbar-icon">
+  <button title="Notification" mat-icon-button class="toolbar-icon">
     <img alt="" src="../../../assets/icons/Bell.svg"/>
   </button>
   <button title="User-icon" *ngIf="!userLoggedIn"  mat-icon-button class="toolbar-icon" (click)="login()">

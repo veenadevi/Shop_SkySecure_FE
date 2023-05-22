@@ -39,22 +39,26 @@ color: #ffff;
 }
 
 .compare-btn {
-    background: #F6EBEC;
-    border: 1px solid #A9383D;
+    background: #E2EDFF;
+    border: 1px solid #003388;
     border-radius: 8px;
     text-align: center;
-    color: #A9383D;
+    color: #003388;
     padding:0.5% 3%;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 
 .request-btn {
-    background: linear-gradient(90deg, #A9383D 35.42%, #D58583 100%);
+    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
     border-radius: 8px;
     color: #FFFFFF;
     border: 1px solid #EFEFEF;
     padding:0.5% 3%;
     margin-right: 3%;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .pd-header-desc {
