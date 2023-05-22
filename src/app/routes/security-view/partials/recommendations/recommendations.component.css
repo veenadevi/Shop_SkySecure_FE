@@ -43,11 +43,13 @@
 }
 
 .request-btn {
-    background: linear-gradient(90deg, #A9383D 35.42%, #D58583 100%);
+    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
     border-radius: 8px;
     color: var(--white);
     border: none;
     height: 40px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .tenant-list {

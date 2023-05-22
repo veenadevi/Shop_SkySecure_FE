@@ -203,20 +203,24 @@
   }
   
   .request-btn {
-    background: #003388;
+    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
     border-radius: 8px;
     border: 1px solid #EFEFEF;
     text-align: center;
     color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
     
 }
 
   .compare-btn {
-      background: #D8E6FF;
       border-radius: 8px;
+      background: #E2EDFF;
       border: 1px solid #003388;
       text-align: center;
       color: #003388;
+      font-size: 16px;
+      font-weight: bold;
       
   }
 
