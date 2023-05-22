@@ -43,11 +43,12 @@ color: var(--neutral);
     padding:0.5% 3%;
     font-size: 16px;
     font-weight: 500;
+    margin-right: 3%;
+    height: 40px;
 }
 
 .compare-btn:hover {
-  background: #003388;
-  /* border: 1px solid #003388; */
+  background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
   color: #FFFFFF;
 }
 
@@ -64,9 +65,22 @@ color: var(--neutral);
 }
 
 .tertiary-btn {
-  color: #FFFFFF;
+  color: #E2E2FF;
   font-size: 16px;
   font-weight: 500;
+  /* text-decoration: underline; */
+  /* background-color: #E2E2FF; */
+  padding:0.5% 3%;
+  border: 1px solid #E2E2FF;
+  border-radius: 8px;
+  text-align: center;
+  height: 40px;
+}
+
+.tertiary-btn:hover {
+  background-color: #E2E2FF;
+  color: #003388;
+
 }
 
 .pd-header-desc {
@@ -147,14 +161,15 @@ color: var(--neutral);
   }
   
   .btn {
-    border: none;
-    padding: 12px 24px;
+    /* border: none; */
+    padding: 0px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin-top: 20px;
     cursor: pointer;
+    font-weight: 500;
   }
   
   @media screen and (max-width: 768px) {
