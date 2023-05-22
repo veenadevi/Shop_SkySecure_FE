@@ -70,7 +70,9 @@ color: var(--neutral);
 }
 
 .pd-header-desc {
-    width: 60%;
+    width: 75%;
+    font-weight: 500;
+    word-spacing: 3px;
 }
 
 .pd-header-right-img {
