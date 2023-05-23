@@ -24,6 +24,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public subCategories : any[] = [];
   public brands : any[] = [];
 
+  public defaultSelectedItem : any[] = [];
+
   public selectedCategoryItems : any[] = [];
   public selectedSubCategoryItems : any[] = [];
   public selectedBrandItems : any[] = [];
@@ -88,7 +90,6 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         this.categories = data;
         
         data.forEach(element => {
-          console.log("**************** Cat ", element.subCategories);
           this.subCategories = [...element.subCategories];
         });
         return data;
@@ -106,7 +107,6 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   .pipe(
     map(data => {
       if(data){
-        console.log("**************** Cat ",data);
         this.brands = data;
         return data;
       }
@@ -155,7 +155,6 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
     this.activeRoute.paramMap.subscribe(params => {
       if(this.categories.length >0 && this.brands.length>0){
-        console.log("++++++ Came in ", params.get('categoryId'));
         if(params.has('categoryId')){
           this.setCategoryChecked(params.get('categoryId'));
           this.getSubCategoriesByID(params.get('categoryId'));
@@ -166,7 +165,6 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
           this.setSubCategoryChecked(params.get('subcategoryId'));
           this.selectedSubCategoryItems.push({'_id' : params.get('subcategoryId').split('-')[1]});
           //this.selectedSubCategoryItems.push(params.get('subcategoryId').split('-')[1]);
-          console.log("++++++ SYB Category ", this.selectedSubCategoryItems.length);
           this.getFilteredData();
           
   
@@ -180,7 +178,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
           })
           this.getFilteredData();
 
-          console.log("++++++ Brand ", params.get('brandId'));
+          
   
         }
       }
@@ -218,7 +216,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   //       //  this.categories.forEach(element => {
   //       //     element['checked'] = true;
   //       //  });
-  //       //  console.log("+++++++ Selected ",this.categories);
+  //       
   //       //  this.getSubCategories(this.categories[0]._id);
   //     })
   //   );
@@ -229,7 +227,6 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     this.subscriptions.push(
       this.metaDataSvc.fetchSubCategories(categoryID).subscribe( response => {
        this.subCategories = response.subCategories;
-       console.log("+++++++ ++++ Inside Get Filters", response);
        this.selectedSubCategoryItems = this.subCategories;
        //this.setAllChecked(this.subCategories);
        this.getFilteredData();
@@ -241,11 +238,11 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public getFilteredData(){
     this.filters.brandIds = this.selectedBrandItems.length > 0 ? this.selectedBrandItems.map((data) => {return data._id }) : []
     this.filters.subCategoryIds = this.selectedSubCategoryItems.length > 0 ? this.selectedSubCategoryItems.map((data) => {
-      console.log("(((((((( data._id", data);
+      
       return data._id 
     }) : []
 
-    console.log("+++++++ ++++ Inside Get Filters", this.filters);
+    
     this.getProductsByFilter(this.filters.subCategoryIds,this.filters.brandIds);
   }
 
@@ -285,7 +282,6 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   }
 
   public setSubCategoryChecked(subCatId) : void {
-    console.log("********* ((((((( ))))))))", this.subCategories);
     let indexToUpdate = this.subCategories.findIndex(item => item._id === subCatId.split('-')[1]);
     if(indexToUpdate !== -1){
       this.subCategories[indexToUpdate]['checked'] = true;
@@ -316,7 +312,11 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   public selecteCategories(item:any){
     
+    console.log("+++++++ SYB ++++ Before", this.selectedCategoryItems);
     this.selectedCategoryItems = item;
+    
+    console.log("+++++++ SYB ++++ After", this.selectedCategoryItems);
+    
     this.getFilteredData();
 
     
@@ -324,7 +324,9 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   public selectedSubCategories(item:any){
     
+    console.log("+++++++ SYB ++++ Before", this.selectedSubCategoryItems);
     this.selectedSubCategoryItems = item;
+    console.log("+++++++ SYB ++++ Before", this.selectedSubCategoryItems);
     this.getFilteredData();
 
     
@@ -332,13 +334,14 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   public selectedBrands(item:any){
     
+    console.log("+++++++ SYB ++++ Before", this.selectedBrandItems);
     this.selectedBrandItems = item;
+    console.log("+++++++ SYB ++++ Before", this.selectedBrandItems);
     this.getFilteredData();
   }
 
 
   public changeTab(event){
-    console.log(event.index)
     this.tabIndex = event.index;
     if(event.index === 0){
       this.selectedTab = 'products';
