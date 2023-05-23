@@ -1,0 +1,25 @@
+<div class="bundle-card-container">
+    <div class="logo-holder" [ngStyle]="{'background': 'url(' + productItem.bannerURL + ') no-repeat 0 0 / cover'}">
+        <div class="img-holder">
+            <img class="mat-card-img" mat-card-image src="{{productItem.bannerLogo ? productItem.bannerLogo : alternateLogo}}" alt="Microsoft" />
+        </div>
+        </div>
+        
+    <div class="content-holder" >
+        <div class="text-header">
+            {{productItem.name}}
+        </div>
+        <div class="text-desc">
+            {{productItem.description}}
+        </div>
+        <div class="view-details-holder" >
+            <div class="view-details-text">
+                View Details
+            </div>
+            
+        </div>
+
+    </div>
+
+    
+</div>

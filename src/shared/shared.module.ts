@@ -16,6 +16,7 @@ import { ProductVariantModalComponent } from './components/product-variant-modal
 import { LoginAlertModalComponent } from './components/login-alert-modal/login-alert-modal.component';
 import { CompanyPromptModalComponent } from './components/modals/company-prompt-modal/company-prompt-modal.component';
 import { SelectOemModalComponent } from './components/modals/select-oem-modal/select-oem-modal.component';
+import { BundleCardFlyerComponent } from './components/bundle-card-flyer/bundle-card-flyer.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { SelectOemModalComponent } from './components/modals/select-oem-modal/se
     ProductVariantModalComponent,
     LoginAlertModalComponent,
     CompanyPromptModalComponent,
-    SelectOemModalComponent
+    SelectOemModalComponent,
+    BundleCardFlyerComponent
   ],
 
   providers: [
@@ -66,7 +68,8 @@ import { SelectOemModalComponent } from './components/modals/select-oem-modal/se
     ProductVariantModalComponent,
     LoginAlertModalComponent,
     CompanyPromptModalComponent,
-    SelectOemModalComponent
+    SelectOemModalComponent,
+    BundleCardFlyerComponent
   ],
   
 

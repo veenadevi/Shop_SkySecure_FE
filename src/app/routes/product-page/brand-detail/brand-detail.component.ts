@@ -33,6 +33,9 @@ export class BrandDetailComponent implements OnInit{
 
   public productVarients : any[] = [];
 
+  public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
+
+
 
 
 
@@ -72,7 +75,10 @@ export class BrandDetailComponent implements OnInit{
     );
   }
 
-
+  public getColor(val){
+    return val.toLowerCase();
+  }
+  
   public requestQuote(product){
 
   }

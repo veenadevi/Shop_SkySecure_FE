@@ -1,4 +1,62 @@
+<div class="brand-details-container">
+    <ng-container *ngIf="onPageLoad">
+        <div class="pd-header" [ngStyle]="{'background': 'url(' + productFamily.bannerURL + ') no-repeat 0 0 / cover'}" *ngIf="onPageLoad" >
+            <div class="pd-header-title">
+                <h3 [style.color]="getColor(productFamily.bannerTextColor)">{{productFamily.name}}</h3>
+                <div class="pd-header-reviews">
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                </div>
+                <div class="pd-header-desc">
+                    <p [style.color]="getColor(productFamily.bannerTextColor)">{{productFamily.description}}</p>
+                </div>
+                <div class="pd-header-actions">
+                    <button class="btn request-btn" (click)="requestQuote(productFamily)">Request quote</button>
+                    <button class="btn compare-btn">Try free trail</button>
+                </div>
+            </div>
+            <div class="pd-header-right">
+                <!-- <img class="mat-card-img pd-header-right-img" mat-card-image src="https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png" alt="Photo of test title" /> -->
+                <img class="mat-card-img pd-header-right-img" mat-card-image src="{{productFamily.bannerLogo ? productFamily.bannerLogo : alternateLogo}}" alt="Microsoft" />
+                <!-- <div class="pd-header-actions">
+                    <button class="btn compare-btn add-to-compare-btn">Add to compare</button>
+                </div> -->
+            </div>
+        </div>
 
+        <!-- Product BUndles -->
+        <!-- <div class='componentWrapper'><div class="header">Headline</div>Text inside div </div> -->
+
+
+        <div class="bundles-container" [ngStyle]="{'background': 'url(' + productFamily.bannerURL + ') no-repeat 0 0 / cover'}">
+            <div class="overlay-header">
+                <span class="text-header">
+                    {{productFamily.name}}
+                </span>
+            </div>
+            
+            <div class="bundle-card-holder">
+                <ng-container *ngFor="let product of products;">
+                    <div class="" href="">
+                        <bundle-card-flyer [productItem]="product"></bundle-card-flyer>
+                    </div>
+                </ng-container>
+                <ng-container *ngFor="let productVarient of productVarients;">
+                    <div class="" href="">
+                        <bundle-card-flyer [productItem]="productVarient"></bundle-card-flyer>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+
+
+<!-- 
 <div class="brand-details-container">
 <ng-container *ngIf="onPageLoad">
 
@@ -114,75 +172,12 @@
             </ng-container>
             
 
-            <!-- <div class="row">
-                <ng-container *ngFor="let product of productList">
-                    <div style="margin-bottom: 40px;">
-                        <div href="">
-                            <card-flyer [product]="product" [routePath]="routePath"></card-flyer>
-                        </div>
-                    </div>
-                </ng-container>
-            </div> -->
+            
         </div>
     </div>
 
-
-    <!-- <div class="pd-pricing">
-        <h4 class="heading-text">{{product.name}} pricing</h4>
-        <div class="pricing-cards">
-            <div class="card" *ngFor="let productVariant of product.productVariants">
-                <div class="card-header">
-                    <div class="price-header"><h3>{{productVariant.name}}</h3></div>
-                    <div class="price-details" *ngIf="productVariant.priceList.length != 0">
-                        <p class="price">Rs {{productVariant.priceList[0].price}}</p>
-                        <p class="price-cost">{{productVariant.priceList[0].priceType}}</p>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <ul *ngFor="let productVariantfeatureList of productVariant.featureList">
-                        <li><mat-icon class="price-item">check_circle</mat-icon><p>{{productVariantfeatureList.name}}</p></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="pd-pricing-footer">
-                <h5>Request a exclusive deal for your company</h5>
-                <button class="btn request-btn" (click)="requestQuote(product)">Request quote</button>
-            </div>
-        </div>
-    </div> -->
-
-
-    <!-- <div class="pd-images">
-        <h4 class="heading-text">Official screenshots</h4>
-        <div class="pd-images-items">
-            <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr87KBGwSmwLUIZRsEY5Im5ZMyt9ILgIHn9zUTBDS9rZfPZwWZ-UCsCfUER4MG5dm9TwI&usqp=CAU" alt="Photo of test title" />
-            </div>
-            <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr87KBGwSmwLUIZRsEY5Im5ZMyt9ILgIHn9zUTBDS9rZfPZwWZ-UCsCfUER4MG5dm9TwI&usqp=CAU" alt="Photo of test title" />
-            </div>
-            <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://support.content.office.net/en-us/media/f1d13c33-fe72-45dc-9dc3-6c27de9fec90.png" alt="Photo of test title" />
-            </div>
-            <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://support.content.office.net/en-us/media/f1d13c33-fe72-45dc-9dc3-6c27de9fec90.png" alt="Photo of test title" />
-            </div>
-            <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://www.pure-ip.com/hs-fs/hubfs/Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png?width=2283&name=Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png" alt="Photo of test title" />
-            </div>
-            <div class="imgae-item">
-                <img class="mat-card-img pd-header-right-img" mat-card-image src="https://www.pure-ip.com/hs-fs/hubfs/Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png?width=2283&name=Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png" alt="Photo of test title" />
-            </div>
-        </div>
-    </div> -->
-
-
-    <!-- <div class="pd-similar-products" *ngIf="similarProducts.length != 0">
-        <h4 class="heading-text">Similer products</h4>
-        <div class="similar-products-cards">
-            <app-similar-products [similarProducts]="similarProducts"></app-similar-products>
-        </div>
-    </div> -->
 </ng-container>
 </div>
-<ngx-spinner size="medium" type="ball-atom"></ngx-spinner>
+<ngx-spinner size="medium" type="ball-atom"></ngx-spinner> -->
+
+
