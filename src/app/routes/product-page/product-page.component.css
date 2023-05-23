@@ -116,3 +116,51 @@ ng-select select-dropdown .selected {
         background-color: green;
     }
 
+
+
+
+
+
+/* Styles For Tab -- Products & Bundles*/
+
+    .product-tab{
+        width: 100%;
+    }
+
+    .tab ul {
+        display: inline-block;
+        background: #E2EDFF;
+        margin: 0;
+        padding: 0;
+    }
+
+    .tab ul li {
+        display: inline-block;
+        list-style-type: none;
+        color: black;
+        font-size: 18px;
+        font-weight: 500;
+        padding: 10px 90px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    /* .tab ul li:hover{
+        background: #006FCB;
+    } */
+
+    .color {
+        color: #FFFFFF !important;
+        background-color: #006FCB;
+        border-bottom: 4px solid #F79C0B !important;
+
+    }
+
+    .content {
+        background: #F2F2F2;
+    }
+
+    .products-content h2 {
+        font-size: 24px;
+        font-weight: 600;
+    }
