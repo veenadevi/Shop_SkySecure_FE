@@ -14,7 +14,9 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 @Injectable({ providedIn: 'root' })
 export class AdminPageService {
   private baseUrl: string;
+  private baseUrlForQuote : string;
   private addFeatureUrl : string;
+  private getAllDashBoardDataUrl :  string;
 
 
 
@@ -26,10 +28,39 @@ export class AdminPageService {
     private userAccountStore : UserAccountStore
   ) {
     this.baseUrl = environment.gatewayUrl;
+    this.baseUrlForQuote = environment.gatewayUrlForOrders;
     this.addFeatureUrl = AppService.appUrl.addFeature;
+    this.getAllDashBoardDataUrl = AppService.appUrl.getAllDashBoardData;
 
     
   }
+
+  /**
+   * Service for Getting Admin Dashboard
+   */
+
+  public getDashboardData() : Observable<any> {
+
+    let url = this.baseUrlForQuote + this.getAllDashBoardDataUrl;
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+  /**
+   * 
+   * Service for Editing Product/Features
+   * 
+   */
 
 
   public addFeature( request : any): Observable<any> {
