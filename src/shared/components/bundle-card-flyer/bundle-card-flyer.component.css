@@ -4,15 +4,17 @@
     max-height: 11em;
     max-width: 24em;
     background: var(--white);
-    margin-bottom: 2em;
+    /* margin-top: 10px; */
     border-radius: 1rem;
     display: flex;
+    box-shadow: 0 2px 4px #00000040;
 }
 
 .logo-holder {
     width:37%;
     border-top-left-radius:1rem;
     border-bottom-left-radius: 1rem;
+    box-shadow: 1px 0px 1px #00000040;
 }
 
 .content-holder{
@@ -37,7 +39,7 @@
 .text-header {
     font-size: 16px;
     font-weight: bold;
-    font-family: 'Roboto Black', sans-serif;
+    font-family: 'Lato', sans-serif;
     letter-spacing: 1px;
     color: var(--text-dark);
     overflow: hidden;
@@ -62,8 +64,15 @@
 
 .view-details-text{
     font-size: 14px;
-    font-family: 'Roboto Black', sans-serif;
+    font-family: 'Lato', sans-serif;
     letter-spacing: 1px;
-    color: var(--red);
+    color: #0047BD;
     overflow: hidden;
+    font-weight: 500;
+    cursor: pointer;
 }
+
+.view-details-text:hover{
+    text-decoration: underline;
+}
+

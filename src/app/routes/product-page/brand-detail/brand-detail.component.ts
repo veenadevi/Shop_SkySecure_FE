@@ -83,4 +83,5 @@ export class BrandDetailComponent implements OnInit{
 
   }
   
+  
 }

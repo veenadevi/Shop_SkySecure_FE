@@ -15,7 +15,7 @@
                 </div>
                 <div class="pd-header-actions">
                     <button class="btn request-btn" (click)="requestQuote(productFamily)">Request quote</button>
-                    <button class="btn compare-btn">Try free trail</button>
+                    <button class="btn tertiary-btn">Try free trail</button>
                 </div>
             </div>
             <div class="pd-header-right">
@@ -31,7 +31,7 @@
         <!-- <div class='componentWrapper'><div class="header">Headline</div>Text inside div </div> -->
 
 
-        <div class="bundles-container" [ngStyle]="{'background': 'url(' + productFamily.bannerURL + ') no-repeat 0 0 / cover'}">
+        <div class="bundles-container" [ngStyle]="{'background' : 'url(' + productFamily.bannerURL + ') no-repeat 0 0 / cover'}">
             <div class="overlay-header">
                 <span class="text-header">
                     {{productFamily.name}}
