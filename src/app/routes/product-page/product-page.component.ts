@@ -362,10 +362,10 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
 
 
-public tabChange(productName: any){
-  console.log(productName)
-  this.tabIndex = productName;
-  if(productName === 'products'){
+public tabChange(productTabSection: any){
+  console.log(productTabSection)
+  this.tabIndex = productTabSection;
+  if(productTabSection === 'products'){
     this.selectedTab = 'products';
   }
   else{
