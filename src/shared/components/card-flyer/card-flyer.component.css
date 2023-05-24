@@ -135,7 +135,7 @@
     margin-bottom: 0px;
     padding-bottom: 0px; 
     font-size: 14px;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px; 
     color: var(--text-dark);
     /* min-height: 66px; */
     overflow: hidden;
