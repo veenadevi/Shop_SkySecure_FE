@@ -59,10 +59,10 @@
 }
 
 .text-style {
-    font-family: 'Lato';
+    font-family: 'Lato', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 21px;
     color: #1B233C;
 }
@@ -91,3 +91,7 @@
 .delete-button {
     cursor: pointer
 }
+
+/* .delete-icon {
+    background-color: #E2EDFF;
+} */
