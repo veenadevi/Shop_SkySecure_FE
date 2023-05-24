@@ -135,7 +135,7 @@
     margin-bottom: 0px;
     padding-bottom: 0px; 
     font-size: 14px;
-    letter-spacing: 0.5px; 
+    letter-spacing: 1px; 
     color: var(--text-dark);
     /* min-height: 66px; */
     overflow: hidden;
@@ -150,7 +150,7 @@
     font-size: 16px;
     font-weight: bold;
     font-family: 'Roboto Black', sans-serif;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     color: var(--text-dark);
     overflow: hidden;
     text-overflow: ellipsis;
