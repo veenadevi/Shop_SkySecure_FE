@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminPageRoutingModule, ROUTED_COMPONENTS } from './admin-page-routing.module';
 import { AdminPageComponent } from './admin-page.component';
 import { FeatureUpdateComponent } from './partials/feature-update/feature-update.component';
+import { AdminDashboardComponent } from './partials/admin-dashboard/admin-dashboard.component';
 
 
 
@@ -16,6 +17,7 @@ import { FeatureUpdateComponent } from './partials/feature-update/feature-update
     ROUTED_COMPONENTS,
     AdminPageComponent,
     FeatureUpdateComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     CommonModule,

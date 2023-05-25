@@ -27,6 +27,8 @@ export class InterfaceComponent {
 
   public typeSelected : string;
 
+  public userRole : string;
+
   // constructor(private spinnerService: NgxSpinnerService) {
   //   this.typeSelected = 'ball-fussion';
   // }
@@ -46,8 +48,9 @@ export class InterfaceComponent {
   public userDetails$ = this.userAccountStore.userProfileDetails$
   .pipe(
     map(data => {
-      console.log("++++++++++ Came inside User", data);
+      //console.log("++++++++++ Came inside User", data);
       if(data){
+        this.userRole = (data.userDetails && data.userDetails.role) ? data.userDetails.role : null;
         console.log("++++++++++ Came inside User Data", data);
         if(data.userDetails.firstName){
           this.userName = data.userDetails.firstName + ' ' + (data.userDetails.lastName ? data.userDetails.lastName : '');

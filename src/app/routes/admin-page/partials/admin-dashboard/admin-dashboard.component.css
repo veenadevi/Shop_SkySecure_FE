@@ -1,0 +1,23 @@
+.admin-dashboard-view {
+    min-height: 30em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+}
+
+.dashboard-container{
+    background: #efefef;
+    padding: 1em;
+}
+
+.border {
+    border-radius: 10px;
+}
+
+.box-content{
+    display: flex;
+    padding: 1em;
+    justify-content: left;
+    align-items: center;
+}

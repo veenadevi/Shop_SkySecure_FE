@@ -1,0 +1,43 @@
+<div class="admin-dashboard-view">
+
+    <div class="dashboard-container">
+
+        <ng-container *ngIf="(dashboardData$ | async) as dashboardData">
+            <div class="overflow-hidden">
+                <div class="row gy-5">
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                        <div class="box-content">
+                            My Accounts - {{dashboardData.TotalAccounts}}
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                        <div class="box-content">
+                            My Open Quotation - {{dashboardData.TotalOpenQuote}}
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                        <div class="box-content">
+                            My Closed Deals Accounts - {{dashboardData.TotalClosedDeals}}
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                        <div class="box-content">
+                            My Open Tasks - {{dashboardData.TotalTasks}}
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+        </ng-container>
+
+          <ngx-spinner size="medium" type="ball-atom"></ngx-spinner>
+    </div>
+</div>
