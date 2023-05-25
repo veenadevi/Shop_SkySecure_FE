@@ -127,11 +127,60 @@ ng-select select-dropdown .selected {
         width: 100%;
     }
 
+    .buttonswitch{
+        display: flex;
+        flex-direction: row;
+        padding: 0 ;
+        border-bottom: 4px solid #f79c0b;
+    }
+    .primary{
+        display: inline-block;
+        list-style-type: none;
+        color: black;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 8px;
+        margin-right: 5px;
+     
+    }
+    .secondary{
+        display: inline-block;
+        list-style-type: none;
+        color: black;
+        font-size: 18px;
+        font-weight: 500;     
+        cursor: pointer;
+        text-align: center;
+        border-radius: 8px;
+       
+    }
+    button{
+        padding: 5px;
+        text-align: center;
+        width: 200px;
+        border-radius: 8px 8px 0 0;
+        border: none;
+        background-color: #E2EDFF;
+        color: #003388;
+    }
+
+
+    
+    .color {
+        color: #FFFFFF !important;
+        background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
+        
+
+    }
+    
     .tab ul {
         display: inline-block;
         background: #E2EDFF;
-        margin: 0;
-        padding: 0;
+        margin: 10px;
+        padding: 0 ;
+        border-radius:8px;
     }
 
     .tab ul li {
@@ -140,21 +189,17 @@ ng-select select-dropdown .selected {
         color: black;
         font-size: 18px;
         font-weight: 500;
-        padding: 10px 90px;
+        padding: 8px 50px;
         cursor: pointer;
         text-align: center;
+        border-radius: 8px;
+     
     }
 
     /* .tab ul li:hover{
         background: #006FCB;
     } */
 
-    .color {
-        color: #FFFFFF !important;
-        background-color: #006FCB;
-        border-bottom: 4px solid #F79C0B !important;
-
-    }
 
     .content {
         background: #F2F2F2;

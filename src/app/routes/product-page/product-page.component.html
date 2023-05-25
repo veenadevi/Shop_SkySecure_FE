@@ -131,11 +131,16 @@
 
   <div class="product-tab">
     <div class="tab">
-      <ul>
-        <li id="products" [class.color]="selectedTab === 'products'" (click)="tabChange('products')">Products</li>
-        <li id="productBundles" [class.color]="selectedTab === 'productBundles'" (click)="tabChange('productBundles')">Product Bundles</li>
-      </ul>
-
+      <div class="buttonswitch">
+     <div class="primary">
+      <button id="products" [class.color]="selectedTab === 'products'" (click)="tabChange('products')">Products</button>
+     </div>
+        <div class="secondary">
+        <button id="productBundles" [class.color]="selectedTab === 'productBundles'" (click)="tabChange('productBundles')">Product Bundles</button>
+      </div>
+      
+    </div>
+ 
       <div class="product-list-container" >
         <ng-container
           *ngIf="(selectedTab === 'products')  ? (!products || products.length <= 0) : (!productBundles || productBundles.length <= 0)">
