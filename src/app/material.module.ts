@@ -31,6 +31,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 
 
+
+
 /*import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -111,7 +113,6 @@ import { NgChartsModule } from 'ng2-charts';
     MatTabsModule,
 
 
-
     NgChartsModule
   ],
   exports: [
@@ -138,8 +139,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatStepperModule,
     MatInputModule,
     MatTabsModule,
-
-
+    
 
     NgChartsModule
     

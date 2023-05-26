@@ -17,6 +17,8 @@ export class AdminPageService {
   private baseUrlForQuote : string;
   private addFeatureUrl : string;
   private getAllDashBoardDataUrl :  string;
+  private getAllAccountsUrl : string;
+  private getAccountsByIdUrl : string
 
 
 
@@ -31,6 +33,8 @@ export class AdminPageService {
     this.baseUrlForQuote = environment.gatewayUrlForOrders;
     this.addFeatureUrl = AppService.appUrl.addFeature;
     this.getAllDashBoardDataUrl = AppService.appUrl.getAllDashBoardData;
+    this.getAllAccountsUrl = AppService.appUrl.getAllAccounts;
+    this.getAccountsByIdUrl = AppService.appUrl.getAccountsById;
 
     
   }
@@ -42,6 +46,48 @@ export class AdminPageService {
   public getDashboardData() : Observable<any> {
 
     let url = this.baseUrlForQuote + this.getAllDashBoardDataUrl;
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+  /**
+   * Service for Getting All Accounts Details
+   */
+
+  public getAllAccounts() : Observable<any> {
+
+    let url = this.baseUrlForQuote + this.getAllAccountsUrl;
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+  /**
+   * Service for Getting Accounts Details By ID
+   */
+
+  public getAccountsById(accountsId : string) : Observable<any> {
+
+    let url = this.baseUrlForQuote + this.getAccountsByIdUrl + '/' + accountsId;
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(

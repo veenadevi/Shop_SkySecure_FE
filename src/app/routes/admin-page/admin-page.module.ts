@@ -8,6 +8,8 @@ import { AdminPageRoutingModule, ROUTED_COMPONENTS } from './admin-page-routing.
 import { AdminPageComponent } from './admin-page.component';
 import { FeatureUpdateComponent } from './partials/feature-update/feature-update.component';
 import { AdminDashboardComponent } from './partials/admin-dashboard/admin-dashboard.component';
+import { AllAccountsComponent } from './partials/all-accounts/all-accounts.component';
+import { AccountDetailsComponent } from './partials/account-details/account-details.component';
 
 
 
@@ -18,6 +20,8 @@ import { AdminDashboardComponent } from './partials/admin-dashboard/admin-dashbo
     AdminPageComponent,
     FeatureUpdateComponent,
     AdminDashboardComponent,
+    AllAccountsComponent,
+    AccountDetailsComponent,
   ],
   imports: [
     CommonModule,

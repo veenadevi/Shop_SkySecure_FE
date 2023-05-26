@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CardItemComponent } from './components/card-item/card-item.component';
 import { SearchComponent } from './components/search/search.component';
 import { MaterialModule } from 'src/app/material.module';
+import { PrimeNgModule } from 'src/app/prime-ng.module';
 import { PopularCategoryComponent } from './components/search/partials/popular-category/popular-category.component';
 import { TrendingProductsComponent } from './components/search/partials/trending-products/trending-products.component';
 import { RecentlySearchedComponent } from './components/search/partials/recently-searched/recently-searched.component';
@@ -23,7 +24,8 @@ import { BundleCardFlyerComponent } from './components/bundle-card-flyer/bundle-
 
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    PrimeNgModule
     
   ],
 
@@ -56,6 +58,7 @@ import { BundleCardFlyerComponent } from './components/bundle-card-flyer/bundle-
   exports: [
     CommonModule,
     MaterialModule,
+    PrimeNgModule,
     CardItemComponent,
     SearchComponent,
     PopularCategoryComponent,

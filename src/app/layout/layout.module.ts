@@ -5,6 +5,7 @@ import { NgModule }                         from '@angular/core';
 import { CommonModule }                     from '@angular/common';
 import { RouterModule }                     from '@angular/router';
 import { MaterialModule }                   from '../material.module';
+import { PrimeNgModule }                    from '../prime-ng.module';
 
 /*
  * Package Imports
@@ -25,7 +26,8 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
   imports: [
     CommonModule,
     RouterModule,
-    MaterialModule
+    MaterialModule,
+    PrimeNgModule
     
 
   ],
@@ -48,6 +50,7 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
   exports: [
     RouterModule,
     MaterialModule,
+    PrimeNgModule,
     CommonModule,
 
     HeaderComponent,

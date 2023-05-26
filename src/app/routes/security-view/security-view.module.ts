@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/shared/shared.module'; 
 import { MaterialModule } from 'src/app/material.module';
+import { PrimeNgModule } from 'src/app/prime-ng.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -25,12 +26,14 @@ import { ActivityDetailsTableComponent } from './partials/recommendations/partia
     NgbModule,
     SharedModule,
     SecurityViewRoutingModule,
-    MaterialModule
+    MaterialModule,
+    PrimeNgModule
   ],
   exports: [
     RouterModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    PrimeNgModule
   ]
 })
 export class SecurityViewModule { }

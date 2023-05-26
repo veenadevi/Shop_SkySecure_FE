@@ -3,6 +3,7 @@ import { NgModule }                       from '@angular/core';
 import { CommonModule }                   from '@angular/common';
 import { RouterModule }                   from '@angular/router';
 import { MaterialModule } from '../material.module';
+import { PrimeNgModule } from '../prime-ng.module';
 import { SharedModule } from 'src/shared/shared.module';
 
 
@@ -29,6 +30,7 @@ import { LayoutModule  } from '../layout/layout.module';
     InterfaceRoutingModule,
     LayoutModule,
     MaterialModule,
+    PrimeNgModule,
     SharedModule
   ],
 
@@ -45,7 +47,8 @@ import { LayoutModule  } from '../layout/layout.module';
   exports: [
     CommonModule,
     RouterModule,
-    MaterialModule
+    MaterialModule,
+    PrimeNgModule,
     /*MatButtonModule,
     MatSidenavModule,
     MatMenuModule,

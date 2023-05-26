@@ -2,6 +2,7 @@ import { NgModule , CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from './material.module';
+import { PrimeNgModule } from './prime-ng.module';
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -69,6 +70,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     RouterModule,
     FormsModule,
     MaterialModule,
+    PrimeNgModule,
     InterfaceModule,
     BrowserAnimationsModule,
     NgbModule,

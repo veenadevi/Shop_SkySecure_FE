@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminPageComponent } from './admin-page.component';
 import { FeatureUpdateComponent } from './partials/feature-update/feature-update.component';
 import { AdminDashboardComponent } from './partials/admin-dashboard/admin-dashboard.component';
+import { AllAccountsComponent } from './partials/all-accounts/all-accounts.component';
+import { AccountDetailsComponent } from './partials/account-details/account-details.component';
 
 const routes: Routes = [
   {
@@ -18,6 +20,16 @@ const routes: Routes = [
         canActivate: [],
         path: 'dashboard',
         component : AdminDashboardComponent
+      },
+      {
+        canActivate: [],
+        path: 'accounts',
+        component : AllAccountsComponent
+      },
+      {
+        canActivate: [],
+        path: 'accounts-details',
+        component : AccountDetailsComponent
       },
       {
         canActivate: [],

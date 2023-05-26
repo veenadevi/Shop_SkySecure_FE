@@ -32,6 +32,8 @@
         "createQuotation" : "api/user/createQuotation",
         "getQuoteHistory" : "api/user/getQuoteHistory",
         "getAllDashBoardData" : "api/user/allDashBoardData",
+        "getAllAccounts" : "api/user/allAccounts",
+        "getAccountsById" : "api/user/getAccountDetails",
 
 
         "app-registration" : "api/user/azure/app-registration",
