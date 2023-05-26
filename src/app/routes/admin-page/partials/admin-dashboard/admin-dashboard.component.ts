@@ -15,6 +15,8 @@ export class AdminDashboardComponent implements OnInit{
 
   public totalAccounts : string;
 
+  public dashboardData ;
+
   constructor(
     private spinnerService : NgxSpinnerService,
     private adminPageService : AdminPageService
@@ -39,12 +41,13 @@ export class AdminDashboardComponent implements OnInit{
 
   ngOnInit(): void {
     
-    
-    /*this.subscriptions.push(
+    /*this.spinnerService.show();
+    this.subscriptions.push(
       
       this.adminPageService.getDashboardData().subscribe( response => {
         console.log("***** +++++ , dashboard Data ", response);
-        //this.spinnerService.hide();
+        this.dashboardData = response;
+        this.spinnerService.hide();
       })
     )*/
   }
