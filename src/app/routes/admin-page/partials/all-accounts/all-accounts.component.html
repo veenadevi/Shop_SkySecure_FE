@@ -19,7 +19,12 @@
             </ng-template>
             <ng-template pTemplate="body" let-account>
                 <tr>
-                    <td>{{ account.id }}</td>
+                    <td>
+                        <div class="text-style" (click)="getAccountById(account.id)">
+                            {{ account.id }}
+                        </div>
+                        
+                    </td>
                     <td>{{ account.Owner.name }}</td>
                     <td>{{ account.Account_Name }}</td>
                     <td>{{ account.Account_Type }}</td>

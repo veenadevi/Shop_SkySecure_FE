@@ -1,1 +1,46 @@
-<p>account-details works!</p>
+<div class="account-details-view">
+    <div class="card">
+        <p-table 
+            [value]="accountData" 
+            [tableStyle]="{ 'min-width': '50rem' }"
+            [paginator]="false"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            >
+            <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>ID</th>
+                    <th>Owner Name</th>
+                    <th>Created By</th>
+                    <th>Industry</th>
+                    <th>Approval State</th>
+                    <th>Shipping City</th>
+                    <th>Shipping Country</th>
+                    <th>Description</th>
+                    <th>Annual Revenue</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-account>
+                <tr>
+                    <td>{{ account.Owner.id }}</td>
+                    <td>{{ account.Owner.name }}</td>
+                    <td>{{ account.Created_By.name }}</td>
+                    <td>{{ account.Industry }}</td>
+                    <td>{{ account.$approval_state }}</td>
+                    <td>{{ account.Shipping_City }}</td>
+                    <td>{{ account.Shipping_Country }}</td>
+                    <td>{{ account.Description }}</td>
+                    <td>{{ account.Annual_Revenue }}</td>
+                </tr>
+            </ng-template>
+            <!-- <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+            </ng-template> -->
+            <!-- <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+            </ng-template> -->
+        </p-table>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
@@ -264,14 +265,15 @@ export class AllAccountsComponent implements OnInit{
   )
 
   constructor(
-    private adminPageService : AdminPageService
+    private adminPageService : AdminPageService,
+    private router : Router
   ){}
 
   ngOnInit(): void {
     
-    //this.accountData = this.sampleData.accounts.data;
-    //this.info = this.sampleData.accounts.info;
-    this.getAllAccounts();
+    this.accountData = this.sampleData.accounts.data;
+    this.info = this.sampleData.accounts.info;
+    //this.getAllAccounts();
 
   }
 
@@ -284,5 +286,13 @@ export class AllAccountsComponent implements OnInit{
 
       })
     )
+  }
+
+  public getAccountById(accountId){
+
+    let queryParams ={
+      accountId : accountId
+    }
+    this.router.navigate(['/admin-page/accounts-details'], {queryParams: queryParams});
   }
 }
