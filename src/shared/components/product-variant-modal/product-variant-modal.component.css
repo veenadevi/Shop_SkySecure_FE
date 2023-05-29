@@ -154,10 +154,17 @@ h6 {
 
 .check-box::after {
     content: '\2713';
+    color: #ffffff;
+    transform: scale(0);
+    transition: transform 0.15s;
 }
 
 .checkbox-input:checked + .check-box{
     background-color: #0047BD;
     border-color: #0047BD;
     color: white;
+}
+
+.checkbox-input:checked + .check-box::after {
+    transform: scale(1);
 }
