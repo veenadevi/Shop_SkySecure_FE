@@ -13,6 +13,9 @@ export class ProductComponent {
 
   @Input() products : Array<any> = [];
 
+  @Input('type')
+  public type : string;
+
   constructor ( 
     private authService : MsalService,
     private loginService : LoginService,

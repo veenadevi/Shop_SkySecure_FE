@@ -17,6 +17,7 @@ export class ProductCardItemComponent implements OnInit{
   @Input('routePath')
   public routePath : string;
 
+
   constructor(
     private router: Router,
     private authService : MsalService,
@@ -52,8 +53,15 @@ export class ProductCardItemComponent implements OnInit{
   }
 
   public navigateToProductDetails(product:any){
+    /*console.log("**************** ++++++++ ", this.type);
+    if(this.type === 'productBundles'){
+      this.router.navigate(['/products/brand-detail', product._id]);
+    }
+    else{
+      this.router.navigate(['/products', product._id]);
+    }*/
     
-    this.router.navigate(['/products', product._id]);
+
   }
 
 }

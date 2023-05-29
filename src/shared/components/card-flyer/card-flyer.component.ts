@@ -70,7 +70,13 @@ export class CardFlyerComponent {
 
   public navigateToProductDetails(product:any){
     
-    this.router.navigate(['/products', product._id]);
+    if(this.routePath === 'productBundles'){
+      this.router.navigate(['/products/brand-detail', product._id]);
+    }
+    else{
+      this.router.navigate(['/products', product._id]);
+    }
+    //this.router.navigate(['/products', product._id]);
   }
 
   public closeModal() {

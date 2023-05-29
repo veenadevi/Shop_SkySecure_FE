@@ -9,7 +9,7 @@ import { ProductListService } from 'src/shared/services/product-list-page.servic
 
 
 @Component({
-  selector: 'app-product-page',
+  selector: 'app-product-page2',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.css']
 })
@@ -453,6 +453,16 @@ public selectedSubCategories(item:any){
     }
   }
 
+  public tabChange(productTabSection: any){
+    console.log(productTabSection)
+    this.tabIndex = productTabSection;
+    if(productTabSection === 'products'){
+      this.selectedTab = 'products';
+    }
+    else{
+      this.selectedTab = 'productBundles';
+    }
+  }
  ngOnDestroy(): void {
   this.subscriptions.forEach((data) => {
     data.unsubscribe();

@@ -259,8 +259,16 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
             _id: data._id
           }
          })
-
-         this.productBundles = [];
+         this.productBundles = response.productBundles;
+         /*this.productBundles = response.productBundles.map((data: any )=> {
+          return { 
+            name: data.name , 
+            description: data.description ,
+            imageUrl: data.imageURL || this.staticProductimageUrl ,
+            solutionLink: data.description,
+            _id: data._id
+          }
+         })*/
       })
     );
   }

@@ -157,7 +157,7 @@
         <ng-container *ngIf="products.length > 0">
           <!-- <h4 class="oem-tilte">Products</h4> -->
           <div *ngIf="products.length > 0">
-            <app-product [products]=" (selectedTab === 'products') ? productList : productBundles"></app-product>
+            <app-product [type]="(selectedTab === 'products') ? 'products' : 'productBundles'" [products]=" (selectedTab === 'products') ? productList : productBundles"></app-product>
           </div>
         </ng-container>
       </div>
