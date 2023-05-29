@@ -1,4 +1,4 @@
-.modal-header {
+/* .modal-header {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,4 +36,128 @@
     margin-right: 10px;
     font-size: 16px;
     font-weight: 500;
+} */
+
+
+
+.popup-header {
+    position: relative;
+    padding: 10px 32px;
+    background-color: #E2EDFF;
+    border-radius: 10px 10px 0 0;
+}
+
+.product-name{
+    max-width: 75%;
+    color: #003388;
+    font-size: 24px;
+    line-height: 135%;
+}
+
+.header-alert{
+    position: absolute;
+    background-color: #B82727;
+    top: 0px;
+    right: 32px;
+    height: 63px;
+    width: 38px;
+    border-radius: 0 0 30px 30px;
+}
+
+.header-alert-icon {
+    position: absolute;
+    top: 20px;
+    left: 6px;
+}
+
+.popup-body {
+    padding: 10px 32px;
+}
+
+.body-content {
+    background-color: #E2EDFF;
+    margin-top: 10px;
+}
+
+.item-name {
+    margin-left: 5px;
+}
+
+h6 {
+    font-size: 1.1rem;
+    padding: 10px 0px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.item-list{
+    display: flex;
+    align-items: baseline;
+    padding: 0px 32px 16px;
+    cursor: pointer;
+
+}
+
+.item-list span {
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.popup-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 0 20px;
+}
+
+.primary-alert-btn {
+    background: linear-gradient(180deg, #B82727 -21.43%, #FC8181 144.64%);
+    border-radius: 8px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.secondary-alert-btn {
+    background: #F8E9E9;
+    border: 1px solid #B82727;
+    border-radius: 8px;
+    text-align: center;
+    color: #B82727;
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.checkbox-input {
+    display: none;
+}
+
+.check-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #0047BD;
+    color: transparent;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    border-radius: 4px;
+    transition: background-color 0.15s, border-color 0.15s;
+}
+
+.check-box::after {
+    content: '\2713';
+}
+
+.checkbox-input:checked + .check-box{
+    background-color: #0047BD;
+    border-color: #0047BD;
+    color: white;
 }
