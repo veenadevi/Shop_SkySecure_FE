@@ -8,6 +8,8 @@ import { AuthenticationResult, EventMessage, EventType, InteractionStatus, SsoSi
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { LoginService } from 'src/shared/services/login.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SelectOemModalComponent } from 'src/shared/components/modals/select-oem-modal/select-oem-modal.component';
 
 
 @Component({
@@ -29,6 +31,13 @@ export class InterfaceComponent {
 
   public userRole : string;
 
+  public visible : boolean;
+
+
+  public cities : any;
+
+  public selectedCity : any;
+
   // constructor(private spinnerService: NgxSpinnerService) {
   //   this.typeSelected = 'ball-fussion';
   // }
@@ -40,7 +49,8 @@ export class InterfaceComponent {
     public collapseService: CollapseService,
     private loginService : LoginService,
     private spinnerService : NgxSpinnerService,
-    private msalBroadcastService: MsalBroadcastService
+    private msalBroadcastService: MsalBroadcastService,
+    private modalService : NgbModal
   ){
     this.typeSelected = 'ball-atom';
   }
@@ -71,6 +81,14 @@ export class InterfaceComponent {
   )
 
   public ngOnInit() : void {
+
+    this.cities = [
+      {name: 'New York', code: 'NY'},
+      {name: 'Rome', code: 'RM'},
+      {name: 'London', code: 'LDN'},
+      {name: 'Istanbul', code: 'IST'},
+      {name: 'Paris', code: 'PRS'}
+  ];
 
     console.log("++++++++++ Called NGONInit");
     this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
@@ -126,6 +144,12 @@ export class InterfaceComponent {
     setTimeout(() => {
       this.spinnerService.hide();
     }, 5000); // 5 seconds
+  }
+
+  public showDialog() : void {
+    //console.log("**** Came in");
+    //this.visible = true;
+    const modalRef = this.modalService.open(SelectOemModalComponent);
   }
   
 

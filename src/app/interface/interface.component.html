@@ -83,7 +83,8 @@
                     </div>
                     <mat-menu #securityMenu="matMenu" yPosition="below" xPosition="after">
                 
-                        <button mat-menu-item [routerLink]="['security-view/recommendations']">
+                        <!-- <button mat-menu-item [routerLink]="['security-view/recommendations']"> -->
+                        <button mat-menu-item (click)="showDialog()">
                             <div class="menu-width" >
                                 Recommendations
                             </div>

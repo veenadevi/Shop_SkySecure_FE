@@ -37,22 +37,9 @@
             <div class="card flex justify-content-center custom-style-accordian">
                 <p-accordion [multiple]="true" [activeIndex]="[0]">
                     <p-accordionTab header="Products">
-                        <!-- <div class="container text-center">
-                            <div class="row">
-                                <div class="col-sm-2 product-holder">
-                                    <div class="product-header">
-                                        <span>Office 365</span>
-                                    </div>
-                                    <div class="product-description">
-                                        <span>View Details</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-10 product-card-holder">
-                                    Hi
-                                </div>
-                              </div>
-                        </div> -->
-                        <div class="row-style">
+
+                        <brand-bundle></brand-bundle>
+                        <!-- <div class="row-style">
                             <div class="product-holder">
                                 <div class="product-header">
                                     <span>Office 365</span>
@@ -64,14 +51,17 @@
                             <div class="product-card-holder">
                                 Sample
                             </div>
-                        </div>
+                        </div> -->
                     </p-accordionTab>
+
+                    <!-- Product Bundles Accordian -->
                     <p-accordionTab header="Features Comparison">
-                        <div class="container text-center">
+                        <brand-features></brand-features>
+                        <!-- <div class="container text-center">
                             <div class="row">
                                Hi
                               </div>
-                        </div>
+                        </div> -->
                     </p-accordionTab>
                 </p-accordion>
             </div>
