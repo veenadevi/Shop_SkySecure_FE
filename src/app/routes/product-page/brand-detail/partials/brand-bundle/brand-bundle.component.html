@@ -1,8 +1,23 @@
-<div class="brand-bundle-container">
-    <div class="product-header">
-        Sample
+<ng-container *ngIf="(productFamilyVariants && productFamilyVariants.length>0) ; else productTemplate">
+    Inside 
+</ng-container>
+<ng-template #productTemplate>
+    <div class="brand-bundle-container">
+        <div class="product-header">
+            <div class="header-text">
+                <span>
+                    {{headerText}}
+                </span>
+            </div>
+
+        </div>
+        <div class="product-content">
+            <div class="card-holder">
+                <ng-container *ngFor="let item of cardItems">
+                    <brand-card-flyer [item] = "item"></brand-card-flyer>
+                </ng-container>
+            </div>
+        </div>
     </div>
-    <div class="product-header">
-        Sample
-    </div>
-</div>
+</ng-template>
+

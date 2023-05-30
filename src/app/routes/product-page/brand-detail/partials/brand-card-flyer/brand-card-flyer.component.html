@@ -1,0 +1,8 @@
+<div class="card-container" (click)="navigateTo(item._id)" [ngStyle]="{'background': 'url(' + item.bgImg + ') no-repeat 0 0 / cover'}" >
+    <div class="img-holder">
+        <img class="mat-card-img" mat-card-image src="{{item.logo}}" alt="Microsoft" />
+    </div>
+    <div class="text-holder">
+        <span [style.color]="getColor(item.textClr)">{{item.name}}</span>
+    </div>
+</div>

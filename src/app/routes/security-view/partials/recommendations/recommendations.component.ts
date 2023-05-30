@@ -41,7 +41,6 @@ export class RecommendationsComponent {
         else{
           //this.pageReloading = 'n';
         }
-        console.log("++++++++++ Page Relaoding", this.pageReloading);
     }));
   }
 

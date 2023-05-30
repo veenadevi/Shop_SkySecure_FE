@@ -104,7 +104,7 @@ export class AccountDetailsComponent implements OnInit{
   public ngOnInit(): void {
     let params = this.route.snapshot.queryParamMap;
 
-    console.log("+++++ ((( ))) ******", params);
+
 
 
 
@@ -121,7 +121,6 @@ export class AccountDetailsComponent implements OnInit{
   public getAccountDetails(accountId){
     this.subscriptions.push(
       this.adminPageService.getAccountsById(accountId).subscribe(response => {
-        console.log("+++++++ ------ +++++ ", response);
         this.accountData = response.accounts.data;
       })
     )
