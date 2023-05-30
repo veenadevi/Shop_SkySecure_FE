@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { map, Subscription } from 'rxjs';
 import { MicrosoftGraphService } from 'src/shared/services/microsoft-graph.service';
 import { UserGraphLoginService } from 'src/shared/services/user-graph-login.service';
@@ -20,11 +20,16 @@ export class RecommendationsComponent {
   public userName : string;
   public pageReloading : boolean;
   public segmentationsList : any;
+  public oemName : any;
+  public tenantName : string;
+
+
   constructor (
     private userGraphLoginService : UserGraphLoginService,
     private adGraphUserStore : AdGraphUserStore,
     private microsoftGraphService : MicrosoftGraphService,
     private userAccountStore : UserAccountStore,
+    private route : ActivatedRoute,
     private router : Router
   ){
         this.subscriptions.push(router.events.subscribe((event) => {
@@ -101,6 +106,10 @@ export class RecommendationsComponent {
 
   ngOnInit(): void {
     
+    let params = this.route.snapshot.queryParamMap;
+
+    this.oemName = params.get('oemName');
+
     //this.subscriptions.push(this.userProfileDetails$.subscribe());
     console.log("+++++++++ Page Reloading ",this.pageReloading);
     if(this.pageReloading === false){
@@ -130,6 +139,7 @@ export class RecommendationsComponent {
      this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
      //this.getAllSegmentations();
      if(this.connectionStatus){
+      this.tenantName = res.connection.userAccessDetails.name;
       this.userGraphLoginService.getRefreshIDTokenByAccessToken(res);
       this.getAllSegmentations();
      }

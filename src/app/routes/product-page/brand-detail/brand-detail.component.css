@@ -100,6 +100,11 @@
 
 :host ::ng-deep .p-accordion .p-accordion-content{
   padding: 0.5em;
+  background: #dee2e6;
+}
+
+:host ::ng-deep .p-accordion-header-link{
+  /* background-color: #dee2e6 !important; */
 }
 
 .product-header {

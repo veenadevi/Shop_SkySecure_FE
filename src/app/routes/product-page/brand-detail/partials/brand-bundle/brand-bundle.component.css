@@ -1,0 +1,8 @@
+.brand-bundle-container{
+    display: flex;
+    flex-direction: row;
+    column-gap: 2%;
+}
+.product-header {
+    background: var(--white);
+}
