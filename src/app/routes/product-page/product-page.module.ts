@@ -16,6 +16,7 @@ import { SimilarProductsComponent } from './similar-products/similar-products.co
 import { BrandDetailComponent } from './brand-detail/brand-detail.component';
 import { BrandBundleComponent } from './brand-detail/partials/brand-bundle/brand-bundle.component';
 import { BrandFeaturesComponent } from './brand-detail/partials/brand-features/brand-features.component';
+import { BrandCardFlyerComponent } from './brand-detail/partials/brand-card-flyer/brand-card-flyer.component';
 
 
 
@@ -29,7 +30,8 @@ import { BrandFeaturesComponent } from './brand-detail/partials/brand-features/b
     SimilarProductsComponent,
     BrandDetailComponent,
     BrandBundleComponent,
-    BrandFeaturesComponent
+    BrandFeaturesComponent,
+    BrandCardFlyerComponent
   ],
   imports: [
     CommonModule,

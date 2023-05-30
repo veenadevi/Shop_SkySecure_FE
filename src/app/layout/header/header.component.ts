@@ -80,7 +80,6 @@ export class HeaderComponent implements OnInit{
         
         
         this.numberOfCartItems = data.length;
-        console.log("++++++ (((((((((((((((((())))))))))))))))))Cart OutPut", data.length);
         return data;
       }
       else{

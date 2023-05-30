@@ -58,10 +58,9 @@ export class InterfaceComponent {
   public userDetails$ = this.userAccountStore.userProfileDetails$
   .pipe(
     map(data => {
-      //console.log("++++++++++ Came inside User", data);
       if(data){
         this.userRole = (data.userDetails && data.userDetails.role) ? data.userDetails.role : null;
-        console.log("++++++++++ Came inside User Data", data);
+        
         if(data.userDetails.firstName){
           this.userName = data.userDetails.firstName + ' ' + (data.userDetails.lastName ? data.userDetails.lastName : '');
         }
@@ -90,7 +89,6 @@ export class InterfaceComponent {
       {name: 'Paris', code: 'PRS'}
   ];
 
-    console.log("++++++++++ Called NGONInit");
     this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
     this.userDetails$.subscribe();
     // if(this.userLoggedIn){

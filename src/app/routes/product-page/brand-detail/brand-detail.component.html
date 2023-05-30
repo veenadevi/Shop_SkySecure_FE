@@ -37,31 +37,12 @@
             <div class="card flex justify-content-center custom-style-accordian">
                 <p-accordion [multiple]="true" [activeIndex]="[0]">
                     <p-accordionTab header="Products">
-
-                        <brand-bundle></brand-bundle>
-                        <!-- <div class="row-style">
-                            <div class="product-holder">
-                                <div class="product-header">
-                                    <span>Office 365</span>
-                                </div>
-                                <div class="link-style">
-                                    <span>View Details</span>
-                                </div>
-                            </div>
-                            <div class="product-card-holder">
-                                Sample
-                            </div>
-                        </div> -->
+                        <brand-bundle [productVarientData] = "productVarientData"></brand-bundle>
                     </p-accordionTab>
 
                     <!-- Product Bundles Accordian -->
                     <p-accordionTab header="Features Comparison">
                         <brand-features></brand-features>
-                        <!-- <div class="container text-center">
-                            <div class="row">
-                               Hi
-                              </div>
-                        </div> -->
                     </p-accordionTab>
                 </p-accordion>
             </div>

@@ -114,7 +114,6 @@ export class ProductDetailComponent implements OnInit{
         this.similarProducts = response.productBundles;
         this.product = { ...response.products , featureList : response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants : response.featureListByProductVariants } ;
         this.onProductLoad = true;*/
-        console.log("++++++++ Product", this.product);
       })
     );
   }
@@ -168,8 +167,6 @@ export class ProductDetailComponent implements OnInit{
           price : product.productVariants[0].priceList[0].price,
         };
       }
-      
-      console.log("((( ((#### ", product);
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
