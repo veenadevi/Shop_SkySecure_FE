@@ -14,6 +14,8 @@ import { MultiSelectDropdownComponent } from './multi-select-dropdown/multi-sele
 import { FormsModule } from '@angular/forms';
 import { SimilarProductsComponent } from './similar-products/similar-products.component';
 import { BrandDetailComponent } from './brand-detail/brand-detail.component';
+import { BrandBundleComponent } from './brand-detail/partials/brand-bundle/brand-bundle.component';
+import { BrandFeaturesComponent } from './brand-detail/partials/brand-features/brand-features.component';
 
 
 
@@ -25,7 +27,9 @@ import { BrandDetailComponent } from './brand-detail/brand-detail.component';
     ProductDetailComponent,
     MultiSelectDropdownComponent,
     SimilarProductsComponent,
-    BrandDetailComponent
+    BrandDetailComponent,
+    BrandBundleComponent,
+    BrandFeaturesComponent
   ],
   imports: [
     CommonModule,

@@ -1,13 +1,26 @@
+
 <div class="modal-container">
+
     <div class="modal-header">
         <div class="modal-top">
-            <!-- <img alt="BackgroundGradient" src="../../../assets/images/BackgroundGradient.png"> -->
-            <img class="altsyslogo-alert" alt="AltsysLogo" src="../../../../assets//icons/Settings.svg"> 
-            <h4>Company Name</h4>
+            <div>
+                Connect OEM
+            </div>
         </div>
     </div>
     <div class="modal-body">
-        Please Enter your compnay name to proceed
+        <div class="dropdown">
+            
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Select OEM
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item">AWS (Amazon Web Services)</a></li>
+              <li><a class="dropdown-item" (click)="navigateToSecurity('Microsoft')">Microsoft</a></li>
+              <li><a class="dropdown-item" >Sentinal One</a></li>
+              <li><a class="dropdown-item" >Tanium</a></li>
+            </ul>
+        </div>
     </div>
     
 </div>

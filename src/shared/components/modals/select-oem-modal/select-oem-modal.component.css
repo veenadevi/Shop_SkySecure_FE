@@ -1,4 +1,5 @@
-.modal-content{
+:host ::ng-deep .modal-content{
+    margin-top: 13em !important;
     -webkit-border-radius: 12px !important;
     -moz-border-radius: 12px !important;
     border-radius: 12px !important; 
@@ -6,10 +7,11 @@
 .modal-container {
     /* width: 600px;
     height: 340px; */
-    background-color: #080F24;
+    border-radius: 10px;
+    background-color: var(--white);
     /* border-radius: 12px; */
     justify-content: center;
-    color: white;
+    color: var(--black);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,11 +23,25 @@
 .modal-footer{
     border: none !important;
 }
+
+.modal-top{
+    margin-top: 1.5em;
+}
+
+.modal-body{
+    width:60%
+}
 .altsyslogo-alert {
     margin-bottom: 10px;
 }
 
-.modal-top {
+.container { display: flex; }
+
+.container > div:first-child { margin-right: auto; visibility: hidden; }
+
+.container > div:last-child { margin-left: auto; }
+
+/* .modal-top {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,10 +49,32 @@
     background: url(../../../../assets/images/BackgroundGradient.png);
     background: fixed;
     background-repeat: no-repeat;
-}
+} */
 
 .altsyslogo-alert {
     width: 90px;
+}
+
+.dropdown button{
+    background: transparent !important;
+    color: var(--black);
+    width:100%
+}
+
+.dropdown ul{
+    width:100%
+}
+
+.dropdown li{
+    cursor: pointer;
+}
+
+button:hover {
+    color: var(--black);
+}
+
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active{
+    color: var(--black);
 }
 
 .request-btn {
