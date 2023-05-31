@@ -54,12 +54,12 @@
             <div class="sec-02">
                 <div class="contact">
                     <label>Contact Number</label><br>
-                    <input type="tel" placeholder="Contact Number" [disabled]="edit">
+                    <input type="tel" placeholder="Contact Number" [disabled]="edit" [(ngModel)]="userDetails.mobileNumber" value="{{userDetails.mobileNumber}}">
                 </div>
                 <div class="country">
                     <label>Country/Region</label><br>
                 
-    <select class="form-select" id="country" placeholder="country" [disabled]="edit">
+    <select class="form-select" id="country" placeholder="country" [disabled]="edit" [(ngModel)]="userDetails.countryCode" value="{{userDetails.countryCode}}">
         <option value="">country</option>
         <option value="AF">Afghanistan</option>
         <option value="AX">Aland Islands</option>
@@ -317,13 +317,13 @@
                 </div>
                 <div class="address">
                     <label>Address</label><br>
-                    <input type="text" placeholder="Enter Your Address" [disabled]="edit">
+                    <input type="text" placeholder="Enter Your Address" [disabled]="edit" [(ngModel)]="userDetails.address" value="{{userDetails.address}}">
                 </div>
             </div>
             <div class="sec-03">
                 <div class="strength">
                     <label>Organisation Strength</label><br>
-                    <select class="form-select" id="Strength" arial-placeholder="IT" [disabled]="edit">
+                    <select class="form-select" id="Strength" arial-placeholder="IT" [disabled]="edit" >
                         <option>select</option>
                         <option>0-10</option>
                         <option>10-50</option>

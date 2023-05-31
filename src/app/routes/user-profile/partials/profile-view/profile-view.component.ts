@@ -59,12 +59,21 @@ export class ProfileViewComponent implements OnInit{
       "firstName": this.userDetails.firstName,
       "company" : this.userDetails.company,
       "lastName" : this.userDetails.lastName,
-      "email" : this.userDetails.email
+      "email" : this.userDetails.email,
+      "createdBy": this.userDetails.createdBy,
+      "updatedBy": this.userDetails.updatedBy,
+      "createdAt": this.userDetails.createdAt,
+      "updatedAt": this.userDetails.updatedAt,
+      "role": this.userDetails.role,
+      "address": this.userDetails.address,
+      "countryCode": this.userDetails.countryCode,
+      "mobileNumber": this.userDetails.mobileNumber
     }
 
     this.subscriptions.push(
       this.userProfileService.updateUserProfile(req).subscribe( response => {
         console.log("***** ++++++ Updated ", response);
+        this.edit = true;
       })
     )
   }
