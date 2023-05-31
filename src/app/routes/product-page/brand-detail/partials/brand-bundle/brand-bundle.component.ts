@@ -32,6 +32,8 @@ export class BrandBundleComponent implements OnInit{
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
 
+  public alternateUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1685514191-MicrosoftGreyBackground.jpg';
+
 
   ngOnInit(): void {
     this.productFamily = this.productVarientData.productFamily;
@@ -54,12 +56,12 @@ export class BrandBundleComponent implements OnInit{
     this.productVarients.forEach(element => {
         element['logo'] = element.products.bannerLogo ? element.products.bannerLogo : this.alternateLogo;
         element['textClr'] = element.products.bannerTextColor ? element.products.bannerTextColor : 'Black';
-        element['bgImg'] = element.products.bannerURL ? element.products.bannerURL : '';
+        element['bgImg'] = element.products.bannerURL ? element.products.bannerURL : this.alternateUrl;
     });
     this.products.forEach(element => {
       element['logo'] = element.bannerLogo ? element.bannerLogo : this.alternateLogo;
       element['textClr'] = element.bannerTextColor ? element.bannerTextColor : 'Black';
-      element['bgImg'] = element.bannerURL ? element.bannerURL : '';
+      element['bgImg'] = element.bannerURL ? element.bannerURL : this.alternateUrl;
     });
     this.cardItems = [...this.products , ...this.productVarients];
   }
@@ -75,14 +77,14 @@ export class BrandBundleComponent implements OnInit{
           element.productsVariants.forEach(element => {
             element['logo'] = element.bannerLogo ? element.bannerLogo : this.alternateLogo;
             element['textClr'] = element.bannerTextColor ? element.bannerTextColor : 'Black';
-            element['bgImg'] = element.bannerURL ? element.bannerURL : '';
+            element['bgImg'] = element.bannerURL ? element.bannerURL : this.alternateUrl;
           });
         }
         if(element.products && element.products.length>0){
           element.products.forEach(element => {
             element['logo'] = element.bannerLogo ? element.bannerLogo : this.alternateLogo;
             element['textClr'] = element.bannerTextColor ? element.bannerTextColor : 'Black';
-            element['bgImg'] = element.bannerURL ? element.bannerURL : '';
+            element['bgImg'] = element.bannerURL ? element.bannerURL : this.alternateUrl;
           });
         }
         
