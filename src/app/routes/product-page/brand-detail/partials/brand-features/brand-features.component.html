@@ -2,9 +2,9 @@
 
     <div style="overflow-x:auto;" *ngIf="onLoad">
         <table class="table">
-            <thead>
+            <thead [ngClass]="(featuerCardVariantFlag === 'Y') ? 'header-left-margin' : ''">
                 <tr>
-                    <th class="feature-header">
+                    <th [ngClass]="(featuerCardVariantFlag === 'Y') ? 'feature-header-big' : 'feature-header'">
                         Features
                     </th>
                     <ng-container *ngIf="varientRow && varientRow.length>0;">
@@ -12,7 +12,7 @@
                                     
                             <th scope="" class="">
                                 
-                                <div class="card-header">
+                                <div [ngClass]="(featuerCardVariantFlag === 'Y') ? 'card-header-big' : 'card-header-small'">
                                     <div class="price-header">
                                         <span>{{item.name ? item.name : ''}}</span>
                                     </div>
@@ -55,45 +55,57 @@
             <tbody>
 
                 <ng-container *ngIf="(featuresCardHeadings && featuresCardHeadings.length>0) ; else singleFeatureList">
-                    <ng-container *ngFor="let features of featureList">
-                        <tr>
-                            <td class="feature-td">
-                                <span (click)="onNavigateTo(features.hyperLinkURL)">
-                                    <span [ngClass]="(features.hyperLinkURL) ? 'feature-list-bold-link' : 'feature-list-bold'">
-                                        {{features.name ? features.name : ''}}
-                                    </span> 
-                                    <span [ngClass]="(features.hyperLinkURL) ? 'feature-list-link' : 'feature-list'" class="feature-list">{{features.description ? ': '+features.description : ''}}</span>
-                                    
-                                </span>
-                                    <!-- {{features.name ? features.name : ''}} -->
-                            </td>
-                            <ng-container *ngFor="let item of varientRow">
-                                <!-- <td class="align-center">
-                                    <span class="card-header">
-                                        <img alt="" class="image-icon" src="../../../assets/icons/tickiconblue.svg">
-                                    </span>
-                                    
-                                </td> -->
-                                <ng-container *ngIf="item.availableFeatures.includes(features._id) ; else notFoundBlock">
-                                    <td class="align-center">
-                                        <span class="card-header">
-                                            <img alt="" class="image-icon" src="../../../assets/icons/tickiconblue.svg">
+                    
+                    <ng-container *ngFor="let header of featuresCardHeadings">
+                        <div class="feature-category-holder">
+                            <span class="feature-category-header">
+                                {{header.name}}
+                            </span>
+                        
+                            <ng-container *ngFor="let features of header.features">
+                                <tr class="top-margin">
+                                    <td class="feature-td">
+                                        <span (click)="onNavigateTo(features.hyperLinkURL)">
+                                            <span [ngClass]="(features.hyperLinkURL) ? 'feature-list-bold-link' : 'feature-list-bold'">
+                                                {{features.name ? features.name : ''}}
+                                            </span> 
+                                            <span [ngClass]="(features.hyperLinkURL) ? 'feature-list-link' : 'feature-list'" class="feature-list">{{features.description ? ': '+features.description : ''}}</span>
+                                            
                                         </span>
-                                        
+                                            <!-- {{features.name ? features.name : ''}} -->
                                     </td>
-                                </ng-container>
-                                <ng-template #notFoundBlock>
-                                    <td class="align-center">
-                                        <span class="card-header">
-                                            -
-                                        </span>
-                                    </td>
-                                </ng-template>
+                                    <ng-container *ngFor="let item of varientRow">
+                                        <!-- <td class="align-center">
+                                            <span class="card-header">
+                                                <img alt="" class="image-icon" src="../../../assets/icons/tickiconblue.svg">
+                                            </span>
+                                            
+                                        </td> -->
+                                        <ng-container *ngIf="item.availableFeatures.includes(features._id) ; else notFoundBlock">
+                                            <td class="align-center">
+                                                <span class="card-header">
+                                                    <img alt="" class="image-icon" src="../../../assets/icons/tickiconblue.svg">
+                                                </span>
+                                                
+                                            </td>
+                                        </ng-container>
+                                        <ng-template #notFoundBlock>
+                                            <td class="align-center">
+                                                <span class="card-header">
+                                                    -
+                                                </span>
+                                            </td>
+                                        </ng-template>
+                                    </ng-container>
+                                
+                                    
+                                </tr>
                             </ng-container>
-                           
-                            
-                        </tr>
+                        </div>
                     </ng-container>
+                    
+                    
+
                 </ng-container>
                 <ng-template #singleFeatureList>
                     <!-- <div class="feature-category-container"> -->
