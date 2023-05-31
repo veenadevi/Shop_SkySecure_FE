@@ -40,8 +40,7 @@ export class PopularCategoryComponent {
     // }));
   }
 
-  public goToProductsPage(){
-    this.router.navigate(['/products']);
+  public goToProductsPageWithCategorySelection(category) {
+    this.router.navigate([`/products/category/${category._id}`]);
   }
-
 }
