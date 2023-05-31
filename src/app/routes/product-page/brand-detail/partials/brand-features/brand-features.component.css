@@ -43,7 +43,7 @@ table thead, table tbody tr {
 }
 
 tbody{
-  height: 700px;
+  /* height: 700px; */
   overflow-y: scroll;
   display: block;
   

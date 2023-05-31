@@ -8,7 +8,13 @@
                     </div>
                 </div>
                 <div class="product-varient-content">
-                    <brand-card-flyer [item] = "item"></brand-card-flyer>
+                    <ng-container *ngFor="let cardItem of item.products">
+                        <brand-card-flyer [item] = "cardItem"></brand-card-flyer>
+                    </ng-container>
+                    <ng-container *ngFor="let cardItem of item.productsVariants">
+                        <brand-card-flyer [item] = "cardItem"></brand-card-flyer>
+                    </ng-container>
+                    
                 </div>
                 
             </div>
