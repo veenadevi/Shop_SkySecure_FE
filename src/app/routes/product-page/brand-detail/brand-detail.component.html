@@ -36,13 +36,13 @@
 
             <div class="card flex justify-content-center custom-style-accordian">
                 <p-accordion [multiple]="true" [activeIndex]="[0]">
-                    <p-accordionTab header="Products">
+                    <p-accordionTab header="Available Products">
                         <brand-bundle [productVarientData] = "productVarientData"></brand-bundle>
                     </p-accordionTab>
 
                     <!-- Product Bundles Accordian -->
-                    <p-accordionTab header="Features Comparison">
-                        <brand-features></brand-features>
+                    <p-accordionTab header="Additional Features">
+                        <brand-features [productVarientData] = "productVarientData"></brand-features>
                     </p-accordionTab>
                 </p-accordion>
             </div>

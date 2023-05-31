@@ -25,7 +25,12 @@ export class BrandCardFlyerComponent implements OnInit{
   }
 
   public getColor(val){
-    return val.toLowerCase();
+    if(val){
+      return val.toLowerCase();
+    }
+    else{
+      return 'Black'
+    }
   }
   
 }

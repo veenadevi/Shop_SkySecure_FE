@@ -189,7 +189,13 @@ export class ProductDetailComponent implements OnInit{
   }
 
   public getColor(val){
-    return val.toLowerCase();
+    if(val){
+      return val.toLowerCase();
+    }
+    else{
+      return 'Black'
+    }
+    
   }
 
   ngOnDestroy(){

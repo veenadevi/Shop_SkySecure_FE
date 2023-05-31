@@ -82,12 +82,11 @@ export class CartService {
   public getCartItems(userData: any): Observable<any> {
 
   
-    console.log("****** Cart Items Data ", userData);
+
  
     //let url = this.baseUrl + this.userCartUrl + '/1001';
     //let url = this.baseUrl + this.userCartUrl + '/2222';
     let userAccountdetails = this.userAccountStore.getUserProfileDetails();
-    console.log("************ Userdeatils ", this.userAccountStore.getUserProfileDetails());
     let url = this.baseUrl + this.userCartUrl + '/' + userAccountdetails._id;
     //let options = this.getOptions();
 

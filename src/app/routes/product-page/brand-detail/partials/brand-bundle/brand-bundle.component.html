@@ -1,5 +1,20 @@
 <ng-container *ngIf="(productFamilyVariants && productFamilyVariants.length>0) ; else productTemplate">
-    Inside 
+    <div class="product-varient-container">
+        <ng-container *ngFor="let item of productFamilyVariants">
+            <div class="product-varient-bundle">
+                <div class="product-varient-header">
+                    <div class="header-text">
+                        {{item.name}}
+                    </div>
+                </div>
+                <div class="product-varient-content">
+                    <brand-card-flyer [item] = "item"></brand-card-flyer>
+                </div>
+                
+            </div>
+        </ng-container>
+        
+    </div>
 </ng-container>
 <ng-template #productTemplate>
     <div class="brand-bundle-container">

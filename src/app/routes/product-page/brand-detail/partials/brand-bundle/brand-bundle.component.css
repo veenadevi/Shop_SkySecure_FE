@@ -5,6 +5,39 @@
     row-gap: 0.6em;
     padding: 1em;
 }
+.product-varient-container{
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.6em;
+    padding: 1em;
+}
+.product-varient-bundle{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    
+    justify-content: center;
+}
+.product-varient-header{
+    display: flex;
+    min-width: 25em;
+    width: 25em;
+    border-radius: 10px;
+    min-height: 40px;
+    background: var(--white);
+    padding: 1em;
+    justify-content: center;
+}
+.product-varient-content{
+    display: flex;
+    min-width: 25em;
+    width: 25em;
+    border-radius: 10px;
+    
+    background: var(--white);
+    padding: 1em;
+    justify-content: center;
+}
 .product-header {
     background: var(--white);
     text-align: center;

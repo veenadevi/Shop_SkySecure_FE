@@ -84,7 +84,6 @@ export class MetadataService {
             return null;
           }
          
-          console.log("++++++ )))  Res", response.oems);
          
           return response;
         }),
@@ -212,7 +211,6 @@ export class MetadataService {
           if (!response) {
             return null;
           }
-          console.log("++++ ** ", response);
           this.metadataStore.setIndividualProductDetail(response);
           return (response);
         }),
@@ -290,7 +288,6 @@ export class MetadataService {
           if (!response) {
             return null;
           }
-          console.log("*******Filter Response***********",response);
           return response;
         }),
         catchError(error => {
