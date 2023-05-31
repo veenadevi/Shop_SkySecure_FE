@@ -25,6 +25,10 @@ export class BrandBundleComponent implements OnInit{
 
   public cardItems : any[] = [];
 
+  public cardProductItems : any[] = [];
+
+  public cardProductVarientsItems : any[] = [];
+
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
 
@@ -61,7 +65,44 @@ export class BrandBundleComponent implements OnInit{
   }
 
   public setProductFamilyVarient(){
+
+
+
+
+    this.productFamilyVariants.forEach( element => {
+      console.log("****** ++++++++ _________ ", element);
+        if(element.productsVariants && element.productsVariants.length>0){
+          element.productsVariants.forEach(element => {
+            element['logo'] = element.bannerLogo ? element.bannerLogo : this.alternateLogo;
+            element['textClr'] = element.bannerTextColor ? element.bannerTextColor : 'Black';
+            element['bgImg'] = element.bannerURL ? element.bannerURL : '';
+          });
+        }
+        if(element.products && element.products.length>0){
+          element.products.forEach(element => {
+            element['logo'] = element.bannerLogo ? element.bannerLogo : this.alternateLogo;
+            element['textClr'] = element.bannerTextColor ? element.bannerTextColor : 'Black';
+            element['bgImg'] = element.bannerURL ? element.bannerURL : '';
+          });
+        }
+        
+        
+      }
+    )
     
+    // this.productVarients.forEach(element => {
+    //   element['logo'] = element.products.bannerLogo ? element.products.bannerLogo : this.alternateLogo;
+    //   element['textClr'] = element.products.bannerTextColor ? element.products.bannerTextColor : 'Black';
+    //   element['bgImg'] = element.products.bannerURL ? element.products.bannerURL : '';
+    // });
+    // this.products.forEach(element => {
+    //   element['logo'] = element.bannerLogo ? element.bannerLogo : this.alternateLogo;
+    //   element['textClr'] = element.bannerTextColor ? element.bannerTextColor : 'Black';
+    //   element['bgImg'] = element.bannerURL ? element.bannerURL : '';
+    // });
+
+    // this.cardProductItems = this.products;
+    // this.cardProductVarientsItems = this.productVarients;
   }
 
 }

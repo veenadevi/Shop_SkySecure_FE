@@ -33,10 +33,13 @@
     min-width: 25em;
     width: 25em;
     border-radius: 10px;
-    
+    row-gap: 2em;
+    column-gap: 2em;
+    align-items: center;
     background: var(--white);
     padding: 1em;
     justify-content: center;
+    flex-wrap: wrap;
 }
 .product-header {
     background: var(--white);
