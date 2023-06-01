@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - realizeskysecure
+name: Build and deploy Node.js app to Azure Web App - dev-realizeweb
 
 on:
   push:
@@ -23,15 +23,15 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm install watch
+          npm run build --prod --if-present
+        
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,6 +45,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
