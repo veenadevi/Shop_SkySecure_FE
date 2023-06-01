@@ -5,8 +5,8 @@ name: Build and deploy Node.js app to Azure Web App - dev-realizeweb
 
 on:
   push:
-  
-     branches: [ "realize-development" ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -46,12 +46,12 @@ jobs:
         with:
           name: node-app
 
+
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'dev-realizeweb'
+          app-name: 'realizeskysecure'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D4927A8D060346E9B3D0866F760E5114 }}
-          package: altsys_frontend
-          
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_61DF6C1EDCF849DA8E19F0E8A8038C23 }}
+          package: .
