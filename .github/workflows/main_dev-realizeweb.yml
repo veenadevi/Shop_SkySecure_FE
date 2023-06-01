@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - dev-realizeweb
 on:
   push:
   
-     branches: [ "realize-development" ]
+     branches: [ "test" ]
   workflow_dispatch:
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install watch
-          npm run build --prod --if-present
+          npm run build
         
 
       - name: Upload artifact for deployment job
