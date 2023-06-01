@@ -19,8 +19,14 @@ export class BrandCardFlyerComponent implements OnInit{
     console.log("*** ++++ ****, ", this.item);
   }
 
-  public navigateTo(id){
-    this.router.navigate(['/products', id]);
+  public navigateTo(item){
+    
+    if(item.prdType === 'bundle'){
+      this.router.navigate(['/products/brand-detail', item.navigationId]);
+    }
+    else{
+      this.router.navigate(['/products', item.navigationId]);
+    }
     // this.router.navigate(['/products/brand-detail', id]);
   }
 
