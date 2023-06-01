@@ -75,9 +75,9 @@ export class BrandBundleComponent implements OnInit{
       console.log("****** ++++++++ _________ ", element);
         if(element.productsVariants && element.productsVariants.length>0){
           element.productsVariants.forEach(element => {
-            element['logo'] = element.bannerLogo ? element.bannerLogo : this.alternateLogo;
-            element['textClr'] = element.bannerTextColor ? element.bannerTextColor : 'Black';
-            element['bgImg'] = element.bannerURL ? element.bannerURL : this.alternateUrl;
+            element['logo'] = element.product.bannerLogo ? element.product.bannerLogo : this.alternateLogo;
+            element['textClr'] = element.product.bannerTextColor ? element.product.bannerTextColor : 'Black';
+            element['bgImg'] = element.product.bannerURL ? element.product.bannerURL : this.alternateUrl;
           });
         }
         if(element.products && element.products.length>0){
