@@ -7,6 +7,7 @@
 
 
 import { LogLevel, Configuration, BrowserCacheLocation } from '@azure/msal-browser';
+import { environment } from 'src/environments/environment';
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
 
@@ -17,20 +18,25 @@ const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigato
  */
 export const b2cPolicies = {
     names: {
-        signUpSignIn: "B2C_1_sisu",
-        editProfile: "B2C_1_ProfileEdit",
-        passwordReset:"B2C_1_PasswordReset"         
+        // signUpSignIn: "B2C_1_sisu",
+        // editProfile: "B2C_1_ProfileEdit",
+        // passwordReset:"B2C_1_PasswordReset"
+        signUpSignIn: environment.signUpSignIn,
+        editProfile: environment.editProfile,
+        passwordReset: environment.passwordReset         
     },
     //https://altsysrealizeappdev.b2clogin.com/altsysrealizeappdev.onmicrosoft.com/<policy-name>/oauth2/v2.0/token
     authorities: {
         signUpSignIn: {
-            authority: "https://altsysrealizeappdev.b2clogin.com/altsysrealizeappdev.onmicrosoft.com/B2C_1_sisu",
+            //authority: "https://altsysrealizeappdev.b2clogin.com/altsysrealizeappdev.onmicrosoft.com/B2C_1_sisu",
+            authority : environment.signUpSignInAuthority,
         },
         editProfile: {
             authority: "https://learnsmartcoding.b2clogin.com/learnsmartcoding.onmicrosoft.com/B2C_1_ProfileEdit"
         }
     },
-    authorityDomain: "altsysrealizeappdev.b2clogin.com"
+    //authorityDomain: "altsysrealizeappdev.b2clogin.com"
+    authorityDomain : environment.authorityDomain
 };
 
 /**
@@ -40,7 +46,8 @@ export const b2cPolicies = {
  */
  export const msalConfig: Configuration = {
     auth: {
-        clientId: '400805fb-213f-4c6b-a346-8cdea9975a88', // This is the ONLY mandatory field that you need to supply.
+        //: '400805fb-213f-4c6b-a346-8cdea9975a88', // This is the ONLY mandatory field that you need to supply.
+        clientId : environment.clientId,
         authority: b2cPolicies.authorities.signUpSignIn.authority, // Defaults to "https://login.microsoftonline.com/common"
         knownAuthorities: [b2cPolicies.authorityDomain], // Mark your B2C tenant's domain as trusted.
         redirectUri:"/", // Points to window.location.origin. You must register this URI on Azure portal/App Registration.

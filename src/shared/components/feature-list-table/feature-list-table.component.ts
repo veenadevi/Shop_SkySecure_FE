@@ -85,13 +85,14 @@ export class FeatureListTableComponent implements OnInit{
   }
 
   public addQuote(productVariant){
-    
+    console.log("&&&&&&&&& +++++++ ", productVariant);
     let queryParams;
     // if(!productVariant.isAddOn){
       queryParams = {
         productName : productVariant.name,
         productId : productVariant._id,
         quantity : 1,
+        price : (productVariant && productVariant.priceList.length>0) ?  productVariant.priceList[0].price : ''
       };
       
     //}

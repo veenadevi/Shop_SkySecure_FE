@@ -3,8 +3,11 @@
 
 import { LogLevel, Configuration, BrowserCacheLocation } from '@azure/msal-browser';
 
+import { environment } from 'src/environments/environment';
+
 export const GraphAuthPolicies = {
-    appId: '25a5e4d5-b46f-42ad-b556-9f1984b0b837',
+    //appId: '25a5e4d5-b46f-42ad-b556-9f1984b0b837',
+    appId : environment.appId,
     redirectUri: '/',
     //scopes: ['user.read', 'mailboxsettings.read', 'calendars.readwrite'],
     scopes: [
@@ -36,7 +39,8 @@ export const GraphAuthPolicies = {
 
   export const connectToTenantMsalConfig = {
     auth: {
-      clientId: '25a5e4d5-b46f-42ad-b556-9f1984b0b837', // This is the ONLY mandatory field that you need to supply.
+      //clientId: '25a5e4d5-b46f-42ad-b556-9f1984b0b837', // This is the ONLY mandatory field that you need to supply.
+      clientId : environment.appId,
       authority: "https://login.microsoftonline.com/common", // Defaults to "https://login.microsoftonline.com/common"
       redirectUri: "/", // Points to window.location.origin. You must register this URI on Azure Portal/App Registration.
       postLogoutRedirectUri: "/", // Indicates the page to navigate after logout.
