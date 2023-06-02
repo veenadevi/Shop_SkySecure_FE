@@ -111,8 +111,7 @@ export class BrandDetailComponent implements OnInit{
     if(loggedinData.length > 0 ){
       
       var existingItems = this.cartStore.getCartItems();
-    console.log("******* Inside div", product);
-      /* let queryParams;
+      let queryParams;
       if(product.productVariants.length>0){
         queryParams = {
           productName : product.productVariants[0].name,
@@ -121,7 +120,7 @@ export class BrandDetailComponent implements OnInit{
           price : product.productVariants[0].priceList[0].price,
         };
       }
-      this.router.navigate(['/cart'], {queryParams: queryParams}); */
+      this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
     else {

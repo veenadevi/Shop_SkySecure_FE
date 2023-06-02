@@ -33,7 +33,7 @@ export class CardFlyerComponent {
       productName : product.name,
       productId : product._id,
       quantity : 1,
-      // price : 
+      price : product.productVariants[0].priceList[0].price,
     };
 
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"));
