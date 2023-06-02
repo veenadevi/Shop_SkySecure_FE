@@ -70,9 +70,11 @@ export class FeatureListTableComponent implements OnInit{
     }
 
     else{
+
+      console.log("+++++ ((((())))) +++++ ", this.authService.instance.getAllAccounts());
       let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"));
 
-      console.log("+++++ ((((())))) +++++ ", loggedinData);
+      
       if(loggedinData.length > 0 ){
         const modalRef = this.modalServiceBundle.open(ProductVariantModalComponent);
         modalRef.componentInstance.productVariant = item;
