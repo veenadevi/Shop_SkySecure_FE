@@ -34,10 +34,12 @@ export class CartViewComponent {
     if(loggedinData.length > 0 ){
       //this.userLoggedIn = true;
       //this.fetchCategoryMock();
+      console.log("+++++ Already Logged In +++++");
     }
 
     else{
       this.loginService.login();
+      console.log("+++++ Not Logged In +++++");
       //this.fetchCategoryMock();
     }
     
