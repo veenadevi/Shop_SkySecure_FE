@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MsalService } from '@azure/msal-angular';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { MetadataService } from 'src/shared/services/metadata.service';
+import { CartStore } from 'src/shared/stores/cart.store';
 
 @Component({
   selector: 'brand-detail',
@@ -13,7 +17,11 @@ export class BrandDetailComponent implements OnInit{
 
   constructor(
     private route: ActivatedRoute,
-    private metaDataSvc : MetadataService
+    private metaDataSvc : MetadataService,
+    private authService : MsalService,
+    private cartStore : CartStore,
+    private router : Router,
+    private modalService : NgbModal
   ){}
 
 
@@ -98,6 +106,31 @@ export class BrandDetailComponent implements OnInit{
   
   public requestQuote(product){
 
+    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"));
+
+    if(loggedinData.length > 0 ){
+      
+      var existingItems = this.cartStore.getCartItems();
+    console.log("******* Inside div", product);
+      /* let queryParams;
+      if(product.productVariants.length>0){
+        queryParams = {
+          productName : product.productVariants[0].name,
+          productId : product.productVariants[0]._id,
+          quantity : 1,
+          price : product.productVariants[0].priceList[0].price,
+        };
+      }
+      this.router.navigate(['/cart'], {queryParams: queryParams}); */
+    }
+
+    else {
+      this.viewModal();
+    }
+  }
+
+  public viewModal() {
+    const modalRef = this.modalService.open(LoginAlertModalComponent);
   }
   
   

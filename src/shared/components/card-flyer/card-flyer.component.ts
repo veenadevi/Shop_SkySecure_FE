@@ -36,7 +36,7 @@ export class CardFlyerComponent {
       // price : 
     };
 
-    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"));
+    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"));
 
     if(loggedinData.length > 0 ){
       //this.userLoggedIn = true;

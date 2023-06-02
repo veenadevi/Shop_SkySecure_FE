@@ -37,6 +37,9 @@ export class BrandFeaturesComponent implements OnInit{
     public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
     public ngOnInit(): void {
+
+        
+
         this.productFamily = this.productVarientData.productFamily;
         this.productFamilyVariants = this.productVarientData.productFamilyVariants;
         this.productVarients = this.productVarientData.productVarients;
@@ -45,6 +48,12 @@ export class BrandFeaturesComponent implements OnInit{
         this.featuresCardHeadings = this.productVarientData.featuresCardHeadings;
         //console.log("***** ++++++ ",this.productVarientData);
         this.featuerCardVariantFlag = (this.featuresCardHeadings && this.featuresCardHeadings.length>0) ? 'Y' : 'N';
+
+        // if(this.features.length <=0 && this.featuresCardHeadings.length <=0){
+        //     this.onLoad = false;
+        // }
+
+
         if(this.productFamilyVariants && this.productFamilyVariants.length>0){
             this.varientRow = this.productFamilyVariants;
             this.setTableData(this.varientRow);

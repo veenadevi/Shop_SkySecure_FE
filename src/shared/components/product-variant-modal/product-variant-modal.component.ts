@@ -46,6 +46,7 @@ export class ProductVariantModalComponent {
         productName : this.productVariant.name,
         productId : this.productVariant._id,
         quantity : 1,
+        price : this.productVariant.priceList[0].price
       };
       
     }
@@ -61,6 +62,7 @@ export class ProductVariantModalComponent {
           productName : this.productVariant.name,
           productId : this.productVariant._id,
           quantity : 1,
+          price : this.productVariant.priceList[0].price
         };
         //this.router.navigate(['/cart'], {queryParams: queryParams});
 
