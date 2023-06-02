@@ -30,7 +30,9 @@ export class CartViewComponent {
   public ngOnInit() : void {
     //console.log("(((((((( ****** ++++++ HElloooooooo ");
 
-        let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"))
+    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"))
+    console.log("+++++ ((((())))) +++++ ", loggedinData);
+    
     if(loggedinData.length > 0 ){
       //this.userLoggedIn = true;
       //this.fetchCategoryMock();
