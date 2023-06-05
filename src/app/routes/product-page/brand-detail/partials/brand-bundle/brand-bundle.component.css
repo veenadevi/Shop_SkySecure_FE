@@ -109,3 +109,24 @@
   .single-product{
     width:30% !important
   }
+
+  .price-details {
+    width: 100%;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .price-details h5{
+    font-size: 1.125rem;
+  }
+
+    .price-details span {
+    font-weight: 400;
+    margin-left: 5px;
+    font-size: 0.7rem;
+    }

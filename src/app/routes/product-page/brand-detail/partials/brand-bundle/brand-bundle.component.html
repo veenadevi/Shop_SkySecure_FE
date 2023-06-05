@@ -6,6 +6,14 @@
                     <div class="header-text">
                         {{item.name}}
                     </div>
+                    <div class="price-details" *ngIf="(item && item.priceList && item.priceList.length>0)">
+                        <h5>
+                            ₹ {{(item && item.priceList && item.priceList.length>0) ? item.priceList[0].price : ''}}
+                        </h5>
+                        <span>
+                            {{(item && item.priceList && item.priceList.length>0) ? item.priceList[0].priceType : ''}}
+                        </span>
+                    </div>
                     <div class="btn-holder">
                         <button class="btn request-btn" (click)="requestQuote(item)">Request quote</button>
                     </div>
@@ -32,6 +40,14 @@
             <div class="header-text">
                 <span>
                     {{headerText}}
+                </span>
+            </div>
+            <div class="price-details" *ngIf="(productFamily && productFamily.priceList && productFamily.priceList.length>0)">
+                <h5>
+                    ₹ {{(productFamily && productFamily.priceList && productFamily.priceList.length>0) ? productFamily.priceList[0].price : ''}}
+                </h5>
+                <span>
+                    {{(productFamily && productFamily.priceList && productFamily.priceList.length>0) ? productFamily.priceList[0].priceType : ''}}
                 </span>
             </div>
             <div class="btn-holder">
