@@ -42,7 +42,7 @@ export class LoginService {
             }
         } else {
                 if (this.msalGuardConfig.authRequest) {
-                    this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest, ...userFlowRequest } as RedirectRequest);
+                    this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest, ...userFlowRequest } as PopupRequest);
                 } else {
                     this.authService.loginRedirect(userFlowRequest);
                 }

@@ -29,15 +29,18 @@
                 
                 <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p> -->
             </div>
-            <div class="text-container text-solution">
-                <span class="text-style">
-                    <h6> Solution Category :</h6>
-                </span>
-                <div  class="solution-link">
-                    {{ (product.subcategories && product.subcategories.length > 0)? product.subcategories[0].name : ''}}
+            <ng-container *ngIf="!(routePath === 'productBundles')">
+                <div class="text-container text-solution">
+                    <span class="text-style">
+                        <h6> Solution Category :</h6>
+                    </span>
+                    <div  class="solution-link">
+                        {{ (product.subcategories && product.subcategories.length > 0)? product.subcategories[0].name : ''}}
+                    </div>
+                    
                 </div>
-                
-            </div>
+            </ng-container>
+            
             <div class="button-container">
                 <div class="product-actions">
                     <button class="btn compare-btn">Add to compare</button>
