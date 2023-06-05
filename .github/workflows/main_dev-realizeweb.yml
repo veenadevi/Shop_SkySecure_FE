@@ -7,7 +7,7 @@ on:
   push:
   
      branches: 
-      - "realize-developement"
+      - realize-developement
   workflow_dispatch:
 
 jobs:
