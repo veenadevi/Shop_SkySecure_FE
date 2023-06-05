@@ -13,6 +13,8 @@ export class QuotationHistoryComponent implements OnInit {
 
   public quotationList : any[] = [];
 
+  public quotationListFlag = '';
+
   constructor(
     private userProfileService : UserProfileService
   ){}
@@ -43,7 +45,7 @@ export class QuotationHistoryComponent implements OnInit {
           return obj.productName === data.Deal_Name;
         });
         console.log("**** ++++ Val ", result);
-        if(result.length>0){
+        if(result.length>0){ this.quotationListFlag = 'Y';
           let quoteData = {
             "name" : data.Deal_Name,
             "description" : data.Description,
@@ -56,6 +58,7 @@ export class QuotationHistoryComponent implements OnInit {
           }
 
           this.quotationList.push(quoteData);
+          
         }
         
       });
