@@ -92,6 +92,17 @@
     cursor: pointer
 }
 
+.empty-container {
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+    /* background: var(--primary); */
+    align-items: center;
+    justify-content: center;
+   
+}
 /* .delete-icon {
     background-color: #E2EDFF;
 } */
