@@ -61,7 +61,6 @@ public cartData : any[] = [];
       if(data){
         //this.cartData = data.usercart[0].userCartDetails;
         this.cartData = data;
-        console.log("**** Data here ", data);
         return this.cartData;
       }
       else{
@@ -116,7 +115,7 @@ public cartData : any[] = [];
           filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
       )
       .subscribe((result: EventMessage) => {
-        let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"))
+        let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"))
         if(loggedinData.length > 0 ){
           //this.userLoggedIn = true;
         }
@@ -160,26 +159,29 @@ public cartData : any[] = [];
       products : productsList
     });
 
+    
 
     if(multipleProduct){
+
 
       let productVariant = JSON.parse(this.params.get('productVariant'));
       
       let productListArray = productVariant.requiredAddOns;
-      console.log("**** +++++ Multiple products ", productVariant);
+      
 
+      console.log("**** +++++ Multiple Products ", productVariant);
       productsList.push({
         "productId": productVariant._id,
         "productName" : productVariant.name,
         "quantity" : 1,
-        "price" : productVariant.price ? productVariant.price : 20
+        "price" : (productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].price : 20
       })
 
 
       if(productListArray.requiredBundles.length > 0){
         productListArray.requiredBundles.forEach(item => {
           var index = productsList.findIndex(el => el.productId === item._id);
-  
+          console.log("**** +++++ Multiple products ", item);
           if(index >=0){
             productsList[index].quantity = Number(productsList[index].quantity) + 1;
           }
@@ -188,16 +190,16 @@ public cartData : any[] = [];
               "productId": item._id,
               "productName" : item.name,
               "quantity" : 1,
-              "price" : item.price ? item.price : 20
+              "price" : item.priceList.length>0 ? item.priceList[0].price  : ''
           });
           }
         });
       }
 
-      if(productListArray.requiredProductVariants.length){
+      if(productListArray.requiredProductVariants.length>0){
         productListArray.requiredProductVariants.forEach(item => {
           var index = productsList.findIndex(el => el.productId === item._id);
-  
+          console.log("**** +++++ Multiple products If  ", productsList[index]);
           if(index >=0){
             productsList[index].quantity = Number(productsList[index].quantity) + 1;
           }
@@ -206,7 +208,7 @@ public cartData : any[] = [];
               "productId": item._id,
               "productName" : item.name,
               "quantity" : 1,
-              "price" : item.price ? item.price : 20
+              "price" : item.priceList.length>0 ? item.priceList[0].price : ''
           });
           }
         });
@@ -217,7 +219,7 @@ public cartData : any[] = [];
 
     else {
       var index = productsList.findIndex(el => el.productId === this.params.get('productId'));
-    
+      
 
       if(index >=0){
         productsList[index].quantity = Number(productsList[index].quantity) + 1;
@@ -227,7 +229,7 @@ public cartData : any[] = [];
           "productId": this.params.get('productId'),
           "productName" : this.params.get('productName'),
           "quantity" : this.params.get('quantity'),
-          "price" : this.params.has('price') ? this.params.get('price') : 20
+          "price" : this.params.has('price') ? this.params.get('price') : ''
       });
       }
 
@@ -247,7 +249,6 @@ public cartData : any[] = [];
       req.products.push(productsList);
     }
 
-    console.log("+++++++ Final Req ", req);
     this.addCartItemsService(req, 'add');
 
 
@@ -302,18 +303,15 @@ public cartData : any[] = [];
   public createQuotationService(req){
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
-        console.log("**** ++++++++  response is ", response);
         if(response && response.Accounts && response.Accounts){
           if(response.Accounts.code === 'SUCCESS'){
             this.cartService.getCartItems(null).subscribe();
             this.router.navigate(['/cart/cart-submit']);
           } 
           else {
-            console.log("/**** Some error occurred ****/ ");
           }
         }
         else{
-          console.log("/**** Some error occurred ****/ ");
         }
         
       })
@@ -333,7 +331,6 @@ public cartData : any[] = [];
     });
 
 
-    console.log("******* +++++++ ", this.cartData);
     this.addCartItemsService(req, 'save');
   }
 
