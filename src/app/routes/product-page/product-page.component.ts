@@ -153,6 +153,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   public initializeData(){
 
+
+
     this.activeRoute.paramMap.subscribe(params => {
       if(this.categories.length >0 && this.brands.length>0){
         if(params.has('categoryId')){
@@ -163,6 +165,9 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         else if(params.has('subcategoryId')){
   
           this.setSubCategoryChecked(params.get('subcategoryId'));
+          
+          this.selectedSubCategoryItems = [];
+
           this.selectedSubCategoryItems.push({'_id' : params.get('subcategoryId').split('-')[1]});
           //this.selectedSubCategoryItems.push(params.get('subcategoryId').split('-')[1]);
           this.getFilteredData();
@@ -320,10 +325,10 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   public selecteCategories(item:any){
     
-    console.log("+++++++ SYB ++++ Before", this.selectedCategoryItems);
+
     this.selectedCategoryItems = item;
     
-    console.log("+++++++ SYB ++++ After", this.selectedCategoryItems);
+   
     
     this.getFilteredData();
 
@@ -332,9 +337,9 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   public selectedSubCategories(item:any){
     
-    console.log("+++++++ SYB ++++ Before", this.selectedSubCategoryItems);
+    
     this.selectedSubCategoryItems = item;
-    console.log("+++++++ SYB ++++ Before", this.selectedSubCategoryItems);
+    
     this.getFilteredData();
 
     
@@ -342,9 +347,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   public selectedBrands(item:any){
     
-    console.log("+++++++ SYB ++++ Before", this.selectedBrandItems);
+   
     this.selectedBrandItems = item;
-    console.log("+++++++ SYB ++++ Before", this.selectedBrandItems);
     this.getFilteredData();
   }
 
@@ -371,7 +375,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
 
 public tabChange(productTabSection: any){
-  console.log(productTabSection)
+ 
   this.tabIndex = productTabSection;
   if(productTabSection === 'products'){
     this.selectedTab = 'products';

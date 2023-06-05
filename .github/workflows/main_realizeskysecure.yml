@@ -54,4 +54,4 @@ jobs:
           app-name: 'realizeskysecure'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_61DF6C1EDCF849DA8E19F0E8A8038C23 }}
-          package: .
+          package: altsys_frontend

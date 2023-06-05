@@ -23,6 +23,7 @@ export class FeatureListTableComponent implements OnInit{
 
   constructor(
     private modalService : NgbModal,
+    private modalServiceBundle : NgbModal,
     private authService : MsalService,
     private router : Router
   ){}
@@ -63,16 +64,22 @@ export class FeatureListTableComponent implements OnInit{
 
   public requestQuote(item){
 
+    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"));
 
     if(!item.isAddOn){
-      this.addQuote(item);
+
+      if(loggedinData.length > 0 ){
+        this.addQuote(item);
+      }
+      else{
+        this.viewModal();
+      }
+      
     }
 
     else{
-      let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"));
-
       if(loggedinData.length > 0 ){
-        const modalRef = this.modalService.open(ProductVariantModalComponent);
+        const modalRef = this.modalServiceBundle.open(ProductVariantModalComponent);
         modalRef.componentInstance.productVariant = item;
       }
 
@@ -105,6 +112,7 @@ export class FeatureListTableComponent implements OnInit{
   }
 
   public viewModal() {
+    console.log("******* +++++++++ ))))))) Login Method Call");
     const modalRef = this.modalService.open(LoginAlertModalComponent);
   }
 
