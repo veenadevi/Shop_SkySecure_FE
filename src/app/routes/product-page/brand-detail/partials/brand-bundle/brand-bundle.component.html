@@ -6,6 +6,10 @@
                     <div class="header-text">
                         {{item.name}}
                     </div>
+                    <div class="btn-holder">
+                        <button class="btn request-btn" (click)="requestQuote(item)">Request quote</button>
+                    </div>
+                    
                 </div>
                 <div class="product-varient-content">
                     <ng-container *ngFor="let cardItem of item.products">
@@ -29,6 +33,9 @@
                 <span>
                     {{headerText}}
                 </span>
+            </div>
+            <div class="btn-holder">
+                <button class="btn request-btn single-product" (click)="requestQuote(productFamily)">Request quote</button>
             </div>
 
         </div>
