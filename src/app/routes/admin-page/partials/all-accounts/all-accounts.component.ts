@@ -271,9 +271,9 @@ export class AllAccountsComponent implements OnInit{
 
   ngOnInit(): void {
     
-    this.accountData = this.sampleData.accounts.data;
-    this.info = this.sampleData.accounts.info;
-    //this.getAllAccounts();
+    //this.accountData = this.sampleData.accounts.data;
+    //this.info = this.sampleData.accounts.info;
+    this.getAllAccounts();
 
   }
 
