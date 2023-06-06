@@ -161,7 +161,7 @@ mat-sidenav-content {
 
 .sidebar-main-container {
   width: 72px;
-  background-color: var(--primary);
+  background-color: #fff;
   padding: 15px 10px;
   transition: all 200ms ease-out;
   color: black;
