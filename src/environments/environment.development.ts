@@ -1,7 +1,9 @@
 export const environment = {
     production : false,
     name : "Dev Env",
-    gatewayUrl : "https://dev-altsys-realize-api.azurewebsites.net/",
+   // gatewayUrl : "https://dev-altsys-realize-api.azurewebsites.net/",
+   //Updating Product API ULR  --Veena
+   gatewayUrl : "https://dev-productapi.realize.skysecuretech.com/",
     // gatewayUrl : "http://localhost:8002/",
     gatewayUrlForUserProfile : "https://dev-altsys-realize-users-api.azurewebsites.net/",
     gatewayUrlForOrders : "https://dev-altsys-realize-order.azurewebsites.net/",

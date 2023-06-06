@@ -2,7 +2,7 @@
 
     "gatewayUrl" : {
      
-        "localhost" :"https://dev-altsys-realize-api.azurewebsites.net/"
+        "localhost" :"https://dev-productapi.realize.skysecuretech.com/"
     },
     "gatewayUrlForUserProfile" : {
         
