@@ -225,6 +225,8 @@ body {
 
   .feature-header{
     width:450px !important;
+    min-width: 450px !important;
+    max-width: 450px !important;
     vertical-align: middle;
     text-align: center;
     
