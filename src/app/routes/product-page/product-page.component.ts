@@ -327,7 +327,13 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     
 
     this.selectedCategoryItems = item;
-    
+
+    this.selectedSubCategoryItems = [];
+    item.forEach(element => {
+        this.selectedSubCategoryItems = [...this.selectedSubCategoryItems, ...element.subCategories];
+    });
+
+    this.subCategories = this.selectedSubCategoryItems;
    
     
     this.getFilteredData();
@@ -339,6 +345,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     
     
     this.selectedSubCategoryItems = item;
+    
     
     this.getFilteredData();
 

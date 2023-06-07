@@ -45,7 +45,8 @@ export class QuotationHistoryComponent implements OnInit {
           return obj.productName === data.Deal_Name;
         });
         console.log("**** ++++ Val ", result);
-        if(result.length>0){ this.quotationListFlag = 'Y';
+        if(result.length>0){
+          this.quotationListFlag = 'Y';
           let quoteData = {
             "name" : data.Deal_Name,
             "description" : data.Description,
