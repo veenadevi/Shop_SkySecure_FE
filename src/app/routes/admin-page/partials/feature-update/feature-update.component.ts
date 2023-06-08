@@ -24,7 +24,6 @@ export class FeatureUpdateComponent {
   public subscriptions : Subscription[] = [];
 
   public submitFeature() :void {
-    console.log("****** *+++ Name ", this.name);
 
     let request = {
       "name": this.name,
@@ -37,7 +36,6 @@ export class FeatureUpdateComponent {
 
     this.subscriptions.push(
       this.adminPageService.addFeature(request).subscribe( data => {
-        console.log("+++++ The result is ", data);
       })
     )
   }

@@ -16,7 +16,6 @@ export class BrandCardFlyerComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    console.log("*** ++++ ****, ", this.item);
   }
 
   public navigateTo(item){

@@ -443,7 +443,6 @@ public selectedSubCategories(item:any){
   }
 
   public changeTab(event){
-    console.log(event.index)
     this.tabIndex = event.index;
     if(event.index === 0){
       this.selectedTab = 'products';
@@ -454,7 +453,6 @@ public selectedSubCategories(item:any){
   }
 
   public tabChange(productTabSection: any){
-    console.log(productTabSection)
     this.tabIndex = productTabSection;
     if(productTabSection === 'products'){
       this.selectedTab = 'products';

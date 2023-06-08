@@ -43,6 +43,7 @@
         
 
         "getAllSegmentation" : "api/segmentations",
+        "getAllRecommendations" : "api/recommandations/all",
         "getRecommandationsBySegmentId" : "api/recommandations/list",
         "getSecureScore" : "api/user/security/getSecureScore"
     },

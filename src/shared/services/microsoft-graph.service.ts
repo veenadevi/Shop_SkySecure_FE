@@ -24,6 +24,7 @@ export class MicrosoftGraphService {
     public getConnectionUrl : string;
     public getAllSegmentationsUrl : string;
     public getRecommendationBySegmentIdUrl : string
+    public getAllRecommendationsUrl : string;
 
     public getSecureScoreUrl : string;
 
@@ -38,6 +39,7 @@ export class MicrosoftGraphService {
     this.getConnectionUrl = AppService.appUrl.getConnection;
     this.getAllSegmentationsUrl = AppService.appUrl.getAllSegmentation;
     this.getRecommendationBySegmentIdUrl = AppService.appUrl.getRecommandationsBySegmentId;
+    this.getAllRecommendationsUrl = AppService.appUrl.getAllRecommendations;
     this.getSecureScoreUrl = AppService.appUrl.getSecureScore;
   }
 
@@ -187,6 +189,37 @@ export class MicrosoftGraphService {
             return null;
           }
           console.log("********* Response in Secure Score");
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+
+    return request$;
+  }
+
+  /** 
+   * Get All Recommendations
+   */
+
+  public getAllRecommendations(): Observable<any> {
+
+    
+      
+    let url = this.baseUrl + this.getAllRecommendationsUrl;
+    
+
+
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          console.log("********* Response in All Segmenation");
           return response;
         }),
         catchError(error => {
