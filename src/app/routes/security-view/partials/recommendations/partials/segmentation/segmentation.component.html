@@ -6,6 +6,9 @@
     <div class="graph-container">
         
             <div class="segmentation-headers">
+                <div class="headers-style" (click)="getAllRecomm()">
+                    All
+                </div>
                 <ng-container *ngFor="let segmentation of segmentationsList.segmentations">
                     <div class="headers-style" (click)="selectedSegmentation(segmentation)">
                         {{segmentation.name}}

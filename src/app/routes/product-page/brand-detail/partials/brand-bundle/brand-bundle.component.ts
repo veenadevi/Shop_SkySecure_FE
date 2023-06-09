@@ -89,7 +89,6 @@ export class BrandBundleComponent implements OnInit{
 
 
     this.productFamilyVariants.forEach( element => {
-      console.log("****** ++++++++ _________ ", element);
         if(element.productsVariants && element.productsVariants.length>0){
           element.productsVariants.forEach(element => {
             element['logo'] = element.product.bannerLogo ? element.product.bannerLogo : this.alternateLogo;
@@ -183,8 +182,6 @@ export class BrandBundleComponent implements OnInit{
         }
         
       }*/
-      
-      console.log("*********** ++++++++ product Prd VAR", queryParams);
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 

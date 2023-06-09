@@ -86,7 +86,7 @@ public cartData : any[] = [];
 
     this.params = this.route.snapshot.queryParamMap;
 
-    console.log("+++++ ((( ))) ******", this.params);
+
 
 
 
@@ -169,7 +169,7 @@ public cartData : any[] = [];
       let productListArray = productVariant.requiredAddOns;
       
 
-      console.log("**** +++++ Multiple Products ", productVariant);
+  
       productsList.push({
         "productId": productVariant._id,
         "productName" : productVariant.name,
@@ -181,7 +181,7 @@ public cartData : any[] = [];
       if(productListArray.requiredBundles.length > 0){
         productListArray.requiredBundles.forEach(item => {
           var index = productsList.findIndex(el => el.productId === item._id);
-          console.log("**** +++++ Multiple products ", item);
+         
           if(index >=0){
             productsList[index].quantity = Number(productsList[index].quantity) + 1;
           }
@@ -199,7 +199,7 @@ public cartData : any[] = [];
       if(productListArray.requiredProductVariants.length>0){
         productListArray.requiredProductVariants.forEach(item => {
           var index = productsList.findIndex(el => el.productId === item._id);
-          console.log("**** +++++ Multiple products If  ", productsList[index]);
+          
           if(index >=0){
             productsList[index].quantity = Number(productsList[index].quantity) + 1;
           }
@@ -291,7 +291,7 @@ public cartData : any[] = [];
 
     
 
-    //console.log("****** Final Products", this.cartData);
+  
 
   }
 
