@@ -65,6 +65,7 @@ export class BrandBundleComponent implements OnInit{
 
   public setSingleVarient(){
     this.headerText = this.productFamily.name ? this.productFamily.name : '';
+
     this.productVarients.forEach(element => {
         element['logo'] = element.products.bannerLogo ? element.products.bannerLogo : this.alternateLogo;
         element['textClr'] = element.products.bannerTextColor ? element.products.bannerTextColor : 'Black';

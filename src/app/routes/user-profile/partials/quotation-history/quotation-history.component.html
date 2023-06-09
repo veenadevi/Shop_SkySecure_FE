@@ -7,7 +7,7 @@
     <!-- If Cart is Empty -->
 
     <!-- If Cart items is present -->
-    <ng-container>
+    <ng-container *ngIf="quotationListFlag === 'Y' ; else noQuotationList">
         <div>
             <table class="table table-borderless">
                 <thead>
@@ -60,4 +60,14 @@
               </table>
         </div>
     </ng-container>
+    <ng-template #noQuotationList>
+      <div class="empty-container">
+        <div>
+          <img class="success-state-img" src="../../../../../assets/images/emptystage.svg" alt="home">
+        </div>
+        <div class="text-header">
+          No Quotations found at this moment !
+        </div>
+      </div>
+    </ng-template>
 </div>

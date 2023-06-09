@@ -64,7 +64,8 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 21px;
-    color: #1B233C;
+    color: var(--brown);
+
 }
 
 .request-btn {
@@ -92,6 +93,17 @@
     cursor: pointer
 }
 
+.empty-container {
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+    /* background: var(--primary); */
+    align-items: center;
+    justify-content: center;
+   
+}
 /* .delete-icon {
     background-color: #E2EDFF;
 } */
