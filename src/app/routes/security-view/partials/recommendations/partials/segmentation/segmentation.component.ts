@@ -64,13 +64,32 @@ export class SegmentationComponent implements OnInit{
 
     public ngOnInit(): void {
       if(this.segmentationsList && this.segmentationsList.segmentations.length> 0){
+
+        console.log("******* (((((( All Data ", this.segmentationsList);
+        //Get All Segmentations
+        this.getAllRecomm();
        
-        this.selectedSegmentation(this.segmentationsList.segmentations[0]);
+        //this.selectedSegmentation(this.segmentationsList.segmentations[0]);
       }
       
 
       //this.dataSource.paginator = this.paginator;
     }
+
+    public getAllRecomm(): void{
+      this.subscriptions.push(
+        this.microsoftGraphService.getAllRecommendations().subscribe(data => {
+    
+          //this.activityDetailsList = data.recommandations;
+          this.activityDetailsList = this.setCustomActivityDetailsList(data.recommandations);
+
+          //this.selected = segmentation.name;
+          this.setGraphData(data.recommandations);
+        })
+        );
+    }
+
+
 
     public selectedSegmentation (segmentation) {
 

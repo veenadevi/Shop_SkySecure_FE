@@ -280,7 +280,6 @@ export class AllAccountsComponent implements OnInit{
   public getAllAccounts(){
     this.subscriptions.push(
       this.adminPageService.getAllAccounts().subscribe( response => {
-        console.log("+++++ ----- +++++ All Accounts ", response);
         this.accountData = response.accounts.data;
         this.info = response.accounts.info;
 
