@@ -25,7 +25,7 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install watch
-          npm run build --development --if-present
+          npm run build --configuration = development
         
 
       - name: Upload artifact for deployment job
