@@ -46,7 +46,7 @@ export class BrandFeaturesComponent implements OnInit{
         this.products = this.productVarientData.products;
         this.featureList = this.productVarientData.features;
         this.featuresCardHeadings = this.productVarientData.featuresCardHeadings;
-        //console.log("***** ++++++ ",this.productVarientData);
+
         this.featuerCardVariantFlag = (this.featuresCardHeadings && this.featuresCardHeadings.length>0) ? 'Y' : 'N';
 
         // if(this.features.length <=0 && this.featuresCardHeadings.length <=0){
@@ -77,8 +77,6 @@ export class BrandFeaturesComponent implements OnInit{
             });
         }
 
-        console.log("+++++++ Var", this.varientRow);
-        console.log("+++++++ Featu", this.featureList);
     }
 
 
@@ -94,7 +92,7 @@ export class BrandFeaturesComponent implements OnInit{
                 prdVar[i]['availableFeatures'] = [];
                 for(let j=0;j<prdVar[i].features.length;j++){
                     var isPresent = this.featureList.some(function(el){ return el._id === prdVar[i].features[j]._id});
-                    console.log("++++++ (((((( ))))))",isPresent);
+                    
                     if(isPresent){
                         prdVar[i].availableFeatures.push(prdVar[i].features[j]._id);
                     }
@@ -107,7 +105,7 @@ export class BrandFeaturesComponent implements OnInit{
                 prdVar[i]['availableFeatures'] = [];
                 for(let j=0;j<prdVar[i].features.length;j++){
                     var isPresent = this.featureList.some(function(el){ return el._id === prdVar[i].features[j]._id});
-                    console.log("++++++ (((((( ))))))",isPresent);
+                    
                     if(isPresent){
                         prdVar[i].availableFeatures.push(prdVar[i].features[j]._id);
                     }
