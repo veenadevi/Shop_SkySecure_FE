@@ -233,7 +233,7 @@ color: var(--neutral);
     line-height: 2rem;
     letter-spacing: 0.02em;
     color: #0B0C22;
-    margin:2% 0%;
+    margin:32px 0 16px 0;
   }
 
   /*------FEATURES------*/
@@ -289,15 +289,21 @@ color: var(--neutral);
   }
 
   .card-pdf-right {
-    width: 30vw;
+    width: 100%;
     background: #F7F7FF;
     border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
   
   .pdf-right-item {
     display: flex;
-    padding: 2%;
+    padding: 1%;
+    width: 100%;
     align-items: center;
+    justify-content: center;
   }
 
   .price-item {

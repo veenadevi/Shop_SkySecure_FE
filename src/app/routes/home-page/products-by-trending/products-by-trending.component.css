@@ -27,10 +27,14 @@
 .brown-color{
     /* color: var(--brown); */
     color: #003388;
+    cursor: pointer;
+
 }
 
 .brown-color img {
     height: 20px;
+    cursor: pointer;
+
 }
 
 .product-descirption {

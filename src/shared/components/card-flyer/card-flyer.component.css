@@ -46,6 +46,8 @@
 .brown-color{
     /* color: var(--brown); */
     color: #003388;
+    cursor: pointer;
+
 }
 
 
