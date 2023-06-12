@@ -26,19 +26,25 @@
         </div>
     </div>
     <div class="pd-features">
-        <h4 class="heading-text">{{product.name}} Product details</h4>
+        <!-- <h4 class="heading-text">{{product.name}} Specifications</h4> -->
+        <h4 class="heading-text">Specifications</h4>
         <div class="card-pdf">
-          <div class="card-pdf-left">
-          <h5>{{product.name}} Key Features</h5>
-          <ng-container *ngIf="product.featureList && product.featureList.length>0">
-            <ul class="card-list-pdf" *ngFor="let feature of (product.featureList.slice(0,3))" >
-                <li>{{feature.name}}</li>
-              </ul>
-          </ng-container>
+          <!-- <div class="card-pdf-left">
+                <h5>{{product.name}} Key Features</h5>
+                <ng-container *ngIf="product.featureList && product.featureList.length>0">
+                    <ul class="card-list-pdf" *ngFor="let feature of (product.featureList.slice(0,3))" >
+                        <li>{{feature.name}}</li>
+                    </ul>
+                </ng-container> -->
+
+<!-- already commented -->
           <!-- <ul class="card-list-pdf" *ngFor="let feature of (product.featureList.slice(0,3))" >
             <li>{{feature.name}}</li>
           </ul> -->
-        </div>
+<!-- already commented -->
+
+
+        <!-- </div> -->
         <div class="card-pdf-right">
             <div class="pdf-right-item">
                 <div class="features-img">
@@ -57,6 +63,12 @@
                     <img class="features-icon" alt="" src="../../../../assets/icons/illustration_icons/LaptopIcon.svg">
                 </div>
                 <h6 class="item-title">DEVICES<br><span class="item-value">Desktop, Mobile</span></h6>
+            </div>
+            <div class="pdf-right-item">
+                <div class="features-img">
+                    <img class="features-icon" alt="" src="../../../../assets/icons/illustration_icons/DeploymentIcon.svg">
+                </div>
+                <h6 class="item-title">DEPLOYMENT<br><span class="item-value">Web-Based</span></h6>
             </div>
         </div>
         </div>

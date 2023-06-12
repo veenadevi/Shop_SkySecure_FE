@@ -1,5 +1,5 @@
 .table-container{
-    padding: 10px;
+    /* padding: 10px; */
     display: flex;
     justify-content: center;
     background-image: url(../../../assets/Realize/logos/images/FeaturesBackground-LiteBlue.jpg);
@@ -10,6 +10,15 @@
     background-repeat: no-repeat;
 }
 
+
+.heading-text {
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  letter-spacing: 0.02em;
+  color: #0B0C22;
+  margin:32px 0 16px 0;
+}
 
 
 

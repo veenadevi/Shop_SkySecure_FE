@@ -1,13 +1,13 @@
 .container{
-    height: 322px;
+    height: 244px;
     width: 100%;
     background : var(--white);
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 0 20px;
     max-width: 1620px !important;
     row-gap: 1em;
-    overflow: scroll;
+    /* overflow: scroll; */
 }
 ::-webkit-scrollbar {
     display: none;
@@ -17,7 +17,7 @@
     flex-grow: 1;
     flex-wrap: wrap;
     margin-bottom: 20px;
-    margin-left: 10px;
+    margin-left: -8px;
     margin-top: -5px;
     column-gap: 1.5%;
 }
@@ -48,8 +48,11 @@
 .brown-color{
     /* color: var(--brown); */
     color: #003388;
+    cursor: pointer;
 }
 
 .brown-color img {
     height: 20px;
+    cursor: pointer;
+
 }
