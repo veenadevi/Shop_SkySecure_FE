@@ -1,5 +1,15 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/shared/services/loader.service';
+import { MetadataService } from 'src/shared/services/metadata.service';
+import { CategoryDetails } from 'src/shared/models/interface/partials/category-details';
+import { MetadataStore } from 'src/shared/stores/metadata.store';
+import { ProductsDetails } from 'src/shared/models/interface/partials/products-details';
+import { OEMDetails } from 'src/shared/models/interface/partials/oem-details';
+import { OEMResponse } from 'src/shared/models/interface/response/oem-response';
+import { CloseScrollStrategy } from '@angular/cdk/overlay';
+import { ProductListService } from 'src/shared/services/product-list-page.service';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { MsalService, MsalBroadcastService } from '@azure/msal-angular';
 import { AppComponent } from 'src/app/app.component';
 import { LoginService } from 'src/shared/services/login.service';
@@ -11,6 +21,7 @@ import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CartService } from 'src/shared/services/cart.service';
 import { MicrosoftGraphService } from 'src/shared/services/microsoft-graph.service';
+import { HttpResponseBase } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 
@@ -26,6 +37,7 @@ export class HeaderComponent implements OnInit{
 
   @Output() loginEvent = new EventEmitter();
   
+  public menuClicked = false;
 
   public userLoggedIn = false;
 
@@ -34,6 +46,23 @@ export class HeaderComponent implements OnInit{
   public numberOfCartItems = 0;
 
   cartItemCounts:number;
+
+//from toolbarcomponent
+  public categories : CategoryDetails[] = [];
+
+  public softwareCategories : CategoryDetails[] = [];
+
+  public hardwareCategories : CategoryDetails[] = [];
+
+  public oemList : OEMDetails[]=[];
+
+  public compareProducts : any[] = [];
+
+  public offers : any[] = [];
+
+  @ViewChild('matMenuTrigger') matMenuTrigger: MatMenuTrigger;
+  
+  @ViewChild('categoriesMenu') categoriesMenu : MatMenuTrigger;
 
   constructor(
     private appComponent : AppComponent,
@@ -46,7 +75,15 @@ export class HeaderComponent implements OnInit{
     private router : Router,
     private microsoftGraphService : MicrosoftGraphService,
     private spinnerService : NgxSpinnerService,
-    private cartStore : CartStore
+    private cartStore : CartStore,
+
+
+    //from toolbar component
+    private metaDataSvc : MetadataService,
+    private loaderService : LoaderService,
+    private metadataStore : MetadataStore,
+    private productListService: ProductListService
+
   ){}
 
   /**
@@ -135,6 +172,15 @@ export class HeaderComponent implements OnInit{
     // else{
     //   this.userAccountStore.setuserAccountDetails(null);
     // }
+
+
+
+    this.getCategories();
+    this.getProducts();
+    this.getOEMs();
+    this.getTrendingProducts();
+    //this.getCartId();
+
     
   }
 
@@ -174,6 +220,7 @@ export class HeaderComponent implements OnInit{
 
 
 
+
     
   }
 
@@ -207,5 +254,104 @@ export class HeaderComponent implements OnInit{
     
 
   }
+
+  private getCategories(): CategoryDetails[]{
+    this.spinnerService.show();
+    let categoryResponse = null;
+    this.subscriptions.push(
+      this.metaDataSvc.fetchCategory().subscribe( response => {
+        this.metadataStore.setCategoryDetails(response.categorys);
+        this.categories = response.categorys;
+        this.softwareCategories = response.categorys;
+        this.hardwareCategories = null;
+        // this.categories = response.categorys.splice(0,10);
+        // this.softwareCategories = response.categorys.splice(0,10);
+        // this.hardwareCategories = response.categorys.splice(0, 10, 15);
+      })
+      
+    );
+    this.spinnerService.hide();
+    return categoryResponse;
+  }
+
+  private getOEMs(): OEMDetails[]{
+    this.spinnerService.show();
+    let OEMResponse = null;
+    this.subscriptions.push(
+      this.metaDataSvc.fetchOEM().subscribe( response => {
+        this.metadataStore.setOEMDetails(response.oems);
+        this.oemList = response.oems;
+        this.spinnerService.hide();
+      })
+      
+    );
+    return OEMResponse;
+  }
+  private getProducts(): ProductsDetails[]{
+    this.spinnerService.show();
+    let categoryResponse = null;
+    this.subscriptions.push(
+      this.metaDataSvc.fetchProducts().subscribe( response => {
+        this.metadataStore.setProductsDetails(response.products);
+      })
+      
+    );
+    this.spinnerService.hide();
+    return categoryResponse;
+  }
+
+  private getTrendingProducts() : void {
+    this.spinnerService.show();
+    this.subscriptions.push(
+      this.metaDataSvc.fetchTrendingProducts().subscribe( response => {
+        this.metadataStore.setTrendingProducts(response.products);
+        this.spinnerService.hide();
+        //this.metadataStore.setProductsDetails(response.products);
+      })
+      
+    );
+  }
+  
+
+
+  // public ngOnInit() : void {
+
+  //   this.getCategories();
+  //   this.getProducts();
+  //   this.getOEMs();
+  //   this.getTrendingProducts();
+  //   //this.getCartId();
+  // }
+
+
+  public goToProductsPage() {
+    this.router.navigate(['/products']);
+  }
+
+  public goToProductsPageWithCategorySelection(category) {
+    this.matMenuTrigger.closeMenu();
+    this.categoriesMenu.closeMenu();
+    this.productListService.setCategoryIdSelection(category._id);
+    this.router.navigate([`/products/category/${category._id}`]);
+  }
+
+  public goToProductsPageWithSubCategorySelection(category,subCategory) {
+    this.productListService.setSubCategoryIdSelection(category._id, subCategory._id);
+    this.router.navigate([`/products/sub-category/${category._id}-${subCategory._id}`], { state: { category , subCategory} });
+  }
+
+  goToProductsPageByBrand(oem) {
+    this.productListService.setBrandIdSelection(oem._id);
+    this.router.navigate([`/products/brand/${oem._id}`]);
+  }
+
+  public openMenu(menuTrigger: MatMenuTrigger){
+    menuTrigger.openMenu();
+  }
+
+  public closeMenu(menuTrigger: MatMenuTrigger){
+    menuTrigger.closeMenu();
+  }
+
 
 }

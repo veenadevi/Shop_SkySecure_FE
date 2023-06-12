@@ -1,20 +1,21 @@
-<mat-toolbar class="toolbar">
+<!-- <mat-toolbar class="toolbar"> -->
   <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button> -->
-  <span class="altsys-logo" (click)="goToHomePage()"> 
+  <!-- <span class="altsys-logo" (click)="goToHomePage()"> 
     <img class="altsys-logo-navbar" alt=""
     src="../../../assets/Realize/logos/RealizeLogo.svg" 
     />
-  </span>
-  <span class="spacer"></span>
+  </span> -->
+ 
+  <!-- <span class="spacer"></span> -->
 
 
-
+<!-- 
   <button title="Cart" [matBadge]="cartItemCounts"  matBadgeColor="accent" mat-icon-button class="toolbar-icon-01" (click)="cartFynction()" >
-    <img alt="" src="../../../assets/icons/Cart.svg"/>
+    <img alt="" src="../../../assets/icons/Cart.svg"/> -->
     <!-- <button class="badge bg-danger">0</button> -->
-    <ng-container *ngIf="(cartItems$ | async) as cartItems">
+    <!-- <ng-container *ngIf="(cartItems$ | async) as cartItems">
       <ng-container *ngIf="cartItems.length > 0">
         <span class="icon-button__badge">{{numberOfCartItems}}</span>
       </ng-container>
@@ -27,12 +28,162 @@
   </button>
   <button title="User-icon" *ngIf="!userLoggedIn"  mat-icon-button class="toolbar-icon" (click)="login()">
     <img alt="" src="../../../assets/icons/User_icon.svg"/>
-  </button>
+  </button> -->
   <!-- <button *ngIf= "userLoggedIn" mat-icon-button class="toolbar-icon" (click)="logout()">
     <img src="../../../assets/icons/Users.svg"/>
   </button> -->
   
   
   
-</mat-toolbar>
-<ngx-spinner size="medium" type="ball-atom"></ngx-spinner>
+<!-- </mat-toolbar>
+<ngx-spinner size="medium" type="ball-atom"></ngx-spinner> -->
+
+
+<div class="navbar">
+
+
+
+  <div class="logo-section" (click)="goToHomePage()">
+    <img class="realize-logo" alt=""
+    src="../../../assets/Realize/logos/RealizeLogo.svg" 
+    />
+  </div>
+
+
+
+  <div class="navMenu-section">
+    <ul class="navmenu">
+      <li #categoriesMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="aboveMenu">
+        <div class="navmenu-text">
+          <span>Categories</span>
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </div>
+      </li>
+      <li mat-button [matMenuTriggerFor]="belowMenu">
+        <div class="navmenu-text">
+          <span>Brands</span>
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </div>
+      </li>
+      <li>
+        <div class="navmenu-text">
+          <span>Compare Products</span>
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </div>
+      </li>
+      <li>
+        <div class="navmenu-text">
+          <span>Offers</span>
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </div>
+      </li>
+    </ul>
+
+    <mat-menu #aboveMenu="matMenu" yPosition="below">
+
+      <button #matMenuTrigger="matMenuTrigger" mat-menu-item [matMenuTriggerFor]="softwares">
+          <div class="menu-width">
+              <span class="text-normal">Software</span>
+          </div>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]=" hardwareCategories &&  hardwareCategories.length > 0 ? hardware : null">
+          <div class="menu-width">
+              <span class="text-normal">Hardware</span>
+          </div>
+      </button>
+      
+  </mat-menu>
+
+
+  
+  <div class="dropdown">
+
+    <mat-menu #softwares="matMenu" xPosition="after">
+      <ng-container *ngFor="let category of softwareCategories">
+        <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="category.subCategories.length>0 ? categoryItems : null"
+          mat-menu-item><span class="text-normal">{{category.name}}</span></button>
+          <mat-menu #categoryItems="matMenu" xPosition="after">
+            <ng-container *ngFor="let subCategory of category.subCategories">
+              <button (click)="goToProductsPageWithSubCategorySelection(category,subCategory)" mat-menu-item><span class="text-normal">{{subCategory.name}}</span></button>
+            </ng-container>
+          </mat-menu>
+      </ng-container>
+    </mat-menu>
+    
+  <mat-menu #hardware="matMenu" xPosition="after">
+      <ng-container *ngFor="let category of hardwareCategories">
+          <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="category.subCategories.length>0 ? categoryItems : null" mat-menu-item><span class="text-normal">{{category.name}}</span></button>
+          <mat-menu #categoryItems="matMenu" xPosition="after">
+              <ng-container *ngFor="let subCategory of category.subCategories">
+                  <button (click)="goToProductsPageWithSubCategorySelection(category,subCategory)" mat-menu-item class="text-normal"><span class="text-normal">{{subCategory.name}}</span></button>
+              </ng-container>
+          </mat-menu>
+      </ng-container>
+  </mat-menu>
+
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+    <ng-container *ngFor="let oem of oemList">
+        <button (click)="goToProductsPageByBrand(oem)" mat-menu-item class="text-normal">
+          <div>
+            <span class="text-normal">{{oem.name}}</span>
+          </div>
+        </button>
+    </ng-container>
+</mat-menu>
+
+  </div>
+
+  </div>
+
+  <!-- <div class="searchbar-section">
+    <input class="search-bar" placeholder="search products">
+    <div class="searchicon-btn">
+      <img alt="search-icon" class="search-icon" src="../../../assets/icons/Search.svg">
+    </div>
+  </div> -->
+
+  <div class="icons-section">
+
+
+
+    <div class="notificationicon-section">
+      <img class="notification-icon" alt="" src="../../../assets/icons/BellWhite.svg">
+    </div>
+
+    
+    <div class="cart-section">
+      <button class="cart-button" title="Cart" [matBadge]="cartItemCounts" (click)="cartFynction()">
+        <div class="cartposition">
+          <img alt="cart" class="cart-icon" src="../../../assets/icons/CartWhite.svg">
+          <!-- <span>Cart</span> -->
+  
+          <ng-container *ngIf="(cartItems$ | async) as cartItems">
+            <ng-container *ngIf="cartItems.length > 0">
+              <span class="icon-button__badge">{{numberOfCartItems}}</span>
+            </ng-container>
+          </ng-container>
+        </div>
+      </button>
+    </div>
+
+
+
+
+
+    <div class="user-icon" title="User-icon" *ngIf="!userLoggedIn" (click)="login()">
+      <img class="usericon" alt="" src="../../../assets/icons/User_icon.svg"/>
+    </div>
+
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">                        
+      <i class="user-img" class="fa fa-solid fa-bars"></i>
+    </label>
+
+  </div>
+
+
+
+
+</div>
+
+
