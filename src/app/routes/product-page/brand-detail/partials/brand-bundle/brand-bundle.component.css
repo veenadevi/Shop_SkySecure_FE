@@ -73,6 +73,11 @@
     letter-spacing: 1px;
     color: var(--text-dark);
     overflow: hidden;
+    min-height: 50px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
 }
 
 .card-holder{

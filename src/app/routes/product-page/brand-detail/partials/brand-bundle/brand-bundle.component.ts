@@ -108,6 +108,16 @@ export class BrandBundleComponent implements OnInit{
             element['navigationId'] = element._id;
           });
         }
+        if(element.childProductFamilyVarients && element.childProductFamilyVarients.length>0){
+          element.childProductFamilyVarients.forEach(element => {
+            element['logo'] = (element.product && element.product.bannerLogo) ? element.product.bannerLogo : this.alternateLogo;
+            element['textClr'] = (element.product && element.product.bannerTextColor) ? element.product.bannerTextColor : 'Black';
+            element['bgImg'] = (element.product && element.product.bannerURL) ? element.product.bannerURL : this.alternateUrl;
+            element['prdType'] = ['bundle'];
+            element['navigationId'] = element.productsFamilyId;
+          });
+        }
+        
         
         
       }
@@ -126,6 +136,7 @@ export class BrandBundleComponent implements OnInit{
 
     // this.cardProductItems = this.products;
     // this.cardProductVarientsItems = this.productVarients;
+    console.log("****** +++++++++ VAL ", this.productFamilyVariants);
   }
 
   public requestQuote(product){
