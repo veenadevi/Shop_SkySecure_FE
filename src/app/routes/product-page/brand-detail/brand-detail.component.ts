@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -14,6 +14,7 @@ import { CartStore } from 'src/shared/stores/cart.store';
 })
 export class BrandDetailComponent implements OnInit{
 
+  public currentRoute: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +23,35 @@ export class BrandDetailComponent implements OnInit{
     private cartStore : CartStore,
     private router : Router,
     private modalService : NgbModal
-  ){}
+  ){
+    this.router.events.subscribe((event: Event) => {
+        let currentUrl = this.route.snapshot.paramMap.get('brandId');
+        
+        if (event instanceof NavigationStart) {
+            // Show progress spinner or progress bar
+            //this.ngOnInit();
+            //console.log('@@@@@@@@ ___ Route change detected');
+            currentUrl = this.route.snapshot.paramMap.get('brandId');
+            //console.log('@@@@@@@@ ___ Route change Start', currentUrl);
+        }
+
+        if (event instanceof NavigationEnd) {
+            // Hide progress spinner or progress bar
+            this.currentRoute = event.url; 
+            currentUrl = this.route.snapshot.paramMap.get('brandId');
+            this.ngOnInit();
+            console.log('@@@@@@@@ ___ Route change End');         
+            //console.log("@@@@@@@@ ___ ",event);
+        }
+
+        if (event instanceof NavigationError) {
+             // Hide progress spinner or progress bar
+
+            // Present error to user
+            //console.log("@@@@@@@@ ___ ", event.error);
+        }
+    });
+  }
 
 
   public onPageLoad : boolean = true;
