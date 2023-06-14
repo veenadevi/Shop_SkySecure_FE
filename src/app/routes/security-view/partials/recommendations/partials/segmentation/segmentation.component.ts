@@ -113,12 +113,20 @@ export class SegmentationComponent implements OnInit{
     public setCustomActivityDetailsList(dataList){
       dataList.forEach(ele => {
         ele['isCompleted'] = false;
-        if(ele.apiData && ele.apiData.body){
+        //isEnable
+        /*if(ele.apiData && ele.apiData.body){
          
           ele['checkBox'] = false;
         }
         else {
         
+          ele['checkBox'] = true;
+        }*/
+
+        if(ele.isEnable){
+          ele['checkBox'] = false;
+        }
+        else{
           ele['checkBox'] = true;
         }
       })
