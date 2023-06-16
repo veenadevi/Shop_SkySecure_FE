@@ -151,14 +151,59 @@ constructor(
     filteredArray.forEach(details => {
       this.isCompleted = true;
       details.isCompleted = true;
-      this.subscriptions.push(
-        
-        this.msUsersPoliciesService.msCreateConditionalPolicy(details).subscribe( res => {
-         
+      details['errorMsg'] = "";
+
+
+
+      if(details.apiData && details.apiData.method){
+        if(details.apiData.method === 'POST'){
+          details.errorMsg = null;
+          this.subscriptions.push(
+            this.msUsersPoliciesService.msGraphPolicyServicePostCall(details).subscribe( res => {
+              this.isCompleted = false;
+              details.isCompleted = false;
+            })
+          )
+        }
+        else if(details.apiData.method === 'GET'){
+          details.errorMsg = null;
+          this.subscriptions.push(
+            this.msUsersPoliciesService.msGraphPolicyServiceGetCall(details).subscribe( res => {
+              this.isCompleted = false;
+              details.isCompleted = false;
+            })
+          )
+        }
+        else{
           this.isCompleted = false;
           details.isCompleted = false;
+          details.errorMsg = 'No Method Specified';
+        }
+      }
+      else{
+        this.isCompleted = false;
+        details.isCompleted = false;
+        details.errorMsg = 'Some error Occurred';
+      }
+
+
+
+
+      /*this.subscriptions.push(
+
+        this.msUsersPoliciesService.msGraphPolicyServicePostCall(details).subscribe( res => {
+
+
+            this.isCompleted = false;
+            details.isCompleted = false;
         })
-      )
+        
+        //this.msUsersPoliciesService.msCreateConditionalPolicy(details).subscribe( res => {
+         
+          //this.isCompleted = false;
+          //details.isCompleted = false;
+        //})
+      )*/
     });
   }
 

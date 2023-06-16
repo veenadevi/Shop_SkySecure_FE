@@ -65,7 +65,6 @@ export class SegmentationComponent implements OnInit{
     public ngOnInit(): void {
       if(this.segmentationsList && this.segmentationsList.segmentations.length> 0){
 
-        console.log("******* (((((( All Data ", this.segmentationsList);
         //Get All Segmentations
         this.getAllRecomm();
        
@@ -96,7 +95,6 @@ export class SegmentationComponent implements OnInit{
       this.subscriptions.push(
         this.microsoftGraphService.getRecommendationsList(segmentation._id).subscribe(data => {
       
-          console.log("**** +++++ Recom data", data);
           //this.activityDetailsList = data.recommandations;
           this.activityDetailsList = this.setCustomActivityDetailsList(data.recommandations);
 
@@ -138,7 +136,6 @@ export class SegmentationComponent implements OnInit{
       
       this.subscriptions.push(
         this.microsoftGraphService.getSecureScore().subscribe( res => {
-          console.log("+++++++++++ Inside the api ", res);
           this.secureScore = res;
         })
       )

@@ -20,6 +20,7 @@ export class RecommendationDetailsModel implements RecommendationDetails {
     public userConfigStatus : any[];
     public apiData : any;
     public checkBox : boolean;
+    public errorMsg : string;
 
 
 
