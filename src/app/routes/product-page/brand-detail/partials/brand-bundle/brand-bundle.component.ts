@@ -70,7 +70,7 @@ export class BrandBundleComponent implements OnInit{
         element['logo'] = element.products.bannerLogo ? element.products.bannerLogo : this.alternateLogo;
         element['textClr'] = element.products.bannerTextColor ? element.products.bannerTextColor : 'Black';
         element['bgImg'] = element.products.bannerURL ? element.products.bannerURL : this.alternateUrl;
-        element['prdType'] = 'bundle';
+        element['prdType'] = 'product';
         element['navigationId'] = element.productId;
     });
     this.products.forEach(element => {
@@ -94,7 +94,7 @@ export class BrandBundleComponent implements OnInit{
             element['logo'] = element.product.bannerLogo ? element.product.bannerLogo : this.alternateLogo;
             element['textClr'] = element.product.bannerTextColor ? element.product.bannerTextColor : 'Black';
             element['bgImg'] = element.product.bannerURL ? element.product.bannerURL : this.alternateUrl;
-            element['prdType'] = 'bundle';
+            element['prdType'] = 'product';
             element['navigationId'] = element.productId;
 
           });
