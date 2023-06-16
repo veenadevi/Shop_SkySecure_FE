@@ -44,7 +44,7 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let item of activityDetailsList; let i=index; let odd = odd">
-                <ng-container *ngIf="!(item.checkBox)">
+                <ng-container>
                     <td class="align-top">
                         <input type="checkbox" disabled="{{item.checkBox}}" value="{{item.title}}" [(ngModel)]="item.checked">
                     </td>
