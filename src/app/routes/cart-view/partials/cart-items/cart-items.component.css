@@ -107,3 +107,9 @@
 /* .delete-icon {
     background-color: #E2EDFF;
 } */
+
+
+.success-state-img {
+    opacity: 50%;
+    height: 18em;
+}

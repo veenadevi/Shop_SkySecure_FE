@@ -15,5 +15,6 @@ export interface RecommendationDetails {
     userConfigStatus : any[];
     apiData : any;
     checkBox : boolean;
+    errorMsg : string;
 
 }

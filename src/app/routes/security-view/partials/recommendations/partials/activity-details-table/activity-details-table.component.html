@@ -4,7 +4,7 @@
             <select class="form-select recom-type" aria-label="Default select example">
                 <option selected>Recommendation Type - OEM</option>
                 <option value="1">OEM</option>
-                <option value="2">Securty</option>
+                <option value="2">Security</option>
             </select>
             <!-- <div class="secure-score">
                 <span>Secure Score</span> 
@@ -44,57 +44,65 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let item of activityDetailsList; let i=index; let odd = odd">
-				<td class="align-top">
-                    <input type="checkbox" disabled="{{item.checkBox}}" value="{{item.title}}" [(ngModel)]="item.checked">
-                </td>
-				<td class="align-top">
-                    <div class="details-container">
-                        <div class="activity-header">
-                            {{item.title}}
+                <ng-container>
+                    <td class="align-top">
+                        <input type="checkbox" disabled="{{item.checkBox}}" value="{{item.title}}" [(ngModel)]="item.checked">
+                    </td>
+                    <td class="align-top">
+                        <div class="details-container">
+                            <div class="activity-header">
+                                {{item.title}}
+                            </div>
+                            <div class="activity-dsec">
+                                {{item.details}}
+                            </div>
                         </div>
-                        <div class="activity-dsec">
-                            {{item.details}}
-                        </div>
-                    </div>
-                </td>
-				<td>
-                    <div class="priority-container">
-                        <div [ngClass]="{'high': item.priority ==='High',
-                                    'medium': item.priority ==='Medium',
-                                    'low': item.priority ==='Low'}">
-                        </div>
-                        <div>
-                            {{item.priority}}
-                        </div>
-                    </div>
-                    
-                </td>
-                <td>
-                    <div class="priority-container">
-                        <ng-container *ngIf="(item.userConfigStatus && item.userConfigStatus.length>0); else notConfiguredBlock">
+                    </td>
+                    <td>
+                        <div class="priority-container">
+                            <div [ngClass]="{'high': item.priority ==='High',
+                                        'medium': item.priority ==='Medium',
+                                        'low': item.priority ==='Low'}">
+                            </div>
                             <div>
-                                <img src="../../../../../../../assets/icons/checkcircle.svg">
+                                {{item.priority}}
                             </div>
-                            <div style="color: #25BC9D">
-                                {{item.userConfigStatus[0].status}}
-                            </div>
-                        </ng-container>
+                        </div>
                         
-                        <ng-template #notConfiguredBlock>
-                            <div>
-                                <img src="../../../../../../../assets/icons/warning.svg">
-                            </div>
-                            <div style="color: #FE9F4C;">
-                                Not Configured
-                            </div>
+                    </td>
+                    <td>
+                        <div class="priority-container">
+                            <ng-container *ngIf="(item.userConfigStatus && item.userConfigStatus.length>0); else notConfiguredBlock">
+                                <div>
+                                    <img src="../../../../../../../assets/icons/checkcircle.svg">
+                                </div>
+                                <div style="color: #25BC9D">
+                                    {{item.userConfigStatus[0].status}}
+                                </div>
+                            </ng-container>
+                            
+                            <ng-template #notConfiguredBlock>
+                                <div>
+                                    <img src="../../../../../../../assets/icons/warning.svg">
+                                </div>
+                                <div style="color: #FE9F4C;">
+                                    Not Configured
+                                </div>
+                            </ng-template>
+                        </div>
+                    </td>
+                    <td>
+                        <ng-container *ngIf="(item.errorMsg && item.errorMsg!== '') ; else progressBarTemplate">
+                            <span class="error-msg"> {{item.errorMsg}} </span>
+                        </ng-container>
+                        <ng-template #progressBarTemplate>
+                            <mat-progress-bar mode="indeterminate" *ngIf="item.isCompleted"></mat-progress-bar>
                         </ng-template>
-                    </div>
-                </td>
-				<td>
-                    <mat-progress-bar mode="indeterminate" *ngIf="item.isCompleted"></mat-progress-bar>
-                </td>
+                        
+                    </td>
 				<!-- <td><button class="btn assess-btn" (click)="assess(item)">Assess</button></td> -->
-			</tr>
+                </ng-container>
+            </tr>
 		</tbody>
 	</table>
 </div>

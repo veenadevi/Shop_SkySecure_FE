@@ -14,7 +14,7 @@
             </div>
             <div class="pd-header-actions">
                 <button class="btn compare-btn" (click)="requestQuote(product)">Request quote</button>
-                <button class="btn tertiary-btn">Try free trail</button>
+                <!-- <button class="btn tertiary-btn">Try free trail</button> -->
             </div>
         </div>
         <div class="pd-header-right">
@@ -26,19 +26,25 @@
         </div>
     </div>
     <div class="pd-features">
-        <h4 class="heading-text">{{product.name}} Product details</h4>
+        <!-- <h4 class="heading-text">{{product.name}} Specifications</h4> -->
+        <h4 class="heading-text">Specifications</h4>
         <div class="card-pdf">
-          <div class="card-pdf-left">
-          <h5>{{product.name}} Key Features</h5>
-          <ng-container *ngIf="product.featureList && product.featureList.length>0">
-            <ul class="card-list-pdf" *ngFor="let feature of (product.featureList.slice(0,3))" >
-                <li>{{feature.name}}</li>
-              </ul>
-          </ng-container>
+          <!-- <div class="card-pdf-left">
+                <h5>{{product.name}} Key Features</h5>
+                <ng-container *ngIf="product.featureList && product.featureList.length>0">
+                    <ul class="card-list-pdf" *ngFor="let feature of (product.featureList.slice(0,3))" >
+                        <li>{{feature.name}}</li>
+                    </ul>
+                </ng-container> -->
+
+<!-- already commented -->
           <!-- <ul class="card-list-pdf" *ngFor="let feature of (product.featureList.slice(0,3))" >
             <li>{{feature.name}}</li>
           </ul> -->
-        </div>
+<!-- already commented -->
+
+
+        <!-- </div> -->
         <div class="card-pdf-right">
             <div class="pdf-right-item">
                 <div class="features-img">
@@ -57,6 +63,12 @@
                     <img class="features-icon" alt="" src="../../../../assets/icons/illustration_icons/LaptopIcon.svg">
                 </div>
                 <h6 class="item-title">DEVICES<br><span class="item-value">Desktop, Mobile</span></h6>
+            </div>
+            <div class="pdf-right-item">
+                <div class="features-img">
+                    <img class="features-icon" alt="" src="../../../../assets/icons/illustration_icons/DeploymentIcon.svg">
+                </div>
+                <h6 class="item-title">DEPLOYMENT<br><span class="item-value">Web-Based</span></h6>
             </div>
         </div>
         </div>
@@ -94,7 +106,7 @@
             </div>
         </div>
     </div> -->
-    <div class="pd-images">
+    <!-- <div class="pd-images">
         <h4 class="heading-text">Official screenshots</h4>
         <div class="pd-images-items">
             <div class="imgae-item">
@@ -116,9 +128,9 @@
                 <img class="mat-card-img pd-header-right-img" mat-card-image src="https://www.pure-ip.com/hs-fs/hubfs/Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png?width=2283&name=Operator%20Connect%20Teams%20admin%20center%20operators%20screenshot.png" alt="Photo of test title" />
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="pd-similar-products" *ngIf="similarProducts.length != 0">
-        <h4 class="heading-text">Similer products</h4>
+        <h4 class="heading-text">Product Bundles</h4>
         <div class="similar-products-cards">
             <app-similar-products [similarProducts]="similarProducts"></app-similar-products>
         </div>

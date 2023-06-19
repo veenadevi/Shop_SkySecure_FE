@@ -26,6 +26,9 @@
                     <ng-container *ngFor="let cardItem of item.productsVariants">
                         <brand-card-flyer [item] = "cardItem"></brand-card-flyer>
                     </ng-container>
+                    <ng-container *ngFor="let cardItem of item.childProductFamilyVarients">
+                        <brand-card-flyer [item] = "cardItem"></brand-card-flyer>
+                    </ng-container>
                     
                 </div>
                 
