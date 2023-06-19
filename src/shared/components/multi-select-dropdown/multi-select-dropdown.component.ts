@@ -34,7 +34,27 @@ export class MultiSelectDropdownComponent implements OnInit{
     //   //let filteredArray = this.list.filter(event => (event.checked === true));
     //   this.checkedList.push(this.list);
     //   console.log("+ + + + +", this.checkedList);
+
+
     // }
+
+
+    // if (this.list.filter(e => e.checked === true).length > 0) {
+    //   /* vendors contains the element we're looking for */
+    //   this.checkedList.push(this.list.filter(e => e.checked === true)); 
+    // }
+    // console.log("+++++ ((((( , ", this.checkedList);
+
+    if(this.list.length>0){
+      this.list.forEach(element => {
+        if(element.checked){
+          this.checkedList.push(element);
+        }
+      });
+      console.log("+++++ ((((( , ", this.list);
+    }
+  
+    
    }
 
        getSelectedValue(status:Boolean,value:any){

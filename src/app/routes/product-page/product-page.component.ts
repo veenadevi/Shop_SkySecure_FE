@@ -160,6 +160,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     this.activeRoute.paramMap.subscribe(params => {
       if(this.categories.length >0 && this.brands.length>0){
         if(params.has('categoryId')){
+          this.setAllUnChecked();
           this.setCategoryChecked(params.get('categoryId'));
           this.getSubCategoriesByID(params.get('categoryId'));
   
@@ -285,6 +286,18 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
       items.forEach(element => {
         element['checked'] = true;
       });
+  }
+  public setAllUnChecked() :void {
+
+    this.categories.forEach(element => {
+      element['checked'] = false;
+    });
+    this.subCategories.forEach(element => {
+      element['checked'] = false;
+    });
+    this.brands.forEach(element => {
+      element['checked'] = false;
+    });
   }
 
   public setCategoryChecked(catId) : void {
