@@ -313,6 +313,18 @@ export class HeaderComponent implements OnInit{
   }
   
 
+  selected: boolean = false
+
+  openSearch(selected : boolean) {
+    this.selected = !this.selected;
+    console.log("@@@@######......OpenSearch......")
+  }
+
+  searchClose(selected : boolean) : void {
+    this.selected = !this.selected;
+    console.log("@@@@######......closeSearch......")
+  }
+
 
   // public ngOnInit() : void {
 

@@ -18,11 +18,19 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   styleUrls: ['./cart-items.component.css']
 })
 export class CartItemsComponent {
+
+
+
   private subscriptions : Subscription[] = [];
 
   public cartItems : any;
 
   public params : any;
+
+    public product : any = {};
+
+
+  public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
  
 
@@ -262,7 +270,8 @@ public cartData : any[] = [];
       this.cartData[i].quantity = Number(this.cartData[i].quantity) + 1;
     }
     else if(opr === 'minus'){
-      this.cartData[i].quantity = Number(this.cartData[i].quantity) - 1;
+
+        this.cartData[i].quantity = Number(this.cartData[i].quantity) - 1;
     }
   }
 
@@ -371,5 +380,10 @@ public cartData : any[] = [];
         
         });
   }
+
+
+
+
+
 
 }
