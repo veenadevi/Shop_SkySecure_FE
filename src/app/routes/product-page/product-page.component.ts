@@ -31,6 +31,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public selectedBrandItems : any[] = [];
 
   public productList : any[] = [];
+  public productBundlesList : any[] = [];
   public products = [];
   public productBundles = [];
 
@@ -119,6 +120,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   )
 
   public ngOnInit() : void { 
+
 
     
     this.dropdownSettings = {
@@ -264,6 +266,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
             _id: data._id
           }
          })
+         this.productBundlesList = response.productBundles;
          this.productBundles = response.productBundles;
          /*this.productBundles = response.productBundles.map((data: any )=> {
           return { 
