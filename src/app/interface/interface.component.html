@@ -46,13 +46,16 @@
                     </span>
                     <div class="icon-description" *ngIf="isExapnded" mat-button [matMenuTriggerFor]="adminMenu">
                         Dashboard
+
                     </div>
+                    
                     <mat-menu #adminMenu="matMenu" yPosition="below" xPosition="after">
                 
                         <button mat-menu-item [routerLink]="['admin-page']">
                             <div class="menu-width" >
                                 Dashboard
                             </div>
+                            
                         </button>
                         <button mat-menu-item [routerLink]="['admin-page/accounts']">
                             <div class="menu-width" >

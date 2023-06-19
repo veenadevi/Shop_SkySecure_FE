@@ -167,6 +167,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         }
         else if(params.has('subcategoryId')){
   
+          this.setAllUnChecked();
           this.setSubCategoryChecked(params.get('subcategoryId'));
           
           this.selectedSubCategoryItems = [];
@@ -178,6 +179,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   
         }
         else if(params.has('brandId')){
+          this.setAllUnChecked();
           let brand = params.get('brandId');
           this.setBrandChecked(brand);
           
