@@ -40,14 +40,14 @@
                         <td>
                           <div class="td-column price-details">
                             <span>
-                              {{ item.price }}
+                              {{ item.price | number : '1.2-2'}}
                             </span>
                           </div>
                         </td>
                         <!-- Item Quantity -->
                         <td>
                           <div class="td-column">
-                            <span (click) = "quantityEdit(i,  'minus')">
+                            <span (click) = "quantityEdit(i,  'minus', item.price)">
                               <img alt="minus" src="../../../assets/icons/Minus.svg">
                             </span>
                             <span>
@@ -55,7 +55,7 @@
                                 class="input-field" [(ngModel)]="item.quantity" value="{{item.quantity}}"
                                 >
                             </span>
-                            <span (click) = "quantityEdit(i , 'plus')">
+                            <span (click) = "quantityEdit(i , 'plus', item.price)">
                               <img alt="" src="../../../assets/icons/Add.svg">
                             </span>
                           </div>
@@ -65,7 +65,7 @@
                         <td>
                           <div class="td-column price-details">
                             <span>
-                              {{ item.price }}
+                              {{ item.itemTotal | number : '1.2-2'}}
                             </span>
                           </div>
                         </td>
@@ -79,7 +79,7 @@
           </div>
           <div class="cart-total">
             <span>GRAND TOTAL</span>
-            <span>Price</span>
+            <span>{{grandTotal | number : '1.2-2'}}</span>
           </div>
           <div class="submit-quote">
             <span class="text-style">

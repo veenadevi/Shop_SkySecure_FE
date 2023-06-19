@@ -29,6 +29,10 @@ export class CartItemsComponent {
 
     public product : any = {};
 
+  public itemTotal;
+
+  public grandTotal = 0;
+
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
@@ -69,6 +73,10 @@ public cartData : any[] = [];
       if(data){
         //this.cartData = data.usercart[0].userCartDetails;
         this.cartData = data;
+        this.cartData.forEach(element => {
+          element['itemTotal'] = element.quantity * element.price;
+        });
+        this.calTotalPrice();
         return this.cartData;
       }
       else{
@@ -263,16 +271,29 @@ public cartData : any[] = [];
 
   }
 
-  public quantityEdit(i, opr) : void {
+
+
+  public quantityEdit(i, opr, price) : void {
 
 
     if(opr === 'plus'){
       this.cartData[i].quantity = Number(this.cartData[i].quantity) + 1;
+      this.cartData[i].itemTotal = this.cartData[i].quantity * price;
     }
     else if(opr === 'minus'){
 
         this.cartData[i].quantity = Number(this.cartData[i].quantity) - 1;
+        this.cartData[i].itemTotal = this.cartData[i].quantity * price;
     }
+    this.calTotalPrice();
+  }
+
+  public calTotalPrice() {
+    let sum: number = this.cartData.map(a => a.itemTotal).reduce(function(a, b)
+    {
+      return a + b;
+    });
+    this.grandTotal = sum;
   }
 
   public requestQuote(){
