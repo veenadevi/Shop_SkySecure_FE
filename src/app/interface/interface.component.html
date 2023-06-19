@@ -27,7 +27,7 @@
                 
 
                 <div class="nav-item">
-                    <span>
+                    <span (click)="exapndCollapse()">
                         <img class="user-img" src="../../assets/Realize/logos/icons/DefaultUserIcon-BlueIYellowllustration.svg" alt="home">
                     </span>
                     <div *ngIf="isExapnded" class="user-name">
@@ -39,12 +39,12 @@
                         </div> -->
                     </div>
                 </div>
-                <div class="nav-item" mat-button [matMenuTriggerFor]="adminMenu" *ngIf="userRole === 'admin'">
-                    <span>
+                <div class="nav-item"  *ngIf="userRole === 'admin'">
+                    <span (click)="exapndCollapse()">
                         <img alt="DashboardIcon" class="user-img" src="../../assets/Realize/logos/icons/DashboardIcon-BlueYellowIllustration.svg">
                         <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true" style="color:#383536; margin-left: 6px;"></i>
                     </span>
-                    <div class="icon-description" *ngIf="isExapnded">
+                    <div class="icon-description" *ngIf="isExapnded" mat-button [matMenuTriggerFor]="adminMenu">
                         Dashboard
                     </div>
                     <mat-menu #adminMenu="matMenu" yPosition="below" xPosition="after">
@@ -73,12 +73,12 @@
                     </mat-menu>
                 </div>
                 <!-- <div class="nav-item" (click)="exapndCollapse()" > -->
-                <div class="nav-item" mat-button [matMenuTriggerFor]="securityMenu" >
-                    <span class="nav-arrow" >
+                <div class="nav-item" >
+                    <span (click)="exapndCollapse()" class="nav-arrow" >
                         <img alt="SecurityIcon" class="user-img" src="../../assets/Realize/logos/icons/SecurityIcon-BlueYellowIllustration.svg">
                         <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true" style="color:#383536; margin-left: 6px;"></i>
                     </span>
-                    <div class="icon-description" *ngIf="isExapnded">
+                    <div class="icon-description" *ngIf="isExapnded" mat-button [matMenuTriggerFor]="securityMenu">
                         Security
                         <i class="fa fa-caret-right" aria-hidden="true" style="color:#383536"></i>
                     </div>
@@ -112,13 +112,13 @@
                     
                 </div> -->
                 <!-- If Security Expanded Ends-->
-                <div class="nav-item" mat-button [matMenuTriggerFor]="aboveMenu">
-                    <span class="nav-arrow" >
+                <div class="nav-item" >
+                    <span (click)="exapndCollapse()" class="nav-arrow" >
                         <img alt="ProfileIcon" class="user-img" src="../../assets/Realize/logos/icons/UserIcon-BlueYellowIllustration.svg">
                         <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true" style="color:#383536; margin-left: 6px;"></i>
                     </span>
                    
-                    <div  class="icon-description" *ngIf="isExapnded">
+                    <div  class="icon-description" *ngIf="isExapnded" mat-button [matMenuTriggerFor]="aboveMenu">
                         Profile
                         <i class="fa fa-caret-right" aria-hidden="true" style="color:#383536"></i>
                     </div>
