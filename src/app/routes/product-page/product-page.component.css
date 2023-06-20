@@ -209,3 +209,8 @@ ng-select select-dropdown .selected {
         font-size: 24px;
         font-weight: 600;
     }
+
+    :host ::ng-deep .custom-ms 
+            .p-multiselect-label {
+            width: 250px !important;
+}

@@ -35,6 +35,10 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public products = [];
   public productBundles = [];
 
+  public checkedListCat = [];
+  public checkedListSubCat = [];
+  public checkedListBrands = [];
+
   public staticProductimageUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png';
 
   private subscriptions: Subscription[] = [];
@@ -161,14 +165,18 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
       if(this.categories.length >0 && this.brands.length>0){
         if(params.has('categoryId')){
           this.setAllUnChecked();
+          
           this.setCategoryChecked(params.get('categoryId'));
           this.getSubCategoriesByID(params.get('categoryId'));
+          this.selectAll('cat');
   
         }
         else if(params.has('subcategoryId')){
   
+          
           this.setAllUnChecked();
           this.setSubCategoryChecked(params.get('subcategoryId'));
+          this.selectAll('subCat');
           
           this.selectedSubCategoryItems = [];
 
@@ -179,9 +187,11 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   
         }
         else if(params.has('brandId')){
+          
           this.setAllUnChecked();
           let brand = params.get('brandId');
           this.setBrandChecked(brand);
+          this.selectAll('brands');
           
           this.selectedBrandItems = this.brands.filter((data) => {
             if(data._id == brand) return data;
@@ -302,8 +312,33 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     });
   }
 
+
+  public selectAll(val){
+
+    switch (val) {
+      case 'cat':
+          
+          this.checkedListSubCat = this.subCategories;
+          this.checkedListBrands = this.brands;
+          console.log("((((((((( +++++ Sub Cat ", this.checkedListSubCat);
+        return;
+      case 'subCat':
+          this.checkedListCat = this.categories;
+          this.checkedListBrands = this.brands;
+        return;
+      case 'brands':
+          this.checkedListCat = this.categories;
+          this.checkedListSubCat = this.subCategories;
+        return;
+
+      default:
+        return null;
+    }
+  }
+
   public setCategoryChecked(catId) : void {
 
+    this.checkedListCat = this.categories.filter(item => item._id === catId);
     let indexToUpdate = this.categories.findIndex(item => item._id === catId);
     if(indexToUpdate !== -1){
       this.categories[indexToUpdate]['checked'] = true;
@@ -313,6 +348,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   }
 
   public setSubCategoryChecked(subCatId) : void {
+    this.checkedListSubCat = this.categories.filter(item => item._id === subCatId.split('-')[1]);
     let indexToUpdate = this.subCategories.findIndex(item => item._id === subCatId.split('-')[1]);
     if(indexToUpdate !== -1){
       this.subCategories[indexToUpdate]['checked'] = true;
@@ -351,7 +387,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         this.selectedSubCategoryItems = [...this.selectedSubCategoryItems, ...element.subCategories];
     });
 
-    this.subCategories = this.selectedSubCategoryItems;
+    //this.subCategories = this.selectedSubCategoryItems;
    
     
     this.getFilteredData();

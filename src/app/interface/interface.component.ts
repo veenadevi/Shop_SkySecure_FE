@@ -38,6 +38,11 @@ export class InterfaceComponent {
 
   public selectedCity : any;
 
+  public dashboardFlag : boolean = false;
+  public securityFlag : boolean = false;
+  public profileFlag : boolean = false;
+
+
   // constructor(private spinnerService: NgxSpinnerService) {
   //   this.typeSelected = 'ball-fussion';
   // }
@@ -150,6 +155,30 @@ export class InterfaceComponent {
     const modalRef = this.modalService.open(SelectOemModalComponent);
   }
   
+
+  public subMenuClick(val){
+    
+    switch (val) {
+      case 'dashboard':
+        this.dashboardFlag = this.dashboardFlag ? false : true;
+        this.securityFlag = false;
+        this.profileFlag = false;
+        return;
+      case 'security':
+        this.dashboardFlag = false;
+        this.securityFlag = this.securityFlag ? false : true;;
+        this.profileFlag = false;
+        return;
+      case 'profile':
+        this.dashboardFlag = false;
+        this.securityFlag = false;
+        this.profileFlag = this.profileFlag ? false : true;;
+        return;
+      
+      default:
+        return null;
+    }
+  }
 
   
 

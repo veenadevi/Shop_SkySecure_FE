@@ -45,6 +45,7 @@
                         <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true" style="color:#383536; margin-left: 6px;"></i>
                     </span>
                     <div class="icon-description" *ngIf="isExapnded" mat-button [matMenuTriggerFor]="adminMenu">
+                    <!-- <div class="icon-description" *ngIf="isExapnded" (click)="subMenuClick('dashboard')"> -->
                         Dashboard
 
                     </div>
@@ -75,6 +76,14 @@
                         
                     </mat-menu>
                 </div>
+                <!-- <ng-container *ngIf="dashboardFlag">
+                    <div class="nav-item"  *ngIf="userRole === 'admin'">
+                        <div class="sub-menu-style">
+                            Dashboard
+                        </div>
+                    </div>
+                </ng-container> -->
+                
                 <!-- <div class="nav-item" (click)="exapndCollapse()" > -->
                 <div class="nav-item" >
                     <span (click)="exapndCollapse()" class="nav-arrow" >
@@ -82,6 +91,7 @@
                         <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true" style="color:#383536; margin-left: 6px;"></i>
                     </span>
                     <div class="icon-description" *ngIf="isExapnded" mat-button [matMenuTriggerFor]="securityMenu">
+                    <!-- <div class="icon-description" *ngIf="isExapnded" (click)="subMenuClick('security')"> -->
                         Security
                         <i class="fa fa-caret-right" aria-hidden="true" style="color:#383536"></i>
                     </div>
@@ -106,6 +116,11 @@
                          -->
                     </mat-menu>
                 </div>
+                <!-- <ng-container *ngIf="securityFlag">
+                    <div class="nav-item"  *ngIf="userRole === 'admin'">
+                        Sample Security
+                    </div>
+                </ng-container> -->
                 <!-- If Security Expanded -->
                 <!-- <div class="nav-item" *ngIf="isExapnded">
                    
