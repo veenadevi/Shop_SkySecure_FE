@@ -169,6 +169,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
           this.setCategoryChecked(params.get('categoryId'));
           this.getSubCategoriesByID(params.get('categoryId'));
           this.selectAll('cat');
+          console.log("((((( val atlast ", this.products);
   
         }
         else if(params.has('subcategoryId')){

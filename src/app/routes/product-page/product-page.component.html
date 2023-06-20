@@ -1,247 +1,37 @@
 <div class="product-page-container">
-  <!-- <div class="filter-container">
-        <h6 class="filter-title">Filter</h6>
-        <div *ngIf="categories.length > 0" class="container drop-down-container">
-          <ng-multiselect-dropdown
-          [placeholder]="'Categories:'"
-          [settings]="dropdownSettings"
-          [data]="categories"
-          [(ngModel)]="selectedCategoryItems"
-          (onSelect)="onCategoryItemSelect($event)"
-          (onSelectAll)="onCategorySelectAll($event)"
-          (onDeSelect)="onCategoryItemDeSelect($event)"
-          (onDeSelectAll)="onCategoryDeSelectAll($event)"
-        >
-        </ng-multiselect-dropdown>
-      </div>
-        <div *ngIf="subCategories.length > 0" class="container drop-down-container">
-            <ng-multiselect-dropdown
-            [placeholder]="'Sub Categories:'"
-            [settings]="dropdownSettings"
-            [data]="subCategories"
-            [(ngModel)]="selectedSubCategoryItems"
-            (onSelect)="onSubCategoryItemSelect($event)"
-            (onSelectAll)="onSubCategorySelectAll($event)"
-            (onDeSelect)="onSubCategoryItemDeSelect($event)"
-            (onDeSelectAll)="onSubCategoryDeSelectAll($event)"
-          >
-          </ng-multiselect-dropdown>
-        </div>
-
-
-        <div *ngIf="brands.length > 0" class="container drop-down-container">
-            <ng-multiselect-dropdown
-            [placeholder]="'Brands:'"
-            [settings]="dropdownSettings"
-            [data]="brands"
-            [(ngModel)]="selectedBrandItems"
-            (onSelect)="onBrandSelect($event)"
-            (onSelectAll)="onBrandSelectAll($event)"
-            (onDeSelect)="onBrandDeSelect($event)"
-            (onDeSelectAll)="onBrandDeSelectAll($event)"
-          >
-          </ng-multiselect-dropdown>
-        </div>
-    </div> -->
-
-
-
-  <div class="filter-container">
-    <div class="filter-section">
-      <span class="filter-icon"><img alt="FilterIcon" src="../../../assets/icons/FilterBlueIcon.svg"></span>
-      <span>Filter</span>
-    </div>
-
-
-
-    <multi-select-dropdown [list]="categories" [filterName]="'Category'" (selectedList)="selecteCategories($event)"
-      (shareIndividualCheckedList)="shareIndividualCheckedList($event)">
-    </multi-select-dropdown>
-
-    <multi-select-dropdown [list]="subCategories" [filterName]="'Sub Category'"
-      (selectedList)="selectedSubCategories($event)" (shareIndividualCheckedList)="shareIndividualCheckedList($event)">
-    </multi-select-dropdown>
-
-    <multi-select-dropdown [list]="brands" [filterName]="'Brand'" (selectedList)="selectedBrands($event)"
-      (shareIndividualCheckedList)="shareIndividualCheckedList($event)">
-    </multi-select-dropdown>
-
-    <!-- <p-multiSelect 
-      [options]="categories" 
-      class="custom-ms"
-      [(ngModel)]="checkedListCat" 
-      defaultLabel= "Category"
-      optionLabel="name" 
-      (onClick)="selecteCategories(checkedListCat)"
-      display = "chip"
-      >
-    </p-multiSelect>
-    <p-multiSelect 
-      [options]="subCategories" 
-      class="custom-ms"
-      [(ngModel)]="checkedListSubCat" 
-      defaultLabel= "Sub Category"
-      optionLabel="name" 
-      (onClick)="selectedSubCategories(checkedListSubCat)"
-      display = "chip"
-      >
-    </p-multiSelect>
-    <p-multiSelect 
-      [options]="brands" 
-      class="custom-ms"
-      [(ngModel)]="checkedListBrands" 
-      defaultLabel= "Brand"
-      optionLabel="name" 
-      (onClick)="selectedBrands(checkedListBrands)"
-      display = "chip"
-      >
-    </p-multiSelect> -->
-
-
-
-    <!-- <div *ngIf="categories.length > 0" class="filter-dropdown">
-        <ng-multiselect-dropdown
-        [placeholder]="'Categories:'"
-        [settings]="dropdownSettings"
-        [data]="categories"
-        [(ngModel)]="selectedCategoryItems"
-        (onSelect)="onCategoryItemSelect($event)"
-        (onSelectAll)="onCategorySelectAll($event)"
-        (onDeSelect)="onCategoryItemDeSelect($event)"
-        (onDeSelectAll)="onCategoryDeSelectAll($event)"
-      >
-      </ng-multiselect-dropdown>
-    </div>
-      <div *ngIf="subCategories.length > 0" class="filter-dropdown">
-          <ng-multiselect-dropdown
-          [placeholder]="'Sub Categories:'"
-          [settings]="subCategoryDropdownSettings"
-          [data]="subCategories"
-          [(ngModel)]="selectedSubCategoryItems"
-          (onSelect)="onSubCategoryItemSelect($event)"
-          (onSelectAll)="onSubCategorySelectAll($event)"
-          (onDeSelect)="onSubCategoryItemDeSelect($event)"
-          (onDeSelectAll)="onSubCategoryDeSelectAll($event)"
-        >
-        </ng-multiselect-dropdown>
-      </div> -->
-
-
-    <!-- <div *ngIf="brands.length > 0" class="filter-dropdown">
-          <ng-multiselect-dropdown
-          [placeholder]="'Brands:'"
-          [settings]="dropdownSettings"
-          [data]="brands"
-          [(ngModel)]="selectedBrandItems"
-          (onSelect)="onBrandSelect($event)"
-          (onSelectAll)="onBrandSelectAll($event)"
-          (onDeSelect)="onBrandDeSelect($event)"
-          (onDeSelectAll)="onBrandDeSelectAll($event)"
-        >
-        </ng-multiselect-dropdown>
-      </div> -->
-
-
-  </div>
-  <!-- <nav mat-tab-nav-bar>
   
-      <a mat-tab-link (click)="tabClick('products')" routerLinkActive #productsTab="routerLinkActive" [active]="productsTab.isActive">
-        Products
-      </a>
-      <a mat-tab-link (click)="tabClick('productBundles')" routerLinkActive #productBundlesTab="routerLinkActive" [active]="productBundlesTab.isActive">
-        Product Bundles
-      </a>
-    
-      
-    </nav> -->
-
-
-
-<!-- Product & Bundles Code -- Tab Code -->
-
-
-  <div class="product-tab">
-    <div class="tab">
-      <div class="buttonswitch">
-     <div class="primary">
-      <button id="products" [class.color]="selectedTab === 'products'" (click)="tabChange('products')">Products</button>
-     </div>
-        <div class="secondary">
-        <button id="productBundles" [class.color]="selectedTab === 'productBundles'" (click)="tabChange('productBundles')">Product Bundles</button>
-      </div>
-      
+  <div class="parent-holder">
+    <div class="filter-container">
+      Filter
     </div>
- 
-      <div class="product-list-container" >
-        <ng-container
-          *ngIf="(selectedTab === 'products')  ? (!products || products.length <= 0) : (!productBundles || productBundles.length <= 0)">
-          <div class="empty-container">
-            <div>
-              <img class="success-state-img" src="../../../../../assets/images/emptystage.svg" alt="home">
+    <div class="product-container">
+      <div class="tab-holder">
+        <mat-tab-group mat-stretch-tabs dynamicHeight animationDuration="1000ms">
+          <mat-tab label="First">
+            <div class="product-items-holder">
+              <div class="card-flyer-holder">
+                <ng-container *ngIf="productList && productList.length>0">
+                  <product-card-flyer [type] = "'products'" [products]=" (selectedTab === 'products') ? productList : productBundlesList"></product-card-flyer>
+                </ng-container>
+                
+                <!-- <app-product [type]="(selectedTab === 'products') ? 'products' : 'productBundles'" [products]=" (selectedTab === 'products') ? productList : productBundlesList"></app-product> -->
+              </div>
             </div>
-            <div class="text-header">
-              No Products Found
+          </mat-tab>
+          <mat-tab label="Second">
+            <div class="product-items-holder">
+              <div class="card-flyer-holder">
+                <product-card-flyer [products]="productBundles"></product-card-flyer>
+              </div>
             </div>
-          </div>
-        </ng-container>
-
-        <!-- <ng-container *ngIf="products.length > 0"> -->
-        <ng-container>
-          <!-- <h4 class="oem-tilte">Products</h4> -->
-          <!-- <div *ngIf="products.length > 0">  -->
-          <div>
-            <app-product [type]="(selectedTab === 'products') ? 'products' : 'productBundles'" [products]=" (selectedTab === 'products') ? productList : productBundlesList"></app-product>
-          </div>
-        </ng-container>
+          </mat-tab>
+        </mat-tab-group>
+        
       </div>
     </div>
-
-
-
-
-
-
-
-
-    <!-- <mat-tab-group selectedIndex="0" (selectedTabChange)="changeTab($event)">
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <span>Products</span>
-        </ng-template>
-        
-      </mat-tab>
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <span>Product Bundles</span>
-        </ng-template>
-        
-      </mat-tab>
-    </mat-tab-group>
-    <div class="product-list-container">
-        <ng-container *ngIf="(selectedTab === 'products')  ? (!products || products.length <= 0) : (!productBundles || productBundles.length <= 0)">
-          <div class="empty-container">
-            <div>
-                <img class="success-state-img" src="../../../../../assets/images/emptystage.svg" alt="home">
-            </div>
-            <div class="text-header">
-                No Products Found
-            </div>
-            
-          </div>
-        </ng-container>
-        
-        <ng-container *ngIf="products.length > 0">
-          <h4 class="oem-tilte">Products</h4>
-          <div  *ngIf="products.length > 0">
-          <app-product [products]=" (selectedTab === 'products') ? productList : productBundles"></app-product>
-        </div>
-        </ng-container> -->
-    <!-- <ng-container *ngIf="selectedCat.length > 0">
-          <h4 class="oem-tilte">Products</h4>
-          <div  *ngIf="selectedCat.length > 0">
-          <app-product [products]="productList"></app-product>
-        </div>
-        </ng-container> -->
-
+    <div class="ad-on-container">
+      Hello
+    </div>
   </div>
+  
 </div>

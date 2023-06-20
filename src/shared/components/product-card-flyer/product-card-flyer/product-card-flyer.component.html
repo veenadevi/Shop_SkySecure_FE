@@ -1,0 +1,63 @@
+<div class="product-card-container">
+    
+    <ng-container *ngFor="let item of products">
+        <div class="product-card-flyer-container">
+            <div class="logo-holder">
+                <div class="logo-box">
+                    <img alt="" src="{{(item.bannerLogo && item.bannerLogo !== null) ? item.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png'}}">
+                </div>
+                <div class="ratings-box">
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <div>
+                        (4.0 Reviews)
+                    </div>
+                </div>
+                <div class="add-to-compare-box">
+                    <span>
+                        Add To Compare
+                    </span>
+                </div>
+            </div>
+
+            <!-- Content Holder -->
+            <div class="content-holder">
+                <div class="header">
+                    <div class="header-title">
+                        {{item.name}}
+                    </div>
+                    <mat-icon>bookmark_border</mat-icon>
+                </div>
+                <div class="price">
+                    <span class="text-style-bold">Starting from</span> <span class="text-price"> ₹ 1234.00</span> <span class="text-term"> / yearly</span>
+                </div>
+                <div class="descr">
+                    <div class="text-style-bold">
+                        Description
+                    </div>
+                    <div class="text-style">
+                        {{item.description}}
+                    </div>
+                </div>
+                <div class="solution-category">
+                    <div class="text-style-bold">
+                        Solution Category
+                    </div>
+                    <div class="text-style">
+                        {{ (item.subcategories && item.subcategories.length > 0)? item.subcategories[0].name : ''}}
+                    </div>
+                </div>
+                <div class="btn-holder">
+                    <button class="btn request-btn">View Details</button>
+                    <button class="btn compare-btn">Add to Cart</button>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </ng-container>
+    
+</div>
+
