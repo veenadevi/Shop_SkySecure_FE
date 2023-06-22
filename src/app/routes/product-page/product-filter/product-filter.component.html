@@ -29,7 +29,8 @@
           </h2>
           <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
             <div class="accordion-body">
-              <searchable-filter [type]="'subCat'" [list] = "subCategoriesList" (selectedList)="selectedSubCategoriesChange($event)" [selectedSubCat]="selectedSubCat"></searchable-filter>
+              <searchable-sub-category-filter [type]="'subCat'" [list] = "subCategoriesList" (selectedList)="selectedSubCategoriesChange($event)" [selectedSubCat]="selectedSubCat" [catForFilter]="catForFilter"></searchable-sub-category-filter>
+              <!-- <searchable-filter [type]="'subCat'" [list] = "subCategoriesList" (selectedList)="selectedSubCategoriesChange($event)" [selectedSubCat]="selectedSubCat"></searchable-filter> -->
             </div>
           </div>
         </div>

@@ -35,6 +35,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public products = [];
   public productBundles = [];
 
+  public finalProductList = [];
+
   public checkedListCat = [];
   public checkedListSubCat = [];
   public checkedListBrands = [];
@@ -306,6 +308,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
          })
          this.productBundlesList = response.productBundles;
          this.productBundles = response.productBundles;
+
+         this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundles]
          /*this.productBundles = response.productBundles.map((data: any )=> {
           return { 
             name: data.name , 

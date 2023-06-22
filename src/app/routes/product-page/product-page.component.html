@@ -20,15 +20,24 @@
     </div>
     <div class="product-container">
       <div class="tab-holder">
-        <mat-tab-group mat-stretch-tabs dynamicHeight animationDuration="1000ms">
+        <div class="product-items-holder">
+          <div class="card-flyer-holder">
+            <ng-container *ngIf="productList && productList.length>0">
+              <!-- <product-card-flyer [type] = "'products'" [products]=" (selectedTab === 'products') ? productList : productBundlesList"></product-card-flyer> -->
+              <product-card-flyer [type] = "'products'" [products]=" finalProductList"></product-card-flyer>
+            </ng-container>
+            
+            <!-- <app-product [type]="(selectedTab === 'products') ? 'products' : 'productBundles'" [products]=" (selectedTab === 'products') ? productList : productBundlesList"></app-product> -->
+          </div>
+        </div>
+        <!-- <mat-tab-group mat-stretch-tabs dynamicHeight animationDuration="1000ms">
           <mat-tab label="First">
             <div class="product-items-holder">
               <div class="card-flyer-holder">
                 <ng-container *ngIf="productList && productList.length>0">
                   <product-card-flyer [type] = "'products'" [products]=" (selectedTab === 'products') ? productList : productBundlesList"></product-card-flyer>
                 </ng-container>
-                
-                <!-- <app-product [type]="(selectedTab === 'products') ? 'products' : 'productBundles'" [products]=" (selectedTab === 'products') ? productList : productBundlesList"></app-product> -->
+
               </div>
             </div>
           </mat-tab>
@@ -39,7 +48,7 @@
               </div>
             </div>
           </mat-tab>
-        </mat-tab-group>
+        </mat-tab-group> -->
         
       </div>
     </div>

@@ -2,18 +2,33 @@ import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 
 @Component({
-  selector: 'searchable-filter',
-  templateUrl: './searchable-filter.component.html',
-  styleUrls: ['./searchable-filter.component.css']
+  selector: 'searchable-sub-category-filter',
+  templateUrl: './searchable-sub-category-filter.component.html',
+  styleUrls: ['./searchable-sub-category-filter.component.css']
 })
-export class SearchableFilterComponent {
+export class SearchableSubCategoryFilterComponent {
 
   @Input('type')
   public type : any;
 
 
-  @Input('list')
-  public list : any[];
+  // @Input('list')
+  // public list : any[];
+
+  @Input() set list(value: any[]) {
+    
+    
+  }
+
+  // @Input() set selectedSubCat(value: any[]) {
+    
+  //   console.log("++++++++++++++ &&&&&& in Sub Set ", value);
+  // }
+
+  @Input() set catForFilter(value: any[]) {
+    console.log("++++++++++++++ &&&&&& in Sub Set ", value);
+    this.setSubCatData(value);
+  }
 
   @Input('selectedCat')
   public selectedCat : any[];
@@ -57,10 +72,10 @@ export class SearchableFilterComponent {
   public ngOnInit(){
 
     this.setType();
+    this.setSubCatData(this.catForFilter);
+    console.log("++++++++++++++ &&&&&& in Sub Cat ", this.selectedSubCat);
     
-
-    
-    this.initializeData();
+    //this.initializeData();
   }
 
   public initializeData(){
@@ -90,12 +105,15 @@ export class SearchableFilterComponent {
     //this.setDefaultChecked();
     this.filteredOptions = [...this.list];
 
-    if(this.type === 'subCat'){
-      this.setSubCatData();
-    }
+    // if(this.type === 'subCat'){
+    //   this.setSubCatData();
+    // }
   }
 
-  public setSubCatData(){
+  public setSubCatData(filteredCat){
+    console.log("+++++++++++++ Sub Cat Change", filteredCat);
+    console.log("+++++++++++++ Sub Cat Length", this.list.length);
+    
   }
 
   

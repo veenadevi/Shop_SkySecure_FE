@@ -21,8 +21,7 @@ export class ProductCardFlyerComponent implements OnInit{
 
   ngOnInit(): void {
     
-    console.log("**** **SAmpel ", this.products);
-    console.log("**** **SAmpel Type", this.type);
+
   }
 
   public navigateToProductDetails(product:any){

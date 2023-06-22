@@ -4,7 +4,7 @@
         <div class="product-card-flyer-container">
             <div class="logo-holder">
                 <div class="logo-box">
-                    <img alt="" src="{{(item.bannerLogo && item.bannerLogo !== null) ? item.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png'}}">
+                    <img alt="" src="{{(item.bannerLogo && item.bannerLogo !== null) ? item.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'}}">
                 </div>
                 <div class="ratings-box">
                     <mat-icon class="review-icon">star</mat-icon>
@@ -31,7 +31,9 @@
                     <mat-icon>bookmark_border</mat-icon>
                 </div>
                 <div class="price">
-                    <span class="text-style-bold">Starting from</span> <span class="text-price"> ₹ 1234.00</span> <span class="text-term"> / yearly</span>
+                    <span class="text-style-bold">Starting from</span> 
+                    <span class="text-price"> ₹ {{((item.priceList && item.priceList.length>0) ? item.priceList[0].price : '' ) | number : '1.2-2'}}</span> 
+                    <span class="text-term"> / {{(item.priceList && item.priceList.length>0) ? item.priceList[0].priceType : ''}}</span>
                 </div>
                 <div class="descr">
                     <div class="text-style-bold">

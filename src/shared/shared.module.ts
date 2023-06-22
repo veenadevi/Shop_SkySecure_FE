@@ -22,6 +22,7 @@ import { RecommendationSelectModalComponent } from './components/modals/recommen
 import { ProductCardFlyerComponent } from './components/product-card-flyer/product-card-flyer/product-card-flyer.component';
 import { SearchableFilterComponent } from './components/searchable-filter/searchable-filter.component';
 import { CustomSearchComponent } from './components/searchable-filter/custom-search/custom-search.component';
+import { SearchableSubCategoryFilterComponent } from './components/searchable-filter/searchable-sub-category-filter/searchable-sub-category-filter.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { CustomSearchComponent } from './components/searchable-filter/custom-sea
     RecommendationSelectModalComponent,
     ProductCardFlyerComponent,
     SearchableFilterComponent,
-    CustomSearchComponent
+    CustomSearchComponent,
+    SearchableSubCategoryFilterComponent
   ],
 
   providers: [
@@ -84,7 +86,8 @@ import { CustomSearchComponent } from './components/searchable-filter/custom-sea
     RecommendationSelectModalComponent,
     ProductCardFlyerComponent,
     SearchableFilterComponent,
-    CustomSearchComponent
+    CustomSearchComponent,
+    SearchableSubCategoryFilterComponent
   ],
   
 
