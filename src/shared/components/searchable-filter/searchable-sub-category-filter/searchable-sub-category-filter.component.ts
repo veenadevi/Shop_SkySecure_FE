@@ -12,13 +12,13 @@ export class SearchableSubCategoryFilterComponent {
   public type : any;
 
 
-  // @Input('list')
-  // public list : any[];
+  @Input('list')
+  public list : any[];
 
-  @Input() set list(value: any[]) {
+  // @Input() set list(value: any[]) {
     
     
-  }
+  // }
 
   // @Input() set selectedSubCat(value: any[]) {
     
@@ -27,6 +27,7 @@ export class SearchableSubCategoryFilterComponent {
 
   @Input() set catForFilter(value: any[]) {
     console.log("++++++++++++++ &&&&&& in Sub Set ", value);
+    this.selected = [];
     this.setSubCatData(value);
   }
 
@@ -59,60 +60,33 @@ export class SearchableSubCategoryFilterComponent {
     });
 
     
-    // this.list.forEach(item => {
-    //   this.shoesSet.set(item, false);
-    // });
-    
-
-    //this.filteredOptions = [...this.typesOfShoes];
+   
     
   }
 
 
   public ngOnInit(){
 
-    this.setType();
-    this.setSubCatData(this.catForFilter);
-    console.log("++++++++++++++ &&&&&& in Sub Cat ", this.selectedSubCat);
     
-    //this.initializeData();
+    this.setType();
+    
   }
 
-  public initializeData(){
-    //this.selectedCat = [];
-    //this.selectedSubCat = [];
-    //this.selectedBrand = [];
-    this.list.forEach(item => {
-      if(this.selectedCat && this.selectedCat.length>0){
-        //this.shoesSet.set(item, true);
-        this.selected = [...this.selectedCat]
-        
-      }
-      else if(this.selectedSubCat && this.selectedSubCat.length>0){
-        //this.shoesSet.set(item, true);
-        this.selected = [...this.selectedSubCat]
-      }
-      else if(this.selectedBrand && this.selectedBrand.length>0){
-        //this.shoesSet.set(item, true);
-        this.selected = [...this.selectedBrand]
-      }
-      else{
-        //this.shoesSet.set(item, false);
-      }
-      this.shoesSet.set(item, false);
-    });
 
-    //this.setDefaultChecked();
-    this.filteredOptions = [...this.list];
-
-    // if(this.type === 'subCat'){
-    //   this.setSubCatData();
-    // }
-  }
 
   public setSubCatData(filteredCat){
-    console.log("+++++++++++++ Sub Cat Change", filteredCat);
-    console.log("+++++++++++++ Sub Cat Length", this.list.length);
+    
+
+    filteredCat.forEach(element => {
+      this.selected = [...this.selected, ...element.subCategories]
+    });
+
+    
+    this.selected = this.selected.filter((value, index) => this.selected.indexOf(value) === index);
+    
+    this.filteredOptions = [...this.selected];
+
+    
     
   }
 
@@ -140,9 +114,7 @@ export class SearchableSubCategoryFilterComponent {
 
   }
   onSearch(searchTerm: string) {
-    // this.filteredOptions = this.typesOfShoes.filter(item =>
-    //   item.toLowerCase().includes(searchTerm)
-    // );
+    
     this.filteredOptions = this.list.filter(item =>
       item.name.toLowerCase().includes(searchTerm)
     );
@@ -150,10 +122,7 @@ export class SearchableSubCategoryFilterComponent {
 
   selectionChange(val: any) {
     this.selectedList.emit(val);
-    // this.shoesSet.set(
-    //   val.option.value,
-    //   !this.shoesSet.get(val.option.value)
-    // );
+    
   }
 
 }
