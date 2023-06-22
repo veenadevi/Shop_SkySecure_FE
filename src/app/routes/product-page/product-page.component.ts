@@ -35,13 +35,22 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public products = [];
   public productBundles = [];
 
+  public finalProductList = [];
+
   public checkedListCat = [];
   public checkedListSubCat = [];
   public checkedListBrands = [];
 
+  public allSubCategories = [];
+
+  public allSubCategoriesFlag = false
+
   public staticProductimageUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png';
 
   private subscriptions: Subscription[] = [];
+
+  public selectedParams ;
+  public selectedParamsVal ;
 
   // public products = [];
   // public productBundles = [];
@@ -165,15 +174,19 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
       if(this.categories.length >0 && this.brands.length>0){
         if(params.has('categoryId')){
           this.setAllUnChecked();
-          
+          this.selectedParams = 'cat';
+          this.selectedParamsVal = params.get('categoryId');
           this.setCategoryChecked(params.get('categoryId'));
           this.getSubCategoriesByID(params.get('categoryId'));
+          //this.getAllSubCategoriesByID();
           this.selectAll('cat');
+          
   
         }
         else if(params.has('subcategoryId')){
   
-          
+          this.selectedParams = 'subCat';
+          this.selectedParamsVal = params.get('subcategoryId');
           this.setAllUnChecked();
           this.setSubCategoryChecked(params.get('subcategoryId'));
           this.selectAll('subCat');
@@ -188,6 +201,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         }
         else if(params.has('brandId')){
           
+          this.selectedParams = 'brand';
+          this.selectedParamsVal = params.get('brandId');
           this.setAllUnChecked();
           let brand = params.get('brandId');
           this.setBrandChecked(brand);
@@ -254,6 +269,18 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
    );
   }
 
+  public getAllSubCategoriesByID(){
+    this.categories.forEach(element => {
+      this.subscriptions.push(
+        this.metaDataSvc.fetchSubCategories(element._id).subscribe( response => {
+         this.allSubCategories = [...response.subCategories];
+    
+       })
+     );
+     this.allSubCategoriesFlag = true;
+    });
+  }
+
 
   public getFilteredData(){
     this.filters.brandIds = this.selectedBrandItems.length > 0 ? this.selectedBrandItems.map((data) => {return data._id }) : []
@@ -281,6 +308,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
          })
          this.productBundlesList = response.productBundles;
          this.productBundles = response.productBundles;
+
+         this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundles]
          /*this.productBundles = response.productBundles.map((data: any )=> {
           return { 
             name: data.name , 
@@ -320,7 +349,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
           
           this.checkedListSubCat = this.subCategories;
           this.checkedListBrands = this.brands;
-          console.log("((((((((( +++++ Sub Cat ", this.checkedListSubCat);
+          
         return;
       case 'subCat':
           this.checkedListCat = this.categories;

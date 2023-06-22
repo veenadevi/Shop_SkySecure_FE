@@ -235,10 +235,10 @@ export class HeaderComponent implements OnInit{
       });
       },
       error => {
-        //this.login();
-        this.userAccountStore.setAccessIdToken(null);
-        this.userAccountStore.setuserAccountDetails(null);
-         console.log(error);
+        this.login();
+        // this.userAccountStore.setAccessIdToken(null);
+        // this.userAccountStore.setuserAccountDetails(null);
+        //  console.log(error);
       },
       () => {
         // 'onCompleted' callback.

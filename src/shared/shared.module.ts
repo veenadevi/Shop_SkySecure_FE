@@ -19,6 +19,10 @@ import { CompanyPromptModalComponent } from './components/modals/company-prompt-
 import { SelectOemModalComponent } from './components/modals/select-oem-modal/select-oem-modal.component';
 import { BundleCardFlyerComponent } from './components/bundle-card-flyer/bundle-card-flyer.component';
 import { RecommendationSelectModalComponent } from './components/modals/recommendation-select-modal/recommendation-select-modal.component';
+import { ProductCardFlyerComponent } from './components/product-card-flyer/product-card-flyer/product-card-flyer.component';
+import { SearchableFilterComponent } from './components/searchable-filter/searchable-filter.component';
+import { CustomSearchComponent } from './components/searchable-filter/custom-search/custom-search.component';
+import { SearchableSubCategoryFilterComponent } from './components/searchable-filter/searchable-sub-category-filter/searchable-sub-category-filter.component';
 
 
 @NgModule({
@@ -46,7 +50,11 @@ import { RecommendationSelectModalComponent } from './components/modals/recommen
     CompanyPromptModalComponent,
     SelectOemModalComponent,
     BundleCardFlyerComponent,
-    RecommendationSelectModalComponent
+    RecommendationSelectModalComponent,
+    ProductCardFlyerComponent,
+    SearchableFilterComponent,
+    CustomSearchComponent,
+    SearchableSubCategoryFilterComponent
   ],
 
   providers: [
@@ -75,7 +83,11 @@ import { RecommendationSelectModalComponent } from './components/modals/recommen
     CompanyPromptModalComponent,
     SelectOemModalComponent,
     BundleCardFlyerComponent,
-    RecommendationSelectModalComponent
+    RecommendationSelectModalComponent,
+    ProductCardFlyerComponent,
+    SearchableFilterComponent,
+    CustomSearchComponent,
+    SearchableSubCategoryFilterComponent
   ],
   
 
