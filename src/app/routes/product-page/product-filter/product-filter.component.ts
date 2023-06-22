@@ -56,6 +56,7 @@ export class ProductFilterComponent {
     switch (this.selectedParams) {
       case 'cat':
         this.selectedCat = this.listCategories.filter(event => (event._id === this.selectedParamsVal));
+        this.selectedSubCat = this.selectedCat[0].subCategories;
         return;
       case 'subCat':
         this.selectedSubCat = this.subCategoriesList.filter(event => (event._id === this.selectedParamsVal));
@@ -73,6 +74,15 @@ export class ProductFilterComponent {
 
   public selectedCategoriesChange(item:any){
     this.selecteCategories.emit(item);
+    console.log("+++++++++++++ Sub Cat Change");
+    this.subCategoriesList = [];
+    // this.selectedSubCat = [];
+    // this.subCategoriesList = [];
+    // item.forEach(element => {
+      
+    //   this.subCategoriesList = [...this.subCategoriesList, ...element.subCategories];
+    //   this.selectedSubCat = [...this.selectedSubCat, ...element.subCategories];
+    // });
     
   }
 

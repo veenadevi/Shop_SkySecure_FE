@@ -64,10 +64,14 @@ export class SearchableFilterComponent {
   }
 
   public initializeData(){
+    this.selectedCat = [];
+    this.selectedSubCat = [];
+    this.selectedBrand = [];
     this.list.forEach(item => {
       if(this.selectedCat && this.selectedCat.length>0){
         //this.shoesSet.set(item, true);
         this.selected = [...this.selectedCat]
+        
       }
       else if(this.selectedSubCat && this.selectedSubCat.length>0){
         //this.shoesSet.set(item, true);
@@ -85,6 +89,14 @@ export class SearchableFilterComponent {
 
     //this.setDefaultChecked();
     this.filteredOptions = [...this.list];
+
+    if(this.type === 'subCat'){
+      this.setSubCatData();
+    }
+  }
+
+  public setSubCatData(){
+    console.log("+++++++++++++ Sub Cat Change", this.list);
   }
 
   
