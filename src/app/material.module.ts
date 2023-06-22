@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTableModule } from '@angular/material/table';
@@ -100,6 +101,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatTableModule,
     MatCheckboxModule,
     MatProgressBarModule,
+    MatExpansionModule,
     NgxSpinnerModule,
 
     MatToolbarModule, 
@@ -138,6 +140,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatStepperModule,
     MatInputModule,
     MatTabsModule,
+    MatExpansionModule,
     
 
     NgChartsModule

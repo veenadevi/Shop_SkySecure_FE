@@ -17,6 +17,7 @@ import { BrandDetailComponent } from './brand-detail/brand-detail.component';
 import { BrandBundleComponent } from './brand-detail/partials/brand-bundle/brand-bundle.component';
 import { BrandFeaturesComponent } from './brand-detail/partials/brand-features/brand-features.component';
 import { BrandCardFlyerComponent } from './brand-detail/partials/brand-card-flyer/brand-card-flyer.component';
+import { ProductFilterComponent } from './product-filter/product-filter.component';
 
 
 
@@ -31,7 +32,8 @@ import { BrandCardFlyerComponent } from './brand-detail/partials/brand-card-flye
     BrandDetailComponent,
     BrandBundleComponent,
     BrandFeaturesComponent,
-    BrandCardFlyerComponent
+    BrandCardFlyerComponent,
+    ProductFilterComponent
   ],
   imports: [
     CommonModule,

@@ -20,6 +20,8 @@ import { SelectOemModalComponent } from './components/modals/select-oem-modal/se
 import { BundleCardFlyerComponent } from './components/bundle-card-flyer/bundle-card-flyer.component';
 import { RecommendationSelectModalComponent } from './components/modals/recommendation-select-modal/recommendation-select-modal.component';
 import { ProductCardFlyerComponent } from './components/product-card-flyer/product-card-flyer/product-card-flyer.component';
+import { SearchableFilterComponent } from './components/searchable-filter/searchable-filter.component';
+import { CustomSearchComponent } from './components/searchable-filter/custom-search/custom-search.component';
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import { ProductCardFlyerComponent } from './components/product-card-flyer/produ
     SelectOemModalComponent,
     BundleCardFlyerComponent,
     RecommendationSelectModalComponent,
-    ProductCardFlyerComponent
+    ProductCardFlyerComponent,
+    SearchableFilterComponent,
+    CustomSearchComponent
   ],
 
   providers: [
@@ -78,7 +82,9 @@ import { ProductCardFlyerComponent } from './components/product-card-flyer/produ
     SelectOemModalComponent,
     BundleCardFlyerComponent,
     RecommendationSelectModalComponent,
-    ProductCardFlyerComponent
+    ProductCardFlyerComponent,
+    SearchableFilterComponent,
+    CustomSearchComponent
   ],
   
 

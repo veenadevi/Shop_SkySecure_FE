@@ -92,28 +92,28 @@
     /* color: #010209; */
     font-weight: 600;
     line-height: 2rem;
-    font-size: 1.5rem;
+    font-size: 18px;
         /* color: #ffff; */
     color: var(--neutral);
       
 }
 
 .text-style-bold{
-    font-size: 1 rem;
+    font-size: 14px;
     font-weight: bold;
 }
 .text-style{
-    font-size: 0.9 rem;
+    font-size: 12px;
     font-weight: normal;
 }
 
 .text-price{
-    font-size: 1.3em;
+    font-size: 16px;
     font-weight: 300;
 }
 
 .text-term{
-    font-size: 0.9 em;
+    font-size: 0.5 em;
     font-weight: 200;
 }
 

@@ -1,8 +1,22 @@
 <div class="product-page-container">
   
+  
   <div class="parent-holder">
     <div class="filter-container">
-      Filter
+      <div style="width:100%">
+        <ng-container *ngIf="categories && categories.length>0">
+          <product-filter 
+            [listCategories] = "categories" (selecteCategories)="selecteCategories($event)"
+            [listSubCategories] = "subCategories" (selectedSubCategories)="selectedSubCategories($event)"
+            [listBrands] = "brands" (selectedBrands)="selectedBrands($event)"
+            [selectedParams] = "selectedParams"
+            [selectedParamsVal] = "selectedParamsVal"
+
+            ></product-filter>
+        </ng-container>
+        
+      </div>
+      
     </div>
     <div class="product-container">
       <div class="tab-holder">
