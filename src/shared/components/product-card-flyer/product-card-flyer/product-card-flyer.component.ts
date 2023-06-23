@@ -35,5 +35,9 @@ export class ProductCardFlyerComponent implements OnInit{
     this.router.navigate(['/products', product._id]);
   }
 
+  public onFilterChange($event){
+    console.log("******* ^^^^^ +++ Event", $event.target.checked);
+  }
+
 
 }
