@@ -149,6 +149,25 @@ export class ProductDetailComponent implements OnInit{
     //this.getProductDetails2(productId);
   }
 
+  images: any[] = [1,2,3,4];
+
+
+    position: string = 'left';
+    responsiveOptions: any[] = [
+      {
+          breakpoint: '1024px',
+          numVisible: 5
+      },
+      {
+          breakpoint: '768px',
+          numVisible: 3
+      },
+      {
+          breakpoint: '560px',
+          numVisible: 1
+      }
+  ];
+
   public requestQuote (product : ProductsDetails) : void {
 
     
