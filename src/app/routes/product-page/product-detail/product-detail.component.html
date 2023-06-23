@@ -2,6 +2,8 @@
     <div class="product-details">
         <div class="product-image-view">
             <div class="product-image">
+                <div>
+                    img
                 <!-- <p-galleria [(value)]="images" [thumbnailsPosition]="position" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5"> 
                     <ng-template pTemplate="item" let-item>
                         <img src="../../assets/images/msLogo.png" style="width: 100%; min-height: 420px; display: block;" />
@@ -12,10 +14,35 @@
                         </div>
                     </ng-template>
                 </p-galleria> -->
+            </div>
+                    <div class="buy-now-prod"> 
+                        <span style="display: inline-flex;justify-content: center;"> 
+                        <h6>Quantity </h6> <p>(per user)</p>
+                        </span>
+                        <span style="display: inline-flex;justify-content: center;gap: 5px;"> 
+                            
+                                <span >
+                                  <img alt="minus" src="../../../assets/icons/Minus.svg">
+                                </span>
+                                <span>
+                                  <input
+                                    class="input-field" 
+                                    >
+                                </span>
+                                <span >
+                                  <img alt="" src="../../../assets/icons/Add.svg">
+                                </span>
+                            </span>
+
+                            <button class="btn buy-now-btn" >Buy now</button>
+                        </div>
                 </div>
                 <div class="product-details-info">
                     <h4 style="margin-bottom: auto;">Exchange Online Plan1
                     </h4>
+                    <p style="margin-top: 10px;
+                    font-size: smaller;
+                    margin-bottom: 5px;">by Microsoft</p>
                     <div class="pd-header-reviews">
                         <mat-icon class="review-icon">star</mat-icon>
                         <mat-icon class="review-icon">star</mat-icon>
@@ -25,13 +52,70 @@
                         <span> 5 reviews | write a review</span>
                     </div>
                     <h4 style="margin-bottom: 17px;">&#8377; 34567.60 / yearly</h4>
-                    <button class="btn view-det-btn" >View Features</button>
+                    
                     <p style="margin-top: 10px; font-weight: 700; margin-bottom: 7px;">Solution Category:</p>
                     <p>Email, Calendar and scheduling</p>
                     <p style=" font-weight: 700; margin-bottom: 7px;">About this product:</p>
-                    <p>Azure Active Directory (Azure AD), is a cloud-based identity and access management service offered by Microsoft. It is designed to manage user identities and access to resources across multiple cloud and on-premises Apps and provide capabilities like Single sign-on, Multifactor authentication, Conditional access, Identity Protection & Governance.</p>
-                    <button class="btn request-quote-btn" >Request Quote</button>
+                    <p style="margin-bottom: 15px;">Azure Active Directory (Azure AD), is a cloud-based identity and access management service offered by Microsoft. It is designed to manage user identities and access to resources across multiple cloud and on-premises Apps and provide capabilities like Single sign-on, Multifactor authentication, Conditional access, Identity Protection & Governance.</p>
+                    <span style = "display:flex;flex-direction: row;"><button class="btn view-det-btn" >View Features</button>
+                    <button class="btn request-quote-btn" style="margin-left: 4%;">Request Quote</button></span>
+                    <p-divider></p-divider>
+                        <div class="offer-det">
+                            <span style="display: inline-flex;">
+                                <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/OfferIllustrationIcon.svg">
+                                <p style=" font-weight: 700; ">&nbsp; &nbsp; Offer</p>
+                                </span>
+                            <div class="offer-card-container">
+                                <div class="offer-card">
+                                    <p style="font-size: 15px;font-weight: 600;">Bank Offers</p>
+                                    <p style="font-size: 14px;">Upto ₹500.00 discount on select Credit Cards</p>
+                                    <a style="color: #0047BD;font-size: 15px;font-weight: 600;">2 more offers</a>
+                                </div>
+                                <div class="offer-card">
+                                    <p style="font-size: 15px;font-weight: 600;">Bank Offers</p>
+                                    <p style="font-size: 14px;">Upto ₹500.00 discount on select Credit Cards</p>
+                                    <a style="color: #0047BD;font-size: 15px;font-weight: 600;">2 more offers</a>
+                                </div>
+                            </div>
+                        </div>
+                        <p-divider></p-divider>
+
+                        <div class="common-info">
+                            <div class="common-det">
+                                <div class="comm-det-img" >
+                                  <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/SecureTransactionIllustrationIcon.svg">
+                                  
+                            </div>
+                            <p style=" font-weight: 400; text-align: center;">secure transaction</p>
+                            </div>
+                            <div class="common-det">
+                                <div class="comm-det-img" >
+                                  <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/TopBrandIllustrationIcon.svg">
+                                  
+                            </div>
+                            <p style=" font-weight: 400; text-align: center;">Top brand</p>
+                            </div>
+                            <div class="common-det">
+                                <div class="comm-det-img" >
+                                  <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/ProductCancellationIllustrationIcon.svg">
+                                  
+                            </div>
+                            <p style=" font-weight: 400; text-align: center;">5 Days Cancellation </p>
+                            </div>
+                            <div class="common-det">
+                                <div class="comm-det-img" >
+                                  <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/GuaranteedPriceIllustrationIcon.svg">
+                                  
+                            </div>
+                            <p style=" font-weight: 400; text-align: center;">Guaranteed Price</p>
+                            </div>
+                            
+                            
+                        </div>
+
                     </div>
+
+                    
             </div>
             <div class="product-info">
                 <div class="compare-box">
@@ -39,33 +123,50 @@
                     <h5>Compare</h5>
                     <span style="display:flex;flex-basis: 70%;
                     justify-content: flex-end;align-items: center;color: cornflowerblue;font-size: small;
-    font-weight: 500;"><p style="margin-bottom: 3px;">Compare products</p></span>
+    font-weight: 500;"><p style="margin-bottom: 3px;color: #0047BD;
+font-size: 13.122px;
+font-weight: 600;">Compare products</p></span>
                     </div>
                     <p style="font-size: small;">choose the right plan that matches your needs!</p>
                     <div class="plan-price">
                         <div class="plan-price-image">
-                            <img style="width:100%;height: 100%;object-fit: cover;" src="../../assets/images/msLogo.png">
+                            <img style="width:70%;height: 100%;object-fit: cover;" src="../../assets/images/msLogo.png">
                         </div>
                         <div class="plan-price-info">
                             <p style="font-size: medium;
                             font-weight: 700;margin-bottom: 0;">Exchange online plan2</p>
+                            <p style="font-size: 13px;
+                            margin-bottom: 0;">solution Category: endpoint security</p>
+                            <p style="font-size: 13px;
+                            margin-bottom: 0;">&#8377; 34567.60 / yearly</p>
+                        </div>
+                    </div>
+
+                    <div class="plan-price">
+                        <div class="plan-price-image">
+                            <img style="width:70%;height: 100%;object-fit: cover;" src="../../assets/images/msLogo.png">
+                        </div>
+                        <div class="plan-price-info">
                             <p style="font-size: medium;
-                            font-weight: 700;margin-bottom: 0;">&#8377; 34567.60 / yearly</p>
+                            font-weight: 700;margin-bottom: 0;">Exchange online plan2</p>
+                            <p style="font-size: 13px;
+                            margin-bottom: 0;">solution Category: endpoint security</p>
+                            <p style="font-size: 13px;
+                            margin-bottom: 0;">&#8377; 34567.60 / yearly</p>
                         </div>
                     </div>
                     </div>
                     
                     <div class="connect-us-box">
+                        <!-- <div class="connect-us-img">
+                            <img style="width:100%;height: 100%;object-fit: cover;" src="../../assets/productDetails/ConnectUsIllustration.svg">
+                        </div> -->
                         <div class="connect-us-desc">
                             <h5>Connect Us!</h5>
-                            <p style="font-size: small;">consult with our expert to choose the right plan</p>
-                            <button class="btn get-free-call-btn" >Get Free Call</button>
+                            <p style="font-size: 16px;align-items: center;justify-content: center;">consult with our expert to choose the right plan</p>
+                            <button class="btn btn buy-now-btn" style="width:35%">Get Free Call</button>
                         </div>
-                        <div class="connect-us-img">
-                            <span style="border-radius: 50%;">
-                            <img style="width:100%;height: 100%;object-fit: cover;" src="../../assets/images/msLogo.png">
-                            </span>
-                        </div>
+                        
                         </div>
                 </div>
         </div>
