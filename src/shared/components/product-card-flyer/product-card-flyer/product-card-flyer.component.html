@@ -1,6 +1,6 @@
 <div class="product-card-container">
     
-    <ng-container *ngFor="let item of products">
+    <ng-container *ngFor="let item of productsList">
         <div class="product-card-flyer-container">
             <div class="logo-holder">
                 <div class="logo-box">
@@ -18,7 +18,9 @@
                 <div class="add-to-compare-box">
                     <span>
                         <input type="checkbox" id="1"
-                        (change)="onFilterChange($event)"> Add to Compare
+                        [checked]="item.checked"
+                        (change)="onFilterChange($event, item)"
+                        > Add to Compare
                     </span>
                 </div>
             </div>
