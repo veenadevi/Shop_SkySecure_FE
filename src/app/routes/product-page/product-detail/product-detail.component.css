@@ -507,12 +507,17 @@ background: #F7F7F7;
   padding: 1%;
  
 }
+.comp-prod-card-cont {
+  display:flex;
+  flex-direction: row;
+}
 
 .comp-prod-card {
   display:flex;
+  flex-basis:30%;
   margin: 1%;
   padding: 1%;
-  flex-direction: row;
+  flex-direction: column;
   border-radius: 4.905px;
   border: 0.613px solid #D9D9D9;
   background: #FFF;
@@ -528,6 +533,8 @@ background: #F7F7F7;
 .comp-prod-card-img {
   display:flex;
   flex-basis: 30%;
+  justify-content: center;
+    align-items: center;
   margin: 1%;
   padding: 1%;
   flex-direction: column;
