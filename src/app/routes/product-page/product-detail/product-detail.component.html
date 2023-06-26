@@ -4,7 +4,7 @@
             <div class="product-image">
                 <div>
                     img
-                <!-- <p-galleria [(value)]="images" [thumbnailsPosition]="position" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5"> 
+                <p-galleria  [thumbnailsPosition]="position" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5"> 
                     <ng-template pTemplate="item" let-item>
                         <img src="../../assets/images/msLogo.png" style="width: 100%; min-height: 420px; display: block;" />
                     </ng-template>
@@ -13,7 +13,7 @@
                             <img src="../../assets/images/msLogo.png" />
                         </div>
                     </ng-template>
-                </p-galleria> -->
+                </p-galleria>
             </div>
                     <div class="buy-now-prod"> 
                         <span style="display: inline-flex;justify-content: center;"> 
@@ -38,7 +38,7 @@
                         </div>
                 </div>
                 <div class="product-details-info">
-                    <h4 style="margin-bottom: auto;">Exchange Online Plan1
+                    <h4 style="margin-bottom: auto;">{{product.products[0].name}}
                     </h4>
                     <p style="margin-top: 10px;
                     font-size: smaller;
@@ -51,12 +51,12 @@
                         <mat-icon class="review-icon">star</mat-icon>
                         <span> 5 reviews | write a review</span>
                     </div>
-                    <h4 style="margin-bottom: 17px;">&#8377; 34567.60 / yearly</h4>
+                    <!-- <h4 style="margin-bottom: 17px;">&#8377; {{product.priceList[0].price}} / {{product.priceList[0].priceType}}</h4> -->
                     
                     <p style="margin-top: 10px; font-weight: 700; margin-bottom: 7px;">Solution Category:</p>
                     <p>Email, Calendar and scheduling</p>
                     <p style=" font-weight: 700; margin-bottom: 7px;">About this product:</p>
-                    <p style="margin-bottom: 15px;">Azure Active Directory (Azure AD), is a cloud-based identity and access management service offered by Microsoft. It is designed to manage user identities and access to resources across multiple cloud and on-premises Apps and provide capabilities like Single sign-on, Multifactor authentication, Conditional access, Identity Protection & Governance.</p>
+                    <p style="margin-bottom: 15px;">{{product.products[0].description}}</p>
                     <span style = "display:flex;flex-direction: row;"><button class="btn view-det-btn" >View Features</button>
                     <button class="btn request-quote-btn" style="margin-left: 4%;">Request Quote</button></span>
                     <p-divider></p-divider>
@@ -118,6 +118,7 @@
                     
             </div>
             <div class="product-info">
+                <ng-template *ngIf="product.productVariants.length>0">
                 <div class="compare-box">
                     <div class="compare-box-headers">    
                     <h5>Compare</h5>
@@ -130,7 +131,7 @@ font-weight: 600;">Compare products</p></span>
                     <p style="font-size: small;">choose the right plan that matches your needs!</p>
                     <div class="plan-price">
                         <div class="plan-price-image">
-                            <img style="width:70%;height: 100%;object-fit: cover;" src="../../assets/images/msLogo.png">
+                            <img style="width:70%;height: 100%;object-fit: cover;" src="{{product.products[0].bannerLogo}}">
                         </div>
                         <div class="plan-price-info">
                             <p style="font-size: medium;
@@ -144,8 +145,7 @@ font-weight: 600;">Compare products</p></span>
 
                     <div class="plan-price">
                         <div class="plan-price-image">
-                            <img style="width:70%;height: 100%;object-fit: cover;" src="../../assets/images/msLogo.png">
-                        </div>
+                            <img style="width:70%;height: 100%;object-fit: cover;" src="{{product.products[0].bannerLogo}}">                        </div>
                         <div class="plan-price-info">
                             <p style="font-size: medium;
                             font-weight: 700;margin-bottom: 0;">Exchange online plan2</p>
@@ -156,7 +156,7 @@ font-weight: 600;">Compare products</p></span>
                         </div>
                     </div>
                     </div>
-                    
+                    </ng-template>
                     <div class="connect-us-box">
                         <!-- <div class="connect-us-img">
                             <img style="width:100%;height: 100%;object-fit: cover;" src="../../assets/productDetails/ConnectUsIllustration.svg">
@@ -171,7 +171,8 @@ font-weight: 600;">Compare products</p></span>
                 </div>
         </div>
     </div>
-        <div class="tab-nav-list">
+    <div class="all-feature-container">
+        <!-- <div class="tab-nav-list"> -->
             <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                   
@@ -193,151 +194,309 @@ font-weight: 600;">Compare products</p></span>
                     </ul>
                   </div>
               </nav> -->
-              <a class="nav-link active" style="margin-left: 27px;font-size: smaller;font-weight: 600;" aria-current="page" href="#">About</a>
+              <!-- <a class="nav-link active" style="margin-left: 27px;font-size: smaller;font-weight: 600;" aria-current="page" href="#">About</a>
               <a class="nav-link active" style="margin-left: 27px;font-size: smaller;font-weight: 600;" aria-current="page" href="#features">Features</a>
               <a class="nav-link active" style="margin-left: 27px;font-size: smaller;font-weight: 600;" aria-current="page" href="#">Specification</a>
               <a class="nav-link active" style="margin-left: 27px;font-size: smaller;font-weight: 600;" aria-current="page" href="#">Reviews</a>
               <a class="nav-link active" style="margin-left: 27px;font-size: smaller;font-weight: 600;" aria-current="page" href="#similar-prod">Similar product</a>
-            </div>
+            </div> -->
+            <!-- <p-tabView>
+                <p-tabPanel >
+                    <a class="nav-link active" style="margin-left: 27px;font-size: smaller;font-weight: 600;" aria-current="page" href="#similar-prod">Similar product</a>
 
-            <div class="product-features-container">
+                </p-tabPanel>
+            </p-tabView> -->
+            <!-- <button (click)="scrollToSection('section1')">Go to Section 1</button> -->
+            <!-- <nav mat-tab-nav-bar >
+                <a mat-tab-link *ngFor="let link of links; index as i"
+                   (click)="scrollToSection(link)"
+                   [active]="activeLink == link"> {{titles[i]}} </a>
+              </nav> -->
+            <p-card style = "font-family: 'Lato', sans-serif;" header="Description" id="description" #descriptionRef>
+                <p class="m-0">
+                    {{product.products[0].description}}
+                </p>
+                <span style = "display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;"><button class="btn view-det-btn" >See More</button></span>
+
+            </p-card>
+            <div class="product-features-container" id="feature" #featureRef>
                 <h5>Features</h5>
-                <div class="feature-desc-heading">
+                <!-- <div class="feature-desc-heading">
+                <p style="font-weight: 400;">Here is the common generalized section for the product</p>
+                </div> -->
+            <!-- </div> -->
+           <div class="product-feature-cards-container">
+            <div class="prod-feat-img">
+                <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustration.svg">
+                </div>
+                <div class="prod-feat-card-cont">
+                    <div class="prod-card-holder">
+<div class="feature-desc-heading">
                 <p style="font-weight: 400;">Here is the common generalized section for the product</p>
                 </div>
-            </div>
-           <div class="product-feature-cards-container">
-            <div class="product-feature-card">
-                <h6>Email Hosting</h6>
-                <p>Azure Active Directory (Azure AD), is a cloud-based identity and access management service offered by Microsoft. It is designed to manage user identities and access to resources </p>
-            </div>
-                <div class="product-feature-card">
-                    <h6>Email Hosting</h6>
-                    <p>Azure Active Directory (Azure AD), is a cloud-based identity and access management service offered by Microsoft. It is designed to manage user identities and access to resources </p>
-                </div>
-                    <div class="product-feature-card">
-                        <h6>Email Hosting</h6>
-                        <p>Azure Active Directory (Azure AD), is a cloud-based identity and access management service offered by Microsoft. It is designed to manage user identities and access to resources </p>
-                    </div>
+                <div class="prod-card-holder2">
+                    <!-- <ng-template *ngIf="featureList.length>0"> -->
+                    <ng-container *ngFor="let item of featureList">
                         <div class="product-feature-card">
-                            <h6>Email Hosting</h6>
-                            <p>Azure Active Directory (Azure AD), is a cloud-based identity and access management service offered by Microsoft. It is designed to manage user identities and access to resources </p>
+                            <span style="display:flex;flex-basis:30%;padding: 7%;justify-content: center;;flex-direction: column;">
+                                <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                                </span>
+                            <span style="display:flex;flex-basis:70%;padding: 1%;flex-direction: column;">
+                            <p style="color: #000;
+                            font-size: initial;
+                            font-weight: 700;">{{item.name}}</p>
+                            <p style="font-size: small;">{{item.description}}</p>
+                        </span>
                         </div>
-                            <div class="product-feature-card">
-                                <h6>Email Hosting</h6>
-                                <p>Azure Active Directory (Azure AD), is a cloud-based identity and access management service offered by Microsoft. It is designed to manage user identities and access to resources </p>
-                                </div>  
-             </div>
-             <div class="product-features-container">
-                <div class="feature-desc-heading">
-                <p style="font-weight: 400;">click here to view detailed feature of the product</p>
-                <button class="btn view-det-btn" >View All Features</button>
-                </div>
+                        <!-- </ng-template> -->
+                        <!-- </ng-container> -->
+                    </ng-container>
+                    <!-- <ng-template #elseBlock>
+                        <ng-container *ngFor="let item of featureList">
+                        
+                        <ng-template let-item>
+                           
+            <div class="product-feature-card">
+                <span style="display:flex;flex-basis:30%;padding: 7%;justify-content: center;;flex-direction: column;">
+                    <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                    </span>
+                <span style="display:flex;flex-basis:70%;padding: 1%;flex-direction: column;">
+                <p style="color: #000;
+                font-size: initial;
+                font-weight: 700;">{{item.name}}</p>
+                <p style="font-size: small;">{{item.description}}</p>
+            </span>
             </div>
+            </ng-template>
+            </ng-container>
+        </ng-template> -->
+            
+            
+        
+            <div class="product-feature-card">
+                <span style="display:flex;flex-basis:30%;padding: 7%;flex-direction: column;">
+                    <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                    </span>
+                <span style="display:flex;flex-basis:70%;padding: 1%;flex-direction: column;">
+                <p style="color: #000;
+                font-size: initial;
+                font-weight: 700;">Email Hosting</p>
+                <p style="font-size: small;">Azure Active Directory (Azure AD), is a cloud-based identity and access  </p>
+            </span>
+            </div>
+            
+        </div>
+        
+        </div>
+        <div class="p-view-all-feature-div">
+            <div class="feature-desc-heading">
+            <p style="margin-bottom: 10px;font-weight: 400;">click here to view detailed feature of the product</p>
+            <button class="btn view-det-btn" (click)="featureCountEvent()">View All Features</button>
+            <!-- {{featureCountEvent()}} -->
+            </div>
+        </div>
+               
+             </div>
+             
+            </div>
+        </div>
 
 
 
 <div class="bottom-container">
-    <div class="specification-cont">
+    <div class="specification-cont" id="specification" #specificationRef>
         <h5>Specifications</h5>
         <div class="specs-list">
             <div class="specs-name">
-            <div >
-                icon
+            <div style="display:flex;flex-basis:20%;padding: 7%;">
+                <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
                 </div>
-                <div style ="margin-left: 5%;">
-                    <p style="font-weight: 400; margin-bottom: 0">Supported Platforms</p>
-                    <p style="font-size: medium;
-                    font-weight: 700;margin-bottom: 0;">Exchange online plan2</p>
+                <div style ="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
+                    <p style="font-size: small;margin-bottom: 0">Supported Platforms</p>
+                    <p style="font-size: smaller;
+                    font-weight: 500;margin-bottom: 0;">Exchange online plan2</p>
                     </div>
             </div>
             <div class="specs-name">
-                <div >
-                    icon
+                <div style="display:flex;flex-basis:20%;padding: 7%;">
+                    <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
                     </div>
-                    <div style ="margin-left: 5%;">
-                        <p style="font-weight: 400; margin-bottom: 0">Supported Platforms</p>
-                        <p style="font-size: medium;
-                        font-weight: 700;margin-bottom: 0;">Exchange online plan2</p>
+                    <div style ="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
+                        <p style="font-size: small;margin-bottom: 0">Supported Platforms</p>
+                        <p style="font-size: smaller;
+                        font-weight: 500;margin-bottom: 0;">Exchange online plan2</p>
                         </div>
                 </div>
                 <div class="specs-name">
-                    <div >
-                        icon
+                    <div style="display:flex;flex-basis:20%;padding: 7%;">
+                        <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
                         </div>
-                        <div style ="margin-left: 5%;">
-                            <p style="font-weight: 400; margin-bottom: 0">Supported Platforms</p>
-                            <p style="font-size: medium;
-                            font-weight: 700;margin-bottom: 0;">Exchange online plan2</p>
+                        <div style ="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
+                            <p style="font-size: small;margin-bottom: 0">Supported Platforms</p>
+                            <p style="font-size: smaller;
+                            font-weight: 500;margin-bottom: 0;">Exchange online plan2</p>
                             </div>
                     </div>
                     <div class="specs-name">
-                        <div >
-                            icon
+                        <div style="display:flex;flex-basis:20%;padding: 7%;">
+                            <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
                             </div>
-                            <div style ="margin-left: 5%;">
-                                <p style="font-weight: 400; margin-bottom: 0">Supported Platforms</p>
-                                <p style="font-size: medium;
-                                font-weight: 700;margin-bottom: 0;">Exchange online plan2</p>
+                            <div style ="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
+                                <p style="font-size: small;margin-bottom: 0">Supported Platforms</p>
+                                <p style="font-size: smaller;
+                                font-weight: 500;margin-bottom: 0;">Exchange online plan2</p>
                                 </div>
                         </div>
             </div>
     </div>
 
-    <div class="specification-cont" >
-        <h6 id="similar-prod">Similar Products</h6>
+
+    <div class="specification-cont" id="compProd" #compProdRef>
+        <h5>Compare Products</h5>
+        <div class="comp-prod-cont">
+            <div class="comp-prod-card">
+                <div class="comp-prod-card-img">
+                    <img style="width:70%;height: auto;position: relative;" src="{{product.products[0].bannerLogo}}">
+                    <span style="    display: inline-flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    /* margin: 1%; */
+                    margin-top: 10%;
+                    padding: 1%;"> 
+                        <p-checkbox  [binary]="true" inputId="binary"></p-checkbox>
+                        <p style="font-size: small;">compare</p>
+                        </span>
+                </div>
+                <div class="comp-prod-card-content">
+                    <p style="font-size: medium;font-weight: 500;">{{product.products[0].name}}</p>
+                    <p style="font-size: small;font-weight: 300;">solution category</p>
+                    <p style="font-size: small;font-weight: 300;">EndPoint security</p>
+                    <span style="    display: inline-flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    /* margin: 1%; */
+                    /* margin-top: 24%; */
+                    padding: 1%;"> 
+                    <a style="color: #0047BD;font-weight: 400;font-size: small;">view details</a>
+                    </span>
+                </div>
+            </div>
+            </div>
+    </div>
+
+
+
+
+
+    <div class="specification-cont"  id="simProd" #simProdRef>
+        <h5 id="similar-prod">Similar Products</h5>
         <div class="specs-list">
+
+            <!-- <p-carousel  [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+                <div class="similar-prod-card">
+                    <div class="similar-prod-img-det">
+                        <img style="width:100%;height: 100%;object-fit: cover;" src="../../assets/images/msLogo.png">
+                        <button class="btn view-price-det-btn" >View details</button>
+                    </div>
+                    <div class="similar-prod-price-det">
+                        <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">Share point Online Plan 1</p></span>
+                        <span class="similar-prod-price-det-price"><h6 style="margin-bottom: 17px;">&#8377; 34567.60 </h6>
+                        <p style="">&nbsp; / yearly</p>
+                        </span>
+                        <span class="similar-prod-price-det-btn">
+                            <button class="btn similar-prod-request-quote-btn" >Request Quote</button>
+                        </span>
+    
+                    </div>
+                </div> -->
+                <!-- <ng-template let-product pTemplate="item">
+                    <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+                        <div class="mb-3">
+                            <img src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" [alt]="product.name" class="w-6 shadow-2" />
+                        </div>
+                        <div>
+                            <h4 class="mb-1">{{ product.name }}</h4>
+                            <h6 class="mt-0 mb-3">{{ '$' + product.price }}</h6>
+                            <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>
+                            <div class="car-buttons mt-5">
+                                <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
+                                <p-button type="button" styleClass="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template> -->
+            <!-- </p-carousel> -->
+
             <div class="similar-prod-card">
+                <div class="sim-prod-holder">
                 <div class="similar-prod-img-det">
                     <img style="width:100%;height: 100%;object-fit: cover;" src="../../assets/images/msLogo.png">
-                    <button class="btn view-price-det-btn" >View details</button>
+                    
                 </div>
                 <div class="similar-prod-price-det">
                     <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">Share point Online Plan 1</p></span>
                     <span class="similar-prod-price-det-price"><h6 style="margin-bottom: 17px;">&#8377; 34567.60 </h6>
                     <p style="">&nbsp; / yearly</p>
                     </span>
-                    <span class="similar-prod-price-det-btn">
-                        <button class="btn similar-prod-request-quote-btn" >Request Quote</button>
-                    </span>
-
+                    
                 </div>
+                </div>
+
+                <div class="sim-prod-holder2">
+                    <p style="font-size: medium;font-weight: 600; margin-top:10px">Key Features</p>
+                    <p-divider style="width:100%"></p-divider>
+                    <span style="display:inline-flex;padding: 1%;
+                                margin: 1%;">
+                        <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                        <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
+                        </span>
+                        <span style="display:inline-flex;padding: 1%;
+                                margin: 1%;">
+                            <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                            <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
+                            </span>
+                            <span style="display:inline-flex;padding: 1%;
+                                margin: 1%;">
+                                <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                                <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
+                                </span>
+                                <span style="display:inline-flex;padding: 1%;
+                                margin: 1%;">
+                                    <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                                    <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
+                                    </span>
+                                    <span style="display:inline-flex;padding: 1%;
+                                margin: 1%;">
+                                        <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                                        <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
+                                        </span>
+                                        <span style="display:inline-flex;padding: 1%;
+                                margin: 1%;">
+                                            <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                                            <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
+                                            </span>
+                                            <span style="display:inline-flex;padding: 1%;
+                                margin: 1%;">
+                                                <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                                                <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
+                                                </span>
+                                                            
+                    </div>
+
+                    <div class="sim-prod-btn-cont">
+                        <button class="btn view-price-det-btn" >View details</button>
+                        <span >
+                            <button class="btn similar-prod-request-quote-btn" >Request Quote</button>
+                        </span>
+                        </div>
+
             </div>
 
-            <div class="similar-prod-card">
-                <div class="similar-prod-img-det">
-                    <img style="width:100%;height: 100%;object-fit: cover;" src="../../assets/images/msLogo.png">
-                    <button class="btn view-price-det-btn" >View details</button>
-                </div>
-                <div class="similar-prod-price-det">
-                    <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">Share point Online Plan 1</p></span>
-                    <span class="similar-prod-price-det-price"><h6 style="margin-bottom: 17px;">&#8377; 34567.60 </h6>
-                    <p style="">&nbsp; / yearly</p>
-                    </span>
-                    <span class="similar-prod-price-det-btn">
-                        <button class="btn similar-prod-request-quote-btn" >Request Quote</button>
-                    </span>
+            
 
-                </div>
-            </div>
-
-            <div class="similar-prod-card">
-                <div class="similar-prod-img-det">
-                    <img style="width:100%;height: 100%;object-fit: cover;" src="../../assets/images/msLogo.png">
-                    <button class="btn view-price-det-btn" >View details</button>
-                </div>
-                <div class="similar-prod-price-det">
-                    <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">Share point Online Plan 1</p></span>
-                    <span class="similar-prod-price-det-price"><h6 style="margin-bottom: 17px;">&#8377; 34567.60 </h6>
-                    <p style="">&nbsp; / yearly</p>
-                    </span>
-                    <span class="similar-prod-price-det-btn">
-                        <button class="btn similar-prod-request-quote-btn" >Request Quote</button>
-                    </span>
-
-                </div>
-            </div>
+            
             
             </div>
     </div>
 </div>
+    </div>
