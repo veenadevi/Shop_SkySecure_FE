@@ -162,11 +162,12 @@ export class ProductDetailComponent implements OnInit{
         console.log("inside", this.featureList);
         
         this.similarProducts = response.productBundles;
+        //response.productVariants = [1234];
         this.product = { products:[...response.products], featureList: response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants: response.featureListByProductVariants };
-        // console.log("inside", this.product);
+        console.log("&&&&& inside", this.product.productVariants.length);
         this.onProductLoad = true;
         this.bannerUrl = this.product.bannerURL;
-        this.product.productVariants = [123];
+        //this.product.productVariants = [123];
         console.log("prVar:",this.product.productVariants)
         this.productVariants=response.productVariants;
         // this.featureCountEvent();
