@@ -207,11 +207,11 @@ font-weight: 600;">Compare products</p></span>
                 </p-tabPanel>
             </p-tabView> -->
             <!-- <button (click)="scrollToSection('section1')">Go to Section 1</button> -->
-            <!-- <nav mat-tab-nav-bar >
+            <nav mat-tab-nav-bar >
                 <a mat-tab-link *ngFor="let link of links; index as i"
                    (click)="scrollToSection(link)"
                    [active]="activeLink == link"> {{titles[i]}} </a>
-              </nav> -->
+              </nav>
             <p-card style = "font-family: 'Lato', sans-serif;" header="Description" id="description" #descriptionRef>
                 <p class="m-0">
                     {{product.products[0].description}}
