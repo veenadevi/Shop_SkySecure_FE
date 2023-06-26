@@ -9,9 +9,10 @@
 
     </ng-container> -->
    
-    <ng-container *ngIf="userLoggedIn">
+    <!-- <ng-container *ngIf="userLoggedIn"> -->
+    <ng-container>
         <div class="full-screen-style">
-            <app-sidenav-wrapper></app-sidenav-wrapper>
+            <app-sidenav-wrapper [userLoggedIn]="userLoggedIn"></app-sidenav-wrapper>
         </div>
         
     </ng-container>
@@ -19,12 +20,12 @@
 
     <!-- Container If not Logged In -->
 
-    <ng-container *ngIf="!userLoggedIn">
+    <!-- <ng-container *ngIf="!userLoggedIn">
 
         <router-outlet></router-outlet>
 
 
-    </ng-container>
+    </ng-container> -->
 
 
 

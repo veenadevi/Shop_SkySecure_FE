@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LoginService } from 'src/shared/services/login.service';
 
 @Component({
@@ -8,7 +8,13 @@ import { LoginService } from 'src/shared/services/login.service';
 })
 export class SidenavWrapperComponent {
 
+  public userLoggedInFlag = false;
   isExpanded: boolean = false;
+
+  @Input() set userLoggedIn(value: any){
+    this.userLoggedInFlag = value;
+    console.log("&&&&&&&& ++++++ ", this.userLoggedInFlag);
+  }
 
   constructor(
     private loginService : LoginService
