@@ -6,6 +6,7 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ProductListService } from 'src/shared/services/product-list-page.service';
+import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 
 
 @Component({
@@ -52,6 +53,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public selectedParams ;
   public selectedParamsVal ;
 
+  public listForCompare : any[] = [];
+
   // public products = [];
   // public productBundles = [];
   // public selectedCat = [];
@@ -89,7 +92,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     private productListService : ProductListService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private metadadataStore : MetadataStore
+    private metadadataStore : MetadataStore,
+    private compareProductsStore : CompareProductsStore
   ){
     const navigation = this.router.getCurrentNavigation();
     // const state = navigation.extras.state as { data: Object };
@@ -158,6 +162,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
     this.setFilters();
     this.loadDropdownValues();
+    this.selectedListForCompare([]);
     //this.getAllCategories();
 
 
@@ -235,7 +240,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     ]).subscribe(([catArray, brandArray]) => {
 
 
-      if(catArray.length >0 && brandArray.length > 0){
+      if( catArray && catArray.length >0 && brandArray.length > 0){
         this.initializeData();
       }
     });
@@ -309,7 +314,19 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
          this.productBundlesList = response.productBundles;
          this.productBundles = response.productBundles;
 
-         this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundles]
+         this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundles];
+         let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+         if(cacheData && cacheData.length>0){
+          cacheData.forEach(element => {
+      
+            let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
+              if(indexToUpdate !== -1){
+                element['checked'] = true;
+                this.finalProductList[indexToUpdate]['checked'] = true;
+      
+              }
+          });
+         }
          /*this.productBundles = response.productBundles.map((data: any )=> {
           return { 
             name: data.name , 
@@ -456,6 +473,57 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public shareIndividualCheckedList(item:{}){
   }
 
+
+  public selectedListForCompare(items){
+    this.listForCompare = items;
+
+    //let cacheData = this.compareProductsStore.getCompareProductsList();
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+
+    cacheData = cacheData.filter(event => (event.checked))
+
+
+
+
+
+    let cumulativeList = [];
+    
+    if(cacheData && cacheData.length>0){
+      
+      cumulativeList = [...this.listForCompare , ...cacheData];
+      //cumulativeList = cumulativeList.filter(element => element._id != item._id);
+    }
+    else{
+      
+      cumulativeList = this.listForCompare;
+    }
+    //let uniqueElements = [...new Set(cumulativeList)];
+    //let uniqueElements = cumulativeList.filter((el, i, a) => i === a.indexOf(el));
+    let uniqueElements = [...new Map(cumulativeList.map(item => [item['_id'], item])).values()];
+    
+
+
+    uniqueElements.forEach(element => {
+      
+      let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
+        if(indexToUpdate !== -1){
+          //element['checked'] = true;
+          this.finalProductList[indexToUpdate]['checked'] = true;
+
+        }
+        else{
+          this.finalProductList[indexToUpdate]['checked'] = false;
+        }
+    });
+
+
+    
+
+
+    this.compareProductsStore.setCompareProductsList(uniqueElements);
+    localStorage.setItem('product_list_to_compare', JSON.stringify(uniqueElements));
+
+  }
 
   ngOnDestroy(): void {
     

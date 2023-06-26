@@ -23,6 +23,7 @@ import { ProductCardFlyerComponent } from './components/product-card-flyer/produ
 import { SearchableFilterComponent } from './components/searchable-filter/searchable-filter.component';
 import { CustomSearchComponent } from './components/searchable-filter/custom-search/custom-search.component';
 import { SearchableSubCategoryFilterComponent } from './components/searchable-filter/searchable-sub-category-filter/searchable-sub-category-filter.component';
+import { CompareProductItemFlyerComponent } from './components/compare-product-item-flyer/compare-product-item-flyer.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { SearchableSubCategoryFilterComponent } from './components/searchable-fi
     ProductCardFlyerComponent,
     SearchableFilterComponent,
     CustomSearchComponent,
-    SearchableSubCategoryFilterComponent
+    SearchableSubCategoryFilterComponent,
+    CompareProductItemFlyerComponent
   ],
 
   providers: [
@@ -87,7 +89,8 @@ import { SearchableSubCategoryFilterComponent } from './components/searchable-fi
     ProductCardFlyerComponent,
     SearchableFilterComponent,
     CustomSearchComponent,
-    SearchableSubCategoryFilterComponent
+    SearchableSubCategoryFilterComponent,
+    CompareProductItemFlyerComponent
   ],
   
 

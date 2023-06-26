@@ -52,7 +52,7 @@ export class ProductCardItemComponent implements OnInit{
   }
 
   public navigateToProductDetails(product:any){
-    /*console.log("**************** ++++++++ ", this.type);
+    /*
     if(this.type === 'productBundles'){
       this.router.navigate(['/products/brand-detail', product._id]);
     }

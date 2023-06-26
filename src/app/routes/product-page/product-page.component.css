@@ -3,18 +3,22 @@
     flex-direction: column;
     /* min-height: 30em; */
     height:100%;
+    background: var(--white);
 }
 
 .parent-holder{
     display: flex;
     flex-direction: row;
+    padding: 30px 150px 10px 150px;
 }
 
 .filter-container {
-    width:20%;
+    width:25%;
     height: 30em;
     display: flex;
-    background: var(--white);
+    background: #F5F5F5;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
 }
 
 .product-container {
@@ -28,10 +32,14 @@
     width:100%
 }
 .ad-on-container {
-    width:20%;
+    width:23%;
     height: 30em;
     display: flex;
     background: var(--white);
+}
+
+.inner-container{
+    width:100%;
 }
 
 :host ::ng-deep .mat-tab-labels {
