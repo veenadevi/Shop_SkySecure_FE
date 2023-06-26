@@ -31,3 +31,7 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
 
      
  }
+
+ .hide-nav{
+    display: none;
+ }
