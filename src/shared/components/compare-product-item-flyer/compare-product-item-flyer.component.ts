@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+
+
 @Component({
   selector: 'compare-product-item-flyer',
   templateUrl: './compare-product-item-flyer.component.html',
@@ -11,9 +13,13 @@ export class CompareProductItemFlyerComponent {
   @Input('item')
   public item : any;
 
+  public defaultLogo = "../../../assets/icons/AddProductIcon.svg" ;
+
   constructor(
     private router : Router
-  ){}
+  ){
+    
+  }
 
   ngOnInit(): void {
 

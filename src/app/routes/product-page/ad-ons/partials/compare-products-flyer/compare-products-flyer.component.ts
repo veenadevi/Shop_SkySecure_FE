@@ -51,6 +51,7 @@ export class CompareProductsFlyerComponent implements OnInit{
       bannerURL: null,
       imageURL: null,
       name: null,
+      _id: 'none'
     }
   }
   

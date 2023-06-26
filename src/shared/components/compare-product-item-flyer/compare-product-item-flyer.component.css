@@ -1,11 +1,22 @@
 .card-container{
-    width: 150px;
-    height: 150px;
+    width: 85px;
+    height: 85px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    
+}
+
+.empty-logo-background{
+    background: #E6E6E6;
+}
+
+.logo-background{
+    background: var(--white);
+    border: 1px solid #BEBEBE;
+    border-radius: 8px;
 }
 
 .img-holder {
@@ -18,6 +29,17 @@
     text-align: center;
     height: 60%;
 }
+
+.empty-img-holder{
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 
 .img-holder img {
     width:80%
