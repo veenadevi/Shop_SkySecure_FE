@@ -6,6 +6,7 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ProductListService } from 'src/shared/services/product-list-page.service';
+import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 
 
 @Component({
@@ -35,13 +36,24 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public products = [];
   public productBundles = [];
 
+  public finalProductList = [];
+
   public checkedListCat = [];
   public checkedListSubCat = [];
   public checkedListBrands = [];
 
+  public allSubCategories = [];
+
+  public allSubCategoriesFlag = false
+
   public staticProductimageUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png';
 
   private subscriptions: Subscription[] = [];
+
+  public selectedParams ;
+  public selectedParamsVal ;
+
+  public listForCompare : any[] = [];
 
   // public products = [];
   // public productBundles = [];
@@ -80,7 +92,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     private productListService : ProductListService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private metadadataStore : MetadataStore
+    private metadadataStore : MetadataStore,
+    private compareProductsStore : CompareProductsStore
   ){
     const navigation = this.router.getCurrentNavigation();
     // const state = navigation.extras.state as { data: Object };
@@ -149,6 +162,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
     this.setFilters();
     this.loadDropdownValues();
+    this.selectedListForCompare([]);
     //this.getAllCategories();
 
 
@@ -165,15 +179,19 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
       if(this.categories.length >0 && this.brands.length>0){
         if(params.has('categoryId')){
           this.setAllUnChecked();
-          
+          this.selectedParams = 'cat';
+          this.selectedParamsVal = params.get('categoryId');
           this.setCategoryChecked(params.get('categoryId'));
           this.getSubCategoriesByID(params.get('categoryId'));
+          //this.getAllSubCategoriesByID();
           this.selectAll('cat');
+          
   
         }
         else if(params.has('subcategoryId')){
   
-          
+          this.selectedParams = 'subCat';
+          this.selectedParamsVal = params.get('subcategoryId');
           this.setAllUnChecked();
           this.setSubCategoryChecked(params.get('subcategoryId'));
           this.selectAll('subCat');
@@ -188,6 +206,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         }
         else if(params.has('brandId')){
           
+          this.selectedParams = 'brand';
+          this.selectedParamsVal = params.get('brandId');
           this.setAllUnChecked();
           let brand = params.get('brandId');
           this.setBrandChecked(brand);
@@ -220,7 +240,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     ]).subscribe(([catArray, brandArray]) => {
 
 
-      if(catArray.length >0 && brandArray.length > 0){
+      if( catArray && catArray.length >0 && brandArray.length > 0){
         this.initializeData();
       }
     });
@@ -254,6 +274,18 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
    );
   }
 
+  public getAllSubCategoriesByID(){
+    this.categories.forEach(element => {
+      this.subscriptions.push(
+        this.metaDataSvc.fetchSubCategories(element._id).subscribe( response => {
+         this.allSubCategories = [...response.subCategories];
+    
+       })
+     );
+     this.allSubCategoriesFlag = true;
+    });
+  }
+
 
   public getFilteredData(){
     this.filters.brandIds = this.selectedBrandItems.length > 0 ? this.selectedBrandItems.map((data) => {return data._id }) : []
@@ -281,6 +313,20 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
          })
          this.productBundlesList = response.productBundles;
          this.productBundles = response.productBundles;
+
+         this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundles];
+         let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+         if(cacheData && cacheData.length>0){
+          cacheData.forEach(element => {
+      
+            let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
+              if(indexToUpdate !== -1){
+                element['checked'] = true;
+                this.finalProductList[indexToUpdate]['checked'] = true;
+      
+              }
+          });
+         }
          /*this.productBundles = response.productBundles.map((data: any )=> {
           return { 
             name: data.name , 
@@ -320,7 +366,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
           
           this.checkedListSubCat = this.subCategories;
           this.checkedListBrands = this.brands;
-          console.log("((((((((( +++++ Sub Cat ", this.checkedListSubCat);
+          
         return;
       case 'subCat':
           this.checkedListCat = this.categories;
@@ -427,6 +473,57 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public shareIndividualCheckedList(item:{}){
   }
 
+
+  public selectedListForCompare(items){
+    this.listForCompare = items;
+
+    //let cacheData = this.compareProductsStore.getCompareProductsList();
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+
+    cacheData = cacheData.filter(event => (event.checked))
+
+
+
+
+
+    let cumulativeList = [];
+    
+    if(cacheData && cacheData.length>0){
+      
+      cumulativeList = [...this.listForCompare , ...cacheData];
+      //cumulativeList = cumulativeList.filter(element => element._id != item._id);
+    }
+    else{
+      
+      cumulativeList = this.listForCompare;
+    }
+    //let uniqueElements = [...new Set(cumulativeList)];
+    //let uniqueElements = cumulativeList.filter((el, i, a) => i === a.indexOf(el));
+    let uniqueElements = [...new Map(cumulativeList.map(item => [item['_id'], item])).values()];
+    
+
+
+    uniqueElements.forEach(element => {
+      
+      let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
+        if(indexToUpdate !== -1){
+          //element['checked'] = true;
+          this.finalProductList[indexToUpdate]['checked'] = true;
+
+        }
+        else{
+          this.finalProductList[indexToUpdate]['checked'] = false;
+        }
+    });
+
+
+    
+
+
+    this.compareProductsStore.setCompareProductsList(uniqueElements);
+    localStorage.setItem('product_list_to_compare', JSON.stringify(uniqueElements));
+
+  }
 
   ngOnDestroy(): void {
     

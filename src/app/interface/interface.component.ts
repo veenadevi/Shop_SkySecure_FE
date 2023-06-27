@@ -150,8 +150,7 @@ export class InterfaceComponent {
   }
 
   public showDialog() : void {
-    //console.log("**** Came in");
-    //this.visible = true;
+
     const modalRef = this.modalService.open(SelectOemModalComponent);
   }
   
