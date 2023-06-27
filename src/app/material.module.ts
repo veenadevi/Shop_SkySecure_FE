@@ -27,7 +27,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { MatTabsModule } from '@angular/material/tabs';
 
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -103,7 +103,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatProgressBarModule,
     MatExpansionModule,
     NgxSpinnerModule,
-
+    MatGridListModule,
     MatToolbarModule, 
     MatButtonModule,
     MatSidenavModule,
@@ -128,6 +128,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatSidenavModule,
     MatListModule,
     MatBadgeModule,
+    MatGridListModule,
     MatTableModule,
     MatCheckboxModule,
     MatProgressBarModule,

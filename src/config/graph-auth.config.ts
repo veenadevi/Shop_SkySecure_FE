@@ -108,7 +108,9 @@ export const GraphAuthPolicies = {
       "RoleManagement.ReadWrite.Directory",
       "UserAuthenticationMethod.ReadWrite.All",
       "DeviceManagementConfiguration.ReadWrite.All", //MDE
-      "DeviceManagementApps.ReadWrite.All"
+      "DeviceManagementApps.ReadWrite.All",
+      "InformationProtectionPolicy.ReadWrite.All",
+      "Domain.ReadWrite.All"
     ],
   };
   
@@ -213,7 +215,8 @@ export const connectToTenantLoginRequestAD = {
       "RoleManagement.ReadWrite.Directory",
       "UserAuthenticationMethod.ReadWrite.All",
       "DeviceManagementConfiguration.ReadWrite.All", //MDE
-      "DeviceManagementApps.ReadWrite.All"
+      "DeviceManagementApps.ReadWrite.All",
+      "RoleEligibilitySchedule.ReadWrite.Directory"
     ],
   };
 
