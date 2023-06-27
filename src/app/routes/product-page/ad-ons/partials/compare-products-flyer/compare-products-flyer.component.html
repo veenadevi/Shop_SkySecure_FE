@@ -1,0 +1,55 @@
+<div class="container-box">
+
+
+    <ng-container *ngIf="(productList$ | async)">
+
+        <!-- Check if Products are present -->
+        <ng-container *ngIf="(productList && productList.length>0); else noProducts">
+
+            <!-- Template for Multiple Products -->
+            <ng-container *ngIf="(productList.length>1); else singleProduct">
+                <div class="header">
+                    Compare Products
+                </div>
+                <div class="text-style">
+                    Select your desired products and compare its features
+                </div>
+                <div class="list-holder">
+                    <ng-container *ngFor="let item of productList">
+                        <compare-product-item-flyer [item] = "item"></compare-product-item-flyer>
+                    </ng-container>
+                </div>
+                
+            </ng-container>
+
+            <!-- Template for Single Product -->
+            <ng-template #singleProduct>
+                <div class="header">
+                    Compare Products
+                </div>
+                <div class="text-style">
+                    Select your desired products and compare its features
+                </div>
+                <div class="list-holder">
+                    <compare-product-item-flyer [item] = "productList[0]"></compare-product-item-flyer>
+                    <compare-product-item-flyer [item] = "[itemJson]"></compare-product-item-flyer>
+                </div>
+                
+            </ng-template>
+        </ng-container>
+
+        <!-- Template for No Products -->
+        <ng-template #noProducts>
+            <div class="header">
+                Compare Products
+            </div>
+            <div class="text-style">
+                Select your desired products and compare its features
+            </div>
+            <div class="list-holder">
+                <compare-product-item-flyer [item] = "[itemJson]"></compare-product-item-flyer>
+                <compare-product-item-flyer [item] = "[itemJson]"></compare-product-item-flyer>
+            </div>
+        </ng-template>
+    </ng-container>
+</div>

@@ -1,0 +1,50 @@
+<div class="filter-container">
+  
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div>
+          <div _ngcontent-hwe-c480="" class="filter-section">
+            <span _ngcontent-hwe-c480="" class="filter-icon">
+              <img _ngcontent-hwe-c480="" alt="FilterIcon" src="../../../assets/icons/FilterBlueIcon.svg">
+            </span>
+            <span _ngcontent-hwe-c480="">Filter</span>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              Categories
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+                <searchable-filter [type]="'cat'" [list] = "listCategories" (selectedList)="selectedCategoriesChange($event)" [selectedCat]="selectedCat"></searchable-filter>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+              Sub Categories
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+            <div class="accordion-body">
+              <searchable-sub-category-filter [type]="'subCat'" [list] = "subCategoriesList" (selectedList)="selectedSubCategoriesChange($event)" [selectedCat]="selectedCat" [catForFilter]="selectedCat"></searchable-sub-category-filter>
+              <!-- <searchable-filter [type]="'subCat'" [list] = "subCategoriesList" (selectedList)="selectedSubCategoriesChange($event)" [selectedSubCat]="selectedSubCat"></searchable-filter> -->
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+              Brands
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+            <div class="accordion-body">
+              <searchable-filter [type]="'brand'" [list] = "listBrands" (selectedList)="selectedBrandChange($event)" [selectedBrand]="selectedBrand"></searchable-filter>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

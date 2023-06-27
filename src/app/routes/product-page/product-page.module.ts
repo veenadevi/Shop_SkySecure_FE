@@ -17,6 +17,10 @@ import { BrandDetailComponent } from './brand-detail/brand-detail.component';
 import { BrandBundleComponent } from './brand-detail/partials/brand-bundle/brand-bundle.component';
 import { BrandFeaturesComponent } from './brand-detail/partials/brand-features/brand-features.component';
 import { BrandCardFlyerComponent } from './brand-detail/partials/brand-card-flyer/brand-card-flyer.component';
+import { ProductFilterComponent } from './product-filter/product-filter.component';
+import { AdOnsComponent } from './ad-ons/ad-ons.component';
+import { CompareProductsFlyerComponent } from './ad-ons/partials/compare-products-flyer/compare-products-flyer.component';
+import { CompareProductItemFlyerComponent } from '../../../shared/components/compare-product-item-flyer/compare-product-item-flyer.component';
 
 
 
@@ -31,7 +35,12 @@ import { BrandCardFlyerComponent } from './brand-detail/partials/brand-card-flye
     BrandDetailComponent,
     BrandBundleComponent,
     BrandFeaturesComponent,
-    BrandCardFlyerComponent
+    BrandCardFlyerComponent,
+    ProductFilterComponent,
+    AdOnsComponent,
+    CompareProductsFlyerComponent,
+    
+    
   ],
   imports: [
     CommonModule,
@@ -42,10 +51,13 @@ import { BrandCardFlyerComponent } from './brand-detail/partials/brand-card-flye
     FormsModule,
     NgMultiSelectDropDownModule,
     SharedModule,
+    
+    
   ],
   exports: [
     RouterModule,
-    SharedModule
+    SharedModule,
+    
   ]
 })
 export class ProductPageModule { }

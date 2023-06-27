@@ -238,7 +238,7 @@ export class HeaderComponent implements OnInit{
         this.login();
         // this.userAccountStore.setAccessIdToken(null);
         // this.userAccountStore.setuserAccountDetails(null);
-         console.log(error);
+        //  console.log(error);
       },
       () => {
         // 'onCompleted' callback.
