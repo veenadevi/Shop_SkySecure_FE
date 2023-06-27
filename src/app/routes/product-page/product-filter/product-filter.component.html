@@ -17,7 +17,7 @@
           </h2>
           <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
             <div class="accordion-body">
-                <searchable-filter [type]="'cat'" [list] = "listCategories" (selectedList)="selectedCategoriesChange($event)" [selectedCat]="selectedCat"></searchable-filter>
+                <searchable-filter [type]="'cat'" [list] = "listCategories" (selectedList)="selectedCategoriesChange($event)" [selectedCat]="selectedCat" ></searchable-filter>
             </div>
           </div>
         </div>
@@ -27,12 +27,17 @@
               Sub Categories
             </button>
           </h2>
+          
+          
           <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
             <div class="accordion-body">
-              <searchable-sub-category-filter [type]="'subCat'" [list] = "subCategoriesList" (selectedList)="selectedSubCategoriesChange($event)" [selectedCat]="selectedCat" [catForFilter]="selectedCat"></searchable-sub-category-filter>
+              <searchable-sub-category-filter [type]="'subCat'" [list] = "subCategoriesList" (selectedList)="selectedSubCategoriesChange($event)" [selectedCat]="selectedCat" [catForFilter]="selectedCat" [selectedSubCat]="selectedSubCat" [selectedParams] = "selectedParams" [catList]="listCategories"></searchable-sub-category-filter>
               <!-- <searchable-filter [type]="'subCat'" [list] = "subCategoriesList" (selectedList)="selectedSubCategoriesChange($event)" [selectedSubCat]="selectedSubCat"></searchable-filter> -->
             </div>
           </div>
+          
+          
+          
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header" id="panelsStayOpen-headingThree">
