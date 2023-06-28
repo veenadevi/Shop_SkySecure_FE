@@ -15,6 +15,7 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit{
+  productImages=[];
   products = [];
   links = ['#description', '#feature', '#specification','#reviews', '#compProd', '#bundles','#simProd'];
   titles = ['Description', 'Features', 'Specification','Reviews','compare produscts','Bundles','Similar Products'];
@@ -60,6 +61,12 @@ export class ProductDetailComponent implements OnInit{
     section.scrollIntoView({ behavior: 'smooth' });
   }
   // responsiveOptions: any[] | undefined;
+
+  openLink(url:any): void {
+    // const url = 'https://example.com';
+    console.log("url",url);
+    window.open(url, '_blank');
+  }
 
   responsiveOptions = [
     {
@@ -167,6 +174,10 @@ export class ProductDetailComponent implements OnInit{
         console.log("&&&&& inside", this.product.productVariants.length);
         this.onProductLoad = true;
         this.bannerUrl = this.product.bannerURL;
+        this.productImages.push(this.product.products[0].bannerLogo)
+        this.productImages.push(this.product.products[0].bannerLogo)
+        this.productImages.push(this.product.products[0].bannerLogo)
+        this.productImages.push(this.product.products[0].bannerLogo)
         //this.product.productVariants = [123];
         console.log("prVar:",this.product.productVariants)
         this.productVariants=response.productVariants;
