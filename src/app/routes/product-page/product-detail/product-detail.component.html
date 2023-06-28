@@ -2,8 +2,22 @@
     <div class="product-details">
         <div class="product-image-view">
             <div class="product-image">
-                <div>
-                    img
+                <div class="prod-img-cont">
+                    <div class="prod-img-hover">
+                        <ng-container *ngFor="let item of productImages">
+                            <img style="width: 120%;
+                            height: auto;
+                            transition: transform .2s;
+                            margin:10%;
+                            cursor: pointer;
+                            background: #EAEAEA;" class="img-hover" src="{{item}}" alt="img">
+                        </ng-container>
+                        <img src="" alt="">
+                        </div>
+                        <div class="prod-img-logo">
+                            <img style="width:120%;height: 100%;object-fit: cover;" src="{{product.products[0].bannerLogo}}">
+                        </div>
+                    <!-- img
                 <p-galleria  [thumbnailsPosition]="position" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5"> 
                     <ng-template pTemplate="item" let-item>
                         <img src="../../assets/images/msLogo.png" style="width: 100%; min-height: 420px; display: block;" />
@@ -13,11 +27,11 @@
                             <img src="../../assets/images/msLogo.png" />
                         </div>
                     </ng-template>
-                </p-galleria>
+                </p-galleria> -->
             </div>
                     <div class="buy-now-prod"> 
-                        <span style="display: inline-flex;justify-content: center;"> 
-                        <h6>Quantity </h6> <p>(per user)</p>
+                        <span style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;"> 
+                        <h6 style="margin-bottom: 0;">Quantity </h6> <p>(per user)</p>
                         </span>
                         <span style="display: inline-flex;justify-content: center;gap: 5px;"> 
                             
@@ -237,7 +251,10 @@ font-weight: 600;">Compare products</p></span>
                 <div class="prod-card-holder2">
                     <!-- <ng-template *ngIf="featureList.length>0"> -->
                     <ng-container *ngFor="let item of featureList">
-                        <div class="product-feature-card">
+                        
+                        <div class="product-feature-card" (click)="openLink(item.hyperLinkURL)">
+                            <!-- <a style="color: unset;
+                        text-decoration: unset;" href="{{item.hyperLinkURL}}" target="_blank"> -->
                             <span style="display:flex;flex-basis:30%;padding: 7%;justify-content: center;;flex-direction: column;">
                                 <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
                                 </span>
@@ -247,7 +264,9 @@ font-weight: 600;">Compare products</p></span>
                             font-weight: 700;">{{item.name}}</p>
                             <p style="font-size: small;">{{item.description}}</p>
                         </span>
+                    <!-- </a> -->
                         </div>
+                    
                         <!-- </ng-template> -->
                         <!-- </ng-container> -->
                     </ng-container>
@@ -273,7 +292,7 @@ font-weight: 600;">Compare products</p></span>
             
             
         
-            <div class="product-feature-card">
+            <!-- <div class="product-feature-card">
                 <span style="display:flex;flex-basis:30%;padding: 7%;flex-direction: column;">
                     <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
                     </span>
@@ -283,7 +302,7 @@ font-weight: 600;">Compare products</p></span>
                 font-weight: 700;">Email Hosting</p>
                 <p style="font-size: small;">Azure Active Directory (Azure AD), is a cloud-based identity and access  </p>
             </span>
-            </div>
+            </div> -->
             
         </div>
         
