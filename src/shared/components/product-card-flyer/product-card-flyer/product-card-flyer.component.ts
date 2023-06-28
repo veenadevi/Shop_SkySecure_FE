@@ -15,8 +15,9 @@ export class ProductCardFlyerComponent implements OnInit{
 
   public productsList : any[] = [];
 
-  @Input() set products(value : any[]){
+  @Input() set products(value : any){
     this.productsList = value;
+    console.log("))))))) Data in alst ", value);
  
   }
 

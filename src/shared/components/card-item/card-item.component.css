@@ -12,13 +12,13 @@
     row-gap: 10%;
 }
 .ellipse{
-    background: var(--white);
+    background: #EBECF6;
     border-radius: 50%;
 }
 
 .card-item img{
-    width: 4em;
-    height: 4em;
+    width: 3em;
+    height: 3em;
 }
 
 .j_Y {

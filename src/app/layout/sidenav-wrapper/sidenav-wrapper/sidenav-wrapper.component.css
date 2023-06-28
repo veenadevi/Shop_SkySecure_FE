@@ -1,3 +1,22 @@
+.navigation-arrow{
+    position: absolute;
+    z-index: 4;
+    border-radius: 50%;
+    background: #E2EDFF;
+    text-align: center;
+    display: flex;
+    margin-top: 23px;
+    border: 0.3px solid black;
+
+}
+
+.arrow-position-short{
+    margin-left: 46px;
+}
+
+.arrow-position-long{
+    margin-left: 172px;
+}
 mat-sidenav-container {
     /* height: 100%; */
 }
@@ -6,6 +25,7 @@ mat-sidenav-container mat-sidenav mat-nav-list .menu-item {
     display: flex;
     justify-content: space-between;
     width:100%;
+    align-items: center;
 }
 mat-sidenav-container mat-sidenav mat-nav-list .chevron-button {
     transition: 300ms ease-in-out;
@@ -19,9 +39,25 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
     margin-left: 10px;
 }
 
+:host ::ng-deep .mat-mdc-list-base .mdc-list-item__content{
+    /* border: 0.6px solid var(--neutral) !important;
+    border-radius: 8px !important;
+    padding: 3px !important; */
+    
+}
+
+
+
 :host ::ng-deep .mat-drawer-inner-container{
     background: #F5F5F5;
+
 }
+
+.nav-expanded{
+    width:180px !important;
+}
+
+
 
 :host ::ng-deep .mat-drawer.mat-drawer-side{
     box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.25);
@@ -39,6 +75,15 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
      
  }
 
+ :host ::ng-deep .material-icons{
+    font-size: 18px;
+ }
+
+ :host ::ng-deep .mat-icon{
+    width:18px;
+    height: 18px;
+ }
+
  :host ::ng-deep .mdc-list-item__primary-text{
     display: flex;
  }
@@ -49,6 +94,28 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
 
  .sub-menu-item{
     margin-left: 32px;
+    font-size: 13px;
+    font-family: 'lato', sans-serif;
  }
+
+ .icon-holder{
+    /* border: 0.6px solid var(--neutral) !important;
+    border-radius: 8px !important;
+    padding: 3px !important; */
+ }
+
+ .text-style{
+    font-size: 14px;
+    margin-top: 3px;
+    font-family: 'lato', sans-serif;
+ }
+
+ :host ::ng-deep .mat-nav-list .mat-list-item:focus,
+ .mat-action-list .mat-list-item:focus,
+ .mat-list-option:focus {
+   background: #76b900 !important;
+ }
+
+
 
 
