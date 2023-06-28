@@ -314,7 +314,16 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
          this.productBundlesList = response.productBundles;
          this.productBundles = response.productBundles;
 
-         this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundles];
+         
+         console.log("******* ))))))) ++++++++ Data here", response);
+
+
+
+
+
+
+         this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundleVariants, ...response.productBundles];
+         console.log("******* ))))))) ++++++++ Data here", this.finalProductList);
          let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
          if(cacheData && cacheData.length>0){
           cacheData.forEach(element => {
