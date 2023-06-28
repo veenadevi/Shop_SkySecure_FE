@@ -65,7 +65,7 @@
           <i class="fa fa-caret-down" aria-hidden="true"></i>
         </div>
       </li>
-      <li>
+      <!-- <li>
         <div class="navmenu-text">
           <span>Compare Products</span>
           <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -76,7 +76,7 @@
           <span>Offers</span>
           <i class="fa fa-caret-down" aria-hidden="true"></i>
         </div>
-      </li>
+      </li> -->
     </ul>
 
     <mat-menu #aboveMenu="matMenu" yPosition="below">
@@ -143,6 +143,21 @@
   </div> -->
 
   <div class="icons-section">
+
+    <div>
+      <button class="searchicon-btn" *ngIf="!selected" (click)="openSearch(selected)">
+        <img alt="search-icon" class="search-icon" src="../../../assets/icons/Search-1.svg">
+      </button>
+    
+      <div class="search-bar" *ngIf="selected">
+        <img alt="" class="search-icon" src="../../../assets/icons/Search.svg">
+        <input class="search-box" placeholder="search products">
+        <button class="close-icon" (click)="searchClose(selected)">
+          <img alt="cancel" src="../../../assets/icons/CloseIcon-white.svg">
+        </button>
+      </div>
+    </div>
+
 
 
 

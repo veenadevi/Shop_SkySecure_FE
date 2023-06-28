@@ -236,7 +236,9 @@ export class HeaderComponent implements OnInit{
       },
       error => {
         this.login();
-         console.log(error);
+        // this.userAccountStore.setAccessIdToken(null);
+        // this.userAccountStore.setuserAccountDetails(null);
+        //  console.log(error);
       },
       () => {
         // 'onCompleted' callback.
@@ -312,6 +314,18 @@ export class HeaderComponent implements OnInit{
     );
   }
   
+
+  selected: boolean = false
+
+  openSearch(selected : boolean) {
+    this.selected = !this.selected;
+    console.log("@@@@######......OpenSearch......")
+  }
+
+  searchClose(selected : boolean) : void {
+    this.selected = !this.selected;
+    console.log("@@@@######......closeSearch......")
+  }
 
 
   // public ngOnInit() : void {

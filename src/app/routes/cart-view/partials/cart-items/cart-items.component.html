@@ -14,19 +14,40 @@
                   <thead class="table-header">
                     <tr>
                       <th scope="col">PRODUCTS</th>
+                      <th scope="col">PRICE</th>
                       <th scope="col">QUANTITY OF LICENSCE </th>
-                      <th scope="col"></th>
+                      <th scope="col">SUB TOTAL</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="table-row">
                     <!-- <ng-container *ngFor="let item of (cartItems$ | async); index as i"> -->
                       <ng-container *ngFor="let item of cartItems; index as i">
                       <tr>
-                        <th scope="row">{{item.productName}}</th>
+                        <th scope="row">
+                          <div class="cart-product-details">
+                            <img class="pd-cart-img" src="{{item.logo ? item.logo : alternateLogo}}" alt="Microsoft" />
+                            <div class="product-name">
+                              {{item.productName}}
+                              <div class="cart-title-btns">
+                                <button class="cart-remove-btn" (click)="removeCartItem(i)">remove</button>
+                                <!-- <span style="font-size: 12px; margin: 0 6px;"> | </span>
+                                <button class="cart-view-btn">View Product</button> -->
+                              </div>
+                            </div>
+                          </div>
+                        </th>
+                        <!-- Base Price -->
+                        <td>
+                          <div class="td-column price-details">
+                            <span>
+                              {{ item.price | number : '1.2-2'}}
+                            </span>
+                          </div>
+                        </td>
                         <!-- Item Quantity -->
                         <td>
                           <div class="td-column">
-                            <span (click) = "quantityEdit(i,  'minus')">
+                            <span (click) = "quantityEdit(i,  'minus', item.price)">
                               <img alt="minus" src="../../../assets/icons/Minus.svg">
                             </span>
                             <span>
@@ -34,7 +55,7 @@
                                 class="input-field" [(ngModel)]="item.quantity" value="{{item.quantity}}"
                                 >
                             </span>
-                            <span (click) = "quantityEdit(i , 'plus')">
+                            <span (click) = "quantityEdit(i , 'plus', item.price)">
                               <img alt="" src="../../../assets/icons/Add.svg">
                             </span>
                           </div>
@@ -42,21 +63,23 @@
 
                         <!-- Action -->
                         <td>
-                          <div class="td-column delete-button" (click)="removeCartItem(i)">
+                          <div class="td-column price-details">
                             <span>
-                              <img alt="" class="delete-icon" src="../../../assets/icons/Delete.svg">
-                            </span>
-                            <span class="delete-text" >
-                              <!-- Remove -->
+                              {{ item.itemTotal | number : '1.2-2'}}
                             </span>
                           </div>
                         </td>
                       </tr>
                     </ng-container>
                     
-                  
+    
                   </tbody>
+
                 </table>
+          </div>
+          <div class="cart-total">
+            <span>GRAND TOTAL</span>
+            <span>{{grandTotal | number : '1.2-2'}}</span>
           </div>
           <div class="submit-quote">
             <span class="text-style">

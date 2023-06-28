@@ -9,166 +9,23 @@
 
     </ng-container> -->
    
-    <ng-container *ngIf="userLoggedIn">
-
+    <!-- <ng-container *ngIf="userLoggedIn"> -->
+    <ng-container>
+        <div class="full-screen-style">
+            <app-sidenav-wrapper [userLoggedIn]="userLoggedIn"></app-sidenav-wrapper>
+        </div>
         
-        <mat-drawer-container class="" autosize>
-            
-            <mat-drawer #drawer class="sidebar-main-container" [style]="isExapnded ? 'width: 14%;': ''" mode="side" [opened]="collapseService.isOpen$ | async">
-
-               
-                <div class="nav-item" (click)="exapndCollapse()">
-                    <span style="font-size: 20px; margin-left:8px">
-                        <i class="user-img" class="fa fa-solid fa-bars"></i>
-                        <!-- <i class="user-img" id="nav-sidebar-icon"  class="fa fa-solid fa-bar"></i> -->
-                    </span>
-                </div>
-
-                
-
-                <div class="nav-item">
-                    <span>
-                        <img class="user-img" src="../../assets/Realize/logos/icons/DefaultUserIcon-BlueIYellowllustration.svg" alt="home">
-                    </span>
-                    <div *ngIf="isExapnded" class="user-name">
-                        <div class="icon-description">
-                            {{userName}}
-                        </div>
-                        <!-- <div >
-                            Admin
-                        </div> -->
-                    </div>
-                </div>
-                <div class="nav-item" mat-button [matMenuTriggerFor]="adminMenu" *ngIf="userRole === 'admin'">
-                    <span>
-                        <img alt="DashboardIcon" class="user-img" src="../../assets/Realize/logos/icons/DashboardIcon-BlueYellowIllustration.svg">
-                    </span>
-                    <div class="icon-description" *ngIf="isExapnded">
-                        Dashboard
-                    </div>
-                    <mat-menu #adminMenu="matMenu" yPosition="below" xPosition="after">
-                
-                        <button mat-menu-item [routerLink]="['admin-page']">
-                            <div class="menu-width" >
-                                Dashboard
-                            </div>
-                        </button>
-                        <button mat-menu-item [routerLink]="['admin-page/accounts']">
-                            <div class="menu-width" >
-                                Accounts
-                            </div>
-                        </button>
-                        <button mat-menu-item>
-                            <div class="menu-width">
-                                Quotations
-                            </div>
-                        </button>
-                        <button mat-menu-item [routerLink]="['admin-page/feature-update']">
-                            <div class="menu-width">
-                                Add New Feature
-                            </div>
-                        </button>
-                        
-                    </mat-menu>
-                </div>
-                <!-- <div class="nav-item" (click)="exapndCollapse()" > -->
-                <div class="nav-item" mat-button [matMenuTriggerFor]="securityMenu" >
-                    <span class="nav-arrow" >
-                        <img alt="SecurityIcon" class="user-img" src="../../assets/Realize/logos/icons/SecurityIcon-BlueYellowIllustration.svg">
-                        <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true" style="color:#383536; margin-left: 6px;"></i>
-                    </span>
-                    <div class="icon-description" *ngIf="isExapnded">
-                        Security
-                        <i class="fa fa-caret-right" aria-hidden="true" style="color:#383536"></i>
-                    </div>
-                    <mat-menu #securityMenu="matMenu" yPosition="below" xPosition="after">
-                
-                        <!-- <button mat-menu-item [routerLink]="['security-view/recommendations']"> -->
-                        <button mat-menu-item (click)="showDialog()">
-                            <div class="menu-width" >
-                                Recommendations
-                            </div>
-                        </button>
-                        <!-- <button mat-menu-item [routerLink]="['licence-catalogue']">
-                            <div class="menu-width" >
-                                Expense
-                            </div>
-                        </button>
-                        <button mat-menu-item>
-                            <div class="menu-width">
-                                Reference Architecture
-                            </div>
-                        </button>
-                         -->
-                    </mat-menu>
-                </div>
-                <!-- If Security Expanded -->
-                <!-- <div class="nav-item" *ngIf="isExapnded">
-                   
-                    <div class="icon-description sub-menu"[routerLink]="['security-view/recommendations']" >
-                        Recommendations
-                    </div>
-                    
-                </div> -->
-                <!-- If Security Expanded Ends-->
-                <div class="nav-item" mat-button [matMenuTriggerFor]="aboveMenu">
-                    <span class="nav-arrow" >
-                        <img alt="ProfileIcon" class="user-img" src="../../assets/Realize/logos/icons/UserIcon-BlueYellowIllustration.svg">
-                        <i *ngIf="!isExapnded" class="fa fa-caret-right" aria-hidden="true" style="color:#383536; margin-left: 6px;"></i>
-                    </span>
-                   
-                    <div  class="icon-description" *ngIf="isExapnded">
-                        Profile
-                        <i class="fa fa-caret-right" aria-hidden="true" style="color:#383536"></i>
-                    </div>
-                       
-                        <mat-menu #aboveMenu="matMenu" yPosition="below" xPosition="after">
-                
-                            <button mat-menu-item [routerLink]="['user-profile/profile-view']">
-                                <div class="menu-width">
-                                    User Profile
-                                </div>
-                            </button>
-                            <button mat-menu-item [routerLink]="['user-profile/quotation-history']">
-                                <div class="menu-width">
-                                    Quotation History
-                                </div>
-                            </button>
-                            <button mat-menu-item (click)="logout()">
-                                <div class="menu-width">
-                                    Logout
-                                </div>
-                            </button>
-                            
-                        </mat-menu>
-                </div>
-
-                
-
-            </mat-drawer>
-        
-            <div class="example-sidenav-content">
-            <!-- <app-toolbar></app-toolbar> -->
-            <router-outlet></router-outlet>
-            </div>
-        
-        </mat-drawer-container>
     </ng-container>
     
 
     <!-- Container If not Logged In -->
 
-    <ng-container *ngIf="!userLoggedIn">
+    <!-- <ng-container *ngIf="!userLoggedIn">
 
-
-        <!-- Toolbar Component-->
-        <!-- <app-toolbar></app-toolbar> -->
-
-        <!-- Other Routes-->
         <router-outlet></router-outlet>
 
 
-    </ng-container>
+    </ng-container> -->
 
 
 

@@ -98,8 +98,8 @@ export class BrandDetailComponent implements OnInit{
         this.productVarients = response.productVarients;
         this.products = response.products;
         
-        this.features = response.features.slice(0,5);
-
+        //this.features = response.features.slice(0,5);
+        this.features = response.features;
 
 
 
