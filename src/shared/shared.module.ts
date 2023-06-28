@@ -24,6 +24,8 @@ import { SearchableFilterComponent } from './components/searchable-filter/search
 import { CustomSearchComponent } from './components/searchable-filter/custom-search/custom-search.component';
 import { SearchableSubCategoryFilterComponent } from './components/searchable-filter/searchable-sub-category-filter/searchable-sub-category-filter.component';
 import { CompareProductItemFlyerComponent } from './components/compare-product-item-flyer/compare-product-item-flyer.component';
+import { ContactUsFlyerComponent } from './components/contact-us-flyer/contact-us-flyer.component';
+import { WriteReviewFlyerComponent } from './components/write-review-flyer/write-review-flyer.component';
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import { CompareProductItemFlyerComponent } from './components/compare-product-i
     SearchableFilterComponent,
     CustomSearchComponent,
     SearchableSubCategoryFilterComponent,
-    CompareProductItemFlyerComponent
+    CompareProductItemFlyerComponent,
+    ContactUsFlyerComponent,
+    WriteReviewFlyerComponent
   ],
 
   providers: [
@@ -90,7 +94,9 @@ import { CompareProductItemFlyerComponent } from './components/compare-product-i
     SearchableFilterComponent,
     CustomSearchComponent,
     SearchableSubCategoryFilterComponent,
-    CompareProductItemFlyerComponent
+    CompareProductItemFlyerComponent,
+    ContactUsFlyerComponent,
+    WriteReviewFlyerComponent
   ],
   
 
