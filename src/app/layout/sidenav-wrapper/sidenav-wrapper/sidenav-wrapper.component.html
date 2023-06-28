@@ -1,7 +1,10 @@
-<span class="navigation-arrow" [ngClass]="(isExpanded ? 'arrow-position-long' : 'arrow-position-short')" (click)="menuExpansion(isExpanded, null)">
-  <mat-icon mat-list-icon class="chevron-button">{{(isExpanded ? 'chevron_left' : 'chevron_right')}}
-  </mat-icon>
-</span>
+<ng-container *ngIf="userLoggedInFlag">
+  <span class="navigation-arrow" [ngClass]="(isExpanded ? 'arrow-position-long' : 'arrow-position-short')" (click)="menuExpansion(isExpanded, null)">
+    <mat-icon mat-list-icon class="chevron-button">{{(isExpanded ? 'chevron_left' : 'chevron_right')}}
+    </mat-icon>
+  </span>
+</ng-container>
+
 <mat-sidenav-container autosize>
     <mat-sidenav #sidenav mode="side" opened="isExpanded" [ngClass]="(userLoggedInFlag) ? '' : 'hide-nav'">
       
@@ -207,7 +210,7 @@
           <mat-list-item [routerLink]="['user-profile/profile-view']">
             <span *ngIf="isExpanded" class="sub-menu-item">Update Profile</span>
           </mat-list-item>
-          <mat-list-item>
+          <mat-list-item (click)="logout()">
             <span *ngIf="isExpanded" class="sub-menu-item">Logout</span>
           </mat-list-item>
         </ng-container>
