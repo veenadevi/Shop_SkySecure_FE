@@ -22,7 +22,7 @@
       <div class="tab-holder">
         <div class="product-items-holder">
           <div class="card-flyer-holder">
-            <ng-container *ngIf="productList && productList.length>0">
+            <ng-container *ngIf="finalProductList && finalProductList.length>0">
               <!-- <product-card-flyer [type] = "'products'" [products]=" (selectedTab === 'products') ? productList : productBundlesList"></product-card-flyer> -->
               <product-card-flyer [type] = "'products'" [products]=" finalProductList" (listForCompare)="selectedListForCompare($event)"></product-card-flyer>
             </ng-container>

@@ -45,6 +45,7 @@ export class ProductFilterComponent {
   ngOnInit(){
     this.initializeSubCategoriesData();
     this.setSelecetdList();
+    console.log("((((((((((((((Sub categories ", this.selectedParams);
   }
 
   public initializeSubCategoriesData(){
@@ -58,7 +59,9 @@ export class ProductFilterComponent {
   public setSelecetdList(){
 
     
+    
     switch (this.selectedParams) {
+      
       case 'cat':
         this.selectedCat = this.listCategories.filter(event => (event._id === this.selectedParamsVal));
         //this.selectedSubCat = this.selectedCat[0].subCategories;

@@ -15,6 +15,14 @@ export class SearchableSubCategoryFilterComponent {
   @Input('list')
   public list : any[];
 
+  @Input('catList')
+  public catList : any[];
+
+  @Input('selectedParams')
+  public selectedParams : any;
+
+  
+
   // @Input() set list(value: any[]) {
     
     
@@ -26,9 +34,16 @@ export class SearchableSubCategoryFilterComponent {
   // }
 
   @Input() set catForFilter(value: any[]) {
-    console.log("++++++++++++++ &&&&&& in Sub Set ", value);
+    
     this.selected = [];
     this.setSubCatData(value);
+    /*if(this.selectedParams !== 'subCat'){
+      this.setSubCatData(value);
+    }
+    else{
+      this.setSubCatDataForSubCatSelection(value);
+    }*/
+    
   }
 
   @Input('selectedCat')
@@ -67,7 +82,10 @@ export class SearchableSubCategoryFilterComponent {
 
   public ngOnInit(){
 
-    
+    console.log("++++++++++++++ &&&&&& in Sub Set ", this.selectedParams);
+    if(this.selectedParams === 'subCat'){
+      this.setSubCatDataForSubCatSelection();
+    }
     this.setType();
     
   }
@@ -86,6 +104,20 @@ export class SearchableSubCategoryFilterComponent {
     
     this.filteredOptions = [...this.selected];
 
+    
+    
+  }
+
+  public setSubCatDataForSubCatSelection(){
+    console.log("((((((((((((((Sub categories ", this.catList);
+    this.filteredOptions = [];
+    this.catList.forEach(element => {
+      //this.selected = [...this.selected, ...element.subCategories]
+      this.filteredOptions = [...this.filteredOptions, ...element.subCategories];
+    });
+
+    this.selected = this.selectedSubCat;
+    //this.selected = this.selected.filter((value, index) => this.selected.indexOf(value) === index);
     
     
   }

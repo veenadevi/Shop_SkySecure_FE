@@ -13,6 +13,12 @@ export class CompareProductItemFlyerComponent {
   @Input('item')
   public item : any;
 
+  public productItem ;
+
+  // @Input() set item(val) {
+  //   this.productItem = val;
+  // }
+
   public defaultLogo = "../../../assets/icons/AddProductIcon.svg" ;
 
   constructor(
@@ -23,7 +29,7 @@ export class CompareProductItemFlyerComponent {
 
   ngOnInit(): void {
 
-    console.log("******* ^^^^ ABCD", this.item);
+    console.log("******* ^^^^ ABCD", this.productItem);
   }
 
   public navigateTo(item){
