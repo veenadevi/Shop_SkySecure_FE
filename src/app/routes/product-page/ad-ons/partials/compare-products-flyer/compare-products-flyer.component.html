@@ -7,7 +7,8 @@
         <ng-container *ngIf="(productList && productList.length>0); else noProducts">
 
             <!-- Template for Multiple Products -->
-            <ng-container *ngIf="(productList.length>1); else singleProduct">
+            <!-- <ng-container *ngIf="(productList.length>1); else singleProduct">-->
+            <ng-container>
                 <div class="header">
                     Compare Products
                 </div>
@@ -23,7 +24,7 @@
             </ng-container>
 
             <!-- Template for Single Product -->
-            <ng-template #singleProduct>
+            <!-- <ng-template #singleProduct>
                 <div class="header">
                     Compare Products
                 </div>
@@ -32,10 +33,10 @@
                 </div>
                 <div class="list-holder">
                     <compare-product-item-flyer [item] = "productList[0]"></compare-product-item-flyer>
-                    <compare-product-item-flyer [item] = "[itemJson]"></compare-product-item-flyer>
+                    <compare-product-item-flyer [item] = "itemJson"></compare-product-item-flyer>
                 </div>
                 
-            </ng-template>
+            </ng-template> -->
         </ng-container>
 
         <!-- Template for No Products -->
@@ -47,8 +48,7 @@
                 Select your desired products and compare its features
             </div>
             <div class="list-holder">
-                <compare-product-item-flyer [item] = "[itemJson]"></compare-product-item-flyer>
-                <compare-product-item-flyer [item] = "[itemJson]"></compare-product-item-flyer>
+                <compare-product-item-flyer [item] = "itemJson"></compare-product-item-flyer>
             </div>
         </ng-template>
     </ng-container>

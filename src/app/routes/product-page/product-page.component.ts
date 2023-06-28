@@ -191,7 +191,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         else if(params.has('subcategoryId')){
   
           this.selectedParams = 'subCat';
-          this.selectedParamsVal = params.get('subcategoryId');
+          this.selectedParamsVal = params.get('subcategoryId').split('-')[1];
           this.setAllUnChecked();
           this.setSubCategoryChecked(params.get('subcategoryId'));
           this.selectAll('subCat');
@@ -508,11 +508,21 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
       let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
         if(indexToUpdate !== -1){
           //element['checked'] = true;
+          console.log("***** ++++++ ,",this.finalProductList[indexToUpdate]);
+          
           this.finalProductList[indexToUpdate]['checked'] = true;
 
         }
         else{
-          this.finalProductList[indexToUpdate]['checked'] = false;
+          this.finalProductList.forEach(element => {
+            if('checked' in element){
+              element.checked = false;
+            }
+            else{
+              element['checked'] = false;
+            }
+          });
+          //this.finalProductList[indexToUpdate]['checked'] = false;
         }
     });
 

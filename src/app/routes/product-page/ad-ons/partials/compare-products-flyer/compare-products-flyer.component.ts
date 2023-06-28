@@ -50,8 +50,8 @@ export class CompareProductsFlyerComponent implements OnInit{
       bannerTextColor: null,
       bannerURL: null,
       imageURL: null,
-      name: null,
-      _id: 'none'
+      name: 'sample',
+      _id: null
     }
   }
   
