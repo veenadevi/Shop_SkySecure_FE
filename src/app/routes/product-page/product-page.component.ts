@@ -317,12 +317,16 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
          
          console.log("******* ))))))) ++++++++ Data here", response);
 
+         let tempProducts = this.setProductsData(response.products);
+         let tempProductVariants = this.setProductVariantsData(response.productVariants);
+         let tempProductBundleVariants = this.setProductBundleVariantsData(response.productBundleVariants);
+         let tempProductBundles = this.setBundlesData(response.productBundles);
 
 
 
+         this.finalProductList = [...tempProducts, ...tempProductVariants, ...tempProductBundleVariants , ...tempProductBundles];
 
-
-         this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundleVariants, ...response.productBundles];
+         //this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundleVariants, ...response.productBundles];
          console.log("******* ))))))) ++++++++ Data here", this.finalProductList);
          let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
          if(cacheData && cacheData.length>0){
@@ -542,6 +546,85 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     this.compareProductsStore.setCompareProductsList(uniqueElements);
     localStorage.setItem('product_list_to_compare', JSON.stringify(uniqueElements));
 
+  }
+
+
+
+
+  /**
+   * Set Products Data
+   */
+
+  public setProductsData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+          element.productType = 'products';
+          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['navigationId'] = element._id;
+      });
+    }
+
+    return data;
+  }
+
+  /**
+   * Set Product Variants Data
+   */
+
+  public setProductVariantsData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+          element.productType = 'productVariants';
+          element.bannerLogo = (element.product && element.product.bannerLogo) ? element.product.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.product && element.product.subCategories && element.product.subCategories.length > 0) ? element.product.subCategories[0].name : "";
+          element['navigationId'] = element.productId;
+      });
+    }
+
+    return data;
+  }
+
+  /**
+   * Set Product Bundle Variants Data
+   */
+
+  public setProductBundleVariantsData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+          element.productType = 'productBundleVariants';
+          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['navigationId'] = element.productsFamilyId;
+      });
+    }
+
+    return data;
+  }
+
+  /**
+   * Set Product Bundles Data
+   */
+
+  public setBundlesData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+          element.productType = 'productBundles';
+          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['navigationId'] = element._id;
+      });
+    }
+
+    return data;
   }
 
   ngOnDestroy(): void {
