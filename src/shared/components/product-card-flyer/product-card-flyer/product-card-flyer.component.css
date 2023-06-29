@@ -105,6 +105,14 @@
 .text-style{
     font-size: 12px;
     font-weight: normal;
+    color: var(--text-dark);
+    /* min-height: 66px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    
 }
 
 .text-price{
