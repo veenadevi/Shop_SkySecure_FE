@@ -12,6 +12,7 @@ import { LoginService } from 'src/shared/services/login.service';
 export class SidenavWrapperComponent {
 
   public userLoggedInFlag = false;
+  public userRoleVal = '';
   isExpanded: boolean = false;
 
   @Input() set userLoggedIn(value: any){
@@ -19,11 +20,17 @@ export class SidenavWrapperComponent {
     console.log("&&&&&&&& ++++++ ", this.userLoggedInFlag);
   }
 
+  @Input() set userRole(value: any){
+    this.userRoleVal = value;
+    
+  }
+
 
   public userSubMenu : boolean = false;
   public dashboardSubMenu : boolean = false;
   public securitySubMenu : boolean = false;
   public profileSubMenu : boolean = false;
+  public adminSubMenu : boolean = false;
 
   constructor(
     private loginService : LoginService,
@@ -48,12 +55,16 @@ export class SidenavWrapperComponent {
     if(navVal === 'profile'){
       this.profileSubMenu = true;
     }
+    if(navVal === 'admin'){
+      this.adminSubMenu = true;
+    }
 
     if(this.isExpanded === false){
       this.userSubMenu = false;
       this.dashboardSubMenu = false;
       this.securitySubMenu = false;
       this.profileSubMenu = false;
+      this.adminSubMenu = false;
     }
 
 
@@ -100,6 +111,10 @@ export class SidenavWrapperComponent {
       case 'profile':
           this.profileSubMenu = (this.profileSubMenu) ? false : true;
           return;
+      case 'admin':
+          this.adminSubMenu = (this.adminSubMenu) ? false : true;
+          return;
+      
       
         
 
