@@ -74,3 +74,32 @@ body {
     font-size: 16px;
     font-weight: 500;
 }
+
+
+/** Modal Style **/
+:host ::ng-deep .p-button {
+  margin: 0 .5rem 0 0;
+  min-width: 10rem;
+}
+
+p {
+  margin: 0;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-dialog .p-button {
+  min-width: 6rem;
+}
+
+.textarea-style{
+  margin-top: 10px;
+}
+.form-group input,textarea{
+  margin-top: 10px;
+}
+
