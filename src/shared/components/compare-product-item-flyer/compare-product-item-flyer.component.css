@@ -106,3 +106,58 @@
 .img-holder img{
     width:100%
 }
+
+
+.plan-price {
+    display: flex;
+    border-radius: 8px;
+    padding: 1%;
+    margin-top: 1%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 4%;
+    flex-direction: row;
+    border-radius: 8px;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.plan-price-image {
+    display: flex;
+    flex-basis: 25%;
+    padding: 1%;
+    margin: 1%;
+    flex-direction: column;
+}
+
+.plan-price-info {
+    display: flex;
+    flex-basis: 75%;
+    padding: 1%;
+    margin: 1%;
+    justify-content: center;
+    align-items: baseline;
+    flex-direction: column;
+}
+
+.img-style{
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.close-icon{
+    /* position: absolute;
+    background: red;
+    color: white;
+    top: -10px;
+    right: -10px; */
+}
+
+.close-icon .btn-close{
+    /* position: absolute; */
+    font-size: 12px;
+}
+
+
