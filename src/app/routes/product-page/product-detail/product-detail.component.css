@@ -554,7 +554,23 @@ background: #F7F7F7;
   flex-wrap: wrap;
   margin: 1%;
   padding: 1%;
- 
+ flex-direction: row;
+}
+.prod-to-comp {
+  display:flex;
+  flex-basis: 30%;
+  flex-wrap: wrap;
+  margin: 1%;
+  padding: 1%;
+ flex-direction: row;
+}
+.comp-prod-vs {
+  display:flex;
+  flex-basis: 60%;
+  /* flex-wrap: wrap; */
+  margin: 1%;
+  padding: 1%;
+ flex-direction: row;
 }
 .comp-prod-card-cont {
   display:flex;
@@ -563,7 +579,7 @@ background: #F7F7F7;
 
 .comp-prod-card {
   display:flex;
-  flex-basis:30%;
+  /* flex-basis:50%; */
   margin: 1%;
   padding: 1%;
   flex-direction: column;

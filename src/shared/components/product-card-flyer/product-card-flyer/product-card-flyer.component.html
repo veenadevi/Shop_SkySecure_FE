@@ -4,6 +4,7 @@
         <div class="product-card-flyer-container">
             <div class="logo-holder">
                 <div class="logo-box">
+                    
                     <img alt="" src="{{(item.bannerLogo && item.bannerLogo !== null) ? item.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'}}">
                 </div>
                 <div class="ratings-box">
@@ -34,7 +35,7 @@
                     <mat-icon>bookmark_border</mat-icon>
                 </div>
                 <div class="price">
-                    <span class="text-style-bold">Starting from</span> 
+                    <span class="text-style-bold">MRP</span> 
                     <span class="text-price"> ₹ {{((item.priceList && item.priceList.length>0) ? item.priceList[0].price : '' ) | number : '1.2-2'}}</span> 
                     <span class="text-term"> / {{(item.priceList && item.priceList.length>0) ? item.priceList[0].priceType : ''}}</span>
                 </div>
@@ -50,9 +51,20 @@
                     <div class="text-style-bold">
                         Solution Category
                     </div>
-                    <div class="text-style">
-                        {{ (item.subcategories && item.subcategories.length > 0)? item.subcategories[0].name : ''}}
+                    <div class="text-style" *ngIf="item.type=='product' || item.type=='productBundles' || item.type=='productBundleVariants'">
+                       
+                      
+                       {{ (item.subcategories && item.subcategories.length > 0)? item.subcategories[0].name : ''}}
+                       
                     </div>
+                    <div class="text-style" *ngIf="item.type=='productVariants'">
+                   
+                      
+                        {{ (item.product.subCategories && item.product.subCategories.length > 0)? item.product.subCategories[0].name : ''}}
+                        
+                     </div>
+
+                   
                 </div>
                 <div class="btn-holder">
                     <button class="btn request-btn" (click)="navigateToProductDetails(item)">View Details</button>
