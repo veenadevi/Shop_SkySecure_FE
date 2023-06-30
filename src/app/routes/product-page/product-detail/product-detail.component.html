@@ -65,10 +65,19 @@
                         <mat-icon class="review-icon">star</mat-icon>
                         <span> 5 reviews | write a review</span>
                     </div>
-                    <h4 style="margin-bottom: 17px;">&#8377; {{product.products[0].priceList[0].price}} / {{product.products[0].priceList[0].priceType}}</h4>
-                    
+                    <span style="display:inline-flex">
+                        <p style="font-size: larger;color: red;">-{{product.products[0].priceList[0].discountRate}}%&nbsp; </p>
+                        <h4 style="font-size: smaller;">&#8377; </h4>
+                    <h4 style="margin-bottom: 0;">{{product.products[0].priceList[0].price}} / {{product.products[0].priceList[0].priceType}}</h4>
+                </span>
+                
+                <span style="display:inline-flex;align-items: center;">
+                <p style="font-size: small;"> M.R.P:&nbsp;</p>
+                <s><p style="font-size: initial;">{{product.products[0].priceList[0].ERPPrice}}</p></s>
+            </span>
+            <p style="font-size: smaller;">GST Extra</p>
                     <p style="margin-top: 10px; font-weight: 700; margin-bottom: 7px;">Solution Category:</p>
-                    <p>Email, Calendar and scheduling</p>
+                    <p>{{product.products[0].subcategories[0].description}}</p>
                     <p style=" font-weight: 700; margin-bottom: 7px;">About this product:</p>
                     <p style="margin-bottom: 15px;">{{product.products[0].description}}</p>
                     <span style = "display:flex;flex-direction: row;"><button class="btn view-det-btn" (click)="scrollToSection('#feature')">View Features</button>
@@ -143,32 +152,23 @@ font-size: 13.122px;
 font-weight: 600;">Compare products</p></span>
                     </div>
                     <p style="font-size: small;">choose the right plan that matches your needs!</p>
+                    <ng-container  *ngFor="let item of product.productVariants">
                     <div class="plan-price">
                         <div class="plan-price-image">
                             <img style="width:70%;height: 100%;object-fit: cover;" src="{{product.products[0].bannerLogo}}">
                         </div>
                         <div class="plan-price-info">
                             <p style="font-size: medium;
-                            font-weight: 700;margin-bottom: 0;">Exchange online plan2</p>
+                            font-weight: 700;margin-bottom: 0;">{{item.name}}</p>
                             <p style="font-size: 13px;
                             margin-bottom: 0;">solution Category: endpoint security</p>
                             <p style="font-size: 13px;
-                            margin-bottom: 0;">&#8377; 34567.60 / yearly</p>
+                            margin-bottom: 0;">&#8377; {{item.priceList[0].price}} / {{item.priceList[0].priceType}}</p>
                         </div>
                     </div>
+                </ng-container>
 
-                    <div class="plan-price">
-                        <div class="plan-price-image">
-                            <img style="width:70%;height: 100%;object-fit: cover;" src="{{product.products[0].bannerLogo}}">                        </div>
-                        <div class="plan-price-info">
-                            <p style="font-size: medium;
-                            font-weight: 700;margin-bottom: 0;">Exchange online plan2</p>
-                            <p style="font-size: 13px;
-                            margin-bottom: 0;">solution Category: endpoint security</p>
-                            <p style="font-size: 13px;
-                            margin-bottom: 0;">&#8377; 34567.60 / yearly</p>
-                        </div>
-                    </div>
+                
                     </div>
                     </ng-container>
                     <div class="connect-us-box">
@@ -369,10 +369,51 @@ font-weight: 600;">Compare products</p></span>
             </div>
     </div>
 
-
+<ng-container *ngIf="product.productVariants.length>0">
     <div class="specification-cont" id="compProd" #compProdRef>
         <h5>Compare Products</h5>
-        <div class="comp-prod-cont">
+        <div class="comp-prod-cont" >
+            <div class="prod-to-comp">
+                <div class="comp-prod-card">
+                    <div class="comp-prod-card-cont">
+                    <div class="comp-prod-card-img">
+                        <img style="width:70%;height: auto;position: relative;" src="{{product.products[0].bannerLogo}}">
+                        
+                    </div>
+                    <div class="comp-prod-card-content">
+                        <p style="font-size: medium;font-weight: 500;">{{product.products[0].name}}</p>
+                        <p style="font-size: small;font-weight: 300;">solution category</p>
+                        <p style="font-size: small;font-weight: 300;">{{product.products[0].subcategories[0].description}}</p>
+                    </div>
+                    
+                </div>
+                <div style="display: flex;flex-direction: row;">
+                    <span style="    display: inline-flex;
+                    flex-basis: 30%;
+                    align-items: center;
+                    justify-content: flex-start;
+                    padding: 1%;"> 
+                        <p-checkbox  [binary]="true" inputId="binary"></p-checkbox>
+                        <p style="font-size: small;">&nbsp;compare</p>
+                        </span>
+                        <span style="    display: inline-flex;
+                    align-items: center;
+                    flex-basis: 70%;
+                    justify-content: flex-end;
+                    padding: 1%;"> 
+                    <a style="color: #0047BD;font-weight: 400;font-size: small;">view details</a>
+                    </span>
+    
+                </div>
+                </div>
+            </div>
+
+            <span style="display:flex;align-items: center;justify-content: center;">
+                <h6>VS</h6>
+                </span>
+
+            <div class="comp-prod-vs">
+            <ng-container  *ngFor="let item of product.productVariants">
             <div class="comp-prod-card">
                 <div class="comp-prod-card-cont">
                 <div class="comp-prod-card-img">
@@ -380,7 +421,7 @@ font-weight: 600;">Compare products</p></span>
                     
                 </div>
                 <div class="comp-prod-card-content">
-                    <p style="font-size: medium;font-weight: 500;">{{product.products[0].name}}</p>
+                    <p style="font-size: medium;font-weight: 500;">{{item.name}}</p>
                     <p style="font-size: small;font-weight: 300;">solution category</p>
                     <p style="font-size: small;font-weight: 300;">EndPoint security</p>
                 </div>
@@ -405,10 +446,12 @@ font-weight: 600;">Compare products</p></span>
 
             </div>
             </div>
+        </ng-container>
+    </div>
             </div>
     </div>
 
-
+</ng-container>
 
 
 
