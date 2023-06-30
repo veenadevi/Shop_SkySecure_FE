@@ -107,7 +107,7 @@
       <!-- Dashboard Section -->
         <mat-list-item>
           <span class="icon-holder" (click)="navAction(isExpanded , 'user')">
-            <img src="../../../../assets/YellowChalk/DefaultUserIcon.svg">
+            <img src="../../../../assets/YellowChalk/DefaultUserIcon.svg" title="User" alt="User">
           </span>
           <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
               <span class="text-style">
@@ -120,9 +120,9 @@
         <!-- Dashboard Section -->
         <mat-list-item>
           <span class="icon-holder" (click)="navAction(isExpanded , 'dashboard')">
-            <img src="../../../../assets/YellowChalk/DashboardIcon.svg">
+            <img src="../../../../assets/YellowChalk/DashboardIcon.svg" title="Dashboard" alt="Dashboard">
           </span>
-          <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
+          <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('dashboard')">
               <span class="text-style">
                 Dashboard
               </span>
@@ -133,7 +133,7 @@
         <!-- Shop Section -->
         <mat-list-item (click)="navAction(isExpanded , 'shop')">
           <span class="icon-holder">
-            <img src="../../../../assets/YellowChalk/ShopIcon.svg">
+            <img src="../../../../assets/YellowChalk/ShopIcon.svg" title="Shop" alt="Shop">
           </span>
           <div *ngIf="isExpanded" class="menu-item">
               <span class="text-style">
@@ -145,8 +145,8 @@
 
         <!-- Security Section -->
         <mat-list-item>
-          <span class="icon-holder" (click)="menuExpansion(isExpanded , 'security')">
-            <img src="../../../../assets/YellowChalk/SecurityIcon.svg">
+          <span class="icon-holder" (click)="menuExpansion(isExpanded , 'security')" >
+            <img src="../../../../assets/YellowChalk/SecurityIcon.svg" title="Security" alt="Security">
           </span>
           <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('security')">
               <span class="text-style">
@@ -169,7 +169,7 @@
         <!-- Insurance Section -->
         <mat-list-item>
           <span class="icon-holder" (click)="navAction(isExpanded , 'insurance')">
-            <img src="../../../../assets/YellowChalk/InsuranceIcon.svg">
+            <img src="../../../../assets/YellowChalk/InsuranceIcon.svg" title="Insurance" alt="Insurance">
           </span>
           <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
               <span class="text-style">
@@ -182,7 +182,7 @@
         <!-- Cloud Section -->
         <mat-list-item>
           <span class="icon-holder" (click)="navAction(isExpanded , 'cloud')">
-            <img src="../../../../assets/YellowChalk/CloudIcon.svg">
+            <img src="../../../../assets/YellowChalk/CloudIcon.svg" title="Cloud" alt="Cloud">
           </span>
           <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
               <span class="text-style">
@@ -227,9 +227,9 @@
         <!-- Profile Section -->
         <mat-list-item>
           <span class="icon-holder" (click)="menuExpansion(isExpanded , 'profile')">
-            <img src="../../../../assets/YellowChalk/ProfileIcon.svg">
+            <img src="../../../../assets/YellowChalk/ProfileIcon.svg" title="Profile" alt="Profile">
           </span>
-          <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('profile')">
+          <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('profile')" >
               <span class="text-style">
                 Profile
               </span>

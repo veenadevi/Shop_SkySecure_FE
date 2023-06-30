@@ -54,6 +54,15 @@ export class CompareProductsFlyerComponent implements OnInit{
       _id: null
     }
   }
+
+  public removeSelectedItem($event){
+    console.log("******** Item to be removed ", $event);
+    this.productList = this.productList.filter(function(item) {
+      return item._id != $event;
+    });
+    this.compareProductsStore.setCompareProductsList(this.productList);
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
+  }
   
 
 }

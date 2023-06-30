@@ -26,17 +26,12 @@
     </ng-template> -->
     <ng-container *ngIf="(item._id === null) ; else productsTemplate">
         
-        <div class="plan-price">
+        <div class="plan-price empty-logo-background">
             <div class="plan-price-image">
-                <img style="width:70%;height: 100%;object-fit: cover;" src="{{(item.bannerLogo) ? item.bannerLogo : '../../../../../assets/icons/AddProductIcon.svg'}}" alt="Microsoft" >
+                <img style="width:70%;height: 100%;object-fit: cover;" src="../../../../../assets/icons/AddProductIcon.svg" alt="Microsoft" >
             </div>
             <div class="plan-price-info">
-                <p style="font-size: medium;
-                font-weight: 700;margin-bottom: 0;">{{item.name}}</p>
-                <p style="font-size: 13px;
-                margin-bottom: 0;">solution Category: endpoint security</p>
-                <p style="font-size: 13px;
-                margin-bottom: 0;">&#8377; {{item.priceList[0].price}} / {{item.priceList[0].priceType}}</p>
+                Add Products to compare
             </div>
         </div>
     </ng-container>
@@ -61,7 +56,7 @@
                 </p>
             </div>
             <div class="close-icon">
-                <button type="button" class="btn-close" aria-label="Close"></button>
+                <button (click)="removeItem(item._id)" type="button" class="btn-close" aria-label="Close"></button>
             </div>
         </div>
     </ng-template>

@@ -17,7 +17,7 @@
                 </div>
                 <div class="list-holder">
                     <ng-container *ngFor="let item of productList">
-                        <compare-product-item-flyer [item] = "item"></compare-product-item-flyer>
+                        <compare-product-item-flyer [item] = "item" (removableItem)="removeSelectedItem($event)"></compare-product-item-flyer>
                     </ng-container>
                 </div>
                 
@@ -48,7 +48,7 @@
                 Select your desired products and compare its features
             </div>
             <div class="list-holder">
-                <compare-product-item-flyer [item] = "itemJson"></compare-product-item-flyer>
+                <compare-product-item-flyer [item] = "itemJson" (removableItem)="removeSelectedItem($event)"></compare-product-item-flyer>
             </div>
         </ng-template>
     </ng-container>

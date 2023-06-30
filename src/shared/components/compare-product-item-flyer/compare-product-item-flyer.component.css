@@ -79,9 +79,7 @@
     padding: 10px 10px 10px 10px;
 }
 
-.empty-logo-background{
-    background: #E6E6E6;
-}
+
 
 .logo-background{
     background: var(--white);
@@ -158,6 +156,10 @@
 .close-icon .btn-close{
     /* position: absolute; */
     font-size: 12px;
+}
+
+.empty-logo-background{
+    background: #E6E6E6 !important;
 }
 
 
