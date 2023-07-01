@@ -29,6 +29,8 @@ export class ProductCardFlyerComponent implements OnInit{
 
   public selectedListForCompare : any[] = [];
 
+  public cachedDataForCheckBox : any = [];
+
   @Output() listForCompare = new EventEmitter();
 
   constructor(
@@ -104,10 +106,10 @@ export class ProductCardFlyerComponent implements OnInit{
 
     }
 
+    this.cachedDataForCheckBox = cacheData;
+
     if($event.target.checked){
       this.selectedListForCompare.push(item);
-      
-      
     }
     else{
       /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
@@ -173,6 +175,10 @@ export class ProductCardFlyerComponent implements OnInit{
 
   public viewModal() {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
+  }
+
+  public setCheckBoxes(){
+
   }
 
 

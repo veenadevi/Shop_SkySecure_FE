@@ -218,6 +218,9 @@
               <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
             </mat-list-item>
             <mat-list-item>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/estimate-details']">Estimates</span>
+            </mat-list-item>
+            <mat-list-item>
               <span *ngIf="isExpanded" class="sub-menu-item">Add New Feature</span>
             </mat-list-item>
           </ng-container>
