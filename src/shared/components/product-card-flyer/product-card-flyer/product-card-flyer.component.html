@@ -35,9 +35,19 @@
                     <mat-icon>bookmark_border</mat-icon>
                 </div>
                 <div class="price">
-                    <span class="text-style-bold">MRP</span> 
-                    <span class="text-price"> ₹ {{((item.priceList && item.priceList.length>0) ? item.priceList[0].price : '' ) | number : '1.2-2'}}</span> 
-                    <span class="text-term"> / {{(item.priceList && item.priceList.length>0) ? item.priceList[0].priceType : ''}}</span>
+                    <span class="discount-holder">
+                        <span *ngIf="item.priceList[0].discountRate != null" class="discounted-text">
+                            -{{item.priceList[0].discountRate}}%&nbsp;
+                        </span>
+                        <span style="font-size: smaller;">&#8377; </span>
+                        <span>{{item.priceList[0].price}} / {{item.priceList[0].priceType}}</span>
+                    </span>
+                    <span>
+                        <span class="text-style-bold">MRP</span> 
+                        <span class="text-price strike-through"> ₹ {{((item.priceList && item.priceList.length>0) ? item.priceList[0].ERPPrice : '' ) | number : '1.2-2'}}</span> 
+                        <span class="text-term"> / {{(item.priceList && item.priceList.length>0) ? item.priceList[0].priceType : ''}}</span>
+                    </span>
+
                 </div>
                 <div class="descr">
                     <div class="text-style-bold">

@@ -209,10 +209,10 @@
           <!-- Security Sub Menu -->
           <ng-container *ngIf="adminSubMenu">
             <mat-list-item>
-              <span *ngIf="isExpanded" class="sub-menu-item">Dashboard</span>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page']">Dashboard</span>
             </mat-list-item>
             <mat-list-item>
-              <span *ngIf="isExpanded" class="sub-menu-item">Accounts</span>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/accounts']">Accounts</span>
             </mat-list-item>
             <mat-list-item>
               <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>

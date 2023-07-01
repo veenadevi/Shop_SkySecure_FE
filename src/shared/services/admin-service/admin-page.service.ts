@@ -45,7 +45,9 @@ export class AdminPageService {
 
   public getDashboardData() : Observable<any> {
 
-    let url = this.baseUrlForQuote + this.getAllDashBoardDataUrl;
+    //let url = this.baseUrlForQuote + this.getAllDashBoardDataUrl;
+
+    let url = 'https://realize.wiremockapi.cloud/api/user/allDashBoardData'
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(
@@ -66,7 +68,9 @@ export class AdminPageService {
 
   public getAllAccounts() : Observable<any> {
 
-    let url = this.baseUrlForQuote + this.getAllAccountsUrl;
+    //let url = this.baseUrlForQuote + this.getAllAccountsUrl;
+
+    let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(
@@ -87,7 +91,9 @@ export class AdminPageService {
 
   public getAccountsById(accountsId : string) : Observable<any> {
 
-    let url = this.baseUrlForQuote + this.getAccountsByIdUrl + '/' + accountsId;
+    //let url = this.baseUrlForQuote + this.getAccountsByIdUrl + '/' + accountsId;
+
+    let url = "https://realize.wiremockapi.cloud/api/user/getAccountDetails/467371000000450104"
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(
@@ -137,7 +143,30 @@ export class AdminPageService {
   }
 
   
+  
 
+  /**
+   * Service to get Deals By Id
+   */
+
+  public getDealsById(accountsId : string) : Observable<any> {
+
+    //let url = this.baseUrlForQuote + this.getAccountsByIdUrl + '/' + accountsId;
+
+    let url = "https://realize.wiremockapi.cloud/api/admin/GetDealsByAccountId/467371000000378155"
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
  
     
     

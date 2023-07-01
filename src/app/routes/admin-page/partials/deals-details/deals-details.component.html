@@ -1,7 +1,7 @@
-<div class="account-details-view">
+<div class="deals-details-view">
     <div class="card">
         <p-table 
-            [value]="accountData" 
+            [value]="dealsData" 
             [tableStyle]="{ 'min-width': '50rem' }"
             [paginator]="false"
             [rows]="10"
@@ -11,26 +11,29 @@
             <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
             <ng-template pTemplate="header">
                 <tr>
-                    <th>ID</th>
-                    <th>Account Name</th>
-                    <th>Owner Name</th>
-                    <th>Parent Account</th>
+                    <th>Deal ID</th>
+                    <th>Deal Name</th>
+                    <th>Description</th>
+                    <th>Expected Revenue</th>
                     
-                    <th>Approval State</th>
+                    <th>Deal Stage</th>
 
+                    <th> Closing Date</th>
                     <th></th>
                     
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-account>
+            <ng-template pTemplate="body" let-deal>
                 <tr>
-                    <td>{{ account.Owner.id }}</td>
-                    <td>{{account.Account_Name}}</td>
-                    <td>{{ account.Owner.name }}</td>
-                    <td>{{ (account.Parent_Account) ? account.Parent_Account : '-'}}</td>
-                    
-                    <td>{{ account.$approval_state }}</td>
-                    <td (click) = "navigateToDealsView('')">View Deals</td>
+                    <td>{{deal.id}}</td>
+                    <td>{{deal.Deal_Name}}</td>
+                    <td>{{deal.Description}}</td>
+                    <td>{{deal.Expected_Revenue}}</td>
+                    <td>{{deal.Stage}}</td>
+                    <td>{{deal.Closing_Date}}</td>
+                    <td>
+                        <button>Create Estimate</button>
+                    </td>
                     
                 </tr>
             </ng-template>
