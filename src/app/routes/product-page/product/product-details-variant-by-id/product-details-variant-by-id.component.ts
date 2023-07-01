@@ -10,12 +10,13 @@ import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 
+
 @Component({
-  selector: 'app-product-detail',
-  templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  selector: 'app-product-details-variant-by-id',
+  templateUrl: './product-details-variant-by-id.component.html',
+  styleUrls: ['./product-details-variant-by-id.component.css']
 })
-export class ProductDetailComponent implements OnInit{
+export class ProductDetailsVariantByIdComponent implements OnInit{
   productImages=[];
   productBundles=[];
   faq = [];
@@ -398,3 +399,4 @@ featureCount=5;
     
   }
 }
+

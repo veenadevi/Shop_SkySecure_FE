@@ -21,6 +21,7 @@ import { ProductFilterComponent } from './product-filter/product-filter.componen
 import { AdOnsComponent } from './ad-ons/ad-ons.component';
 import { CompareProductsFlyerComponent } from './ad-ons/partials/compare-products-flyer/compare-products-flyer.component';
 import { CompareProductItemFlyerComponent } from '../../../shared/components/compare-product-item-flyer/compare-product-item-flyer.component';
+import { ProductDetailsVariantByIdComponent } from './product/product-details-variant-by-id/product-details-variant-by-id.component';
 
 
 
@@ -39,6 +40,7 @@ import { CompareProductItemFlyerComponent } from '../../../shared/components/com
     ProductFilterComponent,
     AdOnsComponent,
     CompareProductsFlyerComponent,
+    ProductDetailsVariantByIdComponent,
     
     
   ],
