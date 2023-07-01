@@ -15,10 +15,9 @@ import { CartStore } from 'src/shared/stores/cart.store';
 })
 export class ProductBundleVariantDetailComponent {
 
-
   public currentRoute: string;
-  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundles', '#simProd'];
-  titles = ['Description', 'Features', 'Specification', 'Reviews', 'compare produscts', 'Bundles', 'Similar Products'];
+  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
+  titles = ['Description', 'Features', 'Specification', 'Reviews', 'compare produscts', 'Bundle Details', 'Similar Products'];
   activeLink = this.links[0];
   myColor = '';
 
@@ -27,7 +26,7 @@ export class ProductBundleVariantDetailComponent {
   @ViewChild('specificationRef') specificationRef!: ElementRef;
   @ViewChild('reviewsRef') reviewsRef!: ElementRef;
   @ViewChild('compProdRef') compProdRef!: ElementRef;
-  @ViewChild('bundlesRef') bundlesRef!: ElementRef;
+  @ViewChild('bundleDetailsRef') bundleDetailsRef!: ElementRef;
   @ViewChild('simProdRef') simProdRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
 
@@ -49,8 +48,8 @@ export class ProductBundleVariantDetailComponent {
     else if (sectionId === 'compProd') {
       section = this.compProdRef.nativeElement
     }
-    else if (sectionId === 'bundles') {
-      section = this.bundlesRef.nativeElement
+    else if (sectionId === 'bundleDetailsRef') {
+      section = this.bundleDetailsRef.nativeElement
     }
     else if (sectionId === 'simProd') {
       section = this.simProdRef.nativeElement
@@ -73,20 +72,20 @@ export class ProductBundleVariantDetailComponent {
     private modalService : NgbModal
   ){
     this.router.events.subscribe((event: Event) => {
-        let currentUrl = this.route.snapshot.paramMap.get('brandId');
+        let currentUrl = this.route.snapshot.paramMap.get('id');
         
         if (event instanceof NavigationStart) {
             // Show progress spinner or progress bar
             //this.ngOnInit();
             //console.log('@@@@@@@@ _ Route change detected');
-            currentUrl = this.route.snapshot.paramMap.get('brandId');
+            currentUrl = this.route.snapshot.paramMap.get('id');
             //console.log('@@@@@@@@ _ Route change Start', currentUrl);
         }
 
         if (event instanceof NavigationEnd) {
             // Hide progress spinner or progress bar
             this.currentRoute = event.url; 
-            currentUrl = this.route.snapshot.paramMap.get('brandId');
+            currentUrl = this.route.snapshot.paramMap.get('id');
             this.ngOnInit();
             console.log('@@@@@@@@ _ Route change End');         
             //console.log("@@@@@@@@ _ ",event);
@@ -110,7 +109,11 @@ export class ProductBundleVariantDetailComponent {
 
   // public productFamilylist : any[] = [];
 
+  public productFamilyVariant : any;
+
   public productFamily : any;
+
+
 
   public products : any[] = [];
 
@@ -124,10 +127,12 @@ export class ProductBundleVariantDetailComponent {
 
   public allCompareProducts: any[];
 
+  public allSimilerProducts: any[];
+
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
   public ngOnInit(): void {
-    const productId = this.route.snapshot.paramMap.get('brandId');
+    const productId = this.route.snapshot.paramMap.get('id');
     this.getBrandDetails(productId);
   }
 
@@ -139,17 +144,17 @@ export class ProductBundleVariantDetailComponent {
     //id = '6412ac15bdb764f8d6a252a5';
     this.onPageLoad = false;
     this.subscriptions.push(
-       this.metaDataSvc.fetchSingleBrandDetails(id).subscribe( response => {
-
+       this.metaDataSvc.fetchSingleProductBundleVariantDetails(id).subscribe( response => {
         this.productVarientData = response;
-        this.productFamily = response.productFamily;
+        this.productFamilyVariant = response.productFamilyVariant;
         this.productFamilyVariants = response.productFamilyVariants;
-        this.productVarients = response.productVarients;
-        this.products = response.products;
-        this.features = response.features;
+        this.productFamily = response.productFamily;
+        this.productVarients = response.productFamilyVariantLicenseList.productVarients;
+        this.products = response.productFamilyVariantLicenseList.products;
+        this.features = response.productFamilyVariantLicenseList.productFamilyVariantFeatures;
         this.onPageLoad = true;
-        this.allCompareProducts = this.products.concat(this.productVarients,this.productFamilyVariants);
-        console.log("____this.productFamily__",this.productFamily);
+        this.allCompareProducts = this.products;
+        this.allSimilerProducts = this.products;
       })
     );
   }
@@ -191,6 +196,4 @@ export class ProductBundleVariantDetailComponent {
   public viewModal() {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
   }
-  
-  
 }

@@ -4,7 +4,7 @@
             <div class="product-image">
                 <div class="prod-img-cont">
                     <div class="prod-img-hover">
-                        <ng-container *ngFor="let item of [1,2,3,4,5]">
+                        <ng-container *ngFor="let item of [1,2,3,4]">
                             <img style="width: 120%;
                             height: auto;
                             transition: transform .2s;
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="product-details-info">
-                <h4>{{productFamily.name}}
+                <h4>{{productFamilyVariant.name}}
                 </h4>
                 <p style="margin-top: 10px;
                     font-size: smaller;
@@ -55,23 +55,24 @@
                     <span> 5 reviews | write a review</span>
                 </div>
                 <span style="display:inline-flex">
-                    <p *ngIf="productFamily.priceList[0].discountRate" style="font-size: larger;color: red;">
-                        -{{productFamily.priceList[0].discountRate}}%&nbsp; </p>
+                    <p *ngIf="productFamilyVariant.priceList[0].discountRate" style="font-size: larger;color: red;">
+                        -{{productFamilyVariant.priceList[0].discountRate}}%&nbsp; </p>
                     <h4 style="font-size: smaller;">&#8377; </h4>
-                    <h4 style="margin-bottom: 0;">{{productFamily.priceList[0].price}} /
-                        {{productFamily.priceList[0].priceType}}</h4>
+                    <h4 style="margin-bottom: 0;">{{productFamilyVariant.priceList[0].price}} /
+                        {{productFamilyVariant.priceList[0].priceType}}</h4>
                 </span>
                 <span style="display:inline-flex;align-items: center;">
                     <p style="font-size: small;"> M.R.P:&nbsp;</p>
                     <s>
-                        <p style="font-size: initial;">10000</p>
+                        <p style="font-size: initial;">{{productFamilyVariant.priceList[0].ERPPrice}}
+                        </p>
                     </s>
                 </span>
                 <p style="font-size: smaller;">GST Extra</p>
                 <p style="margin-top: 10px; font-weight: 700; margin-bottom: 7px;">Solution Category:</p>
-                <p>Test Description</p>
+                <p>{{productFamilyVariant.subcategories[0].name}}</p>
                 <p style=" font-weight: 700; margin-bottom: 7px;">About this product:</p>
-                <p style="margin-bottom: 15px;">{{productFamily.description}}</p>
+                <p style="margin-bottom: 15px;">{{productFamilyVariant.description}}</p>
                 <span style="display:flex;flex-direction: row;"><button class="btn view-det-btn">View
                         Features</button>
                     <button class="btn request-quote-btn" style="margin-left: 4%;">Request Quote</button></span>
@@ -160,7 +161,7 @@
             margin-bottom: 0;">solution Category: endpoint security</p>
                                 <p style="font-size: 13px;
             margin-bottom: 0;">&#8377; {{item.priceList[0].price}} /
-                        {{item.priceList[0].priceType}}</p>
+                                    {{item.priceList[0].priceType}}</p>
                             </div>
                         </div>
                     </ng-container>
@@ -184,16 +185,15 @@
             <a mat-tab-link *ngFor="let link of links; index as i" (click)="scrollToSection(link)"
                 [active]="activeLink == link"> {{titles[i]}} </a>
         </nav>
-        <p-card style="font-family: 'Lato', sans-serif;" header="Description" id="description" #descriptionRef>
+         <p-card style="font-family: 'Lato', sans-serif;" header="Description" id="description" #descriptionRef>
             <p class="m-0">
-                {{productFamily.description}}
+                {{productFamilyVariant.description}}
             </p>
             <span
                 style="display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;"><button
-                    class="btn view-det-btn">See More</button></span>
-
+                    class="btn view-det-btn">See More</button>
+            </span>
         </p-card>
-
         <div class="product-features-container" id="feature" #featureRef>
             <h5>Features</h5>
             <div class="product-feature-cards-container">
@@ -295,84 +295,142 @@
             <ng-container *ngIf="products.length>0">
                 <div class="specification-cont" id="compProd" #compProdRef>
                     <h5>Compare Products</h5>
-                    <div class="comp-prod-cont" >
+                    <div class="comp-prod-cont">
                         <div class="prod-to-comp">
                             <div class="comp-prod-card">
                                 <div class="comp-prod-card-cont">
-                                <div class="comp-prod-card-img">
-                                    <img style="width:70%;height: auto;position: relative;" src="{{productFamily.bannerLogo}}">
-                                    
+                                    <div class="comp-prod-card-img">
+                                        <img style="width:70%;height: auto;position: relative;"
+                                            src="{{productFamily.bannerLogo}}">
+                                    </div>
+                                    <div class="comp-prod-card-content">
+                                        <p style="font-size: medium;font-weight: 500;">{{productFamilyVariant.name}}</p>
+                                        <p style="font-size: medium;font-weight: 300;">solution category</p>
+                                        <p>{{productFamilyVariant.subcategories[0].name}}</p>
+                                    </div>
+
                                 </div>
-                                <div class="comp-prod-card-content">
-                                    <p style="font-size: medium;font-weight: 500;">{{productFamily.name}}</p>
-                                    <p style="font-size: small;font-weight: 300;">solution category</p>
-                                    <p style="font-size: small;font-weight: 300;">{{productFamily.description}}</p>
-                                </div>
-                                
-                            </div>
-                            <div style="display: flex;flex-direction: row;">
-                                <span style="    display: inline-flex;
+                                <div style="display: flex;flex-direction: row;">
+                                    <span style="    display: inline-flex;
                                 flex-basis: 30%;
                                 align-items: center;
                                 justify-content: flex-start;
-                                padding: 1%;"> 
-                                    <p-checkbox  [binary]="true" inputId="binary"></p-checkbox>
-                                    <p style="font-size: small;">&nbsp;compare</p>
+                                padding: 1%;">
+                                        <p-checkbox [binary]="true" inputId="binary"></p-checkbox>
+                                        <p style="font-size: small;">&nbsp;compare</p>
                                     </span>
                                     <span style="    display: inline-flex;
                                 align-items: center;
                                 flex-basis: 70%;
                                 justify-content: flex-end;
-                                padding: 1%;"> 
-                                <a style="color: #0047BD;font-weight: 400;font-size: small;">view details</a>
-                                </span>
-                
-                            </div>
+                                padding: 1%;">
+                                        <a style="color: #0047BD;font-weight: 400;font-size: small;">view details</a>
+                                    </span>
+
+                                </div>
                             </div>
                         </div>
-            
+
                         <span style="display:flex;align-items: center;justify-content: center;">
                             <h6>VS</h6>
-                            </span>
-            
+                        </span>
+
                         <div class="comp-prod-vs">
-                        <ng-container  *ngFor="let item of products">
-                        <div class="comp-prod-card">
-                            <div class="comp-prod-card-cont">
-                            <div class="comp-prod-card-img">
-                                <img style="width:70%;height: auto;position: relative;" src="{{item.bannerLogo}}">
-                            </div>
-                            <div class="comp-prod-card-content">
-                                <p style="font-size: medium;font-weight: 500;">{{item.name}}</p>
-                                <p style="font-size: small;font-weight: 300;">solution category</p>
-                                <p style="font-size: small;font-weight: 300;">{{item.description}}</p>
-                            </div>
-                            
-                        </div>
-                        <div style="display: flex;flex-direction: row;">
-                            <span style="    display: inline-flex;
+                            <ng-container *ngFor="let item of products">
+                                <div class="comp-prod-card">
+                                    <div class="comp-prod-card-cont">
+                                        <div class="comp-prod-card-img">
+                                            <img style="width:70%;height: auto;position: relative;"
+                                                src="{{item.bannerLogo}}">
+                                        </div>
+                                        <div class="comp-prod-card-content">
+                                            <p style="font-size: medium;font-weight: 500;">{{item.name}}</p>
+                                            <p style="font-size: medium;font-weight: 300;">solution category</p>
+                                            <p style="font-size: small;font-weight: 300;">{{item.subCategories[0].name}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div style="display: flex;flex-direction: row;">
+                                        <span style="    display: inline-flex;
                             flex-basis: 30%;
                             align-items: center;
                             justify-content: flex-start;
-                            padding: 1%;"> 
-                                <p-checkbox  [binary]="true" inputId="binary"></p-checkbox>
-                                <p style="font-size: small;">&nbsp;compare</p>
-                                </span>
-                                <span style="    display: inline-flex;
+                            padding: 1%;">
+                                            <p-checkbox [binary]="true" inputId="binary"></p-checkbox>
+                                            <p style="font-size: small;">&nbsp;compare</p>
+                                        </span>
+                                        <span style="    display: inline-flex;
                             align-items: center;
                             flex-basis: 70%;
                             justify-content: flex-end;
-                            padding: 1%;"> 
-                            <a style="color: #0047BD;font-weight: 400;font-size: small;">view details</a>
-                            </span>
-            
+                            padding: 1%;">
+                                            <a style="color: #0047BD;font-weight: 400;font-size: small;">view
+                                                details</a>
+                                        </span>
+
+                                    </div>
+                                </div>
+                            </ng-container>
                         </div>
-                        </div>
-                    </ng-container>
+                    </div>
                 </div>
-                        </div>
-                </div>
-            
+
             </ng-container>
         </div>
+
+        <div class="bottom-container">
+            <ng-container *ngIf="products.length>0">
+                <div class="specification-cont" id="bundleDetailsRef" #bundleDetailsRef>
+                    <h5>Bundle Details</h5>
+                    <div class="comp-prod-cont">
+                        <div class="comp-prod-vs">
+                            <ng-container *ngFor="let item of allSimilerProducts">
+                                <div class="comp-prod-card">
+                                    <div class="similer-product-card-cont">
+                                        <div class="similer-prod-top">
+                                            <div class="comp-prod-card-img">
+                                                <img style="width:70%;height: auto;position: relative;"
+                                                    src="alternateLogo">
+                                            </div>
+                                            <div class="comp-prod-card-content">
+                                                <p style="font-size: medium;font-weight: 500;">{{item.name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="similer-prod-bottom">
+                                            <div class="buy-now-prod">
+                                                <span style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;">
+                                                    <p style="font-size: 13px;
+                                                    margin: 5px;">&#8377; {{item.priceList[0].price}} /
+                                                                            {{item.priceList[0].priceType}}
+                                                    </p>
+                                                    <h6 style="margin-bottom: 0;">Quantity </h6>
+                                                    <p>(per user)</p>
+                                                </span>
+                                                
+                                                <span style="display: inline-flex;justify-content: center;gap: 5px;">
+                            
+                                                    <span>
+                                                        <img alt="minus" src="../../../assets/icons/Minus.svg">
+                                                    </span>
+                                                    <span>
+                                                        <input class="input-field">
+                                                    </span>
+                                                    <span>
+                                                        <img alt="" src="../../../assets/icons/Add.svg">
+                                                    </span>
+                                                </span>
+                            
+                                                <button class="btn buy-now-btn">Buy now</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-container>
+        </div> 
     </div>

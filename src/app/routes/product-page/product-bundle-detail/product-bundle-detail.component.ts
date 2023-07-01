@@ -17,8 +17,8 @@ export class ProductBundleDetailComponent implements OnInit{
 
 
   public currentRoute: string;
-  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundles', '#simProd'];
-  titles = ['Description', 'Features', 'Specification', 'Reviews', 'compare produscts', 'Bundles', 'Similar Products'];
+  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
+  titles = ['Description', 'Features', 'Specification', 'Reviews', 'compare produscts', 'Bundle Details', 'Similar Products'];
   activeLink = this.links[0];
   myColor = '';
 
@@ -27,7 +27,7 @@ export class ProductBundleDetailComponent implements OnInit{
   @ViewChild('specificationRef') specificationRef!: ElementRef;
   @ViewChild('reviewsRef') reviewsRef!: ElementRef;
   @ViewChild('compProdRef') compProdRef!: ElementRef;
-  @ViewChild('bundlesRef') bundlesRef!: ElementRef;
+  @ViewChild('bundleDetailsRef') bundleDetailsRef!: ElementRef;
   @ViewChild('simProdRef') simProdRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
 
@@ -49,8 +49,8 @@ export class ProductBundleDetailComponent implements OnInit{
     else if (sectionId === 'compProd') {
       section = this.compProdRef.nativeElement
     }
-    else if (sectionId === 'bundles') {
-      section = this.bundlesRef.nativeElement
+    else if (sectionId === 'bundleDetailsRef') {
+      section = this.bundleDetailsRef.nativeElement
     }
     else if (sectionId === 'simProd') {
       section = this.simProdRef.nativeElement
@@ -124,6 +124,8 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public allCompareProducts: any[];
 
+  public allSimilerProducts: any[];
+
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
   public ngOnInit(): void {
@@ -148,8 +150,10 @@ export class ProductBundleDetailComponent implements OnInit{
         this.products = response.products;
         this.features = response.features;
         this.onPageLoad = true;
-        this.allCompareProducts = this.products.concat(this.productVarients,this.productFamilyVariants);
-        console.log("____this.productFamily__",this.productFamily);
+        this.allCompareProducts = this.products;
+        this.allSimilerProducts = this.products.concat(response.productVarients,response.productFamilyVariants);
+        this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
+        console.log("_this.productFamily_",this.productFamily);
       })
     );
   }
