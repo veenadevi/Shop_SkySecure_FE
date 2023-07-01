@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 
@@ -12,6 +12,8 @@ export class CompareProductItemFlyerComponent {
 
   @Input('item')
   public item : any;
+
+  @Output() removableItem = new EventEmitter();
 
   public productItem ;
 
@@ -50,6 +52,10 @@ export class CompareProductItemFlyerComponent {
     else{
       return 'Black'
     }
+  }
+
+  public removeItem(itemId){
+    this.removableItem.emit(itemId);
   }
   
 }

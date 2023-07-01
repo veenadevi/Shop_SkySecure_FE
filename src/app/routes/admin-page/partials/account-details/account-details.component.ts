@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
@@ -17,7 +17,8 @@ export class AccountDetailsComponent implements OnInit{
 
   constructor(
     private route : ActivatedRoute,
-    private adminPageService : AdminPageService
+    private adminPageService : AdminPageService,
+    private router : Router
   ){}
 
   public sampleData = {
@@ -121,9 +122,17 @@ export class AccountDetailsComponent implements OnInit{
   public getAccountDetails(accountId){
     this.subscriptions.push(
       this.adminPageService.getAccountsById(accountId).subscribe(response => {
-        this.accountData = response.accounts.data;
+        this.accountData = response.accounts;
       })
     )
+  }
+
+
+  public navigateToDealsView(dealsId){
+    let queryParams ={
+      dealsId : dealsId
+    }
+    this.router.navigate(['/admin-page/deals-details'], {queryParams: queryParams});
   }
 
 }

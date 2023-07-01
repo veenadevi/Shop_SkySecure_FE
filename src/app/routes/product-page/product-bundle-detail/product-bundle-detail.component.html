@@ -1,0 +1,378 @@
+<div class="product-details-container">
+    <div class="product-details">
+        <div class="product-image-view">
+            <div class="product-image">
+                <div class="prod-img-cont">
+                    <div class="prod-img-hover">
+                        <ng-container *ngFor="let item of [1,2,3,4,5]">
+                            <img style="width: 120%;
+                            height: auto;
+                            transition: transform .2s;
+                            margin:10%;
+                            cursor: pointer;
+                            background: #EAEAEA;" class="img-hover"
+                                src="../../../../assets/Logos/MicrosoftDefender_300X300.png" alt="img">
+                        </ng-container>
+                        <img src="" alt="">
+                    </div>
+                    <div class="prod-img-logo">
+                        <img style="width:120%;height: 100%;object-fit: cover;" src="{{productFamily.bannerLogo}}">
+                    </div>
+                </div>
+                <div class="buy-now-prod">
+                    <span style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;">
+                        <h6 style="margin-bottom: 0;">Quantity </h6>
+                        <p>(per user)</p>
+                    </span>
+                    <span style="display: inline-flex;justify-content: center;gap: 5px;">
+
+                        <span>
+                            <img alt="minus" src="../../../assets/icons/Minus.svg">
+                        </span>
+                        <span>
+                            <input class="input-field">
+                        </span>
+                        <span>
+                            <img alt="" src="../../../assets/icons/Add.svg">
+                        </span>
+                    </span>
+
+                    <button class="btn buy-now-btn">Buy now</button>
+                </div>
+            </div>
+            <div class="product-details-info">
+                <h4>{{productFamily.name}}
+                </h4>
+                <p style="margin-top: 10px;
+                    font-size: smaller;
+                    margin-bottom: 5px;">by Microsoft</p>
+                <div class="pd-header-reviews">
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <span> 5 reviews | write a review</span>
+                </div>
+                <span style="display:inline-flex">
+                    <p *ngIf="productFamily.priceList[0].discountRate" style="font-size: larger;color: red;">
+                        -{{productFamily.priceList[0].discountRate}}%&nbsp; </p>
+                    <h4 style="font-size: smaller;">&#8377; </h4>
+                    <h4 style="margin-bottom: 0;">{{productFamily.priceList[0].price}} /
+                        {{productFamily.priceList[0].priceType}}</h4>
+                </span>
+                <span style="display:inline-flex;align-items: center;">
+                    <p style="font-size: small;"> M.R.P:&nbsp;</p>
+                    <s>
+                        <p style="font-size: initial;">10000</p>
+                    </s>
+                </span>
+                <p style="font-size: smaller;">GST Extra</p>
+                <p style="margin-top: 10px; font-weight: 700; margin-bottom: 7px;">Solution Category:</p>
+                <p>Test Description</p>
+                <p style=" font-weight: 700; margin-bottom: 7px;">About this product:</p>
+                <p style="margin-bottom: 15px;">{{productFamily.description}}</p>
+                <span style="display:flex;flex-direction: row;"><button class="btn view-det-btn">View
+                        Features</button>
+                    <button class="btn request-quote-btn" style="margin-left: 4%;">Request Quote</button></span>
+                <p-divider></p-divider>
+                <div class="offer-det">
+                    <span style="display: inline-flex;">
+                        <img style="width:auto;height: auto;position: relative;"
+                            src="../../assets/productDetails/OfferIllustrationIcon.svg">
+                        <p style=" font-weight: 700; ">&nbsp; &nbsp; Offer</p>
+                    </span>
+                    <div class="offer-card-container">
+                        <div class="offer-card">
+                            <p style="font-size: 15px;font-weight: 600;">Bank Offers</p>
+                            <p style="font-size: 14px;">Upto ₹500.00 discount on select Credit Cards</p>
+                            <a style="color: #0047BD;font-size: 15px;font-weight: 600;">2 more offers</a>
+                        </div>
+                        <div class="offer-card">
+                            <p style="font-size: 15px;font-weight: 600;">Bank Offers</p>
+                            <p style="font-size: 14px;">Upto ₹500.00 discount on select Credit Cards</p>
+                            <a style="color: #0047BD;font-size: 15px;font-weight: 600;">2 more offers</a>
+                        </div>
+                    </div>
+                </div>
+                <p-divider></p-divider>
+
+                <div class="common-info">
+                    <div class="common-det">
+                        <div class="comm-det-img">
+                            <img style="width:auto;height: auto;position: relative;"
+                                src="../../assets/productDetails/SecureTransactionIllustrationIcon.svg">
+
+                        </div>
+                        <p style=" font-weight: 400; text-align: center;">secure transaction</p>
+                    </div>
+                    <div class="common-det">
+                        <div class="comm-det-img">
+                            <img style="width:auto;height: auto;position: relative;"
+                                src="../../assets/productDetails/TopBrandIllustrationIcon.svg">
+
+                        </div>
+                        <p style=" font-weight: 400; text-align: center;">Top brand</p>
+                    </div>
+                    <div class="common-det">
+                        <div class="comm-det-img">
+                            <img style="width:auto;height: auto;position: relative;"
+                                src="../../assets/productDetails/ProductCancellationIllustrationIcon.svg">
+
+                        </div>
+                        <p style=" font-weight: 400; text-align: center;">5 Days Cancellation </p>
+                    </div>
+                    <div class="common-det">
+                        <div class="comm-det-img">
+                            <img style="width:auto;height: auto;position: relative;"
+                                src="../../assets/productDetails/GuaranteedPriceIllustrationIcon.svg">
+
+                        </div>
+                        <p style=" font-weight: 400; text-align: center;">Guaranteed Price</p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="product-info">
+            <ng-container>
+                <div class="compare-box">
+                    <div class="compare-box-headers">
+                        <h5>Compare</h5>
+                        <span
+                            style="display:flex;flex-basis: 70%;justify-content: flex-end;align-items: center;color: cornflowerblue;font-size: small;font-weight: 500;">
+                            <p style="margin-bottom: 3px;color: #0047BD;font-size: 13.122px;font-weight: 600;">Compare
+                                products</p>
+                        </span>
+                    </div>
+                    <p style="font-size: small;">choose the right plan that matches your needs!</p>
+                    <ng-container *ngFor="let item of allCompareProducts">
+                        <div class="plan-price">
+                            <div class="plan-price-image">
+                                <img style="width:70%;height: 100%;object-fit: cover;"
+                                    src="../../../../assets/Logos/MicrosoftDefender_300X300.png">
+                            </div>
+                            <div class="plan-price-info">
+                                <p style="font-size: medium;
+            font-weight: 700;margin-bottom: 0;">{{item.name}}</p>
+                                <p style="font-size: 13px;
+            margin-bottom: 0;">solution Category: endpoint security</p>
+                                <p style="font-size: 13px;
+            margin-bottom: 0;">&#8377; {{item.priceList[0].price}} /
+                        {{item.priceList[0].priceType}}</p>
+                            </div>
+                        </div>
+                    </ng-container>
+
+
+                </div>
+            </ng-container>
+            <div class="connect-us-box">
+                <div class="connect-us-desc">
+                    <h5>Connect Us!</h5>
+                    <p style="font-size: 16px;align-items: center;justify-content: center;">consult with
+                        our expert to choose the right plan</p>
+                    <button class="btn btn buy-now-btn" style="width:35%">Get Free Call</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="all-feature-container">
+        <nav mat-tab-nav-bar>
+            <a mat-tab-link *ngFor="let link of links; index as i" (click)="scrollToSection(link)"
+                [active]="activeLink == link"> {{titles[i]}} </a>
+        </nav>
+        <p-card style="font-family: 'Lato', sans-serif;" header="Description" id="description" #descriptionRef>
+            <p class="m-0">
+                {{productFamily.description}}
+            </p>
+            <span
+                style="display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;"><button
+                    class="btn view-det-btn">See More</button></span>
+
+        </p-card>
+
+        <div class="product-features-container" id="feature" #featureRef>
+            <h5>Features</h5>
+            <div class="product-feature-cards-container">
+                <div class="prod-feat-img">
+                    <img style="width:auto;height: auto;position: relative;"
+                        src="../../assets/productDetails/FeaturesIllustration.svg">
+                </div>
+                <div class="prod-feat-card-cont">
+                    <div class="prod-card-holder">
+                        <div class="feature-desc-heading">
+                            <p style="font-weight: 400;">Here is the common generalized section for the product</p>
+                        </div>
+                        <div class="prod-card-holder2">
+                            <ng-container *ngFor="let item of features">
+
+                                <div class="product-feature-card" (click)="openLink(item.hyperLinkURL)">
+                                    <span
+                                        style="display:flex;flex-basis:30%;padding: 7%;justify-content: center;;flex-direction: column;">
+                                        <img style="width:auto;height: auto;position: relative;"
+                                            src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                                    </span>
+                                    <span style="display:flex;flex-basis:70%;padding: 1%;flex-direction: column;">
+                                        <p style="color: #000;
+                        font-size: initial;
+                        font-weight: 700;">{{item.name}}</p>
+                                        <p style="font-size: small;">{{item.description}}</p>
+                                    </span>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                    </div>
+                    <div class="p-view-all-feature-div">
+                        <div class="feature-desc-heading">
+                            <p style="margin-bottom: 10px;font-weight: 400;">click here to view detailed feature of the
+                                product</p>
+                            <button class="btn view-det-btn" (click)="featureCountEvent()">View All Features</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="bottom-container">
+            <div class="specification-cont" id="specification" #specificationRef>
+                <h5>Specifications</h5>
+                <div class="specs-list">
+                    <div class="specs-name">
+                        <div style="display:flex;flex-basis:20%;padding: 7%;">
+                            <img style="width:auto;height: auto;position: relative;"
+                                src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                        </div>
+                        <div
+                            style="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
+                            <p style="font-size: small;margin-bottom: 0">Supported Platforms</p>
+                            <p style="font-size: smaller;
+                            font-weight: 500;margin-bottom: 0;">Exchange online plan2</p>
+                        </div>
+                    </div>
+                    <div class="specs-name">
+                        <div style="display:flex;flex-basis:20%;padding: 7%;">
+                            <img style="width:auto;height: auto;position: relative;"
+                                src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                        </div>
+                        <div
+                            style="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
+                            <p style="font-size: small;margin-bottom: 0">Supported Platforms</p>
+                            <p style="font-size: smaller;
+                                font-weight: 500;margin-bottom: 0;">Exchange online plan2</p>
+                        </div>
+                    </div>
+                    <div class="specs-name">
+                        <div style="display:flex;flex-basis:20%;padding: 7%;">
+                            <img style="width:auto;height: auto;position: relative;"
+                                src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                        </div>
+                        <div
+                            style="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
+                            <p style="font-size: small;margin-bottom: 0">Supported Platforms</p>
+                            <p style="font-size: smaller;
+                                    font-weight: 500;margin-bottom: 0;">Exchange online plan2</p>
+                        </div>
+                    </div>
+                    <div class="specs-name">
+                        <div style="display:flex;flex-basis:20%;padding: 7%;">
+                            <img style="width:auto;height: auto;position: relative;"
+                                src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                        </div>
+                        <div
+                            style="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
+                            <p style="font-size: small;margin-bottom: 0">Supported Platforms</p>
+                            <p style="font-size: smaller;
+                                        font-weight: 500;margin-bottom: 0;">Exchange online plan2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="products.length>0">
+                <div class="specification-cont" id="compProd" #compProdRef>
+                    <h5>Compare Products</h5>
+                    <div class="comp-prod-cont" >
+                        <div class="prod-to-comp">
+                            <div class="comp-prod-card">
+                                <div class="comp-prod-card-cont">
+                                <div class="comp-prod-card-img">
+                                    <img style="width:70%;height: auto;position: relative;" src="{{productFamily.bannerLogo}}">
+                                    
+                                </div>
+                                <div class="comp-prod-card-content">
+                                    <p style="font-size: medium;font-weight: 500;">{{productFamily.name}}</p>
+                                    <p style="font-size: small;font-weight: 300;">solution category</p>
+                                    <p style="font-size: small;font-weight: 300;">{{productFamily.description}}</p>
+                                </div>
+                                
+                            </div>
+                            <div style="display: flex;flex-direction: row;">
+                                <span style="    display: inline-flex;
+                                flex-basis: 30%;
+                                align-items: center;
+                                justify-content: flex-start;
+                                padding: 1%;"> 
+                                    <p-checkbox  [binary]="true" inputId="binary"></p-checkbox>
+                                    <p style="font-size: small;">&nbsp;compare</p>
+                                    </span>
+                                    <span style="    display: inline-flex;
+                                align-items: center;
+                                flex-basis: 70%;
+                                justify-content: flex-end;
+                                padding: 1%;"> 
+                                <a style="color: #0047BD;font-weight: 400;font-size: small;">view details</a>
+                                </span>
+                
+                            </div>
+                            </div>
+                        </div>
+            
+                        <span style="display:flex;align-items: center;justify-content: center;">
+                            <h6>VS</h6>
+                            </span>
+            
+                        <div class="comp-prod-vs">
+                        <ng-container  *ngFor="let item of products">
+                        <div class="comp-prod-card">
+                            <div class="comp-prod-card-cont">
+                            <div class="comp-prod-card-img">
+                                <img style="width:70%;height: auto;position: relative;" src="{{item.bannerLogo}}">
+                            </div>
+                            <div class="comp-prod-card-content">
+                                <p style="font-size: medium;font-weight: 500;">{{item.name}}</p>
+                                <p style="font-size: small;font-weight: 300;">solution category</p>
+                                <p style="font-size: small;font-weight: 300;">{{item.description}}</p>
+                            </div>
+                            
+                        </div>
+                        <div style="display: flex;flex-direction: row;">
+                            <span style="    display: inline-flex;
+                            flex-basis: 30%;
+                            align-items: center;
+                            justify-content: flex-start;
+                            padding: 1%;"> 
+                                <p-checkbox  [binary]="true" inputId="binary"></p-checkbox>
+                                <p style="font-size: small;">&nbsp;compare</p>
+                                </span>
+                                <span style="    display: inline-flex;
+                            align-items: center;
+                            flex-basis: 70%;
+                            justify-content: flex-end;
+                            padding: 1%;"> 
+                            <a style="color: #0047BD;font-weight: 400;font-size: small;">view details</a>
+                            </span>
+            
+                        </div>
+                        </div>
+                    </ng-container>
+                </div>
+                        </div>
+                </div>
+            
+            </ng-container>
+        </div>
+    </div>

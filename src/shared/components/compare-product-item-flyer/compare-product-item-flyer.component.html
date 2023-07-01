@@ -1,23 +1,4 @@
-<!-- <div class="card-container" (click)="navigateTo(item)" [ngStyle]="{'background': 'url(' + item.bgImg + ') no-repeat 0 0 / cover'}" > -->
-<!-- <ng-container *ngIf="productItem && productItem.length>0">
-    <div class="card-container" [ngStyle]="{'background-color': (productItem._id === '0000') ? 'red' : 'blue' }" (click)="navigateTo(item)">
-        <div [ngClass]="(productItem._id !== 'none') ? 'img-holder' : 'empty-img-holder'">
-            <img class="mat-card-img" mat-card-image src="{{(productItem.bannerLogo) ? productItem.bannerLogo : '../../../../../assets/icons/AddProductIcon.svg'}}" alt="Microsoft" />
-            
-        </div>
-        <ng-container>
-            <div class="text-holder">
-                <span [style.color]="getColor(productItem.textClr)">{{productItem.name}}</span>
-            </div>
-        </ng-container>
-        
-    </div>
-</ng-container> -->
-
-
-<!-- <div class="card-container" [ngClass]="(item._id === 'none') ? 'empty-logo-background' : 'logo-background'" (click)="navigateTo(item)"> -->
-
-    <ng-container *ngIf="(item._id === null) ; else productsTemplate">
+    <!-- <ng-container *ngIf="(item._id === null) ; else productsTemplate">
         <div class="card-container empty-padding empty-logo-background">
             <div class="">
                 
@@ -42,7 +23,45 @@
                 {{item.name}}
             </div>
         </div>
+    </ng-template> -->
+    <ng-container *ngIf="(item._id === null) ; else productsTemplate">
+        
+        <div class="plan-price empty-logo-background">
+            <div class="plan-price-image">
+                <img style="width:70%;height: 100%;object-fit: cover;" src="../../../../../assets/icons/AddProductIcon.svg" alt="Microsoft" >
+            </div>
+            <div class="plan-price-info">
+                Add Products to compare
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #productsTemplate>
+        
+        
+        <div class="plan-price">
+            <div class="plan-price-image">
+                <img class="img-style" src="{{(item.bannerLogo) ? item.bannerLogo : '../../../../../assets/icons/AddProductIcon.svg'}}" alt="Microsoft" >
+            </div>
+            <div class="plan-price-info">
+                <p style="font-size: medium;
+                font-weight: 700;margin-bottom: 0;">{{item.name}}</p>
+                <p style="font-size: 13px;
+                margin-bottom: 0;">{{item.solutionCategory}}</p>
+                <p style="font-size: 13px;
+                margin-bottom: 0;font-weight: 700;">
+                <ng-container *ngIf="item.priceList && item.priceList.length>0">
+                    ₹ {{item.priceList[0].price}} / {{item.priceList[0].priceType}}
+                </ng-container>
+                <!-- {{(item.priceList) ? (item.priceList[0].price / item.priceList[0].priceType) : ''}}    {{item.priceList[0].price}} / {{item.priceList[0].priceType}} -->
+                </p>
+            </div>
+            <div class="close-icon">
+                <button (click)="removeItem(item._id)" type="button" class="btn-close" aria-label="Close"></button>
+            </div>
+        </div>
     </ng-template>
+
+
 
 
 

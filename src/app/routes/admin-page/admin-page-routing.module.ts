@@ -5,6 +5,7 @@ import { FeatureUpdateComponent } from './partials/feature-update/feature-update
 import { AdminDashboardComponent } from './partials/admin-dashboard/admin-dashboard.component';
 import { AllAccountsComponent } from './partials/all-accounts/all-accounts.component';
 import { AccountDetailsComponent } from './partials/account-details/account-details.component';
+import { DealsDetailsComponent } from './partials/deals-details/deals-details.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,11 @@ const routes: Routes = [
         canActivate: [],
         path: 'feature-update',
         component : FeatureUpdateComponent
+      },
+      {
+        canActivate: [],
+        path: 'deals-details',
+        component : DealsDetailsComponent
       },
       
       

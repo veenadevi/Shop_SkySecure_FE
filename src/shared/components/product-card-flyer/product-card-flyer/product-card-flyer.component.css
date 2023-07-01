@@ -114,14 +114,17 @@
     -webkit-box-orient: vertical;
     
 }
-
+.price{
+    display: flex;
+    flex-direction: column;
+}
 .text-price{
     font-size: 16px;
     font-weight: 300;
 }
 
 .text-term{
-    font-size: 0.5 em;
+    font-size: 12px !important;
     font-weight: 200;
 }
 
@@ -157,4 +160,18 @@
       font-size: 16px;
       font-weight: 500;
       
+  }
+
+  .strike-through{
+    text-decoration: line-through;
+    margin-left:2px
+  }
+
+  .discount-holder{
+    display: flex;
+    align-items: center;
+  }
+  .discounted-text{
+    font-size: 16px;
+    color: red;
   }
