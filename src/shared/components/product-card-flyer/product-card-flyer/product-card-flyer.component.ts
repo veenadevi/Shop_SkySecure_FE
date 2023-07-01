@@ -46,7 +46,29 @@ export class ProductCardFlyerComponent implements OnInit{
     else{
       this.router.navigate(['/products', product._id]);
     }*/
-    this.router.navigate(['/products', product._id]);
+
+    
+    switch (product.type) {
+      case 'product':
+        this.router.navigate(['/products', product._id]);
+        return;
+
+      case 'productVariants':
+        this.router.navigate(['/products', product._id]);
+        return;
+        
+      case 'productBundles':
+        this.router.navigate(['/products', product._id]);
+        return;
+      
+      case 'productBundleVariants':
+        this.router.navigate(['/products', product._id]);
+        return;
+
+      default:
+        return null;
+    }
+    
   }
 
   public onFilterChange($event, item){
