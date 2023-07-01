@@ -57,6 +57,11 @@ const INTERFACE_ROUTES: Routes = [
         path: 'admin-page',
         loadChildren: () => import('../routes/admin-page/admin-page.module').then(m=>m.AdminPageModule)
       },
+      {
+        canActivate: [],
+        path: 'compare-products',
+        loadChildren: () => import('../routes/compare-products/compare-products.module').then(m=>m.CompareProductsModule)
+      },
     ]
   }
 

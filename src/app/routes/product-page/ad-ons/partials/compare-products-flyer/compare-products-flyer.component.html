@@ -20,6 +20,11 @@
                         <compare-product-item-flyer [item] = "item" (removableItem)="removeSelectedItem($event)"></compare-product-item-flyer>
                     </ng-container>
                 </div>
+                <div class="btn-holder">
+                    <button class="compare-btn" (click)="navigateToCompareProducts()" [disabled]="(productList.length === 1)">
+                        Compare
+                    </button>
+                </div>
                 
             </ng-container>
 

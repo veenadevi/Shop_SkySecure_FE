@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 
@@ -36,7 +37,8 @@ export class CompareProductsFlyerComponent implements OnInit{
   )
 
   constructor(
-    private compareProductsStore : CompareProductsStore
+    private compareProductsStore : CompareProductsStore,
+    private router : Router
   ){}
 
   public ngOnInit(): void {
@@ -62,6 +64,10 @@ export class CompareProductsFlyerComponent implements OnInit{
     });
     this.compareProductsStore.setCompareProductsList(this.productList);
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
+  }
+
+  public navigateToCompareProducts(){
+    this.router.navigate(['/compare-products']);
   }
   
 

@@ -46,11 +46,11 @@
                 <p style="font-size: medium;
                 font-weight: 700;margin-bottom: 0;">{{item.name}}</p>
                 <p style="font-size: 13px;
-                margin-bottom: 0;">solution Category: endpoint security</p>
+                margin-bottom: 0;">{{item.solutionCategory}}</p>
                 <p style="font-size: 13px;
-                margin-bottom: 0;">
+                margin-bottom: 0;font-weight: 700;">
                 <ng-container *ngIf="item.priceList && item.priceList.length>0">
-                    {{item.priceList[0].price}} / {{item.priceList[0].priceType}}
+                    ₹ {{item.priceList[0].price}} / {{item.priceList[0].priceType}}
                 </ng-container>
                 <!-- {{(item.priceList) ? (item.priceList[0].price / item.priceList[0].priceType) : ''}}    {{item.priceList[0].price}} / {{item.priceList[0].priceType}} -->
                 </p>

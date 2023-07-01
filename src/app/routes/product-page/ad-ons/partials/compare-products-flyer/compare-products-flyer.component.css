@@ -43,3 +43,33 @@
     width:100%;
     margin-top: 1em;
 }
+
+.btn-holder{
+    margin-top: 20px;
+}
+
+.compare-btn {
+    background: #F6EBEC;
+    border: 1px solid #A9383D;
+    border-radius: 8px;
+    text-align: center;
+    color: #A9383D;
+    margin-right: 10px;
+    min-width: 140px;
+    height: 40px;
+
+    /* background: linear-gradient(180deg, #A9383D -21.43%, #F6EBEC 144.64%);
+    border-radius: 8px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500; */
+}
+
+.compare-btn:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
