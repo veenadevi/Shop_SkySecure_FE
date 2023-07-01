@@ -1,0 +1,138 @@
+<div class="recommendation-container ">
+    <div class="status-container">
+        <span class="text-style">
+            You are not connected to any tenant. Please connect to view recommendations and begin assessment
+        </span>
+        <button class="btn request-btn " (click)="connectToTenant()">
+            Connect
+        </button>
+    </div>
+
+    <div class="segmentation-container">
+    
+        <div class="text-header">
+            Microsoft- Security Overview
+        </div>
+
+        <div class="graph-container">
+            <div class="segmentation-headers">
+                <div class="headers-style" disabled>
+                    All
+                </div>
+                <div class="headers-style" disabled>
+                    Users
+                </div>
+                <div class="headers-style" disabled>
+                    Devices
+                </div>
+                <div class="headers-style" disabled>
+                    Network
+                </div>
+
+            </div>
+
+            <div class="canvas-container">
+                
+                <div class="chart-section">
+                    <div class="chart-container">
+                        <canvas baseChart
+                            height="120px" 
+                            width="120px"
+                            [labels]="doughnutChartLabels"
+                            [datasets]="doughnutChartDatasets"
+                            [options]="doughnutChartOptions"
+                            [legend]="false"
+                            [type]="'doughnut'">
+                        </canvas>
+                    </div>
+                    
+                    
+                </div>
+                <div class="chart-section">
+                    <div class="chart-container">
+                        <canvas baseChart
+                            height="120px" 
+                            width="120px"
+                            [labels]="doughnutChartLabels"
+                            [datasets]="doughnutChartDatasets"
+                            [options]="doughnutChartOptions"
+                            [legend]="false"
+                            [type]="'doughnut'">
+                        </canvas>
+                    </div>
+                    
+                </div>
+                <div class="chart-section">
+                    <div class="chart-container">
+                        <canvas baseChart
+                            height="120px" 
+                            width="120px"
+                            [labels]="doughnutChartLabels"
+                            [datasets]="doughnutChartDatasets"
+                            [options]="doughnutChartOptions"
+                            [legend]="false"
+                            [type]="'doughnut'">
+                        </canvas>
+                    </div>
+                    
+                </div>
+                <div class="chart-section">
+                    <div class="chart-container">
+                        <canvas baseChart
+                            height="120px" 
+                            width="120px"
+                            [labels]="doughnutChartLabels"
+                            [datasets]="doughnutChartDatasets"
+                            [options]="doughnutChartOptions"
+                            [legend]="false"
+                            [type]="'doughnut'">
+                        </canvas>
+                    </div>
+                    
+                </div>
+
+
+                <!-- Secure Score Section -->
+                <div class="secure-score-container">
+                    <div class="score-box">
+                        <div class="secure-score-text">
+                            <span>
+                                Your Secure Score
+                            </span>
+                        </div>
+                        <ng-container>
+                            <div class="secure-score-val">
+                                <span>
+                                    Secure Score - 
+                                </span>
+                            </div>
+                            <div class="secure-score-metrics">
+                                <span>
+                                    - / -
+                                </span>
+                            </div>
+                            <div class="secure-score-graph">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': '0%'}"></div>
+                                  </div>
+                            </div>
+                        </ng-container>
+                        <ng-template #noSecureData>
+                            -
+                        </ng-template>
+    
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    
+    </div>
+
+
+
+
+
+</div>
+
+

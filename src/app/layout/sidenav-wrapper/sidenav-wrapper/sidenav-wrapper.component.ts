@@ -83,7 +83,8 @@ export class SidenavWrapperComponent {
           this.router.navigate(['/']);
           return;
       case 'recommendations':
-        this.showDialog();
+          //this.showDialog();
+          this.router.navigate(['security-view/recommendation-default']);
         return;
 
       default:
