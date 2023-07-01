@@ -12,14 +12,12 @@
 }
 .product-image-view {
   display: flex;
-  flex-basis: 60%;
-  /* padding: 1%;
-  margin: 1%; */
-  padding-right: 1%;
+  flex-basis: 70%;
+  /* padding-right: 1%; */
   padding-top: 1%;
 padding-bottom: 1%;
 padding-left:0;
-margin-right: 1%;
+/* margin-right: 1%; */
   margin-top: 1%;
 margin-bottom: 1%;
 margin-left:0;
@@ -27,7 +25,7 @@ margin-left:0;
 }
 .product-info {
   display: flex;
-  flex-basis: 40%;
+  flex-basis: 30%;
   padding: 1%;
   /* margin: 1%; */
   flex-direction: column;
@@ -162,7 +160,13 @@ box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding-top: 3%;
   margin-top: 10%;
   margin-left: 3%;
-  border-radius: 30px;
+  top: 0;
+  border-radius: 50% 50% 0 0; /* Adjust the radius for the desired shape */
+  /* transform: translateY(50%); */
+  /* border-radius: 30px; */
+  /* transform: translateX(-50%); */
+  shape-outside: ellipse(20% 50%);
+      clip-path: ellipse(20% 50%);
   background: #F1F8FF;
   flex-direction: column;
 }
@@ -366,7 +370,9 @@ background: #F9F9F9;
 .buy-now-prod {
   display: flex;
   padding: 1%;
-  margin: 1%;
+  margin-left: 35%;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 .buy-now-btn {
@@ -378,13 +384,13 @@ background: #F9F9F9;
   color: #FFFFFF;
   font-size: 16px;
   font-weight: 500;
-  width: 100%;
+  width: auto;
 }
 .input-field {
   background: var(--white);
   border: 1px solid #918F90;
   border-radius: 8px;
-  width: 6em;
+  width: 4em;
   height: 2em;
   text-align: center;
 }
