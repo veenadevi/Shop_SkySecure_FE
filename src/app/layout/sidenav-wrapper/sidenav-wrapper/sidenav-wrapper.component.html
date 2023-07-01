@@ -111,7 +111,7 @@
           </span>
           <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
               <span class="text-style">
-                User
+                {{userFullName}}
               </span>
               <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
             </div>
@@ -131,7 +131,7 @@
         </mat-list-item>
 
         <!-- Shop Section -->
-        <mat-list-item (click)="navAction(isExpanded , 'shop')" pTooltip="Shop" tooltipPosition="right">
+        <mat-list-item (click)="navAction(isExpanded , 'shop')">
           <span class="icon-holder">
             <img src="../../../../assets/YellowChalk/ShopIcon.svg" title="Shop" alt="Shop">
           </span>
