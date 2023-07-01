@@ -26,6 +26,7 @@ import { PrimeNgModule } from 'src/app/prime-ng.module';
 import { ProductBundleDetailComponent } from './product-bundle-detail/product-bundle-detail.component';
 import { ProductBundleVariantDetailComponent } from './product-bundle-variant-detail/product-bundle-variant-detail.component';
 
+import { ProductDetailsVariantByIdComponent } from './product/product-details-variant-by-id/product-details-variant-by-id.component';
 
 
 
@@ -45,8 +46,8 @@ import { ProductBundleVariantDetailComponent } from './product-bundle-variant-de
     AdOnsComponent,
     CompareProductsFlyerComponent,
     ProductBundleDetailComponent,
-    ProductBundleVariantDetailComponent
-    
+    ProductBundleVariantDetailComponent,
+    ProductDetailsVariantByIdComponent,
     
     
   ],
