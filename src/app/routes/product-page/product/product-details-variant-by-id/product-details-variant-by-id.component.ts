@@ -22,15 +22,15 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   faq = [];
   productListToCompare  = [];
   products = [];
-  links = ['#description', '#feature', '#specification','#reviews', '#compProd', '#bundles','#faq'];
-  titles = ['Description', 'Features', 'Specification','Reviews','compare products','Bundles','FAQ'];
+  links = ['#description', '#feature', '#specification','#simProd', '#compProd', '#bundles','#faq'];
+  titles = ['Description', 'Features', 'Specification','Similar Products','compare products','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
   @ViewChild('specificationRef') specificationRef!: ElementRef;
-  @ViewChild('reviewsRef') reviewsRef!: ElementRef;
+  @ViewChild('simProdRef') simProdRef!: ElementRef;
   @ViewChild('compProdRef') compProdRef!: ElementRef;
   @ViewChild('bundlesRef') bundlesRef!: ElementRef;
   @ViewChild('faqRef') faqRef!: ElementRef;
@@ -48,8 +48,8 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
     } else if (sectionId === 'specification') {
       section = this.specificationRef.nativeElement
     }
-    else if (sectionId === 'reviews') {
-      section = this.reviewsRef.nativeElement
+    else if (sectionId === 'simProd') {
+      section = this.simProdRef.nativeElement
     }
     else if (sectionId === 'compProd') {
       section = this.compProdRef.nativeElement
@@ -71,8 +71,8 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   }
 
 
- featureList: any[] = [];
- productVariants: any[]  =[];
+ featureList = [];
+ productVariants ;
  dispFeatureList: any[] = [];
  productName:string;
   public bannerUrl : any;
@@ -81,7 +81,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   public product : any = {};
   public onProductLoad = true;
   public productSubCategoryId : String;
-  public similarProducts : Array<any> = [];
+  public similarProducts :any[] = [];
   public bannerText: '#FFFFFF';
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
@@ -137,23 +137,36 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   private  getProductDetails(productId: string): void {
     this.onProductLoad = false;
     this.subscriptions.push(
-      this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( (response) => {
-         this.individualProductDetail$.subscribe();
+      this.metaDataSvc.fetchProductByProductVariantId(productId).subscribe( (response) => {
+        //  this.individualProductDetail$.subscribe();
+console.log("response product Variant",response.featureList);
+response.productVariants = {...response.productVariants, quantity: 1 }
+this.productVariants=response.productVariants;
+
+for(let i=0;i<response.productBundles.length;i++)
+        response.productBundles[i] = {...response.productBundles[i], checked: false, quantity: 1 };
+        this.productBundles  = response.productBundles;
+        console.log("bundles",this.productBundles);
+
+        this.faq  = response.products[0].productFAQ;
+        console.log("faq:",this.faq);
 
         let fList = [];
         if (response.featureList?.length > 0) {
           //featureList = response.productFeatureList;
+          this.featureList =[];
           this.featureList = response.featureList.slice(0,5);
           //this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
         }
-        if(response.products.name!=null) {
-        this.productName = response.products.name;
-        }
+        // if(response.products.name!=null) {
+        // this.productName = response.products.name;
+        // }
 
         // this.featureList = fList;
         console.log("inside", this.featureList);
-        
-        this.similarProducts = response.productBundles;
+        for(let i=0;i<response.similerProductVariants.length;i++)
+        response.similerProductVariants[i] = {...response.similerProductVariants[i], quantity: 1 }
+        this.similarProducts = response.similerProductVariants;
 //         response.productBundles=[{"name": "Microsoft Defender for Office 365 Plan 1","priceList": [
 //           {
 //               "Currency": "INR",
@@ -164,12 +177,20 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
 //           }
 //         ]
 // }];
+
        response.products[0] = {...response.products[0], quantity: 1 }
         this.product = { products:[...response.products], featureList: response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants: response.featureListByProductVariants };
         console.log("&&&&& inside", this.product.productVariants.length);
         this.onProductLoad = true;
-        this.bannerUrl = this.product.bannerURL;
+        // this.bannerUrl = this.product.bannerURL;
+          if(!response.products[0].hasOwnProperty('productImages')) {
+            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+          }
         if(response.products[0].productImages.length>0) {
+          this.productImages=[];
           this.productImages = response.productImages;
         } else {
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
@@ -177,14 +198,12 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         }
-        for(let i=0;i<response.productBundles.length;i++)
-        response.productBundles[i].productFamily = response.productBundles[i].productFamily.map(object => ({ ...object, checked: false, quantity: 1 }));
-        this.productBundles  = response.productBundles;
-        this.faq  = response.products[0].ProductFAQ;
+
+
         // this.product.productVariants.push(response.productBundles);
         //this.product.productVariants = [123];
-        console.log("prVar:",this.product.productVariants)
-        this.productVariants=response.productVariants;
+        
+        
         // this.featureCountEvent();
         this.setDataValues( {...response.products});
 
@@ -297,7 +316,7 @@ featureCount=5;
   public navigateToCompareProducts(){
     this.router.navigate(['/compare-products']);
   }
-  async addToCompare(item:any):Promise<void> {
+  async addToCompare(item:any, type:any):Promise<void> {
     // if(!item.checked)
     // item.checked = true;
 
@@ -312,7 +331,10 @@ featureCount=5;
       }
     });
     if (count===0) {
-      item = { ...item, 'solutionCategory': this.product.products[0].subcategories[0].description };
+      if(type!='prodFam')
+      item = { ...item, 'solutionCategory': item.subcategories[0]?.description };
+      else
+      item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
       this.productListToCompare.push(item);
     }
     // this.productListToCompare.push(item);
@@ -328,20 +350,29 @@ featureCount=5;
     position: string = 'left';
     quantityCount = 1;
     addQuantity(quantity:any,index:any):void {
-      this.productBundles[index].productFamily[0].quantity = quantity+1;
+      this.productBundles[index].quantity = quantity+1;
     }
     decreaseQuantity(quantity:any,index:any): void {
       if(quantity>1){
-        this.productBundles[index].productFamily[0].quantity = quantity-1;
+        this.productBundles[index].quantity = quantity-1;
+      }
+    }
+
+    addSPQuantity(quantity:any,index:any):void {
+      this.similarProducts[index].quantity = quantity+1;
+    }
+    decreaseSPQuantity(quantity:any,index:any): void {
+      if(quantity>1){
+        this.similarProducts[index].quantity = quantity-1;
       }
     }
 
     addBuyQuantity(quantity:any):void {
-      this.product.products[0].quantity = quantity+1;
+      this.productVariants.quantity = quantity+1;
     }
     decreaseBuyQuantity(quantity:any): void {
       if(quantity>1){
-        this.product.products[0].quantity = quantity-1;
+        this.productVariants.quantity = quantity-1;
       }
     }
 

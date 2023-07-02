@@ -26,6 +26,7 @@ export class MetadataService {
   private fetchProductsByFilter : string;
   private fetchProductBundleVariantDetailsUrl:string;
   private fetchCompareProductsListUrl:string;
+  private fetchProductByProductVariant:string;
 
   constructor(
     private http: HttpClient,
@@ -42,6 +43,7 @@ export class MetadataService {
     this.fetchTrendingProductsUrl = AppService.appUrl.getTrendingProducts;
     this.fetchProductsByFilter = AppService.appUrl.getProductsByFilter;
     this.fetchSignleBrandDetailsUrl = AppService.appUrl.getSingleBrandDetails;
+    this.fetchProductByProductVariant = AppService.appUrl.getByProdyctVariant;
     //this.quotaDetailsUri = this.ouxConfigSvc.getAppConfigValue('apiUri').e2eQuotaACV;
     this.fetchProductBundleVariantDetailsUrl = AppService.appUrl.getProductBundleVariant;
     this.fetchCompareProductsListUrl = AppService.appUrl.fetchCompareProductsListUrl
@@ -226,6 +228,29 @@ export class MetadataService {
 
     return request$;
   }
+
+  public fetchProductByProductVariantId(productId: string) : Observable<any> {
+    let url = this.baseUrl + this.fetchProductByProductVariant + productId;
+  
+    let request$ = this.http.get<any>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          this.metadataStore.setIndividualProductDetail(response);
+          return (response);
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+
+    return request$;
+  }
+
+
 
   public fetchSingleBrandDetails(id: string) : Observable<any> {
     //id = "63eb236c53c21de2f6841bca";
