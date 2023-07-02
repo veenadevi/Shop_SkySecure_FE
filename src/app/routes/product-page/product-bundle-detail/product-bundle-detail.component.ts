@@ -22,6 +22,8 @@ export class ProductBundleDetailComponent implements OnInit{
   activeLink = this.links[0];
   myColor = '';
 
+  public productQuantity:  any = 1;
+
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
   @ViewChild('specificationRef') specificationRef!: ElementRef;
@@ -153,7 +155,7 @@ export class ProductBundleDetailComponent implements OnInit{
         this.allCompareProducts = this.products;
         this.allSimilerProducts = this.products.concat(response.productVarients,response.productFamilyVariants);
         this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
-        console.log("_this.productFamily_",this.productFamily);
+        console.log("++++++++++++++ _this.productFamily_",this.productFamily);
       })
     );
   }
@@ -168,22 +170,40 @@ export class ProductBundleDetailComponent implements OnInit{
     
   }
   
-  public requestQuote(product){
 
+
+  
+  
+
+  public changeQuantity(type){
+
+    console.log("(((( Called,", type);
+    if(type === 'add'){
+      this.productQuantity = Number(this.productQuantity) + 1;
+    }
+    else if(type === 'minus'){
+      this.productQuantity =  Number(this.productQuantity) - 1;
+    }
+    console.log("(((( Called,", this.productQuantity);
+  }
+
+  public buyNow(item, quantity){
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
     if(loggedinData.length > 0 ){
       
       var existingItems = this.cartStore.getCartItems();
+    
       let queryParams;
-      if(product.productVariants.length>0){
+      // if(product.productVariants.length>0){
         queryParams = {
-          productName : product.productVariants[0].name,
-          productId : product.productVariants[0]._id,
-          quantity : 1,
-          price : product.productVariants[0].priceList[0].price,
+          productName : item.name,
+          productId : item._id,
+          quantity : quantity,
+          price : item.priceList[0].price,
         };
-      }
+      // }
+      console.log(queryParams);
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
@@ -195,6 +215,5 @@ export class ProductBundleDetailComponent implements OnInit{
   public viewModal() {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
   }
-  
   
 }
