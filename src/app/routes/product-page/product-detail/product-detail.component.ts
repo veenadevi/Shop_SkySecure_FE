@@ -180,7 +180,7 @@ export class ProductDetailComponent implements OnInit{
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         }
         for(let i=0;i<response.productBundles.length;i++)
-        response.productBundles[i].productFamily = response.productBundles[i].productFamily.map(object => ({ ...object, checked: false, quantity: 1 }));
+        response.productBundles[i].productFamily = {...response.productBundles[i].productFamily, checked: false, quantity: 1 };
         this.productBundles  = response.productBundles;
         this.faq  = response.products[0].productFAQ;
         // this.product.productVariants.push(response.productBundles);
@@ -299,7 +299,7 @@ featureCount=5;
   public navigateToCompareProducts(){
     this.router.navigate(['/compare-products']);
   }
-  async addToCompare(item:any):Promise<void> {
+  async addToCompare(item:any, type:any):Promise<void> {
     // if(!item.checked)
     // item.checked = true;
 
@@ -314,7 +314,10 @@ featureCount=5;
       }
     });
     if (count===0) {
-      item = { ...item, 'solutionCategory': this.product.products[0].subcategories[0].description };
+      if(type!='prodFam')
+      item = { ...item, 'solutionCategory': item.subcategories[0]?.description };
+      else
+      item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
       this.productListToCompare.push(item);
     }
     // this.productListToCompare.push(item);
@@ -330,11 +333,11 @@ featureCount=5;
     position: string = 'left';
     quantityCount = 1;
     addQuantity(quantity:any,index:any):void {
-      this.productBundles[index].productFamily[0].quantity = quantity+1;
+      this.productBundles[index].productFamily.quantity = quantity+1;
     }
     decreaseQuantity(quantity:any,index:any): void {
       if(quantity>1){
-        this.productBundles[index].productFamily[0].quantity = quantity-1;
+        this.productBundles[index].productFamily.quantity = quantity-1;
       }
     }
 

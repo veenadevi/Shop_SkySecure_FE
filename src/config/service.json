@@ -19,6 +19,7 @@
         "subCategoryByCategory" : "api/sub-category/",
         "getProductsBySubCategoryIds" : "api/products",
         "getSingleProduct": "api/product/",
+        "getByProdyctVariant":"api/product-variant/",
         "getProductsByBrandIds": "api/products/oems",
         "getTrendingProducts" : "api/products/trending",
         "getProductsByFilter": "api/products/filter",
