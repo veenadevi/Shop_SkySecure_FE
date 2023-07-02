@@ -366,7 +366,7 @@
                     align-items: center;
                     justify-content: flex-start;
                     padding: 1%;"> 
-                        <p-checkbox (click)="addToCompare(product.products[0])" [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
+                        <p-checkbox (click)="addToCompare(product.products[0], 'fromProd')" [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
                         <p style="font-size: small;">&nbsp;compare</p>
                         </span>
                         <span style="    display: inline-flex;
@@ -387,16 +387,16 @@
 
             <div  class="comp-prod-vs">
             <ng-container  *ngFor="let item of productBundles">
-            <div *ngIf="item.productFamily[0].priceList!=null" class="comp-prod-card2">
+            <div *ngIf="item.productFamily.priceList!=null" class="comp-prod-card2">
                 <div class="comp-prod-card-cont">
                 <div class="comp-prod-card-img">
-                    <img style="width:70%;height: auto;position: relative;" src="{{item.productFamily[0].bannerLogo}}">
+                    <img style="width:70%;height: auto;position: relative;" src="{{item.productFamily.bannerLogo}}">
                     
                 </div>
                 <div class="comp-prod-card-content">
-                    <p style="font-size: medium;font-weight: 500;">{{item.productFamily[0].name}}</p>
+                    <p style="font-size: medium;font-weight: 500;">{{item.productFamily.name}}</p>
                     <p style="font-size: small;font-weight: 300;">solution category:</p>
-                    <p style="font-size: small;font-weight: 300;">{{product.products[0].subcategories[0].description}}</p>
+                    <p style="font-size: small;font-weight: 300;">{{item.productFamily.subCategories[0].description}}</p>
                 </div>
                 
             </div>
@@ -406,7 +406,7 @@
                 align-items: center;
                 justify-content: flex-start;
                 padding: 1%;"> 
-                    <p-checkbox (click)="addToCompare(item.productFamily[0])" [(ngModel)]="item.productFamily[0].checked"  [binary]="true" inputId="binary"></p-checkbox>
+                    <p-checkbox (click)="addToCompare(item.productFamily,'prodFam')" [(ngModel)]="item.productFamily.checked"  [binary]="true" inputId="binary"></p-checkbox>
                     <p style="font-size: small;">&nbsp;compare</p>
                     </span>
                     <span style="    display: inline-flex;
@@ -432,19 +432,19 @@
         <h5 id="similar-prod">Product Bundles</h5>
         <div class="specs-list">
             <ng-container *ngFor="let item of productBundles; let i = index">
-            <div *ngIf="item.productFamily[0].priceList!=null" class="similar-prod-card">
+            <div *ngIf="item.productFamily.priceList!=null" class="similar-prod-card">
                 <div class="sim-prod-holder">
                 <div class="similar-prod-img-det">
-                    <img style="width:100%;height: 100%;object-fit: cover;" src="{{item.productFamily[0].bannerLogo}}">
+                    <img style="width:100%;height: 100%;object-fit: cover;" src="{{item.productFamily.bannerLogo}}">
                     
                 </div>
                 <div class="similar-prod-price-det">
-                    <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">{{item.productFamily[0].name}}</p></span>
+                    <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">{{item.productFamily.name}}</p></span>
                     
                     <p style="font-size: small;font-weight: 300;">solution category</p>
-                    <p style="font-size: small;font-weight: 300;">{{product.products[0].subcategories[0].description}}</p>
-                    <span class="similar-prod-price-det-price" *ngIf="item.productFamily[0].priceList!=null"><p style="font-size: medium;font-weight: 400;">&#8377; {{item.productFamily[0].priceList[0].price}}</p>
-                        <p style="font-size: medium;font-weight: 400;">&nbsp; / {{item.productFamily[0].priceList[0].priceType}}</p>
+                    <p style="font-size: small;font-weight: 300;">{{item.productFamily.subCategories[0].description}}</p>
+                    <span class="similar-prod-price-det-price" *ngIf="item.productFamily.priceList!=null"><p style="font-size: medium;font-weight: 400;">&#8377; {{item.productFamily.priceList[0].price}}</p>
+                        <p style="font-size: medium;font-weight: 400;">&nbsp; / {{item.productFamily.priceList[0].priceType}}</p>
                         </span>
                     
                 </div>
@@ -456,22 +456,22 @@
                         <span style="display: inline-flex;justify-content: center;gap: 5px;"> 
                             
                             <span >
-                              <img id="add-minus-quantity" (click)="decreaseQuantity(item.productFamily[0].quantity,i)" alt="minus" src="../../../assets/icons/Minus.svg">
+                              <img id="add-minus-quantity" (click)="decreaseQuantity(item.productFamily.quantity,i)" alt="minus" src="../../../assets/icons/Minus.svg">
                             </span>
                             <span>
                               <input
-                                class="input-field"  [(ngModel)]="item.productFamily[0].quantity"
+                                class="input-field"  [(ngModel)]="item.productFamily.quantity"
                                 >
                             </span>
                             <span >
-                              <img id="add-minus-quantity" alt="" (click)="addQuantity(item.productFamily[0].quantity,i)" src="../../../assets/icons/Add.svg">
+                              <img id="add-minus-quantity" alt="" (click)="addQuantity(item.productFamily.quantity,i)" src="../../../assets/icons/Add.svg">
                             </span>
                         </span>
                     </div>
 
                     <div class="sim-prod-btn-cont">
                         <span >
-                            <button class="btn similar-prod-request-quote-btn" (click)="requestQuote(item.productFamily[0])">Request Quote</button>
+                            <button class="btn similar-prod-request-quote-btn" (click)="requestQuote(item.productFamily)">Request Quote</button>
                         </span>
                         </div>
 
