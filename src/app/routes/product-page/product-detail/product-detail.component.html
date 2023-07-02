@@ -66,9 +66,9 @@
                         <span> 5 reviews | write a review</span>
                     </div>
                     <span style="display:inline-flex">
-                        <p *ngIf="product.products[0].priceList[0].discountRate != null" style="font-size: larger;color: red;">-4{{product.products[0].priceList[0].discountRate}}%&nbsp; </p>
+                        <p *ngIf="product.products[0].priceList[0].discountRate != null" style="font-size: 16px;color: red;">-{{product.products[0].priceList[0].discountRate}}%&nbsp; </p>
                         <h4 style="font-size: smaller;">&#8377; </h4>
-                    <h4 style="margin-bottom: 0;">{{product.products[0].priceList[0].price}} / {{product.products[0].priceList[0].priceType}}</h4>
+                    <span style="font-size: 18px;font-weight: 500;">{{product.products[0].priceList[0].price}} / {{product.products[0].priceList[0].priceType}}</span>
                 </span>
                 
                 <span style="display:inline-flex;align-items: center;">
@@ -78,7 +78,7 @@
             <p style="font-size: smaller;">GST Extra</p>
                     <p style="margin-top: 10px; font-weight: 700; margin-bottom: 7px;">Solution Category:</p>
                     <p>{{product.products[0].subcategories[0].description}}</p>
-                    <p style=" font-weight: 700; margin-bottom: 7px;">About this product:</p>
+                    <p style=" font-weight: 700; margin-bottom: 7px;margin-top: 7px;">About this product:</p>
                     <p style="margin-bottom: 15px;">{{product.products[0].description}}</p>
                     <span style = "display:flex;flex-direction: row;"><button class="btn view-det-btn" (click)="scrollToSection('#feature')">View Features</button>
                     <button class="btn request-quote-btn" (click)="requestQuote(product.products[0])" style="margin-left: 4%;" >Request Quote</button></span>
@@ -141,7 +141,7 @@
                     
             </div>
             <div class="product-info">
-                <ng-container *ngIf="(productListToCompare.length>0) ; else noCompareProducts">
+                <!-- <ng-container *ngIf="(productListToCompare.length>0) ; else noCompareProducts">
                 <div class="compare-box">
                     <div class="compare-box-headers">    
                     <h5>Compare</h5>
@@ -164,7 +164,7 @@
                             <ng-container *ngIf="item.priceList && item.priceList.length>0">
                                 ₹ {{item.priceList[0].price}} / {{item.priceList[0].priceType}}
                             </ng-container>
-                            <!-- {{(item.priceList) ? (item.priceList[0].price / item.priceList[0].priceType) : ''}}    {{item.priceList[0].price}} / {{item.priceList[0].priceType}} -->
+                            
                             </p>
                         </div>
                         <div class="close-icon">
@@ -202,7 +202,8 @@
                         </div>
                         
                             
-                    </ng-template>
+                    </ng-template> -->
+                    <details-compare-products-flyer [compareProductsList] = "selectedProductItem"></details-compare-products-flyer>
                     <!-- <div class="connect-us-box">
                         <div class="connect-us-desc">
                             <h5>Connect Us!</h5>
@@ -211,7 +212,8 @@
                         </div>
                         
                         </div> -->
-                        <div class="contact-us-wrapper">
+                        <contact-us-flyer></contact-us-flyer>
+                        <!-- <div class="contact-us-wrapper">
                             <div class="card-container">
                               <div class="user">
                                 <img id="userAvatar" src="../../../assets/icons/ConnectUsIllustration.svg" width="125px" height="125px" />
@@ -229,7 +231,7 @@
                                 </div>
                               </div>
                             </div>
-                        </div>
+                        </div> -->
                 </div>
         </div>
     </div>

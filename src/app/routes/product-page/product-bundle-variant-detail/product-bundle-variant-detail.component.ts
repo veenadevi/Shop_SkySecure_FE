@@ -143,6 +143,8 @@ export class ProductBundleVariantDetailComponent {
   public bundleDetails:any[];
   public finalBundleDetails :any[];
 
+  public selectedProductItem : any[] = [];
+
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
   public ngOnInit(): void {
@@ -185,7 +187,7 @@ export class ProductBundleVariantDetailComponent {
         this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
         this.bundleDetails=this.products.concat(this.productVarients,this.childProductFamilies,this.childProductFamilyVariant);
 
-        if(this.productFamily.productImages.length>0) {
+        if(this.productFamily && this.productFamily.productImages && this.productFamily.productImages.length>0) {
           this.productImages = this.productFamily.productImages;
         } else {
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
@@ -235,9 +237,9 @@ console.log("======setProductVariantsData===="+data.length)
       data.forEach(element => {
         element.name=element.name;
           element.productType = 'productVariants';
-          element.bannerLogo = (element.products && element.products[0].bannerLogo) ? element.products[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.bannerLogo = (element.products && element.products.length>0 && element.products[0].bannerLogo) ? element.products[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
-          element['solutionCategory'] = (element.products[0] && element.products[0].subCategories && element.products[0].subCategories.length > 0) ? element.products[0].subCategories[0].name : "";
+          element['solutionCategory'] = (element.products && element.products.length>0 && element.products[0] && element.products[0].subCategories && element.products[0].subCategories.length > 0) ? element.products[0].subCategories[0].name : "";
           element['navigationId'] = element._id;
           element.priceList=element.priceList;
           element.quantity=1

@@ -27,6 +27,8 @@ export class ProductDetailComponent implements OnInit{
   activeLink = this.links[0];
   myColor = '';
 
+  public selectedProductItem : any[] = [];
+
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
   @ViewChild('specificationRef') specificationRef!: ElementRef;

@@ -7,15 +7,18 @@
                 <div class="product-image">
                     <div class="prod-img-cont">
                         <div class="prod-img-hover">
-                            <ng-container *ngFor="let item of [1,2,3,4]">
-                                <img style="width: 120%;
-                                height: auto;
-                                transition: transform .2s;
-                                margin:10%;
-                                cursor: pointer;
-                                background: #EAEAEA;" class="img-hover"
-                                src="../../../../assets/images/imgPlaceholder.png" alt="img">
+                            <ng-container *ngIf="productImages && productImages.length>0">
+                                <ng-container *ngFor="let item of productImages">
+                                    <img style="width: 120%;
+                                    height: auto;
+                                    transition: transform .2s;
+                                    margin:10%;
+                                    cursor: pointer;
+                                    background: #EAEAEA;" class="img-hover"
+                                    src="{{item}}" alt="img">
+                                </ng-container>
                             </ng-container>
+                            
                             <img src="" alt="">
                         </div>
                         <div class="prod-img-logo">
@@ -23,10 +26,9 @@
                         </div>
                     </div>
                     <div class="buy-now-prod">
-                        <span style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;">
-                            <h6 style="margin-bottom: 0;">Quantity </h6>
-                            <p>(per user)</p>
-                        </span>
+                        <span style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;flex-direction: column;text-align: center;"> 
+                            <h6 style="margin-bottom: 0;">Quantity </h6> <p>(per year)</p>
+                            </span>
                         
                         <span style="display: inline-flex;justify-content: center;gap: 5px;"> 
                                 
@@ -60,11 +62,11 @@
                         <span> 5 reviews | write a review</span>
                     </div>
                     <span style="display:inline-flex">
-                        <p *ngIf="productFamily.priceList[0].discountRate" style="font-size: larger;color: red;">
+                        <p *ngIf="productFamily.priceList[0].discountRate" style="font-size: 16px;color: red;">
                             -{{productFamily.priceList[0].discountRate}}%&nbsp; </p>
                         <h4 style="font-size: smaller;">&#8377; </h4>
-                        <h4 style="margin-bottom: 0;">{{productFamily.priceList[0].price}} /
-                            {{productFamily.priceList[0].priceType}}</h4>
+                        <span style="font-size: 18px;font-weight: 500;">{{productFamily.priceList[0].price}} /
+                            {{productFamily.priceList[0].priceType}}</span>
                     </span>
                     <span style="display:inline-flex;align-items: center;">
                         <p style="font-size: small;"> MRP:&nbsp;</p>
@@ -76,7 +78,7 @@
                     <p style="font-size: smaller;">GST Extra</p>
                     <p style="margin-top: 10px; font-weight: 700; margin-bottom: 7px;">Solution Category:</p>
                     <p>{{productFamily.subcategories[0].name}}</p>
-                    <p style=" font-weight: 700; margin-bottom: 7px;">About this product:</p>
+                    <p style=" font-weight: 700; margin-bottom: 7px; margin-top: 7px;">About this product:</p>
                     <p style="margin-bottom: 15px;">{{productFamily.description}}</p>
                     <span style="display:flex;flex-direction: row;"><button class="btn view-det-btn">View
                             Features</button>
@@ -176,7 +178,8 @@
                 </div>
             </ng-container> -->
             <details-compare-products-flyer [compareProductsList] = "selectedProductItem"></details-compare-products-flyer>
-            <div class="connect-us-box">
+            <contact-us-flyer></contact-us-flyer>
+            <!-- <div class="connect-us-box">
                 <div class="connect-us-desc">
                     <h5>Connect Us!</h5>
                     <p style="font-size: 16px;align-items: center;justify-content: center;">consult with
@@ -184,7 +187,7 @@
                     <button class="btn btn buy-now-btn" style="width:35%">Get Free Call</button>
                 </div>
 
-            </div>
+            </div> -->
         </div>
     </div>
     <ng-container *ngIf="productFamily">
@@ -318,8 +321,8 @@
                                         </div>
                                         <div class="comp-prod-card-content">
                                             <p style="font-size: medium;font-weight: 500;">{{productFamily.name}}</p>
-                                            <p style="font-size: medium;font-weight: 300;">solution category</p>
-                                            <p>{{productFamily.subcategories[0].name}}</p>
+                                            <p style="font-size: medium;font-weight: 300;">Solution category</p>
+                                            <p style="font-size: small;font-weight: 500;">{{productFamily.subcategories[0].name}}</p>
                                         </div>
 
                                     </div>
@@ -331,7 +334,7 @@
                                     padding: 1%;">
                                             <p-checkbox [binary]="true" inputId="binary" (onChange) ="compareEvent($event,productFamily)"
                                             ></p-checkbox>
-                                            <p style="font-size: small;">&nbsp;compare</p>
+                                            <p style="font-size: small;">&nbsp;Compare</p>
                                         </span>
                                         <span style="    display: inline-flex;
                                     align-items: center;
@@ -359,8 +362,8 @@
                                             </div>
                                             <div class="comp-prod-card-content">
                                                 <p style="font-size: medium;font-weight: 500;">{{item.name}}</p>
-                                                <p style="font-size: medium;font-weight: 300;">solution category</p>
-                                                <p style="font-size: small;font-weight: 300;">{{item.subCategories[0].name}}
+                                                <p style="font-size: small;font-weight: 300;">Solution category</p>
+                                                <p style="font-size: small;font-weight: 500;">{{item.subCategories[0].name}}
                                                 </p>
                                             </div>
 
@@ -372,7 +375,7 @@
                                 justify-content: flex-start;
                                 padding: 1%;">
                                                 <p-checkbox [binary]="true" inputId="binary" (onChange) ="compareEvent($event,item)"></p-checkbox>
-                                                <p style="font-size: small;">&nbsp;compare</p>
+                                                <p style="font-size: small;">&nbsp;Compare</p>
                                             </span>
                                             <span style="    display: inline-flex;
                                 align-items: center;
@@ -393,7 +396,60 @@
                 </ng-container>
             </div>
 
-            <div class="bottom-container">
+            <div *ngIf="allSimilerProducts && allSimilerProducts.length>0" class="specification-cont"  id="bundleDetailsRef" #bundleDetailsRef>
+                <h5 id="similar-prod">Bundle Details</h5>
+                <div class="specs-list">
+                    <ng-container *ngFor="let item of allSimilerProducts; let i = index">
+                    <div class="similar-prod-card">
+                        <div class="sim-prod-holder">
+                        <div class="similar-prod-img-det">
+                            <img style="width:100%;height: 100%;object-fit: cover;" src="{{(item.bannerLogo) ? item.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'}}">
+                            
+                        </div>
+                        <div class="similar-prod-price-det">
+                            <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">{{item.name}}</p></span>
+                            
+                            <p style="font-size: small;font-weight: 300;">Solution category</p>
+                            <p style="font-size: small;font-weight: 500;">{{(item.subcategories && item.subcategories.length>0) ? item.subcategories[0].name  : 'Cybersecutiy and Compliance'}}</p>
+                            <span class="similar-prod-price-det-price" *ngIf="item.priceList!=null"><p style="font-size: medium;font-weight: 400;">&#8377; {{item.priceList[0].price}}</p>
+                                <p style="font-size: medium;font-weight: 400;">&nbsp; / {{item.priceList[0].priceType}}</p>
+                                </span>
+                            
+                        </div>
+                        </div>
+        
+                    
+        
+                            <div class="quantity-add-prod-bundle">
+                                <span style="display: inline-flex;justify-content: center;gap: 5px;"> 
+                                    
+                                    <span >
+                                    <img id="add-minus-quantity" (click)="decreaseQuantity(item)" alt="minus" src="../../../assets/icons/Minus.svg">
+                                    </span>
+                                    <span>
+                                    <input
+                                        class="input-field"  [(ngModel)]="bundleQuantity"
+                                        >
+                                    </span>
+                                    <span >
+                                    <img id="add-minus-quantity" alt="" (click)="addQuantity(item)" src="../../../assets/icons/Add.svg">
+                                    </span>
+                                </span>
+                            </div>
+        
+                            <div class="sim-prod-btn-cont">
+                                <span >
+                                    <button class="btn similar-prod-request-quote-btn" (click)="requestQuote(item, bundleQuantity)">Request Quote</button>
+                                </span>
+                                </div>
+        
+                    </div>
+                </ng-container>
+        
+                    </div>
+        
+            </div>
+            <!-- <div class="bottom-container">
                 <ng-container *ngIf="products.length>0">
                     <div class="specification-cont" id="bundleDetailsRef" #bundleDetailsRef>
                         <h5>Bundle Details</h5>
@@ -446,6 +502,6 @@
                     </div>
 
                 </ng-container>
-            </div>
+            </div> -->
         </div>
     </ng-container>

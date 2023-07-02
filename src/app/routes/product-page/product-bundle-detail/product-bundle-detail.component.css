@@ -366,7 +366,9 @@ background: #F9F9F9;
 .buy-now-prod {
   display: flex;
   padding: 1%;
-  margin: 1%;
+  margin-left: 35%;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 .buy-now-btn {
@@ -615,6 +617,18 @@ background: #F7F7F7;
   margin: 1%;
   padding: 1%;
   flex-direction: column;
+}
+
+.quantity-add-prod-bundle{
+  display:flex;
+  justify-content: center;
+  width:100%;
+}
+
+.sim-prod-btn-cont{
+  display:flex;
+  justify-content: center;
+  width:100%;
 }
 
 /* ::ng-deep .mat-mdc-tab-nav-bar-stretch-tabs .mat-mdc-tab-link {
