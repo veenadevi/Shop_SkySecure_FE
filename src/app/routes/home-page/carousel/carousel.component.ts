@@ -31,7 +31,7 @@ export class CarouselComponent {
       eventStartDate: new Date('2019/07/28'),
       eventEndingDate: new Date('2019/07/30')
     },
-     {
+     /*{
       event:' Event 3',
       eventLocation:'',
       eventDescription:'',
@@ -54,7 +54,7 @@ export class CarouselComponent {
       img: '../../../../assets/images/banner/MicrosoftIntune.png',
       eventStartDate: new Date('2017/07/10'),
       eventEndingDate: new Date('2017/08/14')
-    },
+    },*/
     /*{
       event:' Event 6',
       eventLocation:'Mumbai',
