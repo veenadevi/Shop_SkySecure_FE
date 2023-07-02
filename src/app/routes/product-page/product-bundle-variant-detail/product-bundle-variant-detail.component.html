@@ -11,7 +11,7 @@
                             margin:10%;
                             cursor: pointer;
                             background: #EAEAEA;" class="img-hover"
-                                src="../../../../assets/Logos/MicrosoftDefender_300X300.png" alt="img">
+                                src="../../../../assets/images/imgPlaceholder.png" alt="img">
                         </ng-container>
                         <img src="" alt="">
                     </div>
@@ -51,28 +51,51 @@
                     <mat-icon class="review-icon">star</mat-icon>
                     <mat-icon class="review-icon">star</mat-icon>
                     <mat-icon class="review-icon">star</mat-icon>
-                    <mat-icon class="review-icon">star</mat-icon>
-                    <span> 5 reviews | write a review</span>
+                    <!-- <mat-icon class="review-icon">star</mat-icon> -->
+                    <span> 4 reviews | write a review</span>
                 </div>
-                <span style="display:inline-flex">
-                    <p *ngIf="productFamilyVariant.priceList[0].discountRate" style="font-size: larger;color: red;">
+ 
+                <!-- <span style="display:inline-flex">
+                    <p *ngIf="productFamilyVariant.priceList[0].discountRate != null" style="font-size: larger;color: rgb(0, 255, 128);">-{{productFamilyVariant.priceList[0].discountRate}}%&nbsp;</p>
+                    <h4 style="font-size: smaller;">&#8377; </h4>
+                <h4 style="margin-bottom: 0;">{{productFamilyVariant.priceList[0].price}} / {{productFamilyVariant.priceList[0].priceType}}</h4>
+              </span> -->
+                <!-- <span style="display:inline-flex">
+                    <p *ngIf="productFamilyVariant.priceList[0].discountRate!=null" style="font-size: larger;color: red;">
                         -{{productFamilyVariant.priceList[0].discountRate}}%&nbsp; </p>
                     <h4 style="font-size: smaller;">&#8377; </h4>
                     <h4 style="margin-bottom: 0;">{{productFamilyVariant.priceList[0].price}} /
                         {{productFamilyVariant.priceList[0].priceType}}</h4>
-                </span>
-                <span style="display:inline-flex;align-items: center;">
+                </span> -->
+                <!-- <span style="display:inline-flex;align-items: center;">
                     <p style="font-size: small;"> MRP:&nbsp;</p>
                     <s>
                         <p style="font-size: initial;">{{productFamilyVariant.priceList[0].ERPPrice}}
                         </p>
                     </s>
                 </span>
-                <p style="font-size: smaller;">GST Extra</p>
+                <p style="font-size: smaller;">GST Extra</p> -->
+
+
+                <div class="price">
+                    <span class="discount-holder">
+                        <span *ngIf="productFamilyVariant.priceList[0].discountRate != null" class="discounted-text">
+                            -{{productFamilyVariant.priceList[0].discountRate}}%&nbsp;
+                        </span>
+                        <span style="font-size: smaller;">&#8377; </span>
+                        <span>{{productFamilyVariant.priceList[0].price}} / {{productFamilyVariant.priceList[0].priceType}}</span>
+                    </span>
+                    <span>
+                        <span class="text-style-bold">MRP</span> 
+                        <span class="text-price strike-through"> ₹ {{((productFamilyVariant.priceList && productFamilyVariant.priceList.length>0) ? productFamilyVariant.priceList[0].ERPPrice : '' ) | number : '1.2-2'}}</span> 
+                        <span class="text-term"> / {{(productFamilyVariant.priceList && productFamilyVariant.priceList.length>0) ? productFamilyVariant.priceList[0].priceType : ''}}</span>
+                    </span>
+
+                </div>
                 <p style="margin-top: 10px; font-weight: 700; margin-bottom: 7px;">Solution Category:</p>
                 <p>{{productFamilyVariant.subcategories[0].name}}</p>
                 <p style=" font-weight: 700; margin-bottom: 7px;">About this product:</p>
-                <p style="margin-bottom: 15px;">{{productFamilyVariant.description}}</p>
+                <p style="margin-bottom: 15px;">{{productFamily.description}}</p>
                 <span style="display:flex;flex-direction: row;"><button class="btn view-det-btn">View
                         Features</button>
                     <button class="btn request-quote-btn" style="margin-left: 4%;">Request Quote</button></span>
@@ -185,9 +208,9 @@
             <a mat-tab-link *ngFor="let link of links; index as i" (click)="scrollToSection(link)"
                 [active]="activeLink == link"> {{titles[i]}} </a>
         </nav>
-         <p-card style="font-family: 'Lato', sans-serif;" header="Description" id="description" #descriptionRef>
+        <p-card style="font-family: 'Lato', sans-serif;" header="Description" id="description" #descriptionRef>
             <p class="m-0">
-                {{productFamilyVariant.description}}
+                {{productFamily.description}}
             </p>
             <span
                 style="display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;"><button
@@ -302,11 +325,12 @@
                                     <div class="comp-prod-card-img">
                                         <img style="width:70%;height: auto;position: relative;"
                                             src="{{productFamily.bannerLogo}}">
+
                                     </div>
                                     <div class="comp-prod-card-content">
-                                        <p style="font-size: medium;font-weight: 500;">{{productFamilyVariant.name}}</p>
+                                        <p style="font-size: medium;font-weight: 500;">{{productFamily.name}}</p>
                                         <p style="font-size: medium;font-weight: 300;">solution category</p>
-                                        <p>{{productFamilyVariant.subcategories[0].name}}</p>
+                                        <p>{{productFamily.subcategories[0].name}}</p>
                                     </div>
 
                                 </div>
@@ -391,7 +415,7 @@
                                         <div class="similer-prod-top">
                                             <div class="comp-prod-card-img">
                                                 <img style="width:70%;height: auto;position: relative;"
-                                                    src="alternateLogo">
+                                                    src="{{item.bannerLogo ? item.bannerLogo  : alternateLogo}}">
                                             </div>
                                             <div class="comp-prod-card-content">
                                                 <p style="font-size: medium;font-weight: 500;">{{item.name}}</p>
@@ -432,5 +456,5 @@
                 </div>
 
             </ng-container>
-        </div> 
+        </div>
     </div>

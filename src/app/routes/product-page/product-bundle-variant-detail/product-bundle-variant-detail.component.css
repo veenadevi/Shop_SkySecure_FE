@@ -617,6 +617,14 @@ background: #F7F7F7;
   flex-direction: column;
 }
 
+.discount-holder{
+  display: flex;
+  align-items: center;
+}
+.discounted-text{
+  font-size: 16px;
+  color: red;
+}
 /* ::ng-deep .mat-mdc-tab-nav-bar-stretch-tabs .mat-mdc-tab-link {
   flex-grow: 0;
 } */
