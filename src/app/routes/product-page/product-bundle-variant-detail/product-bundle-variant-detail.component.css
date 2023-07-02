@@ -366,7 +366,9 @@ background: #F9F9F9;
 .buy-now-prod {
   display: flex;
   padding: 1%;
-  margin: 1%;
+  margin-left: 35%;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 .buy-now-btn {
@@ -378,7 +380,7 @@ background: #F9F9F9;
   color: #FFFFFF;
   font-size: 16px;
   font-weight: 500;
-  width: 100%;
+  width: auto;
 }
 .input-field {
   background: var(--white);
@@ -616,7 +618,10 @@ background: #F7F7F7;
   padding: 1%;
   flex-direction: column;
 }
-
+.strike-through{
+  text-decoration: line-through;
+  margin-left:2px
+}
 .discount-holder{
   display: flex;
   align-items: center;

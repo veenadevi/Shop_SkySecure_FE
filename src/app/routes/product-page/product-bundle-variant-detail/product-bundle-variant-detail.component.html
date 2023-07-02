@@ -4,22 +4,49 @@
             <div class="product-image">
                 <div class="prod-img-cont">
                     <div class="prod-img-hover">
-                        <ng-container *ngFor="let item of [1,2,3,4]">
+                        <ng-container *ngFor="let item of productImages">
                             <img style="width: 120%;
                             height: auto;
                             transition: transform .2s;
                             margin:10%;
                             cursor: pointer;
-                            background: #EAEAEA;" class="img-hover"
-                                src="../../../../assets/images/imgPlaceholder.png" alt="img">
+                            background: #EAEAEA;" class="img-hover" src="../../../../assets/images/imgPlaceholder.png" alt="img">
                         </ng-container>
                         <img src="" alt="">
-                    </div>
+                        </div>
                     <div class="prod-img-logo">
                         <img style="width:120%;height: 100%;object-fit: cover;" src="{{productFamily.bannerLogo}}">
                     </div>
                 </div>
-                <div class="buy-now-prod">
+
+
+
+
+
+                <div class="buy-now-prod"> 
+                    <span style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;flex-direction: column;text-align: center;"> 
+                    <h6 style="margin-bottom: 0;">Quantity </h6> <p>(per license)</p>
+                    </span>
+                    <span style="display: inline-flex;justify-content: center;gap: 5px;"> 
+                        
+                            <span >
+                              <img id="add-minus-quantity" (click)="decreaseBuyQuantity(productFamilyVariant.quantity)" alt="minus" src="../../../assets/icons/Minus.svg">
+                            </span>
+                            <span>
+                              <input
+                                class="input-field"  [(ngModel)]="productFamilyVariant.quantity"
+                                >
+                            </span>
+                            <span >
+                              <img id="add-minus-quantity" alt="" (click)="addBuyQuantity(productFamilyVariant.quantity)" src="../../../assets/icons/Add.svg">
+                            </span>
+                        </span>
+
+                        <button class="btn buy-now-btn" (click)="requestQuote(productFamilyVariant)">Buy now</button>
+                    </div> 
+            </div>
+
+                <!-- <div class="buy-now-prod">
                     <span style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;">
                         <h6 style="margin-bottom: 0;">Quantity </h6>
                         <p>(per user)</p>
@@ -38,8 +65,8 @@
                     </span>
 
                     <button class="btn buy-now-btn">Buy now</button>
-                </div>
-            </div>
+                </div> -->
+           
             <div class="product-details-info">
                 <h4>{{productFamilyVariant.name}}
                 </h4>
@@ -96,7 +123,7 @@
                 <p>{{productFamilyVariant.subcategories[0].name}}</p>
                 <p style=" font-weight: 700; margin-bottom: 7px;">About this product:</p>
                 <p style="margin-bottom: 15px;">{{productFamily.description}}</p>
-                <span style="display:flex;flex-direction: row;"><button class="btn view-det-btn">View
+                <span style="display:flex;flex-direction: row;"><button class="btn view-det-btn" (click)="scrollToSection('#feature')">View
                         Features</button>
                     <button class="btn request-quote-btn" style="margin-left: 4%;">Request Quote</button></span>
                 <p-divider></p-divider>
@@ -251,8 +278,8 @@
                     </div>
                     <div class="p-view-all-feature-div">
                         <div class="feature-desc-heading">
-                            <p style="margin-bottom: 10px;font-weight: 400;">click here to view detailed feature of the
-                                product</p>
+                            <!-- <p style="margin-bottom: 10px;font-weight: 400;">click here to view detailed feature of the
+                                product</p> -->
                             <button class="btn view-det-btn" (click)="featureCountEvent()">View All Features</button>
                         </div>
                     </div>
@@ -404,12 +431,13 @@
         </div>
 
         <div class="bottom-container">
-            <ng-container *ngIf="products.length>0">
+         
+            <ng-container *ngIf="finalBundleDetails.length>0">
                 <div class="specification-cont" id="bundleDetailsRef" #bundleDetailsRef>
                     <h5>Bundle Details</h5>
                     <div class="comp-prod-cont">
                         <div class="comp-prod-vs">
-                            <ng-container *ngFor="let item of allSimilerProducts">
+                            <ng-container *ngFor="let item of finalBundleDetails">
                                 <div class="comp-prod-card">
                                     <div class="similer-product-card-cont">
                                         <div class="similer-prod-top">
