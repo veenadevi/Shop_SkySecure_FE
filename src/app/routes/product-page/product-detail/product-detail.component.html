@@ -141,31 +141,15 @@
                     
             </div>
             <div class="product-info">
-                <ng-container *ngIf="productListToCompare.length>0">
+                <ng-container *ngIf="(productListToCompare.length>0) ; else noCompareProducts">
                 <div class="compare-box">
                     <div class="compare-box-headers">    
                     <h5>Compare</h5>
-                    <span style="display:flex;flex-basis: 70%;
-                    justify-content: flex-end;align-items: center;color: cornflowerblue;font-size: small;
-    font-weight: 500;"><p style="margin-bottom: 3px;color: #0047BD;
-font-size: 13.122px;
-font-weight: 600;">Compare products</p></span>
+                    <span class="compare-products-action">
+                        <p>Compare products</p></span>
                     </div>
-                    <p style="font-size: small;margin-bottom: 10px;">choose the right plan that matches your needs!</p>
+                    <p class="choose-right-plan-style">Choose the right plan that matches your needs!</p>
                     <ng-container  *ngFor="let item of productListToCompare">
-                    <!-- <div class="plan-price">
-                        <div class="plan-price-image">
-                            <img style="width:70%;height: 100%;object-fit: cover;" src="{{product.products[0].bannerLogo}}">
-                        </div>
-                        <div class="plan-price-info">
-                            <p style="font-size: medium;
-                            font-weight: 700;margin-bottom: 0;">{{item.name}}</p>
-                            <p style="font-size: 13px;
-                            margin-bottom: 0;">solution Category: endpoint security</p>
-                            <p style="font-size: 13px;
-                            margin-bottom: 0;">&#8377; {{item.priceList[0].price}} / {{item.priceList[0].priceType}}</p>
-                        </div>
-                    </div> -->
                     <div class="plan-price">
                         <div class="plan-price-image">
                             <img class="img-style" src="{{(item.bannerLogo) ? item.bannerLogo : '../../../../../assets/icons/AddProductIcon.svg'}}" alt="Microsoft" >
@@ -196,6 +180,29 @@ font-weight: 600;">Compare products</p></span>
                 
                     </div>
                     </ng-container>
+                    <ng-template #noCompareProducts>
+                        <div class="compare-box">
+                            <div class="compare-box-headers">    
+                                <h5>Compare</h5>
+                                <span class="compare-products-action">
+                                    <p>Compare products</p>
+                                </span>
+                            </div>
+                            <p class="choose-right-plan-style">Choose the right plan that matches your needs!</p>
+                            
+                                
+                            <div class="plan-price empty-logo-background">
+                                <div class="plan-price-image">
+                                    <img style="width:70%;height: 100%;object-fit: cover;" src="../../../../../assets/icons/AddProductIcon.svg" alt="Microsoft" >
+                                </div>
+                                <div class="plan-price-info">
+                                    Add Products to compare
+                                </div>
+                            </div>
+                        </div>
+                        
+                            
+                    </ng-template>
                     <!-- <div class="connect-us-box">
                         <div class="connect-us-desc">
                             <h5>Connect Us!</h5>

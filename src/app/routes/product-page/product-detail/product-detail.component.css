@@ -777,3 +777,29 @@ background: #F7F7F7;
 /* ::ng-deep .mat-mdc-tab-nav-bar-stretch-tabs .mat-mdc-tab-link {
   flex-grow: 0;
 } */
+
+.compare-products-action{
+    display:flex;
+    flex-basis: 70%;
+    justify-content: flex-end;
+    align-items: center;
+    color: cornflowerblue;
+    font-size: small;
+    font-weight: 500;
+}
+
+.compare-products-action p{
+    margin-bottom: 3px;color: #0047BD;
+    font-size: 13.122px;
+    font-weight: 600;
+
+}
+
+.choose-right-plan-style{
+    font-size: small;
+    margin-bottom: 10px;
+}
+
+.empty-logo-background{
+  background: #E6E6E6 !important;
+}

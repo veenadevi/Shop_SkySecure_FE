@@ -64,7 +64,7 @@ export class ProductCardFlyerComponent implements OnInit{
         return;
 
       case 'productVariants':
-        this.router.navigate(['/products', product._id]);
+        this.router.navigate(['/products/product-variant-detail', product._id]);
         return;
         
       case 'productBundles':
