@@ -24,6 +24,8 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public productQuantity:  any = 1;
 
+  public selectedProductItem : any[] = [];
+
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
   @ViewChild('specificationRef') specificationRef!: ElementRef;
@@ -214,6 +216,20 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public viewModal() {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
+  }
+
+  public compareEvent($event, item){
+    console.log("&*&*&*&*& ", $event);
+    console.log("&*&*&*&*& ", item);
+
+    if($event.checked){
+      this.selectedProductItem = [item];
+    }
+    else{
+
+    }
+
+
   }
   
 }

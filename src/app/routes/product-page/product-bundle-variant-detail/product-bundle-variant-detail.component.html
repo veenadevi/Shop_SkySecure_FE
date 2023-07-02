@@ -4,14 +4,48 @@
             <div class="product-image">
                 <div class="prod-img-cont">
                     <div class="prod-img-hover">
-                        <ng-container *ngFor="let item of productImages">
-                            <img style="width: 120%;
-                            height: auto;
-                            transition: transform .2s;
-                            margin:10%;
-                            cursor: pointer;
-                            background: #EAEAEA;" class="img-hover" src="../../../../assets/images/imgPlaceholder.png" alt="img">
+                        <ng-container *ngIf="(productImages && productImages.length>0); else noImagesBlock">
+                            <ng-container *ngFor="let item of productImages">
+                                <img style="width: 120%;
+                                height: auto;
+                                transition: transform .2s;
+                                margin:10%;
+                                cursor: pointer;
+                                background: #EAEAEA;" class="img-hover" src="../../../../assets/images/imgPlaceholder.png" alt="img">
+                            </ng-container>
                         </ng-container>
+                        <ng-template #noImagesBlock>
+                            <!-- <ng-container *ngFor="let img of dummyImages"> -->
+                                <img style="width: 120%;
+                                height: auto;
+                                transition: transform .2s;
+                                margin:10%;
+                                cursor: pointer;
+                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+
+                                <img style="width: 120%;
+                                height: auto;
+                                transition: transform .2s;
+                                margin:10%;
+                                cursor: pointer;
+                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+
+                                <img style="width: 120%;
+                                height: auto;
+                                transition: transform .2s;
+                                margin:10%;
+                                cursor: pointer;
+                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+
+                                <img style="width: 120%;
+                                height: auto;
+                                transition: transform .2s;
+                                margin:10%;
+                                cursor: pointer;
+                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                            <!-- </ng-container> -->
+                        </ng-template>
+                        
                         <img src="" alt="">
                         </div>
                     <div class="prod-img-logo">

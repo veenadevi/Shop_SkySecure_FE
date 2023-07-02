@@ -175,7 +175,7 @@
 
                 </div>
             </ng-container> -->
-            <details-compare-products-flyer [compareProductsList] = "[]"></details-compare-products-flyer>
+            <details-compare-products-flyer [compareProductsList] = "selectedProductItem"></details-compare-products-flyer>
             <div class="connect-us-box">
                 <div class="connect-us-desc">
                     <h5>Connect Us!</h5>
@@ -329,7 +329,8 @@
                                     align-items: center;
                                     justify-content: flex-start;
                                     padding: 1%;">
-                                            <p-checkbox [binary]="true" inputId="binary"></p-checkbox>
+                                            <p-checkbox [binary]="true" inputId="binary" (onChange) ="compareEvent($event,productFamily)"
+                                            ></p-checkbox>
                                             <p style="font-size: small;">&nbsp;compare</p>
                                         </span>
                                         <span style="    display: inline-flex;
@@ -370,7 +371,7 @@
                                 align-items: center;
                                 justify-content: flex-start;
                                 padding: 1%;">
-                                                <p-checkbox [binary]="true" inputId="binary"></p-checkbox>
+                                                <p-checkbox [binary]="true" inputId="binary" (onChange) ="compareEvent($event,item)"></p-checkbox>
                                                 <p style="font-size: small;">&nbsp;compare</p>
                                             </span>
                                             <span style="    display: inline-flex;

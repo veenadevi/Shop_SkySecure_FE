@@ -25,6 +25,8 @@ export class ProductBundleVariantDetailComponent {
   myColor = '';
   productImages=[];
 
+  public dummyImages = [1,2,3,4];
+
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
   @ViewChild('specificationRef') specificationRef!: ElementRef;

@@ -4,6 +4,7 @@ import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, map } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
+import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 import { ProductsDetails } from 'src/shared/models/interface/partials/products-details';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
@@ -393,6 +394,13 @@ featureCount=5;
     }
     
   }
+
+
+  public showDialog(){
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+  }
+
+  
 
   ngOnDestroy(){
     
