@@ -1,5 +1,5 @@
 .admin-dashboard-view {
-    min-height: 30em;
+    min-height: 35em;
     display: flex;
     flex-direction: column;
     row-gap: 1em;
@@ -20,4 +20,8 @@
     padding: 1em;
     justify-content: left;
     align-items: center;
+}
+
+.pointer-style{
+    cursor: pointer;
 }

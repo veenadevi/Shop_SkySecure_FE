@@ -4,6 +4,9 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 //import { HomePgaeComponent } from './home-page.component';
 import { ProductPgaeComponent } from './product-page.component';
 import { BrandDetailComponent } from './brand-detail/brand-detail.component';
+import { ProductBundleDetailComponent } from './product-bundle-detail/product-bundle-detail.component';
+import { ProductBundleVariantDetailComponent } from './product-bundle-variant-detail/product-bundle-variant-detail.component';
+import { ProductDetailsVariantByIdComponent } from './product/product-details-variant-by-id/product-details-variant-by-id.component';
 
 const routes: Routes = [
   {
@@ -24,6 +27,16 @@ const routes: Routes = [
   {
     path:'brand-detail/:brandId',
     component: BrandDetailComponent
+  },
+  { path: 'product-bundle-detail/:id', 
+    component: ProductBundleDetailComponent 
+  },
+  { path: 'product-bundle-varaint-detail/:id', 
+    component: ProductBundleVariantDetailComponent 
+  },
+  {
+    path: 'product-variant-detail/:id',
+    component : ProductDetailsVariantByIdComponent
   }
 ];
 

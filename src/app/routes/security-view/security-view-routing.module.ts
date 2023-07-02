@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RecommendationsComponent } from './partials/recommendations/recommendations.component';
 import { SecurityViewComponent } from './security-view.component';
+import { EmptyRecommViewComponent } from './partials/empty-recomm-view/empty-recomm-view.component';
 
 const routes: Routes = [
   {
@@ -13,9 +14,12 @@ const routes: Routes = [
         path: 'recommendations',
         component : RecommendationsComponent
       },
-      
+      {
+        canActivate: [],
+        path: 'recommendation-default',
+        component : EmptyRecommViewComponent
+      },
     ]
-    
   }
 ];
 

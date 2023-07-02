@@ -50,14 +50,18 @@
 
 }
 
+.img-style{
+  width:50% !important;
+}
+
 
 
 
 /*----  Main Style  ----*/
-/* #cards_landscape_wrap-2{
+#cards_landscape_wrap-2{
     
-    background: #F7F7F7;
-  } */
+  border: 2px solid #EFEFEF;
+  }
   /* #cards_landscape_wrap-2 .product-container{
     padding-top: 80px; 
     padding-bottom: 100px;
@@ -82,6 +86,9 @@
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.30);
     position: relative;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -259,7 +266,7 @@
 
   .review-icon {
     color: orange;
-    padding-left: 5px;
+    padding-left: 3px;
     font-size: 18px;
     /* margin-top: 4px; */
     display: flex;

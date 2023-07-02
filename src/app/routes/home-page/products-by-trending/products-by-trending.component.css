@@ -1,4 +1,4 @@
-.container{
+/* .container{
     height: 322px;
     width: 100%;
     background : var(--white);
@@ -25,7 +25,7 @@
 }
 
 .brown-color{
-    /* color: var(--brown); */
+  
     color: #003388;
     cursor: pointer;
 
@@ -63,9 +63,7 @@ mat-card-header {
     
 }
 
-/* img {
-    width:100%;
-} */
+
 
 .mat-card-hero img{
     width: 100%;
@@ -159,7 +157,136 @@ mat-card-subtitle {
 
 @media (min-width: 768px) {
     .mat-card-hero {
-      /* width: calc(33.33% - 30px); */
+     
       width: 31%
     }
+} */
+
+.trending-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-family: 'lato',sans-serif;
+}
+.trending-heading{
+    
+   padding: 20px;
+}
+h6{
+    font-family: 'lato',sans-serif;
+    font-weight: bolder;
+}
+.trending-cards-list{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.trending-card-01{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    background-color: #E2EDFF;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+    margin-left: 3%;
+}
+.card-img{
+    width:100px;
+    height: 100px;
+    margin-left: 30%;
+}
+.card-heading{
+    text-align: center;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 60px;
+    font-size: 20px;
+    height: 0px;
+}
+.input-field{
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100px;
+}
+.quantity{
+    margin: 10px 0px 10px 0;
+    padding-top: 10px;
+}
+.td-column{
+    padding-left: 55px;
+}
+.card-btn{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+.primary-btn{
+    box-sizing: border-box;
+    border-radius: 8px;
+    text-align: center;
+    border: none;
+    color: white;
+    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 5px;
+    width: 100px;
+    margin-left: 20px;
+
+}
+.secondary-btn{
+    box-sizing: border-box;
+    border-radius: 8px;
+    text-align: center;
+    border: none;
+    color: white;
+    background: linear-gradient(180deg, #F79C0B 0%, #C68600 100%);
+    width: 100px;
+    margin-left: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 5px;
+}
+
+.trending-card-02{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    background-color: #E2EDFF;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+    margin-left: 5%;
+}
+
+.trending-card-03{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    background-color: #E2EDFF;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+    margin-left: 5%;
+}
+.trending-card-04{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    background-color: #E2EDFF;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+    margin-left: 5%;
+}
+
+.product-container {
+    margin-top: 5px;
 }

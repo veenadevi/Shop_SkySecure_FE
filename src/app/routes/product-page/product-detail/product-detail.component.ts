@@ -4,9 +4,11 @@ import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, map } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
+import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 import { ProductsDetails } from 'src/shared/models/interface/partials/products-details';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
+import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 
 @Component({
@@ -16,11 +18,16 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 })
 export class ProductDetailComponent implements OnInit{
   productImages=[];
+  productBundles=[];
+  faq = [];
+  productListToCompare  = [];
   products = [];
-  links = ['#description', '#feature', '#specification','#reviews', '#compProd', '#bundles','#simProd'];
-  titles = ['Description', 'Features', 'Specification','Reviews','compare produscts','Bundles','Similar Products'];
+  links = ['#description', '#feature', '#specification','#reviews', '#compProd', '#bundles','#faq'];
+  titles = ['Description', 'Features', 'Specification','Reviews','Compare Products','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
+
+  public selectedProductItem : any[] = [];
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
@@ -28,7 +35,7 @@ export class ProductDetailComponent implements OnInit{
   @ViewChild('reviewsRef') reviewsRef!: ElementRef;
   @ViewChild('compProdRef') compProdRef!: ElementRef;
   @ViewChild('bundlesRef') bundlesRef!: ElementRef;
-  @ViewChild('simProdRef') simProdRef!: ElementRef;
+  @ViewChild('faqRef') faqRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
 
   scrollToSection(sectionId: any): void {
@@ -52,39 +59,19 @@ export class ProductDetailComponent implements OnInit{
     else if (sectionId === 'bundles') {
       section = this.bundlesRef.nativeElement
     }
-    else if (sectionId === 'simProd') {
-      section = this.simProdRef.nativeElement
+    else if (sectionId === 'faq') {
+      section = this.faqRef.nativeElement
     }
     
 
-    // const section = sectionId === 'section1' ? this.section1Ref.nativeElement : this.section2Ref.nativeElement;
     section.scrollIntoView({ behavior: 'smooth' });
   }
-  // responsiveOptions: any[] | undefined;
 
   openLink(url:any): void {
-    // const url = 'https://example.com';
     console.log("url",url);
     window.open(url, '_blank');
   }
 
-  responsiveOptions = [
-    {
-        breakpoint: '1199px',
-        numVisible: 1,
-        numScroll: 1
-    },
-    {
-        breakpoint: '991px',
-        numVisible: 2,
-        numScroll: 1
-    },
-    {
-        breakpoint: '767px',
-        numVisible: 1,
-        numScroll: 1
-    }
-];
 
  featureList: any[] = [];
  productVariants: any[]  =[];
@@ -169,405 +156,34 @@ export class ProductDetailComponent implements OnInit{
         console.log("inside", this.featureList);
         
         this.similarProducts = response.productBundles;
-        response.productVariants = [{
-          "_id": "6413082ebdb764f8d6a252b7",
-          "priceList": [
-              {
-                  "Currency": "INR",
-                  "price": "1525.20",
-                  "priceType": "Yearly",
-                  "ERPPrice": "1860.00",
-                  "discountRate": "18"
-              }
-          ],
-          "name": "Microsoft Defender for Office 365 Plan 1",
-          "description": "Microsoft Defender for Office 365 Plan 1",
-          "createdBy": "ADMIN",
-          "updatedBy": "ADMIN",
-          "productId": "6408c67ebc262d784813b71b",
-          "createdAt": "2023-03-16T12:14:38.814Z",
-          "updatedAt": "2023-06-26T07:52:25.863Z",
-          "__v": 0,
-          "isActive": true,
-          "productSkuNumber": "CFQ7TTC0LH04",
-          "productSkuId": 1,
-          "requiredAddOns": {
-              "requiredProductVariants": [],
-              "requiredBundles": []
-          },
-          "featureList": [
-              {
-                  "_id": "6406ce0c4f8b923f284306ed",
-                  "name": "Preset security policies and Configuration Analyzer",
-                  "description": "Preset security policies and Configuration Analyzer",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.226Z",
-                  "updatedAt": "2023-03-07T05:39:24.226Z",
-                  "__v": 0,
-                  "productVariantId": "6413082ebdb764f8d6a252b7",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f284306f1",
-                  "name": "Safe Attachments in Teams",
-                  "description": "Safe Attachments in Teams",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.315Z",
-                  "updatedAt": "2023-03-07T05:39:24.315Z",
-                  "__v": 0,
-                  "productVariantId": "6413082ebdb764f8d6a252b7",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f284306f5",
-                  "name": "Safe Documents",
-                  "description": "Safe Documents",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.406Z",
-                  "updatedAt": "2023-03-07T05:39:24.406Z",
-                  "__v": 0,
-                  "productVariantId": "6413082ebdb764f8d6a252b7",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f284306f7",
-                  "name": "Safe Links in Teams",
-                  "description": "Safe Links in Teams",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.452Z",
-                  "updatedAt": "2023-03-07T05:39:24.452Z",
-                  "__v": 0,
-                  "productVariantId": "6413082ebdb764f8d6a252b7",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f284306f9",
-                  "name": "Report Message Add-In",
-                  "description": "Report Message Add-In",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.500Z",
-                  "updatedAt": "2023-03-07T05:39:24.500Z",
-                  "__v": 0,
-                  "productVariantId": "6413082ebdb764f8d6a252b7",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f284306fb",
-                  "name": "Protection for SharePoint, OneDrive, and Microsoft Teams",
-                  "description": "Protection for SharePoint, OneDrive, and Microsoft Teams",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.547Z",
-                  "updatedAt": "2023-03-07T05:39:24.547Z",
-                  "__v": 0,
-                  "productVariantId": "6413082ebdb764f8d6a252b7",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f284306fd",
-                  "name": "Anti-phishing policies",
-                  "description": "Anti-phishing policies",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.595Z",
-                  "updatedAt": "2023-03-07T05:39:24.595Z",
-                  "__v": 0,
-                  "productVariantId": "6413082ebdb764f8d6a252b7",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f284306ff",
-                  "name": "Real-time reports",
-                  "description": "Real-time reports",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.639Z",
-                  "updatedAt": "2023-03-07T05:39:24.639Z",
-                  "__v": 0,
-                  "productVariantId": "6413082ebdb764f8d6a252b7",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f28430701",
-                  "name": "Advanced protection for internal mail",
-                  "description": "Advanced protection for internal mail",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.681Z",
-                  "updatedAt": "2023-03-07T05:39:24.681Z",
-                  "__v": 0,
-                  "productVariantId": "6413082ebdb764f8d6a252b7",
-                  "isActive": true
-              }
-          ]
-      },
-      {
-          "_id": "6413084dbdb764f8d6a252b9",
-          "priceList": [
-              {
-                  "Currency": "INR",
-                  "price": "3886.80",
-                  "priceType": "Yearly",
-                  "ERPPrice": "4740.00",
-                  "discountRate": "18"
-              }
-          ],
-          "name": "Microsoft Defender for Office 365 Plan 2",
-          "description": "Microsoft Defender for Office 365 Plan 2",
-          "createdBy": "ADMIN",
-          "updatedBy": "ADMIN",
-          "productId": "6408c67ebc262d784813b71b",
-          "createdAt": "2023-03-16T12:15:09.755Z",
-          "updatedAt": "2023-06-26T07:52:25.863Z",
-          "__v": 0,
-          "isActive": true,
-          "productSkuNumber": "CFQ7TTC0LHXH",
-          "productSkuId": 1,
-          "requiredAddOns": {
-              "requiredProductVariants": [],
-              "requiredBundles": []
-          },
-          "featureList": [
-              {
-                  "_id": "6406ce0c4f8b923f28430703",
-                  "name": "Threat Trackers",
-                  "description": "Threat Trackers",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.725Z",
-                  "updatedAt": "2023-03-07T05:39:24.725Z",
-                  "__v": 0,
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f28430705",
-                  "name": "Campaign Views",
-                  "description": "Campaign Views",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.772Z",
-                  "updatedAt": "2023-03-07T05:39:24.772Z",
-                  "__v": 0,
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f28430707",
-                  "name": "Threat investigation (advanced threat investigation)",
-                  "description": "Threat investigation (advanced threat investigation)",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.820Z",
-                  "updatedAt": "2023-03-07T05:39:24.820Z",
-                  "__v": 0,
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f28430709",
-                  "name": "Automated investigation & response",
-                  "description": "Automated investigation & response",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.865Z",
-                  "updatedAt": "2023-03-07T05:39:24.865Z",
-                  "__v": 0,
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "isActive": true
-              },
-              {
-                  "_id": "6406ce0c4f8b923f2843070b",
-                  "name": "Attack simulation training",
-                  "description": "Attack simulation training",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "createdAt": "2023-03-07T05:39:24.911Z",
-                  "updatedAt": "2023-03-07T05:39:24.911Z",
-                  "__v": 0,
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "isActive": true
-              },
-              {
-                  "_id": "6416e9a601f5bc0a35b03f87",
-                  "properties": [],
-                  "isHighlight": false,
-                  "name": "Preset security policies and Configuration Analyzer",
-                  "description": "Preset security policies and Configuration Analyzer",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "createdAt": "2023-03-19T10:53:26.977Z",
-                  "updatedAt": "2023-03-19T10:53:26.977Z",
-                  "__v": 0,
-                  "isActive": true
-              },
-              {
-                  "_id": "6416f06101f5bc0a35b03f8b",
-                  "properties": [],
-                  "isHighlight": false,
-                  "name": "Safe Attachments in Teams",
-                  "description": "Safe Attachments in Teams",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "createdAt": "2023-03-19T11:22:09.532Z",
-                  "updatedAt": "2023-03-19T11:22:09.532Z",
-                  "__v": 0,
-                  "isActive": true
-              },
-              {
-                  "_id": "6416f0b001f5bc0a35b03f8f",
-                  "properties": [],
-                  "isHighlight": false,
-                  "name": "Safe Documents",
-                  "description": "Safe Documents",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "createdAt": "2023-03-19T11:23:28.737Z",
-                  "updatedAt": "2023-03-19T11:23:28.737Z",
-                  "__v": 0,
-                  "isActive": true
-              },
-              {
-                  "_id": "6416f28d01f5bc0a35b03f91",
-                  "properties": [],
-                  "isHighlight": false,
-                  "name": "Safe Links in Teams",
-                  "description": "Safe Links in Teams",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "createdAt": "2023-03-19T11:31:25.663Z",
-                  "updatedAt": "2023-03-19T11:31:25.663Z",
-                  "__v": 0,
-                  "isActive": true
-              },
-              {
-                  "_id": "6416f2bc01f5bc0a35b03f93",
-                  "properties": [],
-                  "isHighlight": false,
-                  "name": "Report Message Add-In",
-                  "description": "Report Message Add-In",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "createdAt": "2023-03-19T11:32:12.437Z",
-                  "updatedAt": "2023-03-19T11:32:12.437Z",
-                  "__v": 0,
-                  "isActive": true
-              },
-              {
-                  "_id": "6416f32501f5bc0a35b03f95",
-                  "properties": [],
-                  "isHighlight": false,
-                  "name": "Protection for SharePoint, OneDrive, and Microsoft Teams",
-                  "description": "Protection for SharePoint, OneDrive, and Microsoft Teams",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "createdAt": "2023-03-19T11:33:57.136Z",
-                  "updatedAt": "2023-03-19T11:33:57.136Z",
-                  "__v": 0,
-                  "isActive": true
-              },
-              {
-                  "_id": "64170cdb01f5bc0a35b03f97",
-                  "properties": [],
-                  "isHighlight": false,
-                  "name": "Anti-phishing policies",
-                  "description": "Anti-phishing policies",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "createdAt": "2023-03-19T13:23:39.903Z",
-                  "updatedAt": "2023-03-19T13:23:39.903Z",
-                  "__v": 0,
-                  "isActive": true
-              },
-              {
-                  "_id": "64170d2901f5bc0a35b03f99",
-                  "properties": [],
-                  "isHighlight": false,
-                  "name": "Real-time reports",
-                  "description": "Real-time reports",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "createdAt": "2023-03-19T13:24:57.687Z",
-                  "updatedAt": "2023-03-19T13:24:57.687Z",
-                  "__v": 0,
-                  "isActive": true
-              },
-              {
-                  "_id": "64170d3c01f5bc0a35b03f9b",
-                  "properties": [],
-                  "isHighlight": false,
-                  "name": "Advanced protection for internal mail",
-                  "description": "Advanced protection for internal mail",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "createdAt": "2023-03-19T13:25:16.956Z",
-                  "updatedAt": "2023-03-19T13:25:16.956Z",
-                  "__v": 0,
-                  "isActive": true
-              },
-              {
-                  "_id": "641711ed01f5bc0a35b03f9d",
-                  "properties": [],
-                  "isHighlight": false,
-                  "name": "Integration with Microsoft 365 Defender",
-                  "description": "Integration with Microsoft 365 Defender",
-                  "createdBy": "ADMIN",
-                  "updatedBy": "ADMIN",
-                  "subCategoryId": "6405e6304f8b923f28430513",
-                  "productVariantId": "6413084dbdb764f8d6a252b9",
-                  "createdAt": "2023-03-19T13:45:17.538Z",
-                  "updatedAt": "2023-03-19T13:45:17.538Z",
-                  "__v": 0,
-                  "isActive": true
-              }
-          ]
-      }
- ];
+//         response.productBundles=[{"name": "Microsoft Defender for Office 365 Plan 1","priceList": [
+//           {
+//               "Currency": "INR",
+//               "price": "1525.20",
+//               "priceType": "Yearly",
+//               "ERPPrice": "1860.00",
+//               "discountRate": "18"
+//           }
+//         ]
+// }];
+       response.products[0] = {...response.products[0], quantity: 1 }
         this.product = { products:[...response.products], featureList: response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants: response.featureListByProductVariants };
         console.log("&&&&& inside", this.product.productVariants.length);
         this.onProductLoad = true;
         this.bannerUrl = this.product.bannerURL;
-        this.productImages.push(this.product.products[0].bannerLogo)
-        this.productImages.push(this.product.products[0].bannerLogo)
-        this.productImages.push(this.product.products[0].bannerLogo)
-        this.productImages.push(this.product.products[0].bannerLogo)
+        if(response.products[0].productImages.length>0) {
+          this.productImages = response.productImages;
+        } else {
+        this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        }
+        for(let i=0;i<response.productBundles.length;i++)
+        response.productBundles[i].productFamily = response.productBundles[i].productFamily.map(object => ({ ...object, checked: false, quantity: 1 }));
+        this.productBundles  = response.productBundles;
+        this.faq  = response.products[0].productFAQ;
+        // this.product.productVariants.push(response.productBundles);
         //this.product.productVariants = [123];
         console.log("prVar:",this.product.productVariants)
         this.productVariants=response.productVariants;
@@ -619,6 +235,7 @@ console.log("response values: ", resp);
   }
 
   viewAllFeature = false;
+  checked: boolean = false;
 
   constructor(
     private metaDataSvc : MetadataService,
@@ -627,7 +244,8 @@ console.log("response values: ", resp);
     private metadataStore : MetadataStore,
     private router : Router,
     private authService : MsalService,
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private compareProductsStore : CompareProductsStore
   ){}
 featureCount=5;
 
@@ -637,6 +255,7 @@ featureCount=5;
     
     this.getProductDetails(productId);
     console.log(this.featureList);
+    this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     // if(this.featureList.length>5 && !this.viewAllFeature){
     //   this.dispFeatureList = [...this.featureList.slice(0,5)];
     //   console.log("dispfeatureList",this.featureList);
@@ -664,16 +283,71 @@ featureCount=5;
     //   this.viewAllFeature = true;
     // } else {
       this.featureList = this.product.featureList;
+      console.log("product list to compare",this.productListToCompare);
     // }
+  }
+
+  public removeSelectedItem(_id:any){
+    this.productListToCompare = this.productListToCompare.filter(function(item) {
+      return item._id != _id;
+    });
+    // this.compareProductsStore.setCompareProductsList(this.productList);
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+    // console.log('product_list_to_compare',);
+  }
+
+  public navigateToCompareProducts(){
+    this.router.navigate(['/compare-products']);
+  }
+  async addToCompare(item:any):Promise<void> {
+    // if(!item.checked)
+    // item.checked = true;
+
+    // if(item.checked)
+    // item.checked = false;
+    // else
+    // item.checked = true;
+    let count=0;
+    await this.productListToCompare.forEach(val => {
+      if(val._id===item._id) {
+        count++;
+      }
+    });
+    if (count===0) {
+      item = { ...item, 'solutionCategory': this.product.products[0].subcategories[0].description };
+      this.productListToCompare.push(item);
+    }
+    // this.productListToCompare.push(item);
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+    this.compareProductsStore.setCompareProductsList(this.productListToCompare);
+    const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    console.log("getProdFromLocalStorage",prodGet);
   }
 
   images: any[] = [1,2,3,4];
 
 
     position: string = 'left';
-   
+    quantityCount = 1;
+    addQuantity(quantity:any,index:any):void {
+      this.productBundles[index].productFamily[0].quantity = quantity+1;
+    }
+    decreaseQuantity(quantity:any,index:any): void {
+      if(quantity>1){
+        this.productBundles[index].productFamily[0].quantity = quantity-1;
+      }
+    }
 
-  public requestQuote (product : ProductsDetails) : void {
+    addBuyQuantity(quantity:any):void {
+      this.product.products[0].quantity = quantity+1;
+    }
+    decreaseBuyQuantity(quantity:any): void {
+      if(quantity>1){
+        this.product.products[0].quantity = quantity-1;
+      }
+    }
+
+  public requestQuote (product : any) : void {
 
     
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
@@ -683,14 +357,15 @@ featureCount=5;
       var existingItems = this.cartStore.getCartItems();
     
       let queryParams;
-      if(product.productVariants.length>0){
+      // if(product.productVariants.length>0){
         queryParams = {
-          productName : product.productVariants[0].name,
-          productId : product.productVariants[0]._id,
-          quantity : 1,
-          price : product.productVariants[0].priceList[0].price,
+          productName : product.name,
+          productId : product._id,
+          quantity : product.quantity,
+          price : product.priceList[0].price,
         };
-      }
+      // }
+      console.log(queryParams);
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
@@ -721,6 +396,13 @@ featureCount=5;
     }
     
   }
+
+
+  public showDialog(){
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+  }
+
+  
 
   ngOnDestroy(){
     

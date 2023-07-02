@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { MsalService } from '@azure/msal-angular';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
+import { LoginAlertModalComponent } from '../../login-alert-modal/login-alert-modal.component';
 
 @Component({
   selector: 'product-card-flyer',
@@ -25,11 +29,17 @@ export class ProductCardFlyerComponent implements OnInit{
 
   public selectedListForCompare : any[] = [];
 
+  public cachedDataForCheckBox : any = [];
+
   @Output() listForCompare = new EventEmitter();
 
   constructor(
     private router : Router,
-    private compareProductsStore : CompareProductsStore
+    private compareProductsStore : CompareProductsStore,
+    private authService : MsalService,
+    private cartStore : CartStore,
+    
+    private modalService : NgbModal
   ){}
 
 
@@ -46,7 +56,29 @@ export class ProductCardFlyerComponent implements OnInit{
     else{
       this.router.navigate(['/products', product._id]);
     }*/
-    this.router.navigate(['/products', product._id]);
+
+    
+    switch (product.type) {
+      case 'product':
+        this.router.navigate(['/products', product._id]);
+        return;
+
+      case 'productVariants':
+        this.router.navigate(['/products/product-variant-detail', product._id]);
+        return;
+        
+      case 'productBundles':
+        this.router.navigate(['/products/product-bundle-detail', product._id]);
+        return;
+      
+      case 'productBundleVariants':
+        this.router.navigate(['/products/product-bundle-varaint-detail', product._id]);
+        return;
+
+      default:
+        return null;
+    }
+    
   }
 
   public onFilterChange($event, item){
@@ -74,10 +106,10 @@ export class ProductCardFlyerComponent implements OnInit{
 
     }
 
+    this.cachedDataForCheckBox = cacheData;
+
     if($event.target.checked){
       this.selectedListForCompare.push(item);
-      
-      
     }
     else{
       /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
@@ -115,6 +147,38 @@ export class ProductCardFlyerComponent implements OnInit{
     
     this.listForCompare.emit(this.selectedListForCompare);
     
+  }
+
+  public requestQuote(product){
+
+    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
+
+    if(loggedinData.length > 0 ){
+      
+      var existingItems = this.cartStore.getCartItems();
+      let queryParams;
+      
+      console.log("))))))) product", product);
+      queryParams = {
+            productName : product.name,
+            productId : product._id,
+            quantity : 1,
+            price : product.priceList[0].price,
+          };
+      this.router.navigate(['/cart'], {queryParams: queryParams});
+    }
+
+    else {
+      this.viewModal();
+    }
+  }
+
+  public viewModal() {
+    const modalRef = this.modalService.open(LoginAlertModalComponent);
+  }
+
+  public setCheckBoxes(){
+
   }
 
 

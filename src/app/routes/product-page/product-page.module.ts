@@ -21,6 +21,13 @@ import { ProductFilterComponent } from './product-filter/product-filter.componen
 import { AdOnsComponent } from './ad-ons/ad-ons.component';
 import { CompareProductsFlyerComponent } from './ad-ons/partials/compare-products-flyer/compare-products-flyer.component';
 import { CompareProductItemFlyerComponent } from '../../../shared/components/compare-product-item-flyer/compare-product-item-flyer.component';
+import { MaterialModule } from 'src/app/material.module';
+import { PrimeNgModule } from 'src/app/prime-ng.module';
+import { ProductBundleDetailComponent } from './product-bundle-detail/product-bundle-detail.component';
+import { ProductBundleVariantDetailComponent } from './product-bundle-variant-detail/product-bundle-variant-detail.component';
+
+import { ProductDetailsVariantByIdComponent } from './product/product-details-variant-by-id/product-details-variant-by-id.component';
+import { DetailsCompareProductsFlyerComponent } from './ad-ons/partials/details-compare-products-flyer/details-compare-products-flyer.component';
 
 
 
@@ -39,6 +46,10 @@ import { CompareProductItemFlyerComponent } from '../../../shared/components/com
     ProductFilterComponent,
     AdOnsComponent,
     CompareProductsFlyerComponent,
+    ProductBundleDetailComponent,
+    ProductBundleVariantDetailComponent,
+    ProductDetailsVariantByIdComponent,
+    DetailsCompareProductsFlyerComponent,
     
     
   ],
@@ -51,12 +62,16 @@ import { CompareProductItemFlyerComponent } from '../../../shared/components/com
     FormsModule,
     NgMultiSelectDropDownModule,
     SharedModule,
+    MaterialModule,
+    PrimeNgModule
     
     
   ],
   exports: [
     RouterModule,
     SharedModule,
+    MaterialModule,
+    PrimeNgModule
     
   ]
 })

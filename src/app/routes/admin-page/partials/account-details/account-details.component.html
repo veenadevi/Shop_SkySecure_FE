@@ -12,27 +12,26 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th>ID</th>
+                    <th>Account Name</th>
                     <th>Owner Name</th>
-                    <th>Created By</th>
-                    <th>Industry</th>
+                    <th>Parent Account</th>
+                    
                     <th>Approval State</th>
-                    <th>Shipping City</th>
-                    <th>Shipping Country</th>
-                    <th>Description</th>
-                    <th>Annual Revenue</th>
+
+                    <th></th>
+                    
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-account>
                 <tr>
                     <td>{{ account.Owner.id }}</td>
+                    <td>{{account.Account_Name}}</td>
                     <td>{{ account.Owner.name }}</td>
-                    <td>{{ account.Created_By.name }}</td>
-                    <td>{{ account.Industry }}</td>
+                    <td>{{ (account.Parent_Account) ? account.Parent_Account : '-'}}</td>
+                    
                     <td>{{ account.$approval_state }}</td>
-                    <td>{{ account.Shipping_City }}</td>
-                    <td>{{ account.Shipping_Country }}</td>
-                    <td>{{ account.Description }}</td>
-                    <td>{{ account.Annual_Revenue }}</td>
+                    <td (click) = "navigateToDealsView('')">View Deals</td>
+                    
                 </tr>
             </ng-template>
             <!-- <ng-template pTemplate="paginatorleft">

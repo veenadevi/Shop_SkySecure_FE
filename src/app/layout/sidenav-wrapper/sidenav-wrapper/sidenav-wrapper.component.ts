@@ -13,6 +13,7 @@ export class SidenavWrapperComponent {
 
   public userLoggedInFlag = false;
   public userRoleVal = '';
+  public userFullName = '';
   isExpanded: boolean = false;
 
   @Input() set userLoggedIn(value: any){
@@ -23,6 +24,10 @@ export class SidenavWrapperComponent {
   @Input() set userRole(value: any){
     this.userRoleVal = value;
     
+  }
+
+  @Input() set userName(value : any){
+    this.userFullName =  value;
   }
 
 
@@ -83,7 +88,8 @@ export class SidenavWrapperComponent {
           this.router.navigate(['/']);
           return;
       case 'recommendations':
-        this.showDialog();
+          //this.showDialog();
+          this.router.navigate(['security-view/recommendation-default']);
         return;
 
       default:
