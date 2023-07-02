@@ -196,7 +196,8 @@ export class ProductBundleVariantDetailComponent {
         let tempProductVariants = this.setProductVariantsData(this.productVarients);
         let tempProductBundleVariants = this.setProductBundleVariantsData(this.childProductFamilyVariant);
         let tempProductBundles = this.setBundlesData(this.childProductFamilies);
-        this.finalBundleDetails = [...tempProducts,...tempProductBundles, ...tempProductVariants,...tempProductBundleVariants ];
+        this.finalBundleDetails = [...tempProducts,...tempProductBundles, ...tempProductVariants,...tempProductBundleVariants] ;
+        //this.finalBundleDetails={...this.finalBundleDetails,quantity: 1 }
       })
     );
   }
@@ -253,7 +254,8 @@ console.log("======setProductVariantsData===="+data.length)
           element.productType = 'productBundleVariants';
           element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
-          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element.solutionCategory=(element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
+          element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
           element['navigationId'] = element._id;
           element.priceList=element.priceList
       });
