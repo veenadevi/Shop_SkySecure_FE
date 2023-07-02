@@ -27,6 +27,7 @@ import { ProductBundleDetailComponent } from './product-bundle-detail/product-bu
 import { ProductBundleVariantDetailComponent } from './product-bundle-variant-detail/product-bundle-variant-detail.component';
 
 import { ProductDetailsVariantByIdComponent } from './product/product-details-variant-by-id/product-details-variant-by-id.component';
+import { DetailsCompareProductsFlyerComponent } from './ad-ons/partials/details-compare-products-flyer/details-compare-products-flyer.component';
 
 
 
@@ -48,6 +49,7 @@ import { ProductDetailsVariantByIdComponent } from './product/product-details-va
     ProductBundleDetailComponent,
     ProductBundleVariantDetailComponent,
     ProductDetailsVariantByIdComponent,
+    DetailsCompareProductsFlyerComponent,
     
     
   ],
