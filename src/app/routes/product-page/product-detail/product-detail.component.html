@@ -52,7 +52,7 @@
                         </div>
                 </div>
                 <div class="product-details-info">
-                    <h4 style="margin-bottom: auto;">{{product.products[0].name}}
+                    <h4 style="">{{product.products[0].name}}
                     </h4>
                     <p style="margin-top: 10px;
                     font-size: smaller;
@@ -357,8 +357,8 @@
                     </div>
                     <div class="comp-prod-card-content">
                         <p style="font-size: medium;font-weight: 500;">{{product.products[0].name}}</p>
-                        <p style="font-size: small;font-weight: 300;">solution category:</p>
-                        <p style="font-size: small;font-weight: 300;">{{product.products[0].subcategories[0].description}}</p>
+                        <p style="font-size: small;font-weight: 300;">Solution category:</p>
+                        <p style="font-size: small;font-weight: 500;">{{product.products[0].subcategories[0].description}}</p>
                     </div>
                     
                 </div>
@@ -369,7 +369,7 @@
                     justify-content: flex-start;
                     padding: 1%;"> 
                         <p-checkbox (click)="addToCompare(product.products[0], 'fromProd')" [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
-                        <p style="font-size: small;">&nbsp;compare</p>
+                        <p style="font-size: small;">&nbsp;Compare</p>
                         </span>
                         <span style="    display: inline-flex;
                     align-items: center;
@@ -397,8 +397,8 @@
                 </div>
                 <div class="comp-prod-card-content">
                     <p style="font-size: medium;font-weight: 500;">{{item.productFamily.name}}</p>
-                    <p style="font-size: small;font-weight: 300;">solution category:</p>
-                    <p style="font-size: small;font-weight: 300;">{{item.productFamily.subCategories[0].description}}</p>
+                    <p style="font-size: small;font-weight: 300;">Solution category:</p>
+                    <p style="font-size: small;font-weight: 500;">{{item.productFamily.subCategories[0].description}}</p>
                 </div>
                 
             </div>

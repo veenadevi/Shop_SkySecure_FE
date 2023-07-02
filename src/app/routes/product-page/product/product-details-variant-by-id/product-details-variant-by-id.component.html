@@ -31,7 +31,7 @@
             </div>
                     <div class="buy-now-prod"> 
                         <span style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;flex-direction: column;text-align: center;"> 
-                        <h6 style="margin-bottom: 0;">Quantity </h6> <p>(per license)</p>
+                        <h6 style="margin-bottom: 0;">Quantity </h6> <p>(per year)</p>
                         </span>
                         <span style="display: inline-flex;justify-content: center;gap: 5px;"> 
                             
@@ -66,9 +66,9 @@
                         <span> 5 reviews | write a review</span>
                     </div>
                     <span style="display:inline-flex">
-                        <p *ngIf="productVariants.priceList[0].discountRate != null" style="font-size: larger;color: red;">-{{productVariants.priceList[0].discountRate}}%&nbsp; </p>
-                        <h4 style="font-size: smaller;">&#8377; </h4>
-                    <h4 style="margin-bottom: 0;">{{productVariants.priceList[0].price}} / {{productVariants.priceList[0].priceType}}</h4>
+                        <p *ngIf="productVariants.priceList[0].discountRate != null" class="discounted-text">-{{productVariants.priceList[0].discountRate}}%&nbsp; </p>
+                        <span style="font-size: smaller;">&#8377; </span>
+                    <span style="font-size: 18px;font-weight: 500;">{{productVariants.priceList[0].price}} / {{productVariants.priceList[0].priceType}}</span>
                 </span>
                 
                 <span style="display:inline-flex;align-items: center;">
