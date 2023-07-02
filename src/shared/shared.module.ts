@@ -26,6 +26,7 @@ import { SearchableSubCategoryFilterComponent } from './components/searchable-fi
 import { CompareProductItemFlyerComponent } from './components/compare-product-item-flyer/compare-product-item-flyer.component';
 import { ContactUsFlyerComponent } from './components/contact-us-flyer/contact-us-flyer.component';
 import { WriteReviewFlyerComponent } from './components/write-review-flyer/write-review-flyer.component';
+import { GetFreeCallModalComponent } from './components/modals/get-free-call-modal/get-free-call-modal.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { WriteReviewFlyerComponent } from './components/write-review-flyer/write
     SearchableSubCategoryFilterComponent,
     CompareProductItemFlyerComponent,
     ContactUsFlyerComponent,
-    WriteReviewFlyerComponent
+    WriteReviewFlyerComponent,
+    GetFreeCallModalComponent
   ],
 
   providers: [
@@ -96,7 +98,8 @@ import { WriteReviewFlyerComponent } from './components/write-review-flyer/write
     SearchableSubCategoryFilterComponent,
     CompareProductItemFlyerComponent,
     ContactUsFlyerComponent,
-    WriteReviewFlyerComponent
+    WriteReviewFlyerComponent,
+    GetFreeCallModalComponent
   ],
   
 

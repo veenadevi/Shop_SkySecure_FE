@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PrimeNGConfig } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
+import { GetFreeCallModalComponent } from '../modals/get-free-call-modal/get-free-call-modal.component';
 
 @Component({
   selector: 'contact-us-flyer',
@@ -18,7 +20,8 @@ export class ContactUsFlyerComponent {
 
   constructor(
     private primengConfig: PrimeNGConfig,
-    private userProfileService : UserProfileService
+    private userProfileService : UserProfileService,
+    private modalService : NgbModal
     ) {}
 
     ngOnInit() {
@@ -26,9 +29,14 @@ export class ContactUsFlyerComponent {
     }
     
     showBasicDialog() {
-      this.displayBasic = true;
+      //this.displayBasic = true;
+      this.viewModal(null);
     }
 
+    public viewModal(req) {
+      const modalRef = this.modalService.open(GetFreeCallModalComponent);
+      modalRef.componentInstance.request = req;
+    }
     public sendEmail(){
       this.displayBasic = false;
 

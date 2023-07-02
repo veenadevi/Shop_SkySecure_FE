@@ -111,7 +111,7 @@
           </span>
           <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
               <span class="text-style">
-                User
+                {{userFullName}}
               </span>
               <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
             </div>
@@ -209,13 +209,16 @@
           <!-- Security Sub Menu -->
           <ng-container *ngIf="adminSubMenu">
             <mat-list-item>
-              <span *ngIf="isExpanded" class="sub-menu-item">Dashboard</span>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page']">Dashboard</span>
             </mat-list-item>
             <mat-list-item>
-              <span *ngIf="isExpanded" class="sub-menu-item">Accounts</span>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/accounts']">Accounts</span>
             </mat-list-item>
             <mat-list-item>
               <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/estimate-details']">Estimates</span>
             </mat-list-item>
             <mat-list-item>
               <span *ngIf="isExpanded" class="sub-menu-item">Add New Feature</span>
@@ -261,7 +264,10 @@
 
     <!-- Content - rendered Content for the current router path into the <router-outlet>, e.g. /dashboard or /info-->
     <mat-sidenav-content>
-      <router-outlet></router-outlet>
+      <div class="router-otlet-content">
+        <router-outlet></router-outlet>
+      </div>
+      
     </mat-sidenav-content>
   
   </mat-sidenav-container>

@@ -105,11 +105,14 @@ public cartData : any[] = [];
 
 
 
+    
 
     if(this.params.has('productId')){
+      console.log("()()()()()()() If Product,")
       this.getCartItems(false);
     }
     else if(this.params.has('productVariant')){
+      console.log("()()()()()()() If Product, Variant")
       //var list = JSON.parse(this.params.get('productList'));
       this.getCartItems(true);
     }
@@ -189,7 +192,7 @@ public cartData : any[] = [];
       productsList.push({
         "productId": productVariant._id,
         "productName" : productVariant.name,
-        "quantity" : 1,
+        "quantity" : productVariant.quantity,
         "price" : (productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].price : 20
       })
 
@@ -205,7 +208,7 @@ public cartData : any[] = [];
             productsList.push({
               "productId": item._id,
               "productName" : item.name,
-              "quantity" : 1,
+              "quantity" : item.quantity,
               "price" : item.priceList.length>0 ? item.priceList[0].price  : ''
           });
           }
@@ -223,7 +226,7 @@ public cartData : any[] = [];
             productsList.push({
               "productId": item._id,
               "productName" : item.name,
-              "quantity" : 1,
+              "quantity" : item.quantity,
               "price" : item.priceList.length>0 ? item.priceList[0].price : ''
           });
           }
@@ -238,7 +241,7 @@ public cartData : any[] = [];
       
 
       if(index >=0){
-        productsList[index].quantity = Number(productsList[index].quantity) + 1;
+        productsList[index].quantity = Number(productsList[index].quantity) + Number(this.params.get('quantity'));
       }
       else {
         productsList.push({

@@ -11,6 +11,7 @@ import { RecommendationsComponent } from './partials/recommendations/recommendat
 import { SecurityViewRoutingModule, ROUTED_COMPONENTS } from './security-view-routing.module';
 import { SegmentationComponent } from './partials/recommendations/partials/segmentation/segmentation.component';
 import { ActivityDetailsTableComponent } from './partials/recommendations/partials/activity-details-table/activity-details-table.component';
+import { EmptyRecommViewComponent } from './partials/empty-recomm-view/empty-recomm-view.component';
 
 
 
@@ -19,7 +20,8 @@ import { ActivityDetailsTableComponent } from './partials/recommendations/partia
     ROUTED_COMPONENTS,
     RecommendationsComponent,
     SegmentationComponent,
-    ActivityDetailsTableComponent
+    ActivityDetailsTableComponent,
+    EmptyRecommViewComponent
   ],
   imports: [
     CommonModule,

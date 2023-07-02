@@ -1,0 +1,48 @@
+<div class="deals-details-view">
+    <div class="card">
+        <p-table 
+            [value]="dealsData" 
+            [tableStyle]="{ 'min-width': '50rem' }"
+            [paginator]="false"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            >
+            <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Deal ID</th>
+                    <th>Deal Name</th>
+                    <th>Description</th>
+                    <th>Expected Revenue</th>
+                    
+                    <th>Deal Stage</th>
+
+                    <th> Closing Date</th>
+                    <th></th>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-deal>
+                <tr>
+                    <td>{{deal.id}}</td>
+                    <td>{{deal.Deal_Name}}</td>
+                    <td>{{deal.Description}}</td>
+                    <td>{{deal.Expected_Revenue}}</td>
+                    <td>{{deal.Stage}}</td>
+                    <td>{{deal.Closing_Date}}</td>
+                    <td>
+                        <button (click)="craeteEstimate(deal)">Create Estimate</button>
+                    </td>
+                    
+                </tr>
+            </ng-template>
+            <!-- <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+            </ng-template> -->
+            <!-- <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+            </ng-template> -->
+        </p-table>
+    </div>
+</div>

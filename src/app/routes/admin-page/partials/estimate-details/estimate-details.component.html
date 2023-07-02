@@ -1,0 +1,37 @@
+<div class="estimate-details-view">
+    <div class="card">
+        <p-table 
+            [value]="estimatesData" 
+            [tableStyle]="{ 'min-width': '50rem' }"
+            [paginator]="false"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            >
+            <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Company Name</th>
+                    <th>Customer ID</th>
+                    <th>Customer Name</th>
+                    <th>Estimate Number</th>
+                    <th>Total</th>
+
+                    
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>{{item.company_name}}</td>
+                    <td>{{item.customer_id}}</td>
+                    <td>{{item.customer_name}}</td>
+                    <td>{{item.estimate_number}}</td>
+                    <td>{{item.total}}</td>
+                    
+                </tr>
+            </ng-template>
+            
+        </p-table>
+    </div>
+</div>
