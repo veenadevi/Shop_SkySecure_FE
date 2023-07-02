@@ -17,7 +17,8 @@ export class CarouselComponent {
       event:' Event 1',
       eventLocation:'',
       eventDescription:'',
-      img: '../../../../assets/images/banner/MicrosoftDefender.png',
+      // img: '../../../../assets/images/banner/MicrosoftDefender.png',
+      img: '../../../../assets/images/banner/AboutBanner.jpg',
       eventStartDate: new Date('2019/05/20'),
       eventEndingDate: new Date('2019/05/24')
     },
@@ -25,11 +26,12 @@ export class CarouselComponent {
       event:' Event 2',
       eventLocation:'',
       eventDescription:'',
-      img: '../../../../assets/images/banner/AzureActiveDirectory.png',
+      // img: '../../../../assets/images/banner/AzureActiveDirectory.png',
+      img: '../../../../assets/images/banner/FacilityForProductBundles.png',
       eventStartDate: new Date('2019/07/28'),
       eventEndingDate: new Date('2019/07/30')
     },
-     {
+     /*{
       event:' Event 3',
       eventLocation:'',
       eventDescription:'',
@@ -52,7 +54,7 @@ export class CarouselComponent {
       img: '../../../../assets/images/banner/MicrosoftIntune.png',
       eventStartDate: new Date('2017/07/10'),
       eventEndingDate: new Date('2017/08/14')
-    },
+    },*/
     /*{
       event:' Event 6',
       eventLocation:'Mumbai',
