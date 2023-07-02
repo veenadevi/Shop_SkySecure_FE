@@ -1,0 +1,96 @@
+
+:host ::ng-deep .modal-content{
+  margin-top: 13em !important;
+  -webkit-border-radius: 12px !important;
+  -moz-border-radius: 12px !important;
+  border-radius: 12px !important; 
+}
+.modal-container {
+  /* width: 600px;
+  height: 340px; */
+  border-radius: 10px;
+  background-color: var(--white);
+  /* border-radius: 12px; */
+  justify-content: center;
+  color: var(--black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.modal-header{
+  border: none !important;
+  width: 100%;
+}
+.modal-footer{
+  border: none !important;
+  width:100%;
+  justify-content: end;
+}
+
+.modal-top{
+ 
+}
+
+.modal-body{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+}
+.altsyslogo-alert {
+  margin-bottom: 10px;
+}
+
+.container { display: flex; }
+
+.container > div:first-child { margin-right: auto; visibility: hidden; }
+
+.container > div:last-child { margin-left: auto; }
+
+
+
+.request-btn {
+  background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
+  border-radius: 8px;
+  color: #FFFFFF;
+  /* border: 1px solid #EFEFEF; */
+  height: 40px;
+  width: 200px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.compare-btn {
+  background: #E2EDFF;
+  border: 1px solid #003388;
+  border-radius: 8px;
+  text-align: center;
+  color: #003388;
+  margin-right: 10px;
+  width: 200px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.input-field{
+  width: 70%;
+}
+
+.header-style{
+  font-weight: 600;
+  line-height: 2rem;
+  font-size: 18px;
+  color: var(--neutral);
+}
+
+.p-inputtext{
+  width:100%
+}
+
+.close{
+  background: none;
+  border: none;
+  font-size: 25px;
+}
+

@@ -1,0 +1,105 @@
+.contact-us-wrapper{
+    padding: 0px 0px 20px 0px;
+}
+.contact-us-container{
+    /* border: 1px solid #d9d9d9;
+    border-radius: 8px; */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+    align-items: center;
+}
+
+
+
+
+body {
+    background: #efefef;
+  }
+  
+
+  .card-container {
+    
+    border: none !important;
+    border-radius: none;
+    box-shadow: none;
+    background: var(--white);
+  }
+  
+  .user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+   #userAvatar {
+    border: none;
+    position: relative;
+    bottom: -50px;
+    object-fit: cover;
+  }
+  
+  .accountStats {
+    width:100%;
+    min-height: 100px;
+    padding-top: 55px;
+    background-color: #F1F8FF;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    justify-content: center;
+    align-items: center;
+    padding: 55px 15px 0px 15px;
+    /* border-radius: 0px 0px 5px 5px; */
+
+  }
+
+  .text-header{
+    font-size: 18px;
+  }
+
+  .text-small{
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .call-btn {
+    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
+    border-radius: 8px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+/** Modal Style **/
+:host ::ng-deep .p-button {
+  margin: 0 .5rem 0 0;
+  min-width: 10rem;
+}
+
+p {
+  margin: 0;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-dialog .p-button {
+  min-width: 6rem;
+}
+
+.textarea-style{
+  margin-top: 10px;
+}
+.form-group input,textarea{
+  margin-top: 10px;
+}
+

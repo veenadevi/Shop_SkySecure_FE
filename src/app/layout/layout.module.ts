@@ -19,6 +19,7 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
+import { SidenavWrapperComponent } from './sidenav-wrapper/sidenav-wrapper/sidenav-wrapper.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
     ToolbarComponent,
     FooterComponent,
     UserPanelComponent,
+    SidenavWrapperComponent,
     
   ],
 
@@ -56,7 +58,8 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
     HeaderComponent,
     ToolbarComponent,
     FooterComponent,
-    UserPanelComponent
+    UserPanelComponent,
+    SidenavWrapperComponent
   ]
 
 })

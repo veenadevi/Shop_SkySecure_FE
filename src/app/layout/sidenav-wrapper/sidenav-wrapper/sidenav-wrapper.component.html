@@ -1,0 +1,273 @@
+<ng-container *ngIf="userLoggedInFlag">
+  <span class="navigation-arrow" [ngClass]="(isExpanded ? 'arrow-position-long' : 'arrow-position-short')" (click)="menuExpansion(isExpanded, null)">
+    <mat-icon mat-list-icon class="chevron-button">{{(isExpanded ? 'chevron_left' : 'chevron_right')}}
+    </mat-icon>
+  </span>
+</ng-container>
+
+<mat-sidenav-container autosize>
+    <mat-sidenav #sidenav mode="side" opened="isExpanded" [ngClass]="(userLoggedInFlag) ? '' : 'hide-nav'">
+      
+      
+      <mat-nav-list [ngClass]="(isExpanded) ? 'nav-expanded' : ''">
+  
+        
+        
+        
+        <!-- <mat-list-item (click)="isExpanded = !isExpanded"> -->
+        <!-- <mat-list-item (click)="menuExpansion(isExpanded)">
+          <span class="icon-holder">
+            <mat-icon mat-list-icon class="chevron-button" [ngClass]="{ rotated: isExpanded }">chevron_right
+            </mat-icon>
+            <img src="../../../../assets/icons/illustration_icons/HamburgerIcon.svg">
+          </span>
+        </mat-list-item> -->
+  
+        <!-- <mat-list-item>
+          
+          <span class="icon-holder" (click)="isExpanded = !isExpanded">
+            <img src="../../../../assets/icons/illustration_icons/UserIcon.svg">
+          </span>
+          <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
+              <span>
+                User
+              </span>
+              <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+            </div>
+        </mat-list-item>
+
+        <ng-container *ngIf="userSubMenu">
+          <mat-list-item [routerLink]="'dashboard'">
+            <span *ngIf="isExpanded" class="sub-menu-item">User Profile</span>
+          </mat-list-item>
+          <mat-list-item [routerLink]="'dashboard'">
+            <span *ngIf="isExpanded" class="sub-menu-item">Quotation History</span>
+          </mat-list-item>
+          <mat-list-item [routerLink]="'dashboard'">
+            <span *ngIf="isExpanded" class="sub-menu-item" (click)="logout()">Logout</span>
+          </mat-list-item>
+        </ng-container>
+        
+
+
+
+  
+        <mat-list-item>
+          
+          <span class="icon-holder" (click)="isExpanded = !isExpanded">
+            <img src="../../../../assets/icons/illustration_icons/DashboardIcon.svg">
+          </span>
+          <span *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('dashboard')">
+            <span>
+              Dashboard
+            </span>
+            <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+          </span>
+          
+        </mat-list-item>
+
+        <ng-container *ngIf="dashboardSubMenu">
+          <mat-list-item [routerLink]="'dashboard'">
+            <span *ngIf="isExpanded" class="sub-menu-item">Dashboard</span>
+          </mat-list-item>
+          <mat-list-item [routerLink]="'dashboard'">
+            <span *ngIf="isExpanded" class="sub-menu-item">Accounts</span>
+          </mat-list-item>
+          <mat-list-item [routerLink]="'dashboard'">
+            <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
+          </mat-list-item>
+          <mat-list-item [routerLink]="'dashboard'">
+            <span *ngIf="isExpanded" class="sub-menu-item">Add New Feature</span>
+          </mat-list-item>
+        </ng-container>
+  
+        <mat-list-item>
+          
+          <span class="icon-holder" (click)="isExpanded = !isExpanded">
+            <img src="../../../../assets/icons/illustration_icons/SecurityIcon.svg">
+          </span>
+          <span *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('security')">
+            <span>
+              Security
+            </span>
+            <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+          </span>
+        </mat-list-item>
+
+        <ng-container *ngIf="securitySubMenu">
+          <mat-list-item [routerLink]="'dashboard'">
+            <span *ngIf="isExpanded" class="sub-menu-item">Recommendations</span>
+          </mat-list-item>
+        </ng-container>
+  
+         -->
+    
+
+
+      <!-- Dashboard Section -->
+        <mat-list-item>
+          <span class="icon-holder" (click)="navAction(isExpanded , 'user')">
+            <img src="../../../../assets/YellowChalk/DefaultUserIcon.svg" title="User" alt="User">
+          </span>
+          <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
+              <span class="text-style">
+                {{userFullName}}
+              </span>
+              <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
+            </div>
+        </mat-list-item>
+
+        <!-- Dashboard Section -->
+        <mat-list-item>
+          <span class="icon-holder" (click)="navAction(isExpanded , 'dashboard')">
+            <img src="../../../../assets/YellowChalk/DashboardIcon.svg" title="Dashboard" alt="Dashboard">
+          </span>
+          <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('dashboard')">
+              <span class="text-style">
+                Dashboard
+              </span>
+              <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
+            </div>
+        </mat-list-item>
+
+        <!-- Shop Section -->
+        <mat-list-item (click)="navAction(isExpanded , 'shop')">
+          <span class="icon-holder">
+            <img src="../../../../assets/YellowChalk/ShopIcon.svg" title="Shop" alt="Shop">
+          </span>
+          <div *ngIf="isExpanded" class="menu-item">
+              <span class="text-style">
+                Shop
+              </span>
+              <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
+            </div>
+        </mat-list-item>
+
+        <!-- Security Section -->
+        <mat-list-item>
+          <span class="icon-holder" (click)="menuExpansion(isExpanded , 'security')" >
+            <img src="../../../../assets/YellowChalk/SecurityIcon.svg" title="Security" alt="Security">
+          </span>
+          <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('security')">
+              <span class="text-style">
+                Security
+              </span>
+              <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+            </div>
+        </mat-list-item>
+
+        <!-- Security Sub Menu -->
+        <ng-container *ngIf="securitySubMenu">
+          <mat-list-item (click)="navAction(isExpanded , 'recommendations')">
+            <span *ngIf="isExpanded" class="sub-menu-item">Recommendations</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span *ngIf="isExpanded" class="sub-menu-item">Reference Architecture</span>
+          </mat-list-item>
+        </ng-container>
+
+        <!-- Insurance Section -->
+        <mat-list-item>
+          <span class="icon-holder" (click)="navAction(isExpanded , 'insurance')">
+            <img src="../../../../assets/YellowChalk/InsuranceIcon.svg" title="Insurance" alt="Insurance">
+          </span>
+          <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
+              <span class="text-style">
+                Insurance
+              </span>
+              <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
+            </div>
+        </mat-list-item>
+
+        <!-- Cloud Section -->
+        <mat-list-item>
+          <span class="icon-holder" (click)="navAction(isExpanded , 'cloud')">
+            <img src="../../../../assets/YellowChalk/CloudIcon.svg" title="Cloud" alt="Cloud">
+          </span>
+          <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
+              <span class="text-style">
+                Cloud
+              </span>
+              <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
+            </div>
+        </mat-list-item>
+
+        <!-- Admin Section -->
+        <ng-container *ngIf="userRoleVal === 'admin'">
+          <mat-list-item>
+            <span class="icon-holder" (click)="menuExpansion(isExpanded , 'admin')">
+              <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
+            </span>
+            <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('admin')">
+                <span class="text-style">
+                  Admin
+                </span>
+                <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+              </div>
+          </mat-list-item>
+  
+          <!-- Security Sub Menu -->
+          <ng-container *ngIf="adminSubMenu">
+            <mat-list-item>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page']">Dashboard</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/accounts']">Accounts</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/estimate-details']">Estimates</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span *ngIf="isExpanded" class="sub-menu-item">Add New Feature</span>
+            </mat-list-item>
+          </ng-container>
+        </ng-container>
+        
+
+        <!-- Profile Section -->
+        <mat-list-item>
+          <span class="icon-holder" (click)="menuExpansion(isExpanded , 'profile')">
+            <img src="../../../../assets/YellowChalk/ProfileIcon.svg" title="Profile" alt="Profile">
+          </span>
+          <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('profile')" >
+              <span class="text-style">
+                Profile
+              </span>
+              <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+            </div>
+        </mat-list-item>
+
+        <!-- Security Sub Menu -->
+        <ng-container *ngIf="profileSubMenu">
+          <mat-list-item [routerLink]="['user-profile/profile-view']">
+            <span *ngIf="isExpanded" class="sub-menu-item">Update Profile</span>
+          </mat-list-item>
+          <mat-list-item (click)="logout()">
+            <span *ngIf="isExpanded" class="sub-menu-item">Logout</span>
+          </mat-list-item>
+        </ng-container>
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+
+
+
+
+
+
+
+
+
+    <!-- Content - rendered Content for the current router path into the <router-outlet>, e.g. /dashboard or /info-->
+    <mat-sidenav-content>
+      <div class="router-otlet-content">
+        <router-outlet></router-outlet>
+      </div>
+      
+    </mat-sidenav-content>
+  
+  </mat-sidenav-container>

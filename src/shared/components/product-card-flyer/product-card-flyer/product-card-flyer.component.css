@@ -1,0 +1,177 @@
+.product-card-container{
+    
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.2em;
+    width:100%;
+}
+
+.product-card-flyer-container{
+    border : 1px solid #d9d9d9;
+    border-radius: 8px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    width:100%;
+}
+
+.logo-holder{
+    width:30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 10px 20px 10px;
+}
+
+/** Logo Holder CSS **/
+
+.logo-box{
+    width:60%;
+}
+
+.logo-box img{
+    width: 100%;
+}
+
+.ratings-box{
+    height: 50%;
+}
+.review-icon {
+    color: orange;
+    padding-top: 5px;
+    line-height:2rem;
+    overflow: visible;
+}
+
+.ratings-box div{
+    font-size: 12px;
+    text-align: center;
+}
+.add-to-compare-box{
+    height: 10%;
+    margin-top: 10px;
+}
+
+.add-to-compare-box span{
+    font-size: 13px;
+}
+
+
+/** Logo Holder CSS  Ends **/
+
+
+
+
+
+
+
+.content-holder{
+    width:70%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 10px 10px 20px 10px;
+    row-gap: 10px;
+}
+
+/** Content Holder CSS **/
+
+
+.header{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header mat-icon{
+    margin-right: 20px;
+}
+
+.header-title{
+    /* color: #010209; */
+    font-weight: 600;
+    line-height: 2rem;
+    font-size: 18px;
+        /* color: #ffff; */
+    color: var(--neutral);
+      
+}
+
+.text-style-bold{
+    font-size: 14px;
+    font-weight: bold;
+}
+.text-style{
+    font-size: 12px;
+    font-weight: normal;
+    color: var(--text-dark);
+    /* min-height: 66px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    
+}
+.price{
+    display: flex;
+    flex-direction: column;
+}
+.text-price{
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.text-term{
+    font-size: 12px !important;
+    font-weight: 200;
+}
+
+/** Content Holder CSS  Ends **/
+
+
+
+.btn-holder{
+    width:90%;
+    display: flex;
+    column-gap: 20px;
+    justify-content: end;
+    margin-top: 20px;
+}
+
+.request-btn {
+    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
+    border-radius: 8px;
+    border: 1px solid #EFEFEF;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    
+}
+
+  .compare-btn {
+      border-radius: 8px;
+      background: #E2EDFF;
+      border: 1px solid #003388;
+      text-align: center;
+      color: #003388;
+      font-size: 16px;
+      font-weight: 500;
+      
+  }
+
+  .strike-through{
+    text-decoration: line-through;
+    margin-left:2px
+  }
+
+  .discount-holder{
+    display: flex;
+    align-items: center;
+  }
+  .discounted-text{
+    font-size: 16px;
+    color: red;
+  }

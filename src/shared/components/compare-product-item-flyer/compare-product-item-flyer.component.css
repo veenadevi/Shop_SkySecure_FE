@@ -1,0 +1,167 @@
+/* .card-container{
+    width: 85px;
+    height: 85px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    
+}
+
+.empty-logo-background{
+    background: #E6E6E6;
+}
+
+.logo-background{
+    background: var(--white);
+    border: 1px solid #BEBEBE;
+    border-radius: 8px;
+}
+
+.img-holder {
+    
+    
+    text-align: center;
+    height: 60%;
+}
+
+.empty-img-holder{
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.img-holder img {
+    width:80%
+}
+
+.text-holder{
+    display: flex;
+    align-items: center;
+    height: 40%;
+    padding: 0.3em;
+    font-size: 13px;
+    text-align: center;
+}
+
+.text-holder span{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+} */
+
+
+.card-container{
+    border : 1px solid #d9d9d9;
+    border-radius: 8px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    column-gap: 1em;
+    
+    /* justify-content: center; */
+}
+
+.empty-padding{
+    padding: 10px 30px 10px 30px;
+}
+
+.product-padding{
+    padding: 10px 10px 10px 10px;
+}
+
+
+
+.logo-background{
+    background: var(--white);
+    border: 1px solid #BEBEBE;
+    border-radius: 8px;
+}
+
+.content-holder{
+    display: flex;
+    align-items: center;
+}
+
+.logo-holder {
+    width:30%;
+}
+
+.img-holder{
+    text-align: center;
+    height: 60%;
+}
+
+.img-holder img{
+    width:100%
+}
+
+
+.plan-price {
+    display: flex;
+    border-radius: 8px;
+    padding: 1%;
+    margin-top: 1%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 4%;
+    flex-direction: row;
+    border-radius: 8px;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.plan-price-image {
+    display: flex;
+    flex-basis: 25%;
+    padding: 1%;
+    margin: 1%;
+    flex-direction: column;
+}
+
+.plan-price-info {
+    display: flex;
+    flex-basis: 75%;
+    padding: 1%;
+    margin: 1%;
+    justify-content: center;
+    align-items: baseline;
+    flex-direction: column;
+}
+
+.img-style{
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.close-icon{
+    /* position: absolute;
+    background: red;
+    color: white;
+    top: -10px;
+    right: -10px; */
+}
+
+.close-icon .btn-close{
+    /* position: absolute; */
+    font-size: 12px;
+}
+
+.empty-logo-background{
+    background: #E6E6E6 !important;
+}
+
+
+
+

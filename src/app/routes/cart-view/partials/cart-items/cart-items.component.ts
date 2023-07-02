@@ -18,11 +18,23 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   styleUrls: ['./cart-items.component.css']
 })
 export class CartItemsComponent {
+
+
+
   private subscriptions : Subscription[] = [];
 
   public cartItems : any;
 
   public params : any;
+
+    public product : any = {};
+
+  public itemTotal;
+
+  public grandTotal = 0;
+
+
+  public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
  
 
@@ -61,6 +73,10 @@ public cartData : any[] = [];
       if(data){
         //this.cartData = data.usercart[0].userCartDetails;
         this.cartData = data;
+        this.cartData.forEach(element => {
+          element['itemTotal'] = element.quantity * element.price;
+        });
+        this.calTotalPrice();
         return this.cartData;
       }
       else{
@@ -89,11 +105,14 @@ public cartData : any[] = [];
 
 
 
+    
 
     if(this.params.has('productId')){
+      console.log("()()()()()()() If Product,")
       this.getCartItems(false);
     }
     else if(this.params.has('productVariant')){
+      console.log("()()()()()()() If Product, Variant")
       //var list = JSON.parse(this.params.get('productList'));
       this.getCartItems(true);
     }
@@ -173,7 +192,7 @@ public cartData : any[] = [];
       productsList.push({
         "productId": productVariant._id,
         "productName" : productVariant.name,
-        "quantity" : 1,
+        "quantity" : productVariant.quantity,
         "price" : (productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].price : 20
       })
 
@@ -189,7 +208,7 @@ public cartData : any[] = [];
             productsList.push({
               "productId": item._id,
               "productName" : item.name,
-              "quantity" : 1,
+              "quantity" : item.quantity,
               "price" : item.priceList.length>0 ? item.priceList[0].price  : ''
           });
           }
@@ -207,7 +226,7 @@ public cartData : any[] = [];
             productsList.push({
               "productId": item._id,
               "productName" : item.name,
-              "quantity" : 1,
+              "quantity" : item.quantity,
               "price" : item.priceList.length>0 ? item.priceList[0].price : ''
           });
           }
@@ -222,7 +241,7 @@ public cartData : any[] = [];
       
 
       if(index >=0){
-        productsList[index].quantity = Number(productsList[index].quantity) + 1;
+        productsList[index].quantity = Number(productsList[index].quantity) + Number(this.params.get('quantity'));
       }
       else {
         productsList.push({
@@ -255,15 +274,29 @@ public cartData : any[] = [];
 
   }
 
-  public quantityEdit(i, opr) : void {
+
+
+  public quantityEdit(i, opr, price) : void {
 
 
     if(opr === 'plus'){
       this.cartData[i].quantity = Number(this.cartData[i].quantity) + 1;
+      this.cartData[i].itemTotal = this.cartData[i].quantity * price;
     }
     else if(opr === 'minus'){
-      this.cartData[i].quantity = Number(this.cartData[i].quantity) - 1;
+
+        this.cartData[i].quantity = Number(this.cartData[i].quantity) - 1;
+        this.cartData[i].itemTotal = this.cartData[i].quantity * price;
     }
+    this.calTotalPrice();
+  }
+
+  public calTotalPrice() {
+    let sum: number = this.cartData.map(a => a.itemTotal).reduce(function(a, b)
+    {
+      return a + b;
+    });
+    this.grandTotal = sum;
   }
 
   public requestQuote(){
@@ -371,5 +404,10 @@ public cartData : any[] = [];
         
         });
   }
+
+
+
+
+
 
 }

@@ -1,0 +1,90 @@
+<div class="product-card-container">
+    
+    <ng-container *ngFor="let item of productsList">
+        <div class="product-card-flyer-container">
+            <div class="logo-holder">
+                <div class="logo-box">
+                    
+                    <img alt="" src="{{(item.bannerLogo && item.bannerLogo !== null) ? item.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'}}">
+                </div>
+                <div class="ratings-box">
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <mat-icon class="review-icon">star</mat-icon>
+                    <div>
+                        (4.0 Reviews)
+                    </div>
+                </div>
+                <div class="add-to-compare-box">
+                    <span>
+                        <input type="checkbox" id="1"
+                        [checked]="item.checked"
+                        (change)="onFilterChange($event, item)"
+                        > Add to Compare
+                    </span>
+                </div>
+            </div>
+
+            <!-- Content Holder -->
+            <div class="content-holder">
+                <div class="header">
+                    <div class="header-title">
+                        {{item.name}}
+                    </div>
+                    <mat-icon>bookmark_border</mat-icon>
+                </div>
+                <div class="price">
+                    <span class="discount-holder">
+                        <span *ngIf="item.priceList[0].discountRate != null" class="discounted-text">
+                            -{{item.priceList[0].discountRate}}%&nbsp;
+                        </span>
+                        <span style="font-size: smaller;">&#8377; </span>
+                        <span>{{item.priceList[0].price}} / {{item.priceList[0].priceType}}</span>
+                    </span>
+                    <span>
+                        <span class="text-style-bold">MRP</span> 
+                        <span class="text-price strike-through"> ₹ {{((item.priceList && item.priceList.length>0) ? item.priceList[0].ERPPrice : '' ) | number : '1.2-2'}}</span> 
+                        <span class="text-term"> / {{(item.priceList && item.priceList.length>0) ? item.priceList[0].priceType : ''}}</span>
+                    </span>
+
+                </div>
+                <div class="descr">
+                    <div class="text-style-bold">
+                        Description
+                    </div>
+                    <div class="text-style">
+                        {{item.description}}
+                    </div>
+                </div>
+                <div class="solution-category">
+                    <div class="text-style-bold">
+                        Solution Category
+                    </div>
+                    <div class="text-style" *ngIf="item.type=='product' || item.type=='productBundles' || item.type=='productBundleVariants'">
+                       
+                      
+                       {{ (item.subcategories && item.subcategories.length > 0)? item.subcategories[0].name : ''}}
+                       
+                    </div>
+                    <div class="text-style" *ngIf="item.type=='productVariants'">
+                   
+                      
+                        {{ (item.product.subCategories && item.product.subCategories.length > 0)? item.product.subCategories[0].name : ''}}
+                        
+                     </div>
+
+                   
+                </div>
+                <div class="btn-holder">
+                    <button class="btn request-btn" (click)="navigateToProductDetails(item)">View Details</button>
+                    <button class="btn compare-btn" (click)="requestQuote(item)">Add to Cart</button>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </ng-container>
+    
+</div>
+

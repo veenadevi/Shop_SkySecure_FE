@@ -102,12 +102,12 @@ ul .nav-text:hover {
     cursor: pointer;
 }
 
-.searchbar-section{
+/* .searchbar-section{
     position: relative;
-}
+} */
 
 
-.search-bar {
+/* .search-bar {
     background-color: #fff;
     border: 1px solid #efefef;
     padding: 8px 136px 8px 45px;
@@ -124,8 +124,7 @@ ul .nav-text:hover {
 
 .searchicon-btn .search-icon {
     height: 18px;
-}
-
+} */
 
 
 
@@ -169,6 +168,28 @@ ul .nav-text:hover {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.searchicon-btn {
+    height: 42px;
+    width: 42px;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.search-icon{
+    height: 20px;
+}
+
+.searchicon-btn:hover {
+    border: 1px solid #efefef;
+    border-radius: 8px;
 }
 
 .notificationicon-section {
@@ -327,3 +348,38 @@ ul .nav-text:hover {
 }
 
 
+.search-bar {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.search-box {
+    width: 98%;
+    height: 80%;
+    transition: 0.5s ease-in-out;
+    display: flex;
+    border-radius: 50px;
+    padding: 0 50px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.search-bar .search-icon {
+    position: absolute;
+    left: 36px;
+}
+
+.search-bar .close-icon {
+    position: absolute;
+    right: 20px;
+    background-color: #1e1e1e;
+    border-radius: 50%;
+    padding: 6px;
+}

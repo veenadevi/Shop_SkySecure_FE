@@ -33,7 +33,7 @@ export class CardFlyerComponent {
       productName : product.name,
       productId : product._id,
       quantity : 1,
-      price : product.productVariants[0].priceList[0].price,
+      price : product.priceList[0].price,
     };
 
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"));
@@ -49,18 +49,7 @@ export class CardFlyerComponent {
     }
 
     
-    //this.router.navigate(['/cart'], {queryParams: queryParams});
-
-    // let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com"));
-    // console.log("++++ ((( ", loggedinData);
-    // if(loggedinData.length > 0 ){
-    //   //this.userLoggedIn = true;
-    //   this.router.navigate(['/cart'], {queryParams: queryParams});
-    // }
-    // else {
-    //   this.loginService.login();
-    //   //this.router.navigate(['/cart'], {queryParams: queryParams});
-    // }
+    
   }
 
 

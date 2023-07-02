@@ -10,6 +10,8 @@ import { FeatureUpdateComponent } from './partials/feature-update/feature-update
 import { AdminDashboardComponent } from './partials/admin-dashboard/admin-dashboard.component';
 import { AllAccountsComponent } from './partials/all-accounts/all-accounts.component';
 import { AccountDetailsComponent } from './partials/account-details/account-details.component';
+import { DealsDetailsComponent } from './partials/deals-details/deals-details.component';
+import { EstimateDetailsComponent } from './partials/estimate-details/estimate-details.component';
 
 
 
@@ -22,6 +24,8 @@ import { AccountDetailsComponent } from './partials/account-details/account-deta
     AdminDashboardComponent,
     AllAccountsComponent,
     AccountDetailsComponent,
+    DealsDetailsComponent,
+    EstimateDetailsComponent,
   ],
   imports: [
     CommonModule,

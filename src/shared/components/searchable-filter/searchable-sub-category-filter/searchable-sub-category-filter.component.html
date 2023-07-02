@@ -1,0 +1,10 @@
+<app-custom-search (search)="onSearch($event)"></app-custom-search>
+
+<div class="selectedType">Selected {{selectedTypeText}} ({{selected.length}})</div>
+
+<mat-selection-list class="mat-list-style" #shoes (selectionChange)="selectionChange(selected)" [(ngModel)]="selected">
+  <mat-list-option *ngFor="let item of filteredOptions" checkboxPosition="before" [value]="item"
+    [selected]="shoesSet.get(item.name)">
+    {{item.name}}
+  </mat-list-option>
+</mat-selection-list>

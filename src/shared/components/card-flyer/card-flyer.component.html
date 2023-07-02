@@ -3,7 +3,7 @@
     <div class="cards_landscape_wrap-2 card-flyer">
         <div class="text-box">
             <div class="image-box" (click)="navigateToProductDetails(product)">
-                <img alt="" src="{{(product.imageURL && product.imageURL !== null) ? product.imageURL : 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png'}}">
+                <img alt="" class="img-style" src="{{(product.bannerLogo && product.bannerLogo !== null) ? product.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'}}">
                 <!-- <img src="../../../assets/images/mrr.png"> -->
                 <div class="overlay">
                     <div class="review-container">
@@ -23,9 +23,9 @@
                     <h4>{{product.name}}</h4>
                     <img alt="BookmarkIcon" src="../../../assets/icons/Bookmark.svg">
                 </div>
-                <p class="description-container">
+                <!-- <p class="description-container">
                     {{product.shortDescription ? product.shortDescription : product.description}}
-                </p>
+                </p> -->
                 
                 <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p> -->
             </div>
@@ -43,9 +43,9 @@
             
             <div class="button-container">
                 <div class="product-actions">
-                    <button class="btn compare-btn">Add to compare</button>
+                    <button class="btn compare-btn" (click)="navigateToProductDetails(product)">View Details</button>
                     <!-- <button class="btn request-btn" (click)="requestQuote(product)">Request quote</button> -->
-                    <button class="btn request-btn" (click)="navigateToProductDetails(product)">View Details</button>
+                    <button class="btn request-btn" (click)="requestQuote(product)">Buy Now</button>
                   </div>
             </div>
         </div>

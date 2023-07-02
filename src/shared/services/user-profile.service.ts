@@ -154,6 +154,65 @@ export class UserProfileService {
   }
 
   /**
+   * Service to Trigger Email
+   */
+  public sendEmailRequest(): Observable<any> {
+
+    
+    let url = "https://graph.microsoft.com/v2.0/me/sendMail"
+    //let url = this.baseUrlForQuote + this.getQuotationUrl + '/640f59c83d2d10005c34023e';
+    const OPTIONS = this.getOptions();
+
+    let request = {
+      "message": {
+        "subject": "Testing",
+        "body": {
+          "contentType": "Text",
+          "content": "The email is Triggerred"
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "vigneshblog4@gmail.com"
+            }
+          }
+        ],
+        "ccRecipients": [
+          {
+            "emailAddress": {
+              "address": "vignesh@skysecuretech.com"
+            }
+          }
+        ]
+      },
+      "saveToSentItems": "false"
+    }
+
+    const REQUEST$ = this.http.post<any>(url, request, OPTIONS)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          this.userAccountStore.setUserProfileDetails(response);
+          //this.userAccountStore.setUserProfileDetails(response);
+          return of(response);
+        }),
+        map((response: any) => {
+          this.userAccountStore.setUserProfileDetails(response);
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling
+          return error
+        })
+      );
+
+    return REQUEST$;
+  }
+
+
+  /**
    * Stages our Http Request Headers
    */
 
