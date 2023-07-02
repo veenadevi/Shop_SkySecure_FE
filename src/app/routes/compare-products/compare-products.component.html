@@ -1,11 +1,11 @@
 <div class="compare-products-container">
-    <h1 class="heading">Compare Products</h1>
+    <h1 class="heading">Compare Products <span class="description">(You can compare a maximum upto 4 products)</span></h1>
     <div class="layout">
         <div class="header-component">
-            <div class="header-note-container">
+            <!-- <div class="header-note-container">
             <h2 class="sub-heading">Added Products</h2>
             <p class="description">(You can compare a maximum upto 4 products)</p>
-            </div>
+            </div> -->
             <div class="compare-card" *ngFor="let item of allProducts">
                 <div class="prod-img-logo">
                     <img class="prod-img-logo-img"  src="{{item.bannerLogo}}" alt="product-image">
@@ -33,6 +33,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
         <div class="feature-component" *ngFor="let item of allProperties">
             <div class="label-container">

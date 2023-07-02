@@ -58,7 +58,51 @@ export class CompareProductsComponent implements OnInit{
   ) {
   }
   public ngOnInit(): void {
-    this.fetchCompareProductsList(this.allSelectedItems);
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let reqBody = this.setPrdList(cacheData);
+    console.log("********* ^^^^^ Data ", cacheData);
+    //this.fetchCompareProductsList(this.allSelectedItems);
+    this.fetchCompareProductsList(reqBody);
+  }
+
+  public setPrdList(data){
+
+    let tempPrd = [];
+    let tempPrdVar = [];
+    let tempBundles = [];
+    let tempPrdBundleVar = [];
+
+
+    data.forEach(element => {
+      switch (element.type) {
+        case 'product':
+          tempPrd.push(element._id);
+          return;
+  
+        case 'productVariants':
+          tempPrdVar.push(element._id);
+          return;
+          
+        case 'productBundles':
+          tempBundles.push(element._id);
+          return;
+        
+        case 'productBundleVariants':
+          tempPrdBundleVar.push(element._id);
+          return;
+  
+        default:
+          return null;
+      }
+    });
+    let reqBody = {
+      "products": tempPrd,
+      "productsVariants": tempPrdVar,
+      "productFamily": tempBundles,
+      "productFamilyVariants": tempPrdBundleVar
+    }
+
+    return reqBody;
   }
 
   public fetchCompareProductsList(allSelectedItems: any) {
