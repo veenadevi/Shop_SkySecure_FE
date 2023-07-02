@@ -191,13 +191,15 @@ export class ProductBundleVariantDetailComponent {
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         }
-
+        this.productImages=this.productImages.slice(0,4);
         let tempProducts = this.setProductsData(this.products);
         let tempProductVariants = this.setProductVariantsData(this.productVarients);
         let tempProductBundleVariants = this.setProductBundleVariantsData(this.childProductFamilyVariant);
         let tempProductBundles = this.setBundlesData(this.childProductFamilies);
         this.finalBundleDetails = [...tempProducts,...tempProductBundles, ...tempProductVariants,...tempProductBundleVariants] ;
-        //this.finalBundleDetails={...this.finalBundleDetails,quantity: 1 }
+     
+        console.log("=====finalBundleDetails====="+this.finalBundleDetails)
+        // this.finalBundleDetails={...this.finalBundleDetails,quantity: 1 }
       })
     );
   }
@@ -213,9 +215,10 @@ export class ProductBundleVariantDetailComponent {
           element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
           element['navigationId'] = element._id;
           element.priceList=element.price
+          element.quantity=1
       });
     }
-
+    
     return data;
   }
 
@@ -235,6 +238,7 @@ console.log("======setProductVariantsData===="+data.length)
           element['solutionCategory'] = (element.products[0] && element.products[0].subCategories && element.products[0].subCategories.length > 0) ? element.products[0].subCategories[0].name : "";
           element['navigationId'] = element._id;
           element.priceList=element.priceList;
+          element.quantity=1
       });
     }
 
@@ -258,6 +262,7 @@ console.log("======setProductVariantsData===="+data.length)
           element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
           element['navigationId'] = element._id;
           element.priceList=element.priceList
+          element.quantity=1
       });
     }
 
@@ -279,6 +284,7 @@ console.log("======setProductVariantsData===="+data.length)
           element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
           element['navigationId'] = element._id;
           element.priceList=element.priceList
+          element.quantity=1
       });
     }
 
@@ -299,11 +305,11 @@ console.log("======setProductVariantsData===="+data.length)
   position: string = 'left';
   quantityCount = 1;
   addQuantity(quantity:any,index:any):void {
-    this.productFamilyVariant[index].quantity = quantity+1;
+    this.finalBundleDetails[index].quantity = quantity+1;
   }
   decreaseQuantity(quantity:any,index:any): void {
     if(quantity>1){
-      this.productFamilyVariant[index].quantity = quantity-1;
+      this.finalBundleDetails[index].quantity = quantity-1;
     }
   }
 
@@ -324,7 +330,7 @@ public requestQuote (productFamilyVariant : any) : void {
   if(loggedinData.length > 0 ){
     
     var existingItems = this.cartStore.getCartItems();
-  
+    console.log( productFamilyVariant);
     let queryParams;
     // if(product.productVariants.length>0){
       queryParams = {

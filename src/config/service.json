@@ -46,7 +46,8 @@
         "getAllRecommendations" : "api/recommandations/all",
         "getRecommandationsBySegmentId" : "api/recommandations/list",
         "getSecureScore" : "api/user/security/getSecureScore",
-        "getProductBundleVariant": "api/product-family-variant/"
+        "getProductBundleVariant": "api/product-family-variant/",
+        "fetchCompareProductsListUrl": "api/product/compare"
     },
 
     "policiesUrl" : {

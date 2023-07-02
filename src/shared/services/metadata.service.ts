@@ -25,6 +25,7 @@ export class MetadataService {
   private fetchSignleBrandDetailsUrl : string;
   private fetchProductsByFilter : string;
   private fetchProductBundleVariantDetailsUrl:string;
+  private fetchCompareProductsListUrl:string;
 
   constructor(
     private http: HttpClient,
@@ -43,6 +44,7 @@ export class MetadataService {
     this.fetchSignleBrandDetailsUrl = AppService.appUrl.getSingleBrandDetails;
     //this.quotaDetailsUri = this.ouxConfigSvc.getAppConfigValue('apiUri').e2eQuotaACV;
     this.fetchProductBundleVariantDetailsUrl = AppService.appUrl.getProductBundleVariant;
+    this.fetchCompareProductsListUrl = AppService.appUrl.fetchCompareProductsListUrl
   }
 
   //fetch All Category
@@ -325,6 +327,26 @@ export class MetadataService {
     return request$;
   }
 
-  
+  public fetchCompareProductsList(paylad: any) : Observable<any> {
+    let url = this.baseUrl+ this.fetchCompareProductsListUrl;
+    let request$ = this.http.post(url,paylad)
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+
+        return response;
+      }),
+      catchError(error => {
+        // create operation mapping for http exception handling 
+        return (error);
+      })
+    );
+
+  return request$;
+
+    return request$;
+  }
 
 }
