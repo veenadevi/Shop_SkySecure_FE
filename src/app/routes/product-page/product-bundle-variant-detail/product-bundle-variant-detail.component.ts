@@ -16,8 +16,8 @@ import { CartStore } from 'src/shared/stores/cart.store';
 export class ProductBundleVariantDetailComponent {
 
   public currentRoute: string;
-  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
-  titles = ['Description', 'Features', 'Specification', 'Reviews', 'Compare Products', 'Bundle Details', 'Similar Products'];
+  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
+  titles = ['Description', 'Features', 'Specification', 'Reviews', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
   activeLink = this.links[0];
   myColor = '';
   productImages=[];
@@ -30,6 +30,7 @@ export class ProductBundleVariantDetailComponent {
   @ViewChild('bundleDetailsRef') bundleDetailsRef!: ElementRef;
   @ViewChild('simProdRef') simProdRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
+  @ViewChild('faqRef') faqRef!: ElementRef;
 
   scrollToSection(sectionId: any): void {
 
@@ -54,6 +55,9 @@ export class ProductBundleVariantDetailComponent {
     }
     else if (sectionId === 'simProd') {
       section = this.simProdRef.nativeElement
+    }
+    else if (sectionId === 'faq') {
+      section = this.faqRef.nativeElement
     }
     section.scrollIntoView({ behavior: 'smooth' });
   }
@@ -114,7 +118,7 @@ export class ProductBundleVariantDetailComponent {
 
   public productFamily : any;
 
-
+  public faq = [];
 
   public products : any[] = [];
 
@@ -162,8 +166,10 @@ export class ProductBundleVariantDetailComponent {
         this.productVarients = response.productFamilyVariantLicenseList.productVariants;        ;
         this.products = response.productFamilyVariantLicenseList.products;
         this.features = response.productFamilyVariantLicenseList.productFamilyVariantFeatures;
-        this.childProductFamilies=response.productFamilyVariantLicenseList.childProductFamilies;
+        this.childProductFamilies=response.productFamilyVariantLicenseList.childProductFamily;
         this.childProductFamilyVariant=response.productFamilyVariantLicenseList.childProductFamilyVariant;
+
+        this.faq  = this.productFamilyVariant.productFAQ;
 
         this.onPageLoad = true;
         this.allCompareProducts = this.products;
@@ -187,7 +193,7 @@ export class ProductBundleVariantDetailComponent {
         let tempProductVariants = this.setProductVariantsData(this.productVarients);
         let tempProductBundleVariants = this.setProductBundleVariantsData(this.childProductFamilyVariant);
         let tempProductBundles = this.setBundlesData(this.childProductFamilies);
-        this.finalBundleDetails = [...tempProducts, ...tempProductVariants,...tempProductBundleVariants ];
+        this.finalBundleDetails = [...tempProducts,...tempProductBundles, ...tempProductVariants,...tempProductBundleVariants ];
       })
     );
   }
