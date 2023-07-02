@@ -22,7 +22,7 @@ export class ProductDetailComponent implements OnInit{
   productListToCompare  = [];
   products = [];
   links = ['#description', '#feature', '#specification','#reviews', '#compProd', '#bundles','#faq'];
-  titles = ['Description', 'Features', 'Specification','Reviews','compare products','Bundles','FAQ'];
+  titles = ['Description', 'Features', 'Specification','Reviews','Compare Products','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
 
@@ -179,7 +179,7 @@ export class ProductDetailComponent implements OnInit{
         for(let i=0;i<response.productBundles.length;i++)
         response.productBundles[i].productFamily = response.productBundles[i].productFamily.map(object => ({ ...object, checked: false, quantity: 1 }));
         this.productBundles  = response.productBundles;
-        this.faq  = response.products[0].ProductFAQ;
+        this.faq  = response.products[0].productFAQ;
         // this.product.productVariants.push(response.productBundles);
         //this.product.productVariants = [123];
         console.log("prVar:",this.product.productVariants)

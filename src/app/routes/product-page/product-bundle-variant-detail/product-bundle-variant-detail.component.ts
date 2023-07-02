@@ -16,8 +16,11 @@ import { CartStore } from 'src/shared/stores/cart.store';
 export class ProductBundleVariantDetailComponent {
 
   public currentRoute: string;
-  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
-  titles = ['Description', 'Features', 'Specification', 'Reviews', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
+  // links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
+  // titles = ['Description', 'Features', 'Specification', 'Reviews', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
+
+  links = ['#description', '#feature', '#specification', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
+  titles = ['Description', 'Features', 'Specification', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
   activeLink = this.links[0];
   myColor = '';
   productImages=[];
@@ -118,7 +121,7 @@ export class ProductBundleVariantDetailComponent {
 
   public productFamily : any;
 
-  public faq = [];
+  public faq : any[]=[];
 
   public products : any[] = [];
 
