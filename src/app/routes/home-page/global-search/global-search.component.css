@@ -20,6 +20,35 @@
     /* margin-top: 10%; */
 }
 
+/* On screens that are 392px or less, set the background color to blue */
+@media screen and (max-width: 770px) {
+    .header{
+        color: var(--white);
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-family: 'Merriweather';
+        font-size: 1em;
+        /* margin-top: 10%; */
+    }
+}
+/* On screens that are 392px or less, set the background color to blue */
+@media screen and (max-width: 392px) {
+    .header{
+        color: var(--white);
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-family: 'Merriweather';
+        font-size: 1.8em;
+        /* margin-top: 10%; */
+    }
+  }
+
+
+
+
+
 .search-box-container {
     width: 50%;
 }
