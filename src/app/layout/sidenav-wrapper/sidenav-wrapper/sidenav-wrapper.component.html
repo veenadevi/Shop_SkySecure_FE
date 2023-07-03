@@ -111,7 +111,7 @@
           </span>
           <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
               <span class="text-style">
-                User
+                {{userFullName}}
               </span>
               <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
             </div>
@@ -131,7 +131,7 @@
         </mat-list-item>
 
         <!-- Shop Section -->
-        <mat-list-item (click)="navAction(isExpanded , 'shop')" pTooltip="Shop" tooltipPosition="right">
+        <mat-list-item (click)="navAction(isExpanded , 'shop')">
           <span class="icon-holder">
             <img src="../../../../assets/YellowChalk/ShopIcon.svg" title="Shop" alt="Shop">
           </span>
@@ -181,8 +181,8 @@
 
         <!-- Cloud Section -->
         <mat-list-item>
-          <span class="icon-holder" (click)="navAction(isExpanded , 'cloud')" pTooltip="Cloud" tooltipPosition="right">
-            <img src="../../../../assets/YellowChalk/CloudIcon.svg">
+          <span class="icon-holder" (click)="navAction(isExpanded , 'cloud')">
+            <img src="../../../../assets/YellowChalk/CloudIcon.svg" title="Cloud" alt="Cloud">
           </span>
           <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('user')">
               <span class="text-style">
@@ -216,6 +216,9 @@
             </mat-list-item>
             <mat-list-item>
               <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/estimate-details']">Estimates</span>
             </mat-list-item>
             <mat-list-item>
               <span *ngIf="isExpanded" class="sub-menu-item">Add New Feature</span>

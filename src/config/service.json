@@ -19,6 +19,7 @@
         "subCategoryByCategory" : "api/sub-category/",
         "getProductsBySubCategoryIds" : "api/products",
         "getSingleProduct": "api/product/",
+        "getByProdyctVariant":"api/product-variant/",
         "getProductsByBrandIds": "api/products/oems",
         "getTrendingProducts" : "api/products/trending",
         "getProductsByFilter": "api/products/filter",
@@ -45,7 +46,9 @@
         "getAllSegmentation" : "api/segmentations",
         "getAllRecommendations" : "api/recommandations/all",
         "getRecommandationsBySegmentId" : "api/recommandations/list",
-        "getSecureScore" : "api/user/security/getSecureScore"
+        "getSecureScore" : "api/user/security/getSecureScore",
+        "getProductBundleVariant": "api/product-family-variant/",
+        "fetchCompareProductsListUrl": "api/product/compare"
     },
 
     "policiesUrl" : {

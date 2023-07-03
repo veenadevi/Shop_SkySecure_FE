@@ -10,7 +10,7 @@
                             transition: transform .2s;
                             margin:10%;
                             cursor: pointer;
-                            background: #EAEAEA;" class="img-hover" src="{{item}}" alt="img">
+                            background: #EAEAEA;" class="img-hover" src="../../../../assets/images/imgPlaceholder.png" alt="img">
                         </ng-container>
                         <img src="" alt="">
                         </div>
@@ -31,28 +31,28 @@
             </div>
                     <div class="buy-now-prod"> 
                         <span style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;flex-direction: column;text-align: center;"> 
-                        <h6 style="margin-bottom: 0;">Quantity </h6> <p>(per user)</p>
+                        <h6 style="margin-bottom: 0;">Quantity </h6> <p>(per license)</p>
                         </span>
                         <span style="display: inline-flex;justify-content: center;gap: 5px;"> 
                             
                                 <span >
-                                  <img alt="minus" src="../../../assets/icons/Minus.svg">
+                                  <img id="add-minus-quantity" (click)="decreaseBuyQuantity(product.products[0].quantity)" alt="minus" src="../../../assets/icons/Minus.svg">
                                 </span>
                                 <span>
                                   <input
-                                    class="input-field" 
+                                    class="input-field"  [(ngModel)]="product.products[0].quantity"
                                     >
                                 </span>
                                 <span >
-                                  <img alt="" src="../../../assets/icons/Add.svg">
+                                  <img id="add-minus-quantity" alt="" (click)="addBuyQuantity(product.products[0].quantity)" src="../../../assets/icons/Add.svg">
                                 </span>
                             </span>
 
-                            <button class="btn buy-now-btn" >Buy now</button>
+                            <button class="btn buy-now-btn" (click)="requestQuote(product.products[0])">Buy now</button>
                         </div>
                 </div>
                 <div class="product-details-info">
-                    <h4 style="margin-bottom: auto;">{{product.products[0].name}}
+                    <h4 style="">{{product.products[0].name}}
                     </h4>
                     <p style="margin-top: 10px;
                     font-size: smaller;
@@ -66,22 +66,22 @@
                         <span> 5 reviews | write a review</span>
                     </div>
                     <span style="display:inline-flex">
-                        <p *ngIf="product.products[0].priceList[0].discountRate != null" style="font-size: larger;color: red;">-{{product.products[0].priceList[0].discountRate}}%&nbsp; </p>
+                        <p *ngIf="product.products[0].priceList[0].discountRate != null" style="font-size: 16px;color: red;">-{{product.products[0].priceList[0].discountRate}}%&nbsp; </p>
                         <h4 style="font-size: smaller;">&#8377; </h4>
-                    <h4 style="margin-bottom: 0;">{{product.products[0].priceList[0].price}} / {{product.products[0].priceList[0].priceType}}</h4>
+                    <span style="font-size: 18px;font-weight: 500;">{{product.products[0].priceList[0].price}} / {{product.products[0].priceList[0].priceType}}</span>
                 </span>
                 
                 <span style="display:inline-flex;align-items: center;">
-                <p style="font-size: small;"> M.R.P:&nbsp;</p>
+                <p style="font-size: small;"> MRP:&nbsp;</p>
                 <s><p style="font-size: initial;">{{product.products[0].priceList[0].ERPPrice}}</p></s>
             </span>
             <p style="font-size: smaller;">GST Extra</p>
                     <p style="margin-top: 10px; font-weight: 700; margin-bottom: 7px;">Solution Category:</p>
                     <p>{{product.products[0].subcategories[0].description}}</p>
-                    <p style=" font-weight: 700; margin-bottom: 7px;">About this product:</p>
+                    <p style=" font-weight: 700; margin-bottom: 7px;margin-top: 7px;">About this product:</p>
                     <p style="margin-bottom: 15px;">{{product.products[0].description}}</p>
                     <span style = "display:flex;flex-direction: row;"><button class="btn view-det-btn" (click)="scrollToSection('#feature')">View Features</button>
-                    <button class="btn request-quote-btn" style="margin-left: 4%;" >Request Quote</button></span>
+                    <button class="btn request-quote-btn" (click)="requestQuote(product.products[0])" style="margin-left: 4%;" >Request Quote</button></span>
                     <p-divider></p-divider>
                         <div class="offer-det">
                             <span style="display: inline-flex;">
@@ -141,44 +141,97 @@
                     
             </div>
             <div class="product-info">
-                <ng-container *ngIf="product.productVariants.length>0">
+                <!-- <ng-container *ngIf="(productListToCompare.length>0) ; else noCompareProducts">
                 <div class="compare-box">
                     <div class="compare-box-headers">    
                     <h5>Compare</h5>
-                    <span style="display:flex;flex-basis: 70%;
-                    justify-content: flex-end;align-items: center;color: cornflowerblue;font-size: small;
-    font-weight: 500;"><p style="margin-bottom: 3px;color: #0047BD;
-font-size: 13.122px;
-font-weight: 600;">Compare products</p></span>
+                    <span class="compare-products-action">
+                        <p>Compare products</p></span>
                     </div>
-                    <p style="font-size: small;">choose the right plan that matches your needs!</p>
-                    <ng-container  *ngFor="let item of product.productVariants">
+                    <p class="choose-right-plan-style">Choose the right plan that matches your needs!</p>
+                    <ng-container  *ngFor="let item of productListToCompare">
                     <div class="plan-price">
                         <div class="plan-price-image">
-                            <img style="width:70%;height: 100%;object-fit: cover;" src="{{product.products[0].bannerLogo}}">
+                            <img class="img-style" src="{{(item.bannerLogo) ? item.bannerLogo : '../../../../../assets/icons/AddProductIcon.svg'}}" alt="Microsoft" >
                         </div>
                         <div class="plan-price-info">
                             <p style="font-size: medium;
                             font-weight: 700;margin-bottom: 0;">{{item.name}}</p>
                             <p style="font-size: 13px;
-                            margin-bottom: 0;">solution Category: endpoint security</p>
+                            margin-bottom: 0;">{{item.solutionCategory}}</p>
                             <p style="font-size: 13px;
-                            margin-bottom: 0;">&#8377; {{item.priceList[0].price}} / {{item.priceList[0].priceType}}</p>
+                            margin-bottom: 0;font-weight: 700;">
+                            <ng-container *ngIf="item.priceList && item.priceList.length>0">
+                                ₹ {{item.priceList[0].price}} / {{item.priceList[0].priceType}}
+                            </ng-container>
+                            
+                            </p>
+                        </div>
+                        <div class="close-icon">
+                            <button  type="button" (click)="removeSelectedItem(item._id)" class="btn-close" aria-label="Close"></button>
                         </div>
                     </div>
                 </ng-container>
-
+                <div class="btn-holder">
+                    <button class="compare-btn"  (click)="navigateToCompareProducts()">
+                        Compare
+                    </button>
+                </div>
                 
                     </div>
                     </ng-container>
-                    <div class="connect-us-box">
+                    <ng-template #noCompareProducts>
+                        <div class="compare-box">
+                            <div class="compare-box-headers">    
+                                <h5>Compare</h5>
+                                <span class="compare-products-action">
+                                    <p>Compare products</p>
+                                </span>
+                            </div>
+                            <p class="choose-right-plan-style">Choose the right plan that matches your needs!</p>
+                            
+                                
+                            <div class="plan-price empty-logo-background">
+                                <div class="plan-price-image">
+                                    <img style="width:70%;height: 100%;object-fit: cover;" src="../../../../../assets/icons/AddProductIcon.svg" alt="Microsoft" >
+                                </div>
+                                <div class="plan-price-info">
+                                    Add Products to compare
+                                </div>
+                            </div>
+                        </div>
+                        
+                            
+                    </ng-template> -->
+                    <details-compare-products-flyer [compareProductsList] = "selectedProductItem"></details-compare-products-flyer>
+                    <!-- <div class="connect-us-box">
                         <div class="connect-us-desc">
                             <h5>Connect Us!</h5>
                             <p style="font-size: 16px;align-items: center;justify-content: center;text-align: center;">consult with our expert to choose the right plan</p>
                             <button class="btn btn buy-now-btn" >Get Free Call</button>
                         </div>
                         
-                        </div>
+                        </div> -->
+                        <contact-us-flyer></contact-us-flyer>
+                        <!-- <div class="contact-us-wrapper">
+                            <div class="card-container">
+                              <div class="user">
+                                <img id="userAvatar" src="../../../assets/icons/ConnectUsIllustration.svg" width="125px" height="125px" />
+                              </div>
+                              <div class="accountStats">
+                                <span class="text-header">
+                                    Connect Us!
+                                </span>
+                                <span class="text-small">
+                                    Connect with Our Skilled Experts and Find the Best Plan for You!
+                                </span>
+                        
+                                <div>
+                                    <button class="btn call-btn" (click)="showDialog()"> Get Free Call</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div> -->
                 </div>
         </div>
     </div>
@@ -250,7 +303,7 @@ font-weight: 600;">Compare products</p></span>
         <div class="specs-list">
             <div class="specs-name">
             <div style="display:flex;flex-basis:20%;padding: 7%;">
-                <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                <img style="width:auto;height: auto;position: relative;" src="../../assets/icons/PlatformIcon.svg">
                 </div>
                 <div style ="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
                     <p style="font-size: small;margin-bottom: 0">Supported Platforms</p>
@@ -260,7 +313,7 @@ font-weight: 600;">Compare products</p></span>
             </div>
             <div class="specs-name">
                 <div style="display:flex;flex-basis:20%;padding: 7%;">
-                    <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                    <img style="width:auto;height: auto;position: relative;" src="../../assets/icons/LanguagesIcon.svg">
                     </div>
                     <div style ="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
                         <p style="font-size: small;margin-bottom: 0">Languages</p>
@@ -270,7 +323,7 @@ font-weight: 600;">Compare products</p></span>
                 </div>
                 <div class="specs-name">
                     <div style="display:flex;flex-basis:20%;padding: 7%;">
-                        <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                        <img style="width:auto;height: auto;position: relative;" src="../../assets/icons/DevicesIcon.svg">
                         </div>
                         <div style ="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
                             <p style="font-size: small;margin-bottom: 0">Devices</p>
@@ -280,7 +333,7 @@ font-weight: 600;">Compare products</p></span>
                     </div>
                     <div class="specs-name">
                         <div style="display:flex;flex-basis:20%;padding: 7%;">
-                            <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                            <img style="width:auto;height: auto;position: relative;" src="../../assets/icons/DeploymentIcon.svg">
                             </div>
                             <div style ="display:flex;flex-basis: 80%;flex-direction: column;justify-content: center;align-items: baseline;margin-left: 5%;">
                                 <p style="font-size: small;margin-bottom: 0">Deployment</p>
@@ -291,7 +344,7 @@ font-weight: 600;">Compare products</p></span>
             </div>
     </div>
 
-<ng-container *ngIf="product.productVariants.length>0">
+<ng-container *ngIf="productBundles.length>0">
     <div class="specification-cont" id="compProd" #compProdRef>
         <h5>Compare Products</h5>
         <div class="comp-prod-cont" >
@@ -304,8 +357,8 @@ font-weight: 600;">Compare products</p></span>
                     </div>
                     <div class="comp-prod-card-content">
                         <p style="font-size: medium;font-weight: 500;">{{product.products[0].name}}</p>
-                        <p style="font-size: small;font-weight: 300;">solution category</p>
-                        <p style="font-size: small;font-weight: 300;">{{product.products[0].subcategories[0].description}}</p>
+                        <p style="font-size: small;font-weight: 300;">Solution category:</p>
+                        <p style="font-size: small;font-weight: 500;">{{product.products[0].subcategories[0].description}}</p>
                     </div>
                     
                 </div>
@@ -315,8 +368,8 @@ font-weight: 600;">Compare products</p></span>
                     align-items: center;
                     justify-content: flex-start;
                     padding: 1%;"> 
-                        <p-checkbox  [binary]="true" inputId="binary"></p-checkbox>
-                        <p style="font-size: small;">&nbsp;compare</p>
+                        <p-checkbox (click)="addToCompare(product.products[0], 'fromProd')" [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
+                        <p style="font-size: small;">&nbsp;Compare</p>
                         </span>
                         <span style="    display: inline-flex;
                     align-items: center;
@@ -334,18 +387,18 @@ font-weight: 600;">Compare products</p></span>
                 <h6>VS</h6>
                 </span>
 
-            <div class="comp-prod-vs">
-            <ng-container  *ngFor="let item of product.productVariants">
-            <div class="comp-prod-card">
+            <div  class="comp-prod-vs">
+            <ng-container  *ngFor="let item of productBundles">
+            <div *ngIf="item.productFamily.priceList!=null" class="comp-prod-card2">
                 <div class="comp-prod-card-cont">
                 <div class="comp-prod-card-img">
-                    <img style="width:70%;height: auto;position: relative;" src="{{product.products[0].bannerLogo}}">
+                    <img style="width:70%;height: auto;position: relative;" src="{{item.productFamily.bannerLogo}}">
                     
                 </div>
                 <div class="comp-prod-card-content">
-                    <p style="font-size: medium;font-weight: 500;">{{item.name}}</p>
-                    <p style="font-size: small;font-weight: 300;">solution category</p>
-                    <p style="font-size: small;font-weight: 300;">EndPoint security</p>
+                    <p style="font-size: medium;font-weight: 500;">{{item.productFamily.name}}</p>
+                    <p style="font-size: small;font-weight: 300;">Solution category:</p>
+                    <p style="font-size: small;font-weight: 500;">{{item.productFamily.subCategories[0].description}}</p>
                 </div>
                 
             </div>
@@ -355,7 +408,7 @@ font-weight: 600;">Compare products</p></span>
                 align-items: center;
                 justify-content: flex-start;
                 padding: 1%;"> 
-                    <p-checkbox  [binary]="true" inputId="binary"></p-checkbox>
+                    <p-checkbox (click)="addToCompare(item.productFamily,'prodFam')" [(ngModel)]="item.productFamily.checked"  [binary]="true" inputId="binary"></p-checkbox>
                     <p style="font-size: small;">&nbsp;compare</p>
                     </span>
                     <span style="    display: inline-flex;
@@ -377,82 +430,70 @@ font-weight: 600;">Compare products</p></span>
 
 
 
-    <div class="specification-cont"  id="simProd" #simProdRef>
-        <h5 id="similar-prod">Similar Products</h5>
+    <div *ngIf="productBundles.length>0" class="specification-cont"  id="bundles" #bundlesRef>
+        <h5 id="similar-prod">Product Bundles</h5>
         <div class="specs-list">
-            <div class="similar-prod-card">
+            <ng-container *ngFor="let item of productBundles; let i = index">
+            <div *ngIf="item.productFamily.priceList!=null" class="similar-prod-card">
                 <div class="sim-prod-holder">
                 <div class="similar-prod-img-det">
-                    <img style="width:100%;height: 100%;object-fit: cover;" src="../../assets/images/msLogo.png">
+                    <img style="width:100%;height: 100%;object-fit: cover;" src="{{item.productFamily.bannerLogo}}">
                     
                 </div>
                 <div class="similar-prod-price-det">
-                    <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">Share point Online Plan 1</p></span>
+                    <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">{{item.productFamily.name}}</p></span>
                     
                     <p style="font-size: small;font-weight: 300;">solution category</p>
-                    <p style="font-size: small;font-weight: 300;">EndPoint security</p>
-                    <span class="similar-prod-price-det-price"><p style="font-size: medium;font-weight: 400;">&#8377; 34567.60 </p>
-                        <p style="font-size: medium;font-weight: 400;">&nbsp; / yearly</p>
+                    <p style="font-size: small;font-weight: 300;">{{item.productFamily.subCategories[0].description}}</p>
+                    <span class="similar-prod-price-det-price" *ngIf="item.productFamily.priceList!=null"><p style="font-size: medium;font-weight: 400;">&#8377; {{item.productFamily.priceList[0].price}}</p>
+                        <p style="font-size: medium;font-weight: 400;">&nbsp; / {{item.productFamily.priceList[0].priceType}}</p>
                         </span>
                     
                 </div>
                 </div>
 
-                <div class="sim-prod-holder2">
-                    <p style="font-size: medium;font-weight: 600; margin-top:10px">Key Features</p>
-                    <p-divider style="width:100%"></p-divider>
-                    <span style="display:inline-flex;padding: 1%;
-                                margin: 1%;">
-                        <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
-                        <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
-                        </span>
-                        <span style="display:inline-flex;padding: 1%;
-                                margin: 1%;">
-                            <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
-                            <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
+               
+
+                    <div class="quantity-add-prod-bundle">
+                        <span style="display: inline-flex;justify-content: center;gap: 5px;"> 
+                            
+                            <span >
+                              <img id="add-minus-quantity" (click)="decreaseQuantity(item.productFamily.quantity,i)" alt="minus" src="../../../assets/icons/Minus.svg">
                             </span>
-                            <span style="display:inline-flex;padding: 1%;
-                                margin: 1%;">
-                                <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
-                                <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
-                                </span>
-                                <span style="display:inline-flex;padding: 1%;
-                                margin: 1%;">
-                                    <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
-                                    <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
-                                    </span>
-                                    <span style="display:inline-flex;padding: 1%;
-                                margin: 1%;">
-                                        <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
-                                        <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
-                                        </span>
-                                        <span style="display:inline-flex;padding: 1%;
-                                margin: 1%;">
-                                            <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
-                                            <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
-                                            </span>
-                                            <span style="display:inline-flex;padding: 1%;
-                                margin: 1%;">
-                                                <img style="width:7%;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
-                                                <p style="font-size: smaller;font-weight: 500;">Email Hosting</p>
-                                                </span>
-                                                            
+                            <span>
+                              <input
+                                class="input-field"  [(ngModel)]="item.productFamily.quantity"
+                                >
+                            </span>
+                            <span >
+                              <img id="add-minus-quantity" alt="" (click)="addQuantity(item.productFamily.quantity,i)" src="../../../assets/icons/Add.svg">
+                            </span>
+                        </span>
                     </div>
 
                     <div class="sim-prod-btn-cont">
-                        <button class="btn view-price-det-btn" >View details</button>
                         <span >
-                            <button class="btn similar-prod-request-quote-btn" >Request Quote</button>
+                            <button class="btn similar-prod-request-quote-btn" (click)="requestQuote(item.productFamily)">Request Quote</button>
                         </span>
                         </div>
 
             </div>
+        </ng-container>
 
-            
-
-            
-            
             </div>
+
     </div>
+
+
+    <div *ngIf="faq.length>0" class="faq-cont" id="faq" #faqRef>
+        <span class="faq-title"><h5 id="similar-prod">Frequently asked Questions</h5></span>
+        <ng-container *ngFor="let item of faq; let i = index">
+            <div class="display-faq">
+        <p class="faq-question">{{i+1}}.&nbsp;{{item.Question}}</p>
+        <p>{{item.Answer}}</p>
+    </div>
+        </ng-container>
+
+        </div>
 </div>
     </div>

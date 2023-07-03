@@ -17,17 +17,23 @@ export class ProductBundleDetailComponent implements OnInit{
 
 
   public currentRoute: string;
-  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundles', '#simProd'];
-  titles = ['Description', 'Features', 'Specification', 'Reviews', 'compare produscts', 'Bundles', 'Similar Products'];
+  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
+  titles = ['Description', 'Features', 'Specification', 'Reviews', 'compare produscts', 'Bundle Details', 'Similar Products'];
   activeLink = this.links[0];
   myColor = '';
+
+  public productQuantity:  any = 1;
+
+  public selectedProductItem : any[] = [];
+
+  public bundleQuantity = 1;
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
   @ViewChild('specificationRef') specificationRef!: ElementRef;
   @ViewChild('reviewsRef') reviewsRef!: ElementRef;
   @ViewChild('compProdRef') compProdRef!: ElementRef;
-  @ViewChild('bundlesRef') bundlesRef!: ElementRef;
+  @ViewChild('bundleDetailsRef') bundleDetailsRef!: ElementRef;
   @ViewChild('simProdRef') simProdRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
 
@@ -49,8 +55,8 @@ export class ProductBundleDetailComponent implements OnInit{
     else if (sectionId === 'compProd') {
       section = this.compProdRef.nativeElement
     }
-    else if (sectionId === 'bundles') {
-      section = this.bundlesRef.nativeElement
+    else if (sectionId === 'bundleDetailsRef') {
+      section = this.bundleDetailsRef.nativeElement
     }
     else if (sectionId === 'simProd') {
       section = this.simProdRef.nativeElement
@@ -124,6 +130,10 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public allCompareProducts: any[];
 
+  public allSimilerProducts: any[];
+
+  public productImages : any=[];
+
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
   public ngOnInit(): void {
@@ -148,10 +158,99 @@ export class ProductBundleDetailComponent implements OnInit{
         this.products = response.products;
         this.features = response.features;
         this.onPageLoad = true;
-        this.allCompareProducts = this.products.concat(this.productVarients,this.productFamilyVariants);
-        console.log("____this.productFamily__",this.productFamily);
+        this.allCompareProducts = this.products;
+
+
+        if( this.productFamily && this.productFamily.productImages && this.productFamily.productImages.length>0) {
+          this.productImages = this.productFamily.productImages;
+        } 
+        else {
+        this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        }
+        console.log("()()()()() ", this.productImages);
+        this.productImages=this.productImages.slice(0,4);
+
+
+        let tempProducts = this.setProductsData(response.products);
+        let tempProductVariants = this.setProductVariantsData(this.productVarients);
+        let tempChildProductFamilyVariants = this.setChildProductFamilyVariant(response.childProductFamilyVarient);
+        //let tempProductBundles = this.setBundlesData(this.childProductFamilies);
+
+        this.allSimilerProducts = [...tempProducts, ...tempProductVariants, ...tempChildProductFamilyVariants]
+        console.log("++++++++++++++ _this.",this.allSimilerProducts);
+        //this.allSimilerProducts = this.products.concat(response.productVarients,response.productFamilyVariants);
+        //this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
+        
       })
     );
+  }
+
+  public setProductsData(data){
+console.log("()()()()()()( ", data);
+    if(data && data.length>0){
+      data.forEach(element => {
+        element.name=element.name;
+          element.productType = 'products';
+          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['navigationId'] = element._id;
+          element.priceList=element.price
+          element.quantity=1
+      });
+    }
+    
+    return data;
+  }
+
+  /**
+   * Set Product Variants Data
+   */
+
+  public setProductVariantsData(data){
+    
+console.log("======setProductVariantsData===="+data.length)
+    if(data && data.length>0){
+      data.forEach(element => {
+        element.name=element.name;
+          element.productType = 'productVariants';
+          element.bannerLogo = (element.products && element.products.length>0 && element.products[0].bannerLogo) ? element.products[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.products && element.products.length>0 && element.products[0] && element.products[0].subCategories && element.products[0].subCategories.length > 0) ? element.products[0].subCategories[0].name : "";
+          element['navigationId'] = element._id;
+          element.priceList=element.priceList;
+          element.quantity=1
+      });
+    }
+
+    return data;
+  }
+
+  /**
+   * Set Product Bundle Variants Data
+   */
+
+  public setChildProductFamilyVariant(data){
+
+    if(data && data.length>0){
+      console.log("===========setProductBundleVariantsData======="+data.length)
+      data.forEach(element => {
+        element.name=element.name;
+          element.productType = 'productBundleVariants';
+          element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          //element.solutionCategory=(element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
+          element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : 'Cybersecutiy and Compliance'
+          element['navigationId'] = element._id;
+          element.priceList=element.priceList
+          element.quantity=1
+      });
+    }
+
+    return data;
   }
 
   public getColor(val){
@@ -164,22 +263,40 @@ export class ProductBundleDetailComponent implements OnInit{
     
   }
   
-  public requestQuote(product){
 
+
+  
+  
+
+  public changeQuantity(type){
+
+    console.log("(((( Called,", type);
+    if(type === 'add'){
+      this.productQuantity = Number(this.productQuantity) + 1;
+    }
+    else if(type === 'minus'){
+      this.productQuantity =  Number(this.productQuantity) - 1;
+    }
+    console.log("(((( Called,", this.productQuantity);
+  }
+
+  public buyNow(item, quantity){
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
     if(loggedinData.length > 0 ){
       
       var existingItems = this.cartStore.getCartItems();
+    
       let queryParams;
-      if(product.productVariants.length>0){
+      // if(product.productVariants.length>0){
         queryParams = {
-          productName : product.productVariants[0].name,
-          productId : product.productVariants[0]._id,
-          quantity : 1,
-          price : product.productVariants[0].priceList[0].price,
+          productName : item.name,
+          productId : item._id,
+          quantity : quantity,
+          price : item.priceList[0].price,
         };
-      }
+      // }
+      console.log(queryParams);
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
@@ -191,6 +308,56 @@ export class ProductBundleDetailComponent implements OnInit{
   public viewModal() {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
   }
-  
+
+  public compareEvent($event, item){
+    console.log("&*&*&*&*& ", $event);
+    console.log("&*&*&*&*& ", item);
+
+    if($event.checked){
+      this.selectedProductItem = [item];
+    }
+    else{
+
+    }
+
+
+  }
+
+  addQuantity(item):void {
+    
+    this.bundleQuantity = Number(this.bundleQuantity) + 1
+    //this.finalBundleDetails[index].quantity = quantity+1;
+  }
+  decreaseQuantity(item): void {
+    // if(quantity>1){
+    //   this.finalBundleDetails[index].quantity = quantity-1;
+    // }
+    this.bundleQuantity = Number(this.bundleQuantity) - 1
+  }
+
+  public requestQuote(item, quant){
+    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
+
+    if(loggedinData.length > 0 ){
+      
+      var existingItems = this.cartStore.getCartItems();
+    
+      let queryParams;
+      // if(product.productVariants.length>0){
+        queryParams = {
+          productName : item.name,
+          productId : item._id,
+          quantity : quant,
+          price : item.priceList[0].price,
+        };
+      // }
+      console.log(queryParams);
+      this.router.navigate(['/cart'], {queryParams: queryParams});
+    }
+
+    else {
+      this.viewModal();
+    }
+  }
   
 }

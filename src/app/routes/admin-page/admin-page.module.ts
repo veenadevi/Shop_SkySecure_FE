@@ -11,6 +11,7 @@ import { AdminDashboardComponent } from './partials/admin-dashboard/admin-dashbo
 import { AllAccountsComponent } from './partials/all-accounts/all-accounts.component';
 import { AccountDetailsComponent } from './partials/account-details/account-details.component';
 import { DealsDetailsComponent } from './partials/deals-details/deals-details.component';
+import { EstimateDetailsComponent } from './partials/estimate-details/estimate-details.component';
 
 
 
@@ -24,6 +25,7 @@ import { DealsDetailsComponent } from './partials/deals-details/deals-details.co
     AllAccountsComponent,
     AccountDetailsComponent,
     DealsDetailsComponent,
+    EstimateDetailsComponent,
   ],
   imports: [
     CommonModule,

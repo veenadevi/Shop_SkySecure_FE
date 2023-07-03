@@ -153,6 +153,7 @@ export class AdminPageService {
 
     //let url = this.baseUrlForQuote + this.getAccountsByIdUrl + '/' + accountsId;
 
+    
     let url = "https://realize.wiremockapi.cloud/api/admin/GetDealsByAccountId/467371000000378155"
 
     let request$ = this.http.get<Observable<any>>(url)
@@ -168,7 +169,65 @@ export class AdminPageService {
     return request$;
   }
  
+
+  /**
+   * Create Estimate Service
+   */
+
+  public createEstimate( request : any): Observable<any> {
+
+    //const URL = this.baseUrl + this.addFeatureUrl;
+
+    let temp = "api/admin/createZohoBooksCustomer"
+  
+    let URL = this.baseUrlForQuote + temp;
     
+    const REQUEST$ = this.http.post<any>(URL, request)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          
+          return of(response);
+        }),
+        map((response: any) => {
+          
+          return response;
+        }),
+        catchError(error => {
+          
+          return error
+        })
+      );
+
+    return REQUEST$;
+  }
+
+
+  /**
+   * Service to Get Estimate Details https://realize.wiremockapi.cloud/api/admin/getEstimates
+   */
+    
+  public getEstimateDetails() : Observable<any> {
+
+    //let url = this.baseUrlForQuote + this.getAccountsByIdUrl + '/' + accountsId;
+
+    
+    let url = "https://realize.wiremockapi.cloud/api/admin/getEstimates"
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
     
 
   /**

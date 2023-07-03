@@ -1,0 +1,84 @@
+<!-- <div>
+  <p-dialog header="Get Free Call" [(visible)]="displayBasic" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+  [draggable]="false" [resizable]="false">
+
+  <div class="form-body">
+
+    <div class="row">
+      <div class="col-md-12">
+        
+        <div class="form-group">
+          <label id="email-label" for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="Enter your email" class="form-control" required>
+        </div>
+        
+      
+      </div>
+    </div>
+
+    <div class="row textarea-style">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Leave Message</label>
+          <textarea  id="comments" class="form-control" name="comment" placeholder="Enter your comment here..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-times" (click)="displayBasic=false" label="Cancel"></p-button>
+      <p-button class="btn-send" icon="pi pi-check" (click)="sendEmail()" label="Send Email" styleClass="p-button-text"></p-button>
+      
+  </ng-template>
+</p-dialog>
+</div> -->
+
+<div class="modal-container">
+
+  <div class="modal-header">
+      <div class="modal-top">
+          <div class="header-style">
+              Connect With Us
+          </div>
+      </div>
+      <button (click)="closeModal()" type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="email-style">
+        <span class="p-float-label">
+          <input pInputText id="emailId" [(ngModel)]="emailId" />
+          <label htmlFor="emailId">Email ID</label>
+      </span>
+      </div>
+
+      <div class="phoneno-style">
+        <span class="p-float-label">
+          <input pInputText id="phoneNo" [(ngModel)]="phoneNo" />
+          <label htmlFor="phoneNo">Mobile Number</label>
+        </span>
+      </div>
+
+      <div class="company-name-style">
+        <span class="p-float-label">
+          <input pInputText id="companyName" [(ngModel)]="companyName" />
+          <label htmlFor="companyName">Compnay Name</label>
+        </span>
+      </div>
+
+      <div class="message-text-style"> 
+        <span class="p-float-label">
+          <textarea id="messageText" rows="5" cols="30" pInputTextarea [(ngModel)]="messageText"></textarea>
+          <label for="messageText">Message</label>
+        </span>
+      </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn request-btn">Submit</button>
+    
+  </div>
+  
+</div>
