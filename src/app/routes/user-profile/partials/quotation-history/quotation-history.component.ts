@@ -39,7 +39,8 @@ export class QuotationHistoryComponent implements OnInit {
     
     response.forEach(element => {
 
-      element.deals.data.deals.data.forEach(data => {
+      element.deals.data.deals.forEach(data => {
+        // element.forEach(data => {
         
         const result = element.userCartDetails.filter((obj) => {
           return obj.productName === data.Deal_Name;
