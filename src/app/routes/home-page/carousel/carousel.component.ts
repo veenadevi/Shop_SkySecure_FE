@@ -18,7 +18,7 @@ export class CarouselComponent {
       eventLocation:'',
       eventDescription:'',
       // img: '../../../../assets/images/banner/MicrosoftDefender.png',
-      img: '../../../../assets/images/banner/AboutBanner.jpg',
+      img: '../../../../assets/images/banner/AboutBanner.png',
       eventStartDate: new Date('2019/05/20'),
       eventEndingDate: new Date('2019/05/24')
     },
@@ -31,15 +31,15 @@ export class CarouselComponent {
       eventStartDate: new Date('2019/07/28'),
       eventEndingDate: new Date('2019/07/30')
     },
-     /*{
+    {
       event:' Event 3',
       eventLocation:'',
       eventDescription:'',
-      img: '../../../../assets/images/banner/Microsoft.png',
+      img: '../../../../assets/images/banner/AutoDeploymentBanner.png',
       eventStartDate: new Date('2020/05/20'),
       eventEndingDate: new Date('2020/05/24')
     },
-     {
+     /*{
       event:' Event 4',
       eventLocation:'',
       eventDescription:'',

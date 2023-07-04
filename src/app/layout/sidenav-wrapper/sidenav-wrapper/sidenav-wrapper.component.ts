@@ -63,6 +63,9 @@ export class SidenavWrapperComponent {
     if(navVal === 'admin'){
       this.adminSubMenu = true;
     }
+    if(navVal === 'dashboard'){
+      this.dashboardSubMenu = true;
+    }
 
     if(this.isExpanded === false){
       this.userSubMenu = false;
@@ -83,6 +86,7 @@ export class SidenavWrapperComponent {
           return;
       case 'dashboard':
           this.dashboardSubMenu = (this.dashboardSubMenu) ? false : true;
+          this.isExpanded = this.isExpanded ? false : true;
           return;
       case 'shop':
           this.router.navigate(['/']);
