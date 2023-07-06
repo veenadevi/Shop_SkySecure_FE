@@ -24,7 +24,7 @@ body {
     border: none !important;
     border-radius: none;
     box-shadow: none;
-    background: var(--white);
+    /* background: var(--white); */
   }
   
   .user {
