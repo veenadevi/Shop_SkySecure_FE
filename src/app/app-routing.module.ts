@@ -11,11 +11,11 @@ import { InterfaceModule  } from './interface/interface.module';
  */
 const appRoutes : Routes = [
 
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'login'
-  },
+  // {
+  //   path: '',
+  //   pathMatch: 'full',
+  //   // redirectTo: 'login',
+  // },
 
   {
     // Needed for handling redirect after login
@@ -36,6 +36,11 @@ const appRoutes : Routes = [
       preload: true
       //activities: ['Admin']
     }
+  },
+
+  { 
+    path: 'login', 
+    loadChildren: () => import('./login-signup/login-signup.module').then(m => m.LoginSignupModule) 
   },
 
   

@@ -102,7 +102,7 @@ export class InterfaceComponent {
 
 
         
-    this.msalBroadcastService.msalSubject$
+    /*this.msalBroadcastService.msalSubject$
             .pipe(
                 filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
             )
@@ -124,7 +124,7 @@ export class InterfaceComponent {
             )
             .subscribe(() => {
                 
-            })
+            })*/
   }
 
 
