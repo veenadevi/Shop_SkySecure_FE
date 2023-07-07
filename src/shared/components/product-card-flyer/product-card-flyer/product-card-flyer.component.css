@@ -66,7 +66,10 @@
 }
 
 .add-to-compare-box span{
-    font-size: 13px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
 }
 
 
