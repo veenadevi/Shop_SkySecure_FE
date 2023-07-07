@@ -19,7 +19,7 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 export class ProductDetailsVariantByIdComponent implements OnInit{
   productImages=[];
   productBundles=[];
-  faq = [];
+  public faq : any[]=[];
   productListToCompare  = [];
   products = [];
   links = ['#description', '#feature', '#specification','#simProd', '#compProd', '#bundles','#faq'];
@@ -183,22 +183,18 @@ for(let i=0;i<response.productBundles.length;i++)
         console.log("&&&&& inside", this.product.productVariants.length);
         this.onProductLoad = true;
         // this.bannerUrl = this.product.bannerURL;
-          if(!response.products[0].hasOwnProperty('productImages')) {
-            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-          }
-        if(response.products[0].productImages.length>0) {
-          this.productImages=[];
-          this.productImages = response.productImages;
-        } else {
+        if( response.products[0] &&response.products[0].hasOwnProperty('productImages')&& response.products[0].productImages && response.products[0].productImages.length>0) {
+          this.productImages = response.products[0].productImages;
+        } 
+        else {
+          console.log("======no product images====")
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        console.log("======no product images====",this.productImages.length)
         }
-
+        this.productImages=this.productImages.slice(0,4);
 
         // this.product.productVariants.push(response.productBundles);
         //this.product.productVariants = [123];
