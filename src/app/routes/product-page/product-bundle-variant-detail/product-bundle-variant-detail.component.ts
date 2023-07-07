@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
+import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class ProductBundleVariantDetailComponent {
   titles = ['Description', 'Features', 'Specification', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
   activeLink = this.links[0];
   myColor = '';
-  productImages=[];
+  public productImages=[];
 
   public dummyImages = [1,2,3,4];
 
@@ -79,7 +80,8 @@ export class ProductBundleVariantDetailComponent {
     private authService : MsalService,
     private cartStore : CartStore,
     private router : Router,
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private compareProductsStore : CompareProductsStore
   ){
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
@@ -202,7 +204,7 @@ export class ProductBundleVariantDetailComponent {
         let tempProductBundles = this.setBundlesData(this.childProductFamilies);
         this.finalBundleDetails = [...tempProducts,...tempProductBundles, ...tempProductVariants,...tempProductBundleVariants] ;
      
-        console.log("=====finalBundleDetails====="+this.finalBundleDetails)
+        console.log("=====finalBundleDetails====="+this.finalBundleDetails.length)
         // this.finalBundleDetails={...this.finalBundleDetails,quantity: 1 }
       })
     );
@@ -211,6 +213,7 @@ export class ProductBundleVariantDetailComponent {
   public setProductsData(data){
 
     if(data && data.length>0){
+      console.log("=====child product legth==="+data.length)
       data.forEach(element => {
         element.name=element.name;
           element.productType = 'products';
@@ -218,7 +221,7 @@ export class ProductBundleVariantDetailComponent {
           element.description = element.description;
           element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
           element['navigationId'] = element._id;
-          element.priceList=element.price
+          element.priceList=element.priceList
           element.quantity=1
       });
     }
@@ -360,6 +363,34 @@ public requestQuote (productFamilyVariant : any) : void {
 
 
 
+}
+
+async addToCompare(item:any, type:any):Promise<void> {
+  // if(!item.checked)
+  // item.checked = true;
+
+  // if(item.checked)
+  // item.checked = false;
+  // else
+  // item.checked = true;
+  let count=0;
+  await this.products.forEach(val => {
+    if(val._id===item._id) {
+      count++;
+    }
+  });
+  if (count===0) {
+    if(type!='prodFam')
+    item = { ...item, 'solutionCategory': item.solutionCategory };
+    else
+    item = { ...item, 'solutionCategory': item.solutionCategory };
+    this.products.push(item);
+  }
+  // this.productListToCompare.push(item);
+  localStorage.setItem('product_list_to_compare', JSON.stringify(this.products));
+  this.compareProductsStore.setCompareProductsList(this.products);
+  const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+  console.log("getProdFromLocalStorage",prodGet);
 }
 
 public viewModal() {

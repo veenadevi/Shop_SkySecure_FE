@@ -4,14 +4,51 @@
             <div class="product-image">
                 <div class="prod-img-cont">
                     <div class="prod-img-hover">
-                        <ng-container *ngFor="let item of productImages">
-                            <img style="width: 120%;
-                            height: auto;
-                            transition: transform .2s;
-                            margin:10%;
-                            cursor: pointer;
-                            background: #EAEAEA;" class="img-hover" src="{{item}}" alt="img">
+                        <ng-container *ngIf="(productImages.length>0); else noImagesBlock">
+                            <ng-container *ngFor="let item of productImages">
+                              
+                                <img style="width: 120%;
+                                height: auto;
+                                transition: transform .2s;
+                                margin:10%;
+                                cursor: pointer;
+                                background: #EAEAEA;" class="img-hover"
+                                src="{{item}}" alt="img">
+                            </ng-container>
                         </ng-container>
+                        <ng-template #noImagesBlock>
+                      
+                            <!-- <ng-container *ngFor="let img of dummyImages"> -->
+                                <img style="width: 120%;
+                                height: auto;
+                                transition: transform .2s;
+                                margin:10%;
+                                cursor: pointer;
+                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+
+                                <img style="width: 120%;
+                                height: auto;
+                                transition: transform .2s;
+                                margin:10%;
+                                cursor: pointer;
+                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+
+                                <img style="width: 120%;
+                                height: auto;
+                                transition: transform .2s;
+                                margin:10%;
+                                cursor: pointer;
+                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+
+                                <img style="width: 120%;
+                                height: auto;
+                                transition: transform .2s;
+                                margin:10%;
+                                cursor: pointer;
+                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                            <!-- </ng-container> -->
+                        </ng-template>
+                        
                         <img src="" alt="">
                         </div>
                         <div class="prod-img-logo">
@@ -555,15 +592,25 @@ font-weight: 600;">Compare products</p></span>
 
     </div>
 
-    <div *ngIf="faq.length>0" class="faq-cont" id="faq" #faqRef>
-        <span class="faq-title"><h5 id="similar-prod">Frequently asked Questions</h5></span>
-        <ng-container *ngFor="let item of faq; let i = index">
-            <div class="display-faq">
-        <p class="faq-question">{{i+1}}.&nbsp;{{item.Question}}</p>
-        <p>{{item.Answer}}</p>
-    </div>
-        </ng-container>
+    <ng-container *ngIf="faq && faq.length>0">
+        <div class="bottom-container specification-cont">
+
+    
+
+            <div *ngIf="faq.length>0" class="faq-cont" id="faq" #faqRef>
+                <span class="faq-title"><h5 id="similar-prod">Frequently asked Questions</h5></span>
+                <ng-container *ngFor="let item of faq; let i = index">
+                    <div class="display-faq">
+                <p class="faq-question">{{i+1}}.&nbsp;{{item.Question}}</p>
+                <p>{{item.Answer}}</p>
+            </div>
+                </ng-container>
+        
+                </div>
+        
+
 
         </div>
+    </ng-container>
 </div>
     </div>
