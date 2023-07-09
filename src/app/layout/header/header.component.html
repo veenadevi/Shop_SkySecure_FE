@@ -188,7 +188,7 @@
     <!-- <div class="user-icon" title="User-icon" *ngIf="!userLoggedIn" (click)="login()">
       <img class="usericon" alt="" src="../../../assets/icons/User_icon.svg"/>
     </div> -->
-    <div class="user-icon" title="User-icon" *ngIf="!userLoggedIn" [routerLink]="'login'">
+    <div class="user-icon" title="User-icon" *ngIf="!userLoggedIn" (click)="navigateToLogin()">
       <img class="usericon" alt="" src="../../../assets/icons/User_icon.svg"/>
     </div>
 

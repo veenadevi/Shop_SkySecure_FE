@@ -1,0 +1,6 @@
+.signup-container{
+    display: flex;
+    padding: 10%;
+    flex-direction: column;
+    row-gap: 20%;
+}

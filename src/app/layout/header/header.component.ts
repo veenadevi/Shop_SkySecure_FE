@@ -367,6 +367,9 @@ export class HeaderComponent implements OnInit{
   public closeMenu(menuTrigger: MatMenuTrigger){
     menuTrigger.closeMenu();
   }
-
+  
+  public navigateToLogin(){
+    this.router.navigate(['/login']);
+  }
 
 }

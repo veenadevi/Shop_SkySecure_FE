@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from './material.module';
 import { PrimeNgModule } from './prime-ng.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -13,6 +13,7 @@ import {
     MSAL_GUARD_CONFIG, MSAL_INSTANCE, MsalGuardConfiguration, MsalRedirectComponent, MsalModule
 } from '@azure/msal-angular';
 import { NgxSpinnerModule } from "ngx-spinner";
+
 
 
 
@@ -69,6 +70,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AppRoutingModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     PrimeNgModule,
     InterfaceModule,
