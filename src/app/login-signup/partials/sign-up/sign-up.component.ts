@@ -104,6 +104,7 @@ export class SignUpComponent {
         
         this.authService.signUp(req).subscribe( res=> {
           console.log("***** The res is ", res);
+          this.router.navigate(['login']);
           //localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
         })
       )
