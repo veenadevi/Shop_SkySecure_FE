@@ -9,7 +9,7 @@
                 <input
                   type="text"
                   formControlName="email"
-                  placeholder="Eg.,CompanyEmailId.com"
+                  placeholder="Ex.: suryakumar@mail.com "
                   class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
                 />
@@ -24,7 +24,7 @@
                 <input
                   type="password"
                   formControlName="password"
-                  placeholder="Eg.,abcd&1243"
+                  placeholder="Type here...."
                   class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
                 />
@@ -56,7 +56,7 @@
             <span class="psw"> <a href="#">Forgot password?</a></span>
           </div>
           <div class="signin-btn">
-            <button class="primary-btn">Sign In</button>
+            <button type="submit" class="primary-btn">Sign In</button>
           </div>
 
           <!-- <div class="form-group">
@@ -185,6 +185,6 @@
                 <div class="no-account-01">
                     Don’t have an account?
                 </div>
-                <div class="no-account-02"> Sign Up</div>
+                <div class="no-account-02" (click)="signUp()"> Sign Up</div>
               </div>
 </div>
