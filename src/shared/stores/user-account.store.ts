@@ -25,6 +25,7 @@ export class UserAccountStore {
     public productsDetails$ = this.productsDetailsSubject.asObservable(); */
 
     public userAccountDetails : any;
+    public userDetails : any;
     public accessIdToken : any;
     public userProfileDetails : any;
 
@@ -36,6 +37,9 @@ export class UserAccountStore {
 
     private userProfileDetailsSubject = new BehaviorSubject<any>(null);
     public userProfileDetails$ = this.userProfileDetailsSubject.asObservable();
+
+    private userDetailsSubject = new BehaviorSubject<any>(null);
+    public userDetails$ = this.userDetailsSubject.asObservable();
 
 
   constructor() {
@@ -62,6 +66,15 @@ export class UserAccountStore {
 
   /**
    * ============================================================
+   * Set User Data
+   */
+  public setUserDetails(data : any) : void {
+    this.userDetails = data;
+    this.userDetailsSubject.next(data);
+  }
+
+  /**
+   * ============================================================
    * Set Product AccessIdToken
    */
   public setAccessIdToken(data : any) : void {
@@ -82,9 +95,18 @@ export class UserAccountStore {
    * Return User Profile
    */
   public getUserProfileDetails(): UserDetails {
+  
+    return this.userProfileDetails.userDetails;
+    //return aa;
+  }
+
+  /**
+   * Return User Details
+   */
+  public getUserDetails(): UserDetails {
     
 
-    return this.userProfileDetails.userDetails;
+    return this.userDetails;
     //return aa;
   }
 

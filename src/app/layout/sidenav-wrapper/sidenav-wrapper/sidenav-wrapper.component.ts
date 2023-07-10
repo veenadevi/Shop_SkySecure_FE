@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectOemModalComponent } from 'src/shared/components/modals/select-oem-modal/select-oem-modal.component';
 import { LoginService } from 'src/shared/services/login.service';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'app-sidenav-wrapper',
@@ -40,12 +41,17 @@ export class SidenavWrapperComponent {
   constructor(
     private loginService : LoginService,
     private router : Router,
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private userAccountStore : UserAccountStore
   ){}
 
 
   public logout() {
-    this.loginService.logout();
+    //this.loginService.logout();
+    //localStorage.setItem('XXXXaccess__tokenXXXX', null);
+    localStorage.removeItem('XXXXaccess__tokenXXXX');
+    this.userAccountStore.setUserDetails(null);
+    this.router.navigate(['']);
   }
 
 

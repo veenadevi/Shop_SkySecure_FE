@@ -3,7 +3,9 @@ import { AbstractControl, FormBuilder, FormGroup, Validators, ReactiveFormsModul
 import Validation from '../utils/validation';
 import { AuthService } from 'src/shared/services/auth.service';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'login',
@@ -17,13 +19,21 @@ export class LoginComponent {
 
   private subscriptions : Subscription[] = [];
 
+  public params : any;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService : AuthService,
-    public router : Router
+    public router : Router,
+    public route : ActivatedRoute,
+    private userAccountStore : UserAccountStore
     ) {}
 
   ngOnInit(): void {
+
+    this.params = this.route.snapshot.queryParamMap;
+    console.log("()()()()() Inside is valid", this.params);
+
     this.form = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
@@ -84,8 +94,22 @@ export class LoginComponent {
       }
       this.subscriptions.push(
         this.authService.signin(req).subscribe( res=> {
-          console.log("***** The res is ", res);
+          
           localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
+          var decoded = jwtDecode(res.data);
+          
+          this.userAccountStore.setUserDetails(decoded);
+          
+
+          if(this.params && this.params.has('productId')){
+            console.log("***** The res is ", decoded);
+            //this.router.navigate(['/cart'], {queryParams: this.params});
+            //this.router.navigate(['/cart'], {queryParams: this.params});
+          }
+          else{
+            this.router.navigate(['']);
+          }
+          
         })
       )
     }

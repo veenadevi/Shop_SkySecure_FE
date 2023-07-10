@@ -37,7 +37,7 @@ const appRoutes : Routes = [
       preload: true
       //activities: ['Admin']
     },
-    canActivate : [AuthGuard]
+    //canActivate : [AuthGuard]
   },
 
   { 

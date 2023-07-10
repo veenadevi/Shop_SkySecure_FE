@@ -10,6 +10,8 @@ import { LoginService } from 'src/shared/services/login.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectOemModalComponent } from 'src/shared/components/modals/select-oem-modal/select-oem-modal.component';
+import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
 
 
 @Component({
@@ -55,12 +57,13 @@ export class InterfaceComponent {
     private loginService : LoginService,
     private spinnerService : NgxSpinnerService,
     private msalBroadcastService: MsalBroadcastService,
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private router : Router
   ){
     this.typeSelected = 'ball-atom';
   }
 
-  public userDetails$ = this.userAccountStore.userProfileDetails$
+  /*public userDetails$ = this.userAccountStore.userProfileDetails$
   .pipe(
     map(data => {
       if(data){
@@ -82,10 +85,36 @@ export class InterfaceComponent {
       }
     }
     )
+  )*/
+
+  public userDetails$ = this.userAccountStore.userDetails$
+  .pipe(
+    map(data => {
+      if(data){
+        this.userRole = (data && data.role) ? data.role : null;
+        
+        if(data.firstName){
+          this.userName = data.firstName + ' ' + (data.lastName ? data.lastName : '');
+        }
+        else {
+          this.userName ="Altsys User" 
+        }
+        
+        this.userLoggedIn = true;
+        return data;
+      }
+      else{
+        this.userName ="Altsys User" ;
+        this.userLoggedIn = false;
+        return data;
+      }
+    }
+    )
   )
 
   public ngOnInit() : void {
 
+    //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.cities = [
       {name: 'New York', code: 'NY'},
       {name: 'Rome', code: 'RM'},
@@ -94,7 +123,9 @@ export class InterfaceComponent {
       {name: 'Paris', code: 'PRS'}
   ];
 
-    this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
+    this.checkUserLogIn();
+
+    //this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
     this.userDetails$.subscribe();
     // if(this.userLoggedIn){
     //   this.userDetails$.subscribe();
@@ -125,6 +156,19 @@ export class InterfaceComponent {
             .subscribe(() => {
                 
             })*/
+  }
+
+  public checkUserLogIn(){
+    let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
+    if (encodedVal !== null) {
+      //Logged In
+        var decoded = jwtDecode(encodedVal);
+        this.userAccountStore.setUserDetails(decoded);
+    }
+    else{
+        console.log("******* Auth Gaurd Else ");
+        this.userAccountStore.setUserDetails(null);
+    }
   }
 
 

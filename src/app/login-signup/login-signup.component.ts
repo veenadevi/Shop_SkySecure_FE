@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-signup',
@@ -10,15 +10,20 @@ export class LoginSignupComponent implements OnInit{
 
   public isValid : boolean = false;
 
+  public params : any;
+
   constructor(
-    public router : Router
+    public router : Router,
+    public route : ActivatedRoute
   ){}
 
   public ngOnInit(): void {
+
+    
     
     this.isValid = this.validateAuth();
     if(!this.isValid){
-      console.log("()()()()() Inside is valid", );
+     
       //this.router.navigate(['']);
     }
 
