@@ -90,7 +90,7 @@ export class SignUpComponent {
         "email":formValue.email,
         "password":formValue.password,
         "company":formValue.companyName,
-        "role": "admin",
+        "role": "developer",
         "countryCode":"+91",
         "mobileNumber":formValue.mobileNumber,
         "addressOne":{"name":"bangalore"},

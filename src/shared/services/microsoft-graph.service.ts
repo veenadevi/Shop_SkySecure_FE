@@ -65,7 +65,8 @@ export class MicrosoftGraphService {
     const URL = this.baseUrl + this.appRegistrationUrl;
     const OPTIONS = this.getOptions(msAddata);
 
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
 
     
     let request = {
@@ -102,7 +103,8 @@ export class MicrosoftGraphService {
   public getConnectionStatus(): Observable<any> {
 
     
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
       let url = this.baseUrl + this.getConnectionUrl;
       const OPTIONS = {
         params: new HttpParams()

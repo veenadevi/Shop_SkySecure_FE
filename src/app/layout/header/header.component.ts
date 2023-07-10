@@ -92,10 +92,11 @@ export class HeaderComponent implements OnInit{
 
   // Cart Click
 
-  public userDetails$ = this.userAccountStore.userAccountDetails$
+  public userDetails$ = this.userAccountStore.userDetails$
   .pipe(
     map(data => {
       if(data){
+        console.log("***** (((( ", data);
         return data;
       }
       else{
@@ -130,9 +131,16 @@ export class HeaderComponent implements OnInit{
 
     this.spinnerService.show();
     this.subscriptions.push(this.userDetails$.subscribe(res => {
-      this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
+      if(res && res.email){
+        this.userLoggedIn = true;
+      }
+      else{
+        this.userLoggedIn = false;
+      }
       if(this.userLoggedIn){
-        this.getAccessIdToken();
+        //this.getAccessIdToken();
+        console.log("()()()()( Data)", res);
+        this.retrieveCarttItems(res);
         this.spinnerService.hide();
         //this.sample();
       }

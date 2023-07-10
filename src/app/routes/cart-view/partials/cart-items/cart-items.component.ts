@@ -167,7 +167,8 @@ public cartData : any[] = [];
 
   public getCartItems(multipleProduct) : void {
 
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
     let cartRefId = this.cartStore.getCartRefreneceId();
     let productsList = this.cartStore.getProductListItems() ? this.cartStore.getProductListItems() : [];
     
@@ -302,7 +303,9 @@ public cartData : any[] = [];
   public requestQuote(){
     //this.router.navigate(['/cart/cart-submit']);
     let cartRefId = this.cartStore.getCartRefreneceId();
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
+
     let req = {
       userId : userAccountdetails._id,
       createdBy : userAccountdetails.firstName,
@@ -354,7 +357,8 @@ public cartData : any[] = [];
 
   
     let cartRefId = this.cartStore.getCartRefreneceId();
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
       //userId : '2222',
@@ -373,13 +377,15 @@ public cartData : any[] = [];
 
     this.cartData.splice(i, 1);
     let cartRefId = this.cartStore.getCartRefreneceId();
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
       //userId : '2222',
       createdBy : userAccountdetails.firstName,
       products : this.cartData,
-      cart_ref_id : cartRefId
+      cart_ref_id : cartRefId,
+      status : "New"
     });
 
     this.addCartItemsService(req, 'remove');

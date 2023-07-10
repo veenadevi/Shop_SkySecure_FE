@@ -66,6 +66,11 @@ export class AuthService {
     let authToken = localStorage.getItem('XXXXaccess__tokenXXXX');
     return authToken !== null ? true : false;
   }
+
+
+  public signOut() {
+    
+  }
   
 
 
