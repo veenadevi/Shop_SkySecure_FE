@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/shared/services/auth.service';
 import Validation from '../utils/validation';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'sign-up',
@@ -82,8 +83,11 @@ export class SignUpComponent {
     else{ // If Valid
       console.log("()()() Valid");
       
-      console.log(JSON.stringify(this.form.value, null, 2));
+      
+      //console.log(JSON.stringify(this.form.value, null, 2));
       let formValue = this.form.value;
+      let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
+      let hashedPass = CryptoJS.AES.encrypt(formValue.password, key).toString();
       let req = {
         "firstName":formValue.firstName,
         "lastName":formValue.lastName,

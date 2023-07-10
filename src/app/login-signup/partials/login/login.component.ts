@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
+import * as CryptoJS from 'crypto-js';
+
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -87,10 +89,12 @@ export class LoginComponent {
     }
     else{ // If Valid
       
+      let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
+      let hashedPass = CryptoJS.AES.encrypt(this.form.value.password, key).toString();
       console.log(JSON.stringify(this.form.value, null, 2));
       let req = {
         "email":this.form.value.email,
-        "password":this.form.value.password
+        "password":hashedPass
       }
       this.subscriptions.push(
         this.authService.signin(req).subscribe( res=> {

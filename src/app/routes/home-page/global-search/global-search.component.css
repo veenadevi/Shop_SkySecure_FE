@@ -20,29 +20,107 @@
     /* margin-top: 10%; */
 }
 
-/* On screens that are 392px or less, set the background color to blue */
-@media screen and (max-width: 770px) {
+
+@media  ( min-width: 1025px) and (max-width: 1200px)  {
+    .global-search-container{
+        background-image: url('../../../../assets/Realize/logos/images/HeaderBackgroundDarkBlue.jpg');
+        background-repeat: repeat-y;
+        height: 225px;
+        width: 100%;
+        background-size: cover;
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
     .header{
         color: var(--white);
         padding-bottom: 20px;
-        padding-left: 10px;
+        padding-left: 0px;
+        padding-right: 15px;
+        font-family: 'Merriweather';
+        font-size: 35px;
+        text-align: center;
+    }
+}
+
+
+@media  ( min-width: 771px) and (max-width: 1024px)  {
+    .global-search-container{
+        background-image: url('../../../../assets/Realize/logos/images/HeaderBackgroundDarkBlue.jpg');
+        background-repeat: repeat-y;
+        height: 150px;
+        width: 100%;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .header{
+        color: var(--white);
+        padding-bottom: 25px;
+        /* padding-left: -127px; */
         padding-right: 10px;
         font-family: 'Merriweather';
-        font-size: 1em;
+        font-size: 27px;
+        text-align: center;
+        /* margin-top: 10%; */
+    }
+}
+
+/* On screens that are 392px or less, set the background color to blue */
+@media  ( min-width: 481px) and (max-width: 770px)  {
+    .global-search-container{
+        background-image: url('../../../../assets/Realize/logos/images/HeaderBackgroundDarkBlue.jpg');
+        background-repeat: repeat-y;
+        height: 150px;
+        width: 100%;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .header{
+        color: var(--white);
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 50px;
+        font-family: 'Merriweather';
+        font-size: 20px;
+        text-align: center;
         /* margin-top: 10%; */
     }
 }
 /* On screens that are 392px or less, set the background color to blue */
-@media screen and (max-width: 392px) {
+@media ( min-width: 320px) and (max-width: 480px) {
+    .global-search-container{
+        background-image: url('../../../../assets/Realize/logos/images/HeaderBackgroundDarkBlue.jpg');
+        background-repeat: repeat-y;
+        height: 150px;
+        width: 100%;
+        background-size: cover;
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
     .header{
         color: var(--white);
         padding-bottom: 20px;
         padding-left: 10px;
         padding-right: 10px;
         font-family: 'Merriweather';
-        font-size: 1.8em;
-        /* margin-top: 10%; */
+        font-size: 7px;
+        text-align: center;
     }
+    
+.search-box-container {
+    width: 50%;
+}
   }
 
 
