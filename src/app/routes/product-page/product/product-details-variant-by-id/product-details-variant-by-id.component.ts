@@ -18,7 +18,10 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 })
 export class ProductDetailsVariantByIdComponent implements OnInit{
   productImages=[];
+  productVideoURL: string;
+  productVideoURLTitle : string;
   productBundles=[];
+  public productVideoText: string;
   public faq : any[]=[];
   productListToCompare  = [];
   products = [];
@@ -83,6 +86,9 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   public productSubCategoryId : String;
   public similarProducts :any[] = [];
   public bannerText: '#FFFFFF';
+
+
+  public alternateFeaturesImage = "../../assets/productDetails/FeaturesIllustration.svg";
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
@@ -185,6 +191,7 @@ for(let i=0;i<response.productBundles.length;i++)
         // this.bannerUrl = this.product.bannerURL;
         if( response.products[0] &&response.products[0].hasOwnProperty('productImages')&& response.products[0].productImages && response.products[0].productImages.length>0) {
           this.productImages = response.products[0].productImages;
+
         } 
         else {
           console.log("======no product images====")
@@ -195,6 +202,41 @@ for(let i=0;i<response.productBundles.length;i++)
         console.log("======no product images====",this.productImages.length)
         }
         this.productImages=this.productImages.slice(0,4);
+
+        
+
+        
+
+        if(this.productVariants && this.productVariants.productVideoURL){
+          this.setIframe(this.productVariants.productVideoURL);
+          this.productVideoText = `<span> Azure Active Directory Plan 1 </span>`
+          
+          //this.productVideoURL = "'https://www.youtube.com/embed/aGtMBo1Ko8w'";
+          //console.log("================================Available",this.productVideoURL);
+        }
+        else{
+          this.productVideoURL= this.alternateFeaturesImage;
+          console.log("======no product video====",this.productVideoURL.length)
+        }
+
+        /*if(this.productVariants.productVideoURL &&this.productVariants.hasOwnProperty('productVideoURL')&& this.productVariants.productVideoURL && this.productVariants.productVideoURL.length>0) {
+          //this.productVideoURL =  "`"+this.productVariants.productVideoURL+"`";
+          this.productVideoURL = "https://www.youtube.com/embed/aGtMBo1Ko8w";
+          this.productVideoURLTitle = "Sample";
+
+          console.log("================================Available",this.productVideoURL);
+          
+        } 
+        else {
+        this.productVideoURL= this.alternateFeaturesImage;
+        console.log("======no product video====",this.productVideoURL.length)
+        }*/
+        
+        
+
+
+
+
 
         // this.product.productVariants.push(response.productBundles);
         //this.product.productVariants = [123];
@@ -225,6 +267,31 @@ for(let i=0;i<response.productBundles.length;i++)
 
 
     );
+  }
+
+  public setIframe(data){
+    var iframeDivHolder = document.getElementById("iframe-div");
+
+		// create iframe
+		var substack = document.createElement("iframe");
+		// Add attributes
+		//substack.src = "https://www.youtube.com/embed/aGtMBo1Ko8w";
+    substack.src = data[0].source;
+		// Set size and hide iframe border
+		substack.width = "300";
+		substack.height = "150";
+		substack.frameBorder ="0";
+		substack.scrolling = "0";
+		substack.style.border= "none";
+		substack.style.background = "white";
+		iframeDivHolder.appendChild(substack);
+		// event to trigger iframe loading
+		/*document.getElementById("subscribe").addEventListener("click", function(){
+			// Add Iframe to webpage
+			loadSubscribe.appendChild(substack);
+			// Hide button
+			this.style.display = "none";
+		})*/
   }
 
   public setDataValues(resp:any): void {
@@ -422,8 +489,13 @@ featureCount=5;
     
   }
 
+  
+
   ngOnDestroy(){
     
   }
+
+
+
 }
 

@@ -305,7 +305,14 @@ font-weight: 600;">Compare products</p></span>
                 
            <div class="product-feature-cards-container">
             <div class="prod-feat-img">
-                <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustration.svg">
+                <div id="iframe-div" >
+                   <!-- Space for Iframe -->
+                </div>
+                <ng-container *ngIf="productVideoURL">
+                                       
+                </ng-container>
+                
+                <!-- <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustration.svg"> -->
                 </div>
                 <div class="prod-feat-card-cont">
                     <div class="prod-card-holder">

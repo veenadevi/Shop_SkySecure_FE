@@ -18,6 +18,7 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 })
 export class ProductDetailComponent implements OnInit{
   productImages=[];
+  productVideoURL=[];
   productBundles=[];
   faq = [];
   productListToCompare  = [];
