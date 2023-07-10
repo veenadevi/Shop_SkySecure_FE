@@ -1,5 +1,5 @@
 .container{
-    height: 260px;
+    /* height: 260px; */
     width: 100%;
     background : var(--white);
     display: flex;
@@ -59,3 +59,222 @@
     cursor: pointer;
 
 }
+
+
+
+@media  ( min-width: 1025px) and (max-width: 1200px)  {
+   
+    
+}
+
+
+@media  ( min-width: 771px) and (max-width: 1024px)  {
+
+    .container{
+        /* height: 260px; */
+        width: 100%;
+        background : var(--white);
+        display: flex;
+        flex-direction: column;
+        padding: 20px 20px 0 20px;
+        max-width: 1620px !important;
+        row-gap: 1em;
+        /* overflow: scroll; */
+    }
+    
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .card-container{
+        display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    margin-left: 90px;
+    margin-top: -5px;
+    column-gap: 1.5%;
+    padding-right: 50px;
+    /* flex-direction: column; */
+    }
+    
+    .card-item{
+        border: 2px solid var(--light_border);
+        border-radius: 5px;
+        height: 11.5rem;
+        width: 11.5rem;
+    }
+    
+    .d-flex{
+        display: flex!important;
+    }
+    
+    .card-container img{
+        width: 3em;
+        height: 3em;
+    }
+    
+    .alignLeft {
+        float: left;
+        font-size: 15px;
+    }
+    .alignRight {
+        float: right;
+    }
+    
+    .brown-color{
+        /* color: var(--brown); */
+        color: #003388;
+        cursor: pointer;
+        font-size: 12px;
+        margin-top: 1px;
+    
+    }
+    
+    .brown-color img {
+        height: 15px;
+        cursor: pointer;
+    
+    }
+
+   
+}
+
+
+@media  ( min-width: 481px) and (max-width: 770px)  {
+    .container{
+        /* height: 260px; */
+        width: 100%;
+        background : var(--white);
+        display: flex;
+        flex-direction: column;
+        padding: 20px 20px 0 20px;
+        max-width: 1620px !important;
+        row-gap: 1em;
+        /* overflow: scroll; */
+    }
+    
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .card-container{
+        display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    margin-left: 45px;
+    margin-top: -5px;
+    column-gap: 1.5%;
+    padding-right: 50px;
+    flex-direction: column;
+    }
+    
+    .card-item{
+        border: 2px solid var(--light_border);
+        border-radius: 5px;
+        height: 11.5rem;
+        width: 11.5rem;
+    }
+    
+    .d-flex{
+        display: flex!important;
+    }
+    
+    .card-container img{
+        width: 3em;
+        height: 3em;
+    }
+    
+    .alignLeft {
+        float: left;
+        font-size: 10px;
+    }
+    .alignRight {
+        float: right;
+    }
+    
+    .brown-color{
+        /* color: var(--brown); */
+        color: #003388;
+        cursor: pointer;
+        font-size: 10px;
+        margin-top: 1px;
+    
+    }
+    
+    .brown-color img {
+        height: 10px;
+        cursor: pointer;
+    
+    }
+}
+
+@media ( min-width: 320px) and (max-width: 480px) {
+    .container{
+        /* height: 260px; */
+        width: 100%;
+        background : var(--white);
+        display: flex;
+        flex-direction: column;
+        padding: 20px 20px 0 20px;
+        max-width: 1620px !important;
+        row-gap: 1em;
+        /* overflow: scroll; */
+    }
+    
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .card-container{
+        display: flex;
+        flex-grow: 1;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        margin-left: -8px;
+        margin-top: -5px;
+        column-gap: 1.5%;
+    }
+    
+    .card-item{
+        border: 2px solid var(--light_border);
+        border-radius: 5px;
+        height: 11.5rem;
+        width: 11.5rem;
+    }
+    
+    .d-flex{
+        display: flex!important;
+    }
+    
+    .card-container img{
+        width: 3em;
+        height: 3em;
+    }
+    
+    .alignLeft {
+        float: left;
+        font-size: 7px;
+    }
+    .alignRight {
+        float: right;
+    }
+    
+    .brown-color{
+        /* color: var(--brown); */
+        color: #003388;
+        cursor: pointer;
+        font-size: 6px;
+        margin-top: 1px;
+    
+    }
+    
+    .brown-color img {
+        height: 10px;
+        cursor: pointer;
+    
+    }
+    
+}
+    

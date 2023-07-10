@@ -267,3 +267,33 @@
     font-size: 18px;
     margin-top: 4px;
 }
+
+
+
+
+
+@media (min-width: 1025px) and (max-width: 1200px){
+  .col-md-3 {
+      flex: 0 0 auto;
+      width: 40%;
+     
+      margin-left:6.5%;
+  }
+  }
+
+  @media (min-width: 771px) and (max-width: 1024px){
+    .col-md-3 {
+        flex: 0 0 auto;
+        width: 40%;
+       
+        margin-left:7%;
+    }
+    }
+    @media (min-width: 480px) and (max-width: 770px){
+      .col-md-3 {
+          flex: 0 0 auto;
+          width: 50%;
+         
+          margin-left:0%;
+      }
+      }

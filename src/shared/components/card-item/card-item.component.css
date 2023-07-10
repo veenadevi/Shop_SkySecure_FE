@@ -25,3 +25,121 @@
     text-align: center;
     height: 25px;
 }
+
+@media  ( min-width: 1025px) and (max-width: 1200px)  {
+   
+    
+}
+
+
+@media  ( min-width: 771px) and (max-width: 1024px)  {
+
+    .card-item{
+        border: 2px solid var(--light_border);
+        border-radius: 5px;
+        height: auto;
+        width: 11.5rem;
+        /* background: var(--secondary); */
+        cursor: pointer;
+    }
+    
+    .d-flex{
+        display: flex!important;
+        row-gap: 10%;
+        width: 95%;
+        height: auto;
+    }
+    .ellipse{
+        background: #EBECF6;
+        border-radius: 50%;
+    }
+    
+    .card-item img{
+        width: 2em;
+        height: 2em;
+    }
+    
+    .j_Y {
+        text-align: center;
+        height: 50px;
+    }
+    .text-normal{
+        font-size: 10px;
+    }
+
+   
+}
+
+
+@media  ( min-width: 481px) and (max-width: 770px)  {
+    .card-item{
+        border: 2px solid var(--light_border);
+        border-radius: 5px;
+        height: auto;
+        width: 11.5rem;
+        /* background: var(--secondary); */
+        cursor: pointer;
+    }
+    
+    .d-flex{
+        display: flex!important;
+        row-gap: 10%;
+        width: 95%;
+        height: auto;
+    }
+    .ellipse{
+        background: #EBECF6;
+        border-radius: 50%;
+    }
+    
+    .card-item img{
+        width: 2em;
+        height: 2em;
+    }
+    
+    .j_Y {
+        text-align: center;
+        height: 50px;
+    }
+    .text-normal{
+        font-size: 10px;
+    }
+      
+}
+
+@media  ( min-width: 320px) and (max-width: 480px)  {
+
+    .card-item{
+        border: 2px solid var(--light_border);
+        border-radius: 5px;
+        height: auto;
+        width: 11.5rem;
+        /* background: var(--secondary); */
+        cursor: pointer;
+    }
+    
+    .d-flex{
+        display: flex!important;
+        row-gap: 10%;
+        width: 95%;
+        height: auto;
+    }
+    .ellipse{
+        background: #EBECF6;
+        border-radius: 50%;
+    }
+    
+    .card-item img{
+        width: 2em;
+        height: 2em;
+    }
+    
+    .j_Y {
+        text-align: center;
+        height: 75px;
+        padding-top: 10px;
+    }
+    .text-normal{
+        font-size: 16px;
+    }
+}

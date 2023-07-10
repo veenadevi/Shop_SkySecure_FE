@@ -290,3 +290,12 @@ h6{
 .product-container {
     margin-top: 5px;
 }
+
+
+@media (min-width: 771px) {
+    .trending-cards-list{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+}
