@@ -9,7 +9,7 @@
                 <input
                   type="text"
                   formControlName="email"
-                  placeholder="Ex.: suryakumar@mail.com "
+                  placeholder="john@xyz.com "
                   class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
                 />
@@ -24,7 +24,7 @@
                 <input
                   type="password"
                   formControlName="password"
-                  placeholder="Type here...."
+                  placeholder="*****."
                   class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
                 />
@@ -183,8 +183,8 @@
                <!-- changed as per figma -->
                <div class="no-account">
                 <div class="no-account-01">
-                    Don’t have an account?
+                    Don't have an account?
                 </div>
-                <div class="no-account-02" (click)="signUp()"> Sign Up</div>
+                <div class="no-account-02" (click)="signUp()"><span> Sign Up</span> </div>
               </div>
 </div>
