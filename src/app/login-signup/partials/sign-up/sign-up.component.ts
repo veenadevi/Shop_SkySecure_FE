@@ -92,7 +92,7 @@ export class SignUpComponent {
         "firstName":formValue.firstName,
         "lastName":formValue.lastName,
         "email":formValue.email,
-        "password":formValue.password,
+        "password":hashedPass,
         "company":formValue.companyName,
         "role": "developer",
         "countryCode":"+91",
