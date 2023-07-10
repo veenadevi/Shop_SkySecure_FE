@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MsalGuard, MsalRedirectComponent } from '@azure/msal-angular';
 
 import { InterfaceModule  } from './interface/interface.module';
+import { AuthGuard } from 'src/shared/services/auth.guard';
 
 /**
  * Changed loading strategy from Lazy to Eager
@@ -11,11 +12,11 @@ import { InterfaceModule  } from './interface/interface.module';
  */
 const appRoutes : Routes = [
 
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'login'
-  },
+  // {
+  //   path: '',
+  //   pathMatch: 'full',
+  //   redirectTo: 'login',
+  // },
 
   {
     // Needed for handling redirect after login
@@ -35,7 +36,13 @@ const appRoutes : Routes = [
     data: {
       preload: true
       //activities: ['Admin']
-    }
+    },
+    canActivate : [AuthGuard]
+  },
+
+  { 
+    path: 'login', 
+    loadChildren: () => import('./login-signup/login-signup.module').then(m => m.LoginSignupModule) 
   },
 
   
