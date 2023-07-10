@@ -171,14 +171,30 @@ export class ProductDetailComponent implements OnInit{
         console.log("&&&&& inside", this.product.productVariants.length);
         this.onProductLoad = true;
         this.bannerUrl = this.product.bannerURL;
-        if(response.products[0].productImages.length>0) {
-          this.productImages = response.productImages;
+
+
+        if(this.products[0] && this.products[0].productImages && this.products[0].productImages.length>0) {
+          this.productImages = this.products[0].productImages;
         } else {
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         }
+        this.productImages=this.productImages.slice(0,4);
+
+
+
+        // if(response.products[0].productImages.length>0) {
+        //   this.productImages = response.productImages;
+        // } else {
+        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        // }
+
+
         for(let i=0;i<response.productBundles.length;i++)
         response.productBundles[i].productFamily = {...response.productBundles[i].productFamily, checked: false, quantity: 1 };
         this.productBundles  = response.productBundles;
