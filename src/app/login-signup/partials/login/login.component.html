@@ -3,12 +3,13 @@
 
     <div class="register-form">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
+          <div class="heading"><h1>Sign in!</h1></div>
             <div class="form-group">
                 <label>Email</label>
                 <input
                   type="text"
                   formControlName="email"
+                  placeholder="Ex.: suryakumar@mail.com "
                   class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
                 />
@@ -23,6 +24,7 @@
                 <input
                   type="password"
                   formControlName="password"
+                  placeholder="Type here...."
                   class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
                 />
@@ -37,7 +39,7 @@
                 </div>
               </div>
 
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <button type="submit" class="btn btn-primary">Sign In</button>
                 <button
                   type="button"
@@ -46,7 +48,17 @@
                 >
                   Reset
                 </button>
-              </div>
+              </div> -->
+
+
+<!-- changed html as per figma -->
+<div class="forgot-pwd">
+            <span class="psw"> <a href="#">Forgot password?</a></span>
+          </div>
+          <div class="signin-btn">
+            <button type="submit" class="primary-btn">Sign In</button>
+          </div>
+
           <!-- <div class="form-group">
             <label>Full Name</label>
             <input
@@ -160,12 +172,19 @@
           </div> -->
         </form>
       </div>
-
+<!-- 
       <div>
         <button (click)="signUp()">
           Sign Up
         </button>
-      </div>
-      
+      </div> -->
+        
 
+               <!-- changed as per figma -->
+               <div class="no-account">
+                <div class="no-account-01">
+                    Don’t have an account?
+                </div>
+                <div class="no-account-02" (click)="signUp()"> Sign Up</div>
+              </div>
 </div>

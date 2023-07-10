@@ -189,6 +189,7 @@ export class ProductBundleVariantDetailComponent {
         this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
         this.bundleDetails=this.products.concat(this.productVarients,this.childProductFamilies,this.childProductFamilyVariant);
 
+        
         if(this.productFamily && this.productFamily.productImages && this.productFamily.productImages.length>0) {
           this.productImages = this.productFamily.productImages;
         } else {
@@ -198,6 +199,8 @@ export class ProductBundleVariantDetailComponent {
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         }
         this.productImages=this.productImages.slice(0,4);
+
+
         let tempProducts = this.setProductsData(this.products);
         let tempProductVariants = this.setProductVariantsData(this.productVarients);
         let tempProductBundleVariants = this.setProductBundleVariantsData(this.childProductFamilyVariant);
