@@ -131,8 +131,8 @@ export class UserProfileService {
     
     
     
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
-    
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
 
     
     let url = this.baseUrlForQuote + this.getQuotationUrl + '/' + userAccountdetails._id;

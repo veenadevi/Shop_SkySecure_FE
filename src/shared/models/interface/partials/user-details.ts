@@ -9,5 +9,6 @@ export interface UserDetails {
     updatedAt
     updatedBy
     __v : number;
-    _id : string
+    _id : string;
+    userId : string;
 }
