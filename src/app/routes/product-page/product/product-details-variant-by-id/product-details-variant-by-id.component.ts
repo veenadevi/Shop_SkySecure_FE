@@ -19,6 +19,8 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 export class ProductDetailsVariantByIdComponent implements OnInit{
   productImages=[];
   productVideoURL: string;
+  featuresVideoTitle: string = "Features Video";
+  element: string;
   productVideoURLTitle : string;
   productBundles=[];
   public productVideoText: string;
@@ -29,6 +31,15 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   titles = ['Description', 'Features', 'Specification','Similar Products','compare products','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
+
+  public headingTags = [
+    { title_size: "h1" },
+    { title_size: "h2" },
+    { title_size: "h3" },
+    { title_size: "h4" },
+    { title_size: "h5" },
+    { title_size: "h6" }
+  ];
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
@@ -74,10 +85,10 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   }
 
 
- featureList = [];
- productVariants ;
- dispFeatureList: any[] = [];
- productName:string;
+  featureList = [];
+  productVariants ;
+  dispFeatureList: any[] = [];
+  productName:string;
   public bannerUrl : any;
 
   private subscriptions: Subscription[] = [];
@@ -88,7 +99,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   public bannerText: '#FFFFFF';
 
 
-  public alternateFeaturesImage = "../../assets/productDetails/FeaturesIllustration.svg";
+  public alternateFeaturesImage = '../../../../assets/productDetails/FeaturesIllustration.svg';
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
@@ -205,11 +216,12 @@ for(let i=0;i<response.productBundles.length;i++)
 
         
 
-        
+        //iframe functionality------->
 
         if(this.productVariants && this.productVariants.productVideoURL){
           this.setIframe(this.productVariants.productVideoURL);
-          this.productVideoText = `<span> Azure Active Directory Plan 1 </span>`
+          // this.productVideoText = `<${this.headingTags[4].title_size}>${this.productVariants.name}</${this.headingTags[4].title_size}>`
+          this.element = `<${this.headingTags[4].title_size}>${this.featuresVideoTitle}</${this.headingTags[4].title_size}>`
           
           //this.productVideoURL = "'https://www.youtube.com/embed/aGtMBo1Ko8w'";
           //console.log("================================Available",this.productVideoURL);
@@ -270,6 +282,7 @@ for(let i=0;i<response.productBundles.length;i++)
   }
 
   public setIframe(data){
+
     var iframeDivHolder = document.getElementById("iframe-div");
 
 		// create iframe
@@ -278,8 +291,8 @@ for(let i=0;i<response.productBundles.length;i++)
 		//substack.src = "https://www.youtube.com/embed/aGtMBo1Ko8w";
     substack.src = data[0].source;
 		// Set size and hide iframe border
-		substack.width = "300";
-		substack.height = "150";
+		substack.width = "608";
+		substack.height = "342";
 		substack.frameBorder ="0";
 		substack.scrolling = "0";
 		substack.style.border= "none";

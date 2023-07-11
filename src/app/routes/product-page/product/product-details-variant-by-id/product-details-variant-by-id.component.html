@@ -304,52 +304,61 @@ font-weight: 600;">Compare products</p></span>
                 <h5>Features</h5>
                 
            <div class="product-feature-cards-container">
-            <div class="prod-feat-img">
-                <div id="iframe-div" >
-                   <!-- Space for Iframe -->
+            <div class="features-headline">
+                <h3>{{productVariants.name}}</h3>   
+                <div [innerHTML]="element">
+                    <!-- space for features video -->
                 </div>
-                <ng-container *ngIf="productVideoURL">
-                                       
-                </ng-container>
-                
-                <!-- <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustration.svg"> -->
-                </div>
-                <div class="prod-feat-card-cont">
-                    <div class="prod-card-holder">
-   <div class="feature-desc-heading">
-                <p style="font-weight: 400;">Here is the common generalized section for the product</p>
-                </div>
-                <div class="prod-card-holder2">
-                    
-                    <ng-container *ngFor="let item of featureList">
-                        
-                        <div class="product-feature-card" (click)="openLink(item.hyperLinkURL)">
-                           
-                            <span style="display:flex;flex-basis:30%;padding: 7%;justify-content: center;;flex-direction: column;">
-                                <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
-                                </span>
-                            <span style="display:flex;flex-basis:70%;padding: 1%;flex-direction: column;">
-                            <p style="color: #000;
-                            font-size: initial;
-                            font-weight: 700;">{{item.name}}</p>
-                            <p style="font-size: small;">{{item.description}}</p>
-                        </span>
-                        </div>
-
-                    </ng-container>
-                   
-        </div>
-        
-        </div>
-        <div class="p-view-all-feature-div">
-            <div class="feature-desc-heading">
-            <p style="margin-bottom: 10px;font-weight: 400;">click here to view detailed feature of the product</p>
-            <button class="btn view-det-btn" (click)="featureCountEvent()">View All Features</button>
-          
             </div>
-        </div>
-               
-             </div>
+                <div class="features-content">
+                    <div class="prod-feat-img">
+                        <div id="iframe-div" class="iframe-container" >
+                           <!-- Space for Iframe -->
+                           
+                        </div>
+                        <ng-container *ngIf="productVideoURL"> 
+                        </ng-container>
+                        
+                        <!-- <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustration.svg"> -->
+                        </div>
+                        <div class="prod-feat-card-cont">
+                            <div class="prod-card-holder">
+           <div class="feature-desc-heading">
+                        <p style="font-weight: 400; font-size: 18px;">Here is the common generalized section for the product</p>
+                        </div>
+                        <div class="prod-card-holder2">
+                            
+                            <ng-container *ngFor="let item of featureList">
+                                
+                                <div class="product-feature-card" (click)="openLink(item.hyperLinkURL)">
+                                   
+                                    <span style="display:flex;flex-basis:30%;padding: 7%;justify-content: center;;flex-direction: column;">
+                                        <img style="width:auto;height: auto;position: relative;" src="../../assets/productDetails/FeaturesIllustrationIcon.svg">
+                                        </span>
+                                    <span style="display:flex;flex-basis:70%;padding: 1%;flex-direction: column;">
+                                    <p style="color: #000;
+                                    font-size: initial;
+                                    font-weight: 700;">{{item.name}}</p>
+                                    <p style="font-size: small;">{{item.description}}</p>
+                                </span>
+                                </div>
+        
+                            </ng-container>
+                           
+                </div>
+                
+                </div>
+                <div class="p-view-all-feature-div">
+                    <div class="feature-desc-heading">
+                    <p style="margin-bottom: 10px;font-weight: 400;">click here to view detailed feature of the product</p>
+                    <button class="btn view-det-btn" (click)="featureCountEvent()">View All Features</button>
+                  
+                    </div>
+                </div>
+                       
+                     </div>
+                </div>
+            
              
             </div>
         </div>
