@@ -2,3 +2,39 @@
     padding : 0 46px 0 46px;
     background-color: #efefef;
 }
+
+
+
+
+@media  ( min-width: 771px) and (max-width: 1024px)  {
+   
+    .home-page-container {
+        display: flex;
+        flex-direction: column;
+        padding : 0 46px 0 46px;
+        background-color: #efefef;
+        overflow: visible;
+    }
+}
+
+@media  ( min-width: 481px) and (max-width: 770px)  {
+   
+    .home-page-container {
+        display: flex;
+        flex-direction: column;
+        padding : 0 46px 0 46px;
+        background-color: #efefef;
+        overflow: visible;
+    }
+}
+
+@media  ( min-width: 320px) and (max-width: 480px)  {
+   
+    .home-page-container {
+        display: flex;
+        flex-direction: column;
+        padding : 0 25px 0 25px;
+        background-color: #efefef;
+        overflow: visible;
+    }
+}

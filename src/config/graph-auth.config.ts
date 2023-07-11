@@ -32,7 +32,8 @@ export const GraphAuthPolicies = {
         "DeviceManagementApps.ReadWrite.All",
         "SecurityActions.Read.All",
         "SecurityActions.ReadWrite.All",
-        "SecurityEvents.ReadWrite.All"
+        "SecurityEvents.ReadWrite.All",
+        "ThreatAssessment.ReadWrite.All"//DFO
 
       ],
   };
