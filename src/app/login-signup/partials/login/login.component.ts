@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators, ReactiveFormsModul
 import Validation from '../utils/validation';
 import { AuthService } from 'src/shared/services/auth.service';
 import { Subscription } from 'rxjs';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
@@ -76,6 +77,26 @@ export class LoginComponent {
         validators: [Validation.match('password', 'confirmPassword')]
       }
     );*/
+
+
+    let formValue = this.form.value;
+    let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
+    let hashedPass = CryptoJS.AES.encrypt(formValue.password, key).toString();
+    let req = {
+    
+      "email":formValue.email,
+      "password":hashedPass,
+     
+      }
+      console.log("*(*(*(*(*(*( ",req);
+    this.subscriptions.push(
+        
+      this.authService.signUp(req).subscribe( res=> {
+        console.log("***** The res is ", res);
+        this.router.navigate(['']);
+        //localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
+      })
+    )
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -127,6 +148,9 @@ export class LoginComponent {
 
   public signUp(){
     this.router.navigate(['login/signUp']);
+  }
+  public navigateToHomePage(){
+    this.router.navigate(['']);
   }
 }
 
