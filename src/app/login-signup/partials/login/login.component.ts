@@ -89,13 +89,13 @@ export class LoginComponent {
      
       }
       console.log("*(*(*(*(*(*( ",req);
-    this.subscriptions.push(
+      this.subscriptions.push(
         
-      this.authService.signUp(req).subscribe( res=> {
-        console.log("***** The res is ", res);
-        this.router.navigate(['']);
-        //localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
-      })
+      // this.authService.signUp(req).subscribe( res=> {
+      //   console.log("***** The res is ", res);
+      //   this.router.navigate(['']);
+      //   //localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
+      // })
     )
   }
 
