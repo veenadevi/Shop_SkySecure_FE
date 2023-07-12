@@ -30,16 +30,7 @@ export class ProductComponent {
 
     
     var existingItems = this.cartStore.getCartItems();
-    // if(existingItems && existingItems.usercart.length > 0){
-      
-    //   existingItems.usercart[0].userCartDetails.push({
-    //     "productId": product,
-    //     "quantity" : 1
-    //   });
-    // }
-    //this.cartStore.setCartItems(product);
-    // this.router.navigate(['/cart']);
-
+    
     let queryParams = {
       productName : product.name,
       productId : product._id,

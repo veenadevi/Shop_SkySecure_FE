@@ -4,6 +4,7 @@ import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { CartStore } from 'src/shared/stores/cart.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'brand-bundle',
@@ -44,7 +45,8 @@ export class BrandBundleComponent implements OnInit{
     private authService : MsalService,
     private cartStore : CartStore,
     private router : Router,
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private userAccountStore : UserAccountStore
   ){}
 
   ngOnInit(): void {
@@ -143,10 +145,7 @@ export class BrandBundleComponent implements OnInit{
 
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    if(loggedinData.length > 0 ){
-      
-      var existingItems = this.cartStore.getCartItems();
-      let queryParams;
+    let queryParams;
       
       if(product.priceList && product.priceList.length>0){
         queryParams = {
@@ -164,45 +163,33 @@ export class BrandBundleComponent implements OnInit{
           price : ''
         };
       }
-      /*if(product.productsVariants){
-        
-        queryParams = {
-          productName : product.productVariants[0].name,
-          productId : product.productVariants[0]._id,
-          quantity : 1,
-          price : product.productVariants[0].priceList[0].price,
-        };
-      }
-      else{
-        console.log("*********** ++++++++ product No product Var", product);
-        if(product.priceList && product.priceList.length>0){
-          queryParams = {
-            productName : product.name,
-            productId : product._id,
-            quantity : 1,
-            price : product.priceList[0].price,
-          };
-        }
-        else{
-          queryParams = {
-            productName : product.name,
-            productId : product._id,
-            quantity : 1,
-            price : ''
-          };
-        }
-        
-      }*/
+
+
+    /*if(loggedinData.length > 0 ){
+      
+      var existingItems = this.cartStore.getCartItems();
+      
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
     else {
-      this.viewModal();
-    }
+      this.viewModal(queryParams);
+    }*/
+
+    this.userAccountStore.userDetails$.subscribe(res=>{
+      console.log("()()()() ", res);
+      if(res && res.email !== null){
+        this.router.navigate(['/cart'], {queryParams: queryParams});
+      }
+      else{
+        this.viewModal(queryParams);
+      }
+    })
   }
 
-  public viewModal() {
+  public viewModal(queryParams) {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
+    modalRef.componentInstance.request = queryParams;
   }
 
 }
