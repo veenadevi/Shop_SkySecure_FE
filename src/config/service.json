@@ -28,13 +28,16 @@
 
         
         "userCart" : "api/user-cart",
-        "userSignin" : "api/user/signin",
+        "userSignin" : "api/user/login",
         "profileUpdate" : "api/user/profile-update",
         "createQuotation" : "api/user/createQuotation",
         "getQuoteHistory" : "api/user/getQuoteHistory",
         "getAllDashBoardData" : "api/user/allDashBoardData",
         "getAllAccounts" : "api/user/allAccounts",
         "getAccountsById" : "api/user/getAccountDetails",
+
+        "userSignUp":"api/user/signup",
+        "userLogin":"api/user/login",
 
 
         "app-registration" : "api/user/azure/app-registration",
