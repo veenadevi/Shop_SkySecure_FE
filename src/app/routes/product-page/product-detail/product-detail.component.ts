@@ -21,6 +21,7 @@ export class ProductDetailComponent implements OnInit{
   productImages=[];
   productVideoURL=[];
   productBundles=[];
+  productDescriptionWordLimit: number = 50;
   faq = [];
   productListToCompare  = [];
   products = [];
@@ -28,6 +29,10 @@ export class ProductDetailComponent implements OnInit{
   titles = ['Description', 'Features', 'Specification','Reviews','Compare Products','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
+
+
+
+  
 
   public selectedProductItem : any[] = [];
 
@@ -74,6 +79,8 @@ export class ProductDetailComponent implements OnInit{
     window.open(url, '_blank');
   }
 
+  
+
 
  featureList: any[] = [];
  productVariants: any[]  =[];
@@ -88,9 +95,14 @@ export class ProductDetailComponent implements OnInit{
   public similarProducts : Array<any> = [];
   public bannerText: '#FFFFFF';
 
+  seeMore: boolean = false;
+
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
 
+  public openDescription(): void {
+    this.seeMore= !this.seeMore;
+  }
 
   public individualProductDetail$ = this.metadataStore.individualProductDetail$
   .pipe(
@@ -293,6 +305,10 @@ featureCount=5;
     console.log("featureList",this.dispFeatureList.length);
     //this.getProductDetails2(productId);
   }
+
+
+
+
 
   public featureCountEvent(): void {
     
