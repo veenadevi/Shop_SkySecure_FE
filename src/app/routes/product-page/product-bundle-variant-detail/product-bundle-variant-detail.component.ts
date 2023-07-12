@@ -7,6 +7,7 @@ import { LoginAlertModalComponent } from 'src/shared/components/login-alert-moda
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 
 @Component({
@@ -81,7 +82,8 @@ export class ProductBundleVariantDetailComponent {
     private cartStore : CartStore,
     private router : Router,
     private modalService : NgbModal,
-    private compareProductsStore : CompareProductsStore
+    private compareProductsStore : CompareProductsStore,
+    private userAccountStore : UserAccountStore
   ){
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
@@ -337,26 +339,38 @@ public requestQuote (productFamilyVariant : any) : void {
   
   let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-  if(loggedinData.length > 0 ){
+  let queryParams;
     
-    var existingItems = this.cartStore.getCartItems();
-    console.log( productFamilyVariant);
-    let queryParams;
-    // if(product.productVariants.length>0){
       queryParams = {
         productName : productFamilyVariant.name,
         productId : productFamilyVariant._id,
         quantity : productFamilyVariant.quantity,
         price : productFamilyVariant.priceList[0].price,
       };
-    // }
+    
+  /*if(loggedinData.length > 0 ){
+    
+    var existingItems = this.cartStore.getCartItems();
+    console.log( productFamilyVariant);
+    
     console.log(queryParams);
     this.router.navigate(['/cart'], {queryParams: queryParams});
   }
 
   else {
-    this.viewModal();
-  }
+    this.viewModal(queryParams);
+  }*/
+
+
+  this.userAccountStore.userDetails$.subscribe(res=>{
+    console.log("()()()() ", res);
+    if(res && res.email !== null){
+      this.router.navigate(['/cart'], {queryParams: queryParams});
+    }
+    else{
+      this.viewModal(queryParams);
+    }
+  })
 
   
 
@@ -396,8 +410,9 @@ async addToCompare(item:any, type:any):Promise<void> {
   console.log("getProdFromLocalStorage",prodGet);
 }
 
-public viewModal() {
+public viewModal(queryParams) {
   const modalRef = this.modalService.open(LoginAlertModalComponent);
+  modalRef.componentInstance.request = queryParams;
 }
 
 ngOnDestroy(){

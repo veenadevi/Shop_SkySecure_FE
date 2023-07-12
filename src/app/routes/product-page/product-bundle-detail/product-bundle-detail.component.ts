@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 
 @Component({
@@ -76,7 +77,8 @@ export class ProductBundleDetailComponent implements OnInit{
     private authService : MsalService,
     private cartStore : CartStore,
     private router : Router,
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private userAccountStore : UserAccountStore
   ){
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
@@ -283,11 +285,7 @@ console.log("======setProductVariantsData===="+data.length)
   public buyNow(item, quantity){
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    if(loggedinData.length > 0 ){
-      
-      var existingItems = this.cartStore.getCartItems();
-    
-      let queryParams;
+    let queryParams;
       // if(product.productVariants.length>0){
         queryParams = {
           productName : item.name,
@@ -295,18 +293,40 @@ console.log("======setProductVariantsData===="+data.length)
           quantity : quantity,
           price : item.priceList[0].price,
         };
-      // }
+    /*if(loggedinData.length > 0 ){
+      
+      var existingItems = this.cartStore.getCartItems();
+    
+      
+      
       console.log(queryParams);
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
     else {
-      this.viewModal();
-    }
+      this.viewModal(queryParams);
+    }*/
+
+    this.userAccountStore.userDetails$.subscribe(res=>{
+      console.log("()()()() ", res);
+      if(res && res.email !== null){
+        this.router.navigate(['/cart'], {queryParams: queryParams});
+      }
+      else{
+        this.viewModal(queryParams);
+      }
+    })
+
+
+
+
+
+
   }
 
-  public viewModal() {
+  public viewModal(queryParams) {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
+    modalRef.componentInstance.request = queryParams;
   }
 
   public compareEvent($event, item){
@@ -338,25 +358,25 @@ console.log("======setProductVariantsData===="+data.length)
   public requestQuote(item, quant){
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
+    let queryParams;
+      queryParams = {
+        productName : item.name,
+        productId : item._id,
+        quantity : quant,
+        price : item.priceList[0].price,
+      };
     if(loggedinData.length > 0 ){
       
       var existingItems = this.cartStore.getCartItems();
     
-      let queryParams;
-      // if(product.productVariants.length>0){
-        queryParams = {
-          productName : item.name,
-          productId : item._id,
-          quantity : quant,
-          price : item.priceList[0].price,
-        };
+
       // }
       console.log(queryParams);
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
     else {
-      this.viewModal();
+      this.viewModal(queryParams);
     }
   }
   

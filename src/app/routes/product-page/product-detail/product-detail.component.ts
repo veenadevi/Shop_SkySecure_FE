@@ -10,6 +10,7 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'app-product-detail',
@@ -262,7 +263,8 @@ console.log("response values: ", resp);
     private router : Router,
     private authService : MsalService,
     private modalService : NgbModal,
-    private compareProductsStore : CompareProductsStore
+    private compareProductsStore : CompareProductsStore,
+    private userAccountStore : UserAccountStore
   ){}
 featureCount=5;
 
@@ -372,11 +374,7 @@ featureCount=5;
     
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    if(loggedinData.length > 0 ){
-      
-      var existingItems = this.cartStore.getCartItems();
-    
-      let queryParams;
+    let queryParams;
       // if(product.productVariants.length>0){
         queryParams = {
           productName : product.name,
@@ -385,13 +383,29 @@ featureCount=5;
           price : product.priceList[0].price,
         };
       // }
-      console.log(queryParams);
+    /*if(loggedinData.length > 0 ){
+      
+      var existingItems = this.cartStore.getCartItems();
+    
+      
+      
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
     else {
-      this.viewModal();
-    }
+      this.viewModal(queryParams);
+    }*/
+
+    this.userAccountStore.userDetails$.subscribe(res=>{
+      console.log("()()()() ", res);
+      if(res && res.email !== null){
+        this.router.navigate(['/cart'], {queryParams: queryParams});
+      }
+      else{
+        this.viewModal(queryParams);
+      }
+    })
+    
 
     
 
@@ -403,8 +417,9 @@ featureCount=5;
 
   }
 
-  public viewModal() {
+  public viewModal(queryParams) {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
+    modalRef.componentInstance.request = queryParams;
   }
 
   public getColor(val){
