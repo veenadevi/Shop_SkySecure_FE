@@ -29,6 +29,7 @@ import { WriteReviewFlyerComponent } from './components/write-review-flyer/write
 import { GetFreeCallModalComponent } from './components/modals/get-free-call-modal/get-free-call-modal.component';
 
 
+
 @NgModule({
 
   imports: [
@@ -62,7 +63,7 @@ import { GetFreeCallModalComponent } from './components/modals/get-free-call-mod
     CompareProductItemFlyerComponent,
     ContactUsFlyerComponent,
     WriteReviewFlyerComponent,
-    GetFreeCallModalComponent
+    GetFreeCallModalComponent,
   ],
 
   providers: [
