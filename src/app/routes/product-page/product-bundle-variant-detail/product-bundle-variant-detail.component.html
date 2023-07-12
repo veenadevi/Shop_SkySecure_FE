@@ -12,77 +12,86 @@
                                 margin:10%;
                                 cursor: pointer;
                                 background: #EAEAEA;" class="img-hover"
-                                 src="../../../../assets/images/imgPlaceholder.png" alt="img">
+                                    src="../../../../assets/images/imgPlaceholder.png" alt="img">
                             </ng-container>
                         </ng-container>
                         <ng-template #noImagesBlock>
                             <!-- <ng-container *ngFor="let img of dummyImages"> -->
-                                <img style="width: 120%;
+                            <img style="width: 120%;
                                 height: auto;
                                 transition: transform .2s;
                                 margin:10%;
                                 cursor: pointer;
-                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                                background: #EAEAEA;" class="img-hover"
+                                src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
-                                <img style="width: 120%;
+                            <img style="width: 120%;
                                 height: auto;
                                 transition: transform .2s;
                                 margin:10%;
                                 cursor: pointer;
-                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                                background: #EAEAEA;" class="img-hover"
+                                src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
-                                <img style="width: 120%;
+                            <img style="width: 120%;
                                 height: auto;
                                 transition: transform .2s;
                                 margin:10%;
                                 cursor: pointer;
-                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                                background: #EAEAEA;" class="img-hover"
+                                src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
-                                <img style="width: 120%;
+                            <img style="width: 120%;
                                 height: auto;
                                 transition: transform .2s;
                                 margin:10%;
                                 cursor: pointer;
-                                background: #EAEAEA;" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                                background: #EAEAEA;" class="img-hover"
+                                src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
                             <!-- </ng-container> -->
                         </ng-template>
-                        
+
                         <img src="" alt="">
-                        </div>
+                    </div>
                     <div class="prod-img-logo">
-                        <img style="width:120%;height: 100%;object-fit: cover;" src="{{(productFamily && productFamily.bannerLogo) ? productFamily.bannerLogo : ''}}">
+                        <img style="width:120%;height: 100%;object-fit: cover;"
+                            src="{{(productFamily && productFamily.bannerLogo) ? productFamily.bannerLogo : ''}}">
                     </div>
                 </div>
 
 
 
                 <ng-container *ngIf="productFamilyVariant">
-                    <div class="buy-now-prod"> 
-                        <span style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;flex-direction: column;text-align: center;"> 
-                        <h6 style="margin-bottom: 0;">Quantity </h6> <p>(per year)</p>
+                    <div class="buy-now-prod">
+                        <span
+                            style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;flex-direction: column;text-align: center;">
+                            <h6 style="margin-bottom: 0;">Quantity </h6>
+                            <p>(per year)</p>
                         </span>
-                        <span style="display: inline-flex;justify-content: center;gap: 5px;"> 
-                            
-                                <span >
-                                  <img id="add-minus-quantity" (click)="decreaseBuyQuantity(productFamilyVariant.quantity)" alt="minus" src="../../../assets/icons/Minus.svg">
-                                </span>
-                                <span>
-                                  <input
-                                    class="input-field"  [(ngModel)]="productFamilyVariant.quantity"
-                                    >
-                                </span>
-                                <span >
-                                  <img id="add-minus-quantity" alt="" (click)="addBuyQuantity(productFamilyVariant.quantity)" src="../../../assets/icons/Add.svg">
-                                </span>
+                        <span style="display: inline-flex;justify-content: center;gap: 5px;">
+
+                            <span>
+                                <img id="add-minus-quantity"
+                                    (click)="decreaseBuyQuantity(productFamilyVariant.quantity)" alt="minus"
+                                    src="../../../assets/icons/Minus.svg">
                             </span>
-    
-                            <button class="btn buy-now-btn" (click)="requestQuote(productFamilyVariant)">Buy now</button>
-                        </div>
+                            <span>
+                                <input class="input-field" [(ngModel)]="productFamilyVariant.quantity">
+                            </span>
+                            <span>
+                                <img id="add-minus-quantity" alt=""
+                                    (click)="addBuyQuantity(productFamilyVariant.quantity)"
+                                    src="../../../assets/icons/Add.svg">
+                            </span>
+                        </span>
+
+                        <button class="btn buy-now-btn" (click)="requestQuote(productFamilyVariant)">Buy now</button>
+                    </div>
                 </ng-container>
-                 
+
             </div>
 
-                <!-- <div class="buy-now-prod">
+            <!-- <div class="buy-now-prod">
                     <span style="display: inline-flex;justify-content: center;align-items: center;margin-bottom: 7%;">
                         <h6 style="margin-bottom: 0;">Quantity </h6>
                         <p>(per user)</p>
@@ -102,7 +111,7 @@
 
                     <button class="btn buy-now-btn">Buy now</button>
                 </div> -->
-           
+
             <ng-container *ngIf="productFamilyVariant">
                 <div class="product-details-info">
                     <h4>{{productFamilyVariant.name}}
@@ -118,7 +127,7 @@
                         <mat-icon class="review-icon">star_border</mat-icon>
                         <span> 4 reviews | write a review</span>
                     </div>
-     
+
                     <!-- <span style="display:inline-flex">
                         <p *ngIf="productFamilyVariant.priceList[0].discountRate != null" style="font-size: larger;color: rgb(0, 255, 128);">-{{productFamilyVariant.priceList[0].discountRate}}%&nbsp;</p>
                         <h4 style="font-size: smaller;">&#8377; </h4>
@@ -139,28 +148,35 @@
                         </s>
                     </span>
                     <p style="font-size: smaller;">GST Extra</p> -->
-    
-    
+
+
                     <div class="price">
                         <span class="discount-holder">
-                            <span *ngIf="productFamilyVariant.priceList[0].discountRate != null" class="discounted-text">
+                            <span *ngIf="productFamilyVariant.priceList[0].discountRate != null"
+                                class="discounted-text">
                                 -{{productFamilyVariant.priceList[0].discountRate}}%&nbsp;
                             </span>
                             <span style="font-size: smaller;">&#8377; </span>
-                            <span style="font-size: 18px;font-weight: 500;">{{productFamilyVariant.priceList[0].price}} / {{productFamilyVariant.priceList[0].priceType}}</span>
+                            <span style="font-size: 18px;font-weight: 500;">{{productFamilyVariant.priceList[0].price}}
+                                / {{productFamilyVariant.priceList[0].priceType}}</span>
                         </span>
                         <span>
-                            <span class="text-style-bold">MRP</span> 
-                            <span class="text-price strike-through"> ₹ {{((productFamilyVariant.priceList && productFamilyVariant.priceList.length>0) ? productFamilyVariant.priceList[0].ERPPrice : '' ) | number : '1.2-2'}}</span> 
-                            <span class="text-term"> / {{(productFamilyVariant.priceList && productFamilyVariant.priceList.length>0) ? productFamilyVariant.priceList[0].priceType : ''}}</span>
+                            <span class="text-style-bold">MRP</span>
+                            <span class="text-price strike-through"> ₹ {{((productFamilyVariant.priceList &&
+                                productFamilyVariant.priceList.length>0) ? productFamilyVariant.priceList[0].ERPPrice :
+                                '' ) | number : '1.2-2'}}</span>
+                            <span class="text-term"> / {{(productFamilyVariant.priceList &&
+                                productFamilyVariant.priceList.length>0) ? productFamilyVariant.priceList[0].priceType :
+                                ''}}</span>
                         </span>
-    
+
                     </div>
                     <p style="margin-top: 10px; font-weight: 700; margin-bottom: 7px;">Solution Category:</p>
                     <p>{{productFamilyVariant.subcategories[0].name}}</p>
                     <p style=" font-weight: 700; margin-bottom: 7px;margin-top: 7px;">About this product:</p>
                     <p style="margin-bottom: 15px;">{{productFamilyVariant.description}}</p>
-                    <span style="display:flex;flex-direction: row;"><button class="btn view-det-btn" (click)="scrollToSection('#feature')">View
+                    <span style="display:flex;flex-direction: row;"><button class="btn view-det-btn"
+                            (click)="scrollToSection('#feature')">View
                             Features</button>
                         <button class="btn request-quote-btn" style="margin-left: 4%;">Request Quote</button></span>
                     <p-divider></p-divider>
@@ -184,13 +200,13 @@
                         </div>
                     </div>
                     <p-divider></p-divider>
-    
+
                     <div class="common-info">
                         <div class="common-det">
                             <div class="comm-det-img">
                                 <img style="width:auto;height: auto;position: relative;"
                                     src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
-    
+
                             </div>
                             <p style=" font-weight: 400; text-align: center;">secure transaction</p>
                         </div>
@@ -198,7 +214,7 @@
                             <div class="comm-det-img">
                                 <img style="width:auto;height: auto;position: relative;"
                                     src="../../../../assets/icons/illustration_icons/TopBrandIllustrationIcon.svg">
-    
+
                             </div>
                             <p style=" font-weight: 400; text-align: center;">Top brand</p>
                         </div>
@@ -206,7 +222,7 @@
                             <div class="comm-det-img">
                                 <img style="width:auto;height: auto;position: relative;"
                                     src="../../../../assets/icons/illustration_icons/ProductCancellationIllustrationIcon.svg">
-    
+
                             </div>
                             <p style=" font-weight: 400; text-align: center;">5 Days Cancellation </p>
                         </div>
@@ -214,12 +230,12 @@
                             <div class="comm-det-img">
                                 <img style="width:auto;height: auto;position: relative;"
                                     src="../../../../assets/icons/illustration_icons/GuaranteedPriceIllustrationIcon.svg">
-    
+
                             </div>
                             <p style=" font-weight: 400; text-align: center;">Guaranteed Price</p>
                         </div>
-    
-    
+
+
                     </div>
                 </div>
             </ng-container>
@@ -258,7 +274,8 @@
 
                 </div>
             </ng-container> -->
-            <details-compare-products-flyer [compareProductsList] = "selectedProductItem"></details-compare-products-flyer>
+            <details-compare-products-flyer
+                [compareProductsList]="selectedProductItem"></details-compare-products-flyer>
             <contact-us-flyer></contact-us-flyer>
             <!-- <div class="connect-us-box">
                 <div class="connect-us-desc">
@@ -273,17 +290,19 @@
     </div>
     <ng-container *ngIf="productFamilyVariant">
 
- 
+
         <div class="all-feature-container">
             <nav mat-tab-nav-bar>
                 <a mat-tab-link *ngFor="let link of links; index as i" (click)="scrollToSection(link)"
                     [active]="activeLink == link"> {{titles[i]}} </a>
             </nav>
-            <p-card style = "font-family: 'Lato', sans-serif;" header="Description" id="description" #descriptionRef>
+            <p-card style="font-family: 'Lato', sans-serif;" header="Description" id="description" #descriptionRef>
                 <p class="m-0">
                     {{productFamilyVariant.description}}
                 </p>
-                <span style = "display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;"><button class="btn view-det-btn" >See More</button></span>
+                <span
+                    style="display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;"><button
+                        class="btn view-det-btn">See More</button></span>
 
             </p-card>
             <div class="product-features-container" id="feature" #featureRef>
@@ -312,7 +331,7 @@
                             font-size: initial;
                             font-weight: 700;">{{item.name}}</p>
                                             <p style="font-size: small;">{{item.description}}</p>
-                                        </span> 
+                                        </span>
                                     </div>
                                 </ng-container>
                             </div>
@@ -322,7 +341,8 @@
                             <div class="feature-desc-heading">
                                 <!-- <p style="margin-bottom: 10px;font-weight: 400;">click here to view detailed feature of the
                                     product</p> -->
-                                <button class="btn view-det-btn" (click)="featureCountEvent()">View All Features</button>
+                                <button class="btn view-det-btn" (click)="featureCountEvent()">View All
+                                    Features</button>
                             </div>
                         </div>
 
@@ -331,7 +351,7 @@
                 </div>
             </div>
             <div class="bottom-container">
-        
+
                 <!-- <div class="specification-cont" id="specification" #specificationRef>
                     <h5>Specifications</h5>
                     <div class="specs-list">
@@ -431,7 +451,7 @@
                 </div>
 
 
-
+<!-- 
                 <ng-container *ngIf="finalBundleDetails.length>0">
                     <div class="specification-cont" id="compProd" #compProdRef>
                         <h5>Compare Products</h5>
@@ -440,14 +460,14 @@
                                 <div class="comp-prod-card">
                                     <div class="comp-prod-card-cont">
                                         <div class="comp-prod-card-img">
-                                            <img class="product-logo"
-                                                src="{{productFamily.bannerLogo}}">
+                                            <img class="product-logo" src="{{productFamily.bannerLogo}}">
 
                                         </div>
                                         <div class="comp-prod-card-content">
                                             <p class="product-name">{{productFamilyVariant.name}}</p>
                                             <p class="solution-category-headline">solution category:</p>
-                                            <p class="solution-category-details">{{productFamilyVariant.subcategories[0].name}}</p>
+                                            <p class="solution-category-details">
+                                                {{productFamilyVariant.subcategories[0].name}}</p>
                                         </div>
 
                                     </div>
@@ -456,7 +476,7 @@
                                             <p-checkbox [binary]="true" inputId="binary"></p-checkbox>
                                             <p class="compare-text">&nbsp;Compare</p>
                                         </span>
-                                        <span  class="view-details-section">
+                                        <span class="view-details-section">
                                             <a class="viewdetails-text">view details</a>
                                         </span>
 
@@ -469,55 +489,160 @@
                             </span>
 
                             <div class="comp-prod-vs">
-                              
-                             <ng-container  *ngFor="let item of finalBundleDetails">
-                                <div *ngIf="item.priceList!=null" class="comp-prod-card-products-compare-section">
-                                    <div class="comp-prod-card-cont">
-                                    <div class="comp-prod-card-img">
-                                        <img style="width:70%;height: auto;position: relative;" src="{{item.bannerLogo}}">
-                                        
-                                    </div>
-                                    <div class="comp-prod-card-content">
-                                        <p style="font-size: 14px;font-weight: bold;max-width: 160px;">{{item.name}}</p>
-                                        <p style="font-size: 13px;font-weight: 600;margin-top: 11px;">Solution category:</p>
-                                        <p style="font-size: small;font-weight: 500;margin-bottom: 16px;">{{item.solutionCategory}}</p>
-                                    </div>
-                                    
-                                </div>
-                                <div style="display: flex;flex-direction: row;">
-                                    <span style="    display: inline-flex;
+
+                                <ng-container *ngFor="let item of finalBundleDetails">
+                                    <div *ngIf="item.priceList!=null" class="comp-prod-card-products-compare-section">
+                                        <div class="comp-prod-card-cont">
+                                            <div class="comp-prod-card-img">
+                                                <img style="width:70%;height: auto;position: relative;"
+                                                    src="{{item.bannerLogo}}">
+
+                                            </div>
+                                            <div class="comp-prod-card-content">
+                                                <p style="font-size: 14px;font-weight: bold;max-width: 160px;">
+                                                    {{item.name}}</p>
+                                                <p style="font-size: 13px;font-weight: 600;margin-top: 11px;">Solution
+                                                    category:</p>
+                                                <p style="font-size: small;font-weight: 500;margin-bottom: 16px;">
+                                                    {{item.solutionCategory}}</p>
+                                            </div>
+
+                                        </div>
+                                        <div style="display: flex;flex-direction: row;">
+                                            <span style="    display: inline-flex;
                                     flex-basis: 30%;
                                     align-items: center;
                                     justify-content: flex-start;
                                     padding: 0;
                                      padding-left: 12px; 
-                                    padding-top: 0px;"> 
-                                        <p-checkbox (click)="addToCompare(item,'prodFam')" [(ngModel)]="item.checked"  [binary]="true" inputId="binary"></p-checkbox>
-                                        <p style="font-size: small;">&nbsp;compare</p>
-                                        </span>
-                                        <span style="    display: inline-flex;
+                                    padding-top: 0px;">
+                                                <p-checkbox (click)="addToCompare(item,'prodFam')"
+                                                    [(ngModel)]="item.checked" [binary]="true"
+                                                    inputId="binary"></p-checkbox>
+                                                <p style="font-size: small;">&nbsp;compare</p>
+                                            </span>
+                                            <span style="    display: inline-flex;
                                     align-items: center;
                                     flex-basis: 70%;
                                     justify-content: flex-end;
                                     padding: 0;
                                     padding-right: 15px;
                                     padding-top: 5px;
-                                    "> 
-                                    <a style="color: #0047BD;font-weight: 500;font-size: small;text-decoration: none;">view details</a>
-                                    </span>
-                    
-                                </div>
-                                </div>
-                            </ng-container>
-                        </div>
+                                    ">
+                                                <a
+                                                    style="color: #0047BD;font-weight: 500;font-size: small;text-decoration: none;">view
+                                                    details</a>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </ng-container>
                             </div>
+                        </div>
                     </div>
-                
+
+                </ng-container> -->
+
+
+
+
+
+                <ng-container *ngIf="finalBundleDetails.length>0">
+                    <div class="specification-cont" id="compProd" #compProdRef>
+                        <h5>Compare Products</h5>
+                        <div class="comp-product-cont">
+                            <div class="product-to-comp">
+                                <div class="comp-product-card">
+                                    <div class="comp-product-card-cont">
+                                        <div class="comp-product-card-img">
+                                            <img class="card-logo" src="{{productFamily.bannerLogo}}">
+            
+                                        </div>
+                                        <div class="comp-product-card-content">
+                                            <p class="product-category">{{productFamilyVariant.name}}</p>
+                                            <p class="product-solution">Solution category:</p>
+                                            <p class="product-desc">{{productFamilyVariant.subcategories[0].name}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="checkbox-sec">
+                                        <div class="checkbox-sec-01">
+                                            <div class="checkbox">
+                                                <p-checkbox 
+                                         [binary]="true" inputId="binary"></p-checkbox>
+                                            </div>
+                                            <div class="checkbox-header">
+                                                <p class="compare-sec">&nbsp;Compare</p>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox-sec-02">
+                                            <a class="view-sec">view details</a>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <span
+                                style="display:flex;align-items: center;justify-content: center;padding-left:20px;padding-right:20px;">
+                                <h6 style="font-size: 25px;">VS</h6>
+                            </span>
+            
+                            <div class="product-to-comp">
+                                <ng-container *ngFor="let item of finalBundleDetails">
+                                    <div *ngIf="item.priceList!=null">
+                                        <div class="comp-product-card">
+                                            <div class="comp-product-card-cont">
+                                                <div class="comp-product-card-img">
+                                                    <img class="card-logo" src="{{item.bannerLogo}}">
+            
+                                                </div>
+                                                <div class="comp-product-card-content">
+                                                    <p class="product-category">{{item.name}}</p>
+                                                    <p class="product-solution">Solution category:</p>
+                                                    <p class="product-desc">{{item.solutionCategory}}</p>
+                                                </div>
+            
+                                            </div>
+                                            <div class="checkbox-sec">
+                                                <div class="checkbox-sec-01">
+                                                    <div class="checkbox">
+                                                        <p-checkbox (click)="addToCompare(item,'prodFam')"
+                                                        [(ngModel)]="item.checked" [binary]="true"
+                                                            inputId="binary"></p-checkbox>
+                                                    </div>
+                                                    <div class="checkbox-header">
+                                                        <p class="compare-sec">&nbsp;Compare</p>
+                                                    </div>
+                                                </div>
+            
+                                                <div class="checkbox-sec-02">
+                                                    <a class="view-sec">view details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+            
                 </ng-container>
+            
+            
 
 
 
-                            <!-- <div class="comp-prod-vs">
+
+
+
+
+
+
+
+
+
+
+                <!-- <div class="comp-prod-vs">
                                 <ng-container *ngFor="let item of finalBundleDetails">
                                     <div class="comp-prod-card">
                                         <div class="comp-prod-card-cont">
@@ -555,102 +680,109 @@
                                     </div>
                                 </ng-container>
                             </div> -->
-                        <!-- </div>
+                <!-- </div>
                     </div>
 
                 </ng-container>
             </div> -->
 
-    <!-- #---------------------- new -->
+                <!-- #---------------------- new -->
 
 
 
-    <div *ngIf="finalBundleDetails && finalBundleDetails.length>0" class="specification-cont"  id="bundleDetailsRef" #bundleDetailsRef>
-        <h5 id="similar-prod">Bundle Details</h5>
-        <div class="specs-list">
-            <ng-container *ngFor="let item of finalBundleDetails; let i = index">
-            <div *ngIf="item.priceList!=null" class="similar-prod-card">
-                <div class="sim-prod-holder">
-                <div class="similar-prod-img-det">
-                    <img style="width:100%;height: 100%;object-fit: cover;" src="{{item.bannerLogo}}">
-                    
-                </div>
-                <div class="similar-prod-price-det">
-                    <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">{{item.name}}</p></span>
-                    
-                    <p style="font-size: small;font-weight: 300;">solution category</p>
-                    <p style="font-size: small;font-weight: 300;">{{item.solutionCategory}}</p>
-                    <span class="similar-prod-price-det-price" *ngIf="item.priceList!=null"><p style="font-size: medium;font-weight: 400;">&#8377; {{item.priceList[0].price}}</p>
-                        <p style="font-size: medium;font-weight: 400;">&nbsp; / {{item.priceList[0].priceType}}</p>
-                        </span>
-                    
-                </div>
-                </div>
+                <div *ngIf="finalBundleDetails && finalBundleDetails.length>0" class="specification-cont"
+                    id="bundleDetailsRef" #bundleDetailsRef>
+                    <h5 id="similar-prod">Bundle Details</h5>
+                    <div class="specs-list">
+                        <ng-container *ngFor="let item of finalBundleDetails; let i = index">
+                            <div *ngIf="item.priceList!=null" class="similar-prod-card">
+                                <div class="sim-prod-holder">
+                                    <div class="similar-prod-img-det">
+                                        <img style="width:100%;height: 100%;object-fit: cover;"
+                                            src="{{item.bannerLogo}}">
 
-            
+                                    </div>
+                                    <div class="similar-prod-price-det">
+                                        <span class="similar-prod-price-det-title">
+                                            <p style="    font-weight: 500;">{{item.name}}</p>
+                                        </span>
 
-                    <div class="quantity-add-prod-bundle">
-                        <span style="display: inline-flex;justify-content: center;gap: 5px;"> 
-                            
-                            <span >
-                            <img id="add-minus-quantity" (click)="decreaseQuantity(item.quantity,i)" alt="minus" src="../../../assets/icons/Minus.svg">
-                            </span>
-                            <span>
-                            <input
-                                class="input-field"  [(ngModel)]="item.quantity"
-                                >
-                            </span>
-                            <span >
-                            <img id="add-minus-quantity" alt="" (click)="addQuantity(item.quantity,i)" src="../../../assets/icons/Add.svg">
-                            </span>
-                        </span>
-                    </div>
+                                        <p style="font-size: small;font-weight: 300;">solution category</p>
+                                        <p style="font-size: small;font-weight: 300;">{{item.solutionCategory}}</p>
+                                        <span class="similar-prod-price-det-price" *ngIf="item.priceList!=null">
+                                            <p style="font-size: medium;font-weight: 400;">&#8377;
+                                                {{item.priceList[0].price}}</p>
+                                            <p style="font-size: medium;font-weight: 400;">&nbsp; /
+                                                {{item.priceList[0].priceType}}</p>
+                                        </span>
 
-                    <div class="sim-prod-btn-cont">
-                        <span >
-                            <button class="btn similar-prod-request-quote-btn" (click)="requestQuote(item)">Request Quote</button>
-                        </span>
-                        </div>
-
-            </div>
-        </ng-container>
-
-            </div>
-
-    </div>
+                                    </div>
+                                </div>
 
 
 
+                                <div class="quantity-add-prod-bundle">
+                                    <span style="display: inline-flex;justify-content: center;gap: 5px;">
 
+                                        <span>
+                                            <img id="add-minus-quantity" (click)="decreaseQuantity(item.quantity,i)"
+                                                alt="minus" src="../../../assets/icons/Minus.svg">
+                                        </span>
+                                        <span>
+                                            <input class="input-field" [(ngModel)]="item.quantity">
+                                        </span>
+                                        <span>
+                                            <img id="add-minus-quantity" alt="" (click)="addQuantity(item.quantity,i)"
+                                                src="../../../assets/icons/Add.svg">
+                                        </span>
+                                    </span>
+                                </div>
 
+                                <div class="sim-prod-btn-cont">
+                                    <span>
+                                        <button class="btn similar-prod-request-quote-btn"
+                                            (click)="requestQuote(item)">Request Quote</button>
+                                    </span>
+                                </div>
 
-
-
-
-
-        <!-- #----------------------    -->
-
-        
-            <ng-container *ngIf="faq && faq.length>0">
-                <div class="bottom-container specification-cont">
-
-            
-        
-                    <div *ngIf="faq.length>0" class="faq-cont" id="faq" #faqRef>
-                        <span class="faq-title"><h5 id="similar-prod">Frequently asked Questions</h5></span>
-                        <ng-container *ngFor="let item of faq; let i = index">
-                            <div class="display-faq">
-                        <p class="faq-question">{{i+1}}.&nbsp;{{item.Question}}</p>
-                        <p>{{item.Answer}}</p>
-                    </div>
+                            </div>
                         </ng-container>
-                
-                        </div>
-                
-    
-    
-                </div>
-            </ng-container>
-            
 
-        
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+                <!-- #----------------------    -->
+
+
+                <ng-container *ngIf="faq && faq.length>0">
+                    <div class="bottom-container specification-cont">
+
+
+
+                        <div *ngIf="faq.length>0" class="faq-cont" id="faq" #faqRef>
+                            <span class="faq-title">
+                                <h5 id="similar-prod">Frequently asked Questions</h5>
+                            </span>
+                            <ng-container *ngFor="let item of faq; let i = index">
+                                <div class="display-faq">
+                                    <p class="faq-question">{{i+1}}.&nbsp;{{item.Question}}</p>
+                                    <p>{{item.Answer}}</p>
+                                </div>
+                            </ng-container>
+
+                        </div>
+
+
+
+                    </div>
+                </ng-container>
