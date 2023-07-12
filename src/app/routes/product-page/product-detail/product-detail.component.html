@@ -247,12 +247,19 @@
                    [active]="activeLink == link"> {{titles[i]}} </a>
               </nav>
             <p-card style = "font-family: 'Lato', sans-serif;" header="Description" id="description" #descriptionRef>
-                <p class="m-0">
+                <!-- <p class="m-0">
                     {{product.products[0].description}}
+                </p> -->
+                <p class="m-0">
+                    {{(seeMore) ? product.products[0].description : product.products[0].description | slice:0:150}}
+                    <span *ngIf="!seeMore">....</span>
+                    <span style = "display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;">
+                        <button class="btn view-det-btn" (click)="openDescription()">{{ !seeMore ? "See More" : "See Less" }}</button>
+                    </span>
                 </p>
-                <span style = "display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;">
-                    <button class="btn view-det-btn" >See More</button>
-                </span>
+                <!-- <span style = "display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;">
+                    <button class="btn view-det-btn">See More</button>
+                </span> -->
 
             </p-card>
             <div class="product-features-container" id="feature" #featureRef>
@@ -305,7 +312,7 @@
 
 
 <div class="bottom-container">
-    <div class="specification-cont" id="specification" #specificationRef>
+    <!-- <div class="specification-cont" id="specification" #specificationRef>
         <h5>Specifications</h5>
         <div class="specs-list">
             <div class="specs-name">
@@ -349,7 +356,61 @@
                                 </div>
                         </div>
             </div>
+    </div> -->
+
+    
+    <div class="specification-section" id="specification" #specificationRef>
+        <div class="specification-containter">
+            <div class="specification-headline">
+                <h5>Specifications</h5>
+            </div>
+            <div class="specification-list">
+                <div class="specification-feature">
+                    <div class="specification-feature-icon-container">
+                        <img class="specification-icon" src="../../../../assets/icons/PlatformIcon.svg">
+                        <p class="specification-feature-headline">Supported Platforms:</p>
+                    </div>
+                    <div class="specification-feature-details">
+                        <p class="specification-feature-description">Windows, macOS</p>
+                    </div>
+                </div>
+                <div class="specification-feature">
+                    <div class="specification-feature-icon-container">
+                        <img class="specification-icon" src="../../../../assets/icons/LanguagesIcon.svg">
+                        <p class="specification-feature-headline">Languages:</p>
+                    </div>
+                    <div class="specification-feature-details">
+                        <p class="specification-feature-description">English</p>
+                    </div>
+                </div>
+                <div class="specification-feature">
+                    <div class="specification-feature-icon-container">
+                        <img class="specification-icon" src="../../../../assets/icons/DevicesIcon.svg">
+                        <p class="specification-feature-headline">Devices:</p>
+                    </div>
+                    <div class="specification-feature-details">
+                        <p class="specification-feature-description">Desktop, Mobile</p>
+                    </div>
+                </div>
+                <div class="specification-feature">
+                    <div class="specification-feature-icon-container">
+                        <img class="specification-icon" src="../../../../assets/icons/CloudBasedIcon.svg">
+                        <p class="specification-feature-headline">Deployment:</p>
+                    </div>
+                    <div class="specification-feature-details">
+                        <p class="specification-feature-description">Cloud-Based</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="connect-us">
+            <contact-us-flyer></contact-us-flyer>
+        </div>
+        <!-- <div class="write-review">
+            <write-review-flyer></write-review-flyer>
+        </div> -->
     </div>
+
 
 <ng-container *ngIf="productBundles.length>0">
     <div class="specification-cont" id="compProd" #compProdRef>
