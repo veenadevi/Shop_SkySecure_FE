@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 
@@ -44,7 +45,8 @@ export class DetailsCompareProductsFlyerComponent {
   )
 
   constructor(
-    private compareProductsStore : CompareProductsStore
+    private compareProductsStore : CompareProductsStore,
+    private router:Router
   ){}
 
   public ngOnInit(): void {
@@ -88,6 +90,6 @@ export class DetailsCompareProductsFlyerComponent {
   }
 
   public navigateToCompareProducts(){
-    //this.router.navigate(['/compare-products']);
+    this.router.navigate(['/compare-products']);
   }
 }

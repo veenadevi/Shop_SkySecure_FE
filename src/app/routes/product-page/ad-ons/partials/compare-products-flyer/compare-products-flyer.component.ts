@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 
 @Component({
@@ -17,6 +17,7 @@ export class CompareProductsFlyerComponent implements OnInit{
   }
 
   public productList : any[] = [];
+  private subscriptions : Subscription[] = [];
 
   public itemJson;
 
@@ -50,8 +51,18 @@ export class CompareProductsFlyerComponent implements OnInit{
 
   public ngOnInit(): void {
     console.log("++++++++ List in Last Page ");
+    this.subscriptions.push(
+
+      this.productList$.subscribe(res=>{
+
+        res;
+
+      })
+
+    )
     this.setEmptyItem();
   }
+  
 
   public setEmptyItem(): void{
     this.itemJson = {
