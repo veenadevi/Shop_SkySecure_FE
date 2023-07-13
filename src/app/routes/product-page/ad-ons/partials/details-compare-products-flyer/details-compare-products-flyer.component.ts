@@ -20,7 +20,7 @@ export class DetailsCompareProductsFlyerComponent {
 
   public productList : any;
 
-  public productList$ = this.compareProductsStore.compareProductsList$
+  public productList$ = this.compareProductsStore.compareProductsList2$
   .pipe(
     map(data => {
       
@@ -28,18 +28,23 @@ export class DetailsCompareProductsFlyerComponent {
       if(data){
         this.productList = [...this.productList, ...data];
 
-        //return data;
+        this.productList = data;
+        let uniqueElements = [...new Map(this.productList.map(item => [item['_id'], item])).values()];
+        //this.productList = [...this.productList, ...data];
+        this.productList = uniqueElements;
+        return data;
+        
       }
       else{
         
-        //return data;
+        return data;
       }
-      let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+      /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
       this.productList = [...this.productList, ...cacheData];
       console.log("++++++++ List in Paetials ", this.productList);
       let uniqueElements = [...new Map(this.productList.map(item => [item['_id'], item])).values()];
       this.productList = uniqueElements;
-      return data;
+      return data;*/
     }
     )
   )
@@ -85,7 +90,9 @@ export class DetailsCompareProductsFlyerComponent {
     this.productList = this.productList.filter(function(item) {
       return item._id != $event;
     });
-    this.compareProductsStore.setCompareProductsList(this.productList);
+    console.log("******** Item to be removed ", this.productList);
+    this.compareProductsStore.setCompareProductsList2(this.productList);
+    localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
   }
 

@@ -327,6 +327,7 @@ featureCount=5;
       return item._id != _id;
     });
     // this.compareProductsStore.setCompareProductsList(this.productList);
+    localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
     // console.log('product_list_to_compare',);
   }
@@ -356,8 +357,9 @@ featureCount=5;
       this.productListToCompare.push(item);
     }
     // this.productListToCompare.push(item);
+    localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    this.compareProductsStore.setCompareProductsList(this.productListToCompare);
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
     const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     console.log("getProdFromLocalStorage",prodGet);
   }

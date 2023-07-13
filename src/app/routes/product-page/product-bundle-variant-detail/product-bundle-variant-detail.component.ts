@@ -404,6 +404,7 @@ async addToCompare(item:any, type:any):Promise<void> {
     this.products.push(item);
   }
   // this.productListToCompare.push(item);
+  localStorage.removeItem('product_list_to_compare');
   localStorage.setItem('product_list_to_compare', JSON.stringify(this.products));
   this.compareProductsStore.setCompareProductsList(this.products);
   const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');

@@ -56,6 +56,7 @@ export class CompareProductsFlyerComponent implements OnInit{
 
   public ngOnInit(): void {
     console.log("++++++++ List in Last Page ");
+    console.log("++++++++++++++  Item in On Init ", JSON.parse(localStorage.getItem('product_list_to_compare')));
     this.subscriptions.push(
 
       this.productList$.subscribe(res=>{
@@ -87,6 +88,7 @@ export class CompareProductsFlyerComponent implements OnInit{
     });
     console.log("******** Item to be removed ", this.productList);
     this.compareProductsStore.setCompareProductsList(this.productList);
+    localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
     console.log("******** Item after removed ", JSON.parse(localStorage.getItem('product_list_to_compare')));
   }

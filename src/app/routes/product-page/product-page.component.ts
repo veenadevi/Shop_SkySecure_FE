@@ -544,6 +544,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
 
     this.compareProductsStore.setCompareProductsList(uniqueElements);
+    localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(uniqueElements));
 
   }
