@@ -20,13 +20,18 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 export class ProductDetailsVariantByIdComponent implements OnInit{
   productImages=[];
   productVideoURL: string;
+  public parentProduct:any;
   featuresVideoTitle: string = "Features Video";
   element: string;
   productVideoURLTitle : string;
   productBundles=[];
   public productVideoText: string;
+  compareProductList:any=[];
+  productBundleList:any=[];
   public faq : any[]=[];
   productListToCompare  = [];
+  productBundleData:any[]
+  productBundleVariantData:any[]
   products = [];
   links = ['#description', '#feature', '#specification','#simProd', '#compProd', '#bundles','#faq'];
   titles = ['Description', 'Features', 'Specification','Similar Products','compare products','Bundles','FAQ'];
@@ -91,6 +96,8 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   dispFeatureList: any[] = [];
   productName:string;
   public bannerUrl : any;
+  public productVariantData:any
+  public otherProductVariantData:any[0]
 
   private subscriptions: Subscription[] = [];
   public product : any = {};
@@ -160,9 +167,22 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
 console.log("response product Variant",response.featureList);
 response.productVariants = {...response.productVariants, quantity: 1 }
 this.productVariants=response.productVariants;
+this.productVariantData = this.setProductVariantsData(this.productVariants,response.products[0]);
+this.otherProductVariantData=this.setProductVariantsData(this.similarProducts,response.products[0]);
+this.productBundleData=this.setBundlesData(response.productBundles);
+this.productBundleVariantData=this.setProductBundleVariantsData(response.productBundleVariants)
+this.productBundleList=[...this.productBundleData,...this.productBundleVariantData ]
 
-for(let i=0;i<response.productBundles.length;i++)
+
+this.compareProductList = [...this.otherProductVariantData,...this.productBundleData,...this.productBundleVariantData ]
+
+
+        for(let i=0;i<response.productBundles.length;i++)
         response.productBundles[i] = {...response.productBundles[i], checked: false, quantity: 1 };
+
+       
+
+
         this.productBundles  = response.productBundles;
         console.log("bundles",this.productBundles);
 
@@ -195,7 +215,7 @@ for(let i=0;i<response.productBundles.length;i++)
 //           }
 //         ]
 // }];
-
+        this.parentProduct=response.products[0];
        response.products[0] = {...response.products[0], quantity: 1 }
         this.product = { products:[...response.products], featureList: response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants: response.featureListByProductVariants };
         console.log("&&&&& inside", this.product.productVariants.length);
@@ -409,10 +429,9 @@ featureCount=5;
       }
     });
     if (count===0) {
-      if(type!='prodFam')
-      item = { ...item, 'solutionCategory': item.subcategories[0]?.description };
-      else
-      item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
+     
+      item = { ...item, 'solutionCategory': item.solutionCategory };
+    
       this.productListToCompare.push(item);
     }
     // this.productListToCompare.push(item);
@@ -514,7 +533,98 @@ featureCount=5;
     
   }
 
-  
+  public setProductVariantsData(data,parentProduct){
+    
+    
+    console.log("======setProductVariantsData===="+data._id)
+    console.log("getting parentproductData==="+parentProduct.name)
+        if(data ){
+          
+          data.name=data.name;
+          data.productType = 'productVariants';
+          data.bannerLogo = (parentProduct  && parentProduct.bannerLogo) ? parentProduct.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          data.description = data.description;
+          data['solutionCategory'] = (parentProduct &&parentProduct.subcategories && parentProduct.subcategories.length > 0) ? parentProduct.subcategories[0].name : "";
+          data['navigationId'] = data._id;
+          data.priceList=data.priceList;
+          data.quantity=1;
+          data._id=data._id;
+         
+        }
+    
+        return data;
+      }
+
+      public setSimilarProductVariantsData(data,parentProduct){
+    
+    
+        console.log("======setSimilarProductVariantsData===="+data.length)
+        console.log("getting parentproductData==="+parentProduct.name)
+        if(data && data.length>0){
+          console.log("===========setProductBundleVariantsData======="+data.length)
+          data.forEach(element => {
+              
+            element.name=data.name;
+            element.productType = 'productVariants';
+            element.bannerLogo = (parentProduct  && parentProduct.bannerLogo) ? parentProduct.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+            element.description = data.description;
+            element['solutionCategory'] = (parentProduct &&parentProduct.subcategories && parentProduct.subcategories.length > 0) ? parentProduct.subcategories[0].name : "";
+            element['navigationId'] = data._id;
+            element.priceList=data.priceList;
+            element.quantity=1;
+            element._id=data._id;
+             
+            });
+          }
+        
+            return data;
+          }
+
+         /**
+   * Set Product Bundle Variants Data
+   */
+
+  public setProductBundleVariantsData(data){
+
+    if(data && data.length>0){
+      console.log("===========setProductBundleVariantsData======="+data.length)
+      data.forEach(element => {
+        element.name=element.name;
+          element.productType = 'productBundleVariants';
+          element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element.solutionCategory=(element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
+          element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
+          element['navigationId'] = element._id;
+          element.priceList=element.priceList
+          element.quantity=1
+      });
+    }
+
+    return data;
+  }
+
+  /**
+   * Set Product Bundles Data
+   */
+
+  public setBundlesData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+        element.name=element.name;
+          element.productType = 'productBundles';
+          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
+          element['navigationId'] = element._id;
+          element.priceList=element.priceList
+          element.quantity=1
+      });
+    }
+
+    return data;
+  }
 
   ngOnDestroy(){
     
