@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { map } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 
 @Component({
@@ -13,6 +13,8 @@ export class DetailsCompareProductsFlyerComponent {
     
   }
 
+  private subscriptions : Subscription[] = [];
+
   public itemJson;
 
   public productList : any;
@@ -20,15 +22,23 @@ export class DetailsCompareProductsFlyerComponent {
   public productList$ = this.compareProductsStore.compareProductsList$
   .pipe(
     map(data => {
-      console.log("++++++++ List in Paetials ", data);
+      
+      this.productList = [];
       if(data){
         this.productList = [...this.productList, ...data];
-        return data;
+
+        //return data;
       }
       else{
         
-        return data;
+        //return data;
       }
+      let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+      this.productList = [...this.productList, ...cacheData];
+      console.log("++++++++ List in Paetials ", this.productList);
+      let uniqueElements = [...new Map(this.productList.map(item => [item['_id'], item])).values()];
+      this.productList = uniqueElements;
+      return data;
     }
     )
   )
@@ -38,6 +48,12 @@ export class DetailsCompareProductsFlyerComponent {
   ){}
 
   public ngOnInit(): void {
+    
+    this.subscriptions.push(
+      this.productList$.subscribe(res=>{
+        res;
+      })
+    )
     console.log("++++++++ List in Last Page ");
     this.setEmptyItem();
     this.setProductList();

@@ -25,13 +25,20 @@ export class CompareProductsFlyerComponent implements OnInit{
     map(data => {
       console.log("++++++++ List in Paetials ", data);
       if(data){
-        this.productList = data;
-        return data;
+        //this.productList = data;
+        this.productList = [...this.productList, ...data];
+        //return data;
       }
       else{
         
-        return data;
+        //return data;
       }
+      let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+      this.productList = [...this.productList, ...cacheData];
+      console.log("++++++++ List in Paetials ", this.productList);
+      let uniqueElements = [...new Map(this.productList.map(item => [item['_id'], item])).values()];
+      this.productList = uniqueElements;
+      return data;
     }
     )
   )

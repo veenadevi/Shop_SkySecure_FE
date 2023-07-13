@@ -1,7 +1,8 @@
 <div class="container-box">
 
 
-    <ng-container *ngIf="(productList$ | async)">
+    <!-- <ng-container *ngIf="(productList$ | async)"> -->
+        <ng-container>
 
         <!-- Check if Products are present -->
         <ng-container *ngIf="(productList && productList.length>0); else noProducts">
