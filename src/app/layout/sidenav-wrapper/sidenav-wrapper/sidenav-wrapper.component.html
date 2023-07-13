@@ -234,6 +234,10 @@
             <mat-list-item>
               <span *ngIf="isExpanded" class="sub-menu-item">Add New Feature</span>
             </mat-list-item>
+            <mat-list-item>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/add-new-product']">Add New Product</span>
+            </mat-list-item>
+            
           </ng-container>
         </ng-container>
         
