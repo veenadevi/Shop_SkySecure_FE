@@ -390,7 +390,7 @@
                     </div> -->
                 </div>
                 
-                <ng-container *ngIf="products.length>0">
+                <!-- <ng-container *ngIf="products.length>0">
                     
                     <div class="specification-cont" id="compProd" #compProdRef>
                         <h5>Compare Products</h5>
@@ -477,7 +477,104 @@
                         </div>
                     </div>
 
+                </ng-container> -->
+
+
+
+
+
+
+
+                <ng-container *ngIf="products.length>0">
+                    <div class="specification-cont" id="compProd" #compProdRef>
+                        <h5>Compare Products</h5>
+                        <div class="comp-product-cont">
+                            <div class="product-to-comp">
+                                <div class="comp-product-card">
+                                    <div class="comp-product-card-cont">
+                                        <div class="comp-product-card-img">
+                                            <img class="card-logo" src="{{productFamily.bannerLogo}}">
+                
+                                        </div>
+                                        <div class="comp-product-card-content">
+                                            <p class="product-category">{{productFamily.name}}</p>
+                                            <p class="product-solution">Solution category:</p>
+                                            <p class="product-desc">{{productFamily.subcategories[0].name}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="checkbox-sec">
+                                        <div class="checkbox-sec-01">
+                                            <div class="checkbox">
+                                                <p-checkbox [binary]="true" inputId="binary" (onChange) ="compareEvent($event,productFamily)"></p-checkbox>
+                                            </div>
+                                            <div class="checkbox-header">
+                                                <p class="compare-sec">&nbsp;Compare</p>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox-sec-02">
+                                            <a class="view-sec">view details</a>
+                                        </div>
+                
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <span
+                                style="display:flex;align-items: center;justify-content: center;padding-left:20px;padding-right:20px;">
+                                <h6 style="font-size: 25px;">VS</h6>
+                            </span>
+                
+                            <div class="product-to-comp">
+                                <ng-container *ngFor="let item of products">
+                                    
+                                        <div class="comp-product-card">
+                                            <div class="comp-product-card-cont">
+                                                <div class="comp-product-card-img">
+                                                    <img class="card-logo" src="{{item.bannerLogo}}">
+                
+                                                </div>
+                                                <div class="comp-product-card-content">
+                                                    <p class="product-category">{{item.name}}</p>
+                                                    <p class="product-solution">Solution category:</p>
+                                                    <p class="product-desc">{{item.subCategories[0].name}}</p>
+                                                </div>
+                
+                                            </div>
+                                            <div class="checkbox-sec">
+                                                <div class="checkbox-sec-01">
+                                                    <div class="checkbox">
+                                                        <p-checkbox  [binary]="true" inputId="binary" (onChange) ="compareEvent($event,item)"></p-checkbox>
+                                                    </div>
+                                                    <div class="checkbox-header">
+                                                        <p class="compare-sec">&nbsp;Compare</p>
+                                                    </div>
+                                                </div>
+                
+                                                <div class="checkbox-sec-02">
+                                                    <a class="view-sec">view details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                
                 </ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
 
             <div *ngIf="allSimilerProducts && allSimilerProducts.length>0" class="specification-cont"  id="bundleDetailsRef" #bundleDetailsRef>
