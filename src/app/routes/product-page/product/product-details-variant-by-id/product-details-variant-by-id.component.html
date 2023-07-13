@@ -464,7 +464,7 @@ font-weight: 600;">Compare products</p></span>
         </div> -->
     </div>
 
-<ng-container *ngIf="productBundles.length>0">
+<!-- <ng-container *ngIf="productBundles.length>0">
     <div class="specification-cont" id="compProd" #compProdRef>
         <h5>Compare Products</h5>
         <div class="comp-prod-cont" >
@@ -547,7 +547,94 @@ font-weight: 600;">Compare products</p></span>
             </div>
     </div>
 
+</ng-container> -->
+
+
+
+
+
+<ng-container *ngIf="productBundles.length>0">
+    <div class="specification-cont" id="compProd" #compProdRef>
+        <h5>Compare Products</h5>
+        <div class="comp-product-cont">
+            <div class="product-to-comp">
+                <div class="comp-product-card">
+                    <div class="comp-product-card-cont">
+                        <div class="comp-product-card-img">
+                            <img class="card-logo" src="{{product.products[0].bannerLogo}}">
+
+                        </div>
+                        <div class="comp-product-card-content">
+                            <p class="product-category">{{productVariantData.name}}</p>
+                            <p class="product-solution">Solution category:</p>
+                            <p class="product-desc">{{productVariantData.solutionCategory}}</p>
+                        </div>
+                    </div>
+                    <div class="checkbox-sec">
+                        <div class="checkbox-sec-01">
+                            <div class="checkbox">
+                                <p-checkbox (click)="addToCompare(productVariantData,'fromProd')" [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
+                            </div>
+                            <div class="checkbox-header">
+                                <p class="compare-sec">&nbsp;Compare</p>
+                            </div>
+                        </div>
+                        <div class="checkbox-sec-02">
+                            <a class="view-sec">view details</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <span
+                style="display:flex;align-items: center;justify-content: center;padding-left:20px;padding-right:20px;">
+                <h6 style="font-size: 25px;">VS</h6>
+            </span>
+
+            <div class="product-to-comp">
+                <ng-container *ngFor="let item of compareProductList">
+                    <div *ngIf="item.priceList!=null">
+                        <div class="comp-product-card">
+                            <div class="comp-product-card-cont">
+                                <div class="comp-product-card-img">
+                                    <img class="card-logo" src="{{item.bannerLogo}}">
+
+                                </div>
+                                <div class="comp-product-card-content">
+                                    <p class="product-category">{{item.name}}</p>
+                                    <p class="product-solution">Solution category:</p>
+                                    <p class="product-desc">{{item.solutionCategory}}</p>
+                                </div>
+
+                            </div>
+                            <div class="checkbox-sec">
+                                <div class="checkbox-sec-01">
+                                    <div class="checkbox">
+                                        <p-checkbox  (click)="addToCompare(item,'prodFam')" [(ngModel)]="item.checked" [binary]="true"
+                                            inputId="binary"></p-checkbox>
+                                    </div>
+                                    <div class="checkbox-header">
+                                        <p class="compare-sec">&nbsp;Compare</p>
+                                    </div>
+                                </div>
+
+                                <div class="checkbox-sec-02">
+                                    <a class="view-sec">view details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
 </ng-container>
+
+
+
+
 
 
 
