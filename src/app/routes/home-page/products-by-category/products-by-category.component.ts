@@ -67,7 +67,12 @@ export class ProductsByCategoryComponent {
 
     this.subscriptions.push(
       this.categories$.subscribe( response => {
-        this.categories = response.slice(0,7);
+        
+        if(response){
+          this.categories = (response.length<=6) ? response : response.slice(0,7);
+        }
+          
+        
       })
     )
     
