@@ -89,7 +89,7 @@
                         </div>
                 </div>
                 <div class="product-details-info">
-                    <h4 style="margin-bottom: auto;">{{productVariants.name}}
+                    <h4 >{{productVariants.name}}
                     </h4>
                     <p style="margin-top: 10px;
                     font-size: smaller;
@@ -323,7 +323,7 @@ font-weight: 600;">Compare products</p></span>
                         </div>
                         <div class="prod-feat-card-cont">
                             <div class="prod-card-holder">
-           <div class="feature-desc-heading">
+            <div class="feature-desc-heading">
                         <p style="font-weight: 400; font-size: 18px;">Here is the common generalized section for the product</p>
                         </div>
                         <div class="prod-card-holder2">
@@ -553,7 +553,7 @@ font-weight: 600;">Compare products</p></span>
 
 
 
-<ng-container *ngIf="productBundles.length>0">
+<ng-container *ngIf="compareProductList.length>0">
     <div class="specification-cont" id="compProd" #compProdRef>
         <h5>Compare Products</h5>
         <div class="comp-product-cont">
@@ -638,10 +638,10 @@ font-weight: 600;">Compare products</p></span>
 
 
 
-    <div *ngIf="productBundles.length>0" class="specification-cont"  id="bundles" #bundlesRef>
+    <div *ngIf="productBundleList.length>0" class="specification-cont"  id="bundles" #bundlesRef>
         <h5 id="similar-prod">Product Bundles</h5>
         <div class="specs-list">
-            <ng-container *ngFor="let item of productBundles; let i = index">
+            <ng-container *ngFor="let item of productBundleList; let i = index">
             <div *ngIf="item.priceList!=null" class="similar-prod-card">
                 <div class="sim-prod-holder">
                 <div class="similar-prod-img-det">
@@ -652,7 +652,7 @@ font-weight: 600;">Compare products</p></span>
                     <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">{{item.name}}</p></span>
                     
                     <p style="font-size: small;font-weight: 300;">Solution Category</p>
-                    <p style="font-size: small;font-weight: 300;">{{item.subCategories[0].description}}</p>
+                    <p style="font-size: small;font-weight: 300;">{{item.solutionCategory}}</p>
                     <span class="similar-prod-price-det-price" *ngIf="item.priceList!=null"><p style="font-size: medium;font-weight: 400;">&#8377; {{item.priceList[0].price}}</p>
                         <p style="font-size: medium;font-weight: 400;">&nbsp; / {{item.priceList[0].priceType}}</p>
                         </span>
@@ -689,6 +689,7 @@ font-weight: 600;">Compare products</p></span>
         </ng-container>
 
             </div>
+          
 
     </div>
 
@@ -742,6 +743,7 @@ font-weight: 600;">Compare products</p></span>
                         </div>
 
             </div>
+            
         </ng-container>
 
             </div>
