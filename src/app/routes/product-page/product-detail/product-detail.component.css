@@ -1311,7 +1311,7 @@ padding-top: 5%;
 .product-solution {
   font-family: 'lato', sans-serif;
   font-size: 13px;
-  font-weight: bold;
+  /* font-weight: bold; */
   padding-top: 10px;
 }
 
