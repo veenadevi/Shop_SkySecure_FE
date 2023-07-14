@@ -27,8 +27,12 @@ export class CompareProductsFlyerComponent implements OnInit{
       console.log("++++++++ List in Paetials ", data);
       if(data){
         this.productList = data;
-        let uniqueElements = [...new Map(this.productList.map(item => [item['_id'], item])).values()];
+        
+        let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare'));
+        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2'));
+        let combinedData = [...data, ...cachedData, ...cachedData2];
         //this.productList = [...this.productList, ...data];
+        let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.productList = uniqueElements;
         return data;
       }
@@ -57,7 +61,10 @@ export class CompareProductsFlyerComponent implements OnInit{
   public ngOnInit(): void {
     console.log("++++++++ List in Last Page ");
     console.log("++++++++++++++  Item in On Init ", JSON.parse(localStorage.getItem('product_list_to_compare')));
-    this.subscriptions.push(
+    console.log("++++++++++++++  Item in On Init2 ", JSON.parse(localStorage.getItem('product_list_to_compare2')));
+    console.log("()()()() From Get ", this.compareProductsStore.getCompareProductsList2());
+
+    /*this.subscriptions.push(
 
       this.productList$.subscribe(res=>{
 
@@ -65,7 +72,7 @@ export class CompareProductsFlyerComponent implements OnInit{
 
       })
 
-    )
+    )*/
     this.setEmptyItem();
   }
   
@@ -87,9 +94,12 @@ export class CompareProductsFlyerComponent implements OnInit{
       return item._id != $event;
     });
     console.log("******** Item to be removed ", this.productList);
-    this.compareProductsStore.setCompareProductsList(this.productList);
-    localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
+    this.compareProductsStore.setCompareProductsList(this.productList);
+    this.compareProductsStore.setCompareProductsList2(this.productList);
+    //localStorage.removeItem('product_list_to_compare');
+    
     console.log("******** Item after removed ", JSON.parse(localStorage.getItem('product_list_to_compare')));
   }
 

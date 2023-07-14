@@ -327,7 +327,7 @@ featureCount=5;
       return item._id != _id;
     });
     // this.compareProductsStore.setCompareProductsList(this.productList);
-    localStorage.removeItem('product_list_to_compare');
+    //localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
     // console.log('product_list_to_compare',);
   }
@@ -344,7 +344,7 @@ featureCount=5;
     // else
     // item.checked = true;
     let count=0;
-    await this.productListToCompare.forEach(val => {
+    /*await this.productListToCompare.forEach(val => {
       if(val._id===item._id) {
         count++;
       }
@@ -355,13 +355,31 @@ featureCount=5;
       else
       item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
       this.productListToCompare.push(item);
+    }*/
+
+    if(type === 'fromProd'){
+      console.log("()()() From Prom Prod");
+      console.log("()()()( From Prod", item);
+      this.productListToCompare.push(item);
+      
     }
-    // this.productListToCompare.push(item);
-    localStorage.removeItem('product_list_to_compare');
-    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+    else{
+      this.productListToCompare.push(item);
+    }
+
+    
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+
+    //this.productListToCompare.push(item);
+
+    
+    
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
-    const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    console.log("getProdFromLocalStorage",prodGet);
+    console.log("getProdFromLocalStorage",this.productListToCompare);
+    //localStorage.removeItem('product_list_to_compare');
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+    //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    //console.log("getProdFromLocalStorage",prodGet);
   }
 
   images: any[] = [1,2,3,4];

@@ -99,7 +99,7 @@ export class ProductCardFlyerComponent implements OnInit{
           cacheData[indexToUpdate]['checked'] = $event.target.checked;
         }
 
-        localStorage.removeItem('product_list_to_compare');
+        //localStorage.removeItem('product_list_to_compare');
         localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
 
       }

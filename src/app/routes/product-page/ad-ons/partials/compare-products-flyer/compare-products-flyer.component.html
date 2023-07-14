@@ -2,7 +2,7 @@
 
 
     <!-- <ng-container *ngIf="(productList$ | async)"> -->
-        <ng-container>
+        <ng-container *ngIf="(productList$ | async)">
 
         <!-- Check if Products are present -->
         <ng-container *ngIf="(productList && productList.length>0); else noProducts">
