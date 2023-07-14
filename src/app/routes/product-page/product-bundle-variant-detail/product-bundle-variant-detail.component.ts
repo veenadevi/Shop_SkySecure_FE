@@ -118,6 +118,8 @@ export class ProductBundleVariantDetailComponent {
   public onPageLoad : boolean = true;
 
   public subscriptions : Subscription[] = [];
+  checked: boolean = false;
+
 
   // public bundleSku : any;
 
@@ -148,6 +150,7 @@ export class ProductBundleVariantDetailComponent {
   public finalBundleDetails :any[];
 
   public selectedProductItem : any[] = [];
+  productListToCompare  = [];
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
