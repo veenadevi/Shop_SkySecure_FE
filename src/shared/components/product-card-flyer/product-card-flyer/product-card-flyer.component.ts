@@ -100,6 +100,7 @@ export class ProductCardFlyerComponent implements OnInit{
         }
 
         //localStorage.removeItem('product_list_to_compare');
+        
         localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
 
       }
@@ -131,6 +132,7 @@ export class ProductCardFlyerComponent implements OnInit{
           
         }
       }*/
+      
       this.selectedListForCompare = this.selectedListForCompare.filter(element => element._id != item._id);
     }
      
@@ -146,6 +148,8 @@ export class ProductCardFlyerComponent implements OnInit{
       cumulativeList = this.selectedListForCompare;
     }
     this.compareProductsStore.setCompareProductsList(cumulativeList);*/
+    //localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
+    //this.compareProductsStore.setCompareProductsList(this.selectedListForCompare);
     
     this.listForCompare.emit(this.selectedListForCompare);
     
