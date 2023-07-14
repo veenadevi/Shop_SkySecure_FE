@@ -6,7 +6,9 @@ import { Subscription } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
+import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+
 
 
 @Component({
@@ -28,6 +30,7 @@ export class ProductBundleDetailComponent implements OnInit{
   public selectedProductItem : any[] = [];
 
   public bundleQuantity = 1;
+  checked: boolean = false;
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
@@ -78,7 +81,8 @@ export class ProductBundleDetailComponent implements OnInit{
     private cartStore : CartStore,
     private router : Router,
     private modalService : NgbModal,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private compareProductsStore : CompareProductsStore,
   ){
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
@@ -140,11 +144,13 @@ export class ProductBundleDetailComponent implements OnInit{
   public allSimilerProducts: any[];
 
   public productImages : any=[];
+  productListToCompare  = [];
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
   public ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
+    this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     this.getBrandDetails(productId);
   }
 
@@ -403,6 +409,68 @@ console.log("======setProductVariantsData===="+data.length)
     }
 
 
+  }
+
+  async addToCompare(item:any, type:any):Promise<void> {
+    // if(!item.checked)
+    // item.checked = true;
+
+    // if(item.checked)
+    // item.checked = false;
+    // else
+    // item.checked = true;
+    let count=0;
+    /*await this.productListToCompare.forEach(val => {
+      if(val._id===item._id) {
+        count++;
+      }
+    });
+    if (count===0) {
+      if(type!='prodFam')
+      item = { ...item, 'solutionCategory': item.subcategories[0]?.description };
+      else
+      item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
+      this.productListToCompare.push(item);
+    }*/
+
+    if(type === 'fromProd'){
+      console.log("()()() From Prom Prod");
+      console.log("()()()( From Prod", item);
+      this.productListToCompare.push(item);
+      
+    }
+    else{
+      this.productListToCompare.push(item);
+    }
+
+    
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+
+    //this.productListToCompare.push(item);
+
+    
+    
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+    console.log("getProdFromLocalStorage",this.productListToCompare);
+    //localStorage.removeItem('product_list_to_compare');
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+    //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    //console.log("getProdFromLocalStorage",prodGet);
+  }
+
+  public removeSelectedItem(_id:any){
+    this.productListToCompare = this.productListToCompare.filter(function(item) {
+      
+      return item._id != _id;
+    });
+    // this.compareProductsStore.setCompareProductsList(this.productList);
+    //localStorage.removeItem('product_list_to_compare');
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+    // console.log('product_list_to_compare',);
+  }
+
+  public navigateToCompareProducts(){
+    this.router.navigate(['/compare-products']);
   }
 
   addQuantity(item):void {
