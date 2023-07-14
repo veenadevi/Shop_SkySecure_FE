@@ -122,6 +122,11 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public products : any[] = [];
 
+  public childproducts : any[] = [];
+  public childproductVariants : any[] = [];
+  public childproductFamily : any[] = [];
+  public childproductFamilyVariants : any[] = [];
+
   public features : any[] = [];
 
   public productVarients : any[] = [];
@@ -153,14 +158,57 @@ export class ProductBundleDetailComponent implements OnInit{
     this.subscriptions.push(
        this.metaDataSvc.fetchSingleBrandDetails(id).subscribe( response => {
 
-        this.productVarientData = response;
+       // this.productVarientData = response;
         this.productFamily = response.productFamily;
-        this.productFamilyVariants = response.productFamilyVariants;
-        this.productVarients = response.productVarients;
-        this.products = response.products;
-        this.features = response.features;
+       
+        //This is not needed cos bundles which is listed not going to have Variant 
+
+        //this.productFamilyVariants = response.productFamilyVariants;
+
+
+        this.productVarients = response.productFamilyChildLicenseList.productVarients;
+
+       
+        this.products = response.productFamilyChildLicenseList.products;
+
+        console.log("calling TS ---22")
+
+        this.childproducts=this.setProductsData(response.productFamilyChildLicenseList.childproducts);
+        console.log("fetched child products for this bundle "+this.childproducts.length)
+
+        console.log("calling TS ---333")
+
+        this.childproductVariants=this.setProductVariantsData(response.productFamilyChildLicenseList.childproductVariants);
+        console.log("fetched child productVariants for this bundle "+this.childproductVariants.length)
+        console.log("calling TS ---444")
+
+        this.childproductFamily=this.setProductFamilyData(response.productFamilyChildLicenseList.childProductFamily);
+        console.log("fetched child childproductFamily for this bundle "+this.childproductFamily.length)
+
+        this.childproductFamilyVariants=this.setChildProductFamilyVariant(response.productFamilyChildLicenseList.childProductFamilyVariant);
+        console.log("fetched child childproductFamilyVariants for this bundle "+this.childproductFamilyVariants.length)
+
+        this.allCompareProducts = [...this.childproducts, ...this.childproductVariants, ...this.childproductFamily,...this.childproductFamilyVariants]
+        
+        this.allCompareProducts.forEach(element => {
+          element.name = String(element.name);
+          console.log("(compare )()()", element.name);
+        });
+        this.features = response.productFamilyFeatures;
         this.onPageLoad = true;
-        this.allCompareProducts = this.products;
+
+
+        //let tempProducts = this.setProductsData(this.products);
+        //let tempProductVariants = this.setProductVariantsData(this.productVarients);
+       // let tempChildProductFamilyVariants = this.setChildProductFamilyVariant(response.childProductFamilyVarient);
+        //let tempProductBundles = this.setProductFamilyData(this.childProductFamilies);
+        //let tempProductBundles = this.setBundlesData(this.childProductFamilies);
+
+        this.allSimilerProducts = [...this.childproducts, ...this.childproductVariants, ...this.childproductFamily,...this.childproductFamilyVariants]
+
+       
+        console.log("++++++++++++++ _this.",this.allSimilerProducts);
+       
 
 
         if( this.productFamily && this.productFamily.productImages && this.productFamily.productImages.length>0) {
@@ -176,29 +224,23 @@ export class ProductBundleDetailComponent implements OnInit{
         this.productImages=this.productImages.slice(0,4);
 
 
-        let tempProducts = this.setProductsData(response.products);
-        let tempProductVariants = this.setProductVariantsData(this.productVarients);
-        let tempChildProductFamilyVariants = this.setChildProductFamilyVariant(response.childProductFamilyVarient);
-        //let tempProductBundles = this.setBundlesData(this.childProductFamilies);
-
-        this.allSimilerProducts = [...tempProducts, ...tempProductVariants, ...tempChildProductFamilyVariants]
-        console.log("++++++++++++++ _this.",this.allSimilerProducts);
+      
         //this.allSimilerProducts = this.products.concat(response.productVarients,response.productFamilyVariants);
         //this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
         
       })
-    );
+    );  
   }
 
   public setProductsData(data){
-console.log("()()()()()()( ", data);
+  console.log("()()()()()()( ", data);
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
           element.productType = 'products';
           element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
-          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
           element['navigationId'] = element._id;
           element.priceList=element.price
           element.quantity=1
@@ -219,9 +261,9 @@ console.log("======setProductVariantsData===="+data.length)
       data.forEach(element => {
         element.name=element.name;
           element.productType = 'productVariants';
-          element.bannerLogo = (element.products && element.products.length>0 && element.products[0].bannerLogo) ? element.products[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.bannerLogo = (element.products  && element.products.bannerLogo) ? element.products.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
-          element['solutionCategory'] = (element.products && element.products.length>0 && element.products[0] && element.products[0].subCategories && element.products[0].subCategories.length > 0) ? element.products[0].subCategories[0].name : "";
+          element['solutionCategory'] = (element.products && element.products.subCategories && element.products.subCategories.length > 0) ? element.products.subCategories[0].name : "";
           element['navigationId'] = element._id;
           element.priceList=element.priceList;
           element.quantity=1
@@ -240,12 +282,32 @@ console.log("======setProductVariantsData===="+data.length)
     if(data && data.length>0){
       console.log("===========setProductBundleVariantsData======="+data.length)
       data.forEach(element => {
-        element.name=element.name;
+        console.log("fetched PFV name"+element.name)
+          element.name=element.name;
+          console.log("===========setProductBundleVariantsData======="+element.name)
           element.productType = 'productBundleVariants';
           element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           //element.solutionCategory=(element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
           element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : 'Cybersecutiy and Compliance'
+          element['navigationId'] = element._id;
+          element.priceList=element.priceList
+          element.quantity=1
+      });
+    }
+
+    return data;
+  }
+
+  public setProductFamilyData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+        element.name=element.name;
+          element.productType = 'productBundles';
+          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
           element['navigationId'] = element._id;
           element.priceList=element.priceList
           element.quantity=1

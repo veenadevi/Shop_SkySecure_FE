@@ -485,7 +485,7 @@
 
 
 
-                <ng-container *ngIf="products.length>0">
+                <ng-container *ngIf="allCompareProducts.length>0">
                     <div class="specification-cont" id="compProd" #compProdRef>
                         <h5>Compare Products</h5>
                         <div class="comp-product-cont">
@@ -525,7 +525,7 @@
                             </span>
                 
                             <div class="product-to-comp">
-                                <ng-container *ngFor="let item of products">
+                                <ng-container *ngFor="let item of allCompareProducts">
                                     
                                         <div class="comp-product-card">
                                             <div class="comp-product-card-cont">
@@ -534,9 +534,10 @@
                 
                                                 </div>
                                                 <div class="comp-product-card-content">
+                                                    <!-- <p class="product-category">{{item.name}}</p> -->
                                                     <p class="product-category">{{item.name}}</p>
-                                                    <p class="product-solution">Solution category:</p>
-                                                    <p class="product-desc">{{item.subCategories[0].name}}</p>
+                                                    <p class="product-solution">Solution Category:</p>
+                                                    <p class="product-desc">{{item.solutionCategory}}</p>
                                                 </div>
                 
                                             </div>
@@ -588,10 +589,11 @@
                             
                         </div>
                         <div class="similar-prod-price-det">
-                            <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">{{item.name}}</p></span>
+                            
+                            <span class="similar-prod-price-det-title">{{item.name}}</span>
                             
                             <p style="font-size: small;font-weight: 300;">Solution Category</p>
-                            <p style="font-size: small;font-weight: 500;">{{(item.subcategories && item.subcategories.length>0) ? item.subcategories[0].name  : 'Cybersecutiy and Compliance'}}</p>
+                            <p style="font-size: small;font-weight: 500;">{{(item.solutionCategory) ? item.solutionCategory : 'Cybersecutiy and Compliance'}}</p>
                             <span class="similar-prod-price-det-price" *ngIf="item.priceList!=null"><p style="font-size: medium;font-weight: 400;">&#8377; {{item.priceList[0].price}}</p>
                                 <p style="font-size: medium;font-weight: 400;">&nbsp; / {{item.priceList[0].priceType}}</p>
                                 </span>
