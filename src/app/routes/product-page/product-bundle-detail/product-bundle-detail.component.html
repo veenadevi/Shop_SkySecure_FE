@@ -581,10 +581,10 @@
 
             </div>
 
-            <div *ngIf="allSimilerProducts && allSimilerProducts.length>0" class="specification-cont"  id="bundleDetailsRef" #bundleDetailsRef>
+            <div *ngIf="bundleItemsList && bundleItemsList.length>0" class="specification-cont"  id="bundleDetailsRef" #bundleDetailsRef>
                 <h5 id="similar-prod">Bundle Details</h5>
                 <div class="specs-list">
-                    <ng-container *ngFor="let item of allSimilerProducts; let i = index">
+                    <ng-container *ngFor="let item of bundleItemsList; let i = index">
                     <div class="similar-prod-card">
                         <div class="sim-prod-holder">
                         <div class="similar-prod-img-det">
@@ -614,8 +614,7 @@
                                     </span>
                                     <span>
                                     <input
-                                        class="input-field"  [(ngModel)]="bundleQuantity"
-                                        >
+                                        class="input-field"  [(ngModel)]="item.quantity">
                                     </span>
                                     <span >
                                     <img id="add-minus-quantity" alt="" (click)="addQuantity(item)" src="../../../assets/icons/Add.svg">
@@ -625,7 +624,7 @@
         
                             <div class="sim-prod-btn-cont">
                                 <span >
-                                    <button class="btn similar-prod-request-quote-btn" (click)="requestQuote(item, bundleQuantity)">Request Quote</button>
+                                    <button class="btn similar-prod-request-quote-btn" (click)="requestQuote(item)">Request Quote</button>
                                 </span>
                                 </div>
         
