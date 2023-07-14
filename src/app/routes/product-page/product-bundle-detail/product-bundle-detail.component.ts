@@ -248,7 +248,7 @@ export class ProductBundleDetailComponent implements OnInit{
           element.description = element.description;
           element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
           element['navigationId'] = element._id;
-          element.priceList=element.price
+          element.priceList=element.priceList
           element.quantity=1
       });
     }
