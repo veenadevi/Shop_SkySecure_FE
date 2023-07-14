@@ -21,7 +21,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public currentRoute: string;
   links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
-  titles = ['Description', 'Features', 'Specification', 'Reviews', 'compare produscts', 'Bundle Details', 'Similar Products'];
+  titles = ['Description', 'Features', 'Specification', 'Reviews', 'Compare Products', 'Bundle Details', 'Similar Products'];
   activeLink = this.links[0];
   myColor = '';
 
@@ -142,6 +142,7 @@ export class ProductBundleDetailComponent implements OnInit{
   public allCompareProducts: any[];
 
   public allSimilerProducts: any[];
+  public bundleItemsList:any[];
 
   public productImages : any=[];
   productListToCompare  = [];
@@ -210,10 +211,10 @@ export class ProductBundleDetailComponent implements OnInit{
         //let tempProductBundles = this.setProductFamilyData(this.childProductFamilies);
         //let tempProductBundles = this.setBundlesData(this.childProductFamilies);
 
-        this.allSimilerProducts = [...this.childproducts, ...this.childproductVariants, ...this.childproductFamily,...this.childproductFamilyVariants]
+        this.bundleItemsList = [...this.childproducts, ...this.childproductVariants, ...this.childproductFamily,...this.childproductFamilyVariants]
 
        
-        console.log("++++++++++++++ _this.",this.allSimilerProducts);
+        console.log("++++++++++++++ _this.",this.bundleItemsList);
        
 
 
@@ -248,7 +249,7 @@ export class ProductBundleDetailComponent implements OnInit{
           element.description = element.description;
           element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
           element['navigationId'] = element._id;
-          element.priceList=element.price
+          element.priceList=element.priceList
           element.quantity=1
       });
     }
@@ -474,18 +475,62 @@ console.log("======setProductVariantsData===="+data.length)
   }
 
   addQuantity(item):void {
+
+    //this.allSimilerProducts[0].quantity = 1+1;
+    // console.log("increase for item"+item.name +"   "+item.quantity)
+    item.quantity=Number(item.quantity) + 1
+    // console.log("increased now "+item.name +"   "+item.quantity)
     
-    this.bundleQuantity = Number(this.bundleQuantity) + 1
+    //this.bundleQuantity = Number(this.bundleQuantity) + 1
     //this.finalBundleDetails[index].quantity = quantity+1;
   }
   decreaseQuantity(item): void {
-    // if(quantity>1){
-    //   this.finalBundleDetails[index].quantity = quantity-1;
-    // }
-    this.bundleQuantity = Number(this.bundleQuantity) - 1
+    if(item.quantity>1){
+      item.quantity=Number(item.quantity) -1
+    }
+    
   }
 
-  public requestQuote(item, quant){
+
+  public requestQuote (product : any) : void {
+
+    
+    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
+
+    let queryParams;
+      // if(product.productVariants.length>0){
+        queryParams = {
+          productName : product.name,
+          productId : product._id,
+          quantity : product.quantity,
+          price : product.priceList[0].price,
+        };
+      // }
+    /*if(loggedinData.length > 0 ){
+      
+      var existingItems = this.cartStore.getCartItems();
+    
+      
+      
+      this.router.navigate(['/cart'], {queryParams: queryParams});
+    }
+
+    else {
+      this.viewModal(queryParams);
+    }*/
+
+    this.userAccountStore.userDetails$.subscribe(res=>{
+      console.log("()()()() ", res);
+      if(res && res.email !== null){
+        this.router.navigate(['/cart'], {queryParams: queryParams});
+      }
+      else{
+        this.viewModal(queryParams);
+      }
+    })
+  }
+
+  public requestQuoteold(item, quant){
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
     let queryParams;
