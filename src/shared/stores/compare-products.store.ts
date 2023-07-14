@@ -29,6 +29,12 @@ export class CompareProductsStore {
     private compareProductsList2Subject = new BehaviorSubject<any>(null);
     public compareProductsList2$ = this.compareProductsList2Subject.asObservable();
 
+
+    public productsCheckedList : any;
+
+    private productsCheckedListSubject = new BehaviorSubject<any>(null);
+    public productsCheckedList$ = this.productsCheckedListSubject.asObservable();
+
   constructor() {
   }
   
@@ -56,6 +62,17 @@ export class CompareProductsStore {
       this.compareProductsList2Subject.next(data);
     }
 
+
+    /**
+   * ============================================================
+   * Set Products Checked List
+   */
+    public setProductsCheckedList(data : any) : void {
+
+      this.productsCheckedList = data;
+      this.productsCheckedListSubject.next(data);
+    }
+
   
   
 
@@ -71,6 +88,13 @@ export class CompareProductsStore {
    */
   public getCompareProductsList2(): any {
     return this.compareProductsList2;
+  }
+
+  /**
+   * Get Products Checked List
+   */
+  public getProductsCheckedList(): any {
+    return this.productsCheckedList;
   }
 
   

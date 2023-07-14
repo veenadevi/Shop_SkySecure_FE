@@ -100,6 +100,7 @@ export class CompareProductsFlyerComponent implements OnInit{
     this.compareProductsStore.setCompareProductsList2(this.productList);
     //localStorage.removeItem('product_list_to_compare');
     
+    this.compareProductsStore.setProductsCheckedList(null);
     console.log("******** Item after removed ", JSON.parse(localStorage.getItem('product_list_to_compare')));
   }
 
