@@ -31,6 +31,10 @@ export class ProductDetailComponent implements OnInit{
   public allsimilarProducts:any[];
   public allBundleDetails:any[];
 
+  public completeFeatureList : any[] = [];
+
+  public viewAllFeaturesDetails = false;
+
   faq = [];
   productListToCompare  = [];
   products = [];
@@ -185,7 +189,15 @@ export class ProductDetailComponent implements OnInit{
         console.log("price after set quantity===="+this.product.priceList[0].discountRate)
         let fList = [];
         if (response.featureList?.length > 0) {
-          this.featureList = response.featureList;
+          
+          this.completeFeatureList = response.featureList;
+          if(response.featureList.length > 5){
+            this.featureList = response.featureList.slice(0,5);
+          }
+          else{
+            this.featureList = response.featureList;
+          }
+          this.featureList = response.featureList.slice(0,5);
        //   this.featureList = response.featureList.slice(0,5);
           //this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
         }
@@ -343,14 +355,40 @@ featureCount=5;
 
 
 
-  public featureCountEvent(): void {
+  public featureCountEvent(val): void {
+
+
+    console.log("****** View Before", val);
+    val = val ? false : true;
+    console.log("****** View ", val);
+    this.viewAllFeaturesDetails = val;
+    console.log("****** View ", this.viewAllFeaturesDetails);
+    if(this.viewAllFeaturesDetails){
+      console.log("****** In Else");
+      console.log("****** In Else", this.completeFeatureList);
+      this.featureList = this.completeFeatureList;
+    }
+    else{
+      console.log("****** In Else");
+      console.log("****** In Else", this.completeFeatureList);
+      if(this.completeFeatureList.length>5){
+        this.featureList = this.completeFeatureList.slice(0,5);
+      }
+      else{
+        this.featureList = this.completeFeatureList;
+      }
+      
+      
+    }
     
     //  if(this.product.featureList.length>5 && !this.viewAllFeature){
     //   this.featureList = [...this.product.featureList.slice(0,5)];
     //   console.log("dispfeatureList",this.featureList);
     //   this.viewAllFeature = true;
     // } else {
-      this.featureList = this.product.featureList;
+      //this.featureList = this.product.featureList;
+      
+      
       console.log("product list to compare",this.productListToCompare);
     // }
   }

@@ -325,7 +325,14 @@
                     <div class="feature-desc-heading">
                         <p style="margin-bottom: 10px;font-weight: 400;">click here to view detailed feature of the
                             product</p>
-                        <button class="btn view-det-btn" (click)="featureCountEvent()">View All Features</button>
+                        <button class="btn view-det-btn" (click)="featureCountEvent(viewAllFeaturesDetails)">
+                            <ng-container *ngIf="viewAllFeaturesDetails ; else showLess">
+                                Show Less Features 
+                            </ng-container>
+                            <ng-template #showLess>
+                                View All Features
+                            </ng-template>
+                        </button>
 
                     </div>
                 </div>
