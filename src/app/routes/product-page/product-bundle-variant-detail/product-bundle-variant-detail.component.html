@@ -407,43 +407,44 @@
                             <div class="specification-feature">
                                 <div class="specification-feature-icon-container">
                                     <img class="specification-icon" src="../../../../assets/icons/PlatformIcon.svg">
-                                    <p class="specification-feature-headline">Supported Platforms:</p>
                                 </div>
                                 <div class="specification-feature-details">
+                                    <p class="specification-feature-headline">Supported Platforms</p>
                                     <p class="specification-feature-description">Windows, macOS</p>
                                 </div>
                             </div>
                             <div class="specification-feature">
                                 <div class="specification-feature-icon-container">
                                     <img class="specification-icon" src="../../../../assets/icons/LanguagesIcon.svg">
-                                    <p class="specification-feature-headline">Languages:</p>
                                 </div>
                                 <div class="specification-feature-details">
+                                    <p class="specification-feature-headline">Languages</p>
                                     <p class="specification-feature-description">English</p>
                                 </div>
                             </div>
                             <div class="specification-feature">
                                 <div class="specification-feature-icon-container">
                                     <img class="specification-icon" src="../../../../assets/icons/DevicesIcon.svg">
-                                    <p class="specification-feature-headline">Devices:</p>
                                 </div>
                                 <div class="specification-feature-details">
+                                    <p class="specification-feature-headline">Devices</p>
                                     <p class="specification-feature-description">Desktop, Mobile</p>
                                 </div>
                             </div>
                             <div class="specification-feature">
                                 <div class="specification-feature-icon-container">
                                     <img class="specification-icon" src="../../../../assets/icons/CloudBasedIcon.svg">
-                                    <p class="specification-feature-headline">Deployment:</p>
                                 </div>
                                 <div class="specification-feature-details">
+                                    <p class="specification-feature-headline">Deployment</p>
                                     <p class="specification-feature-description">Cloud-Based</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="connect-us">
-                        <contact-us-flyer></contact-us-flyer>
+                    <div class="connect-us-container">
+                        <!-- <contact-us-flyer></contact-us-flyer> -->
+                        <contact-us-flyer-horizontal></contact-us-flyer-horizontal>
                     </div>
                     <!-- <div class="write-review">
                         <write-review-flyer></write-review-flyer>
@@ -587,43 +588,50 @@
                                 style="display:flex;align-items: center;justify-content: center;padding-left:20px;padding-right:20px;">
                                 <h6 style="font-size: 25px;">VS</h6>
                             </span>
-            
-                            <div class="product-to-comp">
-                                <ng-container *ngFor="let item of allCompareProducts">
-                                    <div *ngIf="item.priceList!=null">
-                                        <div class="comp-product-card">
-                                            <div class="comp-product-card-cont">
-                                                <div class="comp-product-card-img">
-                                                    <img class="card-logo" src="{{item.bannerLogo}}">
-            
-                                                </div>
-                                                <div class="comp-product-card-content">
-                                                    <p class="product-category">{{item.name}}</p>
-                                                    <p class="product-solution">Solution category:</p>
-                                                    <p class="product-desc">{{item.solutionCategory}}</p>
-                                                </div>
-            
-                                            </div>
-                                            <div class="checkbox-sec">
-                                                <div class="checkbox-sec-01">
-                                                    <div class="checkbox">
-                                                        <p-checkbox (click)="addToCompare(item,'prodFam')"
-                                                        [(ngModel)]="item.checked" [binary]="true"
-                                                            inputId="binary"></p-checkbox>
+
+                            <button #leftArrow class="arrow left-arrow" (click)="scrollFunctionLeft()"><img src="../../../../assets/icons/arrow-right.svg"></button>
+
+                            <div class="scroll-container">
+                                <div class="scroll-content">
+                                    <div class="product-to-comp">
+                                        <ng-container *ngFor="let item of allCompareProducts">
+                                            <div *ngIf="item.priceList!=null">
+                                                <div class="comp-product-card">
+                                                    <div class="comp-product-card-cont">
+                                                        <div class="comp-product-card-img">
+                                                            <img class="card-logo" src="{{item.bannerLogo}}">
+                    
+                                                        </div>
+                                                        <div class="comp-product-card-content">
+                                                            <p class="product-category">{{item.name}}</p>
+                                                            <p class="product-solution">Solution category:</p>
+                                                            <p class="product-desc">{{item.solutionCategory}}</p>
+                                                        </div>
+                    
                                                     </div>
-                                                    <div class="checkbox-header">
-                                                        <p class="compare-sec">&nbsp;Compare</p>
+                                                    <div class="checkbox-sec">
+                                                        <div class="checkbox-sec-01">
+                                                            <div class="checkbox">
+                                                                <p-checkbox (click)="addToCompare(item,'prodFam')"
+                                                                [(ngModel)]="item.checked" [binary]="true"
+                                                                    inputId="binary"></p-checkbox>
+                                                            </div>
+                                                            <div class="checkbox-header">
+                                                                <p class="compare-sec">&nbsp;Compare</p>
+                                                            </div>
+                                                        </div>
+                    
+                                                        <div class="checkbox-sec-02">
+                                                            <a class="view-sec">view details</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-            
-                                                <div class="checkbox-sec-02">
-                                                    <a class="view-sec">view details</a>
-                                                </div>
                                             </div>
-                                        </div>
+                                        </ng-container>
                                     </div>
-                                </ng-container>
+                                </div>
                             </div>
+                            <button class="arrow right-arrow" (click)="scrollFunctionRight()"><img src="../../../../assets/icons/arrow-right.svg"></button>
                         </div>
                     </div>
             

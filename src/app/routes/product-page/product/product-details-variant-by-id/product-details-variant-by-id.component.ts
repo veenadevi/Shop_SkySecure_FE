@@ -56,6 +56,18 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   @ViewChild('faqRef') faqRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
 
+    // ----- >>>> compare products Scroll function ----- >>>>
+
+    scrollFunctionRight(){
+      let left = document.querySelector(".scroll-content")
+      left.scrollBy(200, 0);
+    };
+  
+    scrollFunctionLeft(){
+      let right = document.querySelector(".scroll-content")
+      right.scrollBy(-200, 0);
+    };
+
   scrollToSection(sectionId: any): void {
 
     this.activeLink=sectionId;

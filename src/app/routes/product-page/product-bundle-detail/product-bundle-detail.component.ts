@@ -41,6 +41,27 @@ export class ProductBundleDetailComponent implements OnInit{
   @ViewChild('simProdRef') simProdRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
 
+  // scroll section
+  // @ViewChild('scrollContent', { static : true }) scrollContent! : ElementRef;
+  // @ViewChild('rightArrow',    { static : true }) rightArrow!    : ElementRef;
+  // @ViewChild('leftArrow',     { static : true }) leftArrow!     : ElementRef;
+
+
+  // ----- >>>> compare products Scroll function ----- >>>>
+
+  scrollFunctionRight(){
+    let left = document.querySelector(".scroll-content")
+    left.scrollBy(200, 0);
+  };
+
+  scrollFunctionLeft(){
+    let right = document.querySelector(".scroll-content")
+    right.scrollBy(-200, 0);
+  };
+
+
+ 
+
   scrollToSection(sectionId: any): void {
 
     this.activeLink = sectionId;
@@ -261,6 +282,8 @@ export class ProductBundleDetailComponent implements OnInit{
    * Set Product Variants Data
    */
 
+ 
+
   public setProductVariantsData(data){
     
 console.log("======setProductVariantsData===="+data.length)
@@ -434,9 +457,8 @@ console.log("======setProductVariantsData===="+data.length)
       this.productListToCompare.push(item);
     }*/
 
+    console.log("********* () ( )( )", item);
     if(type === 'fromProd'){
-      console.log("()()() From Prom Prod");
-      console.log("()()()( From Prod", item);
       this.productListToCompare.push(item);
       
     }

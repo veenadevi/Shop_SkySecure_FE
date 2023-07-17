@@ -31,8 +31,8 @@ export class DetailsCompareProductsFlyerComponent {
         let uniqueElements = [...new Map(this.productList.map(item => [item['_id'], item])).values()];
         this.productList = uniqueElements;*/
 
-        let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare'));
-        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2'));
+        let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
         let combinedData = [...this.productList, ...cachedData, ...cachedData2];
         let uniqueElements2 = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.productList = uniqueElements2;

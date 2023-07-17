@@ -1,0 +1,55 @@
+<div class="connect-us-container">
+    <!-- <contact-us-flyer></contact-us-flyer> -->
+    <div class="connect-us-content-display-container">
+        <div class="connect-us-illustration">
+            <img id="userAvatar" class="connect-us-illustration-img" src="../../../../assets/icons/ConnectUsIllustration.svg"/>
+        </div>
+        <div class="connect-us-content-container">
+            <div class="connect-us-header">
+                    Connect Us!
+            </div>
+            <div class="connect-us-description">
+                    Connect with Our Skilled Experts and Find the Best Plan for You!
+            </div>
+
+            <div>
+                <button class="btn call-btn" (click)="showBasicDialog()" > Get Free Call</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p-dialog header="Get Free Call" [(visible)]="displayBasic" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+
+    <div class="form-body">
+
+      <div class="row">
+        <div class="col-md-12">
+          
+          <div class="form-group">
+            <label id="email-label" for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="Enter your email" class="form-control" required>
+          </div>
+          
+        
+        </div>
+      </div>
+
+      <div class="row textarea-style">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>Leave Message</label>
+						<textarea  id="comments" class="form-control" name="comment" placeholder="Enter your comment here..."></textarea>
+					</div>
+				</div>
+			</div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" (click)="displayBasic=false" label="Cancel"></p-button>
+        <p-button class="btn-send" icon="pi pi-check" (click)="sendEmail()" label="Send Email" styleClass="p-button-text"></p-button>
+        
+    </ng-template>
+</p-dialog>
