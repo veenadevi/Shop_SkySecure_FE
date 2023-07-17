@@ -457,9 +457,8 @@ console.log("======setProductVariantsData===="+data.length)
       this.productListToCompare.push(item);
     }*/
 
+    console.log("********* () ( )( )", item);
     if(type === 'fromProd'){
-      console.log("()()() From Prom Prod");
-      console.log("()()()( From Prod", item);
       this.productListToCompare.push(item);
       
     }

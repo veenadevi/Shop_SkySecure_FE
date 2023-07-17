@@ -20,6 +20,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { SidenavWrapperComponent } from './sidenav-wrapper/sidenav-wrapper/sidenav-wrapper.component';
+import { SharedModule } from 'primeng/api';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import { SidenavWrapperComponent } from './sidenav-wrapper/sidenav-wrapper/siden
     CommonModule,
     RouterModule,
     MaterialModule,
-    PrimeNgModule
+    SharedModule,
+    PrimeNgModule,
+    
     
 
   ],
@@ -54,6 +57,7 @@ import { SidenavWrapperComponent } from './sidenav-wrapper/sidenav-wrapper/siden
     MaterialModule,
     PrimeNgModule,
     CommonModule,
+    SharedModule,
 
     HeaderComponent,
     ToolbarComponent,
