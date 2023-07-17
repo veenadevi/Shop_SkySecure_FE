@@ -89,11 +89,11 @@
                         </div>
                 </div>
                 <div class="product-details-info">
-                    <h4 style="margin-bottom: auto;">{{productVariants.name}}
+                    <h4 >{{productVariants.name}}
                     </h4>
                     <p style="margin-top: 10px;
                     font-size: smaller;
-                    margin-bottom: 5px;">by Microsoft</p>
+                    margin-bottom: 5px;">by Microsoft </p>
                     <div class="pd-header-reviews">
                         <mat-icon class="review-icon">star</mat-icon>
                         <mat-icon class="review-icon">star</mat-icon>
@@ -323,7 +323,7 @@ font-weight: 600;">Compare products</p></span>
                         </div>
                         <div class="prod-feat-card-cont">
                             <div class="prod-card-holder">
-           <div class="feature-desc-heading">
+            <div class="feature-desc-heading">
                         <p style="font-weight: 400; font-size: 18px;">Here is the common generalized section for the product</p>
                         </div>
                         <div class="prod-card-holder2">
@@ -366,7 +366,7 @@ font-weight: 600;">Compare products</p></span>
 
 
 <div class="bottom-container">
-    <div class="specification-cont" id="specification" #specificationRef>
+    <!-- <div class="specification-cont" id="specification" #specificationRef>
         <h5>Specifications</h5>
         <div class="specs-list">
             <div class="specs-name">
@@ -410,9 +410,61 @@ font-weight: 600;">Compare products</p></span>
                                 </div>
                         </div>
             </div>
+    </div> -->
+
+    <div class="specification-section" id="specification" #specificationRef>
+        <div class="specification-containter">
+            <div class="specification-headline">
+                <h5>Specifications</h5>
+            </div>
+            <div class="specification-list">
+                <div class="specification-feature">
+                    <div class="specification-feature-icon-container">
+                        <img class="specification-icon" src="../../../../assets/icons/PlatformIcon.svg">
+                        <p class="specification-feature-headline">Supported Platforms:</p>
+                    </div>
+                    <div class="specification-feature-details">
+                        <p class="specification-feature-description">Windows, macOS</p>
+                    </div>
+                </div>
+                <div class="specification-feature">
+                    <div class="specification-feature-icon-container">
+                        <img class="specification-icon" src="../../../../assets/icons/LanguagesIcon.svg">
+                        <p class="specification-feature-headline">Languages:</p>
+                    </div>
+                    <div class="specification-feature-details">
+                        <p class="specification-feature-description">English</p>
+                    </div>
+                </div>
+                <div class="specification-feature">
+                    <div class="specification-feature-icon-container">
+                        <img class="specification-icon" src="../../../../assets/icons/DevicesIcon.svg">
+                        <p class="specification-feature-headline">Devices:</p>
+                    </div>
+                    <div class="specification-feature-details">
+                        <p class="specification-feature-description">Desktop, Mobile</p>
+                    </div>
+                </div>
+                <div class="specification-feature">
+                    <div class="specification-feature-icon-container">
+                        <img class="specification-icon" src="../../../../assets/icons/CloudBasedIcon.svg">
+                        <p class="specification-feature-headline">Deployment:</p>
+                    </div>
+                    <div class="specification-feature-details">
+                        <p class="specification-feature-description">Cloud-Based</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="connect-us">
+            <contact-us-flyer></contact-us-flyer>
+        </div>
+        <!-- <div class="write-review">
+            <write-review-flyer></write-review-flyer>
+        </div> -->
     </div>
 
-<ng-container *ngIf="productBundles.length>0">
+<!-- <ng-container *ngIf="productBundles.length>0">
     <div class="specification-cont" id="compProd" #compProdRef>
         <h5>Compare Products</h5>
         <div class="comp-prod-cont" >
@@ -424,19 +476,20 @@ font-weight: 600;">Compare products</p></span>
                         
                     </div>
                     <div class="comp-prod-card-content">
-                        <p style="font-size: medium;font-weight: 500;">{{product.products[0].name}}</p>
-                        <p style="font-size: small;font-weight: 300;">solution category:</p>
-                        <p style="font-size: small;font-weight: 300;">{{product.products[0].subcategories[0].description}}</p>
+                        <p style="font-size: medium;font-weight: 500;">{{productVariantData.name}}</p>
+                        <p style="font-size: small;font-weight: 300;">Solution Category:</p>
+                        <p style="font-size: small;font-weight: 300;">{{productVariantData.solutionCategory}}</p>
                     </div>
                     
                 </div>
                 <div style="display: flex;flex-direction: row;">
+                  
                     <span style="    display: inline-flex;
                     flex-basis: 30%;
                     align-items: center;
                     justify-content: flex-start;
                     padding: 1%;"> 
-                        <p-checkbox (click)="addToCompare(product.products[0],'fromProd')" [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
+                        <p-checkbox (click)="addToCompare(productVariantData,'fromProd')" [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
                         <p style="font-size: small;">&nbsp;compare</p>
                         </span>
                         <span style="    display: inline-flex;
@@ -444,7 +497,7 @@ font-weight: 600;">Compare products</p></span>
                     flex-basis: 70%;
                     justify-content: flex-end;
                     padding: 1%;"> 
-                    <a style="color: #0047BD;font-weight: 400;font-size: small;">view details</a>
+                    <a style="color: #0047BD;font-weight: 400;font-size: small;"> View Details </a>
                     </span>
     
                 </div>
@@ -456,7 +509,7 @@ font-weight: 600;">Compare products</p></span>
                 </span>
 
             <div  class="comp-prod-vs">
-            <ng-container  *ngFor="let item of productBundles">
+            <ng-container  *ngFor="let item of compareProductList">
             <div *ngIf="item.priceList!=null" class="comp-prod-card2">
                 <div class="comp-prod-card-cont">
                 <div class="comp-prod-card-img">
@@ -466,7 +519,7 @@ font-weight: 600;">Compare products</p></span>
                 <div class="comp-prod-card-content">
                     <p style="font-size: medium;font-weight: 500;">{{item.name}}</p>
                     <p style="font-size: small;font-weight: 300;">solution category:</p>
-                    <p style="font-size: small;font-weight: 300;">{{item.subCategories[0].description}}</p>
+                    <p style="font-size: small;font-weight: 300;">{{item.solutionCategory}}</p>
                 </div>
                 
             </div>
@@ -494,14 +547,101 @@ font-weight: 600;">Compare products</p></span>
             </div>
     </div>
 
+</ng-container> -->
+
+
+
+
+
+<ng-container *ngIf="compareProductList.length>0">
+    <div class="specification-cont" id="compProd" #compProdRef>
+        <h5>Compare Products</h5>
+        <div class="comp-product-cont">
+            <div class="product-to-comp">
+                <div class="comp-product-card">
+                    <div class="comp-product-card-cont">
+                        <div class="comp-product-card-img">
+                            <img class="card-logo" src="{{product.products[0].bannerLogo}}">
+
+                        </div>
+                        <div class="comp-product-card-content">
+                            <p class="product-category">{{productVariantData.name}}</p>
+                            <p class="product-solution">Solution Category:</p>
+                            <p class="product-desc">{{productVariantData.solutionCategory}}</p>
+                        </div>
+                    </div>
+                    <div class="checkbox-sec">
+                        <div class="checkbox-sec-01">
+                            <div class="checkbox">
+                                <p-checkbox (click)="addToCompare(productVariantData,'fromProd')" [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
+                            </div>
+                            <div class="checkbox-header">
+                                <p class="compare-sec">&nbsp;Compare</p>
+                            </div>
+                        </div>
+                        <div class="checkbox-sec-02">
+                            <a class="view-sec">view details</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <span
+                style="display:flex;align-items: center;justify-content: center;padding-left:20px;padding-right:20px;">
+                <h6 style="font-size: 25px;">VS</h6>
+            </span>
+
+            <div class="product-to-comp">
+                <ng-container *ngFor="let item of compareProductList">
+                    <div *ngIf="item.priceList!=null">
+                        <div class="comp-product-card">
+                            <div class="comp-product-card-cont">
+                                <div class="comp-product-card-img">
+                                    <img class="card-logo" src="{{item.bannerLogo}}">
+
+                                </div>
+                                <div class="comp-product-card-content">
+                                    <p class="product-category">{{item.name}}</p>
+                                    <p class="product-solution">Solution category:</p>
+                                    <p class="product-desc">{{item.solutionCategory}}</p>
+                                </div>
+
+                            </div>
+                            <div class="checkbox-sec">
+                                <div class="checkbox-sec-01">
+                                    <div class="checkbox">
+                                        <p-checkbox  (click)="addToCompare(item,'prodFam')" [(ngModel)]="item.checked" [binary]="true"
+                                            inputId="binary"></p-checkbox>
+                                    </div>
+                                    <div class="checkbox-header">
+                                        <p class="compare-sec">&nbsp;Compare</p>
+                                    </div>
+                                </div>
+
+                                <div class="checkbox-sec-02">
+                                    <a class="view-sec">view details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
 </ng-container>
 
 
 
-    <div *ngIf="productBundles.length>0" class="specification-cont"  id="bundles" #bundlesRef>
+
+
+
+
+    <div *ngIf="productBundleList.length>0" class="specification-cont"  id="bundles" #bundlesRef>
         <h5 id="similar-prod">Product Bundles</h5>
         <div class="specs-list">
-            <ng-container *ngFor="let item of productBundles; let i = index">
+            <ng-container *ngFor="let item of productBundleList; let i = index">
             <div *ngIf="item.priceList!=null" class="similar-prod-card">
                 <div class="sim-prod-holder">
                 <div class="similar-prod-img-det">
@@ -511,8 +651,8 @@ font-weight: 600;">Compare products</p></span>
                 <div class="similar-prod-price-det">
                     <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">{{item.name}}</p></span>
                     
-                    <p style="font-size: small;font-weight: 300;">solution category</p>
-                    <p style="font-size: small;font-weight: 300;">{{item.subCategories[0].description}}</p>
+                    <p style="font-size: small;font-weight: 300;">Solution Category</p>
+                    <p style="font-size: small;font-weight: 300;">{{item.solutionCategory}}</p>
                     <span class="similar-prod-price-det-price" *ngIf="item.priceList!=null"><p style="font-size: medium;font-weight: 400;">&#8377; {{item.priceList[0].price}}</p>
                         <p style="font-size: medium;font-weight: 400;">&nbsp; / {{item.priceList[0].priceType}}</p>
                         </span>
@@ -549,6 +689,7 @@ font-weight: 600;">Compare products</p></span>
         </ng-container>
 
             </div>
+          
 
     </div>
 
@@ -567,7 +708,7 @@ font-weight: 600;">Compare products</p></span>
                 <div class="similar-prod-price-det">
                     <span class="similar-prod-price-det-title"><p style="    font-weight: 500;">{{item.name}}</p></span>
                     
-                    <p style="font-size: small;font-weight: 300;">solution category</p>
+                    <p style="font-size: small;font-weight: 300;">Solution Category</p>
                     <p style="font-size: small;font-weight: 300;">{{product.products[0].subcategories[0].description}}</p>
                     <span class="similar-prod-price-det-price" *ngIf="item.priceList!=null"><p style="font-size: medium;font-weight: 400;">&#8377; {{item.priceList[0].price}}</p>
                         <p style="font-size: medium;font-weight: 400;">&nbsp; / {{item.priceList[0].priceType}}</p>
@@ -602,6 +743,7 @@ font-weight: 600;">Compare products</p></span>
                         </div>
 
             </div>
+            
         </ng-container>
 
             </div>

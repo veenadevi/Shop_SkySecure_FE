@@ -45,7 +45,6 @@ export class ProductFilterComponent {
   ngOnInit(){
     this.initializeSubCategoriesData();
     this.setSelecetdList();
-    console.log("((((((((((((((Sub categories ", this.selectedParams);
   }
 
   public initializeSubCategoriesData(){
@@ -53,7 +52,6 @@ export class ProductFilterComponent {
     this.listCategories.forEach(element => {
       this.subCategoriesList = [...this.subCategoriesList , ...element.subCategories];
     });
-    console.log("++++++ Sub Cat List ", this.subCategoriesList);
   }
 
   public setSelecetdList(){

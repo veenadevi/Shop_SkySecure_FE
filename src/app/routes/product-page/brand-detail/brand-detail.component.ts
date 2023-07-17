@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'brand-detail',
@@ -22,7 +23,8 @@ export class BrandDetailComponent implements OnInit{
     private authService : MsalService,
     private cartStore : CartStore,
     private router : Router,
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private userAccountStore : UserAccountStore
   ){
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('brandId');
@@ -137,28 +139,41 @@ export class BrandDetailComponent implements OnInit{
 
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    if(loggedinData.length > 0 ){
+    let queryParams;
+    if(product.productVariants.length>0){
+      queryParams = {
+        productName : product.productVariants[0].name,
+        productId : product.productVariants[0]._id,
+        quantity : 1,
+        price : product.productVariants[0].priceList[0].price,
+      };
+    }
+    /*if(loggedinData.length > 0 ){
       
       var existingItems = this.cartStore.getCartItems();
-      let queryParams;
-      if(product.productVariants.length>0){
-        queryParams = {
-          productName : product.productVariants[0].name,
-          productId : product.productVariants[0]._id,
-          quantity : 1,
-          price : product.productVariants[0].priceList[0].price,
-        };
-      }
+
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
     else {
-      this.viewModal();
-    }
+      this.viewModal(queryParams);
+      
+    }*/
+
+    this.userAccountStore.userDetails$.subscribe(res=>{
+      console.log("()()()() ", res);
+      if(res && res.email !== null){
+        this.router.navigate(['/cart'], {queryParams: queryParams});
+      }
+      else{
+        this.viewModal(queryParams);
+      }
+    })
   }
 
-  public viewModal() {
+  public viewModal(queryParams) {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
+    modalRef.componentInstance.request = queryParams;
   }
   
   

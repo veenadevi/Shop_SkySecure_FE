@@ -492,7 +492,7 @@ h3{
 }
 
 
-@media  (max-width: 770px) {
+@media  (min-width: 771px) and  (max-width:1024px) {
     .footer {
     
         background: #0b0d1b;

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { map } from 'rxjs';
+import { Router } from '@angular/router';
+import { Subscription, map } from 'rxjs';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 
 @Component({
@@ -13,31 +14,57 @@ export class DetailsCompareProductsFlyerComponent {
     
   }
 
+  private subscriptions : Subscription[] = [];
+
   public itemJson;
 
   public productList : any;
 
-  public productList$ = this.compareProductsStore.compareProductsList$
+  public productList$ = this.compareProductsStore.compareProductsList2$
   .pipe(
     map(data => {
-      console.log("++++++++ List in Paetials ", data);
+      
+      this.productList = [];
       if(data){
-        this.productList = [...this.productList, ...data];
+        this.productList = data;
+        /*this.productList = [...this.productList, ...data];
+        let uniqueElements = [...new Map(this.productList.map(item => [item['_id'], item])).values()];
+        this.productList = uniqueElements;*/
+
+        let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare'));
+        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2'));
+        let combinedData = [...this.productList, ...cachedData, ...cachedData2];
+        let uniqueElements2 = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+        this.productList = uniqueElements2;
         return data;
+        
       }
       else{
         
         return data;
       }
+      /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+      this.productList = [...this.productList, ...cacheData];
+      console.log("++++++++ List in Paetials ", this.productList);
+      let uniqueElements = [...new Map(this.productList.map(item => [item['_id'], item])).values()];
+      this.productList = uniqueElements;
+      return data;*/
     }
     )
   )
 
   constructor(
-    private compareProductsStore : CompareProductsStore
+    private compareProductsStore : CompareProductsStore,
+    private router:Router
   ){}
 
   public ngOnInit(): void {
+    
+    this.subscriptions.push(
+      this.productList$.subscribe(res=>{
+        res;
+      })
+    )
     console.log("++++++++ List in Last Page ");
     this.setEmptyItem();
     this.setProductList();
@@ -58,7 +85,10 @@ export class DetailsCompareProductsFlyerComponent {
 
   public setProductList(){
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    this.productList = cacheData;
+    let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [ ...cacheData, ...cachedData2];
+    let uniqueElements2 = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+    this.productList = uniqueElements2;
     console.log("******** Item to be removed ", this.productList);
   }
 
@@ -67,11 +97,16 @@ export class DetailsCompareProductsFlyerComponent {
     this.productList = this.productList.filter(function(item) {
       return item._id != $event;
     });
-    this.compareProductsStore.setCompareProductsList(this.productList);
+    console.log("******** Item to be removed ", this.productList);
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
+    this.compareProductsStore.setCompareProductsList2(this.productList);
+    //localStorage.removeItem('product_list_to_compare');
+    
   }
 
   public navigateToCompareProducts(){
-    //this.router.navigate(['/compare-products']);
+    this.router.navigate(['/compare-products']);
   }
 }

@@ -292,10 +292,3 @@ h6{
 }
 
 
-@media (min-width: 771px) {
-    .trending-cards-list{
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-    }
-}

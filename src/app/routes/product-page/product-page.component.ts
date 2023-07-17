@@ -165,7 +165,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     this.selectedListForCompare([]);
     //this.getAllCategories();
 
-
+    this.setCheckedList();
 
 
 
@@ -432,6 +432,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   ngOnChanges(changes: SimpleChanges): void {
     
 
+
   }
 
 
@@ -542,9 +543,10 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
     
 
-
-    this.compareProductsStore.setCompareProductsList(uniqueElements);
     localStorage.setItem('product_list_to_compare', JSON.stringify(uniqueElements));
+    this.compareProductsStore.setCompareProductsList(uniqueElements);
+    //localStorage.removeItem('product_list_to_compare');
+    
 
   }
 
@@ -645,6 +647,46 @@ public tabChange(productTabSection: any){
   }
 }
 
+
+public setCheckedList(){
+
+  this.subscriptions.push(
+    this.compareProductsStore.productsCheckedList$.subscribe(res=>{
+      console.log("**&&&&()()()( Got Checked ",this.productList);
+
+
+      let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare'));
+      let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2'));
+      let combinedData = [...cacheData, ...cacheData2];
+      let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+      /*var index = productsList.findIndex(el => el.productId === item._id);
+         
+      if(index >=0){
+        productsList[index].quantity = Number(productsList[index].quantity) + 1;
+      }*/
+      this.productList.forEach(element => {
+        var index = uniqueElements.findIndex(el => el._id === element._id);
+        if(index >=0){
+          if(element.checked){
+            element.checked = true;
+          }
+          else{
+            element['checked'] = true;
+          }
+        }
+        else{
+          if(element.checked){
+            element.checked = false;
+          }
+          else{
+            element['checked'] = false;
+          }
+        }
+      });
+    })
+  )
+}
 
 
 }

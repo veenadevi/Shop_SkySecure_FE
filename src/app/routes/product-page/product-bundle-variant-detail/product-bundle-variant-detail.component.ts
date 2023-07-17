@@ -7,6 +7,7 @@ import { LoginAlertModalComponent } from 'src/shared/components/login-alert-moda
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 
 @Component({
@@ -81,7 +82,8 @@ export class ProductBundleVariantDetailComponent {
     private cartStore : CartStore,
     private router : Router,
     private modalService : NgbModal,
-    private compareProductsStore : CompareProductsStore
+    private compareProductsStore : CompareProductsStore,
+    private userAccountStore : UserAccountStore
   ){
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
@@ -116,6 +118,8 @@ export class ProductBundleVariantDetailComponent {
   public onPageLoad : boolean = true;
 
   public subscriptions : Subscription[] = [];
+  checked: boolean = false;
+
 
   // public bundleSku : any;
 
@@ -140,17 +144,24 @@ export class ProductBundleVariantDetailComponent {
   public allCompareProducts: any[];
 
   public allSimilerProducts: any[];
+  public allBundleDetais: any[];
   public childProductFamilies:any[];
   public childProductFamilyVariant :any[];
+
+  public childproducts:any[];
+  public childproductVariants :any[];
+
   public bundleDetails:any[];
   public finalBundleDetails :any[];
 
   public selectedProductItem : any[] = [];
+  productListToCompare  = [];
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
   public ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
+    this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     this.getBrandDetails(productId);
   }
 
@@ -168,26 +179,43 @@ export class ProductBundleVariantDetailComponent {
        this.metaDataSvc.fetchSingleProductBundleVariantDetails(id).subscribe( response => {
         this.productBundleVarientData = response;
         //this.productFamilyVariant = response.productFamilyVariant;
-        this.productFamilyVariant={...response.productFamilyVariant, quantity: 1 }
+        //this.productFamilyVariant={...response.productFamilyVariant, quantity: 1 }
+        this.productFamilyVariant=this.setProductBundleVariantsData(response.productFamilyVariant,response.productFamily)
+
         this.productFamilyVariants = response.productFamilyVariants;
         this.productFamily = response.productFamily;
 
-        this.productVarients = response.productFamilyVariantLicenseList.productVariants;        ;
-        this.products = response.productFamilyVariantLicenseList.products;
-        this.features = response.productFamilyVariantLicenseList.productFamilyVariantFeatures;
-        this.childProductFamilies=response.productFamilyVariantLicenseList.childProductFamily;
-        this.childProductFamilyVariant=response.productFamilyVariantLicenseList.childProductFamilyVariant;
+        this.features = response.productFamilyVariantFeatures;
+
+        //Picking Child Product and Productvariants
+
+        console.log("fetching detailscchild product "+response.productFamilyVariantLicenseList.childProducts.length)
+
+        this.childproducts=this.setProductsData(response.productFamilyVariantLicenseList.childProducts);
+        console.log("fetched child products for this bundle "+this.childproducts.length)
+
+        console.log("calling TS ---333")
+
+        this.childproductVariants=this.setProductVariantsData(response.productFamilyVariantLicenseList.childProductVariants);
+        console.log("fetched child productVariants for this bundle "+this.childproductVariants.length)
+        console.log("calling TS ---444")
+
+        this.childProductFamilies=this.setProductFamilyData(response.productFamilyVariantLicenseList.childProductFamily);
+        console.log("fetched child childproductFamily for this bundle "+this.childProductFamilies.length)
+
+        this.childProductFamilyVariant=this.setChildProductBundleVariantsData(response.productFamilyVariantLicenseList.childProductFamilyVariant);
+        console.log("fetched child childproductFamilyVariants for this bundle "+this.childProductFamilyVariant.length)
 
         this.faq  = this.productFamilyVariant.productFAQ;
 
         this.onPageLoad = true;
-        this.allCompareProducts = this.products;
-        this.allSimilerProducts = this.products;
-
-        this.allCompareProducts = this.products;
-        this.allSimilerProducts = this.products.concat(this.productVarients,this.childProductFamilies,this.childProductFamilyVariant);
-        this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
-        this.bundleDetails=this.products.concat(this.productVarients,this.childProductFamilies,this.childProductFamilyVariant);
+        this.allCompareProducts = [...this.childproducts,...this.childproductVariants,...this.childProductFamilies,...this.childProductFamilyVariant];;
+        this.allSimilerProducts =[...this.childproducts,...this.childproductVariants,...this.childProductFamilies,...this.childProductFamilyVariant];
+        this.allBundleDetais=[...this.childproducts,...this.childproductVariants,...this.childProductFamilies,...this.childProductFamilyVariant];
+        // this.allCompareProducts = this.products;
+        // this.allSimilerProducts = [...this.products,...this.productVarients,...this.childProductFamilies,...this.childProductFamilyVariant];
+       // this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
+       // this.bundleDetails=this.products.concat(this.productVarients,this.childProductFamilies,this.childProductFamilyVariant);
 
         
         if(this.productFamily && this.productFamily.productImages && this.productFamily.productImages.length>0) {
@@ -203,26 +231,26 @@ export class ProductBundleVariantDetailComponent {
 
         let tempProducts = this.setProductsData(this.products);
         let tempProductVariants = this.setProductVariantsData(this.productVarients);
-        let tempProductBundleVariants = this.setProductBundleVariantsData(this.childProductFamilyVariant);
-        let tempProductBundles = this.setBundlesData(this.childProductFamilies);
-        this.finalBundleDetails = [...tempProducts,...tempProductBundles, ...tempProductVariants,...tempProductBundleVariants] ;
+      //  let tempProductBundleVariants = this.setProductBundleVariantsData(this.childProductFamilyVariant);
+        let tempProductBundles = this.setProductFamilyData(this.childProductFamilies);
+       // this.finalBundleDetails = [...tempProducts,...tempProductBundles, ...tempProductVariants,...tempProductBundleVariants] ;
      
-        console.log("=====finalBundleDetails====="+this.finalBundleDetails.length)
+      //  console.log("=====finalBundleDetails====="+this.finalBundleDetails.length)
         // this.finalBundleDetails={...this.finalBundleDetails,quantity: 1 }
       })
     );
   }
 
   public setProductsData(data){
-
+    console.log("=====setProductsData==="+data.length)
     if(data && data.length>0){
-      console.log("=====child product legth==="+data.length)
+      
       data.forEach(element => {
         element.name=element.name;
           element.productType = 'products';
           element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
-          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
           element['navigationId'] = element._id;
           element.priceList=element.priceList
           element.quantity=1
@@ -259,7 +287,27 @@ console.log("======setProductVariantsData===="+data.length)
    * Set Product Bundle Variants Data
    */
 
-  public setProductBundleVariantsData(data){
+  public setProductBundleVariantsData(element,productFamily){
+
+    //if(data && data.length>0){
+     // console.log("===========setProductBundleVariantsData======="+data.length)
+      //data.forEach(element => {
+        element.name=element.name;
+          element.productType = 'productBundleVariants';
+          element.bannerLogo = (productFamily.bannerLogo &&productFamily.bannerLogo !== null) ? productFamily.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+         // element.solutionCategory=(element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['navigationId'] = element._id;
+          element.priceList=element.priceList
+          element.quantity=1
+     // });
+    //}
+
+    return element;
+  }
+
+  public setChildProductBundleVariantsData(data){
 
     if(data && data.length>0){
       console.log("===========setProductBundleVariantsData======="+data.length)
@@ -283,7 +331,7 @@ console.log("======setProductVariantsData===="+data.length)
    * Set Product Bundles Data
    */
 
-  public setBundlesData(data){
+  public setProductFamilyData(data){
 
     if(data && data.length>0){
       data.forEach(element => {
@@ -337,26 +385,38 @@ public requestQuote (productFamilyVariant : any) : void {
   
   let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-  if(loggedinData.length > 0 ){
+  let queryParams;
     
-    var existingItems = this.cartStore.getCartItems();
-    console.log( productFamilyVariant);
-    let queryParams;
-    // if(product.productVariants.length>0){
       queryParams = {
         productName : productFamilyVariant.name,
         productId : productFamilyVariant._id,
         quantity : productFamilyVariant.quantity,
         price : productFamilyVariant.priceList[0].price,
       };
-    // }
+    
+  /*if(loggedinData.length > 0 ){
+    
+    var existingItems = this.cartStore.getCartItems();
+    console.log( productFamilyVariant);
+    
     console.log(queryParams);
     this.router.navigate(['/cart'], {queryParams: queryParams});
   }
 
   else {
-    this.viewModal();
-  }
+    this.viewModal(queryParams);
+  }*/
+
+
+  this.userAccountStore.userDetails$.subscribe(res=>{
+    console.log("()()()() ", res);
+    if(res && res.email !== null){
+      this.router.navigate(['/cart'], {queryParams: queryParams});
+    }
+    else{
+      this.viewModal(queryParams);
+    }
+  })
 
   
 
@@ -377,27 +437,47 @@ async addToCompare(item:any, type:any):Promise<void> {
   // else
   // item.checked = true;
   let count=0;
-  await this.products.forEach(val => {
+  /*await this.productListToCompare.forEach(val => {
     if(val._id===item._id) {
       count++;
     }
   });
   if (count===0) {
     if(type!='prodFam')
-    item = { ...item, 'solutionCategory': item.solutionCategory };
+    item = { ...item, 'solutionCategory': item.subcategories[0]?.description };
     else
-    item = { ...item, 'solutionCategory': item.solutionCategory };
-    this.products.push(item);
+    item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
+    this.productListToCompare.push(item);
+  }*/
+
+  if(type === 'fromProd'){
+    console.log("()()() From Prom Prod");
+    console.log("()()()( From Prod", item);
+    this.productListToCompare.push(item);
+    
   }
-  // this.productListToCompare.push(item);
-  localStorage.setItem('product_list_to_compare', JSON.stringify(this.products));
-  this.compareProductsStore.setCompareProductsList(this.products);
-  const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-  console.log("getProdFromLocalStorage",prodGet);
+  else{
+    this.productListToCompare.push(item);
+  }
+
+  
+  localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+
+  //this.productListToCompare.push(item);
+
+  
+  
+  this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+  console.log("getProdFromLocalStorage",this.productListToCompare);
+  //localStorage.removeItem('product_list_to_compare');
+  localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+  //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+  //console.log("getProdFromLocalStorage",prodGet);
 }
 
-public viewModal() {
+public viewModal(queryParams) {
   const modalRef = this.modalService.open(LoginAlertModalComponent);
+  modalRef.componentInstance.request = queryParams;
 }
 
 ngOnDestroy(){
