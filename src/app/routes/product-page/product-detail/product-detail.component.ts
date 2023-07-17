@@ -197,7 +197,7 @@ export class ProductDetailComponent implements OnInit{
           else{
             this.featureList = response.featureList;
           }
-          this.featureList = response.featureList.slice(0,5);
+       //   this.featureList = response.featureList.slice(0,5);
        //   this.featureList = response.featureList.slice(0,5);
           //this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
         }
@@ -364,8 +364,8 @@ featureCount=5;
     this.viewAllFeaturesDetails = val;
     console.log("****** View ", this.viewAllFeaturesDetails);
     if(this.viewAllFeaturesDetails){
-      console.log("****** In Else");
-      console.log("****** In Else", this.completeFeatureList);
+      console.log("****** In If");
+      console.log("****** In If", this.completeFeatureList);
       this.featureList = this.completeFeatureList;
     }
     else{
@@ -540,22 +540,7 @@ featureCount=5;
   }
 
 
-  public setProductData(element){
- //   console.log("=====setProductsData==="+data.length)
-
-        element.name=element.name;
-          element.productType = 'products';
-          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
-          element.description = element.description;
-          element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
-          element['navigationId'] = element._id;
-          element.priceList=element.priceList
-          element.quantity=1
-      //});
-  //  }
-    
-    return element;
-  }
+  
 
   /**
    * Set Product Variants Data
