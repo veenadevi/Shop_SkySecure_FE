@@ -198,6 +198,7 @@ export class ProductDetailComponent implements OnInit{
      
 
         this.productBundlesData=this.setProductBundleData(response.productBundles);
+        if(this.productBundlesData.leagth>0)
         console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
         this.productBundleVariantsData=this.setProductBundleVariantsData(response.productBundleVariants);
 
