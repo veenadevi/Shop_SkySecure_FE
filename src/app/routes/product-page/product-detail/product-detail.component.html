@@ -641,6 +641,65 @@
                 <h6 style="font-size: 25px;">VS</h6>
             </span>
 
+            <button #leftArrow class="arrow left-arrow" (click)="scrollFunctionLeft()"><img class="arrow-icon" src="../../../../assets/icons/ArrowLeftIcon.svg"></button>
+            
+            <div class="scroll-container">
+
+                    <div class="scroll-content">
+                        <div class="product-to-comp">
+                            <ng-container *ngFor="let item of allCompareProducts">
+                                <div class="comp-product-card">
+                                    <div class="comp-product-card-cont">
+                                        <div class="comp-product-card-img">
+                                            <img class="card-logo" src="{{item.bannerLogo}}">
+                                        </div>
+                                        <div class="comp-product-card-content">
+                                            <!-- <p class="product-category">{{item.name}}</p> -->
+                                            <p class="product-category">{{item.name}}</p>
+                                            <p class="product-solution">Solution Category:</p>
+                                            <p class="product-desc">{{item.solutionCategory}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="checkbox-sec">
+                                        <div class="checkbox-sec-01">
+                                            <div class="checkbox">
+                                                <p-checkbox (click)="addToCompare(item,'prodFam')"
+                                                    [(ngModel)]="item.checked" [binary]="true" inputId="binary">
+                                                </p-checkbox>
+                                            </div>
+                                            <div class="checkbox-header">
+                                                <p class="compare-sec">&nbsp;Compare</p>
+                                            </div>
+                                        </div>
+                                    <div class="checkbox-sec-02">
+                                        <a class="view-sec">view details</a>
+                                    </div>
+                                </div>
+                            </div>
+                                    
+                        </ng-container>
+                    </div>
+                </div>
+
+               
+    </div>
+                                    
+    <button class="arrow right-arrow" (click)="scrollFunctionRight()"><img class="arrow-icon" src="../../../../assets/icons/ArrowRightIcon.svg"></button>
+</div>
+</div>
+
+</ng-container>
+
+
+
+
+
+
+                <!-- <span
+                style="display:flex;align-items: center;justify-content: center;padding-left:20px;padding-right:20px;">
+                <h6 style="font-size: 25px;">VS</h6>
+            </span>
+
             <div class="product-to-comp">
                     <ng-container *ngFor="let item of allCompareProducts">
                         <div *ngIf="item.priceList!=null">
@@ -678,9 +737,9 @@
                     </ng-container>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-    </ng-container>
+    <!-- </ng-container> -->
 
 
     <!-- product bundle -->
