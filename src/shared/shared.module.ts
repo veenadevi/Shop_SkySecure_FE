@@ -27,6 +27,7 @@ import { CompareProductItemFlyerComponent } from './components/compare-product-i
 import { ContactUsFlyerComponent } from './components/contact-us-flyer/contact-us-flyer.component';
 import { WriteReviewFlyerComponent } from './components/write-review-flyer/write-review-flyer.component';
 import { GetFreeCallModalComponent } from './components/modals/get-free-call-modal/get-free-call-modal.component';
+import { ContactUsFlyerHorizontalComponent } from './components/contact-us-flyer-horizontal/contact-us-flyer-horizontal.component';
 
 
 
@@ -64,6 +65,7 @@ import { GetFreeCallModalComponent } from './components/modals/get-free-call-mod
     ContactUsFlyerComponent,
     WriteReviewFlyerComponent,
     GetFreeCallModalComponent,
+    ContactUsFlyerHorizontalComponent,
   ],
 
   providers: [
@@ -100,7 +102,8 @@ import { GetFreeCallModalComponent } from './components/modals/get-free-call-mod
     CompareProductItemFlyerComponent,
     ContactUsFlyerComponent,
     WriteReviewFlyerComponent,
-    GetFreeCallModalComponent
+    GetFreeCallModalComponent,
+    ContactUsFlyerHorizontalComponent
   ],
   
 
