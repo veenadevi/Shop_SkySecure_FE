@@ -22,10 +22,41 @@
       <div class="tab-holder">
         <div class="product-items-holder">
           <div class="card-flyer-holder">
-            <ng-container *ngIf="finalProductList && finalProductList.length>0">
+
+
+
+
+
+            <ng-container *ngIf="finalProductList && finalProductList.length>0 ; else noProducts">
+              <div >
+                <product-card-flyer [type] = "'products'" [products]=" finalProductList" (listForCompare)="selectedListForCompare($event)"></product-card-flyer>
+              </div>
+             </ng-container>
+            
+             <ng-template #noProducts>
+              <div >
+                
+                  <div class="empty-container">
+                    <div>
+                      <img class="success-state-img" src="../../../assets/images/NoProductIllustration.png" alt="home">
+                    </div>
+                    <div class="text-header">
+                      <p>We couldn't find the product you're looking for.</p>
+                      <p>Please try again later or explore similar products.</p>
+                    </div>
+                  </div>
+                
+              </div>
+             </ng-template>
+            
+
+
+
+            <!-- <ng-container *ngIf="finalProductList && finalProductList.length>0"> -->
               <!-- <product-card-flyer [type] = "'products'" [products]=" (selectedTab === 'products') ? productList : productBundlesList"></product-card-flyer> -->
-              <product-card-flyer [type] = "'products'" [products]=" finalProductList" (listForCompare)="selectedListForCompare($event)"></product-card-flyer>
-            </ng-container>
+             
+              <!-- <product-card-flyer [type] = "'products'" [products]=" finalProductList" (listForCompare)="selectedListForCompare($event)"></product-card-flyer>
+            </ng-container> -->
             
             <!-- <app-product [type]="(selectedTab === 'products') ? 'products' : 'productBundles'" [products]=" (selectedTab === 'products') ? productList : productBundlesList"></app-product> -->
           </div>
@@ -58,6 +89,12 @@
       </div>
       
     </div>
+   
   </div>
+ 
   
 </div>
+
+
+
+
