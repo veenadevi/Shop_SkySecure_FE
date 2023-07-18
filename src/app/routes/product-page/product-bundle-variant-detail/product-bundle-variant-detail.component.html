@@ -169,9 +169,9 @@
 
                     </div>
                     <p class="solution" >Solution Category:</p>
-                    <p style="font-family: 'lato',sans-serif;">{{productFamilyVariant.subcategories[0].name}}</p>
+                    <p >{{productFamilyVariant.subcategories[0].name}}</p>
                     <p class="about"  >About this product:</p>
-                    <p  class="prod-dec" >{{productFamilyVariant.description}}</p>
+                    <p  class="prod-desc" >{{productFamilyVariant.description}}</p>
                     <span class="request-btn" ><button class="btn view-det-btn"
                             (click)="scrollToSection('#feature')">View
                             Features</button>
@@ -320,7 +320,7 @@
                                         </span>
                                         <span class="feature-card-content" >
                                             <p class="feature-card-heading" >{{item.name}}</p>
-                                            <p >{{item.description}}</p>
+                                            <p class="feature-card-desc">{{item.description}}</p>
                                         </span>
                                     </div>
                                 </ng-container>
@@ -338,7 +338,7 @@
 
 
                         <div class="p-view-all-feature-div">
-                            <div class="feature-desc-heading">
+                            <div class="feature-btn-heading">
                                 <p class="feature-viewall" >click here to view detailed feature of the
                                     product</p>
                                 <button class="btn view-det-btn" (click)="featureCountEvent(viewAllFeaturesDetails)">
