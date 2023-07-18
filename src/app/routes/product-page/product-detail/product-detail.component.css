@@ -347,7 +347,7 @@ button[disabled] {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-/* .specs-list {
+.specs-list {
   display: flex;
   flex-wrap: wrap;
   padding: 1%;
@@ -361,7 +361,7 @@ button[disabled] {
   padding: 1%;
   margin: 1%;
   flex-direction: row;
-} */
+}
 
 
 
@@ -1620,4 +1620,35 @@ button{
   margin-bottom: 10px;
   font-weight: 400;
   font-family: 'lato',sans-serif;
+}
+
+
+
+/* //product bundle// */
+.bundle-img{
+  width:100%;
+  height: 100%;
+  object-fit: cover;
+}
+.bundle-heading{
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+}
+.bundle-solution{
+  font-size: small;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.bundle-solution-desc{
+  font-size: small;
+  font-weight: 300;
+}
+
+.bundle-price{
+  font-size: medium;
+  font-weight: 400;
+}
+.bundle-type{
+  font-size: medium;
+  font-weight: 400;
 }
