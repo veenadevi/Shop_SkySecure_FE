@@ -32,9 +32,9 @@ export class ProductDetailComponent implements OnInit{
   public allBundleDetails:any[];
 
   public completeFeatureList : any[] = [];
-
+  
   public viewAllFeaturesDetails = false;
-
+  
   faq = [];
   productListToCompare  = [];
   products = [];
@@ -210,7 +210,7 @@ export class ProductDetailComponent implements OnInit{
      
 
         this.productBundlesData=this.setProductBundleData(response.productBundles);
-        if(this.productBundlesData.leagth>0)
+        if(this.productBundlesData.length>0)
         console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
         this.productBundleVariantsData=this.setProductBundleVariantsData(response.productBundleVariants);
 
@@ -219,7 +219,7 @@ export class ProductDetailComponent implements OnInit{
         
         this.similarProducts =[...this.productBundlesData,...this.productBundleVariantsData];
         this.allCompareProducts =[...this.productBundlesData,...this.productBundleVariantsData];
-        console.log("allCompareProducts  leagth "+this.allCompareProducts.length)
+        console.log("allCompareProducts  length "+this.allCompareProducts.length)
 
      //  response.products[0] = {...response.products[0], quantity: 1 }
      //setting quantity

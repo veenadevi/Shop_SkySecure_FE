@@ -305,6 +305,7 @@
                         class="btn view-det-btn">See More</button></span>
 
             </p-card>
+
             <div class="product-features-container" id="feature" #featureRef>
                 <h5>Features</h5>
                 <div class="product-feature-cards-container">
@@ -337,19 +338,37 @@
                             </div>
 
                         </div>
-                        <div class="p-view-all-feature-div">
-                            <div class="feature-desc-heading">
+                        <!-- <div class="p-view-all-feature-div"> -->
+                            <!-- <div class="feature-desc-heading"> -->
                                 <!-- <p style="margin-bottom: 10px;font-weight: 400;">click here to view detailed feature of the
                                     product</p> -->
-                                <button class="btn view-det-btn" (click)="featureCountEvent()">View All
+                                <!-- <button class="btn view-det-btn" (click)="featureCountEvent()">View All
                                     Features</button>
+                            </div> -->
+                        <!-- </div> -->
+
+
+                        <div class="p-view-all-feature-div">
+                            <div class="feature-desc-heading">
+                                <p style="margin-bottom: 10px;font-weight: 400;">click here to view detailed feature of the
+                                    product</p>
+                                <button class="btn view-det-btn" (click)="featureCountEvent(viewAllFeaturesDetails)">
+                                    <ng-container *ngIf="viewAllFeaturesDetails ; else showLess">
+                                        Show Less Features 
+                                    </ng-container>
+                                    <ng-template #showLess>
+                                        View All Features
+                                    </ng-template>
+                                </button>
+        
                             </div>
                         </div>
-
                     </div>
 
                 </div>
             </div>
+
+
             <div class="bottom-container">
 
                 <!-- <div class="specification-cont" id="specification" #specificationRef>
