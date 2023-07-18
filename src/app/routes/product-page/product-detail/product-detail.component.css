@@ -1303,12 +1303,14 @@ padding-top: 5%;
   font-weight: bold;
   width: 180px;
   padding-top: 5px;
+  height:50px;
 }
 
 .product-solution {
   font-family: 'lato', sans-serif;
   font-size: 13px;
   padding-top: 10px;
+  font-weight: 550;
 }
 
 .product-desc {

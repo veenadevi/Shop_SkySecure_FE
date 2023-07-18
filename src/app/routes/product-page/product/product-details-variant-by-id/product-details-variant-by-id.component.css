@@ -1016,12 +1016,13 @@ column-gap:8px ;
   font-weight: bold;
   max-width: 165px;
   padding-top: 5px;
+  height: 50px;
 }
 
 .product-solution {
   font-family: 'lato', sans-serif;
   font-size: 13px;
-  /* font-weight: bold; */
+  font-weight: 550;
   padding-top: 10px;
 }
 
