@@ -616,8 +616,11 @@
                         <div class="checkbox-sec">
                             <div class="checkbox-sec-01">
                                 <div class="checkbox">
-                                    <p-checkbox (click)="addToCompare(product, 'fromProd')"
-                                        [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
+                                    <!-- <p-checkbox (click)="addToCompare(product, 'fromProd')"
+                                        [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox> -->
+                                        <p-checkbox (onChange) = "onCheckBoxChange($event, product, 'fromProd')"
+                                        [(ngModel)]="product.checked" [binary]="true" inputId="binary"></p-checkbox>
+                                        
                                 </div>
                                 <div class="checkbox-header">
                                     <p class="compare-sec">&nbsp;Compare</p>
@@ -658,9 +661,13 @@
                                     <div class="checkbox-sec">
                                         <div class="checkbox-sec-01">
                                             <div class="checkbox">
-                                                <p-checkbox (click)="addToCompare(item,'prodFam')"
+                                                <!-- <p-checkbox (click)="addToCompare(item,'prodFam')"
+                                                    [(ngModel)]="item.checked" [binary]="true" inputId="binary">
+                                                </p-checkbox> -->
+                                                <p-checkbox (onChange) = "onCheckBoxChange($event, item, 'prodFam')"
                                                     [(ngModel)]="item.checked" [binary]="true" inputId="binary">
                                                 </p-checkbox>
+                                                
                                             </div>
                                             <div class="checkbox-header">
                                                 <p class="compare-sec">&nbsp;Compare</p>
