@@ -324,7 +324,7 @@ background: #F9F9F9;
     background-color: #fff;
     margin: 1%;
     padding: 1%;
-    width: 50%;
+    width: 100%;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
   }
@@ -340,34 +340,29 @@ background: #F9F9F9;
   .specification-list {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 2%;
+    justify-content: space-evenly;
   }
   
   .specification-feature {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     background: #f1f1f1;
     margin: 10px;
-    padding: 1%;
+    /* padding: 10px 4%; */
     border-radius: 8px;
-    flex-basis: 45%;
-  }
+    padding: 4px 20px;
+}
   
   .specification-feature-icon-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    flex-basis: 10%;
-    /* background: #d9d9d9; */
-    margin-left: 18px;
   }
   
   .specification-feature-headline {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
   }
   
@@ -376,7 +371,7 @@ background: #F9F9F9;
   }
   
   .specification-feature-description {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
   }
   /* specification section - styles - ends */
@@ -949,12 +944,29 @@ background: #F7F7F7;
   scroll-behavior: smooth;
 }
 
+/* height */
+.scroll-content::-webkit-scrollbar {
+  display: none;
+}
+
 .arrow {
   position: absolute;
-  width: 36px;
+  width: 30px;
   border-radius: 100%;
   text-align: center;
   z-index: 2;
+  background: white;
+  border: none;
+  outline: none;
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.arrow-icon {
+  height: 20px;
 }
 
 .hidearrow {
@@ -962,16 +974,13 @@ background: #F7F7F7;
 }
 .left-arrow {
   left: 369px;
-  top: 75px;
-  display: flex;
-  justify-content: center;
+  top: 72px;
 }
 .right-arrow {
   right: 0px;
-  display: flex;
-  justify-content: center;
-  rotate: 180deg;
   top: 75px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .product-to-comp {
@@ -1005,7 +1014,7 @@ background: #F7F7F7;
 }
 
 .comp-product-card-img {
-  width: 35%;
+  width: 100%;
 }
 
 .comp-product-card-content {
@@ -1056,7 +1065,7 @@ background: #F7F7F7;
   font-family: 'lato', sans-serif;
   font-size: 15px;
   font-weight: bold;
-  max-width: 165px;
+  width: 180px;
   padding-top: 5px;
 }
 
@@ -1071,4 +1080,5 @@ background: #F7F7F7;
   font-family: 'lato', sans-serif;
   font-size: 11px;
   font-weight: normal;
+  height: 10px;
 }

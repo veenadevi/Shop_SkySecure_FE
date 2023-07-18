@@ -11,6 +11,7 @@ import { OEMResponse } from '../models/interface/response/oem-response';
 import { ProductsResponse } from '../models/interface/response/products-response';
 import { MetadataStore } from '../stores/metadata.store';
 
+
 @Injectable({ providedIn: 'root' })
 export class MetadataService {
   private baseUrl: string;
@@ -27,6 +28,7 @@ export class MetadataService {
   private fetchProductBundleVariantDetailsUrl:string;
   private fetchCompareProductsListUrl:string;
   private fetchProductByProductVariant:string;
+  private fetchAllSubcategory : string;
 
   constructor(
     private http: HttpClient,
@@ -47,6 +49,7 @@ export class MetadataService {
     //this.quotaDetailsUri = this.ouxConfigSvc.getAppConfigValue('apiUri').e2eQuotaACV;
     this.fetchProductBundleVariantDetailsUrl = AppService.appUrl.getProductBundleVariant;
     this.fetchCompareProductsListUrl = AppService.appUrl.fetchCompareProductsListUrl
+    this.fetchAllSubcategory = AppService.appUrl.allSubcategory;
   }
 
   //fetch All Category
@@ -371,6 +374,31 @@ export class MetadataService {
 
   return request$;
 
+    return request$;
+  }
+
+  public fetchSubCategory(): Observable<any> {
+
+    let url = this.baseUrl + this.fetchAllSubcategory;
+    //let options = this.getOptions();
+    
+
+    let request$ = this.http.get<any>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            
+            return null;
+          }
+          
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+      
     return request$;
   }
 
