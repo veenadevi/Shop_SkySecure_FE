@@ -90,7 +90,6 @@ export class ProductBundleDetailComponent implements OnInit{
   }
 
   openLink(url: any): void {
-    console.log("url", url);
     window.open(url, '_blank');
   }
 
@@ -120,8 +119,7 @@ export class ProductBundleDetailComponent implements OnInit{
             // Hide progress spinner or progress bar
             this.currentRoute = event.url; 
             currentUrl = this.route.snapshot.paramMap.get('id');
-            this.ngOnInit();
-            console.log('@@@@@@@@ _ Route change End');         
+            this.ngOnInit();        
             //console.log("@@@@@@@@ _ ",event);
         }
 
@@ -199,28 +197,24 @@ export class ProductBundleDetailComponent implements OnInit{
        
         this.products = response.productFamilyChildLicenseList.products;
 
-        console.log("calling TS ---22")
+
 
         this.childproducts=this.setProductsData(response.productFamilyChildLicenseList.childproducts);
-        console.log("fetched child products for this bundle "+this.childproducts.length)
-
-        console.log("calling TS ---333")
+        
+  
 
         this.childproductVariants=this.setProductVariantsData(response.productFamilyChildLicenseList.childproductVariants);
-        console.log("fetched child productVariants for this bundle "+this.childproductVariants.length)
-        console.log("calling TS ---444")
+        
 
         this.childproductFamily=this.setProductFamilyData(response.productFamilyChildLicenseList.childProductFamily);
-        console.log("fetched child childproductFamily for this bundle "+this.childproductFamily.length)
-
+        
         this.childproductFamilyVariants=this.setChildProductFamilyVariant(response.productFamilyChildLicenseList.childProductFamilyVariant);
-        console.log("fetched child childproductFamilyVariants for this bundle "+this.childproductFamilyVariants.length)
-
+        
         this.allCompareProducts = [...this.childproducts, ...this.childproductVariants, ...this.childproductFamily,...this.childproductFamilyVariants]
         
         this.allCompareProducts.forEach(element => {
           element.name = String(element.name);
-          console.log("(compare )()()", element.name);
+          
         });
         this.features = response.productFamilyFeatures;
         this.onPageLoad = true;
@@ -235,7 +229,7 @@ export class ProductBundleDetailComponent implements OnInit{
         this.bundleItemsList = [...this.childproducts, ...this.childproductVariants, ...this.childproductFamily,...this.childproductFamilyVariants]
 
        
-        console.log("++++++++++++++ _this.",this.bundleItemsList);
+     
        
 
 
@@ -248,7 +242,6 @@ export class ProductBundleDetailComponent implements OnInit{
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         }
-        console.log("()()()()() ", this.productImages);
         this.productImages=this.productImages.slice(0,4);
 
 
@@ -261,7 +254,6 @@ export class ProductBundleDetailComponent implements OnInit{
   }
 
   public setProductsData(data){
-  console.log("()()()()()()( ", data);
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
@@ -286,7 +278,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public setProductVariantsData(data){
     
-console.log("======setProductVariantsData===="+data.length)
+
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
@@ -310,11 +302,8 @@ console.log("======setProductVariantsData===="+data.length)
   public setChildProductFamilyVariant(data){
 
     if(data && data.length>0){
-      console.log("===========setProductBundleVariantsData======="+data.length)
       data.forEach(element => {
-        console.log("fetched PFV name"+element.name)
           element.name=element.name;
-          console.log("===========setProductBundleVariantsData======="+element.name)
           element.productType = 'productBundleVariants';
           element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
@@ -364,14 +353,13 @@ console.log("======setProductVariantsData===="+data.length)
 
   public changeQuantity(type){
 
-    console.log("(((( Called,", type);
+    
     if(type === 'add'){
       this.productQuantity = Number(this.productQuantity) + 1;
     }
     else if(type === 'minus'){
       this.productQuantity =  Number(this.productQuantity) - 1;
     }
-    console.log("(((( Called,", this.productQuantity);
   }
 
   public buyNow(item, quantity){
@@ -400,7 +388,6 @@ console.log("======setProductVariantsData===="+data.length)
     }*/
 
     this.userAccountStore.userDetails$.subscribe(res=>{
-      console.log("()()()() ", res);
       if(res && res.email !== null){
         this.router.navigate(['/cart'], {queryParams: queryParams});
       }
@@ -422,8 +409,6 @@ console.log("======setProductVariantsData===="+data.length)
   }
 
   public compareEvent($event, item){
-    console.log("&*&*&*&*& ", $event);
-    console.log("&*&*&*&*& ", item);
 
     if($event.checked){
       this.selectedProductItem = [item];
@@ -433,6 +418,16 @@ console.log("======setProductVariantsData===="+data.length)
     }
 
 
+  }
+
+  public onCheckBoxChange($event, item:any, type:any){
+    
+    if($event.checked){
+      this.addToCompare(item, type);
+    }
+    else{
+      this.removeSelectedItem(item._id);
+    }
   }
 
   async addToCompare(item:any, type:any):Promise<void> {
@@ -457,7 +452,7 @@ console.log("======setProductVariantsData===="+data.length)
       this.productListToCompare.push(item);
     }*/
 
-    console.log("********* () ( )( )", item);
+ 
     if(type === 'fromProd'){
       this.productListToCompare.push(item);
       
@@ -474,22 +469,37 @@ console.log("======setProductVariantsData===="+data.length)
     
     
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
-    console.log("getProdFromLocalStorage",this.productListToCompare);
     //localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
     //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    //console.log("getProdFromLocalStorage",prodGet);
+    
   }
 
   public removeSelectedItem(_id:any){
+    console.log("()()()()( Items before ", this.productListToCompare);
     this.productListToCompare = this.productListToCompare.filter(function(item) {
       
       return item._id != _id;
     });
-    // this.compareProductsStore.setCompareProductsList(this.productList);
-    //localStorage.removeItem('product_list_to_compare');
+    console.log("()()()()( Items After ", this.productListToCompare);
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    // console.log('product_list_to_compare',);
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+
+
+    /*console.log("()()()()( Items before ", this.selectedProductItem);
+    this.selectedProductItem = this.selectedProductItem.filter(function(item) {
+      
+      return item._id != _id;
+    });
+    console.log("()()()()( Items After ", this.selectedProductItem);
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.selectedProductItem));
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.selectedProductItem));
+    this.compareProductsStore.setCompareProductsList2(this.selectedProductItem);*/
+
+
+
   }
 
   public navigateToCompareProducts(){
@@ -499,9 +509,9 @@ console.log("======setProductVariantsData===="+data.length)
   addQuantity(item):void {
 
     //this.allSimilerProducts[0].quantity = 1+1;
-    // console.log("increase for item"+item.name +"   "+item.quantity)
+    
     item.quantity=Number(item.quantity) + 1
-    // console.log("increased now "+item.name +"   "+item.quantity)
+    
     
     //this.bundleQuantity = Number(this.bundleQuantity) + 1
     //this.finalBundleDetails[index].quantity = quantity+1;
@@ -542,7 +552,7 @@ console.log("======setProductVariantsData===="+data.length)
     }*/
 
     this.userAccountStore.userDetails$.subscribe(res=>{
-      console.log("()()()() ", res);
+      
       if(res && res.email !== null){
         this.router.navigate(['/cart'], {queryParams: queryParams});
       }
@@ -568,7 +578,6 @@ console.log("======setProductVariantsData===="+data.length)
     
 
       // }
-      console.log(queryParams);
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
