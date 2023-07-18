@@ -3,6 +3,7 @@
   /* padding: 1%;
   margin: 1%; */
   flex-direction: column;
+  font-family: 'lato',sans-serif;
 }
 .product-details {
   display: flex;
@@ -31,6 +32,7 @@ margin-left:0;
   padding: 1%;
   /* margin: 1%; */
   flex-direction: column;
+  font-family: 'lato',sans-serif;
 }
 .product-details-info{
   display: flex;
@@ -94,6 +96,7 @@ margin-left:0;
     color: #003388;
     font-size: 16px;
     font-weight: 500;
+    font-family: 'lato',sans-serif;
   
 }
 .request-quote-btn {
@@ -105,6 +108,7 @@ margin-left:0;
   font-size: 16px;
   font-weight: 500;
   width: 28%;
+  font-family: 'lato',sans-serif;
 }
 .review-icon {
   color: orange;
@@ -229,6 +233,7 @@ display: flex;
   margin-left: 1%;
   margin-right: 1%;
   flex-direction: row;
+  font-family: 'lato',sans-serif;
 }
 .product-feature-card {
   flex-basis: 45%;
@@ -266,9 +271,11 @@ background: #F9F9F9;
   flex-direction: column;
   /* background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
   --bs-bg-opacity: 1 */
+  font-family: 'lato',sans-serif;
 }
 
 .specification-cont {
+  font-family: 'lato',sans-serif;
   display: flex;
   padding: 1%;
   margin: 1%;
@@ -333,9 +340,7 @@ background: #F9F9F9;
     width: 100%;
   }
   
-  .specification-headline h5 {
-    font-size: 30px;
-  }
+ 
   
   .specification-list {
     display: flex;
@@ -547,6 +552,7 @@ background: #F9F9F9;
   /* padding: 1%;
   margin: 1%; */
   flex-direction: row;
+  font-family: 'lato',sans-serif;
 }
 .offer-card {
   display: flex;
@@ -590,6 +596,7 @@ p{
   margin: 1%;
   flex-direction: column;
   background: #F1F1F1;
+  font-family: 'lato',sans-serif;
 }
 
 .p-card .p-card-title {
@@ -805,6 +812,7 @@ background: #F7F7F7;
 .discounted-text{
   font-size: 16px;
   color: red;
+  font-family: 'Lato', sans-serif;
 }
 
 .faq-cont {
@@ -1082,4 +1090,229 @@ background: #F7F7F7;
   font-size: 11px;
   font-weight: normal;
   height: 10px;
+}
+
+
+
+.prod-logo{
+  width:120%;
+  height: 100%;
+  object-fit: cover;
+}
+.quantity-year{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 7%;
+  flex-direction: column;
+  text-align: center;
+}
+.plus-minus{
+  display: inline-flex;
+  justify-content: center;
+  gap: 5px;
+  font-family: 'lato',sans-serif;
+}
+
+.review{
+  font-family: 'lato',sans-serif;
+}
+.offer-img{
+  width:auto;
+  height: auto;
+  position: relative;
+}
+.offer-bank{
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'lato',sans-serif;
+}
+.offer-dis{
+  font-size: 14px;
+  font-family: 'lato',sans-serif;
+}
+.offer-more{
+ color: #0047BD;
+ font-size: 15px;
+ font-weight: 600;
+ font-family: 'lato',sans-serif;
+}
+.amazon-refer-img{
+  width:auto;
+  height: auto;
+  position: relative;
+}
+.description{
+  font-family: 'Lato', sans-serif;
+
+ 
+}
+.nav{
+  font-family: 'lato',sans-serif;
+}
+.bundle-img{
+  width:100%;
+  height: 100%;
+  object-fit: cover;
+}
+.bundle-heading{
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+}
+
+
+
+/* //h6 */
+.head-06{
+  margin-bottom: 0px;
+  font-family: 'lato',sans-serif;
+}
+.head-04{
+  font-family: 'lato',sans-serif;
+  font-weight: bold;
+}
+h5{
+  font-family: 'lato',sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* p */
+
+p{
+  font-family: 'lato',sans-serif;
+}
+.year{
+  font-family: 'lato',sans-serif;
+}
+.para{
+  margin-top: 10px;
+  font-size: smaller;
+  margin-bottom: 5px;
+  font-family: 'lato',sans-serif;
+}
+.solution{
+  margin-top: 10px; 
+  font-weight: 700; 
+  margin-bottom: 7px;
+  font-family: 'lato',sans-serif;
+}
+.review{
+  font-family: 'lato',sans-serif;
+}
+.about{
+   font-weight: 700;
+    margin-bottom: 7px;
+   margin-top: 7px;
+   font-family: 'lato',sans-serif;
+}
+.offer{
+   font-weight: 700; 
+  font-family: 'lato',sans-serif;
+}
+.prod-desc{
+  margin-bottom: 15px;
+  font-family: 'lato',sans-serif;
+}
+
+.amazon-refer{
+  font-family: 'lato',sans-serif;
+   font-weight: 400; text-align: center;
+}
+.m-0{
+  font-family: 'lato',sans-serif;
+}
+.feature-desc{
+  font-weight: 400;
+  font-family: 'lato',sans-serif;
+}
+.feature-card-heading{
+  color: #000;
+ font-size: initial;
+ font-weight: 700;
+ font-family: 'lato',sans-serif;
+}
+.feature-card-desc{
+  font-size: small;
+  font-family: 'lato',sans-serif;
+}
+.feature-viewall{
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-family: 'lato',sans-serif;
+}
+.bundle-solution{
+  font-size: small;
+  font-weight: 300;
+}
+.bundle-solution-desc{
+  font-size: small;
+  font-weight: 300;
+}
+
+.bundle-price{
+  font-size: medium;
+  font-weight: 400;
+}
+.bundle-type{
+  font-size: medium;
+  font-weight: 400;
+}
+
+/* //span */
+
+.price{
+  font-family: 'lato',sans-serif;
+}
+span{
+  font-family: 'lato',sans-serif;
+}
+.actual-price{
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'lato',sans-serif;
+}
+.text-style-bold{
+  font-family: 'lato',sans-serif;
+}
+.text-price strike-through{
+  font-family: 'lato',sans-serif;
+}
+.text-term{
+  font-family: 'lato',sans-serif;
+}
+.see-more{
+ display:flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ margin-top: 20px;
+ font-family: 'lato',sans-serif;
+}
+.feature-card{
+display:flex;
+flex-basis:30%;
+padding: 7%;
+justify-content: center;
+flex-direction: column;
+}
+.feature-card-content{
+  display:flex;
+  flex-basis:70%;
+  padding: 1%;
+  flex-direction: column;
+}
+
+/* //button */
+button{
+  font-family: 'lato',sans-serif;
+}
+.buy-now-btn{
+  font-family: 'lato',sans-serif;
+}
+.request-btn{
+  font-family: 'lato',sans-serif;
+  display:flex;
+  flex-direction: row;
 }

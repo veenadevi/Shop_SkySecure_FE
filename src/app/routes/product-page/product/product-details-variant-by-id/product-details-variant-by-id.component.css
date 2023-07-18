@@ -3,6 +3,7 @@
     /* padding: 1%;
     margin: 1%; */
     flex-direction: column;
+    font-family: 'lato',sans-serif;
   }
   .product-details {
     display: flex;
