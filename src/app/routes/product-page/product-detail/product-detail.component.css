@@ -423,6 +423,7 @@ h5 {
   /* padding: 10px 4%; */
   border-radius: 8px;
   padding: 4px 20px;
+  font-family: 'lato',sans-serif;
 }
 
 .specification-feature-icon-container {
@@ -1405,6 +1406,10 @@ padding-top: 5%;
 
 
 /* //h6 */
+h6{
+  font-family: 'lato',sans-serif;
+}
+
 
 .head-04{
   font-family: 'lato',sans-serif;
