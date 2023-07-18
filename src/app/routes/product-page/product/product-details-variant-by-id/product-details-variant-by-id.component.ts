@@ -38,6 +38,17 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   activeLink = this.links[0];
   myColor = '';
 
+ 
+  public allsimilarProducts:any[];
+
+
+  public selectedProductItem : any[] = [];
+
+  public completeFeatureList : any[] = [];
+  public viewAllFeaturesDetails = false;
+
+
+
   public headingTags = [
     { title_size: "h1" },
     { title_size: "h2" },
@@ -175,12 +186,20 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
     this.onProductLoad = false;
     this.subscriptions.push(
       this.metaDataSvc.fetchProductByProductVariantId(productId).subscribe( (response) => {
+
+        console.log("response product Variant for ",productId);    
         //  this.individualProductDetail$.subscribe();
-console.log("response product Variant",response.featureList);
-response.productVariants = {...response.productVariants, quantity: 1 }
+  console.log("response product Variant feature list",response.featureList);
+  response.productVariants = {...response.productVariants, quantity: 1 }
+
+
 this.productVariants=response.productVariants;
-this.productVariantData = this.setProductVariantsData(this.productVariants,response.products[0]);
-this.otherProductVariantData=this.setProductVariantsData(this.similarProducts,response.products[0]);
+
+
+console.log("response product Variant Quantituy",response.productVariants.quantity);
+console.log("response product videoURL",response.productVariants.productVideoURL[0]);
+this.productVariantData = this.setProductVariantsData(this.productVariants,response.products);
+this.otherProductVariantData=this.setProductVariantsData(this.similarProducts,response.products);
 this.productBundleData=this.setBundlesData(response.productBundles);
 this.productBundleVariantData=this.setProductBundleVariantsData(response.productBundleVariants)
 this.productBundleList=[...this.productBundleData,...this.productBundleVariantData ]
@@ -198,43 +217,33 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
         this.productBundles  = response.productBundles;
         console.log("bundles",this.productBundles);
 
-        this.faq  = response.products[0].productFAQ;
+        this.faq  = response.products.productFAQ;
         console.log("faq:",this.faq);
 
         let fList = [];
-        if (response.featureList?.length > 0) {
-          //featureList = response.productFeatureList;
-          this.featureList =[];
+        if(response.featureList.length > 5){
           this.featureList = response.featureList.slice(0,5);
-          //this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
         }
-        // if(response.products.name!=null) {
-        // this.productName = response.products.name;
-        // }
+        else{
+          this.featureList = response.featureList;
+        }
 
         // this.featureList = fList;
         console.log("inside", this.featureList);
         for(let i=0;i<response.similerProductVariants.length;i++)
         response.similerProductVariants[i] = {...response.similerProductVariants[i], quantity: 1 }
         this.similarProducts = response.similerProductVariants;
-//         response.productBundles=[{"name": "Microsoft Defender for Office 365 Plan 1","priceList": [
-//           {
-//               "Currency": "INR",
-//               "price": "1525.20",
-//               "priceType": "Yearly",
-//               "ERPPrice": "1860.00",
-//               "discountRate": "18"
-//           }
-//         ]
-// }];
-        this.parentProduct=response.products[0];
-       response.products[0] = {...response.products[0], quantity: 1 }
-        this.product = { products:[...response.products], featureList: response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants: response.featureListByProductVariants };
-        console.log("&&&&& inside", this.product.productVariants.length);
+
+        this.parentProduct=response.products;
+        console.log("logo comes from parent product  ==="+this.parentProduct.bannerLogo)
+
+       response.products = {...response.products, quantity: 1 }
+       // this.product = { products:[...response.products], featureList: response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants: response.featureListByProductVariants };
+      //  console.log("&&&&& inside", this.product.productVariants.length);
         this.onProductLoad = true;
         // this.bannerUrl = this.product.bannerURL;
-        if( response.products[0] &&response.products[0].hasOwnProperty('productImages')&& response.products[0].productImages && response.products[0].productImages.length>0) {
-          this.productImages = response.products[0].productImages;
+        if( response.products &&response.products.hasOwnProperty('productImages')&& response.products.productImages && response.products.productImages.length>0) {
+          this.productImages = response.products.productImages;
 
         } 
         else {
@@ -247,12 +256,14 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
         }
         this.productImages=this.productImages.slice(0,4);
 
-        
+        this.completeFeatureList = response.featureList;
 
         //iframe functionality------->
 
         if(this.productVariants && this.productVariants.productVideoURL){
+          console.log("======have videoURL====",this.productVariants.productVideoURL.length) 
           this.setIframe(this.productVariants.productVideoURL);
+          this.productVideoURL = this.productVariants.productVideoURL[0].source 
           // this.productVideoText = `<${this.headingTags[4].title_size}>${this.productVariants.name}</${this.headingTags[4].title_size}>`
           this.element = `<${this.headingTags[4].title_size}>${this.featuresVideoTitle}</${this.headingTags[4].title_size}>`
           
@@ -315,6 +326,7 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
   }
 
   public setIframe(data){
+    console.log("setting video url data "+data[0].source)
 
     var iframeDivHolder = document.getElementById("iframe-div");
 
@@ -402,14 +414,52 @@ featureCount=5;
     //this.getProductDetails2(productId);
   }
 
-  public featureCountEvent(): void {
+  // public featureCountEvent(): void {
+    
+  //   //  if(this.product.featureList.length>5 && !this.viewAllFeature){
+  //   //   this.featureList = [...this.product.featureList.slice(0,5)];
+  //   //   console.log("dispfeatureList",this.featureList);
+  //   //   this.viewAllFeature = true;
+  //   // } else {
+  //     this.featureList = this.product.featureList;
+  //     console.log("product list to compare",this.productListToCompare);
+  //   // }
+  // }
+
+  public featureCountEvent(val): void {
+
+
+    console.log("****** View Before", val);
+    val = val ? false : true;
+    console.log("****** View ", val);
+    this.viewAllFeaturesDetails = val;
+    console.log("****** View ", this.viewAllFeaturesDetails);
+    if(this.viewAllFeaturesDetails){
+      console.log("****** In Else");
+      console.log("****** In Else", this.completeFeatureList);
+      this.featureList = this.completeFeatureList;
+    }
+    else{
+      console.log("****** In Else");
+      console.log("****** In Else", this.completeFeatureList);
+      if(this.completeFeatureList.length>5){
+        this.featureList = this.completeFeatureList.slice(0,5);
+      }
+      else{
+        this.featureList = this.completeFeatureList;
+      }
+      
+      
+    }
     
     //  if(this.product.featureList.length>5 && !this.viewAllFeature){
     //   this.featureList = [...this.product.featureList.slice(0,5)];
     //   console.log("dispfeatureList",this.featureList);
     //   this.viewAllFeature = true;
     // } else {
-      this.featureList = this.product.featureList;
+      //this.featureList = this.product.featureList;
+      
+      
       console.log("product list to compare",this.productListToCompare);
     // }
   }
@@ -427,6 +477,34 @@ featureCount=5;
   public navigateToCompareProducts(){
     this.router.navigate(['/compare-products']);
   }
+  // async addToCompare(item:any, type:any):Promise<void> {
+  //   // if(!item.checked)
+  //   // item.checked = true;
+
+  //   // if(item.checked)
+  //   // item.checked = false;
+  //   // else
+  //   // item.checked = true;
+  //   let count=0;
+  //   await this.productListToCompare.forEach(val => {
+  //     if(val._id===item._id) {
+  //       count++;
+  //     }
+  //   });
+  //   if (count===0) {
+     
+  //     item = { ...item, 'solutionCategory': item.solutionCategory };
+    
+  //     this.productListToCompare.push(item);
+  //   }
+  //   // this.productListToCompare.push(item);
+  //   //localStorage.removeItem('product_list_to_compare');
+  //   localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+  //   this.compareProductsStore.setCompareProductsList(this.productListToCompare);
+  //   const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+  //   console.log("getProdFromLocalStorage",prodGet);
+  // }
+
   async addToCompare(item:any, type:any):Promise<void> {
     // if(!item.checked)
     // item.checked = true;
@@ -436,23 +514,42 @@ featureCount=5;
     // else
     // item.checked = true;
     let count=0;
-    await this.productListToCompare.forEach(val => {
+    /*await this.productListToCompare.forEach(val => {
       if(val._id===item._id) {
         count++;
       }
     });
     if (count===0) {
-     
-      item = { ...item, 'solutionCategory': item.solutionCategory };
-    
+      if(type!='prodFam')
+      item = { ...item, 'solutionCategory': item.subcategories[0]?.description };
+      else
+      item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
+      this.productListToCompare.push(item);
+    }*/
+
+    if(type === 'fromProd'){
+      console.log("()()() From Prom Prod");
+      console.log("()()()( From Prod", item);
+      this.productListToCompare.push(item);
+      
+    }
+    else{
       this.productListToCompare.push(item);
     }
-    // this.productListToCompare.push(item);
+
+    
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+
+    //this.productListToCompare.push(item);
+
+    
+    
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+    console.log("getProdFromLocalStorage",this.productListToCompare);
     //localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    this.compareProductsStore.setCompareProductsList(this.productListToCompare);
-    const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    console.log("getProdFromLocalStorage",prodGet);
+    //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    //console.log("getProdFromLocalStorage",prodGet);
   }
 
   images: any[] = [1,2,3,4];
