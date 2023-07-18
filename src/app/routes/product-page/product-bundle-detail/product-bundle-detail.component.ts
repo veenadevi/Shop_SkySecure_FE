@@ -172,6 +172,7 @@ export class ProductBundleDetailComponent implements OnInit{
     const productId = this.route.snapshot.paramMap.get('id');
     this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     this.getBrandDetails(productId);
+    
   }
 
   public featureCountEvent(): void {
@@ -248,9 +249,10 @@ export class ProductBundleDetailComponent implements OnInit{
       
         //this.allSimilerProducts = this.products.concat(response.productVarients,response.productFamilyVariants);
         //this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
-        
+        this.setCheckBoxState();
       })
     );  
+    
   }
 
   public setProductsData(data){
@@ -486,7 +488,7 @@ export class ProductBundleDetailComponent implements OnInit{
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
     localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
-
+    //this.setCheckBoxState();
 
     /*console.log("()()()()( Items before ", this.selectedProductItem);
     this.selectedProductItem = this.selectedProductItem.filter(function(item) {
@@ -584,6 +586,64 @@ export class ProductBundleDetailComponent implements OnInit{
     else {
       this.viewModal(queryParams);
     }
+  }
+  public setCheckBoxState(){
+
+    //productFamily
+    //allCompareProducts
+
+    
+
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+    /*var index = productsList.findIndex(el => el.productId === item._id);
+       
+    if(index >=0){
+      productsList[index].quantity = Number(productsList[index].quantity) + 1;
+    }*/
+
+    var index = uniqueElements.findIndex(el => el._id === this.productFamily._id);
+    if(index >=0){
+      if(this.productFamily.checked){
+        this.productFamily.checked = true;
+      }
+      else{
+        this.productFamily['checked'] = true;
+      }
+    }
+    else{
+      if(this.productFamily.checked){
+        this.productFamily.checked = false;
+      }
+      else{
+        this.productFamily['checked'] = false;
+      }
+    }
+
+    this.allCompareProducts.forEach(element => {
+      var index = uniqueElements.findIndex(el => el._id === element._id);
+      if(index >=0){
+        if(element.checked){
+          element.checked = true;
+        }
+        else{
+          element['checked'] = true;
+        }
+      }
+      else{
+        if(element.checked){
+          element.checked = false;
+        }
+        else{
+          element['checked'] = false;
+        }
+      }
+    });
+
+
   }
   
 }
