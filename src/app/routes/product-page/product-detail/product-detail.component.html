@@ -753,23 +753,21 @@
                 <div *ngIf="item.priceList!=null" class="similar-prod-card">
                     <div class="sim-prod-holder">
                         <div class="similar-prod-img-det">
-                            <img style="width:100%;height: 100%;object-fit: cover;"
+                            <img class="bundle-img"
                                 src="{{item.bannerLogo}}">
 
                         </div>
                         <div class="similar-prod-price-det">
                             <span class="similar-prod-price-det-title">
-                                <p style="    font-weight: 500;">{{item.name}}</p>
+                                <p class="bundle-heading" >{{item.name}}</p>
                             </span>
 
-                            <p style="font-size: small;font-weight: 300;">Solution Category</p>
-                            <p style="font-size: small;font-weight: 300;">
+                            <p class="bundle-solution">Solution Category:</p>
+                            <p class="bundle-solution-desc">
                                 {{item.solutionCategory}}</p>
                             <span class="similar-prod-price-det-price" *ngIf="item.priceList && item.priceList.length">
-                                <p style="font-size: medium;font-weight: 400;">&#8377;
-                                    {{item.priceList[0].price}}</p>
-                                <p style="font-size: medium;font-weight: 400;">&nbsp; /
-                                    {{item.priceList[0].priceType}}</p>
+                                <p class="bundle-price">&#8377; {{item.priceList[0].price}}</p>
+                                <p  class="bundle-type">&nbsp; / {{item.priceList[0].priceType}}</p>
                             </span>
 
                         </div>
