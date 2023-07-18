@@ -15,12 +15,18 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   templateUrl: './product-bundle-variant-detail.component.html',
   styleUrls: ['./product-bundle-variant-detail.component.css']
 })
-export class ProductBundleVariantDetailComponent {
+export class ProductBundleVariantDetailComponent implements OnInit {
+
+
 
   public currentRoute: string;
   // links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
   // titles = ['Description', 'Features', 'Specification', 'Reviews', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
 
+  public completeFeatureList : any[] = [];
+
+  public viewAllFeaturesDetails = false;
+  
   links = ['#description', '#feature', '#specification', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
   titles = ['Description', 'Features', 'Specification', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
   activeLink = this.links[0];
@@ -28,6 +34,7 @@ export class ProductBundleVariantDetailComponent {
   public productImages=[];
 
   public dummyImages = [1,2,3,4];
+
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
@@ -88,6 +95,38 @@ export class ProductBundleVariantDetailComponent {
     window.open(url, '_blank');
   }
 
+  private setData(response){}
+
+
+
+  private  getProductDetails(productId: string): void {
+    this.subscriptions.push(
+      this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( (response) => {
+        let fList = [];
+        if (response.featureList?.length > 0) {
+          
+          this.completeFeatureList = response.featureList;
+         if(response.featureList.length > 5){
+            this.features = response.featureList.slice(0,5);
+          }
+          else{
+            this.features = response.featureList;
+          }
+         this.features = response.featureList.slice(0,5);
+    
+        }
+       
+        console.log("inside", this.features);
+        
+      })
+
+
+    );
+  }
+
+
+  viewAllFeature = false;
+  checked: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -127,19 +166,24 @@ export class ProductBundleVariantDetailComponent {
         }
     });
   }
-
+  featureCount=5;
 
   public onPageLoad : boolean = true;
 
   public subscriptions : Subscription[] = [];
-  checked: boolean = false;
+  
 
 
   // public bundleSku : any;
 
   // public productFamilylist : any[] = [];
 
+
+  featureList: any[] = [];
+
   public productFamilyVariant : any;
+
+  
 
   public productFamily : any;
 
@@ -172,15 +216,49 @@ export class ProductBundleVariantDetailComponent {
   productListToCompare  = [];
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
+ 
+
+
+
 
   public ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
+    this.viewAllFeature=false;
+
     this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     this.getBrandDetails(productId);
   }
 
-  public featureCountEvent(): void {
-    this.features = this.features
+  public featureCountEvent(val): void {
+   
+    console.log("****** View Before", val);
+    val = val ? false : true;
+    console.log("****** View ", val);
+    this.viewAllFeaturesDetails = val;
+    console.log("****** View ", this.viewAllFeaturesDetails);
+    if(this.viewAllFeaturesDetails){
+      console.log("****** In If");
+      console.log("****** In If", this.completeFeatureList);
+      this.features = this.completeFeatureList;
+    }
+    else{
+      console.log("****** In Else");
+      console.log("****** In Else", this.completeFeatureList);
+      if(this.completeFeatureList.length>5){
+        this.features = this.completeFeatureList.slice(0,5);
+      }
+      else{
+        this.features = this.completeFeatureList;
+      }
+      
+      
+    }
+    
+  
+      
+      
+      console.log("product list to compare",this.productListToCompare);
+    // }
   }
 
 
@@ -200,6 +278,19 @@ export class ProductBundleVariantDetailComponent {
         this.productFamily = response.productFamily;
 
         this.features = response.productFamilyVariantFeatures;
+        if (response.productFamilyVariantFeatures?.length > 0) {
+          
+          this.completeFeatureList = response.productFamilyVariantFeatures;
+         if(response.productFamilyVariantFeatures.length > 5){
+            this.features = response.productFamilyVariantFeatures.slice(0,5);
+          }
+          else{
+            this.features = response.productFamilyVariantFeatures;
+          }
+         //this.features = response.productFamilyVariantFeatures.slice(0,5);
+        //  this.featureList = response.featureList.slice(0,5);
+          // this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
+        }
 
         //Picking Child Product and Productvariants
 
@@ -254,6 +345,20 @@ export class ProductBundleVariantDetailComponent {
       })
     );
   }
+
+
+
+
+
+    
+    
+
+
+
+
+
+  
+
 
   public setProductsData(data){
     console.log("=====setProductsData==="+data.length)
