@@ -342,6 +342,8 @@ export class ProductBundleVariantDetailComponent implements OnInit {
      
       //  console.log("=====finalBundleDetails====="+this.finalBundleDetails.length)
         // this.finalBundleDetails={...this.finalBundleDetails,quantity: 1 }
+
+        this.setCheckBoxState();
       })
     );
   }
@@ -547,6 +549,16 @@ public requestQuote (productFamilyVariant : any) : void {
 
 }
 
+  public onCheckBoxChange($event, item:any, type:any){
+      
+    if($event.checked){
+      this.addToCompare(item, type);
+    }
+    else{
+      this.removeSelectedItem(item._id);
+    }
+  }
+
 async addToCompare(item:any, type:any):Promise<void> {
   // if(!item.checked)
   // item.checked = true;
@@ -590,9 +602,80 @@ async addToCompare(item:any, type:any):Promise<void> {
   console.log("getProdFromLocalStorage",this.productListToCompare);
   //localStorage.removeItem('product_list_to_compare');
   localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+  localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
   //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
   //console.log("getProdFromLocalStorage",prodGet);
 }
+
+public removeSelectedItem(_id:any){
+  this.productListToCompare = this.productListToCompare.filter(function(item) {
+    return item._id != _id;
+  });
+  
+  localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+  localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+  this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+  
+}
+
+  public setCheckBoxState(){
+
+    //productFamily
+    //allCompareProducts
+
+    
+
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+    /*var index = productsList.findIndex(el => el.productId === item._id);
+      
+    if(index >=0){
+      productsList[index].quantity = Number(productsList[index].quantity) + 1;
+    }*/
+
+    var index = uniqueElements.findIndex(el => el._id === this.productFamilyVariant._id);
+    if(index >=0){
+      if(this.productFamilyVariant.checked){
+        this.productFamilyVariant.checked = true;
+      }
+      else{
+        this.productFamilyVariant['checked'] = true;
+      }
+    }
+    else{
+      if(this.productFamilyVariant.checked){
+        this.productFamilyVariant.checked = false;
+      }
+      else{
+        this.productFamilyVariant['checked'] = false;
+      }
+    }
+
+    this.allCompareProducts.forEach(element => {
+      var index = uniqueElements.findIndex(el => el._id === element._id);
+      if(index >=0){
+        if(element.checked){
+          element.checked = true;
+        }
+        else{
+          element['checked'] = true;
+        }
+      }
+      else{
+        if(element.checked){
+          element.checked = false;
+        }
+        else{
+          element['checked'] = false;
+        }
+      }
+    });
+
+
+  }
 
 public viewModal(queryParams) {
   const modalRef = this.modalService.open(LoginAlertModalComponent);

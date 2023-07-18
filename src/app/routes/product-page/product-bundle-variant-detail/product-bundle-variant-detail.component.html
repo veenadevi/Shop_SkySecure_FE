@@ -570,9 +570,13 @@
                                     <div class="checkbox-sec">
                                         <div class="checkbox-sec-01">
                                             <div class="checkbox">
-                                                <p-checkbox (click)="addToCompare(productFamilyVariant,'prodFam')"
+                                                <!-- <p-checkbox (click)="addToCompare(productFamilyVariant,'prodFam')"
+                                                [(ngModel)]="productFamilyVariant.checked" [binary]="true"
+                                                inputId="binary"></p-checkbox> -->
+                                                <p-checkbox (onChange) = "onCheckBoxChange($event, productFamilyVariant, 'fromProd')"
                                                 [(ngModel)]="productFamilyVariant.checked" [binary]="true"
                                                 inputId="binary"></p-checkbox>
+                                                
                                             </div>
                                             <div class="checkbox-header">
                                                 <p class="compare-sec">&nbsp;Compare</p>
@@ -614,9 +618,13 @@
                                                     <div class="checkbox-sec">
                                                         <div class="checkbox-sec-01">
                                                             <div class="checkbox">
-                                                                <p-checkbox (click)="addToCompare(item,'prodFam')"
+                                                                <!-- <p-checkbox (click)="addToCompare(item,'prodFam')"
                                                                 [(ngModel)]="item.checked" [binary]="true"
-                                                                    inputId="binary"></p-checkbox>
+                                                                    inputId="binary"></p-checkbox> -->
+                                                                    <p-checkbox (onChange) = "onCheckBoxChange($event, item, 'prodFam')"
+                                                                        [(ngModel)]="item.checked" [binary]="true"
+                                                                        inputId="binary"></p-checkbox>
+                                                                    
                                                             </div>
                                                             <div class="checkbox-header">
                                                                 <p class="compare-sec">&nbsp;Compare</p>
