@@ -32,9 +32,9 @@ export class ProductDetailComponent implements OnInit{
   public allBundleDetails:any[];
 
   public completeFeatureList : any[] = [];
-
+  
   public viewAllFeaturesDetails = false;
-
+  
   faq = [];
   productListToCompare  = [];
   products = [];
@@ -210,7 +210,7 @@ export class ProductDetailComponent implements OnInit{
      
 
         this.productBundlesData=this.setProductBundleData(response.productBundles);
-        if(this.productBundlesData.leagth>0)
+        if(this.productBundlesData.length>0)
         console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
         this.productBundleVariantsData=this.setProductBundleVariantsData(response.productBundleVariants);
 
@@ -219,7 +219,7 @@ export class ProductDetailComponent implements OnInit{
         
         this.similarProducts =[...this.productBundlesData,...this.productBundleVariantsData];
         this.allCompareProducts =[...this.productBundlesData,...this.productBundleVariantsData];
-        console.log("allCompareProducts  leagth "+this.allCompareProducts.length)
+        console.log("allCompareProducts  length "+this.allCompareProducts.length)
 
      //  response.products[0] = {...response.products[0], quantity: 1 }
      //setting quantity
@@ -283,6 +283,8 @@ export class ProductDetailComponent implements OnInit{
         this.similarProducts = response.productBundles;
         this.product = { ...response.products , featureList : response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants : response.featureListByProductVariants } ;
         this.onProductLoad = true;*/
+
+        this.setCheckBoxState();
       })
 
 
@@ -397,15 +399,28 @@ featureCount=5;
     this.productListToCompare = this.productListToCompare.filter(function(item) {
       return item._id != _id;
     });
-    // this.compareProductsStore.setCompareProductsList(this.productList);
-    //localStorage.removeItem('product_list_to_compare');
+    
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    // console.log('product_list_to_compare',);
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+    
   }
 
   public navigateToCompareProducts(){
     this.router.navigate(['/compare-products']);
   }
+
+  public onCheckBoxChange($event, item:any, type:any){
+    
+    if($event.checked){
+      this.addToCompare(item, type);
+    }
+    else{
+      this.removeSelectedItem(item._id);
+    }
+  }
+
+
   async addToCompare(item:any, type:any):Promise<void> {
     // if(!item.checked)
     // item.checked = true;
@@ -607,6 +622,66 @@ console.log("======setProductVariantsData===="+data.length)
     }
 
     return data;
+  }
+
+
+  public setCheckBoxState(){
+
+    //productFamily
+    //allCompareProducts
+
+    
+
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+    /*var index = productsList.findIndex(el => el.productId === item._id);
+       
+    if(index >=0){
+      productsList[index].quantity = Number(productsList[index].quantity) + 1;
+    }*/
+
+    var index = uniqueElements.findIndex(el => el._id === this.product._id);
+    if(index >=0){
+      if(this.product.checked){
+        this.product.checked = true;
+      }
+      else{
+        this.product['checked'] = true;
+      }
+    }
+    else{
+      if(this.product.checked){
+        this.product.checked = false;
+      }
+      else{
+        this.product['checked'] = false;
+      }
+    }
+
+    this.allCompareProducts.forEach(element => {
+      var index = uniqueElements.findIndex(el => el._id === element._id);
+      if(index >=0){
+        if(element.checked){
+          element.checked = true;
+        }
+        else{
+          element['checked'] = true;
+        }
+      }
+      else{
+        if(element.checked){
+          element.checked = false;
+        }
+        else{
+          element['checked'] = false;
+        }
+      }
+    });
+
+
   }
 
   public showDialog(){
