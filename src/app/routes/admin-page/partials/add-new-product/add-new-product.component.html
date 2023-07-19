@@ -14,7 +14,7 @@
                 <div class="group-gap">
                     <!-- OEMS -->
                     <div class="group-gap">
-                        <div class="mb-3">
+                        <div class="mb-3" style="width:40%">
                             <label [ngClass]="{'error': submitted && myForm.OEM.errors}">OEM's</label>
                             <select class="custom-select d-block w-100" (change)="changeOEM($event)"
                                 formControlName="OEM" [ngClass]="{'error': submitted && myForm.OEM.errors}">
@@ -29,13 +29,13 @@
                     </div>
                     <!---Categories-->
                     <div class="group-gap">
-                        <div class="mb-3">
+                        <div class="mb-3" style="width:40%">
                             <label [ngClass]="{'error': submitted && myForm.categories.errors}">Categories</label>
                             <select class="custom-select d-block w-100" (change)="changeCategories($event)"
                                 formControlName="categories"
                                 [ngClass]="{'error': submitted && myForm.categories.errors}">
                                 <option value="">Choose...</option>
-                                <option *ngFor="let category of categories" [ngValue]="category.name">{{category.name}}
+                                <option *ngFor="let category of categories" [value]="category._id">{{category.name}}
                                 </option>
                             </select>
 
@@ -48,14 +48,14 @@
 
                     <!-- Subcategories -->
                     <div class="group-gap">
-                        <div class="mb-3">
+                        <div class="mb-3" style="width:40%">
                             <label [ngClass]="{'error': submitted && myForm.Subcategories.errors}">Subcategories</label>
                             <select class="custom-select d-block w-100" (change)="changeSubcategories($event)"
                                 formControlName="Subcategories"
                                 [ngClass]="{'error': submitted && myForm.Subcategories.errors}">
                                 <option value="">Choose...</option>
-                                <option *ngFor="let category of subCategories" [ngValue]="category._id">
-                                    {{category.name}}
+                                <option *ngFor="let subcategory of subCategories" [value]="subcategory._id">{{subcategory.name}}
+                                  
                                 </option>
                             </select>
 
@@ -67,7 +67,7 @@
                     </div>
                     <!-- Product Name -->
                     <div>
-                        <div class="mb-3">
+                        <div class="mb-3" style="width:40%">
                             <label [ngClass]="{'error': submitted && myForm.productName.errors}">
                                 Product Name</label>
                             <input type="text" class="form-control" formControlName="productName"
@@ -80,7 +80,7 @@
                     </div>
                     <!--Product Description-->
                     <div>
-                        <div class="mb-3">
+                        <div class="mb-3" style="width:40%">
                             <label [ngClass]="{'error': submitted && myForm.productDescription.errors}">
                                 Product Description</label>
                             <textarea class="form-control" formControlName="productDescription"
@@ -96,7 +96,7 @@
                     </div>
                     <!---Product SKU Number-->
                     <div>
-                        <div class="mb-3">
+                        <div class="mb-3" style="width:40%">
                             <label [ngClass]="{'error': submitted && myForm.productSkuNumber.errors}">
                                 Product Sku Number</label>
                             <input type="text" class="form-control" formControlName="productSkuNumber"
@@ -111,7 +111,7 @@
 
                     <!---Product SKU id-->
                     <div>
-                        <div class="mb-3">
+                        <div class="mb-3" style="width:40%">
                             <label [ngClass]="{'error': submitted && myForm.productSkuId.errors}">
                                 Product Sku Id</label>
                             <input type="number" class="form-control" formControlName="productSkuId"
@@ -126,7 +126,7 @@
 
                     <!---Product Order Number-->
                     <div>
-                        <div class="mb-3">
+                        <div class="mb-3" style="width:40%">
                             <label [ngClass]="{'error': submitted && myForm.productOrderNumber.errors}">
                                 Product Order Number</label>
                             <input type="number" class="form-control" formControlName="productOrderNumber"
@@ -142,7 +142,7 @@
 
                     <!---Product Price-->
                     <div>
-                        <div class="mb-3">
+                        <div class="mb-3" style="width:40%">
                             <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                 Product Price</label>
                             <input type="text" class="form-control" formControlName="productPrice"
@@ -157,7 +157,7 @@
 
                     <!-- Subscription Type -->
                     <div class="group-gap">
-                        <div class="mb-3">
+                        <div class="mb-3" style="width:40%">
                             <label [ngClass]="{'error': submitted && myForm.subscriptionType.errors}">Subscription
                                 Type</label>
                             <select class="custom-select d-block w-100" (change)="changeOEM($event)"
@@ -177,7 +177,7 @@
                 <!-- IsVariant -->
                 <div class="group-gap">
                     <label [ngClass]="{'error': submitted && myForm.isVariant.errors}">isVariant</label>
-                    <div class="d-block my-3">
+                    <div class="d-block my-3" style="width:40%">
                         <div class="custom-control custom-radio">
                             <input id="false" type="radio" class="custom-control-input" name="isVariant"
                                 formControlName="isVariant" value="false" checked (change)="onRadioChange($event)">
@@ -233,24 +233,63 @@
                 <div class="group-gap" style="margin:1rem auto;">
                     <label>Features</label>
                     <div class="mb-3">
-                        <button type="button" class="btn btn-sm btn-success mb-3 btn-block"
-                            (click)="addSuperPowers()">Add Feature</button>
-                        <ul class="subjectList">
-                            <li style="display: flex; flex-direction: column; margin: 4px;"
+                      
+                        <table class="subjectList">
+                            <tr style="display: flex; flex-direction: column; margin: 4px;"
                                 *ngFor="let item of addDynamicElementNew.get('feature')['controls']; let i = index">
+                                
                                 <div [formGroup]="item">
-                                    <label>Title</label>
-                                    <input type="text" class="form-control" formControlName="name">
-                                    <label>Description</label>
-                                    <textarea class="form-control" formControlName="description"></textarea>
-                                    <label>HyperLink</label>
-                                    <input type="text" class="form-control" formControlName="hyperLinkURL">
-                                </div>
-                                <button class="btn btn-warning" (click)="removeFeature(i)">Remove</button>
-                            </li>
+                                    <td>
+                                    <label>Title</label></td>
+                                    <td width="30%">  <input type="text" class="form-control" formControlName="name"></td>
+                                    <td> <label>Description</label></td>
+                                    <td width="30%"><textarea class="form-control" formControlName="description"></textarea></td>
+                                    <td><label>HyperLink</label></td>
+                                    <td width="30%"><input type="text" class="form-control" formControlName="hyperLinkURL"></td>
+                                    <td width="15%">
 
-                        </ul>
+                                     <button  class="btn btn-sm btn-success mb-3 btn-block" (click)="addNewFeature()">Add Feature</button>
+                                    </td>
+                                    <td width="15%">  <button class="btn btn-sm btn-warning mb-3 btn-block" (click)="removeFeature(i)">Remove</button></td>
+                                </div>
+                              
+                             
+                            </tr>
+
+                        </table>
                     </div>
+
+
+
+                    <!-- <div class="group-gap" style="margin:1rem auto;"> -->
+                        <label>FAQ</label>
+                        <div class="mb-3">
+                            
+                            <table class="subjectList">
+                                <tr style="display: flex; flex-direction: column; margin: 4px;"
+                                    *ngFor="let item of addFAQElementNew.get('faq')['controls']; let i = index">
+                                    
+                                    <div [formGroup]="item">
+                                        <td>
+                                        <label>Question</label></td>
+                                        <td>  <input type="text" class="form-control" formControlName="Question"></td>
+                                        <td> <label>Answer</label></td>
+                                        <td><textarea class="form-control" formControlName="Answer"></textarea></td>
+                                        <td><button type="button" class="btn btn-sm btn-success mb-3 btn-block"
+                                            (click)="addNewFAQ()">Add FQA</button></td>
+                                      <td> <button class="btn btn-warning" (click)="removeFAQ(i)">Remove</button></td>
+                                    </div>
+                                   
+                                  
+                                </tr>
+    
+                            </table>
+                        <!-- </div> -->
+    
+                    </div>
+    
+    
+          
 
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-success btn-lg btn-block text-center"
@@ -258,7 +297,7 @@
                 </div>
 
 
-            </form>
+                      </form>
 
         </div>
     </div>
