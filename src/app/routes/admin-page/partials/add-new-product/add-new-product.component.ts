@@ -19,9 +19,11 @@ interface CreateProductPayload {
   bannerLogo: String,
   isActive: Boolean,
   priceList: Array<any>,
+  //productVideoURL: Array<any>,
   productSkuNumber: String,
   productSkuId: Number,
   featureList: Array<any>,
+  faqList: Array<any>,
   isVariant: Boolean,
   productId: String
 }
@@ -49,6 +51,7 @@ export class AddNewProductComponent  implements OnInit {
   showProducts = false;
   registrationForm: FormGroup;
   addDynamicElementNew: FormArray;
+  addFAQArrayNew: FormArray;
 
   createProductPayload: CreateProductPayload;
 
@@ -78,9 +81,16 @@ export class AddNewProductComponent  implements OnInit {
         feature: this.fb.array([
           this.createFeatureGroup()
         ])
+      }),
+      addFAQArrayNew: this.fb.group({
+        // Nested form controls for dynamic elements
+        faq: this.fb.array([
+          this.createFAQGroup()
+        ])
       })
     })
     this.addDynamicElementNew = this.registrationForm.get('addDynamicElementNew') as FormArray;
+    this.addFAQArrayNew = this.registrationForm.get('addFAQArrayNew') as FormArray;
   }
   // ngOnInit(): void {
   //   throw new Error('Method not implemented.');
@@ -92,7 +102,7 @@ export class AddNewProductComponent  implements OnInit {
   removeUpload: boolean = false;
 
   public ngOnInit(): void {
-    this.getSubCategories();
+   this.getSubCategories();
     this.getCategories();
     this.getOEMs();
     this.getProducts();
@@ -106,12 +116,20 @@ export class AddNewProductComponent  implements OnInit {
     });
   }
 
+  createFAQGroup(): FormGroup {
+    return this.fb.group({
+      Question: '',
+      Answer: ''
+    });
+  }
+
   private getCategories(): CategoryDetails[] {
     let categoryResponse = null;
     this.subscriptions.push(
       this.metaDataSvc.fetchCategory().subscribe(response => {
         this.metadataStore.setCategoryDetails(response.categorys);
         this.categories = response.categorys;
+     
       })
 
     );
@@ -192,17 +210,24 @@ export class AddNewProductComponent  implements OnInit {
 
   // Choose Subcategories using select dropdown
   changeCategories(event: any) {
-    const selectedValue = event.target.value.toString();
+    
+    const selectedValue = event.target.value;
+    console.log("selectedValue  "+selectedValue)
     const categoryMap = new Map<string, any>();
     this.categories.forEach(category => {
       categoryMap.set(category._id.toString(), category);
     });
     const selectedCategory = categoryMap.get(selectedValue);
+    console.log("selectedCategory  "+selectedCategory._id)
+
+    this.subCategories =  selectedCategory.subCategories;
+   
+
   }
 
   // Choose Subcategories using select dropdown
   changeSubcategories(e) {
-    this.registrationForm.get('Subcategories').setValue(e.target.value.substring(3), {
+    this.registrationForm.get('Subcategories').setValue(e.target.value, {
       onlySelf: true
     })
   }
@@ -212,6 +237,12 @@ export class AddNewProductComponent  implements OnInit {
   // Choose Subcategories using select dropdown
   changeOEM(e) {
     this.registrationForm.get('OEM').setValue(e.target.value.substring(3), {
+      onlySelf: true
+    })
+  }
+
+  changeSubscriptionType(e) {
+    this.registrationForm.get('subscriptionType').setValue(e.target.value, {
       onlySelf: true
     })
   }
@@ -229,16 +260,27 @@ export class AddNewProductComponent  implements OnInit {
     return this.registrationForm.get('addDynamicElementNew') as FormArray
   }
 
-  addSuperPowers() {
+  get addFAQ() {
+    return this.registrationForm.get('addNewFAQ') as FormArray
+  }
+
+  addNewFeature() {
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
     featureArray.push(this.createFeatureGroup());
+  }
+
+  addNewFAQ() {
+    const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
+    faqArray.push(this.createFAQGroup());
   }
 
   // Submit Registration Form
   onSubmit(): any {
     this.submitted = true;
+    console.log("this.registrationForm.valid"+this.registrationForm.valid)
     if (!this.registrationForm.valid) {
-      alert('Please fill all the required fields to create a super hero!')
+
+     // alert('Please fill all the required fields !')
       return false;
     } else {
       console.log("Final value", this.registrationForm.value);
@@ -260,6 +302,7 @@ export class AddNewProductComponent  implements OnInit {
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
+        faqList: productData.addFAQArrayNew.faq,
         bannerLogo: this.productLogo,
         createdBy: 'ADMIN',
         updatedBy: 'ADMIN'
@@ -273,7 +316,18 @@ export class AddNewProductComponent  implements OnInit {
 
   removeFeature(data: any) {
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
-    featureArray.removeAt(data);
+    if(data>0){
+      featureArray.removeAt(data);
+    }
+   
+  }
+
+  removeFAQ(data: any) {
+    const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
+    if(data>0){
+    faqArray.removeAt(data);
+    }
+  
   }
 
   onRadioChange(event) {

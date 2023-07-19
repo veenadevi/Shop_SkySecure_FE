@@ -156,33 +156,39 @@ label{
     width: 70%;
     padding-left: 30px;
 }
+
+.faq-update{
+    width: 70%;
+    padding-left: 30px;
+}
 .heading{
     padding-left: 20px;
     font-size: large;
     font-weight: bold;
 }
 .add-btn{
-    /* padding-left: 170px; */
-    width:35%;
+    padding-left: 170px;
+    /* width:35%; */
     box-sizing: border-box;
     padding: 7px;
     border: 1px solid #EFEFEF;
     background:linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%); 
     color: white;
 border-radius: 8px;
-margin-left: 5px;
+margin:10px;
+width: 350px
 
 
 }
 .btn-warning{
-    width:100%;
+    width: 350px;
     box-sizing: border-box;
     padding: 7px;
     border: 1px solid #EFEFEF;
     background:#ffc107; 
     color: black;
-border-radius: 8px;
-margin-top: 10px;
+    border-radius: 8px;
+    margin:10px;
 }
 .submit{
     width:100%;
@@ -211,4 +217,9 @@ margin-top: 10px;
 }
 .form-control{
     width: 150%;
+    /* padding-left:200px; */
 }
+/* .more-padding-on-right {
+    padding-right: 10px;
+    width:20%
+  } */
