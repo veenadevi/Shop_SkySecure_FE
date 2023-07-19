@@ -351,6 +351,7 @@ background: #F9F9F9;
     border-radius: 8px;
     padding: 4px 20px;
     font-family: 'lato',sans-serif;
+    width: 20%;
 }
   
   .specification-feature-icon-container {
@@ -887,6 +888,7 @@ background: #F7F7F7;
   float: right;
   padding-right: 10px;
   text-decoration: none;
+  font-family: 'lato', sans-serif;
 }
 
 .checkbox {
