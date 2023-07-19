@@ -49,11 +49,23 @@
 
 
 /* new homepage */
-
-.header-container {
-    position: relative;
+.search-box-container {
     width: 100%;
 }
+
+.header-container{
+    background-image: url('../../../assets/ShopPageHeaderBackground.jpg');
+    background-repeat: repeat-y;
+    height: 422px;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .header-background-img {
     height: 396px;
     width: 100%;
@@ -93,6 +105,7 @@
     justify-content: center;
     flex-direction: row;
     column-gap: 32px;
+    margin-top: 42px;
 }
 
 .shop-feature-card {
