@@ -260,20 +260,19 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
 
         //iframe functionality------->
 
-        if(this.productVariants && this.productVariants.productVideoURL){
+        /*if(this.productVariants && this.productVariants.productVideoURL){
           console.log("======have videoURL====",this.productVariants.productVideoURL.length) 
           this.setIframe(this.productVariants.productVideoURL);
           this.productVideoURL = this.productVariants.productVideoURL[0].source 
           // this.productVideoText = `<${this.headingTags[4].title_size}>${this.productVariants.name}</${this.headingTags[4].title_size}>`
           this.element = `<${this.headingTags[4].title_size}>${this.featuresVideoTitle}</${this.headingTags[4].title_size}>`
           
-          //this.productVideoURL = "'https://www.youtube.com/embed/aGtMBo1Ko8w'";
-          //console.log("================================Available",this.productVideoURL);
+          
         }
         else{
           this.productVideoURL= this.alternateFeaturesImage;
           console.log("======no product video====",this.productVideoURL.length)
-        }
+        }*/
 
         /*if(this.productVariants.productVideoURL &&this.productVariants.hasOwnProperty('productVideoURL')&& this.productVariants.productVideoURL && this.productVariants.productVideoURL.length>0) {
           //this.productVideoURL =  "`"+this.productVariants.productVideoURL+"`";
@@ -319,6 +318,8 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
         this.similarProducts = response.productBundles;
         this.product = { ...response.products , featureList : response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants : response.featureListByProductVariants } ;
         this.onProductLoad = true;*/
+
+        this.setCheckBoxState();
       })
 
 
@@ -465,13 +466,14 @@ featureCount=5;
   }
 
   public removeSelectedItem(_id:any){
+
     this.productListToCompare = this.productListToCompare.filter(function(item) {
       return item._id != _id;
     });
-    // this.compareProductsStore.setCompareProductsList(this.productList);
-    //localStorage.removeItem('product_list_to_compare');
+    
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    // console.log('product_list_to_compare',);
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
   }
 
   public navigateToCompareProducts(){
@@ -504,6 +506,17 @@ featureCount=5;
   //   const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
   //   console.log("getProdFromLocalStorage",prodGet);
   // }
+
+  public onCheckBoxChange($event, item:any, type:any){
+      
+    if($event.checked){
+      this.addToCompare(item, type);
+    }
+    else{
+      this.removeSelectedItem(item._id);
+    }
+  }
+
 
   async addToCompare(item:any, type:any):Promise<void> {
     // if(!item.checked)
@@ -625,6 +638,66 @@ featureCount=5;
     
 
 
+
+
+  }
+
+
+  public setCheckBoxState(){
+
+    //productFamily
+    //allCompareProducts
+
+    
+
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+    /*var index = productsList.findIndex(el => el.productId === item._id);
+      
+    if(index >=0){
+      productsList[index].quantity = Number(productsList[index].quantity) + 1;
+    }*/
+
+    var index = uniqueElements.findIndex(el => el._id === this.productVariantData._id);
+    if(index >=0){
+      if(this.productVariantData.checked){
+        this.productVariantData.checked = true;
+      }
+      else{
+        this.productVariantData['checked'] = true;
+      }
+    }
+    else{
+      if(this.productVariantData.checked){
+        this.productVariantData.checked = false;
+      }
+      else{
+        this.productVariantData['checked'] = false;
+      }
+    }
+
+    this.compareProductList.forEach(element => {
+      var index = uniqueElements.findIndex(el => el._id === element._id);
+      if(index >=0){
+        if(element.checked){
+          element.checked = true;
+        }
+        else{
+          element['checked'] = true;
+        }
+      }
+      else{
+        if(element.checked){
+          element.checked = false;
+        }
+        else{
+          element['checked'] = false;
+        }
+      }
+    });
 
 
   }
