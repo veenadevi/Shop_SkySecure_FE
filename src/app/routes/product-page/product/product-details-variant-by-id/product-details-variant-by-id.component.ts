@@ -10,6 +10,7 @@ import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -46,6 +47,8 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
 
   public completeFeatureList : any[] = [];
   public viewAllFeaturesDetails = false;
+
+  public videoUrl = null;
 
 
 
@@ -258,7 +261,15 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
 
         this.completeFeatureList = response.featureList;
 
-        //iframe functionality------->
+        
+
+        
+        
+        
+        if(this.productVariants && this.productVariants.productVideoURL){
+          //this.videoUrl = this.getVideoSafeUrl("https://www.youtube.com/embed/wsfb6jKE4wI");
+          this.videoUrl = this.getVideoSafeUrl(this.productVariants.productVideoURL[0].source);
+        }
 
         /*if(this.productVariants && this.productVariants.productVideoURL){
           console.log("======have videoURL====",this.productVariants.productVideoURL.length) 
@@ -385,7 +396,8 @@ console.log("response values: ", resp);
     private authService : MsalService,
     private modalService : NgbModal,
     private compareProductsStore : CompareProductsStore,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    protected _sanitizer: DomSanitizer
   ){}
 featureCount=5;
 
@@ -814,6 +826,13 @@ featureCount=5;
     
   }
 
+  private getVideoSafeUrl(url: string): SafeResourceUrl {
+    let safeUrl = '';
+    //safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl(url);
+    return this._sanitizer.bypassSecurityTrustResourceUrl(url);
+    
+    
+  }
 
 
 }
