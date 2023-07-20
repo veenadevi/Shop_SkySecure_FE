@@ -115,7 +115,7 @@
                 <div class="product-details-info">
                     <h4 class="head-04">{{productFamilyVariant.name}}
                     </h4>
-                    <p class="para" >by Microsoft</p>
+                    <p class="para">by Microsoft</p>
                     <div class="pd-header-reviews">
                         <mat-icon class="review-icon">star</mat-icon>
                         <mat-icon class="review-icon">star</mat-icon>
@@ -168,16 +168,17 @@
                         </span>
 
                     </div>
+                    <p style="font-size: smaller;">GST Extra</p>
                     <p class="solution" >Solution Category:</p>
                     <p >{{productFamilyVariant.subcategories[0].name}}</p>
                     <p class="about"  >About this product:</p>
                     <p  class="prod-desc" >{{productFamilyVariant.description}}</p>
-                    <span class="request-btn" ><button class="btn view-det-btn"
+                    <span ><button class="btn view-det-btn"
                             (click)="scrollToSection('#feature')">View
                             Features</button>
                         <button class="btn request-quote-btn" style="margin-left: 4%;">Request Quote</button></span>
                     <p-divider></p-divider>
-                    
+
                     <div class="offer-det">
                         <span style="display: inline-flex;">
                             <img class="offer-img" 
@@ -570,13 +571,9 @@
                                     <div class="checkbox-sec">
                                         <div class="checkbox-sec-01">
                                             <div class="checkbox">
-                                                <!-- <p-checkbox (click)="addToCompare(productFamilyVariant,'prodFam')"
-                                                [(ngModel)]="productFamilyVariant.checked" [binary]="true"
-                                                inputId="binary"></p-checkbox> -->
-                                                <p-checkbox (onChange) = "onCheckBoxChange($event, productFamilyVariant, 'fromProd')"
+                                                <p-checkbox (click)="addToCompare(productFamilyVariant,'prodFam')"
                                                 [(ngModel)]="productFamilyVariant.checked" [binary]="true"
                                                 inputId="binary"></p-checkbox>
-                                                
                                             </div>
                                             <div class="checkbox-header">
                                                 <p class="compare-sec">&nbsp;Compare</p>
@@ -618,13 +615,9 @@
                                                     <div class="checkbox-sec">
                                                         <div class="checkbox-sec-01">
                                                             <div class="checkbox">
-                                                                <!-- <p-checkbox (click)="addToCompare(item,'prodFam')"
+                                                                <p-checkbox (click)="addToCompare(item,'prodFam')"
                                                                 [(ngModel)]="item.checked" [binary]="true"
-                                                                    inputId="binary"></p-checkbox> -->
-                                                                    <p-checkbox (onChange) = "onCheckBoxChange($event, item, 'prodFam')"
-                                                                        [(ngModel)]="item.checked" [binary]="true"
-                                                                        inputId="binary"></p-checkbox>
-                                                                    
+                                                                    inputId="binary"></p-checkbox>
                                                             </div>
                                                             <div class="checkbox-header">
                                                                 <p class="compare-sec">&nbsp;Compare</p>
@@ -728,10 +721,8 @@
                                         <p class="bundle-solution" >Solution Category:</p>
                                         <p class="bundle-solution-desc" >{{item.solutionCategory}}</p>
                                         <span class="similar-prod-price-det-price" *ngIf="item.priceList!=null">
-                                            <p  class="bundle-price" >&#8377;
-                                                {{item.priceList[0].price}}</p>
-                                            <p class="bundle-type" >&nbsp; /
-                                                {{item.priceList[0].priceType}}</p>
+                                            <p  class="bundle-price" >&#8377;{{item.priceList[0].price}}</p>
+                                            <p class="bundle-type" >&nbsp; /{{item.priceList[0].priceType}}</p>
                                         </span>
 
                                     </div>

@@ -23,6 +23,16 @@
     width: 100%;
     position: relative;
     z-index: 999;
+
+    /* position:absolute;
+    display: flex;
+    justify-content: center;
+    width: 97%;
+    z-index: 999;
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
     
     
     /* flex-direction: column; */

@@ -413,6 +413,7 @@
       /* padding: 10px 4%; */
       border-radius: 8px;
       padding: 4px 20px;
+      width: 20%;
   }
     
     .specification-feature-icon-container {
@@ -1004,6 +1005,7 @@ column-gap:8px ;
   float: right;
   padding-right: 10px;
   text-decoration: none;
+  font-family: 'lato', sans-serif;
 }
 
 .checkbox {

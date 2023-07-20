@@ -11,6 +11,8 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { ProductsByCategoryComponent } from './products-by-category/products-by-category.component';
 import { ProductsByBrandComponent } from './products-by-brand/products-by-brand.component';
 import { ProductsByTrendingComponent } from './products-by-trending/products-by-trending.component';
+import { MaterialModule } from 'src/app/material.module';
+import { PrimeNgModule } from 'src/app/prime-ng.module';
 
 
 
@@ -29,11 +31,15 @@ import { ProductsByTrendingComponent } from './products-by-trending/products-by-
     CommonModule,
     HomePageRoutingModule,
     NgbModule,
-    SharedModule
+    SharedModule,
+    MaterialModule,
+    PrimeNgModule
   ],
   exports: [
     RouterModule,
-    SharedModule
+    SharedModule,
+    MaterialModule,
+    PrimeNgModule
   ]
 })
 export class HomePageModule { 
