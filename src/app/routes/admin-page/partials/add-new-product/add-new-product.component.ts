@@ -23,7 +23,7 @@ interface CreateProductPayload {
   productSkuNumber: String,
   productSkuId: Number,
   featureList: Array<any>,
-  faqList: Array<any>,
+  productFAQ: Array<any>,
   isVariant: Boolean,
   productId: String
 }
@@ -52,6 +52,7 @@ export class AddNewProductComponent  implements OnInit {
   registrationForm: FormGroup;
   addDynamicElementNew: FormArray;
   addFAQArrayNew: FormArray;
+  defaultDiscount:number
 
   createProductPayload: CreateProductPayload;
 
@@ -67,14 +68,14 @@ export class AddNewProductComponent  implements OnInit {
       productDescription: ['', Validators.required],
       productSkuNumber: ['', Validators.required],
       productSkuId: ['', Validators.required],
-      productOrderNumber: ['', Validators.required],
-      productPrice: ['', Validators.required],
-      erpPrice: ['', Validators.required],
+      productOrderNumber: [''],
+      productPrice: [''],
+      erpPrice: [''],
       discount: [''],
       categories: ['', Validators.required],
       Subcategories: ['', Validators.required],
       OEM: ['', Validators.required],
-      subscriptionType: ['', Validators.required],
+      subscriptionType: [''],
       isVariant: ['false'],
       file: [null],
       products: [''],
@@ -93,6 +94,7 @@ export class AddNewProductComponent  implements OnInit {
     })
     this.addDynamicElementNew = this.registrationForm.get('addDynamicElementNew') as FormArray;
     this.addFAQArrayNew = this.registrationForm.get('addFAQArrayNew') as FormArray;
+    this.defaultDiscount=18;
   }
   // ngOnInit(): void {
   //   throw new Error('Method not implemented.');
@@ -244,6 +246,7 @@ export class AddNewProductComponent  implements OnInit {
   }
 
   changeSubscriptionType(e) {
+    console.log("subscription value "+e.target.value)
     this.registrationForm.get('subscriptionType').setValue(e.target.value, {
       onlySelf: true
     })
@@ -275,11 +278,14 @@ export class AddNewProductComponent  implements OnInit {
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
     faqArray.push(this.createFAQGroup());
   }
-
-  // Submit Registration Form
   onSubmit(): any {
     this.submitted = true;
-    console.log("this.registrationForm.valid"+this.registrationForm.valid)
+  }
+
+  // Submit Registration Form
+  CreateProduct(): any {
+    //this.submitted = true;
+    console.log("this.registrationForm.valid"+this.submitted)
     if (!this.registrationForm.valid) {
 
      // alert('Please fill all the required fields !')
@@ -307,7 +313,7 @@ export class AddNewProductComponent  implements OnInit {
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
-        faqList: productData.addFAQArrayNew.faq,
+        productFAQ: productData.addFAQArrayNew.faq,
         bannerLogo: this.productLogo,
         createdBy: 'ADMIN',
         updatedBy: 'ADMIN'
