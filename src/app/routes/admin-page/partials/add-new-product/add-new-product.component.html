@@ -202,21 +202,62 @@
                             <div class="forms">
                                 <div class="label">
                                     <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
-                                        Product Price</label>
+                                        SS Price</label>
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="productPrice"
                                         [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                 </div>
 
+                            </div>
+                           
+
+                        </div>
+                    </div>
+
+                    <div class="section-04">
+
+                        <!---Product Order Number-->
+                        <div class="orderno">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        ERP Price</label>
+                                </div>
+                                <div class="input">
+                                    <input type="number" class="custom-select-01" formControlName="erpPrice"
+                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                </div>
+
                                 <!-- error block -->
-                                <div class="invalid-feedback" *ngIf="submitted && myForm.productPrice.errors?.required">
-                                    <sup>*</sup>Product Price required
+                                <div class="invalid-feedback"
+                                    *ngIf="submitted && myForm.productPrice.errors?.required">
+                                    <sup>*</sup>Product ERP required
                                 </div>
                             </div>
 
                         </div>
+
+                        <!---Product Price-->
+                        <div class="price">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        Discount(%)</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" value=18 class="custom-select-03" formControlName="discount"
+                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                </div>
+
+                            </div>
+                           
+
+                        </div>
                     </div>
+
+
+
 
                     <div class="section-05">
                         <!-- Subscription Type -->

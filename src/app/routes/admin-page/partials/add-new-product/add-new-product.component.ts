@@ -69,6 +69,8 @@ export class AddNewProductComponent  implements OnInit {
       productSkuId: ['', Validators.required],
       productOrderNumber: ['', Validators.required],
       productPrice: ['', Validators.required],
+      erpPrice: ['', Validators.required],
+      discount: [''],
       categories: ['', Validators.required],
       Subcategories: ['', Validators.required],
       OEM: ['', Validators.required],
@@ -298,8 +300,8 @@ export class AddNewProductComponent  implements OnInit {
           "Currency": "INR",
           "price": productData.productPrice,
           "priceType": productData.subscriptionType,
-          "ERPPrice" : productData.subscriptionType*0.18,
-          "discountRate" : "18"
+          "ERPPrice" : productData.erpPrice,
+          "discountRate" : productData.discount
 
         }],
         isActive: true,
