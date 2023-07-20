@@ -2,6 +2,8 @@
 
     <!-- Header Component-->
     <app-header (loginEvent)='loginEvent($event)'></app-header>
+    <!-- <app-toolbar></app-toolbar>
+    <router-outlet></router-outlet> -->
     <ngx-spinner size="medium" type="ball-atom"></ngx-spinner>
 
 
@@ -10,6 +12,10 @@
     </ng-container> -->
    
     <!-- <ng-container *ngIf="userLoggedIn"> -->
+
+
+
+
     <ng-container>
         <div class="full-screen-style">
             <app-sidenav-wrapper [userLoggedIn]="userLoggedIn" [userRole]="userRole" [userName]="userName"></app-sidenav-wrapper>

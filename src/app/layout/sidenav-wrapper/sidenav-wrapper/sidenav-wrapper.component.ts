@@ -15,7 +15,10 @@ export class SidenavWrapperComponent {
   public userLoggedInFlag = false;
   public userRoleVal = '';
   public userFullName = '';
-  isExpanded: boolean = false;
+  //isExpanded: boolean = false;
+  isExpanded: boolean = true;
+
+  public menuToogled : boolean = false;
 
   @Input() set userLoggedIn(value: any){
     this.userLoggedInFlag = value;
@@ -57,7 +60,8 @@ export class SidenavWrapperComponent {
 
   public menuExpansion(val, navVal){
 
-    this.isExpanded = (val) ? false : true;
+    //this.isExpanded = (val) ? false : true;
+    this.isExpanded = true;
     
 
     if(navVal === 'security'){
@@ -73,19 +77,20 @@ export class SidenavWrapperComponent {
       this.dashboardSubMenu = true;
     }
 
-    if(this.isExpanded === false){
+    /*if(this.isExpanded === false){
       this.userSubMenu = false;
       this.dashboardSubMenu = false;
       this.securitySubMenu = false;
       this.profileSubMenu = false;
       this.adminSubMenu = false;
-    }
+    }*/
 
 
   }
 
   public navAction(val, navVal){
-    switch (navVal) {
+
+    /*switch (navVal) {
       case 'user':
           //this.userSubMenu = (this.userSubMenu) ? false : true;
           this.isExpanded = this.isExpanded ? false : true;
@@ -104,7 +109,7 @@ export class SidenavWrapperComponent {
 
       default:
         return null;
-    }
+    }*/
   }
 
 
@@ -145,6 +150,11 @@ export class SidenavWrapperComponent {
     const modalRef = this.modalService.open(SelectOemModalComponent);
   }
 
+  public menuToogleEvent($event){
+    
+    this.menuToogled = this.menuToogled ? false : true;
+    console.log("****** () ( )( ", this.menuToogled);
+  }
 
 
 }
