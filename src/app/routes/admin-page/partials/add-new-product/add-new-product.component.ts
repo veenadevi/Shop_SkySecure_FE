@@ -298,6 +298,9 @@ export class AddNewProductComponent  implements OnInit {
           "Currency": "INR",
           "price": productData.productPrice,
           "priceType": productData.subscriptionType,
+          "ERPPrice" : productData.subscriptionType*0.18,
+          "discountRate" : "18"
+
         }],
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
@@ -308,7 +311,7 @@ export class AddNewProductComponent  implements OnInit {
         updatedBy: 'ADMIN'
       }
       console.log("_createProductPayload_", this.createProductPayload);
-      this.http.post('http://localhost:8002/api/admin/product/create',this.createProductPayload).subscribe((response) => {
+      this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
         console.log("__RESPONSE_",response);
       })
     }
