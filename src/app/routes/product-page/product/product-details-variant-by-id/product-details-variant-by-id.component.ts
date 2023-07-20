@@ -9,6 +9,7 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 
 @Component({
@@ -18,14 +19,44 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 })
 export class ProductDetailsVariantByIdComponent implements OnInit{
   productImages=[];
+  productVideoURL: string;
+  public parentProduct:any;
+  featuresVideoTitle: string = "Features Video";
+  element: string;
+  productVideoURLTitle : string;
   productBundles=[];
-  faq = [];
+  public productVideoText: string;
+  compareProductList:any=[];
+  productBundleList:any=[];
+  public faq : any[]=[];
   productListToCompare  = [];
+  productBundleData:any[]
+  productBundleVariantData:any[]
   products = [];
   links = ['#description', '#feature', '#specification','#simProd', '#compProd', '#bundles','#faq'];
   titles = ['Description', 'Features', 'Specification','Similar Products','compare products','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
+
+ 
+  public allsimilarProducts:any[];
+
+
+  public selectedProductItem : any[] = [];
+
+  public completeFeatureList : any[] = [];
+  public viewAllFeaturesDetails = false;
+
+
+
+  public headingTags = [
+    { title_size: "h1" },
+    { title_size: "h2" },
+    { title_size: "h3" },
+    { title_size: "h4" },
+    { title_size: "h5" },
+    { title_size: "h6" }
+  ];
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
@@ -35,6 +66,18 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   @ViewChild('bundlesRef') bundlesRef!: ElementRef;
   @ViewChild('faqRef') faqRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
+
+    // ----- >>>> compare products Scroll function ----- >>>>
+
+    scrollFunctionRight(){
+      let left = document.querySelector(".scroll-content")
+      left.scrollBy(200, 0);
+    };
+  
+    scrollFunctionLeft(){
+      let right = document.querySelector(".scroll-content")
+      right.scrollBy(-200, 0);
+    };
 
   scrollToSection(sectionId: any): void {
 
@@ -71,11 +114,13 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   }
 
 
- featureList = [];
- productVariants ;
- dispFeatureList: any[] = [];
- productName:string;
+  featureList = [];
+  productVariants ;
+  dispFeatureList: any[] = [];
+  productName:string;
   public bannerUrl : any;
+  public productVariantData:any
+  public otherProductVariantData:any[0]
 
   private subscriptions: Subscription[] = [];
   public product : any = {};
@@ -83,6 +128,9 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   public productSubCategoryId : String;
   public similarProducts :any[] = [];
   public bannerText: '#FFFFFF';
+
+
+  public alternateFeaturesImage = '../../../../assets/productDetails/FeaturesIllustration.svg';
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
@@ -138,66 +186,111 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
     this.onProductLoad = false;
     this.subscriptions.push(
       this.metaDataSvc.fetchProductByProductVariantId(productId).subscribe( (response) => {
+
+        console.log("response product Variant for ",productId);    
         //  this.individualProductDetail$.subscribe();
-console.log("response product Variant",response.featureList);
-response.productVariants = {...response.productVariants, quantity: 1 }
+  console.log("response product Variant feature list",response.featureList);
+  response.productVariants = {...response.productVariants, quantity: 1 }
+
+
 this.productVariants=response.productVariants;
 
-for(let i=0;i<response.productBundles.length;i++)
+
+console.log("response product Variant Quantituy",response.productVariants.quantity);
+console.log("response product videoURL",response.productVariants.productVideoURL[0]);
+this.productVariantData = this.setProductVariantsData(this.productVariants,response.products);
+this.otherProductVariantData=this.setProductVariantsData(this.similarProducts,response.products);
+this.productBundleData=this.setBundlesData(response.productBundles);
+this.productBundleVariantData=this.setProductBundleVariantsData(response.productBundleVariants)
+this.productBundleList=[...this.productBundleData,...this.productBundleVariantData ]
+
+
+this.compareProductList = [...this.otherProductVariantData,...this.productBundleData,...this.productBundleVariantData ]
+
+
+        for(let i=0;i<response.productBundles.length;i++)
         response.productBundles[i] = {...response.productBundles[i], checked: false, quantity: 1 };
+
+       
+
+
         this.productBundles  = response.productBundles;
         console.log("bundles",this.productBundles);
 
-        this.faq  = response.products[0].productFAQ;
+        this.faq  = response.products.productFAQ;
         console.log("faq:",this.faq);
 
         let fList = [];
-        if (response.featureList?.length > 0) {
-          //featureList = response.productFeatureList;
-          this.featureList =[];
+        if(response.featureList.length > 5){
           this.featureList = response.featureList.slice(0,5);
-          //this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
         }
-        // if(response.products.name!=null) {
-        // this.productName = response.products.name;
-        // }
+        else{
+          this.featureList = response.featureList;
+        }
 
         // this.featureList = fList;
         console.log("inside", this.featureList);
         for(let i=0;i<response.similerProductVariants.length;i++)
         response.similerProductVariants[i] = {...response.similerProductVariants[i], quantity: 1 }
         this.similarProducts = response.similerProductVariants;
-//         response.productBundles=[{"name": "Microsoft Defender for Office 365 Plan 1","priceList": [
-//           {
-//               "Currency": "INR",
-//               "price": "1525.20",
-//               "priceType": "Yearly",
-//               "ERPPrice": "1860.00",
-//               "discountRate": "18"
-//           }
-//         ]
-// }];
 
-       response.products[0] = {...response.products[0], quantity: 1 }
-        this.product = { products:[...response.products], featureList: response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants: response.featureListByProductVariants };
-        console.log("&&&&& inside", this.product.productVariants.length);
+        this.parentProduct=response.products;
+        console.log("logo comes from parent product  ==="+this.parentProduct.bannerLogo)
+
+       response.products = {...response.products, quantity: 1 }
+       // this.product = { products:[...response.products], featureList: response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants: response.featureListByProductVariants };
+      //  console.log("&&&&& inside", this.product.productVariants.length);
         this.onProductLoad = true;
         // this.bannerUrl = this.product.bannerURL;
-          if(!response.products[0].hasOwnProperty('productImages')) {
-            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-            this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-          }
-        if(response.products[0].productImages.length>0) {
-          this.productImages=[];
-          this.productImages = response.productImages;
-        } else {
+        if( response.products &&response.products.hasOwnProperty('productImages')&& response.products.productImages && response.products.productImages.length>0) {
+          this.productImages = response.products.productImages;
+
+        } 
+        else {
+          console.log("======no product images====")
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
+        console.log("======no product images====",this.productImages.length)
         }
+        this.productImages=this.productImages.slice(0,4);
+
+        this.completeFeatureList = response.featureList;
+
+        //iframe functionality------->
+
+        /*if(this.productVariants && this.productVariants.productVideoURL){
+          console.log("======have videoURL====",this.productVariants.productVideoURL.length) 
+          this.setIframe(this.productVariants.productVideoURL);
+          this.productVideoURL = this.productVariants.productVideoURL[0].source 
+          // this.productVideoText = `<${this.headingTags[4].title_size}>${this.productVariants.name}</${this.headingTags[4].title_size}>`
+          this.element = `<${this.headingTags[4].title_size}>${this.featuresVideoTitle}</${this.headingTags[4].title_size}>`
+          
+          
+        }
+        else{
+          this.productVideoURL= this.alternateFeaturesImage;
+          console.log("======no product video====",this.productVideoURL.length)
+        }*/
+
+        /*if(this.productVariants.productVideoURL &&this.productVariants.hasOwnProperty('productVideoURL')&& this.productVariants.productVideoURL && this.productVariants.productVideoURL.length>0) {
+          //this.productVideoURL =  "`"+this.productVariants.productVideoURL+"`";
+          this.productVideoURL = "https://www.youtube.com/embed/aGtMBo1Ko8w";
+          this.productVideoURLTitle = "Sample";
+
+          console.log("================================Available",this.productVideoURL);
+          
+        } 
+        else {
+        this.productVideoURL= this.alternateFeaturesImage;
+        console.log("======no product video====",this.productVideoURL.length)
+        }*/
+        
+        
+
+
+
 
 
         // this.product.productVariants.push(response.productBundles);
@@ -225,10 +318,39 @@ for(let i=0;i<response.productBundles.length;i++)
         this.similarProducts = response.productBundles;
         this.product = { ...response.products , featureList : response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants : response.featureListByProductVariants } ;
         this.onProductLoad = true;*/
+
+        this.setCheckBoxState();
       })
 
 
     );
+  }
+
+  public setIframe(data){
+    console.log("setting video url data "+data[0].source)
+
+    var iframeDivHolder = document.getElementById("iframe-div");
+
+		// create iframe
+		var substack = document.createElement("iframe");
+		// Add attributes
+		//substack.src = "https://www.youtube.com/embed/aGtMBo1Ko8w";
+    substack.src = data[0].source;
+		// Set size and hide iframe border
+		substack.width = "608";
+		substack.height = "342";
+		substack.frameBorder ="0";
+		substack.scrolling = "0";
+		substack.style.border= "none";
+		substack.style.background = "white";
+		iframeDivHolder.appendChild(substack);
+		// event to trigger iframe loading
+		/*document.getElementById("subscribe").addEventListener("click", function(){
+			// Add Iframe to webpage
+			loadSubscribe.appendChild(substack);
+			// Hide button
+			this.style.display = "none";
+		})*/
   }
 
   public setDataValues(resp:any): void {
@@ -262,7 +384,8 @@ console.log("response values: ", resp);
     private router : Router,
     private authService : MsalService,
     private modalService : NgbModal,
-    private compareProductsStore : CompareProductsStore
+    private compareProductsStore : CompareProductsStore,
+    private userAccountStore : UserAccountStore
   ){}
 featureCount=5;
 
@@ -292,30 +415,109 @@ featureCount=5;
     //this.getProductDetails2(productId);
   }
 
-  public featureCountEvent(): void {
+  // public featureCountEvent(): void {
+    
+  //   //  if(this.product.featureList.length>5 && !this.viewAllFeature){
+  //   //   this.featureList = [...this.product.featureList.slice(0,5)];
+  //   //   console.log("dispfeatureList",this.featureList);
+  //   //   this.viewAllFeature = true;
+  //   // } else {
+  //     this.featureList = this.product.featureList;
+  //     console.log("product list to compare",this.productListToCompare);
+  //   // }
+  // }
+
+  public featureCountEvent(val): void {
+
+
+    console.log("****** View Before", val);
+    val = val ? false : true;
+    console.log("****** View ", val);
+    this.viewAllFeaturesDetails = val;
+    console.log("****** View ", this.viewAllFeaturesDetails);
+    if(this.viewAllFeaturesDetails){
+      console.log("****** In Else");
+      console.log("****** In Else", this.completeFeatureList);
+      this.featureList = this.completeFeatureList;
+    }
+    else{
+      console.log("****** In Else");
+      console.log("****** In Else", this.completeFeatureList);
+      if(this.completeFeatureList.length>5){
+        this.featureList = this.completeFeatureList.slice(0,5);
+      }
+      else{
+        this.featureList = this.completeFeatureList;
+      }
+      
+      
+    }
     
     //  if(this.product.featureList.length>5 && !this.viewAllFeature){
     //   this.featureList = [...this.product.featureList.slice(0,5)];
     //   console.log("dispfeatureList",this.featureList);
     //   this.viewAllFeature = true;
     // } else {
-      this.featureList = this.product.featureList;
+      //this.featureList = this.product.featureList;
+      
+      
       console.log("product list to compare",this.productListToCompare);
     // }
   }
 
   public removeSelectedItem(_id:any){
+
     this.productListToCompare = this.productListToCompare.filter(function(item) {
       return item._id != _id;
     });
-    // this.compareProductsStore.setCompareProductsList(this.productList);
+    
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    // console.log('product_list_to_compare',);
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
   }
 
   public navigateToCompareProducts(){
     this.router.navigate(['/compare-products']);
   }
+  // async addToCompare(item:any, type:any):Promise<void> {
+  //   // if(!item.checked)
+  //   // item.checked = true;
+
+  //   // if(item.checked)
+  //   // item.checked = false;
+  //   // else
+  //   // item.checked = true;
+  //   let count=0;
+  //   await this.productListToCompare.forEach(val => {
+  //     if(val._id===item._id) {
+  //       count++;
+  //     }
+  //   });
+  //   if (count===0) {
+     
+  //     item = { ...item, 'solutionCategory': item.solutionCategory };
+    
+  //     this.productListToCompare.push(item);
+  //   }
+  //   // this.productListToCompare.push(item);
+  //   //localStorage.removeItem('product_list_to_compare');
+  //   localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+  //   this.compareProductsStore.setCompareProductsList(this.productListToCompare);
+  //   const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+  //   console.log("getProdFromLocalStorage",prodGet);
+  // }
+
+  public onCheckBoxChange($event, item:any, type:any){
+      
+    if($event.checked){
+      this.addToCompare(item, type);
+    }
+    else{
+      this.removeSelectedItem(item._id);
+    }
+  }
+
+
   async addToCompare(item:any, type:any):Promise<void> {
     // if(!item.checked)
     // item.checked = true;
@@ -325,7 +527,7 @@ featureCount=5;
     // else
     // item.checked = true;
     let count=0;
-    await this.productListToCompare.forEach(val => {
+    /*await this.productListToCompare.forEach(val => {
       if(val._id===item._id) {
         count++;
       }
@@ -336,12 +538,31 @@ featureCount=5;
       else
       item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
       this.productListToCompare.push(item);
+    }*/
+
+    if(type === 'fromProd'){
+      console.log("()()() From Prom Prod");
+      console.log("()()()( From Prod", item);
+      this.productListToCompare.push(item);
+      
     }
-    // this.productListToCompare.push(item);
+    else{
+      this.productListToCompare.push(item);
+    }
+
+    
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+
+    //this.productListToCompare.push(item);
+
+    
+    
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+    console.log("getProdFromLocalStorage",this.productListToCompare);
+    //localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    this.compareProductsStore.setCompareProductsList(this.productListToCompare);
-    const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    console.log("getProdFromLocalStorage",prodGet);
+    //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    //console.log("getProdFromLocalStorage",prodGet);
   }
 
   images: any[] = [1,2,3,4];
@@ -381,28 +602,37 @@ featureCount=5;
     
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    if(loggedinData.length > 0 ){
+    let queryParams;
       
-      var existingItems = this.cartStore.getCartItems();
-    
-      let queryParams;
-      // if(product.productVariants.length>0){
         queryParams = {
           productName : product.name,
           productId : product._id,
           quantity : product.quantity,
           price : product.priceList[0].price,
         };
-      // }
+      
+    /*if(loggedinData.length > 0 ){
+      
+      var existingItems = this.cartStore.getCartItems();
+    
+      
       console.log(queryParams);
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
     else {
-      this.viewModal();
-    }
+      this.viewModal(queryParams);
+    }*/
 
-    
+    this.userAccountStore.userDetails$.subscribe(res=>{
+      console.log("()()()() ", res);
+      if(res && res.email !== null){
+        this.router.navigate(['/cart'], {queryParams: queryParams});
+      }
+      else{
+        this.viewModal(queryParams);
+      }
+    })
 
 
     
@@ -412,8 +642,69 @@ featureCount=5;
 
   }
 
-  public viewModal() {
+
+  public setCheckBoxState(){
+
+    //productFamily
+    //allCompareProducts
+
+    
+
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+    /*var index = productsList.findIndex(el => el.productId === item._id);
+      
+    if(index >=0){
+      productsList[index].quantity = Number(productsList[index].quantity) + 1;
+    }*/
+
+    var index = uniqueElements.findIndex(el => el._id === this.productVariantData._id);
+    if(index >=0){
+      if(this.productVariantData.checked){
+        this.productVariantData.checked = true;
+      }
+      else{
+        this.productVariantData['checked'] = true;
+      }
+    }
+    else{
+      if(this.productVariantData.checked){
+        this.productVariantData.checked = false;
+      }
+      else{
+        this.productVariantData['checked'] = false;
+      }
+    }
+
+    this.compareProductList.forEach(element => {
+      var index = uniqueElements.findIndex(el => el._id === element._id);
+      if(index >=0){
+        if(element.checked){
+          element.checked = true;
+        }
+        else{
+          element['checked'] = true;
+        }
+      }
+      else{
+        if(element.checked){
+          element.checked = false;
+        }
+        else{
+          element['checked'] = false;
+        }
+      }
+    });
+
+
+  }
+
+  public viewModal(queryParams) {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
+    modalRef.componentInstance.request = queryParams;
   }
 
   public getColor(val){
@@ -426,8 +717,104 @@ featureCount=5;
     
   }
 
+  public setProductVariantsData(data,parentProduct){
+    
+    
+    console.log("======setProductVariantsData===="+data._id)
+    console.log("getting parentproductData==="+parentProduct.name)
+        if(data ){
+          
+          data.name=data.name;
+          data.productType = 'productVariants';
+          data.bannerLogo = (parentProduct  && parentProduct.bannerLogo) ? parentProduct.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          data.description = data.description;
+          data['solutionCategory'] = (parentProduct &&parentProduct.subcategories && parentProduct.subcategories.length > 0) ? parentProduct.subcategories[0].name : "";
+          data['navigationId'] = data._id;
+          data.priceList=data.priceList;
+          data.quantity=1;
+          data._id=data._id;
+         
+        }
+    
+        return data;
+      }
+
+      public setSimilarProductVariantsData(data,parentProduct){
+    
+    
+        console.log("======setSimilarProductVariantsData===="+data.length)
+        console.log("getting parentproductData==="+parentProduct.name)
+        if(data && data.length>0){
+          console.log("===========setProductBundleVariantsData======="+data.length)
+          data.forEach(element => {
+              
+            element.name=data.name;
+            element.productType = 'productVariants';
+            element.bannerLogo = (parentProduct  && parentProduct.bannerLogo) ? parentProduct.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+            element.description = data.description;
+            element['solutionCategory'] = (parentProduct &&parentProduct.subcategories && parentProduct.subcategories.length > 0) ? parentProduct.subcategories[0].name : "";
+            element['navigationId'] = data._id;
+            element.priceList=data.priceList;
+            element.quantity=1;
+            element._id=data._id;
+             
+            });
+          }
+        
+            return data;
+          }
+
+         /**
+   * Set Product Bundle Variants Data
+   */
+
+  public setProductBundleVariantsData(data){
+
+    if(data && data.length>0){
+      console.log("===========setProductBundleVariantsData======="+data.length)
+      data.forEach(element => {
+        element.name=element.name;
+          element.productType = 'productBundleVariants';
+          element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element.solutionCategory=(element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
+          element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
+          element['navigationId'] = element._id;
+          element.priceList=element.priceList
+          element.quantity=1
+      });
+    }
+
+    return data;
+  }
+
+  /**
+   * Set Product Bundles Data
+   */
+
+  public setBundlesData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+        element.name=element.name;
+          element.productType = 'productBundles';
+          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
+          element['navigationId'] = element._id;
+          element.priceList=element.priceList
+          element.quantity=1
+      });
+    }
+
+    return data;
+  }
+
   ngOnDestroy(){
     
   }
+
+
+
 }
 

@@ -112,8 +112,8 @@ export class FeatureListTableComponent implements OnInit{
   }
 
   public viewModal() {
-    console.log("******* +++++++++ ))))))) Login Method Call");
     const modalRef = this.modalService.open(LoginAlertModalComponent);
+    //modalRef.componentInstance.request = queryParams;
   }
 
   public onNavigateTo(link){

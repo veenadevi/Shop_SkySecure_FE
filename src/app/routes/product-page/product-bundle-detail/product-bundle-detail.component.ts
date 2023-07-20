@@ -6,6 +6,9 @@ import { Subscription } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
+import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
+
 
 
 @Component({
@@ -18,7 +21,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public currentRoute: string;
   links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
-  titles = ['Description', 'Features', 'Specification', 'Reviews', 'compare produscts', 'Bundle Details', 'Similar Products'];
+  titles = ['Description', 'Features', 'Specification', 'Reviews', 'Compare Products', 'Bundle Details', 'Similar Products'];
   activeLink = this.links[0];
   myColor = '';
 
@@ -27,6 +30,7 @@ export class ProductBundleDetailComponent implements OnInit{
   public selectedProductItem : any[] = [];
 
   public bundleQuantity = 1;
+  checked: boolean = false;
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
@@ -36,6 +40,27 @@ export class ProductBundleDetailComponent implements OnInit{
   @ViewChild('bundleDetailsRef') bundleDetailsRef!: ElementRef;
   @ViewChild('simProdRef') simProdRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
+
+  // scroll section
+  // @ViewChild('scrollContent', { static : true }) scrollContent! : ElementRef;
+  // @ViewChild('rightArrow',    { static : true }) rightArrow!    : ElementRef;
+  // @ViewChild('leftArrow',     { static : true }) leftArrow!     : ElementRef;
+
+
+  // ----- >>>> compare products Scroll function ----- >>>>
+
+  scrollFunctionRight(){
+    let left = document.querySelector(".scroll-content")
+    left.scrollBy(200, 0);
+  };
+
+  scrollFunctionLeft(){
+    let right = document.querySelector(".scroll-content")
+    right.scrollBy(-200, 0);
+  };
+
+
+ 
 
   scrollToSection(sectionId: any): void {
 
@@ -65,7 +90,6 @@ export class ProductBundleDetailComponent implements OnInit{
   }
 
   openLink(url: any): void {
-    console.log("url", url);
     window.open(url, '_blank');
   }
 
@@ -76,7 +100,9 @@ export class ProductBundleDetailComponent implements OnInit{
     private authService : MsalService,
     private cartStore : CartStore,
     private router : Router,
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private userAccountStore : UserAccountStore,
+    private compareProductsStore : CompareProductsStore,
   ){
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
@@ -93,8 +119,7 @@ export class ProductBundleDetailComponent implements OnInit{
             // Hide progress spinner or progress bar
             this.currentRoute = event.url; 
             currentUrl = this.route.snapshot.paramMap.get('id');
-            this.ngOnInit();
-            console.log('@@@@@@@@ _ Route change End');         
+            this.ngOnInit();        
             //console.log("@@@@@@@@ _ ",event);
         }
 
@@ -120,6 +145,11 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public products : any[] = [];
 
+  public childproducts : any[] = [];
+  public childproductVariants : any[] = [];
+  public childproductFamily : any[] = [];
+  public childproductFamilyVariants : any[] = [];
+
   public features : any[] = [];
 
   public productVarients : any[] = [];
@@ -131,14 +161,18 @@ export class ProductBundleDetailComponent implements OnInit{
   public allCompareProducts: any[];
 
   public allSimilerProducts: any[];
+  public bundleItemsList:any[];
 
   public productImages : any=[];
+  productListToCompare  = [];
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
   public ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
+    this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     this.getBrandDetails(productId);
+    
   }
 
   public featureCountEvent(): void {
@@ -151,14 +185,53 @@ export class ProductBundleDetailComponent implements OnInit{
     this.subscriptions.push(
        this.metaDataSvc.fetchSingleBrandDetails(id).subscribe( response => {
 
-        this.productVarientData = response;
+       // this.productVarientData = response;
         this.productFamily = response.productFamily;
-        this.productFamilyVariants = response.productFamilyVariants;
-        this.productVarients = response.productVarients;
-        this.products = response.products;
-        this.features = response.features;
+       
+        //This is not needed cos bundles which is listed not going to have Variant 
+
+        //this.productFamilyVariants = response.productFamilyVariants;
+
+
+        this.productVarients = response.productFamilyChildLicenseList.productVarients;
+
+       
+        this.products = response.productFamilyChildLicenseList.products;
+
+
+
+        this.childproducts=this.setProductsData(response.productFamilyChildLicenseList.childproducts);
+        
+  
+
+        this.childproductVariants=this.setProductVariantsData(response.productFamilyChildLicenseList.childproductVariants);
+        
+
+        this.childproductFamily=this.setProductFamilyData(response.productFamilyChildLicenseList.childProductFamily);
+        
+        this.childproductFamilyVariants=this.setChildProductFamilyVariant(response.productFamilyChildLicenseList.childProductFamilyVariant);
+        
+        this.allCompareProducts = [...this.childproducts, ...this.childproductVariants, ...this.childproductFamily,...this.childproductFamilyVariants]
+        
+        this.allCompareProducts.forEach(element => {
+          element.name = String(element.name);
+          
+        });
+        this.features = response.productFamilyFeatures;
         this.onPageLoad = true;
-        this.allCompareProducts = this.products;
+
+
+        //let tempProducts = this.setProductsData(this.products);
+        //let tempProductVariants = this.setProductVariantsData(this.productVarients);
+       // let tempChildProductFamilyVariants = this.setChildProductFamilyVariant(response.childProductFamilyVarient);
+        //let tempProductBundles = this.setProductFamilyData(this.childProductFamilies);
+        //let tempProductBundles = this.setBundlesData(this.childProductFamilies);
+
+        this.bundleItemsList = [...this.childproducts, ...this.childproductVariants, ...this.childproductFamily,...this.childproductFamilyVariants]
+
+       
+     
+       
 
 
         if( this.productFamily && this.productFamily.productImages && this.productFamily.productImages.length>0) {
@@ -170,35 +243,28 @@ export class ProductBundleDetailComponent implements OnInit{
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         }
-        console.log("()()()()() ", this.productImages);
         this.productImages=this.productImages.slice(0,4);
 
 
-        let tempProducts = this.setProductsData(response.products);
-        let tempProductVariants = this.setProductVariantsData(this.productVarients);
-        let tempChildProductFamilyVariants = this.setChildProductFamilyVariant(response.childProductFamilyVarient);
-        //let tempProductBundles = this.setBundlesData(this.childProductFamilies);
-
-        this.allSimilerProducts = [...tempProducts, ...tempProductVariants, ...tempChildProductFamilyVariants]
-        console.log("++++++++++++++ _this.",this.allSimilerProducts);
+      
         //this.allSimilerProducts = this.products.concat(response.productVarients,response.productFamilyVariants);
         //this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
-        
+        this.setCheckBoxState();
       })
-    );
+    );  
+    
   }
 
   public setProductsData(data){
-console.log("()()()()()()( ", data);
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
           element.productType = 'products';
           element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
-          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
           element['navigationId'] = element._id;
-          element.priceList=element.price
+          element.priceList=element.priceList
           element.quantity=1
       });
     }
@@ -210,16 +276,18 @@ console.log("()()()()()()( ", data);
    * Set Product Variants Data
    */
 
+ 
+
   public setProductVariantsData(data){
     
-console.log("======setProductVariantsData===="+data.length)
+
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
           element.productType = 'productVariants';
-          element.bannerLogo = (element.products && element.products.length>0 && element.products[0].bannerLogo) ? element.products[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.bannerLogo = (element.products  && element.products.bannerLogo) ? element.products.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
-          element['solutionCategory'] = (element.products && element.products.length>0 && element.products[0] && element.products[0].subCategories && element.products[0].subCategories.length > 0) ? element.products[0].subCategories[0].name : "";
+          element['solutionCategory'] = (element.products && element.products.subCategories && element.products.subCategories.length > 0) ? element.products.subCategories[0].name : "";
           element['navigationId'] = element._id;
           element.priceList=element.priceList;
           element.quantity=1
@@ -236,14 +304,31 @@ console.log("======setProductVariantsData===="+data.length)
   public setChildProductFamilyVariant(data){
 
     if(data && data.length>0){
-      console.log("===========setProductBundleVariantsData======="+data.length)
       data.forEach(element => {
-        element.name=element.name;
+          element.name=element.name;
           element.productType = 'productBundleVariants';
           element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           //element.solutionCategory=(element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
           element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : 'Cybersecutiy and Compliance'
+          element['navigationId'] = element._id;
+          element.priceList=element.priceList
+          element.quantity=1
+      });
+    }
+
+    return data;
+  }
+
+  public setProductFamilyData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+        element.name=element.name;
+          element.productType = 'productBundles';
+          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
           element['navigationId'] = element._id;
           element.priceList=element.priceList
           element.quantity=1
@@ -270,24 +355,19 @@ console.log("======setProductVariantsData===="+data.length)
 
   public changeQuantity(type){
 
-    console.log("(((( Called,", type);
+    
     if(type === 'add'){
       this.productQuantity = Number(this.productQuantity) + 1;
     }
     else if(type === 'minus'){
       this.productQuantity =  Number(this.productQuantity) - 1;
     }
-    console.log("(((( Called,", this.productQuantity);
   }
 
   public buyNow(item, quantity){
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    if(loggedinData.length > 0 ){
-      
-      var existingItems = this.cartStore.getCartItems();
-    
-      let queryParams;
+    let queryParams;
       // if(product.productVariants.length>0){
         queryParams = {
           productName : item.name,
@@ -295,23 +375,42 @@ console.log("======setProductVariantsData===="+data.length)
           quantity : quantity,
           price : item.priceList[0].price,
         };
-      // }
+    /*if(loggedinData.length > 0 ){
+      
+      var existingItems = this.cartStore.getCartItems();
+    
+      
+      
       console.log(queryParams);
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
     else {
-      this.viewModal();
-    }
+      this.viewModal(queryParams);
+    }*/
+
+    this.userAccountStore.userDetails$.subscribe(res=>{
+      if(res && res.email !== null){
+        this.router.navigate(['/cart'], {queryParams: queryParams});
+      }
+      else{
+        this.viewModal(queryParams);
+      }
+    })
+
+
+
+
+
+
   }
 
-  public viewModal() {
+  public viewModal(queryParams) {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
+    modalRef.componentInstance.request = queryParams;
   }
 
   public compareEvent($event, item){
-    console.log("&*&*&*&*& ", $event);
-    console.log("&*&*&*&*& ", item);
 
     if($event.checked){
       this.selectedProductItem = [item];
@@ -323,41 +422,228 @@ console.log("======setProductVariantsData===="+data.length)
 
   }
 
-  addQuantity(item):void {
+  public onCheckBoxChange($event, item:any, type:any){
     
-    this.bundleQuantity = Number(this.bundleQuantity) + 1
+    if($event.checked){
+      this.addToCompare(item, type);
+    }
+    else{
+      this.removeSelectedItem(item._id);
+    }
+  }
+
+  async addToCompare(item:any, type:any):Promise<void> {
+    // if(!item.checked)
+    // item.checked = true;
+
+    // if(item.checked)
+    // item.checked = false;
+    // else
+    // item.checked = true;
+    let count=0;
+    /*await this.productListToCompare.forEach(val => {
+      if(val._id===item._id) {
+        count++;
+      }
+    });
+    if (count===0) {
+      if(type!='prodFam')
+      item = { ...item, 'solutionCategory': item.subcategories[0]?.description };
+      else
+      item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
+      this.productListToCompare.push(item);
+    }*/
+
+ 
+    if(type === 'fromProd'){
+      this.productListToCompare.push(item);
+      
+    }
+    else{
+      this.productListToCompare.push(item);
+    }
+
+    
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+
+    //this.productListToCompare.push(item);
+
+    
+    
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+    //localStorage.removeItem('product_list_to_compare');
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    
+  }
+
+  public removeSelectedItem(_id:any){
+    console.log("()()()()( Items before ", this.productListToCompare);
+    this.productListToCompare = this.productListToCompare.filter(function(item) {
+      
+      return item._id != _id;
+    });
+    console.log("()()()()( Items After ", this.productListToCompare);
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+    //this.setCheckBoxState();
+
+    /*console.log("()()()()( Items before ", this.selectedProductItem);
+    this.selectedProductItem = this.selectedProductItem.filter(function(item) {
+      
+      return item._id != _id;
+    });
+    console.log("()()()()( Items After ", this.selectedProductItem);
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.selectedProductItem));
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.selectedProductItem));
+    this.compareProductsStore.setCompareProductsList2(this.selectedProductItem);*/
+
+
+
+  }
+
+  public navigateToCompareProducts(){
+    this.router.navigate(['/compare-products']);
+  }
+
+  addQuantity(item):void {
+
+    //this.allSimilerProducts[0].quantity = 1+1;
+    
+    item.quantity=Number(item.quantity) + 1
+    
+    
+    //this.bundleQuantity = Number(this.bundleQuantity) + 1
     //this.finalBundleDetails[index].quantity = quantity+1;
   }
   decreaseQuantity(item): void {
-    // if(quantity>1){
-    //   this.finalBundleDetails[index].quantity = quantity-1;
-    // }
-    this.bundleQuantity = Number(this.bundleQuantity) - 1
+    if(item.quantity>1){
+      item.quantity=Number(item.quantity) -1
+    }
+    
   }
 
-  public requestQuote(item, quant){
+
+  public requestQuote (product : any) : void {
+
+    
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    if(loggedinData.length > 0 ){
+    let queryParams;
+      // if(product.productVariants.length>0){
+        queryParams = {
+          productName : product.name,
+          productId : product._id,
+          quantity : product.quantity,
+          price : product.priceList[0].price,
+        };
+      // }
+    /*if(loggedinData.length > 0 ){
       
       var existingItems = this.cartStore.getCartItems();
     
-      let queryParams;
-      // if(product.productVariants.length>0){
-        queryParams = {
-          productName : item.name,
-          productId : item._id,
-          quantity : quant,
-          price : item.priceList[0].price,
-        };
-      // }
-      console.log(queryParams);
+      
+      
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
     else {
-      this.viewModal();
+      this.viewModal(queryParams);
+    }*/
+
+    this.userAccountStore.userDetails$.subscribe(res=>{
+      
+      if(res && res.email !== null){
+        this.router.navigate(['/cart'], {queryParams: queryParams});
+      }
+      else{
+        this.viewModal(queryParams);
+      }
+    })
+  }
+
+  public requestQuoteold(item, quant){
+    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
+
+    let queryParams;
+      queryParams = {
+        productName : item.name,
+        productId : item._id,
+        quantity : quant,
+        price : item.priceList[0].price,
+      };
+    if(loggedinData.length > 0 ){
+      
+      var existingItems = this.cartStore.getCartItems();
+    
+
+      // }
+      this.router.navigate(['/cart'], {queryParams: queryParams});
     }
+
+    else {
+      this.viewModal(queryParams);
+    }
+  }
+  public setCheckBoxState(){
+
+    //productFamily
+    //allCompareProducts
+
+    
+
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+    /*var index = productsList.findIndex(el => el.productId === item._id);
+       
+    if(index >=0){
+      productsList[index].quantity = Number(productsList[index].quantity) + 1;
+    }*/
+
+    var index = uniqueElements.findIndex(el => el._id === this.productFamily._id);
+    if(index >=0){
+      if(this.productFamily.checked){
+        this.productFamily.checked = true;
+      }
+      else{
+        this.productFamily['checked'] = true;
+      }
+    }
+    else{
+      if(this.productFamily.checked){
+        this.productFamily.checked = false;
+      }
+      else{
+        this.productFamily['checked'] = false;
+      }
+    }
+
+    this.allCompareProducts.forEach(element => {
+      var index = uniqueElements.findIndex(el => el._id === element._id);
+      if(index >=0){
+        if(element.checked){
+          element.checked = true;
+        }
+        else{
+          element['checked'] = true;
+        }
+      }
+      else{
+        if(element.checked){
+          element.checked = false;
+        }
+        else{
+          element['checked'] = false;
+        }
+      }
+    });
+
+
   }
   
 }

@@ -7,6 +7,7 @@ import { AllAccountsComponent } from './partials/all-accounts/all-accounts.compo
 import { AccountDetailsComponent } from './partials/account-details/account-details.component';
 import { DealsDetailsComponent } from './partials/deals-details/deals-details.component';
 import { EstimateDetailsComponent } from './partials/estimate-details/estimate-details.component';
+import { AddNewProductComponent } from './partials/add-new-product/add-new-product.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,11 @@ const routes: Routes = [
         canActivate: [],
         path: 'estimate-details',
         component : EstimateDetailsComponent
+      },
+      {
+        canActivate: [],
+        path: 'add-new-product',
+        component : AddNewProductComponent
       },
       
       

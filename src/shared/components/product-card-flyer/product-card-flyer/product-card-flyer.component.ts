@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { LoginAlertModalComponent } from '../../login-alert-modal/login-alert-modal.component';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'product-card-flyer',
@@ -38,8 +39,8 @@ export class ProductCardFlyerComponent implements OnInit{
     private compareProductsStore : CompareProductsStore,
     private authService : MsalService,
     private cartStore : CartStore,
-    
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private userAccountStore : UserAccountStore
   ){}
 
 
@@ -98,6 +99,8 @@ export class ProductCardFlyerComponent implements OnInit{
           cacheData[indexToUpdate]['checked'] = $event.target.checked;
         }
 
+        //localStorage.removeItem('product_list_to_compare');
+        
         localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
 
       }
@@ -129,6 +132,7 @@ export class ProductCardFlyerComponent implements OnInit{
           
         }
       }*/
+      
       this.selectedListForCompare = this.selectedListForCompare.filter(element => element._id != item._id);
     }
      
@@ -144,6 +148,8 @@ export class ProductCardFlyerComponent implements OnInit{
       cumulativeList = this.selectedListForCompare;
     }
     this.compareProductsStore.setCompareProductsList(cumulativeList);*/
+    //localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
+    //this.compareProductsStore.setCompareProductsList(this.selectedListForCompare);
     
     this.listForCompare.emit(this.selectedListForCompare);
     
@@ -153,28 +159,40 @@ export class ProductCardFlyerComponent implements OnInit{
 
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    if(loggedinData.length > 0 ){
+    let queryParams;
+      
+    
+    queryParams = {
+          productName : product.name,
+          productId : product._id,
+          quantity : 1,
+          price : product.priceList[0].price,
+        };
+    /*if(loggedinData.length > 0 ){
       
       var existingItems = this.cartStore.getCartItems();
-      let queryParams;
-      
-      console.log("))))))) product", product);
-      queryParams = {
-            productName : product.name,
-            productId : product._id,
-            quantity : 1,
-            price : product.priceList[0].price,
-          };
+
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
 
     else {
-      this.viewModal();
-    }
+      this.viewModal(queryParams);
+    }*/
+
+    this.userAccountStore.userDetails$.subscribe(res=>{
+      console.log("()()()() ", res);
+      if(res && res.email !== null){
+        this.router.navigate(['/cart'], {queryParams: queryParams});
+      }
+      else{
+        this.viewModal(queryParams);
+      }
+    })
   }
 
-  public viewModal() {
+  public viewModal(queryParams) {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
+    modalRef.componentInstance.request = queryParams;
   }
 
   public setCheckBoxes(){

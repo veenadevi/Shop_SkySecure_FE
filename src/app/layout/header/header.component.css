@@ -350,14 +350,17 @@ ul .nav-text:hover {
 
 .search-bar {
     position: absolute;
-    width: 100%;
+    width: 50%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     top: 0;
-    left: 0;
     z-index: 10;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .search-box {
@@ -382,4 +385,11 @@ ul .nav-text:hover {
     background-color: #1e1e1e;
     border-radius: 50%;
     padding: 6px;
+}
+
+.search-bar-holder{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

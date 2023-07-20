@@ -1,0 +1,53 @@
+
+    .login-container{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+    .LHS{
+        display: flex;
+        flex-direction: column;
+        background-color: #080F24;
+        width: 60%;
+        min-height: 100vh;
+    }
+    
+    .logo{
+        display: flex;
+        padding: 6% 0 0 50px;
+    
+    }
+    .center-img{
+        text-align: center;
+        padding: 40px 0 20px 0;
+    }
+    .welcome{
+        text-align: center;
+        color: white;
+        font-family: 'lato',sans-serif;
+    }
+    .content{
+        display: flex;
+        align-items: center;
+        color: white;
+        justify-content: center;
+        /* padding-left: 30%; */
+        padding-bottom: 6%;
+        /* margin-top: -25px; */
+        font-family: 'lato',sans-serif;
+    }
+    .content span{
+        width:70%;
+        text-align: center;
+    }
+    .RHS{
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+    }
+    .heading{
+        font-family: 'lato',sans-serif;
+        padding: 10% 0 0 0;
+        text-align: center;
+        
+    }

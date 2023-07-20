@@ -134,7 +134,8 @@ export class UserGraphLoginService {
     const URL = this.baseUrl + this.tenantUpdateUrl;
     const OPTIONS = this.getOptions(data);
 
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
     console.log("***(((())*&^%$% Token ");
     
     let request = {

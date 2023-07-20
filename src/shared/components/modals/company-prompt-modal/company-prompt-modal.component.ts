@@ -65,7 +65,8 @@ export class CompanyPromptModalComponent {
 
   public updateProfile(companyName){
     
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
 
     console.log("++++++++ Details ", userAccountdetails);
 

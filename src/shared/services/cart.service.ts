@@ -79,15 +79,18 @@ export class CartService {
     return REQUEST$;
   }
 
-  public getCartItems(userData: any): Observable<any> {
+  public getCartItems(userData1: any): Observable<any> {
 
-  
+    //console.log("()()()()( )", userData);
 
+    var userData = this.userAccountStore.getUserDetails();
  
     //let url = this.baseUrl + this.userCartUrl + '/1001';
     //let url = this.baseUrl + this.userCartUrl + '/2222';
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
-    let url = this.baseUrl + this.userCartUrl + '/' + userAccountdetails._id;
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+
+    //let url = this.baseUrl + this.userCartUrl + '/' + userAccountdetails._id;
+    let url = this.baseUrl + this.userCartUrl + '/' + userData._id;
     //let options = this.getOptions();
 
     let request$ = this.http.get<Observable<any>>(url)

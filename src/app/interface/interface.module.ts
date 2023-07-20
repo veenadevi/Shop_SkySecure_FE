@@ -49,6 +49,7 @@ import { LayoutModule  } from '../layout/layout.module';
     RouterModule,
     MaterialModule,
     PrimeNgModule,
+    SharedModule
     /*MatButtonModule,
     MatSidenavModule,
     MatMenuModule,

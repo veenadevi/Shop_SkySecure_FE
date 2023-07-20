@@ -5,7 +5,7 @@
   </span>
 </ng-container>
 
-<mat-sidenav-container autosize>
+<mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" opened="isExpanded" [ngClass]="(userLoggedInFlag) ? '' : 'hide-nav'">
       
       
@@ -126,9 +126,20 @@
               <span class="text-style">
                 Dashboard
               </span>
+              <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+              <!-- [routerLink]="['user-profile/quotation-history']" -->
               <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
             </div>
         </mat-list-item>
+
+
+        <!-- Dashboard Sub Menu -->
+        <ng-container *ngIf="dashboardSubMenu">
+          <mat-list-item>
+            <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['user-profile/quotation-history']">Quotation History</span>
+          </mat-list-item>
+
+        </ng-container>
 
         <!-- Shop Section -->
         <mat-list-item (click)="navAction(isExpanded , 'shop')">
@@ -223,6 +234,10 @@
             <mat-list-item>
               <span *ngIf="isExpanded" class="sub-menu-item">Add New Feature</span>
             </mat-list-item>
+            <mat-list-item>
+              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/add-new-product']">Add New Product</span>
+            </mat-list-item>
+            
           </ng-container>
         </ng-container>
         

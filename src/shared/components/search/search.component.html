@@ -2,6 +2,7 @@
 <ng-container>
 
     <div class="form-group search-box">
+        <div class="search-box">
         <span class="search-icon"><img alt="SearchIcon" src="../../../assets/icons/Search.svg"></span>
         <input type="text" 
             class="form-control" 
@@ -13,6 +14,8 @@
             (input)="onSearchQueryInput($event)"
             >
             <!-- (focusout)="onFocusOutEvent($event)" -->
+            
+        </div>
     </div>
     <ng-container *ngIf="isOpen">
         <div class="search-result-container p-1">

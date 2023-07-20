@@ -149,13 +149,17 @@
         <img alt="search-icon" class="search-icon" src="../../../assets/icons/Search-1.svg">
       </button>
     
-      <div class="search-bar" *ngIf="selected">
-        <img alt="" class="search-icon" src="../../../assets/icons/Search.svg">
-        <input class="search-box" placeholder="search products">
-        <button class="close-icon" (click)="searchClose(selected)">
-          <img alt="cancel" src="../../../assets/icons/CloseIcon-white.svg">
-        </button>
-      </div>
+      
+        <div class="search-bar" *ngIf="selected">
+          
+          <img alt="" class="search-icon" src="../../../assets/icons/Search.svg">
+          <input class="search-box" placeholder="search products">
+          <button class="close-icon" (click)="searchClose(selected)">
+            <img alt="cancel" src="../../../assets/icons/CloseIcon-white.svg">
+          </button>
+        </div>
+      
+      
     </div>
 
 
@@ -185,7 +189,10 @@
 
 
 
-    <div class="user-icon" title="User-icon" *ngIf="!userLoggedIn" (click)="login()">
+    <!-- <div class="user-icon" title="User-icon" *ngIf="!userLoggedIn" (click)="login()">
+      <img class="usericon" alt="" src="../../../assets/icons/User_icon.svg"/>
+    </div> -->
+    <div class="user-icon" title="User-icon" *ngIf="!userLoggedIn" (click)="navigateToLogin()">
       <img class="usericon" alt="" src="../../../assets/icons/User_icon.svg"/>
     </div>
 

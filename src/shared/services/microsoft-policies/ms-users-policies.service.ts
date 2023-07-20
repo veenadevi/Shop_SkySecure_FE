@@ -70,7 +70,8 @@ export class MSUsersPoliciesService {
     const URL = this.baseUrl + this.conditionalPolicyUrl;
     const OPTIONS = this.getOptions();
 
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
     let requestParams = {
         "userId": userAccountdetails._id,
         "recommandationId": data._id
@@ -104,7 +105,8 @@ export class MSUsersPoliciesService {
   public setMSPolicyBody(body, data) {
     
     
-    let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
     //const hasKey = recomm in body;
 
     let reqBody = {
