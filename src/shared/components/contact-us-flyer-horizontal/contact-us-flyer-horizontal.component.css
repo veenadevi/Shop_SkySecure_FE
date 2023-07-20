@@ -1,17 +1,21 @@
 .connect-us-container {
-    display: flex;
+    /* display: flex;
     align-items: center;
-    flex-direction: row-reverse;
+    flex-direction: row;
     background: #ffffff;
-    padding: 1%;
-    border-radius: 8px 130px 130px 8px;
+    padding: 2% 0;
+    margin: 2% 0;
+    border-radius: 8px; */
   }
 
   .connect-us-content-display-container {
     background: #f1f8ff;
-    border-radius: 8px 130px 130px 8px;
+    border-radius: 8px;
     display: flex;
     flex-direction: row-reverse;
+    align-items: center;
+    padding: 3%;
+    margin: 6% 0;
   }
 
   .connect-us-illustration {
@@ -32,15 +36,15 @@
   }
 
   .connect-us-header {
-    font-size: 24px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 600;
   }
 
   .connect-us-description {
-    width: 90%;
+    width: 100%;
     font-weight: 500;
-    font-size: 17px;
-    margin: 10px 0;
+    font-size: 14px;
+    margin: 8px 0;
   }
 
   .call-btn {
