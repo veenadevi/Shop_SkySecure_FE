@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { map, Subscription } from 'rxjs';
 import { LoaderService } from 'src/shared/services/loader.service';
 import { MetadataService } from 'src/shared/services/metadata.service';
@@ -50,9 +50,13 @@ export class ToolbarComponent {
 
   public offers : any[] = [];
 
+  //public menuToogleVal : boolean = false;
+
   @ViewChild('matMenuTrigger') matMenuTrigger: MatMenuTrigger;
   
   @ViewChild('categoriesMenu') categoriesMenu : MatMenuTrigger;
+
+  @Output() menuToogleEvent = new EventEmitter();
   
 
   private getCategories(): CategoryDetails[]{
@@ -153,5 +157,11 @@ export class ToolbarComponent {
   public closeMenu(menuTrigger: MatMenuTrigger){
     menuTrigger.closeMenu();
   }
+
+  public menuToogled(){
+    this.menuToogleEvent.emit('clicked');
+  }
+
+  
 
 }

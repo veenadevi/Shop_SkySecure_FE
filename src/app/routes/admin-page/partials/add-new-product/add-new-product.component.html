@@ -46,7 +46,7 @@
                                         formControlName="categories"
                                         [ngClass]="{'error': submitted && myForm.categories.errors}">
                                         <option value="">Choose...</option>
-                                        <option *ngFor="let category of categories" [ngValue]="category.name">
+                                        <option *ngFor="let category of categories" [value]="category._id">
                                             {{category.name}}
                                         </option>
                                     </select>
@@ -72,8 +72,8 @@
                                         formControlName="Subcategories"
                                         [ngClass]="{'error': submitted && myForm.Subcategories.errors}">
                                         <option value="">Choose...</option>
-                                        <option *ngFor="let category of subCategories" [ngValue]="category._id">
-                                            {{category.name}}
+                                        <option *ngFor="let subcategory of subCategories" [value]="subcategory._id">
+                                            {{subcategory.name}}
                                         </option>
                                     </select>
                                 </div>
@@ -177,7 +177,7 @@
                     <div class="section-04">
 
                         <!---Product Order Number-->
-                        <div class="orderno">
+                        <!-- <div class="orderno">
                             <div class="forms">
                                 <div class="label">
                                     <label [ngClass]="{'error': submitted && myForm.productOrderNumber.errors}">
@@ -188,35 +188,77 @@
                                         [ngClass]="{'error': submitted && myForm.productOrderNumber.errors}">
                                 </div>
 
-                                <!-- error block -->
+                               
                                 <div class="invalid-feedback"
                                     *ngIf="submitted && myForm.productOrderNumber.errors?.required">
                                     <sup>*</sup>Product Order Number required
                                 </div>
                             </div>
 
-                        </div>
+                        </div> -->
 
                         <!---Product Price-->
                         <div class="price">
                             <div class="forms">
                                 <div class="label">
                                     <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
-                                        Product Price</label>
+                                        SS Price</label>
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="productPrice"
                                         [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                 </div>
 
+                            </div>
+                           
+
+                        </div>
+
+                        <div class="price">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        Discount(%)</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text"  class="custom-select-03" formControlName="discount" [(ngModel)]=defaultDiscount
+                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                </div>
+
+                            </div>
+                         
+                        </div>
+                    </div>
+
+                    <div class="section-04">
+
+                        <!---Product Order Number-->
+                        <div class="orderno">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        ERP Price</label>
+                                </div>
+                                <div class="input">
+                                    <input type="number" class="custom-select-01" formControlName="erpPrice"
+                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                </div>
+
                                 <!-- error block -->
-                                <div class="invalid-feedback" *ngIf="submitted && myForm.productPrice.errors?.required">
-                                    <sup>*</sup>Product Price required
+                                <div class="invalid-feedback"
+                                    *ngIf="submitted && myForm.productPrice.errors?.required">
+                                    <sup>*</sup>Product ERP required
                                 </div>
                             </div>
 
                         </div>
+
+                        <!---Product Price-->
+                       
                     </div>
+
+
+
 
                     <div class="section-05">
                         <!-- Subscription Type -->
@@ -228,11 +270,11 @@
                                         Type</label>
                                 </div>
                                 <div class="select">
-                                    <select class="custom-select" (change)="changeOEM($event)"
+                                    <select class="custom-select" (change)="changeSubscriptionType($event)"
                                         formControlName="subscriptionType"
                                         [ngClass]="{'error': submitted && myForm.subscriptionType.errors}">
                                         <option value="">Choose...</option>
-                                        <option *ngFor="let type of subscriptionTypeList" [ngValue]="type">{{type}}
+                                        <option *ngFor="let type of subscriptionTypeList" [value]="type">{{type}}
                                         </option>
                                     </select>
                                 </div>
@@ -323,44 +365,85 @@
                
 
                 <!-- Add Super Powers Dynamically-->
-                <div class="feature-update" >
-                    <label class="heading">Features</label>
-                    <div class="mb-3">
-                        <button type="button" class="add-btn"
-                            (click)="addSuperPowers()">Add Feature</button>
-                        <ul class="subjectList">
-                            <li style="display: flex; flex-direction: column; margin-top: 10px;margin: 5px;"
-                                *ngFor="let item of addDynamicElementNew.get('feature')['controls']; let i = index">
-                                <div [formGroup]="item">
-                                    <label>Title</label>
-                                    <input type="text" class="form-control" formControlName="name">
-                                    <label>Description</label>
-                                    <textarea class="form-control" formControlName="description"></textarea>
-                                    <label>HyperLink</label>
-                                    <input type="text" class="form-control" formControlName="hyperLinkURL">
-                                </div>
-                                <div class="buttons">
-                                    <div class="btn-01">
-                                        <button class="btn btn-warning" (click)="removeFeature(i)">Remove</button>
-                                    </div>
-                                    <div class="btn-02">
-                                        <button type="submit" class="submit">Create</button>
-                                    </div>
-                                </div>
-                               
-                                
-                            </li>
+              
+    <div class="feature-update" >
+        <label class="heading">Features</label>
+       
+          <div class="feature"   *ngFor="let item of addDynamicElementNew.get('feature')['controls']; let i = index">
+           
+                   
+                      
+                        <div class="feature-title" [formGroup]="item">
+                       
+                                <label>Title</label>
+                                <input type="text" class="form-control"  formControlName="name">
 
-                        </ul>
-                    </div>
-
-                    <!-- Submit Button -->
+                          
+                        </div>
+                       <div class="feature-desc"  [formGroup]="item">
                     
-                </div>
+                            
+                              <label>Description</label>
+                              <textarea class="form-control" formControlName="description"></textarea>
+                           
+                        
+                       </div>
+                   <div class="feature-link" [formGroup]="item">
+                 
+                        
+                          <label>HyperLink</label>
+                          <input type="text" class="form-control" formControlName="hyperLinkURL">
+                       
+                   </div>
+                   <div class="feature-btn">
+                        <!-- <div class="btn-01" style="display: flex; align-items: center;"> -->
+                          <!-- <button type="button" class="add-btn"
+                          (click)="addNewFeature()">Add Feature</button> -->
+                              <button class="btn add-btn" (click)="addNewFeature()">Add New</button>
+                              <button class="btn btn-warning" (click)="removeFeature(i)">Remove</button>
+                   </div>
+      
+          </div>
+
+
+</div>
+
+<div class="faq-update" >
+    <label class="heading">Product FAQ</label>
+
+      <div class="faq" *ngFor="let item of addFAQArrayNew.get('faq')['controls']; let i = index">
+
+              <div [formGroup]="item" class="faq-question">
+                <label>Question</label>
+                <input type="text" class="form-control"  formControlName="Question">
+              </div>
+           
+              <div [formGroup]="item" class="faq-answer">
+                <label>Answer</label>
+                <textarea class="form-control" formControlName="Answer"></textarea>
+              </div>
+
+                <div class="faq-btn" >
+                    <button class="btn add-btn" (click)="addNewFAQ()">Add New</button>
+                    <button class="btn btn-warning" (click)="removeFAQ(i)">Remove</button>
+                  </div>
+
+      </div>
+
+</div>
+
+
+
+                <div class="btn-02">
+                    <button  class="btn btn-success" (click)="CreateProduct()">Create</button>
+                  </div>
 
 
             </form>
 
         </div>
     </div>
-</div>
+
+
+
+

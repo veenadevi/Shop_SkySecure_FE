@@ -1,13 +1,20 @@
-<global-search></global-search>
+<!---
+    <global-search></global-search>
 
 <div class="home-page-container">
 
-    <!-- <global-search></global-search> -->
+        already commented
+            <global-search></global-search>
+            <carousel></carousel> 
+    -->  
 
-<!-- <carousel></carousel> -->
+
+     
 
 
 
+
+<!--
 <products-by-category></products-by-category>
 <div class="test">
     <carousel></carousel>
@@ -17,6 +24,154 @@
 <products-by-trending></products-by-trending>
 
 
-<!-- <product-card-item></product-card-item> -->
+<product-card-item></product-card-item>
 
+</div>
+
+-->
+
+
+
+<div class="header-container">
+    <div class="header-content">
+        <div class="header-text-content">
+            We bring to you the Best of Products and Services for your Business Excellence
+        </div>
+        <!-- <div class="search-bar">
+            <div class="form-group search-box-container">
+                <search-box></search-box>
+            </div>        
+        </div> -->
+        <div class="form-group search-box-container">
+            <search-box style="position: absolute; width: 92%"></search-box>
+        </div>
+        <div class="shop-feature-container">
+            <div class="shop-feature-card">
+                <div class="shop-feature-content">
+                    <img class="shop-feature-img" src="../../../assets/Shop/CompareProductsIllustration.png">
+                    <div class="shop-feature-title">Compare Products</div>
+                </div>
+            </div>
+            <div class="shop-feature-card">
+                <div class="shop-feature-content">
+                    <img class="shop-feature-img" src="../../../assets/Shop/GuranteedPriceIllustration.png">
+                    <div class="shop-feature-title">Guranteed Price</div>
+                </div>
+            </div>
+            <div class="shop-feature-card">
+                <div class="shop-feature-content">
+                    <img class="shop-feature-img" src="../../../assets/Shop/AutomatedProductIllustration.png">
+                    <div class="shop-feature-title">Automated Deployment</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="header-background">
+        <img class="header-background-img" src="../../../assets/ShopPageHeaderBackground.jpg">
+    </div> -->
+</div>
+
+<div class="body-container">
+    <div class="aboutus-container">
+        <div class="container-headline">
+            <h4>About our platform</h4>
+        </div>
+        <div class="aboutus-content">
+            <div>
+                <!-- <iframe [src]="aboutOurPlatformVideoUrl" width="600" height="350" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+                <iframe [src]="aboutOurPlatformVideoUrl | safeurl" width="600" height="350" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+            <div class="aboutus-text">
+                <p class="teritary-content">Our platform will help you compare products for features & capabilities, and we ensure you guaranteed best price on all your purchases.</p>
+                <p class="primary-content-headline">And You Know What!</p>
+                <p class="primary-content">We have you covered with an automated deployments of your purchased products & solutions</p>
+                <button class="request-btn">Access Platform</button>
+            </div>
+        </div>
+    </div>
+    <div class="product-by-category-container">
+        <products-by-category></products-by-category>
+    </div>
+    <div class="contactus-flyer">
+        <img class="contactus-flyer-avatar" src="../../../assets/Shop/ContactUsFullIllustration.svg">
+        <p class="primary-content">We are a call away if you want to speak to our solution experts</p>
+        <button class="request-btn">Contact Us</button>
+    </div>
+    <div class="trending-products-container">
+        <products-by-trending></products-by-trending>
+    </div>
+    <div class="review-container">
+        <div class="container-headline">
+            <h4>Reviews</h4>
+        </div>
+        <div class="overall-review-content">
+            <div class="review-card">
+                <!-- <div class="review-quotes">
+                    ,,
+                </div> -->
+                <div class="review-content">
+                    <p class="review-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+    
+                <div class="reviewer-container">
+                    <div class="reviewer-avatar">
+                        <img class="reviewer-avatar-img" src="../../../assets/Shop/ReviewDummy/mubariz-mehdizadeh-t3zrEm88ehc-unsplash.jpg">
+                    </div>
+                    <div class="reviewer-details">
+                        <div class="review-rating">
+                            <mat-icon class="star-icon">star</mat-icon>
+                            <mat-icon class="star-icon">star</mat-icon>
+                            <mat-icon class="star-icon">star</mat-icon>
+                            <mat-icon class="star-icon">star</mat-icon>
+                            <mat-icon class="star-icon">star_border</mat-icon>
+                        </div>
+                        <div class="reviewer-name-container">
+                            <p class="reviewer-name">David Webb</p>
+                            <div class="verified-section">
+                                <img class="success-icon" src="../../../assets/icons/SuccessTickIcon.svg">
+                                <p class="verified-user">Verified user</p>
+                            </div>
+                        </div>
+                        <p class="reviewer-role">Project Manager, CISCO</p>
+                    </div>                
+                </div>
+            </div>
+            <div class="review-card">
+                <!-- <div class="review-quotes">
+                    ,,
+                </div> -->
+                <div class="review-content">
+                    <p class="review-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <div class="reviewer-container">
+                    <div class="reviewer-avatar">
+                        <img class="reviewer-avatar-img" src="../../../assets/Shop/ReviewDummy/mubariz-mehdizadeh-t3zrEm88ehc-unsplash.jpg">
+                    </div>
+                    <div class="reviewer-details">
+                        <div class="review-rating">
+                            <mat-icon class="star-icon">star</mat-icon>
+                            <mat-icon class="star-icon">star</mat-icon>
+                            <mat-icon class="star-icon">star</mat-icon>
+                            <mat-icon class="star-icon">star</mat-icon>
+                            <mat-icon class="star-icon">star_border</mat-icon>
+                        </div>
+                        <div class="reviewer-name-container">
+                            <p class="reviewer-name">David Webb</p>
+                            <div class="verified-section">
+                                <img class="success-icon" src="../../../assets/icons/SuccessTickIcon.svg">
+                                <p class="verified-user">Verified user</p>
+                            </div>
+                        </div>
+                        <p class="reviewer-role">Project Manager, CISCO</p>
+                    </div>                
+                </div>
+            </div>
+            <div class="write-review-section">
+                <p class="review-headline">We'd love to hear your feedback!</p>
+                <img class="review-img" src="../../../assets/Shop/WriteaReviewIllustration.png">
+                <p class="review-description">Tell us your experience about the products and services</p>
+                <button class="request-btn">Write a review</button>
+            </div>
+        </div>
+    </div>
 </div>
