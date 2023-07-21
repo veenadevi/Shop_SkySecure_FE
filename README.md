@@ -403,4 +403,4 @@ While there is a package called NVM for Windows, there were issues trying to run
 
 <br />
 
-**NOTES:** Nodist will create a **.node-version** file when you run ```nodist local x.x.x```.
+**NOTE:** Nodist will create a **.node-version** file when you run ```nodist local x.x.x```.
