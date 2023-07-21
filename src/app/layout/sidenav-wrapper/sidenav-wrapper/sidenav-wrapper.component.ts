@@ -90,17 +90,17 @@ export class SidenavWrapperComponent {
 
   public navAction(val, navVal){
 
-    /*switch (navVal) {
+    switch (navVal) {
       case 'user':
           //this.userSubMenu = (this.userSubMenu) ? false : true;
-          this.isExpanded = this.isExpanded ? false : true;
+          //this.isExpanded = this.isExpanded ? false : true;
           return;
       case 'dashboard':
-          this.dashboardSubMenu = (this.dashboardSubMenu) ? false : true;
-          this.isExpanded = this.isExpanded ? false : true;
+          //this.dashboardSubMenu = (this.dashboardSubMenu) ? false : true;
+          //this.isExpanded = this.isExpanded ? false : true;
           return;
       case 'shop':
-          this.router.navigate(['/']);
+          //this.router.navigate(['/']);
           return;
       case 'recommendations':
           //this.showDialog();
@@ -109,7 +109,7 @@ export class SidenavWrapperComponent {
 
       default:
         return null;
-    }*/
+    }
   }
 
 

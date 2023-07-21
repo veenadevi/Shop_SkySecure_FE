@@ -85,7 +85,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
     public arrowSection: boolean = true    
     public offerVisible:boolean = true
 
-    onclick(){
+    onclickOffer(){
       {
         // this.ReadMore = !this.ReadMore; //not equal to condition
         this.offerVisible = !this.offerVisible
@@ -744,7 +744,7 @@ featureCount=5;
         if(data ){
           
           data.name=data.name;
-          data.productType = 'productVariants';
+          data.type = 'productVariants';
           data.bannerLogo = (parentProduct  && parentProduct.bannerLogo) ? parentProduct.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           data.description = data.description;
           data['solutionCategory'] = (parentProduct &&parentProduct.subcategories && parentProduct.subcategories.length > 0) ? parentProduct.subcategories[0].name : "";
@@ -768,7 +768,7 @@ featureCount=5;
           data.forEach(element => {
               
             element.name=data.name;
-            element.productType = 'productVariants';
+            element.type = 'productVariants';
             element.bannerLogo = (parentProduct  && parentProduct.bannerLogo) ? parentProduct.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
             element.description = data.description;
             element['solutionCategory'] = (parentProduct &&parentProduct.subcategories && parentProduct.subcategories.length > 0) ? parentProduct.subcategories[0].name : "";
@@ -793,7 +793,7 @@ featureCount=5;
       console.log("===========setProductBundleVariantsData======="+data.length)
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productBundleVariants';
+          element.type = 'productBundleVariants';
           element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element.solutionCategory=(element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
@@ -816,7 +816,7 @@ featureCount=5;
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productBundles';
+          element.type = 'productBundles';
           element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''

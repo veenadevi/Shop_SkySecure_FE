@@ -259,7 +259,7 @@ export class ProductBundleDetailComponent implements OnInit{
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'products';
+          element.type = 'product';
           element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
@@ -284,7 +284,7 @@ export class ProductBundleDetailComponent implements OnInit{
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productVariants';
+          element.type = 'productVariants';
           element.bannerLogo = (element.products  && element.products.bannerLogo) ? element.products.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element['solutionCategory'] = (element.products && element.products.subCategories && element.products.subCategories.length > 0) ? element.products.subCategories[0].name : "";
@@ -306,7 +306,7 @@ export class ProductBundleDetailComponent implements OnInit{
     if(data && data.length>0){
       data.forEach(element => {
           element.name=element.name;
-          element.productType = 'productBundleVariants';
+          element.type = 'productBundleVariants';
           element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           //element.solutionCategory=(element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
@@ -325,7 +325,7 @@ export class ProductBundleDetailComponent implements OnInit{
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productBundles';
+          element.type = 'productBundles';
           element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''

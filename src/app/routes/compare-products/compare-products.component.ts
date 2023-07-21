@@ -74,9 +74,10 @@ export class CompareProductsComponent implements OnInit{
     let tempBundles = [];
     let tempPrdBundleVar = [];
 
+    console.log("()()()() ", data);
 
     data.forEach(element => {
-      switch (element.productType) {
+      switch (element.type) {
         case 'product':
           tempPrd.push(element._id);
           return;
@@ -103,6 +104,7 @@ export class CompareProductsComponent implements OnInit{
       "productFamily": tempBundles,
       "productFamilyVariants": tempPrdBundleVar
     }
+
 
     
     return reqBody;
