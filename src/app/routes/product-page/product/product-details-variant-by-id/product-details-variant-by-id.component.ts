@@ -273,6 +273,10 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
 
         this.completeFeatureList = response.featureList;
 
+        if(this.productVariants && this.productVariants.productVideoURL && this.productVariants.productVideoURL.length>0){
+          this.productVideoURL = this.productVariants.productVideoURL[0].source ;
+        } 
+
         //iframe functionality------->
 
         /*if(this.productVariants && this.productVariants.productVideoURL){

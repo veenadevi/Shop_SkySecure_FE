@@ -28,6 +28,7 @@ import { ProductBundleVariantDetailComponent } from './product-bundle-variant-de
 
 import { ProductDetailsVariantByIdComponent } from './product/product-details-variant-by-id/product-details-variant-by-id.component';
 import { DetailsCompareProductsFlyerComponent } from './ad-ons/partials/details-compare-products-flyer/details-compare-products-flyer.component';
+import { SafeUrlPipe } from 'src/shared/pipes/safeUrlPipe';
 
 
 
@@ -50,6 +51,7 @@ import { DetailsCompareProductsFlyerComponent } from './ad-ons/partials/details-
     ProductBundleVariantDetailComponent,
     ProductDetailsVariantByIdComponent,
     DetailsCompareProductsFlyerComponent,
+    SafeUrlPipe
     
     
   ],
