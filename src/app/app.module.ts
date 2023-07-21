@@ -43,7 +43,6 @@ import { SharedModule } from 'src/shared/shared.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { loginRequest, msalConfig } from './auth-config';
-import { SafeUrlPipe } from 'src/shared/pipes/safeUrlPipe';
 
 /**
  * Here we pass the configuration parameters to create an MSAL instance.
@@ -100,8 +99,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     LoaderService
   ],
   declarations: [
-    AppComponent,
-    SafeUrlPipe
+    AppComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

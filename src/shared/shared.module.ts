@@ -28,6 +28,7 @@ import { ContactUsFlyerComponent } from './components/contact-us-flyer/contact-u
 import { WriteReviewFlyerComponent } from './components/write-review-flyer/write-review-flyer.component';
 import { GetFreeCallModalComponent } from './components/modals/get-free-call-modal/get-free-call-modal.component';
 import { ContactUsFlyerHorizontalComponent } from './components/contact-us-flyer-horizontal/contact-us-flyer-horizontal.component';
+import { SafeUrlPipe } from './pipes/safeUrlPipe';
 
 
 
@@ -66,6 +67,7 @@ import { ContactUsFlyerHorizontalComponent } from './components/contact-us-flyer
     WriteReviewFlyerComponent,
     GetFreeCallModalComponent,
     ContactUsFlyerHorizontalComponent,
+    SafeUrlPipe
   ],
 
   providers: [
@@ -103,7 +105,8 @@ import { ContactUsFlyerHorizontalComponent } from './components/contact-us-flyer
     ContactUsFlyerComponent,
     WriteReviewFlyerComponent,
     GetFreeCallModalComponent,
-    ContactUsFlyerHorizontalComponent
+    ContactUsFlyerHorizontalComponent,
+    SafeUrlPipe
   ],
   
 

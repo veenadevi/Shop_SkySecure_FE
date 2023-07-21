@@ -13,7 +13,6 @@ import { ProductsByBrandComponent } from './products-by-brand/products-by-brand.
 import { ProductsByTrendingComponent } from './products-by-trending/products-by-trending.component';
 import { MaterialModule } from 'src/app/material.module';
 import { PrimeNgModule } from 'src/app/prime-ng.module';
-import { SafeUrlPipe } from 'src/shared/pipes/safeUrlPipe';
 
 
 
@@ -26,8 +25,7 @@ import { SafeUrlPipe } from 'src/shared/pipes/safeUrlPipe';
     CarouselComponent,
     ProductsByCategoryComponent,
     ProductsByBrandComponent,
-    ProductsByTrendingComponent,
-    SafeUrlPipe
+    ProductsByTrendingComponent
   ],
   imports: [
     CommonModule,
