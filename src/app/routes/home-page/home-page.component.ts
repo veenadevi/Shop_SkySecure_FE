@@ -18,7 +18,7 @@ export class HomePgaeComponent {
   public ngOnInit() : void {
     
     //this.aboutOurPlatformVideoUrl = this.getSafeUrl("https://www.youtube.com/embed/wsfb6jKE4wI");
-    this.aboutOurPlatformVideoUrl = "https://www.youtube.com/embed/wsfb6jKE4wI";
+    this.aboutOurPlatformVideoUrl = "https://www.youtube.com/embed/LWjxyc4FGGs";
 
   }
 
