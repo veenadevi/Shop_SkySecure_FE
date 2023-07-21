@@ -3,62 +3,35 @@
         <div class="product-image-view">
             <div class="product-image">
                 <div class="prod-img-cont">
+                    <div class="prod-img-logo">
+                        <img class="prod-logo" src="{{(productFamily && productFamily.bannerLogo) ? productFamily.bannerLogo : ''}}">
+                    </div>
+
                     <div class="prod-img-hover">
                         <ng-container *ngIf="(productImages && productImages.length>0); else noImagesBlock">
                             <ng-container *ngFor="let item of productImages">
-                                <img style="width: 120%;
-                                height: auto;
-                                transition: transform .2s;
-                                margin:10%;
-                                cursor: pointer;
-                                background: #EAEAEA;" class="img-hover"
-                                    src="../../../../assets/images/imgPlaceholder.png" alt="img">
+                                <img   class="img-hover" src="../../../../assets/images/imgPlaceholder.png" alt="img">
                             </ng-container>
                         </ng-container>
                         <ng-template #noImagesBlock>
                             <!-- <ng-container *ngFor="let img of dummyImages"> -->
-                            <img style="width: 120%;
-                                height: auto;
-                                transition: transform .2s;
-                                margin:10%;
-                                cursor: pointer;
-                                background: #EAEAEA;" class="img-hover"
-                                src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                            <img  class="img-hover"   class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
-                            <img style="width: 120%;
-                                height: auto;
-                                transition: transform .2s;
-                                margin:10%;
-                                cursor: pointer;
-                                background: #EAEAEA;" class="img-hover"
-                                src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                            <img class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
-                            <img style="width: 120%;
-                                height: auto;
-                                transition: transform .2s;
-                                margin:10%;
-                                cursor: pointer;
-                                background: #EAEAEA;" class="img-hover"
-                                src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                            <img  class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
-                            <img style="width: 120%;
-                                height: auto;
-                                transition: transform .2s;
-                                margin:10%;
-                                cursor: pointer;
-                                background: #EAEAEA;" class="img-hover"
-                                src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                            <img  class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
                             <!-- </ng-container> -->
                         </ng-template>
 
-                        <img src="" alt="">
+                        
                     </div>
-                    <div class="prod-img-logo">
+                    <!-- <div class="prod-img-logo">
                         <img class="prod-logo"  
                             src="{{(productFamily && productFamily.bannerLogo) ? productFamily.bannerLogo : ''}}">
-                    </div>
+                    </div> -->
                 </div>
-
 
 
                 <ng-container *ngIf="productFamilyVariant">
@@ -87,7 +60,6 @@
                         <button class="btn buy-now-btn" (click)="requestQuote(productFamilyVariant)">Buy now</button>
                     </div>
                 </ng-container>
-
             </div>
 
             <!-- <div class="buy-now-prod">
@@ -111,6 +83,14 @@
                     <button class="btn buy-now-btn">Buy now</button>
                 </div> -->
 
+
+
+
+
+
+
+
+
             <ng-container *ngIf="productFamilyVariant">
                 <div class="product-details-info">
                     <h4 class="head-04">{{productFamilyVariant.name}}
@@ -122,7 +102,13 @@
                         <mat-icon class="review-icon">star</mat-icon>
                         <mat-icon class="review-icon">star</mat-icon>
                         <mat-icon class="review-icon">star_border</mat-icon>
-                        <span class="review"> 4 reviews | write a review</span>
+                        <div class="review-text-section">
+                            <p class="review-text"> 4 reviews </p>
+                            <span class="divider">|</span>
+                            <p class="link-text"> Write a review </p>
+                            <span class="divider">|</span>
+                            <p class="link-text"> Have a question? </p>
+                        </div>
                     </div>
 
                     <!-- <span style="display:inline-flex">
@@ -146,33 +132,40 @@
                     </span>
                     <p style="font-size: smaller;">GST Extra</p> -->
 
-
-                    <div class="price">
-                        <span class="discount-holder">
-                            <span *ngIf="productFamilyVariant.priceList[0].discountRate != null"
-                                class="discounted-text">
-                                -{{productFamilyVariant.priceList[0].discountRate}}%&nbsp;
-                            </span>
-                            <span   style="font-size: smaller;font-family: 'lato',sans-serif;">&#8377; </span>
-                            <span  class="actual-price" >{{productFamilyVariant.priceList[0].price}}
-                                / {{productFamilyVariant.priceList[0].priceType}}</span>
-                        </span>
-                        <span>
-                            <span class="text-style-bold">MRP</span>
-                            <span class="text-price strike-through"> ₹ {{((productFamilyVariant.priceList &&
-                                productFamilyVariant.priceList.length>0) ? productFamilyVariant.priceList[0].ERPPrice :
-                                '' ) | number : '1.2-2'}}</span>
-                            <span class="text-term"> / {{(productFamilyVariant.priceList &&
-                                productFamilyVariant.priceList.length>0) ? productFamilyVariant.priceList[0].priceType :
-                                ''}}</span>
-                        </span>
-
+                    <ng-container >
+                        <div class="product-price-detail">
+                            <div class="product-price-section" style="display:inline-flex">
+                                <p *ngIf="productFamilyVariant.priceList[0].discountRate != null"
+                                class="discounted-text"> -{{productFamilyVariant.priceList[0].discountRate}}%&nbsp;
+                                </p>
+                                <div class="price">
+                                    <p class="product-price">
+                                        <span class="price-symbol">&#8377;</span>
+                                        {{productFamilyVariant.priceList[0].price}}
+                                        <span class="product-price-type">/ {{productFamilyVariant.priceList[0].priceType}}</span>
+                                    </p>
+                                </div>
+                                <p style="font-size: smaller;">(GST Extra)</p>
+                            </div>
+                            <div style="display:inline-flex;align-items: center;">
+                                <p style="font-size: small;"> MRP:&nbsp;</p>
+                                <span class="price-symbol">&#8377;</span>
+                                <span>
+                                    <p style="font-size: initial; text-decoration: line-through;"> ₹ {{((productFamilyVariant.priceList &&
+                                        productFamilyVariant.priceList.length>0) ? productFamilyVariant.priceList[0].ERPPrice :
+                                        '' ) | number : '1.2-2'}}</p>
+                                </span>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class="solution-section">
+                        <p class="solution" >Solution Category:</p>
+                        <p>{{productFamilyVariant.subcategories[0].name}}</p>
                     </div>
-                    <p style="font-size: smaller;">GST Extra</p>
-                    <p class="solution" >Solution Category:</p>
-                    <p >{{productFamilyVariant.subcategories[0].name}}</p>
-                    <p class="about"  >About this product:</p>
-                    <p  class="prod-desc" >{{productFamilyVariant.description}}</p>
+                   
+                  
+                    <!-- <p class="about"  >About this product:</p>
+                    <p  class="prod-desc" >{{productFamilyVariant.description}}</p> -->
                     <span ><button class="btn view-det-btn"
                             (click)="scrollToSection('#feature')">View
                             Features</button>
@@ -200,7 +193,7 @@
                     </div>
                     <p-divider></p-divider>
 
-                    <div class="common-info">
+                    <!-- <div class="common-info">
                         <div class="common-det">
                             <div class="comm-det-img">
                                 <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
@@ -231,7 +224,7 @@
                         </div>
 
 
-                    </div>
+                    </div> -->
                 </div>
             </ng-container>
 
