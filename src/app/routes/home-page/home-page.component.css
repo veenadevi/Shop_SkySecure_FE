@@ -64,6 +64,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
 }
 
 .header-background-img {
@@ -91,8 +92,8 @@
     font-size: 34px;
     font-style: normal;
     font-weight: 700;
-    line-height: 138.5%; /* 53.385px */
-    letter-spacing: 2.12px;
+    /* line-height: 138.5%; 
+    letter-spacing: 2.12px; */
 }
 
 .search-bar {
@@ -166,8 +167,8 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 143%; /* 34.32px */
-    letter-spacing: 1.92px;
+    /* line-height: 143%; 34.32px
+    letter-spacing: 1.92px; */
 }
 
 .primary-content-headline {
@@ -175,8 +176,8 @@
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 143%; /* 45.76px */
-    letter-spacing: 2.56px;
+    /* line-height: 143%; 45.76px
+    letter-spacing: 2.56px; */
 }
 
 .primary-content {
@@ -184,8 +185,8 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: 143%; /* 34.32px */
-    letter-spacing: 1.92px;
+    /* line-height: 143%; 34.32px
+    letter-spacing: 1.92px; */
 }
 
 
@@ -199,7 +200,7 @@
     border: none;
     outline: none;
     color: #FFF;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 500;
 }
 
@@ -224,8 +225,8 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: 143%; /* 34.32px */
-    letter-spacing: 1.92px;
+    /* line-height: 143%; 34.32px
+    letter-spacing: 1.92px; */
     width: 45%;
     text-align: center;
 }
@@ -256,7 +257,7 @@
     font-size: 200px;
     font-style: normal;
     font-weight: 400;
-    line-height: 152px; /* 75% */
+    /* line-height: 152px; 75% */
 }
 
 .review-text {
@@ -264,7 +265,7 @@
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 22px; /* 150% */
+    /* line-height: 22px; 150% */
 }
 
 .reviewer-container {
@@ -272,6 +273,7 @@
     display: inline-flex;
     flex-direction: row;
     align-items: center;
+    font-family: 'lato',sans-serif;
 }
 
 .reviewer-avatar {
@@ -312,14 +314,14 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px; /* 150% */
+    /* line-height: 24px; 150% */
 }
 
 .verified-user {
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 20px; /* 150% */
+    /* line-height: 20px; 150% */
 }
 
 .write-review-section {
@@ -334,8 +336,8 @@
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
-    line-height: 18px; /* 150% */
-    letter-spacing: 0.61px;
+    /* line-height: 18px; 150%
+    letter-spacing: 0.61px; */
     text-transform: uppercase;
 }
 
@@ -345,8 +347,8 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: 28px; /* 137.177% */
-    letter-spacing: 0.4px;
+    /* line-height: 28px; 137.177%
+    letter-spacing: 0.4px; */
 }
 
 .review-img {
@@ -362,6 +364,23 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 139.5%; /* 22.32px */
+    /* line-height: 139.5%; 22.32px */
     padding: 4%;
 }
+.review-icon {
+    color: orange;
+    padding-top: 5px;
+    line-height:2rem;
+    overflow: visible;
+  }
+  .star-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: gold;
+  }
+  
+  .mat-icon {
+    cursor: pointer;
+  }
