@@ -53,7 +53,6 @@ import { SafeUrlPipe } from 'src/shared/pipes/safeUrlPipe';
     DetailsCompareProductsFlyerComponent,
     SafeUrlPipe
     
-    
   ],
   imports: [
     CommonModule,
