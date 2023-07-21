@@ -103,6 +103,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AppComponent,
     SafeUrlPipe
   ],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent, MsalRedirectComponent]
 })
