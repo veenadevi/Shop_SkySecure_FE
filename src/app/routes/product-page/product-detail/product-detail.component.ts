@@ -74,6 +74,20 @@ export class ProductDetailComponent implements OnInit{
 
 
 
+        // ---->>> offers section function
+
+        public arrowSection: boolean = true    
+        public offerVisible:boolean = true
+    
+        onclickOffer(){
+          {
+            // this.ReadMore = !this.ReadMore; //not equal to condition
+            this.offerVisible = !this.offerVisible
+          }
+        }
+
+
+
   scrollToSection(sectionId: any): void {
 
     this.activeLink=sectionId;

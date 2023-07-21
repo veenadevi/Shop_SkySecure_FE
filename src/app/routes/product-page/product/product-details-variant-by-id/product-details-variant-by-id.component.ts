@@ -85,7 +85,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
     public arrowSection: boolean = true    
     public offerVisible:boolean = true
 
-    onclick(){
+    onclickOffer(){
       {
         // this.ReadMore = !this.ReadMore; //not equal to condition
         this.offerVisible = !this.offerVisible

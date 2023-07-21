@@ -1,6 +1,7 @@
-
 <ng-container *ngIf="productVariants && productVariants.priceList && productVariants.priceList.length>0" >
-<div class="product-details-container">
+
+
+    <div class="product-details-container">
     <div class="product-details">
         <div class="product-image-view">
             <div class="product-image">
@@ -12,8 +13,7 @@
                         <ng-container *ngIf="(productImages.length>0); else noImagesBlock">
                             <ng-container *ngFor="let item of productImages">
                               
-                                <img class="img-hover"
-                                src="{{item}}" alt="img">
+                                <img class="img-hover" src="{{item}}" alt="img">
                             </ng-container>
                         </ng-container>
                         <ng-template #noImagesBlock>
@@ -90,12 +90,17 @@
                         <div class="product-price-section">
                             <p *ngIf="productVariants.priceList[0].discountRate != null" class="discounted-text">-{{productVariants.priceList[0].discountRate}}%</p>
                             <div class="price">
-                                <p class="product-price"><span class="price-symbol">&#8377;</span>{{productVariants.priceList[0].price}} <span class="product-price-type">/ {{productVariants.priceList[0].priceType}}</span></p>
+                                <p class="product-price">
+                                    <span class="price-symbol">&#8377;</span>
+                                    {{productVariants.priceList[0].price}} 
+                                    <span class="product-price-type">/ {{productVariants.priceList[0].priceType}}</span>
+                                </p>
                             </div>
-                            <p style="font-size: smaller;">GST Extra</p>
+                            <p style="font-size: smaller;">(GST Extra)</p>
                         </div>
                         <div style="display:inline-flex;align-items: center;">
-                            <p style="font-size: small;"> MRP:&nbsp;</p><span class="price-symbol">&#8377;</span>
+                            <p style="font-size: small;"> MRP:&nbsp;</p>
+                            <span class="price-symbol">&#8377;</span>
                             <span><p style="font-size: initial; text-decoration: line-through;">{{productVariants.priceList[0].ERPPrice}}</p></span>
                         </div>
                     </div>
@@ -126,7 +131,7 @@
                             <span class="offer-headline">
                                 <img class="offer-img" src="../../assets/productDetails/OfferIllustrationIcon.svg">
                                 <p  class="offer">&nbsp;Offer</p>
-                                    <button (click)="onclick()" class="downarrow-btn">
+                                    <button (click)="onclickOffer()" class="downarrow-btn">
                                         <ng-container *ngIf="offerVisible ; else downArrow"><img  src="../../../../../assets/icons/DefaultUpIcon.svg"></ng-container>
                                         <ng-template #downArrow><img  src="../../../../../assets/icons/DefaultDownIcon.svg"></ng-template>
                                     </button>
@@ -424,8 +429,8 @@
                     <div class="prod-card">
                         <!-- <ng-container *ngFor="let item of features"> -->
                             <ng-container *ngFor="let item of featureList">
-                            <div class="feature-heading">
-                                <div class="feature-card" (click)="openLink(item.hyperLinkURL)">
+                            <div class="feature-heading" (click)="openLink(item.hyperLinkURL)">
+                                <div class="feature-card" >
                                     <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
                                 </div>
                                 <div class="feature-card-content">
@@ -441,8 +446,8 @@
                 </div>
                 <div class="p-view-all-feature-div">
                     <div class="feature-desc-heading">
-                        <p class="feature-viewall">click here to view detailed feature of the
-                            product</p>
+                        <!-- <p class="feature-viewall">click here to view detailed feature of the
+                            product</p> -->
                             <button class="btn view-det-btn" (click)="featureCountEvent(viewAllFeaturesDetails)">
                             <ng-container *ngIf="viewAllFeaturesDetails ; else showLess">
                                 Show Less Features 
