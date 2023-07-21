@@ -101,6 +101,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   declarations: [
     AppComponent
   ],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent, MsalRedirectComponent]
 })

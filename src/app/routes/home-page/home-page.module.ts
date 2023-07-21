@@ -25,7 +25,7 @@ import { PrimeNgModule } from 'src/app/prime-ng.module';
     CarouselComponent,
     ProductsByCategoryComponent,
     ProductsByBrandComponent,
-    ProductsByTrendingComponent,
+    ProductsByTrendingComponent
   ],
   imports: [
     CommonModule,

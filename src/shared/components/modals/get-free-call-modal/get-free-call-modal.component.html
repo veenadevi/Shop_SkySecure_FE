@@ -35,16 +35,17 @@
 </div> -->
 
 <div class="modal-container">
+  <div class="modal-logo">
+    <img src="../../../../assets/Realize/logos/RealizeLogoDark.svg">
+  </div>
 
   <div class="modal-header">
-      <div class="modal-top">
-          <div class="header-style">
+      <!-- <div class="modal-top"> -->
+          <!-- <div class="header-style"> -->
               Connect With Us
-          </div>
-      </div>
-      <button (click)="closeModal()" type="button" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+          <!-- </div> -->
+      <!-- </div> -->
+      
   </div>
   <div class="modal-body">
       <div class="email-style">
@@ -64,7 +65,7 @@
       <div class="company-name-style">
         <span class="p-float-label">
           <input pInputText id="companyName" [(ngModel)]="companyName" />
-          <label htmlFor="companyName">Compnay Name</label>
+          <label htmlFor="companyName">Company Name</label>
         </span>
       </div>
 
@@ -78,7 +79,10 @@
 
   <div class="modal-footer">
     <button type="button" class="btn request-btn">Submit</button>
-    
+    <button (click)="closeModal()" type="button" class="close" aria-label="Close">
+      <!-- <span aria-hidden="true">&times;</span> -->
+      cancel
+    </button>
   </div>
   
 </div>

@@ -275,7 +275,7 @@
 
     </p-card>
 
-    <div class="product-features-container" id="feature" #featureRef>
+    <!-- <div class="product-features-container" id="feature" #featureRef>
         <h5>Features</h5>
 
         <div class="product-feature-cards-container">
@@ -328,7 +328,65 @@
             </div>
 
         </div>
+    </div> -->
+
+
+
+
+  <!-- <<<<<<<<<<<<feature edit>>>>>>>>>>>>>>>>> -->
+    <div class="product-features-container" id="feature" #featureRef>
+        <h5>Features</h5>
+        <div class="product-feature-container">
+            <div class="prod-feature-img">
+                <img style="width:auto;height: auto;position: relative;"
+                    src="../../assets/productDetails/FeaturesIllustration.svg">
+            </div>
+            <div class="prod-feat-card-content">
+                <div class="prod-card-holder">
+                    <div class="feature-desc-heading">
+                        <p class="feature-desc">Here is the common generalized section for the product</p>
+                    </div>
+                    <div class="prod-card">
+                        <ng-container *ngFor="let item of featureList">
+
+                            <div class="feature-heading">
+                                <div class="feature-card" (click)="openLink(item.hyperLinkURL)">
+                                    <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
+                                </div>
+                                <div class="feature-card-content">
+                                    <p class="feature-card-heading">{{item.name}}</p>
+                                    <!-- <p class="feature-card-desc">{{item.description}}</p> -->
+                                </div>
+                            </div>
+
+
+                        </ng-container>
+                    </div>
+
+                </div>
+                <div class="p-view-all-feature-div">
+                    <div class="feature-desc-heading">
+                        <p class="feature-viewall">click here to view detailed feature of the
+                            product</p>
+                            <button class="btn view-det-btn" (click)="featureCountEvent(viewAllFeaturesDetails)">
+                            <ng-container *ngIf="viewAllFeaturesDetails ; else showLess">
+                                Show Less Features 
+                            </ng-container>
+                            <ng-template #showLess>
+                                View All Features
+                            </ng-template></button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
+
+
+
+
+
 
 
 

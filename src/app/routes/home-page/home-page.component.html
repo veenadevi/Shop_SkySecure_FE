@@ -77,7 +77,10 @@
             <h4>About our platform</h4>
         </div>
         <div class="aboutus-content">
-            <img src="../../../assets/Shop/AboutUsVideoThumbnail.jpg">
+            <div>
+                <!-- <iframe [src]="aboutOurPlatformVideoUrl" width="600" height="350" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+                <iframe [src]="aboutOurPlatformVideoUrl | safeurl" width="600" height="350" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
             <div class="aboutus-text">
                 <p class="teritary-content">Our platform will help you compare products for features & capabilities, and we ensure you guaranteed best price on all your purchases.</p>
                 <p class="primary-content-headline">And You Know What!</p>

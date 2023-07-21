@@ -79,6 +79,21 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
       right.scrollBy(-200, 0);
     };
 
+
+    // ---->>> offers section function
+
+    public arrowSection: boolean = true    
+    public offerVisible:boolean = true
+
+    onclick(){
+      {
+        // this.ReadMore = !this.ReadMore; //not equal to condition
+        this.offerVisible = !this.offerVisible
+      }
+    }
+
+
+
   scrollToSection(sectionId: any): void {
 
     this.activeLink=sectionId;
@@ -257,6 +272,10 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
         this.productImages=this.productImages.slice(0,4);
 
         this.completeFeatureList = response.featureList;
+
+        if(this.productVariants && this.productVariants.productVideoURL && this.productVariants.productVideoURL.length>0){
+          this.productVideoURL = this.productVariants.productVideoURL[0].source ;
+        } 
 
         //iframe functionality------->
 
