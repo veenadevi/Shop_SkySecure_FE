@@ -272,7 +272,7 @@
     width: 300px;
     display: inline-flex;
     flex-direction: row;
-    align-items: center;
+    /* align-items: center; */
     font-family: 'lato',sans-serif;
 }
 
@@ -307,6 +307,7 @@
 
 .reviewer-details {
     margin-left: 10px;
+    height: 50px;
 }
 
 .reviewer-name {

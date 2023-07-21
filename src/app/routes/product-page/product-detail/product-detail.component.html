@@ -6,21 +6,14 @@
         <div class="product-image-view">
             <div class="product-image">
                 <div class="prod-img-cont">
+                    <div class="prod-img-logo">
+                        <img class="prod-logo" src="{{product.bannerLogo}}">
+                    </div>
                     <div class="prod-img-hover">
                         <ng-container *ngFor="let item of productImages">
-                            <img style="width: 120%;
-                            height: auto;
-                            transition: transform .2s;
-                            margin:10%;
-                            cursor: pointer;
-                            background: #EAEAEA;" class="img-hover" src="../../../../assets/images/imgPlaceholder.png"
+                            <img class="img-hover" src="../../../../assets/images/imgPlaceholder.png"
                                 alt="img">
                         </ng-container>
-                        <img src="" alt="">
-                    </div>
-                    <div class="prod-img-logo">
-                        <img class="prod-logo"
-                            src="{{product.bannerLogo}}">
                     </div>
                     <!-- img
                 <p-galleria  [thumbnailsPosition]="position" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5"> 
@@ -37,7 +30,7 @@
                 <div class="buy-now-prod">
                     <span class="quantity-year">
                         <h6 class="head-06"  >Quantity </h6>
-                        <p class="year">(per year)</p>
+                        <span class="year">(per year)</span>
                     </span>
                     <span class="plus-minus">
 
@@ -67,90 +60,114 @@
                     <mat-icon class="review-icon">star</mat-icon>
                     <mat-icon class="review-icon">star</mat-icon>
                     <mat-icon class="review-icon">star_border</mat-icon>
-                    <span  class="review"> 4 reviews | write a review</span>
+                    <div class="review-text-section">
+                        <p class="review-text"> 4 reviews </p>
+                        <span class="divider">|</span>
+                        <p class="link-text"> Write a review </p>
+                        <span class="divider">|</span>
+                        <p class="link-text"> Have a question? </p>
+                    </div>
                 </div>
                 <ng-container >
-                    <span style="display:inline-flex">
-                        <p *ngIf="product.priceList[0].discountRate != null"
-                            style="font-size: 16px;color: red;">-{{product.priceList[0].discountRate}}%&nbsp;
-                        </p>
-                        <h4 style="font-size: smaller;">&#8377; </h4>
-                        <span style="font-size: 18px;font-weight: 500;">{{product.priceList[0].price}} /
-                            {{product.priceList[0].priceType}}</span>
-                    </span>
+                    <div class="product-price-detail">
+                        <div class="product-price-section" style="display:inline-flex">
+                            <p *ngIf="product.priceList[0].discountRate != null"
+                            class="discounted-text">-{{product.priceList[0].discountRate}}%
+                            </p>
+                            <div class="price">
+                                <p class="product-price">
+                                    <span class="price-symbol">&#8377;</span>
+                                    {{product.priceList[0].price}}
+                                    <span class="product-price-type">/ {{product.priceList[0].priceType}}</span>
+                                </p>
+                            </div>
+                            <p style="font-size: smaller;">(GST Extra)</p>
+                        </div>
+                        <div style="display:inline-flex;align-items: center;">
+                            <p style="font-size: small;"> MRP:&nbsp;</p>
+                            <span class="price-symbol">&#8377;</span>
+                            <span>
+                                <p style="font-size: initial; text-decoration: line-through;">{{product.priceList[0].ERPPrice}}</p>
+                            </span>
+                        </div>
+                    </div>
                 </ng-container>
                 
+                <div class="solution-section">
+                    <p class="solution" >Solution Category:</p>
+                    <p>{{product.subcategories[0].description}}</p>
+                </div>
 
-                <span style="display:inline-flex;align-items: center;">
-                    <p style="font-size: small;"> MRP: ₹&nbsp;</p>
-                    <s>
-                        <p style="font-size: initial;">{{product.priceList[0].ERPPrice}}</p>
-                    </s>
-                </span>
-                <p style="font-size: smaller;">GST Extra</p>
-                <p class="solution" >Solution Category:</p>
-                <p>{{product.subcategories[0].description}}</p>
-                <p class="about" >About this product:</p>
-                <p class="prod-desc">{{product.description}}</p>
+                <!-- <p class="about" >About this product:</p>
+                <p class="prod-desc">{{product.description}}</p> -->
                 <span class="request-btn" ><button class="btn view-det-btn"
                         (click)="scrollToSection('#feature')">View Features</button>
                     <button class="btn request-quote-btn" (click)="requestQuote(product)"
                         style="margin-left: 4%;">Request Quote</button></span>
-                <p-divider></p-divider>
+                    
+                    <hr>
 
-                <div class="offer-det">
-                    <span style="display: inline-flex;">
-                        <img class="offer-img"  src="../../assets/productDetails/OfferIllustrationIcon.svg">
-                        <p class="offer" >&nbsp; &nbsp; Offer</p>
-                    </span>
-                    <div class="offer-card-container">
-                        <div class="offer-card">
-                            <p class="offer-bank">Bank Offers</p>
-                            <p class="offer-dis">Upto ₹500.00 discount on select Credit Cards</p>
-                            <a  class="offer-more">2 more offers</a>
+                <!-- <p-divider></p-divider> -->
+
+                <div class="product-common-info">
+                    <div class="offer-det">
+                        <span class="offer-headline">
+                            <img class="offer-img" src="../../assets/productDetails/OfferIllustrationIcon.svg">
+                            <p  class="offer">&nbsp;Offer</p>
+                                <button (click)="onclickOffer()" class="downarrow-btn">
+                                    <ng-container *ngIf="offerVisible ; else downArrow"><img  src="../../../../../assets/icons/DefaultUpIcon.svg"></ng-container>
+                                    <ng-template #downArrow><img  src="../../../../../assets/icons/DefaultDownIcon.svg"></ng-template>
+                                </button>
+                        </span>
+                            <ng-container *ngIf="offerVisible">
+                                <div class="offer-card-container">
+                                    <div class="offer-card">
+                                        <p  class="offer-bank">Bank Offers</p>
+                                        <p  class="offer-dis" >Upto ₹500.00 discount on select Credit Cards</p>
+                                        <a  class="offer-more" >2 more offers</a>
+                                    </div>
+                                    <div class="offer-card">
+                                        <p class="offer-bank" >Bank Offers</p>
+                                        <p class="offer-dis" >Upto ₹500.00 discount on select Credit Cards</p>
+                                        <a class="offer-more">2 more offers</a>
+                                    </div>
+                                </div>
+                            </ng-container>
                         </div>
-                        <div class="offer-card">
-                            <p class="offer-bank">Cashback</p>
-                            <p class="offer-dis">Get ₹50 back if you buy other items in cart</p>
-                            <a  class="offer-more">1 more offers</a>
+
+
+                    <!-- <div class="common-info">
+                        <div class="common-det">
+                            <div class="comm-det-img">
+                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
+    
+                            </div>
+                            <p class="amazon-refer">secure transaction</p>
                         </div>
-                    </div>
+                        <div class="common-det">
+                            <div class="comm-det-img">
+                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/TopBrandIllustrationIcon.svg">
+    
+                            </div>
+                            <p class="amazon-refer">Top brand</p>
+                        </div>
+                        <div class="common-det">
+                            <div class="comm-det-img">
+                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/ProductCancellationIllustrationIcon.svg">
+    
+                            </div>
+                            <p class="amazon-refer">5 Days Cancellation </p>
+                        </div>
+                        <div class="common-det">
+                            <div class="comm-det-img">
+                                <img  class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/GuaranteedPriceIllustrationIcon.svg">
+    
+                            </div>
+                            <p class="amazon-refer" >Guaranteed Price</p>
+                        </div>
+                    </div> -->
                 </div>
-                <p-divider></p-divider>
-
-                <div class="common-info">
-                    <div class="common-det">
-                        <div class="comm-det-img">
-                            <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
-
-                        </div>
-                        <p class="amazon-refer">secure transaction</p>
-                    </div>
-                    <div class="common-det">
-                        <div class="comm-det-img">
-                            <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/TopBrandIllustrationIcon.svg">
-
-                        </div>
-                        <p class="amazon-refer">Top brand</p>
-                    </div>
-                    <div class="common-det">
-                        <div class="comm-det-img">
-                            <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/ProductCancellationIllustrationIcon.svg">
-
-                        </div>
-                        <p class="amazon-refer">5 Days Cancellation </p>
-                    </div>
-                    <div class="common-det">
-                        <div class="comm-det-img">
-                            <img  class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/GuaranteedPriceIllustrationIcon.svg">
-
-                        </div>
-                        <p class="amazon-refer" >Guaranteed Price</p>
-                    </div>
-
-
-                </div>
-
+                <!-- <p-divider></p-divider> -->
             </div>
 
 
@@ -229,7 +246,8 @@
                         </div>
                         
                         </div> -->
-            <contact-us-flyer></contact-us-flyer>
+            <!-- <contact-us-flyer></contact-us-flyer> -->
+            <contact-us-flyer-horizontal></contact-us-flyer-horizontal>
             <!-- <div class="contact-us-wrapper">
                             <div class="card-container">
                               <div class="user">
@@ -349,8 +367,8 @@
                     <div class="prod-card">
                         <ng-container *ngFor="let item of featureList">
 
-                            <div class="feature-heading">
-                                <div class="feature-card" (click)="openLink(item.hyperLinkURL)">
+                            <div class="feature-heading" (click)="openLink(item.hyperLinkURL)">
+                                <div class="feature-card">
                                     <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
                                 </div>
                                 <div class="feature-card-content">
@@ -366,8 +384,8 @@
                 </div>
                 <div class="p-view-all-feature-div">
                     <div class="feature-desc-heading">
-                        <p class="feature-viewall">click here to view detailed feature of the
-                            product</p>
+                        <!-- <p class="feature-viewall">click here to view detailed feature of the
+                            product</p> -->
                             <button class="btn view-det-btn" (click)="featureCountEvent(viewAllFeaturesDetails)">
                             <ng-container *ngIf="viewAllFeaturesDetails ; else showLess">
                                 Show Less Features 
