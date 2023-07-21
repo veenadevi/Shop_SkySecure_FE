@@ -59,14 +59,16 @@ export class CompareProductsComponent implements OnInit{
   }
   public ngOnInit(): void {
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let reqBody = this.setPrdList(cacheData);
-    console.log("********* ^^^^^ Data ", cacheData);
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+    let reqBody = this.setPrdList(uniqueElements);
+    
     //this.fetchCompareProductsList(this.allSelectedItems);
     this.fetchCompareProductsList(reqBody);
   }
 
   public setPrdList(data){
-
     let tempPrd = [];
     let tempPrdVar = [];
     let tempBundles = [];
@@ -74,7 +76,7 @@ export class CompareProductsComponent implements OnInit{
 
 
     data.forEach(element => {
-      switch (element.type) {
+      switch (element.productType) {
         case 'product':
           tempPrd.push(element._id);
           return;
@@ -102,6 +104,7 @@ export class CompareProductsComponent implements OnInit{
       "productFamilyVariants": tempPrdBundleVar
     }
 
+    
     return reqBody;
   }
 
@@ -109,7 +112,6 @@ export class CompareProductsComponent implements OnInit{
     this.onPageLoad = false;
     this.subscriptions.push(
       this.metaDataSvc.fetchCompareProductsList(allSelectedItems).subscribe(response => {
-        console.log("_RESPONSE___", response);
         this.products = response.products.map((data: any) => {
           let productData = data.products[0];
           let properties = {
@@ -166,7 +168,6 @@ export class CompareProductsComponent implements OnInit{
 
         this.allProducts = this.products.concat(this.productVariants,this.productFamilyList,this.productFamilyVariants);
         this.allProducts = this.allProducts.slice(0,4);
-        console.log("__this.allProducts____", this.allProducts);
       })
     );
   }
