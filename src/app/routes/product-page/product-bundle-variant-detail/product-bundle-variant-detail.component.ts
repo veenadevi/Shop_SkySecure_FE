@@ -59,6 +59,15 @@ export class ProductBundleVariantDetailComponent implements OnInit {
       right.scrollBy(-200, 0);
     };
 
+    public offerVisible:boolean = true
+    
+    onclickOffer(){
+      {
+        // this.ReadMore = !this.ReadMore; //not equal to condition
+        this.offerVisible = !this.offerVisible
+      }
+    }
+
 
   scrollToSection(sectionId: any): void {
 

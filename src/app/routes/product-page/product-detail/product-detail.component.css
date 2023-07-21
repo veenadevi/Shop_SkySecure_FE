@@ -595,6 +595,7 @@ h5 {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-right: 12px;
 }
 
 .buy-now-btn {
