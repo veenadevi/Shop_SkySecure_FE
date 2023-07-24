@@ -13,6 +13,7 @@ import { ProductsByBrandComponent } from './products-by-brand/products-by-brand.
 import { ProductsByTrendingComponent } from './products-by-trending/products-by-trending.component';
 import { MaterialModule } from 'src/app/material.module';
 import { PrimeNgModule } from 'src/app/prime-ng.module';
+import { VideoCarouselComponent } from './video-carousel/video-carousel.component';
 
 
 
@@ -25,7 +26,8 @@ import { PrimeNgModule } from 'src/app/prime-ng.module';
     CarouselComponent,
     ProductsByCategoryComponent,
     ProductsByBrandComponent,
-    ProductsByTrendingComponent
+    ProductsByTrendingComponent,
+    VideoCarouselComponent
   ],
   imports: [
     CommonModule,

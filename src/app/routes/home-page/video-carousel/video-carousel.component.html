@@ -1,0 +1,62 @@
+<div class="container">
+    <span class="text-header alignLeft">Products by Category</span>
+
+
+    <div class="video-content">
+        <button #leftArrow class="arrow left-arrow" (click)="scrollFunctionLeft()"><img
+            class="arrow-icon" src="../../../../assets/icons/ArrowLeftIcon.svg"></button>
+        <div class="scroll-container">
+        
+            <div class="scroll-content">
+        
+                <div class="video-card">
+                    <iframe class="video" [src]="azurep1VideoUrl | safeurl" width="286" height="160" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <h5 class="video-title">Azure Active Directory Plan1</h5>
+                </div>
+                <div class="video-card">
+                    <iframe class="video" [src]="azurep2VideoUrl | safeurl" width="286" height="160" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <h5 class="video-title">Azure Active Directory Plan2</h5>
+                </div>
+            
+                <div class="video-card">
+                    <iframe class="video" [src]="microsoft365InsiderVideoUrl | safeurl" width="286" height="160" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <h5 class="video-title">Microsoft 365 Insider Risk Management</h5>
+                </div>
+                <div class="video-card">
+                    <iframe class="video" [src]="eDiscoveryAuditVideoUrl | safeurl" width="286" height="160" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <h5 class="video-title">Microsoft 365 eDiscovery & Audit</h5>
+                </div>
+                <div class="video-card">
+                    <iframe class="video" [src]="defenderForIdentityVideoUrl | safeurl" width="286" height="160" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <h5 class="video-title">Microsoft Defender For Identity</h5>
+                </div>
+                <div class="video-card">
+                    <iframe class="video" [src]="defenderForOfficep1VideoUrl | safeurl" width="286" height="160" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <h5 class="video-title">Microsoft Defender For Office 365 Plan1</h5>
+                </div>
+                <div class="video-card">
+                    <iframe class="video" [src]="defenderForOfficep2VideoUrl | safeurl" width="286" height="160" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <h5 class="video-title">Microsoft Defender For Office 365 Plan2</h5>
+                </div>
+                <div class="video-card">
+                    <iframe class="video" [src]="defenderForEndpointp1VideoUrl | safeurl" width="286" height="160" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <h5 class="video-title">Microsoft Defender For Endpoint Plan1</h5>
+                </div>
+                <div class="video-card">
+                    <iframe class="video" [src]="defenderForEndpointp2VideoUrl | safeurl" width="286" height="160" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <h5 class="video-title">Microsoft Defender For Endpoint Plan2</h5>
+                </div>
+            
+            </div> 
+        
+        </div>
+        
+        <button class="arrow right-arrow" (click)="scrollFunctionRight()"><img class="arrow-icon"
+            src="../../../../assets/icons/ArrowRightIcon.svg"></button>
+    </div>
+
+
+</div>
+
+
+
