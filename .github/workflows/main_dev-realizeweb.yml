@@ -7,7 +7,7 @@ on:
   push:
   
      branches: 
-      - realize-development
+      - main
   workflow_dispatch:
 
 jobs:
