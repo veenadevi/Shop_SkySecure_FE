@@ -616,6 +616,29 @@
     align-items: baseline;
     margin: 0 0 10px 0;
   }
+  .about-section{
+    display: flex;
+    align-items: baseline;
+    margin: 0 0 10px 0;
+    width: 100%;
+  }
+  .about-heading{
+    width: 25%;
+  }
+  .about-desc{
+    width: 75%;
+  }
+  .all-btn {
+    /* border-radius: 8px; */
+    background: transparent;
+    /* border: 1px solid white; */
+    text-align: center;
+    color: #003388;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: line;
+    cursor: pointer;
+  }
   .product-common-info{
     display: flex;
     flex-direction: row;
@@ -1274,8 +1297,7 @@ button{
 }
 .about{
    font-weight: 700;
-    margin-bottom: 7px;
-   margin-top: 7px;
+   margin: 0px 8px 0px 0;
    font-family: 'lato',sans-serif;
 }
 .offer{
