@@ -18,6 +18,8 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 })
 export class ProductBundleDetailComponent implements OnInit{
 
+  productDescriptionWordLimit: number = 50;
+
 
   public currentRoute: string;
   links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
@@ -100,6 +102,11 @@ export class ProductBundleDetailComponent implements OnInit{
     window.open(url, '_blank');
   }
 
+  seeMore: boolean = false;
+
+  public openDescription(): void {
+    this.seeMore= !this.seeMore;
+  }
 
   constructor(
     private route: ActivatedRoute,
