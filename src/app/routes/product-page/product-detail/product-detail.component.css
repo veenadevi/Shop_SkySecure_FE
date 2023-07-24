@@ -634,7 +634,13 @@ h5 {
   width: 25%;
 }
 .about-desc{
-  width: 75%;
+  width: 60%;
+  min-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical;
 }
 .all-btn {
   /* border-radius: 8px; */
@@ -646,6 +652,9 @@ h5 {
   font-weight: 500;
   text-decoration: line;
   cursor: pointer;
+}
+.scroll{
+width:15%;
 }
 .product-common-info{
   display: flex;

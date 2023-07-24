@@ -89,7 +89,7 @@ export class ProductDetailComponent implements OnInit{
 
 
   scrollToSection(sectionId: any): void {
-
+console.log("coming inside");
     this.activeLink=sectionId;
     sectionId  = sectionId.slice(1);
     let section;
@@ -146,6 +146,7 @@ export class ProductDetailComponent implements OnInit{
   public openDescription(): void {
     this.seeMore= !this.seeMore;
   }
+ 
 
   public individualProductDetail$ = this.metadataStore.individualProductDetail$
   .pipe(

@@ -100,27 +100,28 @@
                     <p class="solution" >Solution Category:</p>
                     <p>{{product.subcategories[0].description}}</p>
                 </div>
-<div class="about-section">
-    <div class="about-heading">
-        <p class="about" >About this product:</p>
-    </div>
-   <div class="about-desc">
-    <!-- <p class="prod-desc">{{product.description}}
-       
-    </p> -->
-    <div class="all-desc">
-        {{(seeMore) ? product.description : product.description | slice:0:50}}
-        
-        <span *ngIf="!seeMore">....</span>
-        <a class="all-btn"  (click)="openDescription()">{{ !seeMore ? "See More" : "See Less" }}</a>
-       
-        </div>
-    
-   </div>
- 
-               
-</div>
-            
+                <div class="about-section">
+                    <div class="about-heading">
+                        <p class="about">About this product:</p>
+                    </div>
+                    <div class="about-desc">
+                        <!-- <p class="prod-desc">{{product.description}}
+                       
+                    </p> -->
+                        <div class="all-desc">
+                           {{product.description}}
+                        </div>
+                   
+                    </div>
+                    <div class="scroll">
+                        <span>
+                            <a class="all-btn" (click)="scrollToSection('#description')">see more</a>
+                         </span>
+                    </div>
+
+                </div>
+                <!-- <p class="about" >About this product:</p>
+                <p class="prod-desc">{{product.description}}</p> -->
                 <span class="request-btn" ><button class="btn view-det-btn"
                         (click)="scrollToSection('#feature')">View Features</button>
                     <button class="btn request-quote-btn" (click)="requestQuote(product)"
@@ -296,23 +297,26 @@
         <a class="nav" mat-tab-link *ngFor="let link of links; index as i" (click)="scrollToSection(link)"
             [active]="activeLink == link"> {{titles[i]}} </a>
     </nav>
-    <p-card class="Description" header="Description" id="description" #descriptionRef>
-        <!-- <p class="m-0">
-                    {{product.products[0].description}}
-                </p> -->
-        <p class="m-0">
-            {{(seeMore) ? product.description : product.description | slice:0:150}}
-            <span *ngIf="!seeMore">....</span>
-            <span class="see-more">
-                <button class="btn view-det-btn" (click)="openDescription()">{{ !seeMore ? "See More" : "See Less"
-                    }}</button>
-            </span>
-        </p>
-        <!-- <span style = "display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;">
-                    <button class="btn view-det-btn">See More</button>
-                </span> -->
-
-    </p-card>
+    <div id="description" #descriptionRef>
+        <p-card class="Description" header="Description" >
+            <!-- <p class="m-0">
+                        {{product.products[0].description}}
+                    </p> -->
+            <p class="m-0">
+                {{(seeMore) ? product.description : product.description | slice:0:150}}
+                <span *ngIf="!seeMore">....</span>
+                <span class="see-more">
+                    <button class="btn view-det-btn" (click)="openDescription()">{{ !seeMore ? "See More" : "See Less"
+                        }}</button>
+                </span>
+            </p>
+            <!-- <span style = "display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;">
+                        <button class="btn view-det-btn">See More</button>
+                    </span> -->
+    
+        </p-card>
+    </div>
+   
 
     <!-- <div class="product-features-container" id="feature" #featureRef>
         <h5>Features</h5>
