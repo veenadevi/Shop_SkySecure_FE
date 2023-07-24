@@ -10,16 +10,18 @@
                             <img class="prod-logo"
                                 src="{{(productFamily && productFamily.bannerLogo) ? productFamily.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'}}">
                         </div>
-                        <div class="prod-img-hover">
+
+                  <!-- //commented for no image data// -->
+                        <!-- <div class="prod-img-hover">
                             <ng-container *ngIf="productImages && productImages.length>0">
                                 <ng-container *ngFor="let item of productImages">
 
                                     <img  class="img-hover" src="{{item}}" alt="img">
                                 </ng-container>
                             </ng-container>
-                            <ng-template #noImagesBlock>
+                            <ng-template #noImagesBlock> -->
                                 <!-- <ng-container *ngFor="let img of dummyImages"> -->
-                                <img  class="img-hover"
+                                <!-- <img  class="img-hover"
                                     src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
                                 <img  class="img-hover"
@@ -29,12 +31,12 @@
                                     src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
                                 <img  class="img-hover"
-                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img"> -->
                                 <!-- </ng-container> -->
-                            </ng-template>
+                            <!-- </ng-template>
 
-                            <!-- <img src="" alt=""> -->
-                        </div>
+                           
+                        </div> -->
                         
                     </div>
 
@@ -142,11 +144,11 @@
                                             <p  class="offer-dis" >Upto ₹500.00 discount on select Credit Cards</p>
                                             <a  class="offer-more" >2 more offers</a>
                                         </div>
-                                        <div class="offer-card">
+                                        <!-- <div class="offer-card">
                                             <p class="offer-bank" >Bank Offers</p>
                                             <p class="offer-dis" >Upto ₹500.00 discount on select Credit Cards</p>
                                             <a class="offer-more">2 more offers</a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </ng-container>
                             </div>

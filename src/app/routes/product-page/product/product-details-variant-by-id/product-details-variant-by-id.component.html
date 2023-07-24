@@ -9,28 +9,29 @@
                     <div class="prod-img-logo">
                         <img class="prod-logo" src="{{parentProduct.bannerLogo}}">
                     </div>
-                    <div class="prod-img-hover">
+                          <!-- //commented for no image data// -->
+                    <!-- <div class="prod-img-hover">
                         <ng-container *ngIf="(productImages.length>0); else noImagesBlock">
                             <ng-container *ngFor="let item of productImages">
                               
                                 <img class="img-hover" src="{{item}}" alt="img">
                             </ng-container>
                         </ng-container>
-                        <ng-template #noImagesBlock>
+                        <ng-template #noImagesBlock> -->
                       
                             <!-- <ng-container *ngFor="let img of dummyImages"> -->
-                                <img class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                                <!-- <img class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
                                 <img class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
                                 <img class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
-                                <img class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                                <img class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img"> -->
                             <!-- </ng-container> -->
-                        </ng-template>
+                        <!-- </ng-template>
                         
                         <img src="" alt="">
-                        </div>
+                        </div> -->
 
                     <!-- img
                 <p-galleria  [thumbnailsPosition]="position" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5"> 
@@ -143,11 +144,11 @@
                                             <p  class="offer-dis" >Upto ₹500.00 discount on select Credit Cards</p>
                                             <a  class="offer-more" >2 more offers</a>
                                         </div>
-                                        <div class="offer-card">
+                                        <!-- <div class="offer-card">
                                             <p class="offer-bank" >Bank Offers</p>
                                             <p class="offer-dis" >Upto ₹500.00 discount on select Credit Cards</p>
                                             <a class="offer-more">2 more offers</a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </ng-container>
                             </div>

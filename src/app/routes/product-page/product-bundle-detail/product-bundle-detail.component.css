@@ -78,16 +78,16 @@
 .img-hover {
   /* width: 120%;
   height: auto; */
-  transition: transform .2s;
+  /* transition: transform .2s; */
   margin: 3%;
   cursor: pointer;
-  background: #EAEAEA;
+  /* background: #EAEAEA; */
 }
 
-.img-hover:hover {
+/* .img-hover:hover {
   transform: scale(3);
-  /* z-index: 1000; */
-}
+ 
+} */
 
 .prod-img-logo {
   display: flex;
@@ -619,7 +619,7 @@ h5 {
 
 .offer-card {
   display: flex;
-  flex-basis: 41%;
+  /* flex-basis: 41%; */
   padding: 1%;
   margin: 2%;
   flex-direction: column;
