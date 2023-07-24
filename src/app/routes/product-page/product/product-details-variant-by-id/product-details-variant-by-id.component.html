@@ -429,11 +429,11 @@
                     <div class="prod-card">
                         <!-- <ng-container *ngFor="let item of features"> -->
                             <ng-container *ngFor="let item of featureList">
-                            <div class="feature-heading" (click)="openLink(item.hyperLinkURL)">
+                            <div class="feature-heading" >
                                 <div class="feature-card" >
                                     <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
                                 </div>
-                                <div class="feature-card-content">
+                                <div class="feature-card-content" (click)="openLink(item.hyperLinkURL)">
                                     <p class="feature-card-heading">{{item.name}}</p>
                                     <!-- <p class="feature-card-desc">{{item.description}}</p> -->
                                 </div>

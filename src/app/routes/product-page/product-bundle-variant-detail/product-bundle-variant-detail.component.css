@@ -1530,6 +1530,7 @@ button {
 .feature-heading {
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 .prod-card {
