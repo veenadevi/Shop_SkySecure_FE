@@ -50,7 +50,7 @@
 
 /* new homepage */
 .search-box-container {
-    width: 100%;
+    width: 65%;
 }
 
 .header-container{
@@ -73,6 +73,7 @@
 }
 
 .header-content {
+    width: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -86,7 +87,7 @@
 }
 
 .header-text-content {
-    width: 140%;
+    width: 64%;
     color: #FFF;
     text-align: center;
     font-size: 34px;
@@ -105,38 +106,36 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    column-gap: 44px;
-    margin-top: 42px;
+    column-gap: 14px;
+    margin-top: 49px;
 }
 
 .shop-feature-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background: white;
+    border-radius: 10px;
+    width: 200px;
 }
 
 .shop-feature-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    row-gap: 4px;
+    column-gap: 17px;
+    padding: 10px;
 }
 
 .shop-feature-title {
-    font-size: 15px;
-    font-weight: 500;
-    color: #fff;
-    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e1e1e;
+    /* letter-spacing: 1px; */
 }
 
 .shop-feature-img {
-    width: 5em;
-    height: 5em;
-    /* background: #EBECF6; */
+    width: 3em;
+    height: 3em;
     border-radius: 100%;
-    padding: 5%;
+    margin-left: 12px;
 }
 
 
