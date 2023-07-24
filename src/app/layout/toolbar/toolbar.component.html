@@ -2,7 +2,10 @@
 
     <div class="menu-icon-holder">
         <span (click)="menuToogled()">
-            <mat-icon class="mat-icon-size">menu</mat-icon>
+            <ng-container *ngIf="userLoggedIn">
+                <mat-icon class="mat-icon-size">menu</mat-icon>
+            </ng-container>
+            
         </span>
         
     </div>

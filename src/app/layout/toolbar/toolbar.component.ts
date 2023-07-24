@@ -58,6 +58,25 @@ export class ToolbarComponent {
 
   @Output() menuToogleEvent = new EventEmitter();
   
+  public userLoggedIn : boolean = false;
+
+  public userDetails$ = this.userAccountStore.userDetails$
+  .pipe(
+    map(data => {
+      if(data){
+        
+        this.userLoggedIn = true;
+        return data;
+      }
+      else{
+        
+        this.userLoggedIn = false;
+        return data;
+      }
+    }
+    )
+  )
+
 
   private getCategories(): CategoryDetails[]{
     this.spinnerService.show();
@@ -121,10 +140,14 @@ export class ToolbarComponent {
 
   public ngOnInit() : void {
 
+    
+      
+    
     this.getCategories();
     this.getProducts();
     this.getOEMs();
     this.getTrendingProducts();
+    this.userDetails$.subscribe();
     //this.getCartId();
   }
 
