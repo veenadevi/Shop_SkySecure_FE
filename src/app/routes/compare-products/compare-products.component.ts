@@ -111,24 +111,30 @@ export class CompareProductsComponent implements OnInit{
   }
 
   public fetchCompareProductsList(allSelectedItems: any) {
+    console.log("total itemes---"+allSelectedItems.length)
     this.onPageLoad = false;
     this.subscriptions.push(
       this.metaDataSvc.fetchCompareProductsList(allSelectedItems).subscribe(response => {
+        console.log("fetched product size :"+response.products.length)
         this.products = response.products.map((data: any) => {
-          let productData = data.products[0];
+        
+          //let productData = data.products[0];
+          let productData = data.products;
+          console.log("productData  "+productData)
           let properties = {
             'ProductName': productData.name,
             'DevelopedBy': 'Microsoft',
             'Category': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
             'Subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
-            'Features': data.featureList.length > 0 ? data.featureList : 'No Features'
+            'Features': data.featureList.length > 0 ? data.featureList : 'No Features',
+           'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'
           }
-          return { properties, 'bannerLogo': productData.bannerLogo };
+          return { properties};
         })
 
         this.productVariants = response.productVariants.map((data: any) => {
-          let productData = data.products[0];
+          let productData = data.products;
           let productVariantData = data.productVariants;
           let properties = {
             'ProductName': productVariantData.name,
@@ -136,9 +142,10 @@ export class CompareProductsComponent implements OnInit{
             'Category': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
             'Subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
-            'Features': data.featureList.length > 0 ? data.featureList : 'No Features'
+            'Features': data.featureList.length > 0 ? data.featureList : 'No Features',
+            'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'
           }
-          return { properties, 'bannerLogo': productData.bannerLogo };
+          return { properties };
         })
 
         this.productFamilyList = response.productFamily.map((data: any) => {
@@ -149,9 +156,10 @@ export class CompareProductsComponent implements OnInit{
             'Category': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
             'Subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
-            'Features': data.features.length > 0 ? data.features : 'No Features'
+            'Features': data.features.length > 0 ? data.features : 'No Features',
+            'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'
           }
-          return { properties, 'bannerLogo': productData.bannerLogo };
+          return { properties};
         })
 
         this.productFamilyVariants = response.productFamilyVariants.map((data: any) => {
@@ -163,12 +171,16 @@ export class CompareProductsComponent implements OnInit{
             'Category': productVariantData?.subcategories[0]?.name ? productVariantData?.subcategories[0]?.name : '-',
             'Subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
-            'Features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : 'No Features'
+            'Features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : 'No Features',
+            'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'
           }
-          return { properties, 'bannerLogo': productData.bannerLogo };
+          return { properties};
         })
+        console.log("set compare product list "+this.products.length)
 
         this.allProducts = this.products.concat(this.productVariants,this.productFamilyList,this.productFamilyVariants);
+        
+        
         this.allProducts = this.allProducts.slice(0,4);
       })
     );
