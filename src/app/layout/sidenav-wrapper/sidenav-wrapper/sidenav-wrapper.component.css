@@ -32,6 +32,7 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button {
     transform: rotate(0deg);
     /* /* display: flex; */
     margin-left: 10px;
+    margin-top: 5px;
 }
 mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
     transform: rotate(180deg);

@@ -38,7 +38,7 @@ export class SidenavWrapperComponent {
   public userSubMenu : boolean = false;
   public dashboardSubMenu : boolean = false;
   public securitySubMenu : boolean = false;
-  public profileSubMenu : boolean = false;
+  // public profileSubMenu : boolean = false;
   public adminSubMenu : boolean = false;
 
   constructor(
@@ -67,8 +67,8 @@ export class SidenavWrapperComponent {
     if(navVal === 'security'){
       this.securitySubMenu = true;
     }
-    if(navVal === 'profile'){
-      this.profileSubMenu = true;
+    if(navVal === 'user'){
+      this.userSubMenu = true;
     }
     if(navVal === 'admin'){
       this.adminSubMenu = true;
@@ -92,8 +92,8 @@ export class SidenavWrapperComponent {
 
     switch (navVal) {
       case 'user':
-          //this.userSubMenu = (this.userSubMenu) ? false : true;
-          //this.isExpanded = this.isExpanded ? false : true;
+          this.userSubMenu = (this.userSubMenu) ? false : true;
+          this.isExpanded = this.isExpanded ? false : true;
           return;
       case 'dashboard':
           //this.dashboardSubMenu = (this.dashboardSubMenu) ? false : true;
@@ -129,9 +129,9 @@ export class SidenavWrapperComponent {
       case 'security':
           this.securitySubMenu = (this.securitySubMenu) ? false : true;
           return;
-      case 'profile':
-          this.profileSubMenu = (this.profileSubMenu) ? false : true;
-          return;
+      // case 'profile':
+      //     this.profileSubMenu = (this.profileSubMenu) ? false : true;
+      //     return;
       case 'admin':
           this.adminSubMenu = (this.adminSubMenu) ? false : true;
           return;

@@ -23,9 +23,30 @@
                 <span class="text-style">
                   {{userFullName}}
                 </span>
-                <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
+                <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
               </div>
           </mat-list-item>
+            <!-- Profile Section -->
+            <!-- <mat-list-item>
+              <span class="icon-holder" (click)="menuExpansion(isExpanded , 'profile')">
+                <img src="../../../../assets/YellowChalk/ProfileIcon.svg" title="Profile" alt="Profile">
+              </span>
+              <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('profile')" >
+                  <span class="text-style">
+                    Profile
+                  </span>
+                  <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+                </div>
+            </mat-list-item> -->
+            <!-- Security Sub Menu -->
+            <ng-container *ngIf="userSubMenu">
+              <mat-list-item [routerLink]="['user-profile/profile-view']">
+                <span *ngIf="isExpanded" class="sub-menu-item">Update Profile</span>
+              </mat-list-item>
+              <mat-list-item (click)="logout()">
+                <span *ngIf="isExpanded" class="sub-menu-item">Logout</span>
+              </mat-list-item>
+            </ng-container>
 
           <!-- Dashboard Section -->
           <mat-list-item>
@@ -152,28 +173,9 @@
           </ng-container>
           
 
-          <!-- Profile Section -->
-          <mat-list-item>
-            <span class="icon-holder" (click)="menuExpansion(isExpanded , 'profile')">
-              <img src="../../../../assets/YellowChalk/ProfileIcon.svg" title="Profile" alt="Profile">
-            </span>
-            <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('profile')" >
-                <span class="text-style">
-                  Profile
-                </span>
-                <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
-              </div>
-          </mat-list-item>
+        
 
-          <!-- Security Sub Menu -->
-          <ng-container *ngIf="profileSubMenu">
-            <mat-list-item [routerLink]="['user-profile/profile-view']">
-              <span *ngIf="isExpanded" class="sub-menu-item">Update Profile</span>
-            </mat-list-item>
-            <mat-list-item (click)="logout()">
-              <span *ngIf="isExpanded" class="sub-menu-item">Logout</span>
-            </mat-list-item>
-          </ng-container>
+        
 
         </mat-nav-list>
       </mat-sidenav>
