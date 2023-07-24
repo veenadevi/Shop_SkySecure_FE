@@ -8,27 +8,31 @@
                             src="{{(productFamily && productFamily.bannerLogo) ? productFamily.bannerLogo : ''}}">
                     </div>
 
-                    <div class="prod-img-hover">
+
+                    <!-- //commented for no image data// -->
+                    <!-- <div class="prod-img-hover">
                         <ng-container *ngIf="(productImages && productImages.length>0); else noImagesBlock">
                             <ng-container *ngFor="let item of productImages">
                                 <img class="img-hover" src="../../../../assets/images/imgPlaceholder.png" alt="img">
                             </ng-container>
                         </ng-container>
-                        <ng-template #noImagesBlock>
+                        <ng-template #noImagesBlock> -->
                             <!-- <ng-container *ngFor="let img of dummyImages"> -->
-                            <img class="img-hover" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg"
+                            <!-- <img class="img-hover" class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg"
                                 alt="img">
 
                             <img class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
                             <img class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
-                            <img class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                            <img class="img-hover" src="../../../../assets/icons/DefaultImageIcon.svg" alt="img"> -->
                             <!-- </ng-container> -->
-                        </ng-template>
+                        <!-- </ng-template>
 
 
-                    </div>
+                    </div> -->
+
+
                     <!-- <div class="prod-img-logo">
                         <img class="prod-logo"  
                             src="{{(productFamily && productFamily.bannerLogo) ? productFamily.bannerLogo : ''}}">
@@ -142,8 +146,8 @@
                                 </p>
                                 <div class="price">
                                     <p class="product-price">
-                                        <span class="price-symbol">&#8377;</span>
-                                        {{productFamilyVariant.priceList[0].price}}
+                                        <span class="price-symbol">&#8377;
+                                        {{productFamilyVariant.priceList[0].price}}</span>
                                         <span class="product-price-type">/
                                             {{productFamilyVariant.priceList[0].priceType}}</span>
                                     </p>
@@ -197,11 +201,11 @@
                                         <p class="offer-dis">Upto ₹500.00 discount on select Credit Cards</p>
                                         <a class="offer-more">2 more offers</a>
                                     </div>
-                                    <div class="offer-card">
+                                    <!-- <div class="offer-card">
                                         <p class="offer-bank">Bank Offers</p>
                                         <p class="offer-dis">Upto ₹500.00 discount on select Credit Cards</p>
                                         <a class="offer-more">2 more offers</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </ng-container>
                         </div>
