@@ -6,72 +6,49 @@
             <div class="product-image-view">
                 <div class="product-image">
                     <div class="prod-img-cont">
-                        <div class="prod-img-hover">
-                            <ng-container *ngIf="productImages && productImages.length>0">
-                                <ng-container *ngFor="let item of productImages">
-
-                                    <img style="width: 120%;
-                                    height: auto;
-                                    transition: transform .2s;
-                                    margin:10%;
-                                    cursor: pointer;
-                                    background: #EAEAEA;" class="img-hover" src="{{item}}" alt="img">
-                                </ng-container>
-                            </ng-container>
-                            <ng-template #noImagesBlock>
-                                <!-- <ng-container *ngFor="let img of dummyImages"> -->
-                                <img style="width: 120%;
-                                    height: auto;
-                                    transition: transform .2s;
-                                    margin:10%;
-                                    cursor: pointer;
-                                    background: #EAEAEA;" class="img-hover"
-                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
-
-                                <img style="width: 120%;
-                                    height: auto;
-                                    transition: transform .2s;
-                                    margin:10%;
-                                    cursor: pointer;
-                                    background: #EAEAEA;" class="img-hover"
-                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
-
-                                <img style="width: 120%;
-                                    height: auto;
-                                    transition: transform .2s;
-                                    margin:10%;
-                                    cursor: pointer;
-                                    background: #EAEAEA;" class="img-hover"
-                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
-
-                                <img style="width: 120%;
-                                    height: auto;
-                                    transition: transform .2s;
-                                    margin:10%;
-                                    cursor: pointer;
-                                    background: #EAEAEA;" class="img-hover"
-                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
-                                <!-- </ng-container> -->
-                            </ng-template>
-
-                            <img src="" alt="">
-                        </div>
                         <div class="prod-img-logo">
                             <img class="prod-logo"
                                 src="{{(productFamily && productFamily.bannerLogo) ? productFamily.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'}}">
                         </div>
+                        <div class="prod-img-hover">
+                            <ng-container *ngIf="productImages && productImages.length>0">
+                                <ng-container *ngFor="let item of productImages">
+
+                                    <img  class="img-hover" src="{{item}}" alt="img">
+                                </ng-container>
+                            </ng-container>
+                            <ng-template #noImagesBlock>
+                                <!-- <ng-container *ngFor="let img of dummyImages"> -->
+                                <img  class="img-hover"
+                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+
+                                <img  class="img-hover"
+                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+
+                                <img  class="img-hover"
+                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+
+                                <img  class="img-hover"
+                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
+                                <!-- </ng-container> -->
+                            </ng-template>
+
+                            <!-- <img src="" alt=""> -->
+                        </div>
+                        
                     </div>
+
+
                     <div class="buy-now-prod">
                         <span class="quantity-year">
-                            <h6 class="head-06">Quantity </h6>
-                            <p class="year">(per year)</p>
+                            <h6 class="head-06"  >Quantity </h6>
+                            <span class="year">(per year)</span>
                         </span>
-
                         <span class="plus-minus">
-
+    
                             <span>
-                                <img id="add-minus-quantity" (click)="changeQuantity('minus')" alt="minus"
-                                    src="../../../assets/icons/Minus.svg">
+                                <img id="add-minus-quantity" (click)="changeQuantity('minus')"
+                                    alt="minus" src="../../../assets/icons/Minus.svg">
                             </span>
                             <span>
                                 <input class="input-field" [(ngModel)]="productQuantity">
@@ -81,11 +58,12 @@
                                     src="../../../assets/icons/Add.svg">
                             </span>
                         </span>
-
-                        <button class="btn buy-now-btn" (click)="buyNow(productFamily, productQuantity)">Buy
-                            now</button>
+    
+                        <button class="btn buy-now-btn" (click)="buyNow(productFamily, productQuantity)">Buy now</button>
                     </div>
+
                 </div>
+
                 <div class="product-details-info">
                     <h4 class="head-04">{{productFamily.name}}
                     </h4>
@@ -96,55 +74,90 @@
                         <mat-icon class="review-icon">star</mat-icon>
                         <mat-icon class="review-icon">star</mat-icon>
                         <mat-icon class="review-icon">star_border</mat-icon>
-                        <span class="review"> 4 reviews | write a review</span>
+                        <div class="review-text-section">
+                            <p class="review-text"> 4 reviews </p>
+                            <span class="divider">|</span>
+                            <p class="link-text"> Write a review </p>
+                            <span class="divider">|</span>
+                            <p class="link-text"> Have a question? </p>
+                        </div>
                     </div>
-                    <span style="display:inline-flex">
-                        <p *ngIf="productFamily.priceList[0].discountRate"
-                            style="font-size: 16px;color: red;font-family: 'lato',sans-serif;">
-                            -{{productFamily.priceList[0].discountRate}}%&nbsp; </p>
-                        <h4 style="font-size: smaller;">&#8377; </h4>
-                        <span
-                            style="font-size: 18px;font-weight: 500;font-family: 'lato',sans-serif;">{{productFamily.priceList[0].price}}
-                            /
-                            {{productFamily.priceList[0].priceType}}</span>
-                    </span>
-                    <span style="display:inline-flex;align-items: center;">
-                        <p style="font-size: small;"> MRP:&nbsp;</p>
-                        <s>
-                            <p style="font-size: initial;">{{productFamily.priceList[0].ERPPrice}}
+
+
+                    <div class="product-price-detail">
+                        <div class="product-price-section" style="display:inline-flex">
+                            <p *ngIf="productFamily.priceList[0].discountRate"
+                            class="discounted-text">-{{productFamily.priceList[0].discountRate}}%&nbsp;
                             </p>
-                        </s>
-                    </span>
-                    <p style="font-size: smaller;">GST Extra</p>
-                    <p class="solution">Solution Category:</p>
-                    <p>{{productFamily.subcategories[0].name}}</p>
-                    <p class="about">About this product:</p>
-                    <p class="prod-desc">{{productFamily.description}}</p>
+                            <div class="price">
+                                <p class="product-price">
+                                    <span class="price-symbol">&#8377;</span>
+                                    {{productFamily.priceList[0].price}}
+                                    <span class="product-price-type">
+                                        / {{productFamily.priceList[0].priceType}}</span>
+                                </p>
+                            </div>
+                            <p style="font-size: smaller;">(GST Extra)</p>
+                        </div>
+                        <div style="display:inline-flex;align-items: center;">
+                            <p style="font-size: small;"> MRP:&nbsp;</p>
+                            <span class="price-symbol">&#8377;</span>
+                            <span>
+                                <p style="font-size: initial; text-decoration: line-through;">{{productFamily.priceList[0].ERPPrice}}</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="solution-section">
+                        <p class="solution" >Solution Category:</p>
+                        <p>{{productFamily.subcategories[0].name}}</p>
+                    </div>
+                    <!-- <span class="request-btn" ><button class="btn view-det-btn"
+                        (click)="scrollToSection('#feature')">View Features</button>
+                    <button class="btn request-quote-btn" (click)="requestQuote(product)"
+                        style="margin-left: 4%;">Request Quote</button></span> -->
+                 
+                    <!-- <p class="about">About this product:</p>
+                    <p class="prod-desc">{{productFamily.description}}</p> -->
+
                     <span class="request-btn"><button class="btn view-det-btn">View
                             Features</button>
                         <button class="btn request-quote-btn" style="margin-left: 4%;">Request Quote</button></span>
                     <p-divider></p-divider>
 
-                    <div class="offer-det">
-                        <span style="display: inline-flex;">
-                            <img class="offer-img" src="../../assets/productDetails/OfferIllustrationIcon.svg">
-                            <p class="offer">&nbsp; &nbsp; Offer</p>
-                        </span>
-                        <div class="offer-card-container">
-                            <div class="offer-card">
-                                <p class="offer-bank">Bank Offers</p>
-                                <p class="offer-dis">Upto ₹500.00 discount on select Credit Cards</p>
-                                <a class="offer-more">2 more offers</a>
-                            </div>
-                            <div class="offer-card">
-                                <p class="offer-bank">Bank Offers</p>
-                                <p class="offer-dis">Upto ₹500.00 discount on select Credit Cards</p>
-                                <a class="offer-more">2 more offers</a>
-                            </div>
-                        </div>
-                    </div>
-                    <p-divider></p-divider>
 
+                    <div class="product-common-info">
+                        <div class="offer-det">
+                            <span class="offer-headline">
+                                <img class="offer-img" src="../../assets/productDetails/OfferIllustrationIcon.svg">
+                                <p  class="offer">&nbsp;Offer</p>
+                                    <button (click)="onclickOffer()" class="downarrow-btn">
+                                        <ng-container *ngIf="offerVisible ; else downArrow"><img  src="../../../../../assets/icons/DefaultUpIcon.svg"></ng-container>
+                                        <ng-template #downArrow><img  src="../../../../../assets/icons/DefaultDownIcon.svg"></ng-template>
+                                    </button>
+                            </span>
+                                <ng-container *ngIf="offerVisible">
+                                    <div class="offer-card-container">
+                                        <div class="offer-card">
+                                            <p  class="offer-bank">Bank Offers</p>
+                                            <p  class="offer-dis" >Upto ₹500.00 discount on select Credit Cards</p>
+                                            <a  class="offer-more" >2 more offers</a>
+                                        </div>
+                                        <div class="offer-card">
+                                            <p class="offer-bank" >Bank Offers</p>
+                                            <p class="offer-dis" >Upto ₹500.00 discount on select Credit Cards</p>
+                                            <a class="offer-more">2 more offers</a>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            </div>
+
+
+
+
+                   
+                    <!-- <p-divider></p-divider> -->
+<!-- 
                     <div class="common-info">
 
                         <div class="common-det">
@@ -181,9 +194,10 @@
                         </div>
 
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
+
         </ng-container>
         <div class="product-info">
             <!-- <ng-container>
@@ -220,7 +234,8 @@
             </ng-container> -->
             <details-compare-products-flyer
                 [compareProductsList]="selectedProductItem"></details-compare-products-flyer>
-            <contact-us-flyer></contact-us-flyer>
+            <!-- <contact-us-flyer></contact-us-flyer> -->
+            <contact-us-flyer-horizontal></contact-us-flyer-horizontal>
             <!-- <div class="connect-us-box">
                 <div class="connect-us-desc">
                     <h5>Connect Us!</h5>
@@ -310,10 +325,10 @@
                                 <ng-container *ngFor="let item of features">
 
                                     <div class="feature-heading">
-                                        <div class="feature-card" (click)="openLink(item.hyperLinkURL)">
+                                        <div class="feature-card" >
                                             <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
                                         </div>
-                                        <div class="feature-card-content">
+                                        <div class="feature-card-content" (click)="openLink(item.hyperLinkURL)">
                                             <p class="feature-card-heading">{{item.name}}</p>
                                             <!-- <p class="feature-card-desc">{{item.description}}</p> -->
                                         </div>
@@ -326,8 +341,8 @@
                         </div>
                         <div class="p-view-all-feature-div">
                             <div class="feature-desc-heading">
-                                <p class="feature-viewall">click here to view detailed feature of the
-                                    product</p>
+                                <!-- <p class="feature-viewall">click here to view detailed feature of the
+                                    product</p> -->
                                 <button class="btn view-det-btn" (click)="featureCountEvent()">View All
                                     Features</button>
                             </div>
