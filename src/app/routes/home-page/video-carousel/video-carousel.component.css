@@ -34,7 +34,7 @@
     display: flex; 
     flex-direction: row;
     align-items: baseline;
-    column-gap: 12px;
+    column-gap: 20px;
     overflow-x: auto;
     overflow-y: hidden;
     flex-wrap: nowrap;
@@ -51,8 +51,8 @@
 }
 
 .video-title {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 500;
     margin: 0;
     overflow: hidden;
     display: block;
@@ -81,12 +81,12 @@
 }
 
 .left-arrow{
-    top: 64px;
+    top: 90px;
     left: 0;
 }
 
 .right-arrow{
     right: 0;
-    top: 64px;
+    top: 90px;
     justify-content: flex-start;
 }
