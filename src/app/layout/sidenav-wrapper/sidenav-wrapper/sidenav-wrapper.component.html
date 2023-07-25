@@ -10,6 +10,9 @@
 <mat-sidenav-container >
 
   
+ 
+
+  
       <mat-sidenav #sidenav mode="side" opened="isExpanded" [ngClass]="(menuToogled) ? '' : 'hide-nav'">
         
         
@@ -77,16 +80,16 @@
             <span class="icon-holder">
               <img src="../../../../assets/YellowChalk/ShopIcon.svg" title="Shop" alt="Shop">
             </span>
-            <div *ngIf="isExpanded" class="menu-item">
+            <div *ngIf="isExpanded" class="menu-item" [routerLink]="['/']">
                 <span class="text-style">
                   Shop
                 </span>
-                <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
+                
               </div>
           </mat-list-item>
 
           <!-- Security Section -->
-          <mat-list-item>
+          <!-- <mat-list-item>
             <span class="icon-holder" (click)="menuExpansion(isExpanded , 'security')" >
               <img src="../../../../assets/YellowChalk/SecurityIcon.svg" title="Security" alt="Security">
             </span>
@@ -96,20 +99,20 @@
                 </span>
                 <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
               </div>
-          </mat-list-item>
+          </mat-list-item> -->
 
           <!-- Security Sub Menu -->
-          <ng-container *ngIf="securitySubMenu">
+          <!-- <ng-container *ngIf="securitySubMenu">
             <mat-list-item (click)="navAction(isExpanded , 'recommendations')">
               <span *ngIf="isExpanded" class="sub-menu-item">Recommendations</span>
             </mat-list-item>
             <mat-list-item>
               <span *ngIf="isExpanded" class="sub-menu-item">Reference Architecture</span>
             </mat-list-item>
-          </ng-container>
+          </ng-container> -->
 
           <!-- Insurance Section -->
-          <mat-list-item>
+          <!-- <mat-list-item>
             <span class="icon-holder" (click)="navAction(isExpanded , 'insurance')">
               <img src="../../../../assets/YellowChalk/InsuranceIcon.svg" title="Insurance" alt="Insurance">
             </span>
@@ -117,12 +120,12 @@
                 <span class="text-style">
                   Insurance
                 </span>
-                <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
+                
               </div>
-          </mat-list-item>
+          </mat-list-item> -->
 
           <!-- Cloud Section -->
-          <mat-list-item>
+          <!-- <mat-list-item>
             <span class="icon-holder" (click)="navAction(isExpanded , 'cloud')">
               <img src="../../../../assets/YellowChalk/CloudIcon.svg" title="Cloud" alt="Cloud">
             </span>
@@ -130,9 +133,9 @@
                 <span class="text-style">
                   Cloud
                 </span>
-                <!-- <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon> -->
+                
               </div>
-          </mat-list-item>
+          </mat-list-item> -->
 
           <!-- Admin Section -->
           <ng-container *ngIf="userRoleVal === 'admin'">
@@ -179,6 +182,8 @@
 
         </mat-nav-list>
       </mat-sidenav>
+
+    
 
 
 

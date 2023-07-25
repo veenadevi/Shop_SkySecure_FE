@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - dev-realizeweb
+name: Build and deploy Node.js app to Azure Web App - prod-shop
 
 on:
   push:
@@ -23,9 +23,8 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm install watch
-           npm run build-prod --if-present
-        
+          npm install
+          npm run build-prod --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -46,12 +45,11 @@ jobs:
         with:
           name: node-app
 
-
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'realizeskysecure'
+          app-name: 'prod-shop'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_61DF6C1EDCF849DA8E19F0E8A8038C23 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_510BEB31411847CD91F3BA0A648CC17E }}
           package: altsys_frontend

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { map } from 'rxjs';
 import { SelectOemModalComponent } from 'src/shared/components/modals/select-oem-modal/select-oem-modal.component';
 import { LoginService } from 'src/shared/services/login.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
@@ -48,10 +49,27 @@ export class SidenavWrapperComponent {
     private userAccountStore : UserAccountStore
   ){}
 
+  public userDetails$ = this.userAccountStore.userProfileDetails$
+  .pipe(
+    map(data => {
+      
+      if(data){
+        //this.userDetails = data.userDetails;
+        //console.log("++++++++++ Came inside User", this.userDetails);
+        return data;
+      }
+      else{
+        
+        return null;
+      }
+    }
+    )
+  )
 
   public logout() {
     //this.loginService.logout();
     //localStorage.setItem('XXXXaccess__tokenXXXX', null);
+    this.menuToogled = false;
     localStorage.removeItem('XXXXaccess__tokenXXXX');
     this.userAccountStore.setUserDetails(null);
     this.router.navigate(['']);
@@ -152,8 +170,10 @@ export class SidenavWrapperComponent {
 
   public menuToogleEvent($event){
     
+
+    
+
     this.menuToogled = this.menuToogled ? false : true;
-    console.log("****** () ( )( ", this.menuToogled);
   }
 
 

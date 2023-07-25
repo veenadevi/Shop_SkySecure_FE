@@ -1,0 +1,52 @@
+<div class="container-holder text-style p-3">
+
+    <ng-container>
+        <div class="list-row" *ngIf="searchResultsProducts.length > 0"> 
+            <div class="text-header">
+                <span>Products</span>
+            </div>
+            <ng-container *ngFor="let item of searchResultsProducts">
+                <div (click)="goToProductsPage(item)" class="list-item p-1">
+                    <span>{{item.name}}</span>
+                </div>
+                
+            </ng-container>
+            
+        </div>
+        <div class="list-row"  *ngIf="searchResultsCategoryList.length > 0"> 
+            <div class="text-header">
+                <span>Categories</span>
+            </div>
+            <ng-container *ngFor="let item of searchResultsCategoryList">
+                <div (click)="goToProductsPageWithCategorySelection(item.data)" class="list-item p-1">
+                    <span>{{item.data.name}}</span>
+                    <span>{{item.products.length}} Products</span>
+                </div>
+            </ng-container>
+        </div>
+        <div class="list-row"  *ngIf="searchResultsSubCategoryList.length > 0 "> 
+            <div class="text-header">
+                <span>SubCategories</span>
+            </div>
+            <ng-container *ngFor="let item of searchResultsSubCategoryList">
+                <div (click)="goToProductsPageWithSubCategorySelection(item.data,item.data)" class="list-item p-1">
+                    <span>{{item.data.name}}</span>
+                    <span>{{item.products.length}} Products</span>
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="list-row"  *ngIf="searchResultsProductBundleList.length > 0 "> 
+            <div class="text-header">
+                <span>Product Bundles</span>
+            </div>
+            <ng-container *ngFor="let item of searchResultsProductBundleList">
+                <div  (click)="goToProductBundle(item)" class="list-item p-1">
+                    <span>{{item.name}}</span>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+    
+
+</div>
