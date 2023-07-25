@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CompareProductsComponent } from './compare-products.component';
+import { CompareProductsResultComponent } from './compare-products-result/compare-products-result.component';
+import { CompareProductsHomeComponent } from './compare-products-home/compare-products-home.component';
 
 const routes: Routes = [
   {
@@ -10,10 +12,14 @@ const routes: Routes = [
       title: 'Backlog'
     }*/
     children: [
-      // {
-      //   path: '',
-      //   redirectTo: 'summary'
-      // },
+      {
+        path: '',
+        component: CompareProductsHomeComponent,
+      },
+      {
+        path: 'results',
+        component: CompareProductsResultComponent,
+      },
     ]
   },
   

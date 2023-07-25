@@ -519,7 +519,7 @@ export class ProductBundleDetailComponent implements OnInit{
   }
 
   public navigateToCompareProducts(){
-    this.router.navigate(['/compare-products']);
+    this.router.navigate(['/compare-products/results']);
   }
 
   addQuantity(item):void {

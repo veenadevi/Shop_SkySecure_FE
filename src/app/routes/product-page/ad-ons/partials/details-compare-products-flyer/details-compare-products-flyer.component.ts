@@ -107,6 +107,6 @@ export class DetailsCompareProductsFlyerComponent {
   }
 
   public navigateToCompareProducts(){
-    this.router.navigate(['/compare-products']);
+    this.router.navigate(['/compare-products/results']);
   }
 }
