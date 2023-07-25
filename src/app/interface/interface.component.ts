@@ -44,6 +44,8 @@ export class InterfaceComponent {
   public securityFlag : boolean = false;
   public profileFlag : boolean = false;
 
+  public menuToogled = false;
+
   public content_height : any;
 
   // constructor(private spinnerService: NgxSpinnerService) {
@@ -185,6 +187,12 @@ export class InterfaceComponent {
   public showDialog() : void {
 
     const modalRef = this.modalService.open(SelectOemModalComponent);
+  }
+
+  public menuToogleEvent(event){
+    console.log("()()()() ", event);
+
+    this.menuToogled = this.menuToogled ? false : true;
   }
   
 
