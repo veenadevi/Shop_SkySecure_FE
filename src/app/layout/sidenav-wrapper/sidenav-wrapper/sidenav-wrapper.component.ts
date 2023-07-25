@@ -31,6 +31,10 @@ export class SidenavWrapperComponent {
     
   }
 
+  @Input() set menuToogledVal(value: any){
+    this.menuToogled = value;
+  }
+
   @Input() set userName(value : any){
     this.userFullName =  value;
   }
