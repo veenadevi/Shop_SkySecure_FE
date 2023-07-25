@@ -40,22 +40,27 @@
     <div class="notificationicon-section">
       <img class="notification-icon" alt="" src="../../../assets/icons/BellWhite.svg">
     </div>
+<ng-container *ngIf="userLoggedIn">
+  <div class="cart-section">
+    <button class="cart-button" title="Cart" [matBadge]="cartItemCounts" (click)="cartFynction()">
+      <div class="cartposition">
+        <img alt="cart" class="cart-icon" src="../../../assets/icons/CartWhite.svg">
+        <!-- <span>Cart</span> -->
 
-    
-    <div class="cart-section">
-      <button class="cart-button" title="Cart" [matBadge]="cartItemCounts" (click)="cartFynction()">
-        <div class="cartposition">
-          <img alt="cart" class="cart-icon" src="../../../assets/icons/CartWhite.svg">
-          <!-- <span>Cart</span> -->
-  
-          <ng-container *ngIf="(cartItems$ | async) as cartItems">
-            <ng-container *ngIf="cartItems.length > 0">
-              <span class="icon-button__badge">{{numberOfCartItems}}</span>
-            </ng-container>
+        <ng-container *ngIf="(cartItems$ | async) as cartItems">
+          <ng-container *ngIf=" cartItems.length > 0">
+
+            <span class="icon-button__badge">{{numberOfCartItems}}</span>
           </ng-container>
-        </div>
-      </button>
-    </div>
+        </ng-container>
+      </div>
+    </button>
+  </div>
+</ng-container>
+<!-- <ng-container *ngIf="!userLoggedIn">
+
+</ng-container> -->
+    
 
 
 
