@@ -1,0 +1,80 @@
+<div class="search-container">
+    <div class="search-bar" *ngIf="selected">
+        <img alt="" class="search-icon" src="../../../assets/icons/Search.svg">
+        <input class="search-box" 
+                placeholder="Search by products, categories, brands & more"
+                (click) = "onSearchClicked()"
+                [(ngModel)]="inputText"
+                (focusout)="onFocusOutEvent($event)"
+                
+                (input)="onSearchQueryInput($event)">
+    
+        <button class="close-icon" (click)="searchClose()">
+          <img alt="cancel" src="../../../assets/icons/CloseIcon-white.svg">
+        </button>
+    </div>
+    <ng-container *ngIf="isOpen">
+        <div class="result-holder" *ngIf="selected">
+            <div class="search-component-holder p-1">
+        
+                <ng-container *ngIf="generalSearchOpen">
+                    <searchbar-popular-category></searchbar-popular-category>
+                    <searchbar-trending-products></searchbar-trending-products>
+                    <searchbar-recently-searched></searchbar-recently-searched>
+                </ng-container>
+                <ng-container *ngIf="keywordSearchOpen">
+                    <searchbar-search-list [searchResults] = "searchResults"></searchbar-search-list>
+                </ng-container>
+                
+            </div>
+        </div>
+    </ng-container>
+    
+    
+</div>
+
+
+
+<ng-container>
+    
+    <!-- <div class="form-group search-box">
+        <div class="search-box">
+        <span class="search-icon"><img alt="SearchIcon" src="../../../assets/icons/Search.svg"></span>
+        <input type="text" 
+            class="form-control" 
+            placeholder="Search by products, categories, brands & more"
+            (click) = "onSearchClicked()"
+            [(ngModel)]="inputText"
+            (focusout)="onFocusOutEvent($event)"
+            
+            (input)="onSearchQueryInput($event)"
+            >
+            
+            
+        </div>
+    </div> -->
+
+    
+
+    <!-- <ng-container *ngIf="isOpen">
+        <div class="search-result-container p-1">
+            <div class="search-component-holder p-1">
+    
+                <ng-container *ngIf="generalSearchOpen">
+                    <searchbar-popular-category></searchbar-popular-category>
+                    <searchbar-trending-products></searchbar-trending-products>
+                    <searchbar-recently-searched></searchbar-recently-searched>
+                </ng-container>
+                <ng-container *ngIf="keywordSearchOpen">
+                    <searchbar-search-list [searchResults] = "searchResults"></searchbar-search-list>
+                </ng-container>
+                
+            </div>
+            
+            
+        </div>
+    </ng-container> -->
+</ng-container>
+
+
+

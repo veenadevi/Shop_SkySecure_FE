@@ -28,10 +28,11 @@ import { LayoutModule  } from '../layout/layout.module';
   imports: [
     CommonModule,
     InterfaceRoutingModule,
+    SharedModule,
     LayoutModule,
     MaterialModule,
     PrimeNgModule,
-    SharedModule
+    
   ],
 
   declarations: [
@@ -46,10 +47,11 @@ import { LayoutModule  } from '../layout/layout.module';
 
   exports: [
     CommonModule,
+    SharedModule,
+    LayoutModule,
     RouterModule,
     MaterialModule,
     PrimeNgModule,
-    SharedModule
     /*MatButtonModule,
     MatSidenavModule,
     MatMenuModule,

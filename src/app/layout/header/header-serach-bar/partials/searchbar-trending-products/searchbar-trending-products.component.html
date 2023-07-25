@@ -1,0 +1,16 @@
+<div class="container-holder text-style p-3">
+    <span class="header">
+        Trending Products
+    </span>
+
+    <div class="product-holder">
+        <ng-container *ngFor="let category of (trendingProducts$ | async)">
+            
+            <div class="product-item " (click)="goToProductsPage(category)">
+                <img alt="" src="../../../../../assets/icons/trending_up.svg">
+                {{category.name}} 
+            </div>
+        </ng-container>
+    </div>
+
+</div>
