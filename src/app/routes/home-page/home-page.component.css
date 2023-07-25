@@ -111,8 +111,8 @@
 }
 
 .shop-feature-card {
-    background: white;
-    border-radius: 10px;
+    /* background: white;
+    border-radius: 10px; */
     width: 200px;
 }
 
@@ -127,15 +127,15 @@
 .shop-feature-title {
     font-size: 16px;
     font-weight: 600;
-    color: #1e1e1e;
-    /* letter-spacing: 1px; */
+    color: #fff;
+    letter-spacing: 0.8px;
 }
 
 .shop-feature-img {
-    width: 3em;
-    height: 3em;
-    border-radius: 100%;
-    margin-left: 12px;
+    width: 4em;
+    height: 4em;
+    /* border-radius: 100%;
+    margin-left: 12px; */
 }
 
 
