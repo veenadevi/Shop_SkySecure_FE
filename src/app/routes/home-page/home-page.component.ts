@@ -38,25 +38,11 @@ export class HomePgaeComponent {
       
       if (isInViewport(elm.nativeElement)) {
         console.log("()()() Elements", elm);
+
       }
       else{
         console.log("()()() Elements Else", elm);
       }
-      /*let idStr = 'item'+ elm.nativeElement.id;
-      if(){
-
-      }
-      if (isInViewport(elm.nativeElement)) {
-        
-        detectedElms.push(elm.nativeElement.id)
-        detectedElmsId.push(idStr);
-        document.getElementById(idStr).style.opacity = "1";
-        
-      }
-      else{
-        document.getElementById(idStr).style.opacity = "0.2";
-      }*/
-      
     })
   }
 

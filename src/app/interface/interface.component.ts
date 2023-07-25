@@ -95,7 +95,9 @@ export class InterfaceComponent {
         this.userRole = (data && data.role) ? data.role : null;
         
         if(data.firstName){
-          this.userName = data.firstName + ' ' + (data.lastName ? data.lastName : '');
+          //this.userName = data.firstName + ' ' + (data.lastName ? data.lastName : '');
+          this.userName = data.firstName;
+          console.log("()()()() First Name ", data.firstName);
         }
         else {
           this.userName ="Altsys User" 
