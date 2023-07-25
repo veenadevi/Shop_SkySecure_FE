@@ -1,5 +1,6 @@
 import { Component, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MetadataStore } from 'src/shared/stores/metadata.store';
 
 @Component({
   selector: 'app-home-page',
@@ -14,9 +15,12 @@ export class HomePgaeComponent {
 
   detectedElms = [];
 
+  public elementVisible : boolean = true;
+
   constructor(
     public sanitizer: DomSanitizer,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private metadataStore : MetadataStore
   ){
     this.renderer.listen('window', 'resize', this.detectElms.bind(this));
     this.renderer.listen('window', 'scroll', this.detectElms.bind(this));
@@ -26,6 +30,7 @@ export class HomePgaeComponent {
     
     //this.aboutOurPlatformVideoUrl = this.getSafeUrl("https://www.youtube.com/embed/wsfb6jKE4wI");
     this.aboutOurPlatformVideoUrl = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+    this.metadataStore.setGlobalSearchBarVisibility('T');
 
     
 
@@ -37,11 +42,13 @@ export class HomePgaeComponent {
     this.elms.forEach((elm, index) => {
       
       if (isInViewport(elm.nativeElement)) {
-        console.log("()()() Elements", elm);
-
+        this.elementVisible = true;
+        this.metadataStore.setGlobalSearchBarVisibility('T');
       }
       else{
-        console.log("()()() Elements Else", elm);
+        
+        this.elementVisible = false;
+        this.metadataStore.setGlobalSearchBarVisibility('F');
       }
     })
   }

@@ -19,6 +19,7 @@ export class MetadataStore {
     public oemDetails : OEMDetails ;
     public productsDetails : ProductsDetails ;
     public trendingProducts : any;
+    public globalSearchBarVisibility : any;
 
     public individualProductDetail : any;
     
@@ -37,6 +38,10 @@ export class MetadataStore {
 
     private individualProductDetailSubject = new BehaviorSubject<any[]>(null);
     public individualProductDetail$ = this.individualProductDetailSubject.asObservable();
+
+
+    private globalSearchBarVisibilitySubject = new BehaviorSubject<any[]>(null);
+    public globalSearchBarVisibility$ = this.globalSearchBarVisibilitySubject.asObservable();
 
 
 
@@ -93,6 +98,18 @@ export class MetadataStore {
       this.individualProductDetailSubject.next(data);
     }
 
+
+    /**
+   * ============================================================
+   * Set Global Search Bar Visibility
+   */
+    public setGlobalSearchBarVisibility(data : any) : void {
+
+  
+      this.globalSearchBarVisibility = data;
+      this.globalSearchBarVisibilitySubject.next(data);
+    }
+
   
   /**
    * Return User Details
@@ -128,6 +145,16 @@ export class MetadataStore {
   public getIndividualProductDetail(): ProductsDetails {
     return this.individualProductDetail;
   }
+
+      /**
+   * ============================================================
+   * Return Global Search Bar Visibility
+   */
+      public getGlobalSearchBarVisibility() : void {
+
+  
+        return this.globalSearchBarVisibility;
+      }
 
   
   /**

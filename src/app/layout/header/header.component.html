@@ -12,7 +12,8 @@
   </div>
 
 
-  <div >
+  <!-- <div *ngIf="(globalSearchBarVisibility$ | async)"> -->
+  <div *ngIf="searchBarVisibility">
     <header-serach-bar></header-serach-bar>
   </div>
 

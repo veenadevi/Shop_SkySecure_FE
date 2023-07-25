@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { LoaderService } from 'src/shared/services/loader.service';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CategoryDetails } from 'src/shared/models/interface/partials/category-details';
@@ -45,6 +45,8 @@ export class HeaderComponent implements OnInit{
 
   public numberOfCartItems = 0;
 
+  public searchBarVisibility : boolean = false;
+
   cartItemCounts:number;
 
 //from toolbarcomponent
@@ -84,7 +86,24 @@ export class HeaderComponent implements OnInit{
     private metadataStore : MetadataStore,
     private productListService: ProductListService
 
-  ){}
+  ){
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+          if(this.router.url !== '/'){
+            this.searchBarVisibility = true
+          }
+      }
+
+      if (event instanceof NavigationError) {
+      }
+
+      if (event instanceof NavigationEnd) {
+        if(this.router.url !== '/'){
+          this.searchBarVisibility = true
+        }
+      }
+  });
+  }
 
   /**
    * Click Functions
@@ -96,7 +115,6 @@ export class HeaderComponent implements OnInit{
   .pipe(
     map(data => {
       if(data){
-        console.log("***** (((( ", data);
         return data;
       }
       else{
@@ -127,8 +145,44 @@ export class HeaderComponent implements OnInit{
     )
   )
 
+    // Check Fot Search BAR
+
+    public globalSearchBarVisibility$ = this.metadataStore.globalSearchBarVisibility$
+    .pipe(
+      map(data => {
+        if(data){
+          if(String(data) === 'T'){
+            this.searchBarVisibility = false;
+          }
+          else{
+            this.searchBarVisibility = true;
+          }
+          
+          return data;
+        }
+        else{
+          return null;
+        }
+      }
+      )
+    )
+
+    public   ngAfterViewInit(): void{
+      
+      
+      
+        setTimeout(() => {
+          this.globalSearchBarVisibility$.subscribe(res=>{
+          });
+        }, 1000); // 5 seconds
+      
+
+    }
+  
+
   public ngOnInit(): void {
 
+    
     this.spinnerService.show();
     this.subscriptions.push(this.userDetails$.subscribe(res => {
       if(res && res.email){
@@ -139,7 +193,6 @@ export class HeaderComponent implements OnInit{
       }
       if(this.userLoggedIn){
         //this.getAccessIdToken();
-        console.log("()()()()( Data)", res);
         this.retrieveCarttItems(res);
         this.spinnerService.hide();
         //this.sample();
@@ -328,12 +381,12 @@ export class HeaderComponent implements OnInit{
 
   openSearch(selected : boolean) {
     this.selected = !this.selected;
-    console.log("@@@@######......OpenSearch......")
+    
   }
 
   searchClose(selected : boolean) : void {
     this.selected = !this.selected;
-    console.log("@@@@######......closeSearch......")
+    
   }
 
 
