@@ -90,8 +90,8 @@
                     </ng-container>
                 </mat-menu>
 
-            <!-- <button mat-button [matMenuTriggerFor]="compareProducts &&  compareProducts.length > 0 ? beforeMenu : null">
-                <span class="text-normal">COMPARE PRODUCT</span>
+            <button mat-button [matMenuTriggerFor]="compareProducts &&  compareProducts.length > 0 ? beforeMenu : null" [routerLink]="['compare-products']">
+                <span class="text-normal" >Compare Products</span>
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </button>
                 <mat-menu #beforeMenu="matMenu" yPosition="below">
@@ -100,7 +100,7 @@
                 </mat-menu>
 
 
-            <button mat-button [matMenuTriggerFor]="offers &&  offers.length > 0 ? afterMenu : null">
+            <!-- <button mat-button [matMenuTriggerFor]="offers &&  offers.length > 0 ? afterMenu : null">
                 <span class="text-normal">OFFER</span>
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </button>

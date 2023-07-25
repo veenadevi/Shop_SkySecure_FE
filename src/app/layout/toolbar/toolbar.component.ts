@@ -172,6 +172,7 @@ export class ToolbarComponent {
     this.productListService.setBrandIdSelection(oem._id);
     this.router.navigate([`/products/brand/${oem._id}`]);
   }
+  
 
   public openMenu(menuTrigger: MatMenuTrigger){
     menuTrigger.openMenu();

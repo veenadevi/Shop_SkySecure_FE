@@ -503,7 +503,7 @@ featureCount=5;
   }
 
   public navigateToCompareProducts(){
-    this.router.navigate(['/compare-products']);
+    this.router.navigate(['/compare-products/results']);
   }
   // async addToCompare(item:any, type:any):Promise<void> {
   //   // if(!item.checked)
@@ -659,13 +659,6 @@ featureCount=5;
         this.viewModal(queryParams);
       }
     })
-
-
-    
-
-
-
-
   }
 
 
