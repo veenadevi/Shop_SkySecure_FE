@@ -12,6 +12,13 @@
     justify-content: space-evenly;
 }
 
+.section-02 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
 label {
     font-size: medium;
     font-weight: bold;

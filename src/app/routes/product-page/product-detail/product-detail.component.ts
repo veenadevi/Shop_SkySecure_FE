@@ -19,6 +19,9 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit{
+
+  public displayBasic: boolean; 
+
   productImages=[];
   productVideoURL=[];
   productBundles=[];
@@ -555,6 +558,13 @@ featureCount=5;
 
   }
 
+  public viewModal2(queryParams) {
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+    modalRef.componentInstance.request = queryParams;
+  }
+
+  
+
   public viewModal(queryParams) {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
     modalRef.componentInstance.request = queryParams;
@@ -704,7 +714,10 @@ console.log("======setProductVariantsData===="+data.length)
     const modalRef = this.modalService.open(GetFreeCallModalComponent);
   }
 
-  
+  showBasicDialog() {
+    //this.displayBasic = true;
+    this.viewModal2(null);
+  }
 
   ngOnDestroy(){
     

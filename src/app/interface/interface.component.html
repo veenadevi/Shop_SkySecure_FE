@@ -31,6 +31,7 @@
     <!-- Header Component-->
     <nav id="navbar" class="fixed-top">
         <app-header (loginEvent)='loginEvent($event)'></app-header>
+        <app-toolbar (menuToogleEvent)='menuToogleEvent($event)'></app-toolbar>
     </nav>
     
     <!-- <app-toolbar></app-toolbar>
@@ -52,7 +53,7 @@
 
         <ng-container>
             <div class="full-screen-style">
-                <app-sidenav-wrapper [userLoggedIn]="userLoggedIn" [userRole]="userRole" [userName]="userName"></app-sidenav-wrapper>
+                <app-sidenav-wrapper [menuToogledVal]="menuToogled" [userLoggedIn]="userLoggedIn" [userRole]="userRole" [userName]="userName"></app-sidenav-wrapper>
             </div>
             
         </ng-container>

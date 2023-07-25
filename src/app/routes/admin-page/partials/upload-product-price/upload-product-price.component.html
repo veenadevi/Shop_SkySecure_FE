@@ -1,0 +1,86 @@
+
+<div class= "upload-container">
+<div class="text-center">
+    <h2 class="header-title">
+        Upload  NCE Price List
+    </h2>
+</div>
+<div class="container">
+    
+        <div class="section-01">
+
+
+            <!-- <div class="upload">
+                <label>Upload Product Price Catelog Excel sheet</label>
+            </div> -->
+        </div>
+               <div class="section-02 center" >
+                <div class="avatar-edit">
+                    <input type='file' id="priceUpload" accept=".xls, .xlsx" #fileInput
+                        (change)="updateProductPrice($event)" />
+                   
+                
+                </div>
+                <div class="avatar-preview">
+                    <div id="updated Record" >
+                    </div>
+                </div>
+          
+         </div>
+  
+
+
+<!-- <div class="estimate-details-view">
+    <div class="card"> -->
+
+        <div class="center">
+           
+                   
+                      
+            <div style="padding:1rem;">
+           
+                    <label>Total Products Updated :  </label>
+                   
+                    <span  style="padding:1rem; font-weight: bold;">{{totalProducts}}</span>
+                    <!-- <input type="text" class="form-control"  formControlName="name"> -->
+
+              
+            </div>
+
+            <div  style="padding:1rem;" >
+           
+                <label>Total Product Variants Updated:</label>
+                <span  style="padding:1rem;font-weight: bold;">{{totalProductVariants}}</span>
+                <!-- <input type="text" class="form-control"  formControlName="name"> -->
+
+          
+        </div>
+
+
+           <div   style="padding:1rem;">
+        
+                
+            <label>Total ProductFamily Updated:</label>
+            <span  style="padding:1rem;font-weight: bold;">{{totalProductBundle}}</span>
+               
+            
+           </div>
+           <div  style="padding:1rem;">
+        
+                
+            <label>Total ProductFamilyVariants Updated:</label>
+            <span  style="padding:1rem;font-weight: bold;">{{totalProductBundleVariants}}</span>
+               
+            
+           </div>
+  
+
+</div>
+
+</div>
+</div>
+
+<!-- 
+    </div>
+</div> -->
+

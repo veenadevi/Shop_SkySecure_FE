@@ -10,6 +10,7 @@ import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 
 
 @Component({
@@ -18,6 +19,8 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   styleUrls: ['./product-details-variant-by-id.component.css']
 })
 export class ProductDetailsVariantByIdComponent implements OnInit{
+  public displayBasic: boolean; 
+
   productImages=[];
   productVideoURL: string;
   public parentProduct:any;
@@ -829,6 +832,18 @@ featureCount=5;
     return data;
   }
 
+  public viewModal2(queryParams) {
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+    modalRef.componentInstance.request = queryParams;
+  }
+  public showDialog(){
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+  }
+  
+  showBasicDialog() {
+    //this.displayBasic = true;
+    this.viewModal2(null);
+  }
   ngOnDestroy(){
     
   }
