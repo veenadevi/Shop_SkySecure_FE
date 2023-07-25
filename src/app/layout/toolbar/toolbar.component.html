@@ -2,7 +2,10 @@
 
     <div class="menu-icon-holder">
         <span (click)="menuToogled()">
-            <mat-icon class="mat-icon-size">menu</mat-icon>
+            <ng-container *ngIf="userLoggedIn">
+                <mat-icon class="mat-icon-size">menu</mat-icon>
+            </ng-container>
+            
         </span>
         
     </div>
@@ -11,7 +14,7 @@
             <button #categoriesMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="aboveMenu">
                 
                 <div>
-                    <span class="text-normal">CATEGORIES</span>
+                    <span class="text-normal">Categories</span>
                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </div>
                     
@@ -73,7 +76,7 @@
                 
 
             <button mat-button [matMenuTriggerFor]="belowMenu">
-                <span class="text-normal">BRANDS</span>
+                <span class="text-normal">Brands</span>
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </button>
                 <!-- <mat-menu #belowMenu="matMenu" yPosition="below">

@@ -79,16 +79,16 @@
 .img-hover {
   /* width: 120%;
   height: auto; */
-  transition: transform .2s;
+  /* transition: transform .2s; */
   margin: 3%;
   cursor: pointer;
   background: #EAEAEA;
 }
 
-.img-hover:hover {
+/* .img-hover:hover {
   transform: scale(3);
-  /* z-index: 1000; */
-}
+
+} */
 
 .prod-img-logo {
   display: flex;
@@ -624,6 +624,38 @@ h5 {
   align-items: baseline;
   margin: 0 0 10px 0;
 }
+.about-section{
+  display: flex;
+  align-items: baseline;
+  margin: 0 0 10px 0;
+  width: 100%;
+}
+.about-heading{
+  width: 25%;
+}
+.about-desc{
+  width: 60%;
+  min-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical;
+}
+.all-btn {
+  /* border-radius: 8px; */
+  background: transparent;
+  /* border: 1px solid white; */
+  text-align: center;
+  color: #003388;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: line;
+  cursor: pointer;
+}
+.scroll{
+width:15%;
+}
 .product-common-info{
   display: flex;
   flex-direction: row;
@@ -664,7 +696,7 @@ h5 {
 }
 .offer-card {
   display: flex;
-  flex-basis: 41%;
+  /* flex-basis: 41%; */
   padding: 1%;
   margin: 2%;
   flex-direction: column;
@@ -1334,6 +1366,8 @@ padding-top: 5%;
   width: 100%;
   color: black;
   padding-left: 10px;
+  height: 100px;
+  margin-bottom: 40px;
 }
 
 .checkbox-sec {
@@ -1344,6 +1378,7 @@ padding-top: 5%;
 
 .compare-sec {
   color: black;
+  padding-top: 2px;
 }
 
 .checkbox-sec-01 {
@@ -1378,8 +1413,8 @@ padding-top: 5%;
   font-size: 15px;
   font-weight: bold;
   width: 180px;
-  padding-top: 5px;
-  height:50px;
+  padding-top: 15px;
+  height: 80px;
 }
 
 .product-solution {
@@ -1621,10 +1656,9 @@ button{
   font-family: 'lato',sans-serif;
 }
 .about{
-   font-weight: 700;
-    margin-bottom: 7px;
-   margin-top: 7px;
-   font-family: 'lato',sans-serif;
+  font-weight: 700;
+  font-family: 'lato',sans-serif;
+  margin: 0px 8px 0px 0;
 }
 .offer{
    font-weight: 700; 
@@ -1633,6 +1667,12 @@ button{
 .prod-desc{
   margin-bottom: 15px;
   font-family: 'lato',sans-serif;
+  min-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical;
 }
 
 .amazon-refer{
@@ -1678,13 +1718,14 @@ button{
   }
 
 .feature-desc{
-  font-weight: 400;
+  font-weight: 700;
   font-family: 'lato',sans-serif;
+  text-align: center;
 }
 .feature-card-heading{
   color: #000;
  font-size: initial;
- font-weight: 700;
+ font-weight: 500;
  font-family: 'lato',sans-serif;
 }
 .feature-card-desc{

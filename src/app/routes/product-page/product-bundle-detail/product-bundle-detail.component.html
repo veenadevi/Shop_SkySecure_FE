@@ -10,16 +10,18 @@
                             <img class="prod-logo"
                                 src="{{(productFamily && productFamily.bannerLogo) ? productFamily.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'}}">
                         </div>
-                        <div class="prod-img-hover">
+
+                        <!-- //commented for no image data// -->
+                        <!-- <div class="prod-img-hover">
                             <ng-container *ngIf="productImages && productImages.length>0">
                                 <ng-container *ngFor="let item of productImages">
 
                                     <img  class="img-hover" src="{{item}}" alt="img">
                                 </ng-container>
                             </ng-container>
-                            <ng-template #noImagesBlock>
-                                <!-- <ng-container *ngFor="let img of dummyImages"> -->
-                                <img  class="img-hover"
+                            <ng-template #noImagesBlock> -->
+                        <!-- <ng-container *ngFor="let img of dummyImages"> -->
+                        <!-- <img  class="img-hover"
                                     src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
                                 <img  class="img-hover"
@@ -29,26 +31,26 @@
                                     src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
 
                                 <img  class="img-hover"
-                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img">
-                                <!-- </ng-container> -->
-                            </ng-template>
+                                    src="../../../../assets/icons/DefaultImageIcon.svg" alt="img"> -->
+                        <!-- </ng-container> -->
+                        <!-- </ng-template>
 
-                            <!-- <img src="" alt=""> -->
-                        </div>
-                        
+                           
+                        </div> -->
+
                     </div>
 
 
                     <div class="buy-now-prod">
                         <span class="quantity-year">
-                            <h6 class="head-06"  >Quantity </h6>
+                            <h6 class="head-06">Quantity </h6>
                             <span class="year">(per year)</span>
                         </span>
                         <span class="plus-minus">
-    
+
                             <span>
-                                <img id="add-minus-quantity" (click)="changeQuantity('minus')"
-                                    alt="minus" src="../../../assets/icons/Minus.svg">
+                                <img id="add-minus-quantity" (click)="changeQuantity('minus')" alt="minus"
+                                    src="../../../assets/icons/Minus.svg">
                             </span>
                             <span>
                                 <input class="input-field" [(ngModel)]="productQuantity">
@@ -58,8 +60,9 @@
                                     src="../../../assets/icons/Add.svg">
                             </span>
                         </span>
-    
-                        <button class="btn buy-now-btn" (click)="buyNow(productFamily, productQuantity)">Buy now</button>
+
+                        <button class="btn buy-now-btn" (click)="buyNow(productFamily, productQuantity)">Buy
+                            now</button>
                     </div>
 
                 </div>
@@ -86,8 +89,8 @@
 
                     <div class="product-price-detail">
                         <div class="product-price-section" style="display:inline-flex">
-                            <p *ngIf="productFamily.priceList[0].discountRate"
-                            class="discounted-text">-{{productFamily.priceList[0].discountRate}}%&nbsp;
+                            <p *ngIf="productFamily.priceList[0].discountRate" class="discounted-text">
+                                -{{productFamily.priceList[0].discountRate}}%&nbsp;
                             </p>
                             <div class="price">
                                 <p class="product-price">
@@ -103,19 +106,58 @@
                             <p style="font-size: small;"> MRP:&nbsp;</p>
                             <span class="price-symbol">&#8377;</span>
                             <span>
-                                <p style="font-size: initial; text-decoration: line-through;">{{productFamily.priceList[0].ERPPrice}}</p>
+                                <p style="font-size: initial; text-decoration: line-through;">
+                                    {{productFamily.priceList[0].ERPPrice}}</p>
                             </span>
                         </div>
                     </div>
                     <div class="solution-section">
-                        <p class="solution" >Solution Category:</p>
+                        <p class="solution">Solution Category:</p>
                         <p>{{productFamily.subcategories[0].name}}</p>
                     </div>
                     <!-- <span class="request-btn" ><button class="btn view-det-btn"
                         (click)="scrollToSection('#feature')">View Features</button>
                     <button class="btn request-quote-btn" (click)="requestQuote(product)"
                         style="margin-left: 4%;">Request Quote</button></span> -->
-                 
+
+
+                    <div class="about-section">
+                        <div class="about-heading">
+                            <p class="about">About this product:</p>
+                        </div>
+                        <div class="about-desc">
+                            <!-- <p class="prod-desc">{{product.description}}
+                                   
+                                </p> -->
+                            <div class="all-desc">
+                                {{(seeMore) ? productFamily.description : productFamily.description | slice:0:50}}
+                                <span *ngIf="!seeMore">....</span>
+                            </div>
+
+                        </div>
+                        <div class="scroll">
+                            <span>
+                                <a class="all-btn" (click)="scrollToSection('#description')">see more</a>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- <div class="about-desc">
+                           
+                            <div class="all-desc">
+                                {{(seeMore) ? productFamily.description : productFamily.description | slice:0:50}}
+                                
+                                <span *ngIf="!seeMore">....</span>
+                                <a class="all-btn"  (click)="openDescription()">{{ !seeMore ? "See More" : "See Less" }}</a>
+                               
+                                </div>
+                            
+                           </div> -->
+
+
+
+
                     <!-- <p class="about">About this product:</p>
                     <p class="prod-desc">{{productFamily.description}}</p> -->
 
@@ -129,35 +171,37 @@
                         <div class="offer-det">
                             <span class="offer-headline">
                                 <img class="offer-img" src="../../assets/productDetails/OfferIllustrationIcon.svg">
-                                <p  class="offer">&nbsp;Offer</p>
-                                    <button (click)="onclickOffer()" class="downarrow-btn">
-                                        <ng-container *ngIf="offerVisible ; else downArrow"><img  src="../../../../../assets/icons/DefaultUpIcon.svg"></ng-container>
-                                        <ng-template #downArrow><img  src="../../../../../assets/icons/DefaultDownIcon.svg"></ng-template>
-                                    </button>
+                                <p class="offer">&nbsp;Offer</p>
+                                <button (click)="onclickOffer()" class="downarrow-btn">
+                                    <ng-container *ngIf="offerVisible ; else downArrow"><img
+                                            src="../../../../../assets/icons/DefaultUpIcon.svg"></ng-container>
+                                    <ng-template #downArrow><img
+                                            src="../../../../../assets/icons/DefaultDownIcon.svg"></ng-template>
+                                </button>
                             </span>
-                                <ng-container *ngIf="offerVisible">
-                                    <div class="offer-card-container">
-                                        <div class="offer-card">
-                                            <p  class="offer-bank">Bank Offers</p>
-                                            <p  class="offer-dis" >Upto ₹500.00 discount on select Credit Cards</p>
-                                            <a  class="offer-more" >2 more offers</a>
-                                        </div>
-                                        <div class="offer-card">
+                            <ng-container *ngIf="offerVisible">
+                                <div class="offer-card-container">
+                                    <div class="offer-card">
+                                        <p class="offer-bank">Bank Offers</p>
+                                        <p class="offer-dis">Upto ₹500.00 discount on select Credit Cards</p>
+                                        <a class="offer-more">2 more offers</a>
+                                    </div>
+                                    <!-- <div class="offer-card">
                                             <p class="offer-bank" >Bank Offers</p>
                                             <p class="offer-dis" >Upto ₹500.00 discount on select Credit Cards</p>
                                             <a class="offer-more">2 more offers</a>
-                                        </div>
-                                    </div>
-                                </ng-container>
-                            </div>
-                            </div>
+                                        </div> -->
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
 
 
 
 
-                   
+
                     <!-- <p-divider></p-divider> -->
-<!-- 
+                    <!-- 
                     <div class="common-info">
 
                         <div class="common-det">
@@ -255,13 +299,31 @@
                 <a class="nav" mat-tab-link *ngFor="let link of links; index as i" (click)="scrollToSection(link)"
                     [active]="activeLink == link"> {{titles[i]}} </a>
             </nav>
-            <p-card class="Description" header="Description" id="description" #descriptionRef>
+            <div id="description" #descriptionRef>
+                <p-card class="Description" header="Description">
+                    <!-- <p class="m-0">
+                                {{product.products[0].description}}
+                            </p> -->
+                    <p class="m-0">
+                        {{(seeMore) ? productFamily.description : productFamily.description | slice:0:150}}
+                        <span *ngIf="!seeMore">....</span>
+                        <span class="see-more">
+                            <button class="btn view-det-btn" (click)="openDescription()">{{ !seeMore ? "See More" : "See
+                                Less"
+                                }}</button>
+                        </span>
+                    </p>
+
+                </p-card>
+            </div>
+
+            <!-- <p-card class="Description" header="Description" id="description" #descriptionRef>
                 <p class="m-0">
                     {{productFamily.description}}
                 </p>
                 <span class="see-more"><button class="btn view-det-btn">See More</button>
                 </span>
-            </p-card>
+            </p-card> -->
             <!-- 
             <div class="product-features-container" id="feature" #featureRef>
                 <h5>Features</h5>
@@ -319,13 +381,14 @@
                     <div class="prod-feat-card-content">
                         <div class="prod-card-holder">
                             <div class="feature-desc-heading">
-                                <p class="feature-desc">Here is the common generalized section for the product</p>
+                                <p class="feature-desc">Explore the Cutting-Edge Features of {{productFamily.name}}
+                                    Product</p>
                             </div>
                             <div class="prod-card">
                                 <ng-container *ngFor="let item of features">
 
                                     <div class="feature-heading">
-                                        <div class="feature-card" >
+                                        <div class="feature-card">
                                             <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
                                         </div>
                                         <div class="feature-card-content" (click)="openLink(item.hyperLinkURL)">

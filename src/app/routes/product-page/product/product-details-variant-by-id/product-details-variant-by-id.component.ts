@@ -38,7 +38,8 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   activeLink = this.links[0];
   myColor = '';
 
- 
+  productDescriptionWordLimit: number = 50;
+  
   public allsimilarProducts:any[];
 
 
@@ -126,6 +127,12 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   openLink(url:any): void {
     console.log("url",url);
     window.open(url, '_blank');
+  }
+
+  seeMore: boolean = false;
+
+  public openDescription(): void {
+    this.seeMore= !this.seeMore;
   }
 
 

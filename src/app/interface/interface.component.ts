@@ -44,6 +44,7 @@ export class InterfaceComponent {
   public securityFlag : boolean = false;
   public profileFlag : boolean = false;
 
+  public content_height : any;
 
   // constructor(private spinnerService: NgxSpinnerService) {
   //   this.typeSelected = 'ball-fussion';
@@ -94,7 +95,9 @@ export class InterfaceComponent {
         this.userRole = (data && data.role) ? data.role : null;
         
         if(data.firstName){
-          this.userName = data.firstName + ' ' + (data.lastName ? data.lastName : '');
+          //this.userName = data.firstName + ' ' + (data.lastName ? data.lastName : '');
+          this.userName = data.firstName;
+          console.log("()()()() First Name ", data.firstName);
         }
         else {
           this.userName ="Altsys User" 
@@ -127,35 +130,21 @@ export class InterfaceComponent {
 
     //this.userLoggedIn = this.authService.instance.getAllAccounts().length > 0;
     this.userDetails$.subscribe();
-    // if(this.userLoggedIn){
-    //   this.userDetails$.subscribe();
-    // }
+    this.setContentPadding();
+  }
 
+  public setContentPadding(){
 
-        
-    /*this.msalBroadcastService.msalSubject$
-            .pipe(
-                filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
-            )
-            .subscribe((result: EventMessage) => {
-              let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"))
-              if(loggedinData.length > 0 ){
-                this.userLoggedIn = true;
-                //this.userDetails$.subscribe();
-              }
-                const payload = result.payload as AuthenticationResult;
-                this.authService.instance.setActiveAccount(payload.account);
-                this.userAccountStore.setuserAccountDetails(this.authService.instance.getAllAccounts());
-                this.loginService.retrieveAccessIdToken();
-            });
+    let nav_bar = document.getElementById("navbar");
 
-        this.msalBroadcastService.inProgress$
-            .pipe(
-                filter((status: InteractionStatus) => status === InteractionStatus.None)
-            )
-            .subscribe(() => {
-                
-            })*/
+    console.log("()()() ", nav_bar.offsetHeight);
+
+    let nav_height = nav_bar.offsetHeight;
+
+    let content_holder = document.getElementById("content-holder");
+
+    content_holder.style.paddingTop = nav_height + "px";
+    
   }
 
   public checkUserLogIn(){

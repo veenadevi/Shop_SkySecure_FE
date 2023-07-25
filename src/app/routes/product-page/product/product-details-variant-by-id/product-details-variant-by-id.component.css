@@ -93,17 +93,17 @@
   .img-hover {
     /* width: 120%;
     height: auto; */
-    transition: transform .2s;
+    /* transition: transform .2s; */
     margin: 3%;
     cursor: pointer;
-    background: #EAEAEA;
+    /* background: #EAEAEA; */
   }
 
 
-  .img-hover:hover {
+  /* .img-hover:hover {
     transform:scale(3);
-    /* z-index: 1000; */
-  }
+
+  } */
   .prod-img-logo {
     display: flex;
     /* flex-basis: 75%; */
@@ -616,6 +616,29 @@
     align-items: baseline;
     margin: 0 0 10px 0;
   }
+  .about-section{
+    display: flex;
+    align-items: baseline;
+    margin: 0 0 10px 0;
+    width: 100%;
+  }
+  .about-heading{
+    width: 25%;
+  }
+  .about-desc{
+    width: 60%;
+  }
+  .all-btn {
+    /* border-radius: 8px; */
+    background: transparent;
+    /* border: 1px solid white; */
+    text-align: center;
+    color: #003388;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: line;
+    cursor: pointer;
+  }
   .product-common-info{
     display: flex;
     flex-direction: row;
@@ -654,7 +677,7 @@
   }
   .offer-card {
     display: flex;
-    flex-basis: 41%;
+    /* flex-basis: 41%; */
     padding: 1%;
     margin: 2%;
     flex-direction: column;
@@ -759,8 +782,8 @@
   
   .p-view-all-feature-div {
     display:flex;
-    /* margin: 1%;
-    padding: 1%; */
+    margin: 1%;
+    padding: 1%;
     justify-content: center;
     align-items: center;
   }
@@ -1061,6 +1084,8 @@ column-gap:8px ;
   width: 65%;
   color: black;
   padding-left: 10px;
+  height: 100px;
+  margin-bottom: 40px;
 }
 
 .checkbox-sec {
@@ -1071,6 +1096,7 @@ column-gap:8px ;
 
 .compare-sec {
   color: black;
+  padding-top: 2px;
 }
 
 .checkbox-sec-01 {
@@ -1106,8 +1132,8 @@ column-gap:8px ;
   font-size: 15px;
   font-weight: bold;
   max-width: 165px;
-  padding-top: 5px;
-  height: 50px;
+  padding-top: 15px;
+  height: 80px;
 }
 
 .product-solution {
@@ -1271,8 +1297,7 @@ button{
 }
 .about{
    font-weight: 700;
-    margin-bottom: 7px;
-   margin-top: 7px;
+   margin: 0px 8px 0px 0;
    font-family: 'lato',sans-serif;
 }
 .offer{
@@ -1330,13 +1355,14 @@ button{
   }
 
 .feature-desc{
-  font-weight: 400;
+  font-weight: 700;
   font-family: 'lato',sans-serif;
+  text-align: center;
 }
 .feature-card-heading{
   color: #000;
  font-size: initial;
- font-weight: 700;
+ font-weight: 500;
  font-family: 'lato',sans-serif;
 }
 .feature-card-desc{

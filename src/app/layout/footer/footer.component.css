@@ -113,7 +113,7 @@
 .heading{
     /* padding-left: 10px; */
     max-width: 220px;
-    /* padding-top: 10px; */
+   margin-left: 25px;
 }
 .section-02{
     display: flex;

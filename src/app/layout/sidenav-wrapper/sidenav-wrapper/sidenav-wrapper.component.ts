@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { map } from 'rxjs';
 import { SelectOemModalComponent } from 'src/shared/components/modals/select-oem-modal/select-oem-modal.component';
 import { LoginService } from 'src/shared/services/login.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
@@ -38,7 +39,7 @@ export class SidenavWrapperComponent {
   public userSubMenu : boolean = false;
   public dashboardSubMenu : boolean = false;
   public securitySubMenu : boolean = false;
-  public profileSubMenu : boolean = false;
+  // public profileSubMenu : boolean = false;
   public adminSubMenu : boolean = false;
 
   constructor(
@@ -48,10 +49,27 @@ export class SidenavWrapperComponent {
     private userAccountStore : UserAccountStore
   ){}
 
+  public userDetails$ = this.userAccountStore.userProfileDetails$
+  .pipe(
+    map(data => {
+      
+      if(data){
+        //this.userDetails = data.userDetails;
+        //console.log("++++++++++ Came inside User", this.userDetails);
+        return data;
+      }
+      else{
+        
+        return null;
+      }
+    }
+    )
+  )
 
   public logout() {
     //this.loginService.logout();
     //localStorage.setItem('XXXXaccess__tokenXXXX', null);
+    this.menuToogled = false;
     localStorage.removeItem('XXXXaccess__tokenXXXX');
     this.userAccountStore.setUserDetails(null);
     this.router.navigate(['']);
@@ -67,8 +85,8 @@ export class SidenavWrapperComponent {
     if(navVal === 'security'){
       this.securitySubMenu = true;
     }
-    if(navVal === 'profile'){
-      this.profileSubMenu = true;
+    if(navVal === 'user'){
+      this.userSubMenu = true;
     }
     if(navVal === 'admin'){
       this.adminSubMenu = true;
@@ -92,8 +110,8 @@ export class SidenavWrapperComponent {
 
     switch (navVal) {
       case 'user':
-          //this.userSubMenu = (this.userSubMenu) ? false : true;
-          //this.isExpanded = this.isExpanded ? false : true;
+          this.userSubMenu = (this.userSubMenu) ? false : true;
+          this.isExpanded = this.isExpanded ? false : true;
           return;
       case 'dashboard':
           //this.dashboardSubMenu = (this.dashboardSubMenu) ? false : true;
@@ -129,9 +147,9 @@ export class SidenavWrapperComponent {
       case 'security':
           this.securitySubMenu = (this.securitySubMenu) ? false : true;
           return;
-      case 'profile':
-          this.profileSubMenu = (this.profileSubMenu) ? false : true;
-          return;
+      // case 'profile':
+      //     this.profileSubMenu = (this.profileSubMenu) ? false : true;
+      //     return;
       case 'admin':
           this.adminSubMenu = (this.adminSubMenu) ? false : true;
           return;
@@ -152,8 +170,10 @@ export class SidenavWrapperComponent {
 
   public menuToogleEvent($event){
     
+
+    
+
     this.menuToogled = this.menuToogled ? false : true;
-    console.log("****** () ( )( ", this.menuToogled);
   }
 
 

@@ -1,39 +1,74 @@
 <!-- Main Homepage -->
 
+
+<!-- <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+ <div class="container-fluid">
+   <a class="navbar-brand" href="#">Brand</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav">
+      <span class="navbar-toggler-icon"></span>
+   </button>
+  <div class="collapse navbar-collapse" id="main_nav">
+	<ul class="navbar-nav ms-auto">
+	<li class="nav-item"><a class="nav-link" href="#"> Menu item </a></li>
+	<li class="nav-item"><a class="nav-link" href="#"> Menu item </a></li>
+	<li class="nav-item"><a class="nav-link" href="#"> Menu item </a></li>
+	</ul>
+  </div> 
+ </div>
+</nav> -->
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- Header Component-->
-    <app-header (loginEvent)='loginEvent($event)'></app-header>
+    <nav id="navbar" class="fixed-top">
+        <app-header (loginEvent)='loginEvent($event)'></app-header>
+    </nav>
+    
     <!-- <app-toolbar></app-toolbar>
     <router-outlet></router-outlet> -->
-    <ngx-spinner size="medium" type="ball-atom"></ngx-spinner>
+    <div id="content-holder">
 
-
-    <!-- <ng-container *ngIf="(userDetails$ | async)">
-
-    </ng-container> -->
-   
-    <!-- <ng-container *ngIf="userLoggedIn"> -->
-
-
-
-
-    <ng-container>
-        <div class="full-screen-style">
-            <app-sidenav-wrapper [userLoggedIn]="userLoggedIn" [userRole]="userRole" [userName]="userName"></app-sidenav-wrapper>
-        </div>
-        
-    </ng-container>
     
-
-    <!-- Container If not Logged In -->
-
-    <!-- <ng-container *ngIf="!userLoggedIn">
-
-        <router-outlet></router-outlet>
+        <ngx-spinner size="medium" type="ball-atom"></ngx-spinner>
 
 
-    </ng-container> -->
+        <!-- <ng-container *ngIf="(userDetails$ | async)">
 
+        </ng-container> -->
+    
+        <!-- <ng-container *ngIf="userLoggedIn"> -->
 
 
 
-    <app-footer></app-footer>
+
+        <ng-container>
+            <div class="full-screen-style">
+                <app-sidenav-wrapper [userLoggedIn]="userLoggedIn" [userRole]="userRole" [userName]="userName"></app-sidenav-wrapper>
+            </div>
+            
+        </ng-container>
+        
+
+        <!-- Container If not Logged In -->
+
+        <!-- <ng-container *ngIf="!userLoggedIn">
+
+            <router-outlet></router-outlet>
+
+
+        </ng-container> -->
+
+
+
+
+        <app-footer></app-footer>
+    </div>

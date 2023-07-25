@@ -1,42 +1,4 @@
-<!-- <mat-toolbar class="toolbar"> -->
-  <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button> -->
-  <!-- <span class="altsys-logo" (click)="goToHomePage()"> 
-    <img class="altsys-logo-navbar" alt=""
-    src="../../../assets/Realize/logos/RealizeLogo.svg" 
-    />
-  </span> -->
- 
-  <!-- <span class="spacer"></span> -->
 
-
-<!-- 
-  <button title="Cart" [matBadge]="cartItemCounts"  matBadgeColor="accent" mat-icon-button class="toolbar-icon-01" (click)="cartFynction()" >
-    <img alt="" src="../../../assets/icons/Cart.svg"/> -->
-    <!-- <button class="badge bg-danger">0</button> -->
-    <!-- <ng-container *ngIf="(cartItems$ | async) as cartItems">
-      <ng-container *ngIf="cartItems.length > 0">
-        <span class="icon-button__badge">{{numberOfCartItems}}</span>
-      </ng-container>
-      
-    </ng-container>
-    
-  </button>
-  <button title="Notification" mat-icon-button class="toolbar-icon">
-    <img alt="" src="../../../assets/icons/Bell.svg"/>
-  </button>
-  <button title="User-icon" *ngIf="!userLoggedIn"  mat-icon-button class="toolbar-icon" (click)="login()">
-    <img alt="" src="../../../assets/icons/User_icon.svg"/>
-  </button> -->
-  <!-- <button *ngIf= "userLoggedIn" mat-icon-button class="toolbar-icon" (click)="logout()">
-    <img src="../../../assets/icons/Users.svg"/>
-  </button> -->
-  
-  
-  
-<!-- </mat-toolbar>
-<ngx-spinner size="medium" type="ball-atom"></ngx-spinner> -->
 
 
 <div class="navbar">
@@ -50,106 +12,26 @@
   </div>
 
 
-
-  <!-- <div class="navMenu-section">
-    <ul class="navmenu">
-      <li #categoriesMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="aboveMenu">
-        <div class="navmenu-text">
-          <span>Categories</span>
-          <i class="fa fa-caret-down" aria-hidden="true"></i>
-        </div>
-      </li>
-      <li mat-button [matMenuTriggerFor]="belowMenu">
-        <div class="navmenu-text">
-          <span>Brands</span>
-          <i class="fa fa-caret-down" aria-hidden="true"></i>
-        </div>
-      </li>
-      
-    </ul>
-
-    <mat-menu #aboveMenu="matMenu" yPosition="below">
-
-      <button #matMenuTrigger="matMenuTrigger" mat-menu-item [matMenuTriggerFor]="softwares">
-          <div class="menu-width">
-              <span class="text-normal">Software</span>
-          </div>
-      </button>
-      <button mat-menu-item [matMenuTriggerFor]=" hardwareCategories &&  hardwareCategories.length > 0 ? hardware : null">
-          <div class="menu-width">
-              <span class="text-normal">Hardware</span>
-          </div>
-      </button>
-      
-  </mat-menu>
-
-
-  
-  <div class="dropdown">
-
-    <mat-menu #softwares="matMenu" xPosition="after">
-      <ng-container *ngFor="let category of softwareCategories">
-        <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="category.subCategories.length>0 ? categoryItems : null"
-          mat-menu-item><span class="text-normal">{{category.name}}</span></button>
-          <mat-menu #categoryItems="matMenu" xPosition="after">
-            <ng-container *ngFor="let subCategory of category.subCategories">
-              <button (click)="goToProductsPageWithSubCategorySelection(category,subCategory)" mat-menu-item><span class="text-normal">{{subCategory.name}}</span></button>
-            </ng-container>
-          </mat-menu>
-      </ng-container>
-    </mat-menu>
-    
-  <mat-menu #hardware="matMenu" xPosition="after">
-      <ng-container *ngFor="let category of hardwareCategories">
-          <button (click)="goToProductsPageWithCategorySelection(category)" [matMenuTriggerFor]="category.subCategories.length>0 ? categoryItems : null" mat-menu-item><span class="text-normal">{{category.name}}</span></button>
-          <mat-menu #categoryItems="matMenu" xPosition="after">
-              <ng-container *ngFor="let subCategory of category.subCategories">
-                  <button (click)="goToProductsPageWithSubCategorySelection(category,subCategory)" mat-menu-item class="text-normal"><span class="text-normal">{{subCategory.name}}</span></button>
-              </ng-container>
-          </mat-menu>
-      </ng-container>
-  </mat-menu>
-
-  <mat-menu #belowMenu="matMenu" yPosition="below">
-    <ng-container *ngFor="let oem of oemList">
-        <button (click)="goToProductsPageByBrand(oem)" mat-menu-item class="text-normal">
-          <div>
-            <span class="text-normal">{{oem.name}}</span>
-          </div>
-        </button>
-    </ng-container>
-</mat-menu>
-
+  <div >
+    <header-serach-bar></header-serach-bar>
   </div>
 
-  </div> -->
-
-  <!-- <div class="searchbar-section">
-    <input class="search-bar" placeholder="search products">
-    <div class="searchicon-btn">
-      <img alt="search-icon" class="search-icon" src="../../../assets/icons/Search.svg">
-    </div>
-  </div> -->
+  
 
   <div class="icons-section">
 
-    <div>
+    <!-- <div>
       <button class="searchicon-btn" *ngIf="!selected" (click)="openSearch(selected)">
         <img alt="search-icon" class="search-icon" src="../../../assets/icons/Search-1.svg">
       </button>
     
-      
-        <div class="search-bar" *ngIf="selected">
-          
-          <img alt="" class="search-icon" src="../../../assets/icons/Search.svg">
-          <input class="search-box" placeholder="search products">
-          <button class="close-icon" (click)="searchClose(selected)">
-            <img alt="cancel" src="../../../assets/icons/CloseIcon-white.svg">
-          </button>
-        </div>
+      <ng-container *ngIf="selected">
+        <header-serach-bar></header-serach-bar>
+      </ng-container>
+    
       
       
-    </div>
+    </div> -->
 
 
 
@@ -178,9 +60,7 @@
 
 
 
-    <!-- <div class="user-icon" title="User-icon" *ngIf="!userLoggedIn" (click)="login()">
-      <img class="usericon" alt="" src="../../../assets/icons/User_icon.svg"/>
-    </div> -->
+    
     <div class="user-icon" title="User-icon" *ngIf="!userLoggedIn" (click)="navigateToLogin()">
       <img class="usericon" alt="" src="../../../assets/icons/User_icon.svg"/>
     </div>
