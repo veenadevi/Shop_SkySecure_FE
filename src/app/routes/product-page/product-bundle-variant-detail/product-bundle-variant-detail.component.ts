@@ -8,6 +8,7 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   styleUrls: ['./product-bundle-variant-detail.component.css']
 })
 export class ProductBundleVariantDetailComponent implements OnInit {
+  public displayBasic: boolean; 
 
   productDescriptionWordLimit: number = 50;
 
@@ -691,11 +693,24 @@ public removeSelectedItem(_id:any){
 
   }
 
+  public viewModal2(queryParams) {
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+    modalRef.componentInstance.request = queryParams;
+  }
+
 public viewModal(queryParams) {
   const modalRef = this.modalService.open(LoginAlertModalComponent);
   modalRef.componentInstance.request = queryParams;
 }
 
+public showDialog(){
+  const modalRef = this.modalService.open(GetFreeCallModalComponent);
+}
+
+showBasicDialog() {
+  //this.displayBasic = true;
+  this.viewModal2(null);
+}
 ngOnDestroy(){
     
 }

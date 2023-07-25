@@ -8,6 +8,7 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 
 
 
@@ -17,7 +18,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   styleUrls: ['./product-bundle-detail.component.css']
 })
 export class ProductBundleDetailComponent implements OnInit{
-
+  public displayBasic: boolean; 
   productDescriptionWordLimit: number = 50;
 
 
@@ -417,6 +418,18 @@ export class ProductBundleDetailComponent implements OnInit{
 
 
 
+  }
+  public viewModal2(queryParams) {
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+    modalRef.componentInstance.request = queryParams;
+  }
+  public showDialog(){
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+  }
+  
+  showBasicDialog() {
+    //this.displayBasic = true;
+    this.viewModal2(null);
   }
 
   public viewModal(queryParams) {
