@@ -1,12 +1,14 @@
-<div class="compare-products-container">
+<!-- <div class="compare-products-container">
     <h1 class="heading">Compare Products <span class="description">(You can compare a maximum upto 4 products)</span></h1>
     <div class="layout">
-        <div class="header-component">
+        <div class="header-component"> -->
             <!-- <div class="header-note-container">
             <h2 class="sub-heading">Added Products</h2>
             <p class="description">(You can compare a maximum upto 4 products)</p>
             </div> -->
-            <div class="compare-card" *ngFor="let item of allProducts">
+
+
+            <!-- <div class="compare-card" *ngFor="let item of allProducts">
                 <div class="prod-img-logo">
                     <img class="prod-img-logo-img"  src="{{item.properties.bannerLogo}}" alt="product-image">
                 </div>
@@ -44,8 +46,10 @@
                 <p *ngIf="!isArray(property.value) && (getKey(item) == property.key)">{{property.value}}</p>
                 <div class="feature-item-container" *ngIf="isArray(property.value) &&(getKey(item) == property.key)">
                 <div class="tick-container"   *ngFor="let item of property.value">
+                     -->
                     <!-- <span class="tick-symbol">&#10003;</span> -->
-                    <div class="tick-symbol">
+
+                    <!-- <div class="tick-symbol">
                         <img src="../../../assets/icons/BlueTickIcon.svg">
                     </div>
                     <span class="feature-text">{{item.name}}</span>
@@ -56,4 +60,23 @@
         </div>
     </div>
     
+</div> -->
+
+
+<div class="compare-products-container">
+    <div class="compare-products-header" >
+        <div class="header-section">
+            <span class="headline">Compare Products</span>
+            <span class="compare-disclaimer">(You can compare a maximum upto 4 products)</span>
+        </div>
+        <div class="comparing-products" >
+            <span>Comparing -</span>
+            <div class="productname">
+                <span *ngFor="let item of allProducts">{{item.properties.ProductName}}</span>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
