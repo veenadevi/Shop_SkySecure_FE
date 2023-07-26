@@ -3,28 +3,27 @@
   /* padding: 1%;
   margin: 1%; */
   flex-direction: column;
+  font-family: 'lato',sans-serif;
 }
 
 .product-details {
   display: flex;
-  padding: 1%;
-  margin: 1%;
+  padding: 1% 2% 0 2%;
+  margin: 1% 2% 0 2%;
   flex-direction: row;
 }
 
 .product-image-view {
   display: flex;
   flex-basis: 70%;
-  /* padding: 1%;
-  margin: 1%; */
-  padding-right: 1%;
+  /* padding-right: 1%;
   padding-top: 1%;
   padding-bottom: 1%;
-  padding-left: 0;
+  padding-left:0;
   margin-right: 1%;
   margin-top: 1%;
-  margin-bottom: 1%;
-  margin-left: 0;
+  margin-bottom: 1%; */
+  margin-left:0;
   flex-direction: row;
 }
 
@@ -39,25 +38,18 @@
 .product-details-info {
   display: flex;
   flex-basis: 70%;
-  padding: 1%;
-  margin: 1%;
+  padding: 0 1% 0 1%;
+  margin: 0 1% 0 1%;
   flex-direction: column;
 }
 
 .product-image {
   display: flex;
-  flex-basis: 25%;
-  /* padding: 1%; */
-  padding-right: 1%;
-  padding-top: 1%;
-  padding-bottom: 1%;
-  padding-left: 0;
-  margin-right: 1%;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  margin-left: 0;
-  /* margin: 1%; */
+  flex-basis: 30%;
+  padding: 0% 1% 1% 0;
+  margin: 0% 1% 1% 0;
   flex-direction: column;
+  align-items: center;
 }
 
 .prod-img-cont {
@@ -65,35 +57,46 @@
   /* flex-basis: 30%; */
   padding: 1%;
   margin: 1%;
-  flex-direction: row;
-}
-
-.prod-img-hover {
-  display: flex;
-  flex-basis: 25%;
-  padding: 1%;
-  margin-right: 14%;
-  /* margin: 1%; */
   flex-direction: column;
 }
 
-.img-hover:hover {
-  transform: scale(3);
-  /* z-index: 1000; */
+.prod-img-hover {
+   /* display: flex;
+    flex-basis: 25%;
+    padding: 1%;
+    margin-right: 14%; */
+    /* margin: 1%; */
+    /* flex-direction: column; */
+
+
+    display: flex;
+    flex-basis: 25%;
+    padding-left: 10px;
+    /* margin-right: 14%; */
+    /* flex-direction: row;*/
 }
+.img-hover {
+  /* width: 120%;
+  height: auto; */
+  /* transition: transform .2s; */
+  margin: 3%;
+  cursor: pointer;
+  /* background: #EAEAEA; */
+}
+
+/* .img-hover:hover {
+  transform: scale(3);
+ 
+} */
 
 .prod-img-logo {
   display: flex;
-  flex-basis: 75%;
+  /* flex-basis: 75%; */
   padding: 1%;
   border: 2px solid #BEBEBE;
-  /* margin: 1%; */
-  margin-top: 17%;
-  margin-right: 3%;
-  margin-bottom: 17%;
+  margin: 0 3% 4% 0;
   justify-content: center;
   align-items: center;
-  /* flex-direction: column; */
 }
 
 .view-det-btn {
@@ -117,13 +120,98 @@
   font-weight: 500;
   width: 28%;
 }
-
+.pd-header-reviews {
+  display: flex;
+  flex-direction: row;
+  margin: 6px 0 0;
+}
 .review-icon {
   color: orange;
-  padding-top: 5px;
-  line-height: 2rem;
+  padding-top: 2px;
+  /* line-height: 2rem; */
   overflow: visible;
 }
+.review-text-section{
+  display: flex;
+  flex-direction: row;
+  align-items: center;  
+  margin-left: 4px;
+}
+.divider {
+  margin: 0 10px;
+}
+.link-text{
+  color: #0047BD;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.686px;
+  cursor: pointer;
+}
+
+.product-price-detail{
+  display: flex;
+  flex-direction: column;
+  margin: 6px 0;
+}
+.product-price-section{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  column-gap: 6px;
+}
+.discounted-text{
+  color: #DB553C;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+.price-symbol{
+  font-size: smaller;
+}
+.product-price{
+  font-size: 18px;
+  font-weight: 600;
+}
+.product-price-type{
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.solution-section{
+  display: flex;
+  align-items: baseline;
+  margin: 0 0 10px 0;
+}
+.about-section{
+  display: flex;
+  align-items: baseline;
+  margin: 0 0 10px 0;
+  width: 100%;
+}
+.about-heading{
+  width: 25%;
+}
+.about-desc{
+  width: 60%;
+}
+.all-btn {
+  /* border-radius: 8px; */
+  background: transparent;
+  /* border: 1px solid white; */
+  text-align: center;
+  color: #003388;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: line;
+  cursor: pointer;
+}
+.product-common-info{
+  display: flex;
+  flex-direction: row;
+}
+
 
 .compare-box {
   padding: 2%;
@@ -492,11 +580,10 @@ h5 {
 
 .buy-now-prod {
   display: flex;
-  padding: 1%;
-  margin-left: 35%;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-right: 12px;
 }
 
 .buy-now-btn {
@@ -525,6 +612,23 @@ h5 {
   /* padding: 1%;
   margin: 1%; */
   flex-direction: column;
+  margin: 10px 0;
+}
+.offer-headline{
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.downarrow-btn {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.uparrow-btn {
+  background: none;
+  border: none;
+  outline: none;
 }
 
 .offer-card-container {
@@ -532,11 +636,12 @@ h5 {
   /* padding: 1%;
   margin: 1%; */
   flex-direction: row;
+  margin-top: 4px;
 }
 
 .offer-card {
   display: flex;
-  flex-basis: 41%;
+  /* flex-basis: 41%; */
   padding: 1%;
   margin: 2%;
   flex-direction: column;
@@ -901,6 +1006,8 @@ p {
   width: 100%;
   color: black;
   padding-left: 10px;
+  height: 100px;
+  margin-bottom: 40px;
 }
 
 .checkbox-sec {
@@ -911,6 +1018,7 @@ p {
 
 .compare-sec {
   color: black;
+  padding-top: 2px;
 }
 
 .checkbox-sec-01 {
@@ -946,8 +1054,8 @@ p {
   font-size: 15px;
   font-weight: bold;
   width: 180px;
-  padding-top: 5px;
-  height: 50px;
+  padding-top: 15px;
+  height: 80px;
 }
 
 .product-solution {
@@ -976,8 +1084,9 @@ h6 {
 }
 
 .head-04 {
-  font-family: 'lato', sans-serif;
+  font-family: 'lato',sans-serif;
   font-weight: bold;
+  margin: 0;
 }
 
 h5 {
@@ -1042,8 +1151,8 @@ button {
 }
 
 .request-btn {
-  font-family: 'lato', sans-serif;
-  display: flex;
+  font-family: 'lato',sans-serif;
+  display:flex;
   flex-direction: row;
 }
 
@@ -1052,7 +1161,7 @@ button {
 
 
 .prod-logo {
-  width: 120%;
+  width:100%;
   height: 100%;
   object-fit: cover;
 }
@@ -1062,7 +1171,7 @@ button {
   justify-content: center;
   align-items: center;
   margin-bottom: 7%;
-  flex-direction: column;
+  flex-direction: row;
   text-align: center;
 }
 
@@ -1070,7 +1179,7 @@ button {
   display: inline-flex;
   justify-content: center;
   gap: 5px;
-  font-family: 'lato', sans-serif;
+  font-family: 'lato',sans-serif;
 }
 
 .review {
@@ -1078,7 +1187,7 @@ button {
 }
 
 .offer-img {
-  width: auto;
+  width:auto;
   height: auto;
   position: relative;
 }
@@ -1086,7 +1195,7 @@ button {
 .offer-bank {
   font-size: 15px;
   font-weight: 600;
-  font-family: 'lato', sans-serif;
+  font-family: 'lato',sans-serif;
 }
 
 .offer-dis {
@@ -1096,9 +1205,9 @@ button {
 
 .offer-more {
   color: #0047BD;
-  font-size: 15px;
-  font-weight: 600;
-  font-family: 'lato', sans-serif;
+ font-size: 15px;
+ font-weight: 600;
+ font-family: 'lato',sans-serif;
 }
 
 .amazon-refer-img {
@@ -1112,17 +1221,16 @@ button {
 }
 
 .para {
-  margin-top: 10px;
-  font-size: smaller;
-  margin-bottom: 5px;
-  font-family: 'lato', sans-serif;
+   /* margin-top: 10px; */
+   font-size: smaller;
+   /* margin-bottom: 5px; */
+   font-family: 'lato',sans-serif;
 }
 
-.solution {
-  margin-top: 10px;
+.solution{
   font-weight: 700;
-  margin-bottom: 7px;
-  font-family: 'lato', sans-serif;
+  font-family: 'lato',sans-serif;
+  margin: 0px 8px 0px 0;
 }
 
 .review {
@@ -1131,14 +1239,13 @@ button {
 
 .about {
   font-weight: 700;
-  margin-bottom: 7px;
-  margin-top: 7px;
+  margin: 0px 8px 0px 0;
   font-family: 'lato', sans-serif;
 }
 
 .offer {
-  font-weight: 700;
-  font-family: 'lato', sans-serif;
+  font-weight: 700; 
+  font-family: 'lato',sans-serif;
 }
 
 .prod-desc {
@@ -1182,14 +1289,15 @@ button {
 
 
 .feature-desc {
-  font-weight: 400;
-  font-family: 'lato', sans-serif;
+  font-weight: 700;
+  font-family: 'lato',sans-serif;
+  text-align: center;
 }
 
 .feature-card-heading {
   color: #000;
   font-size: initial;
-  font-weight: 700;
+  font-weight: 500;
   font-family: 'lato', sans-serif;
 }
 
@@ -1242,14 +1350,10 @@ button {
 
 
 
-
-
-
-
-
 .feature-heading {
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 .prod-card {
@@ -1307,6 +1411,7 @@ button {
   flex-basis: 90%;
   padding: 10px;
   flex-direction: column;
+  cursor: pointer;
 }
 .prod-card-holder {
   display: flex;

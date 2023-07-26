@@ -10,6 +10,7 @@ import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 
 
 @Component({
@@ -18,6 +19,8 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   styleUrls: ['./product-details-variant-by-id.component.css']
 })
 export class ProductDetailsVariantByIdComponent implements OnInit{
+  public displayBasic: boolean; 
+
   productImages=[];
   productVideoURL: string;
   public parentProduct:any;
@@ -38,7 +41,8 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   activeLink = this.links[0];
   myColor = '';
 
- 
+  productDescriptionWordLimit: number = 50;
+  
   public allsimilarProducts:any[];
 
 
@@ -85,7 +89,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
     public arrowSection: boolean = true    
     public offerVisible:boolean = true
 
-    onclick(){
+    onclickOffer(){
       {
         // this.ReadMore = !this.ReadMore; //not equal to condition
         this.offerVisible = !this.offerVisible
@@ -126,6 +130,12 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   openLink(url:any): void {
     console.log("url",url);
     window.open(url, '_blank');
+  }
+
+  seeMore: boolean = false;
+
+  public openDescription(): void {
+    this.seeMore= !this.seeMore;
   }
 
 
@@ -496,7 +506,7 @@ featureCount=5;
   }
 
   public navigateToCompareProducts(){
-    this.router.navigate(['/compare-products']);
+    this.router.navigate(['/compare-products/results']);
   }
   // async addToCompare(item:any, type:any):Promise<void> {
   //   // if(!item.checked)
@@ -652,13 +662,6 @@ featureCount=5;
         this.viewModal(queryParams);
       }
     })
-
-
-    
-
-
-
-
   }
 
 
@@ -744,7 +747,7 @@ featureCount=5;
         if(data ){
           
           data.name=data.name;
-          data.productType = 'productVariants';
+          data.type = 'productVariants';
           data.bannerLogo = (parentProduct  && parentProduct.bannerLogo) ? parentProduct.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           data.description = data.description;
           data['solutionCategory'] = (parentProduct &&parentProduct.subcategories && parentProduct.subcategories.length > 0) ? parentProduct.subcategories[0].name : "";
@@ -768,7 +771,7 @@ featureCount=5;
           data.forEach(element => {
               
             element.name=data.name;
-            element.productType = 'productVariants';
+            element.type = 'productVariants';
             element.bannerLogo = (parentProduct  && parentProduct.bannerLogo) ? parentProduct.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
             element.description = data.description;
             element['solutionCategory'] = (parentProduct &&parentProduct.subcategories && parentProduct.subcategories.length > 0) ? parentProduct.subcategories[0].name : "";
@@ -793,7 +796,7 @@ featureCount=5;
       console.log("===========setProductBundleVariantsData======="+data.length)
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productBundleVariants';
+          element.type = 'productBundleVariants';
           element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element.solutionCategory=(element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
@@ -816,7 +819,7 @@ featureCount=5;
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productBundles';
+          element.type = 'productBundles';
           element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
@@ -829,6 +832,18 @@ featureCount=5;
     return data;
   }
 
+  public viewModal2(queryParams) {
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+    modalRef.componentInstance.request = queryParams;
+  }
+  public showDialog(){
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+  }
+  
+  showBasicDialog() {
+    //this.displayBasic = true;
+    this.viewModal2(null);
+  }
   ngOnDestroy(){
     
   }

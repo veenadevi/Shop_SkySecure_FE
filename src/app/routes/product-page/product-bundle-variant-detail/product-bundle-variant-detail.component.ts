@@ -8,6 +8,7 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 
 
 @Component({
@@ -16,8 +17,9 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   styleUrls: ['./product-bundle-variant-detail.component.css']
 })
 export class ProductBundleVariantDetailComponent implements OnInit {
+  public displayBasic: boolean; 
 
-
+  productDescriptionWordLimit: number = 50;
 
   public currentRoute: string;
   // links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
@@ -59,6 +61,15 @@ export class ProductBundleVariantDetailComponent implements OnInit {
       right.scrollBy(-200, 0);
     };
 
+    public offerVisible:boolean = true
+    
+    onclickOffer(){
+      {
+        // this.ReadMore = !this.ReadMore; //not equal to condition
+        this.offerVisible = !this.offerVisible
+      }
+    }
+
 
   scrollToSection(sectionId: any): void {
 
@@ -93,6 +104,11 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   openLink(url: any): void {
     console.log("url", url);
     window.open(url, '_blank');
+  }
+  seeMore: boolean = false;
+
+  public openDescription(): void {
+    this.seeMore= !this.seeMore;
   }
 
   private setData(response){}
@@ -368,7 +384,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
       
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'products';
+          element.type = 'product';
           element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
@@ -391,7 +407,7 @@ console.log("======setProductVariantsData===="+data.length)
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productVariants';
+          element.type = 'productVariants';
           element.bannerLogo = (element.products && element.products.length>0 && element.products[0].bannerLogo) ? element.products[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element['solutionCategory'] = (element.products && element.products.length>0 && element.products[0] && element.products[0].subCategories && element.products[0].subCategories.length > 0) ? element.products[0].subCategories[0].name : "";
@@ -414,7 +430,7 @@ console.log("======setProductVariantsData===="+data.length)
      // console.log("===========setProductBundleVariantsData======="+data.length)
       //data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productBundleVariants';
+          element.type = 'productBundleVariants';
           element.bannerLogo = (productFamily.bannerLogo &&productFamily.bannerLogo !== null) ? productFamily.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
          // element.solutionCategory=(element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
@@ -434,7 +450,7 @@ console.log("======setProductVariantsData===="+data.length)
       console.log("===========setProductBundleVariantsData======="+data.length)
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productBundleVariants';
+          element.type = 'productBundleVariants';
           element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element.solutionCategory=(element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
@@ -457,7 +473,7 @@ console.log("======setProductVariantsData===="+data.length)
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productBundles';
+          element.type = 'productBundles';
           element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
@@ -677,11 +693,24 @@ public removeSelectedItem(_id:any){
 
   }
 
+  public viewModal2(queryParams) {
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+    modalRef.componentInstance.request = queryParams;
+  }
+
 public viewModal(queryParams) {
   const modalRef = this.modalService.open(LoginAlertModalComponent);
   modalRef.componentInstance.request = queryParams;
 }
 
+public showDialog(){
+  const modalRef = this.modalService.open(GetFreeCallModalComponent);
+}
+
+showBasicDialog() {
+  //this.displayBasic = true;
+  this.viewModal2(null);
+}
 ngOnDestroy(){
     
 }

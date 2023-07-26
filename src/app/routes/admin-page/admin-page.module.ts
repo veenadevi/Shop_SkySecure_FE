@@ -13,6 +13,8 @@ import { AccountDetailsComponent } from './partials/account-details/account-deta
 import { DealsDetailsComponent } from './partials/deals-details/deals-details.component';
 import { EstimateDetailsComponent } from './partials/estimate-details/estimate-details.component';
 import { AddNewProductComponent } from './partials/add-new-product/add-new-product.component';
+import { UploadProductPriceComponent } from './partials/upload-product-price/upload-product-price.component';
+
 
 
 
@@ -28,6 +30,7 @@ import { AddNewProductComponent } from './partials/add-new-product/add-new-produ
     DealsDetailsComponent,
     EstimateDetailsComponent,
     AddNewProductComponent,
+    UploadProductPriceComponent,
   ],
   imports: [
     CommonModule,

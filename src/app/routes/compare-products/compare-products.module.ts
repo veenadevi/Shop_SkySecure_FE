@@ -8,6 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CompareProductsRoutingModule, ROUTED_COMPONENTS } from './compare-products-routing.module';
 import { CompareProductsComponent } from './compare-products.component';
+import { CompareProductsResultComponent } from './compare-products-result/compare-products-result.component';
+import { CompareProductsHomeComponent } from './compare-products-home/compare-products-home.component';
 
 
 
@@ -18,6 +20,8 @@ import { CompareProductsComponent } from './compare-products.component';
   declarations: [
     ROUTED_COMPONENTS,
     CompareProductsComponent,
+    CompareProductsResultComponent,
+    CompareProductsHomeComponent,
     
   ],
   imports: [

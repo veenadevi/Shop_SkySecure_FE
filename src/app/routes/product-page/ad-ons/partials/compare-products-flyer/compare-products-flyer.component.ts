@@ -105,7 +105,7 @@ export class CompareProductsFlyerComponent implements OnInit{
   }
 
   public navigateToCompareProducts(){
-    this.router.navigate(['/compare-products']);
+    this.router.navigate(['/compare-products/results']);
   }
   
 

@@ -115,7 +115,7 @@ export class RecommendationsComponent {
       this.checkConnectionStatus();
     }
     else{
-      //this.checkConnectionStatus();
+      this.checkConnectionStatus();
       console.log("+++++++++ Inside here ");
       this.userProfileDetails$.subscribe(data=> {
         //this.checkConnectionStatus();
@@ -136,6 +136,7 @@ export class RecommendationsComponent {
 
     this.microsoftGraphService.getConnectionStatus().subscribe( res => {
      this.connectionStatus = res.connection.connectionStatus ? 'Y' : 'N';
+     //this.connectionStatus = 'Y'
      //this.getAllSegmentations();
      if(this.connectionStatus){
       this.tenantName = res.connection.userAccessDetails.name;

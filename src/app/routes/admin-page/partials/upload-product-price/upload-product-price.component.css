@@ -1,0 +1,44 @@
+.upload {
+    width: 60%;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+.upload-container{
+    background: #efefef;
+    padding: 2em;
+}
+
+.section-01 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.section-02 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid #efefef;
+    padding: 10px;
+  }
+
+  
+.feature {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 20px;
+    padding: 6rem;
+}
+
+.feature-title {
+    width: 25%;
+}

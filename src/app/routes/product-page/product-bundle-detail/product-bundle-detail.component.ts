@@ -8,6 +8,7 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 
 
 
@@ -17,6 +18,8 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   styleUrls: ['./product-bundle-detail.component.css']
 })
 export class ProductBundleDetailComponent implements OnInit{
+  public displayBasic: boolean; 
+  productDescriptionWordLimit: number = 50;
 
 
   public currentRoute: string;
@@ -60,7 +63,14 @@ export class ProductBundleDetailComponent implements OnInit{
   };
 
 
- 
+  public offerVisible:boolean = true
+    
+        onclickOffer(){
+          {
+            // this.ReadMore = !this.ReadMore; //not equal to condition
+            this.offerVisible = !this.offerVisible
+          }
+        }
 
   scrollToSection(sectionId: any): void {
 
@@ -93,6 +103,11 @@ export class ProductBundleDetailComponent implements OnInit{
     window.open(url, '_blank');
   }
 
+  seeMore: boolean = false;
+
+  public openDescription(): void {
+    this.seeMore= !this.seeMore;
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -259,7 +274,7 @@ export class ProductBundleDetailComponent implements OnInit{
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'products';
+          element.type = 'product';
           element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
@@ -284,7 +299,7 @@ export class ProductBundleDetailComponent implements OnInit{
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productVariants';
+          element.type = 'productVariants';
           element.bannerLogo = (element.products  && element.products.bannerLogo) ? element.products.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element['solutionCategory'] = (element.products && element.products.subCategories && element.products.subCategories.length > 0) ? element.products.subCategories[0].name : "";
@@ -306,7 +321,7 @@ export class ProductBundleDetailComponent implements OnInit{
     if(data && data.length>0){
       data.forEach(element => {
           element.name=element.name;
-          element.productType = 'productBundleVariants';
+          element.type = 'productBundleVariants';
           element.bannerLogo = (element.productFamily[0].bannerLogo &&element.productFamily[0].bannerLogo !== null) ? element.productFamily[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           //element.solutionCategory=(element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
@@ -325,7 +340,7 @@ export class ProductBundleDetailComponent implements OnInit{
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
-          element.productType = 'productBundles';
+          element.type = 'productBundles';
           element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
           element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
@@ -403,6 +418,18 @@ export class ProductBundleDetailComponent implements OnInit{
 
 
 
+  }
+  public viewModal2(queryParams) {
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+    modalRef.componentInstance.request = queryParams;
+  }
+  public showDialog(){
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+  }
+  
+  showBasicDialog() {
+    //this.displayBasic = true;
+    this.viewModal2(null);
   }
 
   public viewModal(queryParams) {
@@ -505,7 +532,7 @@ export class ProductBundleDetailComponent implements OnInit{
   }
 
   public navigateToCompareProducts(){
-    this.router.navigate(['/compare-products']);
+    this.router.navigate(['/compare-products/results']);
   }
 
   addQuantity(item):void {

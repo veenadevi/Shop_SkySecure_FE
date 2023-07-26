@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class FeatureUpdateComponent {
   public hyperLinkURL : string ;
   public createdBy : string ;
   public updatedBy : string ;
+  http: any;
 
   constructor(
     private adminPageService : AdminPageService
@@ -40,4 +41,7 @@ export class FeatureUpdateComponent {
     )
   }
 
+
+
+     
 }

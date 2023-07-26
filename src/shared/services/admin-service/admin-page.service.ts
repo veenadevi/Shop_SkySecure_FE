@@ -228,6 +228,8 @@ export class AdminPageService {
 
     return request$;
   }
+
+
     
 
   /**
@@ -246,8 +248,38 @@ export class AdminPageService {
     return OPTIONS; 
   }
 
+ 
 
-  
+  uploadFile(event: any) {
+    console.log("Upload File", event);
+    const formData: FormData = new FormData();
+    formData.append('file', event.target.files[0], event.target.files[0].name);
+    let url="https://dev-productapi.realize.skysecuretech.com/api/bulk/update-pricing"
+
+    const uploadedFileResponse = this.http.post<any>(url, formData)
+    .pipe(
+      switchMap(response => {
+        if (!response) {
+          return (response);
+        }
+        
+        return of(response);
+      }),
+      map((response: any) => {
+        
+        return response;
+      }),
+      catchError(error => {
+        
+        return error
+      })
+    );
+
+  return uploadedFileResponse;
+}
 
 
 }
+
+
+   

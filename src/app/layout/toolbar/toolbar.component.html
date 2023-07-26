@@ -14,7 +14,7 @@
             <button #categoriesMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="aboveMenu">
                 
                 <div>
-                    <span class="text-normal">CATEGORIES</span>
+                    <span class="text-normal">Categories</span>
                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </div>
                     
@@ -76,7 +76,7 @@
                 
 
             <button mat-button [matMenuTriggerFor]="belowMenu">
-                <span class="text-normal">BRANDS</span>
+                <span class="text-normal">Brands</span>
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </button>
                 <!-- <mat-menu #belowMenu="matMenu" yPosition="below">
@@ -90,17 +90,17 @@
                     </ng-container>
                 </mat-menu>
 
-            <!-- <button mat-button [matMenuTriggerFor]="compareProducts &&  compareProducts.length > 0 ? beforeMenu : null">
-                <span class="text-normal">COMPARE PRODUCT</span>
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-            </button>
+            <!-- <button mat-button [matMenuTriggerFor]="compareProducts &&  compareProducts.length > 0 ? beforeMenu : null" [routerLink]="['compare-products']">
+                <span class="text-normal" >Compare Product</span> -->
+                <!-- <i class="fa fa-caret-down" aria-hidden="true"></i> -->
+            <!-- </button> -->
                 <mat-menu #beforeMenu="matMenu" yPosition="below">
                 <button mat-menu-item>Item 1</button>
                 <button mat-menu-item>Item 2</button>
-                </mat-menu>
+                </mat-menu> 
 
 
-            <button mat-button [matMenuTriggerFor]="offers &&  offers.length > 0 ? afterMenu : null">
+            <!-- <button mat-button [matMenuTriggerFor]="offers &&  offers.length > 0 ? afterMenu : null">
                 <span class="text-normal">OFFER</span>
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </button>

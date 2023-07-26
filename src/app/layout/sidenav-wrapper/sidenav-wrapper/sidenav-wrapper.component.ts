@@ -31,6 +31,10 @@ export class SidenavWrapperComponent {
     
   }
 
+  @Input() set menuToogledVal(value: any){
+    this.menuToogled = value;
+  }
+
   @Input() set userName(value : any){
     this.userFullName =  value;
   }
@@ -39,7 +43,7 @@ export class SidenavWrapperComponent {
   public userSubMenu : boolean = false;
   public dashboardSubMenu : boolean = false;
   public securitySubMenu : boolean = false;
-  public profileSubMenu : boolean = false;
+  // public profileSubMenu : boolean = false;
   public adminSubMenu : boolean = false;
 
   constructor(
@@ -85,8 +89,8 @@ export class SidenavWrapperComponent {
     if(navVal === 'security'){
       this.securitySubMenu = true;
     }
-    if(navVal === 'profile'){
-      this.profileSubMenu = true;
+    if(navVal === 'user'){
+      this.userSubMenu = true;
     }
     if(navVal === 'admin'){
       this.adminSubMenu = true;
@@ -108,17 +112,17 @@ export class SidenavWrapperComponent {
 
   public navAction(val, navVal){
 
-    /*switch (navVal) {
+    switch (navVal) {
       case 'user':
-          //this.userSubMenu = (this.userSubMenu) ? false : true;
+          this.userSubMenu = (this.userSubMenu) ? false : true;
           this.isExpanded = this.isExpanded ? false : true;
           return;
       case 'dashboard':
-          this.dashboardSubMenu = (this.dashboardSubMenu) ? false : true;
-          this.isExpanded = this.isExpanded ? false : true;
+          //this.dashboardSubMenu = (this.dashboardSubMenu) ? false : true;
+          //this.isExpanded = this.isExpanded ? false : true;
           return;
       case 'shop':
-          this.router.navigate(['/']);
+          //this.router.navigate(['/']);
           return;
       case 'recommendations':
           //this.showDialog();
@@ -127,7 +131,7 @@ export class SidenavWrapperComponent {
 
       default:
         return null;
-    }*/
+    }
   }
 
 
@@ -147,9 +151,9 @@ export class SidenavWrapperComponent {
       case 'security':
           this.securitySubMenu = (this.securitySubMenu) ? false : true;
           return;
-      case 'profile':
-          this.profileSubMenu = (this.profileSubMenu) ? false : true;
-          return;
+      // case 'profile':
+      //     this.profileSubMenu = (this.profileSubMenu) ? false : true;
+      //     return;
       case 'admin':
           this.adminSubMenu = (this.adminSubMenu) ? false : true;
           return;

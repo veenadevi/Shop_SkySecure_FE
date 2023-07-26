@@ -44,6 +44,8 @@ export class InterfaceComponent {
   public securityFlag : boolean = false;
   public profileFlag : boolean = false;
 
+  public menuToogled = false;
+
   public content_height : any;
 
   // constructor(private spinnerService: NgxSpinnerService) {
@@ -95,7 +97,9 @@ export class InterfaceComponent {
         this.userRole = (data && data.role) ? data.role : null;
         
         if(data.firstName){
-          this.userName = data.firstName + ' ' + (data.lastName ? data.lastName : '');
+          //this.userName = data.firstName + ' ' + (data.lastName ? data.lastName : '');
+          this.userName = data.firstName;
+          
         }
         else {
           this.userName ="Altsys User" 
@@ -135,7 +139,7 @@ export class InterfaceComponent {
 
     let nav_bar = document.getElementById("navbar");
 
-    console.log("()()() ", nav_bar.offsetHeight);
+   
 
     let nav_height = nav_bar.offsetHeight;
 
@@ -153,7 +157,7 @@ export class InterfaceComponent {
         this.userAccountStore.setUserDetails(decoded);
     }
     else{
-        console.log("******* Auth Gaurd Else ");
+        
         this.userAccountStore.setUserDetails(null);
     }
   }
@@ -183,6 +187,12 @@ export class InterfaceComponent {
   public showDialog() : void {
 
     const modalRef = this.modalService.open(SelectOemModalComponent);
+  }
+
+  public menuToogleEvent(event){
+    console.log("()()()() ", event);
+
+    this.menuToogled = this.menuToogled ? false : true;
   }
   
 
