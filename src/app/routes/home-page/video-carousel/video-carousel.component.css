@@ -7,6 +7,7 @@
     padding: 20px 20px 0 20px;
     max-width: 1620px !important;
     row-gap: 1em;
+border-radius: 8px;
     /* overflow: scroll; */
 }
 
@@ -39,6 +40,7 @@
     overflow-y: hidden;
     flex-wrap: nowrap;
     scroll-behavior: smooth;
+    margin-bottom: 20px;
 }
 
 .scroll-content::-webkit-scrollbar {

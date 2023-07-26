@@ -7,6 +7,7 @@
     padding: 20px 20px 0 20px;
     max-width: 1620px !important;
     row-gap: 1em;
+    border-radius: 8px;
     /* overflow: scroll; */
 }
 
@@ -22,6 +23,7 @@
     margin-left: -8px;
     margin-top: -5px;
     column-gap: 1.5%;
+
 }
 
 .card-item{
@@ -29,6 +31,7 @@
     border-radius: 5px;
     height: 11.5rem;
     width: 11.5rem;
+    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
 }
 
 .d-flex{

@@ -1,6 +1,7 @@
 .container-holder {
     color: aliceblue;
     background: var(--white);
+    border-radius: 8px;
 }
 
 .text-style {

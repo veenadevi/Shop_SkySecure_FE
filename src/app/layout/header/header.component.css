@@ -89,7 +89,7 @@ ul .nav-text:hover {
 
 .navbar {
     background-color: #1e1e1e;
-    height: 68px;
+    height: 56px;
     padding: 0px 26px;
     display: flex;
     align-items: center;
@@ -98,7 +98,7 @@ ul .nav-text:hover {
 }
 
 .realize-logo {
-    height: 50px;
+    height: 40px;
     cursor: pointer;
 }
 
