@@ -1,14 +1,16 @@
-<div class="compare-products-container">
+<!-- <div class="compare-products-container">
     <h1 class="heading">Compare Products <span class="description">(You can compare a maximum upto 4 products)</span></h1>
     <div class="layout">
-        <div class="header-component">
+        <div class="header-component"> -->
+
+
             <!-- <div class="header-note-container">
             <h2 class="sub-heading">Added Products</h2>
             <p class="description">(You can compare a maximum upto 4 products)</p>
             </div> -->
 
 
-            <div class="compare-card" *ngFor="let item of allProducts">
+            <!-- <div class="compare-card" *ngFor="let item of allProducts">
                 <div class="prod-img-logo">
                     <img class="prod-img-logo-img"  src="{{item.properties.bannerLogo}}" alt="product-image">
                 </div>
@@ -45,11 +47,11 @@
                 <div class="value-container" *ngFor="let property of product.properties | keyvalue">
                 <p *ngIf="!isArray(property.value) && (getKey(item) == property.key)">{{property.value}}</p>
                 <div class="feature-item-container" *ngIf="isArray(property.value) &&(getKey(item) == property.key)">
-                <div class="tick-container"   *ngFor="let item of property.value">
+                <div class="tick-container"   *ngFor="let item of property.value"> -->
                     
                     <!-- <span class="tick-symbol">&#10003;</span> -->
 
-                    <div class="tick-symbol">
+                    <!-- <div class="tick-symbol">
                         <img src="../../../assets/icons/BlueTickIcon.svg">
                     </div>
                     <span class="feature-text">{{item.name}}</span>
@@ -60,23 +62,81 @@
         </div>
     </div>
     
-</div>
+</div> -->
 
 
-<!-- <div class="compare-products-container">
+<div class="compare-products-container">
     <div class="compare-products-header" >
         <div class="header-section">
             <span class="headline">Compare Products</span>
             <span class="compare-disclaimer">(You can compare a maximum upto 4 products)</span>
         </div>
-        <div class="comparing-products" >
+        <!-- <div class="comparing-products" >
             <span>Comparing -</span>
             <div class="productname">
                 <span *ngFor="let item of allProducts">{{item.properties.ProductName}}</span>
             </div>
+        </div> -->
+    </div>
+    <div class="compare-container">
+        <div class="compare-Top-container">
+            <div class="product-cards-section">
+                <!-- <div class="default-compare-card">
+                    <img src="../../../../assets/icons/Add.svg">
+                    <span class="default-quote">Add product to compare</span>
+                </div> -->
+                    <ng-container class="product-cards" *ngFor="let item of allProducts">
+                        <div class="card">
+                            <img class="close-icon" src="../../../../assets/icons/closecircle.svg">
+                            <div class="product-visual-detail">
+                                <div class="product-logo">
+                                    <img class="product-logo-img"  src="{{item.properties.bannerLogo}}" alt="product-image">
+                                </div>
+                                <div class="product-name-section">
+                                    <span class="product-name">{{item.properties.ProductName}}</span>
+                                </div>
+                            </div>
+                            <div class="td-column">
+                                <span>
+                                  <img alt="minus" src="../../../assets/icons/Minus.svg">
+                                </span>
+                                <span>
+                                  <input
+                                    class="input-field" [(ngModel)]="item.quantity" value="{{item.quantity}}"
+                                    >
+                                </span>
+                                <span>
+                                  <img alt="" src="../../../assets/icons/Add.svg">
+                                </span>
+                              </div>
+                            <button class="request-btn">Request Quote</button>
+                        </div>
+                    </ng-container>
+            </div>
+        </div>
+        <div class="feature-component" *ngFor="let item of allProperties">
+            <div class="label-container">
+                <span> {{item[getKey(item)] }}</span>
+                <img src="../../../../../assets/icons/DefaultUpIcon.svg">
+            </div>
+            <div class="feature-value-container">
+                <div class="feature-value" *ngFor="let product of allProducts">
+                    <div class="value-container" *ngFor="let property of product.properties | keyvalue">
+                        <p *ngIf="!isArray(property.value) && (getKey(item) == property.key)">{{property.value}}</p>
+                        
+                        <div class="feature-item-container" *ngIf="isArray(property.value) &&(getKey(item) == property.key)">
+                            <div class="tick-container"   *ngFor="let item of property.value">
+                                <!-- <span class="tick-symbol">&#10003;</span> -->
+                                <div class="tick-symbol">
+                                    <img src="../../../assets/icons/BlueTickIcon.svg">
+                                </div>
+                                <span class="feature-text">{{item.name}}</span>
+                            </div>        
+                        </div>
+        
+                    </div>       
+                </div>
+            </div>
         </div>
     </div>
-
-
-
-</div> -->
+</div>
