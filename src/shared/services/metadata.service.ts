@@ -29,6 +29,7 @@ export class MetadataService {
   private fetchCompareProductsListUrl:string;
   private fetchProductByProductVariant:string;
   private fetchAllSubcategory : string;
+  private fetchAdminProductDetailsUrl:string
 
   constructor(
     private http: HttpClient,
@@ -399,6 +400,28 @@ export class MetadataService {
         })
       );
       
+    return request$;
+  }
+
+  public fetchAdminProductDetails(id: string) : Observable<any> {
+    //id = "63eb236c53c21de2f6841bca";
+    let url = this.baseUrl+ this.fetchAdminProductDetailsUrl + String(id);
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+  
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+
     return request$;
   }
 
