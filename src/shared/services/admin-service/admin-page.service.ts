@@ -251,7 +251,7 @@ export class AdminPageService {
  
 
   uploadFile(event: any) {
-    console.log("Upload File", event);
+    // console.log("Upload File", event);
     const formData: FormData = new FormData();
     formData.append('file', event.target.files[0], event.target.files[0].name);
     let url="https://dev-productapi.realize.skysecuretech.com/api/bulk/update-pricing"

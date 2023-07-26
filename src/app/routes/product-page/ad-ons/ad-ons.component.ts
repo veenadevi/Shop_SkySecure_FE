@@ -10,7 +10,7 @@ export class AdOnsComponent {
   public compareProductsList : any[];
 
   @Input() set productsList (value: any[]){
-    console.log("++++++++ List in AdOns ", value);
+    // console.log("++++++++ List in AdOns ", value);
     this.compareProductsList = value;
   }
 

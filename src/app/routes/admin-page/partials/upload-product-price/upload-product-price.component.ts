@@ -48,9 +48,9 @@ export class UploadProductPriceComponent implements OnInit  {
   public updateProductPrice(event: any){
     this.subscriptions.push(
       this.adminPageService.uploadFile(event).subscribe(res=>{
-        console.log("***** Res", res);
+        // console.log("***** Res", res);
         this.uplodedData = res.total;
-        console.log("this.uplodedData  "+this.uplodedData.products)
+        // console.log("this.uplodedData  "+this.uplodedData.products)
 
         this.totalProducts=(this.uplodedData.products && this.uplodedData.products!== null)?this.uplodedData.products:0
         this.totalProductVariants=(this.uplodedData.productsVariants && this.uplodedData.productsVariants!== null)?this.uplodedData.productsVariants:0

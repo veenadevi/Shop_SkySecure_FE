@@ -14,7 +14,7 @@ export class RecommendationSelectModalComponent {
 
 
   ngOnInit() { 
-    console.log("** CAme inside Recom");
+    // console.log("** CAme inside Recom");
     this.visible = true;
       this.cities = [
           {name: 'New York', code: 'NY'},

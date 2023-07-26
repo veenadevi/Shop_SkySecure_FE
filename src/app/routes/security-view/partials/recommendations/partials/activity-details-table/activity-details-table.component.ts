@@ -99,7 +99,7 @@ constructor(
 
 
   public assess(details) {
-    console.log("******** ", details);
+    // console.log("******** ", details);
 
     this.isCompleted = true;
     details.isCompleted = true;

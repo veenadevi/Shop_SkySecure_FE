@@ -82,7 +82,7 @@ export class SearchableSubCategoryFilterComponent {
 
   public ngOnInit(){
 
-    console.log("++++++++++++++ &&&&&& in Sub Set ", this.selectedParams);
+    // console.log("++++++++++++++ &&&&&& in Sub Set ", this.selectedParams);
     if(this.selectedParams === 'subCat'){
       this.setSubCatDataForSubCatSelection();
     }
@@ -109,7 +109,7 @@ export class SearchableSubCategoryFilterComponent {
   }
 
   public setSubCatDataForSubCatSelection(){
-    console.log("((((((((((((((Sub categories ", this.catList);
+    // console.log("((((((((((((((Sub categories ", this.catList);
     this.filteredOptions = [];
     this.catList.forEach(element => {
       //this.selected = [...this.selected, ...element.subCategories]

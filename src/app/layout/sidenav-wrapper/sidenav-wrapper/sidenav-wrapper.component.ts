@@ -23,7 +23,7 @@ export class SidenavWrapperComponent {
 
   @Input() set userLoggedIn(value: any){
     this.userLoggedInFlag = value;
-    console.log("&&&&&&&& ++++++ ", this.userLoggedInFlag);
+    // console.log("&&&&&&&& ++++++ ", this.userLoggedInFlag);
   }
 
   @Input() set userRole(value: any){
@@ -139,7 +139,7 @@ export class SidenavWrapperComponent {
 
 
     
-    console.log("+++++++ ", val);
+    // console.log("+++++++ ", val);
 
     switch (val) {
       case 'user':

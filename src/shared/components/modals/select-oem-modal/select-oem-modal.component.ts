@@ -26,7 +26,7 @@ export class SelectOemModalComponent {
 
 
   ngOnInit() { 
-    console.log("** CAme inside Recom");
+    // console.log("** CAme inside Recom");
     this.visible = true;
     this.cities = [
       {id: 1, name: 'Vilnius', avatar: '//www.gravatar.com/avatar/b0d8c6e5ea589e6fc3d3e08afb1873bb?d=retro&r=g&s=30 2x'},
@@ -36,7 +36,7 @@ export class SelectOemModalComponent {
   }
 
   public selectedOem(event){
-    console.log("****** Selected OEM", event);
+    // console.log("****** Selected OEM", event);
   }
 
   public toggle(modalElement){

@@ -174,14 +174,14 @@ export class AddNewProductComponent  implements OnInit {
   }
 
   uploadFile(event: any) {
-    console.log("__TEST__", event);
+    // console.log("__TEST__", event);
     const formData: FormData = new FormData();
     formData.append('file', event.target.files[0], event.target.files[0].name);
 
     this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
       .subscribe(
         (response: any) => {
-          console.log('Upload successful', response);
+          // console.log('Upload successful', response);
           this.productLogo = response.filePath;
           // Handle the response from the server
         },
@@ -216,13 +216,13 @@ export class AddNewProductComponent  implements OnInit {
   changeCategories(event: any) {
     
     const selectedValue = event.target.value;
-    console.log("selectedValue  "+selectedValue)
+    // console.log("selectedValue  "+selectedValue)
     const categoryMap = new Map<string, any>();
     this.categories.forEach(category => {
       categoryMap.set(category._id.toString(), category);
     });
     const selectedCategory = categoryMap.get(selectedValue);
-    console.log("selectedCategory  "+selectedCategory._id)
+    // console.log("selectedCategory  "+selectedCategory._id)
 
     this.subCategories =  selectedCategory.subCategories;
    
@@ -246,7 +246,7 @@ export class AddNewProductComponent  implements OnInit {
   }
 
   changeSubscriptionType(e) {
-    console.log("subscription value "+e.target.value)
+    // console.log("subscription value "+e.target.value)
     this.registrationForm.get('subscriptionType').setValue(e.target.value, {
       onlySelf: true
     })
@@ -285,13 +285,13 @@ export class AddNewProductComponent  implements OnInit {
   // Submit Registration Form
   CreateProduct(): any {
     //this.submitted = true;
-    console.log("this.registrationForm.valid"+this.submitted)
+    // console.log("this.registrationForm.valid"+this.submitted)
     if (!this.registrationForm.valid) {
 
      // alert('Please fill all the required fields !')
       return false;
     } else {
-      console.log("Final value", this.registrationForm.value);
+      // console.log("Final value", this.registrationForm.value);
       var productData = this.registrationForm.value;
       this.createProductPayload = {
         name: productData.productName,
@@ -318,9 +318,9 @@ export class AddNewProductComponent  implements OnInit {
         createdBy: 'ADMIN',
         updatedBy: 'ADMIN'
       }
-      console.log("_createProductPayload_", this.createProductPayload);
+      // console.log("_createProductPayload_", this.createProductPayload);
       this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
-        console.log("__RESPONSE_",response);
+        // console.log("__RESPONSE_",response);
       })
     }
   }

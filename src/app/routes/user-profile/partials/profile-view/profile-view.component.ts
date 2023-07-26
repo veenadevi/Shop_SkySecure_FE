@@ -32,7 +32,7 @@ export class ProfileViewComponent implements OnInit{
       
       if(data){
         this.userDetails = data.userDetails;
-        console.log("++++++++++ Came inside User", this.userDetails);
+        // console.log("++++++++++ Came inside User", this.userDetails);
         return data;
       }
       else{
@@ -49,11 +49,11 @@ export class ProfileViewComponent implements OnInit{
 
 
   onSubmit(formValue) {
-    console.log(formValue);
+    // console.log(formValue);
   }
 
   public updateProfile(){
-    console.log("***** Updated Data ", this.userDetails);
+    // console.log("***** Updated Data ", this.userDetails);
 
     let req = {
       "firstName": this.userDetails.firstName,
@@ -72,7 +72,7 @@ export class ProfileViewComponent implements OnInit{
 
     this.subscriptions.push(
       this.userProfileService.updateUserProfile(req).subscribe( response => {
-        console.log("***** ++++++ Updated ", response);
+        // console.log("***** ++++++ Updated ", response);
         this.edit = true;
       })
     )

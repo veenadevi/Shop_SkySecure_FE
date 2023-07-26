@@ -92,7 +92,7 @@ export class ProductDetailComponent implements OnInit{
 
 
   scrollToSection(sectionId: any): void {
-console.log("coming inside");
+// console.log("coming inside");
     this.activeLink=sectionId;
     sectionId  = sectionId.slice(1);
     let section;
@@ -121,7 +121,7 @@ console.log("coming inside");
   }
 
   openLink(url:any): void {
-    console.log("url",url);
+    // console.log("url",url);
     window.open(url, '_blank');
   }
 
@@ -205,7 +205,7 @@ console.log("coming inside");
      //this.individualProductDetail$.subscribe();
         this.product={...response.product, quantity: 1 }
        this.product.bannerLogo=(this.product.bannerLogo &&this.product.bannerLogo !== null) ? this.product.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
-        console.log("price after set quantity===="+this.product.priceList[0].discountRate)
+        // console.log("price after set quantity===="+this.product.priceList[0].discountRate)
         let fList = [];
         if (response.featureList?.length > 0) {
           
@@ -225,12 +225,12 @@ console.log("coming inside");
         // }
 
         // this.featureList = fList;
-        console.log("inside", this.featureList);
+        // console.log("inside", this.featureList);
      
 
         this.productBundlesData=this.setProductBundleData(response.productBundles);
         if(this.productBundlesData.length>0)
-        console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
+        // console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
         this.productBundleVariantsData=this.setProductBundleVariantsData(response.productBundleVariants);
 
         this.productBundles=[...this.productBundlesData,...this.productBundleVariantsData];
@@ -238,7 +238,7 @@ console.log("coming inside");
         
         this.similarProducts =[...this.productBundlesData,...this.productBundleVariantsData];
         this.allCompareProducts =[...this.productBundlesData,...this.productBundleVariantsData];
-        console.log("allCompareProducts  length "+this.allCompareProducts.length)
+        // console.log("allCompareProducts  length "+this.allCompareProducts.length)
 
      //  response.products[0] = {...response.products[0], quantity: 1 }
      //setting quantity
@@ -313,7 +313,7 @@ console.log("coming inside");
   public setDataValues(resp:any): void {
     // this.product.name=resp.product.name;
     // this.productName = resp.product.name;
-console.log("response values: ", resp);
+// console.log("response values: ", resp);
   }
   private getSimilerProducts(subCategoryId: String) {
     this.subscriptions.push(
@@ -351,7 +351,7 @@ featureCount=5;
     this.viewAllFeature=false;
     
     this.getProductDetails(productId);
-    console.log(this.featureList);
+    // console.log(this.featureList);
     this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     // if(this.featureList.length>5 && !this.viewAllFeature){
     //   this.dispFeatureList = [...this.featureList.slice(0,5)];
@@ -379,19 +379,19 @@ featureCount=5;
   public featureCountEvent(val): void {
 
 
-    console.log("****** View Before", val);
+    // console.log("****** View Before", val);
     val = val ? false : true;
-    console.log("****** View ", val);
+    // console.log("****** View ", val);
     this.viewAllFeaturesDetails = val;
-    console.log("****** View ", this.viewAllFeaturesDetails);
+    // console.log("****** View ", this.viewAllFeaturesDetails);
     if(this.viewAllFeaturesDetails){
-      console.log("****** In If");
-      console.log("****** In If", this.completeFeatureList);
+      // console.log("****** In If");
+      // console.log("****** In If", this.completeFeatureList);
       this.featureList = this.completeFeatureList;
     }
     else{
-      console.log("****** In Else");
-      console.log("****** In Else", this.completeFeatureList);
+      // console.log("****** In Else");
+      // console.log("****** In Else", this.completeFeatureList);
       if(this.completeFeatureList.length>5){
         this.featureList = this.completeFeatureList.slice(0,5);
       }
@@ -410,7 +410,7 @@ featureCount=5;
       //this.featureList = this.product.featureList;
       
       
-      console.log("product list to compare",this.productListToCompare);
+      // console.log("product list to compare",this.productListToCompare);
     // }
   }
 
@@ -463,8 +463,8 @@ featureCount=5;
     }*/
 
     if(type === 'fromProd'){
-      console.log("()()() From Prom Prod");
-      console.log("()()()( From Prod", item);
+      // console.log("()()() From Prom Prod");
+      // console.log("()()()( From Prod", item);
       this.productListToCompare.push(item);
       
     }
@@ -480,7 +480,7 @@ featureCount=5;
     
     
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
-    console.log("getProdFromLocalStorage",this.productListToCompare);
+    // console.log("getProdFromLocalStorage",this.productListToCompare);
     //localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
     //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
@@ -538,7 +538,7 @@ featureCount=5;
     }*/
 
     this.userAccountStore.userDetails$.subscribe(res=>{
-      console.log("()()()() ", res);
+      // console.log("()()()() ", res);
       if(res && res.email !== null){
         this.router.navigate(['/cart'], {queryParams: queryParams});
       }
@@ -589,7 +589,7 @@ featureCount=5;
 
   public setProductVariantsData(data){
     
-console.log("======setProductVariantsData===="+data.length)
+// console.log("======setProductVariantsData===="+data.length)
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
@@ -613,7 +613,7 @@ console.log("======setProductVariantsData===="+data.length)
   public setProductBundleData(data){
 
     if(data && data.length>0){
-     console.log("===========setProductBundleVariantsData======="+data.length)
+    //  console.log("===========setProductBundleVariantsData======="+data.length)
       data.forEach(element => {
         element.name=element.name;
           element.type = 'productBundles';
@@ -633,7 +633,7 @@ console.log("======setProductVariantsData===="+data.length)
   public setProductBundleVariantsData(data){
 
     if(data && data.length>0){
-      console.log("===========setProductBundleVariantsData======="+data.length)
+      // console.log("===========setProductBundleVariantsData======="+data.length)
       data.forEach(element => {
         element.name=element.name;
           element.type = 'productBundleVariants';

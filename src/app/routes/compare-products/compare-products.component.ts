@@ -74,7 +74,7 @@ export class CompareProductsComponent implements OnInit{
     let tempBundles = [];
     let tempPrdBundleVar = [];
 
-    console.log("()()()() ", data);
+    // console.log("()()()() ", data);
 
     data.forEach(element => {
       switch (element.type) {
@@ -111,16 +111,16 @@ export class CompareProductsComponent implements OnInit{
   }
 
   public fetchCompareProductsList(allSelectedItems: any) {
-    console.log("total itemes---"+allSelectedItems.length)
+    // console.log("total itemes---"+allSelectedItems.length)
     this.onPageLoad = false;
     this.subscriptions.push(
       this.metaDataSvc.fetchCompareProductsList(allSelectedItems).subscribe(response => {
-        console.log("fetched product size :"+response.products.length)
+        // console.log("fetched product size :"+response.products.length)
         this.products = response.products.map((data: any) => {
         
           //let productData = data.products[0];
           let productData = data.products;
-          console.log("productData  "+productData)
+          // console.log("productData  "+productData)
           let properties = {
             'ProductName': productData.name,
             'DevelopedBy': 'Microsoft',
@@ -176,7 +176,7 @@ export class CompareProductsComponent implements OnInit{
           }
           return { properties};
         })
-        console.log("set compare product list "+this.products.length)
+        // console.log("set compare product list "+this.products.length)
 
         this.allProducts = this.products.concat(this.productVariants,this.productFamilyList,this.productFamilyVariants);
         

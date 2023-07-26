@@ -66,7 +66,7 @@ export class UserGraphLoginService {
   getRefreshIDTokenByAccessToken(data) {
 
     
-    console.log("****** Current Details ", data);
+    // console.log("****** Current Details ", data);
     let currentAccountDetails = data.connection.userAccessDetails;
     
     //this.connectToTenantMsalInstance.setActiveAccount(res.account);
@@ -115,13 +115,13 @@ export class UserGraphLoginService {
 
     this.connectToTenantMsalInstance.acquireTokenSilent(silentRequest2)
       .then((res) => {
-        console.log("((((((((((((((( ******* Value hit ", res);
+        // console.log("((((((((((((((( ******* Value hit ", res);
         this.adGraphUserStore.setAdUserDetails(res);
         this.connectToTenantMsalInstance.setActiveAccount(res.account);
         this.updateTenant(data, res.account).subscribe();
       })
       .catch((error) => {
-        console.log("Promise rejected with " + error);
+        // console.log("Promise rejected with " + error);
         this.adLogin();
       });
       
@@ -136,7 +136,7 @@ export class UserGraphLoginService {
 
     //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
     let userAccountdetails = this.userAccountStore.getUserDetails();
-    console.log("***(((())*&^%$% Token ");
+    // console.log("***(((())*&^%$% Token ");
     
     let request = {
         "userId": userAccountdetails._id,

@@ -108,11 +108,11 @@ public cartData : any[] = [];
     
 
     if(this.params.has('productId')){
-      console.log("()()()()()()() If Product,")
+      // console.log("()()()()()()() If Product,")
       this.getCartItems(false);
     }
     else if(this.params.has('productVariant')){
-      console.log("()()()()()()() If Product, Variant")
+      // console.log("()()()()()()() If Product, Variant")
       //var list = JSON.parse(this.params.get('productList'));
       this.getCartItems(true);
     }

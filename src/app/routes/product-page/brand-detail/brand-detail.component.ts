@@ -42,7 +42,7 @@ export class BrandDetailComponent implements OnInit{
             this.currentRoute = event.url; 
             currentUrl = this.route.snapshot.paramMap.get('brandId');
             this.ngOnInit();
-            console.log('@@@@@@@@ ___ Route change End');         
+            // console.log('@@@@@@@@ ___ Route change End');         
             //console.log("@@@@@@@@ ___ ",event);
         }
 
@@ -161,7 +161,7 @@ export class BrandDetailComponent implements OnInit{
     }*/
 
     this.userAccountStore.userDetails$.subscribe(res=>{
-      console.log("()()()() ", res);
+      // console.log("()()()() ", res);
       if(res && res.email !== null){
         this.router.navigate(['/cart'], {queryParams: queryParams});
       }

@@ -32,7 +32,7 @@ export class CompanyPromptModalComponent {
   }
 
   ngOnInit(){
-    console.log("********* Req", this.request);
+    // console.log("********* Req", this.request);
 
     //this.createQuotationService();
   }
@@ -45,18 +45,18 @@ export class CompanyPromptModalComponent {
     this.updateProfile(this.companyName);
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
-        console.log("**** ++++++++  response is ", response);
+        // console.log("**** ++++++++  response is ", response);
         if(response && response.Accounts && response.Accounts){
           if(response.Accounts.code === 'SUCCESS'){
             this.cartService.getCartItems(null).subscribe();
             this.router.navigate(['/cart/cart-submit']);
           } 
           else {
-            console.log("/**** Some error occurred ****/ ");
+            // console.log("/**** Some error occurred ****/ ");
           }
         }
         else{
-          console.log("/**** Some error occurred ****/ ");
+          // console.log("/**** Some error occurred ****/ ");
         }
         
       })
@@ -68,7 +68,7 @@ export class CompanyPromptModalComponent {
     //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
     let userAccountdetails = this.userAccountStore.getUserDetails();
 
-    console.log("++++++++ Details ", userAccountdetails);
+    // console.log("++++++++ Details ", userAccountdetails);
 
     let req = {
       "email" : userAccountdetails.email,
@@ -78,7 +78,7 @@ export class CompanyPromptModalComponent {
 
     this.subscriptions.push(
       this.userProfileService.updateUserProfile(req).subscribe( response => {
-        console.log("***** ++++++ Updated ", response);
+        // console.log("***** ++++++ Updated ", response);
       })
     )
   }

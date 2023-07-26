@@ -48,7 +48,7 @@ export class ProductFilterComponent {
   }
 
   public initializeSubCategoriesData(){
-    console.log()
+    // console.log()
     this.listCategories.forEach(element => {
       this.subCategoriesList = [...this.subCategoriesList , ...element.subCategories];
     });

@@ -32,21 +32,21 @@ export class DealsDetailsComponent implements OnInit{
     
 
     if(params.has('dealsId')){
-      console.log("***** )))))) ");
+      // console.log("***** )))))) ");
       this.dealsId = params.get('dealsId');
       //this.accountData = this.sampleData.accounts.data;
       this.getDealsDetails(this.dealsId);
     }
     else{
       // No Account
-      console.log("***** )))))) Else");
+      // console.log("***** )))))) Else");
     }
   }
 
   public getDealsDetails(dealsId){
     this.subscriptions.push(
       this.adminPageService.getDealsById(dealsId).subscribe(response => {
-        console.log("&&&&&&& Data at alst ", response)
+        // console.log("&&&&&&& Data at alst ", response)
         if(response){
           this.accounts = response.account;
           this.dealsData = response.deals;
@@ -89,7 +89,7 @@ export class DealsDetailsComponent implements OnInit{
     //this.router.navigate(['admin-page/estimate-details']);
     this.subscriptions.push(
       this.adminPageService.createEstimate(queryParams).subscribe(res=>{
-        console.log("&&&&& Response In Create Estimate");
+        // console.log("&&&&& Response In Create Estimate");
 
         //If Success
         this.router.navigate(['admin-page/estimate-details']);

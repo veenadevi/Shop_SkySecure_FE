@@ -42,7 +42,7 @@ export class ContactUsFlyerComponent {
 
       this.subscriptions.push(
         this.userProfileService.sendEmailRequest().subscribe(res=>{
-          console.log("&&&&& ******** ++++++ Response in Email ", res);
+          // console.log("&&&&& ******** ++++++ Response in Email ", res);
         })
       )
       

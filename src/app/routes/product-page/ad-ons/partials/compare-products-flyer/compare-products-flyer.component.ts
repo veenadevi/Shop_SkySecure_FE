@@ -24,7 +24,7 @@ export class CompareProductsFlyerComponent implements OnInit{
   public productList$ = this.compareProductsStore.compareProductsList$
   .pipe(
     map(data => {
-      console.log("++++++++ List in Paetials ", data);
+      // console.log("++++++++ List in Paetials ", data);
       if(data){
         this.productList = data;
         
@@ -59,10 +59,10 @@ export class CompareProductsFlyerComponent implements OnInit{
   ){}
 
   public ngOnInit(): void {
-    console.log("++++++++ List in Last Page ");
-    console.log("++++++++++++++  Item in On Init ", JSON.parse(localStorage.getItem('product_list_to_compare')));
-    console.log("++++++++++++++  Item in On Init2 ", JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]'));
-    console.log("()()()() From Get ", this.compareProductsStore.getCompareProductsList2());
+    // console.log("++++++++ List in Last Page ");
+    // console.log("++++++++++++++  Item in On Init ", JSON.parse(localStorage.getItem('product_list_to_compare')));
+    // console.log("++++++++++++++  Item in On Init2 ", JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]'));
+    // console.log("()()()() From Get ", this.compareProductsStore.getCompareProductsList2());
 
     /*this.subscriptions.push(
 
@@ -89,11 +89,11 @@ export class CompareProductsFlyerComponent implements OnInit{
   }
 
   public removeSelectedItem($event){
-    console.log("******** Item to be removed ", $event);
+    // console.log("******** Item to be removed ", $event);
     this.productList = this.productList.filter(function(item) {
       return item._id != $event;
     });
-    console.log("******** Item to be removed ", this.productList);
+    // console.log("******** Item to be removed ", this.productList);
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
     localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
     this.compareProductsStore.setCompareProductsList(this.productList);
@@ -101,7 +101,7 @@ export class CompareProductsFlyerComponent implements OnInit{
     //localStorage.removeItem('product_list_to_compare');
     
     this.compareProductsStore.setProductsCheckedList(null);
-    console.log("******** Item after removed ", JSON.parse(localStorage.getItem('product_list_to_compare')));
+    // console.log("******** Item after removed ", JSON.parse(localStorage.getItem('product_list_to_compare')));
   }
 
   public navigateToCompareProducts(){

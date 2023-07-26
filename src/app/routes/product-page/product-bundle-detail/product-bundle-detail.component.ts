@@ -506,12 +506,12 @@ export class ProductBundleDetailComponent implements OnInit{
   }
 
   public removeSelectedItem(_id:any){
-    console.log("()()()()( Items before ", this.productListToCompare);
+    // console.log("()()()()( Items before ", this.productListToCompare);
     this.productListToCompare = this.productListToCompare.filter(function(item) {
       
       return item._id != _id;
     });
-    console.log("()()()()( Items After ", this.productListToCompare);
+    // console.log("()()()()( Items After ", this.productListToCompare);
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
     localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);

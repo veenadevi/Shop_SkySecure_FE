@@ -315,7 +315,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
          this.productBundles = response.productBundles;
 
          
-         console.log("******* ))))))) ++++++++ Data here", response);
+        //  console.log("******* ))))))) ++++++++ Data here", response);
 
          let tempProducts = this.setProductsData(response.products);
          let tempProductVariants = this.setProductVariantsData(response.productVariants);
@@ -327,7 +327,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
          this.finalProductList = [...tempProducts, ...tempProductVariants, ...tempProductBundleVariants , ...tempProductBundles];
 
          //this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundleVariants, ...response.productBundles];
-         console.log("******* ))))))) ++++++++ Data here", this.finalProductList);
+        //  console.log("******* ))))))) ++++++++ Data here", this.finalProductList);
          let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
          if(cacheData && cacheData.length>0){
           cacheData.forEach(element => {
@@ -522,7 +522,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
       let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
         if(indexToUpdate !== -1){
           //element['checked'] = true;
-          console.log("***** ++++++ ,",this.finalProductList[indexToUpdate]);
+          // console.log("***** ++++++ ,",this.finalProductList[indexToUpdate]);
           
           this.finalProductList[indexToUpdate]['checked'] = true;
 
@@ -652,7 +652,7 @@ public setCheckedList(){
 
   this.subscriptions.push(
     this.compareProductsStore.productsCheckedList$.subscribe(res=>{
-      console.log("**&&&&()()()( Got Checked ",this.productList);
+      // console.log("**&&&&()()()( Got Checked ",this.productList);
 
 
       let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
