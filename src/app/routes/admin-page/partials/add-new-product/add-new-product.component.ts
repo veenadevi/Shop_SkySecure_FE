@@ -21,7 +21,7 @@ interface CreateProductPayload {
   priceList: Array<any>,
   //productVideoURL: Array<any>,
   productSkuNumber: String,
-  productSkuId: Number,
+  productSkuId: String,
   featureList: Array<any>,
   productFAQ: Array<any>,
   isVariant: Boolean,
