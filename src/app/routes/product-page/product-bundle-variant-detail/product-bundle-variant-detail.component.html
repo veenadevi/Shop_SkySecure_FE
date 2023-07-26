@@ -181,7 +181,8 @@
                            
                         </p> -->
                             <div class="all-desc">
-                                {{productFamilyVariant.description}}
+                                <!-- {{productFamilyVariant.description}} -->
+                                {{(seeMore) ? productFamilyVariant.description: productFamilyVariant.description| slice:0:50}}
                             </div>
 
                         </div>
