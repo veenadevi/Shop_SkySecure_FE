@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+  isHiddenTwitter = false;
+  isHiddenLinkedIn = false;
+  isHiddenYouTube = false;
+
+
 }
