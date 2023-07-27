@@ -18,7 +18,7 @@ export class ProductVariantModalComponent {
     ) { }
 
   public ngOnInit() : void {
-    console.log("+++++++ Varient ", this.productVariant);
+    // console.log("+++++++ Varient ", this.productVariant);
     this.setAddOns(this.productVariant.requiredAddOns)
     
   }
@@ -39,7 +39,7 @@ export class ProductVariantModalComponent {
   }
 
   public requestQuote(){
-    console.log("**** +++++++ ,", this.requiredAddOnsList);
+    // console.log("**** +++++++ ,", this.requiredAddOnsList);
     let queryParams;
     if(!this.productVariant.isAddOn){
       queryParams = {
@@ -54,7 +54,7 @@ export class ProductVariantModalComponent {
     else{
 
       let finalProducts = this.requiredAddOnsList.filter(data => (data.checked === true))
-      console.log("**** Final Products", finalProducts);
+      // console.log("**** Final Products", finalProducts);
 
       if(finalProducts.length <= 0) {
         // All Products

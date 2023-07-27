@@ -22,14 +22,14 @@ export class AuthGuard implements CanActivate {
         //console.log("Auth Gaurd If", this.authService.isLoggedIn); 
     if (this.authService.isLoggedIn !== true) {
       //window.alert("Access not allowed!");
-      console.log("()()()() Auth Gaurd If");
+      // console.log("()()()() Auth Gaurd If");
       //this.router.navigate([''])
     }
     else{
-        console.log("******* Auth Gaurd Else ");
+        // console.log("******* Auth Gaurd Else ");
         //this.router.navigate([''])
         var decoded = jwtDecode(encodedVal);
-        console.log("***** The res is ", decoded);
+        // console.log("***** The res is ", decoded);
         this.userAccountStore.setUserDetails(decoded);
         //this.router.navigate(['/']);
     }

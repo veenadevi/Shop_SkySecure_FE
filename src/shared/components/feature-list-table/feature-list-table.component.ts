@@ -30,7 +30,7 @@ export class FeatureListTableComponent implements OnInit{
 
   ngOnInit(): void {
     this.onLoad = false;
-    console.log("****++++++++ After calc", this.product);
+    // console.log("****++++++++ After calc", this.product);
 
     this.setProductVarients(this.product);
     this.setFeatureList(this.product.featureList);
@@ -52,7 +52,7 @@ export class FeatureListTableComponent implements OnInit{
       }
     }
 
-    console.log("****++++++++ After calc ", this.productVarients);
+    // console.log("****++++++++ After calc ", this.productVarients);
     this.productVarients;
     this.onLoad = true;
     
@@ -92,7 +92,7 @@ export class FeatureListTableComponent implements OnInit{
   }
 
   public addQuote(productVariant){
-    console.log("&&&&&&&&& +++++++ ", productVariant);
+    // console.log("&&&&&&&&& +++++++ ", productVariant);
     let queryParams;
     // if(!productVariant.isAddOn){
       queryParams = {

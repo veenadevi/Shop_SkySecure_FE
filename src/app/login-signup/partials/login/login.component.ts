@@ -35,7 +35,7 @@ export class LoginComponent {
   ngOnInit(): void {
 
     this.params = this.route.snapshot.queryParamMap;
-    console.log("()()()()() Inside is valid", this.params);
+    // console.log("()()()()() Inside is valid", this.params);
 
     this.form = this.formBuilder.group(
       {
@@ -88,7 +88,7 @@ export class LoginComponent {
       "password":hashedPass,
      
       }
-      console.log("*(*(*(*(*(*( ",req);
+      // console.log("*(*(*(*(*(*( ",req);
       this.subscriptions.push(
         
       // this.authService.signUp(req).subscribe( res=> {
@@ -112,7 +112,7 @@ export class LoginComponent {
       
       let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
       let hashedPass = CryptoJS.AES.encrypt(this.form.value.password, key).toString();
-      console.log(JSON.stringify(this.form.value, null, 2));
+      // console.log(JSON.stringify(this.form.value, null, 2));
       let req = {
         "email":this.form.value.email,
         "password":hashedPass
@@ -127,7 +127,7 @@ export class LoginComponent {
           
 
           if(this.params && this.params.has('productId')){
-            console.log("***** The res is ", decoded);
+            // console.log("***** The res is ", decoded);
             //this.router.navigate(['/cart'], {queryParams: this.params});
             //this.router.navigate(['/cart'], {queryParams: this.params});
           }

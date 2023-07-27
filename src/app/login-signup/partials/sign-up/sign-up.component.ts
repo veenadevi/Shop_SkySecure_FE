@@ -77,11 +77,11 @@ export class SignUpComponent {
   onSubmit(): void {
     this.submitted = true;
     if (this.form.invalid) { // If Invalid Return
-      console.log("()()() Invalid");
+      // console.log("()()() Invalid");
       return;
     }
     else{ // If Valid
-      console.log("()()() Valid");
+      // console.log("()()() Valid");
       
       
       //console.log(JSON.stringify(this.form.value, null, 2));
@@ -103,11 +103,11 @@ export class SignUpComponent {
         "pinCode":"766789",
         "country":"IN"
         }
-        console.log("*(*(*(*(*(*( ",req);
+        // console.log("*(*(*(*(*(*( ",req);
       this.subscriptions.push(
         
         this.authService.signUp(req).subscribe( res=> {
-          console.log("***** The res is ", res);
+          // console.log("***** The res is ", res);
           this.router.navigate(['login']);
           //localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
         })

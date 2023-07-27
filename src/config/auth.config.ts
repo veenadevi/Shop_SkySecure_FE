@@ -61,7 +61,7 @@ export const b2cPolicies = {
     system: {
         loggerOptions: {
             loggerCallback(logLevel: LogLevel, message: string) {
-                console.log(message);
+                // console.log(message);
             },
             logLevel: LogLevel.Verbose,
             piiLoggingEnabled: false

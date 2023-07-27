@@ -173,6 +173,10 @@
               </mat-list-item>
 
               <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/edit-product']">Edit product</span>
+              </mat-list-item>
+
+              <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/upload-product-price']">Upload Product Price</span>
               </mat-list-item>
               

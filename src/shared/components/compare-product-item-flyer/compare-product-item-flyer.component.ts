@@ -31,7 +31,7 @@ export class CompareProductItemFlyerComponent {
 
   ngOnInit(): void {
 
-    console.log("******* ^^^^ ABCD", this.productItem);
+    // console.log("******* ^^^^ ABCD", this.productItem);
   }
 
   public navigateTo(item){

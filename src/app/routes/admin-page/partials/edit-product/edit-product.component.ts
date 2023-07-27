@@ -7,8 +7,11 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { LoaderService } from 'src/shared/services/loader.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 interface CreateProductPayload {
+  _id: String,
   name: String,
   description: String,
   oemId: String,
@@ -19,22 +22,21 @@ interface CreateProductPayload {
   bannerLogo: String,
   isActive: Boolean,
   priceList: Array<any>,
-  //productVideoURL: Array<any>,
   productSkuNumber: String,
   productSkuId: String,
   featureList: Array<any>,
-  productFAQ: Array<any>,
   isVariant: Boolean,
-  productId: String
+  productId: String,
+  productFAQ: Array<any>
 }
 
-@Component({
-  selector: 'app-admin-product',
-  templateUrl: './add-new-product.component.html',
-  styleUrls: ['./add-new-product.component.css']
-})
 
-export class AddNewProductComponent  implements OnInit {
+@Component({
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.css']
+})
+export class EditProductComponent  implements OnInit {
   submitted = false;
   public subscriptions: Subscription[] = [];
   public categories: CategoryDetails[] = [];
@@ -52,16 +54,21 @@ export class AddNewProductComponent  implements OnInit {
   registrationForm: FormGroup;
   addDynamicElementNew: FormArray;
   addFAQArrayNew: FormArray;
-  defaultDiscount:number
 
   createProductPayload: CreateProductPayload;
-
+  public currentRoute: string;
+  productResult : any;
+  selectedItemId: String;
+  defaultDiscount: number;
+  selectedProductId : string;
   constructor(
     public fb: FormBuilder,
     private cd: ChangeDetectorRef,
     private metaDataSvc: MetadataService,
     private metadataStore: MetadataStore,
-    private http: HttpClient
+    private http: HttpClient,
+    private router : Router,
+    private route: ActivatedRoute
   ) {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
@@ -81,24 +88,18 @@ export class AddNewProductComponent  implements OnInit {
       products: [''],
       addDynamicElementNew: this.fb.group({
         // Nested form controls for dynamic elements
-        feature: this.fb.array([
-          this.createFeatureGroup()
-        ])
+        feature: this.fb.array([])
       }),
       addFAQArrayNew: this.fb.group({
         // Nested form controls for dynamic elements
-        faq: this.fb.array([
-          this.createFAQGroup()
-        ])
+        faq: this.fb.array([])
       })
     })
     this.addDynamicElementNew = this.registrationForm.get('addDynamicElementNew') as FormArray;
     this.addFAQArrayNew = this.registrationForm.get('addFAQArrayNew') as FormArray;
     this.defaultDiscount=18;
   }
-  // ngOnInit(): void {
-  //   throw new Error('Method not implemented.');
-  // }
+  
   //########################## File Upload ########################/
   @ViewChild('fileInput') el: ElementRef;
   imageUrl: any = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
@@ -106,7 +107,10 @@ export class AddNewProductComponent  implements OnInit {
   removeUpload: boolean = false;
 
   public ngOnInit(): void {
-   this.getSubCategories();
+  //  const productId = this.route.snapshot.paramMap.get('id');
+    //console.log("_DATA_",productId);
+  //  this.getProductDetails(productId);
+    this.getSubCategories();
     this.getCategories();
     this.getOEMs();
     this.getProducts();
@@ -114,16 +118,19 @@ export class AddNewProductComponent  implements OnInit {
 
   createFeatureGroup(): FormGroup {
     return this.fb.group({
+      _id: null,
       name: '',
       description: '',
       hyperLinkURL: ''
     });
   }
 
-  createFAQGroup(): FormGroup {
+  createFeatureGroupWithValue(_id, name,description,hyperLinkURL): FormGroup {
     return this.fb.group({
-      Question: '',
-      Answer: ''
+      _id: _id,
+      name: name,
+      description: description,
+      hyperLinkURL: hyperLinkURL
     });
   }
 
@@ -133,7 +140,6 @@ export class AddNewProductComponent  implements OnInit {
       this.metaDataSvc.fetchCategory().subscribe(response => {
         this.metadataStore.setCategoryDetails(response.categorys);
         this.categories = response.categorys;
-     
       })
 
     );
@@ -168,20 +174,45 @@ export class AddNewProductComponent  implements OnInit {
     this.subscriptions.push(
       this.metaDataSvc.fetchProducts().subscribe(response => {
         this.products = response.products;
+        console.log("__TEST__",this.products);
       })
 
     );
   }
 
+  private getProductDetails(productId) {
+    console.log("fetching product for +======"+productId)
+    this.subscriptions.push(
+    
+      this.metaDataSvc.fetchAdminProductDetails(productId).subscribe(response => {
+       this.productResult = response;
+       this.fillFormDetails(this.productResult);
+      })
+    );
+  }
+
+  createFAQGroup(): FormGroup {
+    return this.fb.group({
+      Question: '',
+      Answer: ''
+    });
+  }
+
+  createFAQGroupWithValue(Question,Answer): FormGroup {
+    return this.fb.group({
+      Question: Question,
+      Answer: Answer
+    });
+  }
   uploadFile(event: any) {
-    // console.log("__TEST__", event);
+    console.log("__TEST__", event);
     const formData: FormData = new FormData();
     formData.append('file', event.target.files[0], event.target.files[0].name);
 
     this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
       .subscribe(
         (response: any) => {
-          // console.log('Upload successful', response);
+          console.log('Upload successful', response);
           this.productLogo = response.filePath;
           // Handle the response from the server
         },
@@ -214,24 +245,18 @@ export class AddNewProductComponent  implements OnInit {
 
   // Choose Subcategories using select dropdown
   changeCategories(event: any) {
-    
-    const selectedValue = event.target.value;
-    // console.log("selectedValue  "+selectedValue)
+    const selectedValue = event.target.value.toString();
     const categoryMap = new Map<string, any>();
     this.categories.forEach(category => {
       categoryMap.set(category._id.toString(), category);
     });
     const selectedCategory = categoryMap.get(selectedValue);
-    // console.log("selectedCategory  "+selectedCategory._id)
-
-    this.subCategories =  selectedCategory.subCategories;
-   
-
   }
 
   // Choose Subcategories using select dropdown
   changeSubcategories(e) {
-    this.registrationForm.get('Subcategories').setValue(e.target.value, {
+    console.log("TEST___",e.target.value)
+    this.registrationForm.get('Subcategories').setValue(e.target.value.substring(3), {
       onlySelf: true
     })
   }
@@ -245,55 +270,39 @@ export class AddNewProductComponent  implements OnInit {
     })
   }
 
-  changeSubscriptionType(e) {
-    // console.log("subscription value "+e.target.value)
-    this.registrationForm.get('subscriptionType').setValue(e.target.value, {
-      onlySelf: true
-    })
-  }
-
   changeProduct(e) {
     this.registrationForm.get('products').setValue(e.target.value.substring(3), {
       onlySelf: true
     })
   }
 
-
+  selectProduct(event: any) {
+    this.selectedProductId = event.target.value.substring(3);
+    this.selectedProductId = this.selectedProductId.replace(' ','')
+    this.getProductDetails(this.selectedProductId);
+  }
 
   //############### Add Dynamic Elements ###############/
   get addDynamicElement() {
     return this.registrationForm.get('addDynamicElementNew') as FormArray
   }
 
-  get addFAQ() {
-    return this.registrationForm.get('addNewFAQ') as FormArray
-  }
-
-  addNewFeature() {
+  addSuperPowers() {
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
     featureArray.push(this.createFeatureGroup());
   }
 
-  addNewFAQ() {
-    const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
-    faqArray.push(this.createFAQGroup());
-  }
+  // Submit Registration Form
   onSubmit(): any {
     this.submitted = true;
-  }
-
-  // Submit Registration Form
-  CreateProduct(): any {
-    //this.submitted = true;
-    // console.log("this.registrationForm.valid"+this.submitted)
     if (!this.registrationForm.valid) {
-
-     // alert('Please fill all the required fields !')
+      alert('Please fill all the required fields to create a super hero!')
       return false;
     } else {
-      // console.log("Final value", this.registrationForm.value);
+      console.log("Final value", this.registrationForm.value);
       var productData = this.registrationForm.value;
       this.createProductPayload = {
+        _id: this.selectedProductId,
         name: productData.productName,
         description: productData.productDescription,
         oemId: productData.OEM,
@@ -306,39 +315,28 @@ export class AddNewProductComponent  implements OnInit {
           "Currency": "INR",
           "price": productData.productPrice,
           "priceType": productData.subscriptionType,
-          "ERPPrice" : productData.erpPrice,
-          "discountRate" : productData.discount
-
+          "ERPPrice":productData.erpPrice,
+          "discountRate": productData.discount
         }],
+        productFAQ: productData.addFAQArrayNew.faq,
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
-        productFAQ: productData.addFAQArrayNew.faq,
         bannerLogo: this.productLogo,
         createdBy: 'ADMIN',
-        updatedBy: 'ADMIN'
+        updatedBy: 'ADMIN',
       }
-      // console.log("_createProductPayload_", this.createProductPayload);
-      this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
-        // console.log("__RESPONSE_",response);
+      console.log("_createProductPayload_", this.createProductPayload);
+      var endPoint = `${environment.gatewayUrl}api/admin/product/edit`
+      this.http.patch(endPoint,this.createProductPayload).subscribe((response) => {
+        console.log("__RESPONSE_",response);
       })
     }
   }
 
   removeFeature(data: any) {
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
-    if(data>0){
-      featureArray.removeAt(data);
-    }
-   
-  }
-
-  removeFAQ(data: any) {
-    const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
-    if(data>0){
-    faqArray.removeAt(data);
-    }
-  
+    featureArray.removeAt(data);
   }
 
   onRadioChange(event) {
@@ -358,4 +356,102 @@ export class AddNewProductComponent  implements OnInit {
     }
   }
 
+  removeFAQ(data: any) {
+    const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
+    if(data>0){
+    faqArray.removeAt(data);
+    }
+  }
+
+  fillFormDetails(response) {
+    this.registrationForm.get('productName').setValue(response.products[0].name, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('productDescription').setValue(response.products[0].name, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('productDescription').setValue(response.products[0].description, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('productSkuNumber').setValue(response.products[0].productSkuNumber, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('productSkuId').setValue(response.products[0].productSkuId, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('productOrderNumber').setValue(response.products[0].orderNumber, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('productPrice').setValue(response.products[0].priceList[0].price, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('erpPrice').setValue(response.products[0].priceList[0].ERPPrice, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('discount').setValue(response.products[0].priceList[0].discountRate, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('Subcategories').setValue(response.products[0].subCategoryId, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('OEM').setValue(response.products[0].oemId, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('subscriptionType').setValue(response.products[0].priceList[0].priceType, {
+      onlySelf: true
+    })
+    
+    let isVariant = response.isProduct == true ? 'false' : 'true'
+    this.registrationForm.get('isVariant').setValue(isVariant, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('file').setValue(response.products[0].bannerLogo, {
+      onlySelf: true
+    })
+
+    this.productLogo = response.products[0].bannerLogo;
+    const featureArray = this.addDynamicElementNew.get('feature') as FormArray;
+    response.featureList.forEach((feature) => {
+      featureArray.push(this.createFeatureGroupWithValue(feature.featureId,  feature.name,feature.description,feature.hyperLinkURL)); 
+    })
+
+    const faqArray = this.addFAQArrayNew.get('faq') as FormArray;
+    response.products[0].productFAQ.forEach((faq) => {
+      faqArray.push(this.createFAQGroupWithValue(faq.Question, faq.Answer)); 
+    })
+    this.submitted = true;
+  }
+
+  get addFAQ() {
+    return this.registrationForm.get('addNewFAQ') as FormArray
+  }
+
+  addNewFAQ() {
+    const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
+    faqArray.push(this.createFAQGroup());
+  }
+
+  addNewFeature() {
+    const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
+    featureArray.push(this.createFeatureGroup());
+  }
+
+  changeSubscriptionType(e) {
+    console.log("subscription value "+e.target.value)
+    this.registrationForm.get('subscriptionType').setValue(e.target.value, {
+      onlySelf: true
+    })
+  }
 }

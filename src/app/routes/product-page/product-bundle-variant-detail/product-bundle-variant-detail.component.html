@@ -181,7 +181,8 @@
                            
                         </p> -->
                             <div class="all-desc">
-                                {{productFamilyVariant.description}}
+                                <!-- {{productFamilyVariant.description}} -->
+                                {{(seeMore) ? productFamilyVariant.description: productFamilyVariant.description| slice:0:50}}
                             </div>
 
                         </div>
@@ -218,7 +219,7 @@
                     <p  class="prod-desc" >{{productFamilyVariant.description}}</p> -->
                     <span><button class="btn view-det-btn" (click)="scrollToSection('#feature')">View
                             Features</button>
-                        <button class="btn request-quote-btn" style="margin-left: 4%;">Request Quote</button></span>
+                        <button class="btn request-quote-btn" style="margin-left: 4%;" (click)="requestQuote( productFamilyVariant)">Request Quote</button></span>
                     <p-divider></p-divider>
 
 

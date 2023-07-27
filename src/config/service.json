@@ -52,7 +52,9 @@
         "getSecureScore" : "api/user/security/getSecureScore",
         "getProductBundleVariant": "api/product-family-variant/",
         "fetchCompareProductsListUrl": "api/product/compare",
-        "allSubcategory" : "api/sub-category/get/all"
+        "allSubcategory" : "api/sub-category/get/all",
+        "fetchAdmingProduct":"api/admin/product/",
+        "editProduct":"api/admin/product/edit"
 
     },
 

@@ -110,13 +110,13 @@ export class RecommendationsComponent {
     this.oemName = params.get('oemName');
 
     //this.subscriptions.push(this.userProfileDetails$.subscribe());
-    console.log("+++++++++ Page Reloading ",this.pageReloading);
+    // console.log("+++++++++ Page Reloading ",this.pageReloading);
     if(this.pageReloading === false){
       this.checkConnectionStatus();
     }
     else{
       this.checkConnectionStatus();
-      console.log("+++++++++ Inside here ");
+      // console.log("+++++++++ Inside here ");
       this.userProfileDetails$.subscribe(data=> {
         //this.checkConnectionStatus();
       })

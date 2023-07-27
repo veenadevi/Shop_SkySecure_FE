@@ -71,7 +71,7 @@ export class MultiSelectDropdownComponent implements OnInit{
           this.checkedList.push(element);
         }
       });
-      console.log("+++++ ((((( , ", this.list);
+      // console.log("+++++ ((((( , ", this.list);
     }
   
     
@@ -79,7 +79,7 @@ export class MultiSelectDropdownComponent implements OnInit{
 
        getSelectedValue(status:Boolean,value:any){
 
-        console.log("+ + + + +", status);
+        // console.log("+ + + + +", status);
         if(status){
           this.checkedList.push(value);  
           //console.log("+ + + + +", this.checkedList[0].name);
@@ -110,7 +110,7 @@ export class MultiSelectDropdownComponent implements OnInit{
 
     public handleOnClick() {
       this.selectedList.emit(this.checkedList);
-      console.log("***** )))))) Checked List ", this.checkedList);
+      // console.log("***** )))))) Checked List ", this.checkedList);
     }
 
 

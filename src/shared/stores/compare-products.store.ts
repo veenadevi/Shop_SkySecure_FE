@@ -47,7 +47,7 @@ export class CompareProductsStore {
   public setCompareProductsList(data : any) : void {
 
     this.compareProductsList = data;
-    console.log("()()()()() In Store Get 1", data);
+    // console.log("()()()()() In Store Get 1", data);
     this.compareProductsListSubject.next(data);
   }
 
@@ -58,7 +58,7 @@ export class CompareProductsStore {
     public setCompareProductsList2(data : any) : void {
 
       this.compareProductsList2 = data;
-      console.log("()()()()() In Store Get", data);
+      // console.log("()()()()() In Store Get", data);
       this.compareProductsList2Subject.next(data);
     }
 

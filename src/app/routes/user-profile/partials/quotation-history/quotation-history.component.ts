@@ -45,7 +45,7 @@ export class QuotationHistoryComponent implements OnInit {
         const result = element.userCartDetails.filter((obj) => {
           return obj.productName === data.Deal_Name;
         });
-        console.log("**** ++++ Val ", result);
+        // console.log("**** ++++ Val ", result);
         if(result.length>0){
           this.quotationListFlag = 'Y';
           let quoteData = {

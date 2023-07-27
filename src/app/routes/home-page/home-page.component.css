@@ -146,6 +146,8 @@
 
 .container-headline {
     margin: 10px 0;
+    padding: 15px;
+    padding-left: 20px;
 }
 
 .container-headline h4 {
@@ -158,6 +160,7 @@
     justify-content: center;
     align-items: center;
     gap: 60px;
+    padding: 20px;
 }
 
 .aboutus-text {
@@ -219,6 +222,9 @@
     flex-direction: row;
     width: 100%;
     padding: 1%;
+    margin-top: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
 }
 
 .contactus-flyer-avatar {
@@ -240,6 +246,10 @@
     background-color: #D9E9FF;
     width: 100%;
     padding: 2%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
 }
 .overall-review-content {
     display: flex;
@@ -389,4 +399,35 @@
   
   .mat-icon {
     cursor: pointer;
+  }
+
+
+
+  /* segments seperation */
+  .aboutus-container{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+  }
+  .product-by-category-container{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    /* background: white; */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+  }
+  .trending-products-container{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+  }
+  .video{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
   }

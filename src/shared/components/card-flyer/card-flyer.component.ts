@@ -30,7 +30,7 @@ export class CardFlyerComponent {
   ){}
 
   public requestQuote(product:any){
-    console.log("***** Sample Product", product);
+    // console.log("***** Sample Product", product);
     let queryParams = {
       productName : product.name,
       productId : product._id,
@@ -41,7 +41,7 @@ export class CardFlyerComponent {
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"));
 
     this.userAccountStore.userDetails$.subscribe(res=>{
-      console.log("()()()() ", res);
+      // console.log("()()()() ", res);
       if(res && res.email !== null){
         this.router.navigate(['/cart'], {queryParams: queryParams});
       }
