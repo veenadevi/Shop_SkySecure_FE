@@ -145,9 +145,8 @@
 }
 
 .container-headline {
-    margin: 10px 0;
-    padding: 15px;
-    padding-left: 20px;
+    margin: 10px 0 0 0;
+    padding: 15px 0 0 20px;
 }
 
 .container-headline h4 {
