@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
+import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'app-compare-products-result',
@@ -22,6 +24,7 @@ export class CompareProductsResultComponent {
   productVariants: any[] = [];
   productFamilyList: any[] = [];
   productFamilyVariants: any[] = [];
+  public cachedProductsList : any[];
   allProperties = [
     { 'ProductName': 'Product Name' },
     { 'DevelopedBy': 'Developed by' },
@@ -52,7 +55,9 @@ export class CompareProductsResultComponent {
     private authService: MsalService,
     private cartStore: CartStore,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private userAccountStore : UserAccountStore,
+    private compareProductsStore : CompareProductsStore
   ) {
   }
   public ngOnInit(): void {
@@ -61,6 +66,7 @@ export class CompareProductsResultComponent {
     let combinedData = [...cacheData, ...cacheData2];
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
     let reqBody = this.setPrdList(uniqueElements);
+    this.cachedProductsList = uniqueElements;
     
     //this.fetchCompareProductsList(this.allSelectedItems);
     this.fetchCompareProductsList(reqBody);
@@ -72,7 +78,7 @@ export class CompareProductsResultComponent {
     let tempBundles = [];
     let tempPrdBundleVar = [];
 
-    // console.log("()()()() ", data);
+ 
 
     data.forEach(element => {
       switch (element.type) {
@@ -109,24 +115,25 @@ export class CompareProductsResultComponent {
   }
 
   public fetchCompareProductsList(allSelectedItems: any) {
-    // console.log("total itemes---"+allSelectedItems.length)
     this.onPageLoad = false;
     this.subscriptions.push(
       this.metaDataSvc.fetchCompareProductsList(allSelectedItems).subscribe(response => {
-        // console.log("fetched product size :"+response.products.length)
+        
         this.products = response.products.map((data: any) => {
         
           //let productData = data.products[0];
           let productData = data.products;
-          // console.log("productData  "+productData)
+          
           let properties = {
             'ProductName': productData.name,
             'DevelopedBy': 'Microsoft',
             'Category': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
             'Subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
+            'price' : productData?.priceList[0]?.price ? productData?.priceList[0].price : '',
             'Features': data.featureList.length > 0 ? data.featureList : 'No Features',
-           'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'
+           'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
+           '_id' : productData._id
           }
           return { properties};
         })
@@ -140,8 +147,11 @@ export class CompareProductsResultComponent {
             'Category': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
             'Subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
+            'price' : productVariantData?.priceList[0]?.price ? productVariantData?.priceList[0].price : '',
             'Features': data.featureList.length > 0 ? data.featureList : 'No Features',
-            'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'
+            'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
+            '_id' : productVariantData._id
+
           }
           return { properties };
         })
@@ -154,8 +164,10 @@ export class CompareProductsResultComponent {
             'Category': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
             'Subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
+            'price' : productData?.priceList[0]?.price ? productData?.priceList[0].price : '',
             'Features': data.features.length > 0 ? data.features : 'No Features',
-            'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'
+            'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
+            '_id' : productData._id
           }
           return { properties};
         })
@@ -169,19 +181,102 @@ export class CompareProductsResultComponent {
             'Category': productVariantData?.subcategories[0]?.name ? productVariantData?.subcategories[0]?.name : '-',
             'Subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
+            'price' : productVariantData?.priceList[0]?.price ? productVariantData?.priceList[0].price : '',
             'Features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : 'No Features',
-            'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'
+            'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
+            '_id' : productVariantData._id
           }
           return { properties};
         })
-        // console.log("set compare product list "+this.products.length)
+        
 
         this.allProducts = this.products.concat(this.productVariants,this.productFamilyList,this.productFamilyVariants);
+
+        this.setQuantity();
         
         
         this.allProducts = this.allProducts.slice(0,4);
       })
     );
+  }
+
+  public setQuantity(){
+
+    this.allProducts.forEach(element => {
+        if(element.quantity){
+          element.quantity = element.quantity
+        }
+        else{
+          element['quantity'] = 1;
+        }
+    });
+  }
+
+  public quantityEdit(i, opr) : void {
+
+
+    if(opr === 'plus'){
+      this.allProducts[i].quantity = Number(this.allProducts[i].quantity) + 1;
+      
+    }
+    else if(opr === 'minus'){
+
+        this.allProducts[i].quantity = Number(this.allProducts[i].quantity) - 1;
+        
+    }
+  }
+
+  public requestQuote (productItem : any) : void {
+
+    var product = productItem.properties;
+    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
+
+    let queryParams;
+      // if(product.productVariants.length>0){
+        queryParams = {
+          productName : product.ProductName,
+          productId : product._id,
+          quantity : productItem.quantity,
+          price : product.price,
+        };
+
+
+
+    this.userAccountStore.userDetails$.subscribe(res=>{
+      
+      if(res && res.email !== null){
+        this.router.navigate(['/cart'], {queryParams: queryParams});
+      }
+      else{
+        this.viewModal(queryParams);
+      }
+    })
+  }
+
+  public removeItem(product){
+    
+      
+      this.allProducts = this.allProducts.filter(function(item) {
+        return item.properties._id != product.properties._id;
+      });
+      
+      
+      this.cachedProductsList = this.cachedProductsList.filter(function(item) {
+        return item._id != product.properties._id;
+      });
+      
+      
+      localStorage.setItem('product_list_to_compare', JSON.stringify(this.cachedProductsList));
+      localStorage.setItem('product_list_to_compare2', JSON.stringify(this.cachedProductsList));
+      this.compareProductsStore.setCompareProductsList2(this.cachedProductsList); 
+      
+      
+    
+  }
+
+  public viewModal(queryParams) {
+    const modalRef = this.modalService.open(LoginAlertModalComponent);
+    modalRef.componentInstance.request = queryParams;
   }
 
    

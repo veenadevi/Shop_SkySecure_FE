@@ -85,9 +85,9 @@
                     <img src="../../../../assets/icons/Add.svg">
                     <span class="default-quote">Add product to compare</span>
                 </div> -->
-                    <ng-container class="product-cards" *ngFor="let item of allProducts">
+                    <ng-container class="product-cards" *ngFor="let item of allProducts; index as i">
                         <div class="card">
-                            <img class="close-icon" src="../../../../assets/icons/closecircle.svg">
+                            <img class="close-icon" (click)="removeItem(item)" src="../../../../assets/icons/closecircle.svg">
                             <div class="product-visual-detail">
                                 <div class="product-logo">
                                     <img class="product-logo-img"  src="{{item.properties.bannerLogo}}" alt="product-image">
@@ -98,7 +98,7 @@
                             </div>
                             <div class="td-column">
                                 <span>
-                                  <img style="cursor: pointer;" alt="minus" src="../../../assets/icons/Minus.svg">
+                                  <img style="cursor: pointer;" alt="minus" (click)="quantityEdit(i,'minus')" src="../../../assets/icons/Minus.svg">
                                 </span>
                                 <span>
                                   <input
@@ -106,10 +106,10 @@
                                     >
                                 </span>
                                 <span>
-                                  <img style="cursor: pointer;" alt="" src="../../../assets/icons/Add.svg">
+                                  <img style="cursor: pointer;" alt="" (click)="quantityEdit(i,'plus')" src="../../../assets/icons/Add.svg">
                                 </span>
                               </div>
-                            <button class="request-btn">Request Quote</button>
+                            <button class="request-btn" (click)="requestQuote(item)">Request Quote</button>
                         </div>
                     </ng-container>
             </div>
