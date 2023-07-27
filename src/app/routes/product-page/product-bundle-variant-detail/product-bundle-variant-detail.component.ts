@@ -105,6 +105,16 @@ export class ProductBundleVariantDetailComponent implements OnInit {
     // console.log("url", url);
     window.open(url, '_blank');
   }
+
+
+  readMore: boolean= false;
+  
+  public openDescription01(): void {
+    this.readMore= !this.readMore;
+  }
+
+
+
   seeMore: boolean = false;
 
   public openDescription(): void {

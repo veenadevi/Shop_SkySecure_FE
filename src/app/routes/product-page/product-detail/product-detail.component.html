@@ -101,14 +101,40 @@
                         <p class="solution">Solution Category:</p>
                         <p>{{product.subcategories[0].description}}</p>
                     </div>
-                    <div class="about-section">
+
+
+                    <ng-container *ngIf="product.description">
+                        <div class="about-section">
+                            <div class="about-heading">
+                                <p class="about">About this product:</p>
+                            </div>
+                            <div class="about-desc">
+                                <!-- <p class="prod-desc">{{product.description}}
+                        </p> -->
+                        <div class="all-desc">
+                            <!-- {{product.description}} -->
+                            {{(readMore) ? product.description  : product.description  | slice:0:50}}
+                             <span *ngIf="!readMore">....</span>
+                        </div>
+                            </div>
+                            <ng-container *ngIf="product.description.length>50">
+                               
+                            <div class="scroll">
+                                <span>
+                                    <a class="all-btn" (click)="scrollToSection('#description')">Read more</a>
+                                </span>
+                            </div>
+                        </ng-container> 
+                        </div>
+                       </ng-container>
+
+
+                    <!-- <div class="about-section">
                         <div class="about-heading">
                             <p class="about">About this product:</p>
                         </div>
                         <div class="about-desc">
-                            <!-- <p class="prod-desc">{{product.description}}
-                       
-                    </p> -->
+                            
                             <div class="all-desc">
                                 {{product.description}}
                             </div>
@@ -120,9 +146,8 @@
                             </span>
                         </div>
 
-                    </div>
-                    <!-- <p class="about" >About this product:</p>
-                <p class="prod-desc">{{product.description}}</p> -->
+                    </div> -->
+                  
                     <span class="request-btn"><button class="btn view-det-btn"
                             (click)="scrollToSection('#feature')">View Features</button>
                         <button class="btn request-quote-btn" (click)="requestQuote(product)"
@@ -300,12 +325,12 @@
             <a class="nav" mat-tab-link *ngFor="let link of links; index as i" (click)="scrollToSection(link)"
                 [active]="activeLink == link"> {{titles[i]}} </a>
         </nav>
-        <div id="description" #descriptionRef>
-            <p-card class="Description" header="Description">
+        <!-- <div id="description" #descriptionRef>
+            <p-card class="Description" header="Description"> -->
                 <!-- <p class="m-0">
                         {{product.products[0].description}}
                     </p> -->
-                <p class="m-0">
+                <!-- <p class="m-0">
                     {{(seeMore) ? product.description : product.description | slice:0:150}}
                     <span *ngIf="!seeMore">....</span>
                     <span class="see-more">
@@ -313,14 +338,36 @@
                             Less"
                             }}</button>
                     </span>
-                </p>
+                </p> -->
                 <!-- <span style = "display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;">
                         <button class="btn view-det-btn">See More</button>
                     </span> -->
 
-            </p-card>
-        </div>
+            <!-- </p-card>
+        </div> -->
 
+
+        <ng-container *ngIf="product.description ">
+            <div id="description" #descriptionRef>
+                <p-card class="Description" header="Description">
+                       
+                    <p class="m-0">
+                        {{(seeMore) ? product.description  : product.description  | slice:0:690}}
+                        <ng-container *ngIf=" product.description  .length>700">
+                        <span *ngIf="!seeMore">....</span>
+                        <!-- <span class="see-more"> -->
+                            <button class="btn view-det-btn-01" (click)="openDescription()">{{ !seeMore ? "See More" : "See
+                                Less"
+                                }}</button>
+                        <!-- </span> -->
+                    </ng-container>
+                    </p>
+            
+                    
+    
+                </p-card>
+            </div>
+        </ng-container>
 
         <!-- <div class="product-features-container" id="feature" #featureRef>
         <h5>Features</h5>
