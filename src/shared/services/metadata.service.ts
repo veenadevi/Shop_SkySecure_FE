@@ -51,6 +51,7 @@ export class MetadataService {
     this.fetchProductBundleVariantDetailsUrl = AppService.appUrl.getProductBundleVariant;
     this.fetchCompareProductsListUrl = AppService.appUrl.fetchCompareProductsListUrl
     this.fetchAllSubcategory = AppService.appUrl.allSubcategory;
+    this.fetchAdminProductDetailsUrl=AppService.appUrl.fetchAdmingProduct
   }
 
   //fetch All Category
@@ -406,6 +407,7 @@ export class MetadataService {
   public fetchAdminProductDetails(id: string) : Observable<any> {
     //id = "63eb236c53c21de2f6841bca";
     let url = this.baseUrl+ this.fetchAdminProductDetailsUrl + String(id);
+    console.log("fetch API"+url)
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(

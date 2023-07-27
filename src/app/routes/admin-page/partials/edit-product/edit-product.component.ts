@@ -23,7 +23,7 @@ interface CreateProductPayload {
   isActive: Boolean,
   priceList: Array<any>,
   productSkuNumber: String,
-  productSkuId: Number,
+  productSkuId: String,
   featureList: Array<any>,
   isVariant: Boolean,
   productId: String,
@@ -107,9 +107,9 @@ export class EditProductComponent  implements OnInit {
   removeUpload: boolean = false;
 
   public ngOnInit(): void {
-    const productId = this.route.snapshot.paramMap.get('id');
-    console.log("_DATA_",productId);
-    this.getProductDetails(productId);
+  //  const productId = this.route.snapshot.paramMap.get('id');
+    //console.log("_DATA_",productId);
+  //  this.getProductDetails(productId);
     this.getSubCategories();
     this.getCategories();
     this.getOEMs();
@@ -181,7 +181,9 @@ export class EditProductComponent  implements OnInit {
   }
 
   private getProductDetails(productId) {
+    console.log("fetching product for +======"+productId)
     this.subscriptions.push(
+    
       this.metaDataSvc.fetchAdminProductDetails(productId).subscribe(response => {
        this.productResult = response;
        this.fillFormDetails(this.productResult);
