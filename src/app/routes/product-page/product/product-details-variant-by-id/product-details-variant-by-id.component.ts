@@ -131,7 +131,10 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
     // console.log("url",url);
     window.open(url, '_blank');
   }
-
+  readMore: boolean= false;
+  public openDescription01(): void {
+    this.readMore= !this.readMore;
+  }
   seeMore: boolean = false;
 
   public openDescription(): void {
@@ -216,7 +219,6 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
         //  this.individualProductDetail$.subscribe();
   // console.log("response product Variant feature list",response.featureList);
   response.productVariants = {...response.productVariants, quantity: 1 }
-
 
 this.productVariants=response.productVariants;
 

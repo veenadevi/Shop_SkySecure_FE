@@ -101,6 +101,11 @@ export class ProductBundleDetailComponent implements OnInit{
 
   openLink(url: any): void {
     window.open(url, '_blank');
+  } 
+
+  readMore: boolean= false;
+  public openDescription01(): void {
+    this.readMore= !this.readMore;
   }
 
   seeMore: boolean = false;
@@ -202,6 +207,8 @@ export class ProductBundleDetailComponent implements OnInit{
 
        // this.productVarientData = response;
         this.productFamily = response.productFamily;
+
+        
        
         //This is not needed cos bundles which is listed not going to have Variant 
 
