@@ -637,8 +637,11 @@
     width: 25%;
   }
   .about-desc{
-    width: 60%;
+    width: 65%;
   }
+  .scroll{
+    width:10%;
+    }
   .all-btn {
     /* border-radius: 8px; */
     background: transparent;
