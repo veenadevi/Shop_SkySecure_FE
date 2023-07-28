@@ -54,6 +54,10 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
 
 }
 
+:host ::ng-deep .mat-drawer-content{
+    background: white;
+}
+
 .nav-expanded{
     width:180px !important;
 }
