@@ -109,7 +109,17 @@
   font-size: 16px;
   font-weight: 500;
 }
-
+.view-det-btn-01 {
+  background: transparent;
+  border: transparent;
+  text-align: center;
+  color: #003388;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: line;
+  cursor: pointer;
+  text-decoration: underline;
+}
 .request-quote-btn {
   background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
   border-radius: 8px;
@@ -631,7 +641,7 @@ h5 {
   width: 100%;
 }
 .about-heading{
-  width: 25%;
+  width: 26%;
 }
 .about-desc{
   width: 60%;
@@ -658,7 +668,7 @@ width:15%;
 }
 .product-common-info{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .offer-det {
@@ -697,7 +707,8 @@ width:15%;
 .offer-card {
   display: flex;
   /* flex-basis: 41%; */
-  padding: 1%;
+  width: 40%;
+  padding: 2%;
   margin: 2%;
   flex-direction: column;
   border-radius: 8px;
@@ -1557,7 +1568,7 @@ span{
 .text-style-bold{
   font-family: 'lato',sans-serif;
 }
-.text-price strike-through{
+.text-price .strike-through{
   font-family: 'lato',sans-serif;
 }
 .text-term{

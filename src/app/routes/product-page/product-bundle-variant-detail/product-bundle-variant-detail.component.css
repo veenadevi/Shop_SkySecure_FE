@@ -110,6 +110,20 @@
   font-size: 16px;
   font-weight: 500;
 }
+.view-det-btn-01 {
+ /* border-radius: 8px; */
+ background: transparent;
+ border: transparent;
+ text-align: center;
+ color: #003388;
+ font-size: 12px;
+ font-weight: 500;
+ text-decoration: line;
+ cursor: pointer;
+ text-decoration: underline;
+}
+
+
 
 .request-quote-btn {
   background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
@@ -195,7 +209,7 @@
   width: 100%;
 }
 .about-heading{
-  width: 30%;
+  width: 25%;
 }
 .about-desc{
   width: 60%;
@@ -211,7 +225,9 @@
   text-decoration: line;
   cursor: pointer;
 }
-
+.scroll{
+  width:15%;
+  }
 .compare-box {
   padding: 2%;
   margin: 2%;
@@ -671,7 +687,7 @@ h5 {
 
 .product-common-info {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .offer-det {
@@ -699,7 +715,8 @@ h5 {
 .offer-card {
   display: flex;
   /* flex-basis: 41%; */
-  padding: 1%;
+  width: 40%;
+  padding: 2%;
   margin: 2%;
   flex-direction: column;
   border-radius: 8px;

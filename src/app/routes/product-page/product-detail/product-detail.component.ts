@@ -141,11 +141,17 @@ export class ProductDetailComponent implements OnInit{
   public similarProducts : Array<any> = [];
   public bannerText: '#FFFFFF';
 
-  seeMore: boolean = false;
+  
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
-
+  readMore: boolean= false;
+  
+  public openDescription01(): void {
+    this.readMore= !this.readMore;
+  }
+  seeMore: boolean = false;
+  
   public openDescription(): void {
     this.seeMore= !this.seeMore;
   }
@@ -718,7 +724,7 @@ featureCount=5;
     //this.displayBasic = true;
     this.viewModal2(null);
   }
-
+ 
   ngOnDestroy(){
     
   }
