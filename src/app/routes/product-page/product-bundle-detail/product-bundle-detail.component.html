@@ -94,7 +94,8 @@
                             </p>
                             <div class="price">
                                 <p class="product-price">
-                                    <span class="price-symbol">&#8377;</span>{{productFamily.priceList[0].price}}
+                                    <span class="price-symbol">&#8377;</span>
+                                    {{productFamily.priceList[0].price}}
                                     <span class="product-price-type">
                                         / {{productFamily.priceList[0].priceType}}</span>
                                 </p>
@@ -125,21 +126,21 @@
                                 <p class="about">About this product:</p>
                             </div>
                             <div class="about-desc">
-                        <div class="all-desc">
-                            {{(readMore) ? productFamily.description : productFamily.description | slice:0:50}}
-                            <span *ngIf="!readMore">....</span>   
-                        </div>
+                                <div class="all-desc">
+                                    {{(readMore) ? productFamily.description : productFamily.description | slice:0:50}}
+                                    <span *ngIf="!readMore">....</span>
+                                </div>
                             </div>
                             <ng-container *ngIf="productFamily.description.length>50">
-                                
-                            <div class="scroll">
-                                <span>
-                                    <a class="all-btn" (click)="scrollToSection('#description')">Read more</a>
-                                </span>
-                            </div>
-                        </ng-container> 
+
+                                <div class="scroll">
+                                    <span>
+                                        <a class="all-btn" (click)="scrollToSection('#description')">Read more</a>
+                                    </span>
+                                </div>
+                            </ng-container>
                         </div>
-                       </ng-container>
+                    </ng-container>
                     <!-- <div class="about-desc">
                            
                             <div class="all-desc">
@@ -160,7 +161,8 @@
 
                     <span class="request-btn"><button class="btn view-det-btn">View
                             Features</button>
-                        <button class="btn request-quote-btn" style="margin-left: 4%;"  (click)="requestQuote( productFamily)">Request Quote</button></span>
+                        <button class="btn request-quote-btn" style="margin-left: 4%;"
+                            (click)="requestQuote( productFamily)">Request Quote</button></span>
                     <p-divider></p-divider>
 
 
@@ -179,9 +181,9 @@
                             <ng-container *ngIf="offerVisible">
                                 <div class="offer-card-container">
                                     <div class="offer-card">
-                                        <p class="offer-bank">Card Offer</p>
-                                        <p class="offer-dis">On Instant Purchase with your credit card, get an additional 2% discount</p>
-                                        <!-- <a class="offer-more">2 more offers</a> -->
+                                        <p class="offer-bank">Bank Offers</p>
+                                        <p class="offer-dis">Upto ₹500.00 discount on select Credit Cards</p>
+                                        <a class="offer-more">2 more offers</a>
                                     </div>
                                     <!-- <div class="offer-card">
                                             <p class="offer-bank" >Bank Offers</p>
@@ -191,8 +193,14 @@
                                 </div>
                             </ng-container>
                         </div>
-                        <ng-container *ngIf="!offerVisible">
-                             <hr>
+                    </div>
+
+
+
+
+
+                    <!-- <p-divider></p-divider> -->
+                    <!-- 
                     <div class="common-info">
 
                         <div class="common-det">
@@ -229,9 +237,7 @@
                         </div>
 
 
-                    </div>
-                        </ng-container>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -310,21 +316,22 @@
             <ng-container *ngIf="productFamily.description">
                 <div id="description" #descriptionRef>
                     <p-card class="Description" header="Description">
-                           
+
                         <p class="m-0">
-                            {{(seeMore) ? productFamily.description  : productFamily.description  | slice:0:690}}
+                            {{(seeMore) ? productFamily.description : productFamily.description | slice:0:690}}
                             <ng-container *ngIf=" productFamily.description.length>700">
-                            <span *ngIf="!seeMore">....</span>
-                            <!-- <span class="see-more"> -->
-                                <button class="btn view-det-btn-01" (click)="openDescription()">{{ !seeMore ? "See More" : "See
+                                <span *ngIf="!seeMore">....</span>
+                                <!-- <span class="see-more"> -->
+                                <button class="btn view-det-btn-01" (click)="openDescription()">{{ !seeMore ? "See More"
+                                    : "See
                                     Less"
                                     }}</button>
-                            <!-- </span> -->
-                        </ng-container>
+                                <!-- </span> -->
+                            </ng-container>
                         </p>
-                
-                        
-        
+
+
+
                     </p-card>
                 </div>
             </ng-container>
@@ -659,7 +666,7 @@
                                             </div>
                                         </div>
                                         <div class="checkbox-sec-02">
-                                            <a class="view-sec">view details</a>
+                                            <a class="view-sec"(click)="navigateToProductDetails(productFamily)">view details</a>
                                         </div>
 
                                     </div>
@@ -710,7 +717,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="checkbox-sec-02">
-                                                        <a class="view-sec">view details</a>
+                                                        <a class="view-sec" (click)="navigateToProductDetails(item)">view details</a>
                                                     </div>
                                                 </div>
                                             </div>

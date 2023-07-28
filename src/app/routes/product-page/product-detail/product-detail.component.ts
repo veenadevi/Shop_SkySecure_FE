@@ -716,6 +716,43 @@ featureCount=5;
 
   }
 
+
+  public navigateToProductDetails(product:any){
+    
+    /*if(this.routePath === 'productBundles'){
+      this.router.navigate(['/products/brand-detail', product._id]);
+    }
+    else{
+      this.router.navigate(['/products', product._id]);
+    }*/
+
+    
+    
+    switch (product.type) {
+      case 'product':
+        this.router.navigate(['/products', product._id]);
+        return;
+
+      case 'productVariants':
+        this.router.navigate(['/products/product-variant-detail', product._id]);
+        return;
+        
+      case 'productBundles':
+        this.router.navigate(['/products/product-bundle-detail', product._id]);
+        return;
+      
+      case 'productBundleVariants':
+        this.router.navigate(['/products/product-bundle-varaint-detail', product._id]);
+        return;
+
+      default:
+        return null;
+    }
+    
+  }
+
+
+
   public showDialog(){
     const modalRef = this.modalService.open(GetFreeCallModalComponent);
   }

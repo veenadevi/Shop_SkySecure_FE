@@ -1049,7 +1049,7 @@ p {
 }
 
 .view-sec {
-
+cursor: pointer;
   color: #0047BD;
   float: right;
   padding-right: 10px;

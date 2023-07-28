@@ -1239,6 +1239,7 @@ p {
   padding-right: 10px;
   text-decoration: none;
   font-family: 'lato', sans-serif;
+  cursor: pointer;
 }
 
 .checkbox {
