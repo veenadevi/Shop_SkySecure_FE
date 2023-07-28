@@ -655,7 +655,7 @@
   }
   .product-common-info{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
   .offer-det {
     display: flex;
@@ -692,7 +692,8 @@
   .offer-card {
     display: flex;
     /* flex-basis: 41%; */
-    padding: 1%;
+    width: 40%;
+    padding: 2%;
     margin: 2%;
     flex-direction: column;
     border-radius: 8px;

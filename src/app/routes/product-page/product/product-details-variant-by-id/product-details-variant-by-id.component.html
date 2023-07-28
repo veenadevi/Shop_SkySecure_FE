@@ -93,8 +93,7 @@
                                 -{{productVariants.priceList[0].discountRate}}%</p>
                             <div class="price">
                                 <p class="product-price">
-                                    <span class="price-symbol">&#8377;</span>
-                                    {{productVariants.priceList[0].price}}
+                                    <span class="price-symbol">&#8377;</span>{{productVariants.priceList[0].price}}
                                     <span class="product-price-type">/ {{productVariants.priceList[0].priceType}}</span>
                                 </p>
                             </div>
@@ -188,9 +187,9 @@
                             <ng-container *ngIf="offerVisible">
                                 <div class="offer-card-container">
                                     <div class="offer-card">
-                                        <p class="offer-bank">Bank Offers</p>
-                                        <p class="offer-dis">Upto ₹500.00 discount on select Credit Cards</p>
-                                        <a class="offer-more">2 more offers</a>
+                                        <p class="offer-bank">Card Offer</p>
+                                        <p class="offer-dis">On Instant Purchase with your credit card, get an additional 2% discount</p>
+                                        <!-- <a class="offer-more">2 more offers</a> -->
                                     </div>
                                     <!-- <div class="offer-card">
                                             <p class="offer-bank" >Bank Offers</p>
@@ -200,10 +199,9 @@
                                 </div>
                             </ng-container>
                         </div>
-
-
-
-                        <!-- <div class="common-info">
+                        <ng-container *ngIf="!offerVisible">
+                            <hr>
+                            <div class="common-info">
                                 <div class="common-det">
                                     <div class="comm-det-img">
                                         <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
@@ -232,9 +230,8 @@
                                     </div>
                                     <p class="amazon-refer" >Guaranteed Price</p>
                                 </div>
-                            </div> -->
-
-
+                            </div>
+                        </ng-container>
                     </div>
 
 
@@ -382,9 +379,8 @@
                         <ng-container *ngIf=" parentProduct.description.length>700">
                         <span *ngIf="!seeMore">....</span>
                         <!-- <span class="see-more"> -->
-                            <button class="btn view-det-btn-01" (click)="openDescription()">{{ !seeMore ? "See More" : "See
-                                Less"
-                                }}</button>
+                            <button class="btn view-det-btn-01" (click)="openDescription()">{{ !seeMore ? "See More" : "SeeLess" }}
+                            </button>
                         <!-- </span> -->
                     </ng-container>
                     </p>
