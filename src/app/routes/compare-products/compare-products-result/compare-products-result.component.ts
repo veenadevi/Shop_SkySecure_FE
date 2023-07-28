@@ -221,7 +221,13 @@ export class CompareProductsResultComponent {
     }
     else if(opr === 'minus'){
 
+      if(this.allProducts[i].quantity === 0){
+        this.allProducts[i].quantity = 0;
+      }
+      else{
         this.allProducts[i].quantity = Number(this.allProducts[i].quantity) - 1;
+      }
+        
         
     }
   }

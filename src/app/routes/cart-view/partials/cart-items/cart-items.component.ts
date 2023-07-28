@@ -286,8 +286,15 @@ public cartData : any[] = [];
     }
     else if(opr === 'minus'){
 
+      if(this.cartData[i].quantity === 0){
+        this.cartData[i].quantity = 0;
+        this.cartData[i].itemTotal = this.cartData[i].quantity * price;
+      }
+      else{
         this.cartData[i].quantity = Number(this.cartData[i].quantity) - 1;
         this.cartData[i].itemTotal = this.cartData[i].quantity * price;
+      }
+        
     }
     this.calTotalPrice();
   }

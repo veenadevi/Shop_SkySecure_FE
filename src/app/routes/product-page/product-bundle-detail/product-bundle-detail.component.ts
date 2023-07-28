@@ -382,7 +382,13 @@ export class ProductBundleDetailComponent implements OnInit{
       this.productQuantity = Number(this.productQuantity) + 1;
     }
     else if(type === 'minus'){
-      this.productQuantity =  Number(this.productQuantity) - 1;
+      if(this.productQuantity === 0){
+        this.productQuantity = 0;
+      }
+      else{
+        this.productQuantity =  Number(this.productQuantity) - 1;
+      }
+      
     }
   }
 
