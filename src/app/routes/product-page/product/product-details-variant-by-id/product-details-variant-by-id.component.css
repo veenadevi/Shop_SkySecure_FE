@@ -1406,6 +1406,7 @@ button{
 .bundle-solution{
   font-size: small;
   font-weight: 600;
+  margin-top: 10px;
 }
 .bundle-solution-desc{
   font-size: 12px;
