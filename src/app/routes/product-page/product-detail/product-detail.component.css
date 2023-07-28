@@ -1469,11 +1469,11 @@ cursor: pointer;
 }
 .left-arrow {
   left: 369px;
-  top: 75px;
+  top: 94px;
 }
 .right-arrow {
   right: 0px;
-  top: 75px;
+  top: 94px;
   display: flex;
   justify-content: flex-start;
 }
@@ -1762,7 +1762,7 @@ button{
   font-family: 'Lato', sans-serif;
 }
 .bundle-solution{
-  font-size: small;
+  font-size: 12px;
   font-weight: 600;
   margin-top: 10px;
 }
