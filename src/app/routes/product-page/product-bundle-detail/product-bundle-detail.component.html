@@ -94,8 +94,7 @@
                             </p>
                             <div class="price">
                                 <p class="product-price">
-                                    <span class="price-symbol">&#8377;</span>
-                                    {{productFamily.priceList[0].price}}
+                                    <span class="price-symbol">&#8377;</span>{{productFamily.priceList[0].price}}
                                     <span class="product-price-type">
                                         / {{productFamily.priceList[0].priceType}}</span>
                                 </p>
@@ -180,9 +179,9 @@
                             <ng-container *ngIf="offerVisible">
                                 <div class="offer-card-container">
                                     <div class="offer-card">
-                                        <p class="offer-bank">Bank Offers</p>
-                                        <p class="offer-dis">Upto ₹500.00 discount on select Credit Cards</p>
-                                        <a class="offer-more">2 more offers</a>
+                                        <p class="offer-bank">Card Offer</p>
+                                        <p class="offer-dis">On Instant Purchase with your credit card, get an additional 2% discount</p>
+                                        <!-- <a class="offer-more">2 more offers</a> -->
                                     </div>
                                     <!-- <div class="offer-card">
                                             <p class="offer-bank" >Bank Offers</p>
@@ -192,14 +191,8 @@
                                 </div>
                             </ng-container>
                         </div>
-                    </div>
-
-
-
-
-
-                    <!-- <p-divider></p-divider> -->
-                    <!-- 
+                        <ng-container *ngIf="!offerVisible">
+                             <hr>
                     <div class="common-info">
 
                         <div class="common-det">
@@ -236,7 +229,9 @@
                         </div>
 
 
-                    </div> -->
+                    </div>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
 

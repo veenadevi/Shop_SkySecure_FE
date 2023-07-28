@@ -25,10 +25,12 @@ export class CompareProductsResultComponent {
   productFamilyList: any[] = [];
   productFamilyVariants: any[] = [];
   public cachedProductsList : any[];
+
+  public emptyProductsLength : any = 0;
   allProperties = [
-    { 'ProductName': 'Product Name' },
+    // { 'ProductName': 'Product Name' },
     { 'DevelopedBy': 'Developed by' },
-    { 'Category': 'Category' },
+    // { 'SolutionCategory': 'Solution Category' },
     { 'Subscription': 'Subscription' },
     { 'EntryLevelPricing': 'Entry level pricing' },
     { 'Features': 'Features' }
@@ -67,6 +69,14 @@ export class CompareProductsResultComponent {
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
     let reqBody = this.setPrdList(uniqueElements);
     this.cachedProductsList = uniqueElements;
+
+    if(this.cachedProductsList.length <= 4){
+      this.emptyProductsLength = 4 - this.cachedProductsList.length;
+    }
+    else{
+      this.emptyProductsLength = 4;
+    }
+    
     
     //this.fetchCompareProductsList(this.allSelectedItems);
     this.fetchCompareProductsList(reqBody);
@@ -127,7 +137,7 @@ export class CompareProductsResultComponent {
           let properties = {
             'ProductName': productData.name,
             'DevelopedBy': 'Microsoft',
-            'Category': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
+            'SolutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
             'Subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
             'price' : productData?.priceList[0]?.price ? productData?.priceList[0].price : '',
@@ -144,7 +154,7 @@ export class CompareProductsResultComponent {
           let properties = {
             'ProductName': productVariantData.name,
             'DevelopedBy': 'Microsoft',
-            'Category': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
+            'SolutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
             'Subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
             'price' : productVariantData?.priceList[0]?.price ? productVariantData?.priceList[0].price : '',
@@ -161,7 +171,7 @@ export class CompareProductsResultComponent {
           let properties = {
             'ProductName': productData.name,
             'DevelopedBy': 'Microsoft',
-            'Category': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
+            'SolutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
             'Subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
             'price' : productData?.priceList[0]?.price ? productData?.priceList[0].price : '',
@@ -178,7 +188,7 @@ export class CompareProductsResultComponent {
           let properties = {
             'ProductName': productVariantData.name,
             'DevelopedBy': 'Microsoft',
-            'Category': productVariantData?.subcategories[0]?.name ? productVariantData?.subcategories[0]?.name : '-',
+            'Solution Category': productVariantData?.subcategories[0]?.name ? productVariantData?.subcategories[0]?.name : '-',
             'Subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
             'price' : productVariantData?.priceList[0]?.price ? productVariantData?.priceList[0].price : '',
@@ -275,6 +285,10 @@ export class CompareProductsResultComponent {
       localStorage.setItem('product_list_to_compare', JSON.stringify(this.cachedProductsList));
       localStorage.setItem('product_list_to_compare2', JSON.stringify(this.cachedProductsList));
       this.compareProductsStore.setCompareProductsList2(this.cachedProductsList); 
+      
+     
+      
+        this.emptyProductsLength = this.emptyProductsLength + 1;
       
       
     
