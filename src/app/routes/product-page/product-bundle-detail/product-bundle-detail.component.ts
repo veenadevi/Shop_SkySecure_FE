@@ -548,19 +548,18 @@ export class ProductBundleDetailComponent implements OnInit{
     this.router.navigate(['/compare-products/results']);
   }
 
-  addQuantity(item):void {
+  addQuantity(quantity:any,index:any):void {
 
     //this.allSimilerProducts[0].quantity = 1+1;
     
-    item.quantity=Number(item.quantity) + 1
-    
+    this.bundleItemsList[index].quantity = quantity+1;
     
     //this.bundleQuantity = Number(this.bundleQuantity) + 1
     //this.finalBundleDetails[index].quantity = quantity+1;
   }
-  decreaseQuantity(item): void {
-    if(item.quantity>1){
-      item.quantity=Number(item.quantity) -1
+  decreaseQuantity(quantity:any,index:any): void {
+    if(quantity>1){
+      this.bundleItemsList[index].quantity = quantity-1;
     }
     
   }

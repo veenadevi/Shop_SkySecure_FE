@@ -776,14 +776,14 @@
                                 <span style="display: inline-flex;justify-content: center;gap: 5px;">
 
                                     <span>
-                                        <img id="add-minus-quantity" (click)="decreaseQuantity(item)" alt="minus"
+                                        <img id="add-minus-quantity" (click)="decreaseQuantity(item.quantity, i)" alt="minus"
                                             src="../../../assets/icons/Minus.svg">
                                     </span>
                                     <span>
                                         <input class="input-field" [(ngModel)]="item.quantity">
                                     </span>
                                     <span>
-                                        <img id="add-minus-quantity" alt="" (click)="addQuantity(item)"
+                                        <img id="add-minus-quantity" alt="" (click)="addQuantity(item.quantity, i)"
                                             src="../../../assets/icons/Add.svg">
                                     </span>
                                 </span>

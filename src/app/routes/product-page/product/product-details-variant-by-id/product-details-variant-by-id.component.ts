@@ -602,11 +602,11 @@ featureCount=5;
     position: string = 'left';
     quantityCount = 1;
     addQuantity(quantity:any,index:any):void {
-      this.productBundles[index].quantity = quantity+1;
+      this.productBundleList[index].quantity = quantity+1;
     }
     decreaseQuantity(quantity:any,index:any): void {
       if(quantity>1){
-        this.productBundles[index].quantity = quantity-1;
+        this.productBundleList[index].quantity = quantity-1;
       }
     }
 
