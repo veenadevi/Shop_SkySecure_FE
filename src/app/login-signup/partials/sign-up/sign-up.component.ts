@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/shared/services/auth.service';
 import Validation from '../utils/validation';
 import * as CryptoJS from 'crypto-js';
+import { UserProfileService } from 'src/shared/services/user-profile.service';
 
 @Component({
   selector: 'sign-up',
@@ -14,28 +15,29 @@ import * as CryptoJS from 'crypto-js';
 export class SignUpComponent {
 
   form: FormGroup;
+  formEmail : FormGroup;
   submitted = false;
+  submittedEmail = false
+
+  emailFormFlag : boolean = true;
+  signUpFormFlag : boolean = false;
 
   private subscriptions : Subscription[] = [];
+
+  public otpField : boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService : AuthService,
-    public router : Router
+    public router : Router,
+    private userProfileService : UserProfileService
     ) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group(
+    this.formEmail = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(40)
-          ]
-        ],
+        otp : [],
       }
     )
     this.form = this.formBuilder.group(
@@ -49,7 +51,7 @@ export class SignUpComponent {
             Validators.maxLength(20)
           ]
         ],*/
-        email: ['', [Validators.required, Validators.email]],
+        //email: ['', [Validators.required, Validators.email]],
         lastName : [],
         password: [
           '',
@@ -72,6 +74,10 @@ export class SignUpComponent {
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
+  }
+
+  get f2(): { [key: string]: AbstractControl } {
+    return this.formEmail.controls;
   }
 
   onSubmit(): void {
@@ -123,6 +129,44 @@ export class SignUpComponent {
 
   public navigateToLogin(){
     this.router.navigate(['login']);
+  }
+
+  public onSubmitEmail(){
+
+    console.log("()()( Inside Func");
+    this.submittedEmail = true;
+    if (this.formEmail.invalid) { // If Invalid Return
+      return;
+    }
+    else{ // If Valid
+      
+
+      let req = {
+        "emailId" : this.formEmail.value.email,
+        "action":"signUp"
+      }
+
+      this.subscriptions.push(
+        this.userProfileService.sendOTP(req).subscribe( res=>{
+          
+
+          if(res.message){
+            this.emailFormFlag = true;
+            this.signUpFormFlag = false;
+            this.otpField = false;
+          }
+          else{
+            this.emailFormFlag = false;
+            this.signUpFormFlag = true;
+            this.otpField = true;
+          }
+        }
+
+        )
+      )
+
+    }
+    
   }
 
 

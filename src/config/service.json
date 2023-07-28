@@ -35,9 +35,12 @@
         "getAllDashBoardData" : "api/user/allDashBoardData",
         "getAllAccounts" : "api/user/allAccounts",
         "getAccountsById" : "api/user/getAccountDetails",
+        
 
         "userSignUp":"api/user/signup",
         "userLogin":"api/user/login",
+        "initiateOTP" : "api/user/userOTPValidation",
+        "validateOTP" : "api/user/validateOTP",
 
 
         "app-registration" : "api/user/azure/app-registration",

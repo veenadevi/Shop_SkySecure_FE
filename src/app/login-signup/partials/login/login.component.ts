@@ -9,6 +9,7 @@ import jwtDecode from 'jwt-decode';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 import * as CryptoJS from 'crypto-js';
+import { UserProfileService } from 'src/shared/services/user-profile.service';
 
 @Component({
   selector: 'login',
@@ -24,12 +25,21 @@ export class LoginComponent {
 
   public params : any;
 
+  public enableSignInButton = false;
+
+  public enableOTPButton = true;
+
+  public newEmailAlert : boolean = false;
+
+  public otpField : boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService : AuthService,
     public router : Router,
     public route : ActivatedRoute,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private userProfileService : UserProfileService
     ) {}
 
   ngOnInit(): void {
@@ -40,43 +50,18 @@ export class LoginComponent {
     this.form = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        password: [
+        otp : []
+        /*password: [
           '',
           [
             Validators.required,
             Validators.minLength(6),
             Validators.maxLength(40)
           ]
-        ],
+        ],*/
       }
     )
-    /*this.form = this.formBuilder.group(
-      {
-        fullname: ['', Validators.required],
-        username: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20)
-          ]
-        ],
-        email: ['', [Validators.required, Validators.email]],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(40)
-          ]
-        ],
-        confirmPassword: ['', Validators.required],
-        acceptTerms: [false, Validators.requiredTrue]
-      },
-      {
-        validators: [Validation.match('password', 'confirmPassword')]
-      }
-    );*/
+    
 
 
     let formValue = this.form.value;
@@ -110,9 +95,47 @@ export class LoginComponent {
     }
     else{ // If Valid
       
-      let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
+      
+
+      console.log("*(*(*(*(* ", this.form.value.email);
+      let req = {
+        "emailId" : this.form.value.email,
+        "action":"login"
+      }
+      this.subscriptions.push(
+        this.userProfileService.sendOTP(req).subscribe(
+          res=>{
+            
+            console.log("()()()()( ", res);
+            
+            if(res.message){
+              console.log("()()()()( Inside If", res);
+              this.enableSignInButton = false;
+              this.enableOTPButton = true;
+              this.newEmailAlert = true;
+              this.otpField = false;
+            }
+            else{
+              console.log("()()()()( Inside Else", res);
+              this.enableSignInButton = true;
+              this.enableOTPButton = false;
+              this.newEmailAlert = false;
+              this.otpField = true;
+            }
+          },
+          err => {
+              this.enableSignInButton = false;
+              this.enableOTPButton = true;
+              this.newEmailAlert = true;
+              this.otpField = false;
+          },
+        ) 
+      )
+
+      console.log("(()()() ", this.newEmailAlert);
+
+      /*let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
       let hashedPass = CryptoJS.AES.encrypt(this.form.value.password, key).toString();
-      // console.log(JSON.stringify(this.form.value, null, 2));
       let req = {
         "email":this.form.value.email,
         "password":hashedPass
@@ -127,9 +150,63 @@ export class LoginComponent {
           
 
           if(this.params && this.params.has('productId')){
-            // console.log("***** The res is ", decoded);
-            //this.router.navigate(['/cart'], {queryParams: this.params});
-            //this.router.navigate(['/cart'], {queryParams: this.params});
+            
+          }
+          else{
+            this.router.navigate(['']);
+          }
+          
+        })
+      )*/
+    }
+    
+  }
+
+  public login(){
+    //Login Logic
+
+    console.log("()()()()() ", this.form.value.otp);
+    //var passKey= "!ndia2320@securesky";
+    let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
+      let hashedPass = CryptoJS.AES.encrypt(this.form.value.otp, key).toString();
+      let req = {
+        "emailId":this.form.value.email,
+        //"emailId" : "veena@skysecuretech.com",
+        "otp": hashedPass
+      }
+
+      this.subscriptions.push(
+        this.userProfileService.validateOTP(req).subscribe( res => {
+          console.log("*(*(*(*(*( OTP Res", res);
+          if(res && res.data){
+            this.callSignIn();
+          }
+        })
+      )
+
+    
+  }
+
+  public callSignIn(){
+
+    var passKey= "!ndia2320@securesky";
+    let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
+      let hashedPass = CryptoJS.AES.encrypt(passKey, key).toString();
+      let req = {
+        "emailId":this.form.value.email,
+        "password": hashedPass
+      }
+      this.subscriptions.push(
+        this.authService.signin(req).subscribe( res=> {
+          
+          localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
+          var decoded = jwtDecode(res.data);
+          
+          this.userAccountStore.setUserDetails(decoded);
+          
+
+          if(this.params && this.params.has('productId')){
+            
           }
           else{
             this.router.navigate(['']);
@@ -137,8 +214,6 @@ export class LoginComponent {
           
         })
       )
-    }
-    
   }
 
   onReset(): void {
