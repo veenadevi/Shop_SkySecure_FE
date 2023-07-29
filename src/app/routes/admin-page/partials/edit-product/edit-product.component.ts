@@ -54,6 +54,7 @@ export class EditProductComponent  implements OnInit {
   registrationForm: FormGroup;
   addDynamicElementNew: FormArray;
   addFAQArrayNew: FormArray;
+  brandIds: Array<string>;
 
   createProductPayload: CreateProductPayload;
   public currentRoute: string;
@@ -113,7 +114,6 @@ export class EditProductComponent  implements OnInit {
     this.getSubCategories();
     this.getCategories();
     this.getOEMs();
-    this.getProducts();
   }
 
   createFeatureGroup(): FormGroup {
@@ -164,6 +164,8 @@ export class EditProductComponent  implements OnInit {
       this.metaDataSvc.fetchOEM().subscribe(response => {
         this.metadataStore.setOEMDetails(response.oems);
         this.oemList = response.oems;
+        this.brandIds = this.oemList.map((data) => data._id);
+        this.getProducts();
       })
 
     );
@@ -172,7 +174,7 @@ export class EditProductComponent  implements OnInit {
 
   private getProducts() {
     this.subscriptions.push(
-      this.metaDataSvc.fetchProducts().subscribe(response => {
+      this.metaDataSvc.fetchProductsByFilters({subCategoryIds: [],brandIds: this.brandIds}).subscribe(response => {
         this.products = response.products;
         console.log("__TEST__",this.products);
       })
@@ -364,51 +366,51 @@ export class EditProductComponent  implements OnInit {
   }
 
   fillFormDetails(response) {
-    this.registrationForm.get('productName').setValue(response.products[0].name, {
+    this.registrationForm.get('productName').setValue(response.products.name, {
       onlySelf: true
     })
 
-    this.registrationForm.get('productDescription').setValue(response.products[0].name, {
+    this.registrationForm.get('productDescription').setValue(response.products.name, {
       onlySelf: true
     })
 
-    this.registrationForm.get('productDescription').setValue(response.products[0].description, {
+    this.registrationForm.get('productDescription').setValue(response.products.description, {
       onlySelf: true
     })
 
-    this.registrationForm.get('productSkuNumber').setValue(response.products[0].productSkuNumber, {
+    this.registrationForm.get('productSkuNumber').setValue(response.products.productSkuNumber, {
       onlySelf: true
     })
 
-    this.registrationForm.get('productSkuId').setValue(response.products[0].productSkuId, {
+    this.registrationForm.get('productSkuId').setValue(response.products.productSkuId, {
       onlySelf: true
     })
 
-    this.registrationForm.get('productOrderNumber').setValue(response.products[0].orderNumber, {
+    this.registrationForm.get('productOrderNumber').setValue(response.products.orderNumber, {
       onlySelf: true
     })
 
-    this.registrationForm.get('productPrice').setValue(response.products[0].priceList[0].price, {
+    this.registrationForm.get('productPrice').setValue(response.products.priceList[0].price, {
       onlySelf: true
     })
 
-    this.registrationForm.get('erpPrice').setValue(response.products[0].priceList[0].ERPPrice, {
+    this.registrationForm.get('erpPrice').setValue(response.products.priceList[0].ERPPrice, {
       onlySelf: true
     })
 
-    this.registrationForm.get('discount').setValue(response.products[0].priceList[0].discountRate, {
+    this.registrationForm.get('discount').setValue(response.products.priceList[0].discountRate, {
       onlySelf: true
     })
 
-    this.registrationForm.get('Subcategories').setValue(response.products[0].subCategoryId, {
+    this.registrationForm.get('Subcategories').setValue(response.products.subCategoryId, {
       onlySelf: true
     })
 
-    this.registrationForm.get('OEM').setValue(response.products[0].oemId, {
+    this.registrationForm.get('OEM').setValue(response.products.oemId, {
       onlySelf: true
     })
 
-    this.registrationForm.get('subscriptionType').setValue(response.products[0].priceList[0].priceType, {
+    this.registrationForm.get('subscriptionType').setValue(response.products.priceList[0].priceType, {
       onlySelf: true
     })
     
@@ -417,18 +419,18 @@ export class EditProductComponent  implements OnInit {
       onlySelf: true
     })
 
-    this.registrationForm.get('file').setValue(response.products[0].bannerLogo, {
+    this.registrationForm.get('file').setValue(response.products.bannerLogo, {
       onlySelf: true
     })
 
-    this.productLogo = response.products[0].bannerLogo;
+    this.productLogo = response.products.bannerLogo;
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray;
     response.featureList.forEach((feature) => {
       featureArray.push(this.createFeatureGroupWithValue(feature.featureId,  feature.name,feature.description,feature.hyperLinkURL)); 
     })
 
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray;
-    response.products[0].productFAQ.forEach((faq) => {
+    response.products.productFAQ.forEach((faq) => {
       faqArray.push(this.createFAQGroupWithValue(faq.Question, faq.Answer)); 
     })
     this.submitted = true;
