@@ -165,7 +165,6 @@ export class LoginComponent {
   public login(){
     //Login Logic
 
-    console.log("()()()()() ", this.form.value.otp);
     //var passKey= "!ndia2320@securesky";
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
       let hashedPass = CryptoJS.AES.encrypt(this.form.value.otp, key).toString();

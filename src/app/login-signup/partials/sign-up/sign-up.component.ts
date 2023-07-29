@@ -22,9 +22,15 @@ export class SignUpComponent {
   emailFormFlag : boolean = true;
   signUpFormFlag : boolean = false;
 
+  public enableSignInButton = false;
+
+  public enableOTPButton = true;
+
   private subscriptions : Subscription[] = [];
 
   public otpField : boolean = false;
+
+  public validatedEmail : string ;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,9 +57,11 @@ export class SignUpComponent {
             Validators.maxLength(20)
           ]
         ],*/
-        //email: ['', [Validators.required, Validators.email]],
+        email: [],
         lastName : [],
-        password: [
+        password :[],
+        confirmPassword : [],
+        /*password: [
           '',
           [
             Validators.required,
@@ -61,7 +69,7 @@ export class SignUpComponent {
             Validators.maxLength(40)
           ]
         ],
-        confirmPassword: ['', Validators.required],
+        confirmPassword: ['', Validators.required],*/
         companyName : ['', Validators.required],
         mobileNumber : ['', Validators.required]
         //acceptTerms: [false, Validators.requiredTrue]
@@ -70,6 +78,7 @@ export class SignUpComponent {
         validators: [Validation.match('password', 'confirmPassword')]
       }
     );
+    this.form.controls.email.disable();
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -82,6 +91,7 @@ export class SignUpComponent {
 
   onSubmit(): void {
     this.submitted = true;
+    
     if (this.form.invalid) { // If Invalid Return
       // console.log("()()() Invalid");
       return;
@@ -97,8 +107,8 @@ export class SignUpComponent {
       let req = {
         "firstName":formValue.firstName,
         "lastName":formValue.lastName,
-        "email":formValue.email,
-        "password":hashedPass,
+        "email":this.validatedEmail,
+        //"password":hashedPass,
         "company":formValue.companyName,
         "role": "developer",
         "countryCode":"+91",
@@ -109,11 +119,10 @@ export class SignUpComponent {
         "pinCode":"766789",
         "country":"IN"
         }
-        // console.log("*(*(*(*(*(*( ",req);
+
       this.subscriptions.push(
         
         this.authService.signUp(req).subscribe( res=> {
-          // console.log("***** The res is ", res);
           this.router.navigate(['login']);
           //localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
         })
@@ -133,8 +142,10 @@ export class SignUpComponent {
 
   public onSubmitEmail(){
 
-    console.log("()()( Inside Func");
+    
+    this.validatedEmail = this.formEmail.value.email;
     this.submittedEmail = true;
+    this.form.controls['email'].setValue(this.validatedEmail);
     if (this.formEmail.invalid) { // If Invalid Return
       return;
     }
@@ -151,13 +162,17 @@ export class SignUpComponent {
           
 
           if(res.message){
-            this.emailFormFlag = true;
-            this.signUpFormFlag = false;
+            //this.emailFormFlag = true;
+            //this.signUpFormFlag = false;
+            this.enableSignInButton = false;
+            this.enableOTPButton = true;
             this.otpField = false;
           }
           else{
-            this.emailFormFlag = false;
-            this.signUpFormFlag = true;
+            //this.emailFormFlag = false;
+            //this.signUpFormFlag = true;
+            this.enableSignInButton = true;
+            this.enableOTPButton = false;
             this.otpField = true;
           }
         }
@@ -167,6 +182,32 @@ export class SignUpComponent {
 
     }
     
+  }
+
+  public validateOTP(){
+
+    let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
+      let hashedPass = CryptoJS.AES.encrypt(this.formEmail.value.otp, key).toString();
+      let req = {
+        "emailId":this.formEmail.value.email,
+        "otp": hashedPass
+      }
+
+      
+      
+      this.subscriptions.push(
+        this.userProfileService.validateOTP(req).subscribe( res => {
+          if(res && res.data){
+            this.emailFormFlag = false;
+            this.signUpFormFlag = true;
+            //this.callSignIn();
+          }
+          else{
+            this.emailFormFlag = true;
+            this.signUpFormFlag = false;
+          }
+        })
+      )
   }
 
 
