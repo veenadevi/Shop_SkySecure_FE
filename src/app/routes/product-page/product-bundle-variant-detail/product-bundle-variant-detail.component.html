@@ -140,14 +140,13 @@
 
                     <ng-container>
                         <div class="product-price-detail">
-                            <div class="product-price-section" style="display:inline-flex">
+                            <div class="product-price-section" style="display:flex">
                                 <p *ngIf="productFamilyVariant.priceList[0].discountRate != null"
                                     class="discounted-text"> -{{productFamilyVariant.priceList[0].discountRate}}%&nbsp;
                                 </p>
                                 <div class="price">
                                     <p class="product-price">
-                                        <span class="price-symbol">&#8377;
-                                            {{productFamilyVariant.priceList[0].price}}</span>
+                                        <span class="price-symbol">&#8377;</span><span>{{productFamilyVariant.priceList[0].price}}</span>
                                         <span class="product-price-type">/
                                             {{productFamilyVariant.priceList[0].priceType}}</span>
                                     </p>
@@ -223,8 +222,8 @@
                             Features</button>
                         <button class="btn request-quote-btn" style="margin-left: 4%;"
                             (click)="requestQuote( productFamilyVariant)">Request Quote</button></span>
-                    <p-divider></p-divider>
 
+                            <hr>
 
 
                     <div class="product-common-info">
@@ -254,46 +253,43 @@
                                 </div>
                             </ng-container>
                         </div>
+                        <ng-container *ngIf="!offerVisible">
+                            <hr>
+                            <div class="common-info">
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
+        
+                                    </div>
+                                    <p class="amazon-refer">secure transaction</p>
+                                </div>
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/TopBrandIllustrationIcon.svg">
+        
+                                    </div>
+                                    <p class="amazon-refer">Top brand</p>
+                                </div>
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/ProductCancellationIllustrationIcon.svg">
+        
+                                    </div>
+                                    <p class="amazon-refer" >5 Days Cancellation </p>
+                                </div>
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img class="amazon-refer-img"   src="../../../../assets/icons/illustration_icons/GuaranteedPriceIllustrationIcon.svg">
+        
+                                    </div>
+                                    <p class="amazon-refer" >Guaranteed Price</p>
+                                </div>
+        
+        
+                            </div>
+                        </ng-container>
                     </div>
-
-
-
-
-                    <!-- <p-divider></p-divider> -->
-
-                    <!-- <div class="common-info">
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
-
-                            </div>
-                            <p class="amazon-refer">secure transaction</p>
-                        </div>
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/TopBrandIllustrationIcon.svg">
-
-                            </div>
-                            <p class="amazon-refer">Top brand</p>
-                        </div>
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/ProductCancellationIllustrationIcon.svg">
-
-                            </div>
-                            <p class="amazon-refer" >5 Days Cancellation </p>
-                        </div>
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img class="amazon-refer-img"   src="../../../../assets/icons/illustration_icons/GuaranteedPriceIllustrationIcon.svg">
-
-                            </div>
-                            <p class="amazon-refer" >Guaranteed Price</p>
-                        </div>
-
-
-                    </div> -->
-                </div>
+                 </div>
             </ng-container>
 
         </div>
