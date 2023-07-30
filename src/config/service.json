@@ -26,6 +26,8 @@
         "getSingleBrandDetails" : "api/product-family/",
         "addFeature" : "api/feature",
 
+        "customerSupport" : "api/customerSupport",
+
         
         "userCart" : "api/user-cart",
         "userSignin" : "api/user/login",
