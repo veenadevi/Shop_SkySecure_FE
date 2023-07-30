@@ -26,7 +26,7 @@ export class EstimateDetailsComponent implements OnInit{
   public getEstimateData(){
     this.subscriptions.push(
       this.adminPageService.getEstimateDetails().subscribe(res=>{
-        console.log("***** Res", res);
+        // console.log("***** Res", res);
         this.estimatesData = res.estimates;
       })
     )

@@ -110,8 +110,8 @@
                         <mat-icon class="review-icon">star_border</mat-icon>
                         <div class="review-text-section">
                             <p class="review-text"> 4 reviews </p>
-                            <span class="divider">|</span>
-                            <p class="link-text"> Write a review </p>
+                            <!-- <span class="divider">|</span>
+                            <p class="link-text"> Write a review </p> -->
                             <span class="divider">|</span>
                             <p class="link-text" (click)="showBasicDialog()"> Have a question? </p>
                         </div>
@@ -140,14 +140,13 @@
 
                     <ng-container>
                         <div class="product-price-detail">
-                            <div class="product-price-section" style="display:inline-flex">
+                            <div class="product-price-section" style="display:flex">
                                 <p *ngIf="productFamilyVariant.priceList[0].discountRate != null"
                                     class="discounted-text"> -{{productFamilyVariant.priceList[0].discountRate}}%&nbsp;
                                 </p>
                                 <div class="price">
                                     <p class="product-price">
-                                        <span class="price-symbol">&#8377;
-                                            {{productFamilyVariant.priceList[0].price}}</span>
+                                        <span class="price-symbol">&#8377;</span><span>{{productFamilyVariant.priceList[0].price}}</span>
                                         <span class="product-price-type">/
                                             {{productFamilyVariant.priceList[0].priceType}}</span>
                                     </p>
@@ -172,26 +171,29 @@
                         <p>{{productFamilyVariant.subcategories[0].name}}</p>
                     </div>
 
-                    <div class="about-section">
-                        <div class="about-heading">
-                            <p class="about">About this product:</p>
-                        </div>
-                        <div class="about-desc">
-                            <!-- <p class="prod-desc">{{product.description}}
-                           
-                        </p> -->
-                            <div class="all-desc">
-                                {{productFamilyVariant.description}}
+
+                    <ng-container *ngIf="productFamilyVariant.description">
+                        <div class="about-section">
+                            <div class="about-heading">
+                                <p class="about">About this product:</p>
                             </div>
+                            <div class="about-desc">
+                                <div class="all-desc">
+                                    {{(readMore) ? productFamilyVariant.description : productFamilyVariant.description |
+                                    slice:0:50}}
+                                    <span *ngIf="!readMore">...</span>
+                                </div>
+                            </div>
+                            <ng-container *ngIf="productFamilyVariant.description.length>50">
 
+                                <div class="scroll">
+                                    <span>
+                                        <a class="all-btn" (click)="scrollToSection('#description')">Read more</a>
+                                    </span>
+                                </div>
+                            </ng-container>
                         </div>
-                        <div class="scroll">
-                            <span>
-                                <a class="all-btn" (click)="scrollToSection('#description')">see more</a>
-                            </span>
-                        </div>
-
-                    </div>
+                    </ng-container>
                     <!-- <div class="about-section">
                         <div class="about-heading">
                             <p class="about">About this product:</p>
@@ -218,9 +220,10 @@
                     <p  class="prod-desc" >{{productFamilyVariant.description}}</p> -->
                     <span><button class="btn view-det-btn" (click)="scrollToSection('#feature')">View
                             Features</button>
-                        <button class="btn request-quote-btn" style="margin-left: 4%;">Request Quote</button></span>
-                    <p-divider></p-divider>
+                        <button class="btn request-quote-btn" style="margin-left: 4%;"
+                            (click)="requestQuote( productFamilyVariant)">Request Quote</button></span>
 
+                            <hr>
 
 
                     <div class="product-common-info">
@@ -238,9 +241,9 @@
                             <ng-container *ngIf="offerVisible">
                                 <div class="offer-card-container">
                                     <div class="offer-card">
-                                        <p class="offer-bank">Bank Offers</p>
-                                        <p class="offer-dis">Upto ₹500.00 discount on select Credit Cards</p>
-                                        <a class="offer-more">2 more offers</a>
+                                        <p class="offer-bank">On Instant Purchase</p>
+                                        <p class="offer-dis">With your credit card, get an additional 2% discount</p>
+                                        <!-- <a class="offer-more">2 more offers</a> -->
                                     </div>
                                     <!-- <div class="offer-card">
                                         <p class="offer-bank">Bank Offers</p>
@@ -250,46 +253,43 @@
                                 </div>
                             </ng-container>
                         </div>
+                        <ng-container *ngIf="!offerVisible">
+                            <hr>
+                            <div class="common-info">
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
+        
+                                    </div>
+                                    <p class="amazon-refer">secure transaction</p>
+                                </div>
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/TopBrandIllustrationIcon.svg">
+        
+                                    </div>
+                                    <p class="amazon-refer">Top brand</p>
+                                </div>
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/ProductCancellationIllustrationIcon.svg">
+        
+                                    </div>
+                                    <p class="amazon-refer" >5 Days Cancellation </p>
+                                </div>
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img class="amazon-refer-img"   src="../../../../assets/icons/illustration_icons/GuaranteedPriceIllustrationIcon.svg">
+        
+                                    </div>
+                                    <p class="amazon-refer" >Guaranteed Price</p>
+                                </div>
+        
+        
+                            </div>
+                        </ng-container>
                     </div>
-
-
-
-
-                    <!-- <p-divider></p-divider> -->
-
-                    <!-- <div class="common-info">
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
-
-                            </div>
-                            <p class="amazon-refer">secure transaction</p>
-                        </div>
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/TopBrandIllustrationIcon.svg">
-
-                            </div>
-                            <p class="amazon-refer">Top brand</p>
-                        </div>
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/ProductCancellationIllustrationIcon.svg">
-
-                            </div>
-                            <p class="amazon-refer" >5 Days Cancellation </p>
-                        </div>
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img class="amazon-refer-img"   src="../../../../assets/icons/illustration_icons/GuaranteedPriceIllustrationIcon.svg">
-
-                            </div>
-                            <p class="amazon-refer" >Guaranteed Price</p>
-                        </div>
-
-
-                    </div> -->
-                </div>
+                 </div>
             </ng-container>
 
         </div>
@@ -349,12 +349,12 @@
                 <a class="nav" mat-tab-link *ngFor="let link of links; index as i" (click)="scrollToSection(link)"
                     [active]="activeLink == link"> {{titles[i]}} </a>
             </nav>
-            <div id="description" #descriptionRef>
-                <p-card class="Description" header="Description">
-                    <!-- <p class="m-0">
+            <!-- <div id="description" #descriptionRef>
+                <p-card class="Description" header="Description"> -->
+            <!-- <p class="m-0">
                                 {{product.products[0].description}}
                             </p> -->
-                    <p class="m-0">
+            <!-- <p class="m-0">
                         {{(seeMore) ? productFamilyVariant.description : productFamilyVariant.description |
                         slice:0:150}}
                         <span *ngIf="!seeMore">....</span>
@@ -363,13 +363,39 @@
                                 Less"
                                 }}</button>
                         </span>
-                    </p>
-                    <!-- <span style = "display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;">
+                    </p> -->
+            <!-- <span style = "display:flex;flex-direction: row;justify-content: center;align-items: center;margin-top: 20px;">
                                 <button class="btn view-det-btn">See More</button>
                             </span> -->
 
-                </p-card>
-            </div>
+            <!-- </p-card>
+            </div> -->
+
+
+
+            <ng-container *ngIf="productFamilyVariant.description">
+                <div id="description" #descriptionRef>
+                    <p-card class="Description" header="Description">
+
+                        <p class="m-0">
+                            {{(seeMore) ? productFamilyVariant.description : productFamilyVariant.description |
+                            slice:0:690}}
+                            <ng-container *ngIf=" productFamilyVariant.description.length>700">
+                                <span *ngIf="!seeMore">....</span>
+                                <!-- <span class="see-more"> -->
+                                <button class="btn view-det-btn-01" (click)="openDescription()">{{ !seeMore ? "See More"
+                                    : "See
+                                    Less"
+                                    }}</button>
+                                <!-- </span> -->
+                            </ng-container>
+                        </p>
+
+
+
+                    </p-card>
+                </div>
+            </ng-container>
 
             <!-- <p-card class="Description" header="Description" id="description" #descriptionRef>
                 <p class="m-0">
@@ -713,7 +739,7 @@
                                             </div>
                                         </div>
                                         <div class="checkbox-sec-02">
-                                            <a class="view-sec">view details</a>
+                                            <a class="view-sec"  (click)="navigateToProductDetails(productFamilyVariant)">view details</a>
                                         </div>
 
                                     </div>
@@ -741,7 +767,7 @@
                                                         </div>
                                                         <div class="comp-product-card-content">
                                                             <p class="product-category">{{item.name}}</p>
-                                                            <p class="product-solution">Solution category:</p>
+                                                            <p class="product-solution">Solution Category:</p>
                                                             <p class="product-desc">{{item.solutionCategory}}</p>
                                                         </div>
 
@@ -759,7 +785,7 @@
                                                         </div>
 
                                                         <div class="checkbox-sec-02">
-                                                            <a class="view-sec">view details</a>
+                                                            <a class="view-sec" (click)="navigateToProductDetails(item)">view details</a>
                                                         </div>
                                                     </div>
                                                 </div>

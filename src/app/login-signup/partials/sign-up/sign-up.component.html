@@ -3,10 +3,82 @@
   <div (click)="navigateToLogin()">
     <div class="back-btn"><img src="../../../../assets/icons/arrow-right.svg"></div>
   </div>
-  <div class="heading"><h1>Sign up to begin platform assessment!</h1></div>
-    <div class="register-form">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="heading"><h1>Sign up to begin !</h1></div>
 
+
+  <ng-container *ngIf="emailFormFlag">
+    <div class="register-form">
+      
+      <form [formGroup]="formEmail">
+          <div class="form-group">
+              <label>Email</label>
+              <input
+                type="text"
+                formControlName="email"
+                placeholder="john@xyz.com "
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submittedEmail && f2.email.errors }"
+              />
+              <div *ngIf="submittedEmail && f2.email.errors" class="invalid-feedback">
+                <div *ngIf="f2.email.errors.required">Email is required</div>
+                <div *ngIf="f2.email.errors.email">Email is invalid</div>
+              </div>
+            </div>
+
+            <div *ngIf= "otpField" class="form-group">
+              <label>OTP</label>
+              <input
+                type="text"
+                formControlName="otp"
+                placeholder="Enter OTP"
+                class="form-control"
+              />
+            </div>
+        
+
+
+
+
+  <div class="forgot-pwd">
+          
+        </div>
+        
+          <div class="signin-btn" *ngIf="enableOTPButton">
+            <!-- <button type="submit" class="primary-btn">Send OTP</button> -->
+            <button type="submit" (click) = "onSubmitEmail()" class="btn btn-otp">Send OTP</button>
+          </div>
+
+          <ng-container *ngIf="enableSignInButton">
+            <div class="signin-btn">
+              <button (click)="validateOTP()" class="btn btn-otp">Sign In</button>
+            </div>
+          </ng-container>
+        
+
+      </form>
+    </div>
+  </ng-container>
+
+
+
+
+
+<ng-container *ngIf="signUpFormFlag">
+
+
+    <div class="register-form">
+        <form [formGroup]="form">
+
+          <div class="form-group">
+            <label>Email</label>
+            <input
+              type="text"
+              formControlName="email"
+              placeholder="john@xyz.com"
+              class="form-control"
+              [value] = "validatedEmail"
+            />
+          </div>
 
           <div class="form-group">
             <label>First Name</label>
@@ -22,42 +94,11 @@
             </div>
           </div>
       
+          
+      
+
+      
           <!-- <div class="form-group">
-            <label>Last Name</label>
-            <input
-              type="text"
-              formControlName="lastName"
-              placeholder="Ex,:kumar"
-              class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
-            />-->
-            <!-- <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-              <div *ngIf="f.username.errors.required">Username is required</div>
-              <div *ngIf="f.username.errors.minlength">
-                Username must be at least 6 characters
-              </div>
-              <div *ngIf="f.username.errors.maxlength">
-                Username must not exceed 20 characters
-              </div>
-            </div> 
-          </div> -->
-      
-          <div class="form-group">
-            <label>Email</label>
-            <input
-              type="text"
-              formControlName="email"
-              placeholder="john@xyz.com"
-              class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-            />
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-              <div *ngIf="f.email.errors.required">Email is required</div>
-              <div *ngIf="f.email.errors.email">Email is invalid</div>
-            </div>
-          </div>
-      
-          <div class="form-group">
             <label>Password</label>
             <input
               type="password"
@@ -97,7 +138,7 @@
                 Confirm Password does not match
               </div>
             </div>
-          </div>
+          </div> -->
 
 
           <!-- Company Name-->
@@ -130,25 +171,12 @@
             </div>
           </div>
       
-          <!-- <div class="form-group form-check">
-            <input
-              type="checkbox"
-              formControlName="acceptTerms"
-              class="form-check-input"
-              [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }"
-            />
-            <label for="acceptTerms" class="form-check-label"
-              >I have read and agree to the Terms</label
-            >
-            <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">
-              Accept Terms is required
-            </div>
-          </div> -->
+          
       
           <div class="form-group">
             <div class="btns">
 
-              <button type="submit" class="btn btn-primary">Register</button>
+              <button (click)="onSubmit()" class="btn btn-primary">Register</button>
             <button type="button" (click)="onReset()" class="btn btn-warning float-right" > Reset </button>
             </div>
             
@@ -156,7 +184,7 @@
         </form>
       </div>
 
-      
+    </ng-container>
 
 
       

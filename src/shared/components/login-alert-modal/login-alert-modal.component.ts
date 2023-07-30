@@ -24,7 +24,7 @@ export class LoginAlertModalComponent {
 
       if(val === 'login'){
         //this.activeModal.close(this.loginService.login());
-        console.log("()()()() ", this.request);
+        // console.log("()()()() ", this.request);
         this.activeModal.close(this.router.navigate(['login'], {queryParams: this.request}));
       }
       else{

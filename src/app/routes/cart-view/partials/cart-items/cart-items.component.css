@@ -36,14 +36,26 @@
     align-items: center;
     justify-content: center;
 }
-.input-field {
+.input-field2 {
+    background: var(--white);
+    border: 1px solid #918F90;
+    border-radius: 8px;
+    width: 4em;
+    height: 2em;
+    text-align: center;
+}
+
+.input-field{
     background: var(--white);
     border: 1px solid #918F90;
     border-radius: 8px;
     width: 6em;
-    height: 2em;
+    height: 30px;
     text-align: center;
+    -webkit-appearance: none;
+    line-height: 1%;
 }
+
 
 .delete-text {
     color: var(--red);

@@ -49,7 +49,7 @@ export class CartStore {
    */
    public setCartItems(data : any) : void {
     
-    console.log("**** Cart ITEMS Service Page");
+    // console.log("**** Cart ITEMS Service Page");
     
 
     if(data && data.usercart.length>0 && data.usercart[0].userCartDetails){

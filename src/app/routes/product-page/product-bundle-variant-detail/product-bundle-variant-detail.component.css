@@ -110,6 +110,20 @@
   font-size: 16px;
   font-weight: 500;
 }
+.view-det-btn-01 {
+ /* border-radius: 8px; */
+ background: transparent;
+ border: transparent;
+ text-align: center;
+ color: #003388;
+ font-size: 12px;
+ font-weight: 500;
+ text-decoration: line;
+ cursor: pointer;
+ text-decoration: underline;
+}
+
+
 
 .request-quote-btn {
   background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
@@ -148,6 +162,7 @@
   line-height: normal;
   letter-spacing: 0.686px;
   cursor: pointer;
+  margin-top: 2px;
 }
 
 .product-price-detail {
@@ -195,7 +210,7 @@
   width: 100%;
 }
 .about-heading{
-  width: 30%;
+  width: 25%;
 }
 .about-desc{
   width: 60%;
@@ -211,7 +226,9 @@
   text-decoration: line;
   cursor: pointer;
 }
-
+.scroll{
+  width:15%;
+  }
 .compare-box {
   padding: 2%;
   margin: 2%;
@@ -671,7 +688,7 @@ h5 {
 
 .product-common-info {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .offer-det {
@@ -699,8 +716,9 @@ h5 {
 .offer-card {
   display: flex;
   /* flex-basis: 41%; */
-  padding: 1%;
-  margin: 2%;
+  width: 36%;
+  padding: 2%;
+  margin: 1%;
   flex-direction: column;
   border-radius: 8px;
   background: #FFF;
@@ -736,12 +754,10 @@ p {
 
 .all-feature-container {
   display: flex;
-  flex-basis: 20%;
-  padding: 1%;
-  margin: 1%;
+  margin: 0 2% 2%;
+  padding: 0 1%;
   flex-direction: column;
   background: #F1F1F1;
-  font-family: 'lato', sans-serif;
 }
 
 .p-card .p-card-title {
@@ -902,12 +918,6 @@ p {
   justify-content: space-between;
 }
 
-.all-feature-container {
-  display: flex;
-  margin: 1%;
-  padding: 1%;
-  flex-direction: column;
-}
 
 .comp-prod-card-img {
   display: flex;
@@ -1136,12 +1146,12 @@ p {
 
 .left-arrow {
   left: 369px;
-  top: 72px;
+  top: 94px;
 }
 
 .right-arrow {
   right: 0px;
-  top: 75px;
+  top: 94px;
   display: flex;
   justify-content: flex-start;
 }
@@ -1222,6 +1232,7 @@ p {
   padding-right: 10px;
   text-decoration: none;
   font-family: 'lato', sans-serif;
+  cursor: pointer;
 }
 
 .checkbox {
@@ -1417,12 +1428,6 @@ button {
   margin: 6px 0 0;
 }
 
-.solution {
-  margin-top: 10px;
-  font-weight: 700;
-  margin-bottom: 7px;
-  font-family: 'lato', sans-serif;
-}
 
 .review {
   font-family: 'lato', sans-serif;
@@ -1529,8 +1534,9 @@ button {
 }
 
 .bundle-solution {
-  font-size: small;
-  font-weight: 300;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
 }
 
 .bundle-solution-desc {

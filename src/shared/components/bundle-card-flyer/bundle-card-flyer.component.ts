@@ -16,6 +16,6 @@ export class BundleCardFlyerComponent implements OnInit{
 
 
   ngOnInit(): void {
-    console.log("+++++++++ Val ", this.productItem);
+    // console.log("+++++++++ Val ", this.productItem);
   }
 }

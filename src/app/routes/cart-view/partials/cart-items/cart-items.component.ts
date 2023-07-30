@@ -75,6 +75,7 @@ public cartData : any[] = [];
         this.cartData = data;
         this.cartData.forEach(element => {
           element['itemTotal'] = element.quantity * element.price;
+          element.quantity = String(element.quantity);
         });
         this.calTotalPrice();
         return this.cartData;
@@ -108,11 +109,9 @@ public cartData : any[] = [];
     
 
     if(this.params.has('productId')){
-      console.log("()()()()()()() If Product,")
       this.getCartItems(false);
     }
     else if(this.params.has('productVariant')){
-      console.log("()()()()()()() If Product, Variant")
       //var list = JSON.parse(this.params.get('productList'));
       this.getCartItems(true);
     }
@@ -157,6 +156,7 @@ public cartData : any[] = [];
     this.subscriptions.push(
       this.globalSearch.fetchCartMock().subscribe( response => {
         this.cartItems = response.category;
+        
       })
       
     );
@@ -286,8 +286,15 @@ public cartData : any[] = [];
     }
     else if(opr === 'minus'){
 
+      if(this.cartData[i].quantity === 0){
+        this.cartData[i].quantity = 0;
+        this.cartData[i].itemTotal = this.cartData[i].quantity * price;
+      }
+      else{
         this.cartData[i].quantity = Number(this.cartData[i].quantity) - 1;
         this.cartData[i].itemTotal = this.cartData[i].quantity * price;
+      }
+        
     }
     this.calTotalPrice();
   }

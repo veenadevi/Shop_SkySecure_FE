@@ -42,44 +42,85 @@
   <div class="modal-header">
     Connect With Us
   </div>
+  <form [formGroup]="form">
 
-  <div class="modal-body">
+    
 
-    <div class="email-style">
-      <span class="p-float-label">
-        <input pInputText id="emailId" [(ngModel)]="emailId" />
-        <label htmlFor="emailId">Email ID</label>
-      </span>
+    <div class="modal-body">
+
+      
+
+  
+
+      <div class="email-style">
+        <span class="p-float-label">
+          <input 
+            pInputText 
+            id="emailId" 
+            formControlName="emailId"
+            [(ngModel)]="emailId" 
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }"
+            />
+            <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+              <div *ngIf="f.emailId.errors.required">Email is required</div>
+              <div *ngIf="f.emailId.errors.email">Email is invalid</div>
+            </div>
+          <label htmlFor="emailId">Email ID</label>
+        </span>
+      </div>
+
+      <div class="phoneno-style">
+        <span class="p-float-label">
+          <input 
+            pInputText 
+            id="phoneNo" 
+            formControlName="phoneNo"
+            [(ngModel)]="phoneNo" 
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"
+            />
+            <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
+              <div *ngIf="f.phoneNo.errors.required">Mobile Number is required</div>
+            </div>
+          <label htmlFor="phoneNo">Mobile Number</label>
+        </span>
+      </div>
+
+      <div class="company-name-style">
+        <span class="p-float-label">
+          <input 
+            pInputText 
+            id="companyName" 
+            formControlName="companyName"
+            [(ngModel)]="companyName" />
+          <label htmlFor="companyName">Company Name</label>
+        </span>
+      </div>
+
+      <div class="message-text-style">
+        <span class="p-float-label">
+          <textarea 
+            id="messageText" 
+            rows="5" 
+            cols="30" 
+            formControlName="messageText"
+            pInputTextarea 
+            [(ngModel)]="messageText">
+          </textarea>
+          <label for="messageText">Message</label>
+        </span>
+      </div>
     </div>
 
-    <div class="phoneno-style">
-      <span class="p-float-label">
-        <input pInputText id="phoneNo" [(ngModel)]="phoneNo" />
-        <label htmlFor="phoneNo">Mobile Number</label>
-      </span>
+    <div class="modal-footer">
+      <button type="button" (click) = onSubmit() class="btn request-btn">Submit</button>
+      <button (click)="closeModal()" type="button" class="close" aria-label="Close">
+        <!-- <span aria-hidden="true">&times;</span> -->
+        cancel
+      </button>
     </div>
 
-    <div class="company-name-style">
-      <span class="p-float-label">
-        <input pInputText id="companyName" [(ngModel)]="companyName" />
-        <label htmlFor="companyName">Company Name</label>
-      </span>
-    </div>
-
-    <div class="message-text-style">
-      <span class="p-float-label">
-        <textarea id="messageText" rows="5" cols="30" pInputTextarea [(ngModel)]="messageText"></textarea>
-        <label for="messageText">Message</label>
-      </span>
-    </div>
-  </div>
-
-  <div class="modal-footer">
-    <button type="button" class="btn request-btn">Submit</button>
-    <button (click)="closeModal()" type="button" class="close" aria-label="Close">
-      <!-- <span aria-hidden="true">&times;</span> -->
-      cancel
-    </button>
-  </div>
+  </form>
 
 </div>

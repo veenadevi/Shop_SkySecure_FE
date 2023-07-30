@@ -14,6 +14,7 @@ import { DealsDetailsComponent } from './partials/deals-details/deals-details.co
 import { EstimateDetailsComponent } from './partials/estimate-details/estimate-details.component';
 import { AddNewProductComponent } from './partials/add-new-product/add-new-product.component';
 import { UploadProductPriceComponent } from './partials/upload-product-price/upload-product-price.component';
+import { EditProductComponent } from './partials/edit-product/edit-product.component';
 
 
 
@@ -31,6 +32,7 @@ import { UploadProductPriceComponent } from './partials/upload-product-price/upl
     EstimateDetailsComponent,
     AddNewProductComponent,
     UploadProductPriceComponent,
+    EditProductComponent
   ],
   imports: [
     CommonModule,

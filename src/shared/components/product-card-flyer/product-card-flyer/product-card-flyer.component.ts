@@ -22,7 +22,7 @@ export class ProductCardFlyerComponent implements OnInit{
 
   @Input() set products(value : any){
     this.productsList = value;
-    console.log("))))))) Data in alst ", value);
+    // console.log("))))))) Data in alst ", value);
  
   }
 
@@ -180,7 +180,7 @@ export class ProductCardFlyerComponent implements OnInit{
     }*/
 
     this.userAccountStore.userDetails$.subscribe(res=>{
-      console.log("()()()() ", res);
+      // console.log("()()()() ", res);
       if(res && res.email !== null){
         this.router.navigate(['/cart'], {queryParams: queryParams});
       }

@@ -1,7 +1,26 @@
 <div class="text-center">
     <h2 class="header-title">
-        Create Product
+        Edit Product
     </h2>
+    <div class="variant-product" style="display: flex;width:100%;justify-content: center;align-items: center;" *ngIf="products.length > 0">
+        <div class="forms">
+            <div class="label">
+                <label>Select Products</label>
+            </div>
+            <div class="select">
+                <select class="custom-select-04" (change)="selectProduct($event)" [(ngModel)]="selectedProductId">
+                    <option value="">Choose...</option>
+                    <option *ngFor="let product of products" [ngValue]="product._id">
+                        {{product.name}}</option>
+                </select>
+            </div>
+
+            <!-- error block -->
+            <div class="invalid-feedback" *ngIf="submitted && myForm.products.errors?.required">
+                <sup>*</sup>Please select product
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="container">
@@ -29,7 +48,7 @@
                                 </div>
                             </div>
                             <!-- error block -->
-                            <div class="invalid-feedback" *ngIf="submitted && myForm.Subcategories.errors?.required">
+                            <div class="invalid-feedback" *ngIf="submitted && myForm.OEM.errors?.required">
                                 <sup>*</sup>Please select OEM
                             </div>
                         </div>
@@ -160,7 +179,7 @@
                                         Product Sku Id</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="productSkuId"
+                                    <input type="number" class="custom-select-03" formControlName="productSkuId"
                                         [ngClass]="{'error': submitted && myForm.productSkuId.errors}">
                                 </div>
 
@@ -210,7 +229,7 @@
                                 </div>
 
                             </div>
-                           
+
 
                         </div>
 
@@ -221,12 +240,13 @@
                                         Discount(%)</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text"  class="custom-select-03" formControlName="discount" [(ngModel)]=defaultDiscount
+                                    <input type="text" class="custom-select-03" formControlName="discount"
+                                        [(ngModel)]=defaultDiscount
                                         [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                 </div>
 
                             </div>
-                         
+
                         </div>
                     </div>
 
@@ -245,8 +265,7 @@
                                 </div>
 
                                 <!-- error block -->
-                                <div class="invalid-feedback"
-                                    *ngIf="submitted && myForm.productPrice.errors?.required">
+                                <div class="invalid-feedback" *ngIf="submitted && myForm.productPrice.errors?.required">
                                     <sup>*</sup>Product ERP required
                                 </div>
                             </div>
@@ -254,7 +273,7 @@
                         </div>
 
                         <!---Product Price-->
-                       
+
                     </div>
 
 
@@ -334,116 +353,110 @@
                             </div>
                         </div>
 
-                         <!-- Upload image -->
-                    <div class="upload">
-                        <label>Image Logo</label>
-                        <div class="avatar-edit">
-                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
-                                (change)="uploadFile($event)" />
-                            <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
-                                alt="productLogo" />
-                            <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
-                                (click)="removeImage()">Remove</button>
-                            <label for="imageUpload" *ngIf="editFile" [ngClass]="['custom-label', 'upload-image']"></label>
-                            <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
-                                (click)="removeUploadedFile()"></label>
-                        </div>
-                        <div class="avatar-preview">
-                            <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                        <!-- Upload image -->
+                        <div class="upload">
+                            <label>Image Logo</label>
+                            <div class="avatar-edit">
+                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                                    (change)="uploadFile($event)" />
+                                <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
+                                    alt="productLogo" />
+                                <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
+                                    (click)="removeImage()">Remove</button>
+                                <label for="imageUpload" *ngIf="editFile"
+                                    [ngClass]="['custom-label', 'upload-image']"></label>
+                                <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
+                                    (click)="removeUploadedFile()"></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
 
                 <div class="section-07">
-                   
+
 
 
                 </div>
-                
-               
+
+
 
                 <!-- Add Super Powers Dynamically-->
-              
-    <div class="feature-update" >
-        <label class="heading">Features</label>
-       
-          <div class="feature"   *ngFor="let item of addDynamicElementNew.get('feature')['controls']; let i = index">
-           
-                   
-                      
+
+                <div class="feature-update">
+                    <label class="heading">Features</label>
+
+                    <div class="feature"
+                        *ngFor="let item of addDynamicElementNew.get('feature')['controls']; let i = index">
+
+
+
                         <div class="feature-title" [formGroup]="item">
-                       
-                                <label>Title</label>
-                                <input type="text" class="form-control"  formControlName="name">
 
-                          
+                            <label>Title</label>
+                            <input type="text" class="form-control" formControlName="name">
+
+
                         </div>
-                       <div class="feature-desc"  [formGroup]="item">
-                    
-                            
-                              <label>Description</label>
-                              <textarea class="form-control" formControlName="description"></textarea>
-                           
-                        
-                       </div>
-                   <div class="feature-link" [formGroup]="item">
-                 
-                        
-                          <label>HyperLink</label>
-                          <input type="text" class="form-control" formControlName="hyperLinkURL">
-                       
-                   </div>
-                   <div class="feature-btn">
-                        <!-- <div class="btn-01" style="display: flex; align-items: center;"> -->
-                          <!-- <button type="button" class="add-btn"
+                        <div class="feature-desc" [formGroup]="item">
+
+
+                            <label>Description</label>
+                            <textarea class="form-control" formControlName="description"></textarea>
+
+
+                        </div>
+                        <div class="feature-link" [formGroup]="item">
+
+
+                            <label>HyperLink</label>
+                            <input type="text" class="form-control" formControlName="hyperLinkURL">
+
+                        </div>
+                        <div class="feature-btn">
+                            <!-- <div class="btn-01" style="display: flex; align-items: center;"> -->
+                            <!-- <button type="button" class="add-btn"
                           (click)="addNewFeature()">Add Feature</button> -->
-                              <button class="btn add-btn" (click)="addNewFeature()">Add New</button>
-                              <button class="btn btn-warning" (click)="removeFeature(i)">Remove</button>
-                   </div>
-      
-          </div>
+                            <button class="btn add-btn" (click)="addNewFeature()">Add New</button>
+                            <button class="btn btn-warning" (click)="removeFeature(i)">Remove</button>
+                        </div>
+
+                    </div>
 
 
-</div>
+                </div>
 
-<div class="faq-update" >
-    <label class="heading">Product FAQ</label>
+                <div class="faq-update">
+                    <label class="heading">Product FAQ</label>
 
-      <div class="faq" *ngFor="let item of addFAQArrayNew.get('faq')['controls']; let i = index">
+                    <div class="faq" *ngFor="let item of addFAQArrayNew.get('faq')['controls']; let i = index">
 
-              <div [formGroup]="item" class="faq-question">
-                <label>Question</label>
-                <input type="text" class="form-control"  formControlName="Question">
-              </div>
-           
-              <div [formGroup]="item" class="faq-answer">
-                <label>Answer</label>
-                <textarea class="form-control" formControlName="Answer"></textarea>
-              </div>
+                        <div [formGroup]="item" class="faq-question">
+                            <label>Question</label>
+                            <input type="text" class="form-control" formControlName="Question">
+                        </div>
 
-                <div class="faq-btn" >
-                    <button class="btn add-btn" (click)="addNewFAQ()">Add New</button>
-                    <button class="btn btn-warning" (click)="removeFAQ(i)">Remove</button>
-                  </div>
+                        <div [formGroup]="item" class="faq-answer">
+                            <label>Answer</label>
+                            <textarea class="form-control" formControlName="Answer"></textarea>
+                        </div>
 
-      </div>
+                        <div class="faq-btn">
+                            <button class="btn add-btn" (click)="addNewFAQ()">Add New</button>
+                            <button class="btn btn-warning" (click)="removeFAQ(i)">Remove</button>
+                        </div>
 
-</div>
+                    </div>
 
-
-
+                </div>
                 <div class="btn-02">
-                    <button  class="btn btn-success" (click)="CreateProduct()">Create</button>
-                  </div>
-
-
+                    <button class="btn btn-success" (click)="onSubmit()">Create</button>
+                </div>
             </form>
 
         </div>
     </div>
-
-
-
-
+</div>

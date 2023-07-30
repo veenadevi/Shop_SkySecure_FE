@@ -31,7 +31,7 @@ export class LoginSignupComponent implements OnInit{
 
   public validateAuth(){
     let authToken = localStorage.getItem('XXXXaccess__tokenXXXX');
-    console.log("()()()()() Inside is valid", authToken);
+    // console.log("()()()()() Inside is valid", authToken);
     return authToken !== null ? true : false;
 
   }

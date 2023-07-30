@@ -125,6 +125,17 @@
     font-weight: 500;
     
   }
+  .view-det-btn-01 {
+    background: transparent;
+    border: transparent;
+    text-align: center;
+    color: #003388;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: line;
+    cursor: pointer;
+    text-decoration: underline;
+  }
   .request-quote-btn {
     background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
     border-radius: 8px;
@@ -163,6 +174,7 @@
     line-height: normal;
     letter-spacing: 0.686px;
     cursor: pointer;
+    margin-top: 2px;
   }
   .product-price-detail{
     display: flex;
@@ -590,6 +602,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-right: 12px;
 
   }
   .buy-now-btn {
@@ -628,6 +641,9 @@
   .about-desc{
     width: 60%;
   }
+  .scroll{
+    width:15%;
+    }
   .all-btn {
     /* border-radius: 8px; */
     background: transparent;
@@ -641,7 +657,7 @@
   }
   .product-common-info{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
   .offer-det {
     display: flex;
@@ -677,12 +693,11 @@
   }
   .offer-card {
     display: flex;
-    /* flex-basis: 41%; */
-    padding: 1%;
-    margin: 2%;
+    width: 36%;
+    padding: 2%;
+    margin: 1%;
     flex-direction: column;
     border-radius: 8px;
-    background: #FFF;
     background: #FFF;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   }
@@ -1115,7 +1130,7 @@ column-gap:8px ;
 }
 
 .view-sec {
-
+cursor: pointer;
   color: #0047BD;
   float: right;
   padding-right: 10px;
@@ -1310,11 +1325,9 @@ button{
 }
 
 .amazon-refer{
-  font-family: 'lato',sans-serif;
-   font-weight: 600; 
-   text-align: center;
-   font-size: 14px;
-   color: #1e1e1e;
+  font-family: 'lato', sans-serif;
+  font-weight: 400;
+  text-align: center;
 }
 .head-06{
   margin-bottom: 0px;
@@ -1389,8 +1402,9 @@ button{
   font-family: 'Lato', sans-serif;
 }
 .bundle-solution{
-  font-size: 12px;
+  font-size: small;
   font-weight: 600;
+  margin-top: 10px;
 }
 .bundle-solution-desc{
   font-size: 12px;

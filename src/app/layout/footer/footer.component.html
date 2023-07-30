@@ -60,20 +60,29 @@
             <div class="sec05-heading">
                 <h3>SOCIAL MEDIA</h3>
             </div>
-            <DIV class="social-icons">
+            <div class="social-icons">
 
-                <div class="icon-1">
-                    <a href="https://twitter.com/SkysecureT?t=eIQh6SBZr52JEPj57ntPWw&s=09" target="_blank"><img alt=""
-                        class="p-icon-01"      src="../../../assets/icons/TwitterWhiteIcon.svg"></a>
+                <div class="icon-1" (mouseenter)="isHiddenTwitter = !isHiddenTwitter" (mouseleave)="isHiddenTwitter = !isHiddenTwitter">
+                    <a href="https://twitter.com/SkysecureT?t=eIQh6SBZr52JEPj57ntPWw&s=09" target="_blank">
+                        <ng-container *ngIf="isHiddenTwitter"><img class="p-icon-01" src="../../../assets/icons/TwitterIcon.svg"></ng-container>
+                        <ng-container *ngIf="!isHiddenTwitter"><img alt="" class="p-icon-01" src="../../../assets/icons/TwitterXicon.svg"></ng-container>
+                    </a>
                 </div>
-                <div class="icon-2">
-                    <a href="https://www.linkedin.com/company/skysecure-technologies/" target="_blank"><img alt=""
-                        class="p-icon-02"     src="../../../assets/icons/LinkedInWhiteIcon.svg"></a>
+                <div class="icon-2" (mouseenter)="isHiddenLinkedIn = !isHiddenLinkedIn" (mouseleave)="isHiddenLinkedIn = !isHiddenLinkedIn">
+                    <a href="https://www.linkedin.com/company/skysecure-technologies/" target="_blank">
+                        <ng-container *ngIf="isHiddenLinkedIn"><img alt="" class="p-icon-02" src="../../../assets/icons/LinkedInIcon.svg">
+                        </ng-container>
+                        <ng-container *ngIf="!isHiddenLinkedIn"><img alt="" class="p-icon-02" src="../../../assets/icons/LinkedInWhiteIcon.svg">
+                        </ng-container>
+                    </a>
                 </div>
-                <div class="icon-3">
-                    <a href="https://skysecuretech.com/"    target="_blank"><img alt="" class="p-icon-02" src="../../../assets/icons/GlobeWhiteIcon.svg"></a>
+                <div class="icon-3" (mouseenter)="isHiddenYouTube = !isHiddenYouTube" (mouseleave)="isHiddenYouTube = !isHiddenYouTube">
+                    <a href="https://www.youtube.com/channel/UCdCps8R7SdXhW3YQnE6tsyg"    target="_blank">
+                        <ng-container *ngIf="isHiddenYouTube"><img alt="" class="p-icon-02" src="../../../assets/icons/YoutubeIcon.svg"></ng-container>
+                        <ng-container *ngIf="!isHiddenYouTube"><img alt="" class="p-icon-02" src="../../../assets/icons/YoutubeIcon-1.svg"></ng-container>
+                    </a>
                 </div>
-            </DIV>
+            </div>
         </div>
 
     </div>

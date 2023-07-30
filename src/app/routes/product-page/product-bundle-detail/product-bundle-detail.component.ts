@@ -101,6 +101,11 @@ export class ProductBundleDetailComponent implements OnInit{
 
   openLink(url: any): void {
     window.open(url, '_blank');
+  } 
+
+  readMore: boolean= false;
+  public openDescription01(): void {
+    this.readMore= !this.readMore;
   }
 
   seeMore: boolean = false;
@@ -202,6 +207,8 @@ export class ProductBundleDetailComponent implements OnInit{
 
        // this.productVarientData = response;
         this.productFamily = response.productFamily;
+
+        
        
         //This is not needed cos bundles which is listed not going to have Variant 
 
@@ -375,7 +382,13 @@ export class ProductBundleDetailComponent implements OnInit{
       this.productQuantity = Number(this.productQuantity) + 1;
     }
     else if(type === 'minus'){
-      this.productQuantity =  Number(this.productQuantity) - 1;
+      if(this.productQuantity === 0){
+        this.productQuantity = 0;
+      }
+      else{
+        this.productQuantity =  Number(this.productQuantity) - 1;
+      }
+      
     }
   }
 
@@ -506,12 +519,12 @@ export class ProductBundleDetailComponent implements OnInit{
   }
 
   public removeSelectedItem(_id:any){
-    console.log("()()()()( Items before ", this.productListToCompare);
+    // console.log("()()()()( Items before ", this.productListToCompare);
     this.productListToCompare = this.productListToCompare.filter(function(item) {
       
       return item._id != _id;
     });
-    console.log("()()()()( Items After ", this.productListToCompare);
+    // console.log("()()()()( Items After ", this.productListToCompare);
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
     localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
@@ -535,19 +548,18 @@ export class ProductBundleDetailComponent implements OnInit{
     this.router.navigate(['/compare-products/results']);
   }
 
-  addQuantity(item):void {
+  addQuantity(quantity:any,index:any):void {
 
     //this.allSimilerProducts[0].quantity = 1+1;
     
-    item.quantity=Number(item.quantity) + 1
-    
+    this.bundleItemsList[index].quantity = quantity+1;
     
     //this.bundleQuantity = Number(this.bundleQuantity) + 1
     //this.finalBundleDetails[index].quantity = quantity+1;
   }
-  decreaseQuantity(item): void {
-    if(item.quantity>1){
-      item.quantity=Number(item.quantity) -1
+  decreaseQuantity(quantity:any,index:any): void {
+    if(quantity>1){
+      this.bundleItemsList[index].quantity = quantity-1;
     }
     
   }
@@ -671,6 +683,39 @@ export class ProductBundleDetailComponent implements OnInit{
     });
 
 
+  }
+  public navigateToProductDetails(product:any){
+    
+    /*if(this.routePath === 'productBundles'){
+      this.router.navigate(['/products/brand-detail', product._id]);
+    }
+    else{
+      this.router.navigate(['/products', product._id]);
+    }*/
+
+    
+    
+    switch (product.type) {
+      case 'product':
+        this.router.navigate(['/products', product._id]);
+        return;
+
+      case 'productVariants':
+        this.router.navigate(['/products/product-variant-detail', product._id]);
+        return;
+        
+      case 'productBundles':
+        this.router.navigate(['/products/product-bundle-detail', product._id]);
+        return;
+      
+      case 'productBundleVariants':
+        this.router.navigate(['/products/product-bundle-varaint-detail', product._id]);
+        return;
+
+      default:
+        return null;
+    }
+    
   }
   
 }

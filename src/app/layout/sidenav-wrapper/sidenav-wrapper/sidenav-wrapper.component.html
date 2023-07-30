@@ -7,7 +7,10 @@
 </ng-container> -->
 
 <!-- <mat-sidenav-container autosize> -->
-<mat-sidenav-container >
+  <div style="background: white;">
+
+ 
+<mat-sidenav-container>
 
   
  
@@ -43,9 +46,9 @@
             </mat-list-item> -->
             <!-- Security Sub Menu -->
             <ng-container *ngIf="userSubMenu">
-              <mat-list-item [routerLink]="['user-profile/profile-view']">
+              <!-- <mat-list-item [routerLink]="['user-profile/profile-view']">
                 <span *ngIf="isExpanded" class="sub-menu-item">Update Profile</span>
-              </mat-list-item>
+              </mat-list-item> -->
               <mat-list-item (click)="logout()">
                 <span *ngIf="isExpanded" class="sub-menu-item">Logout</span>
               </mat-list-item>
@@ -173,6 +176,10 @@
               </mat-list-item>
 
               <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/edit-product']">Edit product</span>
+              </mat-list-item>
+
+              <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-page/upload-product-price']">Upload Product Price</span>
               </mat-list-item>
               
@@ -208,3 +215,5 @@
     </mat-sidenav-content>
   
   </mat-sidenav-container>
+
+</div>

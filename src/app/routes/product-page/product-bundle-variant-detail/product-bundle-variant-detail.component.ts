@@ -102,9 +102,19 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   }
 
   openLink(url: any): void {
-    console.log("url", url);
+    // console.log("url", url);
     window.open(url, '_blank');
   }
+
+
+  readMore: boolean= false;
+  
+  public openDescription01(): void {
+    this.readMore= !this.readMore;
+  }
+
+
+
   seeMore: boolean = false;
 
   public openDescription(): void {
@@ -132,7 +142,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
     
         }
        
-        console.log("inside", this.features);
+        // console.log("inside", this.features);
         
       })
 
@@ -170,7 +180,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
             this.currentRoute = event.url; 
             currentUrl = this.route.snapshot.paramMap.get('id');
             this.ngOnInit();
-            console.log('@@@@@@@@ _ Route change End');         
+            // console.log('@@@@@@@@ _ Route change End');         
             //console.log("@@@@@@@@ _ ",event);
         }
 
@@ -245,21 +255,54 @@ export class ProductBundleVariantDetailComponent implements OnInit {
     this.getBrandDetails(productId);
   }
 
+  public navigateToProductDetails(product:any){
+    
+    /*if(this.routePath === 'productBundles'){
+      this.router.navigate(['/products/brand-detail', product._id]);
+    }
+    else{
+      this.router.navigate(['/products', product._id]);
+    }*/
+
+    
+    
+    switch (product.type) {
+      case 'product':
+        this.router.navigate(['/products', product._id]);
+        return;
+
+      case 'productVariants':
+        this.router.navigate(['/products/product-variant-detail', product._id]);
+        return;
+        
+      case 'productBundles':
+        this.router.navigate(['/products/product-bundle-detail', product._id]);
+        return;
+      
+      case 'productBundleVariants':
+        this.router.navigate(['/products/product-bundle-varaint-detail', product._id]);
+        return;
+
+      default:
+        return null;
+    }
+    
+  }
   public featureCountEvent(val): void {
    
-    console.log("****** View Before", val);
+    // console.log("****** View Before", val);
     val = val ? false : true;
-    console.log("****** View ", val);
+    // console.log("****** View ", val);
     this.viewAllFeaturesDetails = val;
-    console.log("****** View ", this.viewAllFeaturesDetails);
+    // console.log("****** View ", this.viewAllFeaturesDetails);
     if(this.viewAllFeaturesDetails){
-      console.log("****** In If");
-      console.log("****** In If", this.completeFeatureList);
+      // console.log("****** In If");
+      // console.log("****** In If", this.completeFeatureList);
       this.features = this.completeFeatureList;
     }
     else{
-      console.log("****** In Else");
-      console.log("****** In Else", this.completeFeatureList);
+      // console.log("****** In Else");
+      // console.log("****** In Else", this.completeFeatureList);
       if(this.completeFeatureList.length>5){
         this.features = this.completeFeatureList.slice(0,5);
       }
@@ -273,7 +316,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   
       
       
-      console.log("product list to compare",this.productListToCompare);
+      // console.log("product list to compare",this.productListToCompare);
     // }
   }
 
@@ -310,22 +353,22 @@ export class ProductBundleVariantDetailComponent implements OnInit {
 
         //Picking Child Product and Productvariants
 
-        console.log("fetching detailscchild product "+response.productFamilyVariantLicenseList.childProducts.length)
+        // console.log("fetching detailscchild product "+response.productFamilyVariantLicenseList.childProducts.length)
 
         this.childproducts=this.setProductsData(response.productFamilyVariantLicenseList.childProducts);
-        console.log("fetched child products for this bundle "+this.childproducts.length)
+        // console.log("fetched child products for this bundle "+this.childproducts.length)
 
-        console.log("calling TS ---333")
+        // console.log("calling TS ---333")
 
         this.childproductVariants=this.setProductVariantsData(response.productFamilyVariantLicenseList.childProductVariants);
-        console.log("fetched child productVariants for this bundle "+this.childproductVariants.length)
-        console.log("calling TS ---444")
+        // console.log("fetched child productVariants for this bundle "+this.childproductVariants.length)
+        // console.log("calling TS ---444")
 
         this.childProductFamilies=this.setProductFamilyData(response.productFamilyVariantLicenseList.childProductFamily);
-        console.log("fetched child childproductFamily for this bundle "+this.childProductFamilies.length)
+        // console.log("fetched child childproductFamily for this bundle "+this.childProductFamilies.length)
 
         this.childProductFamilyVariant=this.setChildProductBundleVariantsData(response.productFamilyVariantLicenseList.childProductFamilyVariant);
-        console.log("fetched child childproductFamilyVariants for this bundle "+this.childProductFamilyVariant.length)
+        // console.log("fetched child childproductFamilyVariants for this bundle "+this.childProductFamilyVariant.length)
 
         this.faq  = this.productFamilyVariant.productFAQ;
 
@@ -379,7 +422,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
 
 
   public setProductsData(data){
-    console.log("=====setProductsData==="+data.length)
+    // console.log("=====setProductsData==="+data.length)
     if(data && data.length>0){
       
       data.forEach(element => {
@@ -403,7 +446,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
 
   public setProductVariantsData(data){
     
-console.log("======setProductVariantsData===="+data.length)
+// console.log("======setProductVariantsData===="+data.length)
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
@@ -447,7 +490,7 @@ console.log("======setProductVariantsData===="+data.length)
   public setChildProductBundleVariantsData(data){
 
     if(data && data.length>0){
-      console.log("===========setProductBundleVariantsData======="+data.length)
+      // console.log("===========setProductBundleVariantsData======="+data.length)
       data.forEach(element => {
         element.name=element.name;
           element.type = 'productBundleVariants';
@@ -500,11 +543,12 @@ console.log("======setProductVariantsData===="+data.length)
   position: string = 'left';
   quantityCount = 1;
   addQuantity(quantity:any,index:any):void {
-    this.finalBundleDetails[index].quantity = quantity+1;
+    
+    this.allBundleDetais[index].quantity = quantity+1;
   }
   decreaseQuantity(quantity:any,index:any): void {
     if(quantity>1){
-      this.finalBundleDetails[index].quantity = quantity-1;
+      this.allBundleDetais[index].quantity = quantity-1;
     }
   }
 
@@ -546,7 +590,7 @@ public requestQuote (productFamilyVariant : any) : void {
 
 
   this.userAccountStore.userDetails$.subscribe(res=>{
-    console.log("()()()() ", res);
+    // console.log("()()()() ", res);
     if(res && res.email !== null){
       this.router.navigate(['/cart'], {queryParams: queryParams});
     }
@@ -598,8 +642,8 @@ async addToCompare(item:any, type:any):Promise<void> {
   }*/
 
   if(type === 'fromProd'){
-    console.log("()()() From Prom Prod");
-    console.log("()()()( From Prod", item);
+    // console.log("()()() From Prom Prod");
+    // console.log("()()()( From Prod", item);
     this.productListToCompare.push(item);
     
   }
@@ -615,7 +659,7 @@ async addToCompare(item:any, type:any):Promise<void> {
   
   
   this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
-  console.log("getProdFromLocalStorage",this.productListToCompare);
+  // console.log("getProdFromLocalStorage",this.productListToCompare);
   //localStorage.removeItem('product_list_to_compare');
   localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
   localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));

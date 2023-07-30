@@ -15,9 +15,9 @@ import { MaterialModule } from 'src/app/material.module';
 import { PrimeNgModule } from 'src/app/prime-ng.module';
 import { VideoCarouselComponent } from './video-carousel/video-carousel.component';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-
-
+import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 
 @NgModule({
   declarations: [
@@ -45,8 +45,24 @@ import { VideoCarouselComponent } from './video-carousel/video-carousel.componen
   ]
 })
 export class HomePageModule { 
-
+  constructor(
+  
+    private modalService : NgbModal,
  
+  ){}
+ 
+  public viewModal2(queryParams) {
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+    modalRef.componentInstance.request = queryParams;
+  }
+  public showDialog(){
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+  }
 
+  showBasicDialog() {
+    //this.displayBasic = true;
+    this.viewModal2(null);
+  }
+ 
   
 }

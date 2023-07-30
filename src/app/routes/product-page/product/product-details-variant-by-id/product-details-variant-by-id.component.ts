@@ -128,10 +128,13 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   }
 
   openLink(url:any): void {
-    console.log("url",url);
+    // console.log("url",url);
     window.open(url, '_blank');
   }
-
+  readMore: boolean= false;
+  public openDescription01(): void {
+    this.readMore= !this.readMore;
+  }
   seeMore: boolean = false;
 
   public openDescription(): void {
@@ -212,17 +215,16 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
     this.subscriptions.push(
       this.metaDataSvc.fetchProductByProductVariantId(productId).subscribe( (response) => {
 
-        console.log("response product Variant for ",productId);    
+        // console.log("response product Variant for ",productId);    
         //  this.individualProductDetail$.subscribe();
-  console.log("response product Variant feature list",response.featureList);
+  // console.log("response product Variant feature list",response.featureList);
   response.productVariants = {...response.productVariants, quantity: 1 }
-
 
 this.productVariants=response.productVariants;
 
 
-console.log("response product Variant Quantituy",response.productVariants.quantity);
-console.log("response product videoURL",response.productVariants.productVideoURL[0]);
+// console.log("response product Variant Quantituy",response.productVariants.quantity);
+// console.log("response product videoURL",response.productVariants.productVideoURL[0]);
 this.productVariantData = this.setProductVariantsData(this.productVariants,response.products);
 this.otherProductVariantData=this.setProductVariantsData(this.similarProducts,response.products);
 this.productBundleData=this.setBundlesData(response.productBundles);
@@ -240,10 +242,10 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
 
 
         this.productBundles  = response.productBundles;
-        console.log("bundles",this.productBundles);
+        // console.log("bundles",this.productBundles);
 
         this.faq  = response.products.productFAQ;
-        console.log("faq:",this.faq);
+        // console.log("faq:",this.faq);
 
         let fList = [];
         if(response.featureList.length > 5){
@@ -254,13 +256,13 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
         }
 
         // this.featureList = fList;
-        console.log("inside", this.featureList);
+        // console.log("inside", this.featureList);
         for(let i=0;i<response.similerProductVariants.length;i++)
         response.similerProductVariants[i] = {...response.similerProductVariants[i], quantity: 1 }
         this.similarProducts = response.similerProductVariants;
 
         this.parentProduct=response.products;
-        console.log("logo comes from parent product  ==="+this.parentProduct.bannerLogo)
+        // console.log("logo comes from parent product  ==="+this.parentProduct.bannerLogo)
 
        response.products = {...response.products, quantity: 1 }
        // this.product = { products:[...response.products], featureList: response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants: response.featureListByProductVariants };
@@ -272,12 +274,12 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
 
         } 
         else {
-          console.log("======no product images====")
+          // console.log("======no product images====")
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
         this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-        console.log("======no product images====",this.productImages.length)
+        // console.log("======no product images====",this.productImages.length)
         }
         this.productImages=this.productImages.slice(0,4);
 
@@ -356,7 +358,7 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
   }
 
   public setIframe(data){
-    console.log("setting video url data "+data[0].source)
+    // console.log("setting video url data "+data[0].source)
 
     var iframeDivHolder = document.getElementById("iframe-div");
 
@@ -385,7 +387,7 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
   public setDataValues(resp:any): void {
     // this.product.name=resp.product.name;
     // this.productName = resp.product.name;
-console.log("response values: ", resp);
+// console.log("response values: ", resp);
   }
   private getSimilerProducts(subCategoryId: String) {
     this.subscriptions.push(
@@ -423,7 +425,7 @@ featureCount=5;
     this.viewAllFeature=false;
     
     this.getProductDetails(productId);
-    console.log(this.featureList);
+    // console.log(this.featureList);
     this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     // if(this.featureList.length>5 && !this.viewAllFeature){
     //   this.dispFeatureList = [...this.featureList.slice(0,5)];
@@ -440,10 +442,45 @@ featureCount=5;
     //     this.featureList = this.product.featureList;
     // }
     this.featureList = this.product.featureList;
-    console.log("featureList",this.dispFeatureList.length);
+    // console.log("featureList",this.dispFeatureList.length);
     //this.getProductDetails2(productId);
   }
 
+  public navigateToProductDetails(product:any){
+    
+    /*if(this.routePath === 'productBundles'){
+      this.router.navigate(['/products/brand-detail', product._id]);
+    }
+    else{
+      this.router.navigate(['/products', product._id]);
+    }*/
+
+    
+    
+    switch (product.type) {
+      case 'product':
+        this.router.navigate(['/products', product._id]);
+        return;
+
+      case 'productVariants':
+        this.router.navigate(['/products/product-variant-detail', product._id]);
+        return;
+        
+      case 'productBundles':
+        this.router.navigate(['/products/product-bundle-detail', product._id]);
+        return;
+      
+      case 'productBundleVariants':
+        this.router.navigate(['/products/product-bundle-varaint-detail', product._id]);
+        return;
+
+      default:
+        return null;
+    }
+    
+  }
+
+  
   // public featureCountEvent(): void {
     
   //   //  if(this.product.featureList.length>5 && !this.viewAllFeature){
@@ -459,19 +496,19 @@ featureCount=5;
   public featureCountEvent(val): void {
 
 
-    console.log("****** View Before", val);
+    // console.log("****** View Before", val);
     val = val ? false : true;
-    console.log("****** View ", val);
+    // console.log("****** View ", val);
     this.viewAllFeaturesDetails = val;
-    console.log("****** View ", this.viewAllFeaturesDetails);
+    // console.log("****** View ", this.viewAllFeaturesDetails);
     if(this.viewAllFeaturesDetails){
-      console.log("****** In Else");
-      console.log("****** In Else", this.completeFeatureList);
+      // console.log("****** In Else");
+      // console.log("****** In Else", this.completeFeatureList);
       this.featureList = this.completeFeatureList;
     }
     else{
-      console.log("****** In Else");
-      console.log("****** In Else", this.completeFeatureList);
+      // console.log("****** In Else");
+      // console.log("****** In Else", this.completeFeatureList);
       if(this.completeFeatureList.length>5){
         this.featureList = this.completeFeatureList.slice(0,5);
       }
@@ -490,7 +527,7 @@ featureCount=5;
       //this.featureList = this.product.featureList;
       
       
-      console.log("product list to compare",this.productListToCompare);
+      // console.log("product list to compare",this.productListToCompare);
     // }
   }
 
@@ -570,8 +607,8 @@ featureCount=5;
     }*/
 
     if(type === 'fromProd'){
-      console.log("()()() From Prom Prod");
-      console.log("()()()( From Prod", item);
+      // console.log("()()() From Prom Prod");
+      // console.log("()()()( From Prod", item);
       this.productListToCompare.push(item);
       
     }
@@ -587,7 +624,7 @@ featureCount=5;
     
     
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
-    console.log("getProdFromLocalStorage",this.productListToCompare);
+    // console.log("getProdFromLocalStorage",this.productListToCompare);
     //localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
     //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
@@ -600,11 +637,11 @@ featureCount=5;
     position: string = 'left';
     quantityCount = 1;
     addQuantity(quantity:any,index:any):void {
-      this.productBundles[index].quantity = quantity+1;
+      this.productBundleList[index].quantity = quantity+1;
     }
     decreaseQuantity(quantity:any,index:any): void {
       if(quantity>1){
-        this.productBundles[index].quantity = quantity-1;
+        this.productBundleList[index].quantity = quantity-1;
       }
     }
 
@@ -654,7 +691,7 @@ featureCount=5;
     }*/
 
     this.userAccountStore.userDetails$.subscribe(res=>{
-      console.log("()()()() ", res);
+      // console.log("()()()() ", res);
       if(res && res.email !== null){
         this.router.navigate(['/cart'], {queryParams: queryParams});
       }
@@ -742,8 +779,8 @@ featureCount=5;
   public setProductVariantsData(data,parentProduct){
     
     
-    console.log("======setProductVariantsData===="+data._id)
-    console.log("getting parentproductData==="+parentProduct.name)
+    // console.log("======setProductVariantsData===="+data._id)
+    // console.log("getting parentproductData==="+parentProduct.name)
         if(data ){
           
           data.name=data.name;
@@ -764,10 +801,10 @@ featureCount=5;
       public setSimilarProductVariantsData(data,parentProduct){
     
     
-        console.log("======setSimilarProductVariantsData===="+data.length)
-        console.log("getting parentproductData==="+parentProduct.name)
+        // console.log("======setSimilarProductVariantsData===="+data.length)
+        // console.log("getting parentproductData==="+parentProduct.name)
         if(data && data.length>0){
-          console.log("===========setProductBundleVariantsData======="+data.length)
+          // console.log("===========setProductBundleVariantsData======="+data.length)
           data.forEach(element => {
               
             element.name=data.name;
@@ -793,7 +830,7 @@ featureCount=5;
   public setProductBundleVariantsData(data){
 
     if(data && data.length>0){
-      console.log("===========setProductBundleVariantsData======="+data.length)
+      // console.log("===========setProductBundleVariantsData======="+data.length)
       data.forEach(element => {
         element.name=element.name;
           element.type = 'productBundleVariants';
@@ -831,6 +868,10 @@ featureCount=5;
 
     return data;
   }
+
+
+
+
 
   public viewModal2(queryParams) {
     const modalRef = this.modalService.open(GetFreeCallModalComponent);

@@ -109,7 +109,17 @@
   font-size: 16px;
   font-weight: 500;
 }
-
+.view-det-btn-01 {
+  background: transparent;
+  border: transparent;
+  text-align: center;
+  color: #003388;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: line;
+  cursor: pointer;
+  text-decoration: underline;
+}
 .request-quote-btn {
   background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
   border-radius: 8px;
@@ -151,6 +161,7 @@
   line-height: normal;
   letter-spacing: 0.686px;
   cursor: pointer;
+  margin-top: 2px;
 }
 .product-price-detail{
   display: flex;
@@ -535,7 +546,7 @@ h5 {
   margin: 1%;
   flex-direction: column;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  ;
+ 
 }
 
 .similar-prod-img-det {
@@ -631,7 +642,7 @@ h5 {
   width: 100%;
 }
 .about-heading{
-  width: 25%;
+  width: 26%;
 }
 .about-desc{
   width: 60%;
@@ -658,7 +669,7 @@ width:15%;
 }
 .product-common-info{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .offer-det {
@@ -697,8 +708,9 @@ width:15%;
 .offer-card {
   display: flex;
   /* flex-basis: 41%; */
-  padding: 1%;
-  margin: 2%;
+  width: 36%;
+  padding: 2%;
+  margin: 1%;
   flex-direction: column;
   border-radius: 8px;
   background: #FFF;
@@ -1396,7 +1408,7 @@ padding-top: 5%;
 }
 
 .view-sec {
-
+cursor: pointer;
   color: #0047BD;
   float: right;
   padding-right: 10px;
@@ -1459,11 +1471,11 @@ padding-top: 5%;
 }
 .left-arrow {
   left: 369px;
-  top: 75px;
+  top: 94px;
 }
 .right-arrow {
   right: 0px;
-  top: 75px;
+  top: 94px;
   display: flex;
   justify-content: flex-start;
 }
@@ -1676,8 +1688,9 @@ button{
 }
 
 .amazon-refer{
-  font-family: 'lato',sans-serif;
-   font-weight: 400; text-align: center;
+  font-family: 'lato', sans-serif;
+  font-weight: 400;
+  text-align: center;
 }
 .head-06{
   margin-bottom: 0px;
@@ -1752,7 +1765,7 @@ button{
   font-family: 'Lato', sans-serif;
 }
 .bundle-solution{
-  font-size: small;
+  font-size: 12px;
   font-weight: 600;
   margin-top: 10px;
 }

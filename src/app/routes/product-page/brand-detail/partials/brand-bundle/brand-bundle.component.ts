@@ -138,7 +138,7 @@ export class BrandBundleComponent implements OnInit{
 
     // this.cardProductItems = this.products;
     // this.cardProductVarientsItems = this.productVarients;
-    console.log("****** +++++++++ VAL ", this.productFamilyVariants);
+    // console.log("****** +++++++++ VAL ", this.productFamilyVariants);
   }
 
   public requestQuote(product){
@@ -177,7 +177,7 @@ export class BrandBundleComponent implements OnInit{
     }*/
 
     this.userAccountStore.userDetails$.subscribe(res=>{
-      console.log("()()()() ", res);
+      // console.log("()()()() ", res);
       if(res && res.email !== null){
         this.router.navigate(['/cart'], {queryParams: queryParams});
       }

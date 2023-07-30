@@ -1,5 +1,5 @@
 <div class="product-card-container">
-    
+    <h6 class="search-result">Results ({{productsList.length}})</h6>
     <ng-container *ngFor="let item of productsList">
         <div class="product-card-flyer-container">
             <div class="logo-holder">
@@ -39,7 +39,8 @@
                     <div class="header-title">
                         {{item.name}}
                     </div>
-                    <mat-icon>bookmark_border</mat-icon>
+                    <!-- <mat-icon>bookmark_border</mat-icon> -->
+                    <img class="bookmark-icon" src="../../../../assets/icons/Bookmark.svg">
                 </div>
                 <div class="price">
                     <span class="discount-holder">
@@ -56,14 +57,16 @@
                     </span>
 
                 </div>
-                <div class="descr">
-                    <div class="text-style-bold">
-                        Description
+                <ng-container *ngIf="item.description">
+                    <div class="descr">
+                        <div class="text-style-bold">
+                            Description
+                        </div>
+                        <div class="text-style">
+                            {{item.description}}
+                        </div>
                     </div>
-                    <div class="text-style">
-                        {{item.description}}
-                    </div>
-                </div>
+                </ng-container>
                 <div class="solution-category">
                     <div class="text-style-bold">
                         Solution Category

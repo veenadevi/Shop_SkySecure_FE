@@ -146,7 +146,7 @@ export class MicrosoftGraphService {
               if (!response) {
                 return null;
               }
-              console.log("********* Response in All Segmenation");
+              // console.log("********* Response in All Segmenation");
               return response;
             }),
             catchError(error => {
@@ -190,7 +190,7 @@ export class MicrosoftGraphService {
           if (!response) {
             return null;
           }
-          console.log("********* Response in Secure Score");
+          // console.log("********* Response in Secure Score");
           return response;
         }),
         catchError(error => {
@@ -221,7 +221,7 @@ export class MicrosoftGraphService {
           if (!response) {
             return null;
           }
-          console.log("********* Response in All Segmenation");
+          // console.log("********* Response in All Segmenation");
           return response;
         }),
         catchError(error => {
@@ -254,7 +254,7 @@ export class MicrosoftGraphService {
           if (!response) {
             return null;
           }
-          console.log("********* Response in All Segmenation");
+          // console.log("********* Response in All Segmenation");
           return response;
         }),
         catchError(error => {

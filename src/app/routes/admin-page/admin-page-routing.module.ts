@@ -9,6 +9,7 @@ import { DealsDetailsComponent } from './partials/deals-details/deals-details.co
 import { EstimateDetailsComponent } from './partials/estimate-details/estimate-details.component';
 import { AddNewProductComponent } from './partials/add-new-product/add-new-product.component';
 import { UploadProductPriceComponent } from './partials/upload-product-price/upload-product-price.component';
+import { EditProductComponent } from './partials/edit-product/edit-product.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,11 @@ const routes: Routes = [
         canActivate: [],
         path: 'upload-product-price',
         component : UploadProductPriceComponent
+      },
+      {
+        canActivate: [],
+        path: 'edit-product',
+        component : EditProductComponent
       }
       
       
