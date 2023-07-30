@@ -715,9 +715,9 @@ h5 {
 .offer-card {
   display: flex;
   /* flex-basis: 41%; */
-  width: 40%;
+  width: 36%;
   padding: 2%;
-  margin: 2%;
+  margin: 1%;
   flex-direction: column;
   border-radius: 8px;
   background: #FFF;
@@ -753,12 +753,10 @@ p {
 
 .all-feature-container {
   display: flex;
-  flex-basis: 20%;
-  padding: 1%;
-  margin: 1%;
+  margin: 0 2% 2%;
+  padding: 0 1%;
   flex-direction: column;
   background: #F1F1F1;
-  font-family: 'lato', sans-serif;
 }
 
 .p-card .p-card-title {
@@ -919,12 +917,6 @@ p {
   justify-content: space-between;
 }
 
-.all-feature-container {
-  display: flex;
-  margin: 1%;
-  padding: 1%;
-  flex-direction: column;
-}
 
 .comp-prod-card-img {
   display: flex;
@@ -1435,12 +1427,6 @@ button {
   margin: 6px 0 0;
 }
 
-.solution {
-  margin-top: 10px;
-  font-weight: 700;
-  margin-bottom: 7px;
-  font-family: 'lato', sans-serif;
-}
 
 .review {
   font-family: 'lato', sans-serif;

@@ -93,8 +93,7 @@
                                 -{{productVariants.priceList[0].discountRate}}%</p>
                             <div class="price">
                                 <p class="product-price">
-                                    <span class="price-symbol">&#8377;</span>
-                                    {{productVariants.priceList[0].price}}
+                                    <span class="price-symbol">&#8377;</span>{{productVariants.priceList[0].price}}
                                     <span class="product-price-type">/ {{productVariants.priceList[0].priceType}}</span>
                                 </p>
                             </div>
@@ -200,10 +199,9 @@
                                 </div>
                             </ng-container>
                         </div>
-
-
-
-                        <!-- <div class="common-info">
+                        <ng-container *ngIf="!offerVisible">
+                            <hr>
+                            <div class="common-info">
                                 <div class="common-det">
                                     <div class="comm-det-img">
                                         <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
@@ -232,7 +230,12 @@
                                     </div>
                                     <p class="amazon-refer" >Guaranteed Price</p>
                                 </div>
-                            </div> -->
+                            </div>
+                        </ng-container>
+
+
+
+                        
 
 
                     </div>
