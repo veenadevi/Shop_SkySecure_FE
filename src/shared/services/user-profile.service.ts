@@ -21,6 +21,8 @@ export class UserProfileService {
   private userSignInUrl : string;
   private profileUpdateUrl : string;
   private getQuotationUrl : string;
+  private initiateOTP : string;
+  private validateOTPUrl : string;
   
 
 
@@ -36,6 +38,9 @@ export class UserProfileService {
     this.profileUpdateUrl = AppService.appUrl.profileUpdate;
     this.getQuotationUrl = AppService.appUrl.getQuoteHistory;
     this.baseUrlForQuote = environment.gatewayUrlForOrders;
+
+    this.initiateOTP = AppService.appUrl.initiateOTP;
+    this.validateOTPUrl  = AppService.appUrl.validateOTP;
     
     
   }
@@ -152,6 +157,58 @@ export class UserProfileService {
 
     return request$;
   }
+
+
+
+  /**
+   * Send Email OTP 
+   */
+
+  public sendOTP(request): Observable<any> {
+
+  
+    
+    
+    let url = this.baseUrl + this.initiateOTP;   
+    let request$ = this.http.post<Observable<any>>(url, request)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+         
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+
+    /**
+   * User Email OTP Validation
+   */
+
+    public validateOTP(request): Observable<any> {
+
+  
+    
+    
+      let url = this.baseUrl + this.validateOTPUrl; 
+      //let url = "http://localhost:2003/api/user/validateOTP"  ;
+      let request$ = this.http.post<Observable<any>>(url, request)
+        .pipe(
+          map(response => {
+            if (!response) {
+              return null;
+            }
+           
+            return response;
+          }),
+        );
+  
+      return request$;
+    }
 
   /**
    * Service to Trigger Email

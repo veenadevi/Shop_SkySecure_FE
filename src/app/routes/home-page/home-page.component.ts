@@ -1,5 +1,7 @@
 import { Component, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 
 @Component({
@@ -20,7 +22,8 @@ export class HomePgaeComponent {
   constructor(
     public sanitizer: DomSanitizer,
     private renderer: Renderer2,
-    private metadataStore : MetadataStore
+    private metadataStore : MetadataStore,
+    private modalService : NgbModal
   ){
     this.renderer.listen('window', 'resize', this.detectElms.bind(this));
     this.renderer.listen('window', 'scroll', this.detectElms.bind(this));
@@ -60,7 +63,19 @@ export class HomePgaeComponent {
 
   }
 
+  public showBasicDialog() {
+    //this.displayBasic = true;
+    this.viewModal(null);
+  }
+  
+  public viewModal(req) {
+    const modalRef = this.modalService.open(GetFreeCallModalComponent);
+    modalRef.componentInstance.request = req;
+  }
+
 }
+
+
 
 function isInViewport (elm) {
   var elementTop = elm.offsetTop;

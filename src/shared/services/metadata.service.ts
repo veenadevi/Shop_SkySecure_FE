@@ -15,6 +15,7 @@ import { MetadataStore } from '../stores/metadata.store';
 @Injectable({ providedIn: 'root' })
 export class MetadataService {
   private baseUrl: string;
+  private baseUrlUsers : string;
   private fetchCategoryUrl : string;
   private fetchOEMUrl : string;
   private fetchProductsUrl : string;
@@ -29,13 +30,16 @@ export class MetadataService {
   private fetchCompareProductsListUrl:string;
   private fetchProductByProductVariant:string;
   private fetchAllSubcategory : string;
-  private fetchAdminProductDetailsUrl:string
+  private fetchAdminProductDetailsUrl:string;
+  private customerSupportUrl : string;
+
 
   constructor(
     private http: HttpClient,
     private metadataStore : MetadataStore
   ) {
-    this.baseUrl = environment.gatewayUrl
+    this.baseUrl = environment.gatewayUrl;
+    this.baseUrlUsers = environment.gatewayUrlForUserProfile;
     this.fetchCategoryUrl = AppService.appUrl.allCategory;
     this.fetchOEMUrl = AppService.appUrl.allOEM;
     this.fetchProductsUrl = AppService.appUrl.allProducts;
@@ -51,7 +55,8 @@ export class MetadataService {
     this.fetchProductBundleVariantDetailsUrl = AppService.appUrl.getProductBundleVariant;
     this.fetchCompareProductsListUrl = AppService.appUrl.fetchCompareProductsListUrl
     this.fetchAllSubcategory = AppService.appUrl.allSubcategory;
-    this.fetchAdminProductDetailsUrl=AppService.appUrl.fetchAdmingProduct
+    this.fetchAdminProductDetailsUrl=AppService.appUrl.fetchAdmingProduct;
+    this.customerSupportUrl = AppService.appUrl.customerSupport;
   }
 
   //fetch All Category
@@ -416,6 +421,31 @@ export class MetadataService {
             return null;
           }
   
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+
+    return request$;
+  }
+
+  /**
+   * Customer Enquiry Service
+   */
+  public sendCustomerSupport(req) : Observable<any> {
+    let url = this.baseUrlUsers + this.customerSupportUrl;
+    //let options = this.getOptions();
+
+    let request$ = this.http.post(url,req)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+    
           return response;
         }),
         catchError(error => {

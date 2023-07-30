@@ -42,44 +42,73 @@
   <div class="modal-header">
     Connect With Us
   </div>
+  <form [formGroup]="form">
 
-  <div class="modal-body">
+    
 
-    <div class="email-style">
-      <span class="p-float-label">
-        <input pInputText id="emailId" [(ngModel)]="emailId" />
-        <label htmlFor="emailId">Email ID</label>
-      </span>
+    <div class="modal-body">
+
+      
+
+  
+
+      <div class="email-style">
+        <span class="p-float-label">
+          <input 
+            pInputText 
+            id="emailId" 
+            formControlName="emailId"
+            [(ngModel)]="emailId" 
+            />
+          <label htmlFor="emailId">Email ID</label>
+        </span>
+      </div>
+
+      <div class="phoneno-style">
+        <span class="p-float-label">
+          <input 
+            pInputText 
+            id="phoneNo" 
+            formControlName="phoneNo"
+            [(ngModel)]="phoneNo" />
+          <label htmlFor="phoneNo">Mobile Number</label>
+        </span>
+      </div>
+
+      <div class="company-name-style">
+        <span class="p-float-label">
+          <input 
+            pInputText 
+            id="companyName" 
+            formControlName="companyName"
+            [(ngModel)]="companyName" />
+          <label htmlFor="companyName">Company Name</label>
+        </span>
+      </div>
+
+      <div class="message-text-style">
+        <span class="p-float-label">
+          <textarea 
+            id="messageText" 
+            rows="5" 
+            cols="30" 
+            formControlName="messageText"
+            pInputTextarea 
+            [(ngModel)]="messageText">
+          </textarea>
+          <label for="messageText">Message</label>
+        </span>
+      </div>
     </div>
 
-    <div class="phoneno-style">
-      <span class="p-float-label">
-        <input pInputText id="phoneNo" [(ngModel)]="phoneNo" />
-        <label htmlFor="phoneNo">Mobile Number</label>
-      </span>
+    <div class="modal-footer">
+      <button type="button" (click) = onSubmit() class="btn request-btn">Submit</button>
+      <button (click)="closeModal()" type="button" class="close" aria-label="Close">
+        <!-- <span aria-hidden="true">&times;</span> -->
+        cancel
+      </button>
     </div>
 
-    <div class="company-name-style">
-      <span class="p-float-label">
-        <input pInputText id="companyName" [(ngModel)]="companyName" />
-        <label htmlFor="companyName">Company Name</label>
-      </span>
-    </div>
 
-    <div class="message-text-style">
-      <span class="p-float-label">
-        <textarea id="messageText" rows="5" cols="30" pInputTextarea [(ngModel)]="messageText"></textarea>
-        <label for="messageText">Message</label>
-      </span>
-    </div>
-  </div>
-
-  <div class="modal-footer">
-    <button type="button" class="btn request-btn">Submit</button>
-    <button (click)="closeModal()" type="button" class="close" aria-label="Close">
-      <!-- <span aria-hidden="true">&times;</span> -->
-      Cancel
-    </button>
-  </div>
 
 </div>
