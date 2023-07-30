@@ -79,8 +79,7 @@
                                 </p>
                                 <div class="price">
                                     <p class="product-price">
-                                        <span class="price-symbol">&#8377;</span>
-                                        {{product.priceList[0].price}}
+                                        <span class="price-symbol">&#8377;</span>{{product.priceList[0].price}}
                                         <span class="product-price-type">/ {{product.priceList[0].priceType}}</span>
                                     </p>
                                 </div>
@@ -184,38 +183,39 @@
                                 </div>
                             </ng-container>
                         </div>
-
-
-                        <!-- <div class="common-info">
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
-    
+                        <ng-container *ngIf="!offerVisible">
+                            <hr>
+                            <div class="common-info">
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
+            
+                                    </div>
+                                    <p class="amazon-refer">secure transaction</p>
+                                </div>
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/TopBrandIllustrationIcon.svg">
+            
+                                    </div>
+                                    <p class="amazon-refer">Top brand</p>
+                                </div>
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/ProductCancellationIllustrationIcon.svg">
+            
+                                    </div>
+                                    <p class="amazon-refer">5 Days Cancellation </p>
+                                </div>
+                                <div class="common-det">
+                                    <div class="comm-det-img">
+                                        <img  class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/GuaranteedPriceIllustrationIcon.svg">
+            
+                                    </div>
+                                    <p class="amazon-refer" >Guaranteed Price</p>
+                                </div>
                             </div>
-                            <p class="amazon-refer">secure transaction</p>
-                        </div>
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/TopBrandIllustrationIcon.svg">
-    
-                            </div>
-                            <p class="amazon-refer">Top brand</p>
-                        </div>
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/ProductCancellationIllustrationIcon.svg">
-    
-                            </div>
-                            <p class="amazon-refer">5 Days Cancellation </p>
-                        </div>
-                        <div class="common-det">
-                            <div class="comm-det-img">
-                                <img  class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/GuaranteedPriceIllustrationIcon.svg">
-    
-                            </div>
-                            <p class="amazon-refer" >Guaranteed Price</p>
-                        </div>
-                    </div> -->
+                        </ng-container>
                     </div>
                     <!-- <p-divider></p-divider> -->
                 </div>

@@ -94,8 +94,7 @@
                             </p>
                             <div class="price">
                                 <p class="product-price">
-                                    <span class="price-symbol">&#8377;</span>
-                                    {{productFamily.priceList[0].price}}
+                                    <span class="price-symbol">&#8377;</span>{{productFamily.priceList[0].price}}
                                     <span class="product-price-type">
                                         / {{productFamily.priceList[0].priceType}}</span>
                                 </p>
@@ -163,8 +162,9 @@
                             Features</button>
                         <button class="btn request-quote-btn" style="margin-left: 4%;"
                             (click)="requestQuote( productFamily)">Request Quote</button></span>
-                    <p-divider></p-divider>
 
+                            <hr>
+                        
 
                     <div class="product-common-info">
                         <div class="offer-det">
@@ -193,14 +193,8 @@
                                 </div>
                             </ng-container>
                         </div>
-                    </div>
-
-
-
-
-
-                    <!-- <p-divider></p-divider> -->
-                    <!-- 
+                        <ng-container *ngIf="!offerVisible">
+                            <hr>
                     <div class="common-info">
 
                         <div class="common-det">
@@ -237,7 +231,9 @@
                         </div>
 
 
-                    </div> -->
+                    </div>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
 
