@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PrimeNGConfig } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -22,6 +22,8 @@ export class GetFreeCallModalComponent implements OnInit{
   public companyName : string;
   public messageText : string;
 
+  public submitted : boolean = false;
+
 
   public form: FormGroup;
   
@@ -40,8 +42,8 @@ export class GetFreeCallModalComponent implements OnInit{
       this.form = this.formBuilder.group(
         {
           //emailId: ['', [Validators.required, Validators.email]],
-          emailId: [],
-          phoneNo : [],
+          emailId: ['', [Validators.required, Validators.email]],
+          phoneNo : ['', Validators.required],
           companyName : [],
           messageText : []
         }
@@ -57,26 +59,38 @@ export class GetFreeCallModalComponent implements OnInit{
     )
   }
 
+  get f(): { [key: string]: AbstractControl } {
+    return this.form.controls;
+  }
+
   public onSubmit(){
-    var formValue = this.form.value;
-    let req = {
-      "name":"test Client",
-      "email": formValue.emailId ? formValue.emailId : '',
-      "mobileNumber": formValue.phoneNo ? formValue.phoneNo : '',
-      "message": formValue.messageText ? formValue.messageText : '',
-      "teamResponse":"",
-      "assignedTo":"64ad793a3efc5f490fc6c45d",
-      "createdBy":"veena",
-      "updatedBy":"veena"
+
+    this.submitted = true;
+    if (this.form.invalid) { // If Invalid Return
+      console.log("()()() Invalid");
+      return;
     }
-
-    this.subscriptions.push(
-      this.metadataService.sendCustomerSupport(req).subscribe( res=>{
-        console.log("()()() ", res);
-      })
-    )
-
-    console.log("()()() ", req);
+    else{
+      var formValue = this.form.value;
+      let req = {
+        "name":"test Client",
+        "email": formValue.emailId ? formValue.emailId : '',
+        "mobileNumber": formValue.phoneNo ? formValue.phoneNo : '',
+        "message": formValue.messageText ? formValue.messageText : '',
+        "teamResponse":"",
+        "assignedTo":"64ad793a3efc5f490fc6c45d",
+        "createdBy":"veena",
+        "updatedBy":"veena"
+      }
+  
+      this.subscriptions.push(
+        this.metadataService.sendCustomerSupport(req).subscribe( res=>{
+          console.log("()()() ", res);
+          this.activeModal.close();
+        })
+      )
+    }
+    
   }
 
   public closeModal(){

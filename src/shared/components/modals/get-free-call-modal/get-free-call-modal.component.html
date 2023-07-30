@@ -59,7 +59,13 @@
             id="emailId" 
             formControlName="emailId"
             [(ngModel)]="emailId" 
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }"
             />
+            <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+              <div *ngIf="f.emailId.errors.required">Email is required</div>
+              <div *ngIf="f.emailId.errors.email">Email is invalid</div>
+            </div>
           <label htmlFor="emailId">Email ID</label>
         </span>
       </div>
@@ -70,7 +76,13 @@
             pInputText 
             id="phoneNo" 
             formControlName="phoneNo"
-            [(ngModel)]="phoneNo" />
+            [(ngModel)]="phoneNo" 
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"
+            />
+            <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
+              <div *ngIf="f.phoneNo.errors.required">Mobile Number is required</div>
+            </div>
           <label htmlFor="phoneNo">Mobile Number</label>
         </span>
       </div>
