@@ -31,10 +31,23 @@ export class SearchbarSearchListComponent {
   public searchResults$ = this.searchResultStore.searchResults$
   .pipe(
     map(data => {
-      this.searchResultsProducts = data?.products || [];
+      // this.searchResultsProducts = data?.products || [];
+      // this.searchResultsCategoryList = data?.categoryList || [];
+      // this.searchResultsSubCategoryList = data?.subCategoryList || [];
+      // this.searchResultsProductBundleList = data?.productBundles || [];
+      let tempProducts  = this.setProductsData(data?.products || []);
+      let tempProductsVarients  = this.setProductVariantsData(data?.productVariants || []);
+
+      let tempProductBundleVariantsData = this.setProductBundleVariantsData(data?.productBundleVariants || []);
+      let tempBundlesData = this.setBundlesData(data?.productBundles || []);
+
+      this.searchResultsProducts = [...tempProducts , ...tempProductsVarients];
+      //this.searchResultsProducts = data?.products || [];
       this.searchResultsCategoryList = data?.categoryList || [];
       this.searchResultsSubCategoryList = data?.subCategoryList || [];
-      this.searchResultsProductBundleList = data?.productBundles || [];
+
+      this.searchResultsProductBundleList = [...tempProductBundleVariantsData , ...tempBundlesData];
+      //this.searchResultsProductBundleList = data?.productBundles || [];
       return data;
     }
     )
@@ -67,6 +80,108 @@ export class SearchbarSearchListComponent {
   public goToProductBundle(item) {
     //this.router.navigate([`/products/category/${category._id}`]);
     this.router.navigate(['/products/brand-detail', item._id]);
+  }
+
+  public navigateToProductDetails(product:any){
+
+    switch (product.productType) {
+      case 'products':
+        this.router.navigate(['/products', product._id]);
+        return;
+
+      case 'productVariants':
+        this.router.navigate(['/products/product-variant-detail', product._id]);
+        return;
+        
+      case 'productBundles':
+        this.router.navigate(['/products/product-bundle-detail', product._id]);
+        return;
+      
+      case 'productBundleVariants':
+        this.router.navigate(['/products/product-bundle-varaint-detail', product._id]);
+        return;
+
+      default:
+        return null;
+    }
+    
+  } 
+
+
+  /**
+   * Set Products Data
+   */
+
+  public setProductsData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+          element.productType = 'products';
+          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['navigationId'] = element._id;
+      });
+    }
+
+    return data;
+  }
+
+  /**
+   * Set Product Variants Data
+   */
+
+  public setProductVariantsData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+          element.productType = 'productVariants';
+          element.bannerLogo = (element.product && element.product.bannerLogo) ? element.product.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.product && element.product.subCategories && element.product.subCategories.length > 0) ? element.product.subCategories[0].name : "";
+          element['navigationId'] = element.productId;
+      });
+    }
+
+    return data;
+  }
+
+  /**
+   * Set Product Bundle Variants Data
+   */
+
+  public setProductBundleVariantsData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+          element.productType = 'productBundleVariants';
+          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['navigationId'] = element.productsFamilyId;
+      });
+    }
+
+    return data;
+  }
+
+  /**
+   * Set Product Bundles Data
+   */
+
+  public setBundlesData(data){
+
+    if(data && data.length>0){
+      data.forEach(element => {
+          element.productType = 'productBundles';
+          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+          element.description = element.description;
+          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['navigationId'] = element._id;
+      });
+    }
+
+    return data;
   }
 
 }

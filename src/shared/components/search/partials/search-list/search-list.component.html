@@ -6,7 +6,8 @@
                 <span>Products</span>
             </div>
             <ng-container *ngFor="let item of searchResultsProducts">
-                <div (click)="goToProductsPage(item)" class="list-item p-1">
+                <!-- <div (click)="goToProductsPage(item)" class="list-item p-1"> -->
+                <div (click)="navigateToProductDetails(item)" class="list-item p-1">
                     <span>{{item.name}}</span>
                 </div>
                 
@@ -41,7 +42,8 @@
                 <span>Product Bundles</span>
             </div>
             <ng-container *ngFor="let item of searchResultsProductBundleList">
-                <div  (click)="goToProductBundle(item)" class="list-item p-1">
+                <!-- <div  (click)="goToProductBundle(item)" class="list-item p-1"> -->
+                <div  (click)="navigateToProductDetails(item)" class="list-item p-1">
                     <span>{{item.name}}</span>
                 </div>
             </ng-container>
