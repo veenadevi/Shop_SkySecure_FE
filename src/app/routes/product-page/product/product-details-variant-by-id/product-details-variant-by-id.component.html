@@ -911,7 +911,7 @@
                                     </span>
 
                                     <p class="similar-solution">Solution Category:</p>
-                                    <p class="similar-desc">{{parentProduct.subcategories[0].description}}</p>
+                                    <p class="similar-desc">{{parentProduct.subcategories.description}}</p>
                                     <span class="similar-prod-price-det-price" *ngIf="item.priceList!=null">
                                         <p class="similar-price">&#8377; {{item.priceList[0].price}}</p>
                                         <p class="similar-type">&nbsp; / {{item.priceList[0].priceType}}</p>
