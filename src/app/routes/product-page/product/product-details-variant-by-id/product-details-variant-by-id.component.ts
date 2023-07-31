@@ -37,7 +37,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   productBundleVariantData:any[]
   products = [];
   links = ['#description', '#feature', '#specification','#simProd', '#compProd', '#bundles','#faq'];
-  titles = ['Description', 'Features', 'Specification','Similar Products','compare products','Bundles','FAQ'];
+  titles = ['Description', 'Features', 'Specification','Similar Products','Compare Products','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
 
