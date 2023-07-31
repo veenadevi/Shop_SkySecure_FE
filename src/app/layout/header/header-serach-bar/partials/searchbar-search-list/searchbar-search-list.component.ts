@@ -83,8 +83,7 @@ export class SearchbarSearchListComponent {
   }
 
   public navigateToProductDetails(product:any){
-       
-    console.log("()()()() ", product);
+
     switch (product.productType) {
       case 'products':
         this.router.navigate(['/products', product._id]);
