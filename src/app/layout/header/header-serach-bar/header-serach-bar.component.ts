@@ -32,6 +32,7 @@ export class HeaderSerachBarComponent {
 
   public onSearchClicked() {
     
+      
     if(this.inputText && this.inputText.length>2){
       this.isOpen = true;
       this.generalSearchOpen = false;
@@ -46,7 +47,7 @@ export class HeaderSerachBarComponent {
 
   public onFocusOutEvent(event: any){
     
-
+      
     setTimeout(()=>{  
       this.isOpen = false;
       this.generalSearchOpen = false;

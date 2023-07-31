@@ -12,6 +12,7 @@ import { SearchResultStore } from 'src/shared/stores/search-results.store';
 })
 export class SearchComponent {
 
+  
   public isOpen = false;
   public keywordSearchOpen = false;
   public generalSearchOpen = false;
@@ -28,6 +29,8 @@ export class SearchComponent {
   ) { }
 
   public onSearchClicked() {
+
+
     
     if(this.inputText && this.inputText.length>2){
       this.isOpen = true;
@@ -47,7 +50,7 @@ export class SearchComponent {
     setTimeout(()=>{  
       this.isOpen = false;
       this.generalSearchOpen = false;
-      this.keywordSearchOpen = false;                    
+      this.keywordSearchOpen = false;
       
     }, 300);
 
