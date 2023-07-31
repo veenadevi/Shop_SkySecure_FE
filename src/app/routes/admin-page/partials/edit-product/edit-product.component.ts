@@ -246,13 +246,31 @@ export class EditProductComponent  implements OnInit {
   }
 
   // Choose Subcategories using select dropdown
+  // changeCategories(event: any) {
+  //   const selectedValue = event.target.value.toString();
+  //   const categoryMap = new Map<string, any>();
+  //   this.categories.forEach(category => {
+  //     categoryMap.set(category._id.toString(), category);
+  //   });
+  //   const selectedCategory = categoryMap.get(selectedValue);
+  // }
+
+  
+
   changeCategories(event: any) {
-    const selectedValue = event.target.value.toString();
+    
+    const selectedValue = event.target.value;
+    // console.log("selectedValue  "+selectedValue)
     const categoryMap = new Map<string, any>();
     this.categories.forEach(category => {
       categoryMap.set(category._id.toString(), category);
     });
     const selectedCategory = categoryMap.get(selectedValue);
+    // console.log("selectedCategory  "+selectedCategory._id)
+
+    this.subCategories =  selectedCategory.subCategories;
+   
+
   }
 
   // Choose Subcategories using select dropdown
@@ -309,6 +327,7 @@ export class EditProductComponent  implements OnInit {
         description: productData.productDescription,
         oemId: productData.OEM,
         subCategoryId: productData.Subcategories,
+       
         productId: productData.products,
         productSkuId: productData.productSkuId,
         productSkuNumber: productData.productSkuNumber,
@@ -399,6 +418,9 @@ export class EditProductComponent  implements OnInit {
     })
 
     this.registrationForm.get('discount').setValue(response.products.priceList[0].discountRate, {
+      onlySelf: true
+    })
+    this.registrationForm.get('categories').setValue(response.products.categories[0]._id, {
       onlySelf: true
     })
 
