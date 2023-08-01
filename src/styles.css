@@ -55,3 +55,9 @@ body{
 .compare-products-modal-custom-class .modal-dialog{
   float : right !important
 }
+
+/** CDK Overlay Custom Style **/
+.cdk-overlay-container{
+  z-index: 1031 !important;
+}
+
