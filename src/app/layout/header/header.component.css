@@ -301,6 +301,40 @@ ul .nav-text:hover {
 #check {
     display: none;
 }
+@media  ( min-width: 771px) and (max-width: 1024px)  {
+    .checkbtn {
+        font-size: 20px;
+        color: #efefef;
+        justify-content: flex-end;
+        cursor: pointer;
+        display: none;
+        margin-left: 4px;
+    }
+}
+
+@media  ( min-width: 481px) and (max-width: 770px)  {
+    .checkbtn {
+        font-size: 20px;
+        color: #efefef;
+        justify-content: flex-end;
+        cursor: pointer;
+        display: none;
+        margin-left: 4px;
+    }
+    
+}
+
+@media  ( min-width: 320px) and (max-width: 480px)  {
+    .checkbtn {
+        font-size: 20px;
+        color: #efefef;
+        justify-content: flex-end;
+        cursor: pointer;
+        display: none;
+        margin-left: 4px;
+    }
+    
+}
 
 @media (max-width: 952px) {
     .logo-section {
@@ -393,3 +427,35 @@ ul .nav-text:hover {
     align-items: center;
     justify-content: center;
 }
+
+
+
+mat-sidenav-container mat-sidenav mat-nav-list .menu-item {
+    margin-left: 8px;
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    align-items: center;
+}
+.text-style{
+    font-size: 14px;
+    margin-top: 3px;
+    font-family: 'lato', sans-serif;
+ }
+ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+    /* /* display: flex; */
+    margin-left: 10px;
+    margin-top: 5px;
+}
+mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
+    transform: rotate(180deg);
+    float: right;
+    margin-left: 10px;
+}
+.sub-menu-item{
+    margin-left: 32px;
+    font-size: 13px;
+    font-family: 'lato', sans-serif;
+ }
