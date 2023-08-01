@@ -71,6 +71,31 @@
       <img class="usericon" alt="" src="../../../assets/icons/User_icon.svg"/>
     </div>
 
+
+
+    <div class="user-icon" title="User-icon" *ngIf="userLoggedIn">
+      <div mat-button [matMenuTriggerFor]="afterMenu">
+        <img class="usericon" alt="" src="../../../assets/icons/User_icon.svg"/>
+        <i class="fa fa-caret-down icon-color" aria-hidden="true"></i>
+      </div>
+      <mat-menu #afterMenu="matMenu" yPosition="below">
+        <button mat-menu-item [routerLink]="['user-profile/profile-view']">Update Profile</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      
+    </div>
+    <div>
+      <!-- <button mat-button [matMenuTriggerFor]="afterMenu">
+        <span class="text-normal">OFFER</span>
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+      </button>
+        <mat-menu #afterMenu="matMenu" yPosition="below">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+        </mat-menu> -->
+    </div>
+
+
     <input type="checkbox" id="check">
     <label for="check" class="checkbtn">                        
       <i class="user-img" class="fa fa-solid fa-bars"></i>
