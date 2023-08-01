@@ -1,0 +1,146 @@
+.modal-header {
+    flex-direction: column;
+}
+
+
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.compare-products-container {
+    max-height: 100%;
+    /* width: 446px; */
+    min-height: 100%;
+    border-radius: 0;
+    margin-right: 0;
+    padding: 28px 24px 0;
+}
+
+.container-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    column-gap: 45px;
+}
+
+.compare-headline-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.compare-headline {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.compare-subheadline {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.close{
+    background: white;
+    /* border: 1px solid #003388; */
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    text-align: center;
+    /* color: black; */
+    margin-right: 10px;
+    /* width: 150px; */
+    font-size: 16px;
+    font-weight: 500;
+    /* padding: 7px; */
+}
+
+
+
+.container-box{
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    padding: 10px 5px 20px 5px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+    align-items: center;
+    background-color: #F1F8FF;
+}
+
+.close-icon {
+    height: 30px;
+}
+
+.header{
+    font-weight: 500;
+    line-height: 2rem;
+    font-size: 18px;
+    color: var(--neutral);
+}
+
+.text-style{
+    align-items: center;
+    text-align: center;
+    font-size: 14px;
+    color: var(--neutral);
+    width:80%;
+}
+
+.list-holder2{
+    column-gap: 2.5em;
+    display: flex;
+    column-gap: 2.5em;
+    row-gap: 1.5em;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    vertical-align: middle;
+    
+}
+
+.list-holder{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+    width:100%;
+    margin-top: 1em;
+}
+
+.btn-holder{
+    margin-top: 20px;
+}
+
+.compare-btn {
+    border-radius: 8px;
+    background: #E2EDFF;
+    border: 1px solid #003388;
+    text-align: center;
+    color: #003388;
+    font-size: 16px;
+    font-weight: 500;
+    width: 110px;
+    height: 40px;
+
+    /* background: linear-gradient(180deg, #A9383D -21.43%, #F6EBEC 144.64%);
+    border-radius: 8px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500; */
+    
+}
+
+.compare-btn:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+
+
+
