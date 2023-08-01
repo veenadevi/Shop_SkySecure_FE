@@ -1890,3 +1890,8 @@ button{
   padding: 10px;
   flex-direction: column;
 }
+
+:host ::ng-deep .myCustomModalClass .modal-dialog {
+  max-width: 565px;
+  float: right;
+}
