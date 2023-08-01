@@ -24,7 +24,8 @@ export class ProductDetailComponent implements OnInit{
   public displayBasic: boolean; 
 
   productImages=[];
-  productVideoURL=[];
+  productVideoURL: string;
+  // productVideoURL=[];
   productBundles=[];
   productBundlesData:any=[];
   productBundleVariantsData:any=[];
@@ -127,10 +128,11 @@ export class ProductDetailComponent implements OnInit{
   }
 
   
+  featureList = [];
+  productparent ;
 
-
- featureList: any[] = [];
- productVariants: any[]  =[];
+//  featureList: any[] = [];
+//  productVariants: any[]  =[];
  dispFeatureList: any[] = [];
  productName:string;
   public bannerUrl : any;
@@ -268,7 +270,14 @@ export class ProductDetailComponent implements OnInit{
         }
         this.productImages=this.productImages.slice(0,4);
 
+        this.completeFeatureList = response.featureList;
 
+        if(this.productparent && this.productparent.productVideoURL && this.productparent.productVideoURL.length>0){
+          this.productVideoURL = this.productparent.productVideoURL[0].source ;
+        } 
+        else{
+          this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+        }
 
         // if(response.products[0].productImages.length>0) {
         //   this.productImages = response.productImages;
