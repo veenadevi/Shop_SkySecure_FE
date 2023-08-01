@@ -29,6 +29,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   public completeFeatureList : any[] = [];
 
   public viewAllFeaturesDetails = false;
+  productVideoURL: string;
   
   links = ['#description', '#feature', '#specification', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
   titles = ['Description', 'Features', 'Specification', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
@@ -155,6 +156,10 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   viewAllFeature = false;
   checked: boolean = false;
 
+  featureList = [];
+  productbundlevariants ;
+
+
   constructor(
     private route: ActivatedRoute,
     private metaDataSvc : MetadataService,
@@ -206,7 +211,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   // public productFamilylist : any[] = [];
 
 
-  featureList: any[] = [];
+
 
   public productFamilyVariant : any;
 
@@ -393,7 +398,13 @@ export class ProductBundleVariantDetailComponent implements OnInit {
         }
         this.productImages=this.productImages.slice(0,4);
 
-
+        this.completeFeatureList = response.featureList;
+        if(this.productbundlevariants && this.productbundlevariants.productVideoURL && this.productbundlevariants.productVideoURL.length>0){
+          this.productVideoURL = this.productbundlevariants.productVideoURL[0].source ;
+        } 
+      else{
+        this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+      }
         let tempProducts = this.setProductsData(this.products);
         let tempProductVariants = this.setProductVariantsData(this.productVarients);
       //  let tempProductBundleVariants = this.setProductBundleVariantsData(this.childProductFamilyVariant);

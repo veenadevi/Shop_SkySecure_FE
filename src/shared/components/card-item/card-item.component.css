@@ -46,8 +46,8 @@
     .d-flex{
         display: flex!important;
         row-gap: 10%;
-        width: 95%;
-        height: auto;
+        width: 100%;
+        height: 100%;
     }
     .ellipse{
         background: #EBECF6;
@@ -61,10 +61,11 @@
     
     .j_Y {
         text-align: center;
-        height: 50px;
+        height: 50%;
+        max-width: 95px;
     }
     .text-normal{
-        font-size: 10px;
+        font-size: 12px;
     }
 
    
@@ -84,8 +85,8 @@
     .d-flex{
         display: flex!important;
         row-gap: 10%;
-        width: 95%;
-        height: auto;
+        width: 100%;
+        height: 100%;
     }
     .ellipse{
         background: #EBECF6;
@@ -99,10 +100,11 @@
     
     .j_Y {
         text-align: center;
-        height: 50px;
+        height: 50%;
+        max-width: 95px;
     }
     .text-normal{
-        font-size: 10px;
+        font-size: 12px;
     }
       
 }
@@ -138,8 +140,9 @@
         text-align: center;
         height: 75px;
         padding-top: 10px;
+        max-width: 100px;
     }
     .text-normal{
-        font-size: 16px;
+        font-size: 12px;
     }
 }

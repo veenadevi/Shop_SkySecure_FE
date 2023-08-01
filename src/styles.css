@@ -50,3 +50,8 @@ body{
   font-weight: 600;
   color: #686A77;
 }
+
+/** Global Styles for Modal **/
+.compare-products-modal-custom-class .modal-dialog{
+  float : right !important
+}
