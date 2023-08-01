@@ -40,7 +40,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   titles = ['Description', 'Features', 'Specification','Similar Products','Compare Products','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
-
+ 
   productDescriptionWordLimit: number = 50;
   
   public allsimilarProducts:any[];
@@ -288,7 +288,9 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
         if(this.productVariants && this.productVariants.productVideoURL && this.productVariants.productVideoURL.length>0){
           this.productVideoURL = this.productVariants.productVideoURL[0].source ;
         } 
-
+        else{
+          this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+        }
         //iframe functionality------->
 
         /*if(this.productVariants && this.productVariants.productVideoURL){
