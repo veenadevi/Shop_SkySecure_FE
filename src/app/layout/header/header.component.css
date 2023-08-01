@@ -269,6 +269,11 @@ ul .nav-text:hover {
     border-radius: 8px;
 }
 
+.icon-color{
+    color: white;
+    margin-left : 10px;
+}
+
 
 .icon-button__badge{
     position: absolute;

@@ -259,7 +259,12 @@ export class HeaderComponent implements OnInit{
   }
 
   public logout() {
-    this.loginService.logout();
+    //this.loginService.logout();
+    //this.menuToogled = false;
+    localStorage.removeItem('XXXXaccess__tokenXXXX');
+    this.userAccountStore.setUserDetails(null);
+    //this.router.navigate(['']);
+    window.location.reload();
   }
 
   public getAccessIdToken1(userData) {
