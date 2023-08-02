@@ -136,12 +136,13 @@ export class ProductBundleVariantDetailComponent implements OnInit {
           
           this.completeFeatureList = response.featureList;
          if(response.featureList.length > 5){
-            this.features = response.featureList.slice(0,5);
+            // this.features = response.featureList.slice(0,5);
+            this.features = response.featureList;
           }
           else{
             this.features = response.featureList;
           }
-         this.features = response.featureList.slice(0,5);
+        //  this.features = response.featureList.slice(0,5);
     
         }
        
@@ -348,7 +349,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
           
           this.completeFeatureList = response.productFamilyVariantFeatures;
          if(response.productFamilyVariantFeatures.length > 5){
-            this.features = response.productFamilyVariantFeatures.slice(0,5);
+            this.features = response.productFamilyVariantFeatures;
           }
           else{
             this.features = response.productFamilyVariantFeatures;

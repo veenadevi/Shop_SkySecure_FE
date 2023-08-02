@@ -1509,8 +1509,22 @@ button{
   border-radius: 8px;
   background-color: #F1F1F1;
   box-shadow: 0px 2.4523746967315674px 2.4523746967315674px 0px rgba(0, 0, 0, 0.25); */
+  height: 250px; 
+  overflow: auto; 
+  padding: 10px;
+  scrollbar-width: thin; /* Creates a thin scrollbar on supporting browsers */
 }
 
+
+
+/* Optional: Customize scrollbar appearance (Not supported in all browsers) */
+.prod-card::-webkit-scrollbar {
+  width: 2px; /* Adjust the width of the scrollbar */
+}
+
+.prod-card::-webkit-scrollbar-thumb {
+  background-color: #888; /* Adjust the color of the scrollbar thumb */
+}
 .product-feature-container {
   display: flex;
   padding: 1%;
@@ -1525,6 +1539,7 @@ button{
   width: 50%;
   justify-content: center;
   align-items: center;
+  margin-top: 4px;
 }
 
 .prod-feat-card-content {
