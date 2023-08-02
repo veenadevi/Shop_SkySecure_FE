@@ -1,11 +1,13 @@
 <ng-container *ngIf="productVariants && productVariants.priceList && productVariants.priceList.length>0">
 
-    <div (click) = "viewModal3(null)" class="compare-products-badge">
-        <img class="compare-icon" src="../../../../assets/icons/compare.svg">
-        <span class="offer-name-label">
-            Compare
-        </span>
-    </div>
+    <ng-container *ngIf="prdLength > 0">
+        <div (click) = "viewModal3(null)" class="compare-products-badge">
+            <img class="compare-icon" src="../../../../assets/icons/compare.svg">
+            <span class="offer-name-label">
+                Compare ({{prdLength ? prdLength : 0}})
+            </span>
+        </div>
+    </ng-container>
 
     <div class="product-details-container">
         <div class="product-details">
@@ -99,7 +101,7 @@
                                 -{{productVariants.priceList[0].discountRate}}%</p>
                             <div class="price">
                                 <p class="product-price">
-                                    <span class="price-symbol">&#8377;</span>{{productVariants.priceList[0].price}}
+                                    <span class="price-symbol">&#8377;</span>{{productVariants.priceList[0].price | number : '1.2-2'}}
                                     <span class="product-price-type">/ {{productVariants.priceList[0].priceType}}</span>
                                 </p>
                             </div>
@@ -110,7 +112,7 @@
                             <span class="price-symbol">&#8377;</span>
                             <span>
                                 <p style="font-size: initial; text-decoration: line-through;">
-                                    {{productVariants.priceList[0].ERPPrice}}</p>
+                                    {{productVariants.priceList[0].ERPPrice | number : '1.2-2'}}</p>
                             </span>
                         </div>
                     </div>
@@ -796,7 +798,6 @@
                                         <div class="comp-product-card-cont">
                                             <div class="comp-product-card-img">
                                                 <img class="card-logo" src="{{item.bannerLogo}}">
-
                                             </div>
                                             <div class="comp-product-card-content">
                                                 <p class="product-category">{{item.name}}</p>

@@ -13,8 +13,8 @@
 
 .compare-products-badge {
   color: var(--white);
-  background: #0047BD;
-  width: 125px;
+  background: linear-gradient(180deg, #F79C0B 0%, #C68600 100%);
+  width: 150px;
   height: 44px;
   cursor: pointer;
   z-index: 3;
@@ -22,7 +22,7 @@
   padding: 8px 16px;
   position: fixed;
   top: 50%;
-  right: -44px;
+  right: -54px;
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
   display: flex;
