@@ -250,6 +250,11 @@ margin-right: -8px;
             border: none;
             visibility: hidden;
         } 
+        .search-bar .search-icon {
+            position: absolute;
+            left: 36px;
+            visibility: hidden;
+        }
     }
 
 
@@ -301,7 +306,12 @@ margin-right: -8px;
             border: none;
             visibility: hidden;
         } 
+        .search-bar .search-icon {
+            position: absolute;
+            left: 36px;
+            visibility: hidden;
         }
+}
 
 
 
