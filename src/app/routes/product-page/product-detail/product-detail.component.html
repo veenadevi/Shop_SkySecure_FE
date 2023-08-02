@@ -1,12 +1,14 @@
 <ng-container *ngIf="product && product.priceList && product.priceList.length>0">
 
+    <ng-container *ngIf="prdLength > 0">
+        <div (click) = "viewModal3(null)" class="compare-products-badge">
+            <img class="compare-icon" src="../../../../assets/icons/compare.svg">
+            <span class="offer-name-label">
+                Compare ({{ prdLength ? prdLength : 0}})
+            </span>
+        </div>
+    </ng-container>
 
-            <div (click) = "viewModal3(null)" class="compare-products-badge">
-                <img class="compare-icon" src="../../../../assets/icons/compare.svg">
-                <span class="offer-name-label">
-                    Compare
-                </span>
-            </div>
 
 
     <div class="product-details-container">
@@ -87,7 +89,7 @@
                                 </p>
                                 <div class="price">
                                     <p class="product-price">
-                                        <span class="price-symbol">&#8377;</span>{{product.priceList[0].price}}
+                                        <span class="price-symbol">&#8377;</span>{{product.priceList[0].price | number : '1.2-2'}}
                                         <span class="product-price-type">/ {{product.priceList[0].priceType}}</span>
                                     </p>
                                 </div>
@@ -98,7 +100,7 @@
                                 <span class="price-symbol">&#8377;</span>
                                 <span>
                                     <p style="font-size: initial; text-decoration: line-through;">
-                                        {{product.priceList[0].ERPPrice}}</p>
+                                        {{product.priceList[0].ERPPrice | number : '1.2-2'}}</p>
                                 </span>
                             </div>
                         </div>
@@ -809,8 +811,12 @@
                             <h6 style="font-size: 25px;">VS</h6>
                         </span>
 
-                        <button #leftArrow class="arrow left-arrow" (click)="scrollFunctionLeft()"><img
-                                class="arrow-icon" src="../../../../assets/icons/ArrowLeftIcon.svg"></button>
+                        <ng-container>
+                            <button #leftArrow class="arrow left-arrow" (click)="scrollFunctionLeft()">
+                                <img class="arrow-icon" src="../../../../assets/icons/ArrowLeftIcon.svg">
+                            </button>
+                        </ng-container>
+
 
                         <div class="scroll-container">
 
@@ -858,8 +864,12 @@
 
                         </div>
 
-                        <button class="arrow right-arrow" (click)="scrollFunctionRight()"><img class="arrow-icon"
-                                src="../../../../assets/icons/ArrowRightIcon.svg"></button>
+                        <ng-container >
+                            <button class="arrow right-arrow" (click)="scrollFunctionRight()">
+                                <img class="arrow-icon" src="../../../../assets/icons/ArrowRightIcon.svg">
+                            </button>
+                        </ng-container>
+
                     </div>
                 </div>
 

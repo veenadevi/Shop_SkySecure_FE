@@ -447,6 +447,7 @@ featureCount=5;
     this.featureList = this.product.featureList;
     // console.log("featureList",this.dispFeatureList.length);
     //this.getProductDetails2(productId);
+    this.compareProductsLength$.subscribe();
   }
 
   public navigateToProductDetails(product:any){
@@ -533,6 +534,32 @@ featureCount=5;
       // console.log("product list to compare",this.productListToCompare);
     // }
   }
+
+  public  prdLength = 0;
+
+  public compareProductsLength$ = this.compareProductsStore.compareProductsList2$
+    .pipe(
+      map(data => {
+
+        let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let combinedData = [...cachedData, ...cachedData2];
+        //this.productList = [...this.productList, ...data];
+        let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+        this.prdLength = uniqueElements.length;
+
+        console.log("++++++++++++++++++++++ ", this.prdLength);
+        
+        if(data){
+          return data;
+        }
+        else{
+          return data;
+        }
+        
+      }
+      )
+    )
 
   public removeSelectedItem(_id:any){
 
