@@ -11,7 +11,7 @@ import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
-
+import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 
 @Component({
   selector: 'app-product-details-variant-by-id',
@@ -40,7 +40,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   titles = ['Description', 'Features', 'Specification','Similar Products','Compare Products','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
-
+ 
   productDescriptionWordLimit: number = 50;
   
   public allsimilarProducts:any[];
@@ -288,7 +288,9 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
         if(this.productVariants && this.productVariants.productVideoURL && this.productVariants.productVideoURL.length>0){
           this.productVideoURL = this.productVariants.productVideoURL[0].source ;
         } 
-
+        else{
+          this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+        }
         //iframe functionality------->
 
         /*if(this.productVariants && this.productVariants.productVideoURL){
@@ -870,6 +872,11 @@ featureCount=5;
   }
 
 
+  public viewModal3(queryParams) {
+    const modalRef = this.modalService.open(CompareProductsModalComponent, {windowClass: 'compare-products-modal-custom-class' });
+    modalRef.componentInstance.request = queryParams;
+    // this.modalService.open(modal_id, { windowClass: 'custom-class' });
+  }
 
 
 

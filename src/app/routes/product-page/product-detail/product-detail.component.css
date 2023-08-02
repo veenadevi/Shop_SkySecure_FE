@@ -6,6 +6,48 @@
   font-family: 'lato',sans-serif;
 }
 
+.custom-class {
+  float: right;
+}
+
+
+.compare-products-badge {
+  color: var(--white);
+  background: #0047BD;
+  width: 125px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 3;
+  border-radius: 8px 8px 0 0;
+  padding: 8px 16px;
+  position: fixed;
+  top: 50%;
+  right: -44px;
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.offer-name-label {
+  color: var(--white);
+  margin-left: 4px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.compare-products-flyer {
+  /* display: flex;
+  position: absolute;
+  right: 0; */
+
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+
+}
+
 .product-details {
   display: flex;
   padding: 1% 2% 0 2%;
@@ -1847,4 +1889,9 @@ button{
   flex-basis: 90%;
   padding: 10px;
   flex-direction: column;
+}
+
+:host ::ng-deep .myCustomModalClass .modal-dialog {
+  max-width: 565px;
+  float: right;
 }

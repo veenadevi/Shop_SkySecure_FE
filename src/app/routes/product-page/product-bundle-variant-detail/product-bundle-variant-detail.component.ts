@@ -9,6 +9,8 @@ import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
+import { CompressOutlined } from '@mui/icons-material';
+import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 
 
 @Component({
@@ -28,6 +30,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   public completeFeatureList : any[] = [];
 
   public viewAllFeaturesDetails = false;
+  productVideoURL: string;
   
   links = ['#description', '#feature', '#specification', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
   titles = ['Description', 'Features', 'Specification', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
@@ -154,6 +157,10 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   viewAllFeature = false;
   checked: boolean = false;
 
+  featureList = [];
+  productbundlevariants ;
+
+
   constructor(
     private route: ActivatedRoute,
     private metaDataSvc : MetadataService,
@@ -205,7 +212,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   // public productFamilylist : any[] = [];
 
 
-  featureList: any[] = [];
+
 
   public productFamilyVariant : any;
 
@@ -392,7 +399,13 @@ export class ProductBundleVariantDetailComponent implements OnInit {
         }
         this.productImages=this.productImages.slice(0,4);
 
-
+        this.completeFeatureList = response.featureList;
+        if(this.productbundlevariants && this.productbundlevariants.productVideoURL && this.productbundlevariants.productVideoURL.length>0){
+          this.productVideoURL = this.productbundlevariants.productVideoURL[0].source ;
+        } 
+      else{
+        this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+      }
         let tempProducts = this.setProductsData(this.products);
         let tempProductVariants = this.setProductVariantsData(this.productVarients);
       //  let tempProductBundleVariants = this.setProductBundleVariantsData(this.childProductFamilyVariant);
@@ -453,7 +466,8 @@ export class ProductBundleVariantDetailComponent implements OnInit {
           element.type = 'productVariants';
           element.bannerLogo = (element.products && element.products.length>0 && element.products[0].bannerLogo) ? element.products[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
-          element['solutionCategory'] = (element.products && element.products.length>0 && element.products[0] && element.products[0].subCategories && element.products[0].subCategories.length > 0) ? element.products[0].subCategories[0].name : "";
+          element['solutionCategory'] = (element.products  && element.products.subCategories && element.products.subCategories.length > 0) ? element.products.subCategories[0].name : "";
+         console.log("fetching solution cat ==="+element['solutionCategory'])
           element['navigationId'] = element._id;
           element.priceList=element.priceList;
           element.quantity=1
@@ -736,6 +750,13 @@ public removeSelectedItem(_id:any){
 
 
   }
+
+  public viewModal3(queryParams) {
+    const modalRef = this.modalService.open(CompareProductsModalComponent, {windowClass: 'compare-products-modal-custom-class' });
+    modalRef.componentInstance.request = queryParams;
+    // this.modalService.open(modal_id, { windowClass: 'custom-class' });
+  }
+
 
   public viewModal2(queryParams) {
     const modalRef = this.modalService.open(GetFreeCallModalComponent);

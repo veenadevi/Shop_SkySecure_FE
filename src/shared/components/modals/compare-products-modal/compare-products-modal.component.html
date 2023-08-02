@@ -1,0 +1,72 @@
+
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="compare-products-container">
+                    <div class="container-header">
+                        <div class="compare-headline-section">
+                            <div class="compare-headline">
+                                Compare Products
+                            </div>
+                            <div class="compare-subheadline">
+                                Select your desired products and compare its features
+                            </div>
+                        </div>
+                        <div class="close-btn-section">
+                            <button (click)="closeModal()" type="button" class="close" aria-label="Close">
+                                <img class="close-icon" src="../../../../assets/icons/CloseIcon-Default.svg">
+                            </button>
+                        </div>
+                    </div>
+            </div>
+                <div class="modal-body">
+                    <!-- <ng-container *ngIf="(productList$ | async)"> -->
+                    <ng-container>
+        
+                        <!-- Check if Products are present -->
+                        <ng-container *ngIf="(productList && productList.length>0); else noProducts">
+                
+                            <!-- Template for Multiple Products -->
+                            <!-- <ng-container *ngIf="(productList.length>1); else singleProduct">-->
+                            <ng-container>
+                                <div class="list-holder">
+                                    <ng-container *ngFor="let item of productList">
+                                        <compare-product-item-flyer [item] = "item" (removableItem)="removeSelectedItem($event)"></compare-product-item-flyer>
+                                    </ng-container>
+                                </div>
+                                <div class="btn-holder">
+                                    <button class="btn secondary-compare-btn" (click)="navigateToCompareProducts()" [disabled]="(productList.length === 1)">
+                                        Compare
+                                    </button>
+                                </div>
+                                
+                            </ng-container>
+                
+                            <!-- Template for Single Product -->
+                            <!-- <ng-template #singleProduct>
+                                <div class="header">
+                                    Compare Products
+                                </div>
+                                <div class="text-style">
+                                    Select your desired products and compare its features
+                                </div>
+                                <div class="list-holder">
+                                    <compare-product-item-flyer [item] = "productList[0]"></compare-product-item-flyer>
+                                    <compare-product-item-flyer [item] = "itemJson"></compare-product-item-flyer>
+                                </div>
+                                
+                            </ng-template> -->
+                        </ng-container>
+                
+                        <!-- Template for No Products -->
+                        <ng-template #noProducts>
+                            <div class="list-holder">
+                                <compare-product-item-flyer [item] = "itemJson" (removableItem)="removeSelectedItem($event)"></compare-product-item-flyer>
+                            </div>
+                        </ng-template>
+                    </ng-container>
+        
+                </div>
+            </div>
+        </div>
+
+

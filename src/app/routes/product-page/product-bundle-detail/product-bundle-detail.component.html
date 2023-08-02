@@ -1,3 +1,12 @@
+
+<div (click) = "viewModal3(null)" class="compare-products-badge">
+    <img class="compare-icon" src="../../../../assets/icons/compare.svg">
+    <span class="offer-name-label">
+        Compare
+    </span>
+</div>
+
+
 <div class="product-details-container">
     <div class="product-details">
         <ng-container *ngIf="productFamily">
@@ -271,8 +280,10 @@
 
                 </div>
             </ng-container> -->
-            <details-compare-products-flyer
-                [compareProductsList]="selectedProductItem"></details-compare-products-flyer>
+
+            <!-- <details-compare-products-flyer
+                [compareProductsList]="selectedProductItem"></details-compare-products-flyer> -->
+
             <!-- <contact-us-flyer></contact-us-flyer> -->
             <contact-us-flyer-horizontal></contact-us-flyer-horizontal>
             <!-- <div class="connect-us-box">
@@ -388,11 +399,21 @@
             <!-- <<<<<<<<<<<<feature edit>>>>>>>>>>>>>>>>> -->
             <div class="product-features-container" id="feature" #featureRef>
                 <h5>Features</h5>
+
                 <div class="product-feature-container">
                     <div class="prod-feature-img">
+                        <!-- <img style="width:auto;height: auto;position: relative;"
+                        src="../../assets/productDetails/FeaturesIllustration.svg"> -->
+    
+    
+                        <iframe [src]="productVideoURL | safeurl" width="600" height="350" frameborder="0" title="test"
+                            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    
+                    </div>
+                    <!-- <div class="prod-feature-img">
                         <img style="width:auto;height: auto;position: relative;"
                             src="../../assets/productDetails/FeaturesIllustration.svg">
-                    </div>
+                    </div> -->
                     <div class="prod-feat-card-content">
                         <div class="prod-card-holder">
                             <div class="feature-desc-heading">

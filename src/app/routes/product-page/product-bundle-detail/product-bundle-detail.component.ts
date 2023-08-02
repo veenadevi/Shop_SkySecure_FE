@@ -9,7 +9,7 @@ import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
-
+import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 
 
 @Component({
@@ -21,6 +21,7 @@ export class ProductBundleDetailComponent implements OnInit{
   public displayBasic: boolean; 
   productDescriptionWordLimit: number = 50;
 
+  productVideoURL: string;
 
   public currentRoute: string;
   links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
@@ -29,7 +30,7 @@ export class ProductBundleDetailComponent implements OnInit{
   myColor = '';
 
   public productQuantity:  any = 1;
-
+  public completeFeatureList : any[] = [];
   public selectedProductItem : any[] = [];
 
   public bundleQuantity = 1;
@@ -114,6 +115,8 @@ export class ProductBundleDetailComponent implements OnInit{
     this.seeMore= !this.seeMore;
   }
 
+  featureList = [];
+  productbundles ;
   constructor(
     private route: ActivatedRoute,
     private metaDataSvc : MetadataService,
@@ -267,8 +270,13 @@ export class ProductBundleDetailComponent implements OnInit{
         }
         this.productImages=this.productImages.slice(0,4);
 
-
-      
+        this.completeFeatureList = response.featureList;
+        if(this.productbundles && this.productbundles.productVideoURL && this.productbundles.productVideoURL.length>0){
+          this.productVideoURL = this.productbundles.productVideoURL[0].source ;
+        } 
+      else{
+        this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+      }
         //this.allSimilerProducts = this.products.concat(response.productVarients,response.productFamilyVariants);
         //this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
         this.setCheckBoxState();
@@ -432,6 +440,14 @@ export class ProductBundleDetailComponent implements OnInit{
 
 
   }
+
+  public viewModal3(queryParams) {
+    const modalRef = this.modalService.open(CompareProductsModalComponent, {windowClass: 'compare-products-modal-custom-class' });
+    modalRef.componentInstance.request = queryParams;
+    // this.modalService.open(modal_id, { windowClass: 'custom-class' });
+  }
+
+
   public viewModal2(queryParams) {
     const modalRef = this.modalService.open(GetFreeCallModalComponent);
     modalRef.componentInstance.request = queryParams;

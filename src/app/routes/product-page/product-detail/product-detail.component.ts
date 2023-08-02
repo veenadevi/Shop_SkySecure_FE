@@ -12,6 +12,7 @@ import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -23,7 +24,8 @@ export class ProductDetailComponent implements OnInit{
   public displayBasic: boolean; 
 
   productImages=[];
-  productVideoURL=[];
+  productVideoURL: string;
+  // productVideoURL=[];
   productBundles=[];
   productBundlesData:any=[];
   productBundleVariantsData:any=[];
@@ -126,10 +128,11 @@ export class ProductDetailComponent implements OnInit{
   }
 
   
+  featureList = [];
+  productparent ;
 
-
- featureList: any[] = [];
- productVariants: any[]  =[];
+//  featureList: any[] = [];
+//  productVariants: any[]  =[];
  dispFeatureList: any[] = [];
  productName:string;
   public bannerUrl : any;
@@ -267,7 +270,14 @@ export class ProductDetailComponent implements OnInit{
         }
         this.productImages=this.productImages.slice(0,4);
 
+        this.completeFeatureList = response.featureList;
 
+        if(this.productparent && this.productparent.productVideoURL && this.productparent.productVideoURL.length>0){
+          this.productVideoURL = this.productparent.productVideoURL[0].source ;
+        } 
+        else{
+          this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+        }
 
         // if(response.products[0].productImages.length>0) {
         //   this.productImages = response.productImages;
@@ -562,6 +572,12 @@ featureCount=5;
 
 
 
+  }
+
+  public viewModal3(queryParams) {
+    const modalRef = this.modalService.open(CompareProductsModalComponent, {windowClass: 'compare-products-modal-custom-class' });
+    modalRef.componentInstance.request = queryParams;
+    // this.modalService.open(modal_id, { windowClass: 'custom-class' });
   }
 
   public viewModal2(queryParams) {
