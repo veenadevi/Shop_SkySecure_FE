@@ -14,7 +14,7 @@
 
 .compare-products-badge {
   color: var(--white);
-  background: #0047BD;
+  background: linear-gradient(180deg, #F79C0B 0%, #C68600 100%);
   width: 150px;
   height: 44px;
   cursor: pointer;

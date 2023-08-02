@@ -771,7 +771,7 @@
                                 <h6 style="font-size: 25px;">VS</h6>
                             </span>
 
-                            <ng-container>
+                            <ng-container *ngIf="allCompareProducts.length >=3">
                                 <button #leftArrow class="arrow left-arrow" (click)="scrollFunctionLeft()">
                                     <img class="arrow-icon" src="../../../../assets/icons/ArrowLeftIcon.svg">
                                 </button>
@@ -817,7 +817,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <ng-container>
+                            <ng-container *ngIf="allCompareProducts.length >=3">
                                 <button class="arrow right-arrow" (click)="scrollFunctionRight()">
                                     <img class="arrow-icon" src="../../../../assets/icons/ArrowRightIcon.svg">
                                 </button>

@@ -32,7 +32,6 @@ import { DetailsCompareProductsFlyerComponent } from './ad-ons/partials/details-
 
 
 
-
 @NgModule({
   declarations: [
     ROUTED_COMPONENTS,
@@ -50,7 +49,7 @@ import { DetailsCompareProductsFlyerComponent } from './ad-ons/partials/details-
     ProductBundleDetailComponent,
     ProductBundleVariantDetailComponent,
     ProductDetailsVariantByIdComponent,
-    DetailsCompareProductsFlyerComponent
+    DetailsCompareProductsFlyerComponent,
     
   ],
   imports: [
