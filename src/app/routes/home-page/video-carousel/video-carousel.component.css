@@ -92,3 +92,40 @@ border-radius: 8px;
     top: 90px;
     justify-content: flex-start;
 }
+@media (min-width:320px) and  (max-width: 480px) {
+
+   
+
+    
+   
+    .video
+    {
+        border-radius: 10px;
+        width: 200px;
+        height: 150px;
+    }
+    
+    .video-title {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0;
+        overflow: hidden;
+        display: block;
+        max-height: 4rem;
+        -webkit-line-clamp: 2;
+    }
+    
+  
+   
+    
+    .left-arrow{
+        top: 60px;
+        left: 0;
+    }
+    
+    .right-arrow{
+        right: 0;
+        top: 60px;
+        justify-content: flex-start;
+    }
+}
