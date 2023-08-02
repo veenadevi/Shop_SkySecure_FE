@@ -5,6 +5,7 @@
 
 
 
+
 .modal-header {
     flex-direction: column;
 }
@@ -23,7 +24,7 @@
     min-height: 100%;
     border-radius: 0;
     margin-right: 0;
-    padding: 28px 24px 0;
+    /* padding: 28px 24px 0; */
 }
 
 .container-header {
@@ -50,7 +51,7 @@
 }
 
 .close{
-    background: white;
+    /* background: white; */
     /* border: 1px solid #003388; */
     border: none;
     outline: none;
@@ -112,24 +113,28 @@
     display: flex;
     flex-direction: column;
     row-gap: 0.5em;
-    width:100%;
+    width: 100%;
     margin-top: 1em;
+    padding: 3%;
+    background: #efefef;
+    border-radius: 10px;
 }
 
 .btn-holder{
     margin-top: 20px;
 }
 
-.compare-btn {
+.secondary-compare-btn {
+    background: linear-gradient(180deg, #F79C0B 0%, #C68600 100%);
     border-radius: 8px;
-    background: #E2EDFF;
-    border: 1px solid #003388;
+    border: 1px solid #EFEFEF;
     text-align: center;
-    color: #003388;
+    margin-top: 3%;
+    color: #FFFFFF;
     font-size: 16px;
     font-weight: 500;
-    width: 110px;
-    height: 40px;
+    width: 100%;
+    padding: 8px 36px;
 
     /* background: linear-gradient(180deg, #A9383D -21.43%, #F6EBEC 144.64%);
     border-radius: 8px;
