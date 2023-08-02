@@ -507,7 +507,7 @@
                     src="../../assets/productDetails/FeaturesIllustration.svg"> -->
 
 
-                    <iframe [src]="productVideoURL | safeurl" width="600" height="350" frameborder="0" title="test"
+                    <iframe [src]="productVideoURL | safeurl" width="600" height="320" frameborder="0" title="test"
                         webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
                 </div>
@@ -535,10 +535,9 @@
                         </div>
 
                     </div>
-                    <div class="p-view-all-feature-div">
+                    <!-- <div class="p-view-all-feature-div">
                         <div class="feature-desc-heading">
-                            <!-- <p class="feature-viewall">click here to view detailed feature of the
-                            product</p> -->
+                          
                             <button class="btn view-det-btn" (click)="featureCountEvent(viewAllFeaturesDetails)">
                                 <ng-container *ngIf="viewAllFeaturesDetails ; else showLess">
                                     Show Less Features
@@ -547,7 +546,7 @@
                                     View All Features
                                 </ng-template></button>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
 

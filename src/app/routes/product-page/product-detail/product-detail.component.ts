@@ -220,7 +220,8 @@ export class ProductDetailComponent implements OnInit{
           
           this.completeFeatureList = response.featureList;
           if(response.featureList.length > 5){
-            this.featureList = response.featureList.slice(0,5);
+            //this.featureList = response.featureList.slice(0,5);
+            this.featureList = response.featureList;
           }
           else{
             this.featureList = response.featureList;
