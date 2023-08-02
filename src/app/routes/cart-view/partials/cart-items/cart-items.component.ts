@@ -31,7 +31,8 @@ export class CartItemsComponent {
 
   public itemTotal;
 
-  public grandTotal = 0;
+  public grandTotal = 0
+  public errortext:string
 
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
@@ -281,16 +282,19 @@ public cartData : any[] = [];
 
 
     if(opr === 'plus'){
+      this.cartData[i].errortext=""
       this.cartData[i].quantity = Number(this.cartData[i].quantity) + 1;
       this.cartData[i].itemTotal = this.cartData[i].quantity * price;
     }
     else if(opr === 'minus'){
 
-      if(this.cartData[i].quantity === 0){
-        this.cartData[i].quantity = 0;
-        this.cartData[i].itemTotal = this.cartData[i].quantity * price;
+      if(this.cartData[i].quantity <= 1){
+         this.cartData[i].quantity =1;
+         this.cartData[i].errortext="Quantity cannot be 0"
+        // this.cartData[i].itemTotal = this.cartData[i].quantity * price;
       }
       else{
+        this.cartData[i].errortext=""
         this.cartData[i].quantity = Number(this.cartData[i].quantity) - 1;
         this.cartData[i].itemTotal = this.cartData[i].quantity * price;
       }
