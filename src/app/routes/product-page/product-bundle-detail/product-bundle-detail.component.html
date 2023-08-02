@@ -1,3 +1,12 @@
+
+<div (click) = "viewModal3(null)" class="compare-products-badge">
+    <img class="compare-icon" src="../../../../assets/icons/compare.svg">
+    <span class="offer-name-label">
+        Compare
+    </span>
+</div>
+
+
 <div class="product-details-container">
     <div class="product-details">
         <ng-container *ngIf="productFamily">
@@ -271,8 +280,10 @@
 
                 </div>
             </ng-container> -->
-            <details-compare-products-flyer
-                [compareProductsList]="selectedProductItem"></details-compare-products-flyer>
+
+            <!-- <details-compare-products-flyer
+                [compareProductsList]="selectedProductItem"></details-compare-products-flyer> -->
+
             <!-- <contact-us-flyer></contact-us-flyer> -->
             <contact-us-flyer-horizontal></contact-us-flyer-horizontal>
             <!-- <div class="connect-us-box">
