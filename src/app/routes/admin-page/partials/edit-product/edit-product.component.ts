@@ -61,7 +61,7 @@ export class EditProductComponent  implements OnInit {
   productResult : any;
   selectedItemId: String;
   defaultDiscount: number;
-  selectedProductId : string;
+  selectedProductId : any;
   constructor(
     public fb: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -297,9 +297,13 @@ export class EditProductComponent  implements OnInit {
   }
 
   selectProduct(event: any) {
-    this.selectedProductId = event.target.value.substring(3);
-    this.selectedProductId = this.selectedProductId.replace(' ','')
-    this.getProductDetails(this.selectedProductId);
+    console.log("()()()",this.selectedProductId);
+    
+    
+    //this.selectedProductId = event.target.value.substring(3);
+    //this.selectedProductId = this.selectedProductId.replace(' ','')
+    //this.selectedProductId = this.selectedProductId._id;
+    this.getProductDetails(this.selectedProductId._id);
   }
 
   //############### Add Dynamic Elements ###############/

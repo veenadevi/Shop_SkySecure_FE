@@ -7,12 +7,28 @@
             <div class="label">
                 <label>Select Products</label>
             </div>
-            <div class="select">
+            <!-- <div class="select">
                 <select class="custom-select-04" (change)="selectProduct($event)" [(ngModel)]="selectedProductId">
                     <option value="">Choose...</option>
                     <option *ngFor="let product of products" [ngValue]="product._id">
                         {{product.name}}</option>
                 </select>
+            </div> -->
+
+            <div>
+                <p-dropdown [options]="products" (onChange)="selectProduct($event)" [(ngModel)]="selectedProductId" optionLabel="name" [filter]="true" filterBy="name"
+                    [showClear]="true" placeholder="Select a Product">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item country-item-value" *ngIf="selectedProductId">
+                            <div>{{selectedProductId.name}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-products pTemplate="item">
+                        <div class="country-item">
+                            <div>{{products.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
             </div>
 
             <!-- error block -->
@@ -135,8 +151,11 @@
                                         Product Description</label>
                                 </div>
                                 <div class="input">
-                                    <input class="custom-select-02" formControlName="productDescription"
-                                        [ngClass]="{'error': submitted && myForm.productDescription.errors}">
+                                    <!-- <input class="custom-select-02" formControlName="productDescription"
+                                        [ngClass]="{'error': submitted && myForm.productDescription.errors}"> -->
+                                        <textarea class="custom-select-02 desc-text-area" formControlName="productDescription"
+                                        [ngClass]="{'error': submitted && myForm.productDescription.errors}"></textarea>
+
                                 </div>
                                 <!-- error block -->
                                 <div class="invalid-feedback"
