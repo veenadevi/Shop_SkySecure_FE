@@ -85,9 +85,11 @@ input{
 
 .new-email-alert{
     font-size: .875em;
+    
     color: #b02a37;
-    padding-left: 29%;
+    padding-left: 0%;
     padding-top: 4%;
+    text-align: center;
 }
 .logo{
     display: none;
@@ -118,6 +120,30 @@ input{
 
 
 /* media-query */
+@media  ( min-width: 1024px) and (max-width: 1200px)  {
+.back-btn{
+    padding-top: 0px;
+    padding-left: 0;
+    margin-top: -70px;
+    margin-left: -35px;
+    cursor: pointer;
+}
+input{
+    box-sizing: border-box;
+    border: 2px solid #918F90;
+    border-radius: 8px;
+    padding: 7px;
+    width: 90%;
+    /* border: none; */
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+    padding-top: 7px;
+    font-family: 'lato',sans-serif;
+}
+}
 
 @media  ( min-width: 770px) and (max-width: 1024px)  {
     .login-container{
@@ -199,10 +225,11 @@ input{
     }
     
     .new-email-alert{
-        font-size: .875em;
+        font-size: 12px;
         color: #b02a37;
-        padding-left: 29%;
+        padding-left: 0%;
         padding-top: 4%;
+        text-align: center;
     }
     .skysecure-logo {
         height: 50px;
@@ -345,10 +372,11 @@ input{
     }
     
     .new-email-alert{
-        font-size: .875em;
+        font-size: 12px;
         color: #b02a37;
-        padding-left: 29%;
+        padding-left: 0%;
         padding-top: 4%;
+        text-align: center;
     }
     .skysecure-logo {
         height: 50px;
@@ -487,10 +515,11 @@ input{
     }
     
     .new-email-alert{
-        font-size: .875em;
+        font-size: 12px;
         color: #b02a37;
-        padding-left: 29%;
+        padding-left: 0%;
         padding-top: 4%;
+        text-align: center;
     }
     .skysecure-logo {
         height: 50px;

@@ -157,7 +157,7 @@ export class ProductCardFlyerComponent implements OnInit{
 
   public requestQuote(product){
 
-    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
+    //let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
     let queryParams;
       
@@ -167,6 +167,10 @@ export class ProductCardFlyerComponent implements OnInit{
           productId : product._id,
           quantity : 1,
           price : product.priceList[0].price,
+          erpPrice:product.priceList[0].ERPPrice,
+          discountRate:product.priceList[0].discountRate,
+          priceType:product.priceList[0].priceType,
+
         };
     /*if(loggedinData.length > 0 ){
       
