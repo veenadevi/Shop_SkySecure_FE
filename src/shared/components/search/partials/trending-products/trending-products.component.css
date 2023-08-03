@@ -13,14 +13,14 @@
     letter-spacing: 0.1em;
     text-transform: capitalize;
 
-    font-weight: 600;
+    /* font-weight: 600; */
     font-size: 0.8rem;
     
 }
 
 .text-style .header {
 
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.7rem;
     text-transform: uppercase;
 }
