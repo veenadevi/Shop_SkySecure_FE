@@ -104,7 +104,7 @@ public cartData : any[] = [];
 
     this.params = this.route.snapshot.queryParamMap;
 
-
+console.log("what is in param..."+ JSON.stringify(this.params))
 
 
     
@@ -195,7 +195,11 @@ public cartData : any[] = [];
         "productId": productVariant._id,
         "productName" : productVariant.name,
         "quantity" : productVariant.quantity,
-        "price" : (productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].price : 20
+        "price" : (productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].price : '',
+        "erpPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].ERPPrice : '',
+        "discountRate":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].discountRate : '',
+        "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : ''
+
       })
 
 
@@ -211,7 +215,10 @@ public cartData : any[] = [];
               "productId": item._id,
               "productName" : item.name,
               "quantity" : item.quantity,
-              "price" : item.priceList.length>0 ? item.priceList[0].price  : ''
+              "price" : item.priceList.length>0 ? item.priceList[0].price  : '',
+              "erpPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].ERPPrice : '',
+              "discountRate":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].discountRate : '',
+              "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : ''
           });
           }
         });
@@ -229,7 +236,10 @@ public cartData : any[] = [];
               "productId": item._id,
               "productName" : item.name,
               "quantity" : item.quantity,
-              "price" : item.priceList.length>0 ? item.priceList[0].price : ''
+              "price" : item.priceList.length>0 ? item.priceList[0].price : '',
+              "erpPrice":item.item.priceList[0].erpPrice,
+              "discountRate":item.item.priceList[0].discountRate,
+              "priceType":item.item.priceList[0].discountRate
           });
           }
         });
@@ -250,7 +260,12 @@ public cartData : any[] = [];
           "productId": this.params.get('productId'),
           "productName" : this.params.get('productName'),
           "quantity" : this.params.get('quantity'),
-          "price" : this.params.has('price') ? this.params.get('price') : ''
+          "price" : this.params.has('price') ? this.params.get('price') : '',
+          "erpPrice" : this.params.get('erpPrice'),
+          "discountRate" : this.params.get('discountRate'),
+          "priceType" : this.params.get('priceType')
+
+       
       });
       }
 
@@ -304,11 +319,14 @@ public cartData : any[] = [];
   }
 
   public calTotalPrice() {
-    let sum: number = this.cartData.map(a => a.itemTotal).reduce(function(a, b)
-    {
-      return a + b;
-    });
-    this.grandTotal = sum;
+    if(this.cartData && this.cartData.length>0){
+      let sum: number = this.cartData.map(a => a.itemTotal).reduce(function(a, b)
+      {
+        return a + b;
+      });
+      this.grandTotal = sum;
+    }
+    
   }
 
   public requestQuote(){

@@ -707,6 +707,9 @@ featureCount=5;
           productId : product._id,
           quantity : product.quantity,
           price : product.priceList[0].price,
+          erpPrice:product.priceList[0].ERPPrice,
+          discountRate:product.priceList[0].discountRate,
+          priceType:product.priceList[0].priceType,
         };
       
     /*if(loggedinData.length > 0 ){

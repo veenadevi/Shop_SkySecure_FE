@@ -14,7 +14,8 @@
                   <thead class="table-header">
                     <tr>
                       <th scope="col">Products</th>
-                      <th scope="col">Price</th>
+                      <th scope="col">MRP</th>
+                      <th scope="col">Skysecure Price</th>
                       <th scope="col">Quantity </th>
                       <th scope="col">Sub Total</th>
                     </tr>
@@ -37,6 +38,13 @@
                           </div>
                         </th>
                         <!-- Base Price -->
+                        <td>
+                          <div class="td-column price-details">
+                            <span>
+                              {{ item.erpPrice | number : '1.2-2'}}
+                            </span>
+                          </div>
+                        </td>
                         <td>
                           <div class="td-column price-details">
                             <span>
