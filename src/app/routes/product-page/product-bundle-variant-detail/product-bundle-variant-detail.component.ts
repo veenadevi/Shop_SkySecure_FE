@@ -563,20 +563,21 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   quantityCount = 1;
   addQuantity(quantity:any,index:any):void {
     
-    this.allBundleDetais[index].quantity = quantity+1;
+    this.allBundleDetais[index].quantity = Number(quantity)+1;
   }
   decreaseQuantity(quantity:any,index:any): void {
     if(quantity>1){
-      this.allBundleDetais[index].quantity = quantity-1;
+      
+      this.allBundleDetais[index].quantity = Number(quantity)-1;
     }
   }
 
   addBuyQuantity(quantity:any):void {
-    this.productFamilyVariant.quantity = quantity+1;
+    this.productFamilyVariant.quantity = Number(quantity)+1;
   }
   decreaseBuyQuantity(quantity:any): void {
     if(quantity>1){
-      this.productFamilyVariant.quantity = quantity-1;
+      this.productFamilyVariant.quantity = Number(quantity)-1;
     }
   }
 

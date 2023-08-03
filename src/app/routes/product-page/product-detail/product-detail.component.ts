@@ -541,20 +541,23 @@ featureCount=5;
     position: string = 'left';
     quantityCount = 1;
     addQuantity(quantity:any,index:any):void {
-      this.productBundles[index].productFamily.quantity = quantity+1;
+    
+      this.productBundles[index].productFamily.quantity =  Number(quantity)+1;
     }
     decreaseQuantity(quantity:any,index:any): void {
       if(quantity>1){
-        this.productBundles[index].productFamily.quantity = quantity-1;
+        this.productBundles[index].productFamily.quantity = Number(quantity)-1;
       }
     }
 
     addBuyQuantity(quantity:any):void {
-      this.product.quantity = quantity+1;
+      //this.product.quantity = quantity+1;
+      this.product.quantity = Number(this.product.quantity) +1;
     }
     decreaseBuyQuantity(quantity:any): void {
       if(quantity>1){
-        this.product.quantity = quantity-1;
+        this.product.quantity = Number(this.product.quantity) - 1;
+       // this.product.quantity = quantity-1;
       }
     }
 

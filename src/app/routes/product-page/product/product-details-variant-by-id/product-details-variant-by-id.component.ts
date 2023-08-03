@@ -669,29 +669,29 @@ featureCount=5;
     position: string = 'left';
     quantityCount = 1;
     addQuantity(quantity:any,index:any):void {
-      this.productBundleList[index].quantity = quantity+1;
+      this.productBundleList[index].quantity = Number(quantity)+1;
     }
     decreaseQuantity(quantity:any,index:any): void {
       if(quantity>1){
-        this.productBundleList[index].quantity = quantity-1;
+        this.productBundleList[index].quantity = Number(quantity)-1;
       }
     }
 
     addSPQuantity(quantity:any,index:any):void {
-      this.similarProducts[index].quantity = quantity+1;
+      this.similarProducts[index].quantity = Number(quantity)+1;
     }
     decreaseSPQuantity(quantity:any,index:any): void {
       if(quantity>1){
-        this.similarProducts[index].quantity = quantity-1;
+        this.similarProducts[index].quantity = Number(quantity)-1;
       }
     }
 
     addBuyQuantity(quantity:any):void {
-      this.productVariants.quantity = quantity+1;
+      this.productVariants.quantity = Number(quantity)+1;
     }
     decreaseBuyQuantity(quantity:any): void {
       if(quantity>1){
-        this.productVariants.quantity = quantity-1;
+        this.productVariants.quantity = Number(quantity)-1;
       }
     }
 
