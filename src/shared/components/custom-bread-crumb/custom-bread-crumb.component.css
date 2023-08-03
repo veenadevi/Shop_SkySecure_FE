@@ -1,0 +1,17 @@
+:host ::ng-deep .border-none{
+    border: none;
+    padding: 0% 0% 0 2%;
+    margin: 1% 0% 0 2%;
+}
+
+:host ::ng-deep .p-breadcrumb{
+    border: none;
+}
+
+:host ::ng-deep ul{
+    font-size: 12px;
+}
+
+:host ::ng-deep .pi{
+    font-size: 0.8rem;
+}

@@ -30,6 +30,7 @@ import { GetFreeCallModalComponent } from './components/modals/get-free-call-mod
 import { ContactUsFlyerHorizontalComponent } from './components/contact-us-flyer-horizontal/contact-us-flyer-horizontal.component';
 import { SafeUrlPipe } from './pipes/safeUrlPipe';
 import { CompareProductsModalComponent } from './components/modals/compare-products-modal/compare-products-modal.component';
+import { CustomBreadCrumbComponent } from './components/custom-bread-crumb/custom-bread-crumb.component';
 
 
 
@@ -69,7 +70,8 @@ import { CompareProductsModalComponent } from './components/modals/compare-produ
     GetFreeCallModalComponent,
     ContactUsFlyerHorizontalComponent,
     SafeUrlPipe,
-    CompareProductsModalComponent
+    CompareProductsModalComponent,
+    CustomBreadCrumbComponent
   ],
 
   providers: [
@@ -109,7 +111,8 @@ import { CompareProductsModalComponent } from './components/modals/compare-produ
     GetFreeCallModalComponent,
     ContactUsFlyerHorizontalComponent,
     SafeUrlPipe,
-    CompareProductsModalComponent
+    CompareProductsModalComponent,
+    CustomBreadCrumbComponent
   ],
   
 

@@ -10,6 +10,9 @@
 
 
 <div class="product-details-container">
+    <div *ngIf="productFamily">
+        <custom-bread-crumb [product] = "productFamily"></custom-bread-crumb>
+    </div>
     <div class="product-details">
         <ng-container *ngIf="productFamily">
 
@@ -79,7 +82,7 @@
                 </div>
 
                 <div class="product-details-info">
-                    <h4 class="head-04">{{productFamily.name}}
+                    <h4 class="head-04 notranslate">{{productFamily.name}}
                     </h4>
                     <p class="para">by Microsoft</p>
                     <div class="pd-header-reviews">
