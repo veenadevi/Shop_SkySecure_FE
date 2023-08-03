@@ -47,16 +47,16 @@ export class SearchComponent {
   public onFocusOutEvent(event: any){
     
 
-    setTimeout(()=>{  
+    /*setTimeout(()=>{  
       this.isOpen = false;
       this.generalSearchOpen = false;
       this.keywordSearchOpen = false;
       
-    }, 300);
+    }, 300);*/
 
-    // this.isOpen = true;
-    // this.generalSearchOpen = false;
-    // this.keywordSearchOpen = true
+    this.isOpen = true;
+    this.generalSearchOpen = false;
+    this.keywordSearchOpen = true
   }
 
   public onSearchQueryInput(event: Event): void {
