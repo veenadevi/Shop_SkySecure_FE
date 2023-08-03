@@ -116,5 +116,6 @@ export class CompareProductsModalComponent {
 
   public navigateToCompareProducts(){
     this.router.navigate(['/compare-products/results']);
+    this.activeModal.close();
   }
 }
