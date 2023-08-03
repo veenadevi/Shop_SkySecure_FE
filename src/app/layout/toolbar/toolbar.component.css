@@ -51,4 +51,5 @@ button i {
     height: auto !important;
     width: auto !important;
     background-color: var(--primary);
+    padding-left: 10px;
 }
