@@ -239,7 +239,7 @@ ul .nav-text:hover {
 .cart-button .cart-icon {
     height: 20px;
     position: absolute;
-    top: 10px;
+    top: 12px;
     right: 10px;
 }
 
@@ -261,7 +261,7 @@ ul .nav-text:hover {
 }
 
 .usericon {
-    height: 20px;
+    height: 18px;
 }
 
 .user-icon:hover {
@@ -306,7 +306,7 @@ ul .nav-text:hover {
 #check {
     display: none;
 }
-@media  ( min-width: 771px) and (max-width: 1024px)  {
+@media  ( min-width: 770px) and (max-width: 1024px)  {
     .checkbtn {
         font-size: 20px;
         color: #efefef;
@@ -315,6 +315,10 @@ ul .nav-text:hover {
         display: none;
         margin-left: 10px;
         margin-top: 2px;
+    }
+    .usericon {
+        height: 18px;
+        margin-top: 5px;
     }
 }
 @media (max-width: 952px) {
@@ -400,6 +404,10 @@ ul .nav-text:hover {
         align-items: center;
         margin-top: -6px;
     }
+    .usericon {
+        height: 18px;
+        margin-top: 5px;
+    }
    
 }
 
@@ -443,6 +451,7 @@ ul .nav-text:hover {
 }
 .usericon {
     height: 18px;
+    margin-top: 5px;
 }
 .icons-section {
     display: flex;
