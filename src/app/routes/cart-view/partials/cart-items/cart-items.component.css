@@ -197,3 +197,12 @@
     text-align: center;
     height: 4em !important;
 }
+.error-message {
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 0;
+    color: #B82727;
+    margin-top: -17%;
+}

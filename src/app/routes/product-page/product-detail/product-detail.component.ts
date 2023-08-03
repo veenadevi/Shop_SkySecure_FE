@@ -39,6 +39,8 @@ export class ProductDetailComponent implements OnInit{
   public completeFeatureList : any[] = [];
   
   public viewAllFeaturesDetails = false;
+
+  public prdType : any;
   
   faq = [];
   productListToCompare  = [];
@@ -213,6 +215,7 @@ export class ProductDetailComponent implements OnInit{
       this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( (response) => {
      //this.individualProductDetail$.subscribe();
         this.product={...response.product, quantity: 1 }
+        this.prdType = response.type;
        this.product.bannerLogo=(this.product.bannerLogo &&this.product.bannerLogo !== null) ? this.product.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
         // console.log("price after set quantity===="+this.product.priceList[0].discountRate)
         let fList = [];
@@ -220,7 +223,8 @@ export class ProductDetailComponent implements OnInit{
           
           this.completeFeatureList = response.featureList;
           if(response.featureList.length > 5){
-            this.featureList = response.featureList.slice(0,5);
+            //this.featureList = response.featureList.slice(0,5);
+            this.featureList = response.featureList;
           }
           else{
             this.featureList = response.featureList;
@@ -386,6 +390,7 @@ featureCount=5;
     //this.featureList = reson.featureList;
     //console.log("featureList",this.dispFeatureList.length);
     //this.getProductDetails2(productId);
+    this.compareProductsLength$.subscribe();
   }
 
 
@@ -429,6 +434,33 @@ featureCount=5;
       // console.log("product list to compare",this.productListToCompare);
     // }
   }
+
+
+  public  prdLength = 0;
+  public compareProductsLength$ = this.compareProductsStore.compareProductsList2$
+    .pipe(
+      map(data => {
+
+        let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let combinedData = [...cachedData, ...cachedData2];
+        //this.productList = [...this.productList, ...data];
+        let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+        this.prdLength = uniqueElements.length;
+
+        console.log("++++++++++++++++++++++ ", this.prdLength);
+        
+        if(data){
+          return data;
+        }
+        else{
+          return data;
+        }
+        
+      }
+      )
+    )
+
 
   public removeSelectedItem(_id:any){
     this.productListToCompare = this.productListToCompare.filter(function(item) {

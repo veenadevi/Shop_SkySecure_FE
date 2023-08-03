@@ -318,8 +318,9 @@ export class HeaderComponent implements OnInit{
   public retrieveCarttItems(data) {
 
 
+    
       this.cartService.getCartItems(data).subscribe();
-      
+      console.log("()()( ) Being called here");
     
 
   }

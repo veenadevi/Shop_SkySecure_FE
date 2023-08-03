@@ -1,4 +1,7 @@
 <div class="login-container">
+  <div class="logo">
+    <img class="skysecure-logo" src="../../assets/Logos/skysecureLogo.png">
+</div>
   <div (click)="navigateToHomePage()">
     <div class="back-btn"><img src="../../../../assets/icons/arrow-right.svg"></div>
   </div>
@@ -73,22 +76,31 @@
 <div class="forgot-pwd">
             <!-- <span class="psw"> <a href="#">Forgot password?</a></span> -->
           </div>
+          <div class="buttons">
           <ng-container *ngIf="enableOTPButton">
-            <div class="signin-btn">
-              <button (click)="onSubmit()" class="primary-btn">Send OTP</button>
-            </div>
+              <div class="signin-btn">
+                <button (click)="onSubmit()" class="primary-btn">Send OTP</button>
+              </div>
+
           </ng-container>
+          <div class="cancel-btn">
+            <button (click)="navigateToHomePage()" class="secondary-btn">Cancel</button>
+          </div>
+        </div>
           <div *ngIf="newEmailAlert" class="new-email-alert">
             The email does not exist. Please proceed with the Sign-up process. 
           </div>
           
-
+          <div class="buttons">
           <ng-container *ngIf="enableSignInButton">
             <div class="signin-btn">
               <button (click)="login()" class="primary-btn">Sign In</button>
             </div>
+            <div class="cancel-btn">
+              <button (click)="navigateToHomePage()" class="secondary-btn">Cancel</button>
+            </div>
           </ng-container>
-          
+          </div>
 
           <!-- <div class="form-group">
             <label>Full Name</label>
@@ -218,4 +230,11 @@
                 </div>
                 <div class="no-account-02" (click)="signUp()"><span> Sign up</span> </div>
               </div>
+              <div class="welcome-img">
+                <div class="center-img">
+                  <img class="login-img" src="../../assets/images/loginsignup/logininImage.svg">
+              </div>
+              <div class="welcome">Welcome to skysecure!</div>
+              </div>
+             
 </div>

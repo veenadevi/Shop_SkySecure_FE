@@ -52,13 +52,16 @@
                             </span>
                             <span>
                               <input
-                                class="input-field" [(ngModel)]="item.quantity" value="{{item.quantity}}"
-                                >
+                                class="input-field" [(ngModel)]="item.quantity" value="{{item.quantity}}">
+                                
+                               
                             </span>
+                          
                             <span (click) = "quantityEdit(i , 'plus', item.price)">
                               <img alt="" src="../../../assets/icons/Add.svg">
                             </span>
                           </div>
+                          <div class="error-message">{{item.errortext}}</div>
                         </td>
 
                         <!-- Action -->
@@ -88,7 +91,7 @@
             </span>
             <span>
               <button class="btn compare-btn" (click)="saveCart()">Save Cart</button>
-              <button class="btn request-btn" (click)="requestQuote()">Request quote</button>
+              <button class="btn request-btn" (click)="requestQuote()">Request Quote</button>
             </span>
           </div>
         </ng-container>

@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
@@ -39,6 +39,8 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   public productImages=[];
 
   public dummyImages = [1,2,3,4];
+
+  public prdType : any;
 
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
@@ -136,12 +138,13 @@ export class ProductBundleVariantDetailComponent implements OnInit {
           
           this.completeFeatureList = response.featureList;
          if(response.featureList.length > 5){
-            this.features = response.featureList.slice(0,5);
+            // this.features = response.featureList.slice(0,5);
+            this.features = response.featureList;
           }
           else{
             this.features = response.featureList;
           }
-         this.features = response.featureList.slice(0,5);
+        //  this.features = response.featureList.slice(0,5);
     
         }
        
@@ -260,6 +263,8 @@ export class ProductBundleVariantDetailComponent implements OnInit {
 
     this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     this.getBrandDetails(productId);
+    this.compareProductsLength$.subscribe();
+
   }
 
   public navigateToProductDetails(product:any){
@@ -339,7 +344,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
         //this.productFamilyVariant = response.productFamilyVariant;
         //this.productFamilyVariant={...response.productFamilyVariant, quantity: 1 }
         this.productFamilyVariant=this.setProductBundleVariantsData(response.productFamilyVariant,response.productFamily)
-
+        this.prdType = response.type;
         this.productFamilyVariants = response.productFamilyVariants;
         this.productFamily = response.productFamily;
 
@@ -348,7 +353,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
           
           this.completeFeatureList = response.productFamilyVariantFeatures;
          if(response.productFamilyVariantFeatures.length > 5){
-            this.features = response.productFamilyVariantFeatures.slice(0,5);
+            this.features = response.productFamilyVariantFeatures;
           }
           else{
             this.features = response.productFamilyVariantFeatures;
@@ -680,6 +685,34 @@ async addToCompare(item:any, type:any):Promise<void> {
   //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
   //console.log("getProdFromLocalStorage",prodGet);
 }
+
+public  prdLength = 0;
+
+  public compareProductsLength$ = this.compareProductsStore.compareProductsList2$
+    .pipe(
+      map(data => {
+
+        let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let combinedData = [...cachedData, ...cachedData2];
+        //this.productList = [...this.productList, ...data];
+        let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+        this.prdLength = uniqueElements.length;
+
+        console.log("++++++++++++++++++++++ ", this.prdLength);
+        
+        if(data){
+          return data;
+        }
+        else{
+          return data;
+        }
+        
+      }
+      )
+    )
+
+
 
 public removeSelectedItem(_id:any){
   this.productListToCompare = this.productListToCompare.filter(function(item) {

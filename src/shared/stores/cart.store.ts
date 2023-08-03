@@ -83,7 +83,7 @@ export class CartStore {
     if(data && data.usercart.length>0){
       this.cartRefreneceId = data.usercart[0].cart_ref_id;
     }
-    
+    console.log("+++++++ Cart Ref d", data);
     this.cartRefreneceIdSubject.next(data);
   }
 

@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { CategoryDetails } from 'src/shared/models/interface/partials/category-details';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ProductListService } from 'src/shared/services/product-list-page.service';
+import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
+
 
 
 @Component({
@@ -48,7 +51,9 @@ export class ProductPgaeComponent2 implements OnInit, OnChanges , OnDestroy{
     private activeRoute: ActivatedRoute,
     private productListService : ProductListService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private modalService : NgbModal,
+
   ){
     const navigation = this.router.getCurrentNavigation();
     // const state = navigation.extras.state as { data: Object };
@@ -226,6 +231,12 @@ export class ProductPgaeComponent2 implements OnInit, OnChanges , OnDestroy{
 
       })
     );
+  }
+
+  public viewModal3(queryParams) {
+    const modalRef = this.modalService.open(CompareProductsModalComponent, {windowClass: 'compare-products-modal-custom-class' });
+    modalRef.componentInstance.request = queryParams;
+    // this.modalService.open(modal_id, { windowClass: 'custom-class' });
   }
 
   private getFilterQuery() {

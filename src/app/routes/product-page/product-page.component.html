@@ -1,5 +1,11 @@
 <div class="product-page-container">
-  
+
+  <div (click) = "viewModal3(null)" class="compare-products-badge">
+    <!-- <img class="compare-icon" src="../../../../assets/icons/compare.svg"> -->
+    <span class="offer-name-label">
+        Compare ({{ prdLength ? prdLength : 0}})
+    </span>
+  </div>
   
   <div class="parent-holder">
     <div class="filter-container">
