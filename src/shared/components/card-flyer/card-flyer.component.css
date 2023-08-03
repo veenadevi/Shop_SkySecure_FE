@@ -482,7 +482,7 @@
 
   .product-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 15px;
     column-gap: 10px;
   }
@@ -769,14 +769,14 @@
 
   .product-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content:space-around;
     margin-bottom: 15px;
     column-gap: 10px;
   }
   
   .request-btn {
     background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
-    border-radius: 8px;
+    border-radius: 5px;
     border: 1px solid #EFEFEF;
     text-align: center;
     color: #FFFFFF;
@@ -786,7 +786,7 @@
 }
 
   .compare-btn {
-      border-radius: 8px;
+      border-radius: 5px;
       background: #E2EDFF;
       border: 1px solid #003388;
       text-align: center;
@@ -1056,14 +1056,14 @@
 
   .product-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 15px;
     column-gap: 10px;
   }
   
   .request-btn {
     background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
-    border-radius: 8px;
+    border-radius: 5px;
     border: 1px solid #EFEFEF;
     text-align: center;
     color: #FFFFFF;
@@ -1073,7 +1073,7 @@
 }
 
   .compare-btn {
-      border-radius: 8px;
+      border-radius: 5px;
       background: #E2EDFF;
       border: 1px solid #003388;
       text-align: center;
