@@ -568,6 +568,7 @@ featureCount=5;
 
     let queryParams;
       // if(product.productVariants.length>0){
+        
         queryParams = {
           productName : product.name,
           productId : product._id,

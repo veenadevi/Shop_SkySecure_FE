@@ -587,13 +587,19 @@ public requestQuote (productFamilyVariant : any) : void {
   let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
   let queryParams;
+  console.log("setting mrp======")
     
       queryParams = {
         productName : productFamilyVariant.name,
         productId : productFamilyVariant._id,
         quantity : productFamilyVariant.quantity,
         price : productFamilyVariant.priceList[0].price,
+        erpPrice:productFamilyVariant.priceList[0].ERPPrice,
+        discountRate:productFamilyVariant.priceList[0].discountRate,
+        priceType:productFamilyVariant.priceList[0].priceType,
       };
+
+
     
   /*if(loggedinData.length > 0 ){
     
