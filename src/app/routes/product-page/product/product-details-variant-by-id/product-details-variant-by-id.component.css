@@ -767,6 +767,7 @@
     /* margin-bottom: 10%; */
   }
   
+
   .prod-feat-card-cont {
     display: flex;
     flex-basis: 70%;
@@ -831,6 +832,33 @@
     flex-direction: row;
   }
   
+/* scroll container */
+
+.scroll-container {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.scroll-content {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  align-items: center;
+  scroll-behavior: smooth;
+}
+
+.scroll-content::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-content .product-to-comp {
+  column-gap: 24px;
+}
+
+
   .comp-prod-cont {
     display:flex;
     flex-basis: content;

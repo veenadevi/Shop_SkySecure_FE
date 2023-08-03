@@ -33,6 +33,7 @@ export class CompareProductsResultComponent {
     // { 'SolutionCategory': 'Solution Category' },
     { 'Subscription': 'Subscription' },
     { 'EntryLevelPricing': 'Entry level pricing' },
+    { 'BundleDetails': 'Bundle details' },
     { 'Features': 'Features' }
   ]
 
