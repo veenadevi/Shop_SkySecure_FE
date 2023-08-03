@@ -1,17 +1,17 @@
 <ng-container *ngIf="product && product.priceList && product.priceList.length>0">
 
 
-            <div (click) = "viewModal3(null)" class="compare-products-badge">
-                <img class="compare-icon" src="../../../../assets/icons/compare.svg">
-                <span class="offer-name-label">
-                    Compare
-                </span>
-            </div>
+    <div (click)="viewModal3(null)" class="compare-products-badge">
+        <img class="compare-icon" src="../../../../assets/icons/compare.svg">
+        <span class="offer-name-label">
+            Compare
+        </span>
+    </div>
 
 
     <div class="product-details-container">
         <div *ngIf="product">
-            <custom-bread-crumb [product] = "product" [prdType] = "prdType"></custom-bread-crumb>
+            <custom-bread-crumb [product]="product" [prdType]="prdType"></custom-bread-crumb>
         </div>
         <div class="product-details">
             <div class="product-image-view">
@@ -199,31 +199,35 @@
                             <div class="common-info">
                                 <div class="common-det">
                                     <div class="comm-det-img">
-                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
-            
+                                        <img class="amazon-refer-img"
+                                            src="../../../../assets/icons/illustration_icons/SecureTransactionIllustrationIcon.svg">
+
                                     </div>
                                     <p class="amazon-refer">secure transaction</p>
                                 </div>
                                 <div class="common-det">
                                     <div class="comm-det-img">
-                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/TopBrandIllustrationIcon.svg">
-            
+                                        <img class="amazon-refer-img"
+                                            src="../../../../assets/icons/illustration_icons/TopBrandIllustrationIcon.svg">
+
                                     </div>
                                     <p class="amazon-refer">Top brand</p>
                                 </div>
                                 <div class="common-det">
                                     <div class="comm-det-img">
-                                        <img class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/ProductCancellationIllustrationIcon.svg">
-            
+                                        <img class="amazon-refer-img"
+                                            src="../../../../assets/icons/illustration_icons/ProductCancellationIllustrationIcon.svg">
+
                                     </div>
                                     <p class="amazon-refer">5 Days Cancellation </p>
                                 </div>
                                 <div class="common-det">
                                     <div class="comm-det-img">
-                                        <img  class="amazon-refer-img" src="../../../../assets/icons/illustration_icons/GuaranteedPriceIllustrationIcon.svg">
-            
+                                        <img class="amazon-refer-img"
+                                            src="../../../../assets/icons/illustration_icons/GuaranteedPriceIllustrationIcon.svg">
+
                                     </div>
-                                    <p class="amazon-refer" >Guaranteed Price</p>
+                                    <p class="amazon-refer">Guaranteed Price</p>
                                 </div>
                             </div>
                         </ng-container>
@@ -299,7 +303,7 @@
 
                 <!-- <details-compare-products-flyer
                     [compareProductsList]="selectedProductItem"></details-compare-products-flyer> -->
-                    
+
                 <!-- <div class="connect-us-box">
                         <div class="connect-us-desc">
                             <h5>Connect Us!</h5>
@@ -459,7 +463,7 @@
                     <div class="prod-card-holder">
                         <div class="feature-desc-heading">
                             <p class="feature-desc">Explore the Cutting-Edge Features of {{product.name}} Product!</p>
-                        </div> 
+                        </div>
                         <div class="prod-card">
                             <ng-container *ngFor="let item of featureList">
 
@@ -480,9 +484,9 @@
                     </div>
                     <!-- <div class="p-view-all-feature-div">
                         <div class="feature-desc-heading"> -->
-                            <!-- <p class="feature-viewall">click here to view detailed feature of the
+                    <!-- <p class="feature-viewall">click here to view detailed feature of the
                             product</p> -->
-                            <!-- <button class="btn view-det-btn" (click)="featureCountEvent(viewAllFeaturesDetails)">
+                    <!-- <button class="btn view-det-btn" (click)="featureCountEvent(viewAllFeaturesDetails)">
                                 <ng-container *ngIf="viewAllFeaturesDetails ; else showLess">
                                     Show Less Features
                                 </ng-container>
@@ -780,7 +784,8 @@
 
                                     </div>
                                     <div class="comp-product-card-content">
-                                        <p class="product-category" (click)="navigateToProductDetails(product)">{{product.name}}</p>
+                                        <p class="product-category" (click)="navigateToProductDetails(product)">
+                                            {{product.name}}</p>
                                         <p class="product-solution">Solution Category:</p>
                                         <p class="product-desc">{{product.subcategories.description}}</p>
                                     </div>
@@ -827,7 +832,8 @@
                                                 </div>
                                                 <div class="comp-product-card-content">
                                                     <!-- <p class="product-category">{{item.name}}</p> -->
-                                                    <p class="product-category" (click)="navigateToProductDetails(item)">{{item.name}}</p>
+                                                    <p class="product-category"
+                                                        (click)="navigateToProductDetails(item)">{{item.name}}</p>
                                                     <p class="product-solution">Solution Category:</p>
                                                     <p class="product-desc">{{item.solutionCategory}}</p>
                                                 </div>
@@ -934,7 +940,7 @@
                                 </div>
                                 <div class="similar-prod-price-det">
                                     <span class="similar-prod-price-det-title">
-                                        <p class="bundle-heading">{{item.name}}</p>
+                                        <p class="bundle-heading" (click)="navigateToProductDetails(item)">{{item.name}}</p>
                                     </span>
 
                                     <p class="bundle-solution">Solution Category:</p>

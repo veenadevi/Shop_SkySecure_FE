@@ -790,7 +790,7 @@
                                 </div>
                                 <div class="similar-prod-price-det">
 
-                                    <span class="similar-prod-price-det-title">{{item.name}}</span>
+                                    <span class="bundle-heading" (click)="navigateToProductDetails(item)">{{item.name}}</span>
 
                                     <p class="bundle-solution">Solution Category:</p>
                                     <p class="bundle-solution-desc">{{(item.solutionCategory) ? item.solutionCategory :
