@@ -667,7 +667,7 @@
 
                                         </div>
                                         <div class="comp-product-card-content">
-                                            <p class="product-category">{{productFamily.name}}</p>
+                                            <p class="product-category" (click)="navigateToProductDetails(productFamily)">{{productFamily.name}}</p>
                                             <p class="product-solution">Solution Category:</p>
                                             <p class="product-desc">{{productFamily.subcategories[0].name}}</p>
                                         </div>
@@ -687,7 +687,7 @@
                                             </div>
                                         </div>
                                         <div class="checkbox-sec-02">
-                                            <a class="view-sec"(click)="navigateToProductDetails(productFamily)">view details</a>
+                                            <!-- <a class="view-sec"(click)="navigateToProductDetails(productFamily)">view details</a> -->
                                         </div>
 
                                     </div>
@@ -717,7 +717,7 @@
                                                     </div>
                                                     <div class="comp-product-card-content">
                                                         <!-- <p class="product-category">{{item.name}}</p> -->
-                                                        <p class="product-category">{{item.name}}</p>
+                                                        <p class="product-category" (click)="navigateToProductDetails(item)">{{item.name}}</p>
                                                         <p class="product-solution">Solution Category:</p>
                                                         <p class="product-desc">{{item.solutionCategory}}</p>
                                                     </div>
@@ -741,7 +741,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="checkbox-sec-02">
-                                                        <a class="view-sec" (click)="navigateToProductDetails(item)">view details</a>
+                                                        <!-- <a class="view-sec" (click)="navigateToProductDetails(item)">view details</a> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -790,7 +790,7 @@
                                 </div>
                                 <div class="similar-prod-price-det">
 
-                                    <span class="similar-prod-price-det-title">{{item.name}}</span>
+                                    <span class="bundle-heading" (click)="navigateToProductDetails(item)">{{item.name}}</span>
 
                                     <p class="bundle-solution">Solution Category:</p>
                                     <p class="bundle-solution-desc">{{(item.solutionCategory) ? item.solutionCategory :

@@ -1286,6 +1286,7 @@ p {
   width: 180px;
   padding-top: 15px;
   height: 80px;
+  cursor: pointer;
 }
 
 .product-solution {
@@ -1569,6 +1570,7 @@ button {
 }
 
 .bundle-heading {
+  cursor: pointer;
   font-weight: bold;
   font-family: 'Lato', sans-serif;
 }

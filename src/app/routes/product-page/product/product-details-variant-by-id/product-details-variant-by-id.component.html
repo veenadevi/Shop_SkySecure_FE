@@ -782,7 +782,7 @@
                                         </div>
                                     </div>
                                     <div class="checkbox-sec-02">
-                                        <a class="view-sec" (click)="navigateToProductDetails(productVariantData)">view details</a>
+                                        <!-- <a class="view-sec" (click)="navigateToProductDetails(productVariantData)">view details</a> -->
                                     </div>
 
                                 </div>
@@ -803,7 +803,7 @@
                                                 <img class="card-logo" src="{{item.bannerLogo}}">
                                             </div>
                                             <div class="comp-product-card-content">
-                                                <p class="product-category">{{item.name}}</p>
+                                                <p class="product-category" (click)="navigateToProductDetails(item)">{{item.name}}</p>
                                                 <p class="product-solution">Solution category:</p>
                                                 <p class="product-desc">{{item.solutionCategory}}</p>
                                             </div>
@@ -825,7 +825,7 @@
                                             </div>
 
                                             <div class="checkbox-sec-02">
-                                                <a class="view-sec" (click)="navigateToProductDetails(item)">view details</a>
+                                                <!-- <a class="view-sec" (click)="navigateToProductDetails(item)">view details</a> -->
                                             </div>
                                         </div>
                                     </div>
@@ -855,7 +855,7 @@
                                 </div>
                                 <div class="similar-prod-price-det">
                                     <span class="similar-prod-price-det-title">
-                                        <p class="bundle-heading">{{item.name}}</p>
+                                        <p class="bundle-heading" (click)="navigateToProductDetails(item)">{{item.name}}</p>
                                     </span>
 
                                     <p class="bundle-solution">Solution Category:</p>
