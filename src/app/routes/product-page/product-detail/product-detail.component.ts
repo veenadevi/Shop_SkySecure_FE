@@ -39,6 +39,8 @@ export class ProductDetailComponent implements OnInit{
   public completeFeatureList : any[] = [];
   
   public viewAllFeaturesDetails = false;
+
+  public prdType : any;
   
   faq = [];
   productListToCompare  = [];
@@ -213,6 +215,7 @@ export class ProductDetailComponent implements OnInit{
       this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( (response) => {
      //this.individualProductDetail$.subscribe();
         this.product={...response.product, quantity: 1 }
+        this.prdType = response.type;
        this.product.bannerLogo=(this.product.bannerLogo &&this.product.bannerLogo !== null) ? this.product.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
         // console.log("price after set quantity===="+this.product.priceList[0].discountRate)
         let fList = [];

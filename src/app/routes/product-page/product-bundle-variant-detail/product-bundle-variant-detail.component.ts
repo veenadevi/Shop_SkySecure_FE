@@ -40,6 +40,8 @@ export class ProductBundleVariantDetailComponent implements OnInit {
 
   public dummyImages = [1,2,3,4];
 
+  public prdType : any;
+
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
@@ -342,7 +344,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
         //this.productFamilyVariant = response.productFamilyVariant;
         //this.productFamilyVariant={...response.productFamilyVariant, quantity: 1 }
         this.productFamilyVariant=this.setProductBundleVariantsData(response.productFamilyVariant,response.productFamily)
-
+        this.prdType = response.type;
         this.productFamilyVariants = response.productFamilyVariants;
         this.productFamily = response.productFamily;
 

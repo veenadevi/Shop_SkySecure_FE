@@ -52,6 +52,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   public viewAllFeaturesDetails = false;
 
 
+  public prdType : any;
 
   public headingTags = [
     { title_size: "h1" },
@@ -221,6 +222,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   response.productVariants = {...response.productVariants, quantity: 1 }
 
 this.productVariants=response.productVariants;
+this.prdType = response.type;
 
 
 // console.log("response product Variant Quantituy",response.productVariants.quantity);

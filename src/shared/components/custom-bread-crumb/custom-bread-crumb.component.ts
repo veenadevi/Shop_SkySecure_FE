@@ -18,6 +18,9 @@ export class CustomBreadCrumbComponent {
     @Input('product')
     public product : any;
 
+    @Input('prdType')
+    public prdType : any;
+
     public categoryName : string;
     public subCategoryName : string;
     public oemName : any;
@@ -35,13 +38,14 @@ export class CustomBreadCrumbComponent {
     .pipe(
       map(data => {
         if(data && this.product){
-          console.log("()()()()() ", this.product);
+          
 
+          var tempSubCatId = this.getSubCatId(this.prdType, this.product);
+        
           const myArrayFiltered = data.filter((el) => {
             return el.subCategories.some((f) => {
-              if(f._id === this.product.subcategories[0]._id){
-                console.log("()()()( Inside if", f._id)
-                console.log("()()()( Inside if", el);
+              if(f._id === tempSubCatId){
+                
                 this.categoryName = el.name;
                 this.catId = el._id;
                 this.subCategoryName = f.name;
@@ -62,9 +66,14 @@ export class CustomBreadCrumbComponent {
     .pipe(
       map(data => {
         if(data && this.product){
-          console.log("()()()()() ", data);
 
-          var tempId = this.product.oemId;
+          var tempId;
+          if(this.prdType === 'productFamilyVariant'){
+            tempId = this.product.subcategories[0].oemId;
+          }
+          else{
+            tempId = this.product.oemId;
+          }
           var tempOemName;
           var tempOemId;
           var isPresent = data.some(function(el){ 
@@ -109,13 +118,12 @@ export class CustomBreadCrumbComponent {
 
     ngOnInit() {
       this.categoryDetails$.subscribe(res=>{
-        console.log("++++++ Cat Name ", this.categoryName);
-        console.log("++++++ Cat Name ", this.subCategoryName);
+        
       });
 
       
       this.oemDetails$.subscribe(res=>{
-        console.log("++++++ OEM Name ", this.oemName);
+        
       });
 
       
@@ -130,8 +138,28 @@ export class CustomBreadCrumbComponent {
       this.home = { icon: 'pi pi-home', routerLink: '/' , id : 'home' };
   }
 
+
+  public getSubCatId(type, item){
+
+    var id;
+    
+    switch (type) {
+      case 'product' :
+        return (item.subcategories) ? item.subcategories._id : '';
+      case 'productVariant' :
+        return (item.subcategories) ? item.subcategories._id : '';
+      case 'productFamily' :
+        return (item.subcategories && item.subcategories.length > 0) ? item.subcategories[0]._id : '';
+      case 'productFamilyVariant' :
+        return (item.subcategories && item.subcategories.length > 0) ? item.subcategories[0]._id : '';
+      default : 
+        return null;
+    }
+
+  }
+
   public itemClicked(event){
-    console.log("()()() Clicked", event.item.id);
+
     switch (event.item.id) {
       case 'cat':
           this.router.navigate([`/products/category/${this.catId}`]);

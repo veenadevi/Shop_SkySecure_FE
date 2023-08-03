@@ -36,6 +36,8 @@ export class ProductBundleDetailComponent implements OnInit{
   public bundleQuantity = 1;
   checked: boolean = false;
 
+  public prdType : any;
+
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
   @ViewChild('specificationRef') specificationRef!: ElementRef;
@@ -237,6 +239,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
        // this.productVarientData = response;
         this.productFamily = response.productFamily;
+        this.prdType = response.type ? response.type : '';
 
         
        

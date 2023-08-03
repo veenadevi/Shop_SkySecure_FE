@@ -40,8 +40,8 @@
 
   .product-details {
     display: flex;
-    padding: 1% 2% 0 2%;
-    margin: 1% 2% 0 2%;
+    padding: 0% 2% 0 2%;
+    margin: 0% 2% 0 2%;
     flex-direction: row;
   }
   .product-image-view {

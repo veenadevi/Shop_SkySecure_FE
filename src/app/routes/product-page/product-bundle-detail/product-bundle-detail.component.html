@@ -11,7 +11,7 @@
 
 <div class="product-details-container">
     <div *ngIf="productFamily">
-        <custom-bread-crumb [product] = "productFamily"></custom-bread-crumb>
+        <custom-bread-crumb [product] = "productFamily" [prdType] = "prdType"></custom-bread-crumb>
     </div>
     <div class="product-details">
         <ng-container *ngIf="productFamily">
