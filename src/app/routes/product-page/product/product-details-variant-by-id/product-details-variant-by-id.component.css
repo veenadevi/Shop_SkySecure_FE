@@ -5,43 +5,10 @@
     flex-direction: column;
     font-family: 'lato',sans-serif;
   }
-
-  
-.custom-class {
-  float: right;
-}
-
-
-.compare-products-badge {
-  color: var(--white);
-  background: linear-gradient(180deg, #F79C0B 0%, #C68600 100%);
-  width: 150px;
-  height: 44px;
-  cursor: pointer;
-  z-index: 3;
-  border-radius: 8px 8px 0 0;
-  padding: 8px 16px;
-  position: fixed;
-  top: 50%;
-  right: -54px;
-  -webkit-transform: rotate(270deg);
-  transform: rotate(270deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.offer-name-label {
-  color: var(--white);
-  margin-left: 4px;
-  font-size: 16px;
-  font-weight: 500;
-}
-
   .product-details {
     display: flex;
-    padding: 0% 2% 0 2%;
-    margin: 0% 2% 0 2%;
+    padding: 1% 2% 0 2%;
+    margin: 1% 2% 0 2%;
     flex-direction: row;
   }
   .product-image-view {
@@ -1182,6 +1149,7 @@ cursor: pointer;
   max-width: 165px;
   padding-top: 15px;
   height: 80px;
+  cursor: pointer;
 }
 
 .product-solution {
@@ -1515,9 +1483,6 @@ button{
   scrollbar-width: thin; /* Creates a thin scrollbar on supporting browsers */
 }
 
-
-
-/* Optional: Customize scrollbar appearance (Not supported in all browsers) */
 .prod-card::-webkit-scrollbar {
   width: 2px; /* Adjust the width of the scrollbar */
 }
