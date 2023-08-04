@@ -624,6 +624,11 @@
     height: 2em;
     text-align: center;
   }
+  input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
   .solution-section{
     display: flex;
     align-items: baseline;
