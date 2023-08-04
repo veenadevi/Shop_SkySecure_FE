@@ -68,7 +68,7 @@
                                     alt="minus" src="../../../assets/icons/Minus.svg">
                             </span>
                             <span>
-                                <input class="input-field" [(ngModel)]="productVariants.quantity">
+                                <input type="number" min="0" class="input-field" [(ngModel)]="productVariants.quantity" (keydown)="onKeyDown($event)">
                             </span>
                             <span>
                                 <img id="add-minus-quantity" alt="" (click)="addBuyQuantity(productVariants.quantity)"
@@ -891,7 +891,7 @@
                                             alt="minus" src="../../../assets/icons/Minus.svg">
                                     </span>
                                     <span>
-                                        <input class="input-field" [(ngModel)]="item.quantity">
+                                        <input type="number" min="0" class="input-field" [(ngModel)]="item.quantity" (keydown)="onKeyDown($event)">
                                     </span>
                                     <span>
                                         <img id="add-minus-quantity" alt="" (click)="addQuantity(item.quantity,i)"
@@ -952,7 +952,7 @@
                                             alt="minus" src="../../../assets/icons/Minus.svg">
                                     </span>
                                     <span>
-                                        <input class="input-field" [(ngModel)]="item.quantity">
+                                        <input type="number" min="0" class="input-field" [(ngModel)]="item.quantity"(keydown)="onKeyDown($event)">
                                     </span>
                                     <span>
                                         <img id="add-minus-quantity" alt="" (click)="addSPQuantity(item.quantity,i)"

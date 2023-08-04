@@ -67,7 +67,7 @@
                                     src="../../../assets/icons/Minus.svg">
                             </span>
                             <span>
-                                <input class="input-field" [(ngModel)]="productQuantity">
+                                <input type="number" min="0" class="input-field" [(ngModel)]="productQuantity" (keydown)="onKeyDown($event)">
                             </span>
                             <span>
                                 <img id="add-minus-quantity" alt="" (click)="changeQuantity('add')"
@@ -75,8 +75,7 @@
                             </span>
                         </span>
 
-                        <button class="btn buy-now-btn" (click)="buyNow(productFamily, productQuantity)">Buy
-                            now</button>
+                        <button class="btn buy-now-btn" (click)="buyNow(productFamily, productQuantity)">Buy now</button>
                     </div>
 
                 </div>
@@ -813,7 +812,7 @@
                                             src="../../../assets/icons/Minus.svg">
                                     </span>
                                     <span>
-                                        <input class="input-field" [(ngModel)]="item.quantity">
+                                        <input  type="number" min="0" class="input-field" [(ngModel)]="item.quantity" (keydown)="onKeyDown($event)">
                                     </span>
                                     <span>
                                         <img id="add-minus-quantity" alt="" (click)="addQuantity(item.quantity, i)"

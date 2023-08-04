@@ -716,7 +716,13 @@ h5 {
   width: 4em;
   height: 2em;
   text-align: center;
+ 
 }
+ input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
 
 .product-common-info {
   display: flex;
