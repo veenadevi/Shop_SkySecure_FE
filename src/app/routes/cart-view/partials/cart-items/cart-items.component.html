@@ -60,7 +60,7 @@
                             </span>
                             <span>
                               <input
-                                class="input-field" [(ngModel)]="item.quantity" value="{{item.quantity}}">
+                                class="input-field" (change)="onChangeQuantity(i,item.price)" [(ngModel)]="item.quantity" value="{{item.quantity}}">
                                 
                                
                             </span>

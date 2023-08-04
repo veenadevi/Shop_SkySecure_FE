@@ -290,7 +290,12 @@ console.log("what is in param..."+ JSON.stringify(this.params))
 
 
   }
-
+public onChangeQuantity(i, price) : void {
+  //console.log("changed quantity "+this.cartData[i].quantity)
+  this.cartData[i].quantity = Number(this.cartData[i].quantity)
+  this.cartData[i].itemTotal = this.cartData[i].quantity * price;
+  this.calTotalPrice();
+}
 
 
   public quantityEdit(i, opr, price) : void {
