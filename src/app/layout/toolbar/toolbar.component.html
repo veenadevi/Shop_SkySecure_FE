@@ -11,15 +11,13 @@
     </div>
     <div class="menu-holder">
         <mat-toolbar color="var(--primary)" class="toolbar">
-            <button #categoriesMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="aboveMenu">
-                
+            <button  #categoriesMenu="matMenuTrigger" 
+            (mouseover)="openMenuList(categoriesMenu)"
+            mat-button [matMenuTriggerFor]="aboveMenu">
                 <div>
                     <span class="text-normal">Categories</span>
                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </div>
-                    
-                
-                
             </button>
                 <!-- <mat-menu #aboveMenu="matMenu" yPosition="below">
                 <ng-container *ngFor="let category of categories">
@@ -75,7 +73,7 @@
 
                 
 
-            <button mat-button [matMenuTriggerFor]="belowMenu">
+            <button (mouseover)="openMenuList(brandMenu)" #brandMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="belowMenu">
                 <span class="text-normal">Brands</span>
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </button>

@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
+import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 
 @Component({
   selector: 'app-home-page',
@@ -35,7 +36,8 @@ export class HomePgaeComponent {
     this.aboutOurPlatformVideoUrl = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
     this.metadataStore.setGlobalSearchBarVisibility('T');
 
-    
+    // this.compareProductsLength$.subscribe();
+
 
   }
 
@@ -67,6 +69,12 @@ export class HomePgaeComponent {
     //this.displayBasic = true;
     this.viewModal(null);
   }
+
+  public viewModal3(queryParams) {
+    const modalRef = this.modalService.open(CompareProductsModalComponent, {windowClass: 'compare-products-modal-custom-class' });
+    modalRef.componentInstance.request = queryParams;
+    // this.modalService.open(modal_id, { windowClass: 'custom-class' });
+  }
   
   public viewModal(req) {
     const modalRef = this.modalService.open(GetFreeCallModalComponent);
@@ -74,6 +82,32 @@ export class HomePgaeComponent {
   }
 
 }
+
+  // /* compare products length display */
+  // public  prdLength = 0;
+
+  // public compareProductsLength$ = this.compareProductsStore.compareProductsList$
+  //   .pipe(
+  //     map(data => {
+
+  //       let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+  //       let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+  //       let combinedData = [...cachedData, ...cachedData2];
+  //       let uniqueElements = [...new Map(cachedData.map(item => [item['_id'], item])).values()];
+  //       this.prdLength = uniqueElements.length;
+
+  //       console.log("++++++++++++++++++++++ ", this.prdLength);
+        
+  //       if(data){
+  //         return data;
+  //       }
+  //       else{
+  //         return data;
+  //       }
+        
+  //     }
+  //     )
+  //   )
 
 
 
