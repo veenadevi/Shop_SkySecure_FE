@@ -1191,13 +1191,13 @@ p {
 }
 
 .left-arrow {
-  left: 369px;
-  top: 94px;
+  left: 400px;
+  top: 100px;
 }
 
 .right-arrow {
   right: 0px;
-  top: 94px;
+  top: 100px;
   display: flex;
   justify-content: flex-start;
 }
@@ -1214,10 +1214,15 @@ p {
 .comp-product-card {
   display: flex;
   flex-direction: column;
-  border: 0.613px solid #D9D9D9;
+  /* border: 0.613px solid #D9D9D9; */
   border-radius: 8px;
   width: 100%;
   background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
   /* box-shadow: 0px 2.4523746967315674px 2.4523746967315674px 0px rgba(0, 0, 0, 0.25); */
 }
 
@@ -1289,7 +1294,7 @@ p {
   font-family: 'lato', sans-serif;
   font-size: 15px;
   font-weight: bold;
-  width: 180px;
+  width: 165px;
   padding-top: 15px;
   height: 80px;
   cursor: pointer;

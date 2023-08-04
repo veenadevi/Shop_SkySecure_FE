@@ -1480,7 +1480,7 @@ cursor: pointer;
   font-family: 'lato', sans-serif;
   font-size: 15px;
   font-weight: bold;
-  width: 180px;
+  width: 165px;
   padding-top: 15px;
   height: 80px;
   cursor: pointer;
@@ -1527,12 +1527,12 @@ cursor: pointer;
     display: none;
 }
 .left-arrow {
-  left: 369px;
-  top: 94px;
+  left: 400px;
+  top: 100px;
 }
 .right-arrow {
   right: 0px;
-  top: 94px;
+  top: 100px;
   display: flex;
   justify-content: flex-start;
 }

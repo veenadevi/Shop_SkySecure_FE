@@ -803,8 +803,8 @@
                             <div class="scroll-content">
                                 <div class="product-to-comp">
                                     <ng-container *ngFor="let item of compareProductList">
-                                        <div *ngIf="item.priceList!=null">
-                                            <div class="comp-product-card">
+                                        <!-- <div > -->
+                                            <div class="comp-product-card" *ngIf="item.priceList!=null">
                                                 <div class="comp-product-card-cont">
                                                     <div class="comp-product-card-img">
                                                         <img class="card-logo" src="{{item.bannerLogo}}">
@@ -836,7 +836,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <!-- </div> -->
                                     </ng-container>
                                 </div>
                             </div>
