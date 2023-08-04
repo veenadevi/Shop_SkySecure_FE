@@ -1451,11 +1451,27 @@ button {
 }
 
 .prod-feature-img {
-  display: flex;
-  width: 50%;
-  justify-content: center;
-  align-items: center;
+  /* display: flex; */
+  width: 70%;
+  /* justify-content: center;
+  align-items: center; */
   margin-top: 4px;
+}
+
+.bundle-desc-heading{
+display: flex;
+align-items: flex-start;
+justify-content: flex-start;
+}
+
+.bundle-desc {
+  font-weight: 700;
+}
+
+.card-flyer-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .prod-feat-card-content {

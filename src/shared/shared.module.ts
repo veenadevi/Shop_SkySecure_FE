@@ -31,6 +31,7 @@ import { ContactUsFlyerHorizontalComponent } from './components/contact-us-flyer
 import { SafeUrlPipe } from './pipes/safeUrlPipe';
 import { CompareProductsModalComponent } from './components/modals/compare-products-modal/compare-products-modal.component';
 import { CustomBreadCrumbComponent } from './components/custom-bread-crumb/custom-bread-crumb.component';
+import { BundleVarientCardFlyerComponent } from './components/bundle-varient-card-flyer/bundle-varient-card-flyer.component';
 
 
 
@@ -71,7 +72,8 @@ import { CustomBreadCrumbComponent } from './components/custom-bread-crumb/custo
     ContactUsFlyerHorizontalComponent,
     SafeUrlPipe,
     CompareProductsModalComponent,
-    CustomBreadCrumbComponent
+    CustomBreadCrumbComponent,
+    BundleVarientCardFlyerComponent
   ],
 
   providers: [
@@ -112,7 +114,8 @@ import { CustomBreadCrumbComponent } from './components/custom-bread-crumb/custo
     ContactUsFlyerHorizontalComponent,
     SafeUrlPipe,
     CompareProductsModalComponent,
-    CustomBreadCrumbComponent
+    CustomBreadCrumbComponent,
+    BundleVarientCardFlyerComponent
   ],
   
 
