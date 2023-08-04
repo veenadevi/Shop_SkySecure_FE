@@ -1417,7 +1417,11 @@ button {
   gap: 5px;
   font-family: 'lato', sans-serif;
 }
-
+.add{
+  height: 20px;
+  width: 20px;
+  padding-top: 2px;
+}
 .review {
   font-family: 'lato', sans-serif;
 }

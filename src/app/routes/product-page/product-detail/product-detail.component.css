@@ -1037,7 +1037,11 @@ p {
   font-size: 16px;
   font-weight: 500;
 }
-
+.add{
+  height: 20px;
+  width: 20px;
+  padding-top: 2px;
+}
 #add-minus-quantity {
   cursor: pointer;
 }

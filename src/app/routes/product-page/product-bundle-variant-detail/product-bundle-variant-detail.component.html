@@ -64,7 +64,7 @@
                             <span>
                                 <img id="add-minus-quantity"
                                     (click)="decreaseBuyQuantity(productFamilyVariant.quantity)" alt="minus"
-                                    src="../../../assets/icons/Minus.svg">
+                                    class="add" src="../../../../../assets/icons/MinusIcon.svg">
                             </span>
                             <span>
                                 <input type="number" min="0" class="input-field" [(ngModel)]="productFamilyVariant.quantity" (keydown)="onKeyDown($event)">
@@ -72,7 +72,7 @@
                             <span>
                                 <img id="add-minus-quantity" alt=""
                                     (click)="addBuyQuantity(productFamilyVariant.quantity)"
-                                    src="../../../assets/icons/Add.svg">
+                                    class="add" src="../../../../assets/icons/AddIcon.svg">
                             </span>
                         </span>
 
@@ -925,14 +925,14 @@
 
                                         <span>
                                             <img id="add-minus-quantity" (click)="decreaseQuantity(item.quantity,i)"
-                                                alt="minus" src="../../../assets/icons/Minus.svg">
+                                                alt="minus" class="add" src="../../../../../assets/icons/MinusIcon.svg">
                                         </span>
                                         <span>
                                             <input type="number" min="0" class="input-field" [(ngModel)]="item.quantity" (keydown)="onKeyDown($event)">
                                         </span>
                                         <span>
                                             <img id="add-minus-quantity" alt="" (click)="addQuantity(item.quantity,i)"
-                                                src="../../../assets/icons/Add.svg">
+                                            class="add" src="../../../../../assets/icons/AddIcon.svg">
                                         </span>
                                     </span>
                                 </div>
