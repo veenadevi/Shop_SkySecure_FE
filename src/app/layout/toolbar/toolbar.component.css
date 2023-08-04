@@ -27,6 +27,7 @@ button i {
 .mat-mdc-menu-item.mdc-list-item {
     border-bottom: 2px solid var(--primary) !important;
     padding-bottom: 4px;
+    width: 225px;
 }
 
 .mat-mdc-menu-item.mdc-list-item:last-child {
