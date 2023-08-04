@@ -19,7 +19,18 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 })
 export class CartItemsComponent {
 
+  quantity: "cartItems";
 
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
+
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
 
   private subscriptions : Subscription[] = [];
 
