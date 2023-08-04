@@ -19,7 +19,18 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 })
 export class CartItemsComponent {
 
+  quantity: "cartItems";
 
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
+
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
 
   private subscriptions : Subscription[] = [];
 
@@ -290,7 +301,12 @@ console.log("what is in param..."+ JSON.stringify(this.params))
 
 
   }
-
+public onChangeQuantity(i, price) : void {
+  //console.log("changed quantity "+this.cartData[i].quantity)
+  this.cartData[i].quantity = Number(this.cartData[i].quantity)
+  this.cartData[i].itemTotal = this.cartData[i].quantity * price;
+  this.calTotalPrice();
+}
 
 
   public quantityEdit(i, opr, price) : void {

@@ -18,6 +18,19 @@ import { CompareProductsModalComponent } from 'src/shared/components/modals/comp
   styleUrls: ['./product-bundle-detail.component.css']
 })
 export class ProductBundleDetailComponent implements OnInit{
+
+  quantity: number = 1;
+
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
+
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
   public displayBasic: boolean; 
   productDescriptionWordLimit: number = 50;
 
@@ -417,6 +430,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
     
     if(type === 'add'){
+
       this.productQuantity = Number(this.productQuantity) + 1;
     }
     else if(type === 'minus'){
@@ -440,6 +454,9 @@ export class ProductBundleDetailComponent implements OnInit{
           productId : item._id,
           quantity : quantity,
           price : item.priceList[0].price,
+          erpPrice:item.priceList[0].ERPPrice,
+          discountRate:item.priceList[0].discountRate,
+          priceType:item.priceList[0].priceType,
         };
     /*if(loggedinData.length > 0 ){
       

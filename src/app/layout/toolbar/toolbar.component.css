@@ -8,6 +8,7 @@
     width:100%;
     height: 46px;
 }
+
 .toolbar{
     background-color: var(--primary);
     
@@ -17,6 +18,7 @@
 
 button{
     padding-right: 2em;
+    /* margin-left: 24px; */
 }
 
 button i {
@@ -27,6 +29,7 @@ button i {
 .mat-mdc-menu-item.mdc-list-item {
     border-bottom: 2px solid var(--primary) !important;
     padding-bottom: 4px;
+    width: 225px;
 }
 
 .mat-mdc-menu-item.mdc-list-item:last-child {
@@ -51,4 +54,5 @@ button i {
     height: auto !important;
     width: auto !important;
     background-color: var(--primary);
+    padding-left: 10px;
 }

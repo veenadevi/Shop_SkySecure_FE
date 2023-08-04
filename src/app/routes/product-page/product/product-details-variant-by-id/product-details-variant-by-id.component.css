@@ -5,43 +5,10 @@
     flex-direction: column;
     font-family: 'lato',sans-serif;
   }
-
-  
-.custom-class {
-  float: right;
-}
-
-
-.compare-products-badge {
-  color: var(--white);
-  background: linear-gradient(180deg, #F79C0B 0%, #C68600 100%);
-  width: 150px;
-  height: 44px;
-  cursor: pointer;
-  z-index: 3;
-  border-radius: 8px 8px 0 0;
-  padding: 8px 16px;
-  position: fixed;
-  top: 50%;
-  right: -54px;
-  -webkit-transform: rotate(270deg);
-  transform: rotate(270deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.offer-name-label {
-  color: var(--white);
-  margin-left: 4px;
-  font-size: 16px;
-  font-weight: 500;
-}
-
   .product-details {
     display: flex;
-    padding: 0% 2% 0 2%;
-    margin: 0% 2% 0 2%;
+    padding: 1% 2% 0 2%;
+    margin: 1% 2% 0 2%;
     flex-direction: row;
   }
   .product-image-view {
@@ -657,6 +624,11 @@
     height: 2em;
     text-align: center;
   }
+  input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
   .solution-section{
     display: flex;
     align-items: baseline;
@@ -800,6 +772,7 @@
     /* margin-bottom: 10%; */
   }
   
+
   .prod-feat-card-cont {
     display: flex;
     flex-basis: 70%;
@@ -864,6 +837,33 @@
     flex-direction: row;
   }
   
+/* scroll container */
+
+.scroll-container {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.scroll-content {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  align-items: center;
+  scroll-behavior: smooth;
+}
+
+.scroll-content::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-content .product-to-comp {
+  column-gap: 24px;
+}
+
+
   .comp-prod-cont {
     display:flex;
     flex-basis: content;
@@ -900,9 +900,9 @@
     padding: 1%;
     flex-direction: column;
     border-radius: 4.905px;
-    border: 0.613px solid #D9D9D9;
+    /* border: 0.613px solid #D9D9D9; */
     background: #FFF;
-    box-shadow: 0px 2.4523746967315674px 2.4523746967315674px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   
   .comp-prod-card2 {
@@ -1003,6 +1003,11 @@
     font-weight: 500;
   }
   
+  .add{
+    height: 20px;
+    width: 20px;
+    padding-top: 2px;
+  }
   #add-minus-quantity {
     cursor: pointer;
   }
@@ -1104,11 +1109,15 @@ column-gap:8px ;
 .comp-product-card {
   display: flex;
   flex-direction: column;
-  border: 0.613px solid #D9D9D9;
+  /* border: 0.613px solid #D9D9D9; */
   border-radius: 8px;
   width: 100%;
   background-color: white;
-  box-shadow: 0px 2.4523746967315674px 2.4523746967315674px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .comp-product-card-cont {
@@ -1182,6 +1191,7 @@ cursor: pointer;
   max-width: 165px;
   padding-top: 15px;
   height: 80px;
+  cursor: pointer;
 }
 
 .product-solution {
@@ -1431,6 +1441,7 @@ button{
   object-fit: cover;
 }
 .bundle-heading{
+  cursor: pointer;
   font-weight: bold;
   font-family: 'Lato', sans-serif;
 }
@@ -1515,9 +1526,6 @@ button{
   scrollbar-width: thin; /* Creates a thin scrollbar on supporting browsers */
 }
 
-
-
-/* Optional: Customize scrollbar appearance (Not supported in all browsers) */
 .prod-card::-webkit-scrollbar {
   width: 2px; /* Adjust the width of the scrollbar */
 }

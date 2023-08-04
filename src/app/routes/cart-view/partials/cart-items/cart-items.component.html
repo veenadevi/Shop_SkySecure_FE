@@ -41,7 +41,7 @@
                         <td>
                           <div class="td-column price-details">
                             <span>
-                              {{ item.erpPrice | number : '1.2-2'}}
+                            {{ item.erpPrice | number : '1.2-2'}}
                             </span>
                           </div>
                         </td>
@@ -56,17 +56,17 @@
                         <td>
                           <div class="td-column">
                             <span (click) = "quantityEdit(i,  'minus', item.price)">
-                              <img alt="minus" src="../../../assets/icons/Minus.svg">
+                              <img alt="minus"  class="add" src="../../../../../assets/icons/MinusIcon.svg">
                             </span>
                             <span>
                               <input
-                                class="input-field" [(ngModel)]="item.quantity" value="{{item.quantity}}">
+                                class="input-field" (change)="onChangeQuantity(i,item.price)" [(ngModel)]="item.quantity" value="{{item.quantity}}" (keydown)="onKeyDown($event)">
                                 
                                
                             </span>
                           
                             <span (click) = "quantityEdit(i , 'plus', item.price)">
-                              <img alt="" src="../../../assets/icons/Add.svg">
+                              <img alt="" class="add" src="../../../../../assets/icons/AddIcon.svg">
                             </span>
                           </div>
                           <div class="error-message">{{item.errortext}}</div>

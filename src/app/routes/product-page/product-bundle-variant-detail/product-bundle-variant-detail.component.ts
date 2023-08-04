@@ -19,6 +19,18 @@ import { CompareProductsModalComponent } from 'src/shared/components/modals/comp
   styleUrls: ['./product-bundle-variant-detail.component.css']
 })
 export class ProductBundleVariantDetailComponent implements OnInit {
+  quantity: number = 1;
+
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
+
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
   public displayBasic: boolean; 
 
   productDescriptionWordLimit: number = 50;
@@ -563,20 +575,21 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   quantityCount = 1;
   addQuantity(quantity:any,index:any):void {
     
-    this.allBundleDetais[index].quantity = quantity+1;
+    this.allBundleDetais[index].quantity = Number(quantity)+1;
   }
   decreaseQuantity(quantity:any,index:any): void {
     if(quantity>1){
-      this.allBundleDetais[index].quantity = quantity-1;
+      
+      this.allBundleDetais[index].quantity = Number(quantity)-1;
     }
   }
 
   addBuyQuantity(quantity:any):void {
-    this.productFamilyVariant.quantity = quantity+1;
+    this.productFamilyVariant.quantity = Number(quantity)+1;
   }
   decreaseBuyQuantity(quantity:any): void {
     if(quantity>1){
-      this.productFamilyVariant.quantity = quantity-1;
+      this.productFamilyVariant.quantity = Number(quantity)-1;
     }
   }
 
@@ -586,13 +599,19 @@ public requestQuote (productFamilyVariant : any) : void {
   let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
   let queryParams;
+  console.log("setting mrp======")
     
       queryParams = {
         productName : productFamilyVariant.name,
         productId : productFamilyVariant._id,
         quantity : productFamilyVariant.quantity,
         price : productFamilyVariant.priceList[0].price,
+        erpPrice:productFamilyVariant.priceList[0].ERPPrice,
+        discountRate:productFamilyVariant.priceList[0].discountRate,
+        priceType:productFamilyVariant.priceList[0].priceType,
       };
+
+
     
   /*if(loggedinData.length > 0 ){
     

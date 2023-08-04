@@ -1,6 +1,20 @@
 <div class="container-holder text-style p-3">
 
     <ng-container>
+
+        <div class="list-row"  *ngIf="searchResultsProductBundleList.length > 0 "> 
+            <div class="text-header">
+                <span>Product Bundles</span>
+            </div>
+            <ng-container *ngFor="let item of searchResultsProductBundleList">
+                <!-- <div  (click)="goToProductBundle(item)" class="list-item p-1"> -->
+                <div  (click)="navigateToProductDetails(item)" class="list-item p-1">
+                    <span>{{item.name}}</span>
+                </div>
+            </ng-container>
+        </div>
+
+        
         <div class="list-row" *ngIf="searchResultsProducts.length > 0"> 
             <div class="text-header">
                 <span>Products</span>
@@ -21,7 +35,7 @@
             <ng-container *ngFor="let item of searchResultsCategoryList">
                 <div (click)="goToProductsPageWithCategorySelection(item.data)" class="list-item p-1">
                     <span>{{item.data.name}}</span>
-                    <span>{{item.products.length}} Products</span>
+                    <span>{{item.count}} Products</span>
                 </div>
             </ng-container>
         </div>
@@ -32,22 +46,12 @@
             <ng-container *ngFor="let item of searchResultsSubCategoryList">
                 <div (click)="goToProductsPageWithSubCategorySelection(item.data,item.data)" class="list-item p-1">
                     <span>{{item.data.name}}</span>
-                    <span>{{item.products.length}} Products</span>
+                    <span>{{item.count}} Products</span>
                 </div>
             </ng-container>
         </div>
 
-        <div class="list-row"  *ngIf="searchResultsProductBundleList.length > 0 "> 
-            <div class="text-header">
-                <span>Product Bundles</span>
-            </div>
-            <ng-container *ngFor="let item of searchResultsProductBundleList">
-                <!-- <div  (click)="goToProductBundle(item)" class="list-item p-1"> -->
-                <div  (click)="navigateToProductDetails(item)" class="list-item p-1">
-                    <span>{{item.name}}</span>
-                </div>
-            </ng-container>
-        </div>
+      
     </ng-container>
     
 
