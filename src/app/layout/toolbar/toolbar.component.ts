@@ -135,6 +135,10 @@ export class ToolbarComponent {
       
     );
   }
+
+  openMenuList(menuTrigger: MatMenuTrigger) {
+    menuTrigger.openMenu();
+} 
   
 
 
