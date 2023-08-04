@@ -16,8 +16,8 @@
     /* font-weight: 600; */
     font-size: 0.8rem;
 
-    height: 15em;
-    overflow: scroll;
+    /* height: 40em; */
+    /* overflow: scroll; */
     overflow-x: hidden;
     
 }
@@ -38,7 +38,7 @@
 }
 
 .list-row:last-child {
-    border-bottom: none !important
+    /* border-bottom: none !important */
 }
 
 
@@ -60,6 +60,6 @@
 
 .list-item:last-child {
     
-    border-bottom: 2px solid var(--text-grey) !important;
-    margin-bottom: 10px;
+    /* border-bottom: 2px solid var(--text-grey) !important;*/
+    margin-bottom: 10px; 
 }
