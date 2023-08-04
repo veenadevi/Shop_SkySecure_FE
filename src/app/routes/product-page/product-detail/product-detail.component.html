@@ -53,7 +53,7 @@
                                     src="../../../assets/icons/Minus.svg">
                             </span>
                             <span>
-                                <input class="input-field" [(ngModel)]="product.quantity">
+                                <input type="number" min="0" class="input-field" [(ngModel)]="product.quantity" (keydown)="onKeyDown($event)">
                             </span>
                             <span>
                                 <img id="add-minus-quantity" alt="" (click)="addBuyQuantity(product.quantity)"
@@ -969,7 +969,7 @@
                                             alt="minus" src="../../../assets/icons/Minus.svg">
                                     </span>
                                     <span>
-                                        <input class="input-field" [(ngModel)]="item.quantity">
+                                        <input class="input-field" [(ngModel)]="item.quantity"  (keydown)="onKeyDown($event)">
                                     </span>
                                     <span>
                                         <img id="add-minus-quantity" alt="" (click)="addQuantity(item.quantity,i)"

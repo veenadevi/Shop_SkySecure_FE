@@ -650,6 +650,11 @@ h5 {
   height: 2em;
   text-align: center;
 }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 .offer-det {
   display: flex;
@@ -1111,7 +1116,11 @@ cursor: pointer;
 }
 
 
-
+.bundle-heading {
+  cursor: pointer;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+}
 
 /* //font style// */
 

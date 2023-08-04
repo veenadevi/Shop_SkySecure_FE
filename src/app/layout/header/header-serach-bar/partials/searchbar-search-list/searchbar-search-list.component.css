@@ -4,7 +4,8 @@
 }
 
 .text-style {
-    color: black;
+    /* color: black; */
+    color: #686A77;
     font-family: 'Lato', sans-serif;
     font-style: normal;
     
@@ -12,18 +13,20 @@
     letter-spacing: 0.1em;
     text-transform: capitalize;
 
-    font-weight: 600;
+    /* font-weight: 600; */
     font-size: 0.8rem;
 
     height: 15em;
     overflow: scroll;
+    overflow-x: hidden;
     
 }
 
 .text-header {
-    color: #686A77;
+    color: black;
     font-size: 0.7rem;
     text-transform: uppercase;
+    font-weight: 600;
 }
 
 .list-row {
