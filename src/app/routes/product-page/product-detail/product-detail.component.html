@@ -2,7 +2,7 @@
 
 
     <div (click)="viewModal3(null)" class="compare-products-badge">
-        <img class="compare-icon" src="../../../../assets/icons/compare.svg">
+        <!-- <img class="compare-icon" src="../../../../assets/icons/compare.svg"> -->
         <span class="offer-name-label">
             Compare
         </span>
@@ -90,7 +90,7 @@
                                 </p>
                                 <div class="price">
                                     <p class="product-price">
-                                        <span class="price-symbol">&#8377;</span>{{product.priceList[0].price}}
+                                        <span class="price-symbol">&#8377;</span>{{product.priceList[0].price | number : '1.2-2'}}
                                         <span class="product-price-type">/ {{product.priceList[0].priceType}}</span>
                                     </p>
                                 </div>
@@ -101,7 +101,7 @@
                                 <span class="price-symbol">&#8377;</span>
                                 <span>
                                     <p style="font-size: initial; text-decoration: line-through;">
-                                        {{product.priceList[0].ERPPrice}}</p>
+                                        {{product.priceList[0].ERPPrice | number : '1.2-2'}}</p>
                                 </span>
                             </div>
                         </div>

@@ -43,32 +43,40 @@
                     <img class="bookmark-icon" src="../../../../assets/icons/Bookmark.svg">
                 </div>
                 <div class="price">
-                    <!-- <span class="discount-holder">
+                    <!--<span class="discount-holder">
                         <span *ngIf="item.priceList[0].discountRate != null" class="discounted-text">
                             -{{item.priceList[0].discountRate}}%&nbsp;
                          
                         </span>
                         <span style="font-size: smaller;">&#8377; </span>
-                        <span>{{item.priceList[0].price}} / {{item.priceList[0].priceType}} </span>
-                        <p style="font-size: smaller;padding-top: 5px;">(GST Extra)</p>
+                        <span>{{item.priceList[0].price | number : '1.2-2'}} / {{item.priceList[0].priceType}}</span>
                     </span> -->
                     <div class="product-price-section">
+
                         <p *ngIf="item.priceList[0].discountRate != null" class="discounted-text">
+
                             -{{item.priceList[0].discountRate}}%&nbsp;</p>
+
                         <div class="price">
+
                             <p class="product-price">
-                                <span class="price-symbol">&#8377;</span>{{item.priceList[0].price | number : '1.2-2'}} 
+
+                                <span class="price-symbol">&#8377;</span>{{item.priceList[0].price | number : '1.2-2'}}
+
                                 <span class="product-price-type">/ {{item.priceList[0].priceType}}</span>
+
                             </p>
+
                         </div>
+
                         <p style="font-size: 10px;">(GST Extra)</p>
+
                     </div>
                     <span>
                         <span class="text-style-mrp">MRP:</span> 
                         <span class="text-price strike-through"> ₹ {{((item.priceList && item.priceList.length>0) ? item.priceList[0].ERPPrice : '' ) | number : '1.2-2'}}</span> 
                         <span class="text-term"> / {{(item.priceList && item.priceList.length>0) ? item.priceList[0].priceType : ''}}</span>
                     </span>
-
                 </div>
                
                 <div class="solution-category">
@@ -111,4 +119,3 @@
     </ng-container>
     
 </div>
-

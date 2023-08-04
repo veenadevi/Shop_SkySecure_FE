@@ -402,16 +402,25 @@
 
             <!-- <<<<<<<<<<<<feature edit>>>>>>>>>>>>>>>>> -->
             <div class="product-features-container" id="feature" #featureRef>
-                <h5>Features</h5>
+                <h5>Bundle Details</h5>
 
                 <div class="product-feature-container">
                     <div class="prod-feature-img">
                         <!-- <img style="width:auto;height: auto;position: relative;"
                         src="../../assets/productDetails/FeaturesIllustration.svg"> -->
+                        <div class="bundle-desc-heading">
+                            <p class="bundle-desc">Products Included</p>
+                        </div>                        
+                        <div class="card-flyer-section">
+                            <ng-container *ngFor="let item of bundleItemsList; let i = index">
+                                <bundle-varient-card-flyer [product]="item" (click)="navigateToProductDetails(item)"></bundle-varient-card-flyer>
+                            </ng-container>
+                        </div>
+
+
     
-    
-                        <iframe [src]="productVideoURL | safeurl" width="600" height="300" frameborder="0" title="test"
-                            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <!-- <iframe [src]="productVideoURL | safeurl" width="600" height="300" frameborder="0" title="test"
+                            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
     
                     </div>
                     <!-- <div class="prod-feature-img">
@@ -421,8 +430,7 @@
                     <div class="prod-feat-card-content">
                         <div class="prod-card-holder">
                             <div class="feature-desc-heading">
-                                <p class="feature-desc">Explore the Cutting-Edge Features of {{productFamily.name}}
-                                    Product</p>
+                                <p class="feature-desc">Product Features</p>
                             </div>
                             <div class="prod-card">
                                 <ng-container *ngFor="let item of features">

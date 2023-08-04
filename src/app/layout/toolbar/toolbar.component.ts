@@ -140,6 +140,10 @@ export class ToolbarComponent {
     menuTrigger.openMenu();
 } 
   
+closeMenuList(menuTrigger: MatMenuTrigger) {
+  menuTrigger.closeMenu();
+
+}
 
 
   public ngOnInit() : void {
