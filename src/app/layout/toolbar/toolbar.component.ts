@@ -135,7 +135,15 @@ export class ToolbarComponent {
       
     );
   }
+
+  openMenuList(menuTrigger: MatMenuTrigger) {
+    menuTrigger.openMenu();
+} 
   
+closeMenuList(menuTrigger: MatMenuTrigger) {
+  menuTrigger.closeMenu();
+
+}
 
 
   public ngOnInit() : void {

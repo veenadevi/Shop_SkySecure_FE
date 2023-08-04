@@ -2,13 +2,15 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
+import { CompressOutlined } from '@mui/icons-material';
+import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 
 
 @Component({
@@ -17,6 +19,18 @@ import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free
   styleUrls: ['./product-bundle-variant-detail.component.css']
 })
 export class ProductBundleVariantDetailComponent implements OnInit {
+  quantity: number = 1;
+
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
+
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
   public displayBasic: boolean; 
 
   productDescriptionWordLimit: number = 50;
@@ -28,6 +42,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   public completeFeatureList : any[] = [];
 
   public viewAllFeaturesDetails = false;
+  productVideoURL: string;
   
   links = ['#description', '#feature', '#specification', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
   titles = ['Description', 'Features', 'Specification', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
@@ -36,6 +51,8 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   public productImages=[];
 
   public dummyImages = [1,2,3,4];
+
+  public prdType : any;
 
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
@@ -133,12 +150,13 @@ export class ProductBundleVariantDetailComponent implements OnInit {
           
           this.completeFeatureList = response.featureList;
          if(response.featureList.length > 5){
-            this.features = response.featureList.slice(0,5);
+            // this.features = response.featureList.slice(0,5);
+            this.features = response.featureList;
           }
           else{
             this.features = response.featureList;
           }
-         this.features = response.featureList.slice(0,5);
+        //  this.features = response.featureList.slice(0,5);
     
         }
        
@@ -153,6 +171,10 @@ export class ProductBundleVariantDetailComponent implements OnInit {
 
   viewAllFeature = false;
   checked: boolean = false;
+
+  featureList = [];
+  productbundlevariants ;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -205,7 +227,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   // public productFamilylist : any[] = [];
 
 
-  featureList: any[] = [];
+
 
   public productFamilyVariant : any;
 
@@ -253,6 +275,8 @@ export class ProductBundleVariantDetailComponent implements OnInit {
 
     this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     this.getBrandDetails(productId);
+    this.compareProductsLength$.subscribe();
+
   }
 
   public navigateToProductDetails(product:any){
@@ -332,7 +356,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
         //this.productFamilyVariant = response.productFamilyVariant;
         //this.productFamilyVariant={...response.productFamilyVariant, quantity: 1 }
         this.productFamilyVariant=this.setProductBundleVariantsData(response.productFamilyVariant,response.productFamily)
-
+        this.prdType = response.type;
         this.productFamilyVariants = response.productFamilyVariants;
         this.productFamily = response.productFamily;
 
@@ -341,7 +365,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
           
           this.completeFeatureList = response.productFamilyVariantFeatures;
          if(response.productFamilyVariantFeatures.length > 5){
-            this.features = response.productFamilyVariantFeatures.slice(0,5);
+            this.features = response.productFamilyVariantFeatures;
           }
           else{
             this.features = response.productFamilyVariantFeatures;
@@ -392,7 +416,13 @@ export class ProductBundleVariantDetailComponent implements OnInit {
         }
         this.productImages=this.productImages.slice(0,4);
 
-
+        this.completeFeatureList = response.featureList;
+        if(this.productbundlevariants && this.productbundlevariants.productVideoURL && this.productbundlevariants.productVideoURL.length>0){
+          this.productVideoURL = this.productbundlevariants.productVideoURL[0].source ;
+        } 
+      else{
+        this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+      }
         let tempProducts = this.setProductsData(this.products);
         let tempProductVariants = this.setProductVariantsData(this.productVarients);
       //  let tempProductBundleVariants = this.setProductBundleVariantsData(this.childProductFamilyVariant);
@@ -453,7 +483,8 @@ export class ProductBundleVariantDetailComponent implements OnInit {
           element.type = 'productVariants';
           element.bannerLogo = (element.products && element.products.length>0 && element.products[0].bannerLogo) ? element.products[0].bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
-          element['solutionCategory'] = (element.products && element.products.length>0 && element.products[0] && element.products[0].subCategories && element.products[0].subCategories.length > 0) ? element.products[0].subCategories[0].name : "";
+          element['solutionCategory'] = (element.products  && element.products.subCategories && element.products.subCategories.length > 0) ? element.products.subCategories[0].name : "";
+         console.log("fetching solution cat ==="+element['solutionCategory'])
           element['navigationId'] = element._id;
           element.priceList=element.priceList;
           element.quantity=1
@@ -544,20 +575,21 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   quantityCount = 1;
   addQuantity(quantity:any,index:any):void {
     
-    this.allBundleDetais[index].quantity = quantity+1;
+    this.allBundleDetais[index].quantity = Number(quantity)+1;
   }
   decreaseQuantity(quantity:any,index:any): void {
     if(quantity>1){
-      this.allBundleDetais[index].quantity = quantity-1;
+      
+      this.allBundleDetais[index].quantity = Number(quantity)-1;
     }
   }
 
   addBuyQuantity(quantity:any):void {
-    this.productFamilyVariant.quantity = quantity+1;
+    this.productFamilyVariant.quantity = Number(quantity)+1;
   }
   decreaseBuyQuantity(quantity:any): void {
     if(quantity>1){
-      this.productFamilyVariant.quantity = quantity-1;
+      this.productFamilyVariant.quantity = Number(quantity)-1;
     }
   }
 
@@ -567,13 +599,19 @@ public requestQuote (productFamilyVariant : any) : void {
   let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
   let queryParams;
+  console.log("setting mrp======")
     
       queryParams = {
         productName : productFamilyVariant.name,
         productId : productFamilyVariant._id,
         quantity : productFamilyVariant.quantity,
         price : productFamilyVariant.priceList[0].price,
+        erpPrice:productFamilyVariant.priceList[0].ERPPrice,
+        discountRate:productFamilyVariant.priceList[0].discountRate,
+        priceType:productFamilyVariant.priceList[0].priceType,
       };
+
+
     
   /*if(loggedinData.length > 0 ){
     
@@ -667,6 +705,34 @@ async addToCompare(item:any, type:any):Promise<void> {
   //console.log("getProdFromLocalStorage",prodGet);
 }
 
+public  prdLength = 0;
+
+  public compareProductsLength$ = this.compareProductsStore.compareProductsList2$
+    .pipe(
+      map(data => {
+
+        let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let combinedData = [...cachedData, ...cachedData2];
+        //this.productList = [...this.productList, ...data];
+        let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+        this.prdLength = uniqueElements.length;
+
+        console.log("++++++++++++++++++++++ ", this.prdLength);
+        
+        if(data){
+          return data;
+        }
+        else{
+          return data;
+        }
+        
+      }
+      )
+    )
+
+
+
 public removeSelectedItem(_id:any){
   this.productListToCompare = this.productListToCompare.filter(function(item) {
     return item._id != _id;
@@ -736,6 +802,13 @@ public removeSelectedItem(_id:any){
 
 
   }
+
+  public viewModal3(queryParams) {
+    const modalRef = this.modalService.open(CompareProductsModalComponent, {windowClass: 'compare-products-modal-custom-class' });
+    modalRef.componentInstance.request = queryParams;
+    // this.modalService.open(modal_id, { windowClass: 'custom-class' });
+  }
+
 
   public viewModal2(queryParams) {
     const modalRef = this.modalService.open(GetFreeCallModalComponent);

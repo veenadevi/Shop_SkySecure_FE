@@ -11,7 +11,7 @@ import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
-
+import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 
 @Component({
   selector: 'app-product-details-variant-by-id',
@@ -19,6 +19,19 @@ import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free
   styleUrls: ['./product-details-variant-by-id.component.css']
 })
 export class ProductDetailsVariantByIdComponent implements OnInit{
+
+  quantity: number = 1;
+
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
+
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
   public displayBasic: boolean; 
 
   productImages=[];
@@ -40,7 +53,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   titles = ['Description', 'Features', 'Specification','Similar Products','Compare Products','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
-
+ 
   productDescriptionWordLimit: number = 50;
   
   public allsimilarProducts:any[];
@@ -52,6 +65,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   public viewAllFeaturesDetails = false;
 
 
+  public prdType : any;
 
   public headingTags = [
     { title_size: "h1" },
@@ -221,6 +235,7 @@ export class ProductDetailsVariantByIdComponent implements OnInit{
   response.productVariants = {...response.productVariants, quantity: 1 }
 
 this.productVariants=response.productVariants;
+this.prdType = response.type;
 
 
 // console.log("response product Variant Quantituy",response.productVariants.quantity);
@@ -249,7 +264,8 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
 
         let fList = [];
         if(response.featureList.length > 5){
-          this.featureList = response.featureList.slice(0,5);
+          // this.featureList = response.featureList.slice(0,5);
+          this.featureList = response.featureList;
         }
         else{
           this.featureList = response.featureList;
@@ -288,7 +304,9 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
         if(this.productVariants && this.productVariants.productVideoURL && this.productVariants.productVideoURL.length>0){
           this.productVideoURL = this.productVariants.productVideoURL[0].source ;
         } 
-
+        else{
+          this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+        }
         //iframe functionality------->
 
         /*if(this.productVariants && this.productVariants.productVideoURL){
@@ -444,6 +462,7 @@ featureCount=5;
     this.featureList = this.product.featureList;
     // console.log("featureList",this.dispFeatureList.length);
     //this.getProductDetails2(productId);
+    this.compareProductsLength$.subscribe();
   }
 
   public navigateToProductDetails(product:any){
@@ -530,6 +549,32 @@ featureCount=5;
       // console.log("product list to compare",this.productListToCompare);
     // }
   }
+
+  public  prdLength = 0;
+
+  public compareProductsLength$ = this.compareProductsStore.compareProductsList2$
+    .pipe(
+      map(data => {
+
+        let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let combinedData = [...cachedData, ...cachedData2];
+        //this.productList = [...this.productList, ...data];
+        let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+        this.prdLength = uniqueElements.length;
+
+        console.log("++++++++++++++++++++++ ", this.prdLength);
+        
+        if(data){
+          return data;
+        }
+        else{
+          return data;
+        }
+        
+      }
+      )
+    )
 
   public removeSelectedItem(_id:any){
 
@@ -637,29 +682,29 @@ featureCount=5;
     position: string = 'left';
     quantityCount = 1;
     addQuantity(quantity:any,index:any):void {
-      this.productBundleList[index].quantity = quantity+1;
+      this.productBundleList[index].quantity = Number(quantity)+1;
     }
     decreaseQuantity(quantity:any,index:any): void {
       if(quantity>1){
-        this.productBundleList[index].quantity = quantity-1;
+        this.productBundleList[index].quantity = Number(quantity)-1;
       }
     }
 
     addSPQuantity(quantity:any,index:any):void {
-      this.similarProducts[index].quantity = quantity+1;
+      this.similarProducts[index].quantity = Number(quantity)+1;
     }
     decreaseSPQuantity(quantity:any,index:any): void {
       if(quantity>1){
-        this.similarProducts[index].quantity = quantity-1;
+        this.similarProducts[index].quantity = Number(quantity)-1;
       }
     }
 
     addBuyQuantity(quantity:any):void {
-      this.productVariants.quantity = quantity+1;
+      this.productVariants.quantity = Number(quantity)+1;
     }
     decreaseBuyQuantity(quantity:any): void {
       if(quantity>1){
-        this.productVariants.quantity = quantity-1;
+        this.productVariants.quantity = Number(quantity)-1;
       }
     }
 
@@ -675,6 +720,9 @@ featureCount=5;
           productId : product._id,
           quantity : product.quantity,
           price : product.priceList[0].price,
+          erpPrice:product.priceList[0].ERPPrice,
+          discountRate:product.priceList[0].discountRate,
+          priceType:product.priceList[0].priceType,
         };
       
     /*if(loggedinData.length > 0 ){
@@ -870,6 +918,11 @@ featureCount=5;
   }
 
 
+  public viewModal3(queryParams) {
+    const modalRef = this.modalService.open(CompareProductsModalComponent, {windowClass: 'compare-products-modal-custom-class' });
+    modalRef.componentInstance.request = queryParams;
+    // this.modalService.open(modal_id, { windowClass: 'custom-class' });
+  }
 
 
 

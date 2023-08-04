@@ -316,3 +316,16 @@ label {
     font-size: larger;
     font-weight: 600;
 }
+
+.desc-text-area{
+    height: 135px;
+}
+
+:host ::ng-deep .p-dropdown{
+    width:600px;
+    border: 1px solid black;
+}
+
+:host ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+    text-align: left !important;
+}

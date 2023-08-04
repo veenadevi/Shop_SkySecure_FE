@@ -120,6 +120,10 @@
     color: var(--neutral);
       
 }
+.text-style-mrp{
+    font-size: 14px;
+    /* font-weight: bold; */
+}
 
 .text-style-bold{
     font-size: 14px;
@@ -192,9 +196,28 @@
 
   .discount-holder{
     display: flex;
+    flex-direction: row;
+    column-gap: 6px;
     align-items: center;
   }
   .discounted-text{
+    color: #DB553C;
     font-size: 16px;
-    color: red;
+    font-style: normal;
+    font-weight: 400;
+  }
+  .product-price-section{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    column-gap: 3px;
+    height: 30px;
+  }
+  .product-price{
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .product-price-type{
+    font-size: 14px;
+    font-weight: 500;
   }

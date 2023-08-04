@@ -1,4 +1,18 @@
+
+<ng-container *ngIf="prdLength > 0">
+    <div (click) = "viewModal3(null)" class="compare-products-badge">
+        <!-- <img class="compare-icon" src="../../../../assets/icons/compare.svg"> -->
+        <span class="offer-name-label">
+            Compare ({{prdLength ? prdLength : 0}})
+        </span>
+    </div>
+</ng-container>
+
+
 <div class="product-details-container">
+    <div *ngIf="productFamily">
+        <custom-bread-crumb [product] = "productFamily" [prdType] = "prdType"></custom-bread-crumb>
+    </div>
     <div class="product-details">
         <ng-container *ngIf="productFamily">
 
@@ -50,25 +64,24 @@
 
                             <span>
                                 <img id="add-minus-quantity" (click)="changeQuantity('minus')" alt="minus"
-                                    src="../../../assets/icons/Minus.svg">
+                                class="add" src="../../../../../assets/icons/MinusIcon.svg">
                             </span>
                             <span>
-                                <input class="input-field" [(ngModel)]="productQuantity">
+                                <input type="number" min="0" class="input-field" [(ngModel)]="productQuantity" (keydown)="onKeyDown($event)">
                             </span>
                             <span>
                                 <img id="add-minus-quantity" alt="" (click)="changeQuantity('add')"
-                                    src="../../../assets/icons/Add.svg">
+                                class="add" src="../../../../assets/icons/AddIcon.svg">
                             </span>
                         </span>
 
-                        <button class="btn buy-now-btn" (click)="buyNow(productFamily, productQuantity)">Buy
-                            now</button>
+                        <button class="btn buy-now-btn" (click)="buyNow(productFamily, productQuantity)">Buy now</button>
                     </div>
 
                 </div>
 
                 <div class="product-details-info">
-                    <h4 class="head-04">{{productFamily.name}}
+                    <h4 class="head-04 notranslate">{{productFamily.name}}
                     </h4>
                     <p class="para">by Microsoft</p>
                     <div class="pd-header-reviews">
@@ -78,7 +91,7 @@
                         <mat-icon class="review-icon">star</mat-icon>
                         <mat-icon class="review-icon">star_border</mat-icon>
                         <div class="review-text-section">
-                            <p class="review-text"> 4 reviews </p>
+                            <p class="review-text"> 4 Reviews </p>
                             <!-- <span class="divider">|</span>
                             <p class="link-text"> Write a review </p> -->
                             <span class="divider">|</span>
@@ -94,7 +107,7 @@
                             </p>
                             <div class="price">
                                 <p class="product-price">
-                                    <span class="price-symbol">&#8377;</span>{{productFamily.priceList[0].price}}
+                                    <span class="price-symbol">&#8377;</span>{{productFamily.priceList[0].price | number : '1.2-2'}}
                                     <span class="product-price-type">
                                         / {{productFamily.priceList[0].priceType}}</span>
                                 </p>
@@ -106,7 +119,7 @@
                             <span class="price-symbol">&#8377;</span>
                             <span>
                                 <p style="font-size: initial; text-decoration: line-through;">
-                                    {{productFamily.priceList[0].ERPPrice}}</p>
+                                    {{productFamily.priceList[0].ERPPrice | number : '1.2-2'}}</p>
                             </span>
                         </div>
                     </div>
@@ -271,8 +284,10 @@
 
                 </div>
             </ng-container> -->
-            <details-compare-products-flyer
-                [compareProductsList]="selectedProductItem"></details-compare-products-flyer>
+
+            <!-- <details-compare-products-flyer
+                [compareProductsList]="selectedProductItem"></details-compare-products-flyer> -->
+
             <!-- <contact-us-flyer></contact-us-flyer> -->
             <contact-us-flyer-horizontal></contact-us-flyer-horizontal>
             <!-- <div class="connect-us-box">
@@ -387,17 +402,35 @@
 
             <!-- <<<<<<<<<<<<feature edit>>>>>>>>>>>>>>>>> -->
             <div class="product-features-container" id="feature" #featureRef>
-                <h5>Features</h5>
+                <h5>Bundle Details</h5>
+
                 <div class="product-feature-container">
                     <div class="prod-feature-img">
+                        <!-- <img style="width:auto;height: auto;position: relative;"
+                        src="../../assets/productDetails/FeaturesIllustration.svg"> -->
+                        <div class="bundle-desc-heading">
+                            <p class="bundle-desc">Products Included</p>
+                        </div>                        
+                        <div class="card-flyer-section">
+                            <ng-container *ngFor="let item of bundleItemsList; let i = index">
+                                <bundle-varient-card-flyer [product]="item" (click)="navigateToProductDetails(item)"></bundle-varient-card-flyer>
+                            </ng-container>
+                        </div>
+
+
+    
+                        <!-- <iframe [src]="productVideoURL | safeurl" width="600" height="300" frameborder="0" title="test"
+                            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+    
+                    </div>
+                    <!-- <div class="prod-feature-img">
                         <img style="width:auto;height: auto;position: relative;"
                             src="../../assets/productDetails/FeaturesIllustration.svg">
-                    </div>
+                    </div> -->
                     <div class="prod-feat-card-content">
                         <div class="prod-card-holder">
                             <div class="feature-desc-heading">
-                                <p class="feature-desc">Explore the Cutting-Edge Features of {{productFamily.name}}
-                                    Product</p>
+                                <p class="feature-desc">Product Features</p>
                             </div>
                             <div class="prod-card">
                                 <ng-container *ngFor="let item of features">
@@ -417,14 +450,13 @@
                             </div>
 
                         </div>
-                        <div class="p-view-all-feature-div">
+                        <!-- <div class="p-view-all-feature-div">
                             <div class="feature-desc-heading">
-                                <!-- <p class="feature-viewall">click here to view detailed feature of the
-                                    product</p> -->
+                              
                                 <button class="btn view-det-btn" (click)="featureCountEvent()">View All
                                     Features</button>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
 
@@ -642,7 +674,7 @@
 
                                         </div>
                                         <div class="comp-product-card-content">
-                                            <p class="product-category">{{productFamily.name}}</p>
+                                            <p class="product-category" (click)="navigateToProductDetails(productFamily)">{{productFamily.name}}</p>
                                             <p class="product-solution">Solution Category:</p>
                                             <p class="product-desc">{{productFamily.subcategories[0].name}}</p>
                                         </div>
@@ -662,7 +694,7 @@
                                             </div>
                                         </div>
                                         <div class="checkbox-sec-02">
-                                            <a class="view-sec"(click)="navigateToProductDetails(productFamily)">view details</a>
+                                            <!-- <a class="view-sec"(click)="navigateToProductDetails(productFamily)">view details</a> -->
                                         </div>
 
                                     </div>
@@ -674,8 +706,11 @@
                                 <h6 style="font-size: 25px;">VS</h6>
                             </span>
 
-                            <button #leftArrow class="arrow left-arrow" (click)="scrollFunctionLeft()"><img
-                                    class="arrow-icon" src="../../../../assets/icons/ArrowLeftIcon.svg"></button>
+                            <ng-container *ngIf="allCompareProducts.length >=3">
+                                <button #leftArrow class="arrow left-arrow" (click)="scrollFunctionLeft()">
+                                    <img class="arrow-icon" src="../../../../assets/icons/ArrowLeftIcon.svg">
+                                </button>
+                            </ng-container>
 
                             <div class="scroll-container">
 
@@ -689,7 +724,7 @@
                                                     </div>
                                                     <div class="comp-product-card-content">
                                                         <!-- <p class="product-category">{{item.name}}</p> -->
-                                                        <p class="product-category">{{item.name}}</p>
+                                                        <p class="product-category" (click)="navigateToProductDetails(item)">{{item.name}}</p>
                                                         <p class="product-solution">Solution Category:</p>
                                                         <p class="product-desc">{{item.solutionCategory}}</p>
                                                     </div>
@@ -713,7 +748,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="checkbox-sec-02">
-                                                        <a class="view-sec" (click)="navigateToProductDetails(item)">view details</a>
+                                                        <!-- <a class="view-sec" (click)="navigateToProductDetails(item)">view details</a> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -724,9 +759,11 @@
 
 
                             </div>
-
-                            <button class="arrow right-arrow" (click)="scrollFunctionRight()"><img class="arrow-icon"
-                                    src="../../../../assets/icons/ArrowRightIcon.svg"></button>
+                            <ng-container *ngIf="allCompareProducts.length >=3">
+                                <button class="arrow right-arrow" (click)="scrollFunctionRight()">
+                                    <img class="arrow-icon" src="../../../../assets/icons/ArrowRightIcon.svg">
+                                </button>
+                            </ng-container>
                         </div>
                     </div>
 
@@ -760,7 +797,7 @@
                                 </div>
                                 <div class="similar-prod-price-det">
 
-                                    <span class="similar-prod-price-det-title">{{item.name}}</span>
+                                    <span class="bundle-heading" (click)="navigateToProductDetails(item)">{{item.name}}</span>
 
                                     <p class="bundle-solution">Solution Category:</p>
                                     <p class="bundle-solution-desc">{{(item.solutionCategory) ? item.solutionCategory :
@@ -780,14 +817,14 @@
 
                                     <span>
                                         <img id="add-minus-quantity" (click)="decreaseQuantity(item.quantity, i)" alt="minus"
-                                            src="../../../assets/icons/Minus.svg">
+                                        class="add" src="../../../../../assets/icons/MinusIcon.svg">
                                     </span>
                                     <span>
-                                        <input class="input-field" [(ngModel)]="item.quantity">
+                                        <input  type="number" min="0" class="input-field" [(ngModel)]="item.quantity" (keydown)="onKeyDown($event)">
                                     </span>
                                     <span>
                                         <img id="add-minus-quantity" alt="" (click)="addQuantity(item.quantity, i)"
-                                            src="../../../assets/icons/Add.svg">
+                                        class="add" src="../../../../assets/icons/AddIcon.svg">
                                     </span>
                                 </span>
                             </div>

@@ -2,14 +2,14 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
-
+import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 
 
 @Component({
@@ -18,9 +18,23 @@ import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free
   styleUrls: ['./product-bundle-detail.component.css']
 })
 export class ProductBundleDetailComponent implements OnInit{
+
+  quantity: number = 1;
+
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
+
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
   public displayBasic: boolean; 
   productDescriptionWordLimit: number = 50;
 
+  productVideoURL: string;
 
   public currentRoute: string;
   links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
@@ -29,11 +43,13 @@ export class ProductBundleDetailComponent implements OnInit{
   myColor = '';
 
   public productQuantity:  any = 1;
-
+  public completeFeatureList : any[] = [];
   public selectedProductItem : any[] = [];
 
   public bundleQuantity = 1;
   checked: boolean = false;
+
+  public prdType : any;
 
   @ViewChild('descriptionRef') descriptionRef!: ElementRef;
   @ViewChild('featureRef') featureRef!: ElementRef;
@@ -114,6 +130,8 @@ export class ProductBundleDetailComponent implements OnInit{
     this.seeMore= !this.seeMore;
   }
 
+  featureList = [];
+  productbundles ;
   constructor(
     private route: ActivatedRoute,
     private metaDataSvc : MetadataService,
@@ -151,6 +169,32 @@ export class ProductBundleDetailComponent implements OnInit{
         }
     });
   }
+
+  public  prdLength = 0;
+
+  public compareProductsLength$ = this.compareProductsStore.compareProductsList2$
+    .pipe(
+      map(data => {
+
+        let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let combinedData = [...cachedData, ...cachedData2];
+        //this.productList = [...this.productList, ...data];
+        let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+        this.prdLength = uniqueElements.length;
+
+        console.log("++++++++++++++++++++++ ", this.prdLength);
+        
+        if(data){
+          return data;
+        }
+        else{
+          return data;
+        }
+        
+      }
+      )
+    )
 
 
   public onPageLoad : boolean = true;
@@ -192,6 +236,7 @@ export class ProductBundleDetailComponent implements OnInit{
     const productId = this.route.snapshot.paramMap.get('id');
     this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     this.getBrandDetails(productId);
+    this.compareProductsLength$.subscribe();
     
   }
 
@@ -207,6 +252,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
        // this.productVarientData = response;
         this.productFamily = response.productFamily;
+        this.prdType = response.type ? response.type : '';
 
         
        
@@ -267,8 +313,13 @@ export class ProductBundleDetailComponent implements OnInit{
         }
         this.productImages=this.productImages.slice(0,4);
 
-
-      
+        this.completeFeatureList = response.featureList;
+        if(this.productbundles && this.productbundles.productVideoURL && this.productbundles.productVideoURL.length>0){
+          this.productVideoURL = this.productbundles.productVideoURL[0].source ;
+        } 
+      else{
+        this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+      }
         //this.allSimilerProducts = this.products.concat(response.productVarients,response.productFamilyVariants);
         //this.allSimilerProducts = this.allSimilerProducts.slice(0,3);
         this.setCheckBoxState();
@@ -379,6 +430,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
     
     if(type === 'add'){
+
       this.productQuantity = Number(this.productQuantity) + 1;
     }
     else if(type === 'minus'){
@@ -402,6 +454,9 @@ export class ProductBundleDetailComponent implements OnInit{
           productId : item._id,
           quantity : quantity,
           price : item.priceList[0].price,
+          erpPrice:item.priceList[0].ERPPrice,
+          discountRate:item.priceList[0].discountRate,
+          priceType:item.priceList[0].priceType,
         };
     /*if(loggedinData.length > 0 ){
       
@@ -432,6 +487,14 @@ export class ProductBundleDetailComponent implements OnInit{
 
 
   }
+
+  public viewModal3(queryParams) {
+    const modalRef = this.modalService.open(CompareProductsModalComponent, {windowClass: 'compare-products-modal-custom-class' });
+    modalRef.componentInstance.request = queryParams;
+    // this.modalService.open(modal_id, { windowClass: 'custom-class' });
+  }
+
+
   public viewModal2(queryParams) {
     const modalRef = this.modalService.open(GetFreeCallModalComponent);
     modalRef.componentInstance.request = queryParams;
@@ -577,6 +640,9 @@ export class ProductBundleDetailComponent implements OnInit{
           productId : product._id,
           quantity : product.quantity,
           price : product.priceList[0].price,
+          erpPrice:product.priceList[0].ERPPrice,
+          discountRate:product.priceList[0].discountRate,
+          priceType:product.priceList[0].priceType,
         };
       // }
     /*if(loggedinData.length > 0 ){

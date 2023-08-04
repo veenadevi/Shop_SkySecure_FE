@@ -125,7 +125,10 @@ export class CartService {
             "productId": element.productId,
             "quantity" : element.quantity,
             "productName" : element.productName,
-            "price" : element.price ? element.price : 0
+            "price" : element.price ? element.price : 0,
+            "erpPrice":element.erpPrice,
+            "discountRate":element.discountRate,
+            "priceType":element.priceType
         })
   
       })

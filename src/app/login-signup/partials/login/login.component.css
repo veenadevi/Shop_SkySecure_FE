@@ -85,7 +85,517 @@ input{
 
 .new-email-alert{
     font-size: .875em;
+    
     color: #b02a37;
-    padding-left: 29%;
+    padding-left: 0%;
     padding-top: 4%;
+    text-align: center;
+}
+.logo{
+    display: none;
+}
+.skysecure-logo {
+    height: 50px;
+}
+.cancel-btn{
+    display: none;
+}
+.welcome-img{
+    display: none;
+}
+.center-img{
+    text-align: center;
+    padding: 40px 0 20px 0;
+  
+}
+.welcome{
+    text-align: center;
+    color: white;
+    font-family: 'lato',sans-serif;
+
+}
+
+
+
+
+
+/* media-query */
+@media  ( min-width: 1024px) and (max-width: 1200px)  {
+.back-btn{
+    padding-top: 0px;
+    padding-left: 0;
+    margin-top: -70px;
+    margin-left: -35px;
+    cursor: pointer;
+}
+input{
+    box-sizing: border-box;
+    border: 2px solid #918F90;
+    border-radius: 8px;
+    padding: 7px;
+    width: 90%;
+    /* border: none; */
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+    padding-top: 7px;
+    font-family: 'lato',sans-serif;
+}
+}
+
+@media  ( min-width: 770px) and (max-width: 1024px)  {
+    .login-container{
+        display: flex;
+        flex-direction: column;
+        font-family: 'lato',sans-serif;
+        padding: 0px;
+        margin: 0px;
+       
+    }
+    .back-btn{
+        padding-top: 0px;
+        padding-left: 0;
+        /* margin-top: -140px; */
+        margin-left: -35px;
+        cursor: pointer;
+        margin: auto;
+        display: none;
+    }
+    .heading{
+        font-family: 'lato',sans-serif;
+        padding: 6% 0 0 0;
+       
+    }
+    h1{
+        font-size: 20px;
+        font-weight: bolder;
+        font-family: 'lato',sans-serif;
+        text-align: center;
+        margin-top: 15%;
+    }
+    label{
+        padding-bottom: 5px;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    input{
+        box-sizing: border-box;
+        border: 2px solid #918F90;
+        border-radius: 8px;
+        padding: 7px;
+        width: 95%;
+        /* border: none; */
+    }
+    .form-group{
+        display: flex;
+        flex-direction: column;
+        padding-left: 5%;
+        padding-top: 7px;
+        font-family: 'lato',sans-serif;
+    }
+    .forgot-pwd{
+        padding-left: 21%;
+        padding-top: 5px;
+        font-size: 13px;
+    }
+ 
+    
+    .no-account{
+        display: flex;
+        flex-direction: row;
+        padding-top: 30px;
+        justify-content: center;
+        align-items: center;
+    
+    }
+    .no-account-01{
+        padding-left: 0%;
+        font-family: 'lato',sans-serif;
+        font-size: 12px;
+    }
+    .no-account-02{
+        color:#383DA9;
+        font-weight: bold;
+        font-family: 'lato',sans-serif;
+        cursor: pointer;
+        padding-left: 1%;
+        font-size: 12px;
+    }
+    
+    .new-email-alert{
+        font-size: 12px;
+        color: #b02a37;
+        padding-left: 0%;
+        padding-top: 4%;
+        text-align: center;
+    }
+    .skysecure-logo {
+        height: 50px;
+        margin-top: 10px;
+    }
+    .logo{
+        display:inline;
+        text-align: center;
+        background-color: #080F24;
+        height: 70px;
+    }
+.buttons{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* column-gap: 15px; */
+}
+.signin-btn{
+    display: flex;
+    width: 40%;
+    margin: 5%;
+}
+.cancel-btn{
+    display: flex;
+    width: 40%;
+    margin: 5%;
+}
+.primary-btn{
+    box-sizing: border-box;
+    border: none;
+    background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
+    border-radius: 5px;
+    padding: 5px;
+    width:100%;
+    /* margin-left: 35%; */
+    font-family: 'lato',sans-serif;
+    margin-top: 25px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 0%;
+}
+
+.secondary-btn{
+    box-sizing: border-box;
+    border: 1px solid  #080F24;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    /* margin-left: 35%; */
+    font-family: 'lato',sans-serif;
+    margin-top: 25px;
+    color:  #080F24;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+}
+
+
+@media  ( min-width: 481px) and (max-width: 770px)  {
+    .login-container{
+        display: flex;
+        flex-direction: column;
+        font-family: 'lato',sans-serif;
+        padding: 0px;
+        margin: 0px;
+       
+    }
+    .back-btn{
+        padding-top: 0px;
+        padding-left: 0;
+        /* margin-top: -140px; */
+        margin-left: -35px;
+        cursor: pointer;
+        margin: auto;
+        display: none;
+    }
+    .heading{
+        font-family: 'lato',sans-serif;
+        padding: 6% 0 0 0;
+       
+    }
+    h1{
+        font-size: 20px;
+        font-weight: bolder;
+        font-family: 'lato',sans-serif;
+        text-align: center;
+        margin-top: 15%;
+    }
+    label{
+        padding-bottom: 5px;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    input{
+        box-sizing: border-box;
+        border: 2px solid #918F90;
+        border-radius: 8px;
+        padding: 7px;
+        width: 95%;
+        /* border: none; */
+    }
+    .form-group{
+        display: flex;
+        flex-direction: column;
+        padding-left: 5%;
+        padding-top: 7px;
+        font-family: 'lato',sans-serif;
+    }
+    .forgot-pwd{
+        padding-left: 21%;
+        padding-top: 5px;
+        font-size: 13px;
+    }
+ 
+    
+    .no-account{
+        display: flex;
+        flex-direction: row;
+        padding-top: 30px;
+        justify-content: center;
+        align-items: center;
+    
+    }
+    .no-account-01{
+        padding-left: 0%;
+        font-family: 'lato',sans-serif;
+        font-size: 12px;
+    }
+    .no-account-02{
+        color:#383DA9;
+        font-weight: bold;
+        font-family: 'lato',sans-serif;
+        cursor: pointer;
+        padding-left: 1%;
+        font-size: 12px;
+    }
+    
+    .new-email-alert{
+        font-size: 12px;
+        color: #b02a37;
+        padding-left: 0%;
+        padding-top: 4%;
+        text-align: center;
+    }
+    .skysecure-logo {
+        height: 50px;
+        margin-top: 10px;
+    }
+    .logo{
+        display:inline;
+        text-align: center;
+        background-color: #080F24;
+        height: 70px;
+    }
+.buttons{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* column-gap: 15px; */
+}
+.signin-btn{
+    display: flex;
+    width: 40%;
+    margin: 5%;
+}
+.cancel-btn{
+    display: flex;
+    width: 40%;
+    margin: 5%;
+}
+.primary-btn{
+    box-sizing: border-box;
+    border: none;
+    background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
+    border-radius: 5px;
+    padding: 5px;
+    width:100%;
+    /* margin-left: 35%; */
+    font-family: 'lato',sans-serif;
+    margin-top: 25px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 0%;
+}
+
+.secondary-btn{
+    box-sizing: border-box;
+    border: 1px solid  #080F24;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    /* margin-left: 35%; */
+    font-family: 'lato',sans-serif;
+    margin-top: 25px;
+    color:  #080F24;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+}
+
+
+@media  ( min-width: 320px) and (max-width: 480px)  {
+    .login-container{
+        display: flex;
+        flex-direction: column;
+        font-family: 'lato',sans-serif;
+        padding: 0px;
+        margin: 0px;
+       
+    }
+    .back-btn{
+        padding-top: 0px;
+        padding-left: 0;
+        /* margin-top: -140px; */
+        margin-left: -35px;
+        cursor: pointer;
+        margin: auto;
+        display: none;
+    }
+    .heading{
+        font-family: 'lato',sans-serif;
+        padding: 6% 0 0 0;
+       
+    }
+    h1{
+        font-size: 20px;
+        font-weight: bolder;
+        font-family: 'lato',sans-serif;
+        text-align: center;
+        margin-top: 15%;
+    }
+    label{
+        padding-bottom: 5px;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    input{
+        box-sizing: border-box;
+        border: 2px solid #918F90;
+        border-radius: 8px;
+        padding: 7px;
+        width: 95%;
+        /* border: none; */
+    }
+    .form-group{
+        display: flex;
+        flex-direction: column;
+        padding-left: 5%;
+        padding-top: 7px;
+        font-family: 'lato',sans-serif;
+    }
+    .forgot-pwd{
+        padding-left: 21%;
+        padding-top: 5px;
+        font-size: 13px;
+    }
+ 
+    
+    .no-account{
+        display: flex;
+        flex-direction: row;
+        padding-top: 30px;
+    
+    }
+    .no-account-01{
+        padding-left: 17%;
+        font-family: 'lato',sans-serif;
+    }
+    .no-account-02{
+        color:#383DA9;
+        font-weight: bold;
+        font-family: 'lato',sans-serif;
+        cursor: pointer;
+        padding-left: 1%;
+    }
+    
+    .new-email-alert{
+        font-size: 12px;
+        color: #b02a37;
+        padding-left: 0%;
+        padding-top: 4%;
+        text-align: center;
+    }
+    .skysecure-logo {
+        height: 50px;
+        margin-top: 10px;
+    }
+    .logo{
+        display:inline;
+        text-align: center;
+        background-color: #080F24;
+        height: 70px;
+    }
+.buttons{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* column-gap: 15px; */
+}
+.signin-btn{
+    display: flex;
+    width: 40%;
+    margin: 5%;
+}
+.cancel-btn{
+    display: flex;
+    width: 40%;
+    margin: 5%;
+}
+.primary-btn{
+    box-sizing: border-box;
+    border: none;
+    background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
+    border-radius: 5px;
+    padding: 5px;
+    width:100%;
+    /* margin-left: 35%; */
+    font-family: 'lato',sans-serif;
+    margin-top: 25px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 0%;
+}
+
+.secondary-btn{
+    box-sizing: border-box;
+    border: 1px solid  #080F24;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    /* margin-left: 35%; */
+    font-family: 'lato',sans-serif;
+    margin-top: 25px;
+    color:  #080F24;
+    font-size: 15px;
+    cursor: pointer;
+}
+.welcome-img{
+    display: block;
+    
+}
+.center-img{
+    text-align: center;
+    padding: 40px 0 20px 0;
+  
+}
+.welcome{
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: center;
+    color: #080F24;
+    font-family: 'lato',sans-serif;
+  
+}
+.login-img{
+    height: 150px;
+    width: 150px;
+}
 }

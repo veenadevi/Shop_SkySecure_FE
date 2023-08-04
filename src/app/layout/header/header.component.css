@@ -239,7 +239,7 @@ ul .nav-text:hover {
 .cart-button .cart-icon {
     height: 20px;
     position: absolute;
-    top: 10px;
+    top: 12px;
     right: 10px;
 }
 
@@ -261,12 +261,17 @@ ul .nav-text:hover {
 }
 
 .usericon {
-    height: 20px;
+    height: 18px;
 }
 
 .user-icon:hover {
     border: 1px solid #efefef;
     border-radius: 8px;
+}
+
+.icon-color{
+    color: white;
+    margin-left : 10px;
 }
 
 
@@ -301,7 +306,21 @@ ul .nav-text:hover {
 #check {
     display: none;
 }
-
+@media  ( min-width: 770px) and (max-width: 1024px)  {
+    .checkbtn {
+        font-size: 20px;
+        color: #efefef;
+        justify-content: flex-end;
+        cursor: pointer;
+        display: none;
+        margin-left: 10px;
+        margin-top: 2px;
+    }
+    .usericon {
+        height: 18px;
+        margin-top: 5px;
+    }
+}
 @media (max-width: 952px) {
     .logo-section {
         height: 40px;
@@ -317,6 +336,13 @@ ul .nav-text:hover {
 @media (max-width: 858px) {
     .checkbtn{
         display: block;
+        font-size: 20px;
+        color: #efefef;
+        justify-content: flex-end;
+        cursor: pointer;
+        /* display: none; */
+        margin-left: 10px;
+        margin-top: 2px;
     }
     
     .navmenu{
@@ -344,8 +370,101 @@ ul .nav-text:hover {
     #check:checked ~ ul{
         left: 0;
     }
+    .cart-button .cart-icon {
+        height: 22px;
+        position: absolute;
+        top: 12px;
+        right: 10px;
+    }
+    
 
 }
+
+
+
+@media  ( min-width: 481px) and (max-width: 770px)  {
+    .checkbtn {
+        font-size: 20px;
+        color: #efefef;
+        justify-content: flex-end;
+        cursor: pointer;
+        /* display: none; */
+        margin-left: 10px;
+        margin-top: 2px;
+    }
+    .cart-button .cart-icon {
+        height: 22px;
+        position: absolute;
+        top: 12px;
+        right: 10px;
+    }
+    .icons-section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: -6px;
+    }
+    .usericon {
+        height: 18px;
+        margin-top: 5px;
+    }
+   
+}
+
+@media  ( min-width: 320px) and (max-width: 480px)  {
+    .checkbtn {
+        font-size: 18px;
+    color: #efefef;
+    justify-content: flex-end;
+    cursor: pointer;
+    margin-left: 4px;
+    margin-top: 6px;
+}
+    
+    .cart-button .cart-icon {
+        height: 20px;
+        position: absolute;
+        top: 12px;
+        right: 3px;
+    }
+    .navbar {
+        background-color: #1e1e1e;
+        height: 56px;
+        padding: 0px 26px;
+        display: flex;
+        align-items: center;
+        justify-content:space-between;
+        /* flex-direction: column; */
+        /* border-bottom: 4px solid #F79C0B; */
+    }
+    .realize-logo {
+        height: 30px;
+        cursor: pointer;
+        top: 10px;
+        margin-top: 5px;
+        margin-left: -10px;
+    }
+    
+.icon-color{
+    color: white;
+    margin-left : 3px;
+}
+.usericon {
+    height: 18px;
+    margin-top: 5px;
+}
+.icons-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: -6px;
+}
+
+}
+    
+
+
+
 
 
 .search-bar {
@@ -393,3 +512,37 @@ ul .nav-text:hover {
     align-items: center;
     justify-content: center;
 }
+
+
+
+mat-sidenav-container mat-sidenav mat-nav-list .menu-item {
+    margin-left: 8px;
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    align-items: center;
+}
+.text-style{
+    font-size: 14px;
+    margin-top: 3px;
+    font-family: 'lato', sans-serif;
+ }
+ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+    /* /* display: flex; */
+    margin-left: 10px;
+    margin-top: 5px;
+}
+mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
+    transform: rotate(180deg);
+    float: right;
+    margin-left: 10px;
+}
+.sub-menu-item{
+    margin-left: 32px;
+    font-size: 13px;
+    font-family: 'lato', sans-serif;
+ }
+
+

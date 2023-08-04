@@ -33,6 +33,7 @@
 
 body{
   margin: 0px !important;
+  font-family: 'Lato', sans-serif !important;
 }
 
 
@@ -50,3 +51,14 @@ body{
   font-weight: 600;
   color: #686A77;
 }
+
+/** Global Styles for Modal **/
+.compare-products-modal-custom-class .modal-dialog{
+  float : right !important
+}
+
+/** CDK Overlay Custom Style **/
+.cdk-overlay-container{
+  z-index: 1031 !important;
+}
+

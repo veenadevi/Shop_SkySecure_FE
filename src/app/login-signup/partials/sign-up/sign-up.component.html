@@ -1,5 +1,7 @@
 <div class="signup-container">
-
+  <div class="logo">
+    <img class="skysecure-logo" src="../../assets/Logos/skysecureLogo.png">
+</div>
   <div (click)="navigateToLogin()">
     <div class="back-btn"><img src="../../../../assets/icons/arrow-right.svg"></div>
   </div>
@@ -42,17 +44,30 @@
   <div class="forgot-pwd">
           
         </div>
-        
-          <div class="signin-btn" *ngIf="enableOTPButton">
+        <div class="buttons">
+          <ng-container *ngIf="enableOTPButton">
+          <div class="signin-btn" >
             <!-- <button type="submit" class="primary-btn">Send OTP</button> -->
-            <button type="submit" (click) = "onSubmitEmail()" class="btn btn-otp">Send OTP</button>
+            <button type="submit" (click) = "onSubmitEmail()" class="primary-btn" >Send OTP</button>
           </div>
+          <div class="cancel-btn">
+            <button (click)="navigateToLogin()" class="secondary-btn">Back</button>
+          </div>
+        </ng-container>
+        </div>
 
+
+
+          <div class="buttons">
           <ng-container *ngIf="enableSignInButton">
             <div class="signin-btn">
-              <button (click)="validateOTP()" class="btn btn-otp">Sign up</button>
+              <button (click)="validateOTP()" class="primary-btn">Sign up</button>
+            </div>
+            <div class="cancel-btn">
+              <button (click)="navigateToLogin()" class="secondary-btn">Back</button>
             </div>
           </ng-container>
+          </div>
         
 
       </form>

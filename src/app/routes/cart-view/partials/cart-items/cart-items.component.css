@@ -10,13 +10,14 @@
 
     background: var(--light_border);
     border-radius: 18px;
+    text-align: center;
 
 }
 
 .table tr th {
     vertical-align: middle;
     text-align: center;
-    height: 4em !important;
+    height: 3em !important;
 }
 
 .table th:first-child {
@@ -72,10 +73,10 @@
 }
 
 .text-style {
-    font-family: 'Lato', sans-serif;
+   
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 21px;
     /* color: var(--brown); */
 
@@ -103,7 +104,7 @@
 }
 
 .price-details {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 600;
     color: #1e1e1e;
 }
@@ -137,6 +138,11 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    width:100%;
+}
+
+tbody th{
+    width:50%;
 }
 
 .product-name{
@@ -144,7 +150,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    font-size: 1.3rem;
+    font-size: 14px;
 }
 
 .cart-title-btns {
@@ -189,11 +195,24 @@
     align-items: center;
     padding: 10px 44px 10px 136px;
 
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 700;
     color: #1e1e1e;
 
     vertical-align: middle;
     text-align: center;
     height: 4em !important;
+}
+.error-message {
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 0;
+    color: #B82727;
+    margin-top: -17%;
+}
+.add{
+    height: 20px;
+    width: 20px;
 }

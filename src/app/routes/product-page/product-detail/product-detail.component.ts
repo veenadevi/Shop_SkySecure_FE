@@ -12,6 +12,7 @@ import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -20,10 +21,24 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 })
 export class ProductDetailComponent implements OnInit{
 
+  quantity: number = 1;
+
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
+
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
+
   public displayBasic: boolean; 
 
   productImages=[];
-  productVideoURL=[];
+  productVideoURL: string;
+  // productVideoURL=[];
   productBundles=[];
   productBundlesData:any=[];
   productBundleVariantsData:any=[];
@@ -37,6 +52,8 @@ export class ProductDetailComponent implements OnInit{
   public completeFeatureList : any[] = [];
   
   public viewAllFeaturesDetails = false;
+
+  public prdType : any;
   
   faq = [];
   productListToCompare  = [];
@@ -126,10 +143,11 @@ export class ProductDetailComponent implements OnInit{
   }
 
   
+  featureList = [];
+  productparent ;
 
-
- featureList: any[] = [];
- productVariants: any[]  =[];
+//  featureList: any[] = [];
+//  productVariants: any[]  =[];
  dispFeatureList: any[] = [];
  productName:string;
   public bannerUrl : any;
@@ -210,6 +228,7 @@ export class ProductDetailComponent implements OnInit{
       this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( (response) => {
      //this.individualProductDetail$.subscribe();
         this.product={...response.product, quantity: 1 }
+        this.prdType = response.type;
        this.product.bannerLogo=(this.product.bannerLogo &&this.product.bannerLogo !== null) ? this.product.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
         // console.log("price after set quantity===="+this.product.priceList[0].discountRate)
         let fList = [];
@@ -217,7 +236,8 @@ export class ProductDetailComponent implements OnInit{
           
           this.completeFeatureList = response.featureList;
           if(response.featureList.length > 5){
-            this.featureList = response.featureList.slice(0,5);
+            //this.featureList = response.featureList.slice(0,5);
+            this.featureList = response.featureList;
           }
           else{
             this.featureList = response.featureList;
@@ -267,7 +287,14 @@ export class ProductDetailComponent implements OnInit{
         }
         this.productImages=this.productImages.slice(0,4);
 
+        this.completeFeatureList = response.featureList;
 
+        if(this.productparent && this.productparent.productVideoURL && this.productparent.productVideoURL.length>0){
+          this.productVideoURL = this.productparent.productVideoURL[0].source ;
+        } 
+        else{
+          this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
+        }
 
         // if(response.products[0].productImages.length>0) {
         //   this.productImages = response.productImages;
@@ -376,6 +403,7 @@ featureCount=5;
     //this.featureList = reson.featureList;
     //console.log("featureList",this.dispFeatureList.length);
     //this.getProductDetails2(productId);
+    this.compareProductsLength$.subscribe();
   }
 
 
@@ -419,6 +447,33 @@ featureCount=5;
       // console.log("product list to compare",this.productListToCompare);
     // }
   }
+
+
+  public  prdLength = 0;
+  public compareProductsLength$ = this.compareProductsStore.compareProductsList2$
+    .pipe(
+      map(data => {
+
+        let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let combinedData = [...cachedData, ...cachedData2];
+        //this.productList = [...this.productList, ...data];
+        let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+        this.prdLength = uniqueElements.length;
+
+        console.log("++++++++++++++++++++++ ", this.prdLength);
+        
+        if(data){
+          return data;
+        }
+        else{
+          return data;
+        }
+        
+      }
+      )
+    )
+
 
   public removeSelectedItem(_id:any){
     this.productListToCompare = this.productListToCompare.filter(function(item) {
@@ -499,20 +554,23 @@ featureCount=5;
     position: string = 'left';
     quantityCount = 1;
     addQuantity(quantity:any,index:any):void {
-      this.productBundles[index].productFamily.quantity = quantity+1;
+    
+      this.productBundles[index].productFamily.quantity =  Number(quantity)+1;
     }
     decreaseQuantity(quantity:any,index:any): void {
       if(quantity>1){
-        this.productBundles[index].productFamily.quantity = quantity-1;
+        this.productBundles[index].productFamily.quantity = Number(quantity)-1;
       }
     }
 
     addBuyQuantity(quantity:any):void {
-      this.product.quantity = quantity+1;
+      //this.product.quantity = quantity+1;
+      this.product.quantity = Number(this.product.quantity) +1;
     }
     decreaseBuyQuantity(quantity:any): void {
       if(quantity>1){
-        this.product.quantity = quantity-1;
+        this.product.quantity = Number(this.product.quantity) - 1;
+       // this.product.quantity = quantity-1;
       }
     }
 
@@ -523,11 +581,15 @@ featureCount=5;
 
     let queryParams;
       // if(product.productVariants.length>0){
+        
         queryParams = {
           productName : product.name,
           productId : product._id,
           quantity : product.quantity,
           price : product.priceList[0].price,
+          erpPrice:product.priceList[0].ERPPrice,
+          discountRate:product.priceList[0].discountRate,
+          priceType:product.priceList[0].priceType,
         };
       // }
     /*if(loggedinData.length > 0 ){
@@ -562,6 +624,12 @@ featureCount=5;
 
 
 
+  }
+
+  public viewModal3(queryParams) {
+    const modalRef = this.modalService.open(CompareProductsModalComponent, {windowClass: 'compare-products-modal-custom-class' });
+    modalRef.componentInstance.request = queryParams;
+    // this.modalService.open(modal_id, { windowClass: 'custom-class' });
   }
 
   public viewModal2(queryParams) {

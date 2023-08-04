@@ -29,7 +29,12 @@
 </div>
 
 -->
-
+<div (click) = "viewModal3(null)" class="compare-products-badge">
+    <!-- <img class="compare-icon" src="../../../../assets/icons/compare.svg"> -->
+    <span class="offer-name-label">
+        Compare
+    </span>
+</div>
 
 
 <div class="header-container">
@@ -44,7 +49,7 @@
             </div>        
         </div> -->
         <div class="form-group search-box-container">
-            <search-box style="position: absolute; width: 62%;"></search-box>
+            <search-box style="position: absolute; width: 45%;"></search-box>
             <div id="searchBox" #elmSearchBox></div>
         </div>
         <div class="shop-feature-container">
@@ -93,13 +98,13 @@
         <div class="aboutus-content">
             <div>
                 <!-- <iframe [src]="aboutOurPlatformVideoUrl" width="600" height="350" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
-                <iframe [src]="aboutOurPlatformVideoUrl | safeurl" width="600" height="350" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <iframe [src]="aboutOurPlatformVideoUrl | safeurl"  class="iframe" width="600" height="350" frameborder="0" title="test" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
             <div class="aboutus-text">
                 <p class="teritary-content">Our platform will help you compare products for features & capabilities, and we ensure you guaranteed best price on all your purchases.</p>
                 <p class="primary-content-headline">And You Know What!</p>
                 <p class="primary-content">We have you covered with an automated deployments of your purchased products & solutions</p>
-                <a href="https://realize.skysecuretech.com/" target="_blank"><button class="request-btn" >Access Platform</button> </a>
+                <a href="https://realize.skysecuretech.com/" target="_blank"><button class="btn request-btn" >Access Platform</button> </a>
             </div>
         </div>
     </div>

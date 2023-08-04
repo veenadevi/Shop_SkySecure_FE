@@ -14,9 +14,10 @@
                   <thead class="table-header">
                     <tr>
                       <th scope="col">Products</th>
-                      <th scope="col">Price</th>
+                      <th scope="col">MRP(₹)</th>
+                      <th scope="col">Skysecure Price(₹)</th>
                       <th scope="col">Quantity </th>
-                      <th scope="col">Sub Total</th>
+                      <th scope="col">Sub Total(₹)</th>
                     </tr>
                   </thead>
                   <tbody class="table-row">
@@ -40,6 +41,13 @@
                         <td>
                           <div class="td-column price-details">
                             <span>
+                            {{ item.erpPrice | number : '1.2-2'}}
+                            </span>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="td-column price-details">
+                            <span>
                               {{ item.price | number : '1.2-2'}}
                             </span>
                           </div>
@@ -48,24 +56,27 @@
                         <td>
                           <div class="td-column">
                             <span (click) = "quantityEdit(i,  'minus', item.price)">
-                              <img alt="minus" src="../../../assets/icons/Minus.svg">
+                              <img alt="minus"  class="add" src="../../../../../assets/icons/MinusIcon.svg">
                             </span>
                             <span>
                               <input
-                                class="input-field" [(ngModel)]="item.quantity" value="{{item.quantity}}"
-                                >
+                                class="input-field" (change)="onChangeQuantity(i,item.price)" [(ngModel)]="item.quantity" value="{{item.quantity}}" (keydown)="onKeyDown($event)">
+                                
+                               
                             </span>
+                          
                             <span (click) = "quantityEdit(i , 'plus', item.price)">
-                              <img alt="" src="../../../assets/icons/Add.svg">
+                              <img alt="" class="add" src="../../../../../assets/icons/AddIcon.svg">
                             </span>
                           </div>
+                          <div class="error-message">{{item.errortext}}</div>
                         </td>
 
                         <!-- Action -->
                         <td>
                           <div class="td-column price-details">
                             <span>
-                              {{ item.itemTotal | number : '1.2-2'}}
+                              {{ item.itemTotal | number : '1.2-2'}} 
                             </span>
                           </div>
                         </td>
@@ -79,7 +90,7 @@
           </div>
           <div class="cart-total">
             <span>GRAND TOTAL</span>
-            <span>{{grandTotal | number : '1.2-2'}}</span>
+            <span>₹ {{grandTotal | number : '1.2-2'}}</span>
           </div>
           <div class="submit-quote">
             <span class="text-style">
@@ -88,7 +99,7 @@
             </span>
             <span>
               <button class="btn compare-btn" (click)="saveCart()">Save Cart</button>
-              <button class="btn request-btn" (click)="requestQuote()">Request quote</button>
+              <button class="btn request-btn" (click)="requestQuote()">Request Quote</button>
             </span>
           </div>
         </ng-container>
