@@ -26,6 +26,13 @@ export class CompareProductsResultComponent {
   productFamilyVariants: any[] = [];
   public cachedProductsList : any[];
 
+  public columnValues : any[];
+  public comparisonCategories : any;
+
+  tableData: any = [];
+  cols: any[] = [];
+  cars : any[] = [];
+
   public emptyProductsLength : any = 0;
   allProperties = [
     // { 'ProductName': 'Product Name' },
@@ -51,6 +58,9 @@ export class CompareProductsResultComponent {
     return Object.keys(obj)[0];
   }
 
+  dataSource = [];
+  displayColumns = ['username', 'age', 'title'];
+
   constructor(
     private route: ActivatedRoute,
     private metaDataSvc: MetadataService,
@@ -61,8 +71,17 @@ export class CompareProductsResultComponent {
     private userAccountStore : UserAccountStore,
     private compareProductsStore : CompareProductsStore
   ) {
+    for (let i = 0; i < 50; ++i) {
+      this.dataSource.push({
+        username: 'test' + Math.random(),
+        age: Math.floor(Math.random() * 50 + 1),
+        title: Math.random() < 0.5 ? 'Mr' : 'Ms'
+      });
+    }
   }
   public ngOnInit(): void {
+
+    
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
     let combinedData = [...cacheData, ...cacheData2];
@@ -135,13 +154,13 @@ export class CompareProductsResultComponent {
           let productData = data.products;
           
           let properties = {
-            'ProductName': productData.name,
-            'DevelopedBy': 'Microsoft',
-            'SolutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
-            'Subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
-            'EntryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
+            'productName': productData.name,
+            'developedBy': 'Microsoft',
+            'solutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
+            'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
+            'entryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
             'price' : productData?.priceList[0]?.price ? productData?.priceList[0].price : '',
-            'Features': data.featureList.length > 0 ? data.featureList : 'No Features',
+            'features': data.featureList.length > 0 ? data.featureList : 'No Features',
            'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
            '_id' : productData._id
           }
@@ -152,13 +171,13 @@ export class CompareProductsResultComponent {
           let productData = data.products;
           let productVariantData = data.productVariants;
           let properties = {
-            'ProductName': productVariantData.name,
-            'DevelopedBy': 'Microsoft',
-            'SolutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
-            'Subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
-            'EntryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
+            'productName': productVariantData.name,
+            'developedBy': 'Microsoft',
+            'solutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
+            'subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
+            'entryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
             'price' : productVariantData?.priceList[0]?.price ? productVariantData?.priceList[0].price : '',
-            'Features': data.featureList.length > 0 ? data.featureList : 'No Features',
+            'features': data.featureList.length > 0 ? data.featureList : 'No Features',
             'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
             '_id' : productVariantData._id
 
@@ -169,13 +188,13 @@ export class CompareProductsResultComponent {
         this.productFamilyList = response.productFamily.map((data: any) => {
           let productData = data.productFamily;
           let properties = {
-            'ProductName': productData.name,
-            'DevelopedBy': 'Microsoft',
-            'SolutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
-            'Subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
-            'EntryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
+            'productName': productData.name,
+            'developedBy': 'Microsoft',
+            'solutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
+            'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
+            'entryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
             'price' : productData?.priceList[0]?.price ? productData?.priceList[0].price : '',
-            'Features': data.features.length > 0 ? data.features : 'No Features',
+            'features': data.features.length > 0 ? data.features : 'No Features',
             'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
             '_id' : productData._id
           }
@@ -186,13 +205,13 @@ export class CompareProductsResultComponent {
           let productData = data.productFamily;
           let productVariantData = data.productFamilyVariant;
           let properties = {
-            'ProductName': productVariantData.name,
-            'DevelopedBy': 'Microsoft',
-            'Solution Category': productVariantData?.subcategories[0]?.name ? productVariantData?.subcategories[0]?.name : '-',
-            'Subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
-            'EntryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
+            'productName': productVariantData.name,
+            'developedBy': 'Microsoft',
+            'solution Category': productVariantData?.subcategories[0]?.name ? productVariantData?.subcategories[0]?.name : '-',
+            'subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
+            'entryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
             'price' : productVariantData?.priceList[0]?.price ? productVariantData?.priceList[0].price : '',
-            'Features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : 'No Features',
+            'features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : 'No Features',
             'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
             '_id' : productVariantData._id
           }
@@ -203,6 +222,7 @@ export class CompareProductsResultComponent {
         this.allProducts = this.products.concat(this.productVariants,this.productFamilyList,this.productFamilyVariants);
 
         this.setQuantity();
+        this.setTableData(this.allProducts);
         
         
         this.allProducts = this.allProducts.slice(0,4);
@@ -297,6 +317,80 @@ export class CompareProductsResultComponent {
   public viewModal(queryParams) {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
     modalRef.componentInstance.request = queryParams;
+  }
+
+
+  public frozenCols : any;
+  public scrollableCols : any;
+  public setTableData(products){
+
+    /*this.scrollableCols = [
+      { field: 'year', header: 'Year' },
+      { field: 'brand', header: 'Brand' },
+      { field: 'color', header: 'Color' },
+      { field: 'year', header: 'Year' },
+      { field: 'brand', header: 'Brand' },
+      { field: 'color', header: 'Color' }
+  ];*/
+
+  this.scrollableCols = [
+    { field: 'headerName', header: '' },
+    { field: 'prd1', header: '' },
+    { field: 'prd2', header: '' },
+    { field: 'prd3', header: '' },
+    { field: 'prd4', header: '' }
+  ];
+
+  this.columnValues = [];
+  
+
+  this.comparisonCategories = [
+    { "header" : "productName" , "headerName" : "Product Name"},
+    { "header" : "developedBy" , "headerName" : "Developed By"},
+    { "header" : "solutionCategory" , "headerName" : "Solution Category"},
+    { "header" : "subscription" , "headerName" : "Product Name"},
+    { "header" : "entryLevelPricing" , "headerName" : "Entry Level Pricing"},
+    { "header" : "price" , "headerName" : "Price"},
+    { "header" : "features" , "headerName" : "Features"},
+    
+    
+  ]
+
+  // this.frozenCols = [
+  //     { field: 'vin', header: 'Vin' },
+  // ];
+    this.cars = [
+          {"brand": "VW", "year": 2012, "color": "Orange", "vin": "dsad231ff"},
+          {"brand": "Audi", "year": 2011, "color": "Black", "vin": "gwregre345"},
+          {"brand": "Renault", "year": 2005, "color": "Gray", "vin": "h354htr"},
+          {"brand": "BMW", "year": 2003, "color": "Blue", "vin": "j6w54qgh"},
+          {"brand": "Mercedes", "year": 1995, "color": "Orange", "vin": "hrtwy34"},
+          {"brand": "Volvo", "year": 2005, "color": "Black", "vin": "jejtyj"},
+          {"brand": "Honda", "year": 2012, "color": "Yellow", "vin": "g43gr"},
+          {"brand": "Jaguar", "year": 2013, "color": "Orange", "vin": "greg34"},
+          {"brand": "Ford", "year": 2000, "color": "Black", "vin": "h54hw5"},
+          {"brand": "Fiat", "year": 2013, "color": "Red", "vin": "245t2s"},
+          {"brand": "VW", "year": 2012, "color": "Orange", "vin": "dsad231ff"},
+          {"brand": "Audi", "year": 2011, "color": "Black", "vin": "gwregre345"},
+          {"brand": "Renault", "year": 2005, "color": "Gray", "vin": "h354htr"},
+          {"brand": "BMW", "year": 2003, "color": "Blue", "vin": "j6w54qgh"},
+          {"brand": "Mercedes", "year": 1995, "color": "Orange", "vin": "hrtwy34"},
+          {"brand": "Volvo", "year": 2005, "color": "Black", "vin": "jejtyj"},
+          {"brand": "Honda", "year": 2012, "color": "Yellow", "vin": "g43gr"},
+          {"brand": "Jaguar", "year": 2013, "color": "Orange", "vin": "greg34"},
+          {"brand": "Ford", "year": 2000, "color": "Black", "vin": "h54hw5"},
+          {"brand": "VW", "year": 2012, "color": "Orange", "vin": "dsad231ff"},
+          {"brand": "Audi", "year": 2011, "color": "Black", "vin": "gwregre345"},
+          {"brand": "Renault", "year": 2005, "color": "Gray", "vin": "h354htr"},
+          {"brand": "BMW", "year": 2003, "color": "Blue", "vin": "j6w54qgh"},
+          {"brand": "Mercedes", "year": 1995, "color": "Orange", "vin": "hrtwy34"},
+          {"brand": "Volvo", "year": 2005, "color": "Black", "vin": "jejtyj"},
+          {"brand": "Honda", "year": 2012, "color": "Yellow", "vin": "g43gr"},
+          {"brand": "Jaguar", "year": 2013, "color": "Orange", "vin": "greg34"},
+          {"brand": "Ford", "year": 2000, "color": "Black", "vin": "h54hw5"},
+      ]
+  
+  
   }
 
    

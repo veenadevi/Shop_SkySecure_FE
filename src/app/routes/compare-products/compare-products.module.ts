@@ -10,6 +10,7 @@ import { CompareProductsRoutingModule, ROUTED_COMPONENTS } from './compare-produ
 import { CompareProductsComponent } from './compare-products.component';
 import { CompareProductsResultComponent } from './compare-products-result/compare-products-result.component';
 import { CompareProductsHomeComponent } from './compare-products-home/compare-products-home.component';
+import { HeaderCardFlyerComponent } from './partials/header-card-flyer/header-card-flyer.component';
 
 
 
@@ -22,6 +23,7 @@ import { CompareProductsHomeComponent } from './compare-products-home/compare-pr
     CompareProductsComponent,
     CompareProductsResultComponent,
     CompareProductsHomeComponent,
+    HeaderCardFlyerComponent,
     
   ],
   imports: [
