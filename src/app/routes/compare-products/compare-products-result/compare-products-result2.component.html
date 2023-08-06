@@ -1,45 +1,83 @@
 <div class="compare-products-container">
     <div>
         <p-table [columns]="scrollableCols" [value]="comparisonCategories" [scrollable]="true" scrollHeight="700px" frozenWidth="200px">
-            <ng-template pTemplate="colgroup" let-columns>
+            <!-- <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
                 <col *ngFor="let col of columns" style="width:200px">
-                <!-- <col style="width:200px">
                 <col style="width:200px">
                 <col style="width:200px">
-                <col style="width:200px"> -->
+                <col style="width:200px">
+                <col style="width:200px">
               </colgroup>
-            </ng-template>
+            </ng-template> -->
             <ng-template pTemplate="header" let-columns>
               <tr>
                 <!-- <th *ngFor="let col of columns"> -->
                 <th class="comparison-category-header">
                         
                 </th>
-                <th>
-                    <header-card-flyer></header-card-flyer>
+                <ng-container *ngFor="let item of allProducts">
+                    <th *ngIf="item.properties._id ; else emptyFlyer">
+                        <header-card-flyer [product]="item"></header-card-flyer>
+                    </th>
+                    <ng-template #emptyFlyer>
+                        <th>
+                            <empty-header-card-flyer></empty-header-card-flyer>
+                        </th>
+                    </ng-template>
+                </ng-container>
+
+
+                <!-- <th *ngIf="allProducts.length > 0 ; else emptyFlyer">
+                    <header-card-flyer [product]="allProducts[0]"></header-card-flyer>
                 </th>
-                <th>
-                    <header-card-flyer></header-card-flyer>
+                <th *ngIf="allProducts.length > 1 ; else emptyFlyer">
+                    <header-card-flyer [product]="allProducts[1]"></header-card-flyer>
                 </th>
-                <th>
-                    <header-card-flyer></header-card-flyer>
+                <th *ngIf="allProducts.length > 2 ; else emptyFlyer">
+                    <header-card-flyer [product]="allProducts[2]"></header-card-flyer>
                 </th>
-                <th>
-                    <header-card-flyer></header-card-flyer>
-                </th>
+                <th *ngIf="allProducts.length > 3 ; else emptyFlyer">
+                    <header-card-flyer [product]="allProducts[3]"></header-card-flyer>
+                </th> -->
+                
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
 
-              <tr>
-                <td>
-                    {{rowData.headerName}}
-                </td>
-                <td>
-                    {{allProducts[0].properties[rowData.header]}}
-                </td>
-              </tr>
+                <tr *ngIf="(rowData.header === 'features'); else otherCat">
+                        <td>
+                            {{rowData.headerName}}
+                        </td>
+                        <td *ngFor="let item of allProducts">
+                            <!-- {{allProducts[0].properties[rowData.header]}} -->
+                            <!-- {{item.properties[rowData.header]}} -->
+                            <div class="feature-item-container" *ngIf="item.properties[rowData.header]">
+                                <div class="tick-container"   *ngFor="let features of item.properties[rowData.header]">
+    
+                                    <!-- <span class="tick-symbol">&#10003;</span> -->
+    
+                                    <div class="tick-symbol">
+                                        <img src="../../../../assets/icons/BlueTickIcon.svg">
+                                    </div>
+                                    <span class="feature-text">{{features.name}}</span>
+                                </div>        
+                            </div>  
+                        </td>
+                    
+                </tr>
+                <ng-template #otherCat>
+                    <tr>
+                        <td>
+                            {{rowData.headerName}}
+                        </td>
+                        <td *ngFor="let item of allProducts">
+                            <!-- {{allProducts[0].properties[rowData.header]}} -->
+                            {{item.properties[rowData.header]}}
+                        </td>
+                    </tr>
+                </ng-template>
+                
             </ng-template>
           </p-table>
     </div>

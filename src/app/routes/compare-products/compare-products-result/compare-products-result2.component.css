@@ -10,5 +10,38 @@ th{
     width:16%;
 }
 
+.feature-item-container {
+    display: flex;
+    flex-direction: column;
+    /* border-radius: 7.009px;
+    border: 0.876px solid #1E1E1E;
+    padding: 5px; */
+    width: 18vw !important;
+}
+
+.feature-text {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.3rem;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.tick-container {
+    display: flex;
+    align-items: flex-start;
+    padding: 3px;
+}
+
+.tick-symbol {
+    text-align: center;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
 
 

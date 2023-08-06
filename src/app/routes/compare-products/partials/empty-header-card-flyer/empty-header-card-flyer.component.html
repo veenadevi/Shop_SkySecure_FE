@@ -1,11 +1,13 @@
-<ng-container *ngIf="productItem">
+<ng-container>
     <div class="card bundle-card-container">
-        <div class=" card-section">
+        <div class="card-section">
             <div class="logo-container">
-                <img class="logo" src="{{productItem.bannerLogo ? productItem.bannerLogo : alternateLogo}}">
-    
+                <!-- <img class="logo" src="{{productItem.bannerLogo ? productItem.bannerLogo : alternateLogo}}"> -->
+                <div class="add" (click)="addProductModal()">
+                    <img class="add-img" src="../../../../../assets/icons/Add.svg">
+                </div>
             </div>
-            <div class="content-section">
+            <!-- <div class="content-section">
                 <div class="headline-section">
                     {{productItem.productName}}
                 </div>
@@ -17,7 +19,7 @@
                         {{productItem.solutionCategory}}
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </ng-container>

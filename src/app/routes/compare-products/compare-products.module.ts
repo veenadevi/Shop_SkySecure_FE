@@ -11,6 +11,7 @@ import { CompareProductsComponent } from './compare-products.component';
 import { CompareProductsResultComponent } from './compare-products-result/compare-products-result.component';
 import { CompareProductsHomeComponent } from './compare-products-home/compare-products-home.component';
 import { HeaderCardFlyerComponent } from './partials/header-card-flyer/header-card-flyer.component';
+import { EmptyHeaderCardFlyerComponent } from './partials/empty-header-card-flyer/empty-header-card-flyer.component';
 
 
 
@@ -24,6 +25,7 @@ import { HeaderCardFlyerComponent } from './partials/header-card-flyer/header-ca
     CompareProductsResultComponent,
     CompareProductsHomeComponent,
     HeaderCardFlyerComponent,
+    EmptyHeaderCardFlyerComponent,
     
   ],
   imports: [

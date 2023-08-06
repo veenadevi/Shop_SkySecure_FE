@@ -32,6 +32,8 @@ import { SafeUrlPipe } from './pipes/safeUrlPipe';
 import { CompareProductsModalComponent } from './components/modals/compare-products-modal/compare-products-modal.component';
 import { CustomBreadCrumbComponent } from './components/custom-bread-crumb/custom-bread-crumb.component';
 import { BundleVarientCardFlyerComponent } from './components/bundle-varient-card-flyer/bundle-varient-card-flyer.component';
+import { AddCompareProductModalComponent } from './components/modals/add-compare-product-modal/add-compare-product-modal.component';
+import { LayoutModule } from 'src/app/layout/layout.module';
 
 
 
@@ -40,7 +42,8 @@ import { BundleVarientCardFlyerComponent } from './components/bundle-varient-car
   imports: [
     CommonModule,
     MaterialModule,
-    PrimeNgModule
+    PrimeNgModule,
+    LayoutModule
     
   ],
 
@@ -73,7 +76,8 @@ import { BundleVarientCardFlyerComponent } from './components/bundle-varient-car
     SafeUrlPipe,
     CompareProductsModalComponent,
     CustomBreadCrumbComponent,
-    BundleVarientCardFlyerComponent
+    BundleVarientCardFlyerComponent,
+    AddCompareProductModalComponent
   ],
 
   providers: [
@@ -115,7 +119,8 @@ import { BundleVarientCardFlyerComponent } from './components/bundle-varient-car
     SafeUrlPipe,
     CompareProductsModalComponent,
     CustomBreadCrumbComponent,
-    BundleVarientCardFlyerComponent
+    BundleVarientCardFlyerComponent,
+    AddCompareProductModalComponent
   ],
   
 

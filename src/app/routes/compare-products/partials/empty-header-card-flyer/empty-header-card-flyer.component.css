@@ -24,10 +24,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    width: 100%;
 }
 
 .logo-container {
-    flex-basis: 25%;
+    flex-basis: 100%;
+    text-align: center;
 }
 
 .logo {

@@ -156,7 +156,7 @@ export class CompareProductsResultComponent {
           let properties = {
             'productName': productData.name,
             'developedBy': 'Microsoft',
-            'solutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
+            'solutionCategory': productData?.subcategories?.name ? productData?.subcategories?.name : '-',
             'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
             'entryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
             'price' : productData?.priceList[0]?.price ? productData?.priceList[0].price : '',
@@ -324,14 +324,32 @@ export class CompareProductsResultComponent {
   public scrollableCols : any;
   public setTableData(products){
 
-    /*this.scrollableCols = [
-      { field: 'year', header: 'Year' },
-      { field: 'brand', header: 'Brand' },
-      { field: 'color', header: 'Color' },
-      { field: 'year', header: 'Year' },
-      { field: 'brand', header: 'Brand' },
-      { field: 'color', header: 'Color' }
-  ];*/
+
+    let emptyLength = 4 - products.length;
+
+    let tempData = {
+
+      'id' : 'null',
+      'properties' : {
+        'productName': '-',
+        'developedBy': '-',
+        'solutionCategory': '-',
+        'subscription': '-',
+        'entryLevelPricing': '-',
+        'price' : '-',
+        'features': null,
+        'bannerLogo' : '-',
+        '_id' : null
+      }
+      
+    }
+
+    for(let i=0;i<emptyLength;i++){
+      this.allProducts.push(tempData);
+    }
+
+    console.log("++++++++++ ", this.allProducts);
+    
 
   this.scrollableCols = [
     { field: 'headerName', header: '' },
