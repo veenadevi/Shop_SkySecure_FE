@@ -56,3 +56,38 @@ button i {
     background-color: var(--primary);
     padding-left: 10px;
 }
+
+
+@media (min-width:320px) and  (max-width: 480px) {
+    .menu-icon-holder{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--primary);
+        padding-left: 16px;
+        cursor: pointer;
+        padding-top: 7px;
+    }
+    button{
+        padding-right: 2em;
+        /* margin-left: 24px; */
+        /* display: none; */
+    }
+    button i {
+        margin-left: 0.6em;
+        color: #686A77;
+        display: none;
+    }
+
+.text-normal {
+    font-family: 'Lato', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    color: #686A77;
+    padding-top: 0;
+}
+.menu-holder{
+    width:85%;
+    height: 46px;
+}
+}
