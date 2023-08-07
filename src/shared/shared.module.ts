@@ -34,6 +34,11 @@ import { CustomBreadCrumbComponent } from './components/custom-bread-crumb/custo
 import { BundleVarientCardFlyerComponent } from './components/bundle-varient-card-flyer/bundle-varient-card-flyer.component';
 import { AddCompareProductModalComponent } from './components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { LayoutModule } from 'src/app/layout/layout.module';
+import { SearchForCompareProductComponent } from './components/modals/add-compare-product-modal/partials/search-for-compare-product/search-for-compare-product.component';
+import { CompareProductsPopularCategoryComponent } from './components/modals/add-compare-product-modal/partials/search-for-compare-product/partiaals/compare-products-popular-category/compare-products-popular-category.component';
+import { CompareProductsRecentlySearchedComponent } from './components/modals/add-compare-product-modal/partials/search-for-compare-product/partiaals/compare-products-recently-searched/compare-products-recently-searched.component';
+import { CompareProductsTrendingProductsComponent } from './components/modals/add-compare-product-modal/partials/search-for-compare-product/partiaals/compare-products-trending-products/compare-products-trending-products.component';
+import { CompareProductsSearchListComponent } from './components/modals/add-compare-product-modal/partials/search-for-compare-product/partiaals/compare-products-search-list/compare-products-search-list.component';
 
 
 
@@ -77,7 +82,12 @@ import { LayoutModule } from 'src/app/layout/layout.module';
     CompareProductsModalComponent,
     CustomBreadCrumbComponent,
     BundleVarientCardFlyerComponent,
-    AddCompareProductModalComponent
+    AddCompareProductModalComponent,
+    SearchForCompareProductComponent,
+    CompareProductsPopularCategoryComponent,
+    CompareProductsRecentlySearchedComponent,
+    CompareProductsTrendingProductsComponent,
+    CompareProductsSearchListComponent,
   ],
 
   providers: [
@@ -120,7 +130,12 @@ import { LayoutModule } from 'src/app/layout/layout.module';
     CompareProductsModalComponent,
     CustomBreadCrumbComponent,
     BundleVarientCardFlyerComponent,
-    AddCompareProductModalComponent
+    AddCompareProductModalComponent,
+    SearchForCompareProductComponent,
+    CompareProductsPopularCategoryComponent,
+    CompareProductsRecentlySearchedComponent,
+    CompareProductsTrendingProductsComponent,
+    CompareProductsSearchListComponent,
   ],
   
 

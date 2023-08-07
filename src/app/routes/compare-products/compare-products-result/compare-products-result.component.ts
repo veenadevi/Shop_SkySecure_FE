@@ -11,8 +11,8 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'app-compare-products-result',
-  templateUrl: './compare-products-result.component.html',
-  styleUrls: ['./compare-products-result.component.css']
+  templateUrl: './compare-products-result2.component.html',
+  styleUrls: ['./compare-products-result2.component.css']
 })
 export class CompareProductsResultComponent {
 
@@ -148,7 +148,9 @@ export class CompareProductsResultComponent {
     this.subscriptions.push(
       this.metaDataSvc.fetchCompareProductsList(allSelectedItems).subscribe(response => {
         
-        this.products = response.products.map((data: any) => {
+        this.products = this.setProductsData(response);
+
+        /*this.products = response.products.map((data: any) => {
         
           //let productData = data.products[0];
           let productData = data.products;
@@ -165,9 +167,13 @@ export class CompareProductsResultComponent {
            '_id' : productData._id
           }
           return { properties};
-        })
+        })*/
 
-        this.productVariants = response.productVariants.map((data: any) => {
+
+        
+        this.productVariants = this.setProductVarientsData(response);
+
+        /*this.productVariants = response.productVariants.map((data: any) => {
           let productData = data.products;
           let productVariantData = data.productVariants;
           let properties = {
@@ -183,9 +189,10 @@ export class CompareProductsResultComponent {
 
           }
           return { properties };
-        })
+        })*/
 
-        this.productFamilyList = response.productFamily.map((data: any) => {
+        this.productFamilyList  = this.setProductFamilyList(response);
+        /*this.productFamilyList = response.productFamily.map((data: any) => {
           let productData = data.productFamily;
           let properties = {
             'productName': productData.name,
@@ -199,9 +206,10 @@ export class CompareProductsResultComponent {
             '_id' : productData._id
           }
           return { properties};
-        })
+        })*/
 
-        this.productFamilyVariants = response.productFamilyVariants.map((data: any) => {
+        this.productFamilyVariants = this.setProductFamilyVarients(response);
+        /*this.productFamilyVariants = response.productFamilyVariants.map((data: any) => {
           let productData = data.productFamily;
           let productVariantData = data.productFamilyVariant;
           let properties = {
@@ -216,7 +224,7 @@ export class CompareProductsResultComponent {
             '_id' : productVariantData._id
           }
           return { properties};
-        })
+        })*/
         
 
         this.allProducts = this.products.concat(this.productVariants,this.productFamilyList,this.productFamilyVariants);
@@ -228,6 +236,96 @@ export class CompareProductsResultComponent {
         this.allProducts = this.allProducts.slice(0,4);
       })
     );
+  }
+
+
+  public setProductsData(response){
+    let item = response.products.map((data: any) => {
+        
+      //let productData = data.products[0];
+      let productData = data.products;
+      
+      let properties = {
+        'productName': productData.name,
+        'developedBy': 'Microsoft',
+        'solutionCategory': productData?.subcategories?.name ? productData?.subcategories?.name : '-',
+        'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
+        'entryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
+        'price' : productData?.priceList[0]?.price ? productData?.priceList[0].price : '',
+        'features': data.featureList.length > 0 ? data.featureList : 'No Features',
+       'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
+       '_id' : productData._id
+      }
+      return { properties};
+    })
+
+    return item;
+
+  }
+
+
+  public setProductVarientsData(response){
+    let item = response.productVariants.map((data: any) => {
+      let productData = data.products;
+      let productVariantData = data.productVariants;
+      let properties = {
+        'productName': productVariantData.name,
+        'developedBy': 'Microsoft',
+        'solutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
+        'subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
+        'entryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
+        'price' : productVariantData?.priceList[0]?.price ? productVariantData?.priceList[0].price : '',
+        'features': data.featureList.length > 0 ? data.featureList : 'No Features',
+        'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
+        '_id' : productVariantData._id
+
+      }
+      return { properties };
+    })
+
+    
+    return item;
+  }
+
+  public setProductFamilyList(response){
+    let item = response.productFamily.map((data: any) => {
+      let productData = data.productFamily;
+      let properties = {
+        'productName': productData.name,
+        'developedBy': 'Microsoft',
+        'solutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
+        'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
+        'entryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
+        'price' : productData?.priceList[0]?.price ? productData?.priceList[0].price : '',
+        'features': data.features.length > 0 ? data.features : 'No Features',
+        'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
+        '_id' : productData._id
+      }
+      return { properties};
+    })
+
+    return item;
+  }
+
+  public setProductFamilyVarients(response){
+    let item = response.productFamilyVariants.map((data: any) => {
+      let productData = data.productFamily;
+      let productVariantData = data.productFamilyVariant;
+      let properties = {
+        'productName': productVariantData.name,
+        'developedBy': 'Microsoft',
+        'solution Category': productVariantData?.subcategories[0]?.name ? productVariantData?.subcategories[0]?.name : '-',
+        'subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
+        'entryLevelPricing': productVariantData?.priceList[0]?.price ? `INR ${productVariantData?.priceList[0].price}` : '-',
+        'price' : productVariantData?.priceList[0]?.price ? productVariantData?.priceList[0].price : '',
+        'features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : 'No Features',
+        'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
+        '_id' : productVariantData._id
+      }
+      return { properties};
+    })
+
+    return item;
   }
 
   public setQuantity(){
@@ -348,7 +446,7 @@ export class CompareProductsResultComponent {
       this.allProducts.push(tempData);
     }
 
-    console.log("++++++++++ ", this.allProducts);
+    
     
 
   this.scrollableCols = [
@@ -409,6 +507,92 @@ export class CompareProductsResultComponent {
       ]
   
   
+  }
+
+  public selectedProductItem(event){
+
+    event.receivedEntry.type = event.receivedEntry.productType;
+
+
+    let reqBody = this.setReqBody(event.receivedEntry);
+
+
+    this.subscriptions.push(
+      this.metaDataSvc.fetchCompareProductsList(reqBody).subscribe( response => {
+      
+        if(event.receivedEntry.productType === "productVariants"){
+ 
+    
+          let finalData = this.setProductVarientsData(response);
+  
+          this.allProducts[event.index] = finalData[0];
+          
+        }
+        else if(event.receivedEntry.productType === "productFamily"){
+          let aa = this.setProductFamilyList(response);
+         
+        }
+        else if(event.receivedEntry.productType === "productFamilyVariants"){
+          let aa = this.setProductFamilyVarients(response);
+          
+        }
+        else{
+          let aa = this.setProductsData(response);
+          
+        }
+
+        
+
+        let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let combinedData = [...cacheData, ...cacheData2];
+        let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+        let finalProducts = [...uniqueElements, event.receivedEntry];
+
+        
+        localStorage.setItem('product_list_to_compare', JSON.stringify(finalProducts));
+        localStorage.setItem('product_list_to_compare2', JSON.stringify(finalProducts));
+      })
+    )
+
+    
+    
+    
+
+  }
+
+  public setReqBody(receivedEntry){
+    let reqBody = {
+      "products": [],
+      "productsVariants": [],
+      "productFamily": [],
+      "productFamilyVariants": []
+    }
+
+
+    
+      
+    switch (receivedEntry.productType) {
+      case 'product':
+        reqBody.products.push(receivedEntry._id);
+        return reqBody;
+
+      case 'productVariants':
+        reqBody.productsVariants.push(receivedEntry._id);
+        return reqBody;
+        
+      case 'productBundles':
+        reqBody.productFamily.push(receivedEntry._id);
+        return reqBody;
+      
+      case 'productBundleVariants':
+        reqBody.productFamilyVariants.push(receivedEntry._id);
+        return reqBody;
+
+      default:
+        return null;
+    }
   }
 
    

@@ -26,5 +26,7 @@ body {
     border: none !important;
     border-radius: none;
     box-shadow: none;
+    height:350px;
+    background: antiquewhite;
     /* background: var(--white); */
   }

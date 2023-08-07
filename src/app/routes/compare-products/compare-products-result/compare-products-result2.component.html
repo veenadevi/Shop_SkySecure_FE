@@ -16,13 +16,13 @@
                 <th class="comparison-category-header">
                         
                 </th>
-                <ng-container *ngFor="let item of allProducts">
+                <ng-container *ngFor="let item of allProducts; let i = index">
                     <th *ngIf="item.properties._id ; else emptyFlyer">
                         <header-card-flyer [product]="item"></header-card-flyer>
                     </th>
                     <ng-template #emptyFlyer>
                         <th>
-                            <empty-header-card-flyer></empty-header-card-flyer>
+                            <empty-header-card-flyer [index] = "i" (selectedProductItem)="selectedProductItem($event)"></empty-header-card-flyer>
                         </th>
                     </ng-template>
                 </ng-container>
