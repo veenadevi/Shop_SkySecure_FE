@@ -1,7 +1,7 @@
 .search-bar {
     position: absolute;
-    width: 45%;
-    height: 60%;
+    width: 90%;
+    height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,6 +11,7 @@
     right:0;
     margin-left:auto;
     margin-right:auto;
+    margin-top: 45px;
 }
 
 .search-box {

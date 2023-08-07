@@ -21,11 +21,11 @@
                         <header-card-flyer [product]="item"></header-card-flyer>
                         <div>
                             <div class="td-column">
-                                <button (click)="removeItem(item)">
-                                    Remove Item
+                                <button class="remove-btn" (click)="removeItem(item)">
+                                    Remove 
                                 </button>
-                                <button (click)="requestQuote(item)">
-                                    Buy
+                                <button class="buy-btn" (click)="requestQuote(item)">
+                                    Buy Now
                                 </button>
                               </div>
                         </div>
@@ -33,8 +33,8 @@
                     <ng-template #emptyFlyer>
                         <th>
                             <empty-header-card-flyer [index] = "i" (selectedProductItem)="selectedProductItem($event)"></empty-header-card-flyer>
-                            <div>
-                                <button (click)="addProductModal(i)">
+                            <div class="add">
+                                <button class="add-btn" (click)="addProductModal(i)">
                                     Add Product
                                 </button>
                             </div>
@@ -61,7 +61,7 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
 
                 <tr *ngIf="(rowData.header === 'features'); else otherCat">
-                        <td>
+                        <td class="product-heading">
                             {{rowData.headerName}}
                         </td>
                         <td *ngFor="let item of allProducts">
@@ -83,10 +83,10 @@
                 </tr>
                 <ng-template #otherCat>
                     <tr>
-                        <td>
+                        <td  class="product-heading">
                             {{rowData.headerName}}
                         </td>
-                        <td *ngFor="let item of allProducts">
+                        <td *ngFor="let item of allProducts" class="feature-text">
                             <!-- {{allProducts[0].properties[rowData.header]}} -->
                             {{item.properties[rowData.header]}}
                         </td>

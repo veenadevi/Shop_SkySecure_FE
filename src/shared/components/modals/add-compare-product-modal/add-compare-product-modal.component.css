@@ -1,5 +1,5 @@
 .contact-us-wrapper{
-    padding: 0px 0px 20px 0px;
+    padding: 0px 0px 0px 0px;
 }
 .contact-us-container{
     /* border: 1px solid #d9d9d9;
@@ -27,6 +27,17 @@ body {
     border-radius: none;
     box-shadow: none;
     height:350px;
-    background: antiquewhite;
+    background-image: url("../../../../assets/ShopPageHeaderBackground.jpg");
+    background-repeat: repeat-y;
+    background-size: cover;
     /* background: var(--white); */
+    border-radius: 5px;
+  }
+  .modal-logo{
+    padding: 20px;
+    text-align: center;
+  }
+  .company-logo{
+    width:225px;
+    height: 50px;
   }
