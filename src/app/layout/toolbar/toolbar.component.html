@@ -12,7 +12,6 @@
     <div class="menu-holder">
         <mat-toolbar color="var(--primary)" class="toolbar">
             <button  #categoriesMenu="matMenuTrigger" 
-            (mouseover)="openMenuList(categoriesMenu)"
 
             mat-button [matMenuTriggerFor]="aboveMenu">
                 <div>
@@ -74,7 +73,7 @@
 
                 
 
-            <button (mouseover)="openMenuList(brandMenu)" #brandMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="belowMenu">
+            <button #brandMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="belowMenu">
                 <span class="text-normal">Brands</span>
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </button>
