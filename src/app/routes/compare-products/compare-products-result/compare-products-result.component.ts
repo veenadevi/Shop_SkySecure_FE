@@ -33,6 +33,8 @@ export class CompareProductsResultComponent {
   cols: any[] = [];
   cars : any[] = [];
 
+  public itemQuantity : number = 1;
+
   public emptyProductsLength : any = 0;
   allProperties = [
     // { 'ProductName': 'Product Name' },
@@ -232,7 +234,7 @@ export class CompareProductsResultComponent {
         this.setQuantity();
         this.setTableData(this.allProducts);
         
-        
+        console.log("))))))++++++ ", this.allProducts);
         this.allProducts = this.allProducts.slice(0,4);
       })
     );
@@ -362,13 +364,15 @@ export class CompareProductsResultComponent {
 
   public requestQuote (productItem : any) : void {
 
+    console.log("()()(+++++++ ", productItem);
     var product = productItem.properties;
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
+    
     let queryParams;
       // if(product.productVariants.length>0){
         queryParams = {
-          productName : product.ProductName,
+          productName : product.productName,
           productId : product._id,
           quantity : productItem.quantity,
           price : product.price,
@@ -406,7 +410,27 @@ export class CompareProductsResultComponent {
       
      
       
-        this.emptyProductsLength = this.emptyProductsLength + 1;
+      this.emptyProductsLength = this.emptyProductsLength + 1;
+      let tempData = {
+
+        'id' : 'null',
+        'properties' : {
+          'productName': '-',
+          'developedBy': '-',
+          'solutionCategory': '-',
+          'subscription': '-',
+          'entryLevelPricing': '-',
+          'price' : '-',
+          'features': null,
+          'bannerLogo' : '-',
+          '_id' : null
+        }
+        
+      }
+  
+      
+        this.allProducts.push(tempData);
+      
       
       
     
@@ -528,16 +552,25 @@ export class CompareProductsResultComponent {
           this.allProducts[event.index] = finalData[0];
           
         }
-        else if(event.receivedEntry.productType === "productFamily"){
+        else if(event.receivedEntry.productType === "productBundles"){
           let aa = this.setProductFamilyList(response);
+          let finalData = this.setProductFamilyList(response);
+  
+          this.allProducts[event.index] = finalData[0];
          
         }
-        else if(event.receivedEntry.productType === "productFamilyVariants"){
+        else if(event.receivedEntry.productType === "productBundleVariants"){
           let aa = this.setProductFamilyVarients(response);
+          let finalData = this.setProductFamilyVarients(response);
+  
+          this.allProducts[event.index] = finalData[0];
           
         }
         else{
           let aa = this.setProductsData(response);
+          let finalData = this.setProductsData(response);
+  
+          this.allProducts[event.index] = finalData[0];
           
         }
 
@@ -570,8 +603,6 @@ export class CompareProductsResultComponent {
       "productFamilyVariants": []
     }
 
-
-    
       
     switch (receivedEntry.productType) {
       case 'product':
@@ -593,6 +624,19 @@ export class CompareProductsResultComponent {
       default:
         return null;
     }
+  }
+
+  public quantityEditForRequestQuote(quantity, type){
+
+    if(type === 'plus'){
+      quantity = quantity+1;
+      this.itemQuantity = quantity;
+    }
+  }
+
+  public requestQuoteItem(val){
+    console.log("++++++++ ", val);
+    
   }
 
    

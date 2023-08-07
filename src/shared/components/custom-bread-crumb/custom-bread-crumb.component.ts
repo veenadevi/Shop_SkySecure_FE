@@ -172,7 +172,6 @@ export class CustomBreadCrumbComponent {
           this.router.navigate([`/products/brand/${this.oemId}`]);
           return;
       default:
-        this.router.navigate(['/']);
         return null;
     }
   }

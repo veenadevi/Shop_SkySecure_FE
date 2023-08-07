@@ -19,10 +19,25 @@
                 <ng-container *ngFor="let item of allProducts; let i = index">
                     <th *ngIf="item.properties._id ; else emptyFlyer">
                         <header-card-flyer [product]="item"></header-card-flyer>
+                        <div>
+                            <div class="td-column">
+                                <button (click)="removeItem(item)">
+                                    Remove Item
+                                </button>
+                                <button (click)="requestQuote(item)">
+                                    Buy
+                                </button>
+                              </div>
+                        </div>
                     </th>
                     <ng-template #emptyFlyer>
                         <th>
                             <empty-header-card-flyer [index] = "i" (selectedProductItem)="selectedProductItem($event)"></empty-header-card-flyer>
+                            <div>
+                                <button>
+                                    Add Product
+                                </button>
+                            </div>
                         </th>
                     </ng-template>
                 </ng-container>

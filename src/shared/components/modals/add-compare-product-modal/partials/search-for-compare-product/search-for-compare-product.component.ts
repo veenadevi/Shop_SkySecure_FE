@@ -43,8 +43,10 @@ export class SearchForCompareProductComponent {
       this.keywordSearchOpen = true;
     }
     else{
-      this.isOpen = true;
-      this.generalSearchOpen = true;
+      this.isOpen = false;
+      this.generalSearchOpen = false;
+      // this.isOpen = true;
+      // this.generalSearchOpen = true;
     }
     
   }
@@ -85,7 +87,8 @@ export class SearchForCompareProductComponent {
         });
       }
       else{
-        this.generalSearchOpen = true;
+        // this.generalSearchOpen = true;
+        this.generalSearchOpen = false;
         this.keywordSearchOpen = false;
       }
 
