@@ -36,7 +36,6 @@ export class SearchForCompareProductComponent {
 
   public onSearchClicked() {
     
-      
     if(this.inputText && this.inputText.length>2){
       this.isOpen = true;
       this.generalSearchOpen = false;
@@ -67,6 +66,9 @@ export class SearchForCompareProductComponent {
   }
 
   public onSearchQueryInput(event: Event): void {
+      this.isOpen = true;
+      this.generalSearchOpen = false;
+      this.keywordSearchOpen = true;
     const searchQuery = (event.target as HTMLInputElement).value;
     this.searchSubject.next(searchQuery?.trim());
   }
