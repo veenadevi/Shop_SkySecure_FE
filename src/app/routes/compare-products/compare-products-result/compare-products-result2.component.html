@@ -34,7 +34,7 @@
                         <th>
                             <empty-header-card-flyer [index] = "i" (selectedProductItem)="selectedProductItem($event)"></empty-header-card-flyer>
                             <div>
-                                <button>
+                                <button (click)="addProductModal(i)">
                                     Add Product
                                 </button>
                             </div>

@@ -4,6 +4,7 @@ import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
+import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
@@ -637,6 +638,21 @@ export class CompareProductsResultComponent {
   public requestQuoteItem(val){
     console.log("++++++++ ", val);
     
+  }
+
+  public addProductModal(index) {
+    const modalRef = this.modalService.open(AddCompareProductModalComponent, {size: 'lg', windowClass: 'add-compare-products-custom-class'});
+    //modalRef.componentInstance.request = queryParams;
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      let productJson = {
+        "receivedEntry" : receivedEntry,
+        "index" : index
+      }
+
+      this.selectedProductItem(productJson);
+      //this.selectedProductItem.emit(productJson);
+
+    })
   }
 
    
