@@ -45,7 +45,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   productVideoURL: string;
   
   links = ['#description', '#feature', '#specification', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
-  titles = ['Description', 'Features', 'Specification', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
+  titles = ['Description', 'Features', 'Specification', 'Compare Products', 'Bundle Features', 'Similar Products','FAQ'];
   activeLink = this.links[0];
   myColor = '';
   public productImages=[];
