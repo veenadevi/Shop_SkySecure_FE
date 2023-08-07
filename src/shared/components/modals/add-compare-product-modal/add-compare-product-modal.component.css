@@ -26,7 +26,7 @@ body {
     border: none !important;
     border-radius: none;
     box-shadow: none;
-    height:350px;
+    height:300px;
     background-image: url("../../../../assets/ShopPageHeaderBackground.jpg");
     background-repeat: repeat-y;
     background-size: cover;
@@ -40,4 +40,13 @@ body {
   .company-logo{
     width:225px;
     height: 50px;
+  }
+  .message{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    /* padding: 20px; */
+    /* margin: 97px; */
+    color: white;
+    padding-top: 25px;
   }
