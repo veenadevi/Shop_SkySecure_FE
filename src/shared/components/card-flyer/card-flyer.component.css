@@ -207,7 +207,7 @@
 
   .product-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 30px;
   }
   
@@ -219,6 +219,7 @@
     color: #FFFFFF;
     font-size: 16px;
     font-weight: 500;
+    width: 125px;
     
 }
 
@@ -230,6 +231,7 @@
       color: #003388;
       font-size: 16px;
       font-weight: 500;
+      width: 125px;
       
   }
 
