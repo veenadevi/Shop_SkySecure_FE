@@ -12,7 +12,7 @@ export class BundleVarientCardFlyerComponent implements OnInit{
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
   ngOnInit(): void {
-    console.log("+++++++++ Val ", this.product);
+    // console.log("+++++++++ Val ", this.product);
   }
 
 }

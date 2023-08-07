@@ -405,24 +405,26 @@
                 <h5>Bundle Details</h5>
 
                 <div class="product-feature-container">
-                    <div class="prod-feature-img">
-                        <!-- <img style="width:auto;height: auto;position: relative;"
-                        src="../../assets/productDetails/FeaturesIllustration.svg"> -->
-                        <div class="bundle-desc-heading">
-                            <p class="bundle-desc">Products Included</p>
-                        </div>                        
-                        <div class="card-flyer-section">
-                            <ng-container *ngFor="let item of bundleItemsList; let i = index">
-                                <bundle-varient-card-flyer [product]="item" (click)="navigateToProductDetails(item)"></bundle-varient-card-flyer>
-                            </ng-container>
+                    <ng-container *ngIf="bundleItemsList">
+                        <div class="prod-feature-img">
+                            <!-- <img style="width:auto;height: auto;position: relative;"
+                            src="../../assets/productDetails/FeaturesIllustration.svg"> -->
+                            <div class="bundle-desc-heading">
+                                <p class="bundle-desc">Products Included</p>
+                            </div>                        
+                            <div class="card-flyer-section">
+                                <ng-container *ngFor="let item of bundleItemsList; let i = index">
+                                    <bundle-varient-card-flyer [product]="item" (click)="navigateToProductDetails(item)"></bundle-varient-card-flyer>
+                                </ng-container>
+                            </div>
+    
+    
+        
+                            <!-- <iframe [src]="productVideoURL | safeurl" width="600" height="300" frameborder="0" title="test"
+                                webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+        
                         </div>
-
-
-    
-                        <!-- <iframe [src]="productVideoURL | safeurl" width="600" height="300" frameborder="0" title="test"
-                            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
-    
-                    </div>
+                    </ng-container>
                     <!-- <div class="prod-feature-img">
                         <img style="width:auto;height: auto;position: relative;"
                             src="../../assets/productDetails/FeaturesIllustration.svg">
@@ -896,9 +898,6 @@
 
                 </ng-container>
             </div> -->
-
-
-
 
 
         </div>

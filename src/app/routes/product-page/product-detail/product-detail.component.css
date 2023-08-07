@@ -550,7 +550,7 @@ h5 {
 }
 
 .specification-feature-headline {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
 }
 
@@ -559,7 +559,7 @@ h5 {
 }
 
 .specification-feature-description {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -861,7 +861,7 @@ p {
   margin: 1% 3%;
   border-radius: 5px;
   border: 0px solid #000;
-  background: #FFF;
+  background: #f9f9f9;
   flex-direction: column;
 }
 
