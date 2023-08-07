@@ -375,6 +375,8 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
     );
   }
 
+
+  
   public setIframe(data){
     // console.log("setting video url data "+data[0].source)
 
