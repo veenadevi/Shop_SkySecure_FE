@@ -499,7 +499,7 @@
                             src="../../assets/productDetails/FeaturesIllustration.svg"> -->
         
                             <!-- <div class="bundle-desc-heading">
-                                <p class="bundle-desc">Products Included</p>
+                                <p class="bundle-desc">Included Standalone Plans</p>
                             </div>                        
                             <div class="card-flyer-section">
                                 <ng-container *ngFor="let item of allBundleDetais; let i = index">
@@ -524,8 +524,9 @@
                                     <p class="feature-desc">Explore the Cutting-Edge Features of {{productFamilyVariant.name}}</p>
                                 </div>
                                 <div class="prod-card">
+                                    <ng-container *ngIf="allBundleDetais.length>0">
                                     <div class="bundles-container">
-                                        <h6>Products Included</h6>
+                                        <h6>Included Standalone Plans</h6>
                                         <hr>
                                         <ng-container *ngFor="let item of allBundleDetais; let i = index">
                                             <div class="feature-heading">
@@ -539,8 +540,9 @@
                                             </div>
                                         </ng-container>
                                     </div>
+                                </ng-container>
                                     <div class="features-container">
-                                        <h6>Product Features</h6>
+                                        <h6>Additional Features</h6>
                                         <hr>
                                         <ng-container *ngFor="let item of features">
                                             <div class="feature-heading">

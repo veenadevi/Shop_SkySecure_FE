@@ -444,8 +444,9 @@
                                     <p class="feature-desc">Explore the Cutting-Edge Features of {{productFamily.name}}</p>
                                 </div>
                                 <div class="prod-card">
+                                <ng-container *ngIf="bundleItemsList.length>0">
                                     <div class="bundles-container">
-                                        <h6>Products Included</h6>
+                                        <h6>Included Standalone Plans</h6>
                                         <hr>
                                         <ng-container *ngFor="let item of bundleItemsList; let i = index">
                                             <div class="feature-heading">
@@ -459,8 +460,9 @@
                                             </div>
                                         </ng-container>
                                     </div>
+                                </ng-container>
                                     <div class="features-container">
-                                        <h6>Product Features</h6>
+                                        <h6>Additional Features</h6>
                                         <hr>
                                         <ng-container *ngFor="let item of features">
                                             <div class="feature-heading">
@@ -913,7 +915,18 @@
 
                 </ng-container>
             </div> -->
+            <div *ngIf="faq.length>0" class="faq-cont" id="faq" #faqRef>
+                <span class="faq-title">
+                    <h5 id="similar-prod">Frequently asked Questions</h5>
+                </span>
+                <ng-container *ngFor="let item of faq; let i = index">
+                    <div class="display-faq">
+                        <p class="faq-question">{{i+1}}.&nbsp;{{item.Question}}</p>
+                        <p>{{item.Answer}}</p>
+                    </div>
+                </ng-container>
 
+            </div>
 
         </div>
 
