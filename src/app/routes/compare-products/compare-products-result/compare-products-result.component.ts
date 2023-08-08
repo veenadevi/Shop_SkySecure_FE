@@ -235,7 +235,7 @@ export class CompareProductsResultComponent {
         this.setQuantity();
         this.setTableData(this.allProducts);
         
-        console.log("))))))++++++ ", this.allProducts);
+        
         this.allProducts = this.allProducts.slice(0,4);
       })
     );
@@ -245,6 +245,7 @@ export class CompareProductsResultComponent {
   public setProductsData(response){
     let item = response.products.map((data: any) => {
         
+      
       //let productData = data.products[0];
       let productData = data.products;
       
@@ -338,7 +339,7 @@ export class CompareProductsResultComponent {
 
   public setIncludedProductsForFamilyVarients(response){
 
-    console.log("_+_+_+_+_+_+_+_ +", response);
+    
 
     let prdVarData : any;
     let prdData : any;
@@ -421,7 +422,7 @@ export class CompareProductsResultComponent {
 
   public requestQuote (productItem : any) : void {
 
-    console.log("()()(+++++++ ", productItem);
+ 
     var product = productItem.properties;
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
@@ -598,6 +599,7 @@ export class CompareProductsResultComponent {
 
     let reqBody = this.setReqBody(event.receivedEntry);
 
+  
 
     this.subscriptions.push(
       this.metaDataSvc.fetchCompareProductsList(reqBody).subscribe( response => {
@@ -634,6 +636,8 @@ export class CompareProductsResultComponent {
 
         
 
+        
+
         let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
         let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
         let combinedData = [...cacheData, ...cacheData2];
@@ -663,7 +667,7 @@ export class CompareProductsResultComponent {
 
       
     switch (receivedEntry.productType) {
-      case 'product':
+      case 'products':
         reqBody.products.push(receivedEntry._id);
         return reqBody;
 
@@ -693,7 +697,7 @@ export class CompareProductsResultComponent {
   }
 
   public requestQuoteItem(val){
-    console.log("++++++++ ", val);
+
     
   }
 
@@ -793,6 +797,31 @@ export class CompareProductsResultComponent {
     }
 
     return data;
+  }
+
+  public navigateToProductDetails(product:any){
+
+    switch (product.type) {
+      case 'product':
+        this.router.navigate(['/products', product._id]);
+        return;
+
+      case 'productVariants':
+        this.router.navigate(['/products/product-variant-detail', product._id]);
+        return;
+        
+      case 'productBundles':
+        this.router.navigate(['/products/product-bundle-detail', product._id]);
+        return;
+      
+      case 'productBundleVariants':
+        this.router.navigate(['/products/product-bundle-varaint-detail', product._id]);
+        return;
+
+      default:
+        return null;
+    }
+    
   }
    
 }

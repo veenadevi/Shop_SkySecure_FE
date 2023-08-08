@@ -118,6 +118,10 @@ th{
     vertical-align: top !important;
   }
 
+  .pointer-style{
+    cursor: pointer;
+  }
+
 
 
 
