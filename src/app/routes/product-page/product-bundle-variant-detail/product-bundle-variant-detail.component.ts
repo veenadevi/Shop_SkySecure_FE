@@ -119,8 +119,11 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   }
 
   openLink(url: any): void {
-    // console.log("url", url);
+    if(url.length>0)
     window.open(url, '_blank');
+    else{
+      
+    }
   }
 
 
