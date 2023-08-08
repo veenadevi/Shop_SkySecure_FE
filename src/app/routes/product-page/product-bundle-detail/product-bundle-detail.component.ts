@@ -38,7 +38,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public currentRoute: string;
   links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
-  titles = ['Description', 'Features', 'Specification', 'Reviews',  'Bundle Features', 'Similar Products'];
+  titles = ['Description', 'Features', 'Specification', 'Reviews', 'Compare Products' ,'Bundle Features', 'Similar Products'];
   activeLink = this.links[0];
   myColor = '';
 

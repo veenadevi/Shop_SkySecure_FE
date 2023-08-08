@@ -235,10 +235,10 @@
   width: 100%;
 }
 .about-heading{
-  width: 15%;
+  /* width: 15%; */
 }
 .about-desc{
-  width: 60%;
+  /* width: 60%; */
 }
 .all-btn {
   /* border-radius: 8px; */
@@ -1277,11 +1277,20 @@ button {
   font-family: 'lato', sans-serif;
 }
 
-.para {
-   /* margin-top: 10px; */
-   font-size: smaller;
-   /* margin-bottom: 5px; */
-   font-family: 'lato',sans-serif;
+.oem-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.para{
+  /* margin-top: 10px; */
+  font-size: smaller;
+  /* margin-bottom: 5px; */
+  font-family: 'lato',sans-serif;
+}
+.partner-icon{
+  margin-left: 4px;
+  height: 24px;
 }
 
 .solution{
