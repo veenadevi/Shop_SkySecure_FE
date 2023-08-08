@@ -25,7 +25,7 @@ body {
   border: none !important;
   border-radius: none;
   box-shadow: none;
-  height:450px;
+  height:350px;
   background: var(--white);
   border-radius: 5px;
 }
