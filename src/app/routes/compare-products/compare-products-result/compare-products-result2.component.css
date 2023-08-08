@@ -1,0 +1,122 @@
+.compare-products-container {
+    padding: 1%;
+    margin: 1%;
+    font-family: 'lato',sans-serif;
+}
+
+th{
+    width:21%
+}
+.comparison-category-header{
+    width:16%;
+}
+
+.feature-item-container {
+    display: flex;
+    flex-direction: column;
+    /* border-radius: 7.009px;
+    border: 0.876px solid #1E1E1E;
+    padding: 5px; */
+    width: 18vw !important;
+}
+
+.feature-text {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.3rem;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-left: 20px;
+}
+
+.feature-text-left-align {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.3rem;
+    margin-bottom: 10px;
+    /* text-align: center; */
+    margin-left: 20px;
+}
+
+.tick-container {
+    display: flex;
+    align-items: flex-start;
+    padding: 3px;
+}
+
+.tick-symbol {
+    text-align: center;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+.product-heading{
+    font-weight: bold;
+    color: black;
+}
+.td-column{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    padding-left: 20px;
+}
+.remove-btn {
+    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
+    border-radius: 5px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    width: 100px;
+  }
+  .buy-btn{
+    background: linear-gradient(180deg, #F79C0B 0%, #C68600 100%);
+    border-radius: 5px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    width: 100px;
+  }
+  .add{
+    width: 100%;
+    padding-left: 20px;
+    margin-bottom: 30px !important;
+  }
+  .add-btn {
+    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
+    border-radius: 5px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    width: 50%;
+    margin-left: 25%;
+  }
+  .p-datatable .p-datatable-tbody > tr > td {
+    text-align: center;
+  }
+
+  .button-holder{
+    margin-bottom: 30px !important;
+  }
+
+  .feature-text-align{
+    margin-left:50px !important
+  }
+
+  .features-align{
+    vertical-align: top !important;
+  }
+
+
+
+

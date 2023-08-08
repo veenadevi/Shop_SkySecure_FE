@@ -525,7 +525,7 @@ h5 {
 }
 
 .specification-feature-headline {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
 }
 
@@ -534,7 +534,7 @@ h5 {
 }
 
 .specification-feature-description {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -1452,7 +1452,7 @@ button {
 
 .prod-feature-img {
   /* display: flex; */
-  width: 70%;
+  width: 100%;
   /* justify-content: center;
   align-items: center; */
   margin-top: 4px;
@@ -1460,8 +1460,8 @@ button {
 
 .bundle-desc-heading{
 display: flex;
-align-items: flex-start;
-justify-content: flex-start;
+align-items: center;
+justify-content: center;
 }
 
 .bundle-desc {
@@ -1477,7 +1477,7 @@ justify-content: flex-start;
 .prod-feat-card-content {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 60%;
 }
 .tick{
   width:25px;
@@ -1504,7 +1504,7 @@ justify-content: flex-start;
   margin: 1%;
   border-radius: 5px;
   border: 0px solid #000;
-  background: #FFF;
+  background: #f9f9f9;
   flex-direction: column;
   /* margin-top: 10%; */
 }

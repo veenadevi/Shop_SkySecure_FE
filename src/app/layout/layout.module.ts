@@ -73,7 +73,8 @@ import { SearchbarTrendingProductsComponent } from './header/header-serach-bar/p
     ToolbarComponent,
     FooterComponent,
     UserPanelComponent,
-    SidenavWrapperComponent
+    SidenavWrapperComponent,
+    HeaderSerachBarComponent
   ]
 
 })

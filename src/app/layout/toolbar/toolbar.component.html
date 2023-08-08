@@ -12,7 +12,6 @@
     <div class="menu-holder">
         <mat-toolbar color="var(--primary)" class="toolbar">
             <button  #categoriesMenu="matMenuTrigger" 
-            (mouseover)="openMenuList(categoriesMenu)"
 
             mat-button [matMenuTriggerFor]="aboveMenu">
                 <div>
@@ -74,7 +73,7 @@
 
                 
 
-            <button (mouseover)="openMenuList(brandMenu)" #brandMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="belowMenu">
+            <button #brandMenu="matMenuTrigger" mat-button [matMenuTriggerFor]="belowMenu">
                 <span class="text-normal">Brands</span>
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </button>
@@ -89,14 +88,13 @@
                     </ng-container>
                 </mat-menu>
 
-            <!-- <button mat-button [matMenuTriggerFor]="compareProducts &&  compareProducts.length > 0 ? beforeMenu : null" [routerLink]="['compare-products']">
-                <span class="text-normal" >Compare Product</span> -->
-                <!-- <i class="fa fa-caret-down" aria-hidden="true"></i> -->
-            <!-- </button> -->
-                <mat-menu #beforeMenu="matMenu" yPosition="below">
+            <button mat-button [routerLink]="['compare-products']">
+                <span class="text-normal" >Compare Products</span>
+            </button>
+                <!-- <mat-menu #beforeMenu="matMenu" yPosition="below">
                 <button mat-menu-item>Item 1</button>
                 <button mat-menu-item>Item 2</button>
-                </mat-menu> 
+                </mat-menu>  -->
 
 
             <!-- <button mat-button [matMenuTriggerFor]="offers &&  offers.length > 0 ? afterMenu : null">

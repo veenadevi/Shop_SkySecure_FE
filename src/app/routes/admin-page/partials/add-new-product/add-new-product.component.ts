@@ -52,7 +52,8 @@ export class AddNewProductComponent  implements OnInit {
   registrationForm: FormGroup;
   addDynamicElementNew: FormArray;
   addFAQArrayNew: FormArray;
-  defaultDiscount:number
+  defaultDiscount:number;
+  showMsg: boolean = false;
 
   createProductPayload: CreateProductPayload;
 
@@ -321,7 +322,11 @@ export class AddNewProductComponent  implements OnInit {
       // console.log("_createProductPayload_", this.createProductPayload);
       this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
         // console.log("__RESPONSE_",response);
+        this.showMsg=true
+
       })
+
+      this.registrationForm.reset();
     }
   }
 

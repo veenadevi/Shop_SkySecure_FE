@@ -198,11 +198,11 @@
                                         <p class="offer-dis">With your credit card, get an additional 2% discount</p>
                                         <!-- <a class="offer-more">2 more offers</a> -->
                                     </div>
-                                    <!-- <div class="offer-card">
-                                            <p class="offer-bank" >Bank Offers</p>
-                                            <p class="offer-dis" >Upto ₹500.00 discount on select Credit Cards</p>
-                                            <a class="offer-more">2 more offers</a>
-                                        </div> -->
+                                    <div class="offer-card">
+                                        <p class="offer-bank" >Business Offer</p>
+                                        <p class="offer-dis" >Save upto 28% on business purchase and get GST Invoice</p>
+                                        <!-- <a class="offer-more">2 more offers</a> -->
+                                    </div>
                                 </div>
                             </ng-container>
                         </div>
@@ -401,28 +401,34 @@
 
 
             <!-- <<<<<<<<<<<<feature edit>>>>>>>>>>>>>>>>> -->
-            <div class="product-features-container" id="feature" #featureRef>
+                <!-- <div class="product-features-container" id="feature" #featureRef></div> -->   
+
+                <!-- above code is for reference of #featureRef scroll section  -->
+
+            <div class="product-features-container" id="bundleDetailsRef" #bundleDetailsRef>
                 <h5>Bundle Details</h5>
 
                 <div class="product-feature-container">
-                    <div class="prod-feature-img">
-                        <!-- <img style="width:auto;height: auto;position: relative;"
-                        src="../../assets/productDetails/FeaturesIllustration.svg"> -->
-                        <div class="bundle-desc-heading">
-                            <p class="bundle-desc">Products Included</p>
-                        </div>                        
-                        <div class="card-flyer-section">
-                            <ng-container *ngFor="let item of bundleItemsList; let i = index">
-                                <bundle-varient-card-flyer [product]="item" (click)="navigateToProductDetails(item)"></bundle-varient-card-flyer>
-                            </ng-container>
+                    <ng-container *ngIf="bundleItemsList">
+                        <div class="prod-feature-img">
+                            <!-- <img style="width:auto;height: auto;position: relative;"
+                            src="../../assets/productDetails/FeaturesIllustration.svg"> -->
+                            <div class="bundle-desc-heading">
+                                <p class="bundle-desc">Products Included</p>
+                            </div>                        
+                            <div class="card-flyer-section">
+                                <ng-container *ngFor="let item of bundleItemsList; let i = index">
+                                    <bundle-varient-card-flyer [product]="item" (click)="navigateToProductDetails(item)"></bundle-varient-card-flyer>
+                                </ng-container>
+                            </div>
+    
+    
+        
+                            <!-- <iframe [src]="productVideoURL | safeurl" width="600" height="300" frameborder="0" title="test"
+                                webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+        
                         </div>
-
-
-    
-                        <!-- <iframe [src]="productVideoURL | safeurl" width="600" height="300" frameborder="0" title="test"
-                            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
-    
-                    </div>
+                    </ng-container>
                     <!-- <div class="prod-feature-img">
                         <img style="width:auto;height: auto;position: relative;"
                             src="../../assets/productDetails/FeaturesIllustration.svg">
@@ -662,7 +668,7 @@
 
 
 
-                <ng-container *ngIf="allCompareProducts.length>0">
+                <ng-container *ngIf="-1>0">
                     <div class="specification-cont" id="compProd" #compProdRef>
                         <h5>Compare Products</h5>
                         <div class="comp-product-cont">
@@ -768,22 +774,11 @@
                     </div>
 
                 </ng-container>
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
 
-            <div *ngIf="bundleItemsList && bundleItemsList.length>0" class="specification-cont" id="bundleDetailsRef"
+
+            <!-- Bundle section -->
+            <!-- <div *ngIf="bundleItemsList && bundleItemsList.length>0" class="specification-cont" id="bundleDetailsRef"
                 #bundleDetailsRef>
                 <h5 id="similar-prod">Bundle Details</h5>
                 <div class="specs-list">
@@ -841,7 +836,7 @@
 
                 </div>
 
-            </div>
+            </div> -->
             <!-- <div class="bottom-container">
                 <ng-container *ngIf="products.length>0">
                     <div class="specification-cont" id="bundleDetailsRef" #bundleDetailsRef>
@@ -896,9 +891,6 @@
 
                 </ng-container>
             </div> -->
-
-
-
 
 
         </div>

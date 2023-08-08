@@ -56,12 +56,13 @@ export class EditProductComponent  implements OnInit {
   addFAQArrayNew: FormArray;
   brandIds: Array<string>;
 
-  createProductPayload: CreateProductPayload;
+  createProductPayload: any;
   public currentRoute: string;
   productResult : any;
   selectedItemId: String;
   defaultDiscount: number;
   selectedProductId : any;
+  showMsg: boolean = false;
   constructor(
     public fb: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -89,15 +90,17 @@ export class EditProductComponent  implements OnInit {
       products: [''],
       addDynamicElementNew: this.fb.group({
         // Nested form controls for dynamic elements
-        feature: this.fb.array([])
+       feature: this.fb.array([])
       }),
       addFAQArrayNew: this.fb.group({
         // Nested form controls for dynamic elements
-        faq: this.fb.array([])
+       faq: this.fb.array([])
       })
     })
+    
     this.addDynamicElementNew = this.registrationForm.get('addDynamicElementNew') as FormArray;
-    this.addFAQArrayNew = this.registrationForm.get('addFAQArrayNew') as FormArray;
+   
+     this.addFAQArrayNew = this.registrationForm.get('addFAQArrayNew') as FormArray;
     this.defaultDiscount=18;
   }
   
@@ -297,13 +300,22 @@ export class EditProductComponent  implements OnInit {
   }
 
   selectProduct(event: any) {
-    console.log("()()()",this.selectedProductId);
+
+    if(this.selectedProductId){
+      console.log("()()()",this.selectedProductId);
     
     
-    //this.selectedProductId = event.target.value.substring(3);
-    //this.selectedProductId = this.selectedProductId.replace(' ','')
-    //this.selectedProductId = this.selectedProductId._id;
-    this.getProductDetails(this.selectedProductId._id);
+      //this.selectedProductId = event.target.value.substring(3);
+      //this.selectedProductId = this.selectedProductId.replace(' ','')
+      //this.selectedProductId = this.selectedProductId._id;
+      this.getProductDetails(this.selectedProductId._id);
+    }
+    else{
+      this.registrationForm.reset();
+      location.reload();
+      this.addDynamicElementNew = null;
+    }
+    
   }
 
   //############### Add Dynamic Elements ###############/
@@ -316,17 +328,24 @@ export class EditProductComponent  implements OnInit {
     featureArray.push(this.createFeatureGroup());
   }
 
-  // Submit Registration Form
   onSubmit(): any {
     this.submitted = true;
+  }
+
+  // Submit Registration Form
+  editProduct(): any {
+  //  this.submitted = true;
+
     if (!this.registrationForm.valid) {
-      alert('Please fill all the required fields to create a super hero!')
+   
+   
       return false;
     } else {
+
       console.log("Final value", this.registrationForm.value);
       var productData = this.registrationForm.value;
       this.createProductPayload = {
-        _id: this.selectedProductId,
+        _id: this.selectedProductId._id,
         name: productData.productName,
         description: productData.productDescription,
         oemId: productData.OEM,
@@ -355,7 +374,9 @@ export class EditProductComponent  implements OnInit {
       var endPoint = `${environment.gatewayUrl}api/admin/product/edit`
       this.http.patch(endPoint,this.createProductPayload).subscribe((response) => {
         console.log("__RESPONSE_",response);
+        this.showMsg=true
       })
+         this.registrationForm.reset();
     }
   }
 
@@ -451,11 +472,13 @@ export class EditProductComponent  implements OnInit {
 
     this.productLogo = response.products.bannerLogo;
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray;
+    console.log("===featureArray ==="+featureArray.length)
     response.featureList.forEach((feature) => {
       featureArray.push(this.createFeatureGroupWithValue(feature.featureId,  feature.name,feature.description,feature.hyperLinkURL)); 
     })
 
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray;
+    console.log("faqArray====="+response.products.productFAQ.length)
     response.products.productFAQ.forEach((faq) => {
       faqArray.push(this.createFAQGroupWithValue(faq.Question, faq.Answer)); 
     })
@@ -481,5 +504,10 @@ export class EditProductComponent  implements OnInit {
     this.registrationForm.get('subscriptionType').setValue(e.target.value, {
       onlySelf: true
     })
+  }
+
+  formRest(){
+    this.registrationForm.reset();
+    return true;
   }
 }

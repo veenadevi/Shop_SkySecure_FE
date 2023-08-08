@@ -48,6 +48,7 @@ export class CompareProductsComponent implements OnInit{
     return Object.keys(obj)[0];
   }
 
+
   constructor(
     private route: ActivatedRoute,
     private metaDataSvc: MetadataService,
@@ -56,6 +57,8 @@ export class CompareProductsComponent implements OnInit{
     private router: Router,
     private modalService: NgbModal
   ) {
+
+
   }
   public ngOnInit(): void {
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
