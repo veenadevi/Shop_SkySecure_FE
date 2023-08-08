@@ -56,7 +56,7 @@ export class SearchForCompareProductComponent {
     setTimeout(()=>{  
       this.isOpen = false;
       this.generalSearchOpen = false;
-      this.keywordSearchOpen = false;                    
+      this.keywordSearchOpen = true;                    
       
     }, 300);
 
