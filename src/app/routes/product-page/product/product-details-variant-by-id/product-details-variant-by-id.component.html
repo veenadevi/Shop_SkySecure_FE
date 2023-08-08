@@ -391,8 +391,8 @@
 
         <ng-container *ngIf="parentProduct.description">
             <div id="description" #descriptionRef>
-                <p-card class="Description" header="Description">
-
+                <p-card class="Description">
+                    <h5>Description</h5>
                     <p class="m-0">
                         {{(seeMore) ? parentProduct.description : parentProduct.description | slice:0:690}}
                         <ng-container *ngIf=" parentProduct.description.length>700">
@@ -527,8 +527,7 @@
                 <div class="prod-feat-card-content">
                     <div class="prod-card-holder">
                         <div class="feature-desc-heading">
-                            <p class="feature-desc"> Explore the Cutting-Edge Features of {{productVariants.name}}
-                                Product!</p>
+                            <p class="feature-desc"> Explore the Cutting-Edge Features of {{productVariants.name}}</p>
                         </div>
                         <div class="prod-card">
                             <!-- <ng-container *ngFor="let item of features"> -->

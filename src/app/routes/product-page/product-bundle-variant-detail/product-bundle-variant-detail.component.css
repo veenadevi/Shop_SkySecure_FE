@@ -473,9 +473,6 @@
   margin-left: 2%;
 }
 
-h5 {
-  font-size: 30px;
-}
 
 .header {
   text-align: center;
@@ -1330,11 +1327,12 @@ h6 {
   margin: 0;
 }
 
-h5 {
-  font-family: 'lato', sans-serif;
-  font-size: 1.5rem;
+h5{
+  font-family: 'lato',sans-serif;
+  font-size: 24px;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  color: #000;
 }
 
 /* p */
@@ -1626,25 +1624,20 @@ button {
 .feature-heading {
   display: flex;
   flex-direction: row;
+  align-items: center;
   cursor: pointer;
 }
 
 .prod-card {
-
-  flex-wrap: wrap;
   padding: 1%;
   margin: 1%;
-  margin-left: 10%;
-  width: 80%;
+  margin-left: 8%;
+  width: 85%;
   height: auto;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  /* box-sizing: border-box;
-  border-radius: 8px;
-  background-color: #F1F1F1;
-  box-shadow: 0px 2.4523746967315674px 2.4523746967315674px 0px rgba(0, 0, 0, 0.25); */
-  max-height: 250px; 
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  max-height: 274px; 
   overflow: auto; 
   padding: 10px;
   scrollbar-width: thin;
@@ -1658,6 +1651,7 @@ button {
 }
 .product-feature-container {
   display: flex;
+  align-items: center;
   padding: 1%;
   background: #F9F9F9;
   margin-left: 1%;
@@ -1702,16 +1696,44 @@ button {
   flex-direction: column;
 }
 
+
 .prod-feat-card-content {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 100%;
 }
-
+.bundles-container {
+  padding: 10px;
+  background: #fff;
+  border-radius: 10px;
+}
+.bundles-container h6 {
+  margin-bottom: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #565656;
+}
+.bundles-container hr {
+  margin: 0;
+  width: 150px;
+}
 .tick {
-  width: 25px;
-  height: 25px;
-
+  height: 20px;
+}
+.features-container {
+  padding: 10px;
+  background: #fff;
+  border-radius: 10px;
+}
+.features-container h6 {
+  margin-bottom: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #565656;
+}
+.features-container hr {
+  margin: 0;
+  width: 150px;
 }
 
 .feature-card {
@@ -1725,7 +1747,7 @@ button {
 .feature-card-content {
   display: flex;
   flex-basis: 90%;
-  padding: 10px;
+  /* padding: 10px; */
   flex-direction: column;
 }
 

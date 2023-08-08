@@ -489,9 +489,7 @@ button[disabled] {
   margin-left: 2%;
 }
 
-h5 {
-  font-size: 30px;
-}
+
 
 .header {
   text-align: center;
@@ -1598,9 +1596,10 @@ h6{
 }
 h5{
   font-family: 'lato',sans-serif;
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  color: #000;
 }
 
 /* p */
@@ -1874,7 +1873,7 @@ button{
   border-radius: 8px;
   background-color: #F1F1F1;
   box-shadow: 0px 2.4523746967315674px 2.4523746967315674px 0px rgba(0, 0, 0, 0.25); */
-  max-height: 250px; /* Set the height to your desired value */
+  max-height: 274px; /* Set the height to your desired value */
   overflow: auto; /* Add a vertical scrollbar when content overflows */
   /* border: 1px solid #ccc; */
   padding: 10px;
@@ -1889,6 +1888,7 @@ button{
 }
 .product-feature-container {
   display: flex;
+  align-items: center;
   padding: 1%;
   background: #F9F9F9;
   margin-left: 1%;
@@ -1898,7 +1898,7 @@ button{
 
 .prod-feature-img {
   display: flex;
-  width: 50%;
+  width: 100%;
   justify-content: center;
   align-items: center;
   margin-top: 1px;
@@ -1907,12 +1907,10 @@ button{
 .prod-feat-card-content {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 }
-.tick{
-  width:25px;
-  height: 25px;
-
+.tick {
+  height: 20px;
 }
 .feature-card {
   display: flex;
