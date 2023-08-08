@@ -82,7 +82,10 @@
                 <div class="product-details-info">
                     <h4 class="head-04">{{productVariants.name}}
                     </h4>
-                    <p class="para">by Microsoft </p>
+                    <div class="oem-section">
+                        <p class="para">by Microsoft</p>
+                        <img class="partner-icon" src="../../../../../assets/icons/TrustedPartnerBadgeIcon.svg">
+                    </div>
 
                     <div class="pd-header-reviews">
                         <mat-icon class="review-icon">star</mat-icon>
@@ -133,8 +136,7 @@
                                 <p class="about">Description:</p>
                             </div>
                             <div class="about-desc">
-                                <!-- <p class="prod-desc">{{product.description}}
-                        </p> -->
+                                <!-- <p class="prod-desc">{{product.description}}</p> -->
                                 <div class="all-desc">
                                     <!-- {{product.description}} -->
                                     {{(readMore) ? parentProduct.description : parentProduct.description | slice:0:50}}

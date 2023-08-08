@@ -694,10 +694,10 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 100%;
 }
 .about-heading{
-  width: 15%;
+  /* width: 15%; */
 }
 .about-desc{
-  width: 60%;
+  /* width: 60%; */
   min-height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -717,7 +717,7 @@ input[type="number"]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 .scroll{
-width:15%;
+/* width:15%; */
 }
 .product-common-info{
   display: flex;
@@ -1710,11 +1710,20 @@ button{
 .year{
   font-family: 'lato',sans-serif;
 }
+.oem-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .para{
   /* margin-top: 10px; */
   font-size: smaller;
   /* margin-bottom: 5px; */
   font-family: 'lato',sans-serif;
+}
+.partner-icon{
+  margin-left: 4px;
+  height: 24px;
 }
 .solution{
   font-weight: 700;
