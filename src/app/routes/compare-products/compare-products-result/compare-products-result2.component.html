@@ -19,7 +19,7 @@
                 <ng-container *ngFor="let item of allProducts; let i = index">
                     <th *ngIf="item.properties._id ; else emptyFlyer">
                         <header-card-flyer [product]="item"></header-card-flyer>
-                        <div>
+                        <div class="button-holder">
                             <div class="td-column">
                                 <button class="remove-btn" (click)="removeItem(item)">
                                     Remove 
@@ -64,7 +64,7 @@
                         <td class="product-heading">
                             {{rowData.headerName}}
                         </td>
-                        <td *ngFor="let item of allProducts">
+                        <td *ngFor="let item of allProducts" class="features-align">
                             <!-- {{allProducts[0].properties[rowData.header]}} -->
                             <!-- {{item.properties[rowData.header]}} -->
                             <div class="feature-item-container" *ngIf="item.properties[rowData.header]">
@@ -75,7 +75,7 @@
                                     <div class="tick-symbol">
                                         <img src="../../../../assets/icons/BlueTickIcon.svg">
                                     </div>
-                                    <span class="feature-text">{{features.name}}</span>
+                                    <span class="feature-text-left-align ">{{features.name}}</span>
                                 </div>        
                             </div>  
                         </td>
@@ -87,8 +87,11 @@
                             {{rowData.headerName}}
                         </td>
                         <td *ngFor="let item of allProducts" class="feature-text">
+                            <span class="feature-text-align">
+                                {{item.properties[rowData.header]}}
+                            </span>
                             <!-- {{allProducts[0].properties[rowData.header]}} -->
-                            {{item.properties[rowData.header]}}
+                            
                         </td>
                     </tr>
                 </ng-template>

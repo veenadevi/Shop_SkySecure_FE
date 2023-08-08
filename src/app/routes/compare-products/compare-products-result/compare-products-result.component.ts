@@ -486,12 +486,12 @@ export class CompareProductsResultComponent {
   
 
   this.comparisonCategories = [
-    { "header" : "productName" , "headerName" : "Product Name"},
+    { "header" : "price" , "headerName" : "Price"},
+    // { "header" : "productName" , "headerName" : "Product Name"},
     { "header" : "developedBy" , "headerName" : "Developed By"},
     { "header" : "solutionCategory" , "headerName" : "Solution Category"},
     { "header" : "subscription" , "headerName" : "Product Name"},
     { "header" : "entryLevelPricing" , "headerName" : "Entry Level Pricing"},
-    { "header" : "price" , "headerName" : "Price"},
     { "header" : "features" , "headerName" : "Features"},
     
     
