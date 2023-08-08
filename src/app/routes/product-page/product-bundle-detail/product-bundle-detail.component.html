@@ -433,39 +433,40 @@
                         <img style="width:auto;height: auto;position: relative;"
                             src="../../assets/productDetails/FeaturesIllustration.svg">
                     </div> -->
-                    <div class="prod-feat-card-content">
-                        <div class="prod-card-holder">
-                            <div class="feature-desc-heading">
-                                <p class="feature-desc">Product Features</p>
-                            </div>
-                            <div class="prod-card">
-                                <ng-container *ngFor="let item of features">
-
-                                    <div class="feature-heading">
-                                        <div class="feature-card">
-                                            <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
+                    <ng-container *ngIf="features">
+                        <div class="prod-feat-card-content">
+                            <div class="prod-card-holder">
+                                <div class="feature-desc-heading">
+                                    <p class="feature-desc">Product Features</p>
+                                </div>
+                                <div class="prod-card">
+                                    <ng-container *ngFor="let item of features">
+    
+                                        <div class="feature-heading">
+                                            <div class="feature-card">
+                                                <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
+                                            </div>
+                                            <div class="feature-card-content" (click)="openLink(item.hyperLinkURL)">
+                                                <p class="feature-card-heading">{{item.name}}</p>
+                                                <!-- <p class="feature-card-desc">{{item.description}}</p> -->
+                                            </div>
                                         </div>
-                                        <div class="feature-card-content" (click)="openLink(item.hyperLinkURL)">
-                                            <p class="feature-card-heading">{{item.name}}</p>
-                                            <!-- <p class="feature-card-desc">{{item.description}}</p> -->
-                                        </div>
-                                    </div>
-
-
-                                </ng-container>
+    
+    
+                                    </ng-container>
+                                </div>
+    
                             </div>
-
+                            <!-- <div class="p-view-all-feature-div">
+                                <div class="feature-desc-heading">
+                                  
+                                    <button class="btn view-det-btn" (click)="featureCountEvent()">View All
+                                        Features</button>
+                                </div>
+                            </div> -->
+    
                         </div>
-                        <!-- <div class="p-view-all-feature-div">
-                            <div class="feature-desc-heading">
-                              
-                                <button class="btn view-det-btn" (click)="featureCountEvent()">View All
-                                    Features</button>
-                            </div>
-                        </div> -->
-
-                    </div>
-
+                    </ng-container>
                 </div>
             </div>
 
