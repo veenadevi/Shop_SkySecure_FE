@@ -97,13 +97,13 @@
                                         <span class="product-price-type">/ {{product.priceList[0].priceType}}</span>
                                     </p>
                                 </div>
-                                <p style="font-size: smaller;">(GST Extra)</p>
+                                <p  class="gst">(GST Extra)</p>
                             </div>
                             <div style="display:inline-flex;align-items: center;">
-                                <p style="font-size: small;"> MRP:&nbsp;</p>
+                                <p class="mrp"> MRP:&nbsp;</p>
                                 <span class="price-symbol">&#8377;</span>
                                 <span>
-                                    <p style="font-size: initial; text-decoration: line-through;">
+                                    <p class="amount" >
                                         {{product.priceList[0].ERPPrice | number : '1.2-2'}}</p>
                                 </span>
                             </div>
@@ -112,7 +112,7 @@
 
                     <div class="solution-section">
                         <p class="solution">Solution Category:</p>
-                        <p>{{product.subcategories.description}}</p>
+                        <p class="solution-desc">{{product.subcategories.description}}</p>
                     </div>
 
 
@@ -162,7 +162,8 @@
                     </div> -->
 
                     <span class="request-btn"><button class="btn view-det-btn"
-                            (click)="scrollToSection('#feature')">View Features</button>
+                        (click)="addToCompare(product, 'fromProd')"
+                                       >Add to Compare</button>
                         <button class="btn request-quote-btn" (click)="requestQuote(product)"
                             style="margin-left: 4%;">Request Quote</button></span>
 
@@ -454,8 +455,8 @@
                 <div class="prod-feature-img">
                     <!-- <img style="width:auto;height: auto;position: relative;"
                     src="../../assets/productDetails/FeaturesIllustration.svg"> -->
-                    <iframe [src]="productVideoURL | safeurl" width="600" height="320" frameborder="0" title="test"
-                        webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <iframe [src]="productVideoURL | safeurl" width="600" height="320" class="video" frameborder="0" title="test"
+                        webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
 
                 </div>
                 <!-- <div class="prod-feature-img">
@@ -798,7 +799,7 @@
                                         <div class="checkbox">
                                             <!-- <p-checkbox (click)="addToCompare(product, 'fromProd')"
                                         [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox> -->
-                                            <p-checkbox (onChange)="onCheckBoxChange($event, product, 'fromProd')"
+                                            <p-checkbox class="p-check" (onChange)="onCheckBoxChange($event, product, 'fromProd')"
                                                 [(ngModel)]="product.checked" [binary]="true"
                                                 inputId="binary"></p-checkbox>
 
@@ -815,8 +816,7 @@
                             </div>
                         </div>
 
-                        <span
-                            style="display:flex;align-items: center;justify-content: center;padding-left:20px;padding-right:20px;">
+                        <span class="vs">
                             <h6 style="font-size: 25px;">VS</h6>
                         </span>
 
@@ -850,7 +850,7 @@
                                                         <!-- <p-checkbox (click)="addToCompare(item,'prodFam')"
                                                     [(ngModel)]="item.checked" [binary]="true" inputId="binary">
                                                 </p-checkbox> -->
-                                                        <p-checkbox
+                                                        <p-checkbox  class="p-check"
                                                             (onChange)="onCheckBoxChange($event, item, 'prodFam')"
                                                             [(ngModel)]="item.checked" [binary]="true" inputId="binary">
                                                         </p-checkbox>
@@ -1003,7 +1003,7 @@
                 <ng-container *ngFor="let item of faq; let i = index">
                     <div class="display-faq">
                         <p class="faq-question">{{i+1}}.&nbsp;{{item.Question}}</p>
-                        <p>{{item.Answer}}</p>
+                        <p class="faq-answer">{{item.Answer}}</p>
                     </div>
                 </ng-container>
 

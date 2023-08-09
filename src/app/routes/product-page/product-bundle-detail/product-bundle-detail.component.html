@@ -174,8 +174,8 @@
                     <!-- <p class="about">About this product:</p>
                     <p class="prod-desc">{{productFamily.description}}</p> -->
 
-                    <span class="request-btn"><button class="btn view-det-btn">View
-                            Features</button>
+                    <span class="request-btn">
+                        <button class="btn view-det-btn"  (click)="addToCompare(productFamily, 'fromProd')" >Add to Compare</button>
                         <button class="btn request-quote-btn" style="margin-left: 4%;"
                             (click)="requestQuote( productFamily)">Request Quote</button></span>
 

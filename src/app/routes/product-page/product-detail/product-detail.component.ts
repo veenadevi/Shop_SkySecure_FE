@@ -491,6 +491,7 @@ featureCount=5;
 
   public navigateToCompareProducts(){
     this.router.navigate(['/compare-products/results']);
+    
   }
 
   public onCheckBoxChange($event, item:any, type:any){
