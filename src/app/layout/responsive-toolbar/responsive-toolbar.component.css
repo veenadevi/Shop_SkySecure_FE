@@ -14,10 +14,6 @@ ul{
   padding-left: 0px;
   margin-left : 0px
 }
-
-a{
-  cursor: pointer;
-}
 nav{
   top: 0;
   left: 0;
@@ -68,7 +64,8 @@ nav .navbar .links li a{
   height: 100%;
   text-decoration: none;
   white-space: nowrap;
-  color: #686A77;
+  /* color: #686A77; */
+  color: black;
   font-family: 'Lato', sans-serif !important;
   font-family: 'Lato', sans-serif;
   font-size: 14px;
@@ -76,7 +73,7 @@ nav .navbar .links li a{
 }
 .links li:hover .htmlcss-arrow,
 .links li:hover .js-arrow{
-  transform: rotate(180deg);
+  /* transform: rotate(180deg); */
   }
 
 nav .navbar .links li .arrow{
@@ -178,7 +175,7 @@ nav .navbar .links li:hover .js-sub-menu{
   background: #3E8DA8;
   right: 10px;
   top: -6px;
-  transform: rotate(45deg);
+  /* transform: rotate(45deg); */
 }
 .search-box .input-box input{
   position: absolute;
@@ -279,5 +276,32 @@ nav .navbar .links li:hover .js-sub-menu{
   /* display: block; */
   z-index: 2;
   background-color: var(--primary);
+}
+.arrow{
+transform: rotate(45deg);
+}
+a{
+  cursor: pointer;
+}
+
+@media  ( min-width: 320px) and (max-width: 480px) {
+  nav .navbar .links{
+    display: flex;
+    margin-top: 10px;
+    height: 10px;
+    width: 10px;
+  }
+
+nav .navbar .links li a{
+  font-size: 12px;
+}
+.mat-icon-size{
+  font-size: 24px !important;
+  height: auto !important;
+  width: auto !important;
+  background-color: var(--primary);
+  padding-left: 10px;
+  padding-top: 10px;
+}
 }
 

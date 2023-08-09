@@ -165,7 +165,7 @@ export class ResponsiveToolbarComponent  implements OnInit{
 
 
     // sidebar submenu open close js code
-    let htmlcssArrow : HTMLElement = document.querySelector(".htmlcss-arrow");
+    /*let htmlcssArrow : HTMLElement = document.querySelector(".htmlcss-arrow");
     htmlcssArrow.onclick = function() {
     navLinks.classList.toggle("show1");
     }
@@ -176,7 +176,7 @@ export class ResponsiveToolbarComponent  implements OnInit{
     let jsArrow : HTMLElement = document.querySelector(".js-arrow");
     jsArrow.onclick = function() {
     navLinks.classList.toggle("show3");
-    }
+    }*/
   }
   
 
