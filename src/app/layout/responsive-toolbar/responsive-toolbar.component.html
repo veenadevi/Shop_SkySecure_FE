@@ -1,66 +1,80 @@
 <nav>
-    <div class="navbar">
-      <div class="hamburger-icon-holder">
-        <span (click)="menuToogled()">
-          <ng-container *ngIf="userLoggedIn">
-              <mat-icon class="mat-icon-size">menu</mat-icon>
-          </ng-container>
-          
-      </span>
-      </div>
-      <div class="nav-holder">
-        <div class="nav-links">
-          <ul class="links">
-            <li>
+  <div class="navbar">
+    <div class="hamburger-icon-holder">
+      <span (click)="menuToogled()">
+        <ng-container *ngIf="userLoggedIn">
+          <mat-icon class="mat-icon-size">menu</mat-icon>
+        </ng-container>
 
-              <a  >Categories</a>
-              <i class='bx bxs-chevron-down htmlcss-arrow arrow  '>
-                <!-- <img  class="arrow" src="../../../assets/icons/ArrowRightIcon.svg"> -->
-              </i>
-              <ul class="htmlCss-sub-menu sub-menu">
-                
-                <li class="more">
-                  <span><a  >Software</a>
-                  </span>
-                  <ul class="more-sub-menu sub-menu">
-                    <li class="more" *ngFor="let category of softwareCategories">
-                      <a   (click)="goToProductsPageWithCategorySelection(category)">{{category.name}}</a>
-                      <ul class="more-sub-menu2">
-                        
-                        <li class="more" *ngFor="let subCategory of category.subCategories">
-                          <a   (click)="goToProductsPageWithSubCategorySelection(category,subCategory)">{{subCategory.name}}</a>
-                        </li>
-                        <!-- <li class=""><a  > {{category.name}}Hardware</a></li>
+      </span>
+    </div>
+    <div class="nav-holder">
+      <div class="nav-links">
+        <ul class="links">
+          <li>
+            
+              <a>Categories
+     
+         
+              <i class='bx bxs-chevron-down htmlcss-arrow arrow-01  '>
+                <img class="arrow-01" src="../../../assets/icons/ArrowRightIcon.svg">
+              </i> </a>
+          
+
+
+            <ul class="htmlCss-sub-menu sub-menu">
+
+              <li class="more">
+                <span><a >Software
+                  <i class='bx bxs-chevron-down htmlcss-arrow arrow  '>
+                    <img  class="right" src="../../../assets/icons/ArrowRightIcon.svg">
+                  </i> 
+                </a>
+                </span>
+                <ul class="more-sub-menu sub-menu">
+                  <li class="more" *ngFor="let category of softwareCategories">
+                    <a (click)="goToProductsPageWithCategorySelection(category)">{{category.name}}</a>
+                    <ul class="more-sub-menu2">
+
+                      <li class="more" *ngFor="let subCategory of category.subCategories">
+                        <a
+                          (click)="goToProductsPageWithSubCategorySelection(category,subCategory)">{{subCategory.name}}</a>
+                      </li>
+                      <!-- <li class=""><a  > {{category.name}}Hardware</a></li>
                         <li class=""><a  > {{category.name}}Hardware</a></li>
                         <li class=""><a  > {{category.name}}Hardware</a></li> -->
-                        
-                      </ul>
-                    </li>
-  
-                    <!-- <li class="more" *ngFor="let category of softwareCategories">
+
+                    </ul>
+                  </li>
+
+                  <!-- <li class="more" *ngFor="let category of softwareCategories">
                       <a  >{{category.name}}</a>
                       <ul class="more-sub-menu2 sub-menu">
                         <li class="more"><a  >Hardware</a></li>
                       </ul>
                     </li> -->
-                  </ul>
-                </li>
-                <li><a  >Hardware</a></li>
-              </ul>
-            </li>
-            <li>
-              <a  >Brands</a>
-              <i class='bx bxs-chevron-down js-arrow arrow '></i>
-              <ul class="js-sub-menu sub-menu">
-                <li *ngFor="let oem of oemList">
-                  <a   (click)="goToProductsPageByBrand(oem)" >{{oem.name}}</a>
-                </li>
-              </ul>
-            </li>
-            <li><a  [routerLink]="['compare-products']">Compare Products</a></li>
-          </ul>
-        </div>
+                </ul>
+              </li>
+              
+              <li><a>Hardware</a></li>
+            </ul>
+          </li>
+          <li>
+            <a>Brands
+            <i class='bx bxs-chevron-down js-arrow arrow-01 '>
+              <img class="arrow-01" src="../../../assets/icons/ArrowRightIcon.svg">
+            </i>
+          </a>
+            <ul class="js-sub-menu sub-menu">
+              <li *ngFor="let oem of oemList">
+                <a (click)="goToProductsPageByBrand(oem)">{{oem.name}}</a>
+              </li>
+            </ul>
+          </li>
+          <li><a [routerLink]="['compare-products']">Compare Products</a></li>
+        </ul>
       </div>
-
     </div>
-  </nav>
+
+  </div>
+</nav>
