@@ -94,7 +94,7 @@
                             {{rowData.headerName}}
                         </td>
                         <td *ngFor="let item of allProducts" class="feature-text">
-                            <ng-container *ngIf="(rowData.header === 'price') ; else otherVal">
+                            <ng-container *ngIf="(rowData.header === 'price' || rowData.header === 'entryLevelPricing') ; else otherVal">
                                 <ng-container *ngIf="item && item.properties && item.properties[rowData.header] === '-' ; else presentData">
                                     -
                                 </ng-container>
@@ -103,6 +103,10 @@
                                 </ng-template>
                                 
                             </ng-container>
+
+                            
+                           
+                           
                             <ng-template #otherVal>
                                 <span class="feature-text-align">
                                     {{item.properties[rowData.header]}}
