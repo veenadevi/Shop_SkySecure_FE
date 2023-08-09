@@ -303,6 +303,19 @@ ul .nav-text:hover {
     margin-left: 4px;
 }
 
+.userName {
+    padding: 0 16px;
+    min-height: 48px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: default;
+}
+.usersection-icon {
+    margin-right: 16px;
+    height: 20px;
+}
+
 #check {
     display: none;
 }
