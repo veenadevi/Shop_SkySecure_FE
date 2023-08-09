@@ -83,7 +83,10 @@
                 <div class="product-details-info">
                     <h4 class="head-04 notranslate">{{productFamily.name}}
                     </h4>
-                    <p class="para">by Microsoft</p>
+                    <div class="oem-section">
+                        <p class="para">by Microsoft</p>
+                        <img class="partner-icon" src="../../../../../assets/icons/TrustedPartnerBadgeIcon.svg">
+                    </div>
                     <div class="pd-header-reviews">
                         <mat-icon class="review-icon">star</mat-icon>
                         <mat-icon class="review-icon">star</mat-icon>
@@ -135,7 +138,7 @@
                     <ng-container *ngIf="productFamily.description">
                         <div class="about-section">
                             <div class="about-heading">
-                                <p class="about">About this product:</p>
+                                <p class="about">Description:</p>
                             </div>
                             <div class="about-desc">
                                 <div class="all-desc">
@@ -326,8 +329,8 @@
             </div> -->
             <ng-container *ngIf="productFamily.description">
                 <div id="description" #descriptionRef>
-                    <p-card class="Description" header="Description">
-
+                    <p-card class="Description">
+                        <h5>Description</h5>
                         <p class="m-0">
                             {{(seeMore) ? productFamily.description : productFamily.description | slice:0:690}}
                             <ng-container *ngIf=" productFamily.description.length>700">
@@ -413,19 +416,20 @@
                         <div class="prod-feature-img">
                             <!-- <img style="width:auto;height: auto;position: relative;"
                             src="../../assets/productDetails/FeaturesIllustration.svg"> -->
-                            <div class="bundle-desc-heading">
+
+                            <!-- <div class="bundle-desc-heading">
                                 <p class="bundle-desc">Products Included</p>
                             </div>                        
                             <div class="card-flyer-section">
                                 <ng-container *ngFor="let item of bundleItemsList; let i = index">
                                     <bundle-varient-card-flyer [product]="item" (click)="navigateToProductDetails(item)"></bundle-varient-card-flyer>
                                 </ng-container>
-                            </div>
+                            </div> -->
     
     
         
-                            <!-- <iframe [src]="productVideoURL | safeurl" width="600" height="300" frameborder="0" title="test"
-                                webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+                            <iframe [src]="productVideoURL | safeurl" width="600" height="300" frameborder="0" title="test"
+                                webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         
                         </div>
                     </ng-container>
@@ -433,39 +437,59 @@
                         <img style="width:auto;height: auto;position: relative;"
                             src="../../assets/productDetails/FeaturesIllustration.svg">
                     </div> -->
-                    <div class="prod-feat-card-content">
-                        <div class="prod-card-holder">
-                            <div class="feature-desc-heading">
-                                <p class="feature-desc">Product Features</p>
-                            </div>
-                            <div class="prod-card">
-                                <ng-container *ngFor="let item of features">
-
-                                    <div class="feature-heading">
-                                        <div class="feature-card">
-                                            <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
-                                        </div>
-                                        <div class="feature-card-content" (click)="openLink(item.hyperLinkURL)">
-                                            <p class="feature-card-heading">{{item.name}}</p>
-                                            <!-- <p class="feature-card-desc">{{item.description}}</p> -->
-                                        </div>
+                    <ng-container *ngIf="features">
+                        <div class="prod-feat-card-content">
+                            <div class="prod-card-holder">
+                                <div class="feature-desc-heading">
+                                    <p class="feature-desc">Explore the Cutting-Edge Features of {{productFamily.name}}</p>
+                                </div>
+                                <div class="prod-card">
+                                <ng-container *ngIf="bundleItemsList.length>0">
+                                    <div class="bundles-container">
+                                        <h6>Included Standalone Plans</h6>
+                                        <hr>
+                                        <ng-container *ngFor="let item of bundleItemsList; let i = index">
+                                            <div class="feature-heading">
+                                                <div class="feature-card">
+                                                    <img class="tick" src="../../../../assets/icons/ProductTickIcon.svg">
+                                                </div>
+                                                <div class="feature-card-content" (click)="navigateToProductDetails(item)">
+                                                    <p class="feature-card-heading">{{item.name}}</p>
+                                                    <!-- <p class="feature-card-desc">{{item.description}}</p> -->
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </ng-container>
+                                    <div class="features-container">
+                                        <h6>Additional Features</h6>
+                                        <hr>
+                                        <ng-container *ngFor="let item of features">
+                                            <div class="feature-heading">
+                                                <div class="feature-card">
+                                                    <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
+                                                </div>
+                                                <div class="feature-card-content" (click)="openLink(item.hyperLinkURL)">
+                                                    <p class="feature-card-heading">{{item.name}}</p>
+                                                    <!-- <p class="feature-card-desc">{{item.description}}</p> -->
+                                                </div>
+                                            </div>
+                                        </ng-container>
                                     </div>
 
-
-                                </ng-container>
+                                </div>
+    
                             </div>
-
+                            <!-- <div class="p-view-all-feature-div">
+                                <div class="feature-desc-heading">
+                                  
+                                    <button class="btn view-det-btn" (click)="featureCountEvent()">View All
+                                        Features</button>
+                                </div>
+                            </div> -->
+    
                         </div>
-                        <!-- <div class="p-view-all-feature-div">
-                            <div class="feature-desc-heading">
-                              
-                                <button class="btn view-det-btn" (click)="featureCountEvent()">View All
-                                    Features</button>
-                            </div>
-                        </div> -->
-
-                    </div>
-
+                    </ng-container>
                 </div>
             </div>
 
@@ -891,7 +915,18 @@
 
                 </ng-container>
             </div> -->
+            <div *ngIf="faq.length>0" class="faq-cont" id="faq" #faqRef>
+                <span class="faq-title">
+                    <h5 id="similar-prod">Frequently asked Questions</h5>
+                </span>
+                <ng-container *ngFor="let item of faq; let i = index">
+                    <div class="display-faq">
+                        <p class="faq-question">{{i+1}}.&nbsp;{{item.Question}}</p>
+                        <p>{{item.Answer}}</p>
+                    </div>
+                </ng-container>
 
+            </div>
 
         </div>
 

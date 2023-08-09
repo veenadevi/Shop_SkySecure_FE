@@ -36,9 +36,10 @@ export class ProductBundleDetailComponent implements OnInit{
 
   productVideoURL: string;
 
+
   public currentRoute: string;
-  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
-  titles = ['Description', 'Features', 'Specification', 'Reviews',  'Bundle Features', 'Similar Products'];
+  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#faq'];
+  titles = ['Description', 'Features', 'Specification', 'Reviews', 'Compare Products' ,'Bundle Features', 'FAQ'];
   activeLink = this.links[0];
   myColor = '';
 
@@ -48,6 +49,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public bundleQuantity = 1;
   checked: boolean = false;
+  faq = [];
 
   public prdType : any;
 
@@ -59,6 +61,7 @@ export class ProductBundleDetailComponent implements OnInit{
   @ViewChild('bundleDetailsRef') bundleDetailsRef!: ElementRef;
   @ViewChild('simProdRef') simProdRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
+  @ViewChild('faqRef') faqRef!: ElementRef;
 
   // scroll section
   // @ViewChild('scrollContent', { static : true }) scrollContent! : ElementRef;
@@ -111,6 +114,9 @@ export class ProductBundleDetailComponent implements OnInit{
     }
     else if (sectionId === 'simProd') {
       section = this.simProdRef.nativeElement
+    }
+    else if (sectionId === 'faq') {
+      section = this.faqRef.nativeElement
     }
     section.scrollIntoView({ behavior: 'smooth' });
   }
@@ -258,7 +264,7 @@ export class ProductBundleDetailComponent implements OnInit{
         this.productFamily = response.productFamily;
         this.prdType = response.type ? response.type : '';
 
-        
+        this.faq=response.productFamily.productFAQ;
        
         //This is not needed cos bundles which is listed not going to have Variant 
 

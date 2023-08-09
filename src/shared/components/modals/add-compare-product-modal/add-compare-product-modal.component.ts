@@ -20,4 +20,8 @@ export class AddCompareProductModalComponent {
     this.activeModal.close();
   }
 
+  public closeModal(){
+    this.activeModal.close();
+  }
+
 }
