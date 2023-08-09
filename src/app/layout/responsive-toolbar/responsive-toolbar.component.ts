@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription, map } from 'rxjs';
@@ -46,6 +46,8 @@ export class ResponsiveToolbarComponent  implements OnInit{
   public offers : any[] = [];
 
   public userLoggedIn : boolean = false;
+
+  @Output() menuToogleEvent = new EventEmitter();
 
   public userDetails$ = this.userAccountStore.userDetails$
   .pipe(
@@ -129,6 +131,11 @@ export class ResponsiveToolbarComponent  implements OnInit{
       })
       
     );
+  }
+
+
+  public menuToogled(){
+    this.menuToogleEvent.emit('clicked');
   }
 
 
