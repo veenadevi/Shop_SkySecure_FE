@@ -14,6 +14,10 @@ ul{
   padding-left: 0px;
   margin-left : 0px
 }
+
+a{
+  cursor: pointer;
+}
 nav{
   top: 0;
   left: 0;

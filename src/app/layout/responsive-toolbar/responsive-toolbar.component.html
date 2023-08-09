@@ -12,49 +12,49 @@
         <div class="nav-links">
           <ul class="links">
             <li>
-              <a href="#">Categories</a>
+              <a  >Categories</a>
               <i class='bx bxs-chevron-down htmlcss-arrow arrow  '></i>
               <ul class="htmlCss-sub-menu sub-menu">
                 
                 <li class="more">
-                  <span><a href="#">Software</a>
+                  <span><a  >Software</a>
                   </span>
                   <ul class="more-sub-menu sub-menu">
                     <li class="more" *ngFor="let category of softwareCategories">
-                      <a href="#">{{category.name}}</a>
+                      <a   (click)="goToProductsPageWithCategorySelection(category)">{{category.name}}</a>
                       <ul class="more-sub-menu2">
                         
                         <li class="more" *ngFor="let subCategory of category.subCategories">
-                          <a href="#">{{subCategory.name}}</a>
+                          <a   (click)="goToProductsPageWithSubCategorySelection(category,subCategory)">{{subCategory.name}}</a>
                         </li>
-                        <!-- <li class=""><a href="#"> {{category.name}}Hardware</a></li>
-                        <li class=""><a href="#"> {{category.name}}Hardware</a></li>
-                        <li class=""><a href="#"> {{category.name}}Hardware</a></li> -->
+                        <!-- <li class=""><a  > {{category.name}}Hardware</a></li>
+                        <li class=""><a  > {{category.name}}Hardware</a></li>
+                        <li class=""><a  > {{category.name}}Hardware</a></li> -->
                         
                       </ul>
                     </li>
   
                     <!-- <li class="more" *ngFor="let category of softwareCategories">
-                      <a href="#">{{category.name}}</a>
+                      <a  >{{category.name}}</a>
                       <ul class="more-sub-menu2 sub-menu">
-                        <li class="more"><a href="#">Hardware</a></li>
+                        <li class="more"><a  >Hardware</a></li>
                       </ul>
                     </li> -->
                   </ul>
                 </li>
-                <li><a href="#">Hardware</a></li>
+                <li><a  >Hardware</a></li>
               </ul>
             </li>
             <li>
-              <a href="#">Brands</a>
+              <a  >Brands</a>
               <i class='bx bxs-chevron-down js-arrow arrow '></i>
               <ul class="js-sub-menu sub-menu">
                 <li *ngFor="let oem of oemList">
-                  <a href="#">{{oem.name}}</a>
+                  <a   (click)="goToProductsPageByBrand(oem)" >{{oem.name}}</a>
                 </li>
               </ul>
             </li>
-            <li><a href="#">Compare Products</a></li>
+            <li><a  >Compare Products</a></li>
           </ul>
         </div>
       </div>
