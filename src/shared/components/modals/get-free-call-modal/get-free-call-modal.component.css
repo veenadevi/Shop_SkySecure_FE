@@ -16,7 +16,7 @@
   align-items: center;
  font-family: 'lato',sans-serif;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background-image: url("../../../../assets/ShopPageHeaderBackground.jpg");
+  background-image: url("../../../../assets/images/shopHeaderBg.jpg");
     background-repeat: repeat-y;
     background-size: cover;
 }
