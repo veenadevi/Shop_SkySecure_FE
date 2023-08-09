@@ -495,13 +495,22 @@ featureCount=5;
   }
 
   public onCheckBoxChange($event, item:any, type:any){
+
+    let tempLen = this.getCompareProductsCount(); 
+
+    if(tempLen <= 3) {
+      if($event.checked){
+        this.addToCompare(item, type);
+      }
+      else{
+        this.removeSelectedItem(item._id);
+      }
+    }
+    else {
+      alert("Only 4 products are allowed to compare");
+    }
     
-    if($event.checked){
-      this.addToCompare(item, type);
-    }
-    else{
-      this.removeSelectedItem(item._id);
-    }
+
   }
 
 
@@ -823,6 +832,17 @@ featureCount=5;
     
   }
 
+
+  public getCompareProductsCount(){
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+    //console.log("++++++++++++++++++++++()()()()( ", uniqueElements.length);
+    return uniqueElements.length;
+    
+  }
 
 
   public showDialog(){

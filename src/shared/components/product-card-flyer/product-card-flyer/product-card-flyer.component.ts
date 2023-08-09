@@ -90,6 +90,7 @@ export class ProductCardFlyerComponent implements OnInit{
 
       let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
 
+
       if(cacheData && cacheData.length>0){
         let indexToUpdate = cacheData.findIndex(element => element._id === item._id);
         if(indexToUpdate !== -1){
@@ -101,7 +102,7 @@ export class ProductCardFlyerComponent implements OnInit{
             cacheData[indexToUpdate]['checked'] = $event.target.checked;
           }
   
-          //localStorage.removeItem('product_list_to_compare');
+          // localStorage.removeItem('product_list_to_compare');
           
           localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
   
