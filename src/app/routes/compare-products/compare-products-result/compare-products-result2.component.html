@@ -1,6 +1,6 @@
 <div class="compare-products-container">
     <div>
-        <p-table [columns]="scrollableCols" [value]="comparisonCategories" [scrollable]="true" scrollHeight="700px" frozenWidth="200px">
+        <p-table [columns]="scrollableCols" [value]="comparisonCategories" [scrollable]="true"  frozenWidth="200px">
             <!-- <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
                 <col *ngFor="let col of columns" style="width:200px">
@@ -76,8 +76,8 @@
                             <div class="tick-container"   *ngFor="let prdItem of item.properties[rowData.header]">
 
                                 <div class="tick-symbol">
-                                    <!-- <img src="../../../../assets/icons/BlueTickIcon.svg"> -->
-                                    -
+                                    <img src="../../../../assets/icons/ProductTickIcon.svg">
+                                    <!-- - -->
                                 </div>
                                 <span class="feature-text-left-align pointer-style" (click)="navigateToProductDetails(prdItem)">{{prdItem.name}}</span>
                             </div>        
@@ -89,7 +89,7 @@
                 
                 </tr>
                 <!-- <ng-template #otherCat> -->
-                    <tr *ngIf="(rowData.header !== 'features') && (rowData.header !== 'includedProducts')">
+                    <tr *ngIf="(rowData.header !== 'features') && (rowData.header !== 'includedProducts') ">
                         <td  class="product-heading">
                             {{rowData.headerName}}
                         </td>
