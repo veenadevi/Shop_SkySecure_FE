@@ -1,49 +1,63 @@
 <nav>
     <div class="navbar">
-      <div class="nav-links">
-        <ul class="links">
-          <li>
-            <a href="#">Categories</a>
-            <i class='bx bxs-chevron-down htmlcss-arrow arrow  '></i>
-            <ul class="htmlCss-sub-menu sub-menu">
-              
-              <li class="more">
-                <span><a href="#">Software</a>
-                </span>
-                <ul class="more-sub-menu sub-menu">
-                  <li class="more">
-                    <a href="#">Sample</a>
-                    <ul class="more-sub-menu2">
-                      <li class=""><a href="#">Hardware</a></li>
-                      <li class=""><a href="#">Hardware</a></li>
-                      <li class=""><a href="#">Hardware</a></li>
-                      
-                    </ul>
-                  </li>
-
-                  <!-- <li class="more" *ngFor="let category of softwareCategories">
-                    <a href="#">{{category.name}}</a>
-                    <ul class="more-sub-menu2 sub-menu">
-                      <li class="more"><a href="#">Hardware</a></li>
-                    </ul>
-                  </li> -->
-                </ul>
-              </li>
-              <li><a href="#">Hardware</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">Brands</a>
-            <i class='bx bxs-chevron-down js-arrow arrow '></i>
-            <ul class="js-sub-menu sub-menu">
-              <li><a href="#">Dynamic Clock</a></li>
-              <li><a href="#">Form Validation</a></li>
-              <li><a href="#">Card Slider</a></li>
-              <li><a href="#">Complete Website</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Compare Products</a></li>
-        </ul>
+      <div class="hamburger-icon-holder">
+        <span (click)="menuToogled()">
+          <ng-container *ngIf="userLoggedIn">
+              <mat-icon class="mat-icon-size">menu</mat-icon>
+          </ng-container>
+          
+      </span>
       </div>
+      <div class="nav-holder">
+        <div class="nav-links">
+          <ul class="links">
+            <li>
+              <a href="#">Categories</a>
+              <i class='bx bxs-chevron-down htmlcss-arrow arrow  '></i>
+              <ul class="htmlCss-sub-menu sub-menu">
+                
+                <li class="more">
+                  <span><a href="#">Software</a>
+                  </span>
+                  <ul class="more-sub-menu sub-menu">
+                    <li class="more" *ngFor="let category of softwareCategories">
+                      <a href="#">{{category.name}}</a>
+                      <ul class="more-sub-menu2">
+                        
+                        <li class="more" *ngFor="let subCategory of category.subCategories">
+                          <a href="#">{{subCategory.name}}</a>
+                        </li>
+                        <!-- <li class=""><a href="#"> {{category.name}}Hardware</a></li>
+                        <li class=""><a href="#"> {{category.name}}Hardware</a></li>
+                        <li class=""><a href="#"> {{category.name}}Hardware</a></li> -->
+                        
+                      </ul>
+                    </li>
+  
+                    <!-- <li class="more" *ngFor="let category of softwareCategories">
+                      <a href="#">{{category.name}}</a>
+                      <ul class="more-sub-menu2 sub-menu">
+                        <li class="more"><a href="#">Hardware</a></li>
+                      </ul>
+                    </li> -->
+                  </ul>
+                </li>
+                <li><a href="#">Hardware</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">Brands</a>
+              <i class='bx bxs-chevron-down js-arrow arrow '></i>
+              <ul class="js-sub-menu sub-menu">
+                <li *ngFor="let oem of oemList">
+                  <a href="#">{{oem.name}}</a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#">Compare Products</a></li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </nav>
