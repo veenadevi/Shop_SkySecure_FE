@@ -72,7 +72,7 @@
                     </td>
                     <td *ngFor="let item of allProducts" class="features-align">
                         
-                        <div class="feature-item-container" *ngIf="item.properties[rowData.header]">
+                        <div class="feature-item-container" *ngIf="((item.properties[rowData.header]) && (item.properties[rowData.header].length>0)) ; else noBundleData">
                             <div class="tick-container"   *ngFor="let prdItem of item.properties[rowData.header]">
 
                                 <div class="tick-symbol">
@@ -82,6 +82,9 @@
                                 <span class="feature-text-left-align pointer-style" (click)="navigateToProductDetails(prdItem)">{{prdItem.name}}</span>
                             </div>        
                         </div>  
+                        <ng-template #noBundleData>
+                            -
+                        </ng-template>
                     </td>
                 
                 </tr>
