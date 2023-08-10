@@ -36,9 +36,10 @@ export class ProductBundleDetailComponent implements OnInit{
 
   productVideoURL: string;
 
+
   public currentRoute: string;
-  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#simProd'];
-  titles = ['Description', 'Features', 'Specification', 'Reviews', 'Compare Products', 'Bundle Details', 'Similar Products'];
+  links = ['#description', '#feature', '#specification', '#reviews', '#compProd', '#bundleDetailsRef', '#faq'];
+  titles = ['Description', 'Features', 'Specification', 'Reviews', 'Compare Products' ,'Bundle Features', 'FAQ'];
   activeLink = this.links[0];
   myColor = '';
 
@@ -48,6 +49,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public bundleQuantity = 1;
   checked: boolean = false;
+  faq = [];
 
   public prdType : any;
 
@@ -59,6 +61,7 @@ export class ProductBundleDetailComponent implements OnInit{
   @ViewChild('bundleDetailsRef') bundleDetailsRef!: ElementRef;
   @ViewChild('simProdRef') simProdRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
+  @ViewChild('faqRef') faqRef!: ElementRef;
 
   // scroll section
   // @ViewChild('scrollContent', { static : true }) scrollContent! : ElementRef;
@@ -112,11 +115,18 @@ export class ProductBundleDetailComponent implements OnInit{
     else if (sectionId === 'simProd') {
       section = this.simProdRef.nativeElement
     }
+    else if (sectionId === 'faq') {
+      section = this.faqRef.nativeElement
+    }
     section.scrollIntoView({ behavior: 'smooth' });
   }
 
   openLink(url: any): void {
+    if(url.length>0)
     window.open(url, '_blank');
+    else{
+
+    }
   } 
 
   readMore: boolean= false;
@@ -254,7 +264,7 @@ export class ProductBundleDetailComponent implements OnInit{
         this.productFamily = response.productFamily;
         this.prdType = response.type ? response.type : '';
 
-        
+        this.faq=response.productFamily.productFAQ;
        
         //This is not needed cos bundles which is listed not going to have Variant 
 
@@ -526,13 +536,22 @@ export class ProductBundleDetailComponent implements OnInit{
   }
 
   public onCheckBoxChange($event, item:any, type:any){
+
+    let tempLen = this.getCompareProductsCount(); 
+
+    if(tempLen <= 3) {
+      if($event.checked){
+        this.addToCompare(item, type);
+      }
+      else{
+        this.removeSelectedItem(item._id);
+      }
+    }
+    else {
+      alert("Only 4 products are allowed to compare");
+    }
     
-    if($event.checked){
-      this.addToCompare(item, type);
-    }
-    else{
-      this.removeSelectedItem(item._id);
-    }
+
   }
 
   async addToCompare(item:any, type:any):Promise<void> {
@@ -781,6 +800,17 @@ export class ProductBundleDetailComponent implements OnInit{
       default:
         return null;
     }
+    
+  }
+
+  public getCompareProductsCount(){
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+    //console.log("++++++++++++++++++++++()()()()( ", uniqueElements.length);
+    return uniqueElements.length;
     
   }
   

@@ -1,0 +1,100 @@
+.contact-us-wrapper{
+  padding: 0px 0px 0px 0px;
+}
+.contact-us-container{
+
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+  align-items: center;
+  font-family: 'lato',sans-serif;
+}
+
+
+
+
+body {
+  background: #efefef;
+  font-family: 'lato',sans-serif;
+}
+
+
+.card-container {
+  
+  border: none !important;
+  border-radius: none;
+  box-shadow: none;
+  height:350px;
+  background: var(--white);
+  border-radius: 5px;
+}
+.modal-logo{
+  padding: 20px;
+  text-align: center;
+}
+.company-logo{
+  width:225px;
+  height: 50px;
+}
+.message{
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  padding-top: 25px;
+}
+
+.header-text{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* .contact-us-wrapper{
+    padding: 0px 0px 0px 0px;
+}
+.contact-us-container{
+
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+    align-items: center;
+    font-family: 'lato',sans-serif;
+}
+
+
+
+
+body {
+    background: #efefef;
+    font-family: 'lato',sans-serif;
+  }
+  
+
+  .card-container {
+    
+    border: none !important;
+    border-radius: none;
+    box-shadow: none;
+    height:300px;
+    background-image: url("../../../../assets/ShopPageHeaderBackground.jpg");
+    background-repeat: repeat-y;
+    background-size: cover;
+    border-radius: 5px;
+  }
+  .modal-logo{
+    padding: 20px;
+    text-align: center;
+  }
+  .company-logo{
+    width:225px;
+    height: 50px;
+  }
+  .message{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    padding-top: 25px;
+  } */

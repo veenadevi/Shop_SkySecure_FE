@@ -31,6 +31,8 @@ export class LoginComponent {
 
   public newEmailAlert : boolean = false;
 
+  public inValidOTP:boolean=false;
+
   public otpField : boolean = false;
 
   constructor(
@@ -179,6 +181,13 @@ export class LoginComponent {
           console.log("*(*(*(*(*( OTP Res", res);
           if(res && res.data){
             this.callSignIn();
+          }
+          else{
+            this.inValidOTP=true;
+            this.enableSignInButton = true;
+          //  this.enableOTPButton = true;
+          //  this.newEmailAlert = true;
+            this.otpField = true;
           }
         })
       )

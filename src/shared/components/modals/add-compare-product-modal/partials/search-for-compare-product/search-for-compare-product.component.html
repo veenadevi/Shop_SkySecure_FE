@@ -1,0 +1,51 @@
+<div class="search-container">
+    <div class="search-bar" *ngIf="selected">
+        <img alt="" class="search-icon" src="../../../assets/icons/Search.svg">
+        <input class="search-box" 
+                placeholder="Search by products, categories, brands & more"
+                (click) = "onSearchClicked()"
+                [(ngModel)]="inputText"
+                (focusout)="onFocusOutEvent($event)"
+                
+                (input)="onSearchQueryInput($event)">
+
+    </div>
+    <!-- <ng-container *ngIf="isOpen">
+        <div class="result-holder" *ngIf="selected">
+            <div class="search-component-holder p-1">
+        
+                <ng-container *ngIf="generalSearchOpen">
+                    <compare-products-popular-category></compare-products-popular-category>
+                    <compare-products-trending-products></compare-products-trending-products>
+                    <compare-products-recently-searched></compare-products-recently-searched>
+                </ng-container>
+                <ng-container *ngIf="keywordSearchOpen">
+                    <compare-products-search-list [searchResults] = "searchResults" (selectedProductItem)="selectedProductItem($event)"></compare-products-search-list>
+                </ng-container>
+                
+            </div>
+        </div>
+    </ng-container> -->
+
+    
+    
+    
+</div>
+
+<div class="result-holder">
+    <div class="result-header">
+        Results Based on your Search
+    </div>
+    <ng-container *ngIf="keywordSearchOpen">
+    
+        <compare-products-search-list [searchResults] = "searchResults" (selectedProductItem)="selectedProductItem($event)"></compare-products-search-list>
+    
+    
+    </ng-container>
+</div>
+
+
+
+
+
+

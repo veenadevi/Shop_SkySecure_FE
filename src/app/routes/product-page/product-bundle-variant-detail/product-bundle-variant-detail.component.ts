@@ -45,7 +45,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   productVideoURL: string;
   
   links = ['#description', '#feature', '#specification', '#compProd', '#bundleDetailsRef', '#simProd','#faq'];
-  titles = ['Description', 'Features', 'Specification', 'Compare Products', 'Bundle Details', 'Similar Products','FAQ'];
+  titles = ['Description', 'Features', 'Specification', 'Compare Products', 'Bundle Features', 'Similar Products','FAQ'];
   activeLink = this.links[0];
   myColor = '';
   public productImages=[];
@@ -119,8 +119,11 @@ export class ProductBundleVariantDetailComponent implements OnInit {
   }
 
   openLink(url: any): void {
-    // console.log("url", url);
+    if(url.length>0)
     window.open(url, '_blank');
+    else{
+      
+    }
   }
 
 
@@ -648,13 +651,21 @@ public requestQuote (productFamilyVariant : any) : void {
 }
 
   public onCheckBoxChange($event, item:any, type:any){
-      
-    if($event.checked){
-      this.addToCompare(item, type);
+
+    let tempLen = this.getCompareProductsCount(); 
+
+    if(tempLen <= 3) {
+      if($event.checked){
+        this.addToCompare(item, type);
+      }
+      else{
+        this.removeSelectedItem(item._id);
+      }
     }
     else{
-      this.removeSelectedItem(item._id);
+      alert("Only 4 products are allowed to compare");
     }
+
   }
 
 async addToCompare(item:any, type:any):Promise<void> {
@@ -801,6 +812,17 @@ public removeSelectedItem(_id:any){
     });
 
 
+  }
+
+  public getCompareProductsCount(){
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+    //console.log("++++++++++++++++++++++()()()()( ", uniqueElements.length);
+    return uniqueElements.length;
+    
   }
 
   public viewModal3(queryParams) {

@@ -26,6 +26,7 @@ import { SearchbarPopularCategoryComponent } from './header/header-serach-bar/pa
 import { SearchbarRecentlySearchedComponent } from './header/header-serach-bar/partials/searchbar-recently-searched/searchbar-recently-searched.component';
 import { SearchbarSearchListComponent } from './header/header-serach-bar/partials/searchbar-search-list/searchbar-search-list.component';
 import { SearchbarTrendingProductsComponent } from './header/header-serach-bar/partials/searchbar-trending-products/searchbar-trending-products.component';
+import { ResponsiveToolbarComponent } from './responsive-toolbar/responsive-toolbar.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { SearchbarTrendingProductsComponent } from './header/header-serach-bar/p
     SearchbarRecentlySearchedComponent,
     SearchbarSearchListComponent,
     SearchbarTrendingProductsComponent,
+    ResponsiveToolbarComponent,
     
   ],
 
@@ -73,7 +75,9 @@ import { SearchbarTrendingProductsComponent } from './header/header-serach-bar/p
     ToolbarComponent,
     FooterComponent,
     UserPanelComponent,
-    SidenavWrapperComponent
+    SidenavWrapperComponent,
+    HeaderSerachBarComponent,
+    ResponsiveToolbarComponent,
   ]
 
 })

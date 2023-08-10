@@ -138,8 +138,11 @@ export class ProductDetailComponent implements OnInit{
   }
 
   openLink(url:any): void {
-    // console.log("url",url);
+    if(url.length>0)
     window.open(url, '_blank');
+    else{
+      
+    }
   }
 
   
@@ -488,16 +491,26 @@ featureCount=5;
 
   public navigateToCompareProducts(){
     this.router.navigate(['/compare-products/results']);
+    
   }
 
   public onCheckBoxChange($event, item:any, type:any){
+
+    let tempLen = this.getCompareProductsCount(); 
+
+    if(tempLen <= 3) {
+      if($event.checked){
+        this.addToCompare(item, type);
+      }
+      else{
+        this.removeSelectedItem(item._id);
+      }
+    }
+    else {
+      alert("Only 4 products are allowed to compare");
+    }
     
-    if($event.checked){
-      this.addToCompare(item, type);
-    }
-    else{
-      this.removeSelectedItem(item._id);
-    }
+
   }
 
 
@@ -694,7 +707,7 @@ featureCount=5;
           element.bannerLogo = (element.bannerLogo &&element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
           element.description = element.description;
          // element.solutionCategory=(element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
-          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
+          element['solutionCategory'] = (element.subCategories && element.subCategories.length > 0)? element.subCategories[0].name : ''
           element['navigationId'] = element._id;
           element.priceList=element.priceList
           element.quantity=1
@@ -819,6 +832,17 @@ featureCount=5;
     
   }
 
+
+  public getCompareProductsCount(){
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+    //console.log("++++++++++++++++++++++()()()()( ", uniqueElements.length);
+    return uniqueElements.length;
+    
+  }
 
 
   public showDialog(){

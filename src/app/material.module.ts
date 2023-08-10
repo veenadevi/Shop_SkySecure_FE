@@ -29,6 +29,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import {MatGridListModule} from '@angular/material/grid-list';
 
+import { CdkTableModule} from '@angular/cdk/table';
+
 
 
 
@@ -112,7 +114,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatStepperModule,
     MatInputModule,
     MatTabsModule,
-
+    CdkTableModule,
 
     NgChartsModule
   ],
@@ -142,7 +144,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatInputModule,
     MatTabsModule,
     MatExpansionModule,
-    
+    CdkTableModule,
 
     NgChartsModule
     

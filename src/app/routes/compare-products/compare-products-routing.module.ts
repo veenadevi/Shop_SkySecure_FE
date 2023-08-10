@@ -12,9 +12,13 @@ const routes: Routes = [
       title: 'Backlog'
     }*/
     children: [
+      // {
+      //   path: '',
+      //   component: CompareProductsHomeComponent,
+      // },
       {
         path: '',
-        component: CompareProductsHomeComponent,
+        component: CompareProductsResultComponent,
       },
       {
         path: 'results',

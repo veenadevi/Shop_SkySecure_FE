@@ -13,6 +13,7 @@ import {
     MSAL_GUARD_CONFIG, MSAL_INSTANCE, MsalGuardConfiguration, MsalRedirectComponent, MsalModule
 } from '@azure/msal-angular';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { DecimalPipe } from '@angular/common';
 
 
 
@@ -96,7 +97,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalService,
     MsalGuard,
     MsalBroadcastService,
-    LoaderService
+    LoaderService,
+    DecimalPipe
   ],
   declarations: [
     AppComponent

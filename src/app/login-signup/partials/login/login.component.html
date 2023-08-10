@@ -91,6 +91,10 @@
           <div *ngIf="newEmailAlert" class="new-email-alert">
             The email does not exist. Please proceed with the Sign-up process. 
           </div>
+
+          <div *ngIf="inValidOTP" class="new-email-alert">
+           Invalid OTP; Please Enter Correct OTP 
+          </div>
           
           <div class="buttons">
           <ng-container *ngIf="enableSignInButton">

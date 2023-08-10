@@ -1,0 +1,12 @@
+<div class="container-holder text-style p-3">
+    <span class="header">
+        Popular Category
+    </span>
+
+    <div class="product-holder">
+        <ng-container *ngFor="let category of (popularCategory$ | async)">
+            <div class="product-item" (click)="goToProductsPageWithCategorySelection(category)">{{category.name}} </div>
+        </ng-container>
+    </div>
+
+</div>

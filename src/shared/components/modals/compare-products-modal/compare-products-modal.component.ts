@@ -109,8 +109,11 @@ export class CompareProductsModalComponent {
     //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
     localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
+    this.compareProductsStore.setCompareProductsList(this.productList);
     this.compareProductsStore.setCompareProductsList2(this.productList);
-    //localStorage.removeItem('product_list_to_compare');
+    // localStorage.removeItem('product_list_to_compare');
+
+    this.compareProductsStore.setProductsCheckedList(this.productList);
     
   }
 
