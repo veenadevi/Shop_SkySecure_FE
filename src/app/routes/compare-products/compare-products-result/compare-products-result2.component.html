@@ -54,7 +54,7 @@
                         </td>
                         <td *ngFor="let item of allProducts" class="features-align">
                             
-                            <div class="feature-item-container" *ngIf="item.properties[rowData.header]">
+                            <div class="feature-item-container" *ngIf="(item.properties[rowData.header] && item.properties[rowData.header].length>0) ; else noFeaturesData">
                                 <div class="tick-container"   *ngFor="let features of item.properties[rowData.header]">
     
                                     <div class="tick-symbol">
@@ -62,7 +62,10 @@
                                     </div>
                                     <span class="feature-text-left-align ">{{features.name}}</span>
                                 </div>        
-                            </div>  
+                            </div> 
+                            <ng-template #noFeaturesData>
+                                -
+                            </ng-template> 
                         </td>
                     
                 </tr>
