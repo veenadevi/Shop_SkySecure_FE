@@ -14,11 +14,7 @@
           <li>
             
               <a>Categories
-     
-         
-              <i class='bx bxs-chevron-down htmlcss-arrow arrow-01  '>
-                <img class="arrow-01" src="../../../assets/icons/ArrowRightIcon.svg">
-              </i> </a>
+                <i class="fa fa-caret-down" aria-hidden="true"></i> </a>
           
 
 
@@ -26,18 +22,20 @@
 
               <li class="more">
                 <span><a >Software
-                  <i class='bx bxs-chevron-down htmlcss-arrow arrow  '>
-                    <img  class="right" src="../../../assets/icons/ArrowRightIcon.svg">
-                  </i> 
+                  <i class="fa fa-caret-right" aria-hidden="true"></i>
                 </a>
                 </span>
                 <ul class="more-sub-menu sub-menu">
                   <li class="more" *ngFor="let category of softwareCategories">
                     <a (click)="goToProductsPageWithCategorySelection(category)">{{category.name}}</a>
+                    <div class="dropright">
+                      <!-- <i class="fa fa-caret-right right" aria-hidden="true"></i> -->
+                    </div>
+                    
                     <ul class="more-sub-menu2">
 
                       <li class="more" *ngFor="let subCategory of category.subCategories">
-                        <a
+                        <a 
                           (click)="goToProductsPageWithSubCategorySelection(category,subCategory)">{{subCategory.name}}</a>
                       </li>
                       <!-- <li class=""><a  > {{category.name}}Hardware</a></li>
@@ -61,15 +59,13 @@
           </li>
           <li>
             <a>Brands
-            <i class='bx bxs-chevron-down js-arrow arrow-01 '>
-              <img class="arrow-01" src="../../../assets/icons/ArrowRightIcon.svg">
-            </i>
+              <i class="fa fa-caret-down" aria-hidden="true"></i>
           </a>
-            <ul class="js-sub-menu sub-menu">
+            <!-- <ul class="js-sub-menu sub-menu">
               <li *ngFor="let oem of oemList">
                 <a (click)="goToProductsPageByBrand(oem)">{{oem.name}}</a>
               </li>
-            </ul>
+            </ul> -->
           </li>
           <li><a [routerLink]="['compare-products']">Compare Products</a></li>
         </ul>

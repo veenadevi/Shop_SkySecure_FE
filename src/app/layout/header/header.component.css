@@ -341,6 +341,18 @@ ul .nav-text:hover {
     .usericon {
         height: 18px;
         margin-top: 5px;
+
+    }
+    .username{
+        color: #fff;
+        font-size: 12px;
+        font-weight: 500;
+        padding-top: 5px;
+    }
+    .icon-color{
+        color: white;
+        margin-left: 3px;
+        margin-top: 6px;
     }
 }
 @media (max-width: 952px) {
@@ -364,7 +376,7 @@ ul .nav-text:hover {
         cursor: pointer;
         /* display: none; */
         margin-left: 10px;
-        margin-top: 2px;
+        margin-top: 7px;
     }
     
     .navmenu{
@@ -411,8 +423,8 @@ ul .nav-text:hover {
         justify-content: flex-end;
         cursor: pointer;
         /* display: none; */
-        margin-left: 10px;
-        margin-top: 9px;
+        margin-left: 5px;
+        margin-top: 3px;
     }
     .cart-button .cart-icon {
         height: 22px;
@@ -428,26 +440,37 @@ ul .nav-text:hover {
     }
     .usericon {
         height: 18px;
-        margin-top: 2px;
+        margin-top: 3px;
+    }
+    .username{
+        color: #fff;
+        font-size: 12px;
+        font-weight: 500;
+        padding-top: 5px;
+    }
+    .icon-color{
+        color: white;
+        margin-left: 3px;
+        margin-top: 6px;
     }
    
 }
 
 @media  ( min-width: 320px) and (max-width: 480px)  {
     .checkbtn {
-        font-size: 18px;
-    color: #efefef;
-    justify-content: flex-end;
-    cursor: pointer;
-    margin-left: 4px;
-    margin-top: 6px;
+        font-size: 15px;
+        color: #efefef;
+        justify-content: flex-end;
+        cursor: pointer;
+        margin-left: 4px;
+        margin-top: 6px;
 }
     
     .cart-button .cart-icon {
-        height: 20px;
-        position: absolute;
-        top: 10px;
-        right: 3px;
+        height: 17px;
+    position: absolute;
+    top: 14px;
+    right: 0px;
     }
     .navbar {
         background-color: #1e1e1e;
@@ -469,11 +492,18 @@ ul .nav-text:hover {
     
 .icon-color{
     color: white;
-    margin-left : 3px;
+    margin-left: 3px;
+    margin-top: 6px;
 }
 .usericon {
-    height: 18px;
-    margin-top: 5px;
+    height: 14px;
+    margin-top: 6px;
+}
+.username{
+    color: #fff;
+    font-size: 9px;
+    font-weight: 500;
+    padding-top: 8px;
 }
 .icons-section {
     display: flex;
