@@ -53,7 +53,7 @@
                     </span> -->
                     <div class="product-price-section">
 
-                        <p *ngIf="item.priceList[0].discountRate != null" class="discounted-text">
+                        <p *ngIf="item.priceList && item.priceList.length>0 && item.priceList[0].discountRate != null" class="discounted-text">
 
                             -{{item.priceList[0].discountRate}}%&nbsp;</p>
 

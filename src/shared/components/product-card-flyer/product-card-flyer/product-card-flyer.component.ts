@@ -85,8 +85,9 @@ export class ProductCardFlyerComponent implements OnInit{
   public onFilterChange($event, item){
     
     let tempLen = this.getCompareProductsCount();
+    var a = 3;
 
-    if(tempLen <= 3){
+    if(a === 3){
 
       let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
 
