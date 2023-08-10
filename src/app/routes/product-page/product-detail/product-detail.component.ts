@@ -498,7 +498,8 @@ featureCount=5;
 
     let tempLen = this.getCompareProductsCount(); 
 
-    if(tempLen <= 3) {
+    var a = 3;
+    if(a === 3) {
       if($event.checked){
         this.addToCompare(item, type);
       }

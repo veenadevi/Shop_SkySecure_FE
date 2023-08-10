@@ -538,8 +538,9 @@ export class ProductBundleDetailComponent implements OnInit{
   public onCheckBoxChange($event, item:any, type:any){
 
     let tempLen = this.getCompareProductsCount(); 
+    var a = 3;
 
-    if(tempLen <= 3) {
+    if(a === 3) {
       if($event.checked){
         this.addToCompare(item, type);
       }
