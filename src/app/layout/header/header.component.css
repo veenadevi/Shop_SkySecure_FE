@@ -511,6 +511,10 @@ ul .nav-text:hover {
     align-items: center;
     margin-top: -6px;
 }
+.usersection-icon {
+    margin-right: 16px;
+    height: 18px;
+}
 
 }
     
