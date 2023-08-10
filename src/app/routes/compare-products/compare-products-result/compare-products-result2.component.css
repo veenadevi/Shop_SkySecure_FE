@@ -1,5 +1,5 @@
 .compare-products-container {
-    padding: 1%;
+    /* padding: 1%; */
     margin: 1%;
     font-family: 'lato',sans-serif;
 }
@@ -21,7 +21,7 @@ th{
 }
 
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
-  padding: 1rem 1rem 1rem 2rem;
+  padding: 5px 1rem 5px 1rem;
 }
 
 .feature-text {
