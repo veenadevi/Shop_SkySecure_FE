@@ -444,26 +444,26 @@
                                     <p class="feature-desc">Explore the Cutting-Edge Features of {{productFamily.name}}</p>
                                 </div>
                                 <div class="prod-card">
-                                <ng-container *ngIf="bundleItemsList.length>0">
-                                    <div class="bundles-container">
-                                        <h6>Included Standalone Plans</h6>
-                                        <hr>
-                                        <ng-container *ngFor="let item of bundleItemsList; let i = index">
-                                            <div class="feature-heading">
-                                                <div class="feature-card">
-                                                    <img class="tick" src="../../../../assets/icons/ProductTickIcon.svg">
-                                                </div>
-                                                <div class="feature-card-content" (click)="navigateToProductDetails(item)">
-                                                    <p class="feature-card-heading">{{item.name}}</p>
-                                                    <!-- <p class="feature-card-desc">{{item.description}}</p> -->
-                                                </div>
-                                            </div>
+                              
+                                    <!-- <div class="features-container"> -->
+                                        <ng-container *ngIf="bundleItemsList.length>0">
+                                          
+                                              
+                                                
+                                                <ng-container *ngFor="let item of bundleItemsList; let i = index">
+                                                    <div class="feature-heading">
+                                                        <div class="feature-card">
+                                                            <img class="tick" src="../../../../assets/icons/ProductTickIcon.svg">
+                                                        </div>
+                                                        <div class="feature-card-content" (click)="navigateToProductDetails(item)">
+                                                            <p class="feature-card-heading">{{item.name}}</p>
+                                                            <!-- <p class="feature-card-desc">{{item.description}}</p> -->
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            
                                         </ng-container>
-                                    </div>
-                                </ng-container>
-                                    <div class="features-container">
-                                        <h6>Additional Features</h6>
-                                        <hr>
+                                        
                                         <ng-container *ngFor="let item of features">
                                             <div class="feature-heading">
                                                 <div class="feature-card">
@@ -475,7 +475,7 @@
                                                 </div>
                                             </div>
                                         </ng-container>
-                                    </div>
+                                    <!-- </div> -->
 
                                 </div>
     
