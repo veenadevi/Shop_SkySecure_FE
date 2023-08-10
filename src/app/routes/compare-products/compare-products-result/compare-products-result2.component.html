@@ -1,6 +1,6 @@
 <div class="compare-products-container">
     <div>
-        <p-table [columns]="scrollableCols" [value]="comparisonCategories" [scrollable]="true" scrollHeight="700px" frozenWidth="200px">
+        <p-table [columns]="scrollableCols" [value]="comparisonCategories" [scrollable]="true"  frozenWidth="200px">
             <!-- <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
                 <col *ngFor="let col of columns" style="width:200px">
@@ -72,26 +72,29 @@
                     </td>
                     <td *ngFor="let item of allProducts" class="features-align">
                         
-                        <div class="feature-item-container" *ngIf="item.properties[rowData.header]">
+                        <div class="feature-item-container" *ngIf="((item.properties[rowData.header]) && (item.properties[rowData.header].length>0)) ; else noBundleData">
                             <div class="tick-container"   *ngFor="let prdItem of item.properties[rowData.header]">
 
                                 <div class="tick-symbol">
-                                    <!-- <img src="../../../../assets/icons/BlueTickIcon.svg"> -->
-                                    -
+                                    <img src="../../../../assets/icons/ProductTickIcon.svg">
+                                    <!-- - -->
                                 </div>
                                 <span class="feature-text-left-align pointer-style" (click)="navigateToProductDetails(prdItem)">{{prdItem.name}}</span>
                             </div>        
                         </div>  
+                        <ng-template #noBundleData>
+                            -
+                        </ng-template>
                     </td>
                 
                 </tr>
                 <!-- <ng-template #otherCat> -->
-                    <tr *ngIf="(rowData.header !== 'features') && (rowData.header !== 'includedProducts')">
+                    <tr *ngIf="(rowData.header !== 'features') && (rowData.header !== 'includedProducts') ">
                         <td  class="product-heading">
                             {{rowData.headerName}}
                         </td>
                         <td *ngFor="let item of allProducts" class="feature-text">
-                            <ng-container *ngIf="(rowData.header === 'price') ; else otherVal">
+                            <ng-container *ngIf="(rowData.header === 'price' || rowData.header === 'entryLevelPricing') ; else otherVal">
                                 <ng-container *ngIf="item && item.properties && item.properties[rowData.header] === '-' ; else presentData">
                                     -
                                 </ng-container>
@@ -100,6 +103,10 @@
                                 </ng-template>
                                 
                             </ng-container>
+
+                            
+                           
+                           
                             <ng-template #otherVal>
                                 <span class="feature-text-align">
                                     {{item.properties[rowData.header]}}

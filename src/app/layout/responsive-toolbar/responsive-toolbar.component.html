@@ -1,38 +1,80 @@
 <nav>
-    <div class="navbar">
+  <div class="navbar">
+    <div class="hamburger-icon-holder">
+      <span (click)="menuToogled()">
+        <ng-container *ngIf="userLoggedIn">
+          <mat-icon class="mat-icon-size">menu</mat-icon>
+        </ng-container>
+
+      </span>
+    </div>
+    <div class="nav-holder">
       <div class="nav-links">
         <ul class="links">
           <li>
-            <a href="#">Categories</a>
-            <i class='bx bxs-chevron-down htmlcss-arrow arrow  '></i>
+            
+              <a>Categories
+     
+         
+              <i class='bx bxs-chevron-down htmlcss-arrow arrow-01  '>
+                <img class="arrow-01" src="../../../assets/icons/ArrowRightIcon.svg">
+              </i> </a>
+          
+
+
             <ul class="htmlCss-sub-menu sub-menu">
-              <li><a href="#">Web Design</a></li>
-              <li><a href="#">Login Forms</a></li>
-              <li><a href="#">Card Design</a></li>
+
               <li class="more">
-                <span><a href="#">More</a>
-                  <i class='bx bxs-chevron-right arrow more-arrow'></i>
+                <span><a >Software
+                  <i class='bx bxs-chevron-down htmlcss-arrow arrow  '>
+                    <img  class="right" src="../../../assets/icons/ArrowRightIcon.svg">
+                  </i> 
+                </a>
                 </span>
                 <ul class="more-sub-menu sub-menu">
-                  <li><a href="#">Neumorphism</a></li>
-                  <li><a href="#">Pre-loader</a></li>
-                  <li><a href="#">Glassmorphism</a></li>
+                  <li class="more" *ngFor="let category of softwareCategories">
+                    <a (click)="goToProductsPageWithCategorySelection(category)">{{category.name}}</a>
+                    <ul class="more-sub-menu2">
+
+                      <li class="more" *ngFor="let subCategory of category.subCategories">
+                        <a
+                          (click)="goToProductsPageWithSubCategorySelection(category,subCategory)">{{subCategory.name}}</a>
+                      </li>
+                      <!-- <li class=""><a  > {{category.name}}Hardware</a></li>
+                        <li class=""><a  > {{category.name}}Hardware</a></li>
+                        <li class=""><a  > {{category.name}}Hardware</a></li> -->
+
+                    </ul>
+                  </li>
+
+                  <!-- <li class="more" *ngFor="let category of softwareCategories">
+                      <a  >{{category.name}}</a>
+                      <ul class="more-sub-menu2 sub-menu">
+                        <li class="more"><a  >Hardware</a></li>
+                      </ul>
+                    </li> -->
                 </ul>
               </li>
+              
+              <li><a>Hardware</a></li>
             </ul>
           </li>
           <li>
-            <a href="#">Brands</a>
-            <i class='bx bxs-chevron-down js-arrow arrow '></i>
+            <a>Brands
+            <i class='bx bxs-chevron-down js-arrow arrow-01 '>
+              <img class="arrow-01" src="../../../assets/icons/ArrowRightIcon.svg">
+            </i>
+          </a>
             <ul class="js-sub-menu sub-menu">
-              <li><a href="#">Dynamic Clock</a></li>
-              <li><a href="#">Form Validation</a></li>
-              <li><a href="#">Card Slider</a></li>
-              <li><a href="#">Complete Website</a></li>
+              <li *ngFor="let oem of oemList">
+                <a (click)="goToProductsPageByBrand(oem)">{{oem.name}}</a>
+              </li>
             </ul>
           </li>
-          <li><a href="#">Compare Products</a></li>
+          <li><a [routerLink]="['compare-products']">Compare Products</a></li>
         </ul>
       </div>
     </div>
-  </nav>
+
+  </div>
+</nav>

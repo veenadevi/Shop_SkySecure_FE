@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { LoaderService } from 'src/shared/services/loader.service';
 import { MetadataService } from 'src/shared/services/metadata.service';
@@ -62,6 +62,12 @@ export class HeaderComponent implements OnInit{
 
   public offers : any[] = [];
 
+  public userFullName = '';
+
+  @Input() set userName(value : any){
+    this.userFullName =  value;
+  }
+
   @ViewChild('matMenuTrigger') matMenuTrigger: MatMenuTrigger;
   
   @ViewChild('categoriesMenu') categoriesMenu : MatMenuTrigger;
@@ -115,6 +121,8 @@ export class HeaderComponent implements OnInit{
   .pipe(
     map(data => {
       if(data){
+                // this.userDetails = data.userDetails;
+        // console.log("++++++++++ Came inside User", this.userDetails);
         return data;
       }
       else{

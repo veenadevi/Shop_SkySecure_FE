@@ -74,13 +74,18 @@
 
 
     <div class="user-icon" title="User-icon" *ngIf="userLoggedIn">
-      <div mat-button [matMenuTriggerFor]="afterMenu">
-        <img class="usericon" alt="" src="../../../assets/icons/User_icon.svg"/>
+      <div mat-button [matMenuTriggerFor]="afterMenu" class="user-header">
+        <img class="usericon" alt="" src="../../../assets/icons/User_icon.svg"/> 
+        <span class="username">{{userFullName}}</span>
         <i class="fa fa-caret-down icon-color" aria-hidden="true"></i>
       </div>
       <mat-menu #afterMenu="matMenu" yPosition="below">
-        <button mat-menu-item [routerLink]="['user-profile/profile-view']">Update Profile</button>
-        <button mat-menu-item (click)="logout()">Logout</button>
+        <!-- <button class="userName">
+          <img class="usersection-icon" src="../../../assets/icons/DefaultUserIcon.svg">
+          {{userFullName}}</button> -->
+        <!-- user profile is commented for now need to uncomment after the functionality completed -->
+        <!-- <button mat-menu-item [routerLink]="['user-profile/profile-view']">Update Profile</button> -->
+        <button mat-menu-item (click)="logout()"><img class="usersection-icon" src="../../../assets/icons/LogoutIcon.svg">Logout</button>
         </mat-menu>
       
     </div>

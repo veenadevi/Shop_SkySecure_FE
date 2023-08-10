@@ -84,74 +84,85 @@ export class ProductCardFlyerComponent implements OnInit{
 
   public onFilterChange($event, item){
     
-    
+    let tempLen = this.getCompareProductsCount();
 
-    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    if(tempLen <= 3){
 
-    if(cacheData && cacheData.length>0){
-      let indexToUpdate = cacheData.findIndex(element => element._id === item._id);
-      if(indexToUpdate !== -1){
-        
-        if('checked' in cacheData){
-          cacheData[indexToUpdate].checked = $event.target.checked;
-        }
-        else{
-          cacheData[indexToUpdate]['checked'] = $event.target.checked;
-        }
+      let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
 
-        //localStorage.removeItem('product_list_to_compare');
-        
-        localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
 
-      }
-
-      
-
-    }
-
-    this.cachedDataForCheckBox = cacheData;
-
-    if($event.target.checked){
-      this.selectedListForCompare.push(item);
-    }
-    else{
-      /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
       if(cacheData && cacheData.length>0){
-        //let indexToUpdate = cacheData.findIndex(element => element._id === item._id);
-        var indexToUpdate = cacheData.findIndex(element=> element._id === item._id);
-        
-        
+        let indexToUpdate = cacheData.findIndex(element => element._id === item._id);
         if(indexToUpdate !== -1){
           
-          
-          cacheData = cacheData.splice(indexToUpdate, 1);
-          
+          if('checked' in cacheData){
+            cacheData[indexToUpdate].checked = $event.target.checked;
+          }
+          else{
+            cacheData[indexToUpdate]['checked'] = $event.target.checked;
+          }
+  
+          // localStorage.removeItem('product_list_to_compare');
           
           localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
-          let ss = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-          
+  
         }
-      }*/
+  
+        
+  
+      }
+  
+      this.cachedDataForCheckBox = cacheData;
+  
+      if($event.target.checked){
+        this.selectedListForCompare.push(item);
+      }
+      else{
+        /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        if(cacheData && cacheData.length>0){
+          //let indexToUpdate = cacheData.findIndex(element => element._id === item._id);
+          var indexToUpdate = cacheData.findIndex(element=> element._id === item._id);
+          
+          
+          if(indexToUpdate !== -1){
+            
+            
+            cacheData = cacheData.splice(indexToUpdate, 1);
+            
+            
+            localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
+            let ss = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+            
+          }
+        }*/
+        
+        this.selectedListForCompare = this.selectedListForCompare.filter(element => element._id != item._id);
+      }
+       
       
-      this.selectedListForCompare = this.selectedListForCompare.filter(element => element._id != item._id);
-    }
-     
-    
+  
+      /*let cacheData = this.compareProductsStore.getCompareProductsList();
+      let cumulativeList = [];
+      if(cacheData && cacheData.length>0){
+        cumulativeList = [...this.selectedListForCompare , ...cacheData];
+        cumulativeList = cumulativeList.filter(element => element._id != item._id);
+      }
+      else{
+        cumulativeList = this.selectedListForCompare;
+      }
+      this.compareProductsStore.setCompareProductsList(cumulativeList);*/
+      //localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
+      //this.compareProductsStore.setCompareProductsList(this.selectedListForCompare);
+      
+      this.listForCompare.emit(this.selectedListForCompare);
 
-    /*let cacheData = this.compareProductsStore.getCompareProductsList();
-    let cumulativeList = [];
-    if(cacheData && cacheData.length>0){
-      cumulativeList = [...this.selectedListForCompare , ...cacheData];
-      cumulativeList = cumulativeList.filter(element => element._id != item._id);
     }
+
     else{
-      cumulativeList = this.selectedListForCompare;
+      alert("Only 4 products are allowed to compare");
     }
-    this.compareProductsStore.setCompareProductsList(cumulativeList);*/
-    //localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
-    //this.compareProductsStore.setCompareProductsList(this.selectedListForCompare);
-    
-    this.listForCompare.emit(this.selectedListForCompare);
+
+
     
   }
 
@@ -201,6 +212,18 @@ export class ProductCardFlyerComponent implements OnInit{
 
   public setCheckBoxes(){
 
+  }
+
+
+  public getCompareProductsCount(){
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+    //console.log("++++++++++++++++++++++()()()()( ", uniqueElements.length);
+    return uniqueElements.length;
+    
   }
 
 

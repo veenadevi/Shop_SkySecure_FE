@@ -26,7 +26,7 @@ export class ProfileViewComponent implements OnInit{
   ){};
 
 
-  public userDetails$ = this.userAccountStore.userProfileDetails$
+  public userDetails$ = this.userAccountStore.userDetails$
   .pipe(
     map(data => {
       

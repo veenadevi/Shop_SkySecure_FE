@@ -239,7 +239,7 @@ ul .nav-text:hover {
 .cart-button .cart-icon {
     height: 20px;
     position: absolute;
-    top: 12px;
+    top: 10px;
     right: 10px;
 }
 
@@ -253,7 +253,8 @@ ul .nav-text:hover {
 .user-icon {
     margin-left: 4px;    
     height: 42px;
-    width: 42px;
+    padding: 0 10px;
+    /* width: 42px; */
     align-items: center;
     justify-content: center;
     display: flex;
@@ -262,6 +263,10 @@ ul .nav-text:hover {
 
 .usericon {
     height: 18px;
+}
+
+.username {
+    margin-left: 6px;
 }
 
 .user-icon:hover {
@@ -301,6 +306,23 @@ ul .nav-text:hover {
     cursor: pointer;
     display: none;
     margin-left: 4px;
+}
+
+.user-header {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.username {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.usersection-icon {
+    margin-right: 16px;
+    height: 20px;
 }
 
 #check {
@@ -373,7 +395,7 @@ ul .nav-text:hover {
     .cart-button .cart-icon {
         height: 22px;
         position: absolute;
-        top: 12px;
+        top: 10px;
         right: 10px;
     }
     
@@ -390,12 +412,12 @@ ul .nav-text:hover {
         cursor: pointer;
         /* display: none; */
         margin-left: 10px;
-        margin-top: 2px;
+        margin-top: 9px;
     }
     .cart-button .cart-icon {
         height: 22px;
         position: absolute;
-        top: 12px;
+        top: 10px;
         right: 10px;
     }
     .icons-section {
@@ -406,7 +428,7 @@ ul .nav-text:hover {
     }
     .usericon {
         height: 18px;
-        margin-top: 5px;
+        margin-top: 2px;
     }
    
 }
@@ -424,7 +446,7 @@ ul .nav-text:hover {
     .cart-button .cart-icon {
         height: 20px;
         position: absolute;
-        top: 12px;
+        top: 10px;
         right: 3px;
     }
     .navbar {
