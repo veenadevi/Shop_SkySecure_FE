@@ -131,12 +131,13 @@ th{
     display: flex;
     flex-direction: row;
     align-items: baseline;
+    margin-bottom: -15px;
     
   }
   .discounted-text{
     color: #DB553C;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 14px;
     font-style: normal;
     line-height: 1.3rem;
   }
@@ -151,8 +152,9 @@ th{
     font-weight: 600;
   }
   .product-price-type{
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
+    color: black;
   }
   /* .price{
     font-weight: 400;
@@ -164,23 +166,41 @@ th{
     font-size: smaller;
   }
   .mrp{
-    font-size: small;
+    font-size: 10px;
+    color: black;
+    margin-bottom: 0px;
+
   }
   .amount{
-    font-size: initial;
+    color: black;
+    font-size:12px;
      text-decoration: line-through;
+     margin-bottom: 0px;
   }
   .price-symbol{
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.3s;
+    color: black;
   }
-  
+  .price-symbol-01{
+    font-size: 14px;
+    /* font-weight: bold; */
+    cursor: pointer;
+    transition: transform 0.3s;
+    color: black;
+    margin-top: 0px;
+  }
+  .gst{
+    font-size: 12px;
+    color: black;
+  }
   .price-symbol:hover {
     transform: scale(1.1);
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
+    color: black;
   }
 
 
