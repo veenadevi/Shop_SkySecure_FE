@@ -91,12 +91,19 @@
                                 <p *ngIf="product.priceList[0].discountRate != null" class="discounted-text">
                                     -{{product.priceList[0].discountRate}}%
                                 </p>
-                                <div class="price">
+                                
+                                    <div class="price" (mouseenter)="showMonthlyPrice()" (mouseleave)="showDiscountRate()">
+                                        <span class="price-symbol">&#8377;  {{ isMonthly ? (product.priceList[0].price/12 | number : '1.2-2') : product.priceList[0].price }} </span>
+                                        <span class="product-price-type"> /  {{isMonthly ? 'Monthly' : (product.priceList[0].priceType)}}</span>
+                                        
+                                    </div>
+                                   
+                                <!-- <div class="price">
                                     <p class="product-price">
                                         <span class="price-symbol">&#8377;</span>{{product.priceList[0].price | number : '1.2-2'}}
                                         <span class="product-price-type">/ {{product.priceList[0].priceType}}</span>
                                     </p>
-                                </div>
+                                </div> -->
                                 <p  class="gst">(GST Extra)</p>
                             </div>
                             <div style="display:inline-flex;align-items: center;">

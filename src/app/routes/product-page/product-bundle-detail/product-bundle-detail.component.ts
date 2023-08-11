@@ -19,6 +19,19 @@ import { CompareProductsModalComponent } from 'src/shared/components/modals/comp
 })
 export class ProductBundleDetailComponent implements OnInit{
 
+  discountRate: number =120; 
+  monthlyPrice: number = this.discountRate / 12;
+  isMonthly: boolean = false;
+
+  showMonthlyPrice() {
+    this.isMonthly = true;
+  }
+
+  showDiscountRate() {
+    this.isMonthly = false;
+  }
+
+
   quantity: number = 1;
 
   onKeyDown(event: KeyboardEvent): void {

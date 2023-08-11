@@ -1941,6 +1941,18 @@ button{
   font-size: initial;
    text-decoration: line-through;
 }
+.price-symbol{
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.price-symbol:hover {
+  transform: scale(1.1);
+  font-size: 18px;
+  font-weight: bold;
+}
 
 /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
