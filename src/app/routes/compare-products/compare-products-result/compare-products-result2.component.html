@@ -62,7 +62,7 @@
                                 
                                     <div class="price" (mouseenter)="showMonthlyPrice()" (mouseleave)="showDiscountRate()">
                                         <span class="price-symbol">&#8377;  {{ isMonthly ? (item.properties['priceList'].price/12 | number : '1.2-2') : item.properties['priceList'].price }} </span>
-                                        <span class="product-price-type"> /  {{isMonthly ? 'Monthly' : (item.properties['priceList'].priceType)}}</span>
+                                        <span class="product-price-type"> /  {{isMonthly ? 'Month' : (item.properties['priceList'].priceType)}}</span>
                                         
                                     </div>
                                    
@@ -92,13 +92,21 @@
                         <td *ngFor="let item of allProducts" class="features-align">
                             
                             <div class="feature-item-container" *ngIf="(item.properties[rowData.header] && item.properties[rowData.header].length>0) ; else noFeaturesData">
+                                <div class="tick-container"   *ngFor="let features of item.properties['includedProducts']">
+    
+                                    <div class="tick-symbol">
+                                        <img src="../../../../assets/icons/ProductTickIcon.svg">
+                                    </div>
+                                    <span class="feature-text-left-align ">{{features.name}}</span>
+                                </div>   
                                 <div class="tick-container"   *ngFor="let features of item.properties[rowData.header]">
     
                                     <div class="tick-symbol">
                                         <img src="../../../../assets/icons/BlueTickIcon.svg">
                                     </div>
                                     <span class="feature-text-left-align ">{{features.name}}</span>
-                                </div>        
+                                </div>     
+                                
                             </div> 
                             <ng-template #noFeaturesData>
                                 -

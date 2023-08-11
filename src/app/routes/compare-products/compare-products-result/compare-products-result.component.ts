@@ -301,8 +301,11 @@ export class CompareProductsResultComponent {
   public setProductFamilyList(response){
     console.log("=====productFzmily length===="+response.productFamily.length)
     let item = response.productFamily.map((data: any) => {
+      let featureList=data.productFamilyFeatures 
       let productData = data.productFamily;
+      let bundleFeaturesList=[...featureList,...this.setIncludedProductsForFamilyVarients(response)]
       let properties = {
+
         'productName': productData.name,
         'developedBy': 'Microsoft',
         'solutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
@@ -310,6 +313,7 @@ export class CompareProductsResultComponent {
         'entryLevelPricing': productData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productData?.priceList[0].ERPPrice) : '-',
         'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price) : '-',
         'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
+       // 'features':bundleFeaturesList,
         'features': data.productFamilyFeatures.length > 0 ? data.productFamilyFeatures : 'No Features',
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response),
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
@@ -325,6 +329,9 @@ export class CompareProductsResultComponent {
     let item = response.productFamilyVariants.map((data: any) => {
       let productData = data.productFamily;
       let productVariantData = data.productFamilyVariant;
+      let featureList=data.productFamilyVariantFeatures
+     
+      let bundleFeaturesList=[...this.setIncludedProductsForFamilyVarients(response),...featureList]
       console.log("fetching solution cat for family varient   "+productVariantData?.subcategories[0]?.name)
       let properties = {
         'productName': productVariantData.name,
@@ -336,6 +343,7 @@ export class CompareProductsResultComponent {
         'priceList' : productVariantData?.priceList[0] ? productVariantData?.priceList[0] : '-',
         'features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : 'No Features',
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response),
+    // 'features':bundleFeaturesList.length>0?bundleFeaturesList:'-',
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
         '_id' : productVariantData._id
       }
@@ -558,7 +566,7 @@ export class CompareProductsResultComponent {
     { "header" : "solutionCategory" , "headerName" : "Solution Category"},
     // { "header" : "subscription" , "headerName" : "Product Name"},
     // { "header" : "entryLevelPricing" , "headerName" : "Entry Level Pricing"},
-    { "header" : "includedProducts" , "headerName" : "Included Products"},
+    //{ "header" : "includedProducts" , "headerName" : "Included Products"},
     { "header" : "features" , "headerName" : "Features"},
     
     
