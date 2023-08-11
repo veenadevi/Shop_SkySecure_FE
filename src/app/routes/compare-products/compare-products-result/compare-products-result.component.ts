@@ -34,6 +34,7 @@ export class CompareProductsResultComponent {
   tableData: any = [];
   cols: any[] = [];
   cars : any[] = [];
+  public isMonthly: boolean = false;
 
   public itemQuantity : number = 1;
 
@@ -257,7 +258,8 @@ export class CompareProductsResultComponent {
         'solutionCategory': productData?.subcategories?.name ? productData?.subcategories?.name : '-',
         'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
         'entryLevelPricing': productData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productData?.priceList[0].ERPPrice) : '-',
-        'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price)  : '',
+        'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price)  : '-',
+        'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
         'features': data.featureList.length > 0 ? data.featureList : 'No Features',
         'includedProducts' : [],
        'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
@@ -281,7 +283,8 @@ export class CompareProductsResultComponent {
         'solutionCategory': productData?.subcategories?.name ? productData?.subcategories?.name : '-',
         'subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
         'entryLevelPricing': productVariantData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productVariantData?.priceList[0].ERPPrice) : '-',
-        'price' : productVariantData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productVariantData?.priceList[0].price) : '',
+        'price' : productVariantData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productVariantData?.priceList[0].price) : '-',
+        'priceList' : productVariantData?.priceList[0] ? productVariantData?.priceList[0] : '-',
         'features': data.featureList.length > 0 ? data.featureList : 'No Features',
         'includedProducts' : [],
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
@@ -305,7 +308,8 @@ export class CompareProductsResultComponent {
         'solutionCategory': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
         'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
         'entryLevelPricing': productData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productData?.priceList[0].ERPPrice) : '-',
-        'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price) : '',
+        'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price) : '-',
+        'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
         'features': data.productFamilyFeatures.length > 0 ? data.productFamilyFeatures : 'No Features',
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response),
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
@@ -328,7 +332,8 @@ export class CompareProductsResultComponent {
         'solutionCategory': productVariantData?.subcategories[0]?.name ? productVariantData?.subcategories[0]?.name : '-',
         'subscription': productVariantData?.priceList[0]?.priceType ? productVariantData?.priceList[0]?.priceType : '-',
         'entryLevelPricing': productVariantData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productVariantData?.priceList[0].ERPPrice ): '-',
-        'price' : productVariantData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productVariantData?.priceList[0].price) : '',
+        'price' : productVariantData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productVariantData?.priceList[0].price) : '-',
+        'priceList' : productVariantData?.priceList[0] ? productVariantData?.priceList[0] : '-',
         'features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : 'No Features',
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response),
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
@@ -552,7 +557,7 @@ export class CompareProductsResultComponent {
     { "header" : "developedBy" , "headerName" : "Developed By"},
     { "header" : "solutionCategory" , "headerName" : "Solution Category"},
     // { "header" : "subscription" , "headerName" : "Product Name"},
-    { "header" : "entryLevelPricing" , "headerName" : "Entry Level Pricing"},
+    // { "header" : "entryLevelPricing" , "headerName" : "Entry Level Pricing"},
     { "header" : "includedProducts" , "headerName" : "Included Products"},
     { "header" : "features" , "headerName" : "Features"},
     
@@ -831,6 +836,14 @@ export class CompareProductsResultComponent {
 
   public decimalTransofrm(val){
     return this.decimalPipe.transform(val, '1.2-2');
+  }
+
+  showMonthlyPrice() {
+    this.isMonthly = true;
+  }
+
+  showDiscountRate() {
+    this.isMonthly = false;
   }
    
 }

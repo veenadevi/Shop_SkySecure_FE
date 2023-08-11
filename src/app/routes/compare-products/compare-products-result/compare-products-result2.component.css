@@ -122,6 +122,75 @@ th{
     cursor: pointer;
   }
 
+  .product-price-detail{
+    display: flex;
+    flex-direction: column;
+    margin: 6px 0;
+  }
+  .product-price-section{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    
+  }
+  .discounted-text{
+    color: #DB553C;
+    font-weight: 400;
+    font-size: 13px;
+    font-style: normal;
+    line-height: 1.3rem;
+  }
+  .price-symbol{
+    font-weight: 400;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 1.3rem;
+  }
+  .product-price{
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .product-price-type{
+    font-size: 13px;
+    font-weight: 500;
+  }
+  /* .price{
+    font-weight: 400;
+    font-size: 15px;
+    font-style: normal;
+    line-height: 1.3rem;
+  } */
+  .gst{
+    font-size: smaller;
+  }
+  .mrp{
+    font-size: small;
+  }
+  .amount{
+    font-size: initial;
+     text-decoration: line-through;
+  }
+  .price-symbol{
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .price-symbol:hover {
+    transform: scale(1.1);
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+
+  .aa{
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.3rem;
+  }
+
 
 
 

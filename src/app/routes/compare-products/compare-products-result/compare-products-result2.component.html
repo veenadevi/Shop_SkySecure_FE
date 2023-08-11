@@ -48,6 +48,43 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
 
+                <tr *ngIf="(rowData.header === 'price')">
+                    <td class="product-heading">
+                        {{rowData.headerName}}
+                    </td>
+                    <td *ngFor="let item of allProducts" class="features-align">
+                        
+                        <div class="product-price-detail" *ngIf="(item.properties[rowData.header] !== '-') ; else noPrice ">
+                            <div  class="product-price-section" style="display:inline-flex">
+                                <p class="discounted-text">
+                                    - {{item.properties['priceList'].discountRate}}%
+                                </p>
+                                
+                                    <div class="price" (mouseenter)="showMonthlyPrice()" (mouseleave)="showDiscountRate()">
+                                        <span class="price-symbol">&#8377;  {{ isMonthly ? (item.properties['priceList'].price/12 | number : '1.2-2') : item.properties['priceList'].price }} </span>
+                                        <span class="product-price-type"> /  {{isMonthly ? 'Monthly' : (item.properties['priceList'].priceType)}}</span>
+                                        
+                                    </div>
+                                   
+                                <p  class="gst">(GST Extra)</p>
+                            </div>
+                            <div style="display:inline-flex;align-items: center;">
+                                <p class="mrp"> MRP:&nbsp;</p>
+                                <span class="price-symbol">&#8377;</span>
+                                <span>
+                                    <p class="amount" >
+                                        {{item.properties['priceList'].ERPPrice | number : '1.2-2'}}</p>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <ng-template #noPrice>
+                            -
+                        </ng-template> 
+                    </td>
+                
+                </tr>
+
                 <tr *ngIf="(rowData.header === 'features')">
                         <td class="product-heading">
                             {{rowData.headerName}}
@@ -92,7 +129,7 @@
                 
                 </tr>
                 <!-- <ng-template #otherCat> -->
-                    <tr *ngIf="(rowData.header !== 'features') && (rowData.header !== 'includedProducts') ">
+                    <tr *ngIf="(rowData.header !== 'features') && (rowData.header !== 'includedProducts') && (rowData.header !== 'price')">
                         <td  class="product-heading">
                             {{rowData.headerName}}
                         </td>
