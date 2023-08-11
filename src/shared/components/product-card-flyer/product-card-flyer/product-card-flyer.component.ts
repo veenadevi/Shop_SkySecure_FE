@@ -14,6 +14,18 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 })
 export class ProductCardFlyerComponent implements OnInit{
 
+  discountRate: number =120; // Example yearly price
+  monthlyPrice: number = this.discountRate / 12;
+  isMonthly: boolean = false;
+
+  showMonthlyPrice() {
+    this.isMonthly = true;
+  }
+
+  showDiscountRate() {
+    this.isMonthly = false;
+  }
+
 
 
   //@Input() products : Array<any> = [];
