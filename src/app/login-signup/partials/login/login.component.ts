@@ -184,6 +184,7 @@ export class LoginComponent {
           }
           else{
             this.inValidOTP=true;
+            this.form.get('otp').reset();
             this.enableSignInButton = true;
           //  this.enableOTPButton = true;
           //  this.newEmailAlert = true;
