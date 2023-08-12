@@ -29,10 +29,21 @@
 
 
     <!-- Header Component-->
-    <nav id="navbar" class="fixed-top">
+    <!-- <nav id="navbar" class="fixed-top">
         <app-header (loginEvent)='loginEvent($event)' [userName]="userName"></app-header>
-        <!-- <app-toolbar (menuToogleEvent)='menuToogleEvent($event)'></app-toolbar> -->
+        <app-toolbar (menuToogleEvent)='menuToogleEvent($event)'></app-toolbar>
         <responsive-toolbar (menuToogleEvent)='menuToogleEvent($event)'></responsive-toolbar>
+    </nav> -->
+    <!-- Header Component-->
+
+    <nav id="navbar" class="fixed-top">
+
+        <app-header (loginEvent)='loginEvent($event)' [userName]="userName"></app-header>
+
+        <!-- <app-toolbar (menuToogleEvent)='menuToogleEvent($event)'></app-toolbar> -->
+
+        <responsive-toolbar (menuToogleEvent)='menuToogleEvent($event)'></responsive-toolbar>
+
     </nav>
     
     <!-- <app-toolbar></app-toolbar>

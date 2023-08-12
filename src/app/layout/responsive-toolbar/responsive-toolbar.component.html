@@ -1,4 +1,4 @@
-<nav>
+<!-- <nav>
   <div class="navbar">
     <div class="hamburger-icon-holder">
       <span (click)="menuToogled()">
@@ -41,19 +41,12 @@
                         <a 
                           (click)="goToProductsPageWithSubCategorySelection(category,subCategory)">{{subCategory.name}}</a>
                       </li>
-                      <!-- <li class=""><a  > {{category.name}}Hardware</a></li>
-                        <li class=""><a  > {{category.name}}Hardware</a></li>
-                        <li class=""><a  > {{category.name}}Hardware</a></li> -->
+                  
 
                     </ul>
                   </li>
 
-                  <!-- <li class="more" *ngFor="let category of softwareCategories">
-                      <a  >{{category.name}}</a>
-                      <ul class="more-sub-menu2 sub-menu">
-                        <li class="more"><a  >Hardware</a></li>
-                      </ul>
-                    </li> -->
+                
                 </ul>
               </li>
               
@@ -76,4 +69,144 @@
     </div>
 
   </div>
+</nav> -->
+<nav>
+
+  <div class="navbar">
+
+    <div class="hamburger-icon-holder">
+
+      <span (click)="menuToogled()">
+
+        <ng-container *ngIf="userLoggedIn">
+
+          <mat-icon class="mat-icon-size">menu</mat-icon>
+
+        </ng-container>
+
+ 
+
+      </span>
+
+    </div>
+
+    <div class="nav-holder">
+
+      <div class="nav-links">
+
+        <ul class="links" (mouseenter)="openDropdown()" >
+
+          <li>
+
+              <a>Categories
+
+                <i class="fa fa-caret-down" aria-hidden="true"></i> 
+
+             </a>
+
+            <ul *ngIf="hoveropen"  class="htmlCss-sub-menu sub-menu">
+
+              <li class="more">
+
+                <span><a >Software
+                  <i class="fa fa-caret-right" aria-hidden="true"></i>
+
+                </a>
+
+                </span>
+
+                <ul class="more-sub-menu sub-menu">
+
+                  <li class="more" *ngFor="let category of softwareCategories">
+
+                    <!-- <a (click)="goToProductsPageWithCategorySelection(category)">{{category.name}}</a> -->
+                    <div class="cat"  >
+                      <a  (click)="goToProductsPageWithCategorySelection(category)" >{{category.name}}</a>
+                    </div>
+                   
+                    <div class="dropright">
+                      <i class="fa fa-caret-right right" aria-hidden="true"></i>
+                    </div>
+
+                    <ul class="more-sub-menu2">
+
+ 
+
+                      <li class="more" *ngFor="let subCategory of category.subCategories">
+
+                        <a
+
+                          (click)="goToProductsPageWithSubCategorySelection(category,subCategory)">{{subCategory.name}}</a>
+
+                      </li>
+
+                      <!-- <li class=""><a  > {{category.name}}Hardware</a></li>
+
+                        <li class=""><a  > {{category.name}}Hardware</a></li>
+
+                        <li class=""><a  > {{category.name}}Hardware</a></li> -->
+
+ 
+
+                    </ul>
+
+                  </li>
+
+ 
+
+                  <!-- <li class="more" *ngFor="let category of softwareCategories">
+
+                      <a  >{{category.name}}</a>
+
+                      <ul class="more-sub-menu2 sub-menu">
+
+                        <li class="more"><a  >Hardware</a></li>
+
+                      </ul>
+
+                    </li> -->
+
+                </ul>
+
+              </li>
+
+             
+
+              <li><a>Hardware</a></li>
+
+            </ul>
+
+          </li>
+
+          <li>
+
+            <a>Brands
+              <i class="fa fa-caret-down" aria-hidden="true"></i> 
+
+          </a>
+
+            <ul *ngIf="hoveropen" class="js-sub-menu sub-menu">
+
+              <li *ngFor="let oem of oemList">
+
+                <a (click)="goToProductsPageByBrand(oem)">{{oem.name}}</a>
+
+              </li>
+
+            </ul>
+
+          </li>
+
+          <li><a [routerLink]="['compare-products']">Compare Products</a></li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+ 
+
+  </div>
+
 </nav>
