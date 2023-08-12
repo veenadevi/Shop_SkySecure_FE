@@ -27,9 +27,12 @@
                 </span>
                 <ul class="more-sub-menu sub-menu">
                   <li class="more" *ngFor="let category of softwareCategories">
-                    <a (click)="goToProductsPageWithCategorySelection(category)">{{category.name}}</a>
+                    <div class="cat"  >
+                      <a  (click)="goToProductsPageWithCategorySelection(category)" >{{category.name}}</a>
+                    </div>
+                   
                     <div class="dropright">
-                      <!-- <i class="fa fa-caret-right right" aria-hidden="true"></i> -->
+                      <i class="fa fa-caret-right right" aria-hidden="true"></i>
                     </div>
                     
                     <ul class="more-sub-menu2">

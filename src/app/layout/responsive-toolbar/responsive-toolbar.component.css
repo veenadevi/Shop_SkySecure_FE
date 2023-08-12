@@ -76,8 +76,14 @@ nav .navbar .links li a{
 transform: rotate(45deg);
 }
 .right{
-  padding-left: 145px;
-  width: 160px;
+  padding-left: 100px;
+  /* width: 160px; */
+}
+.cat{
+  max-width: 100px;
+}
+.cat-name{
+  max-width: 100px;
 }
 .links li:hover .htmlcss-arrow,
 .links li:hover .js-arrow{
@@ -291,8 +297,8 @@ nav .navbar .links li:hover .js-sub-menu{
 }
 
 .more-sub-menu{
-  width: 250px;
-  /* max-width: 250px; */
+  width: 300px;
+  /* max-width: 150px; */
 }
 
 
@@ -460,3 +466,12 @@ nav .navbar .nav-links{
 }
 
 
+.hoverable {
+  /* Styles for the hover effect */
+}
+
+.disable-hover {
+  /* Styles to disable the hover effect */
+  /* You can reset or remove any hover-specific styles here */
+  pointer-events: none; /* This prevents hover interactions */
+}
