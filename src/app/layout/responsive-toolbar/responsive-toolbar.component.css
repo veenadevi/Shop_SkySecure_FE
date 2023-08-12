@@ -118,9 +118,14 @@ nav .navbar .links li .sub-menu{
   background-color: white;
   
 }
+a:hover
+{
+  color: orange !important;
+}
 nav .navbar .links li:hover .htmlCss-sub-menu,
 nav .navbar .links li:hover .js-sub-menu{
   display: block;
+  
 }
 .navbar .links li .sub-menu li{
   padding: 0 10px;
@@ -130,7 +135,7 @@ nav .navbar .links li:hover .js-sub-menu{
 }
 .navbar .links li .sub-menu a{
   color: #fff;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   color: #686a77;
   padding: 5px;
@@ -152,6 +157,7 @@ nav .navbar .links li:hover .js-sub-menu{
 }
 .links li .sub-menu .more:hover .more-sub-menu{
   display: block;
+  
 }
 .navbar .search-box{
   position: relative;
@@ -255,7 +261,13 @@ nav .navbar .links li:hover .js-sub-menu{
 
 .more-sub-menu .more:hover .more-sub-menu2{
   display: block;
+
+
+ 
 }
+/* .more-sub-menu .more:not(:hover) .more-sub-menu2{
+  display: none;
+} */
 
 .hamburger-icon-holder{
   width:5%;
@@ -309,10 +321,13 @@ a{
   cursor: pointer;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+  
 }
 
 .sub-menu li:hover{
   background-color: var(--primary);
+ 
+ 
 }
 
 i{
