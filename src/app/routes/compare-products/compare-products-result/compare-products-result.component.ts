@@ -482,14 +482,18 @@ export class CompareProductsResultComponent {
     var product = productItem.properties;
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    
+    //console.log('----pricelist---'+product.priceList.price)
+    //console.log('----pricelist---'+product.priceList.discountRate)
     let queryParams;
       // if(product.productVariants.length>0){
         queryParams = {
           productName : product.productName,
           productId : product._id,
           quantity : productItem.quantity,
-          price : product.price,
+          price : product.priceList.price,
+          erpPrice:product.priceList.ERPPrice,
+          discountRate:product.priceList.discountRate,
+          priceType:product.priceList.priceType,
         };
 
 
