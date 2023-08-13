@@ -20,14 +20,14 @@ export class ToasterNotificationService {
   
   showInfo(message, title){
       this.toastr.info(message, title,{
-     //   timeOut:10000,
+      timeOut:10000,
         closeButton:true
       })
   }
   
   showWarning(message, title){
       this.toastr.warning(message, title,{
-        //   timeOut:10000,
+         timeOut:10000,
            closeButton:true
          })
   }
