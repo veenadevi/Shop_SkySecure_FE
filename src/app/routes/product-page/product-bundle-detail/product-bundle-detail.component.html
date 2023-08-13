@@ -108,13 +108,18 @@
                             <p *ngIf="productFamily.priceList[0].discountRate" class="discounted-text">
                                 -{{productFamily.priceList[0].discountRate}}%&nbsp;
                             </p>
-                            <div class="price">
+                            <div class="price" (mouseenter)="showMonthlyPrice()" (mouseleave)="showDiscountRate()">
+                                <span class="price-symbol">&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : productFamily.priceList[0].price }} </span>
+                                <span class="product-price-type"> /  {{isMonthly ? 'Monthly' : (productFamily.priceList[0].priceType)}}</span>
+                                
+                            </div>
+                            <!-- <div class="price">
                                 <p class="product-price">
                                     <span class="price-symbol">&#8377;</span>{{productFamily.priceList[0].price | number : '1.2-2'}}
                                     <span class="product-price-type">
                                         / {{productFamily.priceList[0].priceType}}</span>
                                 </p>
-                            </div>
+                            </div> -->
                             <p style="font-size: smaller;">(GST Extra)</p>
                         </div>
                         <div style="display:inline-flex;align-items: center;">
@@ -444,26 +449,26 @@
                                     <p class="feature-desc">Explore the Cutting-Edge Features of {{productFamily.name}}</p>
                                 </div>
                                 <div class="prod-card">
-                                <ng-container *ngIf="bundleItemsList.length>0">
-                                    <div class="bundles-container">
-                                        <h6>Included Standalone Plans</h6>
-                                        <hr>
-                                        <ng-container *ngFor="let item of bundleItemsList; let i = index">
-                                            <div class="feature-heading">
-                                                <div class="feature-card">
-                                                    <img class="tick" src="../../../../assets/icons/ProductTickIcon.svg">
-                                                </div>
-                                                <div class="feature-card-content" (click)="navigateToProductDetails(item)">
-                                                    <p class="feature-card-heading">{{item.name}}</p>
-                                                    <!-- <p class="feature-card-desc">{{item.description}}</p> -->
-                                                </div>
-                                            </div>
+                              
+                                    <!-- <div class="features-container"> -->
+                                        <ng-container *ngIf="bundleItemsList.length>0">
+                                          
+                                              
+                                                
+                                                <ng-container *ngFor="let item of bundleItemsList; let i = index">
+                                                    <div class="feature-heading">
+                                                        <div class="feature-card">
+                                                            <img class="tick" src="../../../../assets/icons/ProductTickIcon.svg">
+                                                        </div>
+                                                        <div class="feature-card-content" (click)="navigateToProductDetails(item)">
+                                                            <p class="feature-card-heading">{{item.name}}</p>
+                                                            <!-- <p class="feature-card-desc">{{item.description}}</p> -->
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            
                                         </ng-container>
-                                    </div>
-                                </ng-container>
-                                    <div class="features-container">
-                                        <h6>Additional Features</h6>
-                                        <hr>
+                                        
                                         <ng-container *ngFor="let item of features">
                                             <div class="feature-heading">
                                                 <div class="feature-card">
@@ -475,7 +480,7 @@
                                                 </div>
                                             </div>
                                         </ng-container>
-                                    </div>
+                                    <!-- </div> -->
 
                                 </div>
     

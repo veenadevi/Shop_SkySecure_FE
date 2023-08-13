@@ -56,13 +56,16 @@
         </ng-container>
         </div>
 
-
+        <div *ngIf="inValidOTP" class="new-email-alert">
+          Invalid OTP; Please Enter Correct OTP 
+         </div>
 
           <div class="buttons">
           <ng-container *ngIf="enableSignInButton">
             <div class="signin-btn">
               <button (click)="validateOTP()" class="primary-btn">Sign up</button>
             </div>
+         
             <div class="cancel-btn">
               <button (click)="navigateToLogin()" class="secondary-btn">Back</button>
             </div>

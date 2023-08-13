@@ -360,7 +360,7 @@ input{
     .no-account-01{
         padding-left: 0%;
         font-family: 'lato',sans-serif;
-        font-size: 12px;
+        font-size: 14px;
     }
     .no-account-02{
         color:#383DA9;
@@ -368,7 +368,7 @@ input{
         font-family: 'lato',sans-serif;
         cursor: pointer;
         padding-left: 1%;
-        font-size: 12px;
+        font-size: 14px;
     }
     
     .new-email-alert{
@@ -498,20 +498,24 @@ input{
     
     .no-account{
         display: flex;
-        flex-direction: row;
-        padding-top: 30px;
+    flex-direction: row;
+    padding-top: 30px;
+    align-items: center;
+    justify-content: center;
     
     }
     .no-account-01{
-        padding-left: 17%;
+        padding-left: 0%;
         font-family: 'lato',sans-serif;
+        font-size: 12px;
     }
     .no-account-02{
-        color:#383DA9;
+        color: #383DA9;
         font-weight: bold;
         font-family: 'lato',sans-serif;
         cursor: pointer;
         padding-left: 1%;
+        font-size: 12px;
     }
     
     .new-email-alert{

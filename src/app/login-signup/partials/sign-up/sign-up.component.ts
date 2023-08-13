@@ -23,6 +23,7 @@ export class SignUpComponent {
   signUpFormFlag : boolean = false;
 
   public enableSignInButton = false;
+  public inValidOTP:boolean=false;
 
   public enableOTPButton = true;
 
@@ -203,6 +204,11 @@ export class SignUpComponent {
             //this.callSignIn();
           }
           else{
+            this.inValidOTP=true
+         //   this.formEmail.value.otp='';
+           // this.formEmail.setValue({otp: ''});
+           this.formEmail.get('otp').reset();
+          
             this.emailFormFlag = true;
             this.signUpFormFlag = false;
           }

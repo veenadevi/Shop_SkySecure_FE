@@ -1557,6 +1557,9 @@ button{
   max-height: 274px; 
   overflow: auto; 
   padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   scrollbar-width: thin; /* Creates a thin scrollbar on supporting browsers */
 }
 

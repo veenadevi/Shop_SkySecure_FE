@@ -11,7 +11,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 import { CompressOutlined } from '@mui/icons-material';
 import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
-
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
 @Component({
   selector: 'app-product-bundle-variant-detail',
@@ -187,7 +187,8 @@ export class ProductBundleVariantDetailComponent implements OnInit {
     private router : Router,
     private modalService : NgbModal,
     private compareProductsStore : CompareProductsStore,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private toaster : ToasterNotificationService
   ){
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
@@ -653,8 +654,9 @@ public requestQuote (productFamilyVariant : any) : void {
   public onCheckBoxChange($event, item:any, type:any){
 
     let tempLen = this.getCompareProductsCount(); 
+    var a = 3;
 
-    if(tempLen <= 3) {
+    if(tempLen<4) {
       if($event.checked){
         this.addToCompare(item, type);
       }
@@ -663,12 +665,17 @@ public requestQuote (productFamilyVariant : any) : void {
       }
     }
     else{
-      alert("Only 4 products are allowed to compare");
+     // alert("Only 4 products are allowed to compare");
+     this.toaster.showWarning("You can add only 4 products to compare",'')
     }
 
   }
 
 async addToCompare(item:any, type:any):Promise<void> {
+  let tempLen = this.getCompareProductsCount(); 
+  
+
+    if(tempLen<4) {
   // if(!item.checked)
   // item.checked = true;
 
@@ -714,6 +721,11 @@ async addToCompare(item:any, type:any):Promise<void> {
   localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
   //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
   //console.log("getProdFromLocalStorage",prodGet);
+}
+else{
+ // alert("Only 4 products are allowed to compare");
+ this.toaster.showWarning("You can add only 4 products to compare",'')
+}
 }
 
 public  prdLength = 0;
