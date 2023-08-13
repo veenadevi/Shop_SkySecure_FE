@@ -89,11 +89,14 @@ export class CompareProductsResultComponent {
 
     
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+
     let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
     let combinedData = [...cacheData, ...cacheData2];
+
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
     let reqBody = this.setPrdList(uniqueElements);
     this.cachedProductsList = uniqueElements;
+    //console.log("from local storage ==="+uniqueElements.length)
 
     if(this.cachedProductsList.length <= 4){
       this.emptyProductsLength = 4 - this.cachedProductsList.length;
@@ -102,7 +105,8 @@ export class CompareProductsResultComponent {
       this.emptyProductsLength = 4;
     }
     
-    
+   // console.log("empty cards size ==="+this.emptyProductsLength)
+
     //this.fetchCompareProductsList(this.allSelectedItems);
     this.fetchCompareProductsList(reqBody);
   }
@@ -116,8 +120,9 @@ export class CompareProductsResultComponent {
  
 
     data.forEach(element => {
+     // console.log("sendign to req"+JSON.stringify(element))
       switch (element.type) {
-        case 'product':
+        case 'products':
           tempPrd.push(element._id);
           return;
   
@@ -132,6 +137,22 @@ export class CompareProductsResultComponent {
         case 'productBundleVariants':
           tempPrdBundleVar.push(element._id);
           return;
+
+          case 'product':
+          tempPrd.push(element._id);
+          return;
+  
+        case 'productVariant':
+          tempPrdVar.push(element._id);
+          return;
+          
+        case 'productBundle':
+          tempBundles.push(element._id);
+          return;
+        
+        case 'productBundleVariant':
+          tempPrdBundleVar.push(element._id);
+          return;
   
         default:
           return null;
@@ -144,7 +165,11 @@ export class CompareProductsResultComponent {
       "productFamilyVariants": tempPrdBundleVar
     }
 
+   // console.log("reqBody productFamily length size ==="+reqBody.productFamily.length)
 
+    //console.log("reqBody products length size ==="+reqBody.products.length)
+    //console.log("reqBody productsVariants length size ==="+reqBody.productsVariants.length)
+   // console.log("reqBody productFamilyVariants length size ==="+reqBody.productFamilyVariants.length)
     
     return reqBody;
   }
@@ -240,6 +265,9 @@ export class CompareProductsResultComponent {
         
         
         this.allProducts = this.allProducts.slice(0,4);
+
+        console.log("reqBody productFamily length size ==="+this.allProducts.length)
+
       })
     );
   }
@@ -260,7 +288,8 @@ export class CompareProductsResultComponent {
         'entryLevelPricing': productData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productData?.priceList[0].ERPPrice) : '-',
         'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price)  : '-',
         'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
-        'features': data.featureList.length > 0 ? data.featureList : 'No Features',
+       // 'features': data.featureList.length > 0 ? data.featureList : '',
+       'features': data.featureList,
         'includedProducts' : [],
        'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
        '_id' : productData._id
@@ -285,7 +314,8 @@ export class CompareProductsResultComponent {
         'entryLevelPricing': productVariantData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productVariantData?.priceList[0].ERPPrice) : '-',
         'price' : productVariantData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productVariantData?.priceList[0].price) : '-',
         'priceList' : productVariantData?.priceList[0] ? productVariantData?.priceList[0] : '-',
-        'features': data.featureList.length > 0 ? data.featureList : 'No Features',
+       // 'features': data.featureList.length > 0 ? data.featureList : '',
+        'features':  data.featureList ,
         'includedProducts' : [],
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
         '_id' : productVariantData._id
@@ -303,7 +333,7 @@ export class CompareProductsResultComponent {
     let item = response.productFamily.map((data: any) => {
       let featureList=data.productFamilyFeatures 
       let productData = data.productFamily;
-      let bundleFeaturesList=[...featureList,...this.setIncludedProductsForFamilyVarients(response)]
+      let bundleFeaturesList=[...featureList,...this.setIncludedProductsForFamilyVarients(response,"productFamily")]
       let properties = {
 
         'productName': productData.name,
@@ -314,11 +344,14 @@ export class CompareProductsResultComponent {
         'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price) : '-',
         'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
        // 'features':bundleFeaturesList,
-        'features': data.productFamilyFeatures.length > 0 ? data.productFamilyFeatures : 'No Features',
-        'includedProducts' : this.setIncludedProductsForFamilyVarients(response),
+       // 'features': data.productFamilyFeatures.length > 0 ? data.productFamilyFeatures : '-',
+       'features':  data.productFamilyFeatures ,
+        'includedProducts' : this.setIncludedProductsForFamilyVarients(response,'productFamily'),
+        'bundleData':bundleFeaturesList,
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
         '_id' : productData._id
       }
+     // console.log(properties['includedProducts'].length)
       return { properties};
     })
 
@@ -331,8 +364,8 @@ export class CompareProductsResultComponent {
       let productVariantData = data.productFamilyVariant;
       let featureList=data.productFamilyVariantFeatures
      
-      let bundleFeaturesList=[...this.setIncludedProductsForFamilyVarients(response),...featureList]
-      console.log("fetching solution cat for family varient   "+productVariantData?.subcategories[0]?.name)
+      let bundleFeaturesList=[...this.setIncludedProductsForFamilyVarients(response,'productFamilyVariant'),...featureList]
+     // console.log("fetching solution cat for family varient   "+productVariantData?.subcategories[0]?.name)
       let properties = {
         'productName': productVariantData.name,
         'developedBy': 'Microsoft',
@@ -341,9 +374,11 @@ export class CompareProductsResultComponent {
         'entryLevelPricing': productVariantData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productVariantData?.priceList[0].ERPPrice ): '-',
         'price' : productVariantData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productVariantData?.priceList[0].price) : '-',
         'priceList' : productVariantData?.priceList[0] ? productVariantData?.priceList[0] : '-',
-        'features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : 'No Features',
-        'includedProducts' : this.setIncludedProductsForFamilyVarients(response),
-    // 'features':bundleFeaturesList.length>0?bundleFeaturesList:'-',
+       // 'features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : '',
+        'features': data.productFamilyVariantFeatures,
+        'includedProducts' : this.setIncludedProductsForFamilyVarients(response,'productFamilyVariant'),
+        'bundleData':bundleFeaturesList,
+     // 'features':bundleFeaturesList.length>0?bundleFeaturesList:'-',
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
         '_id' : productVariantData._id
       }
@@ -354,14 +389,16 @@ export class CompareProductsResultComponent {
   }
 
 
-  public setIncludedProductsForFamilyVarients(response){
+  public setIncludedProductsForFamilyVarients(response,type){
 
     
 
     let prdVarData : any;
     let prdData : any;
+    //console.log("settiugn child pro=="+type)
 
-    if(response.productFamilyVariants && response.productFamilyVariants.length>0){
+    if(type==='productFamilyVariant'){
+      
       response.productFamilyVariants.forEach(element => {
 
         let childproducts=this.setChildProductsData(element.productFamilyVariantLicenseList.childProducts);
@@ -371,6 +408,7 @@ export class CompareProductsResultComponent {
   
         prdVarData =  [...childproducts,...childproductVariants,...childProductFamilies,...childProductFamilyVariant];
       });
+     // console.log("prdVarData===="+prdVarData.length)
     }
 
     else{
@@ -378,7 +416,7 @@ export class CompareProductsResultComponent {
     }
     
 
-    if(response.productFamily && response.productFamily.length>0){
+    if(type==='productFamily'){
       response.productFamily.forEach(element => {
 
         let childproducts=this.setChildProductsData(element.productFamilyChildLicenseList.childproducts);
@@ -388,6 +426,7 @@ export class CompareProductsResultComponent {
   
         prdData =  [...childproducts,...childproductVariants,...childProductFamilies,...childProductFamilyVariant];
       });
+      //console.log("prdVarData for family===="+prdVarData.length)
     }
     else{
       prdData = [];
@@ -819,7 +858,7 @@ export class CompareProductsResultComponent {
   public navigateToProductDetails(product:any){
 
     switch (product.type) {
-      case 'product':
+      case 'products':
         this.router.navigate(['/products', product._id]);
         return;
 
@@ -834,6 +873,22 @@ export class CompareProductsResultComponent {
       case 'productBundleVariants':
         this.router.navigate(['/products/product-bundle-varaint-detail', product._id]);
         return;
+
+        case 'product':
+          this.router.navigate(['/products', product._id]);
+          return;
+  
+        case 'productVariant':
+          this.router.navigate(['/products/product-variant-detail', product._id]);
+          return;
+          
+        case 'productBundle':
+          this.router.navigate(['/products/product-bundle-detail', product._id]);
+          return;
+        
+        case 'productBundleVariant':
+          this.router.navigate(['/products/product-bundle-varaint-detail', product._id]);
+          return;
 
       default:
         return null;
@@ -853,6 +908,14 @@ export class CompareProductsResultComponent {
   showDiscountRate() {
     this.isMonthly = false;
   }
+
+  openLink(url: any): void {
+    if(url && url.length>0)
+    window.open(url, '_blank');
+    else{
+
+    }
+  } 
    
 }
 

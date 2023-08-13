@@ -6,6 +6,7 @@ import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { LoginAlertModalComponent } from '../../login-alert-modal/login-alert-modal.component';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
 @Component({
   selector: 'product-card-flyer',
@@ -52,7 +53,8 @@ export class ProductCardFlyerComponent implements OnInit{
     private authService : MsalService,
     private cartStore : CartStore,
     private modalService : NgbModal,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private toaster : ToasterNotificationService
   ){}
 
 
@@ -99,7 +101,7 @@ export class ProductCardFlyerComponent implements OnInit{
     let tempLen = this.getCompareProductsCount();
     var a = 3;
 
-    if(a === 3){
+    if(tempLen<4){
 
       let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
 
@@ -128,6 +130,7 @@ export class ProductCardFlyerComponent implements OnInit{
       this.cachedDataForCheckBox = cacheData;
   
       if($event.target.checked){
+       // console.log("pushing to selected item "+item._id +'===='+item.type)
         this.selectedListForCompare.push(item);
       }
       else{
@@ -168,11 +171,15 @@ export class ProductCardFlyerComponent implements OnInit{
       //this.compareProductsStore.setCompareProductsList(this.selectedListForCompare);
       
       this.listForCompare.emit(this.selectedListForCompare);
+      this.toaster.showSuccess("Product added to Compare",'')
 
     }
 
     else{
-      alert("Only 4 products are allowed to compare");
+     // alert("Only 4 products are allowed to compare");
+    
+     this.toaster.showWarning("You can add only 4 products to compare",'')
+     item.checked = false;
     }
 
 

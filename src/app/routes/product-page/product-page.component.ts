@@ -18,6 +18,7 @@ import { CompareProductsModalComponent } from 'src/shared/components/modals/comp
   styleUrls: ['./product-page.component.css']
 })
 export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
+[x: string]: any;
 
 
   public dropdownSettings : IDropdownSettings = {};
@@ -573,10 +574,10 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
         let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
         let combinedData = [...cachedData, ...cachedData2];
-        let uniqueElements = [...new Map(cachedData.map(item => [item['_id'], item])).values()];
+        let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.prdLength = uniqueElements.length;
 
-        console.log("++++++++++++++++++++++ ", this.prdLength);
+        //console.log("+++++++++compare product length+++++++++++++ ", this.prdLength);
         
         if(data){
           return data;

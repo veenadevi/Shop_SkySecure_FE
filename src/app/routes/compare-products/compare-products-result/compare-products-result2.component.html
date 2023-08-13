@@ -90,21 +90,22 @@
                             {{rowData.headerName}}
                         </td>
                         <td *ngFor="let item of allProducts" class="features-align">
-                            
-                            <div class="feature-item-container" *ngIf="(item.properties[rowData.header] && item.properties[rowData.header].length>0) ; else noFeaturesData">
-                                <div class="tick-container"   *ngFor="let features of item.properties['includedProducts']">
+                          
+                           <!-- <div class="feature-item-container" *ngIf="(item.properties[rowData.header] && item.properties[rowData.header].length>0 && item.properties['includedProducts'] && item.properties['includedProducts'].length>0 ) ; else noFeaturesData"> -->
+                            <div class="feature-item-container" *ngIf="((item.properties['bundleData']&&item.properties['bundleData'].length>0) ||( item.properties[rowData.header] && item.properties[rowData.header].length>0 )) ; else noFeaturesData">
+                            <div class="tick-container"   *ngFor="let features of item.properties['includedProducts']">
     
                                     <div class="tick-symbol">
                                         <img src="../../../../assets/icons/ProductTickIcon.svg">
                                     </div>
-                                    <span class="feature-text-left-align ">{{features.name}}</span>
+                                    <span class="feature-text-left-align pointer-style " (click)="navigateToProductDetails(features)">{{features.name}}</span>
                                 </div>   
                                 <div class="tick-container"   *ngFor="let features of item.properties[rowData.header]">
     
                                     <div class="tick-symbol">
                                         <img src="../../../../assets/icons/BlueTickIcon.svg">
                                     </div>
-                                    <span class="feature-text-left-align ">{{features.name}}</span>
+                                    <span class="feature-text-left-align pointer-style" (click)="openLink(features.hyperLinkURL)">{{features.name}}</span>
                                 </div>     
                                 
                             </div> 

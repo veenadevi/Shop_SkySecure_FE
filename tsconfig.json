@@ -23,6 +23,7 @@
     "esModuleInterop": true,
     "useDefineForClassFields": false,
     "strictNullChecks": false,
+    "skipLibCheck":true,
     "lib": [
       "ES2022",
       "dom"

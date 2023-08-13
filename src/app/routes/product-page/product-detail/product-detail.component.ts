@@ -13,7 +13,7 @@ import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
-
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -390,7 +390,8 @@ export class ProductDetailComponent implements OnInit{
     private authService : MsalService,
     private modalService : NgbModal,
     private compareProductsStore : CompareProductsStore,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private toaster : ToasterNotificationService
   ){}
 featureCount=5;
 
@@ -511,7 +512,7 @@ featureCount=5;
     let tempLen = this.getCompareProductsCount(); 
 
     var a = 3;
-    if(a === 3) {
+    if(tempLen<4) {
       if($event.checked){
         this.addToCompare(item, type);
       }
@@ -520,7 +521,8 @@ featureCount=5;
       }
     }
     else {
-      alert("Only 4 products are allowed to compare");
+      //alert("Only 4 products are allowed to compare");
+      this.toaster.showWarning("You can add only 4 products to compare",'')
     }
     
 
@@ -528,6 +530,11 @@ featureCount=5;
 
 
   async addToCompare(item:any, type:any):Promise<void> {
+    let tempLen = this.getCompareProductsCount(); 
+
+    
+    if(tempLen<4) {
+   
     // if(!item.checked)
     // item.checked = true;
 
@@ -572,7 +579,15 @@ featureCount=5;
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
     //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     //console.log("getProdFromLocalStorage",prodGet);
+    this.toaster.showSuccess("Product added to Compare",'')
   }
+  else {
+  //  alert("Only 4 products are allowed to compare");
+  this.toaster.showWarning("You can add only 4 products to compare",'')
+  }
+  }
+
+ 
 
   images: any[] = [1,2,3,4];
 

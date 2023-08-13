@@ -65,5 +65,9 @@ body{
 .cdk-overlay-container{
   z-index: 1031 !important;
 }
+#toast-container > div {
+  width:400px;
+  height: 60px;
+  }
 
 
