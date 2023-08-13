@@ -1,5 +1,5 @@
 .compare-products-container {
-    padding: 1%;
+    /* padding: 1%; */
     margin: 1%;
     font-family: 'lato',sans-serif;
 }
@@ -21,7 +21,7 @@ th{
 }
 
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
-  padding: 1rem 1rem 1rem 2rem;
+  padding: 5px 1rem 5px 1rem;
 }
 
 .feature-text {
@@ -120,6 +120,95 @@ th{
 
   .pointer-style{
     cursor: pointer;
+  }
+
+  .product-price-detail{
+    display: flex;
+    flex-direction: column;
+    margin: 6px 0;
+  }
+  .product-price-section{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-bottom: -15px;
+    
+  }
+  .discounted-text{
+    color: #DB553C;
+    font-weight: 400;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 1.3rem;
+  }
+  .price-symbol{
+    font-weight: 400;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 1.3rem;
+  }
+  .product-price{
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .product-price-type{
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+  }
+  /* .price{
+    font-weight: 400;
+    font-size: 15px;
+    font-style: normal;
+    line-height: 1.3rem;
+  } */
+  .gst{
+    font-size: smaller;
+  }
+  .mrp{
+    font-size: 10px;
+    color: black;
+    margin-bottom: 0px;
+
+  }
+  .amount{
+    color: black;
+    font-size:12px;
+     text-decoration: line-through;
+     margin-bottom: 0px;
+  }
+  .price-symbol{
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s;
+    color: black;
+  }
+  .price-symbol-01{
+    font-size: 14px;
+    /* font-weight: bold; */
+    cursor: pointer;
+    transition: transform 0.3s;
+    color: black;
+    margin-top: 0px;
+  }
+  .gst{
+    font-size: 12px;
+    color: black;
+  }
+  .price-symbol:hover {
+    transform: scale(1.1);
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+  }
+
+
+  .aa{
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.3rem;
   }
 
 

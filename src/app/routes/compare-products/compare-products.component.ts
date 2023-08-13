@@ -159,7 +159,7 @@ export class CompareProductsComponent implements OnInit{
             'Category': productData?.subcategories[0]?.name ? productData?.subcategories[0]?.name : '-',
             'Subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
             'EntryLevelPricing': productData?.priceList[0]?.price ? `INR ${productData?.priceList[0].price}` : '-',
-            'Features': data.features.length > 0 ? data.features : 'No Features',
+            'Features': data.productFamilyFeatures.length > 0 ? data.productFamilyFeatures : 'No Features',
             'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'
           }
           return { properties};

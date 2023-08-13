@@ -6,6 +6,8 @@ import { PrimeNgModule } from './prime-ng.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ToastrModule, ToastrService } from "ngx-toastr";
+
 
 import { IPublicClientApplication, PublicClientApplication, InteractionType } from '@azure/msal-browser';
 import {
@@ -13,7 +15,7 @@ import {
     MSAL_GUARD_CONFIG, MSAL_INSTANCE, MsalGuardConfiguration, MsalRedirectComponent, MsalModule
 } from '@azure/msal-angular';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { DecimalPipe } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 
 
@@ -82,7 +84,17 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     NgMultiSelectDropDownModule,
     MsalModule,
     NgxSpinnerModule,
-    
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass :'toast-bottom-right',
+      closeButton:true,
+      preventDuplicates: true,
+    //  timeOut:2000,
+      maxOpened:2
+
+    })
+   
   ],
   providers: [
     {

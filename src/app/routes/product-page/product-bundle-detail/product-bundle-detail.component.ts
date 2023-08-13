@@ -10,7 +10,7 @@ import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
-
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
 @Component({
   selector: 'app-product-bundle-detail',
@@ -18,6 +18,19 @@ import { CompareProductsModalComponent } from 'src/shared/components/modals/comp
   styleUrls: ['./product-bundle-detail.component.css']
 })
 export class ProductBundleDetailComponent implements OnInit{
+
+  discountRate: number =120; 
+  monthlyPrice: number = this.discountRate / 12;
+  isMonthly: boolean = false;
+
+  showMonthlyPrice() {
+    this.isMonthly = true;
+  }
+
+  showDiscountRate() {
+    this.isMonthly = false;
+  }
+
 
   quantity: number = 1;
 
@@ -151,6 +164,7 @@ export class ProductBundleDetailComponent implements OnInit{
     private modalService : NgbModal,
     private userAccountStore : UserAccountStore,
     private compareProductsStore : CompareProductsStore,
+    private toaster : ToasterNotificationService
   ){
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
@@ -540,7 +554,7 @@ export class ProductBundleDetailComponent implements OnInit{
     let tempLen = this.getCompareProductsCount(); 
     var a = 3;
 
-    if(a === 3) {
+    if(tempLen<4) {
       if($event.checked){
         this.addToCompare(item, type);
       }
@@ -549,7 +563,8 @@ export class ProductBundleDetailComponent implements OnInit{
       }
     }
     else {
-      alert("Only 4 products are allowed to compare");
+    //  alert("Only 4 products are allowed to compare");
+    this.toaster.showWarning("You can add only 4 products to compare",'')
     }
     
 
@@ -576,6 +591,11 @@ export class ProductBundleDetailComponent implements OnInit{
       item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
       this.productListToCompare.push(item);
     }*/
+    let tempLen = this.getCompareProductsCount(); 
+
+    
+    if(tempLen<4) {
+
 
  
     if(type === 'fromProd'){
@@ -598,7 +618,12 @@ export class ProductBundleDetailComponent implements OnInit{
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
     localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
     //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    
+    this.toaster.showSuccess("Product added to Compare",'')
+  }
+  else {
+    //alert("Only 4 products are allowed to compare");
+    this.toaster.showWarning("You can add only 4 products to compare",'')
+  }
   }
 
   public removeSelectedItem(_id:any){

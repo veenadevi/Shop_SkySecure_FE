@@ -58,7 +58,7 @@ nav .navbar .links li{
   justify-content: space-between;
   list-style: none;
   padding: 0 14px;
-  height: 50px;
+  height: 38px;
 }
 nav .navbar .links li a{
   /* height: 100%; */
@@ -76,8 +76,14 @@ nav .navbar .links li a{
 transform: rotate(45deg);
 }
 .right{
-  padding-left: 145px;
-  width: 160px;
+  padding-left: 100px;
+  /* width: 160px; */
+}
+.cat{
+  max-width: 100px;
+}
+.cat-name{
+  max-width: 100px;
 }
 .links li:hover .htmlcss-arrow,
 .links li:hover .js-arrow{
@@ -115,24 +121,30 @@ nav .navbar .links li .sub-menu{
   display: none;
   /* display: block; */
   z-index: 2;
-  background-color: var(--primary);
+  background-color: white;
   
+}
+a:hover
+{
+  color: orange !important;
 }
 nav .navbar .links li:hover .htmlCss-sub-menu,
 nav .navbar .links li:hover .js-sub-menu{
   display: block;
+  
 }
 .navbar .links li .sub-menu li{
-  padding: 0 22px;
+  padding: 0 10px;
   /* border-bottom: 1px solid rgba(255,255,255,0.1); */
   /* border-bottom: 2px solid rgb(96, 96, 96); */
-  width: 250px;
+  /* width: 250px; */
 }
 .navbar .links li .sub-menu a{
   color: #fff;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
-  color: black;
+  color: #686a77;
+  padding: 5px;
 }
 .navbar .links li .sub-menu .more-arrow{
   line-height: 40px;
@@ -147,9 +159,11 @@ nav .navbar .links li:hover .js-sub-menu{
   border-radius: 0 4px 4px 4px;
   z-index: 1;
   display: none;
+  /* display: block; */
 }
 .links li .sub-menu .more:hover .more-sub-menu{
   display: block;
+  
 }
 .navbar .search-box{
   position: relative;
@@ -253,7 +267,13 @@ nav .navbar .links li:hover .js-sub-menu{
 
 .more-sub-menu .more:hover .more-sub-menu2{
   display: block;
+
+
+ 
 }
+/* .more-sub-menu .more:not(:hover) .more-sub-menu2{
+  display: none;
+} */
 
 .hamburger-icon-holder{
   width:5%;
@@ -273,17 +293,21 @@ nav .navbar .links li:hover .js-sub-menu{
 }
 
 .sub-menu{
-  width:250px;
+  width:200px;
 }
 
 .more-sub-menu{
-  width: 300px
+  width: 300px;
+  /* max-width: 150px; */
 }
 
+
 .more-sub-menu2{
- width: 325px;
-  padding: 0 22px;
-  /* border-bottom: 1px solid rgba(255,255,255,0.1); */
+ width: 250px;
+ /* max-width: 250px; */
+ 
+  
+  /* border-bottom: 2px solid rgba(255,255,255,0.1); */
   /* width: 250px; */
   position: absolute;
   top: 30px;
@@ -295,11 +319,32 @@ nav .navbar .links li:hover .js-sub-menu{
   display: none;
   /* display: block; */
   z-index: 2;
-  background-color: var(--primary);
+
+  background-color: white;
 }
 
 a{
   cursor: pointer;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  
+}
+
+.sub-menu li:hover{
+  background-color: var(--primary);
+ 
+ 
+}
+
+i{
+  color: #686a77;
+}
+.fa-caret-right{
+padding-left: 100px;
+}
+
+.right{
+  padding-left: 75px;
 }
 
 
@@ -315,6 +360,7 @@ a{
 
 nav .navbar .links li a{
   font-size: 11px;
+  
 }
 .mat-icon-size{
   font-size: 19px !important;
@@ -420,3 +466,12 @@ nav .navbar .nav-links{
 }
 
 
+.hoverable {
+  /* Styles for the hover effect */
+}
+
+.disable-hover {
+  /* Styles to disable the hover effect */
+  /* You can reset or remove any hover-specific styles here */
+  pointer-events: none; /* This prevents hover interactions */
+}

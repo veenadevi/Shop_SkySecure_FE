@@ -1432,6 +1432,10 @@ button {
   max-height: 274px;
   overflow: auto;
   padding: 10px;
+  scrollbar-width: thin;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .prod-card::-webkit-scrollbar {
   width: 2px; /* Adjust the width of the scrollbar */
@@ -1570,4 +1574,16 @@ justify-content: center;
   justify-content: center;
   margin-bottom: 1%;
   padding-bottom: 1%;
+}
+.price-symbol{
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.price-symbol:hover {
+  transform: scale(1.1);
+  font-size: 18px;
+  font-weight: bold;
 }
