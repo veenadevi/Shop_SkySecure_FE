@@ -44,6 +44,13 @@ export class ProductDetailComponent implements OnInit{
     if (key === '+') {
       event.preventDefault(); // Prevent the negative sign from being entered
     }
+    if (key === '/') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '*') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+   
   }
 
   public displayBasic: boolean; 
@@ -601,46 +608,49 @@ featureCount=5;
     }
 
   public requestQuote (product : any) : void {
+    if(product.quantity>0){
+      let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    
-    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
-
-    let queryParams;
-      // if(product.productVariants.length>0){
+      let queryParams;
+        // if(product.productVariants.length>0){
+          
+          queryParams = {
+            productName : product.name,
+            productId : product._id,
+            quantity : product.quantity,
+            price : product.priceList[0].price,
+            erpPrice:product.priceList[0].ERPPrice,
+            discountRate:product.priceList[0].discountRate,
+            priceType:product.priceList[0].priceType,
+          };
+        // }
+      /*if(loggedinData.length > 0 ){
         
-        queryParams = {
-          productName : product.name,
-          productId : product._id,
-          quantity : product.quantity,
-          price : product.priceList[0].price,
-          erpPrice:product.priceList[0].ERPPrice,
-          discountRate:product.priceList[0].discountRate,
-          priceType:product.priceList[0].priceType,
-        };
-      // }
-    /*if(loggedinData.length > 0 ){
+        var existingItems = this.cartStore.getCartItems();
       
-      var existingItems = this.cartStore.getCartItems();
-    
-      
-      
-      this.router.navigate(['/cart'], {queryParams: queryParams});
-    }
-
-    else {
-      this.viewModal(queryParams);
-    }*/
-
-    this.userAccountStore.userDetails$.subscribe(res=>{
-      // console.log("()()()() ", res);
-      if(res && res.email !== null){
+        
+        
         this.router.navigate(['/cart'], {queryParams: queryParams});
       }
-      else{
+  
+      else {
         this.viewModal(queryParams);
-      }
-    })
+      }*/
+  
+      this.userAccountStore.userDetails$.subscribe(res=>{
+        // console.log("()()()() ", res);
+        if(res && res.email !== null){
+          this.router.navigate(['/cart'], {queryParams: queryParams});
+        }
+        else{
+          this.viewModal(queryParams);
+        }
+      })
+      
+    }
+
     
+   
 
     
 

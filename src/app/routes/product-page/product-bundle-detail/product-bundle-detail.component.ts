@@ -468,44 +468,47 @@ export class ProductBundleDetailComponent implements OnInit{
   }
 
   public buyNow(item, quantity){
-    let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
+    if(quantity>0){
+      let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    let queryParams;
-      // if(product.productVariants.length>0){
-        queryParams = {
-          productName : item.name,
-          productId : item._id,
-          quantity : quantity,
-          price : item.priceList[0].price,
-          erpPrice:item.priceList[0].ERPPrice,
-          discountRate:item.priceList[0].discountRate,
-          priceType:item.priceList[0].priceType,
-        };
-    /*if(loggedinData.length > 0 ){
+      let queryParams;
+        // if(product.productVariants.length>0){
+          queryParams = {
+            productName : item.name,
+            productId : item._id,
+            quantity : quantity,
+            price : item.priceList[0].price,
+            erpPrice:item.priceList[0].ERPPrice,
+            discountRate:item.priceList[0].discountRate,
+            priceType:item.priceList[0].priceType,
+          };
+      /*if(loggedinData.length > 0 ){
+        
+        var existingItems = this.cartStore.getCartItems();
       
-      var existingItems = this.cartStore.getCartItems();
-    
-      
-      
-      console.log(queryParams);
-      this.router.navigate(['/cart'], {queryParams: queryParams});
-    }
-
-    else {
-      this.viewModal(queryParams);
-    }*/
-
-    this.userAccountStore.userDetails$.subscribe(res=>{
-      if(res && res.email !== null){
+        
+        
+        console.log(queryParams);
         this.router.navigate(['/cart'], {queryParams: queryParams});
       }
-      else{
+  
+      else {
         this.viewModal(queryParams);
-      }
-    })
-
-
-
+      }*/
+  
+      this.userAccountStore.userDetails$.subscribe(res=>{
+        if(res && res.email !== null){
+          this.router.navigate(['/cart'], {queryParams: queryParams});
+        }
+        else{
+          this.viewModal(queryParams);
+        }
+      })
+  
+  
+  
+    }
+   
 
 
 
