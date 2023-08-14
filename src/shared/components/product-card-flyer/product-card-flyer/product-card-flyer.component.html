@@ -1,6 +1,6 @@
 <div class="product-card-container">
-    <h6 class="search-result">Results1 ({{productsList.length}})</h6>
-    <ng-container *ngFor="let item of productsList">
+    <h6 class="search-result">Results ({{productsList.length}})</h6>
+    <ng-container *ngFor="let item of productsList; let i=index">
         <div class="product-card-flyer-container">
             <div class="logo-holder">
                 <div class="logo-box">
@@ -71,10 +71,14 @@
                         <p *ngIf="item.priceList && item.priceList.length>0 && item.priceList[0].discountRate != null" class="discounted-text">
 
                             -{{item.priceList[0].discountRate}}%&nbsp;</p>
-                        <div class="price" (mouseenter)="showMonthlyPrice()" (mouseleave)="showDiscountRate()">
-                            <span class="price-symbol">&#8377;  {{ isMonthly ? (item.priceList[0].price/12 | number : '1.2-2') : item.priceList[0].price }} /  {{isMonthly ? 'Monthly' : (item.priceList[0].priceType)}}</span>
-                            
+
+
+                        <div class="price" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
+                            <!-- <span class="price-symbol">&#8377;  {{ isMonthly ? (item.priceList[0].price/12 | number : '1.2-2') : item.priceList[0].price }} /  {{isMonthly ? 'Monthly' : (item.priceList[0].priceType)}}</span> -->
+                            <span class="price-symbol">&#8377;  {{item.priceList[0].price | number : '1.2-2'}} /  {{item.priceList[0].priceType}}</span>
                         </div>
+                       
+                        
                         <p style="font-size: 10px;padding-left: 5px;">(GST Extra)</p>
                         
                       </div>
@@ -125,4 +129,4 @@
         
     </ng-container>
     
-</div>
+
