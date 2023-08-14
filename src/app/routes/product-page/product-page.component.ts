@@ -354,6 +354,19 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
               }
           });
          }
+
+         let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+         if(cacheData2 && cacheData2.length>0){
+          cacheData2.forEach(element => {
+      
+            let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
+              if(indexToUpdate !== -1){
+                element['checked'] = true;
+                this.finalProductList[indexToUpdate]['checked'] = true;
+      
+              }
+          });
+         }
          /*this.productBundles = response.productBundles.map((data: any )=> {
           return { 
             name: data.name , 
