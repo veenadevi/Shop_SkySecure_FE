@@ -183,6 +183,7 @@ th{
     cursor: pointer;
     transition: transform 0.3s;
     color: black;
+    padding-left: 5px;
   }
   .price-symbol-01{
     font-size: 14px;

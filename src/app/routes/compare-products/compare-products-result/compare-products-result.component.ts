@@ -906,12 +906,25 @@ export class CompareProductsResultComponent {
     return this.decimalPipe.transform(val, '1.2-2');
   }
 
-  showMonthlyPrice() {
-    this.isMonthly = true;
+  discountRate: number =120; 
+  monthlyPrice: number = this.discountRate / 12;
+  // isMonthly: boolean = false;
+  priceValue:any;
+  priceType:any;
+
+  showMonthlyPrice(i:any) {
+    // this.isMonthly = true;
+    this.priceValue = this.allProducts[i].properties['priceList'].price;
+    this.priceType = this.allProducts[i].properties['priceList'].priceType;
+    this.allProducts[i].properties['priceList'].priceType = "Monthly";
+    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12 
   }
 
-  showDiscountRate() {
-    this.isMonthly = false;
+  showDiscountRate(i: any) {
+    // this.isMonthly = false;
+    this.allProducts[i].properties['priceList'].priceType=this.priceType;
+
+    this.allProducts[i].properties['priceList'].price = this.priceValue;
   }
 
   openLink(url: any): void {
