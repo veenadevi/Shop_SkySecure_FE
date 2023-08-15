@@ -46,6 +46,7 @@ import { SharedModule } from 'src/shared/shared.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { loginRequest, msalConfig } from './auth-config';
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 
 /**
  * Here we pass the configuration parameters to create an MSAL instance.
@@ -93,7 +94,10 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     //  timeOut:2000,
       maxOpened:2
 
-    })
+    }),
+    NgxGoogleAnalyticsModule.forRoot('G-KC04RJ3FYD'),
+    NgxGoogleAnalyticsRouterModule
+    
    
   ],
   providers: [
