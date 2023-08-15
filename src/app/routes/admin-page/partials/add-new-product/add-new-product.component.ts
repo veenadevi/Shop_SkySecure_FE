@@ -47,7 +47,7 @@ export class AddNewProductComponent  implements OnInit {
   // City names
   City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan']
 
-  subscriptionTypeList: any = ['Monthly', 'Yearly'];
+  subscriptionTypeList: any = ['Month', 'Year'];
   showProducts = false;
   registrationForm: FormGroup;
   addDynamicElementNew: FormArray;
