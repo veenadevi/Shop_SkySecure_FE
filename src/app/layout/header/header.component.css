@@ -477,7 +477,7 @@ ul .nav-text:hover {
         color: #efefef;
         justify-content: flex-end;
         cursor: pointer;
-        margin-left: 10px;
+        margin-left: 5px;
         margin-top: 8px;
 }
     
@@ -490,7 +490,7 @@ ul .nav-text:hover {
     .navbar {
         background-color: #1e1e1e;
         height: 56px;
-        padding: 0px 15px;
+        padding: 0px 10px;
         display: flex;
         align-items: center;
         justify-content:space-between;

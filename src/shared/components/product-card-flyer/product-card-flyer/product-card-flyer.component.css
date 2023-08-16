@@ -234,3 +234,101 @@
     font-size: 14px;
     font-weight: bold;
   }
+
+.gst{
+    font-size: 10px;padding-left: 5px;
+}
+
+  @media (min-width:320px) and (max-width:480px){
+    .ratings-box div {
+        font-size: 6px;
+        /* text-align: center; */
+        margin-top: 5px;
+        /* column-gap: 2px; */
+    }
+    .review-icon {
+        color: orange;
+        padding-top: 5px;
+        line-height: 1rem;
+        overflow: visible;
+        column-gap: 2px;
+    }
+    
+ .mat-icon {
+        width: 11px;
+        height: 0px;
+        column-gap: 2px;
+    }
+    .parent-holder {
+        display: flex;
+        flex-direction: row;
+        padding: 30px 0px 10px 0px;
+    }
+    .content-holder {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 10px 20px 10px;
+        row-gap: 10px;
+    }
+    .header-title {
+        font-weight: 600;
+        line-height: 1rem;
+        font-size: 12px;
+        color: var(--neutral);
+    }
+    .product-price-section {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        column-gap: 3px;
+        height: 15px;
+        margin-bottom: 0px;
+    }
+    .discounted-text {
+        color: #DB553C;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+    }
+    .price-symbol {
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.3s;
+        font-size: 9px;
+    }
+    .gst {
+        font-size: 7px;
+        padding-left: 5px;
+    }
+    .text-style-mrp {
+        font-size: 10px;
+    }
+    .strike-through {
+        text-decoration: line-through;
+        margin-left: 1px;
+    }
+    .text-price {
+        font-size: 11px;
+        font-weight: 300;
+    }
+    .text-term {
+        font-size: 9px !important;
+        font-weight: 200;
+    }
+    .text-style-bold {
+        font-size: 10px;
+        font-weight: bold;
+    }
+    .text-style {
+        font-size: 8px;
+        font-weight: normal;
+        color: var(--text-dark);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+  }
