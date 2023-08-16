@@ -5,6 +5,9 @@
   <div (click)="navigateToHomePage()">
     <div class="back-btn"><img src="../../../../assets/icons/arrow-right.svg"></div>
   </div>
+  <div *ngIf="signUpSuccess" class="new-user-success">
+    Welcome to Skysecure! Please proceed with Login
+  </div>
 
     <div class="register-form">
       
@@ -86,6 +89,16 @@
           <div class="cancel-btn">
             <button (click)="navigateToHomePage()" class="secondary-btn">Cancel</button>
           </div>
+
+         
+
+
+        </ng-container>
+        <ng-container *ngIf="newEmailAlert">
+          <div class="signin-btn">
+            <button (click)="signUp()" class="primary-btn">Sign up</button>
+          </div>
+          
         </ng-container>
         </div>
           <div *ngIf="newEmailAlert" class="new-email-alert">
@@ -105,6 +118,7 @@
               <button (click)="navigateToHomePage()" class="secondary-btn">Cancel</button>
             </div>
           </ng-container>
+        
           </div>
 
           <!-- <div class="form-group">
