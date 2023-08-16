@@ -915,7 +915,7 @@ export class CompareProductsResultComponent {
     // this.isMonthly = true;
     this.priceValue = this.allProducts[i].properties['priceList'].price;
     this.priceType = this.allProducts[i].properties['priceList'].priceType;
-    this.allProducts[i].properties['priceList'].priceType = "Monthly";
+    this.allProducts[i].properties['priceList'].priceType = "Month";
     this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12 
   }
 

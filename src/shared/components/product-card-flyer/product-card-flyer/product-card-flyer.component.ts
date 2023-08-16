@@ -29,7 +29,7 @@ export class ProductCardFlyerComponent implements OnInit{
     // this.isMonthly = true;
     this.priceValue = this.productsList[i].priceList[0].price;
     this.priceType = this.productsList[i].priceList[0].priceType;
-    this.productsList[i].priceList[0].priceType = "Monthly";
+    this.productsList[i].priceList[0].priceType = "Month";
     this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price/12
   }
 
@@ -193,9 +193,9 @@ export class ProductCardFlyerComponent implements OnInit{
     else{
     //  alert("Only 4 products are allowed to compare");
      // alert("Only 4 products are allowed to compare");
-
-     this.toaster.showWarning("You can add only 4 products to compare",'')
      item.checked = false;
+     this.toaster.showWarning("You can add only 4 products to compare",'')
+    
     }
 
 

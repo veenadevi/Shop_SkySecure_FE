@@ -110,7 +110,7 @@
                             </p>
                             <div class="price" (mouseenter)="showMonthlyPrice()" (mouseleave)="showDiscountRate()">
                                 <span class="price-symbol">&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : productFamily.priceList[0].price }} </span>
-                                <span class="product-price-type"> /  {{isMonthly ? 'Monthly' : (productFamily.priceList[0].priceType)}}</span>
+                                <span class="product-price-type"> /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}</span>
                                 
                             </div>
                             <!-- <div class="price">
