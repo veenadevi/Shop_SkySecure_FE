@@ -279,8 +279,10 @@ export class EditProductComponent  implements OnInit {
   // Choose Subcategories using select dropdown
   changeSubcategories(e) {
     console.log("TEST___",e.target.value)
-    this.registrationForm.get('Subcategories').setValue(e.target.value.substring(3), {
+    this.registrationForm.get('Subcategories').setValue(e.target.value, {
       onlySelf: true
+    // this.registrationForm.get('Subcategories').setValue(e.target.value.substring(3), {
+    //   onlySelf: true
     })
   }
 
