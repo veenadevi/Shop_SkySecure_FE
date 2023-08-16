@@ -1472,3 +1472,10 @@ a:hover img {
         height: 42px;
     }
 }
+
+
+
+
+a{
+    cursor: pointer;;
+}
