@@ -102,6 +102,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   ){
     const navigation = this.router.getCurrentNavigation();
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     // const state = navigation.extras.state as { data: Object };
     // const data = state;
   }

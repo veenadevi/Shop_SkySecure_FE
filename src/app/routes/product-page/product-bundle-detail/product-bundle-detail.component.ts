@@ -166,6 +166,7 @@ export class ProductBundleDetailComponent implements OnInit{
     private compareProductsStore : CompareProductsStore,
     private toaster : ToasterNotificationService
   ){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
         
