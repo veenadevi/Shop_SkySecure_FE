@@ -29,6 +29,7 @@ import { SearchbarTrendingProductsComponent } from './header/header-serach-bar/p
 import { ResponsiveToolbarComponent } from './responsive-toolbar/responsive-toolbar.component';
 
 
+
 @NgModule({
 
   imports: [
@@ -54,6 +55,7 @@ import { ResponsiveToolbarComponent } from './responsive-toolbar/responsive-tool
     SearchbarSearchListComponent,
     SearchbarTrendingProductsComponent,
     ResponsiveToolbarComponent,
+   
     
   ],
 

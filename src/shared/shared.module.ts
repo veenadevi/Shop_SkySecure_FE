@@ -43,6 +43,7 @@ import { BundleMindmapComponent } from './components/bundle-mindmap/bundle-mindm
 
 
 
+
 @NgModule({
 
   imports: [
@@ -89,7 +90,8 @@ import { BundleMindmapComponent } from './components/bundle-mindmap/bundle-mindm
     CompareProductsRecentlySearchedComponent,
     CompareProductsTrendingProductsComponent,
     CompareProductsSearchListComponent,
-    BundleMindmapComponent
+    BundleMindmapComponent,
+   
   ],
 
   providers: [
@@ -138,7 +140,8 @@ import { BundleMindmapComponent } from './components/bundle-mindmap/bundle-mindm
     CompareProductsRecentlySearchedComponent,
     CompareProductsTrendingProductsComponent,
     CompareProductsSearchListComponent,
-    BundleMindmapComponent
+    BundleMindmapComponent,
+   
   ],
   
 
