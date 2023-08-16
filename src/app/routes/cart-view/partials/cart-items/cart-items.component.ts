@@ -30,6 +30,13 @@ export class CartItemsComponent {
     if (key === '+') {
       event.preventDefault(); // Prevent the negative sign from being entered
     }
+    if (key === '/') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '*') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+   
   }
 
   private subscriptions : Subscription[] = [];
@@ -346,30 +353,33 @@ public onChangeQuantity(i, price) : void {
   }
 
   public requestQuote(){
-    //this.router.navigate(['/cart/cart-submit']);
-    let cartRefId = this.cartStore.getCartRefreneceId();
-    //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
-    let userAccountdetails = this.userAccountStore.getUserDetails();
+    if(this.cartData.length>0){
+//this.router.navigate(['/cart/cart-submit']);
+let cartRefId = this.cartStore.getCartRefreneceId();
+//let userAccountdetails = this.userAccountStore.getUserProfileDetails();
+let userAccountdetails = this.userAccountStore.getUserDetails();
 
-    let req = {
-      userId : userAccountdetails._id,
-      createdBy : userAccountdetails.firstName,
-      products : this.cartData,
-      companyName : '',
-      cart_ref_id : cartRefId ? cartRefId : '0001111'
-    };
+let req = {
+  userId : userAccountdetails._id,
+  createdBy : userAccountdetails.firstName,
+  products : this.cartData,
+  companyName : '',
+  cart_ref_id : cartRefId ? cartRefId : '0001111'
+};
 
-    // this.cartService.createQuotation(req);
+// this.cartService.createQuotation(req);
 
-    if(userAccountdetails.company){
-      req.companyName = userAccountdetails.company;
-      this.createQuotationService(req);
-      
+if(userAccountdetails.company){
+  req.companyName = userAccountdetails.company;
+  this.createQuotationService(req);
+  
+}
+else{
+  this.viewModal(req);
+}
+
     }
-    else{
-      this.viewModal(req);
-    }
-
+    
     
 
   
