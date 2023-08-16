@@ -442,7 +442,9 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
     private compareProductsStore : CompareProductsStore,
     private userAccountStore : UserAccountStore,
     private toaster : ToasterNotificationService
-  ){}
+  ){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 featureCount=5;
 
   public ngOnInit() : void {
