@@ -714,6 +714,7 @@ async addToCompare(item:any, type:any):Promise<void> {
 
   
   
+  
   this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
   // console.log("getProdFromLocalStorage",this.productListToCompare);
   //localStorage.removeItem('product_list_to_compare');
