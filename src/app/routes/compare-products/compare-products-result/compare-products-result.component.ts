@@ -656,6 +656,12 @@ export class CompareProductsResultComponent {
 
     event.receivedEntry.type = event.receivedEntry.productType;
 
+    if(event.receivedEntry.checked){
+      event.receivedEntry.checked = true;
+    }
+    else{
+      event.receivedEntry['checked'] = true;
+    }
 
     let reqBody = this.setReqBody(event.receivedEntry);
 
@@ -704,10 +710,14 @@ export class CompareProductsResultComponent {
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
         let finalProducts = [...uniqueElements, event.receivedEntry];
+        console.log("event.receivedEntry   ",event.receivedEntry)
+        console.log("finalProducts"  ,finalProducts)
 
         
         localStorage.setItem('product_list_to_compare', JSON.stringify(finalProducts));
         localStorage.setItem('product_list_to_compare2', JSON.stringify(finalProducts));
+        this.compareProductsStore.setCompareProductsList(finalProducts);
+        this.compareProductsStore.setCompareProductsList2(finalProducts);
       })
     )
 

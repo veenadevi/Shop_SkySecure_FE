@@ -38,6 +38,7 @@ export class CompareProductsModalComponent {
         let combinedData = [...this.productList, ...cachedData, ...cachedData2];
         let uniqueElements2 = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.productList = uniqueElements2;
+        console.log("====total ite  in model==", this.productList)
         return data;
         
       }

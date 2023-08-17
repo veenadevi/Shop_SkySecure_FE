@@ -190,7 +190,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
     private userAccountStore : UserAccountStore,
     private toaster : ToasterNotificationService
   ){
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+   // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
         
@@ -677,26 +677,9 @@ async addToCompare(item:any, type:any):Promise<void> {
   
 
     if(tempLen<4) {
-  // if(!item.checked)
-  // item.checked = true;
-
-  // if(item.checked)
-  // item.checked = false;
-  // else
-  // item.checked = true;
+  
   let count=0;
-  /*await this.productListToCompare.forEach(val => {
-    if(val._id===item._id) {
-      count++;
-    }
-  });
-  if (count===0) {
-    if(type!='prodFam')
-    item = { ...item, 'solutionCategory': item.subcategories[0]?.description };
-    else
-    item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
-    this.productListToCompare.push(item);
-  }*/
+ 
 
   if(type === 'fromProd'){
     // console.log("()()() From Prom Prod");
@@ -713,6 +696,12 @@ async addToCompare(item:any, type:any):Promise<void> {
 
   //this.productListToCompare.push(item);
 
+  if(item.checked){
+    item.checked = true;
+  }
+  else{
+    item['checked'] = true;
+  }
   
   
   

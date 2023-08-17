@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -430,6 +430,7 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
 
   viewAllFeature = false;
   checked: boolean = false;
+  @Output() listForCompare = new EventEmitter();
 
   constructor(
     private metaDataSvc : MetadataService,
@@ -443,7 +444,7 @@ this.compareProductList = [...this.otherProductVariantData,...this.productBundle
     private userAccountStore : UserAccountStore,
     private toaster : ToasterNotificationService
   ){
-   // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  //  this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 featureCount=5;
 
@@ -651,54 +652,40 @@ featureCount=5;
   async addToCompare(item:any, type:any):Promise<void> {
 
     let tempLen = this.getCompareProductsCount(); 
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     
 
     if(tempLen <4) {
-    // if(!item.checked)
-    // item.checked = true;
-
-    // if(item.checked)
-    // item.checked = false;
-    // else
-    // item.checked = true;
+   
     let count=0;
-    /*await this.productListToCompare.forEach(val => {
-      if(val._id===item._id) {
-        count++;
-      }
-    });
-    if (count===0) {
-      if(type!='prodFam')
-      item = { ...item, 'solutionCategory': item.subcategories[0]?.description };
-      else
-      item = { ...item, 'solutionCategory': item.subCategories[0]?.description };
-      this.productListToCompare.push(item);
-    }*/
+   
 
     if(type === 'fromProd'){
       // console.log("()()() From Prom Prod");
       // console.log("()()()( From Prod", item);
-      this.productListToCompare.push(item);
+      cacheData.push(item);
       
     }
     else{
-      this.productListToCompare.push(item);
+      cacheData.push(item);
     }
 
     
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(cacheData));
 
     //this.productListToCompare.push(item);
 
     
     
-    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+    this.compareProductsStore.setCompareProductsList2(cacheData);
     // console.log("getProdFromLocalStorage",this.productListToCompare);
     //localStorage.removeItem('product_list_to_compare');
-    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+   // localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
+    this.listForCompare.emit(cacheData);
     //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     //console.log("getProdFromLocalStorage",prodGet);
-    this.toaster.showSuccess("Product added to Compare",'')
+    this.toaster.showSuccess("The product has been included for comparison",'')
   }
   else{
     this.toaster.showWarning("You can add only 4 products to compare",'')
