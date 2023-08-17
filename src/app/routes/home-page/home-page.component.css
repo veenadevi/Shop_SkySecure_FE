@@ -38,7 +38,7 @@
 
   #simple-chat-button--container {
     position: fixed;
-    bottom: 20px;
+    bottom: 64px;
     right: 20px;
     z-index: 999999999;
 }

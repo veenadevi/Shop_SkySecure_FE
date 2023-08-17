@@ -1126,10 +1126,21 @@ footer {
 }
 .footer-container {
     display: flex;
+    flex-direction: column;
+    margin: 0 30px;
+}
+.top-section {
+    display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-around;
-    margin: 0 30px;
+}
+.second-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
 }
 .logo {
     height: 50px;
@@ -1503,6 +1514,15 @@ a:hover{
     display: flex;
     flex-direction: row;
     column-gap: 4px;
-    margin-top: 70px;
     color: #e0e0e0;
+}
+.company-name-content {
+    font-size: 12px;
+    color: var(--primary);
+    margin: 0;
+}
+.rights-reserved {
+    font-size: 12px;
+    color: var(--primary);
+    margin: 0;
 }
