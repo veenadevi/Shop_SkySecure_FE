@@ -1492,5 +1492,17 @@ a:hover{
     flex-direction: row;
     justify-content: space-evenly;
     width: 20%;
+    margin-top: 32px;
     margin-left: 80px;
+}
+.first-section {
+    display: flex;
+    flex-direction: column;
+}
+.conditions-section {
+    display: flex;
+    flex-direction: row;
+    column-gap: 4px;
+    margin-top: 70px;
+    color: #e0e0e0;
 }
