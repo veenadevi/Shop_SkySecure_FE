@@ -52,14 +52,10 @@ export class LoginComponent {
     // console.log("()()()()() Inside is valid", this.params);
 
     this.route.queryParams.subscribe(params => {
-      let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-      const decrypted = CryptoJS.AES.decrypt(params['email'], key);
-      const decryptedEmail=decrypted.toString(CryptoJS.enc.Utf8)
-    //  console.log("decrypted  "+decryptedEmail)
-       this.emailViaSignup = decryptedEmail;
       
-     //  console.log("is success isnup  "  +params['succuessMessage'])
-    //  email:this.emailViaSignup
+      this.emailViaSignup= params['email'];
+     
+
     if(params['succuessMessage']){
       this.signUpSuccess=true
     }
@@ -251,11 +247,10 @@ export class LoginComponent {
   }
 
   public signUp(){
-    let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-    let hashedEmail = CryptoJS.AES.encrypt(this.form.value.email , key).toString();
-    this.router.navigate(['login/signUp'],{ queryParams: { email: hashedEmail}});
+  
+    this.router.navigate(['login/signUp'],{ queryParams: { email: this.form.value.email}});
 
-   // this.router.navigate(['/login'], { queryParams: { email: this.formEmail.value.email } });
+  
   }
   public navigateToHomePage(){
     this.router.navigate(['']);

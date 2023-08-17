@@ -46,13 +46,10 @@ export class SignUpComponent {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-      const decrypted = CryptoJS.AES.decrypt(params['email'], key);
-      const decryptedEmail=decrypted.toString(CryptoJS.enc.Utf8)
+    
 
-      this.emailViaSignIn = decryptedEmail;
-     // email:this.emailViaSignIn
-     // Use the email value as needed
+      this.emailViaSignIn = params['email'];
+    
    });
 
 
@@ -139,12 +136,8 @@ export class SignUpComponent {
       this.subscriptions.push(
         
         this.authService.signUp(req).subscribe( res=> {
-         
-          const encodedUserId = encodeURIComponent(this.validatedEmail);
-        //  console.log("encodedUserId"+encodedUserId)
-          let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-          let hashedEmail = CryptoJS.AES.encrypt(this.validatedEmail, key).toString();
-          this.router.navigate(['login'], { queryParams: { email: hashedEmail,succuessMessage:"Registered Successfully"} });
+      
+          this.router.navigate(['login'], { queryParams: { email: this.validatedEmail,succuessMessage:"Registered Successfully"} });
           //localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
         })
       )
@@ -240,13 +233,9 @@ export class SignUpComponent {
   }
   public signIn(){
 
-    const encodedUserId = encodeURIComponent(this.validatedEmail);
-    //  console.log("encodedUserId"+encodedUserId)
-      let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-      let hashedEmail = CryptoJS.AES.encrypt(this.validatedEmail, key).toString();
-      this.router.navigate(['login'], { queryParams: { email: hashedEmail} });
-  //  this.router.navigate(['/login'], { queryParams: { email: this.formEmail.value.email }});
-  //  this.router.navigate(['login/login']);
+ 
+      this.router.navigate(['login'], { queryParams: { email: this.validatedEmail} });
+
   }
 
 }
