@@ -102,7 +102,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   ){
     const navigation = this.router.getCurrentNavigation();
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+   // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     // const state = navigation.extras.state as { data: Object };
     // const data = state;
   }
@@ -519,12 +519,17 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public selectedListForCompare(items){
     this.listForCompare = items;
 
+    console.log("++++++++ Cached Data", items);
     //let cacheData = this.compareProductsStore.getCompareProductsList();
-    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData1 = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+
+    let combinedData = [...cacheData1, ...cacheData2];
+    let cacheData = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
     cacheData = cacheData.filter(event => (event.checked))
 
-
+    console.log("____+++________ AAAAAA",combinedData);
 
 
 
@@ -539,6 +544,9 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
       
       cumulativeList = this.listForCompare;
     }
+
+    console.log("____+++________ ",cumulativeList);
+    console.log("____+++________ ",cacheData);
     //let uniqueElements = [...new Set(cumulativeList)];
     //let uniqueElements = cumulativeList.filter((el, i, a) => i === a.indexOf(el));
     let uniqueElements = [...new Map(cumulativeList.map(item => [item['_id'], item])).values()];
@@ -572,7 +580,9 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     
 
     localStorage.setItem('product_list_to_compare', JSON.stringify(uniqueElements));
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(uniqueElements));
     this.compareProductsStore.setCompareProductsList(uniqueElements);
+    this.compareProductsStore.setCompareProductsList2(uniqueElements);
     //localStorage.removeItem('product_list_to_compare');
     
 

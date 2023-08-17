@@ -189,11 +189,13 @@
           <div class="form-group">
             <label>Mobile Number</label>
             <input
-              type="text"
+              type="number"  ng-maxlength="5"
               formControlName="mobileNumber"
               placeholder="10 Digit MobileNumber"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }"
+              maxlength="10" 
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
             />
             <div *ngIf="submitted && f.mobileNumber.errors" class="invalid-feedback">
               <div *ngIf="f.mobileNumber.errors.required">Mobile Number is required</div>

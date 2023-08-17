@@ -66,8 +66,11 @@ body{
   z-index: 1031 !important;
 }
 #toast-container > div {
-  width:400px;
+  width:450px;
   height: 60px;
+  }
+  .ngx-toastr {
+    width: 450px !important;  
   }
 
 

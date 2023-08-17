@@ -90,9 +90,9 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right',
       closeButton:true,
-      preventDuplicates: true,
+      preventDuplicates: false,
     //  timeOut:2000,
-      maxOpened:2
+      maxOpened:4
 
     }),
     NgxGoogleAnalyticsModule.forRoot('G-KC04RJ3FYD'),

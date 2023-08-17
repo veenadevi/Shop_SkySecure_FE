@@ -1126,10 +1126,21 @@ footer {
 }
 .footer-container {
     display: flex;
+    flex-direction: column;
+    margin: 0 60px;
+}
+.top-section {
+    display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-around;
-    margin: 0 30px;
+    justify-content: space-between;
+}
+.second-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
 }
 .logo {
     height: 50px;
@@ -1477,5 +1488,41 @@ a:hover img {
 
 
 a{
-    cursor: pointer;;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 12px;
+    color: var(--primary) ;
+}
+a:hover{
+    color: white ;
+    text-decoration:underline;
+    text-decoration-color: white;
+}
+.footer-02{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 20%;
+    margin-top: 32px;
+    margin-left: 80px;
+}
+.first-section {
+    display: flex;
+    flex-direction: column;
+}
+.conditions-section {
+    display: flex;
+    flex-direction: row;
+    column-gap: 4px;
+    color: #e0e0e0;
+}
+.company-name-content {
+    font-size: 12px;
+    color: var(--primary);
+    margin: 0;
+}
+.rights-reserved {
+    font-size: 12px;
+    color: var(--primary);
+    margin: 0;
 }
