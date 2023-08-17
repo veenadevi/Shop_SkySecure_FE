@@ -1127,18 +1127,18 @@ footer {
 .footer-container {
     display: flex;
     flex-direction: column;
-    margin: 0 30px;
+    margin: 0 60px;
 }
 .top-section {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .second-section {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-top: 50px;
 }
