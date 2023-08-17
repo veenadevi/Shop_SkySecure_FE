@@ -6,7 +6,9 @@ mat-sidenav-content {
   float: right;
 }
 
-
+#content-holder {
+  padding-top: 100px;
+}
 
 
 
