@@ -116,6 +116,15 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+.policyaggrement{
+    font-size: .680em;
+    
+    color: grey;
+    padding-left: 0%;
+    padding-top: 4%;
+    text-align: center;
+
+}
 /* media query */
 @media  ( min-width: 1024px) and (max-width: 1200px)  {
     .back-btn{
