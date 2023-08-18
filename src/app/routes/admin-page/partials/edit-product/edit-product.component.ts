@@ -9,6 +9,8 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { DatePipe } from '@angular/common';
 
 interface CreateProductPayload {
   _id: String,
@@ -27,14 +29,18 @@ interface CreateProductPayload {
   featureList: Array<any>,
   isVariant: Boolean,
   productId: String,
-  productFAQ: Array<any>
+  productFAQ: Array<any>,
+  updatedAt:Date,
+ 
+
 }
 
 
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.css']
+  styleUrls: ['./edit-product.component.css'],
+  providers: [DatePipe] 
 })
 export class EditProductComponent  implements OnInit {
   submitted = false;
@@ -63,6 +69,7 @@ export class EditProductComponent  implements OnInit {
   defaultDiscount: number;
   selectedProductId : any;
   showMsg: boolean = false;
+
   constructor(
     public fb: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -70,7 +77,9 @@ export class EditProductComponent  implements OnInit {
     private metadataStore: MetadataStore,
     private http: HttpClient,
     private router : Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userAccountStore :UserAccountStore,
+    private datePipe: DatePipe
   ) {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
@@ -88,6 +97,10 @@ export class EditProductComponent  implements OnInit {
       isVariant: ['false'],
       file: [null],
       products: [''],
+      createdBy:[''],
+      updatedBy:[''],
+      updatedDate:[''],
+      updatedAt:[''],
       addDynamicElementNew: this.fb.group({
         // Nested form controls for dynamic elements
        feature: this.fb.array([])
@@ -343,6 +356,8 @@ export class EditProductComponent  implements OnInit {
    
       return false;
     } else {
+      let userAccountdetails = this.userAccountStore.getUserDetails();
+      //createdBy : userAccountdetails.firstName,
 
       console.log("Final value", this.registrationForm.value);
       var productData = this.registrationForm.value;
@@ -370,7 +385,7 @@ export class EditProductComponent  implements OnInit {
         featureList: productData.addDynamicElementNew.feature,
         bannerLogo: this.productLogo,
         createdBy: 'ADMIN',
-        updatedBy: 'ADMIN',
+        updatedBy: userAccountdetails.firstName,
       }
       console.log("_createProductPayload_", this.createProductPayload);
       var endPoint = `${environment.gatewayUrl}api/admin/product/edit`
@@ -412,6 +427,17 @@ export class EditProductComponent  implements OnInit {
   }
 
   fillFormDetails(response) {
+    console.log("created By ====="+response.products.createdB)
+   let  formattedDate = this.datePipe.transform(response.products.updatedAt, 'dd-MM-YYYY');
+    this.registrationForm.get('createdBy').setValue(response.products.createdBy, {
+      onlySelf: true
+    }) 
+    this.registrationForm.get('updatedBy').setValue(response.products.updatedBy, {
+      onlySelf: true
+    }) 
+    this.registrationForm.get('updatedAt').setValue(formattedDate, {
+      onlySelf: true
+    }) 
     this.registrationForm.get('productName').setValue(response.products.name, {
       onlySelf: true
     })
