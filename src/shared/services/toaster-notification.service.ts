@@ -12,6 +12,7 @@ export class ToasterNotificationService {
   
   showSuccess(message, title){
       this.toastr.success(message, title)
+      
   }
   
   showError(message, title){
@@ -20,14 +21,14 @@ export class ToasterNotificationService {
   
   showInfo(message, title){
       this.toastr.info(message, title,{
-      timeOut:10000,
+      timeOut:5000,
         closeButton:true
       })
   }
   
   showWarning(message, title){
       this.toastr.warning(message, title,{
-         timeOut:10000,
+         timeOut:5000,
            closeButton:true
          })
   }

@@ -24,8 +24,10 @@ export class LoginComponent {
   private subscriptions : Subscription[] = [];
 
   public params : any;
+  public emailViaSignup:String
 
   public enableSignInButton = false;
+  public signUpSuccess:boolean=false
 
   public enableOTPButton = true;
 
@@ -45,13 +47,25 @@ export class LoginComponent {
     ) {}
 
   ngOnInit(): void {
-
+    this.signUpSuccess=false
     this.params = this.route.snapshot.queryParamMap;
     // console.log("()()()()() Inside is valid", this.params);
 
+    this.route.queryParams.subscribe(params => {
+      
+      this.emailViaSignup= params['email'];
+     
+
+    if(params['succuessMessage']){
+      this.signUpSuccess=true
+    }
+   // console.log("is success isnup  "  +this.signUpSuccess)
+      // Use the email value as needed
+    });
+
     this.form = this.formBuilder.group(
       {
-        email: ['', [Validators.required, Validators.email]],
+        email: [this.emailViaSignup, [Validators.required, Validators.email]],
         otp : []
         /*password: [
           '',
@@ -92,6 +106,7 @@ export class LoginComponent {
 
   onSubmit(): void {
     this.submitted = true;
+    this.signUpSuccess=false
     if (this.form.invalid) { // If Invalid Return
       return;
     }
@@ -113,7 +128,7 @@ export class LoginComponent {
             if(res.message){
               console.log("()()()()( Inside If", res);
               this.enableSignInButton = false;
-              this.enableOTPButton = true;
+              this.enableOTPButton = false;
               this.newEmailAlert = true;
               this.otpField = false;
             }
@@ -130,6 +145,7 @@ export class LoginComponent {
               this.enableOTPButton = true;
               this.newEmailAlert = true;
               this.otpField = false;
+             
           },
         ) 
       )
@@ -231,7 +247,10 @@ export class LoginComponent {
   }
 
   public signUp(){
-    this.router.navigate(['login/signUp']);
+  
+    this.router.navigate(['login/signUp'],{ queryParams: { email: this.form.value.email}});
+
+  
   }
   public navigateToHomePage(){
     this.router.navigate(['']);

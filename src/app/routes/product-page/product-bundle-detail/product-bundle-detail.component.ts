@@ -166,6 +166,7 @@ export class ProductBundleDetailComponent implements OnInit{
     private compareProductsStore : CompareProductsStore,
     private toaster : ToasterNotificationService
   ){
+   // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
         
@@ -614,14 +615,21 @@ export class ProductBundleDetailComponent implements OnInit{
 
     //this.productListToCompare.push(item);
 
+    if(item.checked){
+      item.checked = true;
+    }
+    else{
+      item['checked'] = true;
+    }
     
+   
     
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
     //localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
     localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
     //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    this.toaster.showSuccess("Product added to Compare",'')
+    this.toaster.showSuccess("The product has been included for comparison.",'')
   }
   else {
     //alert("Only 4 products are allowed to compare");

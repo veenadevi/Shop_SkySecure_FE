@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/shared/services/auth.service';
 import Validation from '../utils/validation';
@@ -21,9 +21,12 @@ export class SignUpComponent {
 
   emailFormFlag : boolean = true;
   signUpFormFlag : boolean = false;
+  public emailViaSignIn:String
 
   public enableSignInButton = false;
   public inValidOTP:boolean=false;
+
+  public emailExisitAlert:boolean=false;
 
   public enableOTPButton = true;
 
@@ -37,13 +40,22 @@ export class SignUpComponent {
     private formBuilder: FormBuilder,
     private authService : AuthService,
     public router : Router,
+    public route : ActivatedRoute,
     private userProfileService : UserProfileService
     ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+    
+
+      this.emailViaSignIn = params['email'];
+    
+   });
+
+
     this.formEmail = this.formBuilder.group(
       {
-        email: ['', [Validators.required, Validators.email]],
+        email: [this.emailViaSignIn, [Validators.required, Validators.email]],
         otp : [],
       }
     )
@@ -124,7 +136,8 @@ export class SignUpComponent {
       this.subscriptions.push(
         
         this.authService.signUp(req).subscribe( res=> {
-          this.router.navigate(['login']);
+      
+          this.router.navigate(['login'], { queryParams: { email: this.validatedEmail,succuessMessage:"Registered Successfully"} });
           //localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
         })
       )
@@ -161,15 +174,18 @@ export class SignUpComponent {
       this.subscriptions.push(
         this.userProfileService.sendOTP(req).subscribe( res=>{
           
-
+    //console.log("sign up for exisitng user")
           if(res.message){
+           // console.log("inside if")
             //this.emailFormFlag = true;
             //this.signUpFormFlag = false;
             this.enableSignInButton = false;
-            this.enableOTPButton = true;
+            this.enableOTPButton = false;
             this.otpField = false;
+            this.emailExisitAlert=true
           }
           else{
+           // console.log("inside else")
             //this.emailFormFlag = false;
             //this.signUpFormFlag = true;
             this.enableSignInButton = true;
@@ -215,7 +231,12 @@ export class SignUpComponent {
         })
       )
   }
+  public signIn(){
 
+ 
+      this.router.navigate(['login'], { queryParams: { email: this.validatedEmail} });
+
+  }
 
 }
 

@@ -111,7 +111,11 @@ column-gap: 10px;
     padding-top: 4%;
     text-align: center;
 }
-
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 /* media query */
 @media  ( min-width: 1024px) and (max-width: 1200px)  {
     .back-btn{

@@ -29,7 +29,7 @@ export class ProductCardFlyerComponent implements OnInit{
     // this.isMonthly = true;
     this.priceValue = this.productsList[i].priceList[0].price;
     this.priceType = this.productsList[i].priceList[0].priceType;
-    this.productsList[i].priceList[0].priceType = "Monthly";
+    this.productsList[i].priceList[0].priceType = "Month";
     this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price/12
   }
 
@@ -117,13 +117,16 @@ export class ProductCardFlyerComponent implements OnInit{
     
     let tempLen = this.getCompareProductsCount();
     var a = 3;
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
 
     if(tempLen<4){
+      console.log("legth is less than 4")
 
-      let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    
 
 
       if(cacheData && cacheData.length>0){
+        console.log("cacheData legth "+cacheData.length)
         let indexToUpdate = cacheData.findIndex(element => element._id === item._id);
         if(indexToUpdate !== -1){
           
@@ -143,59 +146,70 @@ export class ProductCardFlyerComponent implements OnInit{
         
   
       }
+      console.log("cacheData legth  is o fresh data "+cacheData.length)
   
       this.cachedDataForCheckBox = cacheData;
   
       if($event.target.checked){
         this.selectedListForCompare.push(item);
+        this.toaster.showSuccess("The product has been included for comparison.",'')
       }
       else{
-        /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-        if(cacheData && cacheData.length>0){
-          //let indexToUpdate = cacheData.findIndex(element => element._id === item._id);
-          var indexToUpdate = cacheData.findIndex(element=> element._id === item._id);
-          
-          
-          if(indexToUpdate !== -1){
-            
-            
-            cacheData = cacheData.splice(indexToUpdate, 1);
-            
-            
-            localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
-            let ss = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-            
-          }
-        }*/
+        this.toaster.showWarning("The product has been excluded from the comparison",'')
         
-        this.selectedListForCompare = this.selectedListForCompare.filter(element => element._id != item._id);
+        console.log("***(()()( ", this.cachedDataForCheckBox);
+        this.selectedListForCompare = this.cachedDataForCheckBox.filter(element => element._id != item._id);
+        localStorage.setItem('product_list_to_compare', JSON.stringify(this.selectedListForCompare));
+        localStorage.setItem('product_list_to_compare2', JSON.stringify(this.selectedListForCompare));
+        console.log("***(()()( ", this.selectedListForCompare);
       }
        
       
   
-      /*let cacheData = this.compareProductsStore.getCompareProductsList();
-      let cumulativeList = [];
-      if(cacheData && cacheData.length>0){
-        cumulativeList = [...this.selectedListForCompare , ...cacheData];
-        cumulativeList = cumulativeList.filter(element => element._id != item._id);
-      }
-      else{
-        cumulativeList = this.selectedListForCompare;
-      }
-      this.compareProductsStore.setCompareProductsList(cumulativeList);*/
-      //localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
-      //this.compareProductsStore.setCompareProductsList(this.selectedListForCompare);
+    
       
       this.listForCompare.emit(this.selectedListForCompare);
 
     }
 
     else{
-    //  alert("Only 4 products are allowed to compare");
-     // alert("Only 4 products are allowed to compare");
+   
 
-     this.toaster.showWarning("You can add only 4 products to compare",'')
-     item.checked = false;
+      if($event.target.checked){
+        item.checked = false;
+        this.toaster.showWarning("You can add only 4 products to compare",'')
+      }
+      else{
+
+        console.log("came to remove when data is 4")
+  
+        let indexToUpdate = cacheData.findIndex(element => element._id === item._id);
+        cacheData[indexToUpdate]['checked'] = $event.target.checked;
+     
+        this.toaster.showWarning("The product has been excluded from the comparison.",'')
+        // if(item.checked){
+        //   item.checked = false;
+        // }
+        // else{
+        //   item['checked'] = false;
+        // }
+        
+        
+        this.selectedListForCompare = this.selectedListForCompare.filter(element => element._id != item._id);
+        localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
+        localStorage.setItem('product_list_to_compare2', JSON.stringify(cacheData));
+        //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.selectedListForCompare));
+        // console.log("()()()()( +++++ ", this.selectedListForCompare);
+        // console.log("()()()()( +++++ Cached", cacheData);
+        this.listForCompare.emit(this.selectedListForCompare);
+      // localStorage.removeItem('product_list_to_compare');
+      
+       
+
+      
+      }
+   
+    
     }
 
 

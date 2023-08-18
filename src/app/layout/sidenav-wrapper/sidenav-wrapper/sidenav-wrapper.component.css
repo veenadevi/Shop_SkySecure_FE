@@ -121,6 +121,10 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
    background: #76b900 !important;
  }
 
+ .router-outlet-content{
+    margin-top: 0px;
+ }
+
 /* tooltip */
 
 /* ::ng-deep .p-tooltip.p-tooltip-text  {

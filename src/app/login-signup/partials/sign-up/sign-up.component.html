@@ -45,6 +45,12 @@
           
         </div>
         <div class="buttons">
+          <ng-container *ngIf="emailExisitAlert">
+            <div class="signin-btn">
+              <button (click)="signIn()" class="primary-btn">Sign In</button>
+            </div>
+            
+          </ng-container>
           <ng-container *ngIf="enableOTPButton">
           <div class="signin-btn" >
             <!-- <button type="submit" class="primary-btn">Send OTP</button> -->
@@ -59,8 +65,13 @@
         <div *ngIf="inValidOTP" class="new-email-alert">
           Invalid OTP; Please Enter Correct OTP 
          </div>
+         <div *ngIf="emailExisitAlert" class="new-email-alert">
+          The email already exist. Please proceed with Login. 
+          
+        </div>
 
           <div class="buttons">
+        
           <ng-container *ngIf="enableSignInButton">
             <div class="signin-btn">
               <button (click)="validateOTP()" class="primary-btn">Sign up</button>
@@ -178,11 +189,13 @@
           <div class="form-group">
             <label>Mobile Number</label>
             <input
-              type="text"
+              type="number"  ng-maxlength="5"
               formControlName="mobileNumber"
               placeholder="10 Digit MobileNumber"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }"
+              maxlength="10" 
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
             />
             <div *ngIf="submitted && f.mobileNumber.errors" class="invalid-feedback">
               <div *ngIf="f.mobileNumber.errors.required">Mobile Number is required</div>

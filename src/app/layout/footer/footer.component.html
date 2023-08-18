@@ -95,15 +95,16 @@
 <!-- alter footer -->
 <footer>
     <div class="footer-container">
-        <div class="logo-part">
-            <div class="logo-container">
-                <img class="logo" src="../../../assets/Logos/skysecureLogo.png">
+        <div class="top-section">
+            <div class="logo-part">
+                <div class="logo-container">
+                    <img class="logo" src="../../../assets/Logos/skysecureLogo.png">
+                </div>
+                <div class="heading">
+                    <p> Assess, Implement & Manage the best solutions!</p>
+                </div>
             </div>
-            <div class="heading">
-                <p> Assess, Implement & Manage the best solutions!</p>
-            </div>
-        </div>
-        
+                    
         <div class="contact-us-container">
             <div class="headline">
                 Contact Us
@@ -207,9 +208,43 @@
                     </a>
                 </li>
             </ul>
-
-           
-           
         </div>
+        </div>
+
+        <div class="second-section">
+            <div class="conditions-section">
+                <div class="terms">
+        
+                    <a  [routerLink]="['/company/refund']">Cancellation and Refund</a>
+                </div>
+                <div class="center">
+        
+                    <p>|</p>
+                </div>
+                <div class="terms">
+        
+                    <a  [routerLink]="['/company/terms']">Terms of Use</a>
+                </div>
+                <div class="center">
+        
+                    <p>|</p>
+                </div>
+                <div class="terms">
+        
+                    <a  [routerLink]="['/company/privacy']">Privacy</a>
+                </div>
+            </div>
+
+            <div class="company-name">
+                <p class="company-name-content">SKYSECURE TECHNOLOGIES PRIVATE LIMITED</p>
+            </div>
+
+            <div class="rights-reserved">
+                <p class="rights-reserved-content"> &copy; Skysecure 2023    All Rights Reserved</p>
+            </div>
+
+        </div>
+
     </div>
+
 </footer>

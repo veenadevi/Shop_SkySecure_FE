@@ -167,3 +167,14 @@
     margin-top: 50px;
     background: yellow;
 } */
+
+@media (min-width:320px) and (max-width:480px){
+    .filter-container {
+        width:25%;
+        display: flex;
+        background: #F5F5F5;
+        border: 1px solid #d9d9d9;
+        border-radius: 8px;
+        display: none;
+    }
+}
