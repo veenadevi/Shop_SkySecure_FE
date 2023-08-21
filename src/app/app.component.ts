@@ -39,7 +39,7 @@ export class AppComponent {
      handleRouteEvents() {
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
-          const title = this.getTitle(this.router.routerState, this.router.routerState.root).join('-');
+          const title = "Skysecure Marketplace";
           this.titleService.setTitle(title);
           gtag('event', 'page_view', {
             page_title: title,

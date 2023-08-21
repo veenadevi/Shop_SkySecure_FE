@@ -75,6 +75,8 @@ export class ProductCardFlyerComponent implements OnInit{
 
 
   ngOnInit(): void {
+
+    
    
     
   }
@@ -117,7 +119,16 @@ export class ProductCardFlyerComponent implements OnInit{
     
     let tempLen = this.getCompareProductsCount();
     var a = 3;
-    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    //let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+
+
+    let cacheData1 = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData1, ...cacheData2];
+    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+
+
+    let cacheData =uniqueElements;
 
     if(tempLen<4){
       console.log("legth is less than 4")

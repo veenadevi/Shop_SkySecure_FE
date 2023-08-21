@@ -29,24 +29,86 @@
                         </div>
                     </ng-template>
                 </p-dropdown>
+
+                
             </div>
+            
+               
+
+          
 
             <!-- error block -->
             <div class="invalid-feedback" *ngIf="submitted && myForm.products.errors?.required">
                 <sup>*</sup>Please select product
             </div>
+
+          
         </div>
     </div>
 </div>
+
+
 
 <div class="container">
     <div class="row custom-wrapper">
         <div class="col-md-12">
 
-            <!-- Form starts -->
-            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+               <!-- Form starts -->
+     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+           
+
+         
 
                 <div class="group-gap">
+                    <div class='section-001'>
+                        <div class="createdBy">
+                            <div class="forms">
+                                <div class="label">
+                                    <label >
+                                        Created By</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" readonly class="custom-select-03" formControlName="createdBy">
+                                        
+                                </div>
+                    
+                            </div>
+                    
+                    
+                        </div>
+                    
+                        <div class="createdBy">
+                            <div class="forms">
+                                <div class="label">
+                                    <label >
+                                       Last Edited By</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" readonly class="custom-select-03" formControlName="updatedBy"
+                                       >
+                                </div>
+                    
+                            </div>
+                    
+                        </div>
+                    
+                        <div class="createdBy">
+                            <div class="forms">
+                                <div class="label">
+                                    <label >
+                                       Last Edited Date</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" readonly class="custom-select-03" formControlName="updatedAt"
+                                       >
+                                </div>
+                    
+                            </div>
+                    
+                        </div>
+                    
+                    
+                            </div>
                     <!-- OEMS -->
                     <div class="section-01">
 
@@ -293,12 +355,12 @@
 
                         <!---Product Price-->
 
-                    </div>
+                  
 
 
 
 
-                    <div class="section-05">
+                    <!-- <div class="section-05"> -->
                         <!-- Subscription Type -->
                         <div class="subscription">
                             <div class="forms">
@@ -325,11 +387,12 @@
                             </div>
                         </div>
                     </div>
+                    <!-- </div> -->
 
 
                     <div class="section-06">
-                        <!-- IsVariant -->
-                        <div class="variant">
+                      
+                        <!-- <div class="variant">
                             <label [ngClass]="{'error': submitted && myForm.isVariant.errors}">isVariant</label>
                             <div class="d-block my-3">
                                 <div class="custom-control custom-radio">
@@ -345,11 +408,11 @@
                                     <label class="custom-control-label" for="true">True</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <!-- Products -->
-                        <div class="variant-product" *ngIf="showProducts">
+                        <!-- <div class="variant-product" *ngIf="showProducts">
                             <div class="forms">
                                 <div class="label">
                                     <label [ngClass]="{'error': submitted && myForm.products.errors}">Choose
@@ -365,12 +428,12 @@
                                     </select>
                                 </div>
 
-                                <!-- error block -->
+                              
                                 <div class="invalid-feedback" *ngIf="submitted && myForm.products.errors?.required">
                                     <sup>*</sup>Please select product
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Upload image -->
                         <div class="upload">
