@@ -102,7 +102,7 @@ export class CompareProductsModalComponent {
   }
 
   public removeSelectedItem($event){
-    // console.log("******** Item to be removed ", $event);
+    console.log("******** Item to be removed Before", $event);
     this.productList = this.productList.filter(function(item) {
       return item._id != $event;
     });
@@ -114,6 +114,7 @@ export class CompareProductsModalComponent {
     this.compareProductsStore.setCompareProductsList2(this.productList);
     // localStorage.removeItem('product_list_to_compare');
 
+    console.log("******** Item to be removed ", this.productList);
     this.compareProductsStore.setProductsCheckedList(this.productList);
     
   }
