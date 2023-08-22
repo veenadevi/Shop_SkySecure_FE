@@ -37,7 +37,7 @@ export class CompareProductsComponent implements OnInit{
     "products": ["6480bdea94c4a49d614093f8", "64898f01cf520500558e7589"],
     "productsVariants": ["641308a7bdb764f8d6a252bb", "641308b1bdb764f8d6a252bd"],
     "productFamily": ["6412ac15bdb764f8d6a252a5", "64142fe6bdb764f8d6a25394"],
-    "productFamilyVariants": ["64777c2afd0e9fa399bac9bc", "64777c2afd0e9fa399bac9bc"]
+    "productFamilyVariants": [ "64733a81fa32e5756e9771ce","647b136922b5a987ed147621","64777c2afd0e9fa399bac9bc"]
   }
 
   isArray(value: any): value is any[] {

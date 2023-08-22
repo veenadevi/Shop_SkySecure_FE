@@ -5,6 +5,7 @@ import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map, forkJoin, Subscription, switchMap, filter } from 'rxjs';
 import { CompanyPromptModalComponent } from 'src/shared/components/modals/company-prompt-modal/company-prompt-modal.component';
+import { GstPromptModalComponent } from 'src/shared/components/modals/gst-prompt-modal/gst-prompt-modal.component';
 import { UserCartRequestModel } from 'src/shared/models/concrete/user-cart.model';
 import { CartService } from 'src/shared/services/cart.service';
 import { GlobalSearchService } from 'src/shared/services/global-search.service';
@@ -353,30 +354,33 @@ public onChangeQuantity(i, price) : void {
   }
 
   public requestQuote(){
+
+    
+    
     if(this.cartData.length>0){
-//this.router.navigate(['/cart/cart-submit']);
-let cartRefId = this.cartStore.getCartRefreneceId();
-//let userAccountdetails = this.userAccountStore.getUserProfileDetails();
-let userAccountdetails = this.userAccountStore.getUserDetails();
 
-let req = {
-  userId : userAccountdetails._id,
-  createdBy : userAccountdetails.firstName,
-  products : this.cartData,
-  companyName : '',
-  cart_ref_id : cartRefId ? cartRefId : '0001111'
-};
+      let cartRefId = this.cartStore.getCartRefreneceId();
+      
+      let userAccountdetails = this.userAccountStore.getUserDetails();
 
-// this.cartService.createQuotation(req);
+      let req = {
+        userId : userAccountdetails._id,
+        createdBy : userAccountdetails.firstName,
+        products : this.cartData,
+        companyName : '',
+        cart_ref_id : cartRefId ? cartRefId : '0001111'
+      };
 
-if(userAccountdetails.company){
-  req.companyName = userAccountdetails.company;
-  this.createQuotationService(req);
-  
-}
-else{
-  this.viewModal(req);
-}
+      //this.viewModal(req);
+
+      if(userAccountdetails.company){
+        req.companyName = userAccountdetails.company;
+        this.createQuotationService(req);
+        
+      }
+      else{
+        this.viewModal(req);
+      }
 
     }
     
@@ -388,6 +392,7 @@ else{
 
   public viewModal(req) {
     const modalRef = this.modalService.open(CompanyPromptModalComponent);
+    //const modalRef = this.modalService.open(GstPromptModalComponent);
     modalRef.componentInstance.request = req;
   }
 
