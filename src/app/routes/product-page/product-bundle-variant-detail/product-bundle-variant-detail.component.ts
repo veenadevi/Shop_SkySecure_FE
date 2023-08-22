@@ -190,7 +190,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
     private userAccountStore : UserAccountStore,
     private toaster : ToasterNotificationService
   ){
-   // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
         

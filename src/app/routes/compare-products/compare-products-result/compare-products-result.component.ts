@@ -49,10 +49,10 @@ export class CompareProductsResultComponent {
   ]
 
   allSelectedItems = {
-    "products": ["6480bdea94c4a49d614093f8", "64898f01cf520500558e7589"],
-    "productsVariants": ["641308a7bdb764f8d6a252bb", "641308b1bdb764f8d6a252bd"],
-    "productFamily": ["6412ac15bdb764f8d6a252a5", "64142fe6bdb764f8d6a25394"],
-    "productFamilyVariants": ["64777c2afd0e9fa399bac9bc", "64777c2afd0e9fa399bac9bc"]
+    "products": [],
+    "productsVariants": ["641308b1bdb764f8d6a252bd"],
+    "productFamily": [],
+    "productFamilyVariants": [ "64733a81fa32e5756e9771ce","647b136922b5a987ed147621","64777c2afd0e9fa399bac9bc"]
   }
 
   isArray(value: any): value is any[] {
@@ -107,7 +107,7 @@ export class CompareProductsResultComponent {
     
    // console.log("empty cards size ==="+this.emptyProductsLength)
 
-    //this.fetchCompareProductsList(this.allSelectedItems);
+   // this.fetchCompareProductsList(this.allSelectedItems);
     this.fetchCompareProductsList(reqBody);
   }
 
@@ -293,7 +293,8 @@ export class CompareProductsResultComponent {
        'features': data.featureList,
         'includedProducts' : [],
        'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
-       '_id' : productData._id
+       '_id' : productData._id,
+       'isActive':productData.isActive
       }
       return { properties};
     })
@@ -319,7 +320,8 @@ export class CompareProductsResultComponent {
         'features':  data.featureList ,
         'includedProducts' : [],
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
-        '_id' : productVariantData._id
+        '_id' : productVariantData._id,
+        'isActive':productVariantData.isActive
 
       }
       return { properties };
@@ -350,7 +352,9 @@ export class CompareProductsResultComponent {
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response,'productFamily'),
         'bundleData':bundleFeaturesList,
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
-        '_id' : productData._id
+        '_id' : productData._id,
+        'isActive':productData.isActive
+
       }
      // console.log(properties['includedProducts'].length)
       return { properties};
@@ -381,7 +385,8 @@ export class CompareProductsResultComponent {
         'bundleData':bundleFeaturesList,
      // 'features':bundleFeaturesList.length>0?bundleFeaturesList:'-',
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
-        '_id' : productVariantData._id
+        '_id' : productVariantData._id,
+        'isActive':productVariantData.isActive
       }
       return { properties};
     })

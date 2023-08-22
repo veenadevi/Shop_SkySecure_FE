@@ -24,9 +24,13 @@
                                 <button class="remove-btn" (click)="removeItem(item)">
                                     Remove 
                                 </button>
+                                <ng-container *ngIf="item.properties.isActive">
                                 <button class="buy-btn" (click)="requestQuote(item)">
+                                   
                                     Buy Now
                                 </button>
+                                </ng-container>
+
                               </div>
                         </div>
                     </th>
