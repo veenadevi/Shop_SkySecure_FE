@@ -69,6 +69,10 @@
           The email already exist. Please proceed with Login. 
           
         </div>
+        <div *ngIf="invalidDomain" class="new-email-alert">
+          Please Sign-up with Business Email 
+          
+        </div>
 
           <div class="buttons">
         
@@ -119,7 +123,7 @@
               [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
             />
             <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-              <div *ngIf="f.firstName.errors.required">First Name is required</div>
+              <div *ngIf="f.firstName.errors.required">Oops! You forgot to provide your First Name</div>
             </div>
           </div>
       
@@ -181,7 +185,7 @@
               [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }"
             />
             <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
-              <div *ngIf="f.companyName.errors.required">Compnay Name is required</div>
+              <div *ngIf="f.companyName.errors.required">Oops! You forgot to provide your Company Name.</div>
             </div>
           </div>
 
@@ -198,7 +202,7 @@
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
             />
             <div *ngIf="submitted && f.mobileNumber.errors" class="invalid-feedback">
-              <div *ngIf="f.mobileNumber.errors.required">Mobile Number is required</div>
+              <div *ngIf="f.mobileNumber.errors.required">Oops! You forgot to provide your Mobile Number.</div>
             </div>
           </div>
      

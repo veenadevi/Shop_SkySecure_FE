@@ -54,7 +54,7 @@ const INTERFACE_ROUTES: Routes = [
       },
       {
         canActivate: [],
-        path: 'admin-page',
+        path: 'portal-admin-page',
         loadChildren: () => import('../routes/admin-page/admin-page.module').then(m=>m.AdminPageModule)
       },
       {
@@ -66,6 +66,11 @@ const INTERFACE_ROUTES: Routes = [
         canActivate: [],
         path: 'company',
         loadChildren: () => import('../routes/company/company.module').then(m=>m.CompanyModule)
+      },
+      {
+        canActivate: [],
+        path: 'admin-pages',
+        loadChildren: () => import('../routes/super-admin-page/super-admin-page.module').then(m=>m.SuperAdminPageModule)
       },
     ]
   }

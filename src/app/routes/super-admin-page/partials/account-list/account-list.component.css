@@ -1,0 +1,12 @@
+.all-accounts-view {
+    min-height: 30em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+}
+
+.text-style{
+    cursor: pointer;
+    color: #3366CC;
+}
