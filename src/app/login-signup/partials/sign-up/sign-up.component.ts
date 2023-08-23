@@ -6,6 +6,7 @@ import { AuthService } from 'src/shared/services/auth.service';
 import Validation from '../utils/validation';
 import * as CryptoJS from 'crypto-js';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
+import { BlockableUI } from 'primeng/api';
 
 @Component({
   selector: 'sign-up',
@@ -27,6 +28,7 @@ export class SignUpComponent {
   public inValidOTP:boolean=false;
 
   public emailExisitAlert:boolean=false;
+  public invalidDomain:boolean=false;
 
   public enableOTPButton = true;
 
@@ -176,13 +178,21 @@ export class SignUpComponent {
           
     //console.log("sign up for exisitng user")
           if(res.message){
-           // console.log("inside if")
-            //this.emailFormFlag = true;
-            //this.signUpFormFlag = false;
-            this.enableSignInButton = false;
+            console.log("error message========"+res.message)
+            if(res.message=='Error: Invalid Domain'){
+              
+              this.invalidDomain=true
+            }
+            else{
+              this.emailExisitAlert=true
+            }
+
+          
+            this.enableSignInButton = true;
             this.enableOTPButton = false;
             this.otpField = false;
-            this.emailExisitAlert=true
+            // this.emailExisitAlert=true
+            // this.invalidDomain=true
           }
           else{
            // console.log("inside else")
