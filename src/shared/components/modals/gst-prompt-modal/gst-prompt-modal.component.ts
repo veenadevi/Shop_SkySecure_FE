@@ -18,6 +18,8 @@ export class GstPromptModalComponent {
 
   public companyName : String; 
 
+  public radioValue : any;
+
   
 
   public subscriptions : Subscription[] = [];
@@ -29,6 +31,11 @@ export class GstPromptModalComponent {
     private userAccountStore : UserAccountStore
   ){
 
+  }
+
+
+  public onRadioButtonClick(){
+    console.log("_+_+_+_+_ ", this.radioValue);
   }
 
 

@@ -15,6 +15,7 @@
                     <th>Owner Name</th>
                     <th>Account Name</th>
                     <th>Account Type</th>
+                    <th> </th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-account>
@@ -28,6 +29,12 @@
                     <td>{{ account.Owner.name }}</td>
                     <td>{{ account.Account_Name }}</td>
                     <td>{{ account.Account_Type }}</td>
+                    <td>
+                        
+                        <div class="btn-holder">
+                            <button id="assign-btn" class="btn" (click)="assign()">Assign</button>
+                        </div>
+                    </td>
                 </tr>
             </ng-template>
             <!-- <ng-template pTemplate="paginatorleft">

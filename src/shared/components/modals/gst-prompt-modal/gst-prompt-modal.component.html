@@ -6,10 +6,26 @@
     </div>
     <div class="modal-body">
         Please Enter your company name to proceed
+
+        <div id="#radio-button-group">
+            <div class="flex flex-wrap gap-3">
+                <div class="flex align-items-center">
+                    <p-radioButton name="radioButton" value="gst" (click)=onRadioButtonClick() [(ngModel)]="radioValue" inputId="gst"></p-radioButton>
+                    <label for="gst" class="ml-2">GST</label>
+                </div>
+                
+                <div class="flex align-items-center">
+                    <p-radioButton name="radioButton" value="manual" (click)=onRadioButtonClick() [(ngModel)]="radioValue" inputId="manual"></p-radioButton>
+                    <label for="manual" class="ml-2">Manual</label>
+                </div>
+            </div>
+        </div>
+
+        
     </div>
-    <div class="input-field">
+    <!-- <div class="input-field">
         <input class="form-control" placeholder="Company Name" name="companyName" type="text" [(ngModel)]="companyName">
-    </div>
+    </div> -->
     <div class="modal-footer">
         <button class="btn compare-btn" (click)="createQuotationService()" [disabled]="!companyName">Submit</button>
     </div>

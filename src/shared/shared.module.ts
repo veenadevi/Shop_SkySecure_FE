@@ -41,6 +41,7 @@ import { CompareProductsTrendingProductsComponent } from './components/modals/ad
 import { CompareProductsSearchListComponent } from './components/modals/add-compare-product-modal/partials/search-for-compare-product/partiaals/compare-products-search-list/compare-products-search-list.component';
 import { BundleMindmapComponent } from './components/bundle-mindmap/bundle-mindmap.component';
 import { GstPromptModalComponent } from './components/modals/gst-prompt-modal/gst-prompt-modal.component';
+import { AssignLeadsModalComponent } from './components/modals/assign-leads-modal/assign-leads-modal.component';
 
 
 
@@ -93,6 +94,7 @@ import { GstPromptModalComponent } from './components/modals/gst-prompt-modal/gs
     CompareProductsSearchListComponent,
     BundleMindmapComponent,
     GstPromptModalComponent,
+    AssignLeadsModalComponent,
    
   ],
 

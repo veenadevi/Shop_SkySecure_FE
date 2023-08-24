@@ -59,7 +59,11 @@
         "fetchCompareProductsListUrl": "api/product/compare",
         "allSubcategory" : "api/sub-category/get/all",
         "fetchAdmingProduct":"api/admin/product/",
-        "editProduct":"api/admin/product/edit"
+        "editProduct":"api/admin/product/edit",
+
+
+        
+        "getAllCRMUsers" : "api/admin/getAllCRMusers"
 
     },
 
