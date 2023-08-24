@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription, map } from 'rxjs';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
@@ -21,6 +21,9 @@ export class AssignLeadsModalComponent implements OnInit{
   private subscriptions : Subscription[] = [];
 
   public closingDate : Date | undefined;
+
+  @Input('request')
+  public request : any;
 
   constructor(
     private superAdminService : SuperAdminService,
@@ -94,9 +97,11 @@ export class AssignLeadsModalComponent implements OnInit{
 
   public submit(){
     console.log("++_+_+_+_+_+_+_+ _Data here", this.closingDate);
+    console.log("++_+_+_+_+_+_+_+ _Data here", this.selectedUser);
   }
 
   public onChange(event){
-    console.log("++_+_+_+_+_+_+_+ _Data here", event.value);
+    
+    this.selectedUser = event.value;
   }
 }
