@@ -1,0 +1,29 @@
+<div class="modal-container">
+    <div class="modal-header">
+        <span>
+            Assign Leads
+        </span>
+    </div>
+    <div class="modal-body">
+
+        <div #assignTo class="field-holder">
+            <div class="left-div">
+                <span>
+                    Assign To 
+                    <mat-icon>info</mat-icon>
+                </span>
+            </div>
+            <div class="right-div">
+                <div class="card flex justify-content-center">
+                    <p-dropdown placeholder="Select Lead" [options]="crmUsersList" (onChange)="onChange($event)" optionLabel="name"></p-dropdown>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+    
+    <div class="modal-footer">
+        <button (click)="submit()">Submit</button>
+    </div>
+</div>

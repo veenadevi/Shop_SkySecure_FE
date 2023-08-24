@@ -90,7 +90,40 @@
               </div>
           </mat-list-item>
 
-         
+         <!-- Account Manager Section -->
+          <ng-container *ngIf="userRoleVal === 'admin'">
+            <mat-list-item>
+              <span class="icon-holder" (click)="menuExpansion(isExpanded , 'am')">
+                <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
+              </span>
+              <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('am')">
+                  <span class="text-style">
+                    Account Manager
+                  </span>
+                  <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+                </div>
+            </mat-list-item>
+    
+            <!-- Security Sub Menu -->
+            <ng-container *ngIf="amSubMenu">
+              <!-- <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['super-admin-page']">Dashboard</span>
+              </mat-list-item> -->
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['account-manager/accounts']">Accounts</span>
+              </mat-list-item>
+              <!-- <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
+              </mat-list-item> -->
+              
+             
+
+             
+
+           
+              
+            </ng-container>
+          </ng-container>
         
           
 
@@ -131,6 +164,12 @@
               
             </ng-container>
           </ng-container>
+
+
+
+          <!-- account-manager -->
+
+
           <ng-container *ngIf="userRoleVal === 'admin'">
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'admin')">
