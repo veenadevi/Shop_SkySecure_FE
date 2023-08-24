@@ -979,7 +979,7 @@
                                             alt="minus" class="add" src="../../../../../assets/icons/MinusIcon.svg">
                                     </span>
                                     <span>
-                                        <input class="input-field" [(ngModel)]="item.quantity"  (keydown)="onKeyDown($event)">
+                                        <input class="input-field" type="number" [(ngModel)]="item.quantity"  (keydown)="onKeyDown($event)">
                                     </span>
                                     <span>
                                         <img id="add-minus-quantity" alt="" (click)="addQuantity(item.quantity,i)"

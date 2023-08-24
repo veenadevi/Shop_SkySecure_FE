@@ -1,0 +1,181 @@
+.blog-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.cont-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.section-01 {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+
+.blog-slug {
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-title {
+    width: 50%;
+}
+
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+input {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+
+}
+
+.input {
+    width: 80%;
+}
+
+.section-02 {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+
+.blog-category {
+    width: 50%;
+
+}
+
+.blog-url {
+    width: 50%;
+}
+
+select {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.section-03 {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    /* justify-content: space-evenly; */
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+
+.blog-author {
+    width: 50%;
+    margin-left: 0%;
+}
+
+.blog-update {
+    width: 22%;
+}
+
+.blog-create {
+    width: 22%;
+}
+
+.section-04 {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    /* justify-content: space-evenly; */
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+
+.upload {
+    width: 50%;
+
+}
+
+.publish-date {
+    width: 50%;
+}
+
+.section-05 {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    /* justify-content: space-evenly; */
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+
+.author-name {
+    width: 30%;
+    margin-left: 0%;
+}
+
+.author-linkedin {
+    width: 20%;
+}
+
+.about-author {
+    width: 50%;
+}
+
+.blog-btn {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.btn-01 {
+    width: 50%;
+}
+
+.btn-02 {
+    width: 50%;
+}
+
+.btn-cancel {
+    box-sizing: border-box;
+    padding: 7px;
+    border: 1px solid #EFEFEF;
+    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
+    color: white;
+    border-radius: 8px;
+    margin: 10px;
+    width: 150px;
+    float: right;
+}
+
+.btn-save {
+    width: 150px;
+    box-sizing: border-box;
+    padding: 7px;
+    border: 1px solid #EFEFEF;
+    background: #ffc107;
+    color: black;
+    border-radius: 8px;
+    margin: 10px;
+}

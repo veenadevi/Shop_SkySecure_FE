@@ -50,7 +50,16 @@ export class ProductDetailComponent implements OnInit{
     if (key === '*') {
       event.preventDefault(); // Prevent the negative sign from being entered
     }
-   
+    if (key === '.') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  
+    if (key === 'e') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === 'E') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
   }
 
   public displayBasic: boolean; 
