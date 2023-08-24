@@ -13,6 +13,7 @@
 
 .field-holder{
     display: flex;
+    align-items: center;
 }
 
 .left-div{
@@ -37,4 +38,8 @@
    
     font-size: 18px;
     color: #9E9E9E;
+}
+
+:host ::ng-deep .card{
+    border: none;
 }

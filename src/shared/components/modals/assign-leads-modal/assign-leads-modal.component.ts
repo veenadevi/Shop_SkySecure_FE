@@ -20,6 +20,8 @@ export class AssignLeadsModalComponent implements OnInit{
 
   private subscriptions : Subscription[] = [];
 
+  public closingDate : Date | undefined;
+
   constructor(
     private superAdminService : SuperAdminService,
     private superAdminStore : SuperAdminStore
@@ -91,7 +93,7 @@ export class AssignLeadsModalComponent implements OnInit{
   }
 
   public submit(){
-    console.log("++_+_+_+_+_+_+_+ _Data here", this.selectedCity);
+    console.log("++_+_+_+_+_+_+_+ _Data here", this.closingDate);
   }
 
   public onChange(event){

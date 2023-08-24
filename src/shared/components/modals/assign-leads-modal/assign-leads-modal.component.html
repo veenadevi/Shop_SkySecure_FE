@@ -20,6 +20,20 @@
             </div>
         </div>
 
+        <div #assignDate class="field-holder">
+            <div class="left-div">
+                <span>
+                    Target Date
+                    <mat-icon>info</mat-icon>
+                </span>
+            </div>
+            <div class="right-div">
+                <div class="card flex justify-content-center">
+                    <p-calendar [(ngModel)]="closingDate" [showIcon]="true"></p-calendar>
+                </div>
+            </div>
+        </div>
+
         
     </div>
     
