@@ -6,6 +6,7 @@ import { AccountManagerComponent } from './account-manager.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'primeng/api';
 import { AmAccountsListComponent } from './partials/am-accounts-list/am-accounts-list.component';
+import { PrimeNgModule } from 'src/app/prime-ng.module';
 
 
 @NgModule({
@@ -16,10 +17,12 @@ import { AmAccountsListComponent } from './partials/am-accounts-list/am-accounts
   ],
   imports: [
     CommonModule,
+    PrimeNgModule,
     AccountManagerRoutingModule
   ],
   exports: [
     RouterModule,
+    PrimeNgModule,
     SharedModule,
   ]
 })
