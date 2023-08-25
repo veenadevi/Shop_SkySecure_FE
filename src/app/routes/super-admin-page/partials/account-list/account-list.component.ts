@@ -62,7 +62,7 @@ export class AccountListComponent implements OnInit{
   public getAllAccounts(){
     
       let a: any = this.sampleData();
-      this.accountData = a.accounts.data;
+      this.accountData = [...a.accounts.data, ...a.accounts.data];
       this.info = a.accounts.info;
     /*this.subscriptions.push(
       this.adminPageService.getAllAccounts().subscribe( response => {
@@ -84,9 +84,15 @@ export class AccountListComponent implements OnInit{
   }
 
 
-  public assign(account){
+  public assign(account, i){
     const modalRef = this.modalService.open(AssignLeadsModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
     modalRef.componentInstance.request = account;
+    console.log("()))_)_)_)_ Data Index ", i);
+
+    modalRef.componentInstance.passedData.subscribe((res) => {
+      
+    })
+    
   }
 
   public getAllCRMUsers(){

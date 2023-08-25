@@ -18,7 +18,7 @@
                     <th> </th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-account>
+            <ng-template pTemplate="body" let-account let-i="rowIndex">
                 <tr>
                     <td>
                         <div class="text-style" (click)="getAccountById(account.id)">
@@ -32,7 +32,7 @@
                     <td>
                         
                         <div class="btn-holder">
-                            <button id="assign-btn" class="btn" (click)="assign(account)">Assign</button>
+                            <button id="assign-btn" class="btn" (click)="assign(account, i)">Assign</button>
                         </div>
                     </td>
                 </tr>

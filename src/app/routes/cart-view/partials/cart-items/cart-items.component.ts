@@ -379,16 +379,16 @@ public onChangeQuantity(i, price) : void {
         cart_ref_id : cartRefId ? cartRefId : '0001111'
       };
 
-      //this.viewModal(req);
+      this.viewModal(req);
 
-      if(userAccountdetails.company){
+      /*if(userAccountdetails.company){
         req.companyName = userAccountdetails.company;
         this.createQuotationService(req);
         
       }
       else{
         this.viewModal(req);
-      }
+      }*/
 
     }
     
@@ -399,8 +399,8 @@ public onChangeQuantity(i, price) : void {
   }
 
   public viewModal(req) {
-    const modalRef = this.modalService.open(CompanyPromptModalComponent);
-    //const modalRef = this.modalService.open(GstPromptModalComponent);
+    //const modalRef = this.modalService.open(CompanyPromptModalComponent);
+    const modalRef = this.modalService.open(GstPromptModalComponent);
     modalRef.componentInstance.request = req;
   }
 

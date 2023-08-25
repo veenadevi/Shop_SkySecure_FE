@@ -63,7 +63,8 @@
 
 
         
-        "getAllCRMUsers" : "api/admin/getAllCRMusers"
+        "getAllCRMUsers" : "api/admin/getAllCRMusers",
+        "assignAccountOwner" :  "api/admin/assignAccountOwner"
 
     },
 

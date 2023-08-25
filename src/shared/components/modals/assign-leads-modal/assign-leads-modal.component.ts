@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, map } from 'rxjs';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
@@ -25,9 +26,12 @@ export class AssignLeadsModalComponent implements OnInit{
   @Input('request')
   public request : any;
 
+  @Output() passedData: EventEmitter<any> = new EventEmitter();
+
   constructor(
     private superAdminService : SuperAdminService,
-    private superAdminStore : SuperAdminStore
+    private superAdminStore : SuperAdminStore,
+    private activeModal : NgbActiveModal
   ){
     this.groupedCities = [
       {
@@ -96,8 +100,26 @@ export class AssignLeadsModalComponent implements OnInit{
   }
 
   public submit(){
-    console.log("++_+_+_+_+_+_+_+ _Data here", this.closingDate);
-    console.log("++_+_+_+_+_+_+_+ _Data here", this.selectedUser);
+    
+    //console.log("++_+_+_+_+_+_+_+ _Data here", this.selectedUser);
+    //console.log("++_+_+_+_+_+_+_+ _Data here", this.request);
+
+    let tempAccountId = []
+    let req = {
+      "accountIds": [this.request.id],
+      "zohoUserId": this.selectedUser.id  
+    }
+    this.subscriptions.push(
+      this.superAdminService.setAssignAccountOwner(req).subscribe(res=>{
+        console.log("++_+_+_+_+_+_+_+ _Response", res);
+        if(res && res.assignownerResult && res.assignownerResult.code === 'SUCCESS'){
+          this.passedData.emit(res.assignownerResult);
+          this.activeModal.close();
+        }
+        
+      })
+    )
+    
   }
 
   public onChange(event){
