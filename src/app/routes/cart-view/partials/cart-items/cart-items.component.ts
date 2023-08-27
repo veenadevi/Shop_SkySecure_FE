@@ -131,7 +131,7 @@ public cartData : any[] = [];
 
     this.params = this.route.snapshot.queryParamMap;
 
-console.log("what is in param..."+ JSON.stringify(this.params))
+
 
 
     
@@ -318,7 +318,7 @@ console.log("what is in param..."+ JSON.stringify(this.params))
 
   }
 public onChangeQuantity(i, price) : void {
-  //console.log("changed quantity "+this.cartData[i].quantity)
+ 
   this.cartData[i].quantity = Number(this.cartData[i].quantity)
   this.cartData[i].itemTotal = this.cartData[i].quantity * price;
   this.calTotalPrice();
@@ -374,6 +374,8 @@ public onChangeQuantity(i, price) : void {
       let req = {
         userId : userAccountdetails._id,
         createdBy : userAccountdetails.firstName,
+        //createdBy : "userwithoutGST1001",
+        
         products : this.cartData,
         companyName : '',
         cart_ref_id : cartRefId ? cartRefId : '0001111'
@@ -400,7 +402,7 @@ public onChangeQuantity(i, price) : void {
 
   public viewModal(req) {
     //const modalRef = this.modalService.open(CompanyPromptModalComponent);
-    const modalRef = this.modalService.open(GstPromptModalComponent);
+    const modalRef = this.modalService.open(GstPromptModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
     modalRef.componentInstance.request = req;
   }
 

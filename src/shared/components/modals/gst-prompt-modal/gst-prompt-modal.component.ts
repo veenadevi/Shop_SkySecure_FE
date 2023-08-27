@@ -1,17 +1,19 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/shared/services/cart.service';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { Country, State, City } from "country-state-city";
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-gst-prompt-modal',
   templateUrl: './gst-prompt-modal.component.html',
   styleUrls: ['./gst-prompt-modal.component.css']
 })
-export class GstPromptModalComponent {
+export class GstPromptModalComponent implements OnInit{
 
   @Input('request')
   public request : any;
@@ -22,6 +24,19 @@ export class GstPromptModalComponent {
 
   public gstNo : any;
 
+
+  public countryList : any;
+
+  public stateList : any;
+
+  public cityList : any;
+
+  public selectedCountry : any;
+  public selectedState : any;
+  public selectedCity : any;
+
+  public form: FormGroup;
+
   
 
   public subscriptions : Subscription[] = [];
@@ -30,33 +45,104 @@ export class GstPromptModalComponent {
     private router : Router,
     public activeModal: NgbActiveModal,
     public userProfileService : UserProfileService,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private formBuilder: FormBuilder,
   ){
+
+  }
+
+  ngOnInit(): void {
+    
+
+    this.setForm();
+    this.countryList = Country.getAllCountries();
+  }
+
+  public setForm(){
+    this.form = this.formBuilder.group(
+      {
+        //email: [this.emailViaSignup, [Validators.required, Validators.email]],
+        //otp : [],
+        gstNo : [],
+        companyName : [],
+        addressLine1 : [],
+        addressLine2 : [],
+        countryName : [],
+        stateName : [],
+        cityName : [],
+        postalCode : [],
+        phoneNo : []
+
+      }
+    )
+  }
+
+
+  public onCountryChange(event){
+    
+    let country = JSON.parse(event.target.value);
+    this.selectedCountry = country;
+
+    this.stateList  = State?.getStatesOfCountry(country.isoCode);
+ 
+
+  }
+
+  
+  public onStateChange(event){
+    
+    //this.cityList  = State?.getStatesOfCountry(event.target.value);
+
+    let state = JSON.parse(event.target.value);
+    this.selectedState = state;
+    this.cityList = City.getCitiesOfState(state?.countryCode, state.isoCode);
+   
+    
+
+  }
+
+  public onCityChange(event){
+    
+    
+
+    
+    let city = JSON.parse(event.target.value);
+    this.selectedCity = city;
+    //this.cityList = City.getCitiesOfState(state?.countryCode, state.isoCode);
+    
+    
 
   }
 
 
   public onRadioButtonClick(){
-    console.log("_+_+_+_+_ ", this.radioValue);
+    
+
   }
 
   public createQuotationService2(){
     
+
+
+  
+
+
     let req = this.request;
+    let formVal = this.form.value; 
     
 
 
     req.companyName = "Test"
     req.billing_address = {
         "attention": "name",
-        "address": "Address1",
-        "street2": "Address2",
-        "state_code": "KA",
-        "city": "Bangalore",
-        "state": "KA",
-        "zip": 560001,
-        "country": "IN",
-        "phone": "9972835477"
+        "address": formVal.addressLine1,
+        "street2": formVal.addressLine2,
+        "state_code": this.selectedState.isoCode,
+        "city": this.selectedCity.name,
+        "state": this.selectedState.name,
+        "zip": formVal.postalCode,
+        "country": this.selectedCountry.isoCode,
+        "phone": formVal.phoneNo
     }
 
     req.currency_id = "1014673000000000064";
@@ -75,16 +161,18 @@ export class GstPromptModalComponent {
     
 
 
-    if(this.gstNo!= null || this.gstNo !== ''){
+    if(formVal.gstNo === null || formVal.gstNo === ''){
       
-      req.gst_no =  "29ABDCS1510L1ZB";
-    }
-    else{
+      
       req.gst_treatment = "business_none";
     }
+    else{
+      req.gst_no =  formVal.gstNo;
+      req.gst_treatment = "business_gst";
+    }
 
 
-    console.log("_++_+_+_+_+_+_ +", this.request);
+   
 
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
@@ -95,24 +183,16 @@ export class GstPromptModalComponent {
             this.router.navigate(['/cart/cart-submit']);
           } 
           else {
-            // console.log("/**** Some error occurred ****/ ");
+            
           }
         }
         else{
-          // console.log("/**** Some error occurred ****/ ");
+          
         }
         
       })
     )
 
-
-    /*let req = {
-      userId : userAccountdetails._id,
-      createdBy : userAccountdetails.firstName,
-      products : this.cartData,
-      companyName : '',
-      cart_ref_id : cartRefId ? cartRefId : '0001111'
-    };*/
   }
 
   public createQuotationService(){
@@ -123,18 +203,19 @@ export class GstPromptModalComponent {
     this.updateProfile(this.companyName);
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
-        // console.log("**** ++++++++  response is ", response);
+        
         if(response && response.Accounts && response.Accounts){
           if(response.Accounts.code === 'SUCCESS'){
             this.cartService.getCartItems(null).subscribe();
             this.router.navigate(['/cart/cart-submit']);
+            this.activeModal.close();
           } 
           else {
-            // console.log("/**** Some error occurred ****/ ");
+           
           }
         }
         else{
-          // console.log("/**** Some error occurred ****/ ");
+          
         }
         
       })
@@ -146,7 +227,7 @@ export class GstPromptModalComponent {
     //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
     let userAccountdetails = this.userAccountStore.getUserDetails();
 
-    // console.log("++++++++ Details ", userAccountdetails);
+  
 
     let req = {
       "email" : userAccountdetails.email,
@@ -156,7 +237,7 @@ export class GstPromptModalComponent {
 
     this.subscriptions.push(
       this.userProfileService.updateUserProfile(req).subscribe( response => {
-        // console.log("***** ++++++ Updated ", response);
+        
       })
     )
   }

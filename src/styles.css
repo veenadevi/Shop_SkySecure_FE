@@ -68,6 +68,10 @@ body{
   width:100% !important;
 }
 
+.gst-prompt-modal-custom-class{
+  width:100% !important;
+}
+
 /** CDK Overlay Custom Style **/
 .cdk-overlay-container{
   z-index: 1031 !important;

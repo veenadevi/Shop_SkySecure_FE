@@ -66,3 +66,17 @@
     width: 70%;
 }
 
+label {
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.row{
+    row-gap: 2rem;;
+}
+
+.mx-t3{
+  margin-top: -3rem;
+}
+
