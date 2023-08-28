@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'am-accounts-list',
@@ -15,6 +16,7 @@ export class AmAccountsListComponent {
   public accountData : any;
 
   public info : any;
+  public myEmail:string;
 
 
   public sampleData = {
@@ -248,38 +250,45 @@ export class AmAccountsListComponent {
   }
 
 
-  public allAccounts$ = this.adminPageService.getAllAccounts()
-  .pipe(
-    map(data => {
-      if(data){
-        this.accountData = data.accounts.data;
-        this.info = data.accounts.info;
-        return data;
+  // public myAssignedAccounts$ = this.adminPageService.getMyAssignedAccounts(this.myEmail)
+  // .pipe(
+  //   map(data => {
+  //     if(data){
+  //       this.accountData = data.accounts.data;
+  //       this.info = data.accounts.info;
+  //       return data;
         
-      }
-      else{
-        return data;
-      }
-    }
-    )
-  )
+  //     }
+  //     else{
+  //       return data;
+  //     }
+  //   }
+  //   )
+  // )
 
   constructor(
     private adminPageService : AdminPageService,
-    private router : Router
+    private router : Router,
+    private userAccountStore : UserAccountStore,
   ){}
 
   ngOnInit(): void {
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
-    this.getAllAccounts();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
+
+    //this.myEmail=userAccountdetails.email
+    //hard coded to komal for testimng
+    this.myEmail="komal.verma@skysecuretech.com"
+    this.getMyAssignedAccounts();
+    
 
   }
 
-  public getAllAccounts(){
+  public getMyAssignedAccounts(){
     this.subscriptions.push(
-      this.adminPageService.getAllAccounts().subscribe( response => {
+      this.adminPageService.getMyAssignedAccounts(this.myEmail).subscribe( response => {
         this.accountData = response.accounts.data;
         this.info = response.accounts.info;
 

@@ -36,6 +36,7 @@
         "getQuoteHistory" : "api/user/getQuoteHistory",
         "getAllDashBoardData" : "api/user/allDashBoardData",
         "getAllAccounts" : "api/user/allAccounts",
+        "getMyAssignedAccounts" : "api/user/getMyAccounts",
         "getAccountsById" : "api/user/getAccountDetails",
         "userGstUpdate" : "api/user/user-gst-update",
         

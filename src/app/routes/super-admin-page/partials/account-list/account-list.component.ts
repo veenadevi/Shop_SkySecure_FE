@@ -61,10 +61,10 @@ export class AccountListComponent implements OnInit{
 
   public getAllAccounts(){
     
-      let a: any = this.sampleData();
-      this.accountData = [...a.accounts.data, ...a.accounts.data];
-      this.info = a.accounts.info;
-    /*this.subscriptions.push(
+      // let a: any = this.sampleData();
+      // this.accountData = [...a.accounts.data, ...a.accounts.data];
+      // this.info = a.accounts.info;
+    this.subscriptions.push(
       this.adminPageService.getAllAccounts().subscribe( response => {
         this.accountData = response.accounts.data;
         this.info = response.accounts.info;
@@ -72,7 +72,7 @@ export class AccountListComponent implements OnInit{
         
 
       })
-    )*/
+    )
   }
 
   public getAccountById(accountId){
