@@ -23,6 +23,7 @@ export class UserProfileService {
   private getQuotationUrl : string;
   private initiateOTP : string;
   private validateOTPUrl : string;
+  private userGstUpdateUrl : string;
   
 
 
@@ -41,6 +42,7 @@ export class UserProfileService {
 
     this.initiateOTP = AppService.appUrl.initiateOTP;
     this.validateOTPUrl  = AppService.appUrl.validateOTP;
+    this.userGstUpdateUrl = AppService.appUrl.userGstUpdate;
     
     
   }
@@ -122,6 +124,42 @@ export class UserProfileService {
           return error;
         })
       );
+
+    return REQUEST$;
+  }
+
+  /**
+   * Service To Update GST
+   */
+
+  public updateGST(req): Observable<any> {
+
+    const URL = this.baseUrl + this.userGstUpdateUrl;
+    const OPTIONS = this.getOptions2();
+
+    let request = req;
+    console.log("+++++++++++++ Here 1");
+
+    let REQUEST$ = this.http.patch<Observable<any>>(URL, request, OPTIONS)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          this.userAccountStore.setUserProfileDetails(response);
+          return response;
+        }),
+      );
+
+
+    /*const REQUEST$ = this.http.patch<any>(URL, request, OPTIONS)
+      .pipe(
+        map((response: any) => {
+          console.log("+++++++++++++ Here 2");
+          this.userAccountStore.setUserProfileDetails(response);
+          return response;
+        }),
+      );*/
 
     return REQUEST$;
   }
@@ -280,6 +318,21 @@ export class UserProfileService {
       headers : new HttpHeaders() 
         .set('authorization', token) 
         .append('Content-Type', 'application/json') 
+    }; 
+ 
+    return OPTIONS; 
+  }
+
+  /**
+   * Stages our Http Request Headers 2
+   */
+
+  private getOptions2() : { headers: HttpHeaders } { 
+ 
+    let token = this.userAccountStore.getAccessIdToken();
+    const OPTIONS : { headers : HttpHeaders } = { 
+      headers : new HttpHeaders() 
+        .set('Content-Type', 'application/json') 
     }; 
  
     return OPTIONS; 

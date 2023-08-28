@@ -37,6 +37,7 @@
         "getAllDashBoardData" : "api/user/allDashBoardData",
         "getAllAccounts" : "api/user/allAccounts",
         "getAccountsById" : "api/user/getAccountDetails",
+        "userGstUpdate" : "api/user/user-gst-update",
         
 
         "userSignUp":"api/user/signup",

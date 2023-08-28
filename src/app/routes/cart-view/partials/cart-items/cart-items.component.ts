@@ -383,6 +383,17 @@ public onChangeQuantity(i, price) : void {
 
       this.viewModal(req);
 
+      //if(userAccountdetails.placeOfSupply && userAccountdetails.placeOfSupply !== null){
+
+      /*if(userAccountdetails.placeOfSupply && userAccountdetails.placeOfSupply !== null){
+          req.companyName = userAccountdetails.company;
+          this.createQuotationService(req);
+          
+      }
+      else{
+          this.viewModal(req);
+      }*/
+
       /*if(userAccountdetails.company){
         req.companyName = userAccountdetails.company;
         this.createQuotationService(req);
@@ -405,6 +416,65 @@ public onChangeQuantity(i, price) : void {
     const modalRef = this.modalService.open(GstPromptModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
     modalRef.componentInstance.request = req;
   }
+
+  /*public createQuotationService2(req){
+
+
+        req.billing_address = {
+          "attention": "name",
+          "address": formVal.addressLine1,
+          "street2": formVal.addressLine2,
+          "state_code": this.selectedState.isoCode,
+          "city": this.selectedCity.name,
+          "state": this.selectedState.name,
+          "zip": formVal.postalCode,
+          "country": this.selectedCountry.isoCode,
+          "phone": formVal.phoneNo
+      }
+
+      req.currency_id = "1014673000000000064";
+
+      req.contact_persons =  [
+          {
+              "first_name": "Veena",
+              "email": "veena@skysecuretech.com",
+              "phone": "+91-9972835477",
+              "is_primary_contact": true,
+              "enable_portal": false
+          }
+      ];
+
+      
+      
+
+
+      if(formVal.gstNo === null || formVal.gstNo === ''){
+        
+        
+        req.gst_treatment = "business_none";
+      }
+      else{
+        req.gst_no =  formVal.gstNo;
+        req.gst_treatment = "business_gst";
+      }
+
+
+    this.subscriptions.push(
+      this.cartService.createQuotation(req).subscribe( response => {
+        if(response && response.Accounts && response.Accounts){
+          if(response.Accounts.code === 'SUCCESS'){
+            this.cartService.getCartItems(null).subscribe();
+            this.router.navigate(['/cart/cart-submit']);
+          } 
+          else {
+          }
+        }
+        else{
+        }
+        
+      })
+    )
+  }*/
 
   public createQuotationService(req){
     this.subscriptions.push(

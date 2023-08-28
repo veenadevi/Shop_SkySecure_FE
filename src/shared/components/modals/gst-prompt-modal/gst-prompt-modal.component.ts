@@ -123,8 +123,11 @@ export class GstPromptModalComponent implements OnInit{
   public createQuotationService2(){
     
 
+    let userDetails = this.userAccountStore.getUserDetails();
 
-  
+    
+
+    console.log("_+_+_+_ +Details",userDetails);
 
 
     let req = this.request;
@@ -172,8 +175,10 @@ export class GstPromptModalComponent implements OnInit{
     }
 
 
-   
+    //this.updateGSTService(req);;
 
+   
+    /*
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
         
@@ -191,8 +196,57 @@ export class GstPromptModalComponent implements OnInit{
         }
         
       })
-    )
+    )*/
 
+  }
+
+  public updateGSTService(req){
+
+    
+
+       
+       let userDetails = this.userAccountStore.getUserDetails();
+
+  
+
+      //  let req = {
+      //    "email" : userAccountdetails.email,
+      //    "company" : companyName,
+         
+      //  }
+   
+
+
+    let request = {
+ 
+      "email": userDetails.email,
+      "isRegistered": (req.gst_treatment === "business_gst") ? true : false,
+      //"gstinNumber":"ABCDEG78101",
+      "companyBusinessName":req.companyName,
+      "placeOfSupply": this.selectedState.isoCode,
+       "fullAddress" : [
+             {
+                 "address1" : req.billing_address.address,
+                 "address2" : req.billing_address.street2,
+                 "state" : this.selectedState.name,
+                 "district" : this.selectedCity.isoCode,
+                 "pincode" : req.billing_address.zip,
+                 "countryCode" : this.selectedState.isoCode,
+             }
+         ],
+     
+      
+       "updatedBy": userDetails.email
+       
+     
+     
+     }
+
+     this.subscriptions.push(
+      this.userProfileService.updateGST(request).subscribe( response => {
+        console.log("SSSS");
+      })
+    )
   }
 
   public createQuotationService(){
