@@ -90,6 +90,8 @@
                     <label for="State">City</label>
                       <select  formControlName="cityName" class="form-control" (change)="onCityChange($event)">
                           <option disabled value="'Select City'">Select City </option>
+                          <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
+
                       </select>
                   </div>
                 <div class="col-sm-6 form-group">
