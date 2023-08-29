@@ -113,6 +113,7 @@ export class AssignLeadsModalComponent implements OnInit{
       this.superAdminService.setAssignAccountOwner(req).subscribe(res=>{
         console.log("++_+_+_+_+_+_+_+ _Response", res);
         if(res && res.assignownerResult && res.assignownerResult.code === 'SUCCESS'){
+          res.assignownerResult.ownerName = this.selectedUser;
           this.passedData.emit(res.assignownerResult);
           this.activeModal.close();
         }

@@ -33,8 +33,8 @@ export class SuperAdminService {
     private userAccountStore : UserAccountStore
   ) {
    
-    //this.baseUrlForSuperAdmin = environment.gatewayUrlForOrders;
-    this.baseUrlForSuperAdmin = "http://localhost:8080/";
+    this.baseUrlForSuperAdmin = environment.gatewayUrlForOrders;
+    //this.baseUrlForSuperAdmin = "http://localhost:8080/";
     this.baseUrlForOrders = environment.gatewayUrl;
 
     this.getAllCRMUsersUrl = AppService.appUrl.getAllCRMUsers;

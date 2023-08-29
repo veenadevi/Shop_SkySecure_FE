@@ -90,7 +90,9 @@ export class AccountListComponent implements OnInit{
     console.log("()))_)_)_)_ Data Index ", i);
 
     modalRef.componentInstance.passedData.subscribe((res) => {
-      
+      //account.Owner.name
+      //console.log("_+_+_+_ Outside ", res.ownerName.name);
+      this.accountData[i].Owner.name = res.ownerName.name;
     })
     
   }
