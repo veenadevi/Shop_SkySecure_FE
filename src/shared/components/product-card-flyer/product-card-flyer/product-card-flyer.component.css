@@ -60,6 +60,11 @@
 .realize-review-icon {
     height: 16px;
     margin-right: 2px;
+    
+    margin-bottom: 15px;
+}
+.r4{
+    color: grey;
 }
 
 .ratings-box div{
