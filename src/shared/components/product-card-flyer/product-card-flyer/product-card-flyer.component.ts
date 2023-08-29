@@ -24,6 +24,7 @@ export class ProductCardFlyerComponent implements OnInit{
   isMonthly: boolean = false;
   priceValue:any;
   priceType:any;
+  mrpPriceType : any;
 
   showMonthlyPrice(i:any) {
     // this.isMonthly = true;
@@ -51,6 +52,7 @@ export class ProductCardFlyerComponent implements OnInit{
 
   @Input() set products(value : any){
     this.productsList = value;
+    this.mrpPriceType = this.productsList[0].priceList[0].priceType;
     // console.log("))))))) Data in alst ", value);
  
   }

@@ -91,7 +91,7 @@
                     <span>
                         <span class="text-style-mrp">MRP:</span> 
                         <span class="text-price strike-through"> ₹ {{((item.priceList && item.priceList.length>0) ? item.priceList[0].ERPPrice : '' ) | number : '1.2-2'}}</span> 
-                        <span class="text-term"> / {{(item.priceList && item.priceList.length>0) ? item.priceList[0].priceType : ''}}</span>
+                        <span class="text-term"> / {{(item.priceList && item.priceList.length>0) ? mrpPriceType : ''}}</span>
                     </span>
                 </div>
                
