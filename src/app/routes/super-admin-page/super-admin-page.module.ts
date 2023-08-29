@@ -8,13 +8,15 @@ import { SuperAdminPageComponent } from './super-admin-page.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccountListComponent } from './partials/account-list/account-list.component';
+import { MarketplaceuserComponent } from './partials/marketplaceuser/marketplaceuser.component';
 
 
 @NgModule({
   declarations: [
     ROUTED_COMPONENTS,
     SuperAdminPageComponent,
-    AccountListComponent
+    AccountListComponent,
+    MarketplaceuserComponent
   ],
   imports: [
     CommonModule,

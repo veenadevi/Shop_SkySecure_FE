@@ -11,6 +11,7 @@ import { AddNewProductComponent } from './partials/add-new-product/add-new-produ
 import { UploadProductPriceComponent } from './partials/upload-product-price/upload-product-price.component';
 import { EditProductComponent } from './partials/edit-product/edit-product.component';
 import { UpdateblogComponent } from './partials/updateblog/updateblog.component';
+// import { MarketplaceuserComponent } from '../super-admin-page/partials/marketplaceuser/marketplaceuser.component';
 
 const routes: Routes = [
   {
@@ -72,7 +73,8 @@ const routes: Routes = [
         canActivate: [],
         path: 'updateblog',
         component : UpdateblogComponent
-      }
+      },
+     
     ]
     
   }

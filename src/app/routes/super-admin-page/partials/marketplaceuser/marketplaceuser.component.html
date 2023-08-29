@@ -1,0 +1,47 @@
+<div class="all-accounts-view">
+    <div class="card">
+        <p-table 
+            [value]="accountData" 
+            [tableStyle]="{ 'min-width': '50rem' }"
+            [paginator]="true"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            >
+            <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>First Name</th>
+                    <th>Email</th>
+                    <th>companyName</th>
+                    <th>PhoneNO</th>
+                    <th> </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-account let-i="rowIndex">
+                <tr>
+                    <td>
+                        <div class="text-style" (click)="getAccountById(account.id)">
+                            {{ account.id }}
+                        </div>
+                        
+                    </td>
+                    <td>{{ account.Owner.name }}</td>
+                    <td>{{ account.Account_Name }}</td>
+                    <td>{{ account.Account_Type }}</td>
+                    <td>
+                        
+                       
+                    </td>
+                </tr>
+            </ng-template>
+            <!-- <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+            </ng-template> -->
+            <!-- <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+            </ng-template> -->
+        </p-table>
+    </div>
+</div>
+

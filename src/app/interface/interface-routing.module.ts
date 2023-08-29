@@ -77,6 +77,7 @@ const INTERFACE_ROUTES: Routes = [
         path: 'account-manager',
         loadChildren: () => import('../routes/account-manager/account-manager.module').then(m=>m.AccountManagerModule)
       },
+     
     ]
   }
 
