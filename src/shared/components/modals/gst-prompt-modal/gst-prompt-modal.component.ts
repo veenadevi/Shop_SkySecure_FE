@@ -127,7 +127,7 @@ export class GstPromptModalComponent implements OnInit{
 
     
 
-    console.log("_+_+_+_ +Details",userDetails);
+    
 
 
     let req = this.request;
@@ -252,7 +252,7 @@ export class GstPromptModalComponent implements OnInit{
 
      this.subscriptions.push(
       this.userProfileService.updateGST(request).subscribe( response => {
-        console.log("SSSS");
+        
       })
     )
   }

@@ -386,11 +386,9 @@ public onChangeQuantity(i, price) : void {
       
 
       if(userAccountdetails.placeOfSupply && userAccountdetails.placeOfSupply !== null){
-        console.log("_+_+_+_+_+_+_+_+_ Data In Cart ", userAccountdetails);
         this.createQuotationService(req, userAccountdetails);
       }
       else{
-        console.log("_+_+_+_+_+_+_+_+_ Data In Cart False", userAccountdetails);
         this.viewModal(req);
       }
 
@@ -499,7 +497,7 @@ public onChangeQuantity(i, price) : void {
         cart_ref_id : cartRefId ? cartRefId : '0001111' */
 
 
-        console.log("+++++++ ____ _ Inside ", userData);
+        
 
         
         req.companyName = userData.company
@@ -509,7 +507,7 @@ public onChangeQuantity(i, price) : void {
             "street2": userData.addressTwo ? userData.addressTwo : '',
             "state_code": userData.placeOfSupply,
             "city": userData.city ? userData.city : '',
-            "state": userData.state ? userData.state : '',
+            "state": userData.placeOfSupply ? userData.placeOfSupply : '',
             "zip": userData.pinCode ? userData.pinCode : '',
             "country": userData.country ? userData.country : '',
             "phone": userData.mobileNumber ? userData.mobileNumber : ''
@@ -528,7 +526,6 @@ public onChangeQuantity(i, price) : void {
         ];
 
 
-        console.log("+++++++ ____ _ Inside 2", userData);
 
         if( userData.isRegistered){
       
