@@ -175,10 +175,10 @@ export class GstPromptModalComponent implements OnInit{
     }
 
 
-    //this.updateGSTService(req);;
+    this.updateGSTService(req);
 
    
-    /*
+    
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
         
@@ -196,7 +196,7 @@ export class GstPromptModalComponent implements OnInit{
         }
         
       })
-    )*/
+    )
 
   }
 
@@ -228,19 +228,27 @@ export class GstPromptModalComponent implements OnInit{
              {
                  "address1" : req.billing_address.address,
                  "address2" : req.billing_address.street2,
-                 "state" : this.selectedState.name,
+                 //"state" : this.selectedState.name,
+                 "state" : this.selectedState.isoCode,
                  "district" : this.selectedCity.isoCode,
                  "pincode" : req.billing_address.zip,
-                 "countryCode" : this.selectedState.isoCode,
+                 //"countryCode" : this.selectedState.isoCode,
+                 "countryCode" : this.selectedCountry.isoCode,
              }
          ],
      
       
        "updatedBy": userDetails.email
-       
-     
      
      }
+
+     if(req.gst_treatment === "business_gst"){
+        request["gstinNumber"] = req.gst_no ;
+     }
+
+
+
+
 
      this.subscriptions.push(
       this.userProfileService.updateGST(request).subscribe( response => {

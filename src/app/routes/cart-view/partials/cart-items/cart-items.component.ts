@@ -381,7 +381,18 @@ public onChangeQuantity(i, price) : void {
         cart_ref_id : cartRefId ? cartRefId : '0001111'
       };
 
-      this.viewModal(req);
+      //this.viewModal(req);
+
+      
+
+      if(userAccountdetails.placeOfSupply && userAccountdetails.placeOfSupply !== null){
+        console.log("_+_+_+_+_+_+_+_+_ Data In Cart ", userAccountdetails);
+        this.createQuotationService(req, userAccountdetails);
+      }
+      else{
+        console.log("_+_+_+_+_+_+_+_+_ Data In Cart False", userAccountdetails);
+        this.viewModal(req);
+      }
 
       //if(userAccountdetails.placeOfSupply && userAccountdetails.placeOfSupply !== null){
 
@@ -476,7 +487,65 @@ public onChangeQuantity(i, price) : void {
     )
   }*/
 
-  public createQuotationService(req){
+  public createQuotationService(req, userData){
+
+
+
+    /*
+        userId : userAccountdetails._id,
+        createdBy : userAccountdetails.firstName,
+        products : this.cartData,
+        companyName : '',
+        cart_ref_id : cartRefId ? cartRefId : '0001111' */
+
+
+        console.log("+++++++ ____ _ Inside ", userData);
+
+        
+        req.companyName = userData.company
+        req.billing_address = {
+            "attention": "name",
+            "address": userData.addressOne ? userData.addressOne : '',
+            "street2": userData.addressTwo ? userData.addressTwo : '',
+            "state_code": userData.placeOfSupply,
+            "city": userData.city ? userData.city : '',
+            "state": userData.state ? userData.state : '',
+            "zip": userData.pinCode ? userData.pinCode : '',
+            "country": userData.country ? userData.country : '',
+            "phone": userData.mobileNumber ? userData.mobileNumber : ''
+        }
+
+        req.currency_id = "1014673000000000064";
+
+        req.contact_persons =  [
+            {
+                "first_name": userData.firstName,
+                "email": userData.email,
+                "phone": userData.mobileNumber ? userData.mobileNumber : '',
+                "is_primary_contact": true,
+                "enable_portal": false
+            }
+        ];
+
+
+        console.log("+++++++ ____ _ Inside 2", userData);
+
+        if( userData.isRegistered){
+      
+          req.gst_no =  userData.gstinNumber ? userData.gstinNumber : '';
+          //req.gst_no = "29ABDCS1510L1ZB";
+          req.gst_treatment = "business_gst";
+          
+        }
+        else{
+          req.gst_treatment = "business_none";
+        }
+        
+
+
+
+
+
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
         if(response && response.Accounts && response.Accounts){

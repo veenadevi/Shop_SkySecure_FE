@@ -161,6 +161,8 @@ export class CartService {
   //     products: product
   
   // }
+
+  console.log("+++++++ ____ _ InsideCreate Quotation ", request);
     
     const REQUEST$ = this.http.post<any>(URL, request)
       .pipe(
