@@ -1,0 +1,28 @@
+.all-accounts-view {
+    min-height: 30em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+}
+
+.text-style{
+    cursor: pointer;
+    color: #3366CC;
+}
+
+.btn-holder{
+    display: flex;
+    column-gap: 1rem;
+}
+#assign-btn {
+    box-sizing: border-box;
+    padding: 7px;
+    border: 1px solid #EFEFEF;
+    color: white;
+    margin: 10px;
+    width: 100px;
+    border-radius: 8px;
+    background: var(--dark-violet, linear-gradient(90deg, #888BCB 0%, #383DA9 100%));
+    
+}

@@ -16,7 +16,11 @@ export class SuperAdminService {
 
   private baseUrlForSuperAdmin : string;
 
-  private getAllCRMUsersUrl : string
+  private baseUrlForOrders : string;
+
+  private getAllCRMUsersUrl : string;
+
+  private assignAccountOwnerUrl : string;
 
 
 
@@ -30,7 +34,11 @@ export class SuperAdminService {
   ) {
    
     this.baseUrlForSuperAdmin = environment.gatewayUrlForOrders;
+    //this.baseUrlForSuperAdmin = "http://localhost:8080/";
+    this.baseUrlForOrders = environment.gatewayUrl;
+
     this.getAllCRMUsersUrl = AppService.appUrl.getAllCRMUsers;
+    this.assignAccountOwnerUrl = AppService.appUrl.assignAccountOwner;
     
   }
 
@@ -43,7 +51,7 @@ export class SuperAdminService {
 
     let url = this.baseUrlForSuperAdmin + this.getAllCRMUsersUrl;
 
-    //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
+    
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(
@@ -57,6 +65,59 @@ export class SuperAdminService {
 
     return request$;
   }
+
+
+   /**
+   * Service for Assigning Account Manager
+   */
+
+   public setAssignAccountOwner(req): Observable<any> {
+
+    const URL = this.baseUrlForSuperAdmin + this.assignAccountOwnerUrl;
+
+    //let URL = "http://localhost:8080/" + this.assignAccountOwnerUrl
+    const OPTIONS = this.getOptions();
+
+    //let request = null;
+    
+    const REQUEST$ = this.http.post<any>(URL, req, OPTIONS)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          this.userAccountStore.setUserProfileDetails(response);
+          //this.userAccountStore.setUserProfileDetails(response);
+          return of(response);
+        }),
+        map((response: any) => {
+          this.userAccountStore.setUserProfileDetails(response);
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling
+          return error
+        })
+      );
+
+    return REQUEST$;
+  }
+
+
+    /**
+   * Stages our Http Request Headers
+   */
+
+    private getOptions() : { headers: HttpHeaders } { 
+ 
+      let token = this.userAccountStore.getAccessIdToken();
+      const OPTIONS : { headers : HttpHeaders } = { 
+        headers : new HttpHeaders() 
+          .set('Content-Type', 'application/json') 
+      }; 
+   
+      return OPTIONS; 
+    }
 
   
 

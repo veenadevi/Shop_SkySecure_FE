@@ -21,10 +21,10 @@
                         <mat-icon class="review-icon">star_border</mat-icon>
                     </div>
                     <div class="realize-review">
-                        <img class="realize-review-icon" src="../../../../assets/Realize/logos/RealizeIcon.svg">
-                        (4.0 Reviews)
+                        <img class="realize-review-icon" src="../../../../assets/Logos/SS logo.svg">
+                        <p class="r4">(4.0 Reviews)</p>
                     </div>
-                    <!-- <div>
+                    <!-- <div>  
                         (4.0 Reviews)
                     </div> -->
                 </div>
@@ -91,7 +91,7 @@
                     <span>
                         <span class="text-style-mrp">MRP:</span> 
                         <span class="text-price strike-through"> ₹ {{((item.priceList && item.priceList.length>0) ? item.priceList[0].ERPPrice : '' ) | number : '1.2-2'}}</span> 
-                        <span class="text-term"> / {{(item.priceList && item.priceList.length>0) ? item.priceList[0].priceType : ''}}</span>
+                        <span class="text-term"> / {{(item.priceList && item.priceList.length>0) ? mrpPriceType : ''}}</span>
                     </span>
                 </div>
                

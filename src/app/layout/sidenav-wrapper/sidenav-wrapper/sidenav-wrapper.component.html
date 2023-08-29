@@ -18,6 +18,8 @@
   
       <mat-sidenav #sidenav mode="side" opened="isExpanded" [ngClass]="(menuToogled) ? '' : 'hide-nav'">
         
+        <div>
+
         
         <mat-nav-list [ngClass]="(isExpanded) ? 'nav-expanded' : ''">
         <!-- Dashboard Section -->
@@ -155,7 +157,9 @@
               <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
               </mat-list-item>
-              
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-pages/marketplaceuser']">Marketplace User</span>
+              </mat-list-item>
              
 
              
@@ -212,6 +216,9 @@
                 <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['portal-admin-page/upload-product-price']">Upload Product Price</span>
               </mat-list-item>
               
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['portal-admin-page/updateblog']">Update Blog</span>
+              </mat-list-item>
             </ng-container>
           </ng-container>
           
@@ -221,6 +228,11 @@
         
 
         </mat-nav-list>
+
+      </div>
+      <div>
+        
+      </div>
       </mat-sidenav>
 
     

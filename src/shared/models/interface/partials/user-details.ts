@@ -11,4 +11,8 @@ export interface UserDetails {
     __v : number;
     _id : string;
     userId : string;
+    isRegistered : boolean;
+    placeOfSupply : string;
+
+    
 }

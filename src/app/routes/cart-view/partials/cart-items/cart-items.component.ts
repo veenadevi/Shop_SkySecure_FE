@@ -37,7 +37,15 @@ export class CartItemsComponent {
     if (key === '*') {
       event.preventDefault(); // Prevent the negative sign from being entered
     }
-   
+    if (key === '.') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === 'e') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === 'E') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
   }
 
   private subscriptions : Subscription[] = [];
@@ -123,7 +131,7 @@ public cartData : any[] = [];
 
     this.params = this.route.snapshot.queryParamMap;
 
-console.log("what is in param..."+ JSON.stringify(this.params))
+
 
 
     
@@ -310,7 +318,7 @@ console.log("what is in param..."+ JSON.stringify(this.params))
 
   }
 public onChangeQuantity(i, price) : void {
-  //console.log("changed quantity "+this.cartData[i].quantity)
+ 
   this.cartData[i].quantity = Number(this.cartData[i].quantity)
   this.cartData[i].itemTotal = this.cartData[i].quantity * price;
   this.calTotalPrice();
@@ -366,6 +374,8 @@ public onChangeQuantity(i, price) : void {
       let req = {
         userId : userAccountdetails._id,
         createdBy : userAccountdetails.firstName,
+        //createdBy : "userwithoutGST1001",
+        
         products : this.cartData,
         companyName : '',
         cart_ref_id : cartRefId ? cartRefId : '0001111'
@@ -373,14 +383,34 @@ public onChangeQuantity(i, price) : void {
 
       //this.viewModal(req);
 
-      if(userAccountdetails.company){
+      
+
+      if(userAccountdetails.placeOfSupply && userAccountdetails.placeOfSupply !== null){
+        this.createQuotationService(req, userAccountdetails);
+      }
+      else{
+        this.viewModal(req);
+      }
+
+      //if(userAccountdetails.placeOfSupply && userAccountdetails.placeOfSupply !== null){
+
+      /*if(userAccountdetails.placeOfSupply && userAccountdetails.placeOfSupply !== null){
+          req.companyName = userAccountdetails.company;
+          this.createQuotationService(req);
+          
+      }
+      else{
+          this.viewModal(req);
+      }*/
+
+      /*if(userAccountdetails.company){
         req.companyName = userAccountdetails.company;
         this.createQuotationService(req);
         
       }
       else{
         this.viewModal(req);
-      }
+      }*/
 
     }
     
@@ -391,12 +421,128 @@ public onChangeQuantity(i, price) : void {
   }
 
   public viewModal(req) {
-    const modalRef = this.modalService.open(CompanyPromptModalComponent);
-    //const modalRef = this.modalService.open(GstPromptModalComponent);
+    //const modalRef = this.modalService.open(CompanyPromptModalComponent);
+    const modalRef = this.modalService.open(GstPromptModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
     modalRef.componentInstance.request = req;
   }
 
-  public createQuotationService(req){
+  /*public createQuotationService2(req){
+
+
+        req.billing_address = {
+          "attention": "name",
+          "address": formVal.addressLine1,
+          "street2": formVal.addressLine2,
+          "state_code": this.selectedState.isoCode,
+          "city": this.selectedCity.name,
+          "state": this.selectedState.name,
+          "zip": formVal.postalCode,
+          "country": this.selectedCountry.isoCode,
+          "phone": formVal.phoneNo
+      }
+
+      req.currency_id = "1014673000000000064";
+
+      req.contact_persons =  [
+          {
+              "first_name": "Veena",
+              "email": "veena@skysecuretech.com",
+              "phone": "+91-9972835477",
+              "is_primary_contact": true,
+              "enable_portal": false
+          }
+      ];
+
+      
+      
+
+
+      if(formVal.gstNo === null || formVal.gstNo === ''){
+        
+        
+        req.gst_treatment = "business_none";
+      }
+      else{
+        req.gst_no =  formVal.gstNo;
+        req.gst_treatment = "business_gst";
+      }
+
+
+    this.subscriptions.push(
+      this.cartService.createQuotation(req).subscribe( response => {
+        if(response && response.Accounts && response.Accounts){
+          if(response.Accounts.code === 'SUCCESS'){
+            this.cartService.getCartItems(null).subscribe();
+            this.router.navigate(['/cart/cart-submit']);
+          } 
+          else {
+          }
+        }
+        else{
+        }
+        
+      })
+    )
+  }*/
+
+  public createQuotationService(req, userData){
+
+
+
+    /*
+        userId : userAccountdetails._id,
+        createdBy : userAccountdetails.firstName,
+        products : this.cartData,
+        companyName : '',
+        cart_ref_id : cartRefId ? cartRefId : '0001111' */
+
+
+        
+
+        
+        req.companyName = userData.company
+        req.billing_address = {
+            "attention": "name",
+            "address": userData.addressOne ? userData.addressOne : '',
+            "street2": userData.addressTwo ? userData.addressTwo : '',
+            "state_code": userData.placeOfSupply,
+            "city": userData.city ? userData.city : '',
+            "state": userData.placeOfSupply ? userData.placeOfSupply : '',
+            "zip": userData.pinCode ? userData.pinCode : '',
+            "country": userData.country ? userData.country : '',
+            "phone": userData.mobileNumber ? userData.mobileNumber : ''
+        }
+
+        req.currency_id = "1014673000000000064";
+
+        req.contact_persons =  [
+            {
+                "first_name": userData.firstName,
+                "email": userData.email,
+                "phone": userData.mobileNumber ? userData.mobileNumber : '',
+                "is_primary_contact": true,
+                "enable_portal": false
+            }
+        ];
+
+
+
+        if( userData.isRegistered){
+      
+          req.gst_no =  userData.gstinNumber ? userData.gstinNumber : '';
+          //req.gst_no = "29ABDCS1510L1ZB";
+          req.gst_treatment = "business_gst";
+          
+        }
+        else{
+          req.gst_treatment = "business_none";
+        }
+        
+
+
+
+
+
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
         if(response && response.Accounts && response.Accounts){

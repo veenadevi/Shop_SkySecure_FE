@@ -1,3 +1,4 @@
+// import { Component } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,12 +9,11 @@ import { SuperAdminService } from 'src/shared/services/super-admin-service/super
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 
 @Component({
-  selector: 'account-list',
-  templateUrl: './account-list.component.html',
-  styleUrls: ['./account-list.component.css']
+  selector: 'app-marketplaceuser',
+  templateUrl: './marketplaceuser.component.html',
+  styleUrls: ['./marketplaceuser.component.css']
 })
-export class AccountListComponent implements OnInit{
-  
+export class MarketplaceuserComponent implements OnInit {
 
   public subscriptions : Subscription[] = [];
 
@@ -90,9 +90,7 @@ export class AccountListComponent implements OnInit{
     console.log("()))_)_)_)_ Data Index ", i);
 
     modalRef.componentInstance.passedData.subscribe((res) => {
-      //account.Owner.name
-      //console.log("_+_+_+_ Outside ", res.ownerName.name);
-      this.accountData[i].Owner.name = res.ownerName.name;
+      
     })
     
   }
@@ -115,8 +113,11 @@ export class AccountListComponent implements OnInit{
         "data": [{
             "Owner": {
               "name": "Realize Web Services",
-              "id": "467371000000262001",
-              "email": "rws@altsystech.com"
+            
+              "email": "rws@altsystech.com",
+              "companyName":"skysecuretech",
+              "phoneNo":"123456789"
+             
             },
             "Account_Type": null,
             "Account_Name": "test company",
@@ -125,73 +126,16 @@ export class AccountListComponent implements OnInit{
           {
             "Owner": {
               "name": "Realize Web Services",
-              "id": "467371000000262001",
-              "email": "rws@altsystech.com"
+            
+              "email": "rws@altsystech.com",
+              "companyName":"skysecuretech",
+              "phoneNo":"123456789"
             },
             "Account_Type": "Customer",
             "Account_Name": "Skysecuretech",
             "id": "467371000000718025"
           },
-          {
-            "Owner": {
-              "name": "Realize Web Services",
-              "id": "467371000000262001",
-              "email": "rws@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "Skysecure Technology",
-            "id": "467371000000717034"
-          },
-          {
-            "Owner": {
-              "name": "TestSP",
-              "id": "467371000000386001",
-              "email": "veena@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "SKYSECURE",
-            "id": "467371000000717007"
-          },
-          {
-            "Owner": {
-              "name": "TestSP",
-              "id": "467371000000386001",
-              "email": "veena@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "SKYSECURE OWNER Update",
-            "id": "467371000000717002"
-          },
-          {
-            "Owner": {
-              "name": "TestSP",
-              "id": "467371000000386001",
-              "email": "veena@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "SKYSECURE",
-            "id": "467371000000715007"
-          },
-          {
-            "Owner": {
-              "name": "Realize Web Services",
-              "id": "467371000000262001",
-              "email": "rws@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "Sky Secure",
-            "id": "467371000000715002"
-          },
-          {
-            "Owner": {
-              "name": "Realize Web Services",
-              "id": "467371000000262001",
-              "email": "rws@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "Skysecure Technologies",
-            "id": "467371000000714035"
-          },
+        
         ],
         "info": {
           "per_page": 200,
@@ -204,4 +148,5 @@ export class AccountListComponent implements OnInit{
       }
     }
   }
+
 }

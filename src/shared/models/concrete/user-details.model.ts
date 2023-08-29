@@ -12,7 +12,10 @@ export class UserDetailsModel implements UserDetails {
   public updatedAt
   public updatedBy
   public __v : number;
-  public _id : string
+  public _id : string;
+  public userId : string;
+  public isRegistered : boolean;
+  public placeOfSupply : string;
 
   constructor(args : Partial<UserDetailsModel>) {
     Object.assign(this, args);

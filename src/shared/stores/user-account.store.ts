@@ -94,7 +94,7 @@ export class UserAccountStore {
   /**
    * Return User Profile
    */
-  public getUserProfileDetails(): UserDetails {
+  public getUserProfileDetails(): any {
   
     return this.userProfileDetails.userDetails;
     //return aa;
@@ -103,7 +103,7 @@ export class UserAccountStore {
   /**
    * Return User Details
    */
-  public getUserDetails(): UserDetails {
+  public getUserDetails(): any {
     
 
     return this.userDetails;

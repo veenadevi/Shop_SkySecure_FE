@@ -11,14 +11,14 @@
             <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Id</th>
-                    <th>Owner Name</th>
-                    <th>Account Name</th>
-                    <th>Account Type</th>
-                    <th></th>
+                    <th>First Name</th>
+                    <th>Email</th>
+                    <th>companyName</th>
+                    <th>PhoneNO</th>
+                    <th> </th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-account>
+            <ng-template pTemplate="body" let-account let-i="rowIndex">
                 <tr>
                     <td>
                         <div class="text-style" (click)="getAccountById(account.id)">
@@ -30,10 +30,8 @@
                     <td>{{ account.Account_Name }}</td>
                     <td>{{ account.Account_Type }}</td>
                     <td>
-                        <div class="btn-holder">
-                            <button id="assign-btn" class="btn">Assign</button>
-                            <button id="assign-btn" class="btn">Reject</button>
-                        </div>
+                        
+                       
                     </td>
                 </tr>
             </ng-template>
@@ -46,3 +44,4 @@
         </p-table>
     </div>
 </div>
+
