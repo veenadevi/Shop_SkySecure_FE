@@ -91,7 +91,7 @@ export class GstPromptModalComponent implements OnInit{
 
 
     this.form.controls['gstNo'].setValue(userDetails.gstinNumber ? userDetails.gstinNumber : null);
-    this.form.controls['companyName'].setValue(userDetails.company ? userDetails.company : null);
+    this.form.controls['companyName'].setValue(userDetails.companyBusinessName ? userDetails.companyBusinessName : null);
     this.form.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
     this.form.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
     this.form.controls['phoneNo'].setValue(userDetails.mobileNumber ? userDetails.mobileNumber : null);
