@@ -106,7 +106,7 @@ export class GstPromptModalComponent implements OnInit{
     //formVal.gstNo = userDetails.gstinNumber ? userDetails.gstinNumber : null;
     
 
-    console.log("+_+_+_+_+_+_ UserDetails ", userDetails);
+    
   }
 
   public onCountryChange(event){
@@ -163,7 +163,6 @@ export class GstPromptModalComponent implements OnInit{
   public createQuotationService2(){
     
 
-    console.log("+__+_+_+_+_ Type ", this.selectedType);
 
     let userDetails = this.userAccountStore.getUserDetails();
 
@@ -174,8 +173,7 @@ export class GstPromptModalComponent implements OnInit{
     let req = this.request;
     let formVal = this.form.value; 
     
-    console.log("+__+_+_+_+_ Email ", formVal.email);
-    console.log("+__+_+_+_+_ Name ", formVal.firstName);
+    
 
     
     req.companyName = formVal.companyName;
@@ -238,7 +236,7 @@ export class GstPromptModalComponent implements OnInit{
       req.gst_treatment = "business_gst";
     }
 
-    console.log("*(*(*(*(*(* Final Req ", req);
+
 
 
 
