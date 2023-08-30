@@ -9,6 +9,7 @@ import { SuperAdminPageComponent } from './super-admin-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccountListComponent } from './partials/account-list/account-list.component';
 import { MarketplaceuserComponent } from './partials/marketplaceuser/marketplaceuser.component';
+import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MarketplaceuserComponent } from './partials/marketplaceuser/marketplace
     ROUTED_COMPONENTS,
     SuperAdminPageComponent,
     AccountListComponent,
-    MarketplaceuserComponent
+    MarketplaceuserComponent,
+    LeadSummaryComponent
   ],
   imports: [
     CommonModule,

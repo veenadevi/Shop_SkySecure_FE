@@ -75,11 +75,16 @@ export class AccountListComponent implements OnInit{
     )
   }
 
-  public getAccountById(accountId){
+  public getAccountById(account){
 
+    let acc = JSON.stringify(account);
     let queryParams ={
-      accountId : accountId
+      account : acc,
+
     }
+
+    this.router.navigate(['admin-pages/lead-summary'], {queryParams: queryParams});
+
    // this.router.navigate(['/admin-page/accounts-details'], {queryParams: queryParams});
   }
 
