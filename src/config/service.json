@@ -45,6 +45,8 @@
         "userLogin":"api/user/login",
         "initiateOTP" : "api/user/userOTPValidation",
         "validateOTP" : "api/user/validateOTP",
+        "getAllUsers":"api/admin/getAllusers",
+        "updateUserRole":"api/admin/updateUserRole",
 
 
         "app-registration" : "api/user/azure/app-registration",

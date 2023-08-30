@@ -1,12 +1,20 @@
 .all-accounts-view {
-    min-height: 30em;
+    min-height: 25em;
     display: flex;
     flex-direction: column;
     row-gap: 1em;
     padding: 40px;
+    font-size: 0.7rem;
 }
 
 .text-style{
     cursor: pointer;
     color: #3366CC;
+}
+
+.userCountDisplay{
+    padding: 20px; 
+    margin-left: 1.1rem;
+    color: #3366CC;
+    font-weight: 550;
 }
