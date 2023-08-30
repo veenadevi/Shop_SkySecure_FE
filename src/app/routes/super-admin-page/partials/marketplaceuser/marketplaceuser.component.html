@@ -1,10 +1,12 @@
+
+    <div class ="userCountDisplay"> Total Users :{{totalusersCount}}</div>
 <div class="all-accounts-view">
     <div class="card">
         <p-table 
-            [value]="accountData" 
+            [value]="usersData" 
             [tableStyle]="{ 'min-width': '50rem' }"
             [paginator]="true"
-            [rows]="10"
+            [rows]="30"
             [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             >
@@ -13,22 +15,25 @@
                 <tr>
                     <th>First Name</th>
                     <th>Email</th>
-                    <th>companyName</th>
-                    <th>PhoneNO</th>
+                    <th>Contact No</th>
+                    <th>Company Name</th>
+                    <th>Role</th>
                     <th> </th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-account let-i="rowIndex">
+            <ng-template pTemplate="body" let-user let-i="rowIndex">
                 <tr>
-                    <td>
+                    <!-- <td>
                         <div class="text-style" (click)="getAccountById(account.id)">
                             {{ account.id }}
                         </div>
                         
-                    </td>
-                    <td>{{ account.Owner.name }}</td>
-                    <td>{{ account.Account_Name }}</td>
-                    <td>{{ account.Account_Type }}</td>
+                    </td> -->
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.mobileNumber }}</td>
+                    <td>{{ user.company }}</td>
+                    <td>{{ user.role }}</td>
                     <td>
                         
                        

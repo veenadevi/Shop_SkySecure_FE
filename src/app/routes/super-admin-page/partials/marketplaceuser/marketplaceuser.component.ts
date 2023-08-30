@@ -17,26 +17,27 @@ export class MarketplaceuserComponent implements OnInit {
 
   public subscriptions : Subscription[] = [];
 
-  public accountData : any;
+  public usersData : any=[];
 
   public info : any;
+  public totalusersCount:number
 
 
 
 
 
-  public allAccounts$ = this.adminPageService.getAllAccounts()
+  public allAccounts$ = this.adminPageService.getAllusers()
   .pipe(
     map(data => {
       if(data){
-        this.accountData = data.accounts.data;
-        this.info = data.accounts.info;
+        this.usersData = data.data;
+    
         return data;
         
       }
-      else{
-        return data;
-      }
+      // else{
+      //   return data;
+      // }
     }
     )
   )
@@ -54,20 +55,20 @@ export class MarketplaceuserComponent implements OnInit {
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
-    this.getAllAccounts();
-    this.getAllCRMUsers();
+    this.getAlluser();
+    // this.getAllCRMUsers();
 
   }
 
-  public getAllAccounts(){
-    
-      // let a: any = this.sampleData();
-      // this.accountData = [...a.accounts.data, ...a.accounts.data];
-      // this.info = a.accounts.info;
+  public getAlluser(){
+  console.log("fetching All users")
     this.subscriptions.push(
-      this.adminPageService.getAllAccounts().subscribe( response => {
-        this.accountData = response.accounts.data;
-        this.info = response.accounts.info;
+      this.adminPageService.getAllusers().subscribe( response => {
+
+        console.log("fetched user data ",response)
+        this.usersData = response;
+      this.totalusersCount=response.length;
+      console.log("===== this.totalusersCoun  ", this.totalusersCount)
         
         
 
@@ -107,46 +108,6 @@ export class MarketplaceuserComponent implements OnInit {
 
 
 
-  public sampleData(){
-    return {
-      "accounts": {
-        "data": [{
-            "Owner": {
-              "name": "Realize Web Services",
-            
-              "email": "rws@altsystech.com",
-              "companyName":"skysecuretech",
-              "phoneNo":"123456789"
-             
-            },
-            "Account_Type": null,
-            "Account_Name": "test company",
-            "id": "467371000000719057"
-          },
-          {
-            "Owner": {
-              "name": "Realize Web Services",
-            
-              "email": "rws@altsystech.com",
-              "companyName":"skysecuretech",
-              "phoneNo":"123456789"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "Skysecuretech",
-            "id": "467371000000718025"
-          },
-        
-        ],
-        "info": {
-          "per_page": 200,
-          "count": 77,
-          "page": 1,
-          "sort_by": "id",
-          "sort_order": "desc",
-          "more_records": false
-        }
-      }
-    }
-  }
+
 
 }
