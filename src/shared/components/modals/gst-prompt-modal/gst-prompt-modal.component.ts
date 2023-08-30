@@ -127,15 +127,12 @@ export class GstPromptModalComponent implements OnInit{
 
     
 
-    
-
-
     let req = this.request;
     let formVal = this.form.value; 
     
 
 
-    req.companyName = "Test"
+    req.companyName = formVal.companyName;
     req.billing_address = {
         "attention": "name",
         "address": formVal.addressLine1,
@@ -152,9 +149,9 @@ export class GstPromptModalComponent implements OnInit{
 
     req.contact_persons =  [
         {
-            "first_name": "Veena",
-            "email": "veena@skysecuretech.com",
-            "phone": "+91-9972835477",
+            "first_name": userDetails.firstName,
+            "email": userDetails.email,
+            "phone": userDetails.mobileNumber ? userDetails.mobileNumber : '',
             "is_primary_contact": true,
             "enable_portal": false
         }
@@ -175,6 +172,8 @@ export class GstPromptModalComponent implements OnInit{
     }
 
 
+    
+    
     this.updateGSTService(req);
 
    

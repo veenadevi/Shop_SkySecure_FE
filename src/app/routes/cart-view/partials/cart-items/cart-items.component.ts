@@ -381,16 +381,16 @@ public onChangeQuantity(i, price) : void {
         cart_ref_id : cartRefId ? cartRefId : '0001111'
       };
 
-      //this.viewModal(req);
+      this.viewModal(req);
 
       
-
+/*
       if(userAccountdetails.placeOfSupply && userAccountdetails.placeOfSupply !== null){
         this.createQuotationService(req, userAccountdetails);
       }
       else{
         this.viewModal(req);
-      }
+      }*/
 
       //if(userAccountdetails.placeOfSupply && userAccountdetails.placeOfSupply !== null){
 
