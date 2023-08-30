@@ -1,0 +1,23 @@
+#leadSummary{
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    min-height: 35em;
+}
+
+#lead-summary-header{
+    background: var(--primary);
+}
+
+.row-div{
+    display: flex;
+}
+
+#leadStatus{
+    flex-basis: 30%;
+}
+
+#selectedProducts{
+    flex-basis : 70%
+}
