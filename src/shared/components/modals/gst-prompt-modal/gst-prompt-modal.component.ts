@@ -37,6 +37,8 @@ export class GstPromptModalComponent implements OnInit{
 
   public form: FormGroup;
 
+  public selectedType : any = 'self';
+
   
 
   public subscriptions : Subscription[] = [];
@@ -53,10 +55,13 @@ export class GstPromptModalComponent implements OnInit{
 
   ngOnInit(): void {
     
-
+    
     this.setForm();
+    this.setSelfData();
     this.countryList = Country.getAllCountries();
   }
+
+
 
   public setForm(){
     this.form = this.formBuilder.group(
@@ -71,12 +76,38 @@ export class GstPromptModalComponent implements OnInit{
         stateName : [],
         cityName : [],
         postalCode : [],
-        phoneNo : []
+        phoneNo : [],
+        firstName : [],
+        email : []
 
       }
     )
   }
 
+  public setSelfData(){
+    let userDetails = this.userAccountStore.getUserDetails();
+
+    let formVal = this.form.value;
+
+
+    this.form.controls['gstNo'].setValue(userDetails.gstinNumber ? userDetails.gstinNumber : null);
+    this.form.controls['companyName'].setValue(userDetails.company ? userDetails.company : null);
+    this.form.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
+    this.form.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
+    this.form.controls['phoneNo'].setValue(userDetails.mobileNumber ? userDetails.mobileNumber : null);
+
+
+
+
+
+    //formVal.countryName = userDetails.countryCode ? userDetails.countryCode : null;
+    //formVal.stateName = userDetails.state ? userDetails.state : null;
+    
+    //formVal.gstNo = userDetails.gstinNumber ? userDetails.gstinNumber : null;
+    
+
+    console.log("+_+_+_+_+_+_ UserDetails ", userDetails);
+  }
 
   public onCountryChange(event){
     
@@ -120,18 +151,33 @@ export class GstPromptModalComponent implements OnInit{
 
   }
 
+  public onToogleChange(val){
+    
+    this.selectedType = val;
+    this.form.reset();
+    if(val === 'self'){
+      this.setSelfData();
+    }
+  }
+
   public createQuotationService2(){
     
 
+    console.log("+__+_+_+_+_ Type ", this.selectedType);
+
     let userDetails = this.userAccountStore.getUserDetails();
+
+
 
     
 
     let req = this.request;
     let formVal = this.form.value; 
     
+    console.log("+__+_+_+_+_ Email ", formVal.email);
+    console.log("+__+_+_+_+_ Name ", formVal.firstName);
 
-
+    
     req.companyName = formVal.companyName;
     req.billing_address = {
         "attention": "name",
@@ -147,15 +193,36 @@ export class GstPromptModalComponent implements OnInit{
 
     req.currency_id = "1014673000000000064";
 
-    req.contact_persons =  [
-        {
-            "first_name": userDetails.firstName,
-            "email": userDetails.email,
-            "phone": userDetails.mobileNumber ? userDetails.mobileNumber : '',
-            "is_primary_contact": true,
-            "enable_portal": false
-        }
-    ];
+    req.RequestingForOther = (this.selectedType === 'others') ? true : false;
+
+    if(this.selectedType === 'others'){
+      req.contact_persons =  [
+          {
+              "first_name": formVal.firstName,
+              "email": formVal.email,
+              "phone": formVal.mobileNumber ? formVal.mobileNumber : '',
+              "is_primary_contact": true,
+              "enable_portal": false
+          }
+      ];
+    }
+
+    else{
+      req.contact_persons =  [
+          {
+              "first_name": userDetails.firstName,
+              "email": userDetails.email,
+              "phone": userDetails.mobileNumber ? userDetails.mobileNumber : '',
+              "is_primary_contact": true,
+              "enable_portal": false
+          }
+      ];
+    }
+
+
+    
+
+    
 
     
     
@@ -171,8 +238,11 @@ export class GstPromptModalComponent implements OnInit{
       req.gst_treatment = "business_gst";
     }
 
+    console.log("*(*(*(*(*(* Final Req ", req);
 
-    
+
+
+    /*
     
     this.updateGSTService(req);
 
@@ -195,7 +265,7 @@ export class GstPromptModalComponent implements OnInit{
         }
         
       })
-    )
+    )*/
 
   }
 
@@ -302,5 +372,7 @@ export class GstPromptModalComponent implements OnInit{
       })
     )
   }
+
+
 
 }

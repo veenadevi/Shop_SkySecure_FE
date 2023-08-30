@@ -137,3 +137,11 @@ h5{
 .col-sm-12{
     display: flex;
 }
+
+#customerToogle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
