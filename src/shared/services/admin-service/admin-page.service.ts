@@ -20,6 +20,9 @@ export class AdminPageService {
   private getAllAccountsUrl : string;
   private getMyAssignedAccountsUrl:string
   private getAccountsByIdUrl : string
+  private baseUrlForUsers:string
+  private getAllusersURL:string
+  private updateUserRole:string
 
 
 
@@ -31,12 +34,15 @@ export class AdminPageService {
     private userAccountStore : UserAccountStore
   ) {
     this.baseUrl = environment.gatewayUrl;
+    this.baseUrlForUsers = environment.gatewayUrlForUserProfile;
     this.baseUrlForQuote = environment.gatewayUrlForOrders;
     this.addFeatureUrl = AppService.appUrl.addFeature;
     this.getAllDashBoardDataUrl = AppService.appUrl.getAllDashBoardData;
     this.getAllAccountsUrl = AppService.appUrl.getAllAccounts;
     this.getMyAssignedAccountsUrl=AppService.appUrl.getMyAssignedAccounts;
     this.getAccountsByIdUrl = AppService.appUrl.getAccountsById;
+    this.getAllusersURL=AppService.appUrl.getAllUsers;
+    this.updateUserRole=AppService.appUrl.updateUserRole;
 
     
   }
@@ -87,6 +93,25 @@ export class AdminPageService {
     return request$;
   }
 
+
+  public getAllusers() : Observable<any> {
+
+    let url = this.baseUrlForUsers + this.getAllusersURL;
+
+    //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
 
   public getMyAssignedAccounts(emailId:string) : Observable<any> {
 
