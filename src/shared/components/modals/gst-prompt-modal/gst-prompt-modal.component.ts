@@ -253,6 +253,7 @@ export class GstPromptModalComponent implements OnInit{
           if(response.Accounts.code === 'SUCCESS'){
             this.cartService.getCartItems(null).subscribe();
             this.router.navigate(['/cart/cart-submit']);
+            this.activeModal.close();
           } 
           else {
             
