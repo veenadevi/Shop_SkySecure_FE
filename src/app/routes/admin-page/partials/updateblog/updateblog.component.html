@@ -1,0 +1,129 @@
+<div class="blog-container">
+    <h1>Update Blog</h1>
+    <div class="cont-container">
+        <div class="section-01">
+            <div class="blog-slug">
+                <label>Slug</label>
+                <div class="down">
+                    <input class="input" placeholder="Enter your Blog Slug">
+                </div>
+
+            </div>
+            <div class="blog-title">
+                <label>Title</label>
+                <div class="down">
+                    <input class="input" placeholder="Enter your Blog Title">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section-02">
+            <div class="blog-category">
+                <label>Select Category</label>
+                <div class="down">
+                    <select class="input" placeholder="Enter your Blog Category">
+                        <option>Categories</option>
+                        <option>White Papers</option>
+                        <option>Others</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="blog-url">
+                <label>Blog URL</label>
+                <div class="down">
+                    <input class="input" placeholder="Enter your Blog Url ">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="section-03">
+            <div class="blog-author">
+                <label>Author</label>
+                <div class="down">
+                    <input class="input" placeholder="Enter Author Name">
+                </div>
+
+            </div>
+            <div class="blog-create">
+                <label>Created By</label>
+                <div class="down">
+                    <input class="input" placeholder="Enter the Name">
+                </div>
+            </div>
+            <div class="blog-update">
+                <label>Updated By</label>
+                <div class="down">
+                    <input class="input" placeholder="Enter the Name">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section-04">
+            <div class="upload">
+                <label>Image Logo</label>
+                <div class="avatar-edit">
+                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                        (change)="uploadFile($event)" />
+                    <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
+                        alt="productLogo" />
+                    <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
+                        (click)="removeImage()">Remove</button>
+                    <label for="imageUpload" *ngIf="editFile" [ngClass]="['custom-label', 'upload-image']"></label>
+                    <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
+                        (click)="removeUploadedFile()"></label>
+                </div>
+                <div class="avatar-preview">
+                    <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="publish-date">
+                <label for="datepicker">Select a date</label>
+                <div>
+                    <input type="date" id="datepicker" name="datepicker">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-05">
+            <div class="author-name">
+                <label>Author Name</label>
+                <div class="down">
+                    <input class="input" placeholder="Enter Author Name">
+                </div>
+
+            </div>
+            <div class="author-linkedin">
+                <label>Author LinkedIn</label>
+                <div class="down">
+                    <input class="input" placeholder="Enter the LinkedIn">
+                </div>
+            </div>
+            <div class="about-author">
+                <label>About Author</label>
+                <div class="down">
+                    <input class="input" placeholder="Enter About Author">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="blog-btn">
+            <div class="btn-01">
+                <button class="btn-cancel">Cancel</button>
+            </div>
+            <div class="btn-02">
+                <button class="btn-save">Save Changes</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>

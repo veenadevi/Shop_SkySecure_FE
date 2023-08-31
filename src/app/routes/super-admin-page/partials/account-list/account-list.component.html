@@ -15,12 +15,13 @@
                     <th>Owner Name</th>
                     <th>Account Name</th>
                     <th>Account Type</th>
+                    <th> </th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-account>
+            <ng-template pTemplate="body" let-account let-i="rowIndex">
                 <tr>
                     <td>
-                        <div class="text-style" (click)="getAccountById(account.id)">
+                        <div class="text-style" (click)="getAccountById(account)">
                             {{ account.id }}
                         </div>
                         
@@ -28,6 +29,12 @@
                     <td>{{ account.Owner.name }}</td>
                     <td>{{ account.Account_Name }}</td>
                     <td>{{ account.Account_Type }}</td>
+                    <td>
+                        
+                        <div class="btn-holder">
+                            <button id="assign-btn" class="btn" (click)="assign(account, i)">Assign</button>
+                        </div>
+                    </td>
                 </tr>
             </ng-template>
             <!-- <ng-template pTemplate="paginatorleft">

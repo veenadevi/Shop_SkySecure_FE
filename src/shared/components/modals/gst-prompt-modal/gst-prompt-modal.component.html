@@ -1,16 +1,149 @@
 <div class="modal-container">
     <div class="modal-header">
         <div class="modal-top">
-            <h4>GST Details</h4>
+            <h4>Business Details</h4>
         </div>
     </div>
     <div class="modal-body">
-        Please Enter your company name to proceed
-    </div>
-    <div class="input-field">
-        <input class="form-control" placeholder="Company Name" name="companyName" type="text" [(ngModel)]="companyName">
+        <div id="customerToogle">
+          <p>
+            <mat-button-toggle-group #group="matButtonToggleGroup" name="fontStyle" [value]="selectedType" (change)="onToogleChange(group.value)" aria-label="Font Style">
+              <mat-button-toggle value="self">Self</mat-button-toggle>
+              <mat-button-toggle value="others">Others</mat-button-toggle>
+            </mat-button-toggle-group>
+          </p>
+        </div>
+
+        <!-- <div id="#radio-button-group">
+            <div class="flex flex-wrap gap-3">
+                <div class="flex align-items-center">
+                    <p-radioButton name="radioButton" value="gst" (click)=onRadioButtonClick() [(ngModel)]="radioValue" inputId="gst"></p-radioButton>
+                    <label for="gst" class="ml-2">GST</label>
+                </div>
+                
+                <div class="flex align-items-center">
+                    <p-radioButton name="radioButton" value="manual" (click)=onRadioButtonClick() [(ngModel)]="radioValue" inputId="manual"></p-radioButton>
+                    <label for="manual" class="ml-2">Manual</label>
+                </div>
+            </div>
+        </div> -->
+        
+        <div class="container mt-3">
+            <form [formGroup]="form">
+            
+              <div class="row jumbotron box8">
+             
+
+                
+                <div class="col-sm-11 form-group">
+                    <label for="gst-no">GST</label>
+                    <input formControlName="gstNo" type="text" class="form-control" name="gstNo" id="gst-no" placeholder="Enter your first name." required>
+                </div>
+            
+                <!-- <div class="col-sm-6 form-group">
+                  <label for="name-f">First Name</label>
+                  <input type="text" class="form-control" name="fname" id="name-f" placeholder="Enter your first name." required>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label for="name-l">Last name</label>
+                  <input type="text" class="form-control" name="lname" id="name-l" placeholder="Enter your last name." required>
+                </div> -->
+                <ng-container *ngIf="selectedType === 'others'">
+                  <div class="col-sm-6 form-group">
+                    <label for="email">Email ID</label>
+                    <input formControlName="email" type="email" class="form-control-01" name="email" id="email" placeholder="Email ID" required>
+                  </div>
+                  <div class="col-sm-6 form-group">
+                    <label for="firstName">First Name</label>
+                    <input formControlName="firstName" type="firstName" class="form-control-01" name="Locality" id="firstName" placeholder="First Name" required>
+                  </div>
+                  
+                </ng-container>
+                <div class="col-sm-6 form-group">
+                    <label for="companyName">Company Name</label>
+                    <input formControlName="companyName" type="companyName" class="form-control-01" name="companyName" id="companyName" placeholder="Company Name" required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label for="address-1">Address Line-1</label>
+                  <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality" id="address-1" placeholder="Locality/House/Street no." required>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label for="address-2">Address Line-2</label>
+                  <input formControlName="addressLine2" type="address" class="form-control-01" name="address" id="address-2" placeholder="Village/City Name." required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="Country">Country</label>
+                    <select  formControlName="countryName" class="form-control" (change)="onCountryChange($event)">
+                        <option disabled value="'Select Country'">Select Country </option>
+                        <option  *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+                    </select>
+                    <!-- <select class="form-control custom-select browser-default" (ngModelChange)="onCountryChange($event)">
+                        <ng-container *ngFor=" let item of countryList">
+                            <option value="item.id">{{item.flag}} {{item.name}}</option>
+                        </ng-container>
+                      <option value="Afghanistan">Afghanistan</option>
+                      <option value="Åland Islands">Åland Islands</option>
+                      
+                    </select> -->
+                  </div>
+                <div class="col-sm-6 form-group">
+                  <label for="State">State</label>
+                    <select formControlName="stateName" class="form-control" (change)="onStateChange($event)" >
+                        <option disabled value="'Select State'">Select Country </option>
+                        <option  *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+                    </select>
+                </div>
+                <!-- <div class="col-sm-6 form-group">
+                    <label for="State">State</label>
+                    <select class="form-control" [(ngModel)] ="selectedState" (change)="onStateChange($event, selectedState)">
+                      <option disabled value="'Select State'">Select Country </option>
+                      <option *ngFor="let item of stateList" [ngValue]="item">{{item.name}}</option>
+                  </select>
+                </div> -->
+                
+                <div class="col-sm-6 form-group">
+                    <label for="State">City</label>
+                      <select  formControlName="cityName" class="form-control" (change)="onCityChange($event)">
+                          <option disabled value="'Select City'">Select City </option>
+                          <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
+
+                      </select>
+                  </div>
+                <div class="col-sm-6 form-group">
+                  <label for="zip">Postal-Code</label>
+                  <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip" placeholder="Postal-Code." required>
+                </div>
+                
+                <div class="col-sm-2 form-group">
+                  <label for="cod">Country code</label>
+                  <select class="form-control browser-default custom-select">
+                    <option data-countryCode="US" value="1" selected>USA (+1)</option>
+                    <option data-countryCode="GB" value="44">UK (+44)</option>
+          
+                    
+                  </select>
+                </div>
+                <div class="col-sm-4 form-group">
+                  <label for="tel">Phone</label>
+                  <input formControlName="phoneNo" type="tel" name="phone" class="form-control" id="tel" placeholder="Enter Your Phone No." required>
+                </div>
+
+                <div class="col-sm-12">
+                  <input type="checkbox" class="form-check d-inline" id="chb" required>
+                  <div for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
+                  </div>
+                </div>
+          
+              </div>
+            </form>
+          </div>
+
+        
     </div>
     <div class="modal-footer">
-        <button class="btn compare-btn" (click)="createQuotationService()" [disabled]="!companyName">Submit</button>
+        <button class="btn compare-btn" (click)="createQuotationService2()">Submit</button>
     </div>
 </div>

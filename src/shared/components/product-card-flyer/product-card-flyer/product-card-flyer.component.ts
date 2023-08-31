@@ -20,24 +20,24 @@ export class ProductCardFlyerComponent implements OnInit{
 
 
   discountRate: number =120; 
-  monthlyPrice: number = this.discountRate / 12;
-  isMonthly: boolean = false;
+  // monthlyPrice: number = this.discountRate ;
+  isMonthly: boolean = true;
   priceValue:any;
   priceType:any;
+  mrpPriceType : any;
 
   showMonthlyPrice(i:any) {
-    // this.isMonthly = true;
-    this.priceValue = this.productsList[i].priceList[0].price;
-    this.priceType = this.productsList[i].priceList[0].priceType;
-    this.productsList[i].priceList[0].priceType = "Month";
-    this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price/12
+    this.isMonthly = true;
+    this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price;
+    // this.priceValue = this.productsList[i].priceList[0].price;
+    // this.priceType = this.productsList[i].priceList[0].priceType;
+    this.productsList[i].priceList[0].priceType = "Year";
+    this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price*12;
   }
 
   showDiscountRate(i: any) {
-    // this.isMonthly = false;
-    this.productsList[i].priceList[0].priceType=this.priceType;
-
-    this.productsList[i].priceList[0].price = this.priceValue;
+    this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price/12;
+    this.productsList[i].priceList[0].priceType = "Month";
   }
   // originalAmount: number = 100;
   // modifiedAmountValue: number = 150;
@@ -50,8 +50,13 @@ export class ProductCardFlyerComponent implements OnInit{
   public productsList : any[] = [];
 
   @Input() set products(value : any){
+
     this.productsList = value;
+    this.mrpPriceType = this.productsList[0].priceList[0].priceType;
     // console.log("))))))) Data in alst ", value);
+    this.productsList.forEach(element => {
+        element.priceList[0].priceType = "Month";
+    });
  
   }
 

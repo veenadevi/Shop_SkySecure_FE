@@ -46,6 +46,7 @@ export class SidenavWrapperComponent {
   // public profileSubMenu : boolean = false;
   public adminSubMenu : boolean = false;
   public sAdminSubMenu : boolean = false;
+  public amSubMenu : boolean = false;
 
   constructor(
     private loginService : LoginService,
@@ -101,6 +102,9 @@ export class SidenavWrapperComponent {
     }
     if(navVal === 'dashboard'){
       this.dashboardSubMenu = true;
+    }
+    if(navVal === 'am'){
+      this.amSubMenu = true;
     }
 
     /*if(this.isExpanded === false){
@@ -162,9 +166,13 @@ export class SidenavWrapperComponent {
           this.adminSubMenu = (this.adminSubMenu) ? false : true;
           return;
 
-        case 'sadmin':
-            this.sAdminSubMenu = (this.sAdminSubMenu) ? false : true;
-            return;
+      case 'sadmin':
+          this.sAdminSubMenu = (this.sAdminSubMenu) ? false : true;
+          return;
+
+      case 'am':
+          this.amSubMenu = (this.amSubMenu) ? false : true;
+          return;
       
       
         

@@ -72,6 +72,12 @@ const INTERFACE_ROUTES: Routes = [
         path: 'admin-pages',
         loadChildren: () => import('../routes/super-admin-page/super-admin-page.module').then(m=>m.SuperAdminPageModule)
       },
+      {
+        canActivate: [],
+        path: 'account-manager',
+        loadChildren: () => import('../routes/account-manager/account-manager.module').then(m=>m.AccountManagerModule)
+      },
+     
     ]
   }
 

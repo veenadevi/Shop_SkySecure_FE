@@ -36,13 +36,17 @@
         "getQuoteHistory" : "api/user/getQuoteHistory",
         "getAllDashBoardData" : "api/user/allDashBoardData",
         "getAllAccounts" : "api/user/allAccounts",
+        "getMyAssignedAccounts" : "api/user/getMyAccounts",
         "getAccountsById" : "api/user/getAccountDetails",
+        "userGstUpdate" : "api/user/user-gst-update",
         
 
         "userSignUp":"api/user/signup",
         "userLogin":"api/user/login",
         "initiateOTP" : "api/user/userOTPValidation",
         "validateOTP" : "api/user/validateOTP",
+        "getAllUsers":"api/admin/getAllusers",
+        "updateUserRole":"api/admin/updateUserRole",
 
 
         "app-registration" : "api/user/azure/app-registration",
@@ -59,7 +63,12 @@
         "fetchCompareProductsListUrl": "api/product/compare",
         "allSubcategory" : "api/sub-category/get/all",
         "fetchAdmingProduct":"api/admin/product/",
-        "editProduct":"api/admin/product/edit"
+        "editProduct":"api/admin/product/edit",
+
+
+        
+        "getAllCRMUsers" : "api/admin/getAllCRMusers",
+        "assignAccountOwner" :  "api/admin/assignAccountOwner"
 
     },
 

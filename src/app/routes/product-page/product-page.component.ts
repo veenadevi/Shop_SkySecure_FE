@@ -599,9 +599,10 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
         let combinedData = [...cachedData, ...cachedData2];
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
-        this.prdLength = uniqueElements.length;
+        this.productListToCompare = uniqueElements;
+        this.prdLength = this.productListToCompare.length;
 
-        //console.log("+++++++++compare product length+++++++++++++ ", this.prdLength);
+        console.log("+++++++++compare product length++ via Subcategory+++++++++++ ", this.prdLength);
         
         if(data){
           return data;

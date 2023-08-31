@@ -50,7 +50,16 @@ export class ProductDetailComponent implements OnInit{
     if (key === '*') {
       event.preventDefault(); // Prevent the negative sign from being entered
     }
-   
+    if (key === '.') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  
+    if (key === 'e') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === 'E') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
   }
 
   public displayBasic: boolean; 
@@ -78,7 +87,8 @@ export class ProductDetailComponent implements OnInit{
   productListToCompare  = [];
   products = [];
   links = ['#description', '#feature', '#specification','#reviews', '#compProd', '#bundles','#faq'];
-  titles = ['Description', 'Features', 'Specification','Reviews','Compare Products','Bundles','FAQ'];
+  //titles = ['Description', 'Features', 'Specification','Reviews','Compare Products','Bundles','FAQ'];
+  titles = ['Description', 'Features', 'Specification','Reviews','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
 
@@ -412,13 +422,13 @@ featureCount=5;
     this.getProductDetails(productId);
     // console.log(this.featureList);
 
-    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
-    let combinedData = [...cacheData, ...cacheData2];
-    let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+    // let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    // let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    // let combinedData = [...cacheData, ...cacheData2];
+    // let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
-
-    this.productListToCompare =uniqueElements;
+    this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    // this.productListToCompare =uniqueElements;
 
     console.log("while page load product list szie ===",this.productListToCompare)
    
@@ -543,17 +553,19 @@ featureCount=5;
     
 
     if(type === 'fromProd'){
-      // console.log("()()() From Prom Prod");
+     console.log("()()() From Prom Prod");
       // console.log("()()()( From Prod", item);
-      cacheData.push(item);
+      this.productListToCompare.push(item);
       
     }
     else{
-      cacheData.push(item);
+      console.log("()()() adding From else");
+      this.productListToCompare.push(item);
     }
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
 
-    localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(cacheData));
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
 
     //this.productListToCompare.push(item);
 
@@ -564,21 +576,19 @@ featureCount=5;
       item['checked'] = true;
     }
     
-    this.compareProductsStore.setCompareProductsList2(cacheData);
-  //  this.selectedListForCompare = this.selectedListForCompare.filter(element => element._id != item._id);
-    this.listForCompare.emit(cacheData);
-    // console.log("getProdFromLocalStorage",this.productListToCompare);
+    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
     //localStorage.removeItem('product_list_to_compare');
-    //localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
     //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    //console.log("getProdFromLocalStorage",prodGet);
     this.toaster.showSuccess("The product has been included for comparison.",'')
   }
   else {
   //  alert("Only 4 products are allowed to compare");
   this.toaster.showWarning("You can add only 4 products to compare",'')
   }
+
+  
   }
 
  

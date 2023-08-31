@@ -31,6 +31,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 
 import { CdkTableModule} from '@angular/cdk/table';
 
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
+
 
 
 
@@ -115,6 +118,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatInputModule,
     MatTabsModule,
     CdkTableModule,
+    MatButtonToggleModule,
 
     NgChartsModule
   ],
@@ -145,6 +149,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatTabsModule,
     MatExpansionModule,
     CdkTableModule,
+    MatButtonToggleModule,
 
     NgChartsModule
     
