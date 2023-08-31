@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
 @Component({
   selector: 'add-compare-product-modal',
@@ -13,11 +14,27 @@ export class AddCompareProductModalComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
+    private toaster : ToasterNotificationService
   ){}
 
   public selectedItem(event){
-    this.passEntry.emit(event);
-    this.activeModal.close();
+    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let combinedData = [...cacheData, ...cacheData2];
+
+
+    var isPresent = combinedData.some(function(el){ return el._id === event._id});
+                    
+    if(isPresent){
+        
+        this.toaster.showWarning("Product Already present",'')
+    }
+    else{
+      
+      this.passEntry.emit(event);
+      this.activeModal.close();
+    }
+    
   }
 
   public closeModal(){
