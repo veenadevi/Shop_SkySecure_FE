@@ -174,7 +174,7 @@
           <!-- account-manager -->
 
 
-          <ng-container *ngIf="userRoleVal === 'admin' userRoleVal === 'superadmin'">
+          <ng-container *ngIf="userRoleVal === 'admin' || userRoleVal === 'superadmin'">
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'admin')">
                 <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
