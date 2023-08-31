@@ -93,7 +93,7 @@
           </mat-list-item>
 
          <!-- Account Manager Section -->
-          <ng-container *ngIf="userRoleVal === 'admin'">
+          <ng-container *ngIf="userRoleVal === 'admin' || userRoleVal === 'superadmin'">
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'am')">
                 <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
@@ -133,7 +133,7 @@
 
           <!-- Admin Section -->
 
-          <ng-container *ngIf="userRoleVal === 'admin'">
+          <ng-container *ngIf="userRoleVal === 'superadmin'">
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'sadmin')">
                 <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
@@ -174,7 +174,7 @@
           <!-- account-manager -->
 
 
-          <ng-container *ngIf="userRoleVal === 'admin'">
+          <ng-container *ngIf="userRoleVal === 'admin' userRoleVal === 'superadmin'">
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'admin')">
                 <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
