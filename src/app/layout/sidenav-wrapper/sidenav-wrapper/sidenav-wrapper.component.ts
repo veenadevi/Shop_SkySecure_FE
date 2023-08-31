@@ -27,7 +27,9 @@ export class SidenavWrapperComponent {
   }
 
   @Input() set userRole(value: any){
-    this.userRoleVal = value;
+    
+    //this.userRoleVal = value;
+    this.userRoleVal = 'superadmin'
     
   }
 

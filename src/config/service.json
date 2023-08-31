@@ -68,7 +68,8 @@
 
         
         "getAllCRMUsers" : "api/admin/getAllCRMusers",
-        "assignAccountOwner" :  "api/admin/assignAccountOwner"
+        "assignAccountOwner" :  "api/admin/assignAccountOwner",
+        "getMarketplaceAccountDetailsById" : "api/admin/getMarketplaceAccountDetailsById"
 
     },
 
