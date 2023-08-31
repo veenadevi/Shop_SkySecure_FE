@@ -14,6 +14,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./gst-prompt-modal.component.css']
 })
 export class GstPromptModalComponent implements OnInit{
+  
 
   @Input('request')
   public request : any;

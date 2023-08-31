@@ -45,6 +45,8 @@ const appRoutes : Routes = [
     loadChildren: () => import('./login-signup/login-signup.module').then(m => m.LoginSignupModule) 
   },
 
+  { path: 'review-page', loadChildren: () => import('./routes/review-page/review-page.module').then(m => m.ReviewPageModule) },
+
   
 
   
