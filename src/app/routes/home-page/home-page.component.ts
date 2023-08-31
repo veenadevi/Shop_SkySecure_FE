@@ -19,6 +19,7 @@ export class HomePgaeComponent {
   detectedElms = [];
 
   public elementVisible : boolean = true;
+  public whatsAppMessage:string
 
   constructor(
     public sanitizer: DomSanitizer,
@@ -35,7 +36,7 @@ export class HomePgaeComponent {
     //this.aboutOurPlatformVideoUrl = this.getSafeUrl("https://www.youtube.com/embed/wsfb6jKE4wI");
     this.aboutOurPlatformVideoUrl = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
     this.metadataStore.setGlobalSearchBarVisibility('T');
-
+    this.whatsAppMessage="Hello! I've contacted you through your website 'Skysecure MarketPlace." 
     // this.compareProductsLength$.subscribe();
 
 
