@@ -197,4 +197,65 @@ export class SidenavWrapperComponent {
   }
 
 
+  public routeEvent(routeVal){
+
+    switch (routeVal) {
+      case 'home':
+          //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['/']);
+          return;
+      case 'quotation-history':
+          //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['user-profile/quotation-history']);
+          return;
+      case 'amAccounts':
+          //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['account-manager/accounts']);
+          return;
+      case 'sadminAccounts':
+          //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['admin-pages/accounts']);
+          return;
+      case 'sadminMarketPlaceUser':
+          //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['admin-pages/marketplaceuser']);
+          return;
+        case 'paFeatureUpdate':
+          //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['portal-admin-page/feature-update']);
+          return;
+        case 'paAddNewProduct':
+          //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['portal-admin-page/add-new-product']);
+          return;
+        case 'paEditProduct':
+         //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['portal-admin-page/edit-product']);
+          return;
+        case 'paUploadProductPrice':
+          //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['portal-admin-page/upload-product-price']);
+          return;
+        case 'paUploadBlog':
+          //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['portal-admin-page/updateblog']);
+          return;
+
+      default:
+        return null;
+    }
+
+  }
+
+
 }
