@@ -16,6 +16,12 @@
     margin-top: 50px;
     margin-bottom: 30px;
 }
+h1{
+    text-align: center;
+    padding: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
 .form{
     display: flex;
     flex-direction: row;
@@ -103,4 +109,101 @@ hr{
 }
 .review{
     padding: 20px;
+}
+.condition{
+    
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        margin-top: 0px;
+        padding-left: 40px;
+        padding-right: 40px;
+}
+.form-check-label{
+    margin-top: 25px;
+}
+.check{
+    width: 20px;
+}
+.btn{
+    float: right;
+    margin-right: 40px;
+    border: none;
+}
+.next-btn{
+    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
+    border-radius: 8px;
+    border: 1px solid #EFEFEF;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 500;
+    width: 125px;
+    padding: 8px;
+}
+.next-btn:hover{
+    border-radius: 8px;
+    background: #E2EDFF;
+    border: 1px solid #003388;
+    text-align: center;
+    color: #003388;
+    font-size: 18px;
+    font-weight: 500;
+    width: 125px;
+    padding: 8px;
+
+}
+.guide-container{
+    background-color: white;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 10px;
+    box-shadow:0px 2px 4px rgba(0, 0, 0, 0.25); 
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-family: 'lato',sans-serif;
+}
+.guide-heading{
+    text-align: center;
+    padding-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.guide-cont{
+    /* width: 90%; */
+    text-align: center;
+    font-weight: 400;
+    font-size: 16px;
+    color: #6C6C6C;
+    /* margin-left: 5%; */
+    padding-top: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.guide-image{
+    display: flex;
+    flex-direction: row;
+padding: 40px;
+justify-content: space-between;
+}
+.img-01{
+    width:18%;
+}
+.info-cont{
+    text-align: center;
+    font-size: 14px;
+    color: #120D26;
+font-weight: 400;
+}
+.info-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-guide{
+    width: 80px;
+    height: 80px;
 }

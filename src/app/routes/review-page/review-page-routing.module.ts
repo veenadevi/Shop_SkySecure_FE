@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReviewPageComponent } from './review-page.component';
 import { ReviewHomeComponent } from './partials/review-home/review-home.component';
 import { ReviewDetailPageComponent } from './partials/review-detail-page/review-detail-page.component';
+import { ReviewRatingPageComponent } from './partials/review-rating-page/review-rating-page.component';
 
 
 const routes: Routes = [{
@@ -22,7 +23,11 @@ const routes: Routes = [{
       path: 'review-detail-page',
       component : ReviewDetailPageComponent
     },
-    
+    {
+      canActivate: [],
+      path: 'review-rating-page',
+      component : ReviewRatingPageComponent
+    },
   ]
   
 }];

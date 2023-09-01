@@ -1,5 +1,6 @@
 import { Component , Input, Output, EventEmitter } from '@angular/core';
 
+
 @Component({
   selector: 'app-review-detail-page',
   templateUrl: './review-detail-page.component.html',

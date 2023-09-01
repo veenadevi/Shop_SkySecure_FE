@@ -1,5 +1,6 @@
 <div class="container">
     <div class="content">
+        <h1>Give Your Ratings</h1>
     <div class="form">
         <div class="input-cont">
             <label>Name*</label>
@@ -77,14 +78,14 @@
         </div>
 
     <div class="rating-cont">
-        <label>Value of Money</label>
+        <label>Value of Money*</label>
         <div class="star-rating">
             <span *ngFor="let star of stars" (click)="rate03(star)" [class.active]="star <= selectedRating03">&#9733;</span>
           </div>
         </div>
 
         <div class="rating-cont">
-            <label>Customer Support</label>
+            <label>Customer Support*</label>
             <div class="star-rating">
                 <span *ngFor="let star of stars" (click)="rate04(star)" [class.active]="star <= selectedRating04">&#9733;</span>
               </div>
@@ -102,8 +103,47 @@
         <label>Your Review*</label>
         <textarea class="review"  type="text-area" placeholder="Give your Review" required ></textarea>
     </div>
-    </div>
+    
+    <div class="condition">
+        <input type="checkbox" class="check" id="chb" required>
+        <div class="form-check-label">&nbsp;I certify that my feedback is based on my experience with this product. By submitting, I agree to the terms of use and privacy policy of SoftwareSuggest.
+        </div>
+      </div>
 
+      <div class="btn" >
+        <button class="next-btn"  [routerLink]="['/review-page/review-rating-page']" >Next</button>
+      </div>
+    </div>
+<div class="guide-container">
+    <div class="guide-heading">Review Guidelines</div>
+    <div class="guide-cont">All reviews will be moderated before publication and must meet our guidelines. Review must be substantive, professional, and avoid self promotion. Moderators will use their discretion to approve reviews.</div>
+    <div class="guide-image">
+        <div class="img-01">
+            <div class="info-img">
+                <img class="img-guide" src="../../../../../assets/images/info.svg">
+            </div>
+            <div class="info-cont">No Incomplete Information</div>
+        </div>
+        <div class="img-01">
+            <div class="info-img">
+                <img class="img-guide" src="../../../../../assets/images/activity.svg">
+            </div>
+            <div class="info-cont">No Self-Promotional Activity</div>
+        </div>
+        <div class="img-01">
+            <div class="info-img">
+                <img class="img-guide" src="../../../../../assets/images/lang.svg">
+            </div>
+            <div class="info-cont">No Hateful or Disparaging Language</div>
+        </div>
+        <div class="img-01">
+            <div class="info-img">
+                <img class="img-guide" src="../../../../../assets/images/fake.svg">
+            </div>
+            <div class="info-cont">No Use of Fake Names or Spam Content.</div>
+        </div>
+    </div>
+</div>
 </div>
 
    
