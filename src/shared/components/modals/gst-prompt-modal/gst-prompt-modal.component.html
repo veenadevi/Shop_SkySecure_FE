@@ -8,12 +8,31 @@
     <p>Please fill the mentioned details to generate estimation</p>
     <div class="modal-body">
         <div id="customerToogle">
-          <p>
+          <!-- <p>
             <mat-button-toggle-group #group="matButtonToggleGroup" name="fontStyle" [value]="selectedType" (change)="onToogleChange(group.value)" aria-label="Font Style">
               <mat-button-toggle  class="self" value="self">Self</mat-button-toggle>
               <mat-button-toggle class="other" value="others">Others</mat-button-toggle>
             </mat-button-toggle-group>
-          </p>
+          </p> -->
+          <!-- <div class="inputGroup">
+              <input id="radio1" name="radio" type="radio" />
+              <label for="radio1">Male</label>
+          </div>
+          <div class="inputGroup">
+              <input id="radio2" name="radio" type="radio" />
+              <label for="radio2">Female</label>
+          </div> -->
+
+          <div class="radio-group">
+            <input type="radio" name="myRadios" (change)="handleChange('self')"  value="self" /> 
+            <span>Self</span>
+          </div>
+          <div class="radio-group">
+            <input type="radio" name="myRadios" (change)="handleChange('others')"  value="others" />
+            <span>Others</span>
+          </div>
+          
+          
         </div>
 
         <!-- <div id="#radio-button-group">
