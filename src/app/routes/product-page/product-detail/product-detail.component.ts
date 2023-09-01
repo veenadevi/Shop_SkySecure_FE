@@ -23,7 +23,7 @@ export class ProductDetailComponent implements OnInit{
 
   discountRate: number =120; 
   monthlyPrice: number = this.discountRate / 12;
-  isMonthly: boolean = false;
+  isMonthly: boolean = true;
 
   showMonthlyPrice() {
     this.isMonthly = true;

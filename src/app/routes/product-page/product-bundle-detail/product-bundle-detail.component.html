@@ -108,7 +108,7 @@
                             <p *ngIf="productFamily.priceList[0].discountRate" class="discounted-text">
                                 -{{productFamily.priceList[0].discountRate}}%&nbsp;
                             </p>
-                            <div class="price" (mouseenter)="showMonthlyPrice()" (mouseleave)="showDiscountRate()">
+                            <div class="price" (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
                                 <span class="price-symbol">&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : productFamily.priceList[0].price }} </span>
                                 <span class="product-price-type"> /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}</span>
                                 
