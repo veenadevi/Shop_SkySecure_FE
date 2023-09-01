@@ -162,7 +162,7 @@ export class GstPromptModalComponent implements OnInit{
   }
 
   public handleChange(val){
-    console.log("+++++ Val", val);
+    
 
     this.selectedType = val;
     this.form.reset();
