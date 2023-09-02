@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PrimeNGConfig } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 
@@ -16,9 +18,13 @@ export class LeadSummaryComponent implements OnInit{
 
   public subscriptions : Subscription[] = [];
 
+    public productsData : any;
+    
+
   constructor(
     private route : ActivatedRoute,
-    private superAdminService : SuperAdminService
+    private superAdminService : SuperAdminService,
+    private primengConfig: PrimeNGConfig
   ){}
 
 
@@ -28,6 +34,8 @@ export class LeadSummaryComponent implements OnInit{
     this.accountDetails = JSON.parse(this.params.params.account);
 
     this.getLeadSummary(this.accountDetails);
+
+    
    
   }
 
@@ -36,10 +44,16 @@ export class LeadSummaryComponent implements OnInit{
 
     this.subscriptions.push(
       this.superAdminService.getLeadSummaryDetails(null).subscribe(res=>{
-        console.log("+_+_+_C Data After Click");
+        console.log("+_+_+_C Data After Click", res.zohoBookEstimateData);
+        this.productsData = res.zohoBookEstimateData;
       })
     )
   }
+
+
+  
+
+ 
 
 
 }

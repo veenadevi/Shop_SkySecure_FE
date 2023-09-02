@@ -7,12 +7,105 @@
 
         <div class="row-div">
             <div id="leadStatus">
-                Lead Status
+                <div class="card-container">
+                    <div class="content-holder">
+                        <span class="header">
+                            Lead Status
+                        </span>
+                        <span class="value">
+                            New
+                        </span>
+                    </div>
+                    <div class="content-holder">
+                        <span class="header">
+                            Last Activity
+                        </span>
+                        <span class="value">
+                            New
+                        </span>
+                    </div>
+                    <div class="content-holder">
+                        <span class="header">
+                            Lead Expiry
+                        </span>
+                        <span class="value">
+                            New
+                        </span>
+                    </div>
+                    <div class="content-holder">
+                        <span class="header">
+                            Opportunity Size
+                        </span>
+                        <span class="value">
+                            New
+                        </span>
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
             </div>
-            <div id="selectedProducts">
-                Selected Products
+            <div id="customerDetails">
+                <div class="card-container">
+                    <div class="content-holder">
+                        <span class="header">
+                            Lead Status
+                        </span>
+                        <span class="value">
+                            New
+                        </span>
+                    </div>
+                    <div class="content-holder">
+                        <span class="header">
+                            Last Activity
+                        </span>
+                        <span class="value">
+                            New
+                        </span>
+                    </div>
+                    <div class="content-holder">
+                        <span class="header">
+                            Lead Expiry
+                        </span>
+                        <span class="value">
+                            New
+                        </span>
+                    </div>
+                    <div class="content-holder">
+                        <span class="header">
+                            Opportunity Size
+                        </span>
+                        <span class="value">
+                            New
+                        </span>
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div id="assigneeDetails">
+                <div>
+                    Selected Products
+                </div>
+                <div>
+                    Selected Products
+                </div>
+                
             </div>
         </div>
+
+        <div class="row-div">
+            <div id="productItems">
+                <div class="card-container">
+                    <ng-container *ngIf="productsData">
+                        <products-table [productsData]="productsData"></products-table>
+                    </ng-container>
+                    
+                </div>
+            </div>
+        </div>
+        
     </ng-container>
     
 </div>
