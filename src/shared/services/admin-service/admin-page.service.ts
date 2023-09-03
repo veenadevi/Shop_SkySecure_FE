@@ -22,7 +22,8 @@ export class AdminPageService {
   private getAccountsByIdUrl : string
   private baseUrlForUsers:string
   private getAllusersURL:string
-  private updateUserRole:string
+  private updateUserRoleURL:string
+  private getAllMarketPlaceAccountListURL:string
 
 
 
@@ -42,7 +43,8 @@ export class AdminPageService {
     this.getMyAssignedAccountsUrl=AppService.appUrl.getMyAssignedAccounts;
     this.getAccountsByIdUrl = AppService.appUrl.getAccountsById;
     this.getAllusersURL=AppService.appUrl.getAllUsers;
-    this.updateUserRole=AppService.appUrl.updateUserRole;
+    this.updateUserRoleURL=AppService.appUrl.updateUserRole;
+    this.getAllMarketPlaceAccountListURL=AppService.appUrl.getAllMarketPlaceAccountListURL;
 
     
   }
@@ -73,6 +75,25 @@ export class AdminPageService {
   /**
    * Service for Getting All Accounts Details
    */
+
+  public getAllMarketPlaceAccountList() : Observable<any> {
+
+    let url = this.baseUrlForQuote + this.getAllMarketPlaceAccountListURL;
+
+    //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
 
   public getAllAccounts() : Observable<any> {
 
