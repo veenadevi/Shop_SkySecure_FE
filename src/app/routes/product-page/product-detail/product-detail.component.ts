@@ -524,16 +524,30 @@ featureCount=5;
 
   public onCheckBoxChange($event, item:any, type:any){
 
-    let tempLen = this.getCompareProductsCount(); 
+    //let tempLen = this.getCompareProductsCount(); 
+    let returnedData = this.getCompareProductsCount();
+
+    
 
     var a = 3;
-    if(tempLen<4) {
-      if($event.checked){
-        this.addToCompare(item, type);
+    if(returnedData.len<4) {
+
+
+      var index = returnedData.items.findIndex(el => el._id === item._id);
+      
+      if(index >=0){
+        this.toaster.showWarning("Product already added for Compare",'')
       }
       else{
-        this.removeSelectedItem(item._id);
+        if($event.checked){
+          this.addToCompare(item, type);
+        }
+        else{
+          this.removeSelectedItem(item._id);
+        }
       }
+
+
     }
     else {
       //alert("Only 4 products are allowed to compare");
@@ -545,43 +559,56 @@ featureCount=5;
 
 
   async addToCompare(item:any, type:any):Promise<void> {
-    let tempLen = this.getCompareProductsCount(); 
+    let returnedData = this.getCompareProductsCount(); 
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     
-    if(tempLen<4) {
+    if(returnedData.len<4) {
    
+
+      var index = returnedData.items.findIndex(el => el._id === item._id);
+      
+      if(index >=0){
+        this.toaster.showWarning("Product already added for Compare",'')
+      }
+
+      else{
+
     
 
     if(type === 'fromProd'){
-     console.log("()()() From Prom Prod");
-      // console.log("()()()( From Prod", item);
-      this.productListToCompare.push(item);
-      
-    }
-    else{
-      console.log("()()() adding From else");
-      this.productListToCompare.push(item);
-    }
-    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
-
-    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
-
-    //this.productListToCompare.push(item);
-
-    if(item.checked){
-      item.checked = true;
-    }
-    else{
-      item['checked'] = true;
-    }
+      console.log("()()() From Prom Prod");
+       // console.log("()()()( From Prod", item);
+       this.productListToCompare.push(item);
+       
+     }
+     else{
+       console.log("()()() adding From else");
+       this.productListToCompare.push(item);
+     }
+     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+ 
+     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+     //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+ 
+     //this.productListToCompare.push(item);
+ 
+     if(item.checked){
+       item.checked = true;
+     }
+     else{
+       item['checked'] = true;
+     }
+     
+     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
+     //localStorage.removeItem('product_list_to_compare');
+     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
+     localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+     //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+     this.toaster.showSuccess("The product has been included for comparison.",'')
+      }
     
-    this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
-    //localStorage.removeItem('product_list_to_compare');
-    localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
-    //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    this.toaster.showSuccess("The product has been included for comparison.",'')
+
+    
   }
   else {
   //  alert("Only 4 products are allowed to compare");
@@ -875,7 +902,11 @@ featureCount=5;
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
     //console.log("++++++++++++++++++++++()()()()( ", uniqueElements.length);
-    return uniqueElements.length;
+    return {
+      "len":uniqueElements.length,
+      "items" : uniqueElements
+    }
+    
     
   }
 
