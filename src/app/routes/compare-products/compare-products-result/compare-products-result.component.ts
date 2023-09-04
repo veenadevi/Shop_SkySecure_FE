@@ -266,6 +266,10 @@ export class CompareProductsResultComponent {
         
         this.allProducts = this.allProducts.slice(0,4);
 
+        this.allProducts.forEach(element => {
+            element.properties['priceList'].priceType= 'Month';
+        });
+
         console.log("reqBody productFamily length size ==="+this.allProducts.length)
 
       })
