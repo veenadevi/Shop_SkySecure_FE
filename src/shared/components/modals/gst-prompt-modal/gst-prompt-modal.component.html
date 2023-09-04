@@ -197,14 +197,11 @@
                 <option disabled value="'Select Country'">Select Country </option>
                 <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
               </select>
-              <!-- <select class="form-control custom-select browser-default" (ngModelChange)="onCountryChange($event)">
-          <ng-container *ngFor=" let item of countryList">
-              <option value="item.id">{{item.flag}} {{item.name}}</option>
-          </ng-container>
-        <option value="Afghanistan">Afghanistan</option>
-        <option value="Åland Islands">Åland Islands</option>
+
+
+              
         
-      </select> -->
+      
             </div>
           </div>
 
@@ -302,7 +299,7 @@
               </div>
               <div class="col-sm-6 form-group">
                 <label for="Country">Country*</label>
-                <select formControlName="countryName" [(ngModel)]="selectedCountry" class="form-control" (change)="onCountryChange($event)">
+                <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)">
                   <option disabled value="'Select Country'">Select Country </option>
                   <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
                 </select>
@@ -385,10 +382,24 @@
             </div>
             <div class="col-sm-6 form-group">
               <label for="Country">Country*</label>
-              <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)">
-                <option disabled value="'Select Country'">Select Country </option>
-                <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+              <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)" >
+                <ng-container *ngIf="gstData; else noGstData">
+                  <option disabled value="'Select Country'">Select Country </option>
+                  <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+                </ng-container>
+                <ng-template #noGstData>
+                  <option value="India">India</option>
+                </ng-template>
+                
               </select>
+              <!-- <select formControlName="countryName" class="form-control" id="exampleFormControlSelect1" [(ngModel)]="selectedValue">
+                    <option *ngFor="let quantity of Quantities" [ngValue]="quantity">{{quantity}}</option>
+              </select> -->
+
+
+              <!-- <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)" id="exampleFormControlSelect1" [(ngModel)]="selectedValue.isoCode">
+                <option *ngFor="let item of countryList" [ngValue]="item.isoCode">{{item.name}}</option>
+              </select> -->
 
             </div>
           </div>

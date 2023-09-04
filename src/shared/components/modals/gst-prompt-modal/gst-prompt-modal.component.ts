@@ -46,6 +46,17 @@ export class GstPromptModalComponent implements OnInit{
 
  
   isChecked: boolean = false;
+  nrSelect : any;
+
+  toStr = JSON.stringify;
+
+
+  Quantities = Array(50).fill(0).map((x,i)=>i);
+
+  // variable to hold the value of select 
+  selectedValue : any;
+
+  public gstData : boolean = false;
 
  
  
@@ -69,10 +80,15 @@ export class GstPromptModalComponent implements OnInit{
 
   ngOnInit(): void {
     
-    
+
+    this.countryList = Country.getAllCountries();
+ 
+    this.selectedValue = this.countryList[0];
     this.setForm();
     this.setSelfData();
-    this.countryList = Country.getAllCountries();
+    
+    
+    
   }
 
 
@@ -119,7 +135,7 @@ export class GstPromptModalComponent implements OnInit{
     this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
     this.myForm.controls['phoneNo'].setValue(userDetails.mobileNumber ? userDetails.mobileNumber : null);
 
-    console.log("+_+_+_+_+_+_+_ ", userDetails);
+  
 
     let allCountries = Country.getAllCountries();
 
@@ -128,10 +144,11 @@ export class GstPromptModalComponent implements OnInit{
     var index = allCountries.findIndex(el => el.isoCode === userDetails.countryCode);
          
           if(index >=0){
-            console.log("++++))) Val ", allCountries[index]);
+            
             //this.myForm.value.countryName = allCountries[index];
-            //this.myForm.controls['countryName'].setValue(allCountries[index].name);
-            this.selectedCountry = allCountries[index];
+            //this.myForm.controls['countryName'].setValue(allCountries[index]);
+            //this.myForm.controls['countryName'].setValue(allCountries.filter(c => c.isoCode === userDetails.countryCode));
+            //this.selectedCountry = allCountries.filter(c => c.isoCode === userDetails.countryCode)[0];
           }
 
     //this.countryList
@@ -151,8 +168,9 @@ export class GstPromptModalComponent implements OnInit{
   public onCountryChange(event){
     
     let country = JSON.parse(event.target.value);
+    
     this.selectedCountry = country;
-
+    
     this.stateList  = State?.getStatesOfCountry(country.isoCode);
  
 
@@ -241,7 +259,7 @@ export class GstPromptModalComponent implements OnInit{
         "city": this.selectedCity.name,
         "state": this.selectedState.name,
         "zip": formVal.postalCode,
-        "country": this.selectedCountry.isoCode,
+        "country": "IN", //this.selectedCountry.isoCode,
         "phone": formVal.phoneNo
     }
 
@@ -433,15 +451,46 @@ export class GstPromptModalComponent implements OnInit{
   public onNextClick(){
     this.showContent = !this.showContent;
 
-    this.subscriptions.push(
-      this.superAdminService.getGSTDetailsById(this.myForm.value.gstNo).subscribe(res=>{
-        console.log("+)(*&^%^ Response in Final ", res);
-      })
-    )
+    
+
+    if(this.myForm.value.gstNo.length === 15){
+
+        this.myForm.controls['companyName'].disable();
+        this.myForm.controls['addressLine1'].disable();
+        this.myForm.controls['addressLine2'].disable();
+        this.myForm.controls['postalCode'].disable();
+        this.myForm.controls['countryName'].disable();
+        this.myForm.controls['stateName'].disable();
+        this.myForm.controls['cityName'].disable();
+      this.subscriptions.push(
+        this.superAdminService.getGSTDetailsById(this.myForm.value.gstNo).subscribe(res=>{
+  
+          this.gstData = true;
+      
+  
+          
+          this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
+          this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
+          this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
+          this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
+          
+          //this.myForm.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
+          //this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
+  
+          
+        })
+      )
+    }
+    else{
+
+    }
+
+
   }
 
   public onBackClick(){
     this.showContent = !this.showContent;
+    this.myForm.enable();
   }
 
 

@@ -150,6 +150,7 @@ export class SuperAdminService {
 
 
     let url = this.baseUrlForSuperAdmin + "api/admin/fetchGSTDetails/" + id; //29ABDCS1510L1ZB"
+    //let url = "http://localhost:8080/" + "api/admin/fetchGSTDetails/" + id; //29ABDCS1510L1ZB"
     //let url = "http://localhost:8080/api/admin/fetchGSTDetails/29ABDCS1510L1ZB"
     //let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/' + id;
 
