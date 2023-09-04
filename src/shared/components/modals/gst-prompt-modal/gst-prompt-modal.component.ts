@@ -6,7 +6,7 @@ import { CartService } from 'src/shared/services/cart.service';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { Country, State, City } from "country-state-city";
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup , Validators  } from '@angular/forms';
 
 @Component({
   selector: 'app-gst-prompt-modal',
@@ -14,7 +14,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./gst-prompt-modal.component.css']
 })
 export class GstPromptModalComponent implements OnInit{
-  
+  showContent: boolean = false;
+  showButton: boolean=true;
+ 
 
   @Input('request')
   public request : any;
@@ -39,11 +41,16 @@ export class GstPromptModalComponent implements OnInit{
   public form: FormGroup;
 
   public selectedType : any = 'self';
+  myForm: FormGroup;
 
-  
+ 
+  isChecked: boolean = false;
 
+ 
+ 
   public subscriptions : Subscription[] = [];
   constructor(
+    private fb: FormBuilder,
     private cartService : CartService,
     private router : Router,
     public activeModal: NgbActiveModal,
@@ -51,7 +58,10 @@ export class GstPromptModalComponent implements OnInit{
     private userAccountStore : UserAccountStore,
     private formBuilder: FormBuilder,
   ){
-
+    this.myForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+    });
   }
 
   ngOnInit(): void {
@@ -169,7 +179,10 @@ export class GstPromptModalComponent implements OnInit{
     if(val === 'self'){
       this.setSelfData();
     }
+
   }
+
+
 
   public createQuotationService2(){
     
