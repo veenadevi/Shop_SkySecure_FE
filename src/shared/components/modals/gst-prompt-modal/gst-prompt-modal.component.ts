@@ -209,7 +209,7 @@ export class GstPromptModalComponent implements OnInit{
           {
               "first_name": formVal.firstName,
               "email": formVal.email,
-              "phone": formVal.mobileNumber ? formVal.mobileNumber : '',
+              "phone": formVal.phoneNo ? formVal.phoneNo : '',
               "is_primary_contact": true,
               "enable_portal": false
           }
@@ -317,7 +317,7 @@ export class GstPromptModalComponent implements OnInit{
          ],
      
       
-       "updatedBy": userDetails.email
+       "updatedBy": userDetails._id
      
      }
 
