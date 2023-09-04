@@ -50,10 +50,12 @@
                 </div>
             </div>
         </div> -->
-
+        
+  
 <div *ngIf="!showContent" class="cont">
     <div class="container mt-3">
       <form [formGroup]="myForm">
+        
 
         <div class="row jumbotron box8">
 
@@ -274,7 +276,8 @@
  
 
     <ng-container *ngIf="!showContent == showButton">
-  <button class="btn compare-btn" (click)="showContent = !showContent">Next</button>
+  <!-- <button class="btn compare-btn" (click)="showContent = !showContent">Next</button> -->
+  <button class="btn compare-btn" (click)="onNextClick()">Next</button>
 </ng-container>
 
   <div *ngIf="showContent" class="cont">
@@ -299,7 +302,7 @@
               </div>
               <div class="col-sm-6 form-group">
                 <label for="Country">Country*</label>
-                <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)">
+                <select formControlName="countryName" [(ngModel)]="selectedCountry" class="form-control" (change)="onCountryChange($event)">
                   <option disabled value="'Select Country'">Select Country </option>
                   <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
                 </select>
@@ -360,12 +363,12 @@
               <label for="tel">Phone*</label>
               <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel"
                 placeholder="Enter Your Phone No." required>
-              <div *ngIf="myForm.get('phoneNumber').hasError('required')">
+              <!-- <div *ngIf="myForm.get('phoneNumber').hasError('required')">
                 Phone number is required.
               </div>
               <div *ngIf="myForm.get('phoneNumber').hasError('pattern')">
                 Phone number must be 10 digits.
-              </div>
+              </div> -->
             </div>
           </div>
 
@@ -427,9 +430,9 @@
 
 
           <div class="modal-footer">
-            <button class="btn compare-btn" (click)="createQuotationService2()">Submit</button>
+            <button class="btn compare-btn" (click)="createQuotationService()">Submit</button>
             <ng-container >
-            <button class="btn back-btn"  >Back</button>
+            <button class="btn back-btn"  (click)="onBackClick()">Back</button>
           </ng-container>
           </div>
         </div>

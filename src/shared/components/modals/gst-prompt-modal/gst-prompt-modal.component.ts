@@ -7,6 +7,7 @@ import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { Country, State, City } from "country-state-city";
 import { FormBuilder, FormGroup , Validators  } from '@angular/forms';
+import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 
 @Component({
   selector: 'app-gst-prompt-modal',
@@ -57,7 +58,9 @@ export class GstPromptModalComponent implements OnInit{
     public userProfileService : UserProfileService,
     private userAccountStore : UserAccountStore,
     private formBuilder: FormBuilder,
+    private superAdminService : SuperAdminService
   ){
+    //this.myForm = this.fb.group({
     this.myForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
@@ -75,7 +78,8 @@ export class GstPromptModalComponent implements OnInit{
 
 
   public setForm(){
-    this.form = this.formBuilder.group(
+    //this.form = this.formBuilder.group(
+      this.myForm = this.formBuilder.group(
       {
         //email: [this.emailViaSignup, [Validators.required, Validators.email]],
         //otp : [],
@@ -98,15 +102,39 @@ export class GstPromptModalComponent implements OnInit{
   public setSelfData(){
     let userDetails = this.userAccountStore.getUserDetails();
 
-    let formVal = this.form.value;
+    //let formVal = this.form.value;
+    let formVal = this.myForm.value;
 
 
-    this.form.controls['gstNo'].setValue(userDetails.gstinNumber ? userDetails.gstinNumber : null);
+    /*this.form.controls['gstNo'].setValue(userDetails.gstinNumber ? userDetails.gstinNumber : null);
     this.form.controls['companyName'].setValue(userDetails.companyBusinessName ? userDetails.companyBusinessName : null);
     this.form.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
     this.form.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
     this.form.controls['phoneNo'].setValue(userDetails.mobileNumber ? userDetails.mobileNumber : null);
+    */
 
+    this.myForm.controls['gstNo'].setValue(userDetails.gstinNumber ? userDetails.gstinNumber : null);
+    this.myForm.controls['companyName'].setValue(userDetails.companyBusinessName ? userDetails.companyBusinessName : null);
+    this.myForm.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
+    this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
+    this.myForm.controls['phoneNo'].setValue(userDetails.mobileNumber ? userDetails.mobileNumber : null);
+
+    console.log("+_+_+_+_+_+_+_ ", userDetails);
+
+    let allCountries = Country.getAllCountries();
+
+    //isoCode
+
+    var index = allCountries.findIndex(el => el.isoCode === userDetails.countryCode);
+         
+          if(index >=0){
+            console.log("++++))) Val ", allCountries[index]);
+            //this.myForm.value.countryName = allCountries[index];
+            //this.myForm.controls['countryName'].setValue(allCountries[index].name);
+            this.selectedCountry = allCountries[index];
+          }
+
+    //this.countryList
 
 
 
@@ -165,17 +193,20 @@ export class GstPromptModalComponent implements OnInit{
   public onToogleChange(val){
     
     this.selectedType = val;
-    this.form.reset();
+    //this.form.reset();
+    this.myForm.reset();
     if(val === 'self'){
       this.setSelfData();
     }
+
   }
 
   public handleChange(val){
     
 
     this.selectedType = val;
-    this.form.reset();
+    //this.form.reset();
+    this.myForm.reset();
     if(val === 'self'){
       this.setSelfData();
     }
@@ -184,7 +215,7 @@ export class GstPromptModalComponent implements OnInit{
 
 
 
-  public createQuotationService2(){
+  public createQuotationService(){
     
 
 
@@ -195,7 +226,8 @@ export class GstPromptModalComponent implements OnInit{
     
 
     let req = this.request;
-    let formVal = this.form.value; 
+    //let formVal = this.form.value; 
+    let formVal = this.myForm.value;
     
     
 
@@ -262,10 +294,11 @@ export class GstPromptModalComponent implements OnInit{
 
 
 
+    console.log("+_+_+_+_+ Final Val , ", req);
 
 
     
-    
+    /*
     this.updateGSTService(req);
 
    
@@ -288,7 +321,7 @@ export class GstPromptModalComponent implements OnInit{
         }
         
       })
-    )
+    )*/
 
   }
 
@@ -349,7 +382,7 @@ export class GstPromptModalComponent implements OnInit{
     )
   }
 
-  public createQuotationService(){
+  public createQuotationService2(){
     let req = this.request;
     req.companyName = this.companyName;
 
@@ -394,6 +427,21 @@ export class GstPromptModalComponent implements OnInit{
         
       })
     )
+  }
+
+
+  public onNextClick(){
+    this.showContent = !this.showContent;
+
+    this.subscriptions.push(
+      this.superAdminService.getGSTDetailsById(this.myForm.value.gstNo).subscribe(res=>{
+        console.log("+)(*&^%^ Response in Final ", res);
+      })
+    )
+  }
+
+  public onBackClick(){
+    this.showContent = !this.showContent;
   }
 
 
