@@ -1,0 +1,58 @@
+<div class="final-container">
+    <div class="final-content">
+<div class="thanks-card">
+    <div class="star">
+       
+            <div class="rating-stars">
+                <mat-icon class="review-icon">star</mat-icon>
+                <mat-icon class="review-icon">star</mat-icon>
+                <mat-icon class="review-icon">star</mat-icon>
+                <mat-icon class="review-icon">star</mat-icon>
+                <mat-icon class="review-icon">star_border</mat-icon>
+            </div>  
+      
+    </div>
+    <div class="star-cont">
+        Thanks for Submitting Review
+    </div>
+</div>
+
+<div class="points">
+    <ul>
+        <ol>
+        <li>To ensure that the reviews are genuine, our team verifies each review.</li>
+        <li>You will need to submit screenshot of invoice or PDF copy to verify this review. This is very important to ensure sanity of reviews are maintained and fake reviews are kept of our ever growing buyer community.</li>
+            <!-- <li>We will further send you Amazon voucher for every verified review for effort you had to take 🙂</li> -->
+    </ol>
+    </ul>
+</div>
+
+
+<div class="file-upload">
+    <div class="upload">
+        <label>Add purchase invoice copy</label>
+        <div class="avatar-edit">
+            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                (change)="uploadFile($event)" />
+            <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
+                alt="productLogo" />
+            <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
+                (click)="removeImage()">Remove</button>
+            <label for="imageUpload" *ngIf="editFile" [ngClass]="['custom-label', 'upload-image']"></label>
+            <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
+                (click)="removeUploadedFile()"></label>
+        </div>
+        <div class="avatar-preview">
+            <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+            </div>
+        </div>
+    </div>
+
+    <div class="btn">
+        <button class="up-btn">Upload</button>
+    </div>
+</div>
+
+    </div>
+
+</div>
