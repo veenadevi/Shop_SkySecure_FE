@@ -42,6 +42,7 @@ import { CompareProductsSearchListComponent } from './components/modals/add-comp
 import { BundleMindmapComponent } from './components/bundle-mindmap/bundle-mindmap.component';
 import { GstPromptModalComponent } from './components/modals/gst-prompt-modal/gst-prompt-modal.component';
 import { AssignLeadsModalComponent } from './components/modals/assign-leads-modal/assign-leads-modal.component';
+import { DateFormatPipe } from './pipes/dateFormat';
 
 
 
@@ -83,6 +84,7 @@ import { AssignLeadsModalComponent } from './components/modals/assign-leads-moda
     GetFreeCallModalComponent,
     ContactUsFlyerHorizontalComponent,
     SafeUrlPipe,
+    DateFormatPipe,
     CompareProductsModalComponent,
     CustomBreadCrumbComponent,
     BundleVarientCardFlyerComponent,
@@ -135,6 +137,7 @@ import { AssignLeadsModalComponent } from './components/modals/assign-leads-moda
     GetFreeCallModalComponent,
     ContactUsFlyerHorizontalComponent,
     SafeUrlPipe,
+    DateFormatPipe,
     CompareProductsModalComponent,
     CustomBreadCrumbComponent,
     BundleVarientCardFlyerComponent,

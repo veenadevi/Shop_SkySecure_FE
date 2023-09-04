@@ -23,6 +23,9 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 
 
 
+
+
+
 /** Angular Material Imports */
 // import { MatButtonModule } from '@angular/material/button';
 // import { MatSidenavModule } from '@angular/material/sidenav';
@@ -48,6 +51,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { loginRequest, msalConfig } from './auth-config';
 import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 
+
+
 /**
  * Here we pass the configuration parameters to create an MSAL instance.
  * For more info, visit: https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/docs/v2-docs/configuration.md
@@ -66,6 +71,10 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       authRequest: loginRequest
   };
 }
+
+
+
+
 
 @NgModule({
   
@@ -96,7 +105,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 
     }),
     NgxGoogleAnalyticsModule.forRoot('G-KC04RJ3FYD'),
-    NgxGoogleAnalyticsRouterModule
+    NgxGoogleAnalyticsRouterModule,
+ 
     
    
   ],
@@ -114,13 +124,16 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalGuard,
     MsalBroadcastService,
     LoaderService,
-    DecimalPipe
+    DecimalPipe,
+
   ],
   declarations: [
-    AppComponent
+    AppComponent,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  bootstrap: [AppComponent, MsalRedirectComponent]
+  bootstrap: [AppComponent, MsalRedirectComponent
+  ],
+  
 })
 export class AppModule { }

@@ -89,9 +89,7 @@ export class AccountListComponent implements OnInit{
     this.adminPageService.getAllMarketPlaceAccountList().subscribe( response => {
       console.log("running here directly==")
       this.allMarketPlaceList=response;
-    //  this.accountData = response.accounts.data;
-      this.info = response.accounts.info;
-      
+    
       
 
     })

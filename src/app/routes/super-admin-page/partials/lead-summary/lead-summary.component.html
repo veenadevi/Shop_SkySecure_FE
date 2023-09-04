@@ -1,5 +1,5 @@
 <div id="leadSummary">
-    <ng-container *ngIf="accountDetails">
+    <ng-container *ngIf="accountDetails && responseData">
         <div id="lead-summary-header">
             {{accountDetails.id}} | Lead Summary
         </div>
@@ -13,7 +13,7 @@
                             Lead Status
                         </span>
                         <span class="value">
-                            New
+                            {{responseData.status}}
                         </span>
                     </div>
                     <div class="content-holder">
@@ -21,7 +21,7 @@
                             Last Activity
                         </span>
                         <span class="value">
-                            New
+                            {{ responseData.updatedAt | dateFormat}}
                         </span>
                     </div>
                     <div class="content-holder">
@@ -29,7 +29,7 @@
                             Lead Expiry
                         </span>
                         <span class="value">
-                            New
+                            {{productsData.expiry_date | dateFormat}}
                         </span>
                     </div>
                     <div class="content-holder">
@@ -37,7 +37,7 @@
                             Opportunity Size
                         </span>
                         <span class="value">
-                            New
+                            {{productsData.totalEstimateCost | number : '1.2-2'}}
                         </span>
                     </div>
                     <div>

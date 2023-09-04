@@ -18,7 +18,16 @@ export class LeadSummaryComponent implements OnInit{
 
   public subscriptions : Subscription[] = [];
 
-    public productsData : any;
+  public responseData : any;
+
+  public productsData : any;
+
+  public accountsData : any;
+
+  public contactsData : any;
+
+  
+  
     
 
   constructor(
@@ -45,7 +54,12 @@ export class LeadSummaryComponent implements OnInit{
     this.subscriptions.push(
       this.superAdminService.getLeadSummaryDetails(data._id).subscribe(res=>{
         console.log("+_+_+_C Data After Click", res.zohoBookEstimateData);
+        this.responseData = res;
         this.productsData = res.zohoBookEstimateData;
+        this.accountsData =  res.zohoCRMAccountData;
+        this.contactsData = res.zohoBookContactData
+
+
       })
     )
   }
