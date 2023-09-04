@@ -1,4 +1,4 @@
-.container {
+/* .container {
     min-height: 30em;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
     width: 5em;
     background: #F6EBEC;
     border: 1px solid #A9383D;
-    /* Style 2 */
+
 
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
     border-radius: 8px;
@@ -22,8 +22,36 @@
     flex-direction: column;
     row-gap: 1em;
     padding: 40px;
-    /* background: var(--primary); */
+   
     align-items: center;
     justify-content: center;
    
+} */
+
+
+
+.all-accounts-view {
+    min-height: 30em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+    font-size: 8px!important;
+}
+
+.text-style{
+    cursor: pointer;
+    color: #3366CC;
+}
+
+#assign-btn {
+    box-sizing: border-box;
+    padding: 7px;
+    border: 1px solid #EFEFEF;
+    color: white;
+    margin: 10px;
+    width: 150px;
+    border-radius: 8px;
+    background: var(--dark-violet, linear-gradient(90deg, #888BCB 0%, #383DA9 100%));
+    
 }
