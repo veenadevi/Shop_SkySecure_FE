@@ -1,17 +1,17 @@
-<div></div>Selected Products
+<div class="selected-products-header">Selected Products</div>
 <div>
     <p-table #dt [value]="lineItems" dataKey="index" editMode="row" responsiveLayout="scroll">
 
         <ng-template pTemplate="header">
             <tr>
                 
-                <th pSortableColumn="title">
+                <th pSortableColumn="title" class="header">
                     Title <p-sortIcon field="title"></p-sortIcon>
                 </th>
-                <th pSortableColumn="category">
+                <th pSortableColumn="category" class="header">
                     Category <p-sortIcon field="category"></p-sortIcon>
                 </th>
-                <th pSortableColumn="rating">
+                <th pSortableColumn="rating" class="header">
                     Rating <p-sortIcon field="rating"></p-sortIcon>
                 </th>
                 <th style="width:8rem"></th>
