@@ -46,50 +46,78 @@
                 </div>
             </div>
             <div id="customerDetails">
-                <div class="card-container">
-                    <div class="content-holder">
-                        <span class="header">
-                            Lead Status
-                        </span>
-                        <span class="value">
-                            New
-                        </span>
-                    </div>
-                    <div class="content-holder">
-                        <span class="header">
-                            Last Activity
-                        </span>
-                        <span class="value">
-                            New
-                        </span>
-                    </div>
-                    <div class="content-holder">
-                        <span class="header">
-                            Lead Expiry
-                        </span>
-                        <span class="value">
-                            New
-                        </span>
-                    </div>
-                    <div class="content-holder">
-                        <span class="header">
-                            Opportunity Size
-                        </span>
-                        <span class="value">
-                            New
-                        </span>
-                    </div>
-                    <div>
-                        
-                    </div>
+                <div class="card-container customer-details">
+                        <div class="row-holder bottom-border">
+                            <span class="customer-details-header">Customer Details</span>
+                        </div>
+                        <div class="row-holder">
+                            <span class="row-header">
+                                Name
+                            </span>
+                            <span class="row-value">
+                                {{contactsData.contact_name}}
+                            </span>
+                        </div>
+                        <div class="row-holder">
+                            <span class="row-header">
+                                Address
+                            </span>
+                            <span class="row-value">
+                                {{contactsData.shipping_address.address}}, {{contactsData.shipping_address.street2}}, {{contactsData.shipping_address.city}}
+                            </span>
+                        </div>
+                        <div class="row-holder">
+                            <span class="row-header">
+                                State
+                            </span>
+                            <span class="row-value">
+                                {{contactsData.shipping_address.state}}
+                            </span>
+                        </div>
+                        <div class="row-holder">
+                            <span class="row-header">
+                                Zip Code
+                            </span>
+                            <span class="row-value">
+                                {{contactsData.shipping_address.zip}}
+                            </span>
+                        </div>
                 </div>
             </div>
             <div id="assigneeDetails">
-                <div>
-                    Selected Products
-                </div>
-                <div>
-                    Selected Products
+                <div class="card-container assignee-details">
+                    <div class="row-holder">
+                        <span class="row-header">
+                            Assigned To
+                        </span>
+                        <span class="row-value">
+                            {{responseData.userId}}
+                        </span>
+                    </div>
+                    <div class="row-holder">
+                        <span class="row-header">
+                            Assigned By
+                        </span>
+                        <span class="row-value">
+                            {{responseData.userId}}
+                        </span>
+                    </div>
+                    <!-- <div class="row-holder">
+                        <span class="row-header">
+                            State
+                        </span>
+                        <span class="row-value">
+                            {{contactsData.shipping_address.state}}
+                        </span>
+                    </div>
+                    <div class="row-holder">
+                        <span class="row-header">
+                            Zip Code
+                        </span>
+                        <span class="row-value">
+                            {{contactsData.shipping_address.zip}}
+                        </span>
+                    </div> -->
                 </div>
                 
             </div>

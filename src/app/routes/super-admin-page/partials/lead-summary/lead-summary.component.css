@@ -64,3 +64,48 @@
     color: #00BFFF;
     font-size: 18px;
 }
+
+.customer-details{
+    justify-content: start;
+}
+
+.assignee-details{
+    justify-content: start;
+}
+
+.row-holder{
+    display: flex;
+}
+
+.bottom-border {
+    border-bottom: 1px solid #cbcbcb;
+  }
+
+.row-header{
+    flex-basis: 30%;
+    padding-left: 2rem;
+    color: var(--black);
+    font-size: 17px;
+}
+
+.assignee-details .row-header{
+    padding-left: 0.1rem;
+}
+
+.customer-details-header{
+    margin-left: 2rem;
+    font-size: 18px;
+}
+
+.row-value{
+    color: #00BFFF ;
+    font-size: 17px;
+}
+
+.assignee-details .row-header{
+    font-size: 14px;
+}
+
+.assignee-details .row-value{
+    font-size: 14px;
+}
