@@ -43,7 +43,7 @@ export class LeadSummaryComponent implements OnInit{
   public getLeadSummary(data){
 
     this.subscriptions.push(
-      this.superAdminService.getLeadSummaryDetails(null).subscribe(res=>{
+      this.superAdminService.getLeadSummaryDetails(data._id).subscribe(res=>{
         console.log("+_+_+_C Data After Click", res.zohoBookEstimateData);
         this.productsData = res.zohoBookEstimateData;
       })

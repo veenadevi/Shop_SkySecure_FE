@@ -115,7 +115,10 @@ export class SuperAdminService {
 
   public getLeadSummaryDetails(id) : Observable<any> {
 
-    let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/64f00d90eeb59d0054d5cb46';
+    //let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/64f00d90eeb59d0054d5cb46';
+
+
+    let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/' + id;
 
     
 
