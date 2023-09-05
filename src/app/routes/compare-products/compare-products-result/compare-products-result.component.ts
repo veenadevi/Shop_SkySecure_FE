@@ -158,6 +158,7 @@ export class CompareProductsResultComponent {
           return null;
       }
     });
+    console.log("product also should go inside")
     let reqBody = {
       "products": tempPrd,
       "productsVariants": tempPrdVar,
