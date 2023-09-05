@@ -4,6 +4,7 @@
     flex-direction: column;
     row-gap: 1em;
     padding: 40px;
+    font-size: 8px!important;
 }
 
 .text-style{
@@ -16,9 +17,16 @@
     padding: 7px;
     border: 1px solid #EFEFEF;
     color: white;
-    margin: 10px;
-    width: 150px;
+    margin: 6px;
+    width: 80px;
     border-radius: 8px;
     background: var(--dark-violet, linear-gradient(90deg, #888BCB 0%, #383DA9 100%));
     
+}
+
+.thfont{
+    font-size: 13px!important;  
+}
+.trfont{
+    font-size: 13px!important;  
 }

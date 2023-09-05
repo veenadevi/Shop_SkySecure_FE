@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccountListComponent } from './partials/account-list/account-list.component';
 import { MarketplaceuserComponent } from './partials/marketplaceuser/marketplaceuser.component';
 import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.component';
+import { ProductsTableComponent } from './partials/lead-summary/partials/products-table/products-table.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.compo
     SuperAdminPageComponent,
     AccountListComponent,
     MarketplaceuserComponent,
-    LeadSummaryComponent
+    LeadSummaryComponent,
+    ProductsTableComponent
   ],
   imports: [
     CommonModule,

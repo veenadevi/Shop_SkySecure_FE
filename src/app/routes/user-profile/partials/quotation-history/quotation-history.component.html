@@ -1,12 +1,10 @@
-
+<!-- 
 <div class="container">
     <div class="text-header">
         Quotation History
     </div>
 
-    <!-- If Cart is Empty -->
 
-    <!-- If Cart items is present -->
     <ng-container *ngIf="quotationListFlag === 'Y' ; else noQuotationList">
         <div>
             <table class="table table-borderless">
@@ -16,7 +14,7 @@
                     <th scope="col">Date of Request</th>
                     <th scope="col">Product Name</th>
                     <th scope="col">Quantity</th>
-                    <!-- <th scope="col">Action</th> -->
+                  
                   </tr>
                 </thead>
                 <tbody>
@@ -27,35 +25,10 @@
                       <td>{{item.closingDate ? item.closingDate : ''}}</td>
                       <td>{{item.name ? item.name : ''}}</td>
                       <td>{{item.quantity ? item.quantity : ''}}</td>
-                      <!-- <td>
-                        <button class="notify-button">
-                          Notify
-                        </button>
-                      </td> -->
+                     
                     </tr>
                   </ng-container>
-                  <!-- <tr>
-                    <th scope="row">123456789</th>
-                    <td>02/12/2022</td>
-                    <td>Microsoft</td>
-                    <td>200</td>
-                    <td>
-                      <button class="notify-button">
-                        Notify
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">123456789</th>
-                    <td>02/12/2022</td>
-                    <td>Microsoft</td>
-                    <td>200</td>
-                    <td>
-                      <button class="notify-button">
-                        Notify
-                      </button>
-                    </td>
-                  </tr> -->
+                 
                 </tbody>
               </table>
         </div>
@@ -70,4 +43,87 @@
         </div>
       </div>
     </ng-template>
+</div> -->
+
+<div class="all-accounts-view">
+  <div class="card">
+      <p-table 
+          [value]="allMarketPlaceList" 
+          [tableStyle]="{ 'min-width': '60rem' }"
+          [paginator]="true"
+          [rows]="15"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          >
+          <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
+          <ng-template pTemplate="header">
+              <tr class="thfont">
+                  <th>Cart Id</th>
+                  <th>Customer Name</th>
+                  <th>Customer Email</th>
+                  <th>Customer Phone</th>
+                  <th>Status</th>
+                  <th>GST Type</th>
+                  <th>GST Number</th>
+                  <th>Place of Supply</th>
+                  <th>Estimate Number</th>
+                  <th>Estimate Total</th>
+
+
+                  <th> </th>
+              </tr>
+          </ng-template>
+          <!-- <ng-template pTemplate="body" let-account let-i="rowIndex">
+              <tr>
+                  <td>
+                      <div class="text-style" (click)="getAccountById(account)">
+                          {{ account.id }}
+                      </div>
+                      
+                  </td>
+                  <td>{{ account.Owner.name }}</td>
+                  <td>{{ account.Account_Name }}</td>
+                  <td>{{ account.Account_Type }}</td>
+                  <td>
+                      
+                      <div class="btn-holder">
+                          <button id="assign-btn" class="btn" (click)="assign(account, i)">Assign</button>
+                      </div>
+                  </td>
+              </tr>
+          </ng-template> -->
+
+          <ng-template pTemplate="body" let-account let-i="rowIndex">
+              <tr class="trfont">
+                  <td>
+                      <!-- <div class="text-style" (click)="getAccountById(account)">
+                          {{ account.cart_ref_id }}
+                      </div> -->
+                      {{ account.cart_ref_id }}   
+                  </td>
+                  <td>{{ account.zohoBookContactData.contact_persons_name }}</td>
+                  <td>{{ account.zohoBookContactData.contact_persons_email }}</td>
+                  <td>{{ account.zohoBookContactData.contact_persons_phone }}</td>
+                  <td>{{ account.status }}</td>
+                  <td>{{ account.zohoBookContactData.gst_treatment }}</td>
+                  <td>{{ account.zohoBookContactData.gst_no }}</td>
+                  <td>{{ account.zohoBookContactData.placeOfSupply }}</td>
+                  <td>{{ account.zohoBookEstimateData.estimate_number }}</td>
+                  <td>{{ account.zohoBookEstimateData.totalEstimateCost }}</td>
+                  <!-- <td>
+                      
+                      <div class="btn-holder">
+                          <button id="assign-btn" class="btn" (click)="assign(account, i)">Assign</button>
+                      </div>
+                  </td> -->
+              </tr>
+          </ng-template>
+          <!-- <ng-template pTemplate="paginatorleft">
+              <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+          </ng-template> -->
+          <!-- <ng-template pTemplate="paginatorright">
+              <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+          </ng-template> -->
+      </p-table>
+  </div>
 </div>

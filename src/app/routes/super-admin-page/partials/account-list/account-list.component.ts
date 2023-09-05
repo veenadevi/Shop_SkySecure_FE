@@ -18,6 +18,7 @@ export class AccountListComponent implements OnInit{
   public subscriptions : Subscription[] = [];
 
   public accountData : any;
+  public allMarketPlaceList : any;
 
   public info : any;
 
@@ -28,6 +29,7 @@ export class AccountListComponent implements OnInit{
   public allAccounts$ = this.adminPageService.getAllAccounts()
   .pipe(
     map(data => {
+      console.log("running here ==")
       if(data){
         this.accountData = data.accounts.data;
         this.info = data.accounts.info;
@@ -56,6 +58,7 @@ export class AccountListComponent implements OnInit{
     //this.info = this.sampleData.accounts.info;
     this.getAllAccounts();
     this.getAllCRMUsers();
+    this.getAllMarketPlaceAccountList();
 
   }
 
@@ -66,6 +69,8 @@ export class AccountListComponent implements OnInit{
       // this.info = a.accounts.info;
     this.subscriptions.push(
       this.adminPageService.getAllAccounts().subscribe( response => {
+        console.log("running here directly==")
+     
         this.accountData = response.accounts.data;
         this.info = response.accounts.info;
         
@@ -74,6 +79,22 @@ export class AccountListComponent implements OnInit{
       })
     )
   }
+
+  public getAllMarketPlaceAccountList(){
+    
+    // let a: any = this.sampleData();
+    // this.accountData = [...a.accounts.data, ...a.accounts.data];
+    // this.info = a.accounts.info;
+  this.subscriptions.push(
+    this.adminPageService.getAllMarketPlaceAccountList().subscribe( response => {
+      console.log("running here directly==")
+      this.allMarketPlaceList=response;
+    
+      
+
+    })
+  )
+}
 
   public getAccountById(account){
 

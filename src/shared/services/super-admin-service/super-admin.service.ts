@@ -22,6 +22,8 @@ export class SuperAdminService {
 
   private assignAccountOwnerUrl : string;
 
+  public getAccountDetailsByIdUrl : string
+
 
 
 
@@ -37,8 +39,11 @@ export class SuperAdminService {
     //this.baseUrlForSuperAdmin = "http://localhost:8080/";
     this.baseUrlForOrders = environment.gatewayUrl;
 
+
+
     this.getAllCRMUsersUrl = AppService.appUrl.getAllCRMUsers;
     this.assignAccountOwnerUrl = AppService.appUrl.assignAccountOwner;
+    this.getAccountDetailsByIdUrl = AppService.appUrl.getMarketplaceAccountDetailsById;
     
   }
 
@@ -101,8 +106,70 @@ export class SuperAdminService {
       );
 
     return REQUEST$;
+    
   }
 
+  /**
+   * Service for Getting Lead Summary Details By ID
+   */
+
+  public getLeadSummaryDetails(id) : Observable<any> {
+
+    //let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/64f00d90eeb59d0054d5cb46';
+
+
+    let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/' + id;
+
+    
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+
+  /**
+   *  Get Request for GST Details by Id
+   * 
+   */
+
+  public getGSTDetailsById(id) : Observable<any> {
+
+    //let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/64f00d90eeb59d0054d5cb46';
+
+
+    //let url = "https://www.knowyourgst.com/developers/gstincall";
+
+
+    let url = this.baseUrlForSuperAdmin + "api/admin/fetchGSTDetails/" + id; //29ABDCS1510L1ZB"
+    //let url = "http://localhost:8080/" + "api/admin/fetchGSTDetails/" + id; //29ABDCS1510L1ZB"
+    //let url = "http://localhost:8080/api/admin/fetchGSTDetails/29ABDCS1510L1ZB"
+    //let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/' + id;
+
+
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+  
 
     /**
    * Stages our Http Request Headers
