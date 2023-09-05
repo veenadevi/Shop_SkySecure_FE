@@ -47,17 +47,17 @@
         <div class="buttons">
           <ng-container *ngIf="emailExisitAlert">
             <div class="signin-btn">
-              <button (click)="signIn()" class="primary-btn">Sign In</button>
+              <button (click)="signIn()" class="btn primary-btn">Sign In</button>
             </div>
             
           </ng-container>
           <ng-container *ngIf="enableOTPButton">
           <div class="signin-btn" >
             <!-- <button type="submit" class="primary-btn">Send OTP</button> -->
-            <button type="submit" (click) = "onSubmitEmail()" class="primary-btn" >Send OTP</button>
+            <button type="submit" (click) = "onSubmitEmail()" class="btn primary-btn" >Send OTP</button>
           </div>
           <div class="cancel-btn">
-            <button (click)="navigateToLogin()" class="secondary-btn">Back</button>
+            <button (click)="navigateToLogin()" class="btn secondary-btn">Back</button>
           </div>
         </ng-container>
         </div>
@@ -78,11 +78,11 @@
         
           <ng-container *ngIf="enableSignInButton">
             <div class="signin-btn">
-              <button (click)="validateOTP()" class="primary-btn">Sign up</button>
+              <button (click)="validateOTP()" class="btn primary-btn">Sign up</button>
             </div>
          
             <div class="cancel-btn">
-              <button (click)="navigateToLogin()" class="secondary-btn">Back</button>
+              <button (click)="navigateToLogin()" class="btn secondary-btn">Back</button>
             </div>
           </ng-container>
           </div>
