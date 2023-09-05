@@ -10,7 +10,7 @@
             >
             <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
             <ng-template pTemplate="header">
-                <tr>
+                <tr class="thfont">
                     <th>Cart Id</th>
                     <th>Customer Name</th>
                     <th>Customer Email</th>
@@ -47,7 +47,7 @@
             </ng-template> -->
 
             <ng-template pTemplate="body" let-account let-i="rowIndex">
-                <tr>
+                <tr class="trfont">
                     <td>
                         <div class="text-style" (click)="getAccountById(account)">
                             {{ account.cart_ref_id }}

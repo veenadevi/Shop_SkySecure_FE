@@ -6,13 +6,21 @@
             <tr>
                 
                 <th pSortableColumn="title" class="header">
-                    Title <p-sortIcon field="title"></p-sortIcon>
+                    Product name <p-sortIcon field="title"></p-sortIcon>
                 </th>
                 <th pSortableColumn="category" class="header">
-                    Category <p-sortIcon field="category"></p-sortIcon>
+                    Quantity <p-sortIcon field="category"></p-sortIcon>
+                </th>
+              
+                <th pSortableColumn="rating" class="header">
+                    Price <p-sortIcon field="rating"></p-sortIcon>
+                </th>
+
+                <th pSortableColumn="rating" class="header">
+                    Tax <p-sortIcon field="rating"></p-sortIcon>
                 </th>
                 <th pSortableColumn="rating" class="header">
-                    Rating <p-sortIcon field="rating"></p-sortIcon>
+                    Total <p-sortIcon field="rating"></p-sortIcon>
                 </th>
                 <th style="width:8rem"></th>
             </tr>
@@ -24,20 +32,20 @@
                     {{ product.description }}
                 </td>
                 <td>
-                    {{ product.product_type }}
+                    {{ product.quantity }}
                 </td>
                 <td>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="product.item_total" />
+                            <input pInputText type="text" [(ngModel)]="product.bcy_rate" />
                         </ng-template>
                         <ng-template pTemplate="output">
-                            {{ product.item_total }}
+                            {{ product.bcy_rate }}
                         </ng-template>
                     </p-cellEditor>
-                </td>
+               
 
-                <td style="text-align:center">
+                <!-- <td style="text-align:center"> -->
                     <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
                         (click)="onRowEditInit(product, ri)" class="p-button-rounded 
                                                         p-button-text">
@@ -52,6 +60,13 @@
                                                         p-button-text 
                                                         p-button-danger">
                     </button>
+                </td>
+
+                <td>
+                    {{ product.tax_name }}
+                </td>
+                <td>
+                    {{ product.item_total }}
                 </td>
             </tr>
         </ng-template>

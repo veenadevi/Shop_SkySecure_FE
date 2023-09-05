@@ -24,6 +24,7 @@ export class AdminPageService {
   private getAllusersURL:string
   private updateUserRoleURL:string
   private getAllMarketPlaceAccountListURL:string
+  private getMyMarketPlaceAccountListURL:string
 
 
 
@@ -45,6 +46,7 @@ export class AdminPageService {
     this.getAllusersURL=AppService.appUrl.getAllUsers;
     this.updateUserRoleURL=AppService.appUrl.updateUserRole;
     this.getAllMarketPlaceAccountListURL=AppService.appUrl.getAllMarketPlaceAccountListURL;
+ 
 
     
   }
@@ -345,6 +347,8 @@ export class AdminPageService {
 
   return uploadedFileResponse;
 }
+
+
 
 
 }
