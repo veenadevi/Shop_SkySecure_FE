@@ -702,7 +702,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public requestQuote (product : any) : void {
 
-    
+    console.log("===========quantity passed =====")
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
     let queryParams;
@@ -710,7 +710,7 @@ export class ProductBundleDetailComponent implements OnInit{
         queryParams = {
           productName : product.name,
           productId : product._id,
-          quantity : product.quantity,
+          quantity : product.quantity?product.quantity:1,
           price : product.priceList[0].price,
           erpPrice:product.priceList[0].ERPPrice,
           discountRate:product.priceList[0].discountRate,
