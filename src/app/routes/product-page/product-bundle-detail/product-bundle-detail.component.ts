@@ -22,15 +22,18 @@ export class ProductBundleDetailComponent implements OnInit{
   discountRate: number =120; 
   monthlyPrice: number = this.discountRate / 12;
   isMonthly: boolean = true;
+  public product : any = {};
 
   showMonthlyPrice() {
     this.isMonthly = true;
+    this.productFamily.priceList[0].ERPPrice  =this.productFamily.priceList[0].ERPPrice /12;
   }
 
   showDiscountRate() {
     this.isMonthly = false;
+    this.productFamily.priceList[0].ERPPrice  =this.productFamily.priceList[0].ERPPrice *12;
   }
-
+ 
 
   quantity: number = 1;
 

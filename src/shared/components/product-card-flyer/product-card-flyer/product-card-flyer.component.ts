@@ -33,10 +33,12 @@ export class ProductCardFlyerComponent implements OnInit{
     // this.priceType = this.productsList[i].priceList[0].priceType;
     this.productsList[i].priceList[0].priceType = "Year";
     this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price*12;
+    this.productsList[i].priceList[0].ERPPrice =this.productsList[i].priceList[0].ERPPrice*12;
   }
 
   showDiscountRate(i: any) {
     this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price/12;
+    this.productsList[i].priceList[0].ERPPrice =this.productsList[i].priceList[0].ERPPrice/12;
     this.productsList[i].priceList[0].priceType = "Month";
   }
   // originalAmount: number = 100;

@@ -176,6 +176,7 @@ th{
     font-size:12px;
      text-decoration: line-through;
      margin-bottom: 0px;
+     cursor: pointer;
   }
   .price-symbol{
     font-size: 15px;
