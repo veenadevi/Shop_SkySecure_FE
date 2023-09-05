@@ -247,7 +247,11 @@ export class GstPromptModalComponent implements OnInit{
     //let formVal = this.form.value; 
     let formVal = this.myForm.value;
     
-    
+    //if(this.gstData){
+      console.log("|||||||| ", this.myForm.value.countryName);
+      console.log("|||||||| ", this.myForm.value.stateName);
+      
+    //}
 
     
     req.companyName = formVal.companyName;
@@ -316,7 +320,7 @@ export class GstPromptModalComponent implements OnInit{
 
 
     
-    /*
+    
     this.updateGSTService(req);
 
    
@@ -339,7 +343,7 @@ export class GstPromptModalComponent implements OnInit{
         }
         
       })
-    )*/
+    )
 
   }
 
