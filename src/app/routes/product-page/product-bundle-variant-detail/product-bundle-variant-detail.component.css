@@ -559,7 +559,7 @@
 }
 
 .connect-us-content-display-container {
-  background: #f1f8ff;
+  background: var(--primary-50-purple);
   border-radius: 8px 130px 130px 8px;
   display: flex;
   flex-direction: row-reverse;
