@@ -414,7 +414,7 @@ export class ProductDetailComponent implements OnInit{
     private userAccountStore : UserAccountStore,
     private toaster : ToasterNotificationService
   ){
-   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+   //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 featureCount=5;
 
@@ -683,6 +683,7 @@ featureCount=5;
         // console.log("()()()() ", res);
         if(res && res.email !== null){
           this.router.navigate(['/cart'], {queryParams: queryParams});
+          //this.router.navigate(['/admin-pages/accounts']);
         }
         else{
           this.viewModal(queryParams);
@@ -924,6 +925,8 @@ featureCount=5;
   }
  
   ngOnDestroy(){
-    
+    this.subscriptions.forEach(element => {
+        element.unsubscribe();
+    });
   }
 }
