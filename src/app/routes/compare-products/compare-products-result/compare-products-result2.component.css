@@ -78,6 +78,20 @@ th{
     font-weight: 500;
     width: 100px;
   }
+.secondary-btn {
+  /* height: 30px; */
+  font-size: 12px;
+  font-weight: 500;
+  width: 100px;
+  border-radius: 5px;
+} 
+.primary-btn {
+  /* height: 30px; */
+  font-size: 12px;
+  font-weight: 500;
+  width: 100px;
+  border-radius: 5px;
+}
   .buy-btn{
     background: linear-gradient(180deg, #F79C0B 0%, #C68600 100%);
     border-radius: 5px;

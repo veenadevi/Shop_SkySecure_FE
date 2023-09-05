@@ -207,8 +207,10 @@
 
   .product-actions {
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     margin-bottom: 30px;
+    flex-direction: row;
+    column-gap: 10px;
   }
   
   .request-btn {

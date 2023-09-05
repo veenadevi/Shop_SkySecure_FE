@@ -124,7 +124,7 @@ body{
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   color: var(--white);
-  background: var(--btn-lite-gradient);
+  /* background: var(--btn-lite-gradient); */
 }
 
 .primary-btn:active {
@@ -149,8 +149,8 @@ body{
 .secondary-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  color: var(--white);
-  background-color: var(--primary-500-purple);
+  color: var(--primary-500-purple);
+  /* background-color: var(--primary-500-purple); */
   border: 1px solid var(--primary-500-purple);
 }
 
@@ -177,7 +177,7 @@ body{
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   color: var(--white);
-  background-color: var(--primary-500-purple);
+  background-color: var(--primary-400-purple);
 }
 
 .tertiary-btn:active {
