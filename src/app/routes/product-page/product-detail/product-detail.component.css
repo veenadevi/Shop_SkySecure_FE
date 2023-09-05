@@ -1940,6 +1940,7 @@ button{
 .amount{
   font-size: initial;
    text-decoration: line-through;
+   cursor: pointer;
 }
 .price-symbol{
   font-size: 18px;

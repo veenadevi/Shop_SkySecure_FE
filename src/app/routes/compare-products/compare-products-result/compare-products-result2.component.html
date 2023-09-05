@@ -80,8 +80,10 @@
                                 <p class="mrp"> MRP:&nbsp;</p>
                                 <span class="price-symbol-01">&#8377;</span>
                                 <span>
-                                    <p class="amount" >
-                                        {{item.properties['priceList'].ERPPrice | number : '1.2-2'}}</p>
+                                    <p class="amount" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
+                                        <!-- {{item.properties['priceList'].ERPPrice | number : '1.2-2'}} -->
+                                        {{item.properties['priceList'].ERPPrice/12 | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}
+                                    </p>
                                 </span>
                             </div>
                         </div>

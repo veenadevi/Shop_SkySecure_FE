@@ -27,11 +27,14 @@ export class ProductDetailComponent implements OnInit{
 
   showMonthlyPrice() {
     this.isMonthly = true;
+    this.product.priceList[0].ERPPrice  =this.product.priceList[0].ERPPrice /12;
   }
 
   showDiscountRate() {
     this.isMonthly = false;
+    this.product.priceList[0].ERPPrice  =this.product.priceList[0].ERPPrice *12;
   }
+ 
 
   quantity: number = 1;
 

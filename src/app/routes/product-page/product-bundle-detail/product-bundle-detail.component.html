@@ -124,13 +124,16 @@
                         </div>
                         <div style="display:inline-flex;align-items: center;">
                             <p style="font-size: small;"> MRP:&nbsp;</p>
-                            <span class="price-symbol">&#8377;</span>
+                            <!-- <span class="price-symbol">&#8377;</span> -->
                             <span>
-                                <p style="font-size: initial; text-decoration: line-through;">
-                                    {{productFamily.priceList[0].ERPPrice | number : '1.2-2'}}</p>
+                              
+                                <p style="font-size: initial; text-decoration: line-through;cursor: pointer;" (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
+                                    {{productFamily.priceList[0].ERPPrice /12 | number : '1.2-2'}} /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}
+                                    <!-- <span >&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : productFamily.priceList[0].price }} /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}</span> -->
+                                </p>
                             </span>
-                            <span class="product-price-type">
-                                / {{productFamily.priceList[0].priceType}}</span>
+                            <!-- <span class="product-price-type">
+                                / {{productFamily.priceList[0].priceType}}</span> -->
                         </div>
                     </div>
                     <div class="solution-section">
