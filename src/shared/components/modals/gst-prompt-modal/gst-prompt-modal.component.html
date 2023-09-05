@@ -74,7 +74,7 @@
               <p class="or">(Or)</p>
               <div class="col-sm-12">
                 <input type="checkbox" class="form-check d-inline" id="chb" required>
-                <div for="chb" class="form-check-label">&nbsp;I Don't Have Company Gst Number.
+                <div for="chb" class="form-check-label">&nbsp;I Don't Have Company GST Number.
                 </div>
               </div>
 
@@ -113,7 +113,8 @@
             <div class="col-sm-9 form-group">
               <label for="cod">Country code</label>
               <select class="form-control browser-default custom-select">
-                <option data-countryCode="US" value="1" selected>USA (+1)</option>
+                <option data-countryCode="IN" value="1" selected>IN (+91)</option>
+                <option data-countryCode="US" value="2" selected>USA (+1)</option>
                 <option data-countryCode="GB" value="44">UK (+44)</option>
 
 
@@ -197,6 +198,7 @@
                 <option disabled value="'Select Country'">Select Country </option>
                 <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
               </select>
+              
 
 
               
@@ -299,9 +301,20 @@
               </div>
               <div class="col-sm-6 form-group">
                 <label for="Country">Country*</label>
-                <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)">
+                <!-- <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)">
                   <option disabled value="'Select Country'">Select Country </option>
                   <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+                </select> -->
+                <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)" >
+                  <ng-container *ngIf="gstData; else noGstData">
+                    
+                    <option value="India">India</option>
+                  </ng-container>
+                  <ng-template #noGstData>
+                    <option disabled value="'Select Country'">Select Country </option>
+                    <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+                  </ng-template>
+                  
                 </select>
 
               </div>
@@ -310,19 +323,39 @@
             <div class="address-row" >
               <div class="col-sm-6 form-group">
                 <label for="State">State*</label>
-                <select formControlName="stateName" class="form-control" (change)="onStateChange($event)">
+                <!-- <select formControlName="stateName" class="form-control" (change)="onStateChange($event)">
                   <option disabled value="'Select State'">Select Country </option>
                   <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+                </select> -->
+                <select formControlName="stateName" class="form-control" (change)="onStateChange($event)">
+                  <ng-container *ngIf="gstData; else noGstDataState">
+                    
+                    <option value="">{{gstResponseData.adress.state}}</option>
+                  </ng-container>
+                  <ng-template #noGstDataState>
+                    <option disabled value="'Select State'">Select State</option>
+                    <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+                  </ng-template>
                 </select>
               </div>
   
   
               <div class="col-sm-6 form-group">
                 <label for="State">City*</label>
-                <select formControlName="cityName" class="form-control" (change)="onCityChange($event)">
+                <!-- <select formControlName="cityName" class="form-control" (change)="onCityChange($event)">
                   <option disabled value="'Select City'">Select City </option>
                   <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
   
+                </select> -->
+                <select formControlName="cityName" class="form-control" (change)="onCityChange($event)">
+                  <ng-container *ngIf="gstData; else noGstDataCity">
+                    
+                    <option value="">{{gstResponseData.adress.city}}</option>
+                  </ng-container>
+                  <ng-template #noGstDataCity>
+                    <option disabled value="'Select City'">Select City</option>
+                    <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
+                  </ng-template>
                 </select>
               </div>
               <div class="col-sm-6 form-group">
@@ -340,7 +373,7 @@
           </div>
 
 
-          <div class="name-row" *ngIf="selectedType === 'self'">
+          <div class="name-row" >
             <div class="col-sm form-group">
               <label for="companyName">Company Name*</label>
               <input formControlName="companyName" type="companyName" class="form-control-01" name="companyName"
@@ -384,11 +417,12 @@
               <label for="Country">Country*</label>
               <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)" >
                 <ng-container *ngIf="gstData; else noGstData">
-                  <option disabled value="'Select Country'">Select Country </option>
-                  <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+                  
+                  <option value="India">India</option>
                 </ng-container>
                 <ng-template #noGstData>
-                  <option value="India">India</option>
+                  <option disabled value="'Select Country'">Select Country </option>
+                  <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
                 </ng-template>
                 
               </select>
@@ -408,19 +442,40 @@
           <div class="address-row" *ngIf="selectedType === 'self'">
             <div class="col-sm-6 form-group">
               <label for="State">State*</label>
-              <select formControlName="stateName" class="form-control" (change)="onStateChange($event)">
-                <option disabled value="'Select State'">Select Country </option>
+              <!-- <select formControlName="stateName" class="form-control" (change)="onStateChange($event)">
+                <option disabled value="'Select State'">Select State </option>
                 <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+              </select> -->
+              <select formControlName="stateName" class="form-control" (change)="onStateChange($event)">
+                <ng-container *ngIf="gstData; else noGstDataState">
+                  
+                  <option value="">{{gstResponseData.adress.state}}</option>
+                </ng-container>
+                <ng-template #noGstDataState>
+                  <option disabled value="'Select State'">Select State</option>
+                  <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+                </ng-template>
               </select>
+              
             </div>
 
 
             <div class="col-sm-6 form-group">
               <label for="State">City*</label>
-              <select formControlName="cityName" class="form-control" (change)="onCityChange($event)">
+              <!-- <select formControlName="cityName" class="form-control" (change)="onCityChange($event)">
                 <option disabled value="'Select City'">Select City </option>
                 <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
 
+              </select> -->
+              <select formControlName="cityName" class="form-control" (change)="onCityChange($event)">
+                <ng-container *ngIf="gstData; else noGstDataCity">
+                  
+                  <option value="">{{gstResponseData.adress.city}}</option>
+                </ng-container>
+                <ng-template #noGstDataCity>
+                  <option disabled value="'Select City'">Select City</option>
+                  <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
+                </ng-template>
               </select>
             </div>
             <div class="col-sm-6 form-group">

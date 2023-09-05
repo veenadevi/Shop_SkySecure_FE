@@ -58,6 +58,8 @@ export class GstPromptModalComponent implements OnInit{
 
   public gstData : boolean = false;
 
+  public gstResponseData : any;
+
  
  
   public subscriptions : Subscription[] = [];
@@ -248,14 +250,39 @@ export class GstPromptModalComponent implements OnInit{
     let formVal = this.myForm.value;
     
     //if(this.gstData){
-      console.log("|||||||| ", this.myForm.value.countryName);
-      console.log("|||||||| ", this.myForm.value.stateName);
+      
+
       
     //}
 
     
-    req.companyName = formVal.companyName;
-    req.billing_address = {
+    
+    if(this.gstData){
+      req.companyName = this.gstResponseData['legal-name'];
+    }
+    else{
+      req.companyName = formVal.companyName;
+    }
+   
+
+
+
+    if(this.gstData){
+      req.billing_address = {
+        "attention": "name",
+        "address": this.gstResponseData.adress.floor,
+        "street2": this.gstResponseData.adress.street,
+        "state_code": this.selectedState.isoCode,
+        "city": this.selectedCity.name,
+        "state": this.selectedState.name,
+        "zip": this.gstResponseData.adress.pincode,
+        "country": "IN", //this.selectedCountry.isoCode,
+        "phone": formVal.phoneNo
+      }
+    }
+
+    else{
+      req.billing_address = {
         "attention": "name",
         "address": formVal.addressLine1,
         "street2": formVal.addressLine2,
@@ -266,6 +293,9 @@ export class GstPromptModalComponent implements OnInit{
         "country": "IN", //this.selectedCountry.isoCode,
         "phone": formVal.phoneNo
     }
+    }
+
+    
 
     req.currency_id = "1014673000000000064";
 
@@ -316,7 +346,7 @@ export class GstPromptModalComponent implements OnInit{
 
 
 
-    console.log("+_+_+_+_+ Final Val , ", req);
+  
 
 
     
@@ -380,7 +410,7 @@ export class GstPromptModalComponent implements OnInit{
                  "district" : this.selectedCity.isoCode,
                  "pincode" : req.billing_address.zip,
                  //"countryCode" : this.selectedState.isoCode,
-                 "countryCode" : this.selectedCountry.isoCode,
+                 "countryCode" : "IN",
              }
          ],
      
@@ -466,8 +496,10 @@ export class GstPromptModalComponent implements OnInit{
         this.myForm.controls['countryName'].disable();
         this.myForm.controls['stateName'].disable();
         this.myForm.controls['cityName'].disable();
-      this.subscriptions.push(
+        this.subscriptions.push(
         this.superAdminService.getGSTDetailsById(this.myForm.value.gstNo).subscribe(res=>{
+
+          this.gstResponseData = res;
   
           this.gstData = true;
       
@@ -477,6 +509,32 @@ export class GstPromptModalComponent implements OnInit{
           this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
           this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
           this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
+
+
+          let resState = res.adress.state;
+          let resCity = res.adress.city;
+
+
+          let stateList  = State?.getStatesOfCountry('IN');
+          
+
+
+          let selectedState = stateList.filter(c => c.name === resState)[0];
+         
+          this.selectedState = selectedState;
+
+
+          let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
+
+          
+
+          let selectedCity = cityList.filter(c => c.name === resCity)[0];
+          this.selectedCity = selectedCity;
+
+
+          
+
+
           
           //this.myForm.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
           //this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
