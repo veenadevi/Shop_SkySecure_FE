@@ -466,3 +466,6 @@ p {
     width: 33%;
 }
 
+.bottom-border {
+    border-bottom: 1px solid #cbcbcb;
+  }
