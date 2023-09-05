@@ -1,7 +1,7 @@
 <div id="leadSummary">
     <ng-container *ngIf="accountDetails && responseData">
         <div id="lead-summary-header">
-            {{accountDetails.id}} | Lead Summary
+            {{productsData.estimate_number}} - Lead Summary
         </div>
 
 
@@ -83,7 +83,7 @@
             </div>
             <div id="assigneeDetails">
                 <div class="card-container assignee-details">
-                    <div class="row-holder">
+                    <!-- <div class="row-holder">
                         <span class="row-header">
                             Assigned To
                         </span>
@@ -98,7 +98,7 @@
                         <span class="row-value">
                             {{responseData.userId}}
                         </span>
-                    </div>
+                    </div> -->
                     <!-- <div class="row-holder">
                         <span class="row-header">
                             State
