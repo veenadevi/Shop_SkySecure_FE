@@ -61,7 +61,7 @@
                             </span>
                         </span>
 
-                        <button class="btn buy-now-btn" (click)="requestQuote(product)">Buy now</button>
+                        <button class="btn tertiary-btn" (click)="requestQuote(product)">Add To Cart</button>
                     </div>
                 </div>
                 <div class="product-details-info">
@@ -108,10 +108,12 @@
                             </div>
                             <div style="display:inline-flex;align-items: center;">
                                 <p class="mrp"> MRP:&nbsp;</p>
-                                <span class="price-symbol">&#8377;</span>
+                                <!-- <span class="price-symbol">&#8377;</span> -->
                                 <span>
-                                    <p class="amount" >
-                                        {{product.priceList[0].ERPPrice | number : '1.2-2'}}</p>
+                                    <p class="amount"  (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
+                                        {{product.priceList[0].ERPPrice/12 | number : '1.2-2'}} /  {{isMonthly ? 'Month' : (product.priceList[0].priceType)}}
+                                        <!-- <span class="amount">&#8377;  {{ isMonthly ? (product.priceList[0].ERPPrice/12 | number : '1.2-2') : product.priceList[0].ERPPrice }}  /  {{isMonthly ? 'Month' : (product.priceList[0].priceType)}}</span> -->
+                                        <span class="product-price-type"></span></p>
                                 </span>
                             </div>
                         </div>
@@ -168,10 +170,10 @@
 
                     </div> -->
 
-                    <span class="request-btn"><button class="btn view-det-btn"
+                    <span class="request-btn"><button class="btn secondary-btn"
                         (click)="addToCompare(product, 'fromProd')"
                                        >Add to Compare</button>
-                        <button class="btn request-quote-btn" (click)="requestQuote(product)"
+                        <button class="btn primary-btn" (click)="requestQuote(product)"
                             style="margin-left: 4%;">Request Quote</button></span>
 
                     <hr>
@@ -480,7 +482,7 @@
 
                                 <div class="feature-heading">
                                     <div class="feature-card">
-                                        <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
+                                        <img class="tick" src="../../../../assets/icons/VioletTickIcon.svg">
                                     </div>
                                     <div class="feature-card-content" (click)="openLink(item.hyperLinkURL)">
                                         <p class="feature-card-heading">{{item.name}}</p>
@@ -990,7 +992,7 @@
 
                             <div class="sim-prod-btn-cont">
                                 <span>
-                                    <button class="btn similar-prod-request-quote-btn"
+                                    <button class="btn primary-btn"
                                         (click)="requestQuote(item)">Request Quote</button>
                                 </span>
                             </div>

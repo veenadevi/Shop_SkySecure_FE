@@ -18,7 +18,7 @@
   height: 44px;
   cursor: pointer;
   z-index: 3;
-  border-radius: 10 8px 0 0;
+  border-radius: 8px 8px 0 0;
   padding: 8px 16px;
   position: fixed;
   top: 50%;
@@ -200,7 +200,7 @@
   margin: 0 10px;
 }
 .link-text{
-  color: #0047BD;
+  color: var(--primary-500-purple);
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -713,7 +713,7 @@ input[type="number"]::-webkit-outer-spin-button {
   background: transparent;
   /* border: 1px solid white; */
   text-align: center;
-  color: #003388;
+  color: var(--primary-500-purple);
   font-size: 12px;
   font-weight: 500;
   text-decoration: line;
@@ -1940,6 +1940,7 @@ button{
 .amount{
   font-size: initial;
    text-decoration: line-through;
+   cursor: pointer;
 }
 .price-symbol{
   font-size: 18px;
@@ -2099,7 +2100,6 @@ button{
   font-size: 10px;
 }
 .link-text {
-  color: #0047BD;
   font-size: 9px;
   font-style: normal;
   font-weight: 500;
@@ -2208,7 +2208,6 @@ button{
 .all-btn{
   background: transparent;
   text-align: center;
-  color: #003388;
   font-size: 8px;
   font-weight: 500;
   -webkit-text-decoration: line;
@@ -2628,7 +2627,6 @@ font-size: 10px;
   font-size: 10px;
 }
 .link-text {
-  color: #0047BD;
   font-size: 9px;
   font-style: normal;
   font-weight: 500;
@@ -2778,7 +2776,6 @@ font-size: 10px;
 .all-btn{
   background: transparent;
   text-align: center;
-  color: #003388;
   font-size: 8px;
   font-weight: 500;
   -webkit-text-decoration: line;
@@ -3198,7 +3195,6 @@ font-size: 10px;
   font-size: 10px;
 }
 .link-text {
-  color: #0047BD;
   font-size: 9px;
   font-style: normal;
   font-weight: 500;
@@ -3348,7 +3344,6 @@ font-size: 10px;
 .all-btn{
   background: transparent;
   text-align: center;
-  color: #003388;
   font-size: 8px;
   font-weight: 500;
   -webkit-text-decoration: line;
@@ -3745,7 +3740,6 @@ h5 {
     font-size: 10px;
   }
   .link-text {
-    color: #0047BD;
     font-size: 9px;
     font-style: normal;
     font-weight: 500;
@@ -3853,7 +3847,6 @@ h5 {
   .all-btn{
     background: transparent;
     text-align: center;
-    color: #003388;
     font-size: 8px;
     font-weight: 500;
     -webkit-text-decoration: line;

@@ -184,7 +184,7 @@
   margin: 0 10px;
 }
 .link-text{
-  color: #0047BD;
+  color: var(--primary-500-purple);
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -245,7 +245,7 @@
   background: transparent;
   /* border: 1px solid white; */
   text-align: center;
-  color: #003388;
+  color: var(--primary-500-purple);
   font-size: 12px;
   font-weight: 500;
   text-decoration: line;

@@ -22,15 +22,18 @@ export class ProductBundleDetailComponent implements OnInit{
   discountRate: number =120; 
   monthlyPrice: number = this.discountRate / 12;
   isMonthly: boolean = true;
+  public product : any = {};
 
   showMonthlyPrice() {
     this.isMonthly = true;
+    this.productFamily.priceList[0].ERPPrice  =this.productFamily.priceList[0].ERPPrice /12;
   }
 
   showDiscountRate() {
     this.isMonthly = false;
+    this.productFamily.priceList[0].ERPPrice  =this.productFamily.priceList[0].ERPPrice *12;
   }
-
+ 
 
   quantity: number = 1;
 
@@ -179,7 +182,7 @@ export class ProductBundleDetailComponent implements OnInit{
     private compareProductsStore : CompareProductsStore,
     private toaster : ToasterNotificationService
   ){
-   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+   //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
         
@@ -862,6 +865,12 @@ export class ProductBundleDetailComponent implements OnInit{
     //console.log("++++++++++++++++++++++()()()()( ", uniqueElements.length);
     return uniqueElements.length;
     
+  }
+
+  ngOnDestroy(){
+    this.subscriptions.forEach(element => {
+        element.unsubscribe();
+    });
   }
   
 }

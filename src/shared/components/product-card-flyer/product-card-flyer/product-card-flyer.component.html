@@ -88,12 +88,17 @@
                         <p class="gst">(GST Extra)</p>
                         
                       </div>
-
-                    <span>
+                      <span>
+                        <span class="text-style-mrp">MRP:</span> 
+                        <span class="text-price strike-through" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
+                             ₹ {{((item.priceList && item.priceList.length>0) ? item.priceList[0].ERPPrice : '' )/12 | number : '1.2-2'}} /  {{item.priceList[0].priceType}}</span> 
+                        <!-- <span class="text-term"> </span> -->
+                    </span>
+                    <!-- <span>
                         <span class="text-style-mrp">MRP:</span> 
                         <span class="text-price strike-through"> ₹ {{((item.priceList && item.priceList.length>0) ? item.priceList[0].ERPPrice : '' ) | number : '1.2-2'}}</span> 
                         <span class="text-term"> / {{(item.priceList && item.priceList.length>0) ? mrpPriceType : ''}}</span>
-                    </span>
+                    </span> -->
                 </div>
                
                 <div class="solution-category">
@@ -126,8 +131,8 @@
                     </div>
                 </ng-container>
                 <div class="btn-holder">
-                    <button class="btn request-btn" (click)="navigateToProductDetails(item)">View Details</button>
-                    <button class="btn compare-btn" (click)="requestQuote(item)">Add to Cart</button>
+                    <button class="btn primary-btn" (click)="navigateToProductDetails(item)">View Details</button>
+                    <button class="btn secondary-btn" (click)="requestQuote(item)">Add to Cart</button>
                     
                 </div>
             </div>

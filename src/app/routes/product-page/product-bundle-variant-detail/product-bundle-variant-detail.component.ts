@@ -203,7 +203,7 @@ export class ProductBundleVariantDetailComponent implements OnInit {
     private userAccountStore : UserAccountStore,
     private toaster : ToasterNotificationService
   ){
-   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+   //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
         
@@ -867,7 +867,9 @@ showBasicDialog() {
   this.viewModal2(null);
 }
 ngOnDestroy(){
-    
+  this.subscriptions.forEach(element => {
+      element.unsubscribe();
+  });
 }
 
 }

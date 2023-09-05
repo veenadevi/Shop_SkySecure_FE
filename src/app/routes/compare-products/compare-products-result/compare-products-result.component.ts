@@ -939,6 +939,7 @@ export class CompareProductsResultComponent {
     this.allProducts[i].properties['priceList'].price  = this.allProducts[i].properties['priceList'].price ;
     this.allProducts[i].properties['priceList'].priceType = "Year";
     this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price*12;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice*12;
   }
 
   showDiscountRate(i: any) {
@@ -947,9 +948,10 @@ export class CompareProductsResultComponent {
 
     // this.allProducts[i].properties['priceList'].price = this.priceValue;
     this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice/12;
     this.allProducts[i].properties['priceList'].priceType = "Month";
   }
-
+ 
   openLink(url: any): void {
     if(url && url.length>0)
     window.open(url, '_blank');

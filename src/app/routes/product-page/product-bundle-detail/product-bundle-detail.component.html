@@ -75,7 +75,7 @@
                             </span>
                         </span>
 
-                        <button class="btn buy-now-btn" (click)="buyNow(productFamily, productQuantity)">Buy now</button>
+                        <button class="btn tertiary-btn" (click)="buyNow(productFamily, productQuantity)">Buy now</button>
                     </div>
 
                 </div>
@@ -124,13 +124,16 @@
                         </div>
                         <div style="display:inline-flex;align-items: center;">
                             <p style="font-size: small;"> MRP:&nbsp;</p>
-                            <span class="price-symbol">&#8377;</span>
+                            <!-- <span class="price-symbol">&#8377;</span> -->
                             <span>
-                                <p style="font-size: initial; text-decoration: line-through;">
-                                    {{productFamily.priceList[0].ERPPrice | number : '1.2-2'}}</p>
+                              
+                                <p style="font-size: initial; text-decoration: line-through;cursor: pointer;" (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
+                                    {{productFamily.priceList[0].ERPPrice /12 | number : '1.2-2'}} /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}
+                                    <!-- <span >&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : productFamily.priceList[0].price }} /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}</span> -->
+                                </p>
                             </span>
-                            <span class="product-price-type">
-                                / {{productFamily.priceList[0].priceType}}</span>
+                            <!-- <span class="product-price-type">
+                                / {{productFamily.priceList[0].priceType}}</span> -->
                         </div>
                     </div>
                     <div class="solution-section">
@@ -182,8 +185,8 @@
                     <p class="prod-desc">{{productFamily.description}}</p> -->
 
                     <span class="request-btn">
-                        <button class="btn view-det-btn"  (click)="addToCompare(productFamily, 'fromProd')" >Add to Compare</button>
-                        <button class="btn request-quote-btn" style="margin-left: 4%;"
+                        <button class="btn secondary-btn"  (click)="addToCompare(productFamily, 'fromProd')" >Add to Compare</button>
+                        <button class="btn primary-btn" style="margin-left: 4%;"
                             (click)="requestQuote( productFamily)">Request Quote</button></span>
 
                             <hr>
@@ -474,7 +477,7 @@
                                         <ng-container *ngFor="let item of features">
                                             <div class="feature-heading">
                                                 <div class="feature-card">
-                                                    <img class="tick" src="../../../../assets/icons/FeaturesBlueTickIcon.svg">
+                                                    <img class="tick" src="../../../../assets/icons/VioletTickIcon.svg">
                                                 </div>
                                                 <div class="feature-card-content" (click)="openLink(item.hyperLinkURL)">
                                                     <p class="feature-card-heading">{{item.name}}</p>

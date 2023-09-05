@@ -64,6 +64,8 @@ export class HeaderComponent implements OnInit{
 
   public userFullName = '';
 
+  hoverOpen = true;
+
   @Input() set userName(value : any){
     this.userFullName =  value;
   }
@@ -114,6 +116,13 @@ export class HeaderComponent implements OnInit{
   /**
    * Click Functions
    */
+
+  
+  openDropdown() {
+
+    this.hoverOpen = true;
+
+  }
 
   // Cart Click
 
