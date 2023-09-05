@@ -71,10 +71,21 @@
                 <input formControlName="gstNo" type="text" class="form-control " name="gstNo" id="gst-no"
                   placeholder="Enter your GST NO" required>
               </div>
-              <p class="or">(Or)</p>
+              <p class="or ">(Or)</p>
               <div class="col-sm-12">
                 <input type="checkbox" class="form-check d-inline" id="chb" required>
                 <div for="chb" class="form-check-label">&nbsp;I Don't Have Company GST Number.
+                </div>
+              </div>
+              <div *ngIf="selectedType === 'others'" class="">
+                
+                <div class="form-check-label bottom-border">&nbsp;
+                </div>
+              </div>
+
+              <div *ngIf="selectedType === 'others'" class="">
+                
+                <div class="form-check-label" style="margin-top:10px">&nbsp; *Please fill the contact details
                 </div>
               </div>
 
@@ -102,12 +113,12 @@
                 <label for="email">Email ID*</label>
                 <input formControlName="email" type="email" class="form-control-01" name="email" id="email"
                   placeholder="Email ID" required>
-                <div *ngIf="myForm.get('email').hasError('required')">
+                <!-- <div *ngIf="myForm.get('email').hasError('required')">
                   Email is required.
                 </div>
                 <div *ngIf="myForm.get('email').hasError('email')">
                   Invalid email format.
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="col-sm-9 form-group">
@@ -250,11 +261,11 @@
                 </div> -->
 
 
-          <div class="col-sm-12" *ngIf="selectedType === 'others'">
+          <!-- <div class="col-sm-12" *ngIf="selectedType === 'others'">
             <input type="checkbox" class="form-check d-inline" id="chb" required>
             <div for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
             </div>
-          </div>
+          </div> -->
 
         </div>
       </form>
