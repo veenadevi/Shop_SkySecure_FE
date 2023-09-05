@@ -6,6 +6,8 @@ import { AssignLeadsModalComponent } from 'src/shared/components/modals/assign-l
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
+import { UserProfileService } from 'src/shared/services/user-profile.service';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'quotation-history',
@@ -21,6 +23,7 @@ export class QuotationHistoryComponent implements OnInit {
   public allMarketPlaceList : any;
 
   public info : any;
+  public userId:any;
 
 
 
@@ -48,7 +51,9 @@ export class QuotationHistoryComponent implements OnInit {
     private router : Router,
     private modalService : NgbModal,
     private superAdminService : SuperAdminService,
-    private superAdminStore : SuperAdminStore
+    private superAdminStore : SuperAdminStore,
+    private userProfileService:UserProfileService,
+    private userAccountStore : UserAccountStore,
   ){}
 
   ngOnInit(): void {
@@ -56,9 +61,13 @@ export class QuotationHistoryComponent implements OnInit {
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
+    let userAccountdetails = this.userAccountStore.getUserDetails();
+    this.userId=userAccountdetails._id;
+    console.log("userAccountdetails  ",userAccountdetails._id)
     this.getAllAccounts();
     this.getAllCRMUsers();
     this.getAllMarketPlaceAccountList();
+   
 
   }
 
@@ -86,7 +95,7 @@ export class QuotationHistoryComponent implements OnInit {
     // this.accountData = [...a.accounts.data, ...a.accounts.data];
     // this.info = a.accounts.info;
   this.subscriptions.push(
-    this.adminPageService.getAllMarketPlaceAccountList().subscribe( response => {
+    this.userProfileService.getMyMarketplaceAccountList(this.userId).subscribe( response => {
       console.log("running here directly==")
       this.allMarketPlaceList=response;
     

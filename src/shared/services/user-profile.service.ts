@@ -24,6 +24,7 @@ export class UserProfileService {
   private initiateOTP : string;
   private validateOTPUrl : string;
   private userGstUpdateUrl : string;
+  private getMyMarketPlaceAccountListURL:string;
   
 
 
@@ -43,6 +44,7 @@ export class UserProfileService {
     this.initiateOTP = AppService.appUrl.initiateOTP;
     this.validateOTPUrl  = AppService.appUrl.validateOTP;
     this.userGstUpdateUrl = AppService.appUrl.userGstUpdate;
+    this.getMyMarketPlaceAccountListURL=AppService.appUrl.getMyMarketPlaceAccountListURL
     
     
   }
@@ -338,7 +340,23 @@ export class UserProfileService {
     return OPTIONS; 
   }
 
+  public getMyMarketplaceAccountList(userId:string) : Observable<any> {
 
+    let url = this.baseUrlForQuote + this.getMyMarketPlaceAccountListURL+ '/' + userId;
+  
+  
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+  
+    return request$;
+  }
   
 
 
