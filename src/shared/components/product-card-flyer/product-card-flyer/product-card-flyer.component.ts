@@ -48,6 +48,7 @@ export class ProductCardFlyerComponent implements OnInit{
   //@Input() products : Array<any> = [];
 
   public productsList : any[] = [];
+public whatsAppMessage:string
 
   @Input() set products(value : any){
 
@@ -82,7 +83,7 @@ export class ProductCardFlyerComponent implements OnInit{
   ngOnInit(): void {
 
     
-   
+  this.whatsAppMessage="Hello! I've contacted you through your website 'Skysecure MarketPlace." 
     
   }
 

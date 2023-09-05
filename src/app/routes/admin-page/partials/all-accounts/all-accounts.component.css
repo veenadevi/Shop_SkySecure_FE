@@ -10,3 +10,8 @@
     cursor: pointer;
     color: #3366CC;
 }
+
+th, td {
+    text-align: center;
+    font-size: 0.8em;
+  }

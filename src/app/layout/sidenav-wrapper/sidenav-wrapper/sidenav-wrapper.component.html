@@ -74,7 +74,7 @@
           <!-- Dashboard Sub Menu -->
           <ng-container *ngIf="dashboardSubMenu">
             <mat-list-item>
-              <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['user-profile/quotation-history']">Quotation History</span>
+              <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('quotation-history')">Quotation History</span>
             </mat-list-item>
 
           </ng-container>
@@ -84,16 +84,17 @@
             <span class="icon-holder">
               <img src="../../../../assets/YellowChalk/ShopIcon.svg" title="Shop" alt="Shop">
             </span>
-            <div *ngIf="isExpanded" class="menu-item" [routerLink]="['/']">
+            <div *ngIf="isExpanded" class="menu-item" (click) = "routeEvent('home')">
                 <span class="text-style">
                   Shop
                 </span>
-                
-              </div>
+            </div>
           </mat-list-item>
 
          <!-- Account Manager Section -->
-          <ng-container *ngIf="userRoleVal === 'admin' || userRoleVal === 'superadmin'">
+
+          <ng-container *ngIf="userRoleVal === 'admin'|| userRoleVal === 'superadmin'">
+
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'am')">
                 <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
@@ -112,7 +113,7 @@
                 <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['super-admin-page']">Dashboard</span>
               </mat-list-item> -->
               <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['account-manager/accounts']">Accounts</span>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click)="routeEvent('amAccounts')">Accounts</span>
               </mat-list-item>
               <!-- <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
@@ -151,14 +152,17 @@
               <!-- <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['super-admin-page']">Dashboard</span>
               </mat-list-item> -->
-              <!-- <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-pages/accounts']">Accounts</span>
+
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminAccounts')">Accounts</span>
+
+
               </mat-list-item>
               <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
               </mat-list-item> -->
               <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['admin-pages/marketplaceuser']">Marketplace User</span>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminMarketPlaceUser')">Marketplace User</span>
               </mat-list-item>
              
 
@@ -202,22 +206,22 @@
                 <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['portal-admin-page/estimate-details']">Estimates</span>
               </mat-list-item> -->
               <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['portal-admin-page/feature-update']">Add New Feature</span>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paFeatureUpdate')" >Add New Feature</span>
               </mat-list-item>
               <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['portal-admin-page/add-new-product']">Add New Product</span>
-              </mat-list-item>
-
-              <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['portal-admin-page/edit-product']">Edit product</span>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paAddNewProduct')" >Add New Product</span>
               </mat-list-item>
 
               <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['portal-admin-page/upload-product-price']">Upload Product Price</span>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paEditProduct')" >Edit product</span>
+              </mat-list-item>
+
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paUploadProductPrice')" >Upload Product Price</span>
               </mat-list-item>
               
               <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['portal-admin-page/updateblog']">Update Blog</span>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paUploadBlog')" >Update Blog</span>
               </mat-list-item>
             </ng-container>
           </ng-container>

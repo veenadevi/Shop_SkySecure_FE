@@ -6,7 +6,8 @@ import { CartService } from 'src/shared/services/cart.service';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { Country, State, City } from "country-state-city";
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup , Validators  } from '@angular/forms';
+import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 
 @Component({
   selector: 'app-gst-prompt-modal',
@@ -14,6 +15,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./gst-prompt-modal.component.css']
 })
 export class GstPromptModalComponent implements OnInit{
+  showContent: boolean = false;
+  showButton: boolean=true;
+ 
 
   @Input('request')
   public request : any;
@@ -38,33 +42,62 @@ export class GstPromptModalComponent implements OnInit{
   public form: FormGroup;
 
   public selectedType : any = 'self';
+  myForm: FormGroup;
 
-  
+ 
+  isChecked: boolean = false;
+  nrSelect : any;
 
+  toStr = JSON.stringify;
+
+
+  Quantities = Array(50).fill(0).map((x,i)=>i);
+
+  // variable to hold the value of select 
+  selectedValue : any;
+
+  public gstData : boolean = false;
+
+  public gstResponseData : any;
+
+ 
+ 
   public subscriptions : Subscription[] = [];
   constructor(
+    private fb: FormBuilder,
     private cartService : CartService,
     private router : Router,
     public activeModal: NgbActiveModal,
     public userProfileService : UserProfileService,
     private userAccountStore : UserAccountStore,
     private formBuilder: FormBuilder,
+    private superAdminService : SuperAdminService
   ){
-
+    //this.myForm = this.fb.group({
+    this.myForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+    });
   }
 
   ngOnInit(): void {
     
-    
+
+    this.countryList = Country.getAllCountries();
+ 
+    this.selectedValue = this.countryList[0];
     this.setForm();
     this.setSelfData();
-    this.countryList = Country.getAllCountries();
+    
+    
+    
   }
 
 
 
   public setForm(){
-    this.form = this.formBuilder.group(
+    //this.form = this.formBuilder.group(
+      this.myForm = this.formBuilder.group(
       {
         //email: [this.emailViaSignup, [Validators.required, Validators.email]],
         //otp : [],
@@ -87,15 +120,40 @@ export class GstPromptModalComponent implements OnInit{
   public setSelfData(){
     let userDetails = this.userAccountStore.getUserDetails();
 
-    let formVal = this.form.value;
+    //let formVal = this.form.value;
+    let formVal = this.myForm.value;
 
 
-    this.form.controls['gstNo'].setValue(userDetails.gstinNumber ? userDetails.gstinNumber : null);
+    /*this.form.controls['gstNo'].setValue(userDetails.gstinNumber ? userDetails.gstinNumber : null);
     this.form.controls['companyName'].setValue(userDetails.companyBusinessName ? userDetails.companyBusinessName : null);
     this.form.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
     this.form.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
     this.form.controls['phoneNo'].setValue(userDetails.mobileNumber ? userDetails.mobileNumber : null);
+    */
 
+    this.myForm.controls['gstNo'].setValue(userDetails.gstinNumber ? userDetails.gstinNumber : null);
+    this.myForm.controls['companyName'].setValue(userDetails.companyBusinessName ? userDetails.companyBusinessName : null);
+    this.myForm.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
+    this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
+    this.myForm.controls['phoneNo'].setValue(userDetails.mobileNumber ? userDetails.mobileNumber : null);
+
+  
+
+    let allCountries = Country.getAllCountries();
+
+    //isoCode
+
+    var index = allCountries.findIndex(el => el.isoCode === userDetails.countryCode);
+         
+          if(index >=0){
+            
+            //this.myForm.value.countryName = allCountries[index];
+            //this.myForm.controls['countryName'].setValue(allCountries[index]);
+            //this.myForm.controls['countryName'].setValue(allCountries.filter(c => c.isoCode === userDetails.countryCode));
+            //this.selectedCountry = allCountries.filter(c => c.isoCode === userDetails.countryCode)[0];
+          }
+
+    //this.countryList
 
 
 
@@ -112,8 +170,9 @@ export class GstPromptModalComponent implements OnInit{
   public onCountryChange(event){
     
     let country = JSON.parse(event.target.value);
+    
     this.selectedCountry = country;
-
+    
     this.stateList  = State?.getStatesOfCountry(country.isoCode);
  
 
@@ -154,13 +213,29 @@ export class GstPromptModalComponent implements OnInit{
   public onToogleChange(val){
     
     this.selectedType = val;
-    this.form.reset();
+    //this.form.reset();
+    this.myForm.reset();
     if(val === 'self'){
       this.setSelfData();
     }
+
   }
 
-  public createQuotationService2(){
+  public handleChange(val){
+    
+
+    this.selectedType = val;
+    //this.form.reset();
+    this.myForm.reset();
+    if(val === 'self'){
+      this.setSelfData();
+    }
+
+  }
+
+
+
+  public createQuotationService(){
     
 
 
@@ -171,13 +246,43 @@ export class GstPromptModalComponent implements OnInit{
     
 
     let req = this.request;
-    let formVal = this.form.value; 
+    //let formVal = this.form.value; 
+    let formVal = this.myForm.value;
     
-    
+    //if(this.gstData){
+      
+
+      
+    //}
 
     
-    req.companyName = formVal.companyName;
-    req.billing_address = {
+    
+    if(this.gstData){
+      req.companyName = this.gstResponseData['legal-name'];
+    }
+    else{
+      req.companyName = formVal.companyName;
+    }
+   
+
+
+
+    if(this.gstData){
+      req.billing_address = {
+        "attention": "name",
+        "address": this.gstResponseData.adress.floor,
+        "street2": this.gstResponseData.adress.street,
+        "state_code": this.selectedState.isoCode,
+        "city": this.selectedCity.name,
+        "state": this.selectedState.name,
+        "zip": this.gstResponseData.adress.pincode,
+        "country": "IN", //this.selectedCountry.isoCode,
+        "phone": formVal.phoneNo
+      }
+    }
+
+    else{
+      req.billing_address = {
         "attention": "name",
         "address": formVal.addressLine1,
         "street2": formVal.addressLine2,
@@ -185,9 +290,12 @@ export class GstPromptModalComponent implements OnInit{
         "city": this.selectedCity.name,
         "state": this.selectedState.name,
         "zip": formVal.postalCode,
-        "country": this.selectedCountry.isoCode,
+        "country": "IN", //this.selectedCountry.isoCode,
         "phone": formVal.phoneNo
     }
+    }
+
+    
 
     req.currency_id = "1014673000000000064";
 
@@ -198,7 +306,7 @@ export class GstPromptModalComponent implements OnInit{
           {
               "first_name": formVal.firstName,
               "email": formVal.email,
-              "phone": formVal.mobileNumber ? formVal.mobileNumber : '',
+              "phone": formVal.phoneNo ? formVal.phoneNo : '',
               "is_primary_contact": true,
               "enable_portal": false
           }
@@ -238,6 +346,7 @@ export class GstPromptModalComponent implements OnInit{
 
 
 
+  
 
 
     
@@ -253,6 +362,7 @@ export class GstPromptModalComponent implements OnInit{
           if(response.Accounts.code === 'SUCCESS'){
             this.cartService.getCartItems(null).subscribe();
             this.router.navigate(['/cart/cart-submit']);
+            this.activeModal.close();
           } 
           else {
             
@@ -300,12 +410,12 @@ export class GstPromptModalComponent implements OnInit{
                  "district" : this.selectedCity.isoCode,
                  "pincode" : req.billing_address.zip,
                  //"countryCode" : this.selectedState.isoCode,
-                 "countryCode" : this.selectedCountry.isoCode,
+                 "countryCode" : "IN",
              }
          ],
      
       
-       "updatedBy": userDetails.email
+       "updatedBy": userDetails._id
      
      }
 
@@ -324,7 +434,7 @@ export class GstPromptModalComponent implements OnInit{
     )
   }
 
-  public createQuotationService(){
+  public createQuotationService2(){
     let req = this.request;
     req.companyName = this.companyName;
 
@@ -369,6 +479,80 @@ export class GstPromptModalComponent implements OnInit{
         
       })
     )
+  }
+
+
+  public onNextClick(){
+    this.showContent = !this.showContent;
+
+    
+
+    if(this.myForm.value.gstNo.length === 15){
+
+        this.myForm.controls['companyName'].disable();
+        this.myForm.controls['addressLine1'].disable();
+        this.myForm.controls['addressLine2'].disable();
+        this.myForm.controls['postalCode'].disable();
+        this.myForm.controls['countryName'].disable();
+        this.myForm.controls['stateName'].disable();
+        this.myForm.controls['cityName'].disable();
+        this.subscriptions.push(
+        this.superAdminService.getGSTDetailsById(this.myForm.value.gstNo).subscribe(res=>{
+
+          this.gstResponseData = res;
+  
+          this.gstData = true;
+      
+  
+          
+          this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
+          this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
+          this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
+          this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
+
+
+          let resState = res.adress.state;
+          let resCity = res.adress.city;
+
+
+          let stateList  = State?.getStatesOfCountry('IN');
+          
+
+
+          let selectedState = stateList.filter(c => c.name === resState)[0];
+         
+          this.selectedState = selectedState;
+
+
+          let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
+
+          
+
+          let selectedCity = cityList.filter(c => c.name === resCity)[0];
+          this.selectedCity = selectedCity;
+
+
+          
+
+
+          
+          //this.myForm.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
+          //this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
+  
+          
+        })
+      )
+    }
+    else{
+
+    }
+
+
+  }
+
+  public onBackClick(){
+    this.showContent = !this.showContent;
+    this.myForm.enable();
   }
 
 

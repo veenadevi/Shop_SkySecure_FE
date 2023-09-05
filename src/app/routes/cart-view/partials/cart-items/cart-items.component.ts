@@ -203,7 +203,8 @@ public cartData : any[] = [];
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
       //userId : '2222',
-      createdBy : userAccountdetails.firstName,
+      createdBy : userAccountdetails._id,
+      updatedBy : userAccountdetails._id,
       products : productsList
     });
 
@@ -568,7 +569,8 @@ public onChangeQuantity(i, price) : void {
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
       //userId : '2222',
-      createdBy : userAccountdetails.firstName,
+      createdBy : userAccountdetails._id,
+      updatedBy : userAccountdetails._id,
       products : this.cartData,
       cart_ref_id : cartRefId
     });
@@ -588,7 +590,8 @@ public onChangeQuantity(i, price) : void {
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
       //userId : '2222',
-      createdBy : userAccountdetails.firstName,
+      createdBy : userAccountdetails._id,
+      updatedBy : userAccountdetails._id,
       products : this.cartData,
       cart_ref_id : cartRefId,
       status : "New"

@@ -77,7 +77,11 @@ const INTERFACE_ROUTES: Routes = [
         path: 'account-manager',
         loadChildren: () => import('../routes/account-manager/account-manager.module').then(m=>m.AccountManagerModule)
       },
-     
+      {
+        canActivate: [],
+        path: 'review-page',
+        loadChildren: () => import('../routes/review-page/review-page.module').then(m=>m.ReviewPageModule)
+      },
     ]
   }
 

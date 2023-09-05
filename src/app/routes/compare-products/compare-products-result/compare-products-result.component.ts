@@ -267,6 +267,10 @@ export class CompareProductsResultComponent {
         
         this.allProducts = this.allProducts.slice(0,4);
 
+        this.allProducts.forEach(element => {
+            element.properties['priceList'].priceType= 'Month';
+        });
+
         console.log("reqBody productFamily length size ==="+this.allProducts.length)
 
       })
@@ -922,24 +926,28 @@ export class CompareProductsResultComponent {
   }
 
   discountRate: number =120; 
-  monthlyPrice: number = this.discountRate / 12;
-  // isMonthly: boolean = false;
+  // monthlyPrice: number = this.discountRate ;
+  // isMonthly: boolean = true;
   priceValue:any;
-  priceType:any;
 
   showMonthlyPrice(i:any) {
-    // this.isMonthly = true;
-    this.priceValue = this.allProducts[i].properties['priceList'].price;
-    this.priceType = this.allProducts[i].properties['priceList'].priceType;
-    this.allProducts[i].properties['priceList'].priceType = "Month";
-    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12 
+    this.isMonthly = true;
+    // this.priceValue = this.allProducts[i].properties['priceList'].price;
+    // this.priceType = this.allProducts[i].properties['priceList'].priceType;
+    // this.allProducts[i].properties['priceList'].priceType = "Month";
+    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12 
+    this.allProducts[i].properties['priceList'].price  = this.allProducts[i].properties['priceList'].price ;
+    this.allProducts[i].properties['priceList'].priceType = "Year";
+    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price*12;
   }
 
   showDiscountRate(i: any) {
     // this.isMonthly = false;
-    this.allProducts[i].properties['priceList'].priceType=this.priceType;
+    // this.allProducts[i].properties['priceList'].priceType=this.priceType;
 
-    this.allProducts[i].properties['priceList'].price = this.priceValue;
+    // this.allProducts[i].properties['priceList'].price = this.priceValue;
+    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12;
+    this.allProducts[i].properties['priceList'].priceType = "Month";
   }
 
   openLink(url: any): void {
@@ -949,7 +957,9 @@ export class CompareProductsResultComponent {
 
     }
   } 
-   
+ 
+
+ 
 }
 
   

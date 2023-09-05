@@ -1,24 +1,32 @@
 <div class="all-accounts-view">
     <div class="card">
         <p-table 
-            [value]="accountData" 
-            [tableStyle]="{ 'min-width': '50rem' }"
+            [value]="allMarketPlaceList" 
+            [tableStyle]="{ 'min-width': '60rem' }"
             [paginator]="true"
-            [rows]="10"
+            [rows]="15"
             [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             >
             <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
             <ng-template pTemplate="header">
-                <tr>
-                    <th>ID</th>
-                    <th>Owner Name</th>
-                    <th>Account Name</th>
-                    <th>Account Type</th>
+                <tr class="thfont">
+                    <th>Cart Id</th>
+                    <th>Customer Name</th>
+                    <th>Customer Email</th>
+                    <th>Customer Phone</th>
+                    <th>Status</th>
+                    <th>GST Type</th>
+                    <th>GST Number</th>
+                    <th>Place of Supply</th>
+                    <th>Estimate Number</th>
+                    <th>Estimate Total</th>
+
+
                     <th> </th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-account let-i="rowIndex">
+            <!-- <ng-template pTemplate="body" let-account let-i="rowIndex">
                 <tr>
                     <td>
                         <div class="text-style" (click)="getAccountById(account)">
@@ -29,6 +37,32 @@
                     <td>{{ account.Owner.name }}</td>
                     <td>{{ account.Account_Name }}</td>
                     <td>{{ account.Account_Type }}</td>
+                    <td>
+                        
+                        <div class="btn-holder">
+                            <button id="assign-btn" class="btn" (click)="assign(account, i)">Assign</button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template> -->
+
+            <ng-template pTemplate="body" let-account let-i="rowIndex">
+                <tr class="trfont">
+                    <td>
+                        <div class="text-style" (click)="getAccountById(account)">
+                            {{ account.cart_ref_id }}
+                        </div>
+                        
+                    </td>
+                    <td>{{ account.zohoBookContactData.contact_persons_name }}</td>
+                    <td>{{ account.zohoBookContactData.contact_persons_email }}</td>
+                    <td>{{ account.zohoBookContactData.contact_persons_phone }}</td>
+                    <td>{{ account.status }}</td>
+                    <td>{{ account.zohoBookContactData.gst_treatment }}</td>
+                    <td>{{ account.zohoBookContactData.gst_no }}</td>
+                    <td>{{ account.zohoBookContactData.placeOfSupply }}</td>
+                    <td>{{ account.zohoBookEstimateData.estimate_number }}</td>
+                    <td>{{ account.zohoBookEstimateData.totalEstimateCost }}</td>
                     <td>
                         
                         <div class="btn-holder">
