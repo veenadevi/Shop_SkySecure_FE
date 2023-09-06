@@ -584,6 +584,11 @@ public onChangeQuantity(i, price) : void {
     
 
     this.cartData.splice(i, 1);
+
+
+    if(this.cartData.length <=0){
+      this.cartStore.setCartRefreneceId(null);
+    }
     let cartRefId = this.cartStore.getCartRefreneceId();
     //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
     let userAccountdetails = this.userAccountStore.getUserDetails();
@@ -597,7 +602,12 @@ public onChangeQuantity(i, price) : void {
       status : "New"
     });
 
+    console.log("_)(*&^^%% Val here ", this.cartData.length);
+
+    
+
     this.addCartItemsService(req, 'remove');
+    this.params = null;
   }
 
 
@@ -610,10 +620,12 @@ public onChangeQuantity(i, price) : void {
             //Lets map so to an observable of API call
             const allObs$ = this.cartService.getCartItems(null);
 
+
             //forkJoin will wait for the response to come for all of the observables
             return forkJoin(allObs$);
           })
         ).subscribe((forkJoinResponse) => {
+          console.log("+_)(*&^^ ^", forkJoinResponse);
           //forkJoinResponse will be an array of responses for each of the this.serviceTwo.getAllServiceTwoData CALL
           //Do whatever you want to do with this array
         

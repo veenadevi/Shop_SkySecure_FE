@@ -8,6 +8,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { Country, State, City } from "country-state-city";
 import { FormBuilder, FormGroup , Validators  } from '@angular/forms';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
+import { CartStore } from 'src/shared/stores/cart.store';
 
 @Component({
   selector: 'app-gst-prompt-modal',
@@ -71,7 +72,8 @@ export class GstPromptModalComponent implements OnInit{
     public userProfileService : UserProfileService,
     private userAccountStore : UserAccountStore,
     private formBuilder: FormBuilder,
-    private superAdminService : SuperAdminService
+    private superAdminService : SuperAdminService,
+    private cartStore : CartStore
   ){
     //this.myForm = this.fb.group({
     this.myForm = this.fb.group({
@@ -360,9 +362,13 @@ export class GstPromptModalComponent implements OnInit{
         
         if(response && response.Accounts && response.Accounts){
           if(response.Accounts.code === 'SUCCESS'){
+            this.cartStore.setCartRefreneceId(null);
             this.cartService.getCartItems(null).subscribe();
+            
             this.router.navigate(['/cart/cart-submit']);
+            
             this.activeModal.close();
+            
           } 
           else {
             
