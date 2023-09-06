@@ -263,34 +263,34 @@ input{
     width: 40%;
     margin: 5%;
 }
-/* .primary-btn{
+.primary-btn{
     box-sizing: border-box;
     border: none;
-    background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
+    /* background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%)); */
     border-radius: 5px;
     padding: 5px;
     width:100%;
     font-family: 'lato',sans-serif;
     margin-top: 25px;
-    color: white;
+    /* color: white; */
     font-size: 15px;
     cursor: pointer;
     margin-left: 0%;
-} */
+}
 
-/* .secondary-btn{
+.secondary-btn{
     box-sizing: border-box;
-    border: 1px solid  #080F24;
-    background-color: transparent;
+    /* border: 1px solid  #080F24; */
+    /* background-color: transparent; */
     border-radius: 5px;
     padding: 5px;
     width: 100%;
     font-family: 'lato',sans-serif;
     margin-top: 25px;
-    color:  #080F24;
+    /* color:  #080F24; */
     font-size: 15px;
     cursor: pointer;
-} */
+}
 
 
 }
@@ -415,34 +415,34 @@ input{
     width: 40%;
     margin: 5%;
 }
-/* .primary-btn{
+.primary-btn{
     box-sizing: border-box;
     border: none;
-    background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
+    /* background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%)); */
     border-radius: 5px;
     padding: 5px;
     width:100%;
     font-family: 'lato',sans-serif;
     margin-top: 25px;
-    color: white;
+    /* color: white; */
     font-size: 15px;
     cursor: pointer;
     margin-left: 0%;
-} */
+}
 
-/* .secondary-btn{
+.secondary-btn{
     box-sizing: border-box;
-    border: 1px solid  #080F24;
-    background-color: transparent;
+    /* border: 1px solid  #080F24; */
+    /* background-color: transparent; */
     border-radius: 5px;
     padding: 5px;
     width: 100%;
     font-family: 'lato',sans-serif;
     margin-top: 25px;
-    color:  #080F24;
+    /* color:  #080F24; */
     font-size: 15px;
     cursor: pointer;
-} */
+}
 
 
 }
@@ -571,13 +571,13 @@ input{
 .primary-btn{
     box-sizing: border-box;
     border: none;
-    background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
+    /* background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%)); */
     border-radius: 5px;
     padding: 5px;
     width:100%;
     font-family: 'lato',sans-serif;
     margin-top: 25px;
-    color: white;
+    /* color: white; */
     font-size: 15px;
     cursor: pointer;
     margin-left: 0%;
