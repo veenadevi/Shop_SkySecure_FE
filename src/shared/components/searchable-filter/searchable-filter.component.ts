@@ -56,6 +56,7 @@ export class SearchableFilterComponent {
 
   public ngOnInit(){
 
+  
     this.setType();
     
 
