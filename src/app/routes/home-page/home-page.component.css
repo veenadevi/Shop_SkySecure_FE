@@ -535,7 +535,7 @@
 
   @media  ( min-width: 1025px) and (max-width: 1200px)  {
     .header-container {
-        background-image: url('../../../assets/images/shopHeaderBg.jpg');
+        background-image: url('../../../assets/images/banner/PurpleHeaderBackground.jpg');
         background-repeat: repeat-y;
         height: 300px;
         width: 100%;
@@ -605,7 +605,7 @@
   }
  @media  ( min-width: 771px) and (max-width: 1024px)  {
     .header-container {
-        background-image: url('../../../assets/images/shopHeaderBg.jpg');
+        background-image: url('../../../assets/images/banner/PurpleHeaderBackground.jpg');
         background-repeat: repeat-y;
         height: 250px;
         width: 100%;
@@ -728,7 +728,7 @@
 
   @media (min-width:481px) and  (max-width: 770px) {
     .header-container {
-        background-image: url('../../../assets/images/shopHeaderBg.jpg');
+        background-image: url('../../../assets/images/banner/PurpleHeaderBackground.jpg');
         background-repeat: repeat-y;
         height: 180px;
         width: 100%;
@@ -879,7 +879,7 @@
 
 @media (min-width:320px) and  (max-width: 480px) {
 .header-container {
-    background-image: url('../../../assets/images/shopHeaderBg.jpg');
+    background-image: url('../../../assets/images/banner/PurpleHeaderBackground.jpg');
     background-repeat: repeat-y;
     height: 180px;
     width: 100%;

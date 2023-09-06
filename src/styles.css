@@ -150,7 +150,7 @@ body{
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   color: var(--primary-500-purple);
-  /* background-color: var(--primary-500-purple); */
+  background-color: var(--white);
   border: 1px solid var(--primary-500-purple);
 }
 
