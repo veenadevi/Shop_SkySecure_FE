@@ -584,6 +584,11 @@ public onChangeQuantity(i, price) : void {
     
 
     this.cartData.splice(i, 1);
+
+
+    if(this.cartData.length <=0){
+      this.cartStore.setCartRefreneceId(null);
+    }
     let cartRefId = this.cartStore.getCartRefreneceId();
     //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
     let userAccountdetails = this.userAccountStore.getUserDetails();
@@ -599,9 +604,7 @@ public onChangeQuantity(i, price) : void {
 
     console.log("_)(*&^^%% Val here ", this.cartData.length);
 
-    if(this.cartData.length <=0){
-      this.cartStore.setCartRefreneceId(null);
-    }
+    
 
     this.addCartItemsService(req, 'remove');
     this.params = null;
