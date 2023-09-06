@@ -1,5 +1,14 @@
 <app-custom-search (search)="onSearch($event)"></app-custom-search>
 
+<div class="all-style">
+  <div>
+
+  </div>
+  <div>
+    <a (click)="clearAll()">Clear All</a>
+  </div>
+</div>
+
 <div class="selectedType">Selected {{selectedTypeText}} ({{selected.length}})</div>
 
 <mat-selection-list class="mat-list-style" #shoes (selectionChange)="selectionChange(selected)" [(ngModel)]="selected">
