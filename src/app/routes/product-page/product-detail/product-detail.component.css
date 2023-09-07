@@ -184,7 +184,7 @@
 }
 
 .review-icon {
-  color: orange;
+  color: grey;
   padding-top: 2px;
   /* line-height: 2rem; */
   overflow: visible;
@@ -2069,7 +2069,7 @@ button{
   /* margin: 6px 0 0; */
 }
 .review-icon{
-  color: orange;
+  color: grey;
   padding-top: 2px;
   overflow: visible;
 
@@ -2596,7 +2596,7 @@ font-size: 10px;
   /* margin: 6px 0 0; */
 }
 .review-icon{
-  color: orange;
+  color: grey;
   padding-top: 2px;
   overflow: visible;
 
@@ -3164,7 +3164,7 @@ font-size: 10px;
   /* margin: 6px 0 0; */
 }
 .review-icon{
-  color: orange;
+  color: grey;
   padding-top: 2px;
   overflow: visible;
 
@@ -3709,7 +3709,7 @@ h5 {
     /* margin: 6px 0 0; */
   }
   .review-icon{
-    color: orange;
+    color: grey;
     padding-top: 2px;
     overflow: visible;
   

@@ -46,7 +46,7 @@
     align-items: center;
 }
 .review-icon {
-    color: orange;
+    color: grey;
     padding-top: 5px;
     line-height:2rem;
     overflow: visible;
@@ -327,7 +327,7 @@
         /* column-gap: 2px; */
     }
     .review-icon {
-        color: orange;
+        color: grey;
         padding-top: 5px;
         line-height: 1rem;
         overflow: visible;
@@ -454,7 +454,7 @@
         /* column-gap: 2px; */
     }
     .review-icon {
-        color: orange;
+        color: grey;
         padding-top: 5px;
         line-height: 1rem;
         overflow: visible;
@@ -580,7 +580,7 @@
         /* column-gap: 2px; */
     }
     .review-icon {
-        color: orange;
+        color: grey;
         padding-top: 5px;
         line-height: 1rem;
         overflow: visible;
