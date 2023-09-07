@@ -295,7 +295,8 @@ public whatsAppMessage:string
 
   public getCompareProductsCount(){
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+   //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+   let cacheData2=[]
     let combinedData = [...cacheData, ...cacheData2];
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
