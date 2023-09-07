@@ -34,7 +34,8 @@ export class CompareProductsModalComponent {
         this.productList = uniqueElements;*/
 
         let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let cachedData2 = [];
         let combinedData = [...this.productList, ...cachedData, ...cachedData2];
         let uniqueElements2 = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.productList = uniqueElements2;
@@ -94,7 +95,8 @@ export class CompareProductsModalComponent {
 
   public setProductList(){
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cachedData2 = [];
     let combinedData = [ ...cacheData, ...cachedData2];
     let uniqueElements2 = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
     this.productList = uniqueElements2;
@@ -106,10 +108,9 @@ export class CompareProductsModalComponent {
     this.productList = this.productList.filter(function(item) {
       return item._id != $event;
     });
-    // console.log("******** Item to be removed ", this.productList);
-    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
+
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
     this.compareProductsStore.setCompareProductsList(this.productList);
     this.compareProductsStore.setCompareProductsList2(this.productList);
     // localStorage.removeItem('product_list_to_compare');

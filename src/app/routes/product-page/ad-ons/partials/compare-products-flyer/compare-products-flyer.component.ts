@@ -29,7 +29,8 @@ export class CompareProductsFlyerComponent implements OnInit{
         this.productList = data;
         
         let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let cachedData2 = [];
         let combinedData = [...data, ...cachedData, ...cachedData2];
         //this.productList = [...this.productList, ...data];
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
@@ -59,20 +60,7 @@ export class CompareProductsFlyerComponent implements OnInit{
   ){}
 
   public ngOnInit(): void {
-    // console.log("++++++++ List in Last Page ");
-    // console.log("++++++++++++++  Item in On Init ", JSON.parse(localStorage.getItem('product_list_to_compare')));
-    // console.log("++++++++++++++  Item in On Init2 ", JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]'));
-    // console.log("()()()() From Get ", this.compareProductsStore.getCompareProductsList2());
-
-    /*this.subscriptions.push(
-
-      this.productList$.subscribe(res=>{
-
-        res;
-
-      })
-
-    )*/
+    
     this.setEmptyItem();
   }
   
@@ -95,7 +83,7 @@ export class CompareProductsFlyerComponent implements OnInit{
     });
     // console.log("******** Item to be removed ", this.productList);
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
     this.compareProductsStore.setCompareProductsList(this.productList);
     this.compareProductsStore.setCompareProductsList2(this.productList);
     //localStorage.removeItem('product_list_to_compare');

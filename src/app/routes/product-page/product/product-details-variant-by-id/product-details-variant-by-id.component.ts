@@ -580,7 +580,8 @@ featureCount=5;
       map(data => {
 
         let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let cachedData2 = [];
         let combinedData = [...cachedData, ...cachedData2];
         //this.productList = [...this.productList, ...data];
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
@@ -606,7 +607,7 @@ featureCount=5;
     });
     
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
   }
 
@@ -685,7 +686,7 @@ featureCount=5;
 
     
     localStorage.setItem('product_list_to_compare', JSON.stringify(cacheData));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(cacheData));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(cacheData));
 
     //this.productListToCompare.push(item);
 
@@ -787,7 +788,8 @@ featureCount=5;
     
 
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cacheData2 = [];
     let combinedData = [...cacheData, ...cacheData2];
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
@@ -948,7 +950,8 @@ featureCount=5;
 
   public getCompareProductsCount(){
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cacheData2 = [];
     let combinedData = [...cacheData, ...cacheData2];
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
