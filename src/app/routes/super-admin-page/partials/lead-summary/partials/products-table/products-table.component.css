@@ -8,4 +8,32 @@
     color: #4e4c4d;
     font-size: 16px;
     font-family: 'lato', sans-serif;
+    cursor: none;
+}
+
+:host ::ng-deep .p-button.p-button-icon-only.p-button-rounded {
+    height: 0;
+}
+
+.price-section{
+    display: flex;
+    align-items: center;
+}
+
+:host ::ng-deep .p-datatable .p-sortable-column.p-highlight:hover {
+    color: #4e4c4d;
+    background: #f8f9fa;
+    cursor:default;
+}
+
+:host ::ng-deep .p-datatable .p-sortable-column:not(.p-highlight):hover{
+    color: #4e4c4d;
+    background: #f8f9fa;
+    cursor:default;
+}
+
+:host ::ng-deep .p-datatable .p-sortable-column.p-highlight {
+    color: #4e4c4d;
+    background: #f8f9fa;
+    cursor: default;
 }
