@@ -6,7 +6,7 @@
 .modal-container {
     /* width: 600px;
     height: 340px; */
-    background-color: #1e1e1e;
+    background-color: var(--primary-800-purple);
     /* border-radius: 12px; */
     justify-content: center;
     color: white;

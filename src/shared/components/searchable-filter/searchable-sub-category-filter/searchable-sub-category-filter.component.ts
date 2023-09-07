@@ -155,6 +155,13 @@ export class SearchableSubCategoryFilterComponent {
   selectionChange(val: any) {
     this.selectedList.emit(val);
     
+    
+  }
+
+  clearAll(){
+    
+    this.selected = [];
+    this.selectedList.emit(this.selected);
   }
 
 }

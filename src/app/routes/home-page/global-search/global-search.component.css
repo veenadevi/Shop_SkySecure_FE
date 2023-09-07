@@ -1,6 +1,6 @@
 
 .global-search-container{
-    background-image: url('../../../../assets/Realize/logos/images/HeaderBackgroundDarkBlue.jpg');
+    background-image: url('../../../../assets/images/banner/PurpleHeaderBackground.jpg');
     background-repeat: repeat-y;
     height: 322px;
     width: 100%;
@@ -23,7 +23,7 @@
 
 @media  ( min-width: 1025px) and (max-width: 1200px)  {
     .global-search-container{
-        background-image: url('../../../../assets/Realize/logos/images/HeaderBackgroundDarkBlue.jpg');
+        background-image: url('../../../../assets/images/banner/PurpleHeaderBackground.jpg');
         background-repeat: repeat-y;
         height: 225px;
         width: 100%;
@@ -48,7 +48,7 @@
 
 @media  ( min-width: 771px) and (max-width: 1024px)  {
     .global-search-container{
-        background-image: url('../../../../assets/Realize/logos/images/HeaderBackgroundDarkBlue.jpg');
+        background-image: url('../../../../assets/images/banner/PurpleHeaderBackground.jpg');
         background-repeat: repeat-y;
         height: 150px;
         width: 100%;
@@ -73,7 +73,7 @@
 /* On screens that are 392px or less, set the background color to blue */
 @media  ( min-width: 481px) and (max-width: 770px)  {
     .global-search-container{
-        background-image: url('../../../../assets/Realize/logos/images/HeaderBackgroundDarkBlue.jpg');
+        background-image: url('../../../../assets/images/banner/PurpleHeaderBackground.jpg');
         background-repeat: repeat-y;
         height: 150px;
         width: 100%;
@@ -97,7 +97,7 @@
 /* On screens that are 392px or less, set the background color to blue */
 @media ( min-width: 320px) and (max-width: 480px) {
     .global-search-container{
-        background-image: url('../../../../assets/Realize/logos/images/HeaderBackgroundDarkBlue.jpg');
+        background-image: url('../../../../assets/images/banner/PurpleHeaderBackground.jpg');
         background-repeat: repeat-y;
         height: 150px;
         width: 100%;

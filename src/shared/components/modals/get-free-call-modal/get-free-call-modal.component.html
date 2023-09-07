@@ -111,15 +111,20 @@
           <label for="messageText">Message</label>
         </span>
       </div>
+
+
+      <div class="modal-footer">
+        <button type="button" (click) = onSubmit() class="btn primary-btn">Submit</button>
+        <button (click)="closeModal()" type="button" class="btn secondary-btn" aria-label="Close">
+          <!-- <span aria-hidden="true">&times;</span> -->
+          Cancel
+        </button>
+      </div>
+
+
     </div>
 
-    <div class="modal-footer">
-      <button type="button" (click) = onSubmit() class="btn primary-btn">Submit</button>
-      <button (click)="closeModal()" type="button" class="close" aria-label="Close">
-        <!-- <span aria-hidden="true">&times;</span> -->
-        Cancel
-      </button>
-    </div>
+
 
   </form>
 

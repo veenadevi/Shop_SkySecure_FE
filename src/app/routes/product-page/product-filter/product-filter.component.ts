@@ -45,6 +45,8 @@ export class ProductFilterComponent {
   ngOnInit(){
     this.initializeSubCategoriesData();
     this.setSelecetdList();
+    console.log("+++++++++====== Selected Cat ", this.selectedCat)
+    console.log("+++++++++====== Selected Cat ", this.selectedSubCat)
   }
 
   public initializeSubCategoriesData(){
@@ -62,10 +64,13 @@ export class ProductFilterComponent {
       
       case 'cat':
         this.selectedCat = this.listCategories.filter(event => (event._id === this.selectedParamsVal));
+        console.log("+++++++++====== Selected Cat ")
         //this.selectedSubCat = this.selectedCat[0].subCategories;
         return;
       case 'subCat':
         this.selectedSubCat = this.subCategoriesList.filter(event => (event._id === this.selectedParamsVal));
+        this.setCatBasedOnSubCat(this.selectedSubCat);
+        console.log("+++++++++====== Selected SubCat ")
         return;
       case 'brand':
         this.selectedBrand = this.listBrands.filter(event => (event._id === this.selectedParamsVal));
@@ -75,7 +80,22 @@ export class ProductFilterComponent {
         return null;
     }
 
+
+
     
+  }
+
+  public setCatBasedOnSubCat(subCat){
+
+    //listCategories
+   
+    this.selectedCat  = this.listCategories.filter(function(array_el){
+      return subCat.filter(function(anotherOne_el){
+          return anotherOne_el.categoryId == array_el._id;
+      }).length !== 0
+    });
+    console.log("++++++------ Cat ", this.selectedCat);
+
   }
 
 

@@ -75,7 +75,7 @@
                             </span>
                         </span>
 
-                        <button class="btn tertiary-btn" (click)="buyNow(productFamily, productQuantity)">Buy now</button>
+                        <button class="btn tertiary-btn" (click)="buyNow(productFamily, productQuantity)">Add To Cart</button>
                     </div>
 
                 </div>
@@ -109,7 +109,7 @@
                                 -{{productFamily.priceList[0].discountRate}}%&nbsp;
                             </p>
                             <div class="price" (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
-                                <span class="price-symbol">&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : productFamily.priceList[0].price }} </span>
+                                <span class="price-symbol">&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : (productFamily.priceList[0].price | number : '1.2-2') }} </span>
                                 <span class="product-price-type"> /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}</span>
                                 
                             </div>
