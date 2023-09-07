@@ -705,7 +705,7 @@ async addToCompare(item:any, type:any):Promise<void> {
   }
 
   
-  localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+  //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
 
   //this.productListToCompare.push(item);
 
@@ -722,7 +722,7 @@ async addToCompare(item:any, type:any):Promise<void> {
   // console.log("getProdFromLocalStorage",this.productListToCompare);
   //localStorage.removeItem('product_list_to_compare');
   localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-  localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+  //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
   //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
   //console.log("getProdFromLocalStorage",prodGet);
 }
@@ -739,7 +739,8 @@ public  prdLength = 0;
       map(data => {
 
         let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let cachedData2 = [];
         let combinedData = [...cachedData, ...cachedData2];
         //this.productList = [...this.productList, ...data];
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
@@ -766,7 +767,7 @@ public removeSelectedItem(_id:any){
   });
   
   localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-  localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+  //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
   this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
   
 }
@@ -779,7 +780,8 @@ public removeSelectedItem(_id:any){
     
 
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cacheData2 = [];
     let combinedData = [...cacheData, ...cacheData2];
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
@@ -832,7 +834,8 @@ public removeSelectedItem(_id:any){
 
   public getCompareProductsCount(){
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cacheData2 = [];
     let combinedData = [...cacheData, ...cacheData2];
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
