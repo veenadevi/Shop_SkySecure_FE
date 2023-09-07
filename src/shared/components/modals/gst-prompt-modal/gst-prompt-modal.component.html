@@ -74,7 +74,7 @@
               <p class="or ">(Or)</p>
               <div class="col-sm-12">
                 <input type="checkbox" class="form-check d-inline" id="chb" required>
-                <div for="chb" class="form-check-label">&nbsp;I Don't Have Company GST Number.
+                <div for="chb" class="form-check-label">&nbsp;Procced without GST number.
                 </div>
               </div>
               <div *ngIf="selectedType === 'others'" class="">
@@ -125,14 +125,14 @@
               <label for="cod">Country code</label>
               <select class="form-control browser-default custom-select">
                 <option data-countryCode="IN" value="1" selected>IN (+91)</option>
-                <option data-countryCode="US" value="2" selected>USA (+1)</option>
+                <option data-countryCode="US" value="2" >USA (+1)</option>
                 <option data-countryCode="GB" value="44">UK (+44)</option>
               </select>
             </div>
             <div class="col-sm-8 form-group">
               <label for="tel">Phone*</label>
-              <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel"
-                placeholder="Enter Your Phone No." required>
+              <input formControlName="phoneNo" maxlength="10" type="number" name="phone" class="form-control-02" id="tel"
+                placeholder="Enter Your Phone No." required  (keydown)="onKeyDown($event)">
               <div *ngIf="myForm.get('phoneNumber').hasError('required')">
                 Phone number is required.
               </div>
@@ -179,8 +179,8 @@
             </div>
             <div class="col-sm-4 form-group" *ngIf="selectedType === 'hide'">
               <label for="tel">Phone*</label>
-              <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel"
-                placeholder="Enter Your Phone No." required>
+              <input formControlName="phoneNo"  maxlength="10" type="number" name="phone" class="form-control-02" id="tel"
+                placeholder="Enter Your Phone No." required (keydown)="onKeyDown($event)">
               <div *ngIf="myForm.get('phoneNumber').hasError('required')">
                 Phone number is required.
               </div>
@@ -243,8 +243,8 @@
             </div>
             <div class="col-sm-6 form-group">
               <label for="zip">Postal-Code</label>
-              <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
-                placeholder="Postal-Code." required>
+              <input formControlName="postalCode" type="number" class="form-control" name="Zip" id="zip"
+                placeholder="Postal-Code." required   (keydown)="onKeyDown($event)">
             </div>
           </div>
 
@@ -285,7 +285,14 @@
 
     <ng-container *ngIf="!showContent == showButton">
   <!-- <button class="btn compare-btn" (click)="showContent = !showContent">Next</button> -->
-  <button class="btn primary-btn" (click)="onNextClick()">Next</button>
+  <div class="modal-footer">
+
+    <button class="btn primary-btn" (click)="onNextClick()">Next</button>
+
+    <button class="btn secondary-btn"  (click)="onCancelClick()">Cancel</button>
+  </div>
+  
+   
 </ng-container>
 
   <div *ngIf="showContent" class="cont">
@@ -369,7 +376,7 @@
               </div>
               <div class="col-sm-6 form-group">
                 <label for="zip">Postal-Code</label>
-                <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
+                <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip" (keydown)="onKeyDown($event)"
                   placeholder="Postal-Code." required>
               </div>
             </div>
@@ -400,8 +407,8 @@
             </div>
             <div class="col-sm-4 form-group" *ngIf="selectedType === 'self'">
               <label for="tel">Phone*</label>
-              <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel"
-                placeholder="Enter Your Phone No." required>
+              <input formControlName="phoneNo"  maxlength="10" type="number" name="phone" class="form-control-02" id="tel"
+                placeholder="Enter Your Phone No." required   (keydown)="onKeyDown($event)">
               <!-- <div *ngIf="myForm.get('phoneNumber').hasError('required')">
                 Phone number is required.
               </div>
@@ -489,8 +496,9 @@
             </div>
             <div class="col-sm-6 form-group">
               <label for="zip">Postal-Code</label>
-              <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
+              <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip" (keydown)="onKeyDown($event)"
                 placeholder="Postal-Code." required>
+                
             </div>
           </div>
 
