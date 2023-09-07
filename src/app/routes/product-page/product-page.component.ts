@@ -358,7 +358,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
           });
          }
 
-         let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+         //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+         let cacheData2 = [];
          if(cacheData2 && cacheData2.length>0){
           cacheData2.forEach(element => {
       
@@ -523,7 +524,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
     //let cacheData = this.compareProductsStore.getCompareProductsList();
     let cacheData1 = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cacheData2 = [];
 
     let combinedData = [...cacheData1, ...cacheData2];
     let cacheData = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
@@ -578,7 +580,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     
 
     localStorage.setItem('product_list_to_compare', JSON.stringify(uniqueElements));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(uniqueElements));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(uniqueElements));
     this.compareProductsStore.setCompareProductsList(uniqueElements);
     this.compareProductsStore.setCompareProductsList2(uniqueElements);
     //localStorage.removeItem('product_list_to_compare');
@@ -594,7 +596,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
       map(data => {
 
         let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let cachedData2 = [];
         let combinedData = [...cachedData, ...cachedData2];
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.productListToCompare = uniqueElements;
@@ -718,7 +721,8 @@ public setCheckedList(){
 
 
       let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-      let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+      //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+      let cacheData2 = [];
       let combinedData = [...cacheData, ...cacheData2];
       let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 

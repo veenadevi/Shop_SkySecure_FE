@@ -84,31 +84,7 @@ export class HomePgaeComponent {
 
 }
 
-  // /* compare products length display */
-  // public  prdLength = 0;
 
-  // public compareProductsLength$ = this.compareProductsStore.compareProductsList$
-  //   .pipe(
-  //     map(data => {
-
-  //       let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-  //       let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
-  //       let combinedData = [...cachedData, ...cachedData2];
-  //       let uniqueElements = [...new Map(cachedData.map(item => [item['_id'], item])).values()];
-  //       this.prdLength = uniqueElements.length;
-
-  //       console.log("++++++++++++++++++++++ ", this.prdLength);
-        
-  //       if(data){
-  //         return data;
-  //       }
-  //       else{
-  //         return data;
-  //       }
-        
-  //     }
-  //     )
-  //   )
 
 
 
