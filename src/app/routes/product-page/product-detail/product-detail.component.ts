@@ -115,7 +115,7 @@ export class ProductDetailComponent implements OnInit{
   
   
   @ViewChild('scrollElementForDescriptionRef') scrollElementForDescriptionRef!: ElementRef;
-  @ViewChild('scrollElementForFeatureRef') specscrollElementForFeatureRefificationRef!: ElementRef;
+  @ViewChild('scrollElementForFeatureRef') scrollElementForFeatureRef!: ElementRef;
   @ViewChild('scrollElementForSpecification') scrollElementForSpecification!: ElementRef;
   @ViewChild('scrollElementForReviewsRef') scrollElementForReviewsRef!: ElementRef;
   @ViewChild('scrollElementForCompProdRef') scrollElementForCompProdRef!: ElementRef;
@@ -162,7 +162,8 @@ export class ProductDetailComponent implements OnInit{
       //section = this.descriptionRef.nativeElement;
       section = this.scrollElementForDescriptionRef.nativeElement;
     } else if (sectionId === 'feature') {
-      section = this.featureRef.nativeElement
+      //section = this.featureRef.nativeElement
+      section = this.scrollElementForFeatureRef.nativeElement;
     } else if (sectionId === 'specification') {
       //section = this.specificationRef.nativeElement
       section = this.scrollElementForSpecification.nativeElement;

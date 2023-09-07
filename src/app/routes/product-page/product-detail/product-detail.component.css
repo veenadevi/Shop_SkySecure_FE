@@ -437,6 +437,12 @@ button[disabled] {
   margin-top: -135px;
 }
 
+.scroll-to-style-description{
+  position: absolute;
+  height: 20px;
+  margin-top: -160px;
+}
+
 /* Scroll View Elements */
 #scrollElementForSpecification{
   
