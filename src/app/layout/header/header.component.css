@@ -303,6 +303,8 @@ ul .nav-text:hover {
     padding: 0px 0;
     list-style-type: none;
     width: 154px;
+    margin-top: -8px;
+    margin-bottom: -8px;
 
 }
 .mat-mdc-menu-content {
@@ -311,6 +313,7 @@ ul .nav-text:hover {
     list-style-type: none;
     width: 154px;
 }
+
 /* Media Query */
 
 
@@ -617,3 +620,11 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
  }
 
 
+.mat-mdc-menu-panel .mat-mdc-menu-panel {
+    min-width: 112px;
+    max-width: 280px;
+    overflow: auto;
+    /* -webkit-overflow-scrolling: touch; */
+    position: relative;
+    margin-top: 15px;
+}
