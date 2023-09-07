@@ -430,6 +430,19 @@ button[disabled] {
   color: cornflowerblue;
 }
 
+
+.scroll-to-style{
+  position: absolute;
+  height: 20px;
+  margin-top: -135px;
+}
+
+/* Scroll View Elements */
+#scrollElementForSpecification{
+  
+}
+
+
 @media (max-width: 768px) {
   .product-feature-card {
     flex-basis: content;

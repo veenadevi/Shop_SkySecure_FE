@@ -378,6 +378,9 @@
 
         <ng-container *ngIf="product.description ">
             <div id="description" #descriptionRef>
+                <div class="scroll-to-style" id="scrollElementForDescriptionRef" #scrollElementForDescriptionRef>
+                    &nbsp;
+                </div>
                 <p-card class="Description">
                     <h5>Description</h5>
                     <p class="m-0">
@@ -459,6 +462,9 @@
 
         <!-- <<<<<<<<<<<<feature edit>>>>>>>>>>>>>>>>> -->
         <div class="product-features-container" id="feature" #featureRef>
+            <div class="scroll-to-style" id="scrollElementForFeatureRef" #scrollElementForFeatureRef>
+                &nbsp;
+            </div>
             <h5>Features</h5>
             <div class="product-feature-container">
                 <div class="prod-feature-img">
@@ -560,6 +566,9 @@
 
             <div class="specification-section" id="specification" #specificationRef>
                 <div class="specification-containter">
+                    <div class="scroll-to-style" id="scrollElementForSpecification" #scrollElementForSpecification>
+                        &nbsp;
+                    </div>
                     <div class="specification-headline">
                         <h5>Specifications</h5>
                     </div>
@@ -787,6 +796,9 @@
 
             <ng-container *ngIf="allCompareProducts && allCompareProducts.length>0 ">
                 <div class="specification-cont" id="compProd" #compProdRef>
+                    <div class="scroll-to-style" id="scrollElementForCompProdRef" #scrollElementForCompProdRef>
+                        &nbsp;
+                    </div>
                     <h5>Compare Products</h5>
                     <div class="comp-product-cont">
                         <div class="product-to-comp">
@@ -945,6 +957,9 @@
             <!-- product bundle -->
 
             <div *ngIf="productBundles.length>0" class="specification-cont" id="bundles" #bundlesRef>
+                <div class="scroll-to-style" id="scrollElementForBundlesRef" #scrollElementForBundlesRef>
+                    &nbsp;
+                </div>
                 <h5 id="similar-prod">Product Bundles</h5>
                 <div class="specs-list">
                     <ng-container *ngFor="let item of productBundles; let i = index">
@@ -1006,6 +1021,9 @@
 
 
             <div *ngIf="faq.length>0" class="faq-cont" id="faq" #faqRef>
+                <div class="scroll-to-style" id="scrollElementForFaqRef" #scrollElementForFaqRef>
+                    &nbsp;
+                </div>
                 <span class="faq-title">
                     <h5 id="similar-prod">Frequently asked Questions</h5>
                 </span>

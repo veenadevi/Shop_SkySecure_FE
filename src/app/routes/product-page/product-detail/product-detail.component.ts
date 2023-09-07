@@ -90,7 +90,7 @@ export class ProductDetailComponent implements OnInit{
   productListToCompare  = [];
   products = [];
   public currentRoute: string;
-  links = ['#description', '#feature', '#specification','#reviews', '#compProd', '#bundles','#faq'];
+  links = ['#description', '#feature', '#specification','#reviews','#bundles','#faq'];
   //titles = ['Description', 'Features', 'Specification','Reviews','Compare Products','Bundles','FAQ'];
   titles = ['Description', 'Features', 'Specification','Reviews','Bundles','FAQ'];
   activeLink = this.links[0];
@@ -110,6 +110,19 @@ export class ProductDetailComponent implements OnInit{
   @ViewChild('bundlesRef') bundlesRef!: ElementRef;
   @ViewChild('faqRef') faqRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
+
+
+  
+  
+  @ViewChild('scrollElementForDescriptionRef') scrollElementForDescriptionRef!: ElementRef;
+  @ViewChild('scrollElementForFeatureRef') specscrollElementForFeatureRefificationRef!: ElementRef;
+  @ViewChild('scrollElementForSpecification') scrollElementForSpecification!: ElementRef;
+  @ViewChild('scrollElementForReviewsRef') scrollElementForReviewsRef!: ElementRef;
+  @ViewChild('scrollElementForCompProdRef') scrollElementForCompProdRef!: ElementRef;
+  @ViewChild('scrollElementForBundlesRef') scrollElementForBundlesRef!: ElementRef;
+  @ViewChild('scrollElementForFaqRef') scrollElementForFaqRef!: ElementRef;
+  @ViewChild('scrollElementForSection2Ref') scrollElementForSection2Ref!: ElementRef;
+
 
 
 
@@ -142,28 +155,33 @@ export class ProductDetailComponent implements OnInit{
 
 
   scrollToSection(sectionId: any): void {
-// console.log("coming inside");
     this.activeLink=sectionId;
     sectionId  = sectionId.slice(1);
     let section;
     if(sectionId === 'description') {
-      section = this.descriptionRef.nativeElement
+      //section = this.descriptionRef.nativeElement;
+      section = this.scrollElementForDescriptionRef.nativeElement;
     } else if (sectionId === 'feature') {
       section = this.featureRef.nativeElement
     } else if (sectionId === 'specification') {
-      section = this.specificationRef.nativeElement
+      //section = this.specificationRef.nativeElement
+      section = this.scrollElementForSpecification.nativeElement;
     }
     else if (sectionId === 'reviews') {
-      section = this.reviewsRef.nativeElement
+      //section = this.reviewsRef.nativeElement;
+      section = this.scrollElementForReviewsRef.nativeElement;
     }
     else if (sectionId === 'compProd') {
-      section = this.compProdRef.nativeElement
+      //section = this.compProdRef.nativeElement;
+      section = this.scrollElementForCompProdRef.nativeElement;
     }
     else if (sectionId === 'bundles') {
-      section = this.bundlesRef.nativeElement
+      //section = this.bundlesRef.nativeElement;
+      section = this.scrollElementForBundlesRef.nativeElement;
     }
     else if (sectionId === 'faq') {
-      section = this.faqRef.nativeElement
+      //section = this.faqRef.nativeElement;
+      section = this.scrollElementForFaqRef.nativeElement;
     }
     
 
