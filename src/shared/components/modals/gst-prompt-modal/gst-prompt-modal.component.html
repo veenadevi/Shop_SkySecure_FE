@@ -127,8 +127,6 @@
                 <option data-countryCode="IN" value="1" selected>IN (+91)</option>
                 <option data-countryCode="US" value="2" selected>USA (+1)</option>
                 <option data-countryCode="GB" value="44">UK (+44)</option>
-
-
               </select>
             </div>
             <div class="col-sm-8 form-group">
@@ -287,7 +285,7 @@
 
     <ng-container *ngIf="!showContent == showButton">
   <!-- <button class="btn compare-btn" (click)="showContent = !showContent">Next</button> -->
-  <button class="btn compare-btn" (click)="onNextClick()">Next</button>
+  <button class="btn primary-btn" (click)="onNextClick()">Next</button>
 </ng-container>
 
   <div *ngIf="showContent" class="cont">
@@ -507,9 +505,9 @@
 
 
           <div class="modal-footer">
-            <button class="btn compare-btn" (click)="createQuotationService()">Submit</button>
+            <button class="btn secondary-btn"  (click)="onBackClick()">Back</button>
             <ng-container >
-            <button class="btn back-btn"  (click)="onBackClick()">Back</button>
+              <button class="btn primary-btn" (click)="createQuotationService()">Submit</button>
           </ng-container>
           </div>
         </div>

@@ -79,6 +79,10 @@
     margin-bottom: 10px;
 }
 
+.primary-btn {
+    margin-bottom: 10px;
+}
+
 
 .back-btn {
 
@@ -93,6 +97,10 @@
     font-size: 16px;
     font-weight: 500;
     padding: 8px;
+    margin-bottom: 10px;
+}
+
+.secondary-btn{
     margin-bottom: 10px;
 }
 
@@ -226,7 +234,8 @@ label {
 .form-control {
     display: block;
     width: 100%;
-    padding: 5px;
+    font-size: 14px;
+    padding: 6.5px;
     /* font-size: 1rem; */
     font-weight: 400;
     line-height: 1.5;
