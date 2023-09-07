@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute,Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { Co2Sharp } from '@mui/icons-material';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -89,6 +89,7 @@ export class ProductDetailComponent implements OnInit{
   faq = [];
   productListToCompare  = [];
   products = [];
+  public currentRoute: string;
   links = ['#description', '#feature', '#specification','#reviews', '#compProd', '#bundles','#faq'];
   //titles = ['Description', 'Features', 'Specification','Reviews','Compare Products','Bundles','FAQ'];
   titles = ['Description', 'Features', 'Specification','Reviews','Bundles','FAQ'];
@@ -414,7 +415,32 @@ export class ProductDetailComponent implements OnInit{
     private userAccountStore : UserAccountStore,
     private toaster : ToasterNotificationService
   ){
-   //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.events.subscribe((event: Event) => {
+      let currentUrl = this.route.snapshot.paramMap.get('id');
+      
+      if (event instanceof NavigationStart) {
+          // Show progress spinner or progress bar
+          //this.ngOnInit();
+          //console.log('@@@@@@@@ _ Route change detected');
+          currentUrl = this.route.snapshot.paramMap.get('id');
+          //console.log('@@@@@@@@ _ Route change Start', currentUrl);
+      }
+
+      if (event instanceof NavigationEnd) {
+          // Hide progress spinner or progress bar
+          this.currentRoute = event.url; 
+          currentUrl = this.route.snapshot.paramMap.get('id');
+          this.ngOnInit();        
+          //console.log("@@@@@@@@ _ ",event);
+      }
+
+      if (event instanceof NavigationError) {
+           // Hide progress spinner or progress bar
+
+          // Present error to user
+          //console.log("@@@@@@@@ _ ", event.error);
+      }
+  });
   }
 featureCount=5;
 
