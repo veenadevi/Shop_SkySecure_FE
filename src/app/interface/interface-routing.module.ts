@@ -64,6 +64,11 @@ const INTERFACE_ROUTES: Routes = [
       },
       {
         canActivate: [],
+        path: 'suggested-compare-products',
+        loadChildren: () => import('../routes/suggested-compare-products/suggested-compare-products.module').then(m=>m.SuggestedCompareProductsModule)
+      },
+      {
+        canActivate: [],
         path: 'company',
         loadChildren: () => import('../routes/company/company.module').then(m=>m.CompanyModule)
       },

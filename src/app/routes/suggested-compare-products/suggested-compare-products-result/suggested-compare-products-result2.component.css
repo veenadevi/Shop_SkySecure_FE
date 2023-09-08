@@ -1,0 +1,232 @@
+.compare-products-container {
+    /* padding: 1%; */
+    margin: 1%;
+    font-family: 'lato',sans-serif;
+}
+
+th{
+    width:21%
+}
+.comparison-category-header{
+    width:16%;
+}
+
+.feature-item-container {
+    display: flex;
+    flex-direction: column;
+    /* border-radius: 7.009px;
+    border: 0.876px solid #1E1E1E;
+    padding: 5px; */
+    width: 18vw !important;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding: 5px 1rem 5px 1rem;
+}
+
+.feature-text {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.3rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.feature-text-left-align {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.3rem;
+    margin-bottom: 10px;
+    /* text-align: center; */
+    /* margin-left: 20px; */
+}
+
+.tick-container {
+    display: flex;
+    align-items: flex-start;
+    padding: 3px;
+}
+
+.tick-symbol {
+    text-align: center;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+.product-heading{
+    font-weight: bold;
+    color: #11459d;
+}
+.td-column{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    padding-left: 20px;
+}
+.remove-btn {
+    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
+    border-radius: 5px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    width: 100px;
+  }
+.secondary-btn {
+  /* height: 30px; */
+  font-size: 12px;
+  font-weight: 500;
+  width: 100px;
+  border-radius: 5px;
+} 
+.primary-btn {
+  /* height: 30px; */
+  font-size: 12px;
+  font-weight: 500;
+  width: 100px;
+  border-radius: 5px;
+}
+  .buy-btn{
+    background: linear-gradient(180deg, #F79C0B 0%, #C68600 100%);
+    border-radius: 5px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    width: 100px;
+  }
+  .add{
+    width: 100%;
+    padding-left: 20px;
+    margin-bottom: 30px !important;
+  }
+  .add .primary-btn {
+    /* background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%); */
+    /* border-radius: 5px;
+    color: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    height: 30px; */
+    font-size: 12px;
+    font-weight: 500;
+    width: 50%;
+    margin-left: 25%;
+  }
+  .p-datatable .p-datatable-tbody > tr > td {
+    text-align: center;
+  }
+
+  .button-holder{
+    margin-bottom: 30px !important;
+  }
+
+
+
+  .features-align{
+    vertical-align: top !important;
+  }
+
+  .pointer-style{
+    cursor: pointer;
+  }
+
+  .product-price-detail{
+    display: flex;
+    flex-direction: column;
+    margin: 6px 0;
+  }
+  .product-price-section{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-bottom: -15px;
+    
+  }
+  .discounted-text{
+    color: #DB553C;
+    font-weight: 400;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 1.3rem;
+  }
+  .price-symbol{
+    font-weight: 400;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 1.3rem;
+  }
+  .product-price{
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .product-price-type{
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+  }
+  /* .price{
+    font-weight: 400;
+    font-size: 15px;
+    font-style: normal;
+    line-height: 1.3rem;
+  } */
+  .gst{
+    font-size: smaller;
+  }
+  .mrp{
+    font-size: 10px;
+    color: black;
+    margin-bottom: 0px;
+
+  }
+  .amount{
+    color: black;
+    font-size:12px;
+     text-decoration: line-through;
+     margin-bottom: 0px;
+     cursor: pointer;
+  }
+  .price-symbol{
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s;
+    color: black;
+    padding-left: 5px;
+  }
+  .price-symbol-01{
+    font-size: 14px;
+    /* font-weight: bold; */
+    cursor: pointer;
+    transition: transform 0.3s;
+    color: black;
+    margin-top: 0px;
+  }
+  .gst{
+    font-size: 12px;
+    color: black;
+  }
+  .price-symbol:hover {
+    transform: scale(1.1);
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+  }
+
+
+  .aa{
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.3rem;
+  }
+
+
+
+
