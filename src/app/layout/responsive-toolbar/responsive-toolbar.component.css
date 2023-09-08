@@ -33,7 +33,7 @@ nav .navbar{
   align-items: center;
   flex-direction: column;
   margin: auto;
-  /* background: red; */
+  background: var(--primary-50-purple);
 }
 .navbar .logo a{
   font-size: 30px;
@@ -126,7 +126,7 @@ nav .navbar .links li .sub-menu{
 }
 a:hover
 {
-  color: orange !important;
+  color: var(--primary-500-purple) !important;
 }
 nav .navbar .links li:hover .htmlCss-sub-menu,
 nav .navbar .links li:hover .js-sub-menu{
@@ -287,7 +287,7 @@ nav .navbar .links li:hover .js-sub-menu{
   font-size: 24px !important;
   height: auto !important;
   width: auto !important;
-  background-color: var(--primary);
+  background-color: var(--primary-50-purple);
   padding-left: 10px;
   cursor: pointer;
 }

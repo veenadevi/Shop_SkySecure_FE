@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute,Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { Co2Sharp } from '@mui/icons-material';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -27,11 +27,14 @@ export class ProductDetailComponent implements OnInit{
 
   showMonthlyPrice() {
     this.isMonthly = true;
+    this.product.priceList[0].ERPPrice  =this.product.priceList[0].ERPPrice /12;
   }
 
   showDiscountRate() {
     this.isMonthly = false;
+    this.product.priceList[0].ERPPrice  =this.product.priceList[0].ERPPrice *12;
   }
+ 
 
   quantity: number = 1;
 
@@ -86,7 +89,8 @@ export class ProductDetailComponent implements OnInit{
   faq = [];
   productListToCompare  = [];
   products = [];
-  links = ['#description', '#feature', '#specification','#reviews', '#compProd', '#bundles','#faq'];
+  public currentRoute: string;
+  links = ['#description', '#feature', '#specification','#reviews','#bundles','#faq'];
   //titles = ['Description', 'Features', 'Specification','Reviews','Compare Products','Bundles','FAQ'];
   titles = ['Description', 'Features', 'Specification','Reviews','Bundles','FAQ'];
   activeLink = this.links[0];
@@ -106,6 +110,19 @@ export class ProductDetailComponent implements OnInit{
   @ViewChild('bundlesRef') bundlesRef!: ElementRef;
   @ViewChild('faqRef') faqRef!: ElementRef;
   @ViewChild('section2Ref') section2Ref!: ElementRef;
+
+
+  
+  
+  @ViewChild('scrollElementForDescriptionRef') scrollElementForDescriptionRef!: ElementRef;
+  @ViewChild('scrollElementForFeatureRef') scrollElementForFeatureRef!: ElementRef;
+  @ViewChild('scrollElementForSpecification') scrollElementForSpecification!: ElementRef;
+  @ViewChild('scrollElementForReviewsRef') scrollElementForReviewsRef!: ElementRef;
+  @ViewChild('scrollElementForCompProdRef') scrollElementForCompProdRef!: ElementRef;
+  @ViewChild('scrollElementForBundlesRef') scrollElementForBundlesRef!: ElementRef;
+  @ViewChild('scrollElementForFaqRef') scrollElementForFaqRef!: ElementRef;
+  @ViewChild('scrollElementForSection2Ref') scrollElementForSection2Ref!: ElementRef;
+
 
 
 
@@ -138,28 +155,34 @@ export class ProductDetailComponent implements OnInit{
 
 
   scrollToSection(sectionId: any): void {
-// console.log("coming inside");
     this.activeLink=sectionId;
     sectionId  = sectionId.slice(1);
     let section;
     if(sectionId === 'description') {
-      section = this.descriptionRef.nativeElement
+      //section = this.descriptionRef.nativeElement;
+      section = this.scrollElementForDescriptionRef.nativeElement;
     } else if (sectionId === 'feature') {
-      section = this.featureRef.nativeElement
+      //section = this.featureRef.nativeElement
+      section = this.scrollElementForFeatureRef.nativeElement;
     } else if (sectionId === 'specification') {
-      section = this.specificationRef.nativeElement
+      //section = this.specificationRef.nativeElement
+      section = this.scrollElementForSpecification.nativeElement;
     }
     else if (sectionId === 'reviews') {
-      section = this.reviewsRef.nativeElement
+      //section = this.reviewsRef.nativeElement;
+      section = this.scrollElementForReviewsRef.nativeElement;
     }
     else if (sectionId === 'compProd') {
-      section = this.compProdRef.nativeElement
+      //section = this.compProdRef.nativeElement;
+      section = this.scrollElementForCompProdRef.nativeElement;
     }
     else if (sectionId === 'bundles') {
-      section = this.bundlesRef.nativeElement
+      //section = this.bundlesRef.nativeElement;
+      section = this.scrollElementForBundlesRef.nativeElement;
     }
     else if (sectionId === 'faq') {
-      section = this.faqRef.nativeElement
+      //section = this.faqRef.nativeElement;
+      section = this.scrollElementForFaqRef.nativeElement;
     }
     
 
@@ -411,7 +434,32 @@ export class ProductDetailComponent implements OnInit{
     private userAccountStore : UserAccountStore,
     private toaster : ToasterNotificationService
   ){
-   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.events.subscribe((event: Event) => {
+      let currentUrl = this.route.snapshot.paramMap.get('id');
+      
+      if (event instanceof NavigationStart) {
+          // Show progress spinner or progress bar
+          //this.ngOnInit();
+          //console.log('@@@@@@@@ _ Route change detected');
+          currentUrl = this.route.snapshot.paramMap.get('id');
+          //console.log('@@@@@@@@ _ Route change Start', currentUrl);
+      }
+
+      if (event instanceof NavigationEnd) {
+          // Hide progress spinner or progress bar
+          this.currentRoute = event.url; 
+          currentUrl = this.route.snapshot.paramMap.get('id');
+          this.ngOnInit();        
+          //console.log("@@@@@@@@ _ ",event);
+      }
+
+      if (event instanceof NavigationError) {
+           // Hide progress spinner or progress bar
+
+          // Present error to user
+          //console.log("@@@@@@@@ _ ", event.error);
+      }
+  });
   }
 featureCount=5;
 
@@ -420,12 +468,7 @@ featureCount=5;
     this.viewAllFeature=false;
     
     this.getProductDetails(productId);
-    // console.log(this.featureList);
-
-    // let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    // let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
-    // let combinedData = [...cacheData, ...cacheData2];
-    // let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+    
 
     this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     // this.productListToCompare =uniqueElements;
@@ -512,7 +555,7 @@ featureCount=5;
    
     
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
     
   }
@@ -588,9 +631,7 @@ featureCount=5;
      this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
  
      localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-     //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
- 
-     //this.productListToCompare.push(item);
+     
  
      if(item.checked){
        item.checked = true;
@@ -680,6 +721,7 @@ featureCount=5;
         // console.log("()()()() ", res);
         if(res && res.email !== null){
           this.router.navigate(['/cart'], {queryParams: queryParams});
+          //this.router.navigate(['/admin-pages/accounts']);
         }
         else{
           this.viewModal(queryParams);
@@ -808,7 +850,8 @@ featureCount=5;
     
 
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cacheData2 = [];
     let combinedData = [...cacheData, ...cacheData2];
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
@@ -897,7 +940,8 @@ featureCount=5;
 
   public getCompareProductsCount(){
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cacheData2 = [];
     let combinedData = [...cacheData, ...cacheData2];
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
@@ -921,6 +965,8 @@ featureCount=5;
   }
  
   ngOnDestroy(){
-    
+    this.subscriptions.forEach(element => {
+        element.unsubscribe();
+    });
   }
 }

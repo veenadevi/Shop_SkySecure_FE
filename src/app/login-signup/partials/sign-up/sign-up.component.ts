@@ -178,27 +178,31 @@ export class SignUpComponent {
           
     //console.log("sign up for exisitng user")
           if(res.message){
+            console.log("coming for error message")
             console.log("error message========"+res.message)
             if(res.message=='Error: Invalid Domain'){
               
-              this.invalidDomain=true
+              this.invalidDomain=true;
+              this.enableOTPButton = true;
+             
             }
             else{
               this.emailExisitAlert=true
             }
-
-          
-            this.enableSignInButton = true;
-            this.enableOTPButton = false;
+            this.inValidOTP=false
+            console.log("outside iff====")
+            this.enableSignInButton = false;
+            this.enableOTPButton = true;
             this.otpField = false;
             // this.emailExisitAlert=true
             // this.invalidDomain=true
           }
           else{
-           // console.log("inside else")
+           console.log("inside els====")
             //this.emailFormFlag = false;
             //this.signUpFormFlag = true;
             this.enableSignInButton = true;
+            this.invalidDomain=false;
             this.enableOTPButton = false;
             this.otpField = true;
           }

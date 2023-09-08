@@ -22,15 +22,18 @@ export class ProductBundleDetailComponent implements OnInit{
   discountRate: number =120; 
   monthlyPrice: number = this.discountRate / 12;
   isMonthly: boolean = true;
+  public product : any = {};
 
   showMonthlyPrice() {
     this.isMonthly = true;
+    this.productFamily.priceList[0].ERPPrice  =this.productFamily.priceList[0].ERPPrice /12;
   }
 
   showDiscountRate() {
     this.isMonthly = false;
+    this.productFamily.priceList[0].ERPPrice  =this.productFamily.priceList[0].ERPPrice *12;
   }
-
+ 
 
   quantity: number = 1;
 
@@ -179,7 +182,7 @@ export class ProductBundleDetailComponent implements OnInit{
     private compareProductsStore : CompareProductsStore,
     private toaster : ToasterNotificationService
   ){
-   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+   //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.events.subscribe((event: Event) => {
         let currentUrl = this.route.snapshot.paramMap.get('id');
         
@@ -215,7 +218,8 @@ export class ProductBundleDetailComponent implements OnInit{
       map(data => {
 
         let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let cachedData2 = [];
         let combinedData = [...cachedData, ...cachedData2];
         //this.productList = [...this.productList, ...data];
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
@@ -624,7 +628,7 @@ export class ProductBundleDetailComponent implements OnInit{
     }
 
     
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
 
     //this.productListToCompare.push(item);
 
@@ -640,7 +644,7 @@ export class ProductBundleDetailComponent implements OnInit{
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
     //localStorage.removeItem('product_list_to_compare');
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
     //const prodGet = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     this.toaster.showSuccess("The product has been included for comparison.",'')
   }
@@ -658,19 +662,9 @@ export class ProductBundleDetailComponent implements OnInit{
     });
     // console.log("()()()()( Items After ", this.productListToCompare);
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productListToCompare));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productListToCompare));
     this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
-    //this.setCheckBoxState();
-
-    /*console.log("()()()()( Items before ", this.selectedProductItem);
-    this.selectedProductItem = this.selectedProductItem.filter(function(item) {
-      
-      return item._id != _id;
-    });
-    console.log("()()()()( Items After ", this.selectedProductItem);
-    localStorage.setItem('product_list_to_compare', JSON.stringify(this.selectedProductItem));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.selectedProductItem));
-    this.compareProductsStore.setCompareProductsList2(this.selectedProductItem);*/
+    
 
 
 
@@ -699,7 +693,7 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public requestQuote (product : any) : void {
 
-    
+    console.log("===========quantity passed =====")
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
     let queryParams;
@@ -707,7 +701,7 @@ export class ProductBundleDetailComponent implements OnInit{
         queryParams = {
           productName : product.name,
           productId : product._id,
-          quantity : product.quantity,
+          quantity : product.quantity?product.quantity:1,
           price : product.priceList[0].price,
           erpPrice:product.priceList[0].ERPPrice,
           discountRate:product.priceList[0].discountRate,
@@ -855,13 +849,20 @@ export class ProductBundleDetailComponent implements OnInit{
 
   public getCompareProductsCount(){
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cacheData2 = [];
     let combinedData = [...cacheData, ...cacheData2];
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
     //console.log("++++++++++++++++++++++()()()()( ", uniqueElements.length);
     return uniqueElements.length;
     
+  }
+
+  ngOnDestroy(){
+    this.subscriptions.forEach(element => {
+        element.unsubscribe();
+    });
   }
   
 }

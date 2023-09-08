@@ -90,7 +90,8 @@ export class CompareProductsResultComponent {
     
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
 
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cacheData2 = [];
     let combinedData = [...cacheData, ...cacheData2];
 
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
@@ -533,7 +534,7 @@ export class CompareProductsResultComponent {
       
       
       localStorage.setItem('product_list_to_compare', JSON.stringify(this.cachedProductsList));
-      localStorage.setItem('product_list_to_compare2', JSON.stringify(this.cachedProductsList));
+      //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.cachedProductsList));
       this.compareProductsStore.setCompareProductsList2(this.cachedProductsList); 
       
      
@@ -715,7 +716,8 @@ export class CompareProductsResultComponent {
         
 
         let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-        let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let cacheData2 = [];
         let combinedData = [...cacheData, ...cacheData2];
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
@@ -725,7 +727,7 @@ export class CompareProductsResultComponent {
 
         
         localStorage.setItem('product_list_to_compare', JSON.stringify(finalProducts));
-        localStorage.setItem('product_list_to_compare2', JSON.stringify(finalProducts));
+        //localStorage.setItem('product_list_to_compare2', JSON.stringify(finalProducts));
         this.compareProductsStore.setCompareProductsList(finalProducts);
         this.compareProductsStore.setCompareProductsList2(finalProducts);
       })
@@ -939,6 +941,7 @@ export class CompareProductsResultComponent {
     this.allProducts[i].properties['priceList'].price  = this.allProducts[i].properties['priceList'].price ;
     this.allProducts[i].properties['priceList'].priceType = "Year";
     this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price*12;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice*12;
   }
 
   showDiscountRate(i: any) {
@@ -947,9 +950,10 @@ export class CompareProductsResultComponent {
 
     // this.allProducts[i].properties['priceList'].price = this.priceValue;
     this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice/12;
     this.allProducts[i].properties['priceList'].priceType = "Month";
   }
-
+ 
   openLink(url: any): void {
     if(url && url.length>0)
     window.open(url, '_blank');

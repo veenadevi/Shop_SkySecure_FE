@@ -32,7 +32,8 @@ export class DetailsCompareProductsFlyerComponent {
         this.productList = uniqueElements;*/
 
         let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let cachedData2 = [];
         let combinedData = [...this.productList, ...cachedData, ...cachedData2];
         let uniqueElements2 = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.productList = uniqueElements2;
@@ -85,7 +86,8 @@ export class DetailsCompareProductsFlyerComponent {
 
   public setProductList(){
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cachedData2 = [];
     let combinedData = [ ...cacheData, ...cachedData2];
     let uniqueElements2 = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
     this.productList = uniqueElements2;
@@ -99,7 +101,7 @@ export class DetailsCompareProductsFlyerComponent {
     });
 
     localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.productList));
     this.compareProductsStore.setCompareProductsList2(this.productList);
     
     

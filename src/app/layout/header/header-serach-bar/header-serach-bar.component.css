@@ -334,5 +334,6 @@ margin-right: -8px;
     .search-container{
         display: flex;
         flex-direction: column;
+        
     }
     

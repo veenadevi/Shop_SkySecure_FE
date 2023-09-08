@@ -146,6 +146,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public ngOnInit() : void { 
 
 
+    console.log("+_) 76 4 35  changed Here",);
+
     
     this.dropdownSettings = {
       singleSelection: false,
@@ -356,7 +358,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
           });
          }
 
-         let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+         //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+         let cacheData2 = [];
          if(cacheData2 && cacheData2.length>0){
           cacheData2.forEach(element => {
       
@@ -519,17 +522,16 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public selectedListForCompare(items){
     this.listForCompare = items;
 
-    console.log("++++++++ Cached Data", items);
     //let cacheData = this.compareProductsStore.getCompareProductsList();
     let cacheData1 = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    let cacheData2 = [];
 
     let combinedData = [...cacheData1, ...cacheData2];
     let cacheData = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
     cacheData = cacheData.filter(event => (event.checked))
 
-    console.log("____+++________ AAAAAA",combinedData);
 
 
 
@@ -545,8 +547,6 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
       cumulativeList = this.listForCompare;
     }
 
-    console.log("____+++________ ",cumulativeList);
-    console.log("____+++________ ",cacheData);
     //let uniqueElements = [...new Set(cumulativeList)];
     //let uniqueElements = cumulativeList.filter((el, i, a) => i === a.indexOf(el));
     let uniqueElements = [...new Map(cumulativeList.map(item => [item['_id'], item])).values()];
@@ -580,7 +580,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     
 
     localStorage.setItem('product_list_to_compare', JSON.stringify(uniqueElements));
-    localStorage.setItem('product_list_to_compare2', JSON.stringify(uniqueElements));
+    //localStorage.setItem('product_list_to_compare2', JSON.stringify(uniqueElements));
     this.compareProductsStore.setCompareProductsList(uniqueElements);
     this.compareProductsStore.setCompareProductsList2(uniqueElements);
     //localStorage.removeItem('product_list_to_compare');
@@ -596,14 +596,14 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
       map(data => {
 
         let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-        let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let cachedData2 = [];
         let combinedData = [...cachedData, ...cachedData2];
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.productListToCompare = uniqueElements;
         this.prdLength = this.productListToCompare.length;
 
-        console.log("+++++++++compare product length++ via Subcategory+++++++++++ ", this.prdLength);
-        
+       
         if(data){
           return data;
         }
@@ -721,7 +721,8 @@ public setCheckedList(){
 
 
       let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-      let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+      //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+      let cacheData2 = [];
       let combinedData = [...cacheData, ...cacheData2];
       let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 

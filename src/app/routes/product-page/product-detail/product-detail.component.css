@@ -18,7 +18,7 @@
   height: 44px;
   cursor: pointer;
   z-index: 3;
-  border-radius: 10 8px 0 0;
+  border-radius: 8px 8px 0 0;
   padding: 8px 16px;
   position: fixed;
   top: 50%;
@@ -184,7 +184,7 @@
 }
 
 .review-icon {
-  color: orange;
+  color: grey;
   padding-top: 2px;
   /* line-height: 2rem; */
   overflow: visible;
@@ -200,7 +200,7 @@
   margin: 0 10px;
 }
 .link-text{
-  color: #0047BD;
+  color: var(--primary-500-purple);
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -429,6 +429,25 @@ button[disabled] {
 .product-feature-card h6 {
   color: cornflowerblue;
 }
+
+
+.scroll-to-style{
+  position: absolute;
+  height: 20px;
+  margin-top: -135px;
+}
+
+.scroll-to-style-description{
+  position: absolute;
+  height: 20px;
+  margin-top: -160px;
+}
+
+/* Scroll View Elements */
+#scrollElementForSpecification{
+  
+}
+
 
 @media (max-width: 768px) {
   .product-feature-card {
@@ -713,7 +732,7 @@ input[type="number"]::-webkit-outer-spin-button {
   background: transparent;
   /* border: 1px solid white; */
   text-align: center;
-  color: #003388;
+  color: var(--primary-500-purple);
   font-size: 12px;
   font-weight: 500;
   text-decoration: line;
@@ -805,7 +824,7 @@ p {
   margin: 0 2% 2%;
   padding: 0 1%;
   flex-direction: column;
-  background: #F1F1F1;
+  background: var(--primary-50-purple);
 }
 
 .p-card .p-card-title {
@@ -1940,6 +1959,7 @@ button{
 .amount{
   font-size: initial;
    text-decoration: line-through;
+   cursor: pointer;
 }
 .price-symbol{
   font-size: 18px;
@@ -2068,7 +2088,7 @@ button{
   /* margin: 6px 0 0; */
 }
 .review-icon{
-  color: orange;
+  color: grey;
   padding-top: 2px;
   overflow: visible;
 
@@ -2099,7 +2119,6 @@ button{
   font-size: 10px;
 }
 .link-text {
-  color: #0047BD;
   font-size: 9px;
   font-style: normal;
   font-weight: 500;
@@ -2208,7 +2227,6 @@ button{
 .all-btn{
   background: transparent;
   text-align: center;
-  color: #003388;
   font-size: 8px;
   font-weight: 500;
   -webkit-text-decoration: line;
@@ -2597,7 +2615,7 @@ font-size: 10px;
   /* margin: 6px 0 0; */
 }
 .review-icon{
-  color: orange;
+  color: grey;
   padding-top: 2px;
   overflow: visible;
 
@@ -2628,7 +2646,6 @@ font-size: 10px;
   font-size: 10px;
 }
 .link-text {
-  color: #0047BD;
   font-size: 9px;
   font-style: normal;
   font-weight: 500;
@@ -2778,7 +2795,6 @@ font-size: 10px;
 .all-btn{
   background: transparent;
   text-align: center;
-  color: #003388;
   font-size: 8px;
   font-weight: 500;
   -webkit-text-decoration: line;
@@ -3167,7 +3183,7 @@ font-size: 10px;
   /* margin: 6px 0 0; */
 }
 .review-icon{
-  color: orange;
+  color: grey;
   padding-top: 2px;
   overflow: visible;
 
@@ -3198,7 +3214,6 @@ font-size: 10px;
   font-size: 10px;
 }
 .link-text {
-  color: #0047BD;
   font-size: 9px;
   font-style: normal;
   font-weight: 500;
@@ -3348,7 +3363,6 @@ font-size: 10px;
 .all-btn{
   background: transparent;
   text-align: center;
-  color: #003388;
   font-size: 8px;
   font-weight: 500;
   -webkit-text-decoration: line;
@@ -3714,7 +3728,7 @@ h5 {
     /* margin: 6px 0 0; */
   }
   .review-icon{
-    color: orange;
+    color: grey;
     padding-top: 2px;
     overflow: visible;
   
@@ -3745,7 +3759,6 @@ h5 {
     font-size: 10px;
   }
   .link-text {
-    color: #0047BD;
     font-size: 9px;
     font-style: normal;
     font-weight: 500;
@@ -3853,7 +3866,6 @@ h5 {
   .all-btn{
     background: transparent;
     text-align: center;
-    color: #003388;
     font-size: 8px;
     font-weight: 500;
     -webkit-text-decoration: line;

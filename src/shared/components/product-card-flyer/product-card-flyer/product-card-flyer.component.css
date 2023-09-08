@@ -46,7 +46,7 @@
     align-items: center;
 }
 .review-icon {
-    color: orange;
+    color: grey;
     padding-top: 5px;
     line-height:2rem;
     overflow: visible;
@@ -198,7 +198,8 @@
 
   .strike-through{
     text-decoration: line-through;
-    margin-left:2px
+    margin-left:2px;
+    cursor: pointer;
   }
 
   .discount-holder{
@@ -234,11 +235,11 @@
     transition: transform 0.3s;
   }
   
-  .price-symbol:hover {
+  /* .price-symbol:hover {
     transform: scale(1.1);
     font-size: 14px;
     font-weight: bold;
-  }
+  } */
 
 .gst{
     font-size: 10px;padding-left: 5px;
@@ -326,7 +327,7 @@
         /* column-gap: 2px; */
     }
     .review-icon {
-        color: orange;
+        color: grey;
         padding-top: 5px;
         line-height: 1rem;
         overflow: visible;
@@ -453,7 +454,7 @@
         /* column-gap: 2px; */
     }
     .review-icon {
-        color: orange;
+        color: grey;
         padding-top: 5px;
         line-height: 1rem;
         overflow: visible;
@@ -579,7 +580,7 @@
         /* column-gap: 2px; */
     }
     .review-icon {
-        color: orange;
+        color: grey;
         padding-top: 5px;
         line-height: 1rem;
         overflow: visible;

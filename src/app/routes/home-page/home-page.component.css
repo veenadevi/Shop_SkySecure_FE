@@ -1,6 +1,6 @@
 *{
     margin: 0;
-    padding: 0;
+    /* padding: 0; */
     box-sizing: border-box;
     font-family: 'lato', sans-serif;
 }
@@ -144,7 +144,7 @@
 }
 
 .header-container{
-    background-image: url('../../../assets/images/shopHeaderBg.jpg');
+    background-image: url('../../../assets/images/banner/PurpleHeaderBackground.jpg');
     background-repeat: repeat-y;
     height: 422px;
     width: 100%;
@@ -269,7 +269,8 @@
 }
 
 .primary-content-headline {
-    color: #1C587E;
+    /* color: #1C587E; */
+    color: var(--dark-violet);
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -293,7 +294,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
+    background: var(--btn-gradient) ;
     border: none;
     outline: none;
     color: #FFF;
@@ -309,7 +310,7 @@
 
 .contactus-flyer {
     border-radius: 8px;
-    background: #D9E9FF;
+    background-color: var(--primary-100-purple);
     display: inline-flex;
     align-items: center;
     justify-content: space-around;
@@ -534,7 +535,7 @@
 
   @media  ( min-width: 1025px) and (max-width: 1200px)  {
     .header-container {
-        background-image: url('../../../assets/images/shopHeaderBg.jpg');
+        background-image: url('../../../assets/images/banner/PurpleHeaderBackground.jpg');
         background-repeat: repeat-y;
         height: 300px;
         width: 100%;
@@ -604,7 +605,7 @@
   }
  @media  ( min-width: 771px) and (max-width: 1024px)  {
     .header-container {
-        background-image: url('../../../assets/images/shopHeaderBg.jpg');
+        background-image: url('../../../assets/images/banner/PurpleHeaderBackground.jpg');
         background-repeat: repeat-y;
         height: 250px;
         width: 100%;
@@ -727,7 +728,7 @@
 
   @media (min-width:481px) and  (max-width: 770px) {
     .header-container {
-        background-image: url('../../../assets/images/shopHeaderBg.jpg');
+        background-image: url('../../../assets/images/banner/PurpleHeaderBackground.jpg');
         background-repeat: repeat-y;
         height: 180px;
         width: 100%;
@@ -851,7 +852,7 @@
 /* //contactus banner// */
 .contactus-flyer {
     border-radius: 5px;
-    background: #D9E9FF;
+    /* background: #D9E9FF; */
     display: inline-flex;
     align-items: center;
     justify-content: space-around;
@@ -878,7 +879,7 @@
 
 @media (min-width:320px) and  (max-width: 480px) {
 .header-container {
-    background-image: url('../../../assets/images/shopHeaderBg.jpg');
+    background-image: url('../../../assets/images/banner/PurpleHeaderBackground.jpg');
     background-repeat: repeat-y;
     height: 180px;
     width: 100%;
@@ -1002,7 +1003,7 @@ padding-right: 5px;
 /* //contactus banner// */
 .contactus-flyer {
     border-radius: 5px;
-    background: #D9E9FF;
+    /* background: #D9E9FF; */
     display: inline-flex;
     align-items: center;
     justify-content: space-around;

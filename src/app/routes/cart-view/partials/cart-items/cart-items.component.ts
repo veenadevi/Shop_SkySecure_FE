@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { map, forkJoin, Subscription, switchMap, filter } from 'rxjs';
 import { CompanyPromptModalComponent } from 'src/shared/components/modals/company-prompt-modal/company-prompt-modal.component';
 import { GstPromptModalComponent } from 'src/shared/components/modals/gst-prompt-modal/gst-prompt-modal.component';
@@ -76,7 +77,8 @@ export class CartItemsComponent {
     private msalBroadcastService: MsalBroadcastService,
     private authService : MsalService,
     private loginService : LoginService,
-    private modalService : NgbModal
+    private modalService : NgbModal,
+    private spinner: NgxSpinnerService
   ) {}
 
 public cartData : any[] = [];
@@ -543,11 +545,14 @@ public onChangeQuantity(i, price) : void {
 
 
 
+    this.spinner.show();
 
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
         if(response && response.Accounts && response.Accounts){
           if(response.Accounts.code === 'SUCCESS'){
+
+            this.spinner.hide();
             this.cartService.getCartItems(null).subscribe();
             this.router.navigate(['/cart/cart-submit']);
           } 
@@ -584,6 +589,11 @@ public onChangeQuantity(i, price) : void {
     
 
     this.cartData.splice(i, 1);
+
+
+    if(this.cartData.length <=0){
+      this.cartStore.setCartRefreneceId(null);
+    }
     let cartRefId = this.cartStore.getCartRefreneceId();
     //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
     let userAccountdetails = this.userAccountStore.getUserDetails();
@@ -597,12 +607,18 @@ public onChangeQuantity(i, price) : void {
       status : "New"
     });
 
+    console.log("_)(*&^^%% Val here ", this.cartData.length);
+
+    
+
     this.addCartItemsService(req, 'remove');
+    this.params = null;
   }
 
 
   public addCartItemsService(req, state) {
 
+    this.spinner.show();
     this.cartService.addCartItems(req)
         .pipe(
           //Use switchMap to call another API(s)
@@ -610,10 +626,14 @@ public onChangeQuantity(i, price) : void {
             //Lets map so to an observable of API call
             const allObs$ = this.cartService.getCartItems(null);
 
+
             //forkJoin will wait for the response to come for all of the observables
+            
             return forkJoin(allObs$);
           })
         ).subscribe((forkJoinResponse) => {
+          console.log("+_)(*&^^ ^", forkJoinResponse);
+          this.spinner.hide();
           //forkJoinResponse will be an array of responses for each of the this.serviceTwo.getAllServiceTwoData CALL
           //Do whatever you want to do with this array
         

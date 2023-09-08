@@ -169,7 +169,7 @@
   margin: 6px 0 0;
 }
 .review-icon {
-  color: orange;
+  color: grey;
   padding-top: 2px;
   /* line-height: 2rem; */
   overflow: visible;
@@ -184,7 +184,7 @@
   margin: 0 10px;
 }
 .link-text{
-  color: #0047BD;
+  color: var(--primary-500-purple);
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -245,7 +245,7 @@
   background: transparent;
   /* border: 1px solid white; */
   text-align: center;
-  color: #003388;
+  color: var(--primary-500-purple);
   font-size: 12px;
   font-weight: 500;
   text-decoration: line;
@@ -728,7 +728,7 @@ p {
   margin: 0 2% 2%;
   padding: 0 1%;
   flex-direction: column;
-  background: #F1F1F1;
+  background: var(--primary-50-purple);
 }
 
 .p-card .p-card-title {

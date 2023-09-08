@@ -68,13 +68,6 @@ column-gap: 10px;
 }
 
 .primary-btn{
-    box-sizing: border-box;
-    border: none;
-    background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
-    border-radius: 5px;
-    padding: 5px;
-    width: 30%;
-    font-family: 'lato',sans-serif;
     margin-top: 25px;
     color: white;
     font-size: 18px;
@@ -216,7 +209,7 @@ input[type="number"]::-webkit-outer-spin-button {
     .primary-btn{
         box-sizing: border-box;
         border: none;
-        background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
+        /* background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%)); */
         border-radius: 5px;
         padding: 5px;
         width:100%;
@@ -326,7 +319,7 @@ input[type="number"]::-webkit-outer-spin-button {
     .primary-btn{
         box-sizing: border-box;
         border: none;
-        background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
+        /* background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%)); */
         border-radius: 5px;
         padding: 5px;
         width:100%;
@@ -435,14 +428,14 @@ input[type="number"]::-webkit-outer-spin-button {
     .primary-btn{
         box-sizing: border-box;
         border: none;
-        background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
+        /* background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%)); */
         border-radius: 5px;
         padding: 5px;
         width:100%;
         /* margin-left: 35%; */
         font-family: 'lato',sans-serif;
         margin-top: 25px;
-        color: white;
+        /* color: white; */
         font-size: 15px;
         cursor: pointer;
         margin-left: 0%;

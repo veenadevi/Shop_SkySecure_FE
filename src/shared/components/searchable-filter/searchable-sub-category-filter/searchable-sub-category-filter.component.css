@@ -25,6 +25,19 @@
     font-size: 12px;
     margin-top: 10px;
     margin-left: 15px;
+    display: flex;
+}
+
+.all-style{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.all-style a{
+    color : #0000EE;
+    cursor: pointer;
 }
 
 

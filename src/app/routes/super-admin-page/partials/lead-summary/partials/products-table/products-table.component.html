@@ -6,23 +6,28 @@
             <tr>
                 
                 <th pSortableColumn="title" class="header">
-                    Product name <p-sortIcon field="title"></p-sortIcon>
+                    Product name 
+                    <!-- <p-sortIcon field="title"></p-sortIcon> -->
                 </th>
                 <th pSortableColumn="category" class="header">
-                    Quantity <p-sortIcon field="category"></p-sortIcon>
+                    Quantity 
+                    <!-- <p-sortIcon field="category"></p-sortIcon> -->
                 </th>
               
                 <th pSortableColumn="rating" class="header">
-                    Price <p-sortIcon field="rating"></p-sortIcon>
+                    Price 
+                    <!-- <p-sortIcon field="rating"></p-sortIcon> -->
                 </th>
 
                 <th pSortableColumn="rating" class="header">
-                    Tax <p-sortIcon field="rating"></p-sortIcon>
+                    Tax 
+                    <!-- <p-sortIcon field="rating"></p-sortIcon> -->
                 </th>
                 <th pSortableColumn="rating" class="header">
-                    Total <p-sortIcon field="rating"></p-sortIcon>
+                    Total 
+                    <!-- <p-sortIcon field="rating"></p-sortIcon> -->
                 </th>
-                <th style="width:8rem"></th>
+                <!-- <th style="width:8rem"></th> -->
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
@@ -34,7 +39,7 @@
                 <td>
                     {{ product.quantity }}
                 </td>
-                <td>
+                <td class="price-section">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [(ngModel)]="product.bcy_rate" />

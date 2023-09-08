@@ -318,8 +318,11 @@ export class ResponsiveToolbarComponent  implements OnInit{
 
     this.productListService.setSubCategoryIdSelection(category._id, subCategory._id);
 
-    this.router.navigate([`/products/sub-category/${category._id}-${subCategory._id}`], { state: { category , subCategory} });
+    //this.router.navigate([`/products/sub-category/${category._id}-${subCategory._id}`], { state: { category , subCategory} });
 
+
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate([`/products/sub-category/${category._id}-${subCategory._id}`], { state: { category , subCategory} }));
   }
 
  
