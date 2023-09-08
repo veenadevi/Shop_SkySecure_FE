@@ -489,3 +489,9 @@ input[type="zip"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+.error{
+    color: red;
+    text-align: center;
+    padding: 20px;
+}
