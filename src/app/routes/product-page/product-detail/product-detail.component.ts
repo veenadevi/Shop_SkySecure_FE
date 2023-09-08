@@ -470,10 +470,11 @@ featureCount=5;
     this.getProductDetails(productId);
     
 
-    this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    //this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    this.productListToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
     // this.productListToCompare =uniqueElements;
 
-    console.log("while page load product list szie ===",this.productListToCompare)
+  
    
     this.compareProductsLength$.subscribe();
   }
@@ -522,7 +523,8 @@ featureCount=5;
 
 
   public  prdLength = 0;
-  public compareProductsLength$ = this.compareProductsStore.compareProductsList2$
+  public compareProductsListLength = 0;
+  public compareProductsLength$ = this.compareProductsStore.compareProductsList$
     .pipe(
       map(data => {
 
@@ -533,7 +535,10 @@ featureCount=5;
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.prdLength = uniqueElements.length;
 
-        console.log("++++++++++++++++++++++ ", this.prdLength);
+        let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+        this.compareProductsListLength = cachedProductsToCompare.length;
+
+       
         
         if(data){
           return data;
@@ -600,8 +605,65 @@ featureCount=5;
 
   }
 
-
   async addToCompare(item:any, type:any):Promise<void> {
+    //let returnedData = this.getCompareProductsCount(); 
+    //let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+
+    let compareProductsListLen = this.getProductsCount().length;
+
+    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+    
+    if(compareProductsListLen<4) {
+   
+
+      var index = cachedProductsToCompare.findIndex(el => el._id === item._id);
+      
+      if(index >=0){
+        this.toaster.showWarning("Product already added for Compare",'')
+      }
+
+      else{
+
+    
+        if('checked' in item){
+          item.checked = true;
+        }
+        else{
+          item['checked'] = true;
+        }
+
+        if(type === 'fromProd'){
+          
+          
+          this.productListToCompare.push(item);
+          
+        }
+        else{
+              
+              this.productListToCompare.push(item);
+        }
+        
+       
+        localStorage.setItem('compare_products_list', JSON.stringify(this.productListToCompare));
+        
+        this.compareProductsStore.setCompareProductsList(this.productListToCompare);
+
+        this.toaster.showSuccess("The product has been included for comparison.",'')
+      }
+    
+
+    
+  }
+  else {
+  //  alert("Only 4 products are allowed to compare");
+  this.toaster.showWarning("You can add only 4 products to compare",'')
+  }
+
+  
+  }
+
+
+  /*async addToCompare(item:any, type:any):Promise<void> {
     let returnedData = this.getCompareProductsCount(); 
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     
@@ -657,7 +719,7 @@ featureCount=5;
   }
 
   
-  }
+  } */
 
  
 
@@ -718,7 +780,7 @@ featureCount=5;
       }*/
   
       this.userAccountStore.userDetails$.subscribe(res=>{
-        // console.log("()()()() ", res);
+       
         if(res && res.email !== null){
           this.router.navigate(['/cart'], {queryParams: queryParams});
           //this.router.navigate(['/admin-pages/accounts']);
@@ -952,6 +1014,12 @@ featureCount=5;
     }
     
     
+  }
+
+  public getProductsCount(){
+    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+    
+    return cachedProductsToCompare;
   }
 
 

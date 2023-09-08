@@ -343,9 +343,11 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
          this.finalProductList = [...tempProducts, ...tempProductVariants, ...tempProductBundleVariants , ...tempProductBundles];
 
-         //this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundleVariants, ...response.productBundles];
-        //  console.log("******* ))))))) ++++++++ Data here", this.finalProductList);
-         let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+         
+         //let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+         let cacheData = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
+         
          if(cacheData && cacheData.length>0){
           cacheData.forEach(element => {
       
@@ -522,6 +524,69 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public selectedListForCompare(items){
     this.listForCompare = items;
 
+
+    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
+    //let cacheData: any = [...new Map(cachedProductsToCompare.map(item => [item['_id'], item])).values()];
+
+    let cacheData = cachedProductsToCompare.filter(event => (event.checked))
+
+    console.log("++++++_________ CachedData ", cachedProductsToCompare);
+
+
+    let cumulativeList = [];
+    
+    if(cacheData && cacheData.length>0){
+      
+      cumulativeList = [...this.listForCompare , ...cacheData];
+      
+    }
+    else{
+      
+      cumulativeList = this.listForCompare;
+    }
+
+    //let uniqueElements = [...new Map(cumulativeList.map(item => [item['_id'], item])).values()];
+
+    let uniqueElements = cumulativeList;
+    
+    console.log("++++++_________ cumma ", cumulativeList);
+
+    uniqueElements.forEach(element => {
+      
+      let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
+        if(indexToUpdate !== -1){
+         
+          this.finalProductList[indexToUpdate]['checked'] = true;
+
+        }
+        else{
+          this.finalProductList.forEach(element => {
+            if('checked' in element){
+              element.checked = false;
+            }
+            else{
+              element['checked'] = false;
+            }
+          });
+          
+        }
+    });
+
+
+    console.log("++++++_________ UniqueElem ", uniqueElements);
+    
+
+    localStorage.setItem('compare_products_list', JSON.stringify(uniqueElements));
+    this.compareProductsStore.setCompareProductsList(uniqueElements);
+   
+    
+
+  }
+
+  /*public selectedListForCompare(items){
+    this.listForCompare = items;
+
     //let cacheData = this.compareProductsStore.getCompareProductsList();
     let cacheData1 = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
@@ -586,10 +651,11 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     //localStorage.removeItem('product_list_to_compare');
     
 
-  }
+  }*/
 
   /* compare products length display */
   public  prdLength = 0;
+  public compareProductsListLength = 0;
 
   public compareProductsLength$ = this.compareProductsStore.compareProductsList$
     .pipe(
@@ -602,6 +668,11 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.productListToCompare = uniqueElements;
         this.prdLength = this.productListToCompare.length;
+
+
+
+        let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+        this.compareProductsListLength = cachedProductsToCompare.length;
 
        
         if(data){
@@ -713,7 +784,7 @@ public tabChange(productTabSection: any){
 }
 
 
-public setCheckedList(){
+/*public setCheckedList(){
 
   this.subscriptions.push(
     this.compareProductsStore.productsCheckedList$.subscribe(res=>{
@@ -726,13 +797,40 @@ public setCheckedList(){
       let combinedData = [...cacheData, ...cacheData2];
       let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
-      /*var index = productsList.findIndex(el => el.productId === item._id);
-         
-      if(index >=0){
-        productsList[index].quantity = Number(productsList[index].quantity) + 1;
-      }*/
+
       this.productList.forEach(element => {
         var index = uniqueElements.findIndex(el => el._id === element._id);
+        if(index >=0){
+          if(element.checked){
+            element.checked = true;
+          }
+          else{
+            element['checked'] = true;
+          }
+        }
+        else{
+          if(element.checked){
+            element.checked = false;
+          }
+          else{
+            element['checked'] = false;
+          }
+        }
+      });
+    })
+  )
+}*/
+
+public setCheckedList(){
+
+  this.subscriptions.push(
+    this.compareProductsStore.productsCheckedList$.subscribe(res=>{
+      
+
+      let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
+      this.productList.forEach(element => {
+        var index = cachedProductsToCompare.findIndex(el => el._id === element._id);
         if(index >=0){
           if(element.checked){
             element.checked = true;

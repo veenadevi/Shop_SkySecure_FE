@@ -88,16 +88,22 @@ export class CompareProductsResultComponent {
   public ngOnInit(): void {
 
     
-    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    
+    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
 
-    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+
+    
     let cacheData2 = [];
     let combinedData = [...cacheData, ...cacheData2];
 
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
     let reqBody = this.setPrdList(uniqueElements);
-    this.cachedProductsList = uniqueElements;
-    //console.log("from local storage ==="+uniqueElements.length)
+    this.cachedProductsList = uniqueElements;*/
+
+    let reqBody = this.setPrdList(cachedProductsToCompare);
+    this.cachedProductsList = cachedProductsToCompare;
+    
 
     if(this.cachedProductsList.length <= 4){
       this.emptyProductsLength = 4 - this.cachedProductsList.length;
@@ -106,9 +112,7 @@ export class CompareProductsResultComponent {
       this.emptyProductsLength = 4;
     }
     
-   // console.log("empty cards size ==="+this.emptyProductsLength)
-
-   // this.fetchCompareProductsList(this.allSelectedItems);
+   
     this.fetchCompareProductsList(reqBody);
   }
 
@@ -159,7 +163,7 @@ export class CompareProductsResultComponent {
           return null;
       }
     });
-    console.log("product also should go inside")
+ 
     let reqBody = {
       "products": tempPrd,
       "productsVariants": tempPrdVar,
@@ -272,7 +276,7 @@ export class CompareProductsResultComponent {
             element.properties['priceList'].priceType= 'Month';
         });
 
-        console.log("reqBody productFamily length size ==="+this.allProducts.length)
+    
 
       })
     );
@@ -337,7 +341,7 @@ export class CompareProductsResultComponent {
   }
 
   public setProductFamilyList(response){
-    console.log("=====productFzmily length===="+response.productFamily.length)
+
     let item = response.productFamily.map((data: any) => {
       let featureList=data.productFamilyFeatures 
       let productData = data.productFamily;
@@ -533,9 +537,11 @@ export class CompareProductsResultComponent {
       });
       
       
-      localStorage.setItem('product_list_to_compare', JSON.stringify(this.cachedProductsList));
-      //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.cachedProductsList));
-      this.compareProductsStore.setCompareProductsList2(this.cachedProductsList); 
+      //localStorage.setItem('product_list_to_compare', JSON.stringify(this.cachedProductsList));
+      //this.compareProductsStore.setCompareProductsList2(this.cachedProductsList); 
+
+      localStorage.setItem('compare_products_list', JSON.stringify(this.cachedProductsList));
+      this.compareProductsStore.setCompareProductsList(this.cachedProductsList); 
       
      
       
@@ -715,7 +721,7 @@ export class CompareProductsResultComponent {
 
         
 
-        let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
         //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
         let cacheData2 = [];
         let combinedData = [...cacheData, ...cacheData2];
@@ -729,7 +735,15 @@ export class CompareProductsResultComponent {
         localStorage.setItem('product_list_to_compare', JSON.stringify(finalProducts));
         //localStorage.setItem('product_list_to_compare2', JSON.stringify(finalProducts));
         this.compareProductsStore.setCompareProductsList(finalProducts);
-        this.compareProductsStore.setCompareProductsList2(finalProducts);
+        this.compareProductsStore.setCompareProductsList2(finalProducts);*/
+
+
+        let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+        let finalProducts = [...cachedProductsToCompare, event.receivedEntry];
+        localStorage.setItem('compare_products_list', JSON.stringify(finalProducts));
+        this.compareProductsStore.setCompareProductsList(finalProducts);
+
+
       })
     )
 
