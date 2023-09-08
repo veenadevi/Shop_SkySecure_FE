@@ -95,8 +95,31 @@ export class ProductDetailComponent implements OnInit{
   titles = ['Description', 'Features', 'Specification','Reviews','Bundles','FAQ'];
   activeLink = this.links[0];
   myColor = '';
+  public selectedType : any = 'Month';
 
 
+  public setSelfData(){}
+
+  public onToogleChange(val){
+    
+    this.selectedType = val;
+
+    if(val === 'Month'){
+      this.setSelfData();
+    }
+
+  }
+
+  public handleChange(val){
+    
+
+    this.selectedType = val;
+  
+    if(val === 'Month'){
+      this.setSelfData();
+    }
+
+  }
 
   
 

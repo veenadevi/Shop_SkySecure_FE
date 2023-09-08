@@ -42,11 +42,25 @@
                     </ng-template>
                 </p-galleria> -->
                     </div>
+                    <p class="head-06">Select type of Purchase</p>
+                    <div class="radio-btn">
+                        
+                        
+                        <div class="radio-group">
+                            <input type="radio"  checked name="myRadios" (change)="handleChange('self')" value="Month" />
+                            <span class="radio-label">Month</span>
+                          </div>
+                        
+                          <div class="radio-group">
+                            <input type="radio" name="myRadios" (change)="handleChange('others')" value="Year" />
+                            <span class="radio-label">Year</span>
+                          </div>
+                    </div>
                     <div class="buy-now-prod">
-                        <span class="quantity-year">
+                        <!-- <span class="quantity-year">
                             <h6 class="head-06">Quantity </h6>
                             <span class="year">(per year)</span>
-                        </span>
+                        </span> -->
                         <span class="plus-minus">
 
                             <span>

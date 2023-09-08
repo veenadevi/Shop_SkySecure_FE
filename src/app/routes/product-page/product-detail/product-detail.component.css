@@ -4287,3 +4287,62 @@ h5 {
   font-size: 25px;
 }
        
+
+.radio-btn{
+  display: flex;
+  flex-direction: row;
+  column-gap: 1px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  justify-content: space-around;
+  width: 100%;
+}
+/* .radio-group input[type="radio"]:checked {
+  background-color: var(--primary-400-purple); 
+border: var(--primary-400-purple) ;
+
+}
+
+
+.radio-group  input[type="radio"] {
+  appearance: none; 
+  -webkit-appearance: none;
+  width: 13px; 
+  height: 13px; 
+  border: 1px solid grey; 
+  border-radius: 50%; 
+  background-color: #FFFFFF; 
+  margin-right: 5px; 
+} */
+
+input[type='radio'] {
+  -webkit-appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  outline: none;
+  border: 3px solid gray;
+  cursor: pointer;
+}
+
+input[type='radio']:before {
+  content: '';
+  display: block;
+  width: 90%;
+  height: 90%;
+  margin: 5% ;
+  border-radius: 50%;
+}
+
+input[type="radio"]:checked:before {
+  background: var(--primary-400-purple);
+  
+}
+
+input[type="radio"]:checked {
+border-color:var(--primary-400-purple);
+}
+.radio-label{
+  padding-left: 5px;
+  font-size: 18px;
+}
