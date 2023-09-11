@@ -18,7 +18,7 @@ import { ToasterNotificationService } from 'src/shared/services/toaster-notifica
   styleUrls: ['./product-bundle-detail.component.css']
 })
 export class ProductBundleDetailComponent implements OnInit{
-
+  selectedOption: string = 'default'; 
   discountRate: number =120; 
   monthlyPrice: number = this.discountRate / 12;
   isMonthly: boolean = true;
