@@ -204,6 +204,7 @@ public cartData : any[] = [];
     
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
+      userName : userAccountdetails.first_name,
       //userId : '2222',
       createdBy : userAccountdetails._id,
       updatedBy : userAccountdetails._id,
@@ -376,6 +377,7 @@ public onChangeQuantity(i, price) : void {
 
       let req = {
         userId : userAccountdetails._id,
+        userName : userAccountdetails.firstName,
         createdBy : userAccountdetails.firstName,
         //createdBy : "userwithoutGST1001",
         
@@ -573,6 +575,7 @@ public onChangeQuantity(i, price) : void {
     let userAccountdetails = this.userAccountStore.getUserDetails();
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
+      userName : userAccountdetails.firstName,
       //userId : '2222',
       createdBy : userAccountdetails._id,
       updatedBy : userAccountdetails._id,
@@ -600,6 +603,7 @@ public onChangeQuantity(i, price) : void {
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
       //userId : '2222',
+      userName : userAccountdetails.firstName,
       createdBy : userAccountdetails._id,
       updatedBy : userAccountdetails._id,
       products : this.cartData,
