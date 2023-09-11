@@ -59,12 +59,12 @@
                         
                         
                         <div class="radio-group">
-                            <input type="radio"  checked name="myRadios" (change)="handleChange('self')" value="Month" />
+                            <input type="radio"  checked name="myRadios" [(ngModel)]="selectedOption" value="default" checked>
                             <span class="radio-label">Month</span>
                           </div>
                         
                           <div class="radio-group">
-                            <input type="radio" name="myRadios" (change)="handleChange('others')" value="Year" />
+                            <input type="radio" name="myRadios" [(ngModel)]="selectedOption" value="other">
                             <span class="radio-label">Year</span>
                           </div>
                     </div>
@@ -121,11 +121,31 @@
                             <p *ngIf="productFamily.priceList[0].discountRate" class="discounted-text">
                                 -{{productFamily.priceList[0].discountRate}}%&nbsp;
                             </p>
-                            <div class="price" (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
+                            <!-- <div class="price" (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
                                 <span class="price-symbol">&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : (productFamily.priceList[0].price | number : '1.2-2') }} </span>
                                 <span class="product-price-type"> /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}</span>
                                 
-                            </div>
+                            </div> -->
+
+                            <div *ngIf="selectedOption === 'default'">
+                                <!-- Default content -->
+                                <div class="price" >
+                                    <span class="price-symbol">&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : (productFamily.priceList[0].price | number : '1.2-2') }} </span>
+                                    <span class="product-price-type"> /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}</span>
+                                    
+                                </div>
+                              </div>
+                              
+                              <div *ngIf="selectedOption === 'other'">
+                                <!-- Other content -->
+                                <div class="price" >
+                                    <span class="price-symbol">&#8377;  {{ isMonthly ? (productFamily.priceList[0].price | number : '1.2-2') : (productFamily.priceList[0].price | number : '1.2-2') }} </span>
+                                    <span class="product-price-type"> /  {{productFamily.priceList[0].priceType}}</span>
+                                    
+                                </div>
+                              </div>
+
+
                             <!-- <div class="price">
                                 <p class="product-price">
                                     <span class="price-symbol">&#8377;</span>{{productFamily.priceList[0].price | number : '1.2-2'}}
@@ -138,13 +158,36 @@
                         <div style="display:inline-flex;align-items: center;">
                             <p style="font-size: small;"> MRP:&nbsp;</p>
                             <!-- <span class="price-symbol">&#8377;</span> -->
-                            <span>
+                            <!-- <span>
                               
                                 <p style="font-size: initial; text-decoration: line-through;cursor: pointer;" (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
                                     &#8377;  {{productFamily.priceList[0].ERPPrice /12 | number : '1.2-2'}} /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}
-                                    <!-- <span >&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : productFamily.priceList[0].price }} /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}</span> -->
+                                    <span >&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : productFamily.priceList[0].price }} /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}</span>
                                 </p>
-                            </span>
+                            </span> -->
+
+
+                            <div *ngIf="selectedOption === 'default'">
+                                <!-- Default content -->
+                                <span>
+                                    <p style="font-size: initial; text-decoration: line-through;cursor: pointer;" >
+                                        &#8377;  {{productFamily.priceList[0].ERPPrice /12 | number : '1.2-2'}} /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}
+                                        <!-- <span >&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : productFamily.priceList[0].price }} /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}</span> -->
+                                    </p>
+                                </span>
+                              </div>
+                              
+                              <div *ngIf="selectedOption === 'other'">
+                                <!-- Other content -->
+                                <span>
+                                    <p style="font-size: initial; text-decoration: line-through;cursor: pointer;" >
+                                        &#8377;  {{productFamily.priceList[0].ERPPrice  | number : '1.2-2'}} /  {{productFamily.priceList[0].priceType}}
+                                        <!-- <span >&#8377;  {{ isMonthly ? (productFamily.priceList[0].price/12 | number : '1.2-2') : productFamily.priceList[0].price }} /  {{isMonthly ? 'Month' : (productFamily.priceList[0].priceType)}}</span> -->
+                                    </p>
+                                </span>
+                              </div>
+
+
                             <!-- <span class="product-price-type">
                                 / {{productFamily.priceList[0].priceType}}</span> -->
                         </div>

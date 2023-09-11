@@ -43,16 +43,25 @@
                 </p-galleria> -->
                     </div>
                     <p class="head-06">Select type of Purchase</p>
+                    <!-- <div>
+                        <label>
+                          <input type="radio" [(ngModel)]="selectedOption" value="default" checked> Default
+                        </label>
+                        <label>
+                          <input type="radio" [(ngModel)]="selectedOption" value="other"> Other
+                        </label>
+                      </div> -->
+                     
                     <div class="radio-btn">
                         
                         
                         <div class="radio-group">
-                            <input type="radio"  checked name="myRadios" (change)="handleChange('self')" value="Month" />
+                            <input type="radio"  checked name="myRadios" [(ngModel)]="selectedOption" value="default" checked>
                             <span class="radio-label">Month</span>
                           </div>
                         
                           <div class="radio-group">
-                            <input type="radio" name="myRadios" (change)="handleChange('others')" value="Year" />
+                            <input type="radio" name="myRadios" [(ngModel)]="selectedOption" value="other">
                             <span class="radio-label">Year</span>
                           </div>
                     </div>
@@ -107,12 +116,26 @@
                                     -{{product.priceList[0].discountRate}}%
                                 </p>
                                 
-                                    <div class="price" (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
+                                    <!-- <div class="price" (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
                                         <span class="price-symbol">&#8377;  {{ isMonthly ? (product.priceList[0].price/12 | number : '1.2-2') : (product.priceList[0].price  | number : '1.2-2') }} </span>
                                         <span class="product-price-type"> /  {{isMonthly ? 'Month' : (product.priceList[0].priceType)}}</span>
                                         
-                                    </div>
+                                    </div> -->
                                    
+                                    <div *ngIf="selectedOption === 'default'">
+                                        <div class="price" >
+                                            <span class="price-symbol">&#8377;  {{ isMonthly ? (product.priceList[0].price/12 | number : '1.2-2') : (product.priceList[0].price  | number : '1.2-2') }} </span>
+                                            <span class="product-price-type"> /  {{isMonthly ? 'Month' : (product.priceList[0].priceType)}}</span>
+                                            
+                                        </div>
+                                      </div>
+                                      
+                                      <div *ngIf="selectedOption === 'other'">
+                                        <div class="price" >
+                                            <span class="price-symbol">&#8377;  {{ isMonthly ? (product.priceList[0].price | number : '1.2-2') : (product.priceList[0].price  | number : '1.2-2') }} </span>
+                                            <span class="product-price-type"> /  {{product.priceList[0].priceType}}</span>       
+                                        </div>
+                                      </div>
                                 <!-- <div class="price">
                                     <p class="product-price">
                                         <span class="price-symbol">&#8377;</span>{{product.priceList[0].price | number : '1.2-2'}}
@@ -124,12 +147,32 @@
                             <div style="display:inline-flex;align-items: center;">
                                 <p class="mrp"> MRP:&nbsp;</p>
                                 <!-- <span class="price-symbol">&#8377;</span> -->
-                                <span>
+                                <!-- <span>
                                     <p class="amount"  (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
                                         &#8377; {{product.priceList[0].ERPPrice/12 | number : '1.2-2'}} /  {{isMonthly ? 'Month' : (product.priceList[0].priceType)}}
-                                        <!-- <span class="amount">&#8377;  {{ isMonthly ? (product.priceList[0].ERPPrice/12 | number : '1.2-2') : product.priceList[0].ERPPrice }}  /  {{isMonthly ? 'Month' : (product.priceList[0].priceType)}}</span> -->
+                                        <span class="amount">&#8377;  {{ isMonthly ? (product.priceList[0].ERPPrice/12 | number : '1.2-2') : product.priceList[0].ERPPrice }}  /  {{isMonthly ? 'Month' : (product.priceList[0].priceType)}}</span>
                                         <span class="product-price-type"></span></p>
-                                </span>
+                                </span> -->
+
+                                <div *ngIf="selectedOption === 'default'">
+                                    <!-- Default content -->
+                                    <span>
+                                        <p class="amount"  >
+                                            &#8377; {{product.priceList[0].ERPPrice/12 | number : '1.2-2'}} /  {{isMonthly ? 'Month' : (product.priceList[0].priceType)}}
+                                            <!-- <span class="amount">&#8377;  {{ isMonthly ? (product.priceList[0].ERPPrice/12 | number : '1.2-2') : product.priceList[0].ERPPrice }}  /  {{isMonthly ? 'Month' : (product.priceList[0].priceType)}}</span> -->
+                                            <span class="product-price-type"></span></p>
+                                    </span>
+                                  </div>
+                                  
+                                  <div *ngIf="selectedOption === 'other'">
+                                    <!-- Other content -->
+                                    <span>
+                                        <p class="amount"  >
+                                            &#8377; {{product.priceList[0].ERPPrice | number : '1.2-2'}} /  {{product.priceList[0].priceType}}
+                                            <!-- <span class="amount">&#8377;  {{ isMonthly ? (product.priceList[0].ERPPrice/12 | number : '1.2-2') : product.priceList[0].ERPPrice }}  /  {{isMonthly ? 'Month' : (product.priceList[0].priceType)}}</span> -->
+                                            <span class="product-price-type"></span></p>
+                                    </span>
+                                  </div>
                             </div>
                         </div>
                     </ng-container>
