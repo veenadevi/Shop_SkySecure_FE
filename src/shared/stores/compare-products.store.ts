@@ -35,6 +35,16 @@ export class CompareProductsStore {
     private productsCheckedListSubject = new BehaviorSubject<any>(null);
     public productsCheckedList$ = this.productsCheckedListSubject.asObservable();
 
+
+    //public compareProductsList : any;
+
+    //private productsCheckedListSubject = new BehaviorSubject<any>(null);
+    //public productsCheckedList$ = this.productsCheckedListSubject.asObservable();
+
+
+
+
+
   constructor() {
   }
   

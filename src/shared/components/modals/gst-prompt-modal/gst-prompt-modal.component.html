@@ -69,12 +69,14 @@
               <div class="col-sm-11 form-group">
                 <!-- <label for="gst-no">GST Number</label> -->
                 <input formControlName="gstNo" type="text" class="form-control " name="gstNo" id="gst-no"
-                  placeholder="Enter your GST NO" required>
+                  placeholder="Enter your GST NO" >
+                  {{disableGstNOField()}}
               </div>
               <p class="or ">(Or)</p>
               <div class="col-sm-12">
-                <input type="checkbox" class="form-check d-inline" id="chb" required>
-                <div for="chb" class="form-check-label">&nbsp;Procced without GST number.
+                <input type="checkbox" formControlName="checkGstNil" class="form-check d-inline" id="chb"  >
+                <div for="chb" class="form-check-label" >&nbsp;I Don't Have Company GST Number.
+                  {{disableCheckGstNil()}}
                 </div>
               </div>
               <div *ngIf="selectedType === 'others'" class="">
@@ -125,14 +127,14 @@
               <label for="cod">Country code</label>
               <select class="form-control browser-default custom-select">
                 <option data-countryCode="IN" value="1" selected>IN (+91)</option>
-                <option data-countryCode="US" value="2" >USA (+1)</option>
+                <option data-countryCode="US" value="2" selected>USA (+1)</option>
                 <option data-countryCode="GB" value="44">UK (+44)</option>
               </select>
             </div>
             <div class="col-sm-8 form-group">
               <label for="tel">Phone*</label>
-              <input formControlName="phoneNo" maxlength="10" type="number" name="phone" class="form-control-02" id="tel"
-                placeholder="Enter Your Phone No." required  (keydown)="onKeyDown($event)">
+              <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel"
+                placeholder="Enter Your Phone No." required>
               <div *ngIf="myForm.get('phoneNumber').hasError('required')">
                 Phone number is required.
               </div>
@@ -179,8 +181,8 @@
             </div>
             <div class="col-sm-4 form-group" *ngIf="selectedType === 'hide'">
               <label for="tel">Phone*</label>
-              <input formControlName="phoneNo"  maxlength="10" type="number" name="phone" class="form-control-02" id="tel"
-                placeholder="Enter Your Phone No." required (keydown)="onKeyDown($event)">
+              <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel"
+                placeholder="Enter Your Phone No." required>
               <div *ngIf="myForm.get('phoneNumber').hasError('required')">
                 Phone number is required.
               </div>
@@ -243,8 +245,8 @@
             </div>
             <div class="col-sm-6 form-group">
               <label for="zip">Postal-Code</label>
-              <input formControlName="postalCode" type="number" class="form-control" name="Zip" id="zip"
-                placeholder="Postal-Code." required   (keydown)="onKeyDown($event)">
+              <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
+                placeholder="Postal-Code." required>
             </div>
           </div>
 
@@ -282,17 +284,22 @@
     </div> -->
  
  
+    <div *ngIf="errorMessage">
+      <p class="error">* Please choose one option: Enter a Company GST number or select the I don't have Company GST number checkbox</p>
+    </div>
+
+
+
 
     <ng-container *ngIf="!showContent == showButton">
+      
   <!-- <button class="btn compare-btn" (click)="showContent = !showContent">Next</button> -->
+  
   <div class="modal-footer">
-
+  
     <button class="btn primary-btn" (click)="onNextClick()">Next</button>
-
     <button class="btn secondary-btn"  (click)="onCancelClick()">Cancel</button>
   </div>
-  
-   
 </ng-container>
 
   <div *ngIf="showContent" class="cont">
@@ -376,7 +383,7 @@
               </div>
               <div class="col-sm-6 form-group">
                 <label for="zip">Postal-Code</label>
-                <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip" (keydown)="onKeyDown($event)"
+                <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
                   placeholder="Postal-Code." required>
               </div>
             </div>
@@ -407,8 +414,8 @@
             </div>
             <div class="col-sm-4 form-group" *ngIf="selectedType === 'self'">
               <label for="tel">Phone*</label>
-              <input formControlName="phoneNo"  maxlength="10" type="number" name="phone" class="form-control-02" id="tel"
-                placeholder="Enter Your Phone No." required   (keydown)="onKeyDown($event)">
+              <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel"
+                placeholder="Enter Your Phone No." required>
               <!-- <div *ngIf="myForm.get('phoneNumber').hasError('required')">
                 Phone number is required.
               </div>
@@ -496,9 +503,8 @@
             </div>
             <div class="col-sm-6 form-group">
               <label for="zip">Postal-Code</label>
-              <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip" (keydown)="onKeyDown($event)"
+              <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
                 placeholder="Postal-Code." required>
-                
             </div>
           </div>
 
@@ -506,12 +512,14 @@
 
 
           <div class="col-sm-12">
-            <input type="checkbox" class="form-check d-inline" id="chb" required>
+            <input type="checkbox" formControlName="CheckTerms"  class="form-check d-inline" id="chb" required>
             <div for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
             </div>
           </div>
 
-
+          <div *ngIf="submitErrorMessage">
+            <p class="error">* Please accept the terms and conditions to continue</p>
+          </div>
           <div class="modal-footer">
             <button class="btn secondary-btn"  (click)="onBackClick()">Back</button>
             <ng-container >

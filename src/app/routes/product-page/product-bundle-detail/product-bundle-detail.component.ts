@@ -111,6 +111,35 @@ export class ProductBundleDetailComponent implements OnInit{
   };
 
 
+  public selectedType : any = 'Month';
+
+
+  public setSelfData(){}
+
+  public onToogleChange(val){
+    
+    this.selectedType = val;
+
+    if(val === 'Month'){
+      this.setSelfData();
+    }
+
+  }
+
+  public handleChange(val){
+    
+
+    this.selectedType = val;
+  
+    if(val === 'Month'){
+      this.setSelfData();
+    }
+
+  }
+
+
+
+
   public offerVisible:boolean = true
     
         onclickOffer(){

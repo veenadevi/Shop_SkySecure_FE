@@ -12,11 +12,11 @@ import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
-  selector: 'app-compare-products-result',
-  templateUrl: './compare-products-result2.component.html',
-  styleUrls: ['./compare-products-result2.component.css']
+  selector: 'app-suggested-compare-products-result',
+  templateUrl: './suggested-compare-products-result2.component.html',
+  styleUrls: ['./suggested-compare-products-result2.component.css']
 })
-export class CompareProductsResultComponent {
+export class SuggestedCompareProductsResultComponent {
 
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
   allProducts: any[] = [];
@@ -88,6 +88,7 @@ export class CompareProductsResultComponent {
   public ngOnInit(): void {
 
     
+    console.log("+_0000 In Here");
     
     let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
 
@@ -537,11 +538,10 @@ export class CompareProductsResultComponent {
       });
       
       
-      //localStorage.setItem('product_list_to_compare', JSON.stringify(this.cachedProductsList));
-      //this.compareProductsStore.setCompareProductsList2(this.cachedProductsList); 
+      
 
-      localStorage.setItem('compare_products_list', JSON.stringify(this.cachedProductsList));
-      this.compareProductsStore.setCompareProductsList(this.cachedProductsList); 
+      //localStorage.setItem('compare_products_list', JSON.stringify(this.cachedProductsList));
+      //this.compareProductsStore.setCompareProductsList(this.cachedProductsList); 
       
      
       
@@ -740,8 +740,8 @@ export class CompareProductsResultComponent {
 
         let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
         let finalProducts = [...cachedProductsToCompare, event.receivedEntry];
-        localStorage.setItem('compare_products_list', JSON.stringify(finalProducts));
-        this.compareProductsStore.setCompareProductsList(finalProducts);
+        //localStorage.setItem('compare_products_list', JSON.stringify(finalProducts));
+        //this.compareProductsStore.setCompareProductsList(finalProducts);
 
 
       })

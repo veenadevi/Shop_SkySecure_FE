@@ -56,7 +56,7 @@ public whatsAppMessage:string
 
     this.productsList = value;
     this.mrpPriceType = this.productsList[0].priceList[0].priceType;
-    // console.log("))))))) Data in alst ", value);
+
     this.productsList.forEach(element => {
         element.priceList[0].priceType = "Month";
     });
@@ -83,8 +83,9 @@ public whatsAppMessage:string
 
 
   ngOnInit(): void {
-
     
+
+  //localStorage.removeItem('compare_products_list');
   this.whatsAppMessage="Hello! I've contacted you through your website 'Skysecure MarketPlace." 
     
   }
@@ -123,6 +124,65 @@ public whatsAppMessage:string
   }
 
 
+  public addToCompare($event, item){
+    
+    
+    let compareProductsListLen = this.getProductsCount().length;
+
+    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
+
+    if($event.target.checked){
+
+      if(compareProductsListLen <4){ // If Products added is Less than 4
+
+        
+        //let cachedProductsToCompare = localStorage.setItem('compare_products_list', JSON.stringify(cacheData));
+
+        var index = cachedProductsToCompare.findIndex(el => el._id === item._id);
+      
+          if(index >=0){
+            this.toaster.showWarning("Product already added for Compare",'')
+          }
+          else{
+            if('checked' in item){
+              item.checked = $event.target.checked;
+            }
+            else{
+              item['checked'] = $event.target.checked;
+            }
+            cachedProductsToCompare.push(item);
+            localStorage.setItem('compare_products_list', JSON.stringify(cachedProductsToCompare));
+            this.compareProductsStore.setCompareProductsList(cachedProductsToCompare);
+         
+          }
+
+          
+      
+        
+      }
+      else{ // If 4 products already present
+        $event.target.checked = false;
+        this.toaster.showWarning("You can add only 4 products to compare",'')
+      }
+
+    }
+    else{
+      
+      cachedProductsToCompare = cachedProductsToCompare.filter(element => element._id != item._id);
+      localStorage.setItem('compare_products_list', JSON.stringify(cachedProductsToCompare));
+      this.compareProductsStore.setCompareProductsList(cachedProductsToCompare);
+     
+    }
+
+
+
+
+    
+
+  }
+
+
   public onFilterChange($event, item){
     
     let tempLen = this.getCompareProductsCount();
@@ -140,13 +200,13 @@ public whatsAppMessage:string
     let cacheData =uniqueElements;
 
     if(tempLen<4){
-      console.log("legth is less than 4")
+      
 
     
 
 
       if(cacheData && cacheData.length>0){
-        console.log("cacheData legth "+cacheData.length)
+        
         let indexToUpdate = cacheData.findIndex(element => element._id === item._id);
         if(indexToUpdate !== -1){
           
@@ -166,30 +226,29 @@ public whatsAppMessage:string
         
   
       }
-      console.log("cacheData legth  is o fresh data "+cacheData.length)
+      
   
       this.cachedDataForCheckBox = cacheData;
   
       let tempData = [];
       if($event.target.checked){
-        console.log("+_____)))) Inside if checked  ", this.selectedListForCompare);
+        
         this.selectedListForCompare.push(item);
         tempData.push(item);
-        console.log("+_____)))) Inside if checked ", item);
+        
         
         this.toaster.showSuccess("The product has been included for comparison.",'')
       }
       else{
         this.toaster.showWarning("The product has been excluded from the comparison",'')
         
-        console.log("***(()()( ", this.cachedDataForCheckBox);
+     
         this.selectedListForCompare = this.cachedDataForCheckBox.filter(element => element._id != item._id);
         tempData = this.cachedDataForCheckBox.filter(element => element._id != item._id);
         localStorage.setItem('product_list_to_compare', JSON.stringify(tempData));
         //localStorage.setItem('product_list_to_compare', JSON.stringify(this.selectedListForCompare));
         //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.selectedListForCompare));
-        console.log("***(()()( Selcted", this.selectedListForCompare);
-        console.log("***(()()( Temp", tempData);
+       
       }
        
       
@@ -211,7 +270,7 @@ public whatsAppMessage:string
       }
       else{
 
-        console.log("came to remove when data is 4")
+     
   
         let indexToUpdate = cacheData.findIndex(element => element._id === item._id);
         cacheData[indexToUpdate]['checked'] = $event.target.checked;
@@ -273,7 +332,7 @@ public whatsAppMessage:string
     }*/
 
     this.userAccountStore.userDetails$.subscribe(res=>{
-      // console.log("()()()() ", res);
+      
       if(res && res.email !== null){
         this.router.navigate(['/cart'], {queryParams: queryParams});
       }
@@ -300,9 +359,16 @@ public whatsAppMessage:string
     let combinedData = [...cacheData, ...cacheData2];
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
-    //console.log("++++++++++++++++++++++()()()()( ", uniqueElements.length);
+  
     return uniqueElements.length;
     
+  }
+
+
+  public getProductsCount(){
+    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+    
+    return cachedProductsToCompare;
   }
 
 

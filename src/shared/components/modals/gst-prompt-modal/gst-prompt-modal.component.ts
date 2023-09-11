@@ -19,32 +19,7 @@ export class GstPromptModalComponent implements OnInit{
   showContent: boolean = false;
   showButton: boolean=true;
  
- 
-  onKeyDown(event: KeyboardEvent): void {
-    const key = event.key;
 
-    if (key === '-') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-    if (key === '+') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-    if (key === '*') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-    if (key === '.') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-  
-    if (key === 'e') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-    if (key === 'E') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-  }
-
-  
   @Input('request')
   public request : any;
 
@@ -104,9 +79,7 @@ export class GstPromptModalComponent implements OnInit{
     this.myForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      
     });
-  
   }
 
   ngOnInit(): void {
@@ -130,7 +103,8 @@ export class GstPromptModalComponent implements OnInit{
       {
         //email: [this.emailViaSignup, [Validators.required, Validators.email]],
         //otp : [],
-        gstNo : [],
+        gstNo : [null],
+        checkGstNil : [null],
         companyName : [],
         addressLine1 : [],
         addressLine2 : [],
@@ -140,11 +114,27 @@ export class GstPromptModalComponent implements OnInit{
         postalCode : [],
         phoneNo : [],
         firstName : [],
-        email : []
-
+        email : [],
+       checkTerms : [null]
       }
     )
   }
+
+disableGstNOField(){
+  // console.log(this.myForm.get('checkGstNil').value);
+  if(this.myForm.get('checkGstNil').value)
+    this.myForm.get('gstNo').disable();
+else
+this.myForm.get('gstNo').enable();
+}
+disableCheckGstNil(){
+  // console.log(this.myForm.get('checkGstNil').value);
+  if(this.myForm.get('gstNo').value)
+    this.myForm.get('checkGstNil').disable();
+else
+this.myForm.get('checkGstNil').enable();
+}
+
 
   public setSelfData(){
     let userDetails = this.userAccountStore.getUserDetails();
@@ -262,11 +252,15 @@ export class GstPromptModalComponent implements OnInit{
 
   }
 
-
+public submitErrorMessage: boolean =false;
 
   public createQuotationService(){
-    
-
+    if((this.myForm.get('checkTerms').value === null || this.myForm.get('checkTerms').value === false))
+   {
+this.submitErrorMessage = true;
+  }
+  else{
+    this.submitErrorMessage = false;
 
     let userDetails = this.userAccountStore.getUserDetails();
 
@@ -364,7 +358,8 @@ export class GstPromptModalComponent implements OnInit{
 
 
     if(formVal.gstNo === null || formVal.gstNo === ''){
-  
+      
+      
       req.gst_treatment = "business_none";
     }
     else{
@@ -406,7 +401,7 @@ export class GstPromptModalComponent implements OnInit{
         
       })
     )
-
+    }
   }
 
   public updateGSTService(req){
@@ -512,14 +507,21 @@ export class GstPromptModalComponent implements OnInit{
       })
     )
   }
+public errorMessage: boolean = false;
 
 
   public onNextClick(){
+    if((this.myForm.get('checkGstNil').value === null || this.myForm.get('checkGstNil').value === false)
+    && (this.myForm.get('gstNo').value === null || this.myForm.get('gstNo').value === '')){
+this.errorMessage = true;
+  }
+  else{
+    this.errorMessage = false;
     this.showContent = !this.showContent;
 
-    if("this.myForm.value.gstNo.length >0" || "this.isChecked = 'true'")
-    {
-      if(this.myForm.value.gstNo.length === 15){
+    
+
+    if(this.myForm.value.gstNo.length === 15){
 
         this.myForm.controls['companyName'].disable();
         this.myForm.controls['addressLine1'].disable();
@@ -563,6 +565,7 @@ export class GstPromptModalComponent implements OnInit{
           let selectedCity = cityList.filter(c => c.name === resCity)[0];
           this.selectedCity = selectedCity;
 
+
           
 
 
@@ -577,10 +580,7 @@ export class GstPromptModalComponent implements OnInit{
     else{
 
     }
-    }
-
- 
-
+  }
 
   }
 
@@ -588,10 +588,9 @@ export class GstPromptModalComponent implements OnInit{
     this.showContent = !this.showContent;
     this.myForm.enable();
   }
-
   public onCancelClick(){
     this.activeModal.close();
   }
- 
+
 
 }
