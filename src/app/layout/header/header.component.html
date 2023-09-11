@@ -34,10 +34,11 @@
       
     </div> -->
 
-
+    <ng-container *ngIf="userLoggedIn">
     <div class="notificationicon-section">
       <img class="notification-icon" onclick="openDropdown()" alt="" src="../../../assets/icons/BellWhite.svg">
     </div>
+  </ng-container>
 
 
 <ng-container *ngIf="userLoggedIn">
