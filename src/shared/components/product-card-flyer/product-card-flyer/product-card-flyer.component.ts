@@ -7,6 +7,7 @@ import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { LoginAlertModalComponent } from '../../login-alert-modal/login-alert-modal.component';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
 
 @Component({
   selector: 'product-card-flyer',
@@ -78,7 +79,8 @@ public whatsAppMessage:string
     private cartStore : CartStore,
     private modalService : NgbModal,
     private userAccountStore : UserAccountStore,
-    private toaster : ToasterNotificationService
+    private toaster : ToasterNotificationService,
+    private addItemsToCartService : AddItemsToCartService
   ){}
 
 
@@ -334,7 +336,8 @@ public whatsAppMessage:string
     this.userAccountStore.userDetails$.subscribe(res=>{
       
       if(res && res.email !== null){
-        this.router.navigate(['/cart'], {queryParams: queryParams});
+        this.addItemsToCartService.addItemsToCart(queryParams);
+        //this.router.navigate(['/cart'], {queryParams: queryParams});
       }
       else{
         this.viewModal(queryParams);

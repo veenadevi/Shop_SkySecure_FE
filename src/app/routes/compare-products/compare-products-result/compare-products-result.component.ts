@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
@@ -75,7 +76,8 @@ export class CompareProductsResultComponent {
     private modalService: NgbModal,
     private userAccountStore : UserAccountStore,
     private compareProductsStore : CompareProductsStore,
-    private decimalPipe : DecimalPipe
+    private decimalPipe : DecimalPipe,
+    private addItemsToCartService : AddItemsToCartService
   ) {
     for (let i = 0; i < 50; ++i) {
       this.dataSource.push({
@@ -491,6 +493,29 @@ export class CompareProductsResultComponent {
     }
   }
 
+
+  public getPriceType(val){
+
+    console.log("+++++ Val ", val);
+
+    switch (val.toLowerCase()) {
+      case 'month':
+        return 'Monthly';
+
+      case 'monthly':
+        return 'Monthly';
+        
+      case 'year':
+        return 'Yearly';
+      
+      case 'yearly':
+        return 'Yearly';
+
+      default:
+        return 'Yearly';
+    }
+  }
+
   public requestQuote (productItem : any) : void {
 
  
@@ -508,7 +533,7 @@ export class CompareProductsResultComponent {
           price : product.priceList.price,
           erpPrice:product.priceList.ERPPrice,
           discountRate:product.priceList.discountRate,
-          priceType:product.priceList.priceType,
+          priceType:this.getPriceType(product.priceList.priceType),
         };
 
 
@@ -516,7 +541,9 @@ export class CompareProductsResultComponent {
     this.userAccountStore.userDetails$.subscribe(res=>{
       
       if(res && res.email !== null){
-        this.router.navigate(['/cart'], {queryParams: queryParams});
+        //console.log("_+_+_+__+ ", queryParams);
+        this.addItemsToCartService.addItemsToCart(queryParams);
+        //this.router.navigate(['/cart'], {queryParams: queryParams});
       }
       else{
         this.viewModal(queryParams);
