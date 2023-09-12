@@ -1594,7 +1594,7 @@ button{
   width: 100%;
 }
 .tick {
-  height: 20px;
+  /* height: 20px; */
 }
 .feature-card {
   display: flex;
