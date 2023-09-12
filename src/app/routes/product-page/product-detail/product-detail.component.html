@@ -198,7 +198,6 @@
                                 </div>
                             </div>
                             <ng-container *ngIf="product.description.length>50">
-
                                 <div class="scroll">
                                     <span>
                                         <a class="all-btn" (click)="scrollToSection('#description')">Read more</a>
@@ -447,9 +446,7 @@
                             <span *ngIf="!seeMore">....</span>
                             <!-- <span class="see-more"> -->
                             <button class="btn view-det-btn-01" (click)="openDescription()">{{ !seeMore ? "Read More" :
-                                "Read
-                                Less"
-                                }}</button>
+                                "Read Less"}}</button>
                             <!-- </span> -->
                         </ng-container>
                     </p>
@@ -546,7 +543,7 @@
 
                                 <div class="feature-heading">
                                     <div class="feature-card">
-                                        <img class="tick" src="../../../../assets/icons/VioletTickIcon.svg">
+                                        <img class="tick" src="../../../../assets/icons/PrimaryTickIcon.svg">
                                     </div>
                                     <div class="feature-card-content" (click)="openLink(item.hyperLinkURL)">
                                         <p class="feature-card-heading">{{item.name}}</p>
