@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { ProductsDetails } from 'src/shared/models/interface/partials/products-details';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
 import { LoginService } from 'src/shared/services/login.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 @Component({
@@ -20,7 +21,8 @@ export class ProductComponent {
     private authService : MsalService,
     private loginService : LoginService,
     private cartStore : CartStore,
-    private router : Router
+    private router : Router,
+    private addItemsToCartService : AddItemsToCartService
   ){
 
   }
@@ -36,7 +38,9 @@ export class ProductComponent {
       productId : product._id,
       quantity : 1,
     };
-    this.router.navigate(['/cart'], {queryParams: queryParams});
+
+    this.addItemsToCartService.addItemsToCart(queryParams);
+    //this.router.navigate(['/cart'], {queryParams: queryParams});
 
 
 

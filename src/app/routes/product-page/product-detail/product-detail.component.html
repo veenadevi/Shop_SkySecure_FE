@@ -56,7 +56,7 @@
                         
                         
                         <div class="radio-group">
-                            <input type="radio"  checked name="myRadios" [(ngModel)]="selectedOption" value="default" checked>
+                            <input type="radio"  checked name="myRadios" [(ngModel)]="selectedOption" value="default">
                             <span class="radio-label">Month</span>
                           </div>
                         
@@ -1095,4 +1095,12 @@
             </div>
         </div>
     </div>
+    <ngx-spinner
+        bdColor="rgba(51,51,51,0.8)"
+        size="medium"
+        color="#fff"
+        type="ball-scale-multiple"
+        >
+        <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner>
 </ng-container>

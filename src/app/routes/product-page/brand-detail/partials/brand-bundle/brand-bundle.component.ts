@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
@@ -46,7 +47,8 @@ export class BrandBundleComponent implements OnInit{
     private cartStore : CartStore,
     private router : Router,
     private modalService : NgbModal,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private addItemsToCartService : AddItemsToCartService
   ){}
 
   ngOnInit(): void {
@@ -182,7 +184,8 @@ export class BrandBundleComponent implements OnInit{
     this.userAccountStore.userDetails$.subscribe(res=>{
       // console.log("()()()() ", res);
       if(res && res.email !== null){
-        this.router.navigate(['/cart'], {queryParams: queryParams});
+        this.addItemsToCartService.addItemsToCart(queryParams);
+        //this.router.navigate(['/cart'], {queryParams: queryParams});
       }
       else{
         this.viewModal(queryParams);
