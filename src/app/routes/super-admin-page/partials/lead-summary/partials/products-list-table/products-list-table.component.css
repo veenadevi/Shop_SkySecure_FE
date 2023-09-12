@@ -1,0 +1,42 @@
+.selected-products-header {
+    /* margin-left: 2rem; */
+    font-size: 18px;
+    color: #7A7979;
+    padding: 0.8rem;
+}
+
+thead th{
+    text-align: left;
+    padding: 1rem 1rem;
+    border: 1px solid #dee2e6;
+    border-width: 0 0 1px 0;
+    font-weight: 700;
+    color: #343a40;
+    background: #f8f9fa;
+    transition: box-shadow 0.2s;
+}
+
+tbody tr{
+    background: #ffffff;
+    color: #495057;
+    transition: box-shadow 0.2s;
+}
+
+tbody td{
+    text-align: left;
+    border: 1px solid #dee2e6;
+    border-width: 0 0 1px 0;
+    padding: 1rem 1rem 1rem 0;
+}
+
+:host ::ng-deep .form-control{
+    border : none !important;
+}
+
+.add-new-btn{
+    padding: 0.8rem;
+}
+
+.btn-color{
+    color: #DB553C;
+}

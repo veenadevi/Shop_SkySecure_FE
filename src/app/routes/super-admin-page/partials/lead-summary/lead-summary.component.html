@@ -120,7 +120,20 @@
             </div>
         </div>
 
+
         <div class="row-div">
+            <div id="productItems">
+                <div class="card-container">
+                    <ng-container *ngIf="productsData">
+                        <products-list-table [productsData]="productsData"></products-list-table>
+                    </ng-container>
+                    
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- <div class="row-div">
             <div id="productItems">
                 <div class="card-container">
                     <ng-container *ngIf="productsData">
@@ -129,7 +142,7 @@
                     
                 </div>
             </div>
-        </div>
+        </div> -->
         
     </ng-container>
     

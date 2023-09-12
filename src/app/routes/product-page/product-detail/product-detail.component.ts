@@ -14,6 +14,7 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -455,7 +456,8 @@ export class ProductDetailComponent implements OnInit{
     private modalService : NgbModal,
     private compareProductsStore : CompareProductsStore,
     private userAccountStore : UserAccountStore,
-    private toaster : ToasterNotificationService
+    private toaster : ToasterNotificationService,
+    private addItemsToCartService : AddItemsToCartService
   ){
     this.router.events.subscribe((event: Event) => {
       let currentUrl = this.route.snapshot.paramMap.get('id');
@@ -786,27 +788,26 @@ featureCount=5;
             price : product.priceList[0].price,
             erpPrice:product.priceList[0].ERPPrice,
             discountRate:product.priceList[0].discountRate,
-            priceType:product.priceList[0].priceType,
+            priceType: (this.selectedOption === 'default') ? 'Monthly' : 'Yearly',
           };
-        // }
-      /*if(loggedinData.length > 0 ){
-        
-        var existingItems = this.cartStore.getCartItems();
-      
-        
-        
-        this.router.navigate(['/cart'], {queryParams: queryParams});
-      }
-  
-      else {
-        this.viewModal(queryParams);
-      }*/
-  
+
+        if(this.selectedOption === 'default'){
+          queryParams.price = (queryParams.price/12).toFixed(2);
+        }
+        else{
+          queryParams.price = (Number(queryParams.price)).toFixed(2);
+        }
+
       this.userAccountStore.userDetails$.subscribe(res=>{
        
         if(res && res.email !== null){
-          this.router.navigate(['/cart'], {queryParams: queryParams});
-          //this.router.navigate(['/admin-pages/accounts']);
+
+          //console.log("_)(*&& Cart Item ", queryParams);
+          this.addItemsToCartService.addItemsToCart(queryParams);
+          //this.router.navigate(['/cart'], {queryParams: queryParams});
+
+
+          
         }
         else{
           this.viewModal(queryParams);
@@ -814,16 +815,6 @@ featureCount=5;
       })
       
     }
-
-    
-   
-
-    
-
-
-    
-
-
 
 
   }
@@ -1055,6 +1046,8 @@ featureCount=5;
     this.viewModal2(null);
   }
  
+
+
   ngOnDestroy(){
     this.subscriptions.forEach(element => {
         element.unsubscribe();

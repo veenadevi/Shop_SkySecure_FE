@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
 
 @Component({
   selector: 'app-product-variant-modal',
@@ -14,7 +15,8 @@ export class ProductVariantModalComponent {
   public requiredAddOnsList : any[] = [];
   constructor(
     public activeModal: NgbActiveModal,
-    private router : Router
+    private router : Router,
+    private addItemsToCartService : AddItemsToCartService
     ) { }
 
   public ngOnInit() : void {
@@ -79,7 +81,8 @@ export class ProductVariantModalComponent {
     }
 
     this.activeModal.close();
-    this.router.navigate(['/cart'], {queryParams: queryParams});
+    this.addItemsToCartService.addItemsToCart(queryParams);
+    //this.router.navigate(['/cart'], {queryParams: queryParams});
 
   }
 

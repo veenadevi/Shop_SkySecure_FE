@@ -1,0 +1,51 @@
+<div class="selected-products-header">Selected Products</div>
+
+<!-- Products Table-->
+
+<form [formGroup]="productListForm">
+    <table class="table">
+      <thead>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Tax</th>
+        <th>Total</th>
+        <th></th>
+        
+      </thead>
+      <tbody formArrayName="items" *ngFor="let group of getFormData.controls; let i=index">
+        <tr [formGroupName]="i">
+          <td class="form-group">
+            <input type="text" class="form-control" formControlName="name" placeholder="name">
+            <span class="text-danger" *ngIf="group.get('name').touched && group.get('name').invalid">Name is required</span>
+          </td>
+          <td class="form-group">
+            <input type="text" class="form-control" formControlName="quantity" placeholder="quantity">
+            <span class="text-danger" *ngIf="group.get('quantity').touched && group.get('quantity')?.hasError('required')">Quantity required</span>
+          </td>
+          <td class="form-group">
+            <input type="text" class="form-control" formControlName="bcy_rate" placeholder="bcy_rate">
+            <span class="text-danger" *ngIf="group.get('bcy_rate').touched && group.get('bcy_rate')?.hasError('required')">Amount required</span>
+          </td>
+          <td class="form-group">
+            <input type="text" class="form-control" formControlName="tax_name" placeholder="tax_name">
+            <span class="text-danger" *ngIf="group.get('tax_name').touched && group.get('tax_name')?.hasError('required')">Tax Name required</span>
+          </td>
+          <td class="form-group">
+            <input type="text" class="form-control" formControlName="item_total" placeholder="item_total">
+            <span class="text-danger" *ngIf="group.get('item_total').touched && group.get('item_total')?.hasError('required')">Total required</span>
+          </td>
+          
+          <td>
+            <button (click)="remove(i)" class="btn secondary-btn btn-color">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</form>
+
+<div class="add-new-btn">
+    <button (click)="addUser()" class="btn primary-btn">Add new</button>
+</div>
+
+<!-- <button (click)="save()" [disabled]="productListForm.invalid" class="btn btn-primary">Save</button> -->
