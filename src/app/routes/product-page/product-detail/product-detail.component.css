@@ -1930,7 +1930,7 @@ button{
   width: 100%;
 }
 .tick {
-  height: 20px;
+  /* height: 20px; */
 }
 .feature-card {
   display: flex;
@@ -2377,7 +2377,7 @@ h5 {
   flex-direction: column;
 }
 .tick {
-  height: 15px;
+  /* height: 15px; */
 }
 .feature-card-content {
   display: flex;
@@ -2944,7 +2944,7 @@ h5 {
   flex-direction: column;
 }
 .tick {
-  height: 15px;
+  /* height: 15px; */
 }
 .feature-card-content {
   display: flex;
@@ -3512,7 +3512,7 @@ h5 {
   flex-direction: column;
 }
 .tick {
-  height: 15px;
+  /* height: 15px; */
 }
 .feature-card-content {
   display: flex;
@@ -4042,7 +4042,7 @@ h5 {
     flex-direction: column;
   }
   .tick {
-    height: 15px;
+    /* height: 15px; */
   }
   .feature-card-content {
     display: flex;

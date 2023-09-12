@@ -106,14 +106,14 @@
                             <div class="tick-container"   *ngFor="let features of item.properties['includedProducts']">
     
                                     <div class="tick-symbol">
-                                        <img src="../../../../assets/icons/ProductTickIcon.svg">
+                                        <img src="../../../../assets/icons/SecondaryTickIcon.svg">
                                     </div>
                                     <span class="feature-text-left-align pointer-style " (click)="navigateToProductDetails(features)">{{features.name}}</span>
                                 </div>   
                                 <div class="tick-container"   *ngFor="let features of item.properties[rowData.header]">
     
                                     <div class="tick-symbol">
-                                        <img src="../../../../assets/icons/VioletTickIcon.svg">
+                                        <img src="../../../../assets/icons/PrimaryTickIcon.svg">
                                     </div>
                                     <span class="feature-text-left-align pointer-style" (click)="openLink(features.hyperLinkURL)">{{features.name}}</span>
                                 </div>     
@@ -135,7 +135,7 @@
                             <div class="tick-container"   *ngFor="let prdItem of item.properties[rowData.header]">
 
                                 <div class="tick-symbol">
-                                    <img src="../../../../assets/icons/ProductTickIcon.svg">
+                                    <img src="../../../../assets/icons/SecondaryTickIcon.svg">
                                     <!-- - -->
                                 </div>
                                 <span class="feature-text-left-align pointer-style" (click)="navigateToProductDetails(prdItem)">{{prdItem.name}}</span>
