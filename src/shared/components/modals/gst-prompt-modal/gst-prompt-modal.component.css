@@ -493,5 +493,42 @@ input[type="zip"]::-webkit-outer-spin-button {
 .error{
     color: red;
     text-align: center;
+    /* padding: 20px; */
+}
+.condition{
+    cursor: pointer;
+    color: blue;
+}
+.privacy{
     padding: 20px;
+    font-size: 15px;
+}
+li{
+    padding-bottom: 10px;
+}
+button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.accept{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+}
+.accept-decline{
+    display: flex;
+}
+.header{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+h2{
+    text-align: center;
+}
+.label{
+    padding-top: 1px;
 }
