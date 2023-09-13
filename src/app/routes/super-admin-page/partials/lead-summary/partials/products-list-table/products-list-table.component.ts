@@ -12,9 +12,14 @@ export class ProductsListTableComponent implements OnInit{
   @Input('productsData')
   public productsData : any;
 
+ public isEstimate :Boolean
+
+
+  public fullCartListData : any;
 
   userForm: FormGroup;
   public productListForm : FormGroup;
+  public cartList : FormGroup;
   employee = [
     {
       name: 'tuna',
@@ -56,6 +61,11 @@ export class ProductsListTableComponent implements OnInit{
   }
 
   getEmployee() {
+
+  
+    if(this.productsData.line_items){
+      this.isEstimate=true
+      console.log("passed estimate  details====",this.productsData)
     const control = <FormArray>this.productListForm.get('items');
     for (const items of this.productsData.line_items) {
      /* const grp = this.fb.group({
@@ -73,6 +83,27 @@ export class ProductsListTableComponent implements OnInit{
       });
       control.push(grp);
     }
+  }
+  else{
+    this.isEstimate=false
+
+   this.fullCartListData=this.productsData.CartDetails
+    console.log("passed cart details====",this.productsData)
+    //const cartDetailsControl = <FormArray>this.productListForm.get('items');
+  }
+    // for (const items of this.cartDetailsData.line_items) {
+    
+    //    const grp = this.fb.group({
+    //      name: [items.productName, Validators.required],
+    //      quantity: [items.quantity, [Validators.required]],
+    //      bcy_rate: [items.bcy_rate, [Validators.min(10)]],
+    //      tax_name: [items.tax_name, Validators.required],
+    //      item_total: [items.item_total, Validators.required],
+    //    });
+    //    control.push(grp);
+    //  }
+
+
   }
 
   initiatForm(): FormGroup {

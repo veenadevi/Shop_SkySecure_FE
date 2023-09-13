@@ -103,6 +103,7 @@ export class AccountListComponent implements OnInit{
       account : acc,
 
     }
+    console.log("navigate to detaisl page===",account)
 
     this.router.navigate(['admin-pages/lead-summary'], {queryParams: queryParams});
 

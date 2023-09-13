@@ -17,6 +17,7 @@ export class AmAccountsListComponent {
 
   public info : any;
   public myEmail:string;
+  public userId:string;
 
 
   public sampleData = {
@@ -281,6 +282,7 @@ export class AmAccountsListComponent {
     //this.myEmail=userAccountdetails.email
     //hard coded to komal for testimng
     this.myEmail="komal.verma@skysecuretech.com"
+    this.userId=userAccountdetails._id
     this.getMyAssignedAccounts();
     
 
@@ -288,9 +290,9 @@ export class AmAccountsListComponent {
 
   public getMyAssignedAccounts(){
     this.subscriptions.push(
-      this.adminPageService.getMyAssignedAccounts(this.myEmail).subscribe( response => {
-        this.accountData = response.accounts.data;
-        this.info = response.accounts.info;
+      this.adminPageService.getMyAssignedAccounts(this.userId).subscribe( response => {
+        this.accountData = response;
+       // this.info = response.accounts.info;
 
       })
     )

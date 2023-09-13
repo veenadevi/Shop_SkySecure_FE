@@ -36,7 +36,7 @@
         "getQuoteHistory" : "api/user/getQuoteHistory",
         "getAllDashBoardData" : "api/user/allDashBoardData",
         "getAllAccounts" : "api/user/allAccounts",
-        "getMyAssignedAccounts" : "api/user/getMyAccounts",
+        "getMyAssignedAccounts" : "api/admin/getMyMarketplaceAccountList",
         "getAccountsById" : "api/user/getAccountDetails",
         "userGstUpdate" : "api/user/user-gst-update",
         
@@ -69,7 +69,7 @@
         
         "getAllCRMUsers" : "api/admin/getAllCRMusers",
         "assignAccountOwner" :  "api/admin/assignAccountOwner",
-        "getMarketplaceAccountDetailsById" : "api/admin/getMarketplaceAccountDetailsById",
+        "getMarketplaceAccountDetailsById" : "api/getMarketplaceAccountDetailsById",
         "getAllMarketPlaceAccountListURL":"api/admin/getAllMarketPlaceAccountList",
         "getMyMarketPlaceAccountListURL":"api/admin/getMyMarketplaceAccountList"
 
