@@ -358,9 +358,9 @@ export class EditProductComponent  implements OnInit {
   editProduct(): any {
   //  this.submitted = true;
 
-  console.log("+_)(*&^%%$$ ", this.selectedProductId1);
+  
 
-    /*if (!this.registrationForm.valid) {
+    if (!this.registrationForm.valid) {
    
    
       return false;
@@ -403,7 +403,7 @@ export class EditProductComponent  implements OnInit {
         this.showMsg=true
       })
          this.registrationForm.reset();
-    }*/
+    }
   }
 
   removeFeature(data: any) {
