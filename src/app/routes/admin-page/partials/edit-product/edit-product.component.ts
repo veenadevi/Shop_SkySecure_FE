@@ -68,6 +68,7 @@ export class EditProductComponent  implements OnInit {
   selectedItemId: String;
   defaultDiscount: number;
   selectedProductId : any;
+  selectedProductId1 : any[] = [];
   showMsg: boolean = false;
 
   constructor(
@@ -333,6 +334,12 @@ export class EditProductComponent  implements OnInit {
     
   }
 
+  selectSimilarProduct(event: any) {
+
+    console.log("++++++++ ______ ", event.value);
+    
+  }
+
   //############### Add Dynamic Elements ###############/
   get addDynamicElement() {
     return this.registrationForm.get('addDynamicElementNew') as FormArray
@@ -351,7 +358,9 @@ export class EditProductComponent  implements OnInit {
   editProduct(): any {
   //  this.submitted = true;
 
-    if (!this.registrationForm.valid) {
+  console.log("+_)(*&^%%$$ ", this.selectedProductId1);
+
+    /*if (!this.registrationForm.valid) {
    
    
       return false;
@@ -394,7 +403,7 @@ export class EditProductComponent  implements OnInit {
         this.showMsg=true
       })
          this.registrationForm.reset();
-    }
+    }*/
   }
 
   removeFeature(data: any) {

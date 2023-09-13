@@ -389,6 +389,31 @@
                     </div>
                     <!-- </div> -->
 
+                    <div class="similar-products">
+                        
+                        <!-- <p-multiSelect 
+                            [options]="cities" 
+                            [(ngModel)]="selectedCities1" 
+                            defaultLabel="Select a City" 
+                            optionLabel="name">
+                        </p-multiSelect> -->
+
+                        <p-multiSelect 
+                            [options]="products" 
+                            [(ngModel)]="selectedProductId1" 
+                            defaultLabel="Select Products" 
+                            (onChange)="selectSimilarProduct($event)"
+                            optionLabel="name">
+                            <ng-template let-products pTemplate="item">
+                                <div class="country-item">
+                                    <div>{{products.name}}</div>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+
+
+                    </div>
+
 
                     <div class="section-06">
                       
