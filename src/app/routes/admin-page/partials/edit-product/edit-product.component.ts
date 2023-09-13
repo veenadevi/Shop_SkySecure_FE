@@ -104,11 +104,11 @@ export class EditProductComponent  implements OnInit {
       updatedAt:[''],
       addDynamicElementNew: this.fb.group({
         // Nested form controls for dynamic elements
-       feature: this.fb.array([])
+       feature: this.fb.array([0])
       }),
       addFAQArrayNew: this.fb.group({
         // Nested form controls for dynamic elements
-       faq: this.fb.array([])
+       faq: this.fb.array([0])
       })
     })
     
