@@ -30,11 +30,21 @@
 .tab-holder{
     width:100%
 }
-.ad-on-container {
+
+.ad-on-containe-invisible {
     width:29%;
+}
+.ad-on-container {
+    /* width:29%;
     height: 30em;
     display: flex;
-    background: var(--white);
+    background: var(--white); */
+
+    width: 100%;
+    position: fixed;
+    width: 28%;
+    top: 107px;
+    right: 27px;
 }
 
 .inner-container{
@@ -212,3 +222,6 @@
   .fab-toggler {
     z-index: 100;
   }
+
+
+
