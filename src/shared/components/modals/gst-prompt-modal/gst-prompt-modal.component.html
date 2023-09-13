@@ -1,4 +1,6 @@
+
 <div class="modal-container">
+  <ng-container *ngIf="!showPrivacyContent">
   <div class="modal-header">
     <div class="modal-top">
       <h4>Business Details</h4>
@@ -70,12 +72,14 @@
                 <!-- <label for="gst-no">GST Number</label> -->
                 <input formControlName="gstNo" type="text" class="form-control " name="gstNo" id="gst-no"
                   placeholder="Enter your GST NO" >
+                 
                   {{disableGstNOField()}}
               </div>
               <p class="or ">(Or)</p>
               <div class="col-sm-12">
                 <input type="checkbox" formControlName="checkGstNil" class="form-check d-inline" id="chb"  >
                 <div for="chb" class="form-check-label" >&nbsp;I Don't Have Company GST Number.
+                  
                   {{disableCheckGstNil()}}
                 </div>
               </div>
@@ -286,6 +290,7 @@
  
     <div *ngIf="errorMessage">
       <p class="error">* Please choose one option: Enter a Company GST number or select the I don't have Company GST number checkbox</p>
+      {{disableAnyOneMessage()}}
     </div>
 
 
@@ -512,14 +517,17 @@
 
 
           <div class="col-sm-12">
-            <input type="checkbox" formControlName="CheckTerms"  class="form-check d-inline" id="chb" required>
-            <div for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
+            <input type="checkbox" formControlName="checkTerms"  class="form-check d-inline" id="chb" required>
+            <div for="chb" class="form-check-label">&nbsp;I accept all <span class="condition"  (click)="onTermsClick()"> terms and conditions.</span>
+            {{disableErrorMessage()}}
             </div>
           </div>
 
-          <div *ngIf="submitErrorMessage">
-            <p class="error">* Please accept the terms and conditions to continue</p>
-          </div>
+   
+        <div *ngIf="submitErrorMessage">
+          <p class="error">* Please accept the  and conditions to continue</p>
+        </div>
+
           <div class="modal-footer">
             <button class="btn secondary-btn"  (click)="onBackClick()">Back</button>
             <ng-container >
@@ -530,4 +538,75 @@
       </form>
     </div>
   </div>
+</ng-container>
+
+<div *ngIf="showPrivacyContent" class="privacy">
+  <div class="header">
+    <h2>Terms  And Conditions</h2>
+  </div>
+  <div class="privacy-cont">
+    
+      <ol>
+        <li> Buyer shall mean the person/entity, who accepts/acknowledges these Terms with SKYSECURE TECHNOLOGIES Limited, the Seller. 
+        </li>
+        <li>  Cloud Services shall mean Cloud Software as a Service (SaaS), Cloud Platform as a Service (PaaS) and Cloud Infrastructure as a Service (IaaS) as subscribed by the Buyer as the case may be, invoiced by the Seller and governed by these terms. </li>
+        <li> The terms here in are the binding Contract between Seller and the Buyer and all orders placed by the Buyer with Seller shall be subject to the terms and conditions herein below. These terms shall prevail over all previous, contemporary communications exchanged between the parties, whether or not in writing including the terms and conditions of invoices under which the Cloud Services were sold to the Buyer prior to the date hereof or Buyers Purchase order terms. The Buyer shall not be entitled to vary, amend, add, or alter any of these conditions. </li>
+        <li>Every invoice shall be a binding contract between the Seller and Buyer on principal dealing with principal basis and shall be deemed conclusive on acceptance of the Cloud Services by/on behalf of the Buyer. The Buyer shall not in any event be deemed or construed to be an agent, contractor or representative of the Seller. This Contract shall be in addition to the terms of Dealership Registration Form/ Dealership Registration Agreement and other specific terms of respective Cloud Service Provider as published on the Sellers website/cloud portal. 
+        </li>
+        <li>Buyer shall ensure that Buyer and its customers comply with all anti-corruption laws including but not limited to FCPA, UK Bribery Act, Prevention of Corruption Act or any other country specific laws as applicable. </li>
+        <li>Buyer shall be responsible for payment of GST and all other duties/taxes as applicable to the sale. If at any time before or after receipt of Cloud Services by the Buyer, any duty / tariff / tax or charge of whatsoever nature is imposed / increased by the Government of India or the State Government or any other Statutory Authority with retrospective effect, then the Buyer shall be liable to reimburse the Seller the difference in the tax to the extent of such increase in respect of the supplies made prior to such change to the extent of the new imposition or increase thereof. </li>
+        <li>The contract is subject to force majeure events which includes but is not limited to Act of God, fire, flood, war, public disaster, strike, governmental enactment, rule or regulation or any other cause beyond the Sellers control. Seller shall not be liable for delay in providing Cloud Services on account of such force majeure events. The Buyer shall not be entitled for any compensation, damages, loss under any circumstances even if the Seller is advised of such possibility earlier, whether or not the time is the essence of the contract. </li>
+        <li>The Buyer shall provide necessary certificates against all statutory deductions made out of the payments paid to Seller, within ninety (90) days before the end of the quarter failing which Seller shall have the legal right to raise separate invoice on the Buyer against the amount so deducted. Any amount deducted shall be the liability of the Buyer. 
+        </li>
+        <li> No dispute regarding the quantum of the Cloud Services can be raised without written notice to Seller within five (5) days of this invoice. In respect of any such dispute relating to the quantum of the Cloud Services, the Buyer agrees to first make payment in full before raising such claim. 
+        </li>
+        <li> All payments for the Cloud Services shall be made by the Buyer at the Sellers Registered Office at SPL Guindy House, 95 - Mount Road, Guindy, Chennai - 600 032 or existing Corporate Office. All payments made by cheques are subject to realization and if made by electronic mode (NACH etc.) payment would be subject to receipt of fund in Sellers account. Buyer irrevocably undertakes not to hold payments due to the Seller on account of dispute between the Buyer and the Cloud Service Provider or a third party for whatever reason. Buyer shall pay interest @ 24% per annum, or the maximum interest allowed under applicable laws for payment made beyond the due date until the date of realization with the applicable taxes and penalties. 
+        </li>
+        <li>All bank charges in respect of the payment (including collection or cheque bouncing charges, return charges pursuant to dishonour of standing instructions) and stamp duty on bills of exchange, hundies wherever applicable shall be paid by the Buyer under this invoice with GST as applicable to the account of the Buyer. The Seller shall not be liable for any loss or theft of bank drafts, cheques etc. in transit. 
+        </li>
+        <li> Any notice or other documents shall be deemed to be validly served on the Buyer if sent by ordinary post/reputed courier to the known address of the Buyer or to the registered email address of the Buyer. 
+        </li>
+        <li> All and any dispute arising out of all or any terms of this Contract between the Parties herein shall be resolved through Arbitration. Either of the Parties may notify the dispute to the other party, enabling them to find an amicable settlement of the dispute within thirty (30) days of such notification. In the event if no amicable settlement is arrived within thirty (30) days as stated supra, either of the parties shall refer the dispute to Arbitration. M/s Redington (India) Ltd, shall immediately appoint a Sole Arbitrator within one (1) month of such reference of dispute to Arbitration. Buyer explicitly agrees and waives off any right to question the appointment of Arbitrator as above. Such proceedings shall be conducted in English language only and in accordance with the provisions of The Arbitration and Conciliation Act, 1996, as amended. The finding of the Sole Arbitrator shall be final and be binding on all the parties. The Venue will be as fixed by the Sole Arbitrator and the same will be binding on the parties. The Seat for the Arbitration shall be exclusively at Chennai. The governing laws shall be Indian laws and the parties explicitly agree that all or any legal proceedings in connection with the Arbitration proceedings shall be subject to the exclusive Jurisdiction of Courts in Chennai alone. The Seller shall also have the right to initiate the appropriate civil/criminal proceedings including complaint u/s 138 of NI Act, as applicable. 
+        </li>
+        <li>It is acknowledged and confirmed that the Seller has the right to transfer or assign any of its rights arising out of these terms of contract/ invoice including without limitation the right to transfer or assign the receivables to any third party, without having to secure any separate consent from the Buyer. 
+        </li>
+        <li> Buyer acknowledges that this is a contract for supply/fulfillment of Cloud Services and the Cloud Services so provided under these presents are being made available #AS IS# provided by the Cloud Service Provider or their respective Suppliers. Seller does not make any representation towards warranty or functionality or quality or fitness for particular purpose in respect of the Cloud Services made available hereunder. All claims in relation to the Cloud Services shall be addressed only to the Cloud Service Provider. 
+        </li>
+        <li> The Buyer explicitly agrees not to hold the Seller responsible and liable for quantum, quality, functionality or defect in the Cloud Services provided hereunder including intellectual property infringement claims such as patent, copyright and trademark infringement claims from the Buyer or a third party. Buyer undertakes not to use the patents, trademarks or trade names of Seller or the Cloud Service Providers without the prior written consent of the Seller. 
+        </li>
+        <li>Buyer shall ensure compliance of all applicable local laws relating to its business as well as other applicable foreign laws including the respective Cloud Service Provider terms in respect of the Cloud Services availed by the Buyer. Buyer shall also ensure that the Buyers customers / end users comply with the above requirement. It is the responsibility of the Buyer to ascertain respective Cloud Service Provider terms on its/their own for the purpose of compliance and shall inform their customers / end users of this requirement. Seller shall in no event be liable for an act of ignorance of applicable law by the Buyer or its customers. 
+        </li>
+        <li>Buyer hereby undertakes to comply with any import, re-import, export and re-export control laws or regulations that are applicable to Cloud Services and shall not under any circumstances, use, sell or cause to be sold through any third party, the Cloud Services for use in connection with chemical, biological, nuclear weapons, mass destructive or in unauthorized applications or in a facility engaged in such activities, within or outside India and to customers who are prevented from receiving the Cloud Services under any laws including U.S export regulations. The Buyer would also ensure that the Buyers customers are kept fully informed of all such compliance requirements and make all efforts to ensure that the customers adhere to all the compliance requirements. 
+        </li>
+        <li>Seller shall not be responsible for any wrong/misrepresentation made by the Buyer in respect of the Cloud Services. The total cumulative liability of the Seller to Buyer, its customers or to any third party under any circumstances shall not exceed the amount of the particular invoice giving rise to such claim. Seller shall not be liable for any direct, indirect, special or consequential damages even if advised of such possibilities earlier. 
+        </li>
+      </ol>
+ 
+  </div>
+
+
+  <div class="accept">
+    <div class="accept-decline">
+      <input type="checkbox"  class="form-check d-inline" id="chb" [(ngModel)]="isChecked1" (change)="checkboxChanged(1)">
+      <div for="chb" class="label">&nbsp;Accept
+      </div>
+    </div>
+
+    <div class="accept-decline">
+      <input type="checkbox"  class="form-check d-inline" id="chb" [(ngModel)]="isChecked2" (change)="checkboxChanged(2)">
+      <div for="chb" class="label">&nbsp;Decline
+      </div>
+    </div>
+  </div>
+ 
+  <div class="modal-footer">
+    <button class="btn secondary-btn"  (click)="onPreviousClick()">Next</button>
+  
+  </div>
+  
+
+</div>
+
+
+
 </div>
