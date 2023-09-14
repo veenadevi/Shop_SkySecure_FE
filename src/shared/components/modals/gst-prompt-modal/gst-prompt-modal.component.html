@@ -519,6 +519,7 @@
           <div class="col-sm-12">
        
             <input type="checkbox" formControlName="checkTerms"  class="form-check d-inline" id="chb" required>
+            {{disableCheckTerms()}}
             <div for="chb" class="form-check-label">&nbsp;I accept all <span class="condition"  (click)="onTermsClick()"> T&C.</span>
             {{disableErrorMessage()}}
             </div>
