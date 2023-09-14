@@ -626,6 +626,21 @@ this.errorMessage = true;
       this.isChecked1 = false; 
       
     }
+
+    this.showPrivacyContent = false;
+
+    if(this.isChecked2 === true){
+      this.myForm.patchValue({
+        checkTerms:false
+      })
+    }
+    if(this.isChecked1 === true){
+      this.myForm.patchValue({
+        checkTerms:true
+      })
+    }
+    
+    this.myForm.enable();
   }
 
   disableCheckTerms(){
