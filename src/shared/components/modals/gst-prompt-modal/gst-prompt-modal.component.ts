@@ -46,7 +46,7 @@ export class GstPromptModalComponent implements OnInit{
   public selectedType : any = 'self';
   myForm: FormGroup;
 
- checkTerms :boolean= false;
+
   isChecked: boolean = false;
   nrSelect : any;
 
@@ -627,11 +627,17 @@ this.errorMessage = true;
       
     }
   }
+  checkTerms :boolean= false;
 
   disableCheckTerms(){
     
-    if(this.isChecked2 )
-      this.checkTerms = true;
+    if(this.isChecked2 === false && this.isChecked1 === false  )
+    {
+      this.myForm.get('checkTerms').disable();
+    }
+   
+    else
+    this.myForm.get('checkTerms').enable();
   }
 
   disableErrorMessage(){
