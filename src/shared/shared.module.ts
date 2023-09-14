@@ -45,7 +45,7 @@ import { AssignLeadsModalComponent } from './components/modals/assign-leads-moda
 import { DateFormatPipe } from './pipes/dateFormat';
 // import { TermsConditionModalComponent } from './models/terms-condition-modal/terms-condition-modal.component';
 import { TermsConditionModalComponent } from './components/modals/terms-condition-modal/terms-condition-modal.component';
-
+import { SuggestedCompareCardFlyerComponent } from './components/suggested-compare-card-flyer/suggested-compare-card-flyer.component';
 
 
 
@@ -99,7 +99,8 @@ import { TermsConditionModalComponent } from './components/modals/terms-conditio
     BundleMindmapComponent,
     GstPromptModalComponent,
     AssignLeadsModalComponent,
-    TermsConditionModalComponent,
+    // TermsConditionModalComponent,
+    SuggestedCompareCardFlyerComponent
    
   ],
 
@@ -151,7 +152,8 @@ import { TermsConditionModalComponent } from './components/modals/terms-conditio
     CompareProductsTrendingProductsComponent,
     CompareProductsSearchListComponent,
     BundleMindmapComponent,
-    GstPromptModalComponent
+    GstPromptModalComponent,
+    SuggestedCompareCardFlyerComponent,
    
   ],
   

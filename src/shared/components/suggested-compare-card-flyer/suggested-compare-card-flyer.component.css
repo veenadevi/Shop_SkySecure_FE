@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+}
+
+.card-container{
+    border : 1px solid #d9d9d9;
+    border-radius: 8px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    column-gap: 1em;
+    
+    /* justify-content: center; */
+}
+
+.empty-padding{
+    padding: 10px 30px 10px 30px;
+}
+
+.product-padding{
+    padding: 10px 10px 10px 10px;
+}
+
+
+
+.logo-background{
+    background: var(--white);
+    border: 1px solid #BEBEBE;
+    border-radius: 8px;
+}
+
+.content-holder{
+    display: flex;
+    align-items: center;
+}
+
+.logo-holder {
+    width:30%;
+}
+
+.img-holder{
+    text-align: center;
+    height: 60%;
+}
+
+.img-holder img{
+    width:100%
+}
+
+.default-plan-price {
+    display: flex;
+}
+
+.plan-price {
+    display: flex;
+    border-radius: 8px;
+    padding: 1%;
+    margin: 1% 4%;
+    flex-direction: row;
+    border-radius: 8px;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.plan-price-image {
+    display: flex;
+    align-items: center;
+    flex-basis: 15%;
+    padding: 1%;
+    margin: 1%;
+    flex-direction: column;
+}
+
+.plan-price-info {
+    display: flex;
+    flex-basis: 75%;
+    padding: 1%;
+    margin: 1%;
+    justify-content: center;
+    align-items: baseline;
+    flex-direction: column;
+}
+
+.img-style{
+    width:100%;
+    /* height: 50%; */
+    object-fit: cover;
+}
+
+.close-icon{
+    /* position: absolute;
+    background: red;
+    color: white;
+    top: -10px;
+    right: -10px; */
+}
+
+.close-icon .btn-close{
+    /* position: absolute; */
+    font-size: 12px;
+}
