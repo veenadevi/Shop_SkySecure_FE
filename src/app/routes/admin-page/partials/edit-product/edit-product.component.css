@@ -100,22 +100,23 @@ label {
 }
 
 .skuno {
-    width: 33%;
+    width: 25%;
     padding: 20px;
 }
 
 .skuid {
-    width: 60%;
+    width: 25%;
     padding: 20px;
 }
 
 .custom-select-03 {
-    width: 52%;
+    width: 100%;
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid black;
     border-radius: 8px;
 }
+
 
 .section-04 {
     display: flex;
@@ -126,13 +127,22 @@ label {
     margin-left: 10px;
 }
 
+.header-year{
+    display: flex;
+    margin-left: 30px;
+    margin-bottom: -25px;
+}
+h4{
+    font-size: 20px;
+    font-weight: bold;
+}
 .orderno {
     width: 33%;
     padding: 20px;
 }
 
 .price {
-    width: 35%;
+    width: 25%;
     padding: 20px;
 }
 
@@ -316,6 +326,9 @@ label {
     margin-left: 35%;
     margin-top: 20px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .submit {
     width: 100%;
@@ -341,4 +354,15 @@ label {
 
 :host ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item{
     text-align: left !important;
+}
+.p-dropdown .p-dropdown-label.p-placeholder {
+    color: #6c757d;
+    display: flex;
+}
+.variant-product-01 {
+    padding: 20px;
+    padding-left: 30px;
+    display: flex;
+    width: 100%;
+
 }

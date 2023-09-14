@@ -17,6 +17,7 @@ import { CartStore } from 'src/shared/stores/cart.store';
 })
 export class GstPromptModalComponent implements OnInit{
   showContent: boolean = false;
+  showPrivacyContent: boolean = false;
   showButton: boolean=true;
  
 
@@ -45,7 +46,7 @@ export class GstPromptModalComponent implements OnInit{
   public selectedType : any = 'self';
   myForm: FormGroup;
 
- 
+ checkTerms :boolean= false;
   isChecked: boolean = false;
   nrSelect : any;
 
@@ -115,7 +116,7 @@ export class GstPromptModalComponent implements OnInit{
         phoneNo : [],
         firstName : [],
         email : [],
-       checkTerms : [null]
+       checkTerms : [true]
       }
     )
   }
@@ -257,16 +258,15 @@ public submitErrorMessage: boolean =false;
   public createQuotationService(){
     if((this.myForm.get('checkTerms').value === null || this.myForm.get('checkTerms').value === false))
    {
-this.submitErrorMessage = true;
+    this.submitErrorMessage = true;
+    console.log("_____++++ Error Messgae");
   }
-  else{
-    this.submitErrorMessage = false;
-
+  else
+  {
+    console.log("_____++++ Error False");
+    this.submitErrorMessage = false
+   
     let userDetails = this.userAccountStore.getUserDetails();
-
-
-
-    
 
     let req = this.request;
     //let formVal = this.form.value; 
@@ -507,6 +507,12 @@ this.submitErrorMessage = true;
       })
     )
   }
+
+  public onTermsClick(){
+    this.showPrivacyContent = !this.showPrivacyContent;
+  }
+
+
 public errorMessage: boolean = false;
 
 
@@ -591,6 +597,52 @@ this.errorMessage = true;
   public onCancelClick(){
     this.activeModal.close();
   }
+  public onPreviousClick(){
+    //this.showContent = false ;
+    this.showPrivacyContent = false;
+
+    if(this.isChecked2 === true){
+      this.myForm.patchValue({
+        checkTerms:false
+      })
+    }
+    if(this.isChecked1 === true){
+      this.myForm.patchValue({
+        checkTerms:true
+      })
+    }
+    
+    this.myForm.enable();
+  }
 
 
+  isChecked1: boolean = false;
+  isChecked2: boolean = false;
+
+  checkboxChanged(checkboxNumber: number) {
+    if (checkboxNumber === 1) {
+      this.isChecked2 = false; // Uncheck Checkbox 2 when Checkbox 1 changes
+    } else if (checkboxNumber === 2) {
+      this.isChecked1 = false; 
+      
+    }
+  }
+
+  disableCheckTerms(){
+    
+    if(this.isChecked2 )
+      this.checkTerms = true;
+  }
+
+  disableErrorMessage(){
+    if(this.myForm.get('checkTerms').value === true){
+      this.submitErrorMessage=false;
+    }
+  }
+  disableAnyOneMessage(){
+    if((this.myForm.get('checkGstNil').value === null || this.myForm.get('gstNo').value === true)
+   || (this.myForm.get('gstNo').value === null || this.myForm.get('checkGstNil').value === true)){
+      this.errorMessage=false;
+    }
+  }
 }

@@ -493,5 +493,61 @@ input[type="zip"]::-webkit-outer-spin-button {
 .error{
     color: red;
     text-align: center;
-    padding: 20px;
+    /* padding: 20px; */
 }
+.condition{
+    cursor: pointer;
+    color: blue;
+}
+.privacy{
+    padding: 20px;
+    font-size: 15px;
+}
+li{
+    padding-bottom: 10px;
+}
+button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.accept{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+}
+.accept-decline{
+    display: flex;
+}
+.header{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+h2{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.label{
+    padding-top: 1px;
+}
+.privacy-cont{
+    height: auto;
+    max-height: 425px;
+    overflow: auto;
+    padding: 10px;
+    scrollbar-width: thin;
+}
+
+  .privacy-cont::-webkit-scrollbar {
+    width: 2px; /* Adjust the width of the scrollbar */
+   
+  }
+  .privacy-cont::-webkit-scrollbar-thumb {
+    background-color: #888; /* Adjust the color of the scrollbar thumb */
+    height: 150px;
+  }

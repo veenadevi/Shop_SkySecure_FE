@@ -24,6 +24,7 @@ interface CreateProductPayload {
   productSkuId: String,
   featureList: Array<any>,
   productFAQ: Array<any>,
+  productApp:Array<any>,
   isVariant: Boolean,
   productId: String
 }
@@ -52,6 +53,7 @@ export class AddNewProductComponent  implements OnInit {
   registrationForm: FormGroup;
   addDynamicElementNew: FormArray;
   addFAQArrayNew: FormArray;
+  addAppArrayNew:FormArray;
   defaultDiscount:number;
   showMsg: boolean = false;
 
@@ -91,10 +93,17 @@ export class AddNewProductComponent  implements OnInit {
         faq: this.fb.array([
           this.createFAQGroup()
         ])
+      }),
+      addAppArrayNew: this.fb.group({
+        // Nested form controls for dynamic elements
+        app: this.fb.array([
+          this.createAppGroup()
+        ])
       })
     })
     this.addDynamicElementNew = this.registrationForm.get('addDynamicElementNew') as FormArray;
     this.addFAQArrayNew = this.registrationForm.get('addFAQArrayNew') as FormArray;
+    this.addAppArrayNew = this.registrationForm.get('addAppArrayNew') as FormArray;
     this.defaultDiscount=18;
   }
   // ngOnInit(): void {
@@ -125,6 +134,12 @@ export class AddNewProductComponent  implements OnInit {
     return this.fb.group({
       Question: '',
       Answer: ''
+    });
+  }
+  createAppGroup(): FormGroup {
+    return this.fb.group({
+      AppName: '',
+      File: ''
     });
   }
 
@@ -279,6 +294,10 @@ export class AddNewProductComponent  implements OnInit {
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
     faqArray.push(this.createFAQGroup());
   }
+  addNewApp() {
+    const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
+    appArray.push(this.createAppGroup());
+  }
   onSubmit(): any {
     this.submitted = true;
   }
@@ -315,6 +334,8 @@ export class AddNewProductComponent  implements OnInit {
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
         productFAQ: productData.addFAQArrayNew.faq,
+        productApp:productData.addAppArrayNew.app,
+
         bannerLogo: this.productLogo,
         createdBy: 'ADMIN',
         updatedBy: 'ADMIN'
@@ -346,6 +367,13 @@ export class AddNewProductComponent  implements OnInit {
   
   }
 
+  removeApp(data: any) {
+    const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
+    if(data>0){
+    appArray.removeAt(data);
+    }
+  
+  }
   onRadioChange(event) {
     this.registrationForm.get('isVariant').setValue(event.target.value, {
       onlySelf: true

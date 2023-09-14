@@ -1,8 +1,9 @@
 .selected-products-header {
     /* margin-left: 2rem; */
-    font-size: 18px;
+    font-size: 15px;
     color: #7A7979;
     padding: 0.8rem;
+    font-weight: 700;
 }
 
 thead th{
@@ -10,16 +11,19 @@ thead th{
     padding: 1rem 1rem;
     border: 1px solid #dee2e6;
     border-width: 0 0 1px 0;
-    font-weight: 700;
+   
     color: #343a40;
     background: #f8f9fa;
     transition: box-shadow 0.2s;
+    font-size: 15px;
+    font-size: 15px;
 }
 
 tbody tr{
     background: #ffffff;
     color: #495057;
     transition: box-shadow 0.2s;
+    font-size: 15px;
 }
 
 tbody td{

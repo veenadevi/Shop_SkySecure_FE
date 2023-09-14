@@ -1,7 +1,12 @@
 <div id="leadSummary">
     <ng-container *ngIf="accountDetails && responseData">
         <div id="lead-summary-header">
-            {{productsData.estimate_number}} - Lead Summary
+
+            <ng-container *ngIf="estimateData.estimate_number; else noValue">
+                {{estimateData.estimate_number}} : Lead Summary
+              </ng-container>
+              <ng-template #noValue>Quotation Status</ng-template>
+    
         </div>
 
 
@@ -13,7 +18,7 @@
                             Lead Status
                         </span>
                         <span class="value">
-                            {{responseData.status}}
+                            {{responseData.cartData.status}}
                         </span>
                     </div>
                     <div class="content-holder">
@@ -21,7 +26,7 @@
                             Last Activity
                         </span>
                         <span class="value">
-                            {{ responseData.updatedAt | dateFormat}}
+                            {{ responseData.cartData.updatedAt | dateFormat}}
                         </span>
                     </div>
                     <div class="content-holder">
@@ -29,7 +34,13 @@
                             Lead Expiry
                         </span>
                         <span class="value">
-                            {{productsData.expiry_date | dateFormat}}
+                            <ng-container *ngIf="estimateData.expiry_date; else cartDate">
+                                {{ estimateData.expiry_date | dateFormat}}
+                              </ng-container>
+                              <ng-template #cartDate>-</ng-template>
+
+
+                            <!-- {{productsData.expiry_date | dateFormat}} -->
                         </span>
                     </div>
                     <div class="content-holder">
@@ -37,7 +48,15 @@
                             Opportunity Size
                         </span>
                         <span class="value">
-                            {{productsData.totalEstimateCost | number : '1.2-2'}}
+
+
+                            <ng-container *ngIf="estimateData.totalEstimateCost; else cartValue">
+                                {{estimateData.totalEstimateCost | number : '1.2-2'}}
+                              </ng-container>
+                              <ng-template #cartValue>{{ responseData.TotalCartValue | number : '1.2-2'}}</ng-template>
+
+
+                            
                         </span>
                     </div>
                 </div>
@@ -52,7 +71,13 @@
                                 Name
                             </span>
                             <span class="row-value">
-                                {{contactsData.contact_name}}
+
+                                <ng-container *ngIf="contactsData.contact_name!=null; else contactName">
+                                    {{contactsData.contact_name}}
+                                  </ng-container>
+                                  <ng-template #contactName>{{responseData.assignTo.firstName}}</ng-template>
+
+                              
                             </span>
                         </div>
                         <div class="row-holder">
@@ -60,7 +85,15 @@
                                 Address
                             </span>
                             <span class="row-value">
-                                {{contactsData.shipping_address.address}}, {{contactsData.shipping_address.street2}}, {{contactsData.shipping_address.city}}
+
+
+                                <ng-container *ngIf="contactsData.shipping_address!=null; else noAddress">
+                                    {{contactsData.shipping_address.address}}, {{contactsData.shipping_address.street2}}, {{contactsData.shipping_address.city}}
+                                  </ng-container>
+                                  <ng-template #noAddress>{{responseData.assignTo.fullAddress.address1}}</ng-template>
+
+                              
+                               
                             </span>
                         </div>
                         <div class="row-holder">
@@ -68,7 +101,12 @@
                                 State
                             </span>
                             <span class="row-value">
-                                {{contactsData.shipping_address.state}}
+
+                                <ng-container *ngIf="contactsData.shipping_address!=null; else noAddress">
+                                    {{contactsData.shipping_address.state}}
+                                  </ng-container>
+                                  <ng-template #noAddress>{{responseData.assignTo.fullAddress.state}}</ng-template>
+                               
                             </span>
                         </div>
                         <div class="row-holder">
@@ -76,45 +114,19 @@
                                 Zip Code
                             </span>
                             <span class="row-value">
-                                {{contactsData.shipping_address.zip}}
+
+                                <ng-container *ngIf="contactsData.shipping_address!=null; else noAddress">
+                                    {{contactsData.shipping_address.zip}}
+                                  </ng-container>
+                                  <ng-template #noAddress>{{responseData.assignTo.fullAddress.pincode}}</ng-template>
+                               
                             </span>
                         </div>
                 </div>
             </div>
             <div id="assigneeDetails">
                 <div class="card-container assignee-details">
-                    <!-- <div class="row-holder">
-                        <span class="row-header">
-                            Assigned To
-                        </span>
-                        <span class="row-value">
-                            {{responseData.userId}}
-                        </span>
-                    </div>
-                    <div class="row-holder">
-                        <span class="row-header">
-                            Assigned By
-                        </span>
-                        <span class="row-value">
-                            {{responseData.userId}}
-                        </span>
-                    </div> -->
-                    <!-- <div class="row-holder">
-                        <span class="row-header">
-                            State
-                        </span>
-                        <span class="row-value">
-                            {{contactsData.shipping_address.state}}
-                        </span>
-                    </div>
-                    <div class="row-holder">
-                        <span class="row-header">
-                            Zip Code
-                        </span>
-                        <span class="row-value">
-                            {{contactsData.shipping_address.zip}}
-                        </span>
-                    </div> -->
+                
                 </div>
                 
             </div>
@@ -124,25 +136,26 @@
         <div class="row-div">
             <div id="productItems">
                 <div class="card-container">
-                    <ng-container *ngIf="productsData">
-                        <products-list-table [productsData]="productsData"></products-list-table>
-                    </ng-container>
+
+                    <ng-container *ngIf="responseData.cartData.status!=='New'; else newQuote">
+                    
+                        <products-list-table [productsData]="estimateData" ></products-list-table>
+                      </ng-container>
+                      <ng-template #newQuote>
+
+                   
+                        <products-list-table  [productsData]="responseData.cartData" ></products-list-table> 
+                       </ng-template>
+                   
+
+                   
                     
                 </div>
             </div>
         </div>
         
 
-        <!-- <div class="row-div">
-            <div id="productItems">
-                <div class="card-container">
-                    <ng-container *ngIf="productsData">
-                        <products-table [productsData]="productsData"></products-table>
-                    </ng-container>
-                    
-                </div>
-            </div>
-        </div> -->
+        
         
     </ng-container>
     
