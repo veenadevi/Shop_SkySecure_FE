@@ -116,7 +116,7 @@ export class GstPromptModalComponent implements OnInit{
         phoneNo : [],
         firstName : [],
         email : [],
-       checkTerms : [true]
+       checkTerms : [null]
       }
     )
   }
