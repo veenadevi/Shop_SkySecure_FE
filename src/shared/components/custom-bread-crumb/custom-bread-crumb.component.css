@@ -15,3 +15,11 @@
 :host ::ng-deep .pi{
     font-size: 0.8rem;
 }
+
+
+  
+@media (min-width:320px) and (max-width:480px){
+    .border-none{
+        display: none;
+    }
+}
