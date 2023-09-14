@@ -1974,6 +1974,40 @@ button{
   font-weight: bold;
 }
 
+
+
+
+input[type='radio'] {
+  -webkit-appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  outline: none;
+  border: 3px solid gray;
+  cursor: pointer;
+}
+
+input[type='radio']:before {
+  content: '';
+  display: block;
+  width: 90%;
+  height: 90%;
+  margin: 5% ;
+  border-radius: 50%;
+}
+
+input[type="radio"]:checked:before {
+  background: var(--primary-400-purple);
+  
+}
+
+input[type="radio"]:checked {
+border-color:var(--primary-400-purple);
+}
+.radio-label{
+  padding-left: 5px;
+  font-size: 18px;
+}
 /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
 /* media-query */
@@ -3073,6 +3107,72 @@ font-size: 10px;
 
 
 @media ( min-width: 481px) and (max-width: 770px) {
+  .product-details{
+    display: flex;
+    padding: 5% 2% 0 2%;
+    margin: 0% 2% 0 2%;
+    flex-direction: row;
+}
+  .primary-btn {
+    color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background: var(--btn-gradient);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
+    font-size: 10px;
+    font-weight: 500;
+    width: 50%;
+    height: 30px;
+  }
+  .secondary-btn {
+    color: var(--primary-500-purple);
+    outline: none; 
+    border-radius: 8px;
+    background: var(--white);
+    border: 1px solid var(--primary-300-purple);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
+    border-radius: 5px;
+    font-size: 8px;
+    font-weight: 500;
+    /* padding: 5px; */
+    height: 30px;
+    width: 50%;
+  }
+  .tertiary-btn {
+    border-radius: 8px;
+    background-color: var(--primary-400-purple);
+    text-align: center;
+    /* text-align: center; */
+    margin-top: 5%;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 500;
+    width: 100%;
+    margin-left: 7px;
+    /* width: 100%; */
+    /* border: 1px solid #383536; */
+  }
+
+  input[type='radio'] {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 9px;
+    border-radius: 50%;
+    outline: none;
+    border: 3px solid gray;
+    cursor: pointer;
+}
+.radio-label{
+  padding-left: 5px;
+  font-size: 12px;
+}
+  :host ::ng-deep.p-breadcrumb {
+    border: none;
+    display: none;
+}
   .product-info {
     display: flex;
     flex-basis: 30%;
@@ -3113,7 +3213,7 @@ font-size: 10px;
 .head-06 {
   margin-bottom: 0px;
   font-family: 'lato',sans-serif;
-  font-size: 12px;
+  font-size: 10px;
 }
 .year {
   font-family: 'lato',sans-serif;
@@ -3618,6 +3718,72 @@ h5 {
 
 
   @media ( min-width: 320px) and (max-width: 480px) {
+    .product-details{
+      display: flex;
+      padding: 5% 2% 0 2%;
+      margin: 0% 2% 0 2%;
+      flex-direction: row;
+  }
+    .primary-btn {
+      color: var(--white);
+      border: none;
+      outline: none;
+      border-radius: 8px;
+      background: var(--btn-gradient);
+      transition: all .3s ease;
+      box-shadow: 0 3px 6px #0000001a;
+      font-size: 10px;
+      font-weight: 500;
+      width: 50%;
+      height: 30px;
+    }
+    .secondary-btn {
+      color: var(--primary-500-purple);
+      outline: none; 
+      border-radius: 8px;
+      background: var(--white);
+      border: 1px solid var(--primary-300-purple);
+      transition: all .3s ease;
+      box-shadow: 0 3px 6px #0000001a;
+      border-radius: 5px;
+      font-size: 8px;
+      font-weight: 500;
+      /* padding: 5px; */
+      height: 30px;
+      width: 50%;
+    }
+    .tertiary-btn {
+      border-radius: 8px;
+      background-color: var(--primary-400-purple);
+      text-align: center;
+      /* text-align: center; */
+      margin-top: 5%;
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 500;
+      width: 100%;
+      margin-left: 7px;
+      /* width: 100%; */
+      /* border: 1px solid #383536; */
+    }
+
+    input[type='radio'] {
+      -webkit-appearance: none;
+      width: 10px;
+      height: 9px;
+      border-radius: 50%;
+      outline: none;
+      border: 3px solid gray;
+      cursor: pointer;
+  }
+  .radio-label{
+    padding-left: 5px;
+    font-size: 12px;
+  }
+    :host ::ng-deep.p-breadcrumb {
+      border: none;
+      display: none;
+  }
     .product-info {
       display: flex;
       flex-basis: 30%;
@@ -3658,7 +3824,7 @@ h5 {
   .head-06 {
     margin-bottom: 0px;
     font-family: 'lato',sans-serif;
-    font-size: 12px;
+    font-size: 8px;
   }
   .year {
     font-family: 'lato',sans-serif;
@@ -4314,35 +4480,3 @@ border: var(--primary-400-purple) ;
   background-color: #FFFFFF; 
   margin-right: 5px; 
 } */
-
-input[type='radio'] {
-  -webkit-appearance: none;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  outline: none;
-  border: 3px solid gray;
-  cursor: pointer;
-}
-
-input[type='radio']:before {
-  content: '';
-  display: block;
-  width: 90%;
-  height: 90%;
-  margin: 5% ;
-  border-radius: 50%;
-}
-
-input[type="radio"]:checked:before {
-  background: var(--primary-400-purple);
-  
-}
-
-input[type="radio"]:checked {
-border-color:var(--primary-400-purple);
-}
-.radio-label{
-  padding-left: 5px;
-  font-size: 18px;
-}
