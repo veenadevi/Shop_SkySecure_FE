@@ -32,7 +32,7 @@ label {
 
 .custom-select {
     width: 100%;
-    padding: 10px;
+    padding: 13px;
     box-sizing: border-box;
     border-radius: 8px;
 }
@@ -365,4 +365,19 @@ h4{
     display: flex;
     width: 100%;
 
+}
+
+:host ::ng-deep.p-multiselect {
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+    margin-left: 30px;
+    width: 54%;
+    border: 1px solid black;
+
+}
+.comp-head{
+    padding-left: 30px;
 }
