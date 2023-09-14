@@ -15,6 +15,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
+import { TermsConditionModalComponent } from 'src/shared/components/modals/terms-condition-modal/terms-condition-modal.component';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -829,6 +830,10 @@ featureCount=5;
     const modalRef = this.modalService.open(GetFreeCallModalComponent);
     modalRef.componentInstance.request = queryParams;
   }
+  public viewModal4(queryParams) {
+    const modalRef = this.modalService.open(TermsConditionModalComponent);
+    modalRef.componentInstance.request = queryParams;
+  }
 
   
 
@@ -1045,8 +1050,17 @@ featureCount=5;
     //this.displayBasic = true;
     this.viewModal2(null);
   }
- 
 
+  // TERMS AND CONDITION
+  public displayBasic01: boolean; 
+  public showDialog01(){
+    const modalRef = this.modalService.open(TermsConditionModalComponent);
+  }
+
+  showBasicDialog01() {
+    //this.displayBasic = true;
+    this.viewModal4(null);
+  }
 
   ngOnDestroy(){
     this.subscriptions.forEach(element => {
