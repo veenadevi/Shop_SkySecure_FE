@@ -241,31 +241,36 @@ export class SidenavWrapperComponent {
           this.menuToogled = false;
           this.router.navigate(['admin-pages/marketplaceuser']);
           return;
-        case 'paFeatureUpdate':
+      case 'sadminAssignRoles':
+          this.menuToogled = false;
+          this.router.navigate(['admin-pages/assign-roles']);
+          return;
+      case 'paFeatureUpdate':
           //this.isExpanded = false;
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/feature-update']);
           return;
-        case 'paAddNewProduct':
+      case 'paAddNewProduct':
           //this.isExpanded = false;
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/add-new-product']);
           return;
-        case 'paEditProduct':
+      case 'paEditProduct':
          //this.isExpanded = false;
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/edit-product']);
           return;
-        case 'paUploadProductPrice':
+      case 'paUploadProductPrice':
           //this.isExpanded = false;
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/upload-product-price']);
           return;
-        case 'paUploadBlog':
+      case 'paUploadBlog':
           //this.isExpanded = false;
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/updateblog']);
           return;
+        
 
       default:
         return null;
