@@ -1,0 +1,34 @@
+<div id="assignUsersRoles">
+    <div>
+        Assign Roles
+    </div>
+    <div id="selectionContainer">
+        <div>
+            <p-multiSelect
+                class="custom-ms"
+                [options]="users" 
+                [(ngModel)]="selectedUsers"
+                selectedItemsLabel="No. of Selected Items: {0}"
+                [maxSelectedLabels]="3" 
+                defaultLabel="Select User(s)"
+                optionLabel="name">
+            </p-multiSelect>
+        </div>
+
+        <div>
+            <p-multiSelect
+                class="custom-ms"
+                [options]="roles" 
+                [(ngModel)]="selectedRoles"
+                selectedItemsLabel="No. of Selected Items: {0}"
+                [maxSelectedLabels]="3" 
+                defaultLabel="Select Role(s)"
+                optionLabel="name">
+            </p-multiSelect>
+        </div>
+    </div>
+
+    <div id="buttonHolder">
+        <button id="assign-btn" class="btn primary-btn">Assign</button>
+    </div>
+</div>

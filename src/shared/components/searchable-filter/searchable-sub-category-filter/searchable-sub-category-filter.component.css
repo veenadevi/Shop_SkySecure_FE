@@ -17,8 +17,8 @@
 }
 
 .mat-list-style{
-    max-height:300px;
-    overflow: scroll;
+    /*max-height:300px;
+    overflow: scroll;*/
 }
 
 .selectedType{

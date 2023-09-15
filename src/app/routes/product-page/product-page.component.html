@@ -1,4 +1,4 @@
-<div class="product-page-container">
+<div class="product-page-container" id="productPageContainer">
 
   <div (click) = "viewModal3(null)" class="compare-products-badge">
     <span class="offer-name-label">
@@ -9,8 +9,8 @@
   </div>
   
   <div class="parent-holder">
-    <div class="filter-container">
-      <div style="width:100%">
+    <div id="filterSection" #filterSection class="filter-container">
+      <div style="width:100%" id="testDiv" #testDiv>
         <ng-container *ngIf="categories && categories.length>0">
           <product-filter 
             [listCategories] = "categories" (selecteCategories)="selecteCategories($event)"
@@ -21,8 +21,12 @@
 
             ></product-filter>
         </ng-container>
+        <div id="filterView" #filterView>
+          &nbsp;
+        </div>
         
       </div>
+      
       
     </div>
     <div class="product-container">
@@ -76,16 +80,24 @@
     </div>
    
   </div>
+  
  
   
 </div>
 
-<!-- <div class="fab-container">
-  <button mat-fab class="fab-toggler">
+<div id="floatableFilter" class="fab-container">
+  <!-- <button mat-fab class="fab-toggler">
     <i class="material-icons">add</i>
-  </button>
+  </button> -->
 
-</div> -->
+  <div (click)="scrollToFilters()">
+    <span _ngcontent-hwe-c480="" class="filter-icon">
+      <img _ngcontent-hwe-c480="" alt="FilterIcon" src="../../../assets/icons/FilterBlueIcon.svg">
+    </span>
+    <span _ngcontent-hwe-c480="">Go To Filters</span>
+  </div>
+
+</div>
 
 
 <!--  Changes For Sticky -->

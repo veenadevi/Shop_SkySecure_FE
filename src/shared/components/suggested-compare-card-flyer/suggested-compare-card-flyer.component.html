@@ -1,0 +1,27 @@
+<ng-container *ngIf="(item._id === null) ; else productsTemplate">
+    <div class="default-plan-price empty-logo-background">
+        <div class="plan-price-image">
+            <img style="height: 100%;object-fit: cover;" src="../../../../../assets/icons/AddProductIcon.svg" alt="Microsoft" >
+        </div>
+        <div class="plan-price-info">
+            Add Products to Compare
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #productsTemplate>
+    <div class="product-container">
+        <div class="compare-product-image">
+            <img class="product-img-style" src="{{(item.bannerLogo) ? item.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png'}}" alt="Microsoft" >
+        </div>
+        <p class="tertiary-sub-headline">{{item.name}}</p>
+        <p class="tertiary-sub-headline">
+            <ng-container *ngIf="item.priceList && item.priceList.length>0">
+                ₹ {{item.priceList[0].price/12 | number : '1.2-2'}}/ {{'Month'}}
+            </ng-container>
+            <!-- {{(item.priceList) ? (item.priceList[0].price / item.priceList[0].priceType) : ''}}    {{item.priceList[0].price}} / {{item.priceList[0].priceType}} -->
+        </p>
+    </div>
+</ng-template>
+
+

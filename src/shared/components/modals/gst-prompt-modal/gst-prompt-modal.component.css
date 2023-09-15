@@ -22,6 +22,8 @@
     background-color: #f9f9f9;
     color: black;
     border-radius: 10px;
+    font-size: 15px !important;
+
 }
 
 .modal-header {
@@ -47,6 +49,7 @@
     /* background: url(../../../../assets/images/BackgroundGradient.png); */
     background: fixed;
     background-repeat: no-repeat;
+    font-size: 15px !important;
 }
 
 .altsyslogo-alert {
@@ -81,8 +84,13 @@
 
 .primary-btn {
     margin-bottom: 10px;
+    font-size: 13px !important;
 }
-
+.secondary-btn{
+    margin-bottom: 10px;
+    font-size: 13px;
+    
+}
 
 .back-btn {
 
@@ -94,15 +102,13 @@
     color: #003388;
     margin-right: 10px;
     width: 150px;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 500;
     padding: 8px;
     margin-bottom: 10px;
 }
 
-.secondary-btn{
-    margin-bottom: 10px;
-}
+
 
 .compare-btn:hover {
     background: #FFFFFF;
@@ -234,7 +240,7 @@ label {
 .form-control {
     display: block;
     width: 100%;
-    font-size: 14px;
+    font-size: 13px;
     padding: 6.5px;
     /* font-size: 1rem; */
     font-weight: 400;
@@ -257,6 +263,7 @@ label {
     /* font-size: 1rem; */
     font-weight: 400;
     line-height: 1.5;
+    font-size: 13px !important;
     color: var(--bs-body-color);
     -webkit-appearance: none;
     appearance: none;
@@ -287,7 +294,7 @@ label {
 }
 
 h4 {
-    font-size: 24px;
+    font-size: 17px;
     font-weight: bold;
     margin-bottom: 0;
 }
@@ -541,6 +548,7 @@ h2{
     overflow: auto;
     padding: 10px;
     scrollbar-width: thin;
+    font-size: 13px;
 }
 
   .privacy-cont::-webkit-scrollbar {

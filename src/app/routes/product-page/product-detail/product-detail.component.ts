@@ -15,6 +15,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
+import { TermsConditionModalComponent } from 'src/shared/components/modals/terms-condition-modal/terms-condition-modal.component';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -86,6 +87,9 @@ export class ProductDetailComponent implements OnInit{
   public viewAllFeaturesDetails = false;
 
   public prdType : any;
+
+  public keyFeatureList : any;
+  public additionalFeatureList : any;
   
   faq = [];
   productListToCompare  = [];
@@ -325,12 +329,15 @@ export class ProductDetailComponent implements OnInit{
        //   this.featureList = response.featureList.slice(0,5);
           //this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
         }
-        // if(response.products.name!=null) {
-        // this.productName = response.product.name;
-        // }
-
-        // this.featureList = fList;
-        // console.log("inside", this.featureList);
+        
+        if(this.featureList.length>4){
+          this.keyFeatureList = this.featureList.slice(0,4);
+          this.additionalFeatureList = this.featureList.slice(4);
+        }
+        else{
+          this.keyFeatureList = this.featureList;
+          this.additionalFeatureList = [];
+        }
      
 
         this.productBundlesData=this.setProductBundleData(response.productBundles);
@@ -829,6 +836,10 @@ featureCount=5;
     const modalRef = this.modalService.open(GetFreeCallModalComponent);
     modalRef.componentInstance.request = queryParams;
   }
+  public viewModal4(queryParams) {
+    const modalRef = this.modalService.open(TermsConditionModalComponent);
+    modalRef.componentInstance.request = queryParams;
+  }
 
   
 
@@ -1045,8 +1056,17 @@ featureCount=5;
     //this.displayBasic = true;
     this.viewModal2(null);
   }
- 
 
+  // TERMS AND CONDITION
+  public displayBasic01: boolean; 
+  public showDialog01(){
+    const modalRef = this.modalService.open(TermsConditionModalComponent);
+  }
+
+  showBasicDialog01() {
+    //this.displayBasic = true;
+    this.viewModal4(null);
+  }
 
   ngOnDestroy(){
     this.subscriptions.forEach(element => {

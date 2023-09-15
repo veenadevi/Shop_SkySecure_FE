@@ -10,19 +10,25 @@
             <!-- Template for Multiple Products -->
             <!-- <ng-container *ngIf="(productList.length>1); else singleProduct">-->
             <ng-container>
-                <div class="header">
-                    Compare Products
+                <div class=" tertiary-headline header">
+                    Compare with similar products
                 </div>
-                <div class="text-style">
-                    Select your desired products and compare its features
-                </div>
+                <!-- <div class="text-style">
+                    Compare with similar products
+                </div> -->
                 <div class="list-holder">
-                    <ng-container *ngFor="let item of productList">
-                        <compare-product-item-flyer [item] = "item" (removableItem)="removeSelectedItem($event)"></compare-product-item-flyer>
+                    <div class="row-holder"  *ngFor="let item of productList">
+                        <suggested-compare-card-flyer [item] = "item" (removableItem)="removeSelectedItem($event)"></suggested-compare-card-flyer>
+                    </div>
+                    <ng-container *ngIf="productList.length > 2">
+                        <div class="vs-section">
+                            <span class="vs-text">VS</span>
+                        </div>
                     </ng-container>
+
                 </div>
                 <div class="btn-holder">
-                    <button class="compare-btn" (click)="navigateToCompareProducts()" [disabled]="(productList.length === 1)">
+                    <button class="secondary-btn" (click)="navigateToCompareProducts()" [disabled]="(productList.length === 1)">
                         Compare
                     </button>
                 </div>
