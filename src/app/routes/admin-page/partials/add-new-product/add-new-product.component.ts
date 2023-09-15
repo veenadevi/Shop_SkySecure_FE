@@ -72,13 +72,19 @@ export class AddNewProductComponent  implements OnInit {
       productSkuNumber: ['', Validators.required],
       productSkuId: ['', Validators.required],
       productOrderNumber: [''],
-      productPrice: [''],
-      erpPrice: [''],
-      discount: [''],
+      yproductPrice: [''],
+      yerpPrice: [''],
+      ydistributorPrice:[''],
+      ydiscount: [''],
+      mproductPrice: [''],
+      merpPrice: [''],
+      mdistributorPrice:[''],
+      mdiscount: [''],
       categories: ['', Validators.required],
       Subcategories: ['', Validators.required],
       OEM: ['', Validators.required],
-      subscriptionType: [''],
+      ysubscriptionType: [''],
+      msubscriptionType: [''],
       isVariant: ['false'],
       file: [null],
       products: [''],
@@ -324,12 +330,24 @@ export class AddNewProductComponent  implements OnInit {
         orderNumber: productData.productOrderNumber,
         priceList: [{
           "Currency": "INR",
-          "price": productData.productPrice,
-          "priceType": productData.subscriptionType,
-          "ERPPrice" : productData.erpPrice,
-          "discountRate" : productData.discount
+          "price": productData.yproductPrice,
+          "priceType": "Year",
+          "ERPPrice" : productData.yerpPrice,
+          "distributorPrice":productData.ydistributorPrice,
+          "discountRate" : productData.ydiscount
 
-        }],
+        },
+        {
+          "Currency": "INR",
+          "price": productData.mproductPrice,
+          "priceType": "Month",
+          "ERPPrice" : productData.merpPrice,
+          "distributorPrice":productData.mdistributorPrice,
+          "discountRate" : productData.mdiscount
+
+        }
+      
+      ],
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
