@@ -88,6 +88,8 @@ export class AddNewProductComponent  implements OnInit {
       isVariant: ['false'],
       file: [null],
       products: [''],
+      subscriptionType : [''],
+      productPrice : [''],
       addDynamicElementNew: this.fb.group({
         // Nested form controls for dynamic elements
         feature: this.fb.array([
@@ -330,7 +332,8 @@ export class AddNewProductComponent  implements OnInit {
         orderNumber: productData.productOrderNumber,
         priceList: [{
           "Currency": "INR",
-          "price": productData.yproductPrice,
+          //"price": productData.yproductPrice,
+          "price": this.setYearlyPrice(productData),
           "priceType": "Year",
           "ERPPrice" : productData.yerpPrice,
           "distributorPrice":productData.ydistributorPrice,
@@ -339,7 +342,7 @@ export class AddNewProductComponent  implements OnInit {
         },
         {
           "Currency": "INR",
-          "price": productData.mproductPrice,
+          "price": this.setMonthlyPrice(productData),
           "priceType": "Month",
           "ERPPrice" : productData.merpPrice,
           "distributorPrice":productData.mdistributorPrice,
@@ -367,6 +370,20 @@ export class AddNewProductComponent  implements OnInit {
 
       this.registrationForm.reset();
     }
+  }
+
+  public setYearlyPrice(data){
+
+    let yskySecurePrice = ((Number(data.yerpPrice)) * 0.02) + (Number(data.ydistributorPrice));
+    return yskySecurePrice;
+    
+  }
+
+  public setMonthlyPrice(data){
+
+    let mskySecurePrice = ((Number(data.merpPrice)) * 0.02) + (Number(data.mdistributorPrice));
+    return mskySecurePrice;
+    
   }
 
   removeFeature(data: any) {
