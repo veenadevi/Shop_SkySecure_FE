@@ -24,7 +24,7 @@ interface CreateProductPayload {
   productSkuId: String,
   featureList: Array<any>,
   productFAQ: Array<any>,
-  productApp:Array<any>,
+  appList:Array<any>,
   isVariant: Boolean,
   productId: String
 }
@@ -352,7 +352,7 @@ export class AddNewProductComponent  implements OnInit {
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
         productFAQ: productData.addFAQArrayNew.faq,
-        productApp:productData.addAppArrayNew.app,
+        appList:productData.addAppArrayNew.app,
 
         bannerLogo: this.productLogo,
         createdBy: 'ADMIN',
