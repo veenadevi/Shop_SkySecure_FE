@@ -108,6 +108,14 @@ export class DetailsCompareProductsFlyerComponent {
   }
 
   public navigateToCompareProducts(){
-    this.router.navigate(['/compare-products/results']);
+    //this.router.navigate(['/compare-products/results']);
+    //this.router.navigate(['/suggested-compare-products']);
+
+    let dataId = ['64bdffaa5559b600556bc31e','64bdffaa5559b600556bc31e'];
+
+    this.router.navigate(['/suggested-compare-products/results'], { state: { dataIds: dataId } });
+
+    
+    
   }
 }

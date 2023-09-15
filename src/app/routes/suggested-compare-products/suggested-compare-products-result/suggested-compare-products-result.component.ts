@@ -1,4 +1,4 @@
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
@@ -67,6 +67,8 @@ export class SuggestedCompareProductsResultComponent {
   dataSource = [];
   displayColumns = ['username', 'age', 'title'];
 
+  public dataIds : any;
+
   constructor(
     private route: ActivatedRoute,
     private metaDataSvc: MetadataService,
@@ -77,8 +79,12 @@ export class SuggestedCompareProductsResultComponent {
     private userAccountStore : UserAccountStore,
     private compareProductsStore : CompareProductsStore,
     private decimalPipe : DecimalPipe,
-    private addItemsToCartService : AddItemsToCartService
+    private addItemsToCartService : AddItemsToCartService,
+    private location : Location
   ) {
+
+    this.dataIds = location.getState()['dataIds'];
+    
     for (let i = 0; i < 50; ++i) {
       this.dataSource.push({
         username: 'test' + Math.random(),
@@ -104,16 +110,18 @@ export class SuggestedCompareProductsResultComponent {
     let reqBody = this.setPrdList(uniqueElements);
     this.cachedProductsList = uniqueElements;*/
 
-    let reqBody = this.setPrdList(cachedProductsToCompare);
-    this.cachedProductsList = cachedProductsToCompare;
+    //let reqBody = this.setPrdList(cachedProductsToCompare);
+    let reqBody = this.setPrdList(this.dataIds);
+    
+    //this.cachedProductsList = cachedProductsToCompare;
     
 
-    if(this.cachedProductsList.length <= 4){
+    /*if(this.cachedProductsList.length <= 4){
       this.emptyProductsLength = 4 - this.cachedProductsList.length;
     }
     else{
       this.emptyProductsLength = 4;
-    }
+    }*/
     
    
     this.fetchCompareProductsList(reqBody);
@@ -127,7 +135,7 @@ export class SuggestedCompareProductsResultComponent {
 
  
 
-    data.forEach(element => {
+    /*data.forEach(element => {
      // console.log("sendign to req"+JSON.stringify(element))
       switch (element.type) {
         case 'products':
@@ -165,10 +173,10 @@ export class SuggestedCompareProductsResultComponent {
         default:
           return null;
       }
-    });
+    }); */
  
     let reqBody = {
-      "products": tempPrd,
+      "products": data,
       "productsVariants": tempPrdVar,
       "productFamily": tempBundles,
       "productFamilyVariants": tempPrdBundleVar
