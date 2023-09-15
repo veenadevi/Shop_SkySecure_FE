@@ -87,6 +87,9 @@ export class ProductDetailComponent implements OnInit{
   public viewAllFeaturesDetails = false;
 
   public prdType : any;
+
+  public keyFeatureList : any;
+  public additionalFeatureList : any;
   
   faq = [];
   productListToCompare  = [];
@@ -326,12 +329,15 @@ export class ProductDetailComponent implements OnInit{
        //   this.featureList = response.featureList.slice(0,5);
           //this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
         }
-        // if(response.products.name!=null) {
-        // this.productName = response.product.name;
-        // }
-
-        // this.featureList = fList;
-        // console.log("inside", this.featureList);
+        
+        if(this.featureList.length>4){
+          this.keyFeatureList = this.featureList.slice(0,4);
+          this.additionalFeatureList = this.featureList.slice(4);
+        }
+        else{
+          this.keyFeatureList = this.featureList;
+          this.additionalFeatureList = [];
+        }
      
 
         this.productBundlesData=this.setProductBundleData(response.productBundles);
