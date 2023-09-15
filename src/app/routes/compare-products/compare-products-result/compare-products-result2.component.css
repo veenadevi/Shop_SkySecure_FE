@@ -1,7 +1,8 @@
 .compare-products-container {
     /* padding: 1%; */
-    margin: 1%;
+    margin: 0 1% 1% 1%;
     font-family: 'lato',sans-serif;
+    margin-top:222px;
 }
 
 th{
@@ -225,6 +226,31 @@ th{
     font-style: normal;
     font-weight: 500;
     line-height: 1.3rem;
+  }
+
+
+  :host ::ng-deep .p-datatable .p-datatable-thead{
+    position: fixed;
+    top:104px;
+  }
+
+  /* :host ::ng-deep .p-datatable .p-datatable-tbody tr:first-child 
+  { 
+    position: fixed;
+    top:318px;
+    background: #C68600;
+  } */
+
+
+
+  :host ::ng-deep .p-datatable .p-datatable-tbody td 
+  { 
+    width: 21%;
+  }
+
+  :host ::ng-deep .p-datatable .p-datatable-tbody td:first-child 
+  { 
+    width: 16%;
   }
 
 
