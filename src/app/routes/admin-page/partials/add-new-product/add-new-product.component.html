@@ -172,6 +172,26 @@
 
                         </div>
 
+                        <div class="upload">
+                            <label>Image Logo</label>
+                            <div class="avatar-edit">
+                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                                    (change)="uploadFile($event)" />
+                                <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
+                                    alt="productLogo" />
+                                <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
+                                    (click)="removeImage()">Remove</button>
+                                <label for="imageUpload" *ngIf="editFile"
+                                    [ngClass]="['custom-label', 'upload-image']"></label>
+                                <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
+                                    (click)="removeUploadedFile()"></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="header-year">
@@ -357,7 +377,7 @@
                                         SS Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="productPrice"
+                                    <input type="number" class="custom-select-03" formControlName="productPrice"
                                         [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                 </div>
 
@@ -445,7 +465,7 @@
                                     App  Name</label>
                             </div>
                             <div class="input">
-                                <input type="number" class="custom-select-01" >
+                                <input type="text" class="custom-select-01" >
                             </div>
                         </div>
 
@@ -506,73 +526,7 @@
                     </div> -->
 
 
-                    <div class="section-06">
-                        <!-- IsVariant -->
-                        <div class="variant">
-                            <label [ngClass]="{'error': submitted && myForm.isVariant.errors}">isVariant</label>
-                            <div class="d-block my-3">
-                                <div class="custom-control custom-radio">
-                                    <input id="false" type="radio" class="custom-control-input" name="isVariant"
-                                        formControlName="isVariant" value="false" checked
-                                        (change)="onRadioChange($event)">
-                                    <label class="custom-control-label" for="false">False</label>
-                                </div>
-
-                                <div class="custom-control custom-radio">
-                                    <input id="true" type="radio" class="custom-control-input" name="true"
-                                        formControlName="isVariant" value="true" (change)="onRadioChange($event)">
-                                    <label class="custom-control-label" for="true">True</label>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Products -->
-                        <div class="variant-product" *ngIf="showProducts">
-                            <div class="forms">
-                                <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.products.errors}">Choose
-                                        Products</label>
-                                </div>
-                                <div class="select">
-                                    <select class="custom-select-04" (change)="changeProduct($event)"
-                                        formControlName="products"
-                                        [ngClass]="{'error': submitted && myForm.products.errors}">
-                                        <option value="">Choose...</option>
-                                        <option *ngFor="let product of products" [ngValue]="product._id">
-                                            {{product.name}}</option>
-                                    </select>
-                                </div>
-
-                                <!-- error block -->
-                                <div class="invalid-feedback" *ngIf="submitted && myForm.products.errors?.required">
-                                    <sup>*</sup>Please select product
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Upload image -->
-                        <div class="upload">
-                            <label>Image Logo</label>
-                            <div class="avatar-edit">
-                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
-                                    (change)="uploadFile($event)" />
-                                <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
-                                    alt="productLogo" />
-                                <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
-                                    (click)="removeImage()">Remove</button>
-                                <label for="imageUpload" *ngIf="editFile"
-                                    [ngClass]="['custom-label', 'upload-image']"></label>
-                                <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
-                                    (click)="removeUploadedFile()"></label>
-                            </div>
-                            <div class="avatar-preview">
-                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
-                                </div>
-                            </div>
-                        </div>
-                      
-                    </div>
+                  
                 </div>
 
                 <div class="section-07">
