@@ -4,14 +4,16 @@
 
     <div class="left-section">
         
+        <ng-container *ngIf="compareProductsListLength > 0">
+            <div (click)="viewModal3(null)" class="compare-products-badge">
+                <!-- <img class="compare-icon" src="../../../../assets/icons/compare.svg"> -->
+                <span class="offer-name-label">
+                    <!-- Compare ({{prdLength ? prdLength : 0}}) -->
+                    Compare ({{ compareProductsListLength ? compareProductsListLength : 0}})
+                </span>
+            </div>
+        </ng-container>
 
-        <div (click)="viewModal3(null)" class="compare-products-badge">
-            <!-- <img class="compare-icon" src="../../../../assets/icons/compare.svg"> -->
-            <span class="offer-name-label">
-                <!-- Compare ({{prdLength ? prdLength : 0}}) -->
-                Compare ({{ compareProductsListLength ? compareProductsListLength : 0}})
-            </span>
-        </div>
     
     
         <div class="product-details-container">
@@ -187,29 +189,31 @@
                         </div>
     
     
-                        <ng-container *ngIf="product.description">
+                        <!-- <ng-container *ngIf="product.description">
                             <div class="about-section">
                                 <div class="about-heading">
                                     <p class="about">Description:</p>
                                 </div>
-                                <div class="about-desc">
-                                    <!-- <p class="prod-desc">{{product.description}}
-                            </p> -->
-                                    <div class="all-desc">
-                                        <!-- {{product.description}} -->
-                                        {{(readMore) ? product.description : product.description | slice:0:100}}
-                                        <span *ngIf="!readMore">....</span>
+                                <div class="description-content">
+                                    <div class="about-desc">
+                                        <p class="prod-desc">{{product.description}}</p> //already-commented
+                                        <div class="all-desc">
+                                            {{product.description}} //already-commented
+                                            {{(readMore) ? product.description : product.description | slice:0:100}}
+                                            <span *ngIf="!readMore">....</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <ng-container *ngIf="product.description.length>50">
-                                    <div class="scroll">
-                                        <span>
-                                            <a class="all-btn" (click)="scrollToSection('#description')">Read more</a>
+                                                                    
+                                    <ng-container *ngIf="product.description.length>50">
+                                        <span class="scroll">
+                                            <span>
+                                                <a class="all-btn" (click)="scrollToSection('#description')">Read more</a>
+                                            </span>
                                         </span>
-                                    </div>
-                                </ng-container>
+                                    </ng-container>
+                                </div>
                             </div>
-                        </ng-container>
+                        </ng-container> -->
     
     
                         <!-- <div class="about-section">
@@ -235,7 +239,8 @@
                             (click)="addToCompare(product, 'fromProd')"
                                            >Add to Compare</button>
                             <button class="btn primary-btn" (click)="requestQuote(product)"
-                                style="margin-left: 4%;">Request Quote</button></span>
+                                style="margin-left: 4%;">Request Quote</button>
+                        </span>
     
                         <hr>
     

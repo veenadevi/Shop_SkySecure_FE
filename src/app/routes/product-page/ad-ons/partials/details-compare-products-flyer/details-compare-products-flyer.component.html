@@ -17,9 +17,15 @@
                     Compare with similar products
                 </div> -->
                 <div class="list-holder">
-                    <ng-container *ngFor="let item of productList">
+                    <div class="row-holder"  *ngFor="let item of productList">
                         <suggested-compare-card-flyer [item] = "item" (removableItem)="removeSelectedItem($event)"></suggested-compare-card-flyer>
+                    </div>
+                    <ng-container *ngIf="productList.length > 2">
+                        <div class="vs-section">
+                            <span class="vs-text">VS</span>
+                        </div>
                     </ng-container>
+
                 </div>
                 <div class="btn-holder">
                     <button class="secondary-btn" (click)="navigateToCompareProducts()" [disabled]="(productList.length === 1)">
