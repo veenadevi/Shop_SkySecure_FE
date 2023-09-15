@@ -745,13 +745,17 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 15%;
 } */
 .about-desc{
-  /* width: 60%; */
-  min-height: 20px;
+  width: 60%;
+  min-height: 32px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 1; 
+  -webkit-line-clamp: 2; 
   -webkit-box-orient: vertical;
+}
+.description-content {
+  display: flex;
+  flex-direction: row;
 }
 .all-btn {
   /* border-radius: 8px; */
@@ -821,6 +825,7 @@ width:15%;
 
 p {
   margin-bottom: 0;
+  font-size: 14px;
 }
 
 .common-info {
@@ -1134,7 +1139,7 @@ p {
 }
 
 .faq-question {
-  font-size: large;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -1654,6 +1659,7 @@ h6{
   font-family: 'lato',sans-serif;
   font-weight: bold;
   margin: 0;
+  font-size: 21px;
 }
 h5{
   font-family: 'lato',sans-serif;
@@ -1789,6 +1795,7 @@ button{
   font-weight: 700;
   font-family: 'lato',sans-serif;
   margin: 0px 8px 0px 0;
+  font-size: 14px;
 }
 .review{
   font-family: 'lato',sans-serif;
@@ -1955,17 +1962,18 @@ button{
 
 .features-header{
   margin-left:10px;
-  color: #909090;
+  color: var(--primary-500-purple);
   text-decoration: underline;
 }
 
-.prod-card::-webkit-scrollbar {
+.prod-card-holder3::-webkit-scrollbar {
   width: 2px; /* Adjust the width of the scrollbar */
 }
 
-.prod-card::-webkit-scrollbar-thumb {
+.prod-card-holder3::-webkit-scrollbar-thumb {
   background-color: #888; /* Adjust the color of the scrollbar thumb */
 }
+
 .product-feature-container {
   display: flex;
   align-items: center;
@@ -1990,7 +1998,7 @@ button{
   width: 100%;
 }
 .tick {
-  height: 12px;
+  height: 10px;
 }
 .feature-card {
   display: flex;
@@ -2020,12 +2028,12 @@ button{
 .amount{
   font-size: initial;
    text-decoration: line-through;
-   cursor: pointer;
+   /* cursor: pointer; */
 }
 .price-symbol{
   font-size: 18px;
   font-weight: bold;
-  cursor: pointer;
+  /* cursor: pointer; */
   transition: transform 0.3s;
 }
 
