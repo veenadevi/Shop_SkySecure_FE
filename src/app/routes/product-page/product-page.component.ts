@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, OnChanges, OnDestroy, OnInit, QueryList, Renderer2, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription, combineLatest, forkJoin, map } from 'rxjs';
@@ -9,6 +9,8 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ProductListService } from 'src/shared/services/product-list-page.service';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
+import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
+import { DetectScrollStore } from 'src/shared/stores/detect-scroll.store';
 
 
 
@@ -19,6 +21,13 @@ import { CompareProductsModalComponent } from 'src/shared/components/modals/comp
 })
 export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 [x: string]: any;
+
+
+  @ViewChild('filterSection') filterSection!: ElementRef;
+
+  //@ViewChild('filterView', { static: false })
+  //private filterView: ElementRef<HTMLDivElement>;
+  isFilterViewScrolledIntoView: boolean;
 
 
   public dropdownSettings : IDropdownSettings = {};
@@ -89,6 +98,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
 
   public filters : any;
+
+  public floatableFilter : any;
   
   constructor(
     private metaDataSvc : MetadataService,
@@ -99,12 +110,15 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     private metadadataStore : MetadataStore,
     private compareProductsStore : CompareProductsStore,
     private modalService : NgbModal,
+    private renderer: Renderer2,
+    private scrollDispatcher: ScrollDispatcher, 
+    private zone: NgZone,
+    private detectScrollStore : DetectScrollStore
 
   ){
     const navigation = this.router.getCurrentNavigation();
-   // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    // const state = navigation.extras.state as { data: Object };
-    // const data = state;
+
+    
   }
 
   public getAllCategories$ = this.metadadataStore.categoryDetails$
@@ -143,10 +157,67 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     )
   )
 
+  @ViewChildren('filterView') elms: QueryList<any>;
+
+  detectedElms = [];
+
+
+  @ViewChild('testDiv', { static: false })
+  private testDiv: ElementRef<HTMLDivElement>;
+
+  
+  public isTestDivScrolledIntoView : boolean = false;
+
+  public ngAfterViewInit(): void{
+
+    this.floatableFilter = document.getElementById("floatableFilter");
+    this.floatableFilter.style.display = "none";
+
+    this.subscriptions.push(
+      this.detectScrollStore.productFiltersScroll$.subscribe(res=>{
+    
+        if (this.filterSection) {
+          const rect = this.filterSection.nativeElement.getBoundingClientRect();
+          
+          const topShown = rect.top >= 0;
+          const bottomShown = rect.bottom <= window.innerHeight;
+          
+          this.isTestDivScrolledIntoView = topShown && bottomShown;
+          if(rect.bottom > 110){
+           
+            this.floatableFilter.style.display = "none";
+          }
+          else{
+            
+            this.floatableFilter.style.display = "block";
+          }
+          
+        }
+      })
+    )
+
+    
+
+    //this.floatableFilter = document.getElementById("floatableFilter");
+    //this.floatableFilter.style.display = "none";
+
+    /*this.scrollDispatcher.scrolled().
+    subscribe((cdk: CdkScrollable)  => {
+    this.zone.run(() => {
+    //Here you can add what to happen when scroll changed
+    //I want to display the scroll position for example
+      const scrollPosition = cdk.getElementRef().nativeElement.scrollTop;
+      console.log(scrollPosition);
+    });
+    });*/
+
+  }
+  
+
   public ngOnInit() : void { 
 
 
-    console.log("+_) 76 4 35  changed Here",);
+    
 
     
     this.dropdownSettings = {
@@ -332,7 +403,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
          this.productBundles = response.productBundles;
 
          
-        //  console.log("******* ))))))) ++++++++ Data here", response);
+    
 
          let tempProducts = this.setProductsData(response.products);
          let tempProductVariants = this.setProductVariantsData(response.productVariants);
@@ -531,7 +602,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
     let cacheData = cachedProductsToCompare.filter(event => (event.checked))
 
-    console.log("++++++_________ CachedData ", cachedProductsToCompare);
+
 
 
     let cumulativeList = [];
@@ -550,7 +621,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
     let uniqueElements = cumulativeList;
     
-    console.log("++++++_________ cumma ", cumulativeList);
+
 
     uniqueElements.forEach(element => {
       
@@ -574,7 +645,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     });
 
 
-    console.log("++++++_________ UniqueElem ", uniqueElements);
+  
     
 
     localStorage.setItem('compare_products_list', JSON.stringify(uniqueElements));
@@ -853,4 +924,37 @@ public setCheckedList(){
 }
 
 
+public scrollToFilters(){
+  this.filterSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
 }
+
+
+/*@ViewChild('testDiv', { static: false })
+private testDiv: ElementRef<HTMLDivElement>;
+isTestDivScrolledIntoView: boolean;
+
+@HostListener('window:scroll', ['$event'])
+isScrolledIntoView() {
+  console.log("+++++_______ ", this.testDiv);
+  if (this.testDiv) {
+    const rect = this.testDiv.nativeElement.getBoundingClientRect();
+    const topShown = rect.top >= 0;
+    const bottomShown = rect.bottom <= window.innerHeight;
+    this.isTestDivScrolledIntoView = topShown && bottomShown;
+    console.log("+++++_______ ", this.isTestDivScrolledIntoView);
+  }
+}*/
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
