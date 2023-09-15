@@ -86,7 +86,11 @@
     margin-bottom: 10px;
     font-size: 13px !important;
 }
-
+.secondary-btn{
+    margin-bottom: 10px;
+    font-size: 13px;
+    
+}
 
 .back-btn {
 
@@ -104,11 +108,7 @@
     margin-bottom: 10px;
 }
 
-.secondary-btn{
-    margin-bottom: 10px;
-    font-size: 13px;
-    
-}
+
 
 .compare-btn:hover {
     background: #FFFFFF;
