@@ -3,6 +3,7 @@
 }
 .header-title {
     padding: 5px;
+    font-size: 16px !important;
 }
 
 .section-01 {
@@ -20,7 +21,7 @@
 }
 
 label {
-    font-size: medium;
+    font-size: 13px !important;
     font-weight: bold;
 }
 
@@ -31,7 +32,7 @@ label {
 
 .custom-select {
     width: 100%;
-    padding: 13px;
+    padding: 8px;
     box-sizing: border-box;
     border-radius: 8px;
 
@@ -66,7 +67,7 @@ label {
 
 .custom-select-01 {
     width: 100%;
-    padding: 10px;
+    padding: 4px;
     box-sizing: border-box;
     border: 1px solid black;
     border-radius: 8px;
@@ -122,7 +123,7 @@ label {
     margin-bottom: -25px;
 }
 h4{
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
 }
 .section-04 {
@@ -200,13 +201,13 @@ h4{
 }
 .app{
     display: flex;
-flex-direction: row;
+    flex-direction: row;
     width: 100%;
     margin-top: 10px;
     margin-left: 30px;
 }
 .app-name{
-    width: 50%;
+    width: 20%;
 }
 .upload-01{
     width: 30%;
@@ -214,7 +215,7 @@ flex-direction: row;
     padding-top: 20px;
     background-color: white;
     border: none;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); */
     margin-left: 30px;
 
 
@@ -248,7 +249,7 @@ flex-direction: row;
 
 .heading {
     padding-left: 0px;
-    font-size: large;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -291,11 +292,11 @@ flex-direction: row;
     color: white;
     border-radius: 8px;
     margin: 10px;
-    width: 150px
+    width: 85px
 }
 
 .btn-warning {
-    width: 120px;
+    width: 85px;
     box-sizing: border-box;
     padding: 7px;
     border: 1px solid #EFEFEF;
@@ -351,6 +352,6 @@ flex-direction: row;
     color: white;
     border-radius: 8px;
     margin-top: 10px;
-    font-size: larger;
+    font-size: 20px;
     font-weight: 600;
 }

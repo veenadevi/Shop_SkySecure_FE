@@ -1,0 +1,20 @@
+#assignUsersRoles{
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    min-height: 36em;
+}
+
+#selectionContainer{
+    display: flex;
+    column-gap: 4rem;
+}
+
+#buttonHolder{
+    
+}
+
+:host ::ng-deep .custom-ms .p-multiselect-label {
+    width: 400px !important;
+}

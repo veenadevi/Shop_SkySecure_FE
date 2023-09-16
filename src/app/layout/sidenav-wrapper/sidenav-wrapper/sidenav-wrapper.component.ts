@@ -1,9 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs';
 import { SelectOemModalComponent } from 'src/shared/components/modals/select-oem-modal/select-oem-modal.component';
 import { LoginService } from 'src/shared/services/login.service';
+import { DetectScrollStore } from 'src/shared/stores/detect-scroll.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
@@ -23,7 +25,7 @@ export class SidenavWrapperComponent {
 
   @Input() set userLoggedIn(value: any){
     this.userLoggedInFlag = value;
-    // console.log("&&&&&&&& ++++++ ", this.userLoggedInFlag);
+
   }
 
   @Input() set userRole(value: any){
@@ -54,7 +56,8 @@ export class SidenavWrapperComponent {
     private loginService : LoginService,
     private router : Router,
     private modalService : NgbModal,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private detectScrollStore : DetectScrollStore
   ){}
 
   public userDetails$ = this.userAccountStore.userProfileDetails$
@@ -62,8 +65,7 @@ export class SidenavWrapperComponent {
     map(data => {
       
       if(data){
-        //this.userDetails = data.userDetails;
-        //console.log("++++++++++ Came inside User", this.userDetails);
+      
         return data;
       }
       else{
@@ -73,6 +75,18 @@ export class SidenavWrapperComponent {
     }
     )
   )
+
+  @ViewChild(CdkScrollable) scrollable: CdkScrollable;
+  public ngAfterViewInit(): void{
+
+    
+    this.scrollable.elementScrolled().subscribe(scrolled => {
+      //console.log('******* If scrolled', scrolled)
+      this.detectScrollStore.setProductFiltersScroll();
+    });
+
+    
+  }
 
   public logout() {
     //this.loginService.logout();
@@ -149,7 +163,7 @@ export class SidenavWrapperComponent {
 
 
     
-    // console.log("+++++++ ", val);
+
 
     switch (val) {
       case 'user':
@@ -227,37 +241,44 @@ export class SidenavWrapperComponent {
           this.menuToogled = false;
           this.router.navigate(['admin-pages/marketplaceuser']);
           return;
-        case 'paFeatureUpdate':
+      case 'sadminAssignRoles':
+          this.menuToogled = false;
+          this.router.navigate(['admin-pages/assign-roles']);
+          return;
+      case 'paFeatureUpdate':
           //this.isExpanded = false;
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/feature-update']);
           return;
-        case 'paAddNewProduct':
+      case 'paAddNewProduct':
           //this.isExpanded = false;
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/add-new-product']);
           return;
-        case 'paEditProduct':
+      case 'paEditProduct':
          //this.isExpanded = false;
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/edit-product']);
           return;
-        case 'paUploadProductPrice':
+      case 'paUploadProductPrice':
           //this.isExpanded = false;
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/upload-product-price']);
           return;
-        case 'paUploadBlog':
+      case 'paUploadBlog':
           //this.isExpanded = false;
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/updateblog']);
           return;
+        
 
       default:
         return null;
     }
 
   }
+  
+  
 
 
 }

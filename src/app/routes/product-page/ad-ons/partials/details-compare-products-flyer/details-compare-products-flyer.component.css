@@ -38,10 +38,36 @@
 
 .list-holder{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
+    column-gap: 10px;
     row-gap: 0.6em;
-    width:100%;
+    width: 100%;
     margin-top: 0.5em;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.row-holder {
+    width: 45%;
+}
+
+.vs-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+
+.vs-text {
+    background-color: var(--primary-500-purple);
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    padding: 10px 8px;
+    border-radius: 100%;
+    text-align: center;
 }
 
 .btn-holder{

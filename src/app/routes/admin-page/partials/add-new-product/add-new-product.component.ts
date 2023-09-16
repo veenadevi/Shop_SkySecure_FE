@@ -24,7 +24,7 @@ interface CreateProductPayload {
   productSkuId: String,
   featureList: Array<any>,
   productFAQ: Array<any>,
-  productApp:Array<any>,
+  appList:Array<any>,
   isVariant: Boolean,
   productId: String
 }
@@ -72,16 +72,24 @@ export class AddNewProductComponent  implements OnInit {
       productSkuNumber: ['', Validators.required],
       productSkuId: ['', Validators.required],
       productOrderNumber: [''],
-      productPrice: [''],
-      erpPrice: [''],
-      discount: [''],
+      yproductPrice: [''],
+      yerpPrice: [''],
+      ydistributorPrice:[''],
+      ydiscount: [''],
+      mproductPrice: [''],
+      merpPrice: [''],
+      mdistributorPrice:[''],
+      mdiscount: [''],
       categories: ['', Validators.required],
       Subcategories: ['', Validators.required],
       OEM: ['', Validators.required],
-      subscriptionType: [''],
+      ysubscriptionType: [''],
+      msubscriptionType: [''],
       isVariant: ['false'],
       file: [null],
       products: [''],
+      subscriptionType : [''],
+      productPrice : [''],
       addDynamicElementNew: this.fb.group({
         // Nested form controls for dynamic elements
         feature: this.fb.array([
@@ -324,17 +332,30 @@ export class AddNewProductComponent  implements OnInit {
         orderNumber: productData.productOrderNumber,
         priceList: [{
           "Currency": "INR",
-          "price": productData.productPrice,
-          "priceType": productData.subscriptionType,
-          "ERPPrice" : productData.erpPrice,
-          "discountRate" : productData.discount
+          //"price": productData.yproductPrice,
+          "price": this.setYearlyPrice(productData),
+          "priceType": "Year",
+          "ERPPrice" : productData.yerpPrice,
+          "distributorPrice":productData.ydistributorPrice,
+          "discountRate" : productData.ydiscount
 
-        }],
+        },
+        {
+          "Currency": "INR",
+          "price": this.setMonthlyPrice(productData),
+          "priceType": "Month",
+          "ERPPrice" : productData.merpPrice,
+          "distributorPrice":productData.mdistributorPrice,
+          "discountRate" : productData.mdiscount
+
+        }
+      
+      ],
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
         productFAQ: productData.addFAQArrayNew.faq,
-        productApp:productData.addAppArrayNew.app,
+        appList:productData.addAppArrayNew.app,
 
         bannerLogo: this.productLogo,
         createdBy: 'ADMIN',
@@ -349,6 +370,20 @@ export class AddNewProductComponent  implements OnInit {
 
       this.registrationForm.reset();
     }
+  }
+
+  public setYearlyPrice(data){
+
+    let yskySecurePrice = ((Number(data.yerpPrice)) * 0.02) + (Number(data.ydistributorPrice));
+    return yskySecurePrice;
+    
+  }
+
+  public setMonthlyPrice(data){
+
+    let mskySecurePrice = ((Number(data.merpPrice)) * 0.02) + (Number(data.mdistributorPrice));
+    return mskySecurePrice;
+    
   }
 
   removeFeature(data: any) {

@@ -12,6 +12,7 @@ import { MarketplaceuserComponent } from './partials/marketplaceuser/marketplace
 import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.component';
 import { ProductsTableComponent } from './partials/lead-summary/partials/products-table/products-table.component';
 import { ProductsListTableComponent } from './partials/lead-summary/partials/products-list-table/products-list-table.component';
+import { AssignUsersAndRolesComponent } from './partials/assign-users-and-roles/assign-users-and-roles.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ProductsListTableComponent } from './partials/lead-summary/partials/pro
     MarketplaceuserComponent,
     LeadSummaryComponent,
     ProductsTableComponent,
-    ProductsListTableComponent
+    ProductsListTableComponent,
+    AssignUsersAndRolesComponent
   ],
   imports: [
     CommonModule,
