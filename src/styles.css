@@ -177,11 +177,11 @@ body{
 /* common btn css */
 .primary-btn {
   color: var(--white);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   border: none;
   outline: none;
-  width: 9rem;
+  width: 7rem;
   border-radius: 8px;
   background: var(--btn-gradient);
   transition: all .3s ease;
@@ -202,11 +202,11 @@ body{
 
 .secondary-btn {
   color: var(--primary-500-purple);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   border: none;
   outline: none;
-  width: 9.2rem;
+  width: 7rem;
   border-radius: 8px;
   background: var(--white);
   border: 1px solid var(--primary-300-purple);
@@ -234,9 +234,9 @@ body{
   margin-top: 8%;
   /* color: var(--primary-500-purple); */
   color: var(--white);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  width: 9rem;
+  width: 7rem;
   /* width: 100%; */
   /* border: 1px solid #383536; */
 }
