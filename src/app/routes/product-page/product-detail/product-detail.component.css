@@ -1963,7 +1963,8 @@ button{
 .features-header{
   margin-left:10px;
   color: var(--primary-500-purple);
-  text-decoration: underline;
+  font-size:14px;
+ /* text-decoration: underline; */
 }
 
 .prod-card-holder3::-webkit-scrollbar {

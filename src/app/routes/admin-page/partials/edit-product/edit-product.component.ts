@@ -31,6 +31,7 @@ interface CreateProductPayload {
   productId: String,
   productFAQ: Array<any>,
   updatedAt:Date,
+  appList:Array<any>,
  
 
 }
@@ -59,6 +60,7 @@ export class EditProductComponent  implements OnInit {
   showProducts = false;
   registrationForm: FormGroup;
   addDynamicElementNew: FormArray;
+  addAppArrayNew:FormArray;
   addFAQArrayNew: FormArray;
   brandIds: Array<string>;
 
@@ -88,13 +90,19 @@ export class EditProductComponent  implements OnInit {
       productSkuNumber: ['', Validators.required],
       productSkuId: ['', Validators.required],
       productOrderNumber: [''],
-      productPrice: [''],
-      erpPrice: [''],
-      discount: [''],
+      yproductPrice: [''],
+      yerpPrice: [''],
+      ydistributorPrice:[''],
+      ydiscount: [''],
+      mproductPrice: [''],
+      merpPrice: [''],
+      mdistributorPrice:[''],
+      mdiscount: [''],
       categories: ['', Validators.required],
       Subcategories: ['', Validators.required],
       OEM: ['', Validators.required],
-      subscriptionType: [''],
+      ysubscriptionType: [''],
+      msubscriptionType: [''],
       isVariant: ['false'],
       file: [null],
       products: [''],
@@ -109,12 +117,17 @@ export class EditProductComponent  implements OnInit {
       addFAQArrayNew: this.fb.group({
         // Nested form controls for dynamic elements
        faq: this.fb.array([0])
+      }),
+      addAppArrayNew: this.fb.group({
+        // Nested form controls for dynamic elements
+       app: this.fb.array([0])
       })
     })
     
     this.addDynamicElementNew = this.registrationForm.get('addDynamicElementNew') as FormArray;
    
      this.addFAQArrayNew = this.registrationForm.get('addFAQArrayNew') as FormArray;
+     this.addAppArrayNew = this.registrationForm.get('addAppArrayNew') as FormArray;
     this.defaultDiscount=18;
   }
   
@@ -141,6 +154,7 @@ export class EditProductComponent  implements OnInit {
       hyperLinkURL: ''
     });
   }
+  
 
   createFeatureGroupWithValue(_id, name,description,hyperLinkURL): FormGroup {
     return this.fb.group({
@@ -151,6 +165,12 @@ export class EditProductComponent  implements OnInit {
     });
   }
 
+  createAppGroup(): FormGroup {
+    return this.fb.group({
+      AppName: '',
+      File: ''
+    });
+  }
   private getCategories(): CategoryDetails[] {
     let categoryResponse = null;
     this.subscriptions.push(
@@ -262,16 +282,7 @@ export class EditProductComponent  implements OnInit {
     return this.registrationForm.controls;
   }
 
-  // Choose Subcategories using select dropdown
-  // changeCategories(event: any) {
-  //   const selectedValue = event.target.value.toString();
-  //   const categoryMap = new Map<string, any>();
-  //   this.categories.forEach(category => {
-  //     categoryMap.set(category._id.toString(), category);
-  //   });
-  //   const selectedCategory = categoryMap.get(selectedValue);
-  // }
-
+  
   
 
   changeCategories(event: any) {
@@ -383,11 +394,25 @@ export class EditProductComponent  implements OnInit {
         orderNumber: productData.productOrderNumber,
         priceList: [{
           "Currency": "INR",
-          "price": productData.productPrice,
-          "priceType": productData.subscriptionType,
-          "ERPPrice":productData.erpPrice,
-          "discountRate": productData.discount
-        }],
+          //"price": productData.yproductPrice,
+          "price": this.setYearlyPrice(productData),
+          "priceType": "Year",
+          "ERPPrice" : productData.yerpPrice,
+          "distributorPrice":productData.ydistributorPrice,
+          "discountRate" : productData.ydiscount
+
+        },
+        {
+          "Currency": "INR",
+          "price": this.setMonthlyPrice(productData),
+          "priceType": "Month",
+          "ERPPrice" : productData.merpPrice,
+          "distributorPrice":productData.mdistributorPrice,
+          "discountRate" : productData.mdiscount
+
+        }
+      
+      ],
         productFAQ: productData.addFAQArrayNew.faq,
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
@@ -406,6 +431,20 @@ export class EditProductComponent  implements OnInit {
     }
   }
 
+
+  public setYearlyPrice(data){
+
+    let yskySecurePrice = ((Number(data.yerpPrice)) * 0.02) + (Number(data.ydistributorPrice));
+    return yskySecurePrice;
+    
+  }
+
+  public setMonthlyPrice(data){
+
+    let mskySecurePrice = ((Number(data.merpPrice)) * 0.02) + (Number(data.mdistributorPrice));
+    return mskySecurePrice;
+    
+  }
   removeFeature(data: any) {
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
     featureArray.removeAt(data);
@@ -494,7 +533,10 @@ export class EditProductComponent  implements OnInit {
       onlySelf: true
     })
 
-    this.registrationForm.get('subscriptionType').setValue(response.products.priceList[0].priceType, {
+    this.registrationForm.get('msubscriptionType').setValue(response.products.priceList[0].mpriceType, {
+      onlySelf: true
+    })
+    this.registrationForm.get('ysubscriptionType').setValue(response.products.priceList[0].ypriceType, {
       onlySelf: true
     })
     
@@ -536,11 +578,23 @@ export class EditProductComponent  implements OnInit {
     featureArray.push(this.createFeatureGroup());
   }
 
+  addNewApp() {
+    const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
+    appArray.push(this.createAppGroup());
+  }
   changeSubscriptionType(e) {
     console.log("subscription value "+e.target.value)
     this.registrationForm.get('subscriptionType').setValue(e.target.value, {
       onlySelf: true
     })
+  }
+
+  removeApp(data: any) {
+    const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
+    if(data>0){
+    appArray.removeAt(data);
+    }
+  
   }
 
   formRest(){
