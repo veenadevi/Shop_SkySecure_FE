@@ -341,9 +341,8 @@ export class AddNewProductComponent  implements OnInit {
   // Submit Registration Form
   CreateProduct(): any {
     
-    let a=2;
-    //if (!this.registrationForm.valid) {
-    if (a==3) {
+    
+    if (!this.registrationForm.valid) {
 
       return false;
     } else {
@@ -415,13 +414,13 @@ export class AddNewProductComponent  implements OnInit {
       console.log("_--------------------APP Array", this.tempAppArrayImgFiles);
       console.log("_--------------------createProductPayload_", this.createProductPayload);
       
-      /*this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
+      this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
         // console.log("__RESPONSE_",response);
         this.showMsg=true
 
       })
 
-      this.registrationForm.reset();*/
+      this.registrationForm.reset();
     }
   }
 
