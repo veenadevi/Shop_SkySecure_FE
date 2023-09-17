@@ -418,7 +418,7 @@ export class EditProductComponent  implements OnInit {
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
         bannerLogo: this.productLogo,
-        createdBy: 'ADMIN',
+        createdBy: productData.createdBy,
         updatedBy: userAccountdetails.firstName,
       }
       console.log("_createProductPayload_", this.createProductPayload);
@@ -477,10 +477,11 @@ export class EditProductComponent  implements OnInit {
   fillFormDetails(response) {
     console.log("created By ====="+response.products.createdB)
    let  formattedDate = this.datePipe.transform(response.products.updatedAt, 'dd-MM-YYYY');
-    this.registrationForm.get('createdBy').setValue(response.products.createdBy, {
+   console.log("fetched Created BY details",response.createdBy)
+    this.registrationForm.get('createdBy').setValue(response.createdBy, {
       onlySelf: true
     }) 
-    this.registrationForm.get('updatedBy').setValue(response.products.updatedBy, {
+    this.registrationForm.get('updatedBy').setValue(response.updatedBy, {
       onlySelf: true
     }) 
     this.registrationForm.get('updatedAt').setValue(formattedDate, {
@@ -510,17 +511,37 @@ export class EditProductComponent  implements OnInit {
       onlySelf: true
     })
 
-    this.registrationForm.get('productPrice').setValue(response.products.priceList[0].price, {
+    this.registrationForm.get('yproductPrice').setValue(response.products.priceList[0].price, {
+      onlySelf: true
+    })
+    this.registrationForm.get('ydistributorPrice').setValue(response.products.priceList[0].price, {
       onlySelf: true
     })
 
-    this.registrationForm.get('erpPrice').setValue(response.products.priceList[0].ERPPrice, {
+    this.registrationForm.get('yerpPrice').setValue(response.products.priceList[0].ERPPrice, {
       onlySelf: true
     })
 
-    this.registrationForm.get('discount').setValue(response.products.priceList[0].discountRate, {
+    this.registrationForm.get('ydiscount').setValue(response.products.priceList[0].discountRate, {
       onlySelf: true
     })
+
+
+    this.registrationForm.get('mproductPrice').setValue(response.products.priceList[1].price, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('merpPrice').setValue(response.products.priceList[1].ERPPrice, {
+      onlySelf: true
+    })
+    this.registrationForm.get('mdistributorPrice').setValue(response.products.priceList[1].price, {
+      onlySelf: true
+    })
+
+    this.registrationForm.get('mdiscount').setValue(response.products.priceList[1].discountRate, {
+      onlySelf: true
+    })
+
     this.registrationForm.get('categories').setValue(response.products.categories[0]._id, {
       onlySelf: true
     })
@@ -533,10 +554,10 @@ export class EditProductComponent  implements OnInit {
       onlySelf: true
     })
 
-    this.registrationForm.get('msubscriptionType').setValue(response.products.priceList[0].mpriceType, {
+    this.registrationForm.get('msubscriptionType').setValue(response.products.priceList[1].priceType, {
       onlySelf: true
     })
-    this.registrationForm.get('ysubscriptionType').setValue(response.products.priceList[0].ypriceType, {
+    this.registrationForm.get('ysubscriptionType').setValue(response.products.priceList[0].priceType, {
       onlySelf: true
     })
     
@@ -549,7 +570,14 @@ export class EditProductComponent  implements OnInit {
       onlySelf: true
     })
 
+
+
+
     this.productLogo = response.products.bannerLogo;
+
+
+    
+
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray;
     console.log("===featureArray ==="+featureArray.length)
     response.featureList.forEach((feature) => {

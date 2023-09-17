@@ -295,13 +295,13 @@
                             <div class="forms">
                                 <div class="label">
                                     <label
-                                        [ngClass]="{'error': submitted && myForm.subscriptionType.errors}">Subscription
+                                        [ngClass]="{'error': submitted && myForm.ysubscriptionType.errors}">Subscription
                                         Type</label>
                                 </div>
                                 <div class="select">
                                     <select class="custom-select" (change)="changeSubscriptionType($event)"
                                         formControlName="ysubscriptionType"
-                                        [ngClass]="{'error': submitted && myForm.subscriptionType.errors}">
+                                        [ngClass]="{'error': submitted && myForm.ysubscriptionType.errors}">
                                         <option value="">Choose...</option>
                                         <option *ngFor="let type of subscriptionTypeList" [value]="type">{{type}}
                                         </option>
@@ -310,7 +310,7 @@
 
                                 <!-- error block -->
                                 <div class="invalid-feedback"
-                                    *ngIf="submitted && myForm.subscriptionType.errors?.required">
+                                    *ngIf="submitted && myForm.ysubscriptionType.errors?.required">
                                     <sup>*</sup>Please select Subscription Type
                                 </div>
                             </div>
@@ -319,16 +319,16 @@
                         <div class="orderno">
                             <div class="forms">
                                 <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                    <label [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                         ERP Price</label>
                                 </div>
                                 <div class="input">
                                     <input type="number" class="custom-select-01" formControlName="yerpPrice"
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                 </div>
 
                                 <!-- error block -->
-                                <div class="invalid-feedback" *ngIf="submitted && myForm.productPrice.errors?.required">
+                                <div class="invalid-feedback" *ngIf="submitted && myForm.yproductPrice.errors?.required">
                                     <sup>*</sup>Product ERP required
                                 </div>
                             </div>
@@ -343,7 +343,7 @@
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="ydistributorPrice"
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                 </div>
 
                             </div>
@@ -355,12 +355,12 @@
                         <div class="price">
                             <div class="forms">
                                 <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                    <label [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                         SS Price</label>
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="yproductPrice"
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
                             </div>
@@ -371,13 +371,13 @@
                         <div class="price">
                             <div class="forms">
                                 <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                    <label [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                         Discount(%)</label>
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="ydiscount"
                                         [(ngModel)]=defaultDiscount
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                 </div>
 
                             </div>
@@ -405,7 +405,7 @@
                                 </div>
                                 <div class="select">
                                     <select class="custom-select" (change)="changeSubscriptionType($event)"
-                                        formControlName="subscriptionType"
+                                        formControlName="msubscriptionType"
                                         [ngClass]="{'error': submitted && myForm.msubscriptionType.errors}">
                                         <option value="">Choose...</option>
                                         <option *ngFor="let type of subscriptionTypeList" [value]="type">{{type}}
@@ -415,7 +415,7 @@
 
                                 <!-- error block -->
                                 <div class="invalid-feedback"
-                                    *ngIf="submitted && myForm.subscriptionType.errors?.required">
+                                    *ngIf="submitted && myForm.msubscriptionType.errors?.required">
                                     <sup>*</sup>Please select Subscription Type
                                 </div>
                             </div>
@@ -431,13 +431,10 @@
                                 </div>
                                 <div class="input">
                                     <input type="number" class="custom-select-01" formControlName="merpPrice"
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
-                                <!-- error block -->
-                                <div class="invalid-feedback" *ngIf="submitted && myForm.productPrice.errors?.required">
-                                    <sup>*</sup>Product ERP required
-                                </div>
+                              
                             </div>
 
                         </div>
@@ -446,12 +443,12 @@
                         <div class="price">
                             <div class="forms">
                                 <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                    <label [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                         Distributor Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="mdistributorPrie"
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                    <input type="text" class="custom-select-03" formControlName="mdistributorPrice"
+                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
                             </div>
@@ -463,12 +460,12 @@
                         <div class="price">
                             <div class="forms">
                                 <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                    <label [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                         SS Price</label>
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="mproductPrice"
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
                             </div>
@@ -479,13 +476,13 @@
                         <div class="price">
                             <div class="forms">
                                 <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                    <label [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                         Discount(%)</label>
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="mdiscount"
                                         [(ngModel)]=defaultDiscount
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
                             </div>
