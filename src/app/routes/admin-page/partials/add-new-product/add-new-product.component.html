@@ -407,13 +407,13 @@
 
 
                     <div class="app" *ngFor="let item of addAppArrayNew.get('app')['controls']; let i = index">
-                        <div class="app-name">
+                        <div class="app-name" [formGroup]="item">
                             <div class="label">
                                 <label >
                                     App  Name</label>
                             </div>
                             <div class="input">
-                                <input type="text" class="custom-select-01" >
+                                <input type="text" class="custom-select-01" formControlName="AppName">
                             </div>
                         </div>
 
@@ -422,7 +422,7 @@
                             <label>App Logo</label>
                             <div class="avatar-edit">
                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
-                                    (change)="uploadFile($event)" />
+                                    (change)="uploadFileForApp($event, i)" />
                                 <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
                                     alt="productLogo" />
                                 <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"

@@ -201,6 +201,30 @@ export class AddNewProductComponent  implements OnInit {
     );
   }
 
+
+  public tempAppArrayImgFiles = [];
+
+  uploadFileForApp(event : any, i){
+    const formData: FormData = new FormData();
+    formData.append('file', event.target.files[0], event.target.files[0].name);
+
+    this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
+      .subscribe(
+        (response: any) => {
+          
+          this.tempAppArrayImgFiles.push({
+            'index': i,
+            'val' : response.filePath
+          })
+          //this.productLogo = response.filePath;
+        },
+        error => {
+          console.error('Upload error:', error);
+          // Handle the error response
+        }
+      );
+  }
+
   uploadFile(event: any) {
     // console.log("__TEST__", event);
     const formData: FormData = new FormData();
@@ -316,11 +340,11 @@ export class AddNewProductComponent  implements OnInit {
 
   // Submit Registration Form
   CreateProduct(): any {
-    //this.submitted = true;
-    // console.log("this.registrationForm.valid"+this.submitted)
-    if (!this.registrationForm.valid) {
+    
+    let a=2;
+    //if (!this.registrationForm.valid) {
+    if (a==3) {
 
-     // alert('Please fill all the required fields !')
       return false;
     } else {
       // console.log("Final value", this.registrationForm.value);
@@ -367,14 +391,37 @@ export class AddNewProductComponent  implements OnInit {
         createdBy: userAccountdetails._id,
         updatedBy: userAccountdetails._id
       }
-      // console.log("_createProductPayload_", this.createProductPayload);
-      this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
+
+      
+      if(this.createProductPayload.appList && this.createProductPayload.appList.length>0){
+
+
+        for(let i=0;i<this.createProductPayload.appList.length;i++){
+          const result = this.tempAppArrayImgFiles.filter((obj) => {
+            return obj.index === i;
+          });
+
+          if(result && result.length>0){
+            this.createProductPayload.appList[i].File = result[0].val;
+          }
+          else{
+            this.createProductPayload.appList[i].File = "";
+          }
+        }
+
+        
+      }
+
+      console.log("_--------------------APP Array", this.tempAppArrayImgFiles);
+      console.log("_--------------------createProductPayload_", this.createProductPayload);
+      
+      /*this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
         // console.log("__RESPONSE_",response);
         this.showMsg=true
 
       })
 
-      this.registrationForm.reset();
+      this.registrationForm.reset();*/
     }
   }
 
