@@ -60,6 +60,7 @@ export class EditProductComponent  implements OnInit {
   registrationForm: FormGroup;
   addDynamicElementNew: FormArray;
   addFAQArrayNew: FormArray;
+  addAppListNew: FormArray;
   brandIds: Array<string>;
 
   createProductPayload: any;
@@ -109,12 +110,17 @@ export class EditProductComponent  implements OnInit {
       addFAQArrayNew: this.fb.group({
         // Nested form controls for dynamic elements
        faq: this.fb.array([0])
+      }),
+      addAppListNew: this.fb.group({
+        // Nested form controls for dynamic elements
+       appList: this.fb.array([0])
       })
     })
     
     this.addDynamicElementNew = this.registrationForm.get('addDynamicElementNew') as FormArray;
    
      this.addFAQArrayNew = this.registrationForm.get('addFAQArrayNew') as FormArray;
+     this.addAppListNew = this.registrationForm.get('addAppListNew') as FormArray;
     this.defaultDiscount=18;
   }
   
@@ -214,6 +220,20 @@ export class EditProductComponent  implements OnInit {
     return this.fb.group({
       Question: '',
       Answer: ''
+    });
+  }
+
+  createAppListGroup(): FormGroup {
+    return this.fb.group({
+      Name: '',
+      AppLogo: ''
+    });
+  }
+
+  createAppListGroupWithValue(Name,AppLogo): FormGroup {
+    return this.fb.group({
+      Name: Name,
+      AppLogo: AppLogo
     });
   }
 
@@ -389,6 +409,7 @@ export class EditProductComponent  implements OnInit {
           "discountRate": productData.discount
         }],
         productFAQ: productData.addFAQArrayNew.faq,
+        productAppList: productData.addAppListNew.appList,
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
@@ -432,6 +453,13 @@ export class EditProductComponent  implements OnInit {
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
     if(data>0){
     faqArray.removeAt(data);
+    }
+  }
+
+  removeAppList(data: any){
+    const appListArray = this.addAppListNew.get('appList') as FormArray; // Get the nested FormArray
+    if(data>0){
+      appListArray.removeAt(data);
     }
   }
 
@@ -515,9 +543,17 @@ export class EditProductComponent  implements OnInit {
     })
 
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray;
-    console.log("faqArray====="+response.products.productFAQ.length)
+    
+    
     response.products.productFAQ.forEach((faq) => {
       faqArray.push(this.createFAQGroupWithValue(faq.Question, faq.Answer)); 
+    })
+
+    
+    const appListArray = this.addAppListNew.get('appList') as FormArray;
+    response.appList.forEach((appList) => {
+      appListArray.push(this.createAppListGroupWithValue(appList.name, appList.imageUrl)); 
+      console.log("=====================", appListArray)
     })
     this.submitted = true;
   }
@@ -534,6 +570,11 @@ export class EditProductComponent  implements OnInit {
   addNewFeature() {
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
     featureArray.push(this.createFeatureGroup());
+  }
+
+  addNewAppList() {
+    const appListArray = this.addAppListNew.get('appList') as FormArray; // Get the nested FormArray
+    appListArray.push(this.createAppListGroup());
   }
 
   changeSubscriptionType(e) {

@@ -657,6 +657,26 @@
                 </div>
 
 
+                <!-- App List -->
+                <div class="feature-update">
+                    <label class="heading">App List</label>
+
+                    <div class="feature" *ngFor="let item of addAppListNew.get('appList')['controls']; let i = index">
+                        <div class="feature-title" [formGroup]="item">
+
+                            <label>App Name</label>
+                            <input type="text" class="form-control" formControlName="Name">
+
+
+                        </div>
+                        <div class="feature-btn">
+                            <button class="btn add-btn" (click)="addNewAppList()">Add New</button>
+                            <button class="btn btn-warning" (click)="removeAppList(i)">Remove</button>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <!-- Add Super Powers Dynamically-->
 
