@@ -243,6 +243,19 @@ export class EditProductComponent  implements OnInit {
       Answer: Answer
     });
   }
+
+  createAppList(): FormGroup {
+    return this.fb.group({
+      Name: '',
+      imageUrl: ''
+    });
+  }
+  createAppListWithValue(name,imageUrl): FormGroup {
+    return this.fb.group({
+      Name: name,
+      imageUrl: imageUrl
+    });
+  }
   uploadFile(event: any) {
     console.log("__TEST__", event);
     const formData: FormData = new FormData();
@@ -589,6 +602,19 @@ export class EditProductComponent  implements OnInit {
     response.products.productFAQ.forEach((faq) => {
       faqArray.push(this.createFAQGroupWithValue(faq.Question, faq.Answer)); 
     })
+
+
+    const appNewArray = this.addAppArrayNew.get('app') as FormArray;
+    response.appList.forEach((app) => {
+      console.log("++_+_+__+__++_+ ", app);
+      appNewArray.push(this.createAppListWithValue(app.name, null));
+      //faqArray.push(this.createFAQGroupWithValue(faq.Question, faq.Answer)); 
+    })
+
+
+
+
+
     this.submitted = true;
   }
 
