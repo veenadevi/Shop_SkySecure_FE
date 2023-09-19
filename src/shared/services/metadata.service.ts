@@ -24,6 +24,7 @@ export class MetadataService {
   private fetchProductsByBrandIds : string;
   private fetchTrendingProductsUrl : string
   private getSingleProduct : string;
+  private getSingleProductDetails : string;
   private fetchSignleBrandDetailsUrl : string;
   private fetchProductsByFilter : string;
   private fetchProductBundleVariantDetailsUrl:string;
@@ -46,6 +47,7 @@ export class MetadataService {
     this.fetchSubCategoriesUrl = AppService.appUrl.subCategoryByCategory;
     this.fetchProductsBySubCategoryIds = AppService.appUrl.getProductsBySubCategoryIds;
     this.getSingleProduct = AppService.appUrl.getSingleProduct;
+    this.getSingleProductDetails=AppService.appUrl.getSingleProductDetails;
     this.fetchProductsByBrandIds = AppService.appUrl.getProductsByBrandIds;
     this.fetchTrendingProductsUrl = AppService.appUrl.getTrendingProducts;
     this.fetchProductsByFilter = AppService.appUrl.getProductsByFilter;
@@ -208,7 +210,7 @@ export class MetadataService {
   }
 
   public fetchSingleProductDetails(productId: string) : Observable<any> {
-    let url = this.baseUrl + this.getSingleProduct + productId;
+    let url = this.baseUrl + this.getSingleProductDetails + productId;
     //let options = this.getOptions();
 
     // return this.http.get(url)

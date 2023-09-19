@@ -32,6 +32,7 @@ interface CreateProductPayload {
   productFAQ: Array<any>,
   updatedAt:Date,
   appList:Array<any>,
+  compareWithproducts:Array<any>
  
 
 }
@@ -47,7 +48,10 @@ export class EditProductComponent  implements OnInit {
   submitted = false;
   public subscriptions: Subscription[] = [];
   public categories: CategoryDetails[] = [];
+  public selectedProductIds :any[]=[];
   public products: any[] = [];
+  
+  public compareproducts: any[] = [];
   public selectedCategory: any = {};
   public oemList: OEMDetails[] = [];
   public subCategories: any[] = [];
@@ -63,6 +67,7 @@ export class EditProductComponent  implements OnInit {
   addAppArrayNew:FormArray;
   addFAQArrayNew: FormArray;
   brandIds: Array<string>;
+  compareProductListIds:Array<string>
 
   createProductPayload: any;
   public currentRoute: string;
@@ -70,8 +75,9 @@ export class EditProductComponent  implements OnInit {
   selectedItemId: String;
   defaultDiscount: number;
   selectedProductId : any;
-  selectedProductId1 : any[] = [];
+  selectedProductId1 :  any;
   showMsg: boolean = false;
+  listedProducts:any[]=[];
 
   constructor(
     public fb: FormBuilder,
@@ -100,12 +106,15 @@ export class EditProductComponent  implements OnInit {
       mdiscount: [''],
       categories: ['', Validators.required],
       Subcategories: ['', Validators.required],
+      selectedProductIds:[''],
+      selectedProductId1:[''],
       OEM: ['', Validators.required],
       ysubscriptionType: [''],
       msubscriptionType: [''],
       isVariant: ['false'],
       file: [null],
       products: [''],
+      compareproducts:[''],
       createdBy:[''],
       updatedBy:[''],
       updatedDate:[''],
@@ -167,6 +176,7 @@ export class EditProductComponent  implements OnInit {
 
   createAppGroup(): FormGroup {
     return this.fb.group({
+      
       AppName: '',
       File: ''
     });
@@ -203,6 +213,7 @@ export class EditProductComponent  implements OnInit {
         this.oemList = response.oems;
         this.brandIds = this.oemList.map((data) => data._id);
         this.getProducts();
+        this.getAllProducts();
       })
 
     );
@@ -218,6 +229,23 @@ export class EditProductComponent  implements OnInit {
 
     );
   }
+  private getAllProducts() {
+    this.subscriptions.push(
+      this.metaDataSvc.fetchProductsByFilters({subCategoryIds: [],brandIds: this.brandIds}).subscribe(response => {
+        this.listedProducts=response.products;
+        this.listedProducts.map((data) => {
+        const newProduct = { id: data._id, name:data.name}
+
+        this.compareproducts.push(newProduct)
+        console.log("__TEST COMPARE__",this.compareproducts);
+        });
+      
+
+      })
+
+      );
+    }
+  
 
   private getProductDetails(productId) {
     console.log("fetching product for +======"+productId)
@@ -250,8 +278,9 @@ export class EditProductComponent  implements OnInit {
       imageUrl: ''
     });
   }
-  createAppListWithValue(name,imageUrl): FormGroup {
+  createAppListWithValue(id,name,imageUrl): FormGroup {
     return this.fb.group({
+     _id: id,
       Name: name,
       imageUrl: imageUrl
     });
@@ -361,6 +390,11 @@ export class EditProductComponent  implements OnInit {
   selectSimilarProduct(event: any) {
 
     console.log("++++++++ ______ ", event.value);
+    console.log("selected ProductId====",event.value.length)
+    var selectedproductList=event.value
+
+    this.compareProductListIds = selectedproductList.map((data) => data._id);
+    
     
   }
 
@@ -430,17 +464,20 @@ export class EditProductComponent  implements OnInit {
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
+        appList:productData.addAppArrayNew.app,
         bannerLogo: this.productLogo,
-        createdBy: productData.createdBy,
-        updatedBy: userAccountdetails.firstName,
+      //  createdBy: productData.createdBy,
+        updatedBy: userAccountdetails._id,
+        compareWithproducts:this.compareProductListIds
       }
-      console.log("_createProductPayload_", this.createProductPayload);
+      console.log("_editProductPayload_", this.createProductPayload);
       var endPoint = `${environment.gatewayUrl}api/admin/product/edit`
       this.http.patch(endPoint,this.createProductPayload).subscribe((response) => {
         console.log("__RESPONSE_",response);
         this.showMsg=true
       })
          this.registrationForm.reset();
+         this.selectedProductId.reset();
     }
   }
 
@@ -559,6 +596,13 @@ export class EditProductComponent  implements OnInit {
       onlySelf: true
     })
 
+ console.log("selectedCompareperocuctidss...",response.products.compareWithproducts)
+ //this.selectedProductId1=this.selectedProductId1.concat([response.products.compareWithproducts]);
+  this.selectedProductId1=[response.products.compareWithproducts];
+ 
+    this.registrationForm.get('selectedProductId1').setValue(['64bdffaa5559b600556bc31e', '64be072a5559b600556bc75b']
+    )
+
     this.registrationForm.get('Subcategories').setValue(response.products.subCategoryId, {
       onlySelf: true
     })
@@ -605,9 +649,10 @@ export class EditProductComponent  implements OnInit {
 
 
     const appNewArray = this.addAppArrayNew.get('app') as FormArray;
+
     response.appList.forEach((app) => {
       console.log("++_+_+__+__++_+ ", app);
-      appNewArray.push(this.createAppListWithValue(app.name, null));
+      appNewArray.push(this.createAppListWithValue(app.appId,app.name, app.imageURL));
       //faqArray.push(this.createFAQGroupWithValue(faq.Question, faq.Answer)); 
     })
 

@@ -496,7 +496,7 @@
 
 
 
-                    <div class="section-04">
+                    <div class="section-04" >
 
                     <div class="similar-products">
 
@@ -512,14 +512,16 @@
 
                         <p-multiSelect 
                         
-                            [options]="products" 
+                            [options]="compareproducts" 
+                         
                             [(ngModel)]="selectedProductId1" 
                             defaultLabel="Select Products" 
+                            formControlName="selectedProductId1"
                             (onChange)="selectSimilarProduct($event)"
                             optionLabel="name">
-                            <ng-template let-products pTemplate="item">
+                            <ng-template let-compareproducts pTemplate="item" >
                                 <div class="country-item">
-                                    <div>{{products.name}}</div>
+                                    <div>{{compareproducts.name}}</div>
                                 </div>
                             </ng-template>
                         </p-multiSelect>
