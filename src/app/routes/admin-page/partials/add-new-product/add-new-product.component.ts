@@ -12,6 +12,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 interface CreateProductPayload {
   name: String,
+  shortDescription : String,
   description: String,
   oemId: String,
   subCategoryId: String,
@@ -72,6 +73,7 @@ export class AddNewProductComponent  implements OnInit {
   ) {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
+      productShortDescription:['', Validators.required],
       productDescription: ['', Validators.required],
       productSkuNumber: ['', Validators.required],
       productSkuId: ['', Validators.required],
@@ -341,7 +343,7 @@ export class AddNewProductComponent  implements OnInit {
   // Submit Registration Form
   CreateProduct(): any {
     
-    
+    let a=2;
     if (!this.registrationForm.valid) {
 
       return false;
@@ -352,6 +354,7 @@ export class AddNewProductComponent  implements OnInit {
       var productData = this.registrationForm.value;
       this.createProductPayload = {
         name: productData.productName,
+        shortDescription: productData.productShortDescription,
         description: productData.productDescription,
         oemId: productData.OEM,
         subCategoryId: productData.Subcategories,
@@ -411,16 +414,17 @@ export class AddNewProductComponent  implements OnInit {
         
       }
 
-      console.log("_--------------------APP Array", this.tempAppArrayImgFiles);
-      console.log("_--------------------createProductPayload_", this.createProductPayload);
+      //console.log("_--------------------APP Array", this.tempAppArrayImgFiles);
+      //console.log("_--------------------createProductPayload_", this.createProductPayload);
+      
       
       this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
-        // console.log("__RESPONSE_",response);
+        
         this.showMsg=true
 
       })
 
-      this.registrationForm.reset();
+      this.registrationForm.reset(); 
     }
   }
 
