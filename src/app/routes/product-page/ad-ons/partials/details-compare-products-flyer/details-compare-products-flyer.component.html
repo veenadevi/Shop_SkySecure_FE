@@ -10,19 +10,66 @@
             <!-- Template for Multiple Products -->
             <!-- <ng-container *ngIf="(productList.length>1); else singleProduct">-->
             <ng-container>
-                <div class="header">
-                    Compare Products
+                <div class=" tertiary-headline header">
+                    Compare with similar products
                 </div>
-                <div class="text-style">
-                    Select your desired products and compare its features
-                </div>
+                <div class="parentproductList">
+
+                <div class="main-product">
+                    <div class="product-img-container">
+                        <img class="main-product-img" src="../../../../../../assets/Logos/MicrosoftLogo_300X300.png">
+                    </div>
+
+                            <p class="main-product-content">{{productList[0].name}}</p>
+                            <ng-container *ngIf="productList[0].priceList && productList[1].priceList.length>0">
+                                ₹ {{productList[0].priceList[1].price | number : '1.2-2'}}/ {{'Month'}}
+                            </ng-container>
+                     </div>
+
+            </div>
+                
+                <!-- <div class="text-style">
+                    Compare with similar products
+                </div> -->
                 <div class="list-holder">
-                    <ng-container *ngFor="let item of productList">
-                        <compare-product-item-flyer [item] = "item" (removableItem)="removeSelectedItem($event)"></compare-product-item-flyer>
-                    </ng-container>
+
+
+                    <div class="top-border-left">
+                        <div class="half-curve-border-left">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#918F90"/>
+                              </svg>
+                        </div>
+                        <div class="half-border-left"></div>
+                    </div>
+
+
+
+                    <div class="vs-section-2">
+                        
+                        <span class="vs-text-2">VS</span>
+                    </div>
+
+                    <div class="top-border-right">
+                        <div class="half-curve-border-right">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#918F90"/>
+                              </svg>
+                        </div>
+                        <div class="half-border-right"></div>
+                    </div>
+
+                    <div class="row-holder"  *ngFor="let item of productList | slice:1; let i = index" >
+                        <suggested-compare-card-flyer [item] = "item" ></suggested-compare-card-flyer>
+                    </div>
+                   
+
                 </div>
+
+
+
                 <div class="btn-holder">
-                    <button class="compare-btn" (click)="navigateToCompareProducts()" [disabled]="(productList.length === 1)">
+                    <button class="secondary-btn" (click)="navigateToCompareProducts()" [disabled]="(productList.length === 1)">
                         Compare
                     </button>
                 </div>
@@ -54,7 +101,7 @@
                 Select your desired products and compare its features
             </div>
             <div class="list-holder">
-                <compare-product-item-flyer [item] = "itemJson" (removableItem)="removeSelectedItem($event)"></compare-product-item-flyer>
+                <compare-product-item-flyer [item] = "itemJson" ></compare-product-item-flyer>
             </div>
         </ng-template>
     </ng-container>

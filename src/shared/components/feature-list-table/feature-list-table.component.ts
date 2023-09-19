@@ -4,6 +4,7 @@ import { ProductVariantModalComponent } from '../product-variant-modal/product-v
 import { LoginAlertModalComponent } from '../login-alert-modal/login-alert-modal.component';
 import { MsalService } from '@azure/msal-angular';
 import { Router } from '@angular/router';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
 
 @Component({
   selector: 'feature-list-table',
@@ -25,7 +26,8 @@ export class FeatureListTableComponent implements OnInit{
     private modalService : NgbModal,
     private modalServiceBundle : NgbModal,
     private authService : MsalService,
-    private router : Router
+    private router : Router,
+    private addItemsToCartService : AddItemsToCartService
   ){}
 
   ngOnInit(): void {
@@ -106,8 +108,8 @@ export class FeatureListTableComponent implements OnInit{
 
  
 
-    
-    this.router.navigate(['/cart'], {queryParams: queryParams});
+    this.addItemsToCartService.addItemsToCart(queryParams);
+    //this.router.navigate(['/cart'], {queryParams: queryParams});
 
   }
 

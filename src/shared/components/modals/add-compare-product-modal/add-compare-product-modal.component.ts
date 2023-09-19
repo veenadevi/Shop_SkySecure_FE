@@ -18,13 +18,15 @@ export class AddCompareProductModalComponent {
   ){}
 
   public selectedItem(event){
-    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
     let cacheData2 = [];
-    let combinedData = [...cacheData, ...cacheData2];
+    let combinedData = [...cacheData, ...cacheData2];*/
+
+    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
 
 
-    var isPresent = combinedData.some(function(el){ return el._id === event._id});
+    var isPresent = cachedProductsToCompare.some(function(el){ return el._id === event._id});
                     
     if(isPresent){
         

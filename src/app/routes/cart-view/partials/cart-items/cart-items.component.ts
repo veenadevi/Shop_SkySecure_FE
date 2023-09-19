@@ -204,6 +204,7 @@ public cartData : any[] = [];
     
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
+     
       //userId : '2222',
       createdBy : userAccountdetails._id,
       updatedBy : userAccountdetails._id,
@@ -325,6 +326,8 @@ public onChangeQuantity(i, price) : void {
   this.cartData[i].quantity = Number(this.cartData[i].quantity)
   this.cartData[i].itemTotal = this.cartData[i].quantity * price;
   this.calTotalPrice();
+  this.saveCart();
+  
 }
 
 
@@ -351,6 +354,7 @@ public onChangeQuantity(i, price) : void {
         
     }
     this.calTotalPrice();
+    this.saveCart();
   }
 
   public calTotalPrice() {
@@ -376,6 +380,7 @@ public onChangeQuantity(i, price) : void {
 
       let req = {
         userId : userAccountdetails._id,
+       
         createdBy : userAccountdetails.firstName,
         //createdBy : "userwithoutGST1001",
         
@@ -567,12 +572,14 @@ public onChangeQuantity(i, price) : void {
   }
   public saveCart() {
 
+    console.log("callig save")
   
     let cartRefId = this.cartStore.getCartRefreneceId();
     //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
     let userAccountdetails = this.userAccountStore.getUserDetails();
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
+      
       //userId : '2222',
       createdBy : userAccountdetails._id,
       updatedBy : userAccountdetails._id,
@@ -600,6 +607,7 @@ public onChangeQuantity(i, price) : void {
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
       //userId : '2222',
+    
       createdBy : userAccountdetails._id,
       updatedBy : userAccountdetails._id,
       products : this.cartData,

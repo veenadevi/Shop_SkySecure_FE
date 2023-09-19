@@ -1,7 +1,7 @@
 :host ::ng-deep .border-none{
     border: none;
-    padding: 0% 0% 0 2%;
-    margin: 1% 0% 0 2%;
+    padding: 0% 0% 0 0%;
+    margin: 1% 0% 0 0%;
 }
 
 :host ::ng-deep .p-breadcrumb{
@@ -14,4 +14,12 @@
 
 :host ::ng-deep .pi{
     font-size: 0.8rem;
+}
+
+
+  
+@media (min-width:320px) and (max-width:480px){
+    .border-none{
+        display: none;
+    }
 }

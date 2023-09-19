@@ -17,34 +17,10 @@ import { CartStore } from 'src/shared/stores/cart.store';
 })
 export class GstPromptModalComponent implements OnInit{
   showContent: boolean = false;
+  showPrivacyContent: boolean = false;
   showButton: boolean=true;
  
- 
-  onKeyDown(event: KeyboardEvent): void {
-    const key = event.key;
 
-    if (key === '-') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-    if (key === '+') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-    if (key === '*') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-    if (key === '.') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-  
-    if (key === 'e') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-    if (key === 'E') {
-      event.preventDefault(); // Prevent the negative sign from being entered
-    }
-  }
-
-  
   @Input('request')
   public request : any;
 
@@ -70,7 +46,7 @@ export class GstPromptModalComponent implements OnInit{
   public selectedType : any = 'self';
   myForm: FormGroup;
 
- 
+
   isChecked: boolean = false;
   nrSelect : any;
 
@@ -104,9 +80,7 @@ export class GstPromptModalComponent implements OnInit{
     this.myForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      
     });
-  
   }
 
   ngOnInit(): void {
@@ -130,7 +104,8 @@ export class GstPromptModalComponent implements OnInit{
       {
         //email: [this.emailViaSignup, [Validators.required, Validators.email]],
         //otp : [],
-        gstNo : [],
+        gstNo : [null],
+        checkGstNil : [null],
         companyName : [],
         addressLine1 : [],
         addressLine2 : [],
@@ -140,11 +115,27 @@ export class GstPromptModalComponent implements OnInit{
         postalCode : [],
         phoneNo : [],
         firstName : [],
-        email : []
-
+        email : [],
+       checkTerms : [null]
       }
     )
   }
+
+disableGstNOField(){
+  // console.log(this.myForm.get('checkGstNil').value);
+  if(this.myForm.get('checkGstNil').value)
+    this.myForm.get('gstNo').disable();
+else
+this.myForm.get('gstNo').enable();
+}
+disableCheckGstNil(){
+  // console.log(this.myForm.get('checkGstNil').value);
+  if(this.myForm.get('gstNo').value)
+    this.myForm.get('checkGstNil').disable();
+else
+this.myForm.get('checkGstNil').enable();
+}
+
 
   public setSelfData(){
     let userDetails = this.userAccountStore.getUserDetails();
@@ -262,17 +253,20 @@ export class GstPromptModalComponent implements OnInit{
 
   }
 
-
+public submitErrorMessage: boolean =false;
 
   public createQuotationService(){
-    
-
-
+    if((this.myForm.get('checkTerms').value === null || this.myForm.get('checkTerms').value === false))
+   {
+    this.submitErrorMessage = true;
+    console.log("_____++++ Error Messgae");
+  }
+  else
+  {
+    console.log("_____++++ Error False");
+    this.submitErrorMessage = false
+   
     let userDetails = this.userAccountStore.getUserDetails();
-
-
-
-    
 
     let req = this.request;
     //let formVal = this.form.value; 
@@ -364,7 +358,8 @@ export class GstPromptModalComponent implements OnInit{
 
 
     if(formVal.gstNo === null || formVal.gstNo === ''){
-  
+      
+      
       req.gst_treatment = "business_none";
     }
     else{
@@ -406,7 +401,7 @@ export class GstPromptModalComponent implements OnInit{
         
       })
     )
-
+    }
   }
 
   public updateGSTService(req){
@@ -513,13 +508,26 @@ export class GstPromptModalComponent implements OnInit{
     )
   }
 
+  public onTermsClick(){
+    this.showPrivacyContent = !this.showPrivacyContent;
+  }
+
+
+public errorMessage: boolean = false;
+
 
   public onNextClick(){
+    if((this.myForm.get('checkGstNil').value === null || this.myForm.get('checkGstNil').value === false)
+    && (this.myForm.get('gstNo').value === null || this.myForm.get('gstNo').value === '')){
+this.errorMessage = true;
+  }
+  else{
+    this.errorMessage = false;
     this.showContent = !this.showContent;
 
-    if("this.myForm.value.gstNo.length >0" || "this.isChecked = 'true'")
-    {
-      if(this.myForm.value.gstNo.length === 15){
+    
+
+    if(this.myForm.value.gstNo.length === 15){
 
         this.myForm.controls['companyName'].disable();
         this.myForm.controls['addressLine1'].disable();
@@ -563,6 +571,7 @@ export class GstPromptModalComponent implements OnInit{
           let selectedCity = cityList.filter(c => c.name === resCity)[0];
           this.selectedCity = selectedCity;
 
+
           
 
 
@@ -577,10 +586,7 @@ export class GstPromptModalComponent implements OnInit{
     else{
 
     }
-    }
-
- 
-
+  }
 
   }
 
@@ -588,10 +594,76 @@ export class GstPromptModalComponent implements OnInit{
     this.showContent = !this.showContent;
     this.myForm.enable();
   }
-
   public onCancelClick(){
     this.activeModal.close();
   }
- 
+  public onPreviousClick(){
+    //this.showContent = false ;
+    this.showPrivacyContent = false;
 
+    if(this.isChecked2 === true){
+      this.myForm.patchValue({
+        checkTerms:false
+      })
+    }
+    if(this.isChecked1 === true){
+      this.myForm.patchValue({
+        checkTerms:true
+      })
+    }
+    
+    this.myForm.enable();
+  }
+
+
+  isChecked1: boolean = false;
+  isChecked2: boolean = false;
+
+  checkboxChanged(checkboxNumber: number) {
+    if (checkboxNumber === 1) {
+      this.isChecked2 = false; // Uncheck Checkbox 2 when Checkbox 1 changes
+    } else if (checkboxNumber === 2) {
+      this.isChecked1 = false; 
+      
+    }
+
+    this.showPrivacyContent = false;
+
+    if(this.isChecked2 === true){
+      this.myForm.patchValue({
+        checkTerms:false
+      })
+    }
+    if(this.isChecked1 === true){
+      this.myForm.patchValue({
+        checkTerms:true
+      })
+    }
+    
+    this.myForm.enable();
+  }
+  checkTerms :boolean= false;
+
+  disableCheckTerms(){
+    
+    if(this.isChecked2 === false && this.isChecked1 === false  )
+    {
+      this.myForm.get('checkTerms').disable();
+    }
+   
+    else
+    this.myForm.get('checkTerms').enable();
+  }
+
+  disableErrorMessage(){
+    if(this.myForm.get('checkTerms').value === true){
+      this.submitErrorMessage=false;
+    }
+  }
+  disableAnyOneMessage(){
+    if((this.myForm.get('checkGstNil').value === null || this.myForm.get('gstNo').value === true)
+   || (this.myForm.get('gstNo').value === null || this.myForm.get('checkGstNil').value === true)){
+      this.errorMessage=false;
+    }
+  }
 }

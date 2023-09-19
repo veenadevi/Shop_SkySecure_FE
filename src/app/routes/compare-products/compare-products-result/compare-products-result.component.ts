@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { LoginAlertModalComponent } from 'src/shared/components/login-alert-modal/login-alert-modal.component';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
@@ -75,7 +76,8 @@ export class CompareProductsResultComponent {
     private modalService: NgbModal,
     private userAccountStore : UserAccountStore,
     private compareProductsStore : CompareProductsStore,
-    private decimalPipe : DecimalPipe
+    private decimalPipe : DecimalPipe,
+    private addItemsToCartService : AddItemsToCartService
   ) {
     for (let i = 0; i < 50; ++i) {
       this.dataSource.push({
@@ -88,16 +90,22 @@ export class CompareProductsResultComponent {
   public ngOnInit(): void {
 
     
-    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    
+    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
 
-    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+
+    
     let cacheData2 = [];
     let combinedData = [...cacheData, ...cacheData2];
 
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
     let reqBody = this.setPrdList(uniqueElements);
-    this.cachedProductsList = uniqueElements;
-    //console.log("from local storage ==="+uniqueElements.length)
+    this.cachedProductsList = uniqueElements;*/
+
+    let reqBody = this.setPrdList(cachedProductsToCompare);
+    this.cachedProductsList = cachedProductsToCompare;
+    
 
     if(this.cachedProductsList.length <= 4){
       this.emptyProductsLength = 4 - this.cachedProductsList.length;
@@ -106,9 +114,7 @@ export class CompareProductsResultComponent {
       this.emptyProductsLength = 4;
     }
     
-   // console.log("empty cards size ==="+this.emptyProductsLength)
-
-   // this.fetchCompareProductsList(this.allSelectedItems);
+   
     this.fetchCompareProductsList(reqBody);
   }
 
@@ -159,7 +165,7 @@ export class CompareProductsResultComponent {
           return null;
       }
     });
-    console.log("product also should go inside")
+ 
     let reqBody = {
       "products": tempPrd,
       "productsVariants": tempPrdVar,
@@ -272,7 +278,7 @@ export class CompareProductsResultComponent {
             element.properties['priceList'].priceType= 'Month';
         });
 
-        console.log("reqBody productFamily length size ==="+this.allProducts.length)
+    
 
       })
     );
@@ -337,7 +343,7 @@ export class CompareProductsResultComponent {
   }
 
   public setProductFamilyList(response){
-    console.log("=====productFzmily length===="+response.productFamily.length)
+
     let item = response.productFamily.map((data: any) => {
       let featureList=data.productFamilyFeatures 
       let productData = data.productFamily;
@@ -487,6 +493,29 @@ export class CompareProductsResultComponent {
     }
   }
 
+
+  public getPriceType(val){
+
+    console.log("+++++ Val ", val);
+
+    switch (val.toLowerCase()) {
+      case 'month':
+        return 'Monthly';
+
+      case 'monthly':
+        return 'Monthly';
+        
+      case 'year':
+        return 'Yearly';
+      
+      case 'yearly':
+        return 'Yearly';
+
+      default:
+        return 'Yearly';
+    }
+  }
+
   public requestQuote (productItem : any) : void {
 
  
@@ -504,7 +533,7 @@ export class CompareProductsResultComponent {
           price : product.priceList.price,
           erpPrice:product.priceList.ERPPrice,
           discountRate:product.priceList.discountRate,
-          priceType:product.priceList.priceType,
+          priceType:this.getPriceType(product.priceList.priceType),
         };
 
 
@@ -512,7 +541,9 @@ export class CompareProductsResultComponent {
     this.userAccountStore.userDetails$.subscribe(res=>{
       
       if(res && res.email !== null){
-        this.router.navigate(['/cart'], {queryParams: queryParams});
+        //console.log("_+_+_+__+ ", queryParams);
+        this.addItemsToCartService.addItemsToCart(queryParams);
+        //this.router.navigate(['/cart'], {queryParams: queryParams});
       }
       else{
         this.viewModal(queryParams);
@@ -533,9 +564,11 @@ export class CompareProductsResultComponent {
       });
       
       
-      localStorage.setItem('product_list_to_compare', JSON.stringify(this.cachedProductsList));
-      //localStorage.setItem('product_list_to_compare2', JSON.stringify(this.cachedProductsList));
-      this.compareProductsStore.setCompareProductsList2(this.cachedProductsList); 
+      //localStorage.setItem('product_list_to_compare', JSON.stringify(this.cachedProductsList));
+      //this.compareProductsStore.setCompareProductsList2(this.cachedProductsList); 
+
+      localStorage.setItem('compare_products_list', JSON.stringify(this.cachedProductsList));
+      this.compareProductsStore.setCompareProductsList(this.cachedProductsList); 
       
      
       
@@ -715,7 +748,7 @@ export class CompareProductsResultComponent {
 
         
 
-        let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
         //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
         let cacheData2 = [];
         let combinedData = [...cacheData, ...cacheData2];
@@ -729,7 +762,15 @@ export class CompareProductsResultComponent {
         localStorage.setItem('product_list_to_compare', JSON.stringify(finalProducts));
         //localStorage.setItem('product_list_to_compare2', JSON.stringify(finalProducts));
         this.compareProductsStore.setCompareProductsList(finalProducts);
-        this.compareProductsStore.setCompareProductsList2(finalProducts);
+        this.compareProductsStore.setCompareProductsList2(finalProducts);*/
+
+
+        let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+        let finalProducts = [...cachedProductsToCompare, event.receivedEntry];
+        localStorage.setItem('compare_products_list', JSON.stringify(finalProducts));
+        this.compareProductsStore.setCompareProductsList(finalProducts);
+
+
       })
     )
 

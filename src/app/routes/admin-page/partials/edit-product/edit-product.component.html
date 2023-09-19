@@ -2,22 +2,18 @@
     <h2 class="header-title">
         Edit Product
     </h2>
-    <div class="variant-product" style="display: flex;width:100%;justify-content: center;align-items: center;" *ngIf="products.length > 0">
+    <div class="variant-product" style="display: flex;width:100%;justify-content: center;align-items: center;"
+        *ngIf="products.length > 0">
         <div class="forms">
             <div class="label">
                 <label>Select Products</label>
             </div>
-            <!-- <div class="select">
-                <select class="custom-select-04" (change)="selectProduct($event)" [(ngModel)]="selectedProductId">
-                    <option value="">Choose...</option>
-                    <option *ngFor="let product of products" [ngValue]="product._id">
-                        {{product.name}}</option>
-                </select>
-            </div> -->
+           
 
             <div>
-                <p-dropdown [options]="products" (onChange)="selectProduct($event)" [(ngModel)]="selectedProductId" optionLabel="name" [filter]="true" filterBy="name"
-                    [showClear]="true" placeholder="Select a Product">
+                <p-dropdown [options]="products" (onChange)="selectProduct($event)" [(ngModel)]="selectedProductId"
+                    optionLabel="name" [filter]="true" filterBy="name" [showClear]="true"
+                    placeholder="Select a Product">
                     <ng-template pTemplate="selectedItem">
                         <div class="country-item country-item-value" *ngIf="selectedProductId">
                             <div>{{selectedProductId.name}}</div>
@@ -30,19 +26,19 @@
                     </ng-template>
                 </p-dropdown>
 
-                
-            </div>
-            
-               
 
-          
+            </div>
+
+
+
+
 
             <!-- error block -->
             <div class="invalid-feedback" *ngIf="submitted && myForm.products.errors?.required">
                 <sup>*</sup>Please select product
             </div>
 
-          
+
         </div>
     </div>
 </div>
@@ -53,62 +49,60 @@
     <div class="row custom-wrapper">
         <div class="col-md-12">
 
-               <!-- Form starts -->
-     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-           
+            <!-- Form starts -->
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
 
-         
+
+
 
                 <div class="group-gap">
                     <div class='section-001'>
                         <div class="createdBy">
                             <div class="forms">
                                 <div class="label">
-                                    <label >
+                                    <label>
                                         Created By</label>
                                 </div>
                                 <div class="input">
                                     <input type="text" readonly class="custom-select-03" formControlName="createdBy">
-                                        
+
                                 </div>
-                    
+
                             </div>
-                    
-                    
+
+
                         </div>
-                    
+
                         <div class="createdBy">
                             <div class="forms">
                                 <div class="label">
-                                    <label >
-                                       Last Edited By</label>
+                                    <label>
+                                        Last Edited By</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" readonly class="custom-select-03" formControlName="updatedBy"
-                                       >
+                                    <input type="text" readonly class="custom-select-03" formControlName="updatedBy">
                                 </div>
-                    
+
                             </div>
-                    
+
                         </div>
-                    
+
                         <div class="createdBy">
                             <div class="forms">
                                 <div class="label">
-                                    <label >
-                                       Last Edited Date</label>
+                                    <label>
+                                        Last Edited Date</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" readonly class="custom-select-03" formControlName="updatedAt"
-                                       >
+                                    <input type="text" readonly class="custom-select-03" formControlName="updatedAt">
                                 </div>
-                    
+
                             </div>
-                    
+
                         </div>
-                    
-                    
-                            </div>
+
+
+                    </div>
                     <!-- OEMS -->
                     <div class="section-01">
 
@@ -205,6 +199,28 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="description">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.productShortDescription.errors}">
+                                        Short Description</label>
+                                </div>
+                                <div class="input">
+                                    <textarea class="custom-select-02" formControlName="productShortDescription"
+                                        [ngClass]="{'error': submitted && myForm.productShortDescription.errors}"></textarea>
+                                </div>
+                                <!-- error block -->
+                                <div class="invalid-feedback"
+                                    *ngIf="submitted && myForm.productShortDescription.errors?.required">
+                                    <sup>*</sup>Product Short Description required
+                                </div>
+                            </div>
+
+                        </div>
+</div>
+    <div class="section-productDescription">
+   
                         <!--Product Description-->
                         <div class="description">
                             <div class="forms">
@@ -215,7 +231,8 @@
                                 <div class="input">
                                     <!-- <input class="custom-select-02" formControlName="productDescription"
                                         [ngClass]="{'error': submitted && myForm.productDescription.errors}"> -->
-                                        <textarea class="custom-select-02 desc-text-area" formControlName="productDescription"
+                                    <textarea class="custom-select-02 desc-text-area"
+                                        formControlName="productDescription"
                                         [ngClass]="{'error': submitted && myForm.productDescription.errors}"></textarea>
 
                                 </div>
@@ -231,7 +248,7 @@
 
                     <div class="section-03">
 
-                        <!---Product SKU Number-->
+
                         <div class="skuno">
                             <div class="forms">
                                 <div class="label">
@@ -241,7 +258,7 @@
                                 <div class="input">
                                     <input type="text" class="custom-select-01" formControlName="productSkuNumber"
                                         [ngClass]="{'error': submitted && myForm.productSkuNumber.errors}">
-                                    <!-- error block -->
+
                                 </div>
 
                                 <div class="invalid-feedback"
@@ -252,7 +269,7 @@
 
                         </div>
 
-                        <!---Product SKU id-->
+
                         <div class="skuid">
                             <div class="forms">
                                 <div class="label">
@@ -264,178 +281,11 @@
                                         [ngClass]="{'error': submitted && myForm.productSkuId.errors}">
                                 </div>
 
-                                <!-- error block -->
-                                <div class="invalid-feedback" *ngIf="submitted && myForm.productSkuId.errors?.required">
-                                    <sup>*</sup>Product SkuId required
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="section-04">
-
-                        <!---Product Order Number-->
-                        <!-- <div class="orderno">
-                            <div class="forms">
-                                <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.productOrderNumber.errors}">
-                                        Product Order Number</label>
-                                </div>
-                                <div class="input">
-                                    <input type="number" class="custom-select-01" formControlName="productOrderNumber"
-                                        [ngClass]="{'error': submitted && myForm.productOrderNumber.errors}">
-                                </div>
-
-                               
-                                <div class="invalid-feedback"
-                                    *ngIf="submitted && myForm.productOrderNumber.errors?.required">
-                                    <sup>*</sup>Product Order Number required
-                                </div>
-                            </div>
-
-                        </div> -->
-
-                        <!---Product Price-->
-                        <div class="price">
-                            <div class="forms">
-                                <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
-                                        SS Price</label>
-                                </div>
-                                <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="productPrice"
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-                        <div class="price">
-                            <div class="forms">
-                                <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
-                                        Discount(%)</label>
-                                </div>
-                                <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="discount"
-                                        [(ngModel)]=defaultDiscount
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
-                                </div>
 
                             </div>
 
                         </div>
-                    </div>
 
-                    <div class="section-04">
-
-                        <!---Product Order Number-->
-                        <div class="orderno">
-                            <div class="forms">
-                                <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
-                                        ERP Price</label>
-                                </div>
-                                <div class="input">
-                                    <input type="number" class="custom-select-01" formControlName="erpPrice"
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
-                                </div>
-
-                                <!-- error block -->
-                                <div class="invalid-feedback" *ngIf="submitted && myForm.productPrice.errors?.required">
-                                    <sup>*</sup>Product ERP required
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <!---Product Price-->
-
-                  
-
-
-
-
-                    <!-- <div class="section-05"> -->
-                        <!-- Subscription Type -->
-                        <div class="subscription">
-                            <div class="forms">
-                                <div class="label">
-                                    <label
-                                        [ngClass]="{'error': submitted && myForm.subscriptionType.errors}">Subscription
-                                        Type</label>
-                                </div>
-                                <div class="select">
-                                    <select class="custom-select" (change)="changeSubscriptionType($event)"
-                                        formControlName="subscriptionType"
-                                        [ngClass]="{'error': submitted && myForm.subscriptionType.errors}">
-                                        <option value="">Choose...</option>
-                                        <option *ngFor="let type of subscriptionTypeList" [value]="type">{{type}}
-                                        </option>
-                                    </select>
-                                </div>
-
-                                <!-- error block -->
-                                <div class="invalid-feedback"
-                                    *ngIf="submitted && myForm.subscriptionType.errors?.required">
-                                    <sup>*</sup>Please select Subscription Type
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- </div> -->
-
-
-                    <div class="section-06">
-                      
-                        <!-- <div class="variant">
-                            <label [ngClass]="{'error': submitted && myForm.isVariant.errors}">isVariant</label>
-                            <div class="d-block my-3">
-                                <div class="custom-control custom-radio">
-                                    <input id="false" type="radio" class="custom-control-input" name="isVariant"
-                                        formControlName="isVariant" value="false" checked
-                                        (change)="onRadioChange($event)">
-                                    <label class="custom-control-label" for="false">False</label>
-                                </div>
-
-                                <div class="custom-control custom-radio">
-                                    <input id="true" type="radio" class="custom-control-input" name="true"
-                                        formControlName="isVariant" value="true" (change)="onRadioChange($event)">
-                                    <label class="custom-control-label" for="true">True</label>
-                                </div>
-                            </div>
-                        </div> -->
-
-
-                        <!-- Products -->
-                        <!-- <div class="variant-product" *ngIf="showProducts">
-                            <div class="forms">
-                                <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.products.errors}">Choose
-                                        Products</label>
-                                </div>
-                                <div class="select">
-                                    <select class="custom-select-04" (change)="changeProduct($event)"
-                                        formControlName="products"
-                                        [ngClass]="{'error': submitted && myForm.products.errors}">
-                                        <option value="">Choose...</option>
-                                        <option *ngFor="let product of products" [ngValue]="product._id">
-                                            {{product.name}}</option>
-                                    </select>
-                                </div>
-
-                              
-                                <div class="invalid-feedback" *ngIf="submitted && myForm.products.errors?.required">
-                                    <sup>*</sup>Please select product
-                                </div>
-                            </div>
-                        </div> -->
-
-                        <!-- Upload image -->
                         <div class="upload">
                             <label>Image Logo</label>
                             <div class="avatar-edit">
@@ -455,15 +305,340 @@
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="header-year">
+                        <h4>Yearly:</h4>
+                    </div>
+                    <div class="section-04">
+
+
+                        <div class="subscription">
+                            <div class="forms">
+                                <div class="label">
+                                    <label
+                                        [ngClass]="{'error': submitted && myForm.ysubscriptionType.errors}">Subscription
+                                        Type</label>
+                                </div>
+                                <div class="select">
+                                    <select class="custom-select" (change)="changeSubscriptionType($event)"
+                                        formControlName="ysubscriptionType"
+                                        [ngClass]="{'error': submitted && myForm.ysubscriptionType.errors}">
+                                        <option value="">Choose...</option>
+                                        <option *ngFor="let type of subscriptionTypeList" [value]="type">{{type}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- error block -->
+                                <div class="invalid-feedback"
+                                    *ngIf="submitted && myForm.ysubscriptionType.errors?.required">
+                                    <sup>*</sup>Please select Subscription Type
+                                </div>
+                            </div>
+                        </div>
+                        <!---Product Order Number-->
+                        <div class="orderno">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
+                                        ERP Price</label>
+                                </div>
+                                <div class="input">
+                                    <input type="number" class="custom-select-01" formControlName="yerpPrice"
+                                        [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
+                                </div>
+
+                                <!-- error block -->
+                                <div class="invalid-feedback" *ngIf="submitted && myForm.yproductPrice.errors?.required">
+                                    <sup>*</sup>Product ERP required
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="price">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
+                                        Distributor Price</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" class="custom-select-03" formControlName="ydistributorPrice"
+                                        [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <!---Product Price-->
+                        <div class="price">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
+                                        SS Price</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" class="custom-select-03" formControlName="yproductPrice"
+                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="price">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
+                                        Discount(%)</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" class="custom-select-03" formControlName="ydiscount"
+                                        [(ngModel)]=defaultDiscount
+                                        [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="header-year">
+                        <h4>Monthly Price Details:</h4>
+                    </div>
+                    <div class="section-04">
+                        <!-- Subscription Type -->
+                        <div class="subscription">
+                            <div class="forms">
+                                <div class="label">
+                                    <label
+                                        [ngClass]="{'error': submitted && myForm.msubscriptionType.errors}">Subscription
+                                        Type</label>
+                                </div>
+                                <div class="select">
+                                    <select class="custom-select" (change)="changeSubscriptionType($event)"
+                                        formControlName="msubscriptionType"
+                                        [ngClass]="{'error': submitted && myForm.msubscriptionType.errors}">
+                                        <option value="">Choose...</option>
+                                        <option *ngFor="let type of subscriptionTypeList" [value]="type">{{type}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- error block -->
+                                <div class="invalid-feedback"
+                                    *ngIf="submitted && myForm.msubscriptionType.errors?.required">
+                                    <sup>*</sup>Please select Subscription Type
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!---Product Order Number-->
+                        <div class="orderno">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                        ERP Price</label>
+                                </div>
+                                <div class="input">
+                                    <input type="number" class="custom-select-01" formControlName="merpPrice"
+                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                </div>
+
+                              
+                            </div>
+
+                        </div>
+                        
+
+                        <div class="price">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                        Distributor Price</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" class="custom-select-03" formControlName="mdistributorPrice"
+                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <!---Product Price-->
+                        <div class="price">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                        SS Price</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" class="custom-select-03" formControlName="mproductPrice"
+                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="price">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                        Discount(%)</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" class="custom-select-03" formControlName="mdiscount"
+                                        [(ngModel)]=defaultDiscount
+                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="section-04" >
+
+                    <div class="similar-products">
+
+                        <!-- <p-multiSelect 
+                            [options]="cities" 
+                            [(ngModel)]="selectedCities1" 
+                            defaultLabel="Select a City" 
+                            optionLabel="name">
+                        </p-multiSelect> -->
+                        <div class="comp-head">
+                            <label>Add Products To Compare</label>
+                        </div>
+
+                        <p-multiSelect 
+                        
+                            [options]="compareproducts" 
+                         
+                            [(ngModel)]="selectedProductId1" 
+                            defaultLabel="Select Products" 
+                            formControlName="selectedProductId1"
+                            (onChange)="selectSimilarProduct($event)"
+                            optionLabel="name">
+                            <ng-template let-compareproducts pTemplate="item" >
+                                <div class="country-item">
+                                    <div>{{compareproducts.name}}</div>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                       
+
+
                     </div>
                 </div>
 
-                <div class="section-07">
+            
+                <!-- </div>
 
+               <div> -->
+                    <!-- <div class="app" *ngFor="let item of addAppArrayNew.get('app')['controls']; let i = index">
+                        <div class="app-name"[formGroup]="item" >
+                            <div class="label">
+                                <label >
+                                    App  Name</label>
+                            </div>
+                            <div class="input">
+                                <input type="text" class="custom-select-01" formControlName="Name">
+                            </div>
+                        </div>
+
+                          
+                          <div class="upload-01">
+                            <label>App Logo</label>
+                            <div class="avatar-edit">
+                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                                    (change)="uploadFile($event)" />
+                                <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
+                                    alt="productLogo" />
+                                <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
+                                    (click)="removeImage()">Remove</button>
+                                <label for="imageUpload" *ngIf="editFile"
+                                    [ngClass]="['custom-label', 'upload-image']"></label>
+                                <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
+                                    (click)="removeUploadedFile()"></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-btn">
+                            <button class="btn add-btn" (click)="addNewApp()">Add New</button>
+                            <button class="btn btn-warning" (click)="removeApp(i)">Remove</button>
+                        </div>
+                    </div> -->
 
 
                 </div>
 
+
+
+                <!-- Add App Names -->
+                <div class="feature-update">
+                    <label class="heading">App List</label>
+
+                    <div class="feature" *ngFor="let item of addAppArrayNew.get('app')['controls']; let i = index">
+
+                        <div class="app-name" [formGroup]="item">
+                            <div class="label">
+                                <label >
+                                    App  Name</label>
+                            </div>
+                            <div class="input">
+                                <input type="text" class="custom-select-01" formControlName="Name">
+                            </div>
+                        </div>
+                        <div class="upload-01">
+                            <label>App Logo</label>
+                            <div class="avatar-edit">
+                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                                    (change)="uploadFile($event)" />
+                                <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
+                                    alt="productLogo" />
+                                <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
+                                    (click)="removeImage()">Remove</button>
+                                <label for="imageUpload" *ngIf="editFile"
+                                    [ngClass]="['custom-label', 'upload-image']"></label>
+                                <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
+                                    (click)="removeUploadedFile()"></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-btn">
+                            <button class="btn add-btn" (click)="addNewApp()">Add New</button>
+                            <button class="btn btn-warning" (click)="removeApp(i)">Remove</button>
+                        </div>
+                    </div>
+                </div>
 
 
                 <!-- Add Super Powers Dynamically-->
@@ -537,14 +712,14 @@
                 <div class="btn-02">
                     <button class="btn btn-success" (click)="editProduct()">Save Changes</button>
                 </div>
-                <div class="row"  *ngIf="showMsg">
+                <div class="row" *ngIf="showMsg">
                     <div class="col-xs-12">
-                      <p class="alert alert-success">
-                          <strong>Product Edited  Successfully !</strong>
-            
-                      </p>
+                        <p class="alert alert-success">
+                            <strong>Product Edited Successfully !</strong>
+
+                        </p>
                     </div>
-                  </div>
+                </div>
             </form>
 
         </div>

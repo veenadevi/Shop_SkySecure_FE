@@ -6,6 +6,8 @@ import { AssignLeadsModalComponent } from 'src/shared/components/modals/assign-l
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'account-list',
@@ -24,6 +26,17 @@ export class AccountListComponent implements OnInit{
 
 
 
+   
+
+
+  constructor(
+    private adminPageService : AdminPageService,
+    private router : Router,
+    private modalService : NgbModal,
+    private superAdminService : SuperAdminService,
+    private superAdminStore : SuperAdminStore,
+    public spinner: NgxSpinnerService
+  ){}
 
 
   public allAccounts$ = this.adminPageService.getAllAccounts()
@@ -31,6 +44,7 @@ export class AccountListComponent implements OnInit{
     map(data => {
       console.log("running here ==")
       if(data){
+      
         this.accountData = data.accounts.data;
         this.info = data.accounts.info;
         return data;
@@ -43,15 +57,8 @@ export class AccountListComponent implements OnInit{
     )
   )
 
-  constructor(
-    private adminPageService : AdminPageService,
-    private router : Router,
-    private modalService : NgbModal,
-    private superAdminService : SuperAdminService,
-    private superAdminStore : SuperAdminStore
-  ){}
-
   ngOnInit(): void {
+    this.spinner.show();
     console.log("===============AccountListComponent=======")
     
     //this.accountData = this.sampleData.accounts.data;
@@ -81,14 +88,17 @@ export class AccountListComponent implements OnInit{
   }
 
   public getAllMarketPlaceAccountList(){
-    
+    this.spinner.show(); 
     // let a: any = this.sampleData();
     // this.accountData = [...a.accounts.data, ...a.accounts.data];
     // this.info = a.accounts.info;
   this.subscriptions.push(
+   
     this.adminPageService.getAllMarketPlaceAccountList().subscribe( response => {
+    
       console.log("running here directly==")
       this.allMarketPlaceList=response;
+      this.spinner.hide();
     
       
 
@@ -103,6 +113,7 @@ export class AccountListComponent implements OnInit{
       account : acc,
 
     }
+    console.log("navigate to detaisl page===",account)
 
     this.router.navigate(['admin-pages/lead-summary'], {queryParams: queryParams});
 

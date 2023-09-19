@@ -2,13 +2,13 @@
     padding: 40px;
     display: flex;
     flex-direction: column;
-    row-gap: 2rem;
-    min-height: 35em;
+    row-gap: 1rem;
+    min-height: 36em;
 }
 
 #lead-summary-header{
     background: var(--primary);
-    padding: 16px;
+    padding: 8px;
     font-weight: 600;
     color: #1e1e1e;
 }
@@ -82,7 +82,7 @@
 
 .value{
     color: #4E4C4D;
-    font-size: 18px;
+    font-size: 15px;
     /* font-weight: 600; */
 }
 
@@ -108,7 +108,7 @@
     flex-basis: 30%;
     padding-left: 2rem;
     color: #7A7979;
-    font-size: 17px;
+    font-size: 15px;
 }
 
 .assignee-details .row-header{
@@ -117,13 +117,13 @@
 
 .customer-details-header{
     margin-left: 2rem;
-    font-size: 18px;
+    font-size: 15px;
     color: #7A7979;
 }
 
 .row-value{
     color: #4E4C4D;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .assignee-details .row-header{

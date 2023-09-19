@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Subscription } from 'rxjs';
 import { ProductsDetails } from 'src/shared/models/interface/partials/products-details';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 
@@ -20,7 +21,8 @@ export class ProductsByTrendingComponent {
   constructor(
     private metadataStore : MetadataStore,
     private cartStore : CartStore,
-    private router : Router
+    private router : Router,
+    private addItemsToCartService : AddItemsToCartService
     
   ) {
 
@@ -80,8 +82,8 @@ export class ProductsByTrendingComponent {
       quantity : 1,
     };
 
-    
-    this.router.navigate(['/cart'], {queryParams: queryParams});
+    this.addItemsToCartService.addItemsToCart(queryParams);
+    //this.router.navigate(['/cart'], {queryParams: queryParams});
 
 
 

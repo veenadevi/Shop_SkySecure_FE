@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/shared/services/cart.service';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
@@ -26,7 +27,8 @@ export class CompanyPromptModalComponent {
     private router : Router,
     public activeModal: NgbActiveModal,
     public userProfileService : UserProfileService,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private addItemsToCartService : AddItemsToCartService
   ){
 
   }

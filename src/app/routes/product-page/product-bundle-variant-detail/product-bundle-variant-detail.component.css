@@ -1718,7 +1718,7 @@ button {
   width: 150px;
 }
 .tick {
-  height: 20px;
+  /* height: 20px; */
 }
 .features-container {
   padding: 10px;

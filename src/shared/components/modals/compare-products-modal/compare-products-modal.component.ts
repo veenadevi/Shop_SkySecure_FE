@@ -22,16 +22,14 @@ export class CompareProductsModalComponent {
 
   public productList : any;
 
-  public productList$ = this.compareProductsStore.compareProductsList2$
+  /*public productList$ = this.compareProductsStore.compareProductsList2$
   .pipe(
     map(data => {
       
       this.productList = [];
       if(data){
         this.productList = data;
-        /*this.productList = [...this.productList, ...data];
-        let uniqueElements = [...new Map(this.productList.map(item => [item['_id'], item])).values()];
-        this.productList = uniqueElements;*/
+        
 
         let cachedData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
         //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
@@ -47,12 +45,32 @@ export class CompareProductsModalComponent {
         
         return data;
       }
-      /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-      this.productList = [...this.productList, ...cacheData];
-      console.log("++++++++ List in Paetials ", this.productList);
-      let uniqueElements = [...new Map(this.productList.map(item => [item['_id'], item])).values()];
-      this.productList = uniqueElements;
-      return data;*/
+      
+    }
+    )
+  ) */
+
+  public productList$ = this.compareProductsStore.compareProductsList$
+  .pipe(
+    map(data => {
+      
+      this.productList = [];
+      console.log("====total ite  in model==", data)
+      if(data){
+        this.productList = data;
+
+        let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+        
+        this.productList = cachedProductsToCompare;
+        console.log("====total ite  in model==", this.productList)
+        return data;
+        
+      }
+      else{
+        
+        return data;
+      }
+      
     }
     )
   )
@@ -75,10 +93,10 @@ export class CompareProductsModalComponent {
         res;
       })
     )
-    // console.log("++++++++ List in Last Page ");
+    
     this.setEmptyItem();
-    this.setProductList();
-    //this.setEmptyItem();
+    //this.setProductList();
+   
   }
 
 
@@ -103,7 +121,7 @@ export class CompareProductsModalComponent {
     // console.log("******** Item to be removed ", this.productList);
   }
 
-  public removeSelectedItem($event){
+ /* public removeSelectedItem($event){
     console.log("******** Item to be removed Before", $event);
     this.productList = this.productList.filter(function(item) {
       return item._id != $event;
@@ -116,6 +134,26 @@ export class CompareProductsModalComponent {
     // localStorage.removeItem('product_list_to_compare');
 
     console.log("******** Item to be removed ", this.productList);
+    this.compareProductsStore.setProductsCheckedList(this.productList);
+    
+  }*/
+
+  public removeSelectedItem($event){
+    
+    this.productList = this.productList.filter(function(item) {
+      return item._id != $event;
+    });
+
+    //localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
+
+
+    localStorage.setItem('compare_products_list', JSON.stringify(this.productList));
+    
+    //this.compareProductsStore.setCompareProductsList(this.productList);
+    //this.compareProductsStore.setCompareProductsList2(this.productList);
+    
+    this.compareProductsStore.setCompareProductsList(this.productList);
+    
     this.compareProductsStore.setProductsCheckedList(this.productList);
     
   }

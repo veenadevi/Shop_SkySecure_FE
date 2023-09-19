@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from 'src/shared/services/login.service';
 import { LoginAlertModalComponent } from '../login-alert-modal/login-alert-modal.component';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
 
 @Component({
   selector: 'card-flyer',
@@ -26,7 +27,8 @@ export class CardFlyerComponent {
     private authService : MsalService,
     private loginService : LoginService,
     private modalService : NgbModal,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private addItemsToCartService : AddItemsToCartService
   ){}
 
   public requestQuote(product:any){
@@ -38,7 +40,7 @@ export class CardFlyerComponent {
       price : product.priceList[0].price,
       erpPrice:product.priceList[0].ERPPrice,
       discountRate:product.priceList[0].discountRate,
-      priceType:product.priceList[0].priceType,
+      priceType:this.getPriceType(product.priceList[0].priceType),
     };
 
    // let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"));
@@ -46,7 +48,8 @@ export class CardFlyerComponent {
     this.userAccountStore.userDetails$.subscribe(res=>{
       // console.log("()()()() ", res);
       if(res && res.email !== null){
-        this.router.navigate(['/cart'], {queryParams: queryParams});
+        this.addItemsToCartService.addItemsToCart(queryParams);
+        //this.router.navigate(['/cart'], {queryParams: queryParams});
       }
       else{
         this.viewModal(queryParams);
@@ -67,9 +70,33 @@ export class CardFlyerComponent {
   }
 
 
+
+
   public viewModal(queryParams) {
     const modalRef = this.modalService.open(LoginAlertModalComponent);
     modalRef.componentInstance.request = queryParams;
+  }
+
+  public getPriceType(val){
+
+    console.log("+++++ Val ", val);
+
+    switch (val.toLowerCase()) {
+      case 'month':
+        return 'Monthly';
+
+      case 'monthly':
+        return 'Monthly';
+        
+      case 'year':
+        return 'Yearly';
+      
+      case 'yearly':
+        return 'Yearly';
+
+      default:
+        return 'Yearly';
+    }
   }
 
   public navigateToProductDetails(product:any){

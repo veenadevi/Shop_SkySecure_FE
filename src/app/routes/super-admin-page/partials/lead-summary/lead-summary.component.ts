@@ -20,11 +20,14 @@ export class LeadSummaryComponent implements OnInit{
 
   public responseData : any;
 
-  public productsData : any;
+  public cartData : any;
+
+  public estimateData : any;
 
   public accountsData : any;
 
   public contactsData : any;
+
 
   
   
@@ -44,6 +47,8 @@ export class LeadSummaryComponent implements OnInit{
 
     this.getLeadSummary(this.accountDetails);
 
+   
+
     
    
   }
@@ -51,14 +56,17 @@ export class LeadSummaryComponent implements OnInit{
 
   public getLeadSummary(data){
 
+    console.log("value pass to fetch details ==",data)
     this.subscriptions.push(
-      this.superAdminService.getLeadSummaryDetails(data._id).subscribe(res=>{
+      this.superAdminService.getLeadSummaryDetails(data).subscribe(res=>{
         console.log("+_+_+_C Data After Click", res.zohoBookEstimateData);
         this.responseData = res;
-        this.productsData = res.zohoBookEstimateData;
+        this.cartData=res.cartData;
+        this.estimateData = res.zohoBookEstimateData;
         this.accountsData =  res.zohoCRMAccountData;
-        this.contactsData = res.zohoBookContactData
+        this.contactsData = res.zohoBookContactData?res.zohoBookContactData:null
 
+        console.log("cartDetailsData  ",this.cartData)
 
       })
     )
