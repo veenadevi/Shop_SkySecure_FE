@@ -116,8 +116,11 @@ export class DetailsCompareProductsFlyerComponent {
   public navigateToCompareProducts(){
     //this.router.navigate(['/compare-products/results']);
     //this.router.navigate(['/suggested-compare-products']);
+    
+    var productsIds = this.productList.map((data)=> data._id);
 
-    let dataId = ['64bdffaa5559b600556bc31e','64bdffaa5559b600556bc31e'];
+    let dataId = productsIds;
+    console.log("passing comapre product ",dataId)
 
     this.router.navigate(['/suggested-compare-products/results'], { state: { dataIds: dataId } });
 
