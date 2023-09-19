@@ -10,7 +10,11 @@ import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 })
 export class DetailsCompareProductsFlyerComponent {
 
+  public productSuggestionList:any[]=[];
+
   @Input() set compareProductsList (value: any[]){
+
+    this.productSuggestionList=value;
     
   }
 
@@ -85,12 +89,14 @@ export class DetailsCompareProductsFlyerComponent {
   }
 
   public setProductList(){
-    let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
-    let cachedData2 = [];
-    let combinedData = [ ...cacheData, ...cachedData2];
-    let uniqueElements2 = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
-    this.productList = uniqueElements2;
+
+    console.log("setting suggestion product ===",this.productSuggestionList)
+    // let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    // //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+    // let cachedData2 = [];
+    // let combinedData = [ ...cacheData, ...cachedData2];
+    // let uniqueElements2 = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+    this.productList = this.productSuggestionList;
 
   }
 
@@ -110,8 +116,11 @@ export class DetailsCompareProductsFlyerComponent {
   public navigateToCompareProducts(){
     //this.router.navigate(['/compare-products/results']);
     //this.router.navigate(['/suggested-compare-products']);
+    
+    var productsIds = this.productList.map((data)=> data._id);
 
-    let dataId = ['64bdffaa5559b600556bc31e','64bdffaa5559b600556bc31e'];
+    let dataId = productsIds;
+    console.log("passing comapre product ",dataId)
 
     this.router.navigate(['/suggested-compare-products/results'], { state: { dataIds: dataId } });
 

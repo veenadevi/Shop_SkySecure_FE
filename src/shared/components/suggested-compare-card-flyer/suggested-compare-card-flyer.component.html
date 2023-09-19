@@ -1,3 +1,4 @@
+
 <ng-container *ngIf="(item._id === null) ; else productsTemplate">
     <div class="default-plan-price empty-logo-background">
         <div class="plan-price-image">
@@ -17,7 +18,7 @@
         <p class="tertiary-sub-headline">{{item.name}}</p>
         <p class="tertiary-sub-headline">
             <ng-container *ngIf="item.priceList && item.priceList.length>0">
-                ₹ {{item.priceList[0].price/12 | number : '1.2-2'}}/ {{'Month'}}
+                ₹ {{item.priceList[1].price| number : '1.2-2'}}/ {{'Month'}}
             </ng-container>
             <!-- {{(item.priceList) ? (item.priceList[0].price / item.priceList[0].priceType) : ''}}    {{item.priceList[0].price}} / {{item.priceList[0].priceType}} -->
         </p>

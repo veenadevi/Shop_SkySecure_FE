@@ -181,7 +181,7 @@ body{
   font-weight: 500;
   border: none;
   outline: none;
-  width: 7rem;
+  width: 8rem;
   border-radius: 8px;
   background: var(--btn-gradient);
   transition: all .3s ease;

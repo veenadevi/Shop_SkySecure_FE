@@ -27,20 +27,35 @@ export class ProductCardFlyerComponent implements OnInit{
   priceType:any;
   mrpPriceType : any;
 
-  showMonthlyPrice(i:any) {
+  showYearlyPrice(i:any) {
+    console.log("moue over==")
     this.isMonthly = true;
-    this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price;
+    // this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price;
     // this.priceValue = this.productsList[i].priceList[0].price;
     // this.priceType = this.productsList[i].priceList[0].priceType;
-    this.productsList[i].priceList[0].priceType = "Year";
-    this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price*12;
-    this.productsList[i].priceList[0].ERPPrice =this.productsList[i].priceList[0].ERPPrice*12;
+    // this.productsList[i].priceList[1].priceType = this.productsList[i].priceList[0].priceType;
+    // this.productsList[i].priceList[1].price = this.productsList[i].priceList[0].price;
+    // this.productsList[i].priceList[1].ERPPrice =this.productsList[i].priceList[0].ERPPrice;
+
+
+
+    this.productsList[i].displayPrice= this.productsList[i].priceList[0].price
+    this.productsList[i].displayERPPrice= this.productsList[i].priceList[0].ERPPrice
+    this.productsList[i].displayPriceType= this.productsList[i].priceList[0].priceType
+    this.productsList[i].displayDiscount= this.productsList[i].priceList[0].discountRate
   }
 
   showDiscountRate(i: any) {
-    this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price/12;
-    this.productsList[i].priceList[0].ERPPrice =this.productsList[i].priceList[0].ERPPrice/12;
-    this.productsList[i].priceList[0].priceType = "Month";
+    console.log("moue leav e==")
+    // this.productsList[i].priceList[1].price = this.productsList[i].priceList[1].price;
+    // this.productsList[i].priceList[1].ERPPrice =this.productsList[i].priceList[1].ERPPrice;
+    // console.log("moue leav e== set ",this.productsList[i].priceList[1].priceType)
+    // this.productsList[i].priceList[1].priceType =this.productsList[i].priceList[1].priceType;
+
+    this.productsList[i].displayPrice= this.productsList[i].priceList[1].price
+    this.productsList[i].displayERPPrice= this.productsList[i].priceList[1].ERPPrice
+    this.productsList[i].displayPriceType= this.productsList[i].priceList[1].priceType
+    this.productsList[i].displayDiscount= this.productsList[i].priceList[1].discountRate
   }
   // originalAmount: number = 100;
   // modifiedAmountValue: number = 150;
@@ -56,10 +71,17 @@ public whatsAppMessage:string
   @Input() set products(value : any){
 
     this.productsList = value;
-    this.mrpPriceType = this.productsList[0].priceList[0].priceType;
+    //this.mrpPriceType = this.productsList[0].priceList[0].priceType;
 
     this.productsList.forEach(element => {
-        element.priceList[0].priceType = "Month";
+
+      element.displayPrice=element.priceList[1].price
+      element.displayERPPrice=element.priceList[1].ERPPrice
+      element.displayPriceType=element.priceList[1].priceType
+      element.displayDiscount=element.priceList[1].discountRate
+        //element.priceList[2].priceType = "Month";
+
+        console.log("setting up display erp price ",element.displayPriceType)
     });
  
   }

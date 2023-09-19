@@ -75,12 +75,12 @@
                         
                         <p *ngIf="item.priceList && item.priceList.length>0 && item.priceList[0].discountRate != null" class="discounted-text">
 
-                            -{{item.priceList[0].discountRate}}%&nbsp;</p>
+                            -{{item.displayDiscount}}%&nbsp;</p>
 
 
-                        <div class="price" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
+                        <div class="price" (mouseenter)="showYearlyPrice(i)" (mouseleave)="showDiscountRate(i)">
                             <!-- <span class="price-symbol">&#8377;  {{ isMonthly ? (item.priceList[0].price/12 | number : '1.2-2') : item.priceList[0].price }} /  {{isMonthly ? 'Monthly' : (item.priceList[0].priceType)}}</span> -->
-                            <span class="price-symbol">&#8377;  {{item.priceList[0].price/12 | number : '1.2-2'}} /  {{item.priceList[0].priceType}}</span>
+                            <span class="price-symbol">&#8377;  {{item.displayPrice | number : '1.2-2'}} /  {{item.displayPriceType}}</span>
                         </div>
                        
                        
@@ -90,8 +90,8 @@
                       </div>
                       <span>
                         <span class="text-style-mrp">MRP:</span> 
-                        <span class="text-price strike-through" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
-                             ₹ {{((item.priceList && item.priceList.length>0) ? item.priceList[0].ERPPrice : '' )/12 | number : '1.2-2'}} /  {{item.priceList[0].priceType}}</span> 
+                        <span class="text-price strike-through" (mouseenter)="showYearlyPrice(i)" (mouseleave)="showDiscountRate(i)">
+                             ₹ {{((item.priceList && item.priceList.length>0) ? item.displayERPPrice : '' ) | number : '1.2-2'}} /  {{item.displayPriceType}}</span> 
                         <!-- <span class="text-term"> </span> -->
                     </span>
                     <!-- <span>

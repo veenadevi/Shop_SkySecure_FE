@@ -326,6 +326,8 @@ public onChangeQuantity(i, price) : void {
   this.cartData[i].quantity = Number(this.cartData[i].quantity)
   this.cartData[i].itemTotal = this.cartData[i].quantity * price;
   this.calTotalPrice();
+  this.saveCart();
+  
 }
 
 
@@ -352,6 +354,7 @@ public onChangeQuantity(i, price) : void {
         
     }
     this.calTotalPrice();
+    this.saveCart();
   }
 
   public calTotalPrice() {
@@ -569,6 +572,7 @@ public onChangeQuantity(i, price) : void {
   }
   public saveCart() {
 
+    console.log("callig save")
   
     let cartRefId = this.cartStore.getCartRefreneceId();
     //let userAccountdetails = this.userAccountStore.getUserProfileDetails();

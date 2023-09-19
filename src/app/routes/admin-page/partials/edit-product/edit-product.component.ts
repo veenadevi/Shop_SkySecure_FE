@@ -694,7 +694,12 @@ if(data){
         
       });
     });
-    console.log(")()()() Data Selected ", this.selectedProductId1);
+
+    this.compareProductListIds = [];
+    this.selectedProductId1.forEach(element => {
+      this.compareProductListIds.push(element.id);
+    });
+    
   }
   }
 

@@ -231,7 +231,7 @@ export class LoginComponent {
           
 
           if(this.params && this.params.has('productId')){
-            
+            this.router.navigate(['']);
           }
           else{
             this.router.navigate(['']);

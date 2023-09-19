@@ -26,6 +26,15 @@ export class ProductDetailComponent implements OnInit{
   discountRate: number =120; 
   monthlyPrice: number = this.discountRate / 12;
   isMonthly: boolean = true;
+  
+
+
+
+  displayPrice:number;
+  displayERPPrice:number;
+  displayPriceType:number;
+  displayDiscount:number;
+
 
   showMonthlyPrice() {
     this.isMonthly = true;
@@ -409,6 +418,18 @@ export class ProductDetailComponent implements OnInit{
   
 
         this.setCheckBoxState();
+   // set what to display for price 
+
+
+   this.displayPrice= this.product.priceList[1].price
+   this.displayERPPrice= this.product.priceList[1].ERPPrice
+   this.displayPriceType= this.product.priceList[1].priceType
+   this.displayDiscount= this.product.priceList[1].discountRate
+
+   this.selectedProductItem=response.compareProductList;
+   this.selectedProductItem.unshift(response.product);
+   console.log("selectedProductItem  setting",this.selectedProductItem.length)
+
       })
 
 
@@ -951,26 +972,28 @@ featureCount=5;
         this.product['checked'] = false;
       }
     }
-
-    this.allCompareProducts.forEach(element => {
-      var index = uniqueElements.findIndex(el => el._id === element._id);
-      if(index >=0){
-        if(element.checked){
-          element.checked = true;
-        }
-        else{
-          element['checked'] = true;
-        }
-      }
-      else{
-        if(element.checked){
-          element.checked = false;
-        }
-        else{
-          element['checked'] = false;
-        }
-      }
-    });
+//     if(this.allCompareProducts.length>0)
+// {
+//     this.allCompareProducts.forEach(element => {
+//       var index = uniqueElements.findIndex(el => el._id === element._id);
+//       if(index >=0){
+//         if(element.checked){
+//           element.checked = true;
+//         }
+//         else{
+//           element['checked'] = true;
+//         }
+//       }
+//       else{
+//         if(element.checked){
+//           element.checked = false;
+//         }
+//         else{
+//           element['checked'] = false;
+//         }
+//       }
+//     });
+//   }
 
 
   }
