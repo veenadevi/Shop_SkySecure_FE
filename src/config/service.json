@@ -19,6 +19,7 @@
         "subCategoryByCategory" : "api/sub-category/",
         "getProductsBySubCategoryIds" : "api/products",
         "getSingleProduct": "api/product/",
+        "getSingleProductDetails": "api/productDetails/",
         "getByProdyctVariant":"api/product-variant/",
         "getProductsByBrandIds": "api/products/oems",
         "getTrendingProducts" : "api/products/trending",
@@ -36,7 +37,7 @@
         "getQuoteHistory" : "api/user/getQuoteHistory",
         "getAllDashBoardData" : "api/user/allDashBoardData",
         "getAllAccounts" : "api/user/allAccounts",
-        "getMyAssignedAccounts" : "api/user/getMyAccounts",
+        "getMyAssignedAccounts" : "api/admin/getMyMarketplaceAccountList",
         "getAccountsById" : "api/user/getAccountDetails",
         "userGstUpdate" : "api/user/user-gst-update",
         
@@ -69,7 +70,7 @@
         
         "getAllCRMUsers" : "api/admin/getAllCRMusers",
         "assignAccountOwner" :  "api/admin/assignAccountOwner",
-        "getMarketplaceAccountDetailsById" : "api/admin/getMarketplaceAccountDetailsById",
+        "getMarketplaceAccountDetailsById" : "api/getMarketplaceAccountDetailsById",
         "getAllMarketPlaceAccountListURL":"api/admin/getAllMarketPlaceAccountList",
         "getMyMarketPlaceAccountListURL":"api/admin/getMyMarketplaceAccountList"
 

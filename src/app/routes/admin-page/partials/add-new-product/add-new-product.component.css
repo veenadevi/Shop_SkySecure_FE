@@ -3,6 +3,7 @@
 }
 .header-title {
     padding: 5px;
+    font-size: 16px !important;
 }
 
 .section-01 {
@@ -20,7 +21,7 @@
 }
 
 label {
-    font-size: medium;
+    font-size: 13px !important;
     font-weight: bold;
 }
 
@@ -31,9 +32,10 @@ label {
 
 .custom-select {
     width: 100%;
-    padding: 10px;
+    padding: 8px;
     box-sizing: border-box;
     border-radius: 8px;
+
 }
 
 .invalid-feedback {
@@ -58,14 +60,14 @@ label {
     display: flex;
     flex-direction: row;
     width: 100%;
-    /* justify-content: space-evenly; */
+    
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: -15px;
 }
 
 .custom-select-01 {
     width: 100%;
-    padding: 10px;
+    padding: 4px;
     box-sizing: border-box;
     border: 1px solid black;
     border-radius: 8px;
@@ -89,6 +91,15 @@ label {
     padding: 20px;
 }
 
+.section-productDescription{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* justify-content: space-evenly; */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 .section-03 {
     display: flex;
     flex-direction: row;
@@ -99,23 +110,31 @@ label {
 }
 
 .skuno {
-    width: 33%;
+    width: 25%;
     padding: 20px;
 }
 
 .skuid {
-    width: 60%;
+    width: 25%;
     padding: 20px;
 }
 
 .custom-select-03 {
-    width: 52%;
+    width: 100%;
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid black;
     border-radius: 8px;
 }
-
+.header-year{
+    display: flex;
+    margin-left: 30px;
+    margin-bottom: -25px;
+}
+h4{
+    font-size: 15px;
+    font-weight: bold;
+}
 .section-04 {
     display: flex;
     flex-direction: row;
@@ -131,7 +150,7 @@ label {
 }
 
 .price {
-    width: 35%;
+    width: 25%;
     padding: 20px;
 }
 
@@ -189,8 +208,27 @@ label {
     margin-top: 10px;
     margin-left: 10px;
 }
+.app{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.app-name{
+    width: 20%;
+}
+.upload-01{
+    width: 30%;
+    padding-left: 100px;
+    padding-top: 20px;
+    background-color: white;
+    border: none;
+    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); */
+    margin-left: 30px;
 
 
+}
 
 /* .faq-update {
     width: 70%;
@@ -220,7 +258,7 @@ label {
 
 .heading {
     padding-left: 0px;
-    font-size: large;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -263,11 +301,11 @@ label {
     color: white;
     border-radius: 8px;
     margin: 10px;
-    width: 150px
+    width: 85px
 }
 
 .btn-warning {
-    width: 120px;
+    width: 85px;
     box-sizing: border-box;
     padding: 7px;
     border: 1px solid #EFEFEF;
@@ -310,6 +348,9 @@ label {
     margin-left: 35%;
     margin-top: 20px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .submit {
     width: 100%;
@@ -320,6 +361,6 @@ label {
     color: white;
     border-radius: 8px;
     margin-top: 10px;
-    font-size: larger;
+    font-size: 20px;
     font-weight: 600;
 }

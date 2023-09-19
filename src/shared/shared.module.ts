@@ -43,7 +43,9 @@ import { BundleMindmapComponent } from './components/bundle-mindmap/bundle-mindm
 import { GstPromptModalComponent } from './components/modals/gst-prompt-modal/gst-prompt-modal.component';
 import { AssignLeadsModalComponent } from './components/modals/assign-leads-modal/assign-leads-modal.component';
 import { DateFormatPipe } from './pipes/dateFormat';
-
+// import { TermsConditionModalComponent } from './models/terms-condition-modal/terms-condition-modal.component';
+import { TermsConditionModalComponent } from './components/modals/terms-condition-modal/terms-condition-modal.component';
+import { SuggestedCompareCardFlyerComponent } from './components/suggested-compare-card-flyer/suggested-compare-card-flyer.component';
 
 
 
@@ -97,6 +99,8 @@ import { DateFormatPipe } from './pipes/dateFormat';
     BundleMindmapComponent,
     GstPromptModalComponent,
     AssignLeadsModalComponent,
+    // TermsConditionModalComponent,
+    SuggestedCompareCardFlyerComponent
    
   ],
 
@@ -148,7 +152,8 @@ import { DateFormatPipe } from './pipes/dateFormat';
     CompareProductsTrendingProductsComponent,
     CompareProductsSearchListComponent,
     BundleMindmapComponent,
-    GstPromptModalComponent
+    GstPromptModalComponent,
+    SuggestedCompareCardFlyerComponent,
    
   ],
   

@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ToastrModule, ToastrService } from "ngx-toastr";
+import { NgOtpInputModule } from 'ng-otp-input';
 
 
 import { IPublicClientApplication, PublicClientApplication, InteractionType } from '@azure/msal-browser';
@@ -106,6 +107,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     }),
     NgxGoogleAnalyticsModule.forRoot('G-KC04RJ3FYD'),
     NgxGoogleAnalyticsRouterModule,
+    NgOtpInputModule
  
     
    

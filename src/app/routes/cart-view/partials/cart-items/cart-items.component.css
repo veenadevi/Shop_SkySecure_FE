@@ -8,7 +8,7 @@
 
 .table-header {
 
-    background: var(--light_border);
+    background: var(--primary-50-purple);
     border-radius: 18px;
     text-align: center;
 
@@ -146,7 +146,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 tbody th{
-    width:50%;
+    width:40%;
 }
 
 .product-name{
@@ -191,7 +191,7 @@ tbody th{
 }
 
 .cart-total {
-    background: var(--primary);
+    background: var(--primary-50-purple);
     width: 100%;
     border-radius: 8px;
     display: flex;

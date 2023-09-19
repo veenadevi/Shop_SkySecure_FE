@@ -1,5 +1,5 @@
 .account-details-view {
-    min-height: 30em;
+    min-height: 36em;
     display: flex;
     flex-direction: column;
     row-gap: 1em;

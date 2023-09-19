@@ -4,6 +4,7 @@ import { SuperAdminPageComponent } from './super-admin-page.component';
 import { AccountListComponent } from './partials/account-list/account-list.component';
 import { MarketplaceuserComponent } from './partials/marketplaceuser/marketplaceuser.component';
 import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.component';
+import { AssignUsersAndRolesComponent } from './partials/assign-users-and-roles/assign-users-and-roles.component';
 
 
 const routes: Routes = [{
@@ -30,6 +31,11 @@ const routes: Routes = [{
       canActivate: [],
       path: 'lead-summary',
       component : LeadSummaryComponent
+    },
+    {
+      canActivate: [],
+      path: 'assign-roles',
+      component : AssignUsersAndRolesComponent 
     }
     
   ]

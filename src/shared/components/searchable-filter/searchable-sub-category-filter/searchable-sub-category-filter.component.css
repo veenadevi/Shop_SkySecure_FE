@@ -12,13 +12,13 @@
 }
 
 :host ::ng-deep .mat-mdc-list-option .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background, .mat-mdc-list-option .mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background, .mat-mdc-list-option .mdc-checkbox .mdc-checkbox__native-control[data-indeterminate=true]:enabled~.mdc-checkbox__background{
-    background-color: #4A86EA !important;
-    border-color : #4A86EA !important
+    background-color: var(--primary-500-purple) !important;
+    border-color : var(--primary-500-purple)!important
 }
 
 .mat-list-style{
-    max-height:300px;
-    overflow: scroll;
+    /*max-height:300px;
+    overflow: scroll;*/
 }
 
 .selectedType{
@@ -36,8 +36,11 @@
 }
 
 .all-style a{
-    color : #0000EE;
+    color: var(--primary-500-purple);
     cursor: pointer;
 }
 
+.all-style a:hover {
+    text-decoration: underline;
+}
 

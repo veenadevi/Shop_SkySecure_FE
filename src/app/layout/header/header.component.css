@@ -497,14 +497,14 @@ ul .nav-text:hover {
         display: flex;
         align-items: center;
         justify-content:space-between;
-        /* flex-direction: column; */
+        flex-direction: column;
         /* border-bottom: 4px solid #F79C0B; */
     }
     .realize-logo {
         height: 30px;
         cursor: pointer;
         top: 10px;
-        margin-top: 5px;
+        margin-top: 12px;
         margin-left: -10px;
     }
     
@@ -527,11 +527,34 @@ ul .nav-text:hover {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: -6px;
+    margin-top: 5px;
 }
 .usersection-icon {
     margin-right: 16px;
     height: 18px;
+}
+.notificationicon-section {
+    height: 30px;
+    width: 30px;
+    margin: 0px 4px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+.cart-button{
+    background-color: transparent;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    position: relative;
+    margin-top: -10px;
 }
 
 }

@@ -7,9 +7,12 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { LoaderService } from 'src/shared/services/loader.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { HttpClient } from '@angular/common/http';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
+
 
 interface CreateProductPayload {
   name: String,
+  shortDescription : String,
   description: String,
   oemId: String,
   subCategoryId: String,
@@ -24,7 +27,7 @@ interface CreateProductPayload {
   productSkuId: String,
   featureList: Array<any>,
   productFAQ: Array<any>,
-  isVariant: Boolean,
+  appList:Array<any>,
   productId: String
 }
 
@@ -32,6 +35,7 @@ interface CreateProductPayload {
   selector: 'app-admin-product',
   templateUrl: './add-new-product.component.html',
   styleUrls: ['./add-new-product.component.css']
+  
 })
 
 export class AddNewProductComponent  implements OnInit {
@@ -52,6 +56,7 @@ export class AddNewProductComponent  implements OnInit {
   registrationForm: FormGroup;
   addDynamicElementNew: FormArray;
   addFAQArrayNew: FormArray;
+  addAppArrayNew:FormArray;
   defaultDiscount:number;
   showMsg: boolean = false;
 
@@ -62,24 +67,33 @@ export class AddNewProductComponent  implements OnInit {
     private cd: ChangeDetectorRef,
     private metaDataSvc: MetadataService,
     private metadataStore: MetadataStore,
-    private http: HttpClient
+    private http: HttpClient,
+    private userAccountStore : UserAccountStore,
   ) {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
+      productShortDescription:['', Validators.required],
       productDescription: ['', Validators.required],
       productSkuNumber: ['', Validators.required],
       productSkuId: ['', Validators.required],
       productOrderNumber: [''],
-      productPrice: [''],
-      erpPrice: [''],
-      discount: [''],
+      yproductPrice: [''],
+      yerpPrice: [''],
+      ydistributorPrice:[''],
+      ydiscount: [''],
+      mproductPrice: [''],
+      merpPrice: [''],
+      mdistributorPrice:[''],
+      mdiscount: [''],
       categories: ['', Validators.required],
       Subcategories: ['', Validators.required],
       OEM: ['', Validators.required],
-      subscriptionType: [''],
-      isVariant: ['false'],
+      ysubscriptionType: [''],
+      msubscriptionType: [''],
       file: [null],
       products: [''],
+      subscriptionType : [''],
+      productPrice : [''],
       addDynamicElementNew: this.fb.group({
         // Nested form controls for dynamic elements
         feature: this.fb.array([
@@ -91,10 +105,17 @@ export class AddNewProductComponent  implements OnInit {
         faq: this.fb.array([
           this.createFAQGroup()
         ])
+      }),
+      addAppArrayNew: this.fb.group({
+        // Nested form controls for dynamic elements
+        app: this.fb.array([
+          this.createAppGroup()
+        ])
       })
     })
     this.addDynamicElementNew = this.registrationForm.get('addDynamicElementNew') as FormArray;
     this.addFAQArrayNew = this.registrationForm.get('addFAQArrayNew') as FormArray;
+    this.addAppArrayNew = this.registrationForm.get('addAppArrayNew') as FormArray;
     this.defaultDiscount=18;
   }
   // ngOnInit(): void {
@@ -125,6 +146,12 @@ export class AddNewProductComponent  implements OnInit {
     return this.fb.group({
       Question: '',
       Answer: ''
+    });
+  }
+  createAppGroup(): FormGroup {
+    return this.fb.group({
+      name: '',
+      imageURL: ''
     });
   }
 
@@ -172,6 +199,30 @@ export class AddNewProductComponent  implements OnInit {
       })
 
     );
+  }
+
+
+  public tempAppArrayImgFiles = [];
+
+  uploadFileForApp(event : any, i){
+    const formData: FormData = new FormData();
+    formData.append('file', event.target.files[0], event.target.files[0].name);
+
+    this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
+      .subscribe(
+        (response: any) => {
+          
+          this.tempAppArrayImgFiles.push({
+            'index': i,
+            'val' : response.filePath
+          })
+          //this.productLogo = response.filePath;
+        },
+        error => {
+          console.error('Upload error:', error);
+          // Handle the error response
+        }
+      );
   }
 
   uploadFile(event: any) {
@@ -279,23 +330,29 @@ export class AddNewProductComponent  implements OnInit {
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
     faqArray.push(this.createFAQGroup());
   }
+  addNewApp() {
+    const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
+    appArray.push(this.createAppGroup());
+  }
   onSubmit(): any {
     this.submitted = true;
   }
 
   // Submit Registration Form
   CreateProduct(): any {
-    //this.submitted = true;
-    // console.log("this.registrationForm.valid"+this.submitted)
+    
+    let a=2;
     if (!this.registrationForm.valid) {
 
-     // alert('Please fill all the required fields !')
       return false;
     } else {
       // console.log("Final value", this.registrationForm.value);
+
+      let userAccountdetails = this.userAccountStore.getUserDetails();
       var productData = this.registrationForm.value;
       this.createProductPayload = {
         name: productData.productName,
+        shortDescription: productData.productShortDescription,
         description: productData.productDescription,
         oemId: productData.OEM,
         subCategoryId: productData.Subcategories,
@@ -305,34 +362,102 @@ export class AddNewProductComponent  implements OnInit {
         orderNumber: productData.productOrderNumber,
         priceList: [{
           "Currency": "INR",
-          "price": productData.productPrice,
-          "priceType": productData.subscriptionType,
-          "ERPPrice" : productData.erpPrice,
-          "discountRate" : productData.discount
+          //"price": productData.yproductPrice,
+          "price": this.setYearlyPrice(productData),
+          "priceType": "Year",
+          "ERPPrice" : productData.yerpPrice,
+          "distributorPrice":productData.ydistributorPrice,
+          "discountRate" : productData.ydiscount,
+          
 
-        }],
+        },
+        {
+          "Currency": "INR",
+          "price": this.setMonthlyPrice(productData),
+          "priceType": "Month",
+          "ERPPrice" : productData.merpPrice,
+          "distributorPrice":productData.mdistributorPrice,
+          "discountRate" : productData.mdiscount
+
+        }
+      
+      ],
         isActive: true,
-        isVariant: productData.isVariant == 'true'? true: false ,
+       
         featureList: productData.addDynamicElementNew.feature,
         productFAQ: productData.addFAQArrayNew.faq,
+        appList:productData.addAppArrayNew.app,
+
         bannerLogo: this.productLogo,
-        createdBy: 'ADMIN',
-        updatedBy: 'ADMIN'
+        createdBy: userAccountdetails._id,
+        updatedBy: userAccountdetails._id
       }
-      // console.log("_createProductPayload_", this.createProductPayload);
+
+      
+      if(this.createProductPayload.appList && this.createProductPayload.appList.length>0){
+
+
+        for(let i=0;i<this.createProductPayload.appList.length;i++){
+          const result = this.tempAppArrayImgFiles.filter((obj) => {
+            return obj.index === i;
+          });
+
+          if(result && result.length>0){
+          //  this.createProductPayload.appList[i].File = result[0].val;
+            this.createProductPayload.appList[i].imageURL = result[0].val;
+          }
+          else{
+            this.createProductPayload.appList[i].imageURL = "";
+          }
+        }
+
+        
+      }
+
+      //console.log("_--------------------APP Array", this.tempAppArrayImgFiles);
+      //console.log("_--------------------createProductPayload_", this.createProductPayload);
+      
+      
       this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
-        // console.log("__RESPONSE_",response);
+        
         this.showMsg=true
 
       })
 
-      this.registrationForm.reset();
+      this.registrationForm.reset(); 
     }
+  }
+
+//   public setFAQList(productData){
+//    let length= productData.addDynamicElementNew.feature.length;
+//    console.log("length  of faq list",length)
+//     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
+//    if(length==1){
+//      featureArray.removeAt(0);
+//    }
+//    let length1= productData.addDynamicElementNew.feature.length;
+//    console.log("length  after faq list",length1)
+   
+// return productData.addDynamicElementNew.feature;
+
+//   }
+  public setYearlyPrice(data){
+
+    let yskySecurePrice = ((Number(data.yerpPrice)) * 0.02) + (Number(data.ydistributorPrice));
+    return yskySecurePrice;
+    
+  }
+
+  public setMonthlyPrice(data){
+
+    let mskySecurePrice = ((Number(data.merpPrice)) * 0.02) + (Number(data.mdistributorPrice));
+    return mskySecurePrice;
+    
   }
 
   removeFeature(data: any) {
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
       featureArray.removeAt(data);
     }
    
@@ -340,12 +465,19 @@ export class AddNewProductComponent  implements OnInit {
 
   removeFAQ(data: any) {
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
     faqArray.removeAt(data);
     }
   
   }
 
+  removeApp(data: any) {
+    const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
+    if(data>=0){
+    appArray.removeAt(data);
+    }
+  
+  }
   onRadioChange(event) {
     this.registrationForm.get('isVariant').setValue(event.target.value, {
       onlySelf: true
@@ -360,6 +492,32 @@ export class AddNewProductComponent  implements OnInit {
       this.registrationForm.get('isVariant').setValue(event.target.value, {
         onlySelf: true
       })
+    }
+  }
+
+  public tempYerpPrice:any;
+  public tempMerpPrice : any;
+
+
+  public calDiscountedVal(erp,calVal){
+    return ((erp-calVal)/erp)*100;
+  }
+
+  public onPriceChange(val){
+
+
+    switch (val) {
+      case 'yerpPrice':
+        this.tempYerpPrice = ((Number(this.registrationForm.value.yerpPrice)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice));
+        this.registrationForm.controls['ydiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice)));
+        return;
+      case 'merpPrice':
+        this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
+        this.registrationForm.controls['mdiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice)));
+        return;
+
+      default:
+        return null;
     }
   }
 

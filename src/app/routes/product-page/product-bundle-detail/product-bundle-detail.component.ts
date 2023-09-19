@@ -11,6 +11,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { GetFreeCallModalComponent } from 'src/shared/components/modals/get-free-call-modal/get-free-call-modal.component';
 import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
+import { TermsConditionModalComponent } from 'src/shared/components/modals/terms-condition-modal/terms-condition-modal.component';
 
 @Component({
   selector: 'app-product-bundle-detail',
@@ -18,7 +19,7 @@ import { ToasterNotificationService } from 'src/shared/services/toaster-notifica
   styleUrls: ['./product-bundle-detail.component.css']
 })
 export class ProductBundleDetailComponent implements OnInit{
-
+  selectedOption: string = 'default'; 
   discountRate: number =120; 
   monthlyPrice: number = this.discountRate / 12;
   isMonthly: boolean = true;
@@ -109,6 +110,35 @@ export class ProductBundleDetailComponent implements OnInit{
     let right = document.querySelector(".scroll-content")
     right.scrollBy(-200, 0);
   };
+
+
+  public selectedType : any = 'Month';
+
+
+  public setSelfData(){}
+
+  public onToogleChange(val){
+    
+    this.selectedType = val;
+
+    if(val === 'Month'){
+      this.setSelfData();
+    }
+
+  }
+
+  public handleChange(val){
+    
+
+    this.selectedType = val;
+  
+    if(val === 'Month'){
+      this.setSelfData();
+    }
+
+  }
+
+
 
 
   public offerVisible:boolean = true
@@ -858,6 +888,23 @@ export class ProductBundleDetailComponent implements OnInit{
     return uniqueElements.length;
     
   }
+
+    // TERMS AND CONDITION
+    public viewModal4(queryParams) {
+      const modalRef = this.modalService.open(TermsConditionModalComponent);
+      modalRef.componentInstance.request = queryParams;
+    }
+  
+  
+    public displayBasic01: boolean; 
+    public showDialog01(){
+      const modalRef = this.modalService.open(TermsConditionModalComponent);
+    }
+  
+    showBasicDialog01() {
+      //this.displayBasic = true;
+      this.viewModal4(null);
+    }
 
   ngOnDestroy(){
     this.subscriptions.forEach(element => {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, OnChanges, OnDestroy, OnInit, QueryList, Renderer2, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription, combineLatest, forkJoin, map } from 'rxjs';
@@ -9,6 +9,8 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ProductListService } from 'src/shared/services/product-list-page.service';
 import { CompareProductsStore } from 'src/shared/stores/compare-products.store';
 import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
+import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
+import { DetectScrollStore } from 'src/shared/stores/detect-scroll.store';
 
 
 
@@ -19,6 +21,13 @@ import { CompareProductsModalComponent } from 'src/shared/components/modals/comp
 })
 export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 [x: string]: any;
+
+
+  @ViewChild('filterSection') filterSection!: ElementRef;
+
+  //@ViewChild('filterView', { static: false })
+  //private filterView: ElementRef<HTMLDivElement>;
+  isFilterViewScrolledIntoView: boolean;
 
 
   public dropdownSettings : IDropdownSettings = {};
@@ -89,6 +98,8 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
 
   public filters : any;
+
+  public floatableFilter : any;
   
   constructor(
     private metaDataSvc : MetadataService,
@@ -99,12 +110,15 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     private metadadataStore : MetadataStore,
     private compareProductsStore : CompareProductsStore,
     private modalService : NgbModal,
+    private renderer: Renderer2,
+    private scrollDispatcher: ScrollDispatcher, 
+    private zone: NgZone,
+    private detectScrollStore : DetectScrollStore
 
   ){
     const navigation = this.router.getCurrentNavigation();
-   // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    // const state = navigation.extras.state as { data: Object };
-    // const data = state;
+
+    
   }
 
   public getAllCategories$ = this.metadadataStore.categoryDetails$
@@ -143,10 +157,67 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     )
   )
 
+  @ViewChildren('filterView') elms: QueryList<any>;
+
+  detectedElms = [];
+
+
+  @ViewChild('testDiv', { static: false })
+  private testDiv: ElementRef<HTMLDivElement>;
+
+  
+  public isTestDivScrolledIntoView : boolean = false;
+
+  public ngAfterViewInit(): void{
+
+    this.floatableFilter = document.getElementById("floatableFilter");
+    this.floatableFilter.style.display = "none";
+
+    this.subscriptions.push(
+      this.detectScrollStore.productFiltersScroll$.subscribe(res=>{
+    
+        if (this.filterSection) {
+          const rect = this.filterSection.nativeElement.getBoundingClientRect();
+          
+          const topShown = rect.top >= 0;
+          const bottomShown = rect.bottom <= window.innerHeight;
+          
+          this.isTestDivScrolledIntoView = topShown && bottomShown;
+          if(rect.bottom > 110){
+           
+            this.floatableFilter.style.display = "none";
+          }
+          else{
+            
+            this.floatableFilter.style.display = "block";
+          }
+          
+        }
+      })
+    )
+
+    
+
+    //this.floatableFilter = document.getElementById("floatableFilter");
+    //this.floatableFilter.style.display = "none";
+
+    /*this.scrollDispatcher.scrolled().
+    subscribe((cdk: CdkScrollable)  => {
+    this.zone.run(() => {
+    //Here you can add what to happen when scroll changed
+    //I want to display the scroll position for example
+      const scrollPosition = cdk.getElementRef().nativeElement.scrollTop;
+      console.log(scrollPosition);
+    });
+    });*/
+
+  }
+  
+
   public ngOnInit() : void { 
 
 
-    console.log("+_) 76 4 35  changed Here",);
+    
 
     
     this.dropdownSettings = {
@@ -332,7 +403,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
          this.productBundles = response.productBundles;
 
          
-        //  console.log("******* ))))))) ++++++++ Data here", response);
+    
 
          let tempProducts = this.setProductsData(response.products);
          let tempProductVariants = this.setProductVariantsData(response.productVariants);
@@ -343,9 +414,11 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
          this.finalProductList = [...tempProducts, ...tempProductVariants, ...tempProductBundleVariants , ...tempProductBundles];
 
-         //this.finalProductList = [...response.products, ...response.productVariants, ...response.productBundleVariants, ...response.productBundles];
-        //  console.log("******* ))))))) ++++++++ Data here", this.finalProductList);
-         let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+         
+         //let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+         let cacheData = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
+         
          if(cacheData && cacheData.length>0){
           cacheData.forEach(element => {
       
@@ -522,6 +595,69 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public selectedListForCompare(items){
     this.listForCompare = items;
 
+
+    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
+    //let cacheData: any = [...new Map(cachedProductsToCompare.map(item => [item['_id'], item])).values()];
+
+    let cacheData = cachedProductsToCompare.filter(event => (event.checked))
+
+
+
+
+    let cumulativeList = [];
+    
+    if(cacheData && cacheData.length>0){
+      
+      cumulativeList = [...this.listForCompare , ...cacheData];
+      
+    }
+    else{
+      
+      cumulativeList = this.listForCompare;
+    }
+
+    //let uniqueElements = [...new Map(cumulativeList.map(item => [item['_id'], item])).values()];
+
+    let uniqueElements = cumulativeList;
+    
+
+
+    uniqueElements.forEach(element => {
+      
+      let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
+        if(indexToUpdate !== -1){
+         
+          this.finalProductList[indexToUpdate]['checked'] = true;
+
+        }
+        else{
+          this.finalProductList.forEach(element => {
+            if('checked' in element){
+              element.checked = false;
+            }
+            else{
+              element['checked'] = false;
+            }
+          });
+          
+        }
+    });
+
+
+  
+    
+
+    localStorage.setItem('compare_products_list', JSON.stringify(uniqueElements));
+    this.compareProductsStore.setCompareProductsList(uniqueElements);
+   
+    
+
+  }
+
+  /*public selectedListForCompare(items){
+    this.listForCompare = items;
+
     //let cacheData = this.compareProductsStore.getCompareProductsList();
     let cacheData1 = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
@@ -586,10 +722,11 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     //localStorage.removeItem('product_list_to_compare');
     
 
-  }
+  }*/
 
   /* compare products length display */
   public  prdLength = 0;
+  public compareProductsListLength = 0;
 
   public compareProductsLength$ = this.compareProductsStore.compareProductsList$
     .pipe(
@@ -602,6 +739,11 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.productListToCompare = uniqueElements;
         this.prdLength = this.productListToCompare.length;
+
+
+
+        let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+        this.compareProductsListLength = cachedProductsToCompare.length;
 
        
         if(data){
@@ -713,7 +855,7 @@ public tabChange(productTabSection: any){
 }
 
 
-public setCheckedList(){
+/*public setCheckedList(){
 
   this.subscriptions.push(
     this.compareProductsStore.productsCheckedList$.subscribe(res=>{
@@ -726,13 +868,40 @@ public setCheckedList(){
       let combinedData = [...cacheData, ...cacheData2];
       let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
-      /*var index = productsList.findIndex(el => el.productId === item._id);
-         
-      if(index >=0){
-        productsList[index].quantity = Number(productsList[index].quantity) + 1;
-      }*/
+
       this.productList.forEach(element => {
         var index = uniqueElements.findIndex(el => el._id === element._id);
+        if(index >=0){
+          if(element.checked){
+            element.checked = true;
+          }
+          else{
+            element['checked'] = true;
+          }
+        }
+        else{
+          if(element.checked){
+            element.checked = false;
+          }
+          else{
+            element['checked'] = false;
+          }
+        }
+      });
+    })
+  )
+}*/
+
+public setCheckedList(){
+
+  this.subscriptions.push(
+    this.compareProductsStore.productsCheckedList$.subscribe(res=>{
+      
+
+      let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
+      this.productList.forEach(element => {
+        var index = cachedProductsToCompare.findIndex(el => el._id === element._id);
         if(index >=0){
           if(element.checked){
             element.checked = true;
@@ -755,4 +924,37 @@ public setCheckedList(){
 }
 
 
+public scrollToFilters(){
+  this.filterSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
 }
+
+
+/*@ViewChild('testDiv', { static: false })
+private testDiv: ElementRef<HTMLDivElement>;
+isTestDivScrolledIntoView: boolean;
+
+@HostListener('window:scroll', ['$event'])
+isScrolledIntoView() {
+  console.log("+++++_______ ", this.testDiv);
+  if (this.testDiv) {
+    const rect = this.testDiv.nativeElement.getBoundingClientRect();
+    const topShown = rect.top >= 0;
+    const bottomShown = rect.bottom <= window.innerHeight;
+    this.isTestDivScrolledIntoView = topShown && bottomShown;
+    console.log("+++++_______ ", this.isTestDivScrolledIntoView);
+  }
+}*/
+
+
+
+
+
+
+
+
+
+}
+
+
+
+

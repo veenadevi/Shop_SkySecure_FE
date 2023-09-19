@@ -14,16 +14,27 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { CompareProductsModalComponent } from 'src/shared/components/modals/compare-products-modal/compare-products-modal.component';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
+import { TermsConditionModalComponent } from 'src/shared/components/modals/terms-condition-modal/terms-condition-modal.component';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit{
-
+  selectedOption: string = 'default'; 
   discountRate: number =120; 
   monthlyPrice: number = this.discountRate / 12;
   isMonthly: boolean = true;
+  
+
+
+
+  displayPrice:number;
+  displayERPPrice:number;
+  displayPriceType:number;
+  displayDiscount:number;
+
 
   showMonthlyPrice() {
     this.isMonthly = true;
@@ -85,18 +96,45 @@ export class ProductDetailComponent implements OnInit{
   public viewAllFeaturesDetails = false;
 
   public prdType : any;
+
+  public keyFeatureList : any;
+  public additionalFeatureList : any;
   
   faq = [];
   productListToCompare  = [];
   products = [];
   public currentRoute: string;
-  links = ['#description', '#feature', '#specification','#reviews','#bundles','#faq'];
-  //titles = ['Description', 'Features', 'Specification','Reviews','Compare Products','Bundles','FAQ'];
-  titles = ['Description', 'Features', 'Specification','Reviews','Bundles','FAQ'];
+  //public links = ['#description', '#feature', '#specification','#reviews','#bundles','#faq'];
+  //public titles = ['Description', 'Features', 'Specification','Reviews','Bundles','FAQ'];
+  public links = ['#description', '#feature', '#specification','#reviews'];
+  public titles = ['Description', 'Features', 'Specification','Reviews'];
   activeLink = this.links[0];
   myColor = '';
+  public selectedType : any = 'Month';
 
 
+  public setSelfData(){}
+
+  public onToogleChange(val){
+    
+    this.selectedType = val;
+
+    if(val === 'Month'){
+      this.setSelfData();
+    }
+
+  }
+
+  public handleChange(val){
+    
+
+    this.selectedType = val;
+  
+    if(val === 'Month'){
+      this.setSelfData();
+    }
+
+  }
 
   
 
@@ -278,8 +316,10 @@ export class ProductDetailComponent implements OnInit{
   }
 
   private  getProductDetails(productId: string): void {
+    console.log("+_+_+_+)_+)+)_)____+_+ ");
     this.onProductLoad = false;
     this.subscriptions.push(
+    //  this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( (response) => {
       this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( (response) => {
      //this.individualProductDetail$.subscribe();
         this.product={...response.product, quantity: 1 }
@@ -301,24 +341,27 @@ export class ProductDetailComponent implements OnInit{
        //   this.featureList = response.featureList.slice(0,5);
           //this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
         }
-        // if(response.products.name!=null) {
-        // this.productName = response.product.name;
-        // }
-
-        // this.featureList = fList;
-        // console.log("inside", this.featureList);
+        
+        if(this.featureList.length>4){
+          this.keyFeatureList = this.featureList.slice(0,4);
+          this.additionalFeatureList = this.featureList.slice(4);
+        }
+        else{
+          this.keyFeatureList = this.featureList;
+          this.additionalFeatureList = [];
+        }
      
 
-        this.productBundlesData=this.setProductBundleData(response.productBundles);
-        if(this.productBundlesData.length>0)
-        // console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
-        this.productBundleVariantsData=this.setProductBundleVariantsData(response.productBundleVariants);
+        // this.productBundlesData=this.setProductBundleData(response.productBundles);
+        // if(this.productBundlesData.length>0)
+        // // console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
+        // this.productBundleVariantsData=this.setProductBundleVariantsData(response.productBundleVariants);
 
-        this.productBundles=[...this.productBundlesData,...this.productBundleVariantsData];
+        // this.productBundles=[...this.productBundlesData,...this.productBundleVariantsData];
 
         
-        this.similarProducts =[...this.productBundlesData,...this.productBundleVariantsData];
-        this.allCompareProducts =[...this.productBundlesData,...this.productBundleVariantsData];
+        // this.similarProducts =[...this.productBundlesData,...this.productBundleVariantsData];
+        // this.allCompareProducts =[...this.productBundlesData,...this.productBundleVariantsData];
         // console.log("allCompareProducts  length "+this.allCompareProducts.length)
 
      //  response.products[0] = {...response.products[0], quantity: 1 }
@@ -351,47 +394,42 @@ export class ProductDetailComponent implements OnInit{
           this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
         }
 
-        // if(response.products[0].productImages.length>0) {
-        //   this.productImages = response.productImages;
-        // } else {
-        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-        // }
-
-
-        // for(let i=0;i<response.productBundles.length;i++)
-        // response.productBundles[i].productFamily = {...response.productBundles[i].productFamily, checked: false, quantity: 1 };
-       // this.productBundles  = response.productBundles;
         this.faq  = response.product.productFAQ;
-        // this.product.productVariants.push(response.productBundles);
-        //this.product.productVariants = [123];
-        // console.log("prVar:",this.product.productVariants)
-        // this.productVariants=response.productVariants;
-        // this.featureCountEvent();
-        //this.setDataValues( {...response.product});
 
-        /*let featureList = [];
-        // if(response.productFeatureList?.length > 0) {
-        //   //featureList = response.productFeatureList;
-        //   featureList = response.featureList;
-        //   this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
-        // }
-        if(response.featureList?.length > 0) {
-          //featureList = response.productFeatureList;
-          featureList = response.featureList.splice(0,3);
-          //this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
+
+        if(this.productBundles && this.productBundles.length>0){
+          this.links.push('#bundles');
+          this.titles.push('Bundles');
         }
-        else if(response.productVariants.length> 0 ){
-          featureList = response.productVariants[response.productVariants.length -1].featureList.slice(0,5);
-          //this.productSubCategoryId = response.productVariants[0].featureList[0].subCategoryId;
+        if(this.faq && this.faq.length>0){
+          this.links.push('#faq');
+          this.titles.push('FAQ');
         }
-        this.similarProducts = response.productBundles;
-        this.product = { ...response.products , featureList : response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants : response.featureListByProductVariants } ;
-        this.onProductLoad = true;*/
+
+        this.links = this.links.filter(function(elem, index, self) {
+          return index === self.indexOf(elem);
+        })
+        this.titles = this.titles.filter(function(elem, index, self) {
+          return index === self.indexOf(elem);
+        })
+
+        //public links = ['#description', '#feature', '#specification','#reviews','#bundles','#faq'];
+  //public titles = ['Description', 'Features', 'Specification','Reviews','Bundles','FAQ'];
+  
 
         this.setCheckBoxState();
+   // set what to display for price 
+
+
+   this.displayPrice= this.product.priceList[1].price
+   this.displayERPPrice= this.product.priceList[1].ERPPrice
+   this.displayPriceType= this.product.priceList[1].priceType
+   this.displayDiscount= this.product.priceList[1].discountRate
+
+   this.selectedProductItem=response.compareProductList;
+   this.selectedProductItem.unshift(response.product);
+   console.log("selectedProductItem  setting",this.selectedProductItem.length)
+
       })
 
 
@@ -432,7 +470,8 @@ export class ProductDetailComponent implements OnInit{
     private modalService : NgbModal,
     private compareProductsStore : CompareProductsStore,
     private userAccountStore : UserAccountStore,
-    private toaster : ToasterNotificationService
+    private toaster : ToasterNotificationService,
+    private addItemsToCartService : AddItemsToCartService
   ){
     this.router.events.subscribe((event: Event) => {
       let currentUrl = this.route.snapshot.paramMap.get('id');
@@ -470,10 +509,11 @@ featureCount=5;
     this.getProductDetails(productId);
     
 
-    this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    //this.productListToCompare = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+    this.productListToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
     // this.productListToCompare =uniqueElements;
 
-    console.log("while page load product list szie ===",this.productListToCompare)
+  
    
     this.compareProductsLength$.subscribe();
   }
@@ -522,7 +562,8 @@ featureCount=5;
 
 
   public  prdLength = 0;
-  public compareProductsLength$ = this.compareProductsStore.compareProductsList2$
+  public compareProductsListLength = 0;
+  public compareProductsLength$ = this.compareProductsStore.compareProductsList$
     .pipe(
       map(data => {
 
@@ -533,7 +574,10 @@ featureCount=5;
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.prdLength = uniqueElements.length;
 
-        console.log("++++++++++++++++++++++ ", this.prdLength);
+        let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+        this.compareProductsListLength = cachedProductsToCompare.length;
+
+       
         
         if(data){
           return data;
@@ -600,8 +644,65 @@ featureCount=5;
 
   }
 
-
   async addToCompare(item:any, type:any):Promise<void> {
+    //let returnedData = this.getCompareProductsCount(); 
+    //let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+
+    let compareProductsListLen = this.getProductsCount().length;
+
+    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+    
+    if(compareProductsListLen<4) {
+   
+
+      var index = cachedProductsToCompare.findIndex(el => el._id === item._id);
+      
+      if(index >=0){
+        this.toaster.showWarning("Product already added for Compare",'')
+      }
+
+      else{
+
+    
+        if('checked' in item){
+          item.checked = true;
+        }
+        else{
+          item['checked'] = true;
+        }
+
+        if(type === 'fromProd'){
+          
+          
+          this.productListToCompare.push(item);
+          
+        }
+        else{
+              
+              this.productListToCompare.push(item);
+        }
+        
+       
+        localStorage.setItem('compare_products_list', JSON.stringify(this.productListToCompare));
+        
+        this.compareProductsStore.setCompareProductsList(this.productListToCompare);
+
+        this.toaster.showSuccess("The product has been included for comparison.",'')
+      }
+    
+
+    
+  }
+  else {
+  //  alert("Only 4 products are allowed to compare");
+  this.toaster.showWarning("You can add only 4 products to compare",'')
+  }
+
+  
+  }
+
+
+  /*async addToCompare(item:any, type:any):Promise<void> {
     let returnedData = this.getCompareProductsCount(); 
     let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     
@@ -657,7 +758,7 @@ featureCount=5;
   }
 
   
-  }
+  } */
 
  
 
@@ -698,30 +799,37 @@ featureCount=5;
             productName : product.name,
             productId : product._id,
             quantity : product.quantity,
-            price : product.priceList[0].price,
-            erpPrice:product.priceList[0].ERPPrice,
-            discountRate:product.priceList[0].discountRate,
-            priceType:product.priceList[0].priceType,
+           
           };
+
+        // if(this.selectedOption === 'default'){
+        // //  queryParams.price = (queryParams.price/12).toFixed(2);
+
+        // queryParams.price = product.priceList[1].price,
+        // queryParams.erpPrice=product.priceList[1].ERPPrice,
+        // queryParams.discountRate=product.priceList[1].discountRate,
+        // queryParams.priceType= product.priceList[1].priceType
+       
         // }
-      /*if(loggedinData.length > 0 ){
-        
-        var existingItems = this.cartStore.getCartItems();
-      
-        
-        
-        this.router.navigate(['/cart'], {queryParams: queryParams});
-      }
-  
-      else {
-        this.viewModal(queryParams);
-      }*/
-  
+        // else{
+          //queryParams.price = (Number(queryParams.price)).toFixed(2);
+
+          queryParams.price = product.priceList[0].price,
+          queryParams.erpPrice=product.priceList[0].ERPPrice,
+          queryParams.discountRate=product.priceList[0].discountRate,
+          queryParams.priceType= product.priceList[0].priceType
+       // }
+
       this.userAccountStore.userDetails$.subscribe(res=>{
-        // console.log("()()()() ", res);
+       
         if(res && res.email !== null){
-          this.router.navigate(['/cart'], {queryParams: queryParams});
-          //this.router.navigate(['/admin-pages/accounts']);
+
+          //console.log("_)(*&& Cart Item ", queryParams);
+          this.addItemsToCartService.addItemsToCart(queryParams);
+          //this.router.navigate(['/cart'], {queryParams: queryParams});
+
+
+          
         }
         else{
           this.viewModal(queryParams);
@@ -729,16 +837,6 @@ featureCount=5;
       })
       
     }
-
-    
-   
-
-    
-
-
-    
-
-
 
 
   }
@@ -751,6 +849,10 @@ featureCount=5;
 
   public viewModal2(queryParams) {
     const modalRef = this.modalService.open(GetFreeCallModalComponent);
+    modalRef.componentInstance.request = queryParams;
+  }
+  public viewModal4(queryParams) {
+    const modalRef = this.modalService.open(TermsConditionModalComponent);
     modalRef.componentInstance.request = queryParams;
   }
 
@@ -878,26 +980,28 @@ featureCount=5;
         this.product['checked'] = false;
       }
     }
-
-    this.allCompareProducts.forEach(element => {
-      var index = uniqueElements.findIndex(el => el._id === element._id);
-      if(index >=0){
-        if(element.checked){
-          element.checked = true;
-        }
-        else{
-          element['checked'] = true;
-        }
-      }
-      else{
-        if(element.checked){
-          element.checked = false;
-        }
-        else{
-          element['checked'] = false;
-        }
-      }
-    });
+//     if(this.allCompareProducts.length>0)
+// {
+//     this.allCompareProducts.forEach(element => {
+//       var index = uniqueElements.findIndex(el => el._id === element._id);
+//       if(index >=0){
+//         if(element.checked){
+//           element.checked = true;
+//         }
+//         else{
+//           element['checked'] = true;
+//         }
+//       }
+//       else{
+//         if(element.checked){
+//           element.checked = false;
+//         }
+//         else{
+//           element['checked'] = false;
+//         }
+//       }
+//     });
+//   }
 
 
   }
@@ -954,6 +1058,12 @@ featureCount=5;
     
   }
 
+  public getProductsCount(){
+    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+    
+    return cachedProductsToCompare;
+  }
+
 
   public showDialog(){
     const modalRef = this.modalService.open(GetFreeCallModalComponent);
@@ -963,7 +1073,18 @@ featureCount=5;
     //this.displayBasic = true;
     this.viewModal2(null);
   }
- 
+
+  // TERMS AND CONDITION
+  public displayBasic01: boolean; 
+  public showDialog01(){
+    const modalRef = this.modalService.open(TermsConditionModalComponent);
+  }
+
+  showBasicDialog01() {
+    //this.displayBasic = true;
+    this.viewModal4(null);
+  }
+
   ngOnDestroy(){
     this.subscriptions.forEach(element => {
         element.unsubscribe();
