@@ -541,7 +541,7 @@ export class SuggestedCompareProductsResultComponent {
           price : product.priceList.price,
           erpPrice:product.priceList.ERPPrice,
           discountRate:product.priceList.discountRate,
-          priceType : this.getPriceType(product.priceList.priceType)
+          priceType:"Year",
         };
 
 
