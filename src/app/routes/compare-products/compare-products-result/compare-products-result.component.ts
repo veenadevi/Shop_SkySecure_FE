@@ -533,7 +533,7 @@ export class CompareProductsResultComponent {
           price : product.priceList.price,
           erpPrice:product.priceList.ERPPrice,
           discountRate:product.priceList.discountRate,
-          priceType:product.priceList.priceType,
+          priceType:"Year",
         };
 
 
