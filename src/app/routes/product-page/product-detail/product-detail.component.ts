@@ -308,6 +308,7 @@ export class ProductDetailComponent implements OnInit{
   private  getProductDetails(productId: string): void {
     this.onProductLoad = false;
     this.subscriptions.push(
+    //  this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( (response) => {
       this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( (response) => {
      //this.individualProductDetail$.subscribe();
         this.product={...response.product, quantity: 1 }

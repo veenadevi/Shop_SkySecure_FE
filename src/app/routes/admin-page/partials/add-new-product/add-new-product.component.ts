@@ -7,6 +7,8 @@ import { MetadataService } from 'src/shared/services/metadata.service';
 import { LoaderService } from 'src/shared/services/loader.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { HttpClient } from '@angular/common/http';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
+
 
 interface CreateProductPayload {
   name: String,
@@ -33,6 +35,7 @@ interface CreateProductPayload {
   selector: 'app-admin-product',
   templateUrl: './add-new-product.component.html',
   styleUrls: ['./add-new-product.component.css']
+  
 })
 
 export class AddNewProductComponent  implements OnInit {
@@ -64,7 +67,8 @@ export class AddNewProductComponent  implements OnInit {
     private cd: ChangeDetectorRef,
     private metaDataSvc: MetadataService,
     private metadataStore: MetadataStore,
-    private http: HttpClient
+    private http: HttpClient,
+    private userAccountStore : UserAccountStore,
   ) {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
@@ -197,6 +201,30 @@ export class AddNewProductComponent  implements OnInit {
     );
   }
 
+
+  public tempAppArrayImgFiles = [];
+
+  uploadFileForApp(event : any, i){
+    const formData: FormData = new FormData();
+    formData.append('file', event.target.files[0], event.target.files[0].name);
+
+    this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
+      .subscribe(
+        (response: any) => {
+          
+          this.tempAppArrayImgFiles.push({
+            'index': i,
+            'val' : response.filePath
+          })
+          //this.productLogo = response.filePath;
+        },
+        error => {
+          console.error('Upload error:', error);
+          // Handle the error response
+        }
+      );
+  }
+
   uploadFile(event: any) {
     // console.log("__TEST__", event);
     const formData: FormData = new FormData();
@@ -312,14 +340,15 @@ export class AddNewProductComponent  implements OnInit {
 
   // Submit Registration Form
   CreateProduct(): any {
-    //this.submitted = true;
-    // console.log("this.registrationForm.valid"+this.submitted)
+    
+    
     if (!this.registrationForm.valid) {
 
-     // alert('Please fill all the required fields !')
       return false;
     } else {
       // console.log("Final value", this.registrationForm.value);
+
+      let userAccountdetails = this.userAccountStore.getUserDetails();
       var productData = this.registrationForm.value;
       this.createProductPayload = {
         name: productData.productName,
@@ -358,10 +387,33 @@ export class AddNewProductComponent  implements OnInit {
         appList:productData.addAppArrayNew.app,
 
         bannerLogo: this.productLogo,
-        createdBy: 'ADMIN',
-        updatedBy: 'ADMIN'
+        createdBy: userAccountdetails._id,
+        updatedBy: userAccountdetails._id
       }
-      // console.log("_createProductPayload_", this.createProductPayload);
+
+      
+      if(this.createProductPayload.appList && this.createProductPayload.appList.length>0){
+
+
+        for(let i=0;i<this.createProductPayload.appList.length;i++){
+          const result = this.tempAppArrayImgFiles.filter((obj) => {
+            return obj.index === i;
+          });
+
+          if(result && result.length>0){
+            this.createProductPayload.appList[i].File = result[0].val;
+          }
+          else{
+            this.createProductPayload.appList[i].File = "";
+          }
+        }
+
+        
+      }
+
+      console.log("_--------------------APP Array", this.tempAppArrayImgFiles);
+      console.log("_--------------------createProductPayload_", this.createProductPayload);
+      
       this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
         // console.log("__RESPONSE_",response);
         this.showMsg=true

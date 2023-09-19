@@ -3,6 +3,7 @@
 }
 .header-title {
     padding: 5px;
+    font-size: 1.4rem;
 }
 
 .section-01 {
@@ -11,7 +12,9 @@
     width: 100%;
     justify-content: space-evenly;
 }
-
+.country-item{
+    font-size: 13px;
+}
 .section-001 {
     display: flex;
     flex-direction: row;
@@ -21,7 +24,7 @@
 
 
 label {
-    font-size: medium;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -32,7 +35,7 @@ label {
 
 .custom-select {
     width: 100%;
-    padding: 13px;
+    padding: 10px;
     box-sizing: border-box;
     border-radius: 8px;
 }
@@ -62,6 +65,7 @@ label {
     /* justify-content: space-evenly; */
     margin-top: 10px;
     margin-left: 10px;
+    padding: 10px;
 }
 
 .custom-select-01 {
@@ -108,10 +112,12 @@ label {
     width: 25%;
     padding: 20px;
 }
-
+.p-dropdown-label{
+    padding: .4rem !important;
+}
 .custom-select-03 {
     width: 100%;
-    padding: 10px;
+    padding: 4px;
     box-sizing: border-box;
     border: 1px solid black;
     border-radius: 8px;
@@ -133,7 +139,7 @@ label {
     margin-bottom: -25px;
 }
 h4{
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 }
 .orderno {
@@ -236,7 +242,7 @@ h4{
 
 .heading {
     padding-left: 0px;
-    font-size: large;
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -339,7 +345,7 @@ h4{
     color: white;
     border-radius: 8px;
     margin-top: 10px;
-    font-size: larger;
+    font-size: 18px;
     font-weight: 600;
 }
 

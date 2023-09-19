@@ -402,67 +402,18 @@
 
 
 
-<!-- 
-                    <div class="section-04">
 
-                        -Product Order Number
-                        <div class="orderno">
-                            <div class="forms">
-                                <div class="label">
-                                    <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
-                                        ERP Price</label>
-                                </div>
-                                <div class="input">
-                                    <input type="number" class="custom-select-01" formControlName="erpPrice"
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
-                                </div>
-
-                                error block
-                                <div class="invalid-feedback" *ngIf="submitted && myForm.productPrice.errors?.required">
-                                    <sup>*</sup>Product ERP required
-                                </div>
-                            </div>
-
-                        </div>
-
-                                 Subscription Type
-                                 <div class="subscription">
-                                    <div class="forms">
-                                        <div class="label">
-                                            <label
-                                                [ngClass]="{'error': submitted && myForm.subscriptionType.errors}">Subscription
-                                                Type</label>
-                                        </div>
-                                        <div class="select">
-                                            <select class="custom-select" (change)="changeSubscriptionType($event)"
-                                                formControlName="subscriptionType"
-                                                [ngClass]="{'error': submitted && myForm.subscriptionType.errors}">
-                                                <option value="">Choose...</option>
-                                                <option *ngFor="let type of subscriptionTypeList" [value]="type">{{type}}
-                                                </option>
-                                            </select>
-                                        </div>
-        
-                                        error block
-                                        <div class="invalid-feedback"
-                                            *ngIf="submitted && myForm.subscriptionType.errors?.required">
-                                            <sup>*</sup>Please select Subscription Type
-                                        </div>
-                                    </div>
-                                </div>
-
-                    </div> -->
 
 
 
                     <div class="app" *ngFor="let item of addAppArrayNew.get('app')['controls']; let i = index">
-                        <div class="app-name">
+                        <div class="app-name" [formGroup]="item">
                             <div class="label">
                                 <label >
                                     App  Name</label>
                             </div>
                             <div class="input">
-                                <input type="text" class="custom-select-01" >
+                                <input type="text" class="custom-select-01" formControlName="AppName">
                             </div>
                         </div>
 
@@ -471,7 +422,7 @@
                             <label>App Logo</label>
                             <div class="avatar-edit">
                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
-                                    (change)="uploadFile($event)" />
+                                    (change)="uploadFileForApp($event, i)" />
                                 <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
                                     alt="productLogo" />
                                 <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
