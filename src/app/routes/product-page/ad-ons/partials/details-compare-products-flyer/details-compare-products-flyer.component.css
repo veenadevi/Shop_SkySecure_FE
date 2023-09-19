@@ -121,6 +121,18 @@ button[disabled]{
 }
 
 
+.text-holder{
+    display:flex;
+    flex-direction: column;
+}
+
+.text-holder span{
+    font-size: 12px;
+    font-family: 'Lato',sans-serif;
+    font-weight: 600;
+}
+
+
 .main-product-content {
     display: flex;
     flex-direction: column;
