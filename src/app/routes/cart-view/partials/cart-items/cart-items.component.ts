@@ -106,6 +106,7 @@ public cartData : any[] = [];
         this.cartData.forEach(element => {
           element['itemTotal'] = element.quantity * element.price;
           element.quantity = String(element.quantity);
+          element.priceType="Yearly"
         });
         this.calTotalPrice();
         return this.cartData;
