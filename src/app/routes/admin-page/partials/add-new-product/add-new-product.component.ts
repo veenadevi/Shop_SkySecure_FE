@@ -150,8 +150,8 @@ export class AddNewProductComponent  implements OnInit {
   }
   createAppGroup(): FormGroup {
     return this.fb.group({
-      AppName: '',
-      File: ''
+      name: '',
+      imageURL: ''
     });
   }
 
@@ -403,10 +403,11 @@ export class AddNewProductComponent  implements OnInit {
           });
 
           if(result && result.length>0){
-            this.createProductPayload.appList[i].File = result[0].val;
+          //  this.createProductPayload.appList[i].File = result[0].val;
+            this.createProductPayload.appList[i].imageURL = result[0].val;
           }
           else{
-            this.createProductPayload.appList[i].File = "";
+            this.createProductPayload.appList[i].imageURL = "";
           }
         }
 
