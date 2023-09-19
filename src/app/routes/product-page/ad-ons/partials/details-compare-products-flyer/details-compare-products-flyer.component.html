@@ -21,7 +21,7 @@
                     </div>
                     <div class="text-holder">
                         <span class="main-product-content">{{productList[0].name}}</span>
-                        <ng-container *ngIf="productList[0].priceList && productList[1].priceList.length>0">
+                        <ng-container *ngIf="productList[0].priceList && productList[0].priceList.length>0">
                             <span>₹ {{productList[0].priceList[1].price | number : '1.2-2'}}/ {{'Month'}}</span>
                         </ng-container>
                     </div>
