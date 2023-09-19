@@ -11,7 +11,7 @@
             <!-- <ng-container *ngIf="(productList.length>1); else singleProduct">-->
             <ng-container>
                 <div class=" tertiary-headline header">
-                    Compare with similar products
+                    Comparisons
                 </div>
                 <div class="parentproductList">
 
@@ -19,11 +19,13 @@
                     <div class="product-img-container">
                         <img class="main-product-img" src="../../../../../../assets/Logos/MicrosoftLogo_300X300.png">
                     </div>
-
-                            <p class="main-product-content">{{productList[0].name}}</p>
-                            <ng-container *ngIf="productList[0].priceList && productList[1].priceList.length>0">
-                                ₹ {{productList[0].priceList[1].price | number : '1.2-2'}}/ {{'Month'}}
-                            </ng-container>
+                    <div class="text-holder">
+                        <span class="main-product-content">{{productList[0].name}}</span>
+                        <ng-container *ngIf="productList[0].priceList && productList[1].priceList.length>0">
+                            <span>₹ {{productList[0].priceList[1].price | number : '1.2-2'}}/ {{'Month'}}</span>
+                        </ng-container>
+                    </div>
+                            
                      </div>
 
             </div>
