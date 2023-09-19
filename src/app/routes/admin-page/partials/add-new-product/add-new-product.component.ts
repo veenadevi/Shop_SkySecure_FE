@@ -478,4 +478,23 @@ export class AddNewProductComponent  implements OnInit {
     }
   }
 
+  public tempYerpPrice:any;
+  public tempMerpPrice : any;
+
+  public onPriceChange(val){
+
+
+    switch (val) {
+      case 'yerpPrice':
+        this.tempYerpPrice = ((Number(this.registrationForm.value.yerpPrice)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice));
+        return;
+      case 'merpPrice':
+        this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
+        return;
+
+      default:
+        return null;
+    }
+  }
+
 }

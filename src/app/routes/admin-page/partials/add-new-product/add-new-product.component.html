@@ -232,7 +232,10 @@
                                     </div>
                                     <div class="input">
                                         <input type="number" class="custom-select-01" formControlName="yerpPrice"
-                                            [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        (change)="onPriceChange('yerpPrice')" [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                    </div>
+                                    <div>
+                                        Calculated Price : {{tempYerpPrice}}
                                     </div>
     
                                     <!-- error block -->
@@ -253,7 +256,7 @@
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="ydistributorPrice"
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                    (change)="onPriceChange('yerpPrice')" [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                 </div>
 
                             </div>
@@ -335,7 +338,10 @@
                                     </div>
                                     <div class="input">
                                         <input type="number" class="custom-select-01" formControlName="merpPrice"
-                                            [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                        (change)="onPriceChange('merpPrice')" [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                    </div>
+                                    <div>
+                                        Calculated Price : {{tempMerpPrice}}
                                     </div>
     
                                     <!-- error block -->
@@ -355,8 +361,8 @@
                                         Distributor Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="number" class="custom-select-01" formControlName="mat-tab-link"
-                                        [ngClass]="{'error': submitted && myForm.productPrice.errors}">
+                                    <input type="number" class="custom-select-01" formControlName="mdistributorPrice"
+                                    (change)="onPriceChange('merpPrice')" [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                 </div>
 
                                 <!-- error block -->
