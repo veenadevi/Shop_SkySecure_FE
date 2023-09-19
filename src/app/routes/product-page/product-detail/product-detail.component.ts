@@ -343,16 +343,16 @@ export class ProductDetailComponent implements OnInit{
         }
      
 
-        this.productBundlesData=this.setProductBundleData(response.productBundles);
-        if(this.productBundlesData.length>0)
-        // console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
-        this.productBundleVariantsData=this.setProductBundleVariantsData(response.productBundleVariants);
+        // this.productBundlesData=this.setProductBundleData(response.productBundles);
+        // if(this.productBundlesData.length>0)
+        // // console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
+        // this.productBundleVariantsData=this.setProductBundleVariantsData(response.productBundleVariants);
 
-        this.productBundles=[...this.productBundlesData,...this.productBundleVariantsData];
+        // this.productBundles=[...this.productBundlesData,...this.productBundleVariantsData];
 
         
-        this.similarProducts =[...this.productBundlesData,...this.productBundleVariantsData];
-        this.allCompareProducts =[...this.productBundlesData,...this.productBundleVariantsData];
+        // this.similarProducts =[...this.productBundlesData,...this.productBundleVariantsData];
+        // this.allCompareProducts =[...this.productBundlesData,...this.productBundleVariantsData];
         // console.log("allCompareProducts  length "+this.allCompareProducts.length)
 
      //  response.products[0] = {...response.products[0], quantity: 1 }

@@ -108,6 +108,15 @@ label {
     padding: 20px;
 }
 
+.section-productDescription{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* justify-content: space-evenly; */
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 .skuid {
     width: 25%;
     padding: 20px;

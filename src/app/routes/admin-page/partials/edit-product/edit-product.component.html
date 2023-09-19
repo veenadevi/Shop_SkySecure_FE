@@ -199,6 +199,28 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="description">
+                            <div class="forms">
+                                <div class="label">
+                                    <label [ngClass]="{'error': submitted && myForm.productShortDescription.errors}">
+                                        Short Description</label>
+                                </div>
+                                <div class="input">
+                                    <textarea class="custom-select-02" formControlName="productShortDescription"
+                                        [ngClass]="{'error': submitted && myForm.productShortDescription.errors}"></textarea>
+                                </div>
+                                <!-- error block -->
+                                <div class="invalid-feedback"
+                                    *ngIf="submitted && myForm.productShortDescription.errors?.required">
+                                    <sup>*</sup>Product Short Description required
+                                </div>
+                            </div>
+
+                        </div>
+</div>
+    <div class="section-productDescription">
+   
                         <!--Product Description-->
                         <div class="description">
                             <div class="forms">

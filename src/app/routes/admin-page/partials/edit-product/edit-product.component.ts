@@ -16,6 +16,7 @@ interface CreateProductPayload {
   _id: String,
   name: String,
   description: String,
+  shortDescription: String,
   oemId: String,
   subCategoryId: String,
   createdBy: String,
@@ -93,6 +94,7 @@ export class EditProductComponent  implements OnInit {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
       productDescription: ['', Validators.required],
+      productShortDescription:[''],
       productSkuNumber: ['', Validators.required],
       productSkuId: ['', Validators.required],
       productOrderNumber: [''],
@@ -433,6 +435,7 @@ export class EditProductComponent  implements OnInit {
         _id: this.selectedProductId._id,
         name: productData.productName,
         description: productData.productDescription,
+        shortDescription:productData.productShortDescription,
         oemId: productData.OEM,
         subCategoryId: productData.Subcategories,
        
@@ -522,7 +525,7 @@ export class EditProductComponent  implements OnInit {
 
   removeFAQ(data: any) {
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
     faqArray.removeAt(data);
     }
   }
@@ -544,11 +547,11 @@ export class EditProductComponent  implements OnInit {
       onlySelf: true
     })
 
-    this.registrationForm.get('productDescription').setValue(response.products.name, {
+    this.registrationForm.get('productDescription').setValue(response.products.description, {
       onlySelf: true
     })
 
-    this.registrationForm.get('productDescription').setValue(response.products.description, {
+    this.registrationForm.get('productShortDescription').setValue(response.products.shortDescription, {
       onlySelf: true
     })
 
@@ -678,6 +681,8 @@ export class EditProductComponent  implements OnInit {
     
     this.selectedProductId1= [];
 
+if(data){
+
 
     data.forEach(element => {
       console.log(")()()() Data", element);
@@ -690,7 +695,7 @@ export class EditProductComponent  implements OnInit {
       });
     });
     console.log(")()()() Data Selected ", this.selectedProductId1);
-
+  }
   }
 
   addNewFAQ() {
@@ -716,7 +721,7 @@ export class EditProductComponent  implements OnInit {
 
   removeApp(data: any) {
     const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
     appArray.removeAt(data);
     }
   

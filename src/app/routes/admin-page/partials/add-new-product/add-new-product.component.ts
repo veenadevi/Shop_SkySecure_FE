@@ -28,7 +28,6 @@ interface CreateProductPayload {
   featureList: Array<any>,
   productFAQ: Array<any>,
   appList:Array<any>,
-  isVariant: Boolean,
   productId: String
 }
 
@@ -91,7 +90,6 @@ export class AddNewProductComponent  implements OnInit {
       OEM: ['', Validators.required],
       ysubscriptionType: [''],
       msubscriptionType: [''],
-      isVariant: ['false'],
       file: [null],
       products: [''],
       subscriptionType : [''],
@@ -369,7 +367,8 @@ export class AddNewProductComponent  implements OnInit {
           "priceType": "Year",
           "ERPPrice" : productData.yerpPrice,
           "distributorPrice":productData.ydistributorPrice,
-          "discountRate" : productData.ydiscount
+          "discountRate" : productData.ydiscount,
+          
 
         },
         {
@@ -384,7 +383,7 @@ export class AddNewProductComponent  implements OnInit {
       
       ],
         isActive: true,
-        isVariant: productData.isVariant == 'true'? true: false ,
+       
         featureList: productData.addDynamicElementNew.feature,
         productFAQ: productData.addFAQArrayNew.faq,
         appList:productData.addAppArrayNew.app,
@@ -428,6 +427,19 @@ export class AddNewProductComponent  implements OnInit {
     }
   }
 
+//   public setFAQList(productData){
+//    let length= productData.addDynamicElementNew.feature.length;
+//    console.log("length  of faq list",length)
+//     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
+//    if(length==1){
+//      featureArray.removeAt(0);
+//    }
+//    let length1= productData.addDynamicElementNew.feature.length;
+//    console.log("length  after faq list",length1)
+   
+// return productData.addDynamicElementNew.feature;
+
+//   }
   public setYearlyPrice(data){
 
     let yskySecurePrice = ((Number(data.yerpPrice)) * 0.02) + (Number(data.ydistributorPrice));
@@ -444,7 +456,7 @@ export class AddNewProductComponent  implements OnInit {
 
   removeFeature(data: any) {
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
       featureArray.removeAt(data);
     }
    
@@ -452,7 +464,7 @@ export class AddNewProductComponent  implements OnInit {
 
   removeFAQ(data: any) {
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
     faqArray.removeAt(data);
     }
   
@@ -460,7 +472,7 @@ export class AddNewProductComponent  implements OnInit {
 
   removeApp(data: any) {
     const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
     appArray.removeAt(data);
     }
   
