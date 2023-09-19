@@ -119,7 +119,7 @@
 .header-title{
     /* color: #010209; */
     font-weight: 600;
-    line-height: 2rem;
+    line-height: 1.5rem;
     font-size: 15px;
         /* color: #ffff; */
     color: var(--neutral);

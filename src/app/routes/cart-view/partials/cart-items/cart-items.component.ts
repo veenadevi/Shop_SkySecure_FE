@@ -649,6 +649,9 @@ public onChangeQuantity(i, price) : void {
   }
 
 
+  public navigateToProductDetails(product:any){
+    this.router.navigate(['/products', product.productId]); 
+  }
 
 
 
