@@ -41,7 +41,8 @@
             <!-- Content Holder -->
             <div class="content-holder">
                 <div class="header">
-                    <div class="header-title">
+                    <div class="header-title" (click)="navigateToProductDetails(item)">
+                      
                         {{item.name}}
                     </div>
                     <!-- <mat-icon>bookmark_border</mat-icon> -->
