@@ -13,20 +13,73 @@
                 <div class=" tertiary-headline header">
                     Compare with similar products
                 </div>
+
+                <div class="main-product">
+                    <div class="product-img-container">
+                        <img class="main-product-img" src="../../../../../../assets/Logos/MicrosoftLogo_300X300.png">
+                    </div>
+                    <h2 class="main-product-name tertiary-sub-headline">Azure Information Protection Premium P1</h2>
+                </div>
+
                 <!-- <div class="text-style">
                     Compare with similar products
                 </div> -->
                 <div class="list-holder">
+
+
+                    <div class="top-border-left">
+                        <div class="half-curve-border-left">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#918F90"/>
+                              </svg>
+                        </div>
+                        <div class="half-border-left"></div>
+                    </div>
+
+
+
+                    <div class="vs-section-2">
+                        
+                        <span class="vs-text-2">VS</span>
+                    </div>
+
+                    <div class="top-border-right">
+                        <div class="half-curve-border-right">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#918F90"/>
+                              </svg>
+                        </div>
+                        <div class="half-border-right"></div>
+                    </div>
+
                     <div class="row-holder"  *ngFor="let item of productList">
                         <suggested-compare-card-flyer [item] = "item" (removableItem)="removeSelectedItem($event)"></suggested-compare-card-flyer>
                     </div>
-                    <ng-container *ngIf="productList.length > 2">
+                    <!-- <ng-container *ngIf="productList.length > 2">
                         <div class="vs-section">
                             <span class="vs-text">VS</span>
                         </div>
-                    </ng-container>
+                    </ng-container> -->
+
+                    <!-- <div class="bottom-border-section">
+                        <div class="half-curve-border-bottom-left">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#1E1E1E"/>
+                              </svg>
+                        </div>
+                        <div class="bottom-border"></div>
+                        <div class="half-curve-border-bottom-right">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#1E1E1E"/>
+                              </svg>
+                        </div>
+                    </div> -->
+
 
                 </div>
+
+
+
                 <div class="btn-holder">
                     <button class="secondary-btn" (click)="navigateToCompareProducts()" [disabled]="(productList.length === 1)">
                         Compare
