@@ -799,18 +799,26 @@ featureCount=5;
             productName : product.name,
             productId : product._id,
             quantity : product.quantity,
-            price : product.priceList[0].price,
-            erpPrice:product.priceList[0].ERPPrice,
-            discountRate:product.priceList[0].discountRate,
-            priceType: (this.selectedOption === 'default') ? 'Monthly' : 'Yearly',
+           
           };
 
-        if(this.selectedOption === 'default'){
-          queryParams.price = (queryParams.price/12).toFixed(2);
-        }
-        else{
-          queryParams.price = (Number(queryParams.price)).toFixed(2);
-        }
+        // if(this.selectedOption === 'default'){
+        // //  queryParams.price = (queryParams.price/12).toFixed(2);
+
+        // queryParams.price = product.priceList[1].price,
+        // queryParams.erpPrice=product.priceList[1].ERPPrice,
+        // queryParams.discountRate=product.priceList[1].discountRate,
+        // queryParams.priceType= product.priceList[1].priceType
+       
+        // }
+        // else{
+          //queryParams.price = (Number(queryParams.price)).toFixed(2);
+
+          queryParams.price = product.priceList[0].price,
+          queryParams.erpPrice=product.priceList[0].ERPPrice,
+          queryParams.discountRate=product.priceList[0].discountRate,
+          queryParams.priceType= product.priceList[0].priceType
+       // }
 
       this.userAccountStore.userDetails$.subscribe(res=>{
        
