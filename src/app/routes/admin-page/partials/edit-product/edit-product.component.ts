@@ -389,11 +389,12 @@ export class EditProductComponent  implements OnInit {
 
   selectSimilarProduct(event: any) {
 
-    console.log("++++++++ ______ ", event.value);
-    console.log("selected ProductId====",event.value.length)
+    
+    
     var selectedproductList=event.value
 
-    this.compareProductListIds = selectedproductList.map((data) => data._id);
+    this.compareProductListIds = selectedproductList.map((data) => data.id);
+
     
     
   }
@@ -470,7 +471,8 @@ export class EditProductComponent  implements OnInit {
         updatedBy: userAccountdetails._id,
         compareWithproducts:this.compareProductListIds
       }
-      console.log("_editProductPayload_", this.createProductPayload);
+      console.log("-------------------- _editProductPayload_", this.createProductPayload);
+      
       var endPoint = `${environment.gatewayUrl}api/admin/product/edit`
       this.http.patch(endPoint,this.createProductPayload).subscribe((response) => {
         console.log("__RESPONSE_",response);
@@ -478,6 +480,7 @@ export class EditProductComponent  implements OnInit {
       })
          this.registrationForm.reset();
          this.selectedProductId.reset();
+         
     }
   }
 
@@ -597,11 +600,13 @@ export class EditProductComponent  implements OnInit {
     })
 
  console.log("selectedCompareperocuctidss...",response.products.compareWithproducts)
- //this.selectedProductId1=this.selectedProductId1.concat([response.products.compareWithproducts]);
-  this.selectedProductId1=[response.products.compareWithproducts];
+
+ this.setDefaultCompareProductsSelected(response.products.compareWithproducts);
+
+  /*this.selectedProductId1=[response.products.compareWithproducts];
  
     this.registrationForm.get('selectedProductId1').setValue(['64bdffaa5559b600556bc31e', '64be072a5559b600556bc75b']
-    )
+    ) */
 
     this.registrationForm.get('Subcategories').setValue(response.products.subCategoryId, {
       onlySelf: true
@@ -665,6 +670,27 @@ export class EditProductComponent  implements OnInit {
 
   get addFAQ() {
     return this.registrationForm.get('addNewFAQ') as FormArray
+  }
+
+  public setDefaultCompareProductsSelected(data){
+
+    //this.selectedProductId1=[data];
+    
+    this.selectedProductId1= [];
+
+
+    data.forEach(element => {
+      console.log(")()()() Data", element);
+      this.compareproducts.map((item) => {
+        console.log(")()()() Data ", item);
+        if(item.id === element){
+          this.selectedProductId1.push(item);
+        }
+        
+      });
+    });
+    console.log(")()()() Data Selected ", this.selectedProductId1);
+
   }
 
   addNewFAQ() {
