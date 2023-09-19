@@ -426,6 +426,10 @@ export class ProductDetailComponent implements OnInit{
    this.displayPriceType= this.product.priceList[1].priceType
    this.displayDiscount= this.product.priceList[1].discountRate
 
+   this.selectedProductItem=response.compareProductList;
+   this.selectedProductItem.unshift(response.product);
+   console.log("selectedProductItem  setting",this.selectedProductItem.length)
+
       })
 
 

@@ -13,14 +13,21 @@
                 <div class=" tertiary-headline header">
                     Compare with similar products
                 </div>
+                <div class="parentproductList">
 
                 <div class="main-product">
                     <div class="product-img-container">
                         <img class="main-product-img" src="../../../../../../assets/Logos/MicrosoftLogo_300X300.png">
                     </div>
-                    <h2 class="main-product-name tertiary-sub-headline">Azure Information Protection Premium P1</h2>
-                </div>
 
+                            <p class="main-product-content">{{productList[0].name}}</p>
+                            <ng-container *ngIf="productList[0].priceList && productList[1].priceList.length>0">
+                                ₹ {{productList[0].priceList[1].price | number : '1.2-2'}}/ {{'Month'}}
+                            </ng-container>
+                     </div>
+
+            </div>
+                
                 <!-- <div class="text-style">
                     Compare with similar products
                 </div> -->
@@ -52,29 +59,10 @@
                         <div class="half-border-right"></div>
                     </div>
 
-                    <div class="row-holder"  *ngFor="let item of productList">
-                        <suggested-compare-card-flyer [item] = "item" (removableItem)="removeSelectedItem($event)"></suggested-compare-card-flyer>
+                    <div class="row-holder"  *ngFor="let item of productList | slice:1; let i = index" >
+                        <suggested-compare-card-flyer [item] = "item" ></suggested-compare-card-flyer>
                     </div>
-                    <!-- <ng-container *ngIf="productList.length > 2">
-                        <div class="vs-section">
-                            <span class="vs-text">VS</span>
-                        </div>
-                    </ng-container> -->
-
-                    <!-- <div class="bottom-border-section">
-                        <div class="half-curve-border-bottom-left">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#1E1E1E"/>
-                              </svg>
-                        </div>
-                        <div class="bottom-border"></div>
-                        <div class="half-curve-border-bottom-right">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#1E1E1E"/>
-                              </svg>
-                        </div>
-                    </div> -->
-
+                   
 
                 </div>
 
@@ -113,7 +101,7 @@
                 Select your desired products and compare its features
             </div>
             <div class="list-holder">
-                <compare-product-item-flyer [item] = "itemJson" (removableItem)="removeSelectedItem($event)"></compare-product-item-flyer>
+                <compare-product-item-flyer [item] = "itemJson" ></compare-product-item-flyer>
             </div>
         </ng-template>
     </ng-container>
