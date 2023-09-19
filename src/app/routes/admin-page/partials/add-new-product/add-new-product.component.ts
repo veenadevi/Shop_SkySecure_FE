@@ -12,6 +12,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 interface CreateProductPayload {
   name: String,
+  shortDescription : String,
   description: String,
   oemId: String,
   subCategoryId: String,
@@ -27,7 +28,6 @@ interface CreateProductPayload {
   featureList: Array<any>,
   productFAQ: Array<any>,
   appList:Array<any>,
-  isVariant: Boolean,
   productId: String
 }
 
@@ -72,6 +72,7 @@ export class AddNewProductComponent  implements OnInit {
   ) {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
+      productShortDescription:['', Validators.required],
       productDescription: ['', Validators.required],
       productSkuNumber: ['', Validators.required],
       productSkuId: ['', Validators.required],
@@ -89,7 +90,6 @@ export class AddNewProductComponent  implements OnInit {
       OEM: ['', Validators.required],
       ysubscriptionType: [''],
       msubscriptionType: [''],
-      isVariant: ['false'],
       file: [null],
       products: [''],
       subscriptionType : [''],
@@ -341,7 +341,7 @@ export class AddNewProductComponent  implements OnInit {
   // Submit Registration Form
   CreateProduct(): any {
     
-    
+    let a=2;
     if (!this.registrationForm.valid) {
 
       return false;
@@ -352,6 +352,7 @@ export class AddNewProductComponent  implements OnInit {
       var productData = this.registrationForm.value;
       this.createProductPayload = {
         name: productData.productName,
+        shortDescription: productData.productShortDescription,
         description: productData.productDescription,
         oemId: productData.OEM,
         subCategoryId: productData.Subcategories,
@@ -366,7 +367,8 @@ export class AddNewProductComponent  implements OnInit {
           "priceType": "Year",
           "ERPPrice" : productData.yerpPrice,
           "distributorPrice":productData.ydistributorPrice,
-          "discountRate" : productData.ydiscount
+          "discountRate" : productData.ydiscount,
+          
 
         },
         {
@@ -381,7 +383,7 @@ export class AddNewProductComponent  implements OnInit {
       
       ],
         isActive: true,
-        isVariant: productData.isVariant == 'true'? true: false ,
+       
         featureList: productData.addDynamicElementNew.feature,
         productFAQ: productData.addFAQArrayNew.faq,
         appList:productData.addAppArrayNew.app,
@@ -411,19 +413,33 @@ export class AddNewProductComponent  implements OnInit {
         
       }
 
-      console.log("_--------------------APP Array", this.tempAppArrayImgFiles);
-      console.log("_--------------------createProductPayload_", this.createProductPayload);
+      //console.log("_--------------------APP Array", this.tempAppArrayImgFiles);
+      //console.log("_--------------------createProductPayload_", this.createProductPayload);
+      
       
       this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
-        // console.log("__RESPONSE_",response);
+        
         this.showMsg=true
 
       })
 
-      this.registrationForm.reset();
+      this.registrationForm.reset(); 
     }
   }
 
+//   public setFAQList(productData){
+//    let length= productData.addDynamicElementNew.feature.length;
+//    console.log("length  of faq list",length)
+//     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
+//    if(length==1){
+//      featureArray.removeAt(0);
+//    }
+//    let length1= productData.addDynamicElementNew.feature.length;
+//    console.log("length  after faq list",length1)
+   
+// return productData.addDynamicElementNew.feature;
+
+//   }
   public setYearlyPrice(data){
 
     let yskySecurePrice = ((Number(data.yerpPrice)) * 0.02) + (Number(data.ydistributorPrice));
@@ -440,7 +456,7 @@ export class AddNewProductComponent  implements OnInit {
 
   removeFeature(data: any) {
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
       featureArray.removeAt(data);
     }
    
@@ -448,7 +464,7 @@ export class AddNewProductComponent  implements OnInit {
 
   removeFAQ(data: any) {
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
     faqArray.removeAt(data);
     }
   
@@ -456,7 +472,7 @@ export class AddNewProductComponent  implements OnInit {
 
   removeApp(data: any) {
     const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
     appArray.removeAt(data);
     }
   
@@ -475,6 +491,32 @@ export class AddNewProductComponent  implements OnInit {
       this.registrationForm.get('isVariant').setValue(event.target.value, {
         onlySelf: true
       })
+    }
+  }
+
+  public tempYerpPrice:any;
+  public tempMerpPrice : any;
+
+
+  public calDiscountedVal(erp,calVal){
+    return ((erp-calVal)/erp)*100;
+  }
+
+  public onPriceChange(val){
+
+
+    switch (val) {
+      case 'yerpPrice':
+        this.tempYerpPrice = ((Number(this.registrationForm.value.yerpPrice)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice));
+        this.registrationForm.controls['ydiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice)));
+        return;
+      case 'merpPrice':
+        this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
+        this.registrationForm.controls['mdiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice)));
+        return;
+
+      default:
+        return null;
     }
   }
 

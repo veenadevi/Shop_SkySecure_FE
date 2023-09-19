@@ -95,9 +95,10 @@ export class ProductDetailComponent implements OnInit{
   productListToCompare  = [];
   products = [];
   public currentRoute: string;
-  links = ['#description', '#feature', '#specification','#reviews','#bundles','#faq'];
-  //titles = ['Description', 'Features', 'Specification','Reviews','Compare Products','Bundles','FAQ'];
-  titles = ['Description', 'Features', 'Specification','Reviews','Bundles','FAQ'];
+  //public links = ['#description', '#feature', '#specification','#reviews','#bundles','#faq'];
+  //public titles = ['Description', 'Features', 'Specification','Reviews','Bundles','FAQ'];
+  public links = ['#description', '#feature', '#specification','#reviews'];
+  public titles = ['Description', 'Features', 'Specification','Reviews'];
   activeLink = this.links[0];
   myColor = '';
   public selectedType : any = 'Month';
@@ -306,6 +307,7 @@ export class ProductDetailComponent implements OnInit{
   }
 
   private  getProductDetails(productId: string): void {
+    console.log("+_+_+_+)_+)+)_)____+_+ ");
     this.onProductLoad = false;
     this.subscriptions.push(
     //  this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( (response) => {
@@ -341,16 +343,16 @@ export class ProductDetailComponent implements OnInit{
         }
      
 
-        this.productBundlesData=this.setProductBundleData(response.productBundles);
-        if(this.productBundlesData.length>0)
-        // console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
-        this.productBundleVariantsData=this.setProductBundleVariantsData(response.productBundleVariants);
+        // this.productBundlesData=this.setProductBundleData(response.productBundles);
+        // if(this.productBundlesData.length>0)
+        // // console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
+        // this.productBundleVariantsData=this.setProductBundleVariantsData(response.productBundleVariants);
 
-        this.productBundles=[...this.productBundlesData,...this.productBundleVariantsData];
+        // this.productBundles=[...this.productBundlesData,...this.productBundleVariantsData];
 
         
-        this.similarProducts =[...this.productBundlesData,...this.productBundleVariantsData];
-        this.allCompareProducts =[...this.productBundlesData,...this.productBundleVariantsData];
+        // this.similarProducts =[...this.productBundlesData,...this.productBundleVariantsData];
+        // this.allCompareProducts =[...this.productBundlesData,...this.productBundleVariantsData];
         // console.log("allCompareProducts  length "+this.allCompareProducts.length)
 
      //  response.products[0] = {...response.products[0], quantity: 1 }
@@ -383,45 +385,28 @@ export class ProductDetailComponent implements OnInit{
           this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
         }
 
-        // if(response.products[0].productImages.length>0) {
-        //   this.productImages = response.productImages;
-        // } else {
-        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-        // this.productImages.push("../../assets/icons/DefaultImageIcon.svg");
-        // }
-
-
-        // for(let i=0;i<response.productBundles.length;i++)
-        // response.productBundles[i].productFamily = {...response.productBundles[i].productFamily, checked: false, quantity: 1 };
-       // this.productBundles  = response.productBundles;
         this.faq  = response.product.productFAQ;
-        // this.product.productVariants.push(response.productBundles);
-        //this.product.productVariants = [123];
-        // console.log("prVar:",this.product.productVariants)
-        // this.productVariants=response.productVariants;
-        // this.featureCountEvent();
-        //this.setDataValues( {...response.product});
 
-        /*let featureList = [];
-        // if(response.productFeatureList?.length > 0) {
-        //   //featureList = response.productFeatureList;
-        //   featureList = response.featureList;
-        //   this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
-        // }
-        if(response.featureList?.length > 0) {
-          //featureList = response.productFeatureList;
-          featureList = response.featureList.splice(0,3);
-          //this.productSubCategoryId = response.productFeatureList[0].subCategoryId;
+
+        if(this.productBundles && this.productBundles.length>0){
+          this.links.push('#bundles');
+          this.titles.push('Bundles');
         }
-        else if(response.productVariants.length> 0 ){
-          featureList = response.productVariants[response.productVariants.length -1].featureList.slice(0,5);
-          //this.productSubCategoryId = response.productVariants[0].featureList[0].subCategoryId;
+        if(this.faq && this.faq.length>0){
+          this.links.push('#faq');
+          this.titles.push('FAQ');
         }
-        this.similarProducts = response.productBundles;
-        this.product = { ...response.products , featureList : response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants : response.featureListByProductVariants } ;
-        this.onProductLoad = true;*/
+
+        this.links = this.links.filter(function(elem, index, self) {
+          return index === self.indexOf(elem);
+        })
+        this.titles = this.titles.filter(function(elem, index, self) {
+          return index === self.indexOf(elem);
+        })
+
+        //public links = ['#description', '#feature', '#specification','#reviews','#bundles','#faq'];
+  //public titles = ['Description', 'Features', 'Specification','Reviews','Bundles','FAQ'];
+  
 
         this.setCheckBoxState();
       })

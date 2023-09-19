@@ -16,6 +16,7 @@ interface CreateProductPayload {
   _id: String,
   name: String,
   description: String,
+  shortDescription: String,
   oemId: String,
   subCategoryId: String,
   createdBy: String,
@@ -93,6 +94,7 @@ export class EditProductComponent  implements OnInit {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
       productDescription: ['', Validators.required],
+      productShortDescription:[''],
       productSkuNumber: ['', Validators.required],
       productSkuId: ['', Validators.required],
       productOrderNumber: [''],
@@ -389,11 +391,12 @@ export class EditProductComponent  implements OnInit {
 
   selectSimilarProduct(event: any) {
 
-    console.log("++++++++ ______ ", event.value);
-    console.log("selected ProductId====",event.value.length)
+    
+    
     var selectedproductList=event.value
 
-    this.compareProductListIds = selectedproductList.map((data) => data._id);
+    this.compareProductListIds = selectedproductList.map((data) => data.id);
+
     
     
   }
@@ -432,6 +435,7 @@ export class EditProductComponent  implements OnInit {
         _id: this.selectedProductId._id,
         name: productData.productName,
         description: productData.productDescription,
+        shortDescription:productData.productShortDescription,
         oemId: productData.OEM,
         subCategoryId: productData.Subcategories,
        
@@ -470,7 +474,8 @@ export class EditProductComponent  implements OnInit {
         updatedBy: userAccountdetails._id,
         compareWithproducts:this.compareProductListIds
       }
-      console.log("_editProductPayload_", this.createProductPayload);
+      console.log("-------------------- _editProductPayload_", this.createProductPayload);
+      
       var endPoint = `${environment.gatewayUrl}api/admin/product/edit`
       this.http.patch(endPoint,this.createProductPayload).subscribe((response) => {
         console.log("__RESPONSE_",response);
@@ -478,6 +483,7 @@ export class EditProductComponent  implements OnInit {
       })
          this.registrationForm.reset();
          this.selectedProductId.reset();
+         
     }
   }
 
@@ -519,7 +525,7 @@ export class EditProductComponent  implements OnInit {
 
   removeFAQ(data: any) {
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
     faqArray.removeAt(data);
     }
   }
@@ -541,11 +547,11 @@ export class EditProductComponent  implements OnInit {
       onlySelf: true
     })
 
-    this.registrationForm.get('productDescription').setValue(response.products.name, {
+    this.registrationForm.get('productDescription').setValue(response.products.description, {
       onlySelf: true
     })
 
-    this.registrationForm.get('productDescription').setValue(response.products.description, {
+    this.registrationForm.get('productShortDescription').setValue(response.products.shortDescription, {
       onlySelf: true
     })
 
@@ -597,11 +603,13 @@ export class EditProductComponent  implements OnInit {
     })
 
  console.log("selectedCompareperocuctidss...",response.products.compareWithproducts)
- //this.selectedProductId1=this.selectedProductId1.concat([response.products.compareWithproducts]);
-  this.selectedProductId1=[response.products.compareWithproducts];
+
+ this.setDefaultCompareProductsSelected(response.products.compareWithproducts);
+
+  /*this.selectedProductId1=[response.products.compareWithproducts];
  
     this.registrationForm.get('selectedProductId1').setValue(['64bdffaa5559b600556bc31e', '64be072a5559b600556bc75b']
-    )
+    ) */
 
     this.registrationForm.get('Subcategories').setValue(response.products.subCategoryId, {
       onlySelf: true
@@ -667,6 +675,29 @@ export class EditProductComponent  implements OnInit {
     return this.registrationForm.get('addNewFAQ') as FormArray
   }
 
+  public setDefaultCompareProductsSelected(data){
+
+    //this.selectedProductId1=[data];
+    
+    this.selectedProductId1= [];
+
+if(data){
+
+
+    data.forEach(element => {
+      console.log(")()()() Data", element);
+      this.compareproducts.map((item) => {
+        console.log(")()()() Data ", item);
+        if(item.id === element){
+          this.selectedProductId1.push(item);
+        }
+        
+      });
+    });
+    console.log(")()()() Data Selected ", this.selectedProductId1);
+  }
+  }
+
   addNewFAQ() {
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray; // Get the nested FormArray
     faqArray.push(this.createFAQGroup());
@@ -690,7 +721,7 @@ export class EditProductComponent  implements OnInit {
 
   removeApp(data: any) {
     const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
-    if(data>0){
+    if(data>=0){
     appArray.removeAt(data);
     }
   
