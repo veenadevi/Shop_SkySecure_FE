@@ -817,7 +817,8 @@ featureCount=5;
           queryParams.price = product.priceList[0].price,
           queryParams.erpPrice=product.priceList[0].ERPPrice,
           queryParams.discountRate=product.priceList[0].discountRate,
-          queryParams.priceType= product.priceList[0].priceType
+          queryParams.priceType= product.priceList[0].priceType,
+          queryParams.distributorPrice=product.priceList[0].distributorPrice
        // }
 
       this.userAccountStore.userDetails$.subscribe(res=>{

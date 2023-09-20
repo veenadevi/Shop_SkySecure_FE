@@ -70,8 +70,8 @@ public getCartItems(multipleProduct, data) : void {
         "price" : (productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].price : '',
         "erpPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].ERPPrice : '',
         "discountRate":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].discountRate : '',
-        "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : ''
-
+        "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : '',
+        "distributorPrice" :(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].distributorPrice : ''
       })
 
       if(productListArray.requiredBundles.length > 0){
@@ -89,8 +89,10 @@ public getCartItems(multipleProduct, data) : void {
               "price" : item.priceList.length>0 ? item.priceList[0].price  : '',
               "erpPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].ERPPrice : '',
               "discountRate":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].discountRate : '',
-              "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : ''
-          });
+              "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : '',
+              "distributorPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].distributorPrice : ''
+         
+            });
           }
         });
       }
@@ -109,7 +111,8 @@ public getCartItems(multipleProduct, data) : void {
               "price" : item.priceList.length>0 ? item.priceList[0].price : '',
               "erpPrice":item.item.priceList[0].erpPrice,
               "discountRate":item.item.priceList[0].discountRate,
-              "priceType":item.item.priceList[0].discountRate
+              "priceType":item.item.priceList[0].discountRate,
+              "distributorPrice":data.distributorPrice
           });
           }
         });
@@ -139,7 +142,8 @@ public getCartItems(multipleProduct, data) : void {
           "price" : data.price ? data.price : '',
           "erpPrice" : data.erpPrice,
           "discountRate" : data.discountRate,
-          "priceType" : data.priceType
+          "priceType" : data.priceType,
+          "distributorPrice":data.distributorPrice
 
        
         });

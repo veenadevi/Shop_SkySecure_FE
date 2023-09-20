@@ -534,6 +534,7 @@ export class CompareProductsResultComponent {
           erpPrice:product.priceList.ERPPrice,
           discountRate:product.priceList.discountRate,
           priceType:"Year",
+          distributorPrice:product.priceList.distributorPrice
         };
 
 
