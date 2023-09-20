@@ -12,6 +12,13 @@ export class ProductsListTableComponent implements OnInit{
   @Input('productsData')
   public productsData : any;
 
+
+  @Input('cartData')
+  public cartData : any;
+
+
+  public cartDetails : any[] = [];
+
  public isEstimate :Boolean
 
 
@@ -48,6 +55,7 @@ export class ProductsListTableComponent implements OnInit{
 
   ngOnInit(): void {
     this.setSampleData();
+    this.cartDetails = (this.cartData.CartDetails && this.cartData.CartDetails.length>0) ? this.cartData.CartDetails : null;
   }
 
 
@@ -60,12 +68,40 @@ export class ProductsListTableComponent implements OnInit{
 
   }
 
+
+  public priceChanged(event, item, i){
+      
+
+
+    var index = this.cartDetails.findIndex(el => el.estimateLineItemId === this.productsData.line_items[i].line_item_id);
+         
+    if(index >=0){
+      
+      let editedRate = item.get('bcy_rate').value;
+      let calculatedDistributarPrice = this.cartDetails[index].distributorPrice;
+
+      let calcRate = calculatedDistributarPrice*item.get('quantity').value;
+
+      if(editedRate < calcRate){
+        //this.getFormData.controls['bcy_rate'].setErrors({'invalid': true});
+        item.get('bcy_rate').setErrors({'invalid': true});
+      }
+
+    }
+
+    //formData.form.controls['email'].setErrors({'incorrect': true});
+
+  }
+
+
+
+
   getEmployee() {
 
   
     if(this.productsData.line_items){
-      this.isEstimate=true
-      console.log("passed estimate  details====",this.productsData)
+      this.isEstimate=true;
+      
     const control = <FormArray>this.productListForm.get('items');
     for (const items of this.productsData.line_items) {
      /* const grp = this.fb.group({
@@ -87,8 +123,7 @@ export class ProductsListTableComponent implements OnInit{
   else{
     this.isEstimate=false
 
-   this.fullCartListData=this.productsData.CartDetails
-    console.log("passed cart details====",this.productsData)
+   this.fullCartListData=this.productsData.CartDetails;
     //const cartDetailsControl = <FormArray>this.productListForm.get('items');
   }
     // for (const items of this.cartDetailsData.line_items) {
@@ -131,7 +166,6 @@ export class ProductsListTableComponent implements OnInit{
   }
 
   save() {
-    console.log('isValid', this.productListForm.valid);
-    console.log('value', this.productListForm.value);
+    
   }
 }

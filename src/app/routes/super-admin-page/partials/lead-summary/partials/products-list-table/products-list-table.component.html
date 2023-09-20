@@ -27,8 +27,9 @@
             <span class="text-danger" *ngIf="group.get('quantity').touched && group.get('quantity')?.hasError('required')">Quantity required</span>
           </td>
           <td class="form-group">
-            <input type="text" class="form-control" formControlName="bcy_rate" placeholder="bcy_rate">
+            <input type="text" class="form-control" (change)="priceChanged($event, group, i)" formControlName="bcy_rate" placeholder="bcy_rate">
             <span class="text-danger" *ngIf="group.get('bcy_rate').touched && group.get('bcy_rate')?.hasError('required')">Amount required</span>
+            <span class="text-danger" *ngIf="group.get('bcy_rate')?.hasError('invalid')">Please enter a valid Price</span>
           </td>
           <td class="form-group">
             <input type="text" class="form-control" formControlName="tax_name" placeholder="tax_name">
