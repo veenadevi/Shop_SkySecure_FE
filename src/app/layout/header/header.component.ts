@@ -280,6 +280,7 @@ export class HeaderComponent implements OnInit{
     //this.menuToogled = false;
     localStorage.removeItem('XXXXaccess__tokenXXXX');
     this.userAccountStore.setUserDetails(null);
+    this.cartStore.setCartRefreneceId(null);
     //this.router.navigate(['']);
     window.location.reload();
   }

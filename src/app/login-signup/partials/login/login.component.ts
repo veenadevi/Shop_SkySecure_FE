@@ -231,9 +231,11 @@ export class LoginComponent {
           
 
           if(this.params && this.params.has('productId')){
+            console.log("_+_+_)+_+_+_+_+ Inside Product ID ", this.params);
             this.router.navigate(['']);
           }
           else{
+            console.log("_+_+_)+_+_+_+_+ Inside Product Else ", this.params);
             this.router.navigate(['']);
           }
           
