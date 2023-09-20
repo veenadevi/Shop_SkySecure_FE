@@ -611,19 +611,19 @@
                                     App  Name</label>
                             </div>
                             <div class="input">
-                                <input type="text" class="custom-select-01" formControlName="Name">
+                                <input type="text" class="custom-select-01" formControlName="name">
                             </div>
                         </div>
                         <div class="upload-01">
                             <label>App Logo</label>
                             <div class="avatar-edit">
                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
-                                    (change)="uploadFile($event)" />
+                                    (change)="uploadFileForApp($event,i)" />
                                 <!-- <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
                                     alt="productLogo" /> -->
                                     
-                                    <img style="width: 100px;height: 100px;" src="{{ ( tempAppList && tempAppList.length>0) ? tempAppList[i].imageUrl : ''}}"
-                                    alt="productLogo" /> 
+                                    <img style="width: 100px;height: 100px;" src="{{ (tempAppList && tempAppList.length>0 && tempAppList[i].imageUrl) ? tempAppList[i].imageUrl : ''}}"
+/> 
 
                                 <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
                                     (click)="removeAppImage(i)">Remove</button>
