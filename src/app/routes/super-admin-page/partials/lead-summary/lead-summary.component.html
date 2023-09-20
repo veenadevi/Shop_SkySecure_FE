@@ -139,12 +139,12 @@
 
                     <ng-container *ngIf="responseData.cartData.status!=='New'; else newQuote">
                     
-                        <products-list-table [productsData]="estimateData" ></products-list-table>
+                        <products-list-table [productsData]="estimateData" [cartData]="cartData"></products-list-table>
                       </ng-container>
                       <ng-template #newQuote>
 
                    
-                        <products-list-table  [productsData]="responseData.cartData" ></products-list-table> 
+                        <products-list-table  [productsData]="responseData.cartData" [cartData]="cartData"></products-list-table> 
                        </ng-template>
                    
 
