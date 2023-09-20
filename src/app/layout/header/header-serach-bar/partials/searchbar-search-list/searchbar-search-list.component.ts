@@ -87,19 +87,27 @@ export class SearchbarSearchListComponent {
 
     switch (product.productType) {
       case 'products':
-        this.router.navigate(['/products', product._id]);
+        //this.router.navigate(['/products', product._id]);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['/products', product._id]));
         return;
 
       case 'productVariants':
-        this.router.navigate(['/products/product-variant-detail', product._id]);
+        //this.router.navigate(['/products/product-variant-detail', product._id]);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['/products/product-variant-detail', product._id]));
         return;
         
       case 'productBundles':
-        this.router.navigate(['/products/product-bundle-detail', product._id]);
+        //this.router.navigate(['/products/product-bundle-detail', product._id]);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['/products/product-bundle-detail', product._id]));
         return;
       
       case 'productBundleVariants':
-        this.router.navigate(['/products/product-bundle-varaint-detail', product._id]);
+        //this.router.navigate(['/products/product-bundle-varaint-detail', product._id]);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['/products/product-bundle-varaint-detail', product._id]));
         return;
 
       default:
