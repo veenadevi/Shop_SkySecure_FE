@@ -80,6 +80,10 @@ export class EditProductComponent  implements OnInit {
   showMsg: boolean = false;
   listedProducts:any[]=[];
 
+  public tempAppList : any[] = [];
+
+  public sampleImg = 'https://csg1003200209655332.blob.core.windows.net/images/1695186760-linkedin.png';
+
   constructor(
     public fb: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -226,7 +230,7 @@ export class EditProductComponent  implements OnInit {
     this.subscriptions.push(
       this.metaDataSvc.fetchProductsByFilters({subCategoryIds: [],brandIds: this.brandIds}).subscribe(response => {
         this.products = response.products;
-        console.log("__TEST__",this.products);
+        
       })
 
     );
@@ -239,7 +243,6 @@ export class EditProductComponent  implements OnInit {
         const newProduct = { id: data._id, name:data.name}
 
         this.compareproducts.push(newProduct)
-        console.log("__TEST COMPARE__",this.compareproducts);
         });
       
 
@@ -250,7 +253,7 @@ export class EditProductComponent  implements OnInit {
   
 
   private getProductDetails(productId) {
-    console.log("fetching product for +======"+productId)
+    
     this.subscriptions.push(
     
       this.metaDataSvc.fetchAdminProductDetails(productId).subscribe(response => {
@@ -288,14 +291,14 @@ export class EditProductComponent  implements OnInit {
     });
   }
   uploadFile(event: any) {
-    console.log("__TEST__", event);
+    
     const formData: FormData = new FormData();
     formData.append('file', event.target.files[0], event.target.files[0].name);
 
     this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
       .subscribe(
         (response: any) => {
-          console.log('Upload successful', response);
+          
           this.productLogo = response.filePath;
           // Handle the response from the server
         },
@@ -308,6 +311,12 @@ export class EditProductComponent  implements OnInit {
 
   removeImage() {
     this.productLogo = null;
+    
+  }
+
+  removeAppImage(index){
+    
+    this.tempAppList[index].imageURL = "";
   }
 
   // Function to remove uploaded file
@@ -347,7 +356,7 @@ export class EditProductComponent  implements OnInit {
 
   // Choose Subcategories using select dropdown
   changeSubcategories(e) {
-    console.log("TEST___",e.target.value)
+    
     this.registrationForm.get('Subcategories').setValue(e.target.value, {
       onlySelf: true
     // this.registrationForm.get('Subcategories').setValue(e.target.value.substring(3), {
@@ -373,7 +382,7 @@ export class EditProductComponent  implements OnInit {
   selectProduct(event: any) {
 
     if(this.selectedProductId){
-      console.log("()()()",this.selectedProductId);
+      
     
     
       //this.selectedProductId = event.target.value.substring(3);
@@ -429,7 +438,7 @@ export class EditProductComponent  implements OnInit {
       let userAccountdetails = this.userAccountStore.getUserDetails();
       //createdBy : userAccountdetails.firstName,
 
-      console.log("Final value", this.registrationForm.value);
+   
       var productData = this.registrationForm.value;
       this.createProductPayload = {
         _id: this.selectedProductId._id,
@@ -474,11 +483,11 @@ export class EditProductComponent  implements OnInit {
         updatedBy: userAccountdetails._id,
         compareWithproducts:this.compareProductListIds
       }
-      console.log("-------------------- _editProductPayload_", this.createProductPayload);
+      
       
       var endPoint = `${environment.gatewayUrl}api/admin/product/edit`
       this.http.patch(endPoint,this.createProductPayload).subscribe((response) => {
-        console.log("__RESPONSE_",response);
+        
         this.showMsg=true
       })
          this.registrationForm.reset();
@@ -531,9 +540,9 @@ export class EditProductComponent  implements OnInit {
   }
 
   fillFormDetails(response) {
-    console.log("created By ====="+response.products.createdB)
+    
    let  formattedDate = this.datePipe.transform(response.products.updatedAt, 'dd-MM-YYYY');
-   console.log("fetched Created BY details",response.createdBy)
+   
     this.registrationForm.get('createdBy').setValue(response.createdBy, {
       onlySelf: true
     }) 
@@ -602,7 +611,7 @@ export class EditProductComponent  implements OnInit {
       onlySelf: true
     })
 
- console.log("selectedCompareperocuctidss...",response.products.compareWithproducts)
+ 
 
  this.setDefaultCompareProductsSelected(response.products.compareWithproducts);
 
@@ -644,26 +653,37 @@ export class EditProductComponent  implements OnInit {
     
 
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray;
-    console.log("===featureArray ==="+featureArray.length)
+    
     response.featureList.forEach((feature) => {
       featureArray.push(this.createFeatureGroupWithValue(feature.featureId,  feature.name,feature.description,feature.hyperLinkURL)); 
     })
 
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray;
-    console.log("faqArray====="+response.products.productFAQ.length)
+
     response.products.productFAQ.forEach((faq) => {
       faqArray.push(this.createFAQGroupWithValue(faq.Question, faq.Answer)); 
     })
 
+    
 
     const appNewArray = this.addAppArrayNew.get('app') as FormArray;
 
     response.appList.forEach((app) => {
-      console.log("++_+_+__+__++_+ ", app);
+      
       appNewArray.push(this.createAppListWithValue(app.appId,app.name, app.imageURL));
+
+      
+
       //faqArray.push(this.createFAQGroupWithValue(faq.Question, faq.Answer)); 
     })
 
+    appNewArray.value.forEach(element => {
+      this.tempAppList.push(element);
+    });
+
+    
+     
+      
 
 
 
@@ -685,9 +705,9 @@ if(data){
 
 
     data.forEach(element => {
-      console.log(")()()() Data", element);
+      
       this.compareproducts.map((item) => {
-        console.log(")()()() Data ", item);
+        
         if(item.id === element){
           this.selectedProductId1.push(item);
         }
@@ -716,9 +736,14 @@ if(data){
   addNewApp() {
     const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
     appArray.push(this.createAppGroup());
+    this.tempAppList.push({
+      Name : "",
+      imageUrl: "",
+      _id : "",
+    })
   }
   changeSubscriptionType(e) {
-    console.log("subscription value "+e.target.value)
+   
     this.registrationForm.get('subscriptionType').setValue(e.target.value, {
       onlySelf: true
     })
@@ -728,6 +753,7 @@ if(data){
     const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
     if(data>=0){
     appArray.removeAt(data);
+    this.tempAppList.splice(data, 1);
     }
   
   }
