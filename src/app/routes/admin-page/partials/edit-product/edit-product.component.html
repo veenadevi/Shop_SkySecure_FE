@@ -619,17 +619,21 @@
                             <div class="avatar-edit">
                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
                                     (change)="uploadFile($event)" />
-                                <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
-                                    alt="productLogo" />
+                                <!-- <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
+                                    alt="productLogo" /> -->
+                                    
+                                    <img style="width: 100px;height: 100px;" src="{{ ( tempAppList && tempAppList.length>0) ? tempAppList[i].imageUrl : ''}}"
+                                    alt="productLogo" /> 
+
                                 <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
-                                    (click)="removeImage()">Remove</button>
+                                    (click)="removeAppImage(i)">Remove</button>
                                 <label for="imageUpload" *ngIf="editFile"
                                     [ngClass]="['custom-label', 'upload-image']"></label>
                                 <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
                                     (click)="removeUploadedFile()"></label>
                             </div>
                             <div class="avatar-preview">
-                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                <div id="imagePreview" [style.backgroundImage]="'url('+ item.imageUrl +')'">
                                 </div>
                             </div>
                         </div>
