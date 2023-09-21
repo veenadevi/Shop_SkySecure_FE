@@ -109,8 +109,8 @@
                             <mat-icon class="review-icon">star_border</mat-icon>
                             <div class="review-text-section">
                                 <p class="review-text"> 4 Reviews </p>
-                                <!-- <span class="divider">|</span>
-                                <p class="link-text"> Write a review </p> -->
+                                <span class="divider">|</span>
+                                <p class="link-text"> Write a review </p>
                                 <span class="divider">|</span>
                                 <p class="link-text" (click)="showBasicDialog()"> Have a question? </p>
                             </div>
@@ -485,6 +485,19 @@
         
         
                                     </ng-container>
+
+                                    <div class="app-list-container">
+                                        <span class="features-header">Included Apps</span>
+                                        <div class="app-list">
+                                            <ng-container *ngFor="let item of appList">
+                                                <div class="app-list-section">
+                                                    <img class="app-image" src="{{item.imageURL}}">
+                                                    <span class="app-name">{{item.name}}</span>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="prod-card2">
                                     <span class="features-header">Additional Features</span>
@@ -506,12 +519,19 @@
                             
                         </div>
                     </div>
-                </div>
-                <div>
-                    App List 
-                    <ng-container *ngFor="let item of appList">
-                        <span>{{item.name}}</span>
-                    </ng-container>
+
+                    <!-- <div class="app-list-container2">
+                        <span class="features-header">Included Apps</span>
+                        <div class="app-list2">
+                            <ng-container *ngFor="let item of appList">
+                                <div class="app-list-section2">
+                                    <img class="app-image2" src="{{item.imageURL}}">
+                                    <span class="app-name2">{{item.name}}</span>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div> -->
+
                 </div>
             </div>
     
