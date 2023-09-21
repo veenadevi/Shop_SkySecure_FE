@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { CartService } from 'src/shared/services/cart.service';
 
 
 @Component({
@@ -16,6 +18,11 @@ export class ProductsListTableComponent implements OnInit{
   @Input('cartData')
   public cartData : any;
 
+  @Input('crmData')
+  public crmData : any;
+
+
+  public productsList:any[] = [];
 
   public cartDetails : any[] = [];
 
@@ -23,6 +30,8 @@ export class ProductsListTableComponent implements OnInit{
 
 
   public fullCartListData : any;
+
+  public subscription: Subscription[] = [];
 
   userForm: FormGroup;
   public productListForm : FormGroup;
@@ -49,7 +58,8 @@ export class ProductsListTableComponent implements OnInit{
   ];
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private cartService : CartService
   ){}
 
 
@@ -116,6 +126,7 @@ export class ProductsListTableComponent implements OnInit{
         bcy_rate: [items.bcy_rate, [Validators.min(10)]],
         tax_name: [items.tax_name, Validators.required],
         item_total: [items.item_total, Validators.required],
+        line_items_id: [items.line_item_id, null]
       });
       control.push(grp);
     }
@@ -148,6 +159,7 @@ export class ProductsListTableComponent implements OnInit{
         bcy_rate: ['', [Validators.min(10)]],
         tax_name: ['', Validators.required],
         item_total: ['', Validators.required],
+        line_items_id: ['',null]
     });
   }
 
@@ -168,4 +180,135 @@ export class ProductsListTableComponent implements OnInit{
   save() {
     
   }
+
+  public saveChanges(){
+
+
+
+    
+    let request = this.setRequestData();
+    console.log("+_+_+_+_+_ Res Data ", request);
+
+    /*this.subscription.push(
+      this.cartService.createQuotation(null).subscribe(res=>{
+
+      })
+    )*/
+  }
+
+  public setRequestData(){
+
+    let assignTo = this.crmData.assignTo;
+    let createdBy = this.crmData.createdBy;
+    let cartData = this.crmData.cartData;
+    let zohoBookContactData = this.crmData.zohoBookContactData;
+
+
+    let prdArray = this.setProductsList();
+    let req = {
+        "userId": createdBy._id ? createdBy._id : '',
+        "createdBy": createdBy.createdBy ? createdBy.createdBy : '',
+        "products": prdArray,
+        /*"products": [
+            {
+                "productId": "65088f6d609bfd4be5b75028",
+                "quantity": "2",
+                "productName": "Microsoft Entra ID P1 (Azure Active Directory Premium P1)",
+                "price": 4873.900000000001,
+                "erpPrice": 5640,
+                "discountRate": "19",
+                "priceType": "Yearly",
+                "distributorPrice": 4761.1,
+                "itemTotal": 9747.800000000001
+            },
+            {
+                "productId": "65088fda609bfd4be5b750e0",
+                "quantity": "1",
+                "productName": "Microsoft Entra ID P2 (Azure Active Directory Premium P2)",
+                "price": 6498.2,
+                "erpPrice": 8460,
+                "discountRate": "25",
+                "priceType": "Yearly",
+                "distributorPrice": 6329,
+                "itemTotal": 6498.2
+            }
+        ],*/
+        "companyName": createdBy.companyBusinessName ? createdBy.companyBusinessName : '',
+        "cart_ref_id": cartData.cart_ref_id,
+        "billing_address": {
+            "attention": "name", //Check
+            "address": createdBy.fullAddress[0].address1,
+            "street2": createdBy.fullAddress[0].address2,
+            "state_code": createdBy.fullAddress[0].state,
+            "city": "Bengaluru", //Check
+            "state": "Karnataka", //Check
+            "zip": createdBy.fullAddress[0].pincode,
+            "country": createdBy.fullAddress[0].countryCode,
+            "phone": createdBy.mobileNumber
+        },
+        "currency_id": "1014673000000000064", //Check
+        "RequestingForOther": false, //Check
+        "contact_persons": [ 
+            {
+                "first_name": zohoBookContactData.contact_persons_name,
+                "email": zohoBookContactData.contact_persons_email,
+                "phone": zohoBookContactData.contact_persons_phone,
+                "is_primary_contact": true, //check
+                "enable_portal": false //check
+            }
+        ],
+        "gst_no": createdBy.gstinNumber,
+        "gst_treatment": zohoBookContactData.gst_treatment
+    }
+
+    //console.log("++++++++======== req ", req);
+
+    return req;
+  }
+
+  public setProductsList(){
+
+    this.productsList = [];
+
+    
+    this.getFormData.controls.forEach(element => {
+      
+      var index = this.cartDetails.findIndex(el => el.estimateLineItemId === element.value.line_items_id);
+         
+      if(index >=0){
+
+        console.log("++++++++======== req ", element.value);
+        let tempArray = {
+                "productId": this.cartDetails[index].productId,
+                "quantity": element.value.quantity,
+                "productName": this.cartDetails[index].productName,
+                "price": element.value.bcy_rate,
+                "erpPrice": this.cartDetails[index].erpPrice,
+                "discountRate": this.cartDetails[index].discountRate,
+                "priceType": this.cartDetails[index].priceType,
+                "distributorPrice": this.cartDetails[index].distributorPrice,
+                "itemTotal": element.value.bcy_rate*element.value.quantity
+        }
+
+        this.productsList.push(tempArray);
+
+      }
+      else{
+
+      }
+      
+    });
+    
+    
+    console.log("++++++++======== Products ", this.productsList);
+    //console.log("++++++++======== Products ", this.cartDetails);
+
+
+    return this.productsList;
+
+
+  }
+
+
+
 }
