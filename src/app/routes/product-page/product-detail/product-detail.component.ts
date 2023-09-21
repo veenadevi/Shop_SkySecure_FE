@@ -99,6 +99,8 @@ export class ProductDetailComponent implements OnInit{
 
   public keyFeatureList : any;
   public additionalFeatureList : any;
+
+  public appList : any[] = [];
   
   faq = [];
   productListToCompare  = [];
@@ -395,6 +397,10 @@ export class ProductDetailComponent implements OnInit{
         }
 
         this.faq  = response.product.productFAQ;
+
+        console.log("+_+_+_+_+_+_+ ", response.appList[0]);
+
+        this.appList = response.appList;
 
 
         if(this.productBundles && this.productBundles.length>0){
@@ -802,24 +808,25 @@ featureCount=5;
            
           };
 
-        // if(this.selectedOption === 'default'){
-        // //  queryParams.price = (queryParams.price/12).toFixed(2);
+        if(this.selectedOption === 'default'){
+        //  queryParams.price = (queryParams.price/12).toFixed(2);
 
-        // queryParams.price = product.priceList[1].price,
-        // queryParams.erpPrice=product.priceList[1].ERPPrice,
-        // queryParams.discountRate=product.priceList[1].discountRate,
-        // queryParams.priceType= product.priceList[1].priceType
+        queryParams.price = product.priceList[1].price.toFixed(2),
+        queryParams.erpPrice=product.priceList[1].ERPPrice.toFixed(2),
+        queryParams.discountRate=product.priceList[1].discountRate,
+        queryParams.priceType= product.priceList[1].priceType
+        queryParams.distributorPrice=product.priceList[1].distributorPrice.toFixed(2)
        
-        // }
-        // else{
-          //queryParams.price = (Number(queryParams.price)).toFixed(2);
+        }
+        else{
+          queryParams.price = (Number(queryParams.price)).toFixed(2);
 
-          queryParams.price = product.priceList[0].price,
-          queryParams.erpPrice=product.priceList[0].ERPPrice,
+          queryParams.price = product.priceList[0].price.toFixed(2),
+          queryParams.erpPrice=product.priceList[0].ERPPrice.toFixed(2),
           queryParams.discountRate=product.priceList[0].discountRate,
           queryParams.priceType= product.priceList[0].priceType,
-          queryParams.distributorPrice=product.priceList[0].distributorPrice
-       // }
+          queryParams.distributorPrice=product.priceList[0].distributorPrice.toFixed(2)
+        }
 
       this.userAccountStore.userDetails$.subscribe(res=>{
        

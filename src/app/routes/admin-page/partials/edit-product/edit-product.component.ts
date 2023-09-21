@@ -183,8 +183,8 @@ export class EditProductComponent  implements OnInit {
   createAppGroup(): FormGroup {
     return this.fb.group({
       
-      AppName: '',
-      File: ''
+      name: '',
+      imageURL: ''
     });
   }
   private getCategories(): CategoryDetails[] {
@@ -279,14 +279,14 @@ export class EditProductComponent  implements OnInit {
 
   createAppList(): FormGroup {
     return this.fb.group({
-      Name: '',
+      name: '',
       imageUrl: ''
     });
   }
   createAppListWithValue(id,name,imageUrl): FormGroup {
     return this.fb.group({
      _id: id,
-      Name: name,
+      name: name,
       imageUrl: imageUrl
     });
   }
@@ -319,6 +319,29 @@ export class EditProductComponent  implements OnInit {
     this.tempAppList[index].imageURL = "";
   }
 
+
+  public tempAppArrayImgFiles = [];
+
+  uploadFileForApp(event : any, i){
+    const formData: FormData = new FormData();
+    formData.append('file', event.target.files[0], event.target.files[0].name);
+
+    this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
+      .subscribe(
+        (response: any) => {
+          
+          this.tempAppArrayImgFiles.push({
+            'index': i,
+            'val' : response.filePath
+          })
+          //this.productLogo = response.filePath;
+        },
+        error => {
+          console.error('Upload error:', error);
+          // Handle the error response
+        }
+      );
+  }
   // Function to remove uploaded file
   removeUploadedFile() {
     let newFileList = Array.from(this.el.nativeElement.files);
@@ -737,7 +760,7 @@ if(data){
     const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
     appArray.push(this.createAppGroup());
     this.tempAppList.push({
-      Name : "",
+      name : "",
       imageUrl: "",
       _id : "",
     })
