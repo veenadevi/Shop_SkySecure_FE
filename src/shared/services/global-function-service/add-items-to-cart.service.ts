@@ -125,7 +125,32 @@ public getCartItems(multipleProduct, data) : void {
 
       if(index >=0){
         //productsList[index].quantity = Number(productsList[index].quantity) + Number(this.params.get('quantity'));
-        productsList[index].quantity = Number(productsList[index].quantity) + Number(data.quantity);
+
+        if( productsList[index].priceType===data.priceType){
+          console.log("=====increase as same priceType====")
+          productsList[index].quantity = Number(productsList[index].quantity) + Number(data.quantity);
+        }
+       else{
+        productsList.push({
+          /*"productId": this.params.get('productId'),
+          "productName" : this.params.get('productName'),
+          "quantity" : this.params.get('quantity'),
+          "price" : this.params.has('price') ? this.params.get('price') : '',
+          "erpPrice" : this.params.get('erpPrice'),
+          "discountRate" : this.params.get('discountRate'),
+          "priceType" : this.params.get('priceType')*/
+          "productId": data.productId,
+          "productName" : data.productName,
+          "quantity" : data.quantity,
+          "price" : data.price ? data.price : '',
+          "erpPrice" : data.erpPrice,
+          "discountRate" : data.discountRate,
+          "priceType" : data.priceType,
+          "distributorPrice":data.distributorPrice
+
+       
+        });
+       }
       }
       else {
         productsList.push({

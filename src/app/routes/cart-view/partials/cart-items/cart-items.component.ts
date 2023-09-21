@@ -60,6 +60,8 @@ export class CartItemsComponent {
   public itemTotal;
 
   public grandTotal = 0
+  public monthlyItemsGrandTotal=0
+  public   yearlyItemsGrandTotal=0
   public errortext:string
 
 
@@ -106,7 +108,7 @@ public cartData : any[] = [];
         this.cartData.forEach(element => {
           element['itemTotal'] = element.quantity * element.price;
           element.quantity = String(element.quantity);
-          element.priceType="Yearly"
+         // element.priceType="Yearly"
         });
         this.calTotalPrice();
         return this.cartData;
@@ -360,13 +362,32 @@ public onChangeQuantity(i, price) : void {
 
   public calTotalPrice() {
     if(this.cartData && this.cartData.length>0){
-      let sum: number = this.cartData.map(a => a.itemTotal).reduce(function(a, b)
-      {
+
+      let sum: number = this.cartData
+      .filter(a => a.priceType == 'Year') // Add a filter condition here
+      .map(a => a.itemTotal)
+      .reduce(function(a, b) {
         return a + b;
-      });
-      this.grandTotal = sum;
+      }, 0); // 0 is the initial value
+    
+    this.yearlyItemsGrandTotal = sum;
+
+
+    let montlySum: number = this.cartData
+      .filter(a => a.priceType =='Month') // Add a filter condition here
+      .map(a => a.itemTotal)
+      .reduce(function(a, b) {
+        return a + b;
+      }, 0); // 0 is the initial value
+    
+    this.monthlyItemsGrandTotal = montlySum;
+
+
     }
     
+  }
+
+  public buyNow(){
   }
 
   public requestQuote(){

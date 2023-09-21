@@ -188,7 +188,7 @@ export class CompareProductsResultComponent {
       this.metaDataSvc.fetchCompareProductsList(allSelectedItems).subscribe(response => {
         
         this.products = this.setProductsData(response);
-
+ 
         /*this.products = response.products.map((data: any) => {
         
           //let productData = data.products[0];
@@ -275,7 +275,7 @@ export class CompareProductsResultComponent {
         this.allProducts = this.allProducts.slice(0,4);
 
         this.allProducts.forEach(element => {
-            element.properties['priceList'].priceType= 'Month';
+           // element.properties['priceList'].priceType= 'Month';
         });
 
     
@@ -291,7 +291,8 @@ export class CompareProductsResultComponent {
       
       //let productData = data.products[0];
       let productData = data.products;
-      
+      console.log("setting montly data ===",productData.name)
+      console.log("setting montly data ===",productData?.priceList[1])
       let properties = {
         'productName': productData.name,
         'developedBy': 'Microsoft',
@@ -299,7 +300,10 @@ export class CompareProductsResultComponent {
         'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
         'entryLevelPricing': productData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productData?.priceList[0].ERPPrice) : '-',
         'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price)  : '-',
-        'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
+        'priceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
+        'yearlyPriceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
+        'monthlyPriceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
+        'monthly1PriceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
        // 'features': data.featureList.length > 0 ? data.featureList : '',
        'features': data.featureList,
         'includedProducts' : [],
@@ -307,6 +311,8 @@ export class CompareProductsResultComponent {
        '_id' : productData._id,
        'isActive':productData.isActive
       }
+
+      console.log("setting montly data 222===",properties['monthlyPriceList'])
       return { properties};
     })
 
@@ -529,11 +535,11 @@ export class CompareProductsResultComponent {
         queryParams = {
           productName : product.productName,
           productId : product._id,
-          quantity : productItem.quantity,
+          quantity : product.quantity?productItem.quantity:1,
           price : product.priceList.price,
           erpPrice:product.priceList.ERPPrice,
           discountRate:product.priceList.discountRate,
-          priceType:"Year",
+          priceType:product.priceList.priceType,
           distributorPrice:product.priceList.distributorPrice
         };
 
@@ -986,14 +992,31 @@ export class CompareProductsResultComponent {
     this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice*12;
   }
 
-  showDiscountRate(i: any) {
-    // this.isMonthly = false;
-    // this.allProducts[i].properties['priceList'].priceType=this.priceType;
 
-    // this.allProducts[i].properties['priceList'].price = this.priceValue;
-    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12;
-    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice/12;
-    this.allProducts[i].properties['priceList'].priceType = "Month";
+  showYearlyPrice(i:any) {
+    console.log("show yearly on mouse hover",this.allProducts[i].properties['yearlyPriceList'].priceType)
+   // this.isMonthly = true;
+    // this.priceValue = this.allProducts[i].properties['priceList'].price;
+    // this.priceType = this.allProducts[i].properties['priceList'].priceType;
+    // this.allProducts[i].properties['priceList'].priceType = "Month";
+    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12 
+    this.allProducts[i].properties['priceList'].discountRate  = this.allProducts[i].properties['yearlyPriceList'].discountRate ;
+    this.allProducts[i].properties['priceList'].priceType = this.allProducts[i].properties['yearlyPriceList'].priceType;
+    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['yearlyPriceList'].price;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['yearlyPriceList'].ERPPrice;
+  }
+  showDiscountRate(i: any) {
+    
+     this.isMonthly = true;
+    // this.allProducts[i].properties['priceList'].priceType=this.priceType;
+    console.log("show discount  on mouse out",this.allProducts[i].properties['monthlyPriceList'].priceType)
+
+    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['monthlyPriceList'].price;;
+    this.allProducts[i].properties['priceList'].discountRate = this.allProducts[i].properties['monthlyPriceList'].discountRate;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['monthlyPriceList'].ERPPrice;
+    this.allProducts[i].properties['priceList'].priceType =this.allProducts[i].properties['monthlyPriceList'].priceType;
+
+    console.log("show discount  on mouse out",this.allProducts[i].properties['monthlyPriceList'].priceType)
   }
  
   openLink(url: any): void {
