@@ -99,6 +99,8 @@ export class ProductDetailComponent implements OnInit{
 
   public keyFeatureList : any;
   public additionalFeatureList : any;
+
+  public appList : any[] = [];
   
   faq = [];
   productListToCompare  = [];
@@ -395,6 +397,10 @@ export class ProductDetailComponent implements OnInit{
         }
 
         this.faq  = response.product.productFAQ;
+
+        console.log("+_+_+_+_+_+_+ ", response.appList[0]);
+
+        this.appList = response.appList;
 
 
         if(this.productBundles && this.productBundles.length>0){
