@@ -148,6 +148,7 @@ export class EditProductComponent  implements OnInit {
   
   //########################## File Upload ########################/
   @ViewChild('fileInput') el: ElementRef;
+  imageURL: any = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
   imageUrl: any = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
   editFile: boolean = true;
   removeUpload: boolean = false;
@@ -280,14 +281,14 @@ export class EditProductComponent  implements OnInit {
   createAppList(): FormGroup {
     return this.fb.group({
       name: '',
-      imageUrl: ''
+      imageURL: ''
     });
   }
-  createAppListWithValue(id,name,imageUrl): FormGroup {
+  createAppListWithValue(id,name,imageURL): FormGroup {
     return this.fb.group({
      _id: id,
       name: name,
-      imageUrl: imageUrl
+      imageURL: imageURL
     });
   }
   uploadFile(event: any) {
@@ -345,7 +346,7 @@ export class EditProductComponent  implements OnInit {
   // Function to remove uploaded file
   removeUploadedFile() {
     let newFileList = Array.from(this.el.nativeElement.files);
-    this.imageUrl = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
+    this.imageURL = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
     this.editFile = true;
     this.removeUpload = false;
     this.registrationForm.patchValue({
@@ -463,6 +464,7 @@ export class EditProductComponent  implements OnInit {
 
    
       var productData = this.registrationForm.value;
+      console.log("passing edit value===",productData.addAppArrayNew.app)
       this.createProductPayload = {
         _id: this.selectedProductId._id,
         name: productData.productName,
@@ -500,11 +502,34 @@ export class EditProductComponent  implements OnInit {
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
+
+        
+        
         appList:productData.addAppArrayNew.app,
         bannerLogo: this.productLogo,
       //  createdBy: productData.createdBy,
         updatedBy: userAccountdetails._id,
         compareWithproducts:this.compareProductListIds
+      }
+
+      if(this.createProductPayload.appList && this.createProductPayload.appList.length>0){
+
+
+        for(let i=0;i<this.createProductPayload.appList.length;i++){
+          const result = this.tempAppArrayImgFiles.filter((obj) => {
+            return obj.index === i;
+          });
+
+          if(result && result.length>0){
+          //  this.createProductPayload.appList[i].File = result[0].val;
+            this.createProductPayload.appList[i].imageURL = result[0].val;
+          }
+          else{
+            this.createProductPayload.appList[i].imageURL = "";
+          }
+        }
+
+        
       }
       
       
@@ -692,6 +717,8 @@ export class EditProductComponent  implements OnInit {
     const appNewArray = this.addAppArrayNew.get('app') as FormArray;
 
     response.appList.forEach((app) => {
+
+      console.log(" passing value to payload  for app ", app.appId,app.name, app.imageURL)
       
       appNewArray.push(this.createAppListWithValue(app.appId,app.name, app.imageURL));
 
@@ -761,7 +788,7 @@ if(data){
     appArray.push(this.createAppGroup());
     this.tempAppList.push({
       name : "",
-      imageUrl: "",
+      imageURL: "",
       _id : "",
     })
   }

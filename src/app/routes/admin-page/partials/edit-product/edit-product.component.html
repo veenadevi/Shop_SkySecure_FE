@@ -301,7 +301,7 @@
                                     (click)="removeUploadedFile()"></label>
                             </div>
                             <div class="avatar-preview">
-                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageURL +')'">
                                 </div>
                             </div>
                         </div>
@@ -622,7 +622,7 @@
                                 <!-- <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
                                     alt="productLogo" /> -->
                                     
-                                    <img style="width: 100px;height: 100px;" src="{{ (tempAppList && tempAppList.length>0 && tempAppList[i].imageUrl) ? tempAppList[i].imageUrl : ''}}"
+                                    <img style="width: 100px;height: 100px;" src="{{ (tempAppList && tempAppList.length>0 && tempAppList[i].imageURL) ? tempAppList[i].imageURL : ''}}"
 /> 
 
                                 <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
@@ -633,7 +633,7 @@
                                     (click)="removeUploadedFile()"></label>
                             </div>
                             <div class="avatar-preview">
-                                <div id="imagePreview" [style.backgroundImage]="'url('+ item.imageUrl +')'">
+                                <div id="imagePreview" [style.backgroundImage]="'url('+ item.imageURL +')'">
                                 </div>
                             </div>
                         </div>
