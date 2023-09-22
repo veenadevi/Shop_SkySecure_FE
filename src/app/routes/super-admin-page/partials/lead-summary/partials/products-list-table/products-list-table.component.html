@@ -48,12 +48,15 @@
     </table>
 </form>
 
-<div class="add-new-btn">
-    <button (click)="addApp()" class="btn primary-btn">Add new</button>
-</div>
-<div class="add-new-btn">
-  <button (click)="saveChanges()" class="btn primary-btn">Save</button>
-</div>
+  <div class="action-btn-holder">
+      <div class="add-new-btn">
+        <button (click)="addApp()" class="btn primary-btn">Add new</button>
+    </div>
+    <div class="add-new-btn">
+      <button (click)="saveChanges()" class="btn primary-btn">Save</button>
+    </div>
+  </div>
+
 </ng-container>
 
 <ng-template #cartDetails>

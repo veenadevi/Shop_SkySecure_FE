@@ -103,6 +103,20 @@ export class ProductsListTableComponent implements OnInit{
       }
 
     }
+    else{
+      let data = this.newlyAddedAppList.find(x => x._id+'temp' === item.get('line_items_id'));
+      if(data){
+        let editedRate = item.get('bcy_rate').value;
+        let calculatedDistributarPrice = data.priceList[0].distributorPrice;
+
+        let calcRate = calculatedDistributarPrice*item.get('quantity').value;
+
+        if(editedRate < calcRate){
+        //this.getFormData.controls['bcy_rate'].setErrors({'invalid': true});
+          item.get('bcy_rate').setErrors({'invalid': true});
+        }
+      }
+    }
 
     //formData.form.controls['email'].setErrors({'incorrect': true});
 
@@ -188,7 +202,10 @@ export class ProductsListTableComponent implements OnInit{
   addApp() {
 
     const modalRef = this.modalService.open(AddCompareProductModalComponent, {size: 'lg', windowClass: 'add-compare-products-custom-class'});
-    //modalRef.componentInstance.request = queryParams;
+    let queryParams = {
+      "screen":'edit-product-in-accounts'
+    }
+    modalRef.componentInstance.request = queryParams;
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
 
       console.log("+_+_+_+ Received Entry", receivedEntry);
