@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
 
 
@@ -26,7 +28,7 @@ export class ProductsListTableComponent implements OnInit{
 
   public cartDetails : any[] = [];
 
- public isEstimate :Boolean
+  public isEstimate :Boolean
 
 
   public fullCartListData : any;
@@ -36,6 +38,8 @@ export class ProductsListTableComponent implements OnInit{
   userForm: FormGroup;
   public productListForm : FormGroup;
   public cartList : FormGroup;
+
+  public newlyAddedAppList : any[] = [];
   employee = [
     {
       name: 'tuna',
@@ -59,7 +63,8 @@ export class ProductsListTableComponent implements OnInit{
 
   constructor(
     private fb: FormBuilder,
-    private cartService : CartService
+    private cartService : CartService,
+    private modalService : NgbModal
   ){}
 
 
@@ -163,13 +168,39 @@ export class ProductsListTableComponent implements OnInit{
     });
   }
 
+  createNewAppWithValues(data) : FormGroup{
+
+    let priceListValues = data.priceList[0];
+      return this.fb.group({
+        name: [data.name, Validators.required],
+        quantity: [1, [Validators.required]],
+        bcy_rate: [ parseFloat(priceListValues.price.toFixed(2)),[Validators.min(10)]],
+        tax_name: ['', null],
+        item_total: [priceListValues.price, null],
+        line_items_id: [data._id+'temp']
+    });
+  }
+
   get getFormData(): FormArray {
     return <FormArray>this.productListForm.get('items');
   }
 
-  addUser() {
-    const control = <FormArray>this.productListForm.get('items');
-    control.push(this.initiatForm());
+  addApp() {
+
+    const modalRef = this.modalService.open(AddCompareProductModalComponent, {size: 'lg', windowClass: 'add-compare-products-custom-class'});
+    //modalRef.componentInstance.request = queryParams;
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+
+      console.log("+_+_+_+ Received Entry", receivedEntry);
+
+      const control = <FormArray>this.productListForm.get('items');
+      //control.push(this.initiatForm());
+      control.push(this.createNewAppWithValues(receivedEntry));
+      this.newlyAddedAppList.push(receivedEntry);
+
+    })
+
+    
   }
 
   remove(index: number) {
@@ -294,7 +325,30 @@ export class ProductsListTableComponent implements OnInit{
 
       }
       else{
+        
+          console.log("_+_+_+_ Came here 1", element.value);
+          console.log("_+_+_+_ Came here 2", this.newlyAddedAppList);
 
+          let item = this.newlyAddedAppList.find(x => x._id+'temp' === element.value.line_items_id);
+
+          if(item){
+            console.log("_+_+_+_ Came here 3", item);
+            let tempArray = {
+              "productId": item._id,
+              "quantity": element.value.quantity,
+              "productName": item.name,
+              "price": element.value.bcy_rate,
+              "erpPrice": item.priceList[0].ERPPrice,
+              "discountRate": item.priceList[0].discountRate,
+              "priceType": item.priceList[0].priceType,
+              "distributorPrice": item.priceList[0].distributorPrice,
+              "itemTotal": element.value.bcy_rate*element.value.quantity
+            }
+  
+            this.productsList.push(tempArray);
+          }
+          
+          
       }
       
     });
@@ -308,6 +362,8 @@ export class ProductsListTableComponent implements OnInit{
 
 
   }
+
+  
 
 
 
