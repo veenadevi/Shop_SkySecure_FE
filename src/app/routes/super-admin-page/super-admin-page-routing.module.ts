@@ -5,6 +5,7 @@ import { AccountListComponent } from './partials/account-list/account-list.compo
 import { MarketplaceuserComponent } from './partials/marketplaceuser/marketplaceuser.component';
 import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.component';
 import { AssignUsersAndRolesComponent } from './partials/assign-users-and-roles/assign-users-and-roles.component';
+import { AddNewChannelPartnerComponent } from './partials/add-new-channel-partner/add-new-channel-partner.component';
 
 
 const routes: Routes = [{
@@ -36,6 +37,11 @@ const routes: Routes = [{
       canActivate: [],
       path: 'assign-roles',
       component : AssignUsersAndRolesComponent 
+    },
+    {
+      canActivate: [],
+      path: 'add-new-channel-partner',
+      component : AddNewChannelPartnerComponent 
     }
     
   ]

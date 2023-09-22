@@ -13,6 +13,7 @@ import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.compo
 import { ProductsTableComponent } from './partials/lead-summary/partials/products-table/products-table.component';
 import { ProductsListTableComponent } from './partials/lead-summary/partials/products-list-table/products-list-table.component';
 import { AssignUsersAndRolesComponent } from './partials/assign-users-and-roles/assign-users-and-roles.component';
+import { AddNewChannelPartnerComponent } from './partials/add-new-channel-partner/add-new-channel-partner.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AssignUsersAndRolesComponent } from './partials/assign-users-and-roles/
     LeadSummaryComponent,
     ProductsTableComponent,
     ProductsListTableComponent,
-    AssignUsersAndRolesComponent
+    AssignUsersAndRolesComponent,
+    AddNewChannelPartnerComponent
   ],
   imports: [
     CommonModule,

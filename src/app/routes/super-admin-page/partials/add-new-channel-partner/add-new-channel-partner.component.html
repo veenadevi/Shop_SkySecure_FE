@@ -1,0 +1,112 @@
+<div class="partner-container">
+    <div class="content">
+        <h3>Add New Channel Partner </h3>
+        <form [formGroup]="myForm">
+            <div class="partner-name">
+
+                <div class="section-01">
+                    <label for="firstName">Channel Partner Name</label>
+                    <input formControlName="firstName" type="firstName" class="form-control-01" name="Locality"
+                        id="firstName" placeholder="Enter Partner Name" required>
+                </div>
+            </div>
+            <h4>Address Fields</h4>
+            <div class="address-row">
+                <div class="col-sm-6 form-group">
+                    <label for="address-1">Address Line-1</label>
+                    <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
+                        id="address-1" placeholder="Locality/House/Street no." required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="address-2">Address Line-2</label>
+                    <input formControlName="addressLine2" type="address" class="form-control-01" name="address"
+                        id="address-2" placeholder="Village/City Name." required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="Country">Country*</label>
+                    <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)"
+                        placeholder="select country">
+                        <option disabled value="'Select Country'">Select Country </option>
+                        <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+                    </select>
+
+                </div>
+            </div>
+
+
+            <div class="address-row">
+                <div class="col-sm-6 form-group">
+                    <label for="State">State*</label>
+                    <select formControlName="stateName" class="form-control-01" (change)="onStateChange($event)">
+                        <option disabled value="'Select State'">Select Country </option>
+                        <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+                    </select>
+                </div>
+
+
+                <div class="col-sm-6 form-group">
+                    <label for="State">City*</label>
+                    <select formControlName="cityName" class="form-control-01" (change)="onCityChange($event)">
+                        <option disabled value="'Select City'">Select City </option>
+                        <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
+
+                    </select>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="zip">Postal-Code</label>
+                    <input formControlName="postalCode" type="zip" class="form-control-01" name="Zip" id="zip"
+                        placeholder="Postal-Code." required>
+                </div>
+            </div>
+            <div class="section-02">
+                <div class="credit">
+                    <label>Credit Worthyness</label>
+                    <input formControlName="credit" type="number" class="form-control-02" name="Locality" id="firstName"
+                        placeholder="Enter Credit Worthyness" required>
+                </div>
+            </div>
+           
+            <h4>Add New Admin User</h4>
+            <div class="address-row">
+                <div class="col-sm-6 form-group">
+                    <label for="address-1">FirstName</label>
+                    <input formControlName="userName" type="address" class="form-control-01" name="Locality"
+                        id="address-1" placeholder="Enter FirstName" required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="address-2">Email Id</label>
+                    <input formControlName="EmailId" type="address" class="form-control-01" name="address"
+                        id="address-2" placeholder="Enter EmailId" required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label>phone Number</label>
+                    <input formControlName="phoneNo" type="number" class="form-control-01" name="Locality"
+                        id="firstName" placeholder="Enter Phone Number" required>
+                </div>
+            </div>
+<div class="section-03">
+    <div class="select-user">
+       
+            <label for="user">Select Admin User</label>
+            <select formControlName="adminUser" class="form-control-01">
+                <!-- <option disabled value="'Select City'">Select City </option> -->
+                <option value="" disabled selected >select user</option>
+                {{disableErrorMessage}}
+            </select> 
+    </div>
+</div>
+<div *ngIf="submitErrorMessage">
+    <p class="error">* Please Fill Add New Admin User Fields or Select Admin User</p>
+  </div>
+<div class="modal-footer">
+    <ng-container >
+        
+        <button class="btn primary" (click)="submitForm()" >Add Channel Partner</button>
+    </ng-container>
+</div>
+
+
+
+        </form>
+    </div>
+</div>
