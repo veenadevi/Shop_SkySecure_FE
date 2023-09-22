@@ -110,7 +110,7 @@ button[disabled]{
 .main-product {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     border-radius: 8px;
     border: 1px solid #D9D9D9;
