@@ -364,13 +364,22 @@ public onChangeQuantity(i, price) : void {
     if(this.cartData && this.cartData.length>0){
 
       let sum: number = this.cartData
+    
+      .map(a => a.itemTotal)
+      .reduce(function(a, b) {
+        return a + b;
+      }, 0); 
+      this.grandTotal = sum;
+
+      let yearlysum: number = this.cartData
+
       .filter(a => a.priceType == 'Year') // Add a filter condition here
       .map(a => a.itemTotal)
       .reduce(function(a, b) {
         return a + b;
       }, 0); // 0 is the initial value
     
-    this.yearlyItemsGrandTotal = sum;
+    this.yearlyItemsGrandTotal = yearlysum;
 
 
     let montlySum: number = this.cartData
@@ -521,7 +530,7 @@ public onChangeQuantity(i, price) : void {
 
     /*
         userId : userAccountdetails._id,
-        createdBy : userAccountdetails.firstName,
+        createdBy : userAccountdetails.firstName,yearlyItemsGrandTotal
         products : this.cartData,
         companyName : '',
         cart_ref_id : cartRefId ? cartRefId : '0001111' */

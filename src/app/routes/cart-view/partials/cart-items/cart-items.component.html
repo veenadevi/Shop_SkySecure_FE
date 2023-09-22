@@ -7,136 +7,13 @@
     
       <ng-container *ngIf="(cartItems$ | async) as cartItems">
       
-        <ng-container *ngIf="(cartItems.length>0) ; else noCartItems">
-          <div class="text-header">
-            Montly Billing Products
-         </div>
-          <div>
-              <table class="table">
-                  <thead class="table-header">
-                    <tr>
-                      <th scope="col" style=
-                      text-align:center!important;
-                  >Product Name</th>
-                      <th scope="col">Purchase type</th>
-                      <th scope="col">MRP(₹)</th>
-                      <th scope="col">Skysecure Price(₹)</th>
-                      <th scope="col">Quantity </th>
-                      <th scope="col">Sub Total(₹)</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-row">
-                    <!-- <ng-container *ngFor="let item of (cartItems$ | async); index as i"> -->
-                      <ng-container *ngFor="let item of cartItems; index as i">
-                        <ng-container *ngIf="(item.priceType=='Month')">
-                      <tr>
-                        <th scope="row">
-                          <div class="cart-product-details">
-                            <img class="pd-cart-img" src="{{item.logo ? item.logo : alternateLogo}}" alt="Microsoft" />
-                            <div class="product-name" (click)="navigateToProductDetails(item)">
-                              {{item.productName}}
-                              <div class="cart-title-btns">
-                                <img src=".../../assets/icons/Delete.svg" (click)="removeCartItem(i)"/>
-                                <!-- <button class="cart-remove-btn" (click)="removeCartItem(i)">remove</button> -->
-                                <!-- <span style="font-size: 12px; margin: 0 6px;"> | </span>
-                                <button class="cart-view-btn">View Product</button> -->
-                              </div>
-                            </div>
-                          </div>
-                        </th>
-                        <!-- Base Price -->
-
-                        <td>
-                          <div class="td-column price-details">
-                            <span>
-                            {{ item.priceType}}
-                            </span>
-                          </div>
-                        </td>
-
-                        <td>
-                          <div class="td-column price-details">
-                            <span>
-                            {{ item.erpPrice | number : '1.2-2'}}
-                            </span>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="td-column price-details">
-                            <span>
-                              {{ item.price | number : '1.2-2'}}
-                            </span>
-                          </div>
-                        </td>
-                        <!-- Item Quantity -->
-                        <td>
-                          <div class="td-column">
-                            <span (click) = "quantityEdit(i,  'minus', item.price)">
-                              <img alt="minus"  class="add" src="../../../../../assets/icons/MinusIcon.svg">
-                            </span>
-                            <span>
-                              <input
-                                class="input-field" type="number"  (change)="onChangeQuantity(i,item.price)" [(ngModel)]="item.quantity" value="{{item.quantity}}" (keydown)="onKeyDown($event)">
-                                
-                               
-                            </span>
-                          
-                            <span (click) = "quantityEdit(i , 'plus', item.price)">
-                              <img alt="" class="add" src="../../../../../assets/icons/AddIcon.svg">
-                            </span>
-                          </div>
-                          <div class="error-message">{{item.errortext}}</div>
-                        </td>
-
-                        <!-- Action -->
-                        <td>
-                          <div class="td-column price-details">
-                            <span>
-                              {{ item.itemTotal | number : '1.2-2'}} 
-                            </span>
-                          </div>
-                        </td>
-                      </tr>
-                     
-                    </ng-container>
-                   
-                    </ng-container>
-                    
-                    <tr >
-                      <td [attr.colspan]=6>
-
-                      <div class="cart-total">
-                        <span>GRAND TOTAL</span>
-                        <span>₹ {{monthlyItemsGrandTotal | number : '1.2-2'}}</span>
-                      </div>
-                    </td>
-                    </tr>
-                  </tbody>
-
-                </table>
-          </div>
-          <!-- <div class="cart-total">
-            <span>GRAND TOTAL</span>
-            <span>₹ {{grandTotal | number : '1.2-2'}}</span>
-          </div> -->
-          <div class="submit-quote">
-            <span class="text-style">
-           
-              <!-- * Prices are Subject to Change -->
-            </span>
-            <span class="buttons-section">
-              <button class="btn secondary-btn" (click)="saveCart()">Save Cart</button>
-              <button class="btn primary-btn" (click)="buyNow()">Buy Now</button>
-            </span>
-          </div>
-        </ng-container>
     
-   
-
+<!--    
+Removed Montly Split on Sep22 -->
 
       <ng-container *ngIf="(cartItems.length>0)">
         <div class="text-header">
-          Yearly Billing Products
+         Items in your Cart
        </div>
         <div>
             <table class="table table-borderless">
@@ -149,17 +26,19 @@
                     <th scope="col">MRP(₹)</th>
                     <th scope="col">Skysecure Price(₹)</th>
                     <th scope="col">Quantity </th>
-                    <th scope="col">Sub Total(₹)</th>
+                    <th scope="col">Sub Total(₹)
+                      <span class="gst">(GST Extra)</span>
+                    </th>
                   </tr>
                 </thead>
                 <tbody class="table-row">
                   <!-- <ng-container *ngFor="let item of (cartItems$ | async); index as i"> -->
                     <ng-container *ngFor="let item of cartItems; index as i">
-                      <ng-container *ngIf="(item.priceType=='Year')">
+                      
                     <tr>
                       <th scope="row">
                         <div class="cart-product-details">
-                          <img class="pd-cart-img" src="{{item.logo ? item.logo : alternateLogo}}" alt="Microsoft" />
+                          <img class="pd-cart-img" src="{{item.logo ? item.logo : alternateLogo}}"  />
                           <div class="product-name" (click)="navigateToProductDetails(item)">
                             {{item.productName}}
                             <div class="cart-title-btns">
@@ -225,14 +104,16 @@
                       </td>
                     </tr>
                    
+                  
                   </ng-container>
-                  </ng-container>
+                
                   <tr>
-                    <td [attr.colspan]=6>
+                    <td [attr.colspan]=6 > 
+                      <hr width="100%">
 
                     <div class="cart-total">
                       <span>GRAND TOTAL</span>
-                      <span>₹ {{yearlyItemsGrandTotal | number : '1.2-2'}}</span>
+                      <span>₹ {{grandTotal | number : '1.2-2'}}</span>
                     </div>
                   </td>
                   </tr>
