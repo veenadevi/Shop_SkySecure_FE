@@ -594,7 +594,7 @@ button[disabled] {
 }
 
 .specification-feature-headline {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
 }
 
@@ -603,7 +603,7 @@ button[disabled] {
 }
 
 .specification-feature-description {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -1696,6 +1696,7 @@ p{
 }
 span{
   font-family: 'lato',sans-serif;
+  font-size: 13px;
 }
 .actual-price{
   font-size: 18px;
@@ -1767,13 +1768,14 @@ button{
   position: relative;
 }
 .offer-bank{
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   font-family: 'lato',sans-serif;
 }
 .offer-dis{
-  font-size: 14px;
+  font-size: 12px;
   font-family: 'lato',sans-serif;
+  max-width: 130px;
 }
 .offer-more{
  color: #0047BD;
@@ -1885,7 +1887,7 @@ button{
   color: var(--neutral-500);
 }
 .feature-card-heading{
-  color: #000;
+  /* color: #000; */
  font-size: 12px;
  font-weight: 500;
  font-family: 'lato',sans-serif;
@@ -2047,8 +2049,8 @@ button{
   flex-direction: row;
   width: 100%;
   padding: 5px;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   /* margin-bottom: 10px;*/
 }
 
@@ -2057,7 +2059,7 @@ button{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 40%;
+  width: 33%;
   /* height: 10%; */
   margin-bottom: 15px;
 }
@@ -2068,7 +2070,7 @@ button{
 
 .app-name {
   font-size: 12px;
-  cursor: pointer;
+  /* cursor: pointer; */
   max-width: 60px;
   text-align: center;
 }

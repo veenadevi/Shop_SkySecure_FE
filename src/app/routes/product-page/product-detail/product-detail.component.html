@@ -266,7 +266,7 @@
                                         </div>
                                         <div class="offer-card">
                                             <p class="offer-bank" >Business Offer</p>
-                                            <p class="offer-dis" >Save upto 28% on business purchase and get GST Invoice,<span (click)="showBasicDialog01()" style="color: blue;cursor: pointer;">T&C</span></p>
+                                            <p class="offer-dis" >Save upto 28% on business purchase and get GST Invoice,<span (click)="showBasicDialog01()" style="color: var(--primary-500-purple);cursor: pointer;">T&C</span></p>
                                             <!-- <a class="offer-more">2 more offers</a> -->
                                         </div>
                                     </div>
@@ -486,17 +486,19 @@
         
                                     </ng-container>
 
-                                    <div class="app-list-container">
-                                        <span class="features-header">Included Apps</span>
-                                        <div class="app-list">
-                                            <ng-container *ngFor="let item of appList">
-                                                <div class="app-list-section">
-                                                    <img class="app-image" src="{{item.imageURL}}">
-                                                    <span class="app-name">{{item.name}}</span>
-                                                </div>
-                                            </ng-container>
+                                    <ng-container *ngIf="appList.length>0">
+                                        <div class="app-list-container">
+                                            <span class="features-header">Included Apps</span>
+                                            <div class="app-list">
+                                                <ng-container *ngFor="let item of appList">
+                                                    <div class="app-list-section">
+                                                        <img class="app-image" src="{{item.imageURL}}">
+                                                        <span class="app-name">{{item.name}}</span>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </ng-container>
 
                                 </div>
                                 <div class="prod-card2">
