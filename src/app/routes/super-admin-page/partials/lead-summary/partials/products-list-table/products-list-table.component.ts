@@ -83,12 +83,32 @@ export class ProductsListTableComponent implements OnInit{
 
   }
 
+  public valueChanged(event, item, type){
+
+
+    switch (type) {
+      case 'quantity':
+        let quanTotal = item.get('quantity').value*item.get('bcy_rate').value;
+        item.get('item_total').setValue(quanTotal);
+        return;
+
+      case 'bcyRate':
+        let priceTotal = item.get('quantity').value*item.get('bcy_rate').value;
+        item.get('item_total').setValue(priceTotal);
+        return;
+
+      default:
+        return null;
+    }
+  }
+
 
   public priceChanged(event, item, i){
       
+    //item.get('line_items_id')
 
-
-    var index = this.cartDetails.findIndex(el => el.estimateLineItemId === this.productsData.line_items[i].line_item_id);
+    var index = this.cartDetails.findIndex(el => el.estimateLineItemId === item.get('line_items_id').value);
+    //var index = this.cartDetails.findIndex(el => el.estimateLineItemId === this.productsData.line_items[i].line_item_id);
          
     if(index >=0){
       
@@ -104,7 +124,9 @@ export class ProductsListTableComponent implements OnInit{
 
     }
     else{
-      let data = this.newlyAddedAppList.find(x => x._id+'temp' === item.get('line_items_id'));
+      console.log("_+_+_+_+ Came here ");
+      let data = this.newlyAddedAppList.find(x => x._id+'temp' === item.get('line_items_id').value);
+      console.log("_+_+_+_+ Came here with data", item.get('line_items_id').value);
       if(data){
         let editedRate = item.get('bcy_rate').value;
         let calculatedDistributarPrice = data.priceList[0].distributorPrice;
@@ -117,6 +139,8 @@ export class ProductsListTableComponent implements OnInit{
         }
       }
     }
+
+    this.valueChanged(event, item, 'bcyRate')
 
     //formData.form.controls['email'].setErrors({'incorrect': true});
 
@@ -139,12 +163,13 @@ export class ProductsListTableComponent implements OnInit{
         mobNumber: [emp.mobNumber, [Validators.min(10)]],
         dob: [emp.dob, Validators.required]
       });*/
+      console.log("_+_+_+_ Value ", items);
       const grp = this.fb.group({
         name: [items.description, Validators.required],
         quantity: [items.quantity, [Validators.required]],
         bcy_rate: [items.bcy_rate, [Validators.min(10)]],
         tax_name: [items.tax_name, Validators.required],
-        item_total: [items.item_total, Validators.required],
+        item_total: [ parseFloat((items.bcy_rate*items.quantity).toFixed(2)) , Validators.required],
         line_items_id: [items.line_item_id, null]
       });
       control.push(grp);
@@ -237,11 +262,11 @@ export class ProductsListTableComponent implements OnInit{
     let request = this.setRequestData();
     console.log("+_+_+_+_+_ Res Data ", request);
 
-    /*this.subscription.push(
-      this.cartService.createQuotation(null).subscribe(res=>{
+    this.subscription.push(
+      this.cartService.createQuotation(request).subscribe(res=>{
 
       })
-    )*/
+    )
   }
 
   public setRequestData(){
