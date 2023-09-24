@@ -44,3 +44,7 @@ tbody td{
 .btn-color{
     color: #DB553C;
 }
+
+.action-btn-holder{
+    display: flex;
+}

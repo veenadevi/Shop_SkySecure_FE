@@ -12,18 +12,18 @@
         <th>Quantity</th>
         <th>Price</th>
         <th>Tax</th>
-        <th>Total</th>
+        <th>Total (+Tax)</th>
         <th></th>
         
       </thead>
       <tbody formArrayName="items" *ngFor="let group of getFormData.controls; let i=index">
         <tr [formGroupName]="i">
           <td class="form-group">
-            <input type="text" class="form-control" formControlName="name" placeholder="name">
+            <input type="text" class="form-control" formControlName="name" placeholder="name" readonly>
             <span class="text-danger" *ngIf="group.get('name').touched && group.get('name').invalid">Name is required</span>
           </td>
           <td class="form-group">
-            <input type="text" class="form-control" formControlName="quantity" placeholder="quantity">
+            <input type="text" class="form-control" formControlName="quantity" placeholder="quantity" (change)="valueChanged($event, group, 'quantity')">
             <span class="text-danger" *ngIf="group.get('quantity').touched && group.get('quantity')?.hasError('required')">Quantity required</span>
           </td>
           <td class="form-group">
@@ -36,7 +36,7 @@
             <span class="text-danger" *ngIf="group.get('tax_name').touched && group.get('tax_name')?.hasError('required')">Tax Name required</span>
           </td>
           <td class="form-group">
-            <input type="text" class="form-control" formControlName="item_total" placeholder="item_total">
+            <input type="text" class="form-control" formControlName="item_total" placeholder="item_total" readonly>
             <span class="text-danger" *ngIf="group.get('item_total').touched && group.get('item_total')?.hasError('required')">Total required</span>
           </td>
           
@@ -48,12 +48,15 @@
     </table>
 </form>
 
-<div class="add-new-btn">
-    <button (click)="addUser()" class="btn primary-btn">Add new</button>
-</div>
-<div class="add-new-btn">
-  <button (click)="saveChanges()" class="btn primary-btn">Save</button>
-</div>
+  <div class="action-btn-holder">
+      <div class="add-new-btn">
+        <button (click)="addApp()" class="btn primary-btn">Add new</button>
+    </div>
+    <div class="add-new-btn">
+      <button (click)="saveChanges()" class="btn primary-btn">Save</button>
+    </div>
+  </div>
+
 </ng-container>
 
 <ng-template #cartDetails>

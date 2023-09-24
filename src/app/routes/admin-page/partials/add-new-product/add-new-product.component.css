@@ -121,7 +121,7 @@ label {
 
 .custom-select-03 {
     width: 100%;
-    padding: 10px;
+    padding: 4px;
     box-sizing: border-box;
     border: 1px solid black;
     border-radius: 8px;
@@ -164,7 +164,7 @@ h4{
 }
 
 .subscription {
-    width: 33%;
+    width: 20%;
     padding: 20px;
 }
 

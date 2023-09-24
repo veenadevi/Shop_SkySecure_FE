@@ -24,7 +24,7 @@
     vertical-align: middle;
     text-align: center;
     height: 3em !important;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .table th:first-child {
@@ -130,7 +130,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .price-details {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: #1e1e1e;
 }
@@ -150,7 +150,9 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: #E2EDFF;
 } */
 
-
+.gst{
+    font-size: 9px;
+}
 .success-state-img {
     opacity: 50%;
     height: 18em;
@@ -176,7 +178,7 @@ tbody th{
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .cart-title-btns {
@@ -188,7 +190,7 @@ tbody th{
     background: none;
     border: none;
     outline: none;
-    font-size: 14px;
+    font-size: 13px;
     padding: 0;
 }
 
@@ -196,7 +198,7 @@ tbody th{
     background: none;
     border: none;
     outline: none;
-    font-size: 14px;
+    font-size: 13px;
     padding: 0;
 }
 
@@ -211,9 +213,13 @@ tbody th{
     color: #B82727;
     font-weight: 600;
 }
+.cart-total-row{
+    background: var(--primary-50-purple);
+    width: 100%;
+}
 
 .cart-total {
-    background: var(--primary-50-purple);
+    /* background: var(--primary-50-purple); */
     width: 100%;
     border-radius: 8px;
     display: flex;
@@ -221,19 +227,19 @@ tbody th{
     align-items: center;
     padding: 10px 44px 10px 136px;
 
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     color: #1e1e1e;
 
     vertical-align: middle;
     text-align: center;
-    height: 2em !important;
+    height: .4rem !important;
 }
 .error-message {
     background: none;
     border: none;
     outline: none;
-    font-size: 14px;
+    font-size: 12px;
     padding: 0;
     color: #B82727;
     margin-top: -17%;
