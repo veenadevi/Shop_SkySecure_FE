@@ -192,7 +192,6 @@
                             </div>
 
                         </div>
-
                         <div class="upload">
                             <label>Image Logo</label>
                             <div class="avatar-edit">
@@ -228,8 +227,8 @@
                                     </label>
                                 </div>
                                 <div class="select">
-                                    <select class="custom-select" (change)="changeSubscriptionType($event)"
-                                        formControlName="subscriptionType"
+                                    <select [(ngModel)]='ysubscriptionType' class="custom-select" (change)="changeSubscriptionType($event)"
+                                        formControlName="ysubscriptionType"
                                         [ngClass]="{'error': submitted && myForm.subscriptionType.errors}">
                                         <option value="">Choose...</option>
                                         <option *ngFor="let type of subscriptionTypeList" [value]="type">{{type}}
@@ -255,9 +254,9 @@
                                         <input type="number" class="custom-select-01" formControlName="yerpPrice"
                                         (change)="onPriceChange('yerpPrice')" [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                     </div>
-                                    <div>
+                                    <!-- <div>
                                         Calculated Price : {{tempYerpPrice}}
-                                    </div>
+                                    </div> -->
     
                                     <!-- error block -->
                                     <div class="invalid-feedback" *ngIf="submitted && myForm.productPrice.errors?.required">
@@ -286,21 +285,21 @@
                         </div>
 
                         <!---Product Price-->
-                        <!-- <div class="price">
+                        <div class="price">
                             <div class="forms">
                                 <div class="label">
                                     <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                         SS Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="yproductPrice"
+                                    <input type="text" class="custom-select-03" value={{tempYerpPrice}}
                                         [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                 </div>
 
                             </div>
 
 
-                        </div> -->
+                        </div>
 
                         <div class="price">
                             <div class="forms">
@@ -333,7 +332,7 @@
                                         Type</label>
                                 </div>
                                 <div class="select">
-                                    <select class="custom-select" (change)="changeSubscriptionType($event)"
+                                    <select [(ngModel)]='msubscriptionType' class="custom-select" (change)="changeSubscriptionType($event)"
                                         formControlName="msubscriptionType"
                                         [ngClass]="{'error': submitted && myForm.subscriptionType.errors}">
                                         <option value="month"  selected>Month</option>
@@ -361,9 +360,9 @@
                                         <input type="number" class="custom-select-01" formControlName="merpPrice"
                                         (change)="onPriceChange('merpPrice')" [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                     </div>
-                                    <div>
+                                    <!-- <div>
                                         Calculated Price : {{tempMerpPrice}}
-                                    </div>
+                                    </div> -->
     
                                     <!-- error block -->
                                     <div class="invalid-feedback" *ngIf="submitted && myForm.productPrice.errors?.required">
@@ -394,21 +393,21 @@
 
                         </div>
                         <!---Product Price-->
-                        <!-- <div class="price">
+                        <div class="price">
                             <div class="forms">
                                 <div class="label">
                                     <label [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                         SS Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="number" class="custom-select-03" formControlName="mproductPrice"
+                                    <input type="number" class="custom-select-03" value={{tempMerpPrice}}
                                         [ngClass]="{'error': submitted && myForm.productPrice.errors}">
                                 </div>
 
                             </div>
 
 
-                        </div> -->
+                        </div>
 
                         <div class="price">
                             <div class="forms">
@@ -450,8 +449,8 @@
                             <div class="avatar-edit">
                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
                                     (change)="uploadFileForApp($event, i)" />
-                                <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
-                                    alt="productLogo" />
+                                <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{imageURL}}"
+                                    />
                                 <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
                                     (click)="removeImage()">Remove</button>
                                 <label for="imageUpload" *ngIf="editFile"
@@ -460,7 +459,7 @@
                                     (click)="removeUploadedFile()"></label>
                             </div>
                             <div class="avatar-preview">
-                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageURL +')'">
                                 </div>
                             </div>
                         </div>
