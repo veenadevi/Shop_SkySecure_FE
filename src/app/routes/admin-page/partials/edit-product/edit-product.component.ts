@@ -487,8 +487,8 @@ export class EditProductComponent  implements OnInit {
 
         priceList: [{
           "Currency": "INR",
-          //"price": productData.yproductPrice,
-          "price": this.setYearlyPrice(productData),
+          "price": productData.yproductPrice,
+         // "price": this.setYearlyPrice(productData),
           "priceType": "Year",
           "ERPPrice" : Math.round(parseFloat(productData.yerpPrice.toString())).toFixed(2),
           "distributorPrice":Math.round(parseFloat(productData.ydistributorPrice.toString())).toFixed(2),
@@ -498,7 +498,7 @@ export class EditProductComponent  implements OnInit {
         },
         {
           "Currency": "INR",
-          "price": this.setMonthlyPrice(productData),
+          "price": productData.mproductPrice,
           "priceType": "Month",
           "ERPPrice" : parseFloat(productData.merpPrice.toString()).toFixed(2),
           "distributorPrice":parseFloat(productData.mdistributorPrice.toString()).toFixed(2),
@@ -841,19 +841,36 @@ if(data){
 
   public onPriceChange(val){
 
-
     switch (val) {
       case 'yerpPrice':
         this.tempYerpPrice = ((Number(this.registrationForm.value.yerpPrice)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice));
-        this.registrationForm.controls['ydiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice)));
+        this.registrationForm.controls['yproductPrice'].setValue(this.tempYerpPrice)
+       
+        this.registrationForm.controls['ydiscount'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice).toFixed(2));
         return;
       case 'merpPrice':
         this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
-        this.registrationForm.controls['mdiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice)));
+        this.registrationForm.controls['mproductPrice'].setValue(this.tempMerpPrice)
+        this.registrationForm.controls['mdiscount'].setValue(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice).toFixed(2));
         return;
 
       default:
         return null;
     }
+
+
+    // switch (val) {
+    //   case 'yerpPrice':
+    //     this.tempYerpPrice = ((Number(this.registrationForm.value.yerpPrice)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice));
+    //     this.registrationForm.controls['ydiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice)));
+    //     return;
+    //   case 'merpPrice':
+    //     this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
+    //     this.registrationForm.controls['mdiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice)));
+    //     return;
+
+    //   default:
+    //     return null;
+    // }
   }
 }
