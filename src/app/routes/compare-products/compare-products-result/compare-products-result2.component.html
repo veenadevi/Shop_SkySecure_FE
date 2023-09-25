@@ -63,7 +63,7 @@
                                 
                                 <div class="price" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
                             <!-- <span class="price-symbol">&#8377;  {{ isMonthly ? (item.priceList[0].price/12 | number : '1.2-2') : item.priceList[0].price }} /  {{isMonthly ? 'Monthly' : (item.priceList[0].priceType)}}</span> -->
-                            <span class="price-symbol">&#8377;  {{item.properties['priceList'].price/12 | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span>
+                            <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span>
                         </div>
                                     <!-- <div class="price" (mouseenter)="showMonthlyPrice()" (mouseleave)="showDiscountRate()">
                                         <span class="price-symbol">&#8377;  {{ isMonthly ? (item.properties['priceList'].price/12 | number : '1.2-2') : item.properties['priceList'].price }} </span>
@@ -72,6 +72,7 @@
                                     </div> -->
                                    
                                 <p  class="gst">(GST Extra)</p>
+                
                             </div>
                             <div style="display:inline-flex;align-items: center;">
                                 <p class="mrp"> MRP:&nbsp;</p>
@@ -79,7 +80,7 @@
                                 <span>
                                     <p class="amount" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
                                         <!-- {{item.properties['priceList'].ERPPrice | number : '1.2-2'}} -->
-                                                                      {{item.properties['priceList'].ERPPrice/12 | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}
+                                       {{item.properties['priceList'].ERPPrice | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}
                                     </p>
                                 </span>
                             </div>
