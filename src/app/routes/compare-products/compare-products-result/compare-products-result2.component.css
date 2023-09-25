@@ -27,7 +27,7 @@ th{
 
 .feature-text {
     color: #000;
-    font-size: 15px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: 1.3rem;
@@ -37,7 +37,7 @@ th{
 
 .feature-text-left-align {
     color: #000;
-    font-size: 15px;
+    font-size: 13px;
     font-style: normal;
     font-weight: 500;
     line-height: 1.3rem;
@@ -62,6 +62,7 @@ th{
 .product-heading{
     font-weight: bold;
     color: #11459d;
+    font-size: 14px;
 }
 .td-column{
     display: flex;
@@ -134,7 +135,7 @@ th{
   }
 
   .pointer-style{
-    cursor: pointer;
+    /* cursor: pointer; */
   }
 
   .product-price-detail{
@@ -152,13 +153,13 @@ th{
   .discounted-text{
     color: #DB553C;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
     line-height: 1.3rem;
   }
   .price-symbol{
     font-weight: 400;
-    font-size: 14px;
+    font-size: 13px;
     font-style: normal;
     line-height: 1.3rem;
   }
@@ -194,7 +195,7 @@ th{
      cursor: pointer;
   }
   .price-symbol{
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.3s;
@@ -202,7 +203,7 @@ th{
     padding-left: 5px;
   }
   .price-symbol-01{
-    font-size: 14px;
+    font-size: 13px;
     /* font-weight: bold; */
     cursor: pointer;
     transition: transform 0.3s;
@@ -254,5 +255,36 @@ th{
   }
 
 
+.app-listing-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  padding: 5px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
 
+.app-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 33%;
+  margin-bottom: 15px;
+}
 
+.app-image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.app-image {
+  width: 50%;
+}
+
+.app-name {
+  font-size: 12px;
+  max-width: 60px;
+  text-align: center;
+}

@@ -63,7 +63,7 @@
                                 
                                 <div class="price" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
                             <!-- <span class="price-symbol">&#8377;  {{ isMonthly ? (item.priceList[0].price/12 | number : '1.2-2') : item.priceList[0].price }} /  {{isMonthly ? 'Monthly' : (item.priceList[0].priceType)}}</span> -->
-                            <span class="price-symbol">&#8377;  {{item.properties['priceList'].price/12 | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span>
+                            <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span>
                         </div>
                                     <!-- <div class="price" (mouseenter)="showMonthlyPrice()" (mouseleave)="showDiscountRate()">
                                         <span class="price-symbol">&#8377;  {{ isMonthly ? (item.properties['priceList'].price/12 | number : '1.2-2') : item.properties['priceList'].price }} </span>
@@ -72,6 +72,7 @@
                                     </div> -->
                                    
                                 <p  class="gst">(GST Extra)</p>
+                
                             </div>
                             <div style="display:inline-flex;align-items: center;">
                                 <p class="mrp"> MRP:&nbsp;</p>
@@ -79,7 +80,7 @@
                                 <span>
                                     <p class="amount" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
                                         <!-- {{item.properties['priceList'].ERPPrice | number : '1.2-2'}} -->
-                                                                      {{item.properties['priceList'].ERPPrice/12 | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}
+                                       {{item.properties['priceList'].ERPPrice | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}
                                     </p>
                                 </span>
                             </div>
@@ -97,31 +98,54 @@
                             {{rowData.headerName}}
                         </td>
                         <td *ngFor="let item of allProducts" class="features-align">
-                          
-                           <!-- <div class="feature-item-container" *ngIf="(item.properties[rowData.header] && item.properties[rowData.header].length>0 && item.properties['includedProducts'] && item.properties['includedProducts'].length>0 ) ; else noFeaturesData"> -->
-                            <div class="feature-item-container" *ngIf="((item.properties['bundleData']&&item.properties['bundleData'].length>0) ||( item.properties[rowData.header] && item.properties[rowData.header].length>0 )) ; else noFeaturesData">
-                            <div class="tick-container"   *ngFor="let features of item.properties['includedProducts']">
-    
-                                    <div class="tick-symbol">
-                                        <img src="../../../../assets/icons/SecondaryTickIcon.svg">
-                                    </div>
-                                    <span class="feature-text-left-align pointer-style " (click)="navigateToProductDetails(features)">{{features.name}}</span>
-                                </div>   
-                                <div class="tick-container"   *ngFor="let features of item.properties[rowData.header]">
-    
-                                    <div class="tick-symbol">
-                                        <img src="../../../../assets/icons/PrimaryTickIcon.svg">
-                                    </div>
-                                    <span class="feature-text-left-align pointer-style" (click)="openLink(features.hyperLinkURL)">{{features.name}}</span>
-                                </div>     
-                                
-                            </div> 
-                            <ng-template #noFeaturesData>
-                                -
-                            </ng-template> 
-                        </td>
+                      
+                            <!-- <div class="feature-item-container" *ngIf="(item.properties[rowData.header] && item.properties[rowData.header].length>0 && item.properties['includedProducts'] && item.properties['includedProducts'].length>0 ) ; else noFeaturesData"> -->
+                             <div class="feature-item-container" *ngIf="((item.properties['bundleData']&&item.properties['bundleData'].length>0) ||( item.properties[rowData.header] && item.properties[rowData.header].length>0 )) ; else noFeaturesData">
+                             <div class="tick-container"   *ngFor="let features of item.properties['includedProducts']">
+     
+                                     <div class="tick-symbol">
+                                         <img src="../../../../assets/icons/SecondaryTickIcon.svg">
+                                     </div>
+                                     <span class="feature-text-left-align pointer-style " (click)="navigateToProductDetails(features)">{{features.name}}</span>
+                                 </div>   
+                                 <div class="tick-container"   *ngFor="let features of item.properties[rowData.header]">
+     
+                                     <div class="tick-symbol">
+                                         <img src="../../../../assets/icons/PrimaryTickIcon.svg">
+                                     </div>
+                                     <span class="feature-text-left-align pointer-style" (click)="openLink(features.hyperLinkURL)">{{features.name}}</span>
+                                 </div>     
+                                 
+                             </div> 
+                             <ng-template #noFeaturesData>
+                                 -
+                             </ng-template> 
+                         </td>
                     
                 </tr>
+
+                <tr *ngIf="(rowData.header === 'appList')">
+                    <td class="product-heading">
+                        {{rowData.headerName}}
+                    </td>
+                    <td *ngFor="let item of allProducts" class="features-align">
+                          
+                        <!-- <div class="feature-item-container" *ngIf="(item.properties[rowData.header] && item.properties[rowData.header].length>0 && item.properties['includedProducts'] && item.properties['includedProducts'].length>0 ) ; else noFeaturesData"> -->
+                    <div class="app-listing-container" *ngIf="((item.properties['appList']&&item.properties['appList'].length>0) ||( item.properties[rowData.header] && item.properties[rowData.header].length>0 )) ; else noAppData">
+                         <div class="app-section" *ngFor="let includedApps of item.properties['appList']">
+                                <div class="app-image-container">
+                                    <img class="app-image" src="{{includedApps.imageURL}}">
+                                </div>
+                            <div class="app-name">{{includedApps.name}}</div>
+                        </div>                                    
+                    </div> 
+                    <ng-template #noAppData>
+                             -
+                    </ng-template> 
+                     </td>
+                
+            </tr>
+
                 <tr *ngIf="(rowData.header === 'includedProducts')">
                     <td class="product-heading">
                         {{rowData.headerName}}
@@ -145,7 +169,7 @@
                 
                 </tr>
                 <!-- <ng-template #otherCat> -->
-                    <tr *ngIf="(rowData.header !== 'features') && (rowData.header !== 'includedProducts') && (rowData.header !== 'price')">
+                    <tr *ngIf="(rowData.header !== 'features') && (rowData.header !== 'includedProducts') && (rowData.header !== 'price') && (rowData.header !== 'appList')">
                         <td  class="product-heading">
                             {{rowData.headerName}}
                         </td>
