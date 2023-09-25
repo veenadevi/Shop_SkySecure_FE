@@ -33,7 +33,8 @@ interface CreateProductPayload {
   productFAQ: Array<any>,
   updatedAt:Date,
   appList:Array<any>,
-  compareWithproducts:Array<any>
+  compareWithproducts:Array<any>,
+  productupdateComment:String
  
 
 }
@@ -128,6 +129,8 @@ export class EditProductComponent  implements OnInit {
       updatedBy:[''],
       updatedDate:[''],
       updatedAt:[''],
+      productversion:[''],
+      productupdateComment:[''],
       addDynamicElementNew: this.fb.group({
         // Nested form controls for dynamic elements
        feature: this.fb.array([0])
@@ -480,32 +483,36 @@ export class EditProductComponent  implements OnInit {
         productSkuId: productData.productSkuId,
         productSkuNumber: productData.productSkuNumber,
         orderNumber: productData.productOrderNumber,
+
+
         priceList: [{
           "Currency": "INR",
-          //"price": productData.yproductPrice,
-          "price": this.setYearlyPrice(productData),
+          "price": productData.yproductPrice,
+         // "price": this.setYearlyPrice(productData),
           "priceType": "Year",
-          "ERPPrice" : productData.yerpPrice,
-          "distributorPrice":productData.ydistributorPrice,
-          "discountRate" : productData.ydiscount
+          "ERPPrice" : Math.round(parseFloat(productData.yerpPrice.toString())).toFixed(2),
+          "distributorPrice":Math.round(parseFloat(productData.ydistributorPrice.toString())).toFixed(2),
+          "discountRate" : productData.ydiscount,
+          
 
         },
         {
           "Currency": "INR",
-          "price": this.setMonthlyPrice(productData),
+          "price": productData.mproductPrice,
           "priceType": "Month",
-          "ERPPrice" : productData.merpPrice,
-          "distributorPrice":productData.mdistributorPrice,
+          "ERPPrice" : parseFloat(productData.merpPrice.toString()).toFixed(2),
+          "distributorPrice":parseFloat(productData.mdistributorPrice.toString()).toFixed(2),
           "discountRate" : productData.mdiscount
 
-        }
+        }],
+
+
       
-      ],
         productFAQ: productData.addFAQArrayNew.faq,
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
-
+        productupdateComment:productData.productupdateComment,
         
         
         appList:productData.addAppArrayNew.app,
@@ -551,14 +558,16 @@ export class EditProductComponent  implements OnInit {
   public setYearlyPrice(data){
 
     let yskySecurePrice = ((Number(data.yerpPrice)) * 0.02) + (Number(data.ydistributorPrice));
-    return yskySecurePrice;
+    return Math.round(parseFloat(yskySecurePrice.toString())).toFixed(2);
     
   }
 
   public setMonthlyPrice(data){
 
     let mskySecurePrice = ((Number(data.merpPrice)) * 0.02) + (Number(data.mdistributorPrice));
-    return mskySecurePrice;
+    let fixedValue=parseFloat(mskySecurePrice.toString()).toFixed(2);
+    console.log("fixedValue   ...",fixedValue)
+    return Math.round(parseFloat(fixedValue))
     
   }
   removeFeature(data: any) {
@@ -603,6 +612,17 @@ export class EditProductComponent  implements OnInit {
     this.registrationForm.get('updatedAt').setValue(formattedDate, {
       onlySelf: true
     }) 
+    this.registrationForm.get('productversion').setValue(response.products.productversion.$numberDecimal
+      , {
+      onlySelf: true
+    }) 
+
+    this.registrationForm.get('productupdateComment').setValue(response.products.productupdateComment, {
+      onlySelf: true
+    }) 
+
+
+   
     this.registrationForm.get('productName').setValue(response.products.name, {
       onlySelf: true
     })
@@ -821,19 +841,36 @@ if(data){
 
   public onPriceChange(val){
 
-
     switch (val) {
       case 'yerpPrice':
         this.tempYerpPrice = ((Number(this.registrationForm.value.yerpPrice)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice));
-        this.registrationForm.controls['ydiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice)));
+        this.registrationForm.controls['yproductPrice'].setValue(this.tempYerpPrice)
+       
+        this.registrationForm.controls['ydiscount'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice).toFixed(2));
         return;
       case 'merpPrice':
         this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
-        this.registrationForm.controls['mdiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice)));
+        this.registrationForm.controls['mproductPrice'].setValue(this.tempMerpPrice)
+        this.registrationForm.controls['mdiscount'].setValue(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice).toFixed(2));
         return;
 
       default:
         return null;
     }
+
+
+    // switch (val) {
+    //   case 'yerpPrice':
+    //     this.tempYerpPrice = ((Number(this.registrationForm.value.yerpPrice)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice));
+    //     this.registrationForm.controls['ydiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice)));
+    //     return;
+    //   case 'merpPrice':
+    //     this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
+    //     this.registrationForm.controls['mdiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice)));
+    //     return;
+
+    //   default:
+    //     return null;
+    // }
   }
 }

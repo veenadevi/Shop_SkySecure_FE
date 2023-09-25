@@ -101,6 +101,34 @@
 
                         </div>
 
+                        <div class="productversion">
+                            <div class="forms">
+                                <div class="label">
+                                    <label>
+                                        Product Version</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text"  readonly class="custom-select-03" formControlName="productversion">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="productupdateComment">
+                            <div class="forms">
+                                <div class="label">
+                                    <label>
+                                       Edit Comment</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text"  class="custom-select-03" formControlName="productupdateComment">
+                                </div>
+
+                            </div>
+
+                        </div>
+
 
                     </div>
                     <!-- OEMS -->
@@ -345,7 +373,7 @@
                                         ERP Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="number" class="custom-select-01" formControlName="yerpPrice"
+                                    <input type="number" class="custom-select-01" formControlName="yerpPrice" (change)="onPriceChange('yerpPrice')"
                                         [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                 </div>
 
@@ -365,7 +393,7 @@
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="ydistributorPrice"
-                                        [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
+                                    (change)="onPriceChange('yerpPrice')"  [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                 </div>
 
                             </div>
@@ -381,7 +409,7 @@
                                         SS Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="yproductPrice"
+                                    <input type="text"  readonly class="custom-select-03" formControlName="yproductPrice"
                                         [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
@@ -397,7 +425,7 @@
                                         Discount(%)</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="ydiscount"
+                                    <input type="text" readonly class="custom-select-03" formControlName="ydiscount"
                                         [(ngModel)]=defaultDiscount
                                         [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                 </div>
@@ -452,8 +480,8 @@
                                         ERP Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="number" class="custom-select-01" formControlName="merpPrice"
-                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                    <input type="number" class="custom-select-01" formControlName="merpPrice" 
+                                    (change)="onPriceChange('merpPrice')" [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
                               
@@ -470,7 +498,7 @@
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="mdistributorPrice"
-                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                    (change)="onPriceChange('merpPrice')"  [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
                             </div>

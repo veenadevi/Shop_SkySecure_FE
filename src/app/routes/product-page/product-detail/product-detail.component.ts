@@ -811,11 +811,11 @@ featureCount=5;
         if(this.selectedOption === 'default'){
         //  queryParams.price = (queryParams.price/12).toFixed(2);
 
-        queryParams.price = product.priceList[1].price.toFixed(2),
-        queryParams.erpPrice=product.priceList[1].ERPPrice.toFixed(2),
+        queryParams.price = product.priceList[1].price,
+        queryParams.erpPrice=product.priceList[1].erpPrice,
         queryParams.discountRate=product.priceList[1].discountRate,
         queryParams.priceType= product.priceList[1].priceType
-        queryParams.distributorPrice=product.priceList[1].distributorPrice.toFixed(2)
+        queryParams.distributorPrice=product.priceList[1].distributorPrice
        
         }
         else{
