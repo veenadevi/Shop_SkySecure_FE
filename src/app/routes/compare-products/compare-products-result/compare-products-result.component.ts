@@ -39,6 +39,8 @@ export class CompareProductsResultComponent {
 
   public itemQuantity : number = 1;
 
+  changeValue : boolean = false;
+
   public emptyProductsLength : any = 0;
   allProperties = [
     // { 'ProductName': 'Product Name' },
@@ -510,7 +512,7 @@ export class CompareProductsResultComponent {
 
   public getPriceType(val){
 
-    console.log("+++++ Val ", val);
+
 
     switch (val.toLowerCase()) {
       case 'month':
@@ -994,20 +996,7 @@ export class CompareProductsResultComponent {
   isHovered = false;
   
   showMonthlyPrice(i:any) {
-    // this.isMonthly = true;
-    // this.priceValue = this.allProducts[i].properties['priceList'].price;
-    // this.priceType = this.allProducts[i].properties['priceList'].priceType;
-    // this.allProducts[i].properties['priceList'].priceType = "Month";
-    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12 
-
-    // this.allProducts[i].properties['priceList'].price  = this.allProducts[i].properties['priceList'].price ;
-    // this.allProducts[i].properties['priceList'].priceType = "Year";
-    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price*12;
-    // this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice*12;
-    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['monthlyPriceList'].price;;
-    // this.allProducts[i].properties['priceList'].discountRate = this.allProducts[i].properties['monthlyPriceList'].discountRate;
-    // this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['monthlyPriceList'].ERPPrice;
-    // this.allProducts[i].properties['priceList'].priceType =this.allProducts[i].properties['monthlyPriceList'].priceType;
+    
 
     this.allProducts[i].properties['priceList'].discountRate  = this.allProducts[i].properties['yearlyPriceList'].discountRate ;
     this.allProducts[i].properties['priceList'].priceType = this.allProducts[i].properties['yearlyPriceList'].priceType;
@@ -1043,6 +1032,23 @@ export class CompareProductsResultComponent {
 
     }
   } 
+
+
+  changeValueOnHover(val, i){
+    if(val === 'hover'){
+      this.changeValue = true; 
+
+      this.allProducts[i]['hoverFlag'] = true;
+      
+    }
+    else{
+      this.changeValue = false;
+      this.allProducts[i]['hoverFlag'] = false;
+      
+      
+    }
+    
+  }
  
 
 
