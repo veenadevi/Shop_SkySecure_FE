@@ -514,7 +514,7 @@
                                         SS Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="mproductPrice"
+                                    <input type="text"  readonly class="custom-select-03" formControlName="mproductPrice"
                                         [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
@@ -530,7 +530,7 @@
                                         Discount(%)</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="mdiscount"
+                                    <input type="text" readonly class="custom-select-03" formControlName="mdiscount"
                                         [(ngModel)]=defaultDiscount
                                         [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
