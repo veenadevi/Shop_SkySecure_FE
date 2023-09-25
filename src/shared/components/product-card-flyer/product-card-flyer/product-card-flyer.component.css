@@ -40,7 +40,7 @@
 }
 
 .ratings-box{
-    height: 50%;
+    height: 64%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -123,6 +123,7 @@
     font-size: 15px;
         /* color: #ffff; */
     color: var(--neutral);
+    max-width: 90%;
       
 }
 .text-style-mrp{
