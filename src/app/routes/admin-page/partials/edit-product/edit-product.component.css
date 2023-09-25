@@ -3,7 +3,7 @@
 }
 .header-title {
     padding: 5px;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
 .section-01 {
@@ -24,7 +24,7 @@
 
 
 label {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
 }
 
@@ -148,7 +148,7 @@ label {
     margin-bottom: -25px;
 }
 h4{
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
 }
 .orderno {
@@ -251,7 +251,7 @@ h4{
 
 .heading {
     padding-left: 0px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -354,7 +354,7 @@ h4{
     color: white;
     border-radius: 8px;
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
 }
 
