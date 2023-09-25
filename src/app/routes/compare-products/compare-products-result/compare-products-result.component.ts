@@ -300,26 +300,31 @@ export class CompareProductsResultComponent {
         'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
         'entryLevelPricing': productData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productData?.priceList[0].ERPPrice) : '-',
         'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price)  : '-',
-        'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
-        // 'priceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
-        // 'yearlyPriceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
-        // 'monthlyPriceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
-        // 'monthly1PriceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
-       // 'features': data.featureList.length > 0 ? data.featureList : '',
+        // 'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
+        'priceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
+        'yearlyPriceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
+        'monthlyPriceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
+        'monthly1PriceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
+      //  'features': data.featureList.length > 0 ? data.featureList : '',
        'features': data.featureList,
         'includedProducts' : [],
+        'appList' : data.appListByProduct,
        'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
        '_id' : productData._id,
        'isActive':productData.isActive
       }
 
+
       // console.log("setting montly data 222===",properties['monthlyPriceList'])
       return { properties};
     })
 
+
+
     return item;
 
   }
+
 
 
   public setProductVarientsData(response){
@@ -367,6 +372,7 @@ export class CompareProductsResultComponent {
        // 'features':bundleFeaturesList,
        // 'features': data.productFamilyFeatures.length > 0 ? data.productFamilyFeatures : '-',
        'features':  data.productFamilyFeatures ,
+       'appList': data.appListByProduct,
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response,'productFamily'),
         'bundleData':bundleFeaturesList,
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
@@ -399,6 +405,7 @@ export class CompareProductsResultComponent {
         'priceList' : productVariantData?.priceList[0] ? productVariantData?.priceList[0] : '-',
        // 'features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : '',
         'features': data.productFamilyVariantFeatures,
+        'appList': data.appListByProduct,
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response,'productFamilyVariant'),
         'bundleData':bundleFeaturesList,
      // 'features':bundleFeaturesList.length>0?bundleFeaturesList:'-',
@@ -536,13 +543,13 @@ export class CompareProductsResultComponent {
         queryParams = {
           productName : product.productName,
           productId : product._id,
-          // quantity : product.quantity?productItem.quantity:1,
-          quantity : productItem.quantity,
+          quantity : product.quantity?productItem.quantity:1,
+          // quantity : productItem.quantity,
           price : product.priceList.price,
           erpPrice:product.priceList.ERPPrice,
           discountRate:product.priceList.discountRate,
-          // priceType:product.priceList.priceType,
-          priceType:"Year",
+          priceType:product.priceList.priceType,
+          // priceType:"Year",
           distributorPrice:product.priceList.distributorPrice
         };
 
@@ -665,6 +672,7 @@ export class CompareProductsResultComponent {
     // { "header" : "entryLevelPricing" , "headerName" : "Entry Level Pricing"},
     //{ "header" : "includedProducts" , "headerName" : "Included Products"},
     { "header" : "features" , "headerName" : "Features"},
+    {"header" : "appList", "headerName" : "Included Apps"}
     
     
   ]
@@ -981,28 +989,51 @@ export class CompareProductsResultComponent {
   discountRate: number =120; 
   // monthlyPrice: number = this.discountRate ;
   // isMonthly: boolean = true;
+  isDiscountRate: boolean =true;
   priceValue:any;
-
+  isHovered = false;
+  
   showMonthlyPrice(i:any) {
-    this.isMonthly = true;
+    // this.isMonthly = true;
     // this.priceValue = this.allProducts[i].properties['priceList'].price;
     // this.priceType = this.allProducts[i].properties['priceList'].priceType;
     // this.allProducts[i].properties['priceList'].priceType = "Month";
     // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12 
-    this.allProducts[i].properties['priceList'].price  = this.allProducts[i].properties['priceList'].price ;
-    this.allProducts[i].properties['priceList'].priceType = "Year";
-    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price*12;
-    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice*12;
+
+    // this.allProducts[i].properties['priceList'].price  = this.allProducts[i].properties['priceList'].price ;
+    // this.allProducts[i].properties['priceList'].priceType = "Year";
+    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price*12;
+    // this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice*12;
+    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['monthlyPriceList'].price;;
+    // this.allProducts[i].properties['priceList'].discountRate = this.allProducts[i].properties['monthlyPriceList'].discountRate;
+    // this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['monthlyPriceList'].ERPPrice;
+    // this.allProducts[i].properties['priceList'].priceType =this.allProducts[i].properties['monthlyPriceList'].priceType;
+
+    this.allProducts[i].properties['priceList'].discountRate  = this.allProducts[i].properties['yearlyPriceList'].discountRate ;
+    this.allProducts[i].properties['priceList'].priceType = this.allProducts[i].properties['yearlyPriceList'].priceType;
+    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['yearlyPriceList'].price;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['yearlyPriceList'].ERPPrice;
   }
 
 
 
   showDiscountRate(i: any) {
+   
+    // this.isMonthly = false;
+    // this.allProducts[i].properties['priceList'].discountRate  = this.allProducts[i].properties['yearlyPriceList'].discountRate ;
+    // this.allProducts[i].properties['priceList'].priceType = this.allProducts[i].properties['yearlyPriceList'].priceType;
+    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['yearlyPriceList'].price;
+    // this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['yearlyPriceList'].ERPPrice;
+
+    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['monthlyPriceList'].price;
+    this.allProducts[i].properties['priceList'].discountRate = this.allProducts[i].properties['monthlyPriceList'].discountRate;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['monthlyPriceList'].ERPPrice;
+    this.allProducts[i].properties['priceList'].priceType =this.allProducts[i].properties['monthlyPriceList'].priceType;
     
-     this.isMonthly = false;
-     this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12;
-     this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice/12;
-     this.allProducts[i].properties['priceList'].priceType = "Month";
+    //  this.isMonthly = false;
+    //  this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12;
+    //  this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice/12;
+    //  this.allProducts[i].properties['priceList'].priceType = "Month";
   }
  
   openLink(url: any): void {
@@ -1013,6 +1044,8 @@ export class CompareProductsResultComponent {
     }
   } 
  
+
+
 
  
 }
