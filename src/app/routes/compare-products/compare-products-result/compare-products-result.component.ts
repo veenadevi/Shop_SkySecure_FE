@@ -666,7 +666,7 @@ export class CompareProductsResultComponent {
   
 
   this.comparisonCategories = [
-    { "header" : "price" , "headerName" : "Price"},
+    //{ "header" : "price" , "headerName" : "Price"},
     // { "header" : "productName" , "headerName" : "Product Name"},
     { "header" : "developedBy" , "headerName" : "Developed By"},
     { "header" : "solutionCategory" , "headerName" : "Solution Category"},

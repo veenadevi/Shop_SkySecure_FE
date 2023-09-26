@@ -2,7 +2,7 @@
     /* padding: 1%; */
     margin: 0 1% 1% 1%;
     font-family: 'lato',sans-serif;
-    margin-top:222px;
+    margin-top:233px;
 }
 
 th{
@@ -10,6 +10,8 @@ th{
 }
 .comparison-category-header{
     width:16%;
+    vertical-align: bottom;
+    padding-bottom: 2rem !important;
 }
 
 .feature-item-container {
@@ -141,7 +143,7 @@ th{
   .product-price-detail{
     display: flex;
     flex-direction: column;
-    margin: 6px 0;
+    margin: 6px 0 6px 10px;
   }
   .product-price-section{
     display: flex;
@@ -232,7 +234,7 @@ th{
 
   :host ::ng-deep .p-datatable .p-datatable-thead{
     position: fixed;
-    top:104px;
+    top:102px;
   }
 
   /* :host ::ng-deep .p-datatable .p-datatable-tbody tr:first-child 
