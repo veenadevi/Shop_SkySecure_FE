@@ -318,6 +318,7 @@ export class SuggestedCompareProductsResultComponent {
       //  'features': data.featureList.length > 0 ? data.featureList : '',
        'features': data.featureList,
         'includedProducts' : [],
+        'appList' : data.appListByProduct,
        'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
        '_id' : productData._id,
        'isActive':productData.isActive
@@ -375,6 +376,7 @@ export class SuggestedCompareProductsResultComponent {
        // 'features':bundleFeaturesList,
        // 'features': data.productFamilyFeatures.length > 0 ? data.productFamilyFeatures : '-',
        'features':  data.productFamilyFeatures ,
+       'appList' : data.appListByProduct,
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response,'productFamily'),
         'bundleData':bundleFeaturesList,
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
@@ -407,6 +409,7 @@ export class SuggestedCompareProductsResultComponent {
         'priceList' : productVariantData?.priceList[0] ? productVariantData?.priceList[0] : '-',
        // 'features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : '',
         'features': data.productFamilyVariantFeatures,
+        'appList' : data.appListByProduct,
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response,'productFamilyVariant'),
         'bundleData':bundleFeaturesList,
      // 'features':bundleFeaturesList.length>0?bundleFeaturesList:'-',
@@ -668,7 +671,7 @@ export class SuggestedCompareProductsResultComponent {
     // { "header" : "entryLevelPricing" , "headerName" : "Entry Level Pricing"},
     //{ "header" : "includedProducts" , "headerName" : "Included Products"},
     { "header" : "features" , "headerName" : "Features"},
-    
+    {"header" : "appList", "headerName" : "Included Apps"}
     
   ]
 
