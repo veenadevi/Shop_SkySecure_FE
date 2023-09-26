@@ -684,7 +684,7 @@ featureCount=5;
         
         this.compareProductsStore.setCompareProductsList(cachedProductsToCompare);
 
-        console.log("_+_+_+_()()()( List here ", cachedProductsToCompare);
+  
   
 
         this.toaster.showSuccess("The product has been included for comparison.",'')
