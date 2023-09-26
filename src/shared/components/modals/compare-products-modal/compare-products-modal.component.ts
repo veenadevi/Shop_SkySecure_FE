@@ -55,14 +55,13 @@ export class CompareProductsModalComponent {
     map(data => {
       
       this.productList = [];
-      console.log("====total ite  in model==", data)
+
       if(data){
         this.productList = data;
 
         let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
         
         this.productList = cachedProductsToCompare;
-        console.log("====total ite  in model==", this.productList)
         return data;
         
       }
@@ -153,8 +152,10 @@ export class CompareProductsModalComponent {
     //this.compareProductsStore.setCompareProductsList2(this.productList);
     
     this.compareProductsStore.setCompareProductsList(this.productList);
+
+    console.log("_+_+_+_ ^&^&^& Remoevd Item ", this.productList);
     
-    this.compareProductsStore.setProductsCheckedList(this.productList);
+    //this.compareProductsStore.setProductsCheckedList(this.productList);
     
   }
 

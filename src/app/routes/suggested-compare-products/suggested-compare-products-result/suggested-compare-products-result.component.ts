@@ -39,6 +39,8 @@ export class SuggestedCompareProductsResultComponent {
 
   public itemQuantity : number = 1;
 
+  changeValue : boolean = false;
+
   public emptyProductsLength : any = 0;
   allProperties = [
     // { 'ProductName': 'Product Name' },
@@ -308,8 +310,12 @@ export class SuggestedCompareProductsResultComponent {
         'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
         'entryLevelPricing': productData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productData?.priceList[0].ERPPrice) : '-',
         'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price)  : '-',
-        'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
-       // 'features': data.featureList.length > 0 ? data.featureList : '',
+        // 'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
+        'priceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
+        'yearlyPriceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
+        'monthlyPriceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
+        'monthly1PriceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
+      //  'features': data.featureList.length > 0 ? data.featureList : '',
        'features': data.featureList,
         'includedProducts' : [],
        'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
@@ -654,7 +660,7 @@ export class SuggestedCompareProductsResultComponent {
   
 
   this.comparisonCategories = [
-    { "header" : "price" , "headerName" : "Price"},
+    //{ "header" : "price" , "headerName" : "Price"},
     // { "header" : "productName" , "headerName" : "Product Name"},
     { "header" : "developedBy" , "headerName" : "Developed By"},
     { "header" : "solutionCategory" , "headerName" : "Solution Category"},
@@ -981,25 +987,32 @@ export class SuggestedCompareProductsResultComponent {
   priceValue:any;
 
   showMonthlyPrice(i:any) {
-    this.isMonthly = true;
-    // this.priceValue = this.allProducts[i].properties['priceList'].price;
-    // this.priceType = this.allProducts[i].properties['priceList'].priceType;
-    // this.allProducts[i].properties['priceList'].priceType = "Month";
-    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12 
-    this.allProducts[i].properties['priceList'].price  = this.allProducts[i].properties['priceList'].price ;
-    this.allProducts[i].properties['priceList'].priceType = "Year";
-    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price*12;
-    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice*12;
+    
+
+    this.allProducts[i].properties['priceList'].discountRate  = this.allProducts[i].properties['yearlyPriceList'].discountRate ;
+    this.allProducts[i].properties['priceList'].priceType = this.allProducts[i].properties['yearlyPriceList'].priceType;
+    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['yearlyPriceList'].price;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['yearlyPriceList'].ERPPrice;
   }
+
+
 
   showDiscountRate(i: any) {
     // this.isMonthly = false;
-    // this.allProducts[i].properties['priceList'].priceType=this.priceType;
+    // this.allProducts[i].properties['priceList'].discountRate  = this.allProducts[i].properties['yearlyPriceList'].discountRate ;
+    // this.allProducts[i].properties['priceList'].priceType = this.allProducts[i].properties['yearlyPriceList'].priceType;
+    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['yearlyPriceList'].price;
+    // this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['yearlyPriceList'].ERPPrice;
 
-    // this.allProducts[i].properties['priceList'].price = this.priceValue;
-    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12;
-    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice/12;
-    this.allProducts[i].properties['priceList'].priceType = "Month";
+    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['monthlyPriceList'].price;
+    this.allProducts[i].properties['priceList'].discountRate = this.allProducts[i].properties['monthlyPriceList'].discountRate;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['monthlyPriceList'].ERPPrice;
+    this.allProducts[i].properties['priceList'].priceType =this.allProducts[i].properties['monthlyPriceList'].priceType;
+    
+    //  this.isMonthly = false;
+    //  this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12;
+    //  this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice/12;
+    //  this.allProducts[i].properties['priceList'].priceType = "Month";
   }
  
   openLink(url: any): void {
@@ -1009,6 +1022,23 @@ export class SuggestedCompareProductsResultComponent {
 
     }
   } 
+
+
+  changeValueOnHover(val, i){
+    if(val === 'hover'){
+      this.changeValue = true; 
+
+      this.allProducts[i]['hoverFlag'] = true;
+      
+    }
+    else{
+      this.changeValue = false;
+      this.allProducts[i]['hoverFlag'] = false;
+      
+      
+    }
+    
+  }
  
 
  
