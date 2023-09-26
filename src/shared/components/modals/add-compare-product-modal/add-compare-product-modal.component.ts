@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
@@ -7,8 +7,11 @@ import { ToasterNotificationService } from 'src/shared/services/toaster-notifica
   templateUrl: './add-compare-product-modal.component.html',
   styleUrls: ['./add-compare-product-modal.component.css']
 })
-export class AddCompareProductModalComponent {
+export class AddCompareProductModalComponent implements OnInit {
 
+
+  @Input('request')
+  public request : any;
 
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
@@ -16,6 +19,15 @@ export class AddCompareProductModalComponent {
     public activeModal: NgbActiveModal,
     private toaster : ToasterNotificationService
   ){}
+
+  public headerText = "Unlock Better Choices: Compare Products Today!";
+
+  ngOnInit(): void {
+    console.log("+_+_+_+_+_+_+_+_+_+ _Val", this.request);
+    if(this.request && this.request.screen === 'edit-product-in-accounts'){
+      this.headerText = "Please select the Product!";
+    }
+  }
 
   public selectedItem(event){
     /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');

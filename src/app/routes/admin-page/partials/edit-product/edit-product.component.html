@@ -101,6 +101,34 @@
 
                         </div>
 
+                        <div class="productversion">
+                            <div class="forms">
+                                <div class="label">
+                                    <label>
+                                        Product Version</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text"  readonly class="custom-select-03" formControlName="productversion">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="productupdateComment">
+                            <div class="forms">
+                                <div class="label">
+                                    <label>
+                                       Edit Comment</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text"  class="custom-select-03" formControlName="productupdateComment">
+                                </div>
+
+                            </div>
+
+                        </div>
+
 
                     </div>
                     <!-- OEMS -->
@@ -301,7 +329,7 @@
                                     (click)="removeUploadedFile()"></label>
                             </div>
                             <div class="avatar-preview">
-                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageURL +')'">
                                 </div>
                             </div>
                         </div>
@@ -345,7 +373,7 @@
                                         ERP Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="number" class="custom-select-01" formControlName="yerpPrice"
+                                    <input type="number" class="custom-select-01" formControlName="yerpPrice" (change)="onPriceChange('yerpPrice')"
                                         [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                 </div>
 
@@ -365,7 +393,7 @@
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="ydistributorPrice"
-                                        [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
+                                    (change)="onPriceChange('yerpPrice')"  [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                 </div>
 
                             </div>
@@ -381,7 +409,7 @@
                                         SS Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="yproductPrice"
+                                    <input type="text"  readonly class="custom-select-03" formControlName="yproductPrice"
                                         [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
@@ -397,7 +425,7 @@
                                         Discount(%)</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="ydiscount"
+                                    <input type="text" readonly class="custom-select-03" formControlName="ydiscount"
                                         [(ngModel)]=defaultDiscount
                                         [ngClass]="{'error': submitted && myForm.yproductPrice.errors}">
                                 </div>
@@ -452,8 +480,8 @@
                                         ERP Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="number" class="custom-select-01" formControlName="merpPrice"
-                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                    <input type="number" class="custom-select-01" formControlName="merpPrice" 
+                                    (change)="onPriceChange('merpPrice')" [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
                               
@@ -470,7 +498,7 @@
                                 </div>
                                 <div class="input">
                                     <input type="text" class="custom-select-03" formControlName="mdistributorPrice"
-                                        [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
+                                    (change)="onPriceChange('merpPrice')"  [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
                             </div>
@@ -486,7 +514,7 @@
                                         SS Price</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="mproductPrice"
+                                    <input type="text"  readonly class="custom-select-03" formControlName="mproductPrice"
                                         [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
 
@@ -502,7 +530,7 @@
                                         Discount(%)</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" class="custom-select-03" formControlName="mdiscount"
+                                    <input type="text" readonly class="custom-select-03" formControlName="mdiscount"
                                         [(ngModel)]=defaultDiscount
                                         [ngClass]="{'error': submitted && myForm.mproductPrice.errors}">
                                 </div>
@@ -611,25 +639,29 @@
                                     App  Name</label>
                             </div>
                             <div class="input">
-                                <input type="text" class="custom-select-01" formControlName="Name">
+                                <input type="text" class="custom-select-01" formControlName="name">
                             </div>
                         </div>
                         <div class="upload-01">
                             <label>App Logo</label>
                             <div class="avatar-edit">
                                 <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
-                                    (change)="uploadFile($event)" />
-                                <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
-                                    alt="productLogo" />
+                                    (change)="uploadFileForApp($event,i)" />
+                                <!-- <img *ngIf="productLogo" style="width: 100px;height: 100px;" src="{{productLogo}}"
+                                    alt="productLogo" /> -->
+                                    
+                                    <img style="width: 100px;height: 100px;" src="{{ (tempAppList && tempAppList.length>0 && tempAppList[i].imageURL) ? tempAppList[i].imageURL : ''}}"
+/> 
+
                                 <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
-                                    (click)="removeImage()">Remove</button>
+                                    (click)="removeAppImage(i)">Remove</button>
                                 <label for="imageUpload" *ngIf="editFile"
                                     [ngClass]="['custom-label', 'upload-image']"></label>
                                 <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
                                     (click)="removeUploadedFile()"></label>
                             </div>
                             <div class="avatar-preview">
-                                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                                <div id="imagePreview" [style.backgroundImage]="'url('+ item.imageURL +')'">
                                 </div>
                             </div>
                         </div>

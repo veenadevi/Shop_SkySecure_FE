@@ -128,7 +128,8 @@ export class CartService {
             "price" : element.price ? element.price : 0,
             "erpPrice":element.erpPrice,
             "discountRate":element.discountRate,
-            "priceType":element.priceType
+            "priceType":element.priceType,
+            "distributorPrice":element.distributorPrice
         })
   
       })

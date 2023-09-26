@@ -332,7 +332,7 @@ public whatsAppMessage:string
     //let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
     let queryParams;
-      
+      console.log("passing distrubutor pri e",product.priceList[0].distributorPrice)
     
     queryParams = {
           productName : product.name,
@@ -342,6 +342,7 @@ public whatsAppMessage:string
           erpPrice:product.priceList[0].ERPPrice,
           discountRate:product.priceList[0].discountRate,
           priceType:product.priceList[0].priceType,
+          distributorPrice:product.priceList[0].distributorPrice
 
         };
     /*if(loggedinData.length > 0 ){

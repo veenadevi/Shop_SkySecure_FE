@@ -245,6 +245,10 @@ export class SidenavWrapperComponent {
           this.menuToogled = false;
           this.router.navigate(['admin-pages/assign-roles']);
           return;
+          case 'saddNewChannelPartner':
+            this.menuToogled = false;
+            this.router.navigate(['admin-pages/add-new-channel-partner']);
+            return;
       case 'paFeatureUpdate':
           //this.isExpanded = false;
           this.menuToogled = false;

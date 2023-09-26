@@ -412,7 +412,8 @@ button[disabled] {
 
 .features-content-section {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
+  flex-direction: column;
   width:100%;
 }
 
@@ -593,7 +594,7 @@ button[disabled] {
 }
 
 .specification-feature-headline {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
 }
 
@@ -602,7 +603,7 @@ button[disabled] {
 }
 
 .specification-feature-description {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -918,7 +919,7 @@ p {
   flex-direction: column;
 }
 .prod-card-holder3 {
-  display: flex;
+  /* display: flex;
   padding: 1% 4%;
   margin: 1% 3%;
   border-radius: 5px;
@@ -926,6 +927,17 @@ p {
   background: #f9f9f9;
   flex-direction: column;
   max-height: 230px;
+  overflow: auto; */
+
+
+  display: flex;
+  /* padding: 1% 4%; */
+  /* margin: 1% 3%; */
+  border-radius: 5px;
+  border: 0px solid #000;
+  background: #f9f9f9;
+  flex-direction: row;
+  /* max-height: 230px; */
   overflow: auto;
 }
 
@@ -1684,6 +1696,7 @@ p{
 }
 span{
   font-family: 'lato',sans-serif;
+  font-size: 13px;
 }
 .actual-price{
   font-size: 18px;
@@ -1755,13 +1768,14 @@ button{
   position: relative;
 }
 .offer-bank{
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   font-family: 'lato',sans-serif;
 }
 .offer-dis{
-  font-size: 14px;
+  font-size: 12px;
   font-family: 'lato',sans-serif;
+  max-width: 130px;
 }
 .offer-more{
  color: #0047BD;
@@ -1873,8 +1887,8 @@ button{
   color: var(--neutral-500);
 }
 .feature-card-heading{
-  color: #000;
- font-size: 14px;
+  /* color: #000; */
+ font-size: 12px;
  font-weight: 500;
  font-family: 'lato',sans-serif;
 }
@@ -1927,12 +1941,12 @@ button{
 .feature-heading {
   display: flex;
   flex-direction: row;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .prod-card2 {
   margin: 1%;
-  margin-left: 8%;
+  /* margin-left: 8%; */
   width: 85%;
   height: auto;
   display: flex;
@@ -1965,7 +1979,8 @@ button{
 .features-header{
   margin-left:10px;
   color: var(--primary-500-purple);
-  font-size:14px;
+  font-size:15px;
+  font-weight: 600;
  /* text-decoration: underline; */
 }
 
@@ -1989,10 +2004,12 @@ button{
 
 .prod-feature-img {
   display: flex;
-  width: 50%;
+  width: 100%;
   justify-content: center;
   align-items: center;
-  margin-top: 1px;
+  /* margin-top: 1px; */
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .prod-feat-card-content {
@@ -2007,7 +2024,7 @@ button{
   display: flex;
   flex-basis: 10%;
   padding: 10px;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
 }
 .feature-card-content {
@@ -2017,6 +2034,91 @@ button{
   flex-direction: column;
   justify-content: center;
 }
+
+.app-list-container {
+  display: flex;
+  /* flex-wrap: wrap; */
+  flex-direction: column;
+  width: 100%;
+  margin-top: 42px;
+}
+
+.app-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  padding: 5px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  /* margin-bottom: 10px;*/
+}
+
+.app-list-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 33%;
+  /* height: 10%; */
+  margin-bottom: 15px;
+}
+
+.app-image {
+  width: 50%;
+}
+
+.app-name {
+  font-size: 12px;
+  /* cursor: pointer; */
+  max-width: 60px;
+  text-align: center;
+}
+
+
+
+/* .app-list-container2 {
+  display: flex;
+  flex-direction: column;
+  width: 97%;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 1%;
+}
+
+.app-list2 {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  padding: 5px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.app-list-section2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 15%;
+  margin-bottom: 15px;
+}
+
+.app-image2 {
+  width: 50%;
+}
+
+.app-name2 {
+  font-size: 12px;
+  cursor: pointer;
+  max-width: 60px;
+  text-align: center;
+} */
+
+
 
 :host ::ng-deep .myCustomModalClass .modal-dialog {
   max-width: 565px;
