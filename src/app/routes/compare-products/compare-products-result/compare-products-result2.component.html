@@ -41,14 +41,14 @@
                                     </div> -->
                                     <div class="price" (mouseover)="changeValueOnHover('hover', i)" (mouseout)="changeValueOnHover('out', i)">
                                         <!-- <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span> -->
-                                        <span *ngIf="!item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['monthlyPriceList'].price | number : '1.2-2'}}</span>
-                                        <span *ngIf="item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['yearlyPriceList'].price | number : '1.2-2'}}</span>
+                                        <span *ngIf="!item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['monthlyPriceList'].price | number : '1.2-2'}} / Month</span>
+                                        <span *ngIf="item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['yearlyPriceList'].price | number : '1.2-2'}} / Year</span>
                                     </div>
                                     <!-- <div class="price" (mouseover)="changeValueOnHover('hover', item)" (mouseout)="changeValueOnHover('out', item)">
                                         <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span>
                                     </div> -->
                                        
-                                    <p  class="gst">(GST Extra)</p>
+                                    <p  class="gst">&nbsp;(GST Extra)</p>
                     
                                 </div>
                                 <div style="display:inline-flex;align-items: center;">
@@ -56,8 +56,8 @@
                                     <span class="price-symbol-01">&#8377;</span>
                                     <span>
                                         <p class="amount">
-                                            <span *ngIf="!item.hoverFlag">{{item.properties['monthlyPriceList'].ERPPrice | number : '1.2-2'}}</span>
-                                            <span *ngIf="item.hoverFlag">{{item.properties['yearlyPriceList'].ERPPrice | number : '1.2-2'}}</span>
+                                            <span *ngIf="!item.hoverFlag">{{item.properties['monthlyPriceList'].ERPPrice | number : '1.2-2'}} / Month</span>
+                                            <span *ngIf="item.hoverFlag">{{item.properties['yearlyPriceList'].ERPPrice | number : '1.2-2'}} / Year</span>
                                             
                                          </p>
                                         <!-- <p class="amount" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
@@ -113,14 +113,14 @@
                                 </div> -->
                                 <div class="price" (mouseover)="changeValueOnHover('hover', i)" (mouseout)="changeValueOnHover('out', i)">
                                     <!-- <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span> -->
-                                    <span *ngIf="!item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['monthlyPriceList'].price | number : '1.2-2'}}</span>
-                                    <span *ngIf="item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['yearlyPriceList'].price | number : '1.2-2'}}</span>
+                                    <span *ngIf="!item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['monthlyPriceList'].price | number : '1.2-2'}} / Month</span>
+                                    <span *ngIf="item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['yearlyPriceList'].price | number : '1.2-2'}} / Year</span>
                                 </div>
                                 <!-- <div class="price" (mouseover)="changeValueOnHover('hover', item)" (mouseout)="changeValueOnHover('out', item)">
                                     <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span>
                                 </div> -->
                                    
-                                <p  class="gst">(GST Extra)</p>
+                                <p  class="gst">&nbsp;(GST Extra)</p>
                 
                             </div>
                             <div style="display:inline-flex;align-items: center;">
@@ -128,8 +128,8 @@
                                 <span class="price-symbol-01">&#8377;</span>
                                 <span>
                                     <p class="amount">
-                                        <span *ngIf="!item.hoverFlag">{{item.properties['monthlyPriceList'].ERPPrice | number : '1.2-2'}}</span>
-                                        <span *ngIf="item.hoverFlag">{{item.properties['yearlyPriceList'].ERPPrice | number : '1.2-2'}}</span>
+                                        <span *ngIf="!item.hoverFlag">{{item.properties['monthlyPriceList'].ERPPrice | number : '1.2-2'}} / Month</span>
+                                        <span *ngIf="item.hoverFlag">{{item.properties['yearlyPriceList'].ERPPrice | number : '1.2-2'}} / Year</span>
                                         
                                      </p>
                                     <!-- <p class="amount" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">

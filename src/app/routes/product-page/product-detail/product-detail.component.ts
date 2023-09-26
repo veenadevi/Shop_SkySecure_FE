@@ -318,7 +318,7 @@ export class ProductDetailComponent implements OnInit{
   }
 
   private  getProductDetails(productId: string): void {
-    console.log("+_+_+_+)_+)+)_)____+_+ ");
+  
     this.onProductLoad = false;
     this.subscriptions.push(
     //  this.metaDataSvc.fetchSingleProductDetails(productId).subscribe( (response) => {
@@ -327,7 +327,7 @@ export class ProductDetailComponent implements OnInit{
         this.product={...response.product, quantity: 1 }
         this.prdType = response.type;
        this.product.bannerLogo=(this.product.bannerLogo &&this.product.bannerLogo !== null) ? this.product.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
-        // console.log("price after set quantity===="+this.product.priceList[0].discountRate)
+        
         let fList = [];
         if (response.featureList?.length > 0) {
           
@@ -354,25 +354,12 @@ export class ProductDetailComponent implements OnInit{
         }
      
 
-        // this.productBundlesData=this.setProductBundleData(response.productBundles);
-        // if(this.productBundlesData.length>0)
-        // // console.log("after data setup ===="+this.productBundlesData[0].priceList[0].price)
-        // this.productBundleVariantsData=this.setProductBundleVariantsData(response.productBundleVariants);
-
-        // this.productBundles=[...this.productBundlesData,...this.productBundleVariantsData];
-
         
-        // this.similarProducts =[...this.productBundlesData,...this.productBundleVariantsData];
-        // this.allCompareProducts =[...this.productBundlesData,...this.productBundleVariantsData];
-        // console.log("allCompareProducts  length "+this.allCompareProducts.length)
-
-     //  response.products[0] = {...response.products[0], quantity: 1 }
-     //setting quantity
+     
        
        
 
-       // this.product = { products:[...response.products], featureList: response.featureList, productFeatureList: response.productFeatureList, productVariants: response.productVariants, featureListByProductVariants: response.featureListByProductVariants };
-      //  console.log("&&&&& inside", this.product.productVariants.length);
+       
         this.onProductLoad = true;
         this.bannerUrl = this.product.bannerURL;
 
@@ -398,7 +385,7 @@ export class ProductDetailComponent implements OnInit{
 
         this.faq  = response.product.productFAQ;
 
-        console.log("+_+_+_+_+_+_+ ", response.appList[0]);
+    
 
         this.appList = response.appList;
 
@@ -434,7 +421,6 @@ export class ProductDetailComponent implements OnInit{
 
    this.selectedProductItem=response.compareProductList;
    this.selectedProductItem.unshift(response.product);
-   console.log("selectedProductItem  setting",this.selectedProductItem.length)
 
       })
 
@@ -442,11 +428,7 @@ export class ProductDetailComponent implements OnInit{
     );
   }
 
-  public setDataValues(resp:any): void {
-    // this.product.name=resp.product.name;
-    // this.productName = resp.product.name;
-// console.log("response values: ", resp);
-  }
+
   private getSimilerProducts(subCategoryId: String) {
     this.subscriptions.push(
       this.metaDataSvc.fetchAllProductsBySubCategoryIds([subCategoryId]).subscribe(response => {
@@ -485,9 +467,8 @@ export class ProductDetailComponent implements OnInit{
       if (event instanceof NavigationStart) {
           // Show progress spinner or progress bar
           //this.ngOnInit();
-          //console.log('@@@@@@@@ _ Route change detected');
           currentUrl = this.route.snapshot.paramMap.get('id');
-          //console.log('@@@@@@@@ _ Route change Start', currentUrl);
+          
       }
 
       if (event instanceof NavigationEnd) {
@@ -495,14 +476,13 @@ export class ProductDetailComponent implements OnInit{
           this.currentRoute = event.url; 
           currentUrl = this.route.snapshot.paramMap.get('id');
           this.ngOnInit();        
-          //console.log("@@@@@@@@ _ ",event);
+          
       }
 
       if (event instanceof NavigationError) {
            // Hide progress spinner or progress bar
 
           // Present error to user
-          //console.log("@@@@@@@@ _ ", event.error);
       }
   });
   }
@@ -531,19 +511,17 @@ featureCount=5;
   public featureCountEvent(val): void {
 
 
-    // console.log("****** View Before", val);
+  
     val = val ? false : true;
-    // console.log("****** View ", val);
+   
     this.viewAllFeaturesDetails = val;
-    // console.log("****** View ", this.viewAllFeaturesDetails);
+    
     if(this.viewAllFeaturesDetails){
-      // console.log("****** In If");
-      // console.log("****** In If", this.completeFeatureList);
+      
       this.featureList = this.completeFeatureList;
     }
     else{
-      // console.log("****** In Else");
-      // console.log("****** In Else", this.completeFeatureList);
+      
       if(this.completeFeatureList.length>5){
         this.featureList = this.completeFeatureList.slice(0,5);
       }
@@ -556,13 +534,13 @@ featureCount=5;
     
     //  if(this.product.featureList.length>5 && !this.viewAllFeature){
     //   this.featureList = [...this.product.featureList.slice(0,5)];
-    //   console.log("dispfeatureList",this.featureList);
+    
     //   this.viewAllFeature = true;
     // } else {
       //this.featureList = this.product.featureList;
       
       
-      // console.log("product list to compare",this.productListToCompare);
+      
     // }
   }
 
@@ -657,11 +635,17 @@ featureCount=5;
     let compareProductsListLen = this.getProductsCount().length;
 
     let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
+
+   
     
     if(compareProductsListLen<4) {
    
 
       var index = cachedProductsToCompare.findIndex(el => el._id === item._id);
+
+     
+      
       
       if(index >=0){
         this.toaster.showWarning("Product already added for Compare",'')
@@ -678,20 +662,30 @@ featureCount=5;
         }
 
         if(type === 'fromProd'){
-          
-          
+          cachedProductsToCompare.push(item);
           this.productListToCompare.push(item);
-          
         }
         else{
-              
-              this.productListToCompare.push(item);
+          cachedProductsToCompare.push(item);
+          this.productListToCompare.push(item);
         }
         
-       
+        /*let uniqueElements = [...new Map(this.productListToCompare.map(item => [item['_id'], item])).values()];
+        this.productListToCompare = uniqueElements;
+        localStorage.removeItem('compare_products_list');
         localStorage.setItem('compare_products_list', JSON.stringify(this.productListToCompare));
         
-        this.compareProductsStore.setCompareProductsList(this.productListToCompare);
+        this.compareProductsStore.setCompareProductsList(this.productListToCompare);*/
+
+        let uniqueElements = [...new Map(cachedProductsToCompare.map(item => [item['_id'], item])).values()];
+        cachedProductsToCompare = uniqueElements;
+        localStorage.removeItem('compare_products_list');
+        localStorage.setItem('compare_products_list', JSON.stringify(cachedProductsToCompare));
+        
+        this.compareProductsStore.setCompareProductsList(cachedProductsToCompare);
+
+  
+  
 
         this.toaster.showSuccess("The product has been included for comparison.",'')
       }
@@ -726,13 +720,12 @@ featureCount=5;
     
 
     if(type === 'fromProd'){
-      console.log("()()() From Prom Prod");
-       // console.log("()()()( From Prod", item);
+
        this.productListToCompare.push(item);
        
      }
      else{
-       console.log("()()() adding From else");
+       
        this.productListToCompare.push(item);
      }
      this.compareProductsStore.setCompareProductsList2(this.productListToCompare);
@@ -810,31 +803,32 @@ featureCount=5;
 
         if(this.selectedOption === 'default'){
         //  queryParams.price = (queryParams.price/12).toFixed(2);
+        console.log("sednign erp price for month ====",product.priceList[1].erpPrice)
 
         queryParams.price = product.priceList[1].price,
-        queryParams.erpPrice=product.priceList[1].erpPrice,
+        queryParams.erpPrice=product.priceList[1].ERPPrice,
         queryParams.discountRate=product.priceList[1].discountRate,
         queryParams.priceType= product.priceList[1].priceType
         queryParams.distributorPrice=product.priceList[1].distributorPrice
        
         }
         else{
-          queryParams.price = (Number(queryParams.price)).toFixed(2);
+          queryParams.price = (Number(queryParams.price));
 
-          queryParams.price = product.priceList[0].price.toFixed(2),
-          queryParams.erpPrice=product.priceList[0].ERPPrice.toFixed(2),
+          queryParams.price = product.priceList[0].price,
+          queryParams.erpPrice=product.priceList[0].ERPPrice,
           queryParams.discountRate=product.priceList[0].discountRate,
           queryParams.priceType= product.priceList[0].priceType,
-          queryParams.distributorPrice=product.priceList[0].distributorPrice.toFixed(2)
+          queryParams.distributorPrice=product.priceList[0].distributorPrice
         }
 
       this.userAccountStore.userDetails$.subscribe(res=>{
        
         if(res && res.email !== null){
 
-          //console.log("_)(*&& Cart Item ", queryParams);
+          
           this.addItemsToCartService.addItemsToCart(queryParams);
-          //this.router.navigate(['/cart'], {queryParams: queryParams});
+          
 
 
           
@@ -890,7 +884,7 @@ featureCount=5;
 
   public setProductVariantsData(data){
     
-// console.log("======setProductVariantsData===="+data.length)
+
     if(data && data.length>0){
       data.forEach(element => {
         element.name=element.name;
@@ -914,7 +908,7 @@ featureCount=5;
   public setProductBundleData(data){
 
     if(data && data.length>0){
-    //  console.log("===========setProductBundleVariantsData======="+data.length)
+   
       data.forEach(element => {
         element.name=element.name;
           element.type = 'productBundles';
@@ -934,7 +928,7 @@ featureCount=5;
   public setProductBundleVariantsData(data){
 
     if(data && data.length>0){
-      // console.log("===========setProductBundleVariantsData======="+data.length)
+    
       data.forEach(element => {
         element.name=element.name;
           element.type = 'productBundleVariants';
@@ -1057,7 +1051,7 @@ featureCount=5;
     let combinedData = [...cacheData, ...cacheData2];
     let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
-    //console.log("++++++++++++++++++++++()()()()( ", uniqueElements.length);
+  
     return {
       "len":uniqueElements.length,
       "items" : uniqueElements
