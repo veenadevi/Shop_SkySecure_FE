@@ -179,6 +179,7 @@ tbody th{
     justify-content: center;
     align-items: flex-start;
     font-size: 13px;
+    cursor: pointer;
 }
 
 .cart-title-btns {
@@ -247,6 +248,7 @@ tbody th{
 .add{
     height: 20px;
     width: 20px;
+    cursor: pointer;
 }
 
 .buttons-section {
