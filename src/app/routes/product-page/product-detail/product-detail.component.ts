@@ -662,22 +662,29 @@ featureCount=5;
         }
 
         if(type === 'fromProd'){
-          
-          
+          cachedProductsToCompare.push(item);
           this.productListToCompare.push(item);
-          
         }
         else{
-              
-              this.productListToCompare.push(item);
+          cachedProductsToCompare.push(item);
+          this.productListToCompare.push(item);
         }
         
-        let uniqueElements = [...new Map(this.productListToCompare.map(item => [item['_id'], item])).values()];
+        /*let uniqueElements = [...new Map(this.productListToCompare.map(item => [item['_id'], item])).values()];
         this.productListToCompare = uniqueElements;
+        localStorage.removeItem('compare_products_list');
         localStorage.setItem('compare_products_list', JSON.stringify(this.productListToCompare));
         
-        this.compareProductsStore.setCompareProductsList(this.productListToCompare);
+        this.compareProductsStore.setCompareProductsList(this.productListToCompare);*/
 
+        let uniqueElements = [...new Map(cachedProductsToCompare.map(item => [item['_id'], item])).values()];
+        cachedProductsToCompare = uniqueElements;
+        localStorage.removeItem('compare_products_list');
+        localStorage.setItem('compare_products_list', JSON.stringify(cachedProductsToCompare));
+        
+        this.compareProductsStore.setCompareProductsList(cachedProductsToCompare);
+
+        console.log("_+_+_+_()()()( List here ", cachedProductsToCompare);
   
 
         this.toaster.showSuccess("The product has been included for comparison.",'')
