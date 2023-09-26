@@ -183,6 +183,29 @@
                         </td>
                     
                 </tr>
+
+                <tr *ngIf="(rowData.header === 'appList')">
+                    <td class="product-heading">
+                        {{rowData.headerName}}
+                    </td>
+                    <td *ngFor="let item of allProducts" class="features-align">
+                          
+                        <!-- <div class="feature-item-container" *ngIf="(item.properties[rowData.header] && item.properties[rowData.header].length>0 && item.properties['includedProducts'] && item.properties['includedProducts'].length>0 ) ; else noFeaturesData"> -->
+                    <div class="app-listing-container" *ngIf="((item.properties['appList']&&item.properties['appList'].length>0) ||( item.properties[rowData.header] && item.properties[rowData.header].length>0 )) ; else noAppData">
+                         <div class="app-section" *ngFor="let includedApps of item.properties['appList']">
+                                <div class="app-image-container">
+                                    <img class="app-image" src="{{includedApps.imageURL}}">
+                                </div>
+                            <div class="app-name">{{includedApps.name}}</div>
+                        </div>                                    
+                    </div> 
+                    <ng-template #noAppData>
+                             -
+                    </ng-template> 
+                     </td>
+                
+            </tr>
+
                 <tr *ngIf="(rowData.header === 'includedProducts')">
                     <td class="product-heading">
                         {{rowData.headerName}}
