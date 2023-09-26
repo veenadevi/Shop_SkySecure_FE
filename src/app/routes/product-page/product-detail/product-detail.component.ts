@@ -796,22 +796,23 @@ featureCount=5;
 
         if(this.selectedOption === 'default'){
         //  queryParams.price = (queryParams.price/12).toFixed(2);
+        console.log("sednign erp price for month ====",product.priceList[1].erpPrice)
 
         queryParams.price = product.priceList[1].price,
-        queryParams.erpPrice=product.priceList[1].erpPrice,
+        queryParams.erpPrice=product.priceList[1].ERPPrice,
         queryParams.discountRate=product.priceList[1].discountRate,
         queryParams.priceType= product.priceList[1].priceType
         queryParams.distributorPrice=product.priceList[1].distributorPrice
        
         }
         else{
-          queryParams.price = (Number(queryParams.price)).toFixed(2);
+          queryParams.price = (Number(queryParams.price));
 
-          queryParams.price = product.priceList[0].price.toFixed(2),
-          queryParams.erpPrice=product.priceList[0].ERPPrice.toFixed(2),
+          queryParams.price = product.priceList[0].price,
+          queryParams.erpPrice=product.priceList[0].ERPPrice,
           queryParams.discountRate=product.priceList[0].discountRate,
           queryParams.priceType= product.priceList[0].priceType,
-          queryParams.distributorPrice=product.priceList[0].distributorPrice.toFixed(2)
+          queryParams.distributorPrice=product.priceList[0].distributorPrice
         }
 
       this.userAccountStore.userDetails$.subscribe(res=>{
