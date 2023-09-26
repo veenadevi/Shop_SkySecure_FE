@@ -314,17 +314,13 @@ export class CompareProductsResultComponent {
        'isActive':productData.isActive
       }
 
-
       // console.log("setting montly data 222===",properties['monthlyPriceList'])
       return { properties};
     })
 
-
-
     return item;
 
   }
-
 
 
   public setProductVarientsData(response){
@@ -372,9 +368,10 @@ export class CompareProductsResultComponent {
        // 'features':bundleFeaturesList,
        // 'features': data.productFamilyFeatures.length > 0 ? data.productFamilyFeatures : '-',
        'features':  data.productFamilyFeatures ,
-       'appList': data.appListByProduct,
+       'appList' : data.appListByProduct,
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response,'productFamily'),
         'bundleData':bundleFeaturesList,
+        
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
         '_id' : productData._id,
         'isActive':productData.isActive
@@ -994,6 +991,7 @@ export class CompareProductsResultComponent {
   isHovered = false;
   
   showMonthlyPrice(i:any) {
+
     // this.isMonthly = true;
     // this.priceValue = this.allProducts[i].properties['priceList'].price;
     // this.priceType = this.allProducts[i].properties['priceList'].priceType;
