@@ -808,8 +808,9 @@ featureCount=5;
         queryParams.price = product.priceList[1].price,
         queryParams.erpPrice=product.priceList[1].ERPPrice,
         queryParams.discountRate=product.priceList[1].discountRate,
-        queryParams.priceType= product.priceList[1].priceType
-        queryParams.distributorPrice=product.priceList[1].distributorPrice
+        queryParams.priceType= product.priceList[1].priceType,
+        queryParams.distributorPrice=product.priceList[1].distributorPrice,
+        queryParams.priceList = product.priceList
        
         }
         else{
@@ -819,7 +820,8 @@ featureCount=5;
           queryParams.erpPrice=product.priceList[0].ERPPrice,
           queryParams.discountRate=product.priceList[0].discountRate,
           queryParams.priceType= product.priceList[0].priceType,
-          queryParams.distributorPrice=product.priceList[0].distributorPrice
+          queryParams.distributorPrice=product.priceList[0].distributorPrice,
+          queryParams.priceList = product.priceList
         }
 
       this.userAccountStore.userDetails$.subscribe(res=>{

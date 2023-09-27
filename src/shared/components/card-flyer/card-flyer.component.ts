@@ -41,6 +41,7 @@ export class CardFlyerComponent {
       erpPrice:product.priceList[0].ERPPrice,
       discountRate:product.priceList[0].discountRate,
       priceType:this.getPriceType(product.priceList[0].priceType),
+      priceList : product.priceList
     };
 
    // let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"));

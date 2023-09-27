@@ -342,7 +342,8 @@ public whatsAppMessage:string
           erpPrice:product.priceList[0].ERPPrice,
           discountRate:product.priceList[0].discountRate,
           priceType:product.priceList[0].priceType,
-          distributorPrice:product.priceList[0].distributorPrice
+          distributorPrice:product.priceList[0].distributorPrice,
+          priceList : product.priceList
 
         };
     /*if(loggedinData.length > 0 ){

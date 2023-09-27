@@ -62,3 +62,16 @@ tbody td{
 .action-btn-holder{
     display: flex;
 }
+
+.primary-btn {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 9rem;
+    border-radius: 8px;
+    background: var(--btn-gradient);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
+}

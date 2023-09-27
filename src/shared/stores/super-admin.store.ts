@@ -16,7 +16,14 @@ import { ProductsDetails } from '../models/interface/partials/products-details';
 export class SuperAdminStore {
 
     public crmUsers : any;
+
+
     private crmUsersSubject = new BehaviorSubject<any>(null);
+
+    private channelPartnerSubject=new BehaviorSubject<any>(null);
+    public channelPartnerList : any;
+    public channelPartnerList$=this.channelPartnerSubject.asObservable();
+
     public crmUsers$ = this.crmUsersSubject.asObservable();
 
 
@@ -37,7 +44,15 @@ export class SuperAdminStore {
 
   }
 
- 
+  public setChannelPartnerList(data : any) : void {
+    
+
+    this.channelPartnerSubject.next(data);
+
+    
+
+  }
+
 
   
   
@@ -49,7 +64,9 @@ export class SuperAdminStore {
    public getCrmUsers(): any {
     return this.crmUsers;
   }
-
+  public getChannelPartnerList(): any {
+    return this.channelPartnerList;
+  }
 
   
   /**

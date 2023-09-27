@@ -17,8 +17,11 @@ export class SuperAdminService {
   private baseUrlForSuperAdmin : string;
 
   private baseUrlForOrders : string;
+  private baseURLForusers:string;
 
   private getAllCRMUsersUrl : string;
+
+  private getAllChannelPartner: string;
 
   private assignAccountOwnerUrl : string;
 
@@ -39,9 +42,12 @@ export class SuperAdminService {
     //this.baseUrlForSuperAdmin = "http://localhost:8080/";
     this.baseUrlForOrders = environment.gatewayUrl;
 
+    this.baseURLForusers=environment.gatewayUrlForUserProfile;
+
 
 
     this.getAllCRMUsersUrl = AppService.appUrl.getAllCRMUsers;
+    this.getAllChannelPartner=AppService.appUrl.getAllChannelPartner;
     this.assignAccountOwnerUrl = AppService.appUrl.assignAccountOwner;
     this.getAccountDetailsByIdUrl = AppService.appUrl.getMarketplaceAccountDetailsById;
     
@@ -55,6 +61,26 @@ export class SuperAdminService {
   public getAllCRMUsers() : Observable<any> {
 
     let url = this.baseUrlForSuperAdmin + this.getAllCRMUsersUrl;
+
+    
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+
+  public getAllChannelPartners() : Observable<any> {
+
+    let url = this.baseURLForusers + this.getAllChannelPartner;
 
     
 

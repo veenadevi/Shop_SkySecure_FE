@@ -131,7 +131,8 @@ export class CartService {
             "erpPrice":element.erpPrice,
             "discountRate":element.discountRate,
             "priceType":element.priceType,
-            "distributorPrice":element.distributorPrice
+            "distributorPrice":element.distributorPrice,
+            "priceList" : element.priceList
         })
   
       })
@@ -206,7 +207,9 @@ export class CartService {
   }
 
 
+
   public editQuotation( request : any): Observable<any> {
+
 
     const URL = this.baseUrl + this.editQuoatationUrl;
 

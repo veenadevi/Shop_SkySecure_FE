@@ -96,14 +96,14 @@ export class MarketplaceuserComponent implements OnInit {
     
   }
 
-  public getAllCRMUsers(){
-    this.subscriptions.push(
-      this.superAdminService.getAllCRMUsers().subscribe( res=> {
-        console.log("_+_+_+_+_+_+ ", res);
-        this.superAdminStore.setCrmUsers(res);
-      })
-    )
-  }
+  // public getAllCRMUsers(){
+  //   this.subscriptions.push(
+  //     this.superAdminService.getAllCRMUsers().subscribe( res=> {
+  //       console.log("_+_+_+_+_+_+ ", res);
+  //       this.superAdminStore.setCrmUsers(res);
+  //     })
+  //   )
+  // }
 
 
 
