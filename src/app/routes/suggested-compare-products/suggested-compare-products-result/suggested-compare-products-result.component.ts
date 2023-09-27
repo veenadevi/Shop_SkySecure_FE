@@ -539,8 +539,11 @@ export class SuggestedCompareProductsResultComponent {
     var product = productItem.properties;
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    //console.log('----pricelist---'+product.priceList.price)
-    //console.log('----pricelist---'+product.priceList.discountRate)
+    let priceList = [];
+    priceList.push(productItem.properties.yearlyPriceList);
+    priceList.push(productItem.properties.monthlyPriceList);
+
+
     let queryParams;
       // if(product.productVariants.length>0){
         queryParams = {
@@ -551,7 +554,8 @@ export class SuggestedCompareProductsResultComponent {
           erpPrice:product.priceList.ERPPrice,
           discountRate:product.priceList.discountRate,
           priceType:"Year",
-          distributorPrice:product.priceList.distributorPrice
+          distributorPrice:product.priceList.distributorPrice,
+          priceList : priceList
         };
 
 
