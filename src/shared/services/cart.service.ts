@@ -23,6 +23,7 @@ export class CartService {
   private userCartUrl : string;
 
   private createQuotationUrl : string;
+  private editQuoatationUrl :string;
 
 
 
@@ -35,6 +36,7 @@ export class CartService {
     this.baseUrl = environment.gatewayUrlForOrders;
     this.userCartUrl = AppService.appUrl.userCart;
     this.createQuotationUrl = AppService.appUrl.createQuotation;
+    this.editQuoatationUrl=AppService.appUrl.editQuotation
 
     
   }
@@ -204,7 +206,35 @@ export class CartService {
   }
 
 
+   public editQuotation( request : any): Observable<any> {
+
+    const URL = this.baseUrl + this.editQuoatationUrl;
+
   
+
+  console.log("+++++++ ____ _ InsideCreate Quotation ", request);
+    
+    const REQUEST$ = this.http.post<any>(URL, request)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          //this.userAccountStore.setUserProfileDetails(response);
+          return of(response);
+        }),
+        map((response: any) => {
+          //this.userAccountStore.setUserProfileDetails(response);
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling
+          return error
+        })
+      );
+
+    return REQUEST$;
+  }
 
 
 }
