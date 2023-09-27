@@ -25,6 +25,7 @@ export class AdminPageService {
   private updateUserRoleURL:string
   private getAllMarketPlaceAccountListURL:string
   private getMyMarketPlaceAccountListURL:string
+  private addChannelPartnerURL:string
 
 
 
@@ -46,6 +47,7 @@ export class AdminPageService {
     this.getAllusersURL=AppService.appUrl.getAllUsers;
     this.updateUserRoleURL=AppService.appUrl.updateUserRole;
     this.getAllMarketPlaceAccountListURL=AppService.appUrl.getAllMarketPlaceAccountListURL;
+    this.addChannelPartnerURL=AppService.appUrl.addChannelPartnerURL;
  
 
     
@@ -346,6 +348,36 @@ export class AdminPageService {
     );
 
   return uploadedFileResponse;
+}
+
+public addChannelPartner( request : any): Observable<any> {
+
+  const URL = this.baseUrlForUsers + this.addChannelPartnerURL;
+
+
+
+console.log("+++++++ ____ _ addChannelPartner", request);
+  
+  const REQUEST$ = this.http.post<any>(URL, request)
+    .pipe(
+      switchMap(response => {
+        if (!response) {
+          return throwError(response);
+        }
+        //this.userAccountStore.setUserProfileDetails(response);
+        return of(response);
+      }),
+      map((response: any) => {
+        //this.userAccountStore.setUserProfileDetails(response);
+        return response;
+      }),
+      catchError(error => {
+        // create operation mapping for http exception handling
+        return error
+      })
+    );
+
+  return REQUEST$;
 }
 
 
