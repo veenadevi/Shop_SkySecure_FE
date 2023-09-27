@@ -222,7 +222,14 @@
     font-size: 16px;
     font-weight: 500;
     width: 125px;
-    
+}
+
+.primary-btn {
+  width: 7rem;
+}
+
+.secondary-btn {
+  width: 7rem;
 }
 
   .compare-btn {

@@ -1,3 +1,7 @@
+.search-box {
+    position: relative;
+}
+
 .search-box .form-control {
     padding-left: 3rem;
     font-size: 12px;
