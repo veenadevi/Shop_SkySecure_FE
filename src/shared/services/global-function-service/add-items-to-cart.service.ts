@@ -71,7 +71,8 @@ public getCartItems(multipleProduct, data) : void {
         "erpPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].ERPPrice : '',
         "discountRate":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].discountRate : '',
         "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : '',
-        "distributorPrice" :(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].distributorPrice : ''
+        "distributorPrice" :(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].distributorPrice : '',
+        "priceList" : productVariant.priceList ? productVariant.priceList : ''
       })
 
       if(productListArray.requiredBundles.length > 0){
@@ -90,7 +91,8 @@ public getCartItems(multipleProduct, data) : void {
               "erpPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].ERPPrice : '',
               "discountRate":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].discountRate : '',
               "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : '',
-              "distributorPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].distributorPrice : ''
+              "distributorPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].distributorPrice : '',
+              "priceList" : productVariant.priceList ? productVariant.priceList : ''
          
             });
           }
@@ -112,7 +114,8 @@ public getCartItems(multipleProduct, data) : void {
               "erpPrice":item.item.priceList[0].erpPrice,
               "discountRate":item.item.priceList[0].discountRate,
               "priceType":item.item.priceList[0].discountRate,
-              "distributorPrice":data.distributorPrice
+              "distributorPrice":data.distributorPrice,
+              "priceList" : productVariant.priceList ? productVariant.priceList : ''
           });
           }
         });
@@ -123,12 +126,14 @@ public getCartItems(multipleProduct, data) : void {
       //var index = productsList.findIndex(el => el.productId === this.params.get('productId'));
       var index = productsList.findIndex(el => el.productId === data.productId);
 
+      
       if(index >=0){
         //productsList[index].quantity = Number(productsList[index].quantity) + Number(this.params.get('quantity'));
 
         if( productsList[index].priceType===data.priceType){
           console.log("=====increase as same priceType====")
           productsList[index].quantity = Number(productsList[index].quantity) + Number(data.quantity);
+          productsList[index].priceList = data.priceList
         }
        else{
         productsList.push({
@@ -146,11 +151,12 @@ public getCartItems(multipleProduct, data) : void {
           "erpPrice" : data.erpPrice,
           "discountRate" : data.discountRate,
           "priceType" : data.priceType,
-          "distributorPrice":data.distributorPrice
-
-       
+          "distributorPrice":data.distributorPrice,
+          "priceList" : data.priceList ? data.priceList : ''
         });
        }
+       console.log(")_)_)_)_)_)_)_ Inside else ", productsList);
+
       }
       else {
         productsList.push({
@@ -168,10 +174,12 @@ public getCartItems(multipleProduct, data) : void {
           "erpPrice" : data.erpPrice,
           "discountRate" : data.discountRate,
           "priceType" : data.priceType,
-          "distributorPrice":data.distributorPrice
+          "distributorPrice":data.distributorPrice,
+          "priceList" : data.priceList ? data.priceList : ''
 
        
         });
+        console.log(")_)_)_)_)_)_)_ Inside else If", productsList);
       }
 
       if(cartRefId !== '' || cartRefId !== null){
