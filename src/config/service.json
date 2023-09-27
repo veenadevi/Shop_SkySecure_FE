@@ -34,6 +34,7 @@
         "userSignin" : "api/user/login",
         "profileUpdate" : "api/user/profile-update",
         "createQuotation" : "api/user/createQuotation",
+        "editQuotation" : "/api/user/editQuotation",
         "getQuoteHistory" : "api/user/getQuoteHistory",
         "getAllDashBoardData" : "api/user/allDashBoardData",
         "getAllAccounts" : "api/user/allAccounts",

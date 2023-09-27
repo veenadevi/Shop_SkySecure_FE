@@ -263,7 +263,7 @@ export class ProductsListTableComponent implements OnInit{
     console.log("+_+_+_+_+_ Res Data ", request);
 
     this.subscription.push(
-      this.cartService.createQuotation(request).subscribe(res=>{
+      this.cartService.editQuotation(request).subscribe(res=>{
 
       })
     )
@@ -275,6 +275,8 @@ export class ProductsListTableComponent implements OnInit{
     let createdBy = this.crmData.createdBy;
     let cartData = this.crmData.cartData;
     let zohoBookContactData = this.crmData.zohoBookContactData;
+    let zohoCRMAccountData=this.crmData.zohoCRMAccountData;
+    let zohoBookEstimateData=this.crmData.zohoBookEstimateData;
 
 
     let prdArray = this.setProductsList();
@@ -331,7 +333,10 @@ export class ProductsListTableComponent implements OnInit{
             }
         ],
         "gst_no": createdBy.gstinNumber,
-        "gst_treatment": zohoBookContactData.gst_treatment
+        "gst_treatment": zohoBookContactData.gst_treatment,
+        "zohoAccountNo":zohoCRMAccountData.accountId,
+        "zohoEstimateId":cartData.zohoEstimateId,
+        "zohoBookContactId":zohoBookContactData.contact_id
     }
 
     //console.log("++++++++======== req ", req);
