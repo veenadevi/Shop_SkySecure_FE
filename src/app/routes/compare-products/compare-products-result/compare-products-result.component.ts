@@ -549,8 +549,10 @@ export class CompareProductsResultComponent {
         queryParams = {
           productName : product.productName,
           productId : product._id,
+
           quantity : product.quantity?productItem.quantity:1,
           // quantity : productItem.quantity,
+
           price : product.priceList.price,
           erpPrice:product.priceList.ERPPrice,
           discountRate:product.priceList.discountRate,

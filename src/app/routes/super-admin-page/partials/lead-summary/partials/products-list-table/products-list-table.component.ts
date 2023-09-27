@@ -337,7 +337,9 @@ export class ProductsListTableComponent implements OnInit{
         ],
         "gst_no": createdBy.gstinNumber,
         "gst_treatment": zohoBookContactData.gst_treatment,
-        "zohoAccountNo": zohoCRMAccountData.accountId,
+
+        "zohoAccountNo":zohoCRMAccountData.accountId,
+
         "zohoEstimateId":cartData.zohoEstimateId,
         "zohoBookContactId":zohoBookContactData.contact_id
     }
