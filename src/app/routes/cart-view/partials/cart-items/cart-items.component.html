@@ -56,8 +56,8 @@ Removed Montly Split on Sep22 -->
                         <div class="td-column price-details">
                           <span>
                           <!-- {{ item.priceType}} -->
-                          <select [(ngModel)]="item.priceType" (change)="onSelectChange($event, i)">
-                            <option *ngFor="let opt of firstSelectOptions" [value]="opt">
+                          <select class="type" [(ngModel)]="item.priceType" (change)="onSelectChange($event, i)">
+                            <option class="type" *ngFor="let opt of firstSelectOptions" [value]="opt">
                                {{ opt }}
                             </option>
                            </select> 
