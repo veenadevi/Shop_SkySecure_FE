@@ -150,3 +150,13 @@ element.style {
     text-align: center;
     /* padding: 20px; */
 }
+
+.justify-content-center{
+    align-items: center;
+    padding: 15px;
+    border: none !important;
+}
+
+.radio-style{
+    padding-top: 10px !important;
+}
