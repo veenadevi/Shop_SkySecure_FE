@@ -336,7 +336,7 @@ public onChangeQuantity(i, price) : void {
   this.cartData[i].quantity = Number(this.cartData[i].quantity)
   this.cartData[i].itemTotal = this.cartData[i].quantity * price;
   this.calTotalPrice();
-  this.saveCart();
+  //this.saveCart();
   
 }
 
@@ -364,7 +364,7 @@ public onChangeQuantity(i, price) : void {
         
     }
     this.calTotalPrice();
-    this.saveCart();
+    //this.saveCart();
   }
 
   public calTotalPrice() {
@@ -711,8 +711,10 @@ public onChangeQuantity(i, price) : void {
       this.cartData[i].erpPrice = Number(this.cartData[i].priceList[1].ERPPrice);
     }
 
-    console.log("+_+_+_ ()( )( ERP", this.cartData[i]);
+   // console.log("+_+_+_ ()( )( ERP", this.cartData[i]);
+    this.calTotalPrice();
+   // this.saveCart();
+  }
   }
 
 
-}
