@@ -1,0 +1,8 @@
+.channel-partners-view{
+    min-height: 36em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+    font-size: 8px!important;
+}
