@@ -52,6 +52,16 @@ h4{
     flex: 0 0 auto;
     width: 30%;
 }
+
+.custom-select {
+    width: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+
 .form-control-01 {
     display: block;
     width: 65%;
@@ -65,7 +75,7 @@ h4{
     appearance: none;
     background-color: var(--bs-body-bg);
     background-clip: padding-box;
-    border: 1px solid grey;
+    border: 1px solid black;
     border-radius: var(--bs-border-radius);
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     font-family: 'lato', sans-serif;
