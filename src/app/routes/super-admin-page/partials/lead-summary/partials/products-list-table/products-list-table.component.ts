@@ -26,6 +26,7 @@ export class ProductsListTableComponent implements OnInit{
 
   public productsList:any[] = [];
     public enableEdit:boolean
+    public showMsg:boolean
 
   public cartDetails : any[] = [];
 
@@ -71,6 +72,7 @@ export class ProductsListTableComponent implements OnInit{
 
   ngOnInit(): void {
     this.enableEdit=false
+    this.showMsg=false
     this.cartDetails = (this.cartData.CartDetails && this.cartData.CartDetails.length>0) ? this.cartData.CartDetails : null;
     this.setSampleData();
    
@@ -179,7 +181,7 @@ export class ProductsListTableComponent implements OnInit{
        
         name: [ name, Validators.required],
         priceType:[priceType, Validators.required],
-        distributorPrice: parseFloat(this.getDistributorPrice(items.line_item_id).toFixed(2)),
+        distributorPrice: parseFloat(this.getDistributorPrice(items).toFixed(2)),
         quantity: [items.quantity, [Validators.required]],
         bcy_rate: [items.bcy_rate, [Validators.min(10)]],
         bcy_rate_original: [items.bcy_rate, [Validators.min(10)]],
@@ -211,14 +213,21 @@ export class ProductsListTableComponent implements OnInit{
 
   }
 
-  getDistributorPrice(lineitemId){
-    console.log("fetch distributor for ",lineitemId)
+  getDistributorPrice(items:any){
+    console.log("fetch distributor for ",items.line_item_id)
     console.log("this.cartDetails  ",this.cartDetails)
+    if(items.line_item_id){
 
-    var index = this.cartDetails.findIndex(el => el.estimateLineItemId === lineitemId);
+    
+    var index = this.cartDetails.findIndex(el => el.estimateLineItemId === items.line_item_id);
     console.log("fetched disprice===",this.cartDetails[index].distributorPrice)
 
     return this.cartDetails[index].distributorPrice
+  }
+    else{
+    return items.priceList[0].distributorPrice
+
+    }
 
     
   }
@@ -227,6 +236,8 @@ export class ProductsListTableComponent implements OnInit{
     return this.fb.group({
         name: ['', Validators.required],
         quantity: ['', [Validators.required]],
+        priceType: ['', [Validators.required]],
+        distributorPrice:['', [Validators.required]],
         bcy_rate: ['', [Validators.min(10)]],
         tax_name: ['', Validators.required],
         item_total: ['', Validators.required],
@@ -240,6 +251,8 @@ export class ProductsListTableComponent implements OnInit{
       return this.fb.group({
         name: [data.name, Validators.required],
         quantity: [1, [Validators.required]],
+        priceType:['Year', [Validators.required]],
+        distributorPrice:[ parseFloat(priceListValues.distributorPrice).toFixed(2),[Validators.min(10)]],
         bcy_rate: [ parseFloat(priceListValues.price.toFixed(2)),[Validators.min(10)]],
         tax_name: ['', null],
         item_total: [priceListValues.price, null],
@@ -265,6 +278,8 @@ export class ProductsListTableComponent implements OnInit{
 
       let control = <FormArray>this.productListForm.get('items');
       //control.push(this.initiatForm());
+
+
       
       control.push(this.createNewAppWithValues(receivedEntry));
       this.newlyAddedAppList.push(receivedEntry);
@@ -294,9 +309,12 @@ export class ProductsListTableComponent implements OnInit{
 
     this.subscription.push(
       this.cartService.editQuotation(request).subscribe(res=>{
+        this.showMsg=true
 
       })
     )
+
+  
   }
 
   public setRequestData(){

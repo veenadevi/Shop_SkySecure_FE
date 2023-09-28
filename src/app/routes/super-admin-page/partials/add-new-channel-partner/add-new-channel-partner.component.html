@@ -112,7 +112,7 @@
                     </ng-container>
                     <ng-template #userSelect>
                         <div class="card flex justify-content-center">
-                            <p-dropdown appendTo="body" (onChange)="onDropDownChange($event)" [options]="usersList" optionLabel="firstName" [filter]="true" filterBy="firstName" [showClear]="true" placeholder="Select a Country">
+                            <p-dropdown appendTo="body" (onChange)="onDropDownChange($event)" [options]="usersList" optionLabel="firstName" [filter]="true" filterBy="firstName" [showClear]="true" placeholder="Select User">
                                 <ng-template pTemplate="selectedItem">
                                     <div class="flex align-items-center gap-2">
                                         <!-- <div>{{ selectedCountry.name }}</div> -->
