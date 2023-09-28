@@ -1,15 +1,15 @@
 .card-item{
     border: 2px solid var(--light_border);
     border-radius: 5px;
-    height: 11.5rem;
-    width: 11.5rem;
+    height: 10rem;
+    width: 10rem;
     /* background: var(--secondary); */
     cursor: pointer;
 }
 
 .d-flex{
     display: flex!important;
-    row-gap: 10%;
+    row-gap: 5%;
 }
 .ellipse{
     background: #EBECF6;
@@ -20,10 +20,17 @@
     width: 3em;
     height: 3em;
 }
+.text-normal {
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #686A77;
+}
 
 .j_Y {
     text-align: center;
     height: 25px;
+    margin-bottom: 10px;
 }
 
 @media  ( min-width: 1025px) and (max-width: 1200px)  {
