@@ -27,7 +27,7 @@ export class CarouselComponent {
       eventLocation:'',
       eventDescription:'',
       // img: '../../../../assets/images/banner/AzureActiveDirectory.png',
-      img: '../../../../assets/images/banner/FacilityForProductBundles.png',
+      img: '../../../../assets/images/banner/MicrosoftOEMBanner.png',
       eventStartDate: new Date('2019/07/28'),
       eventEndingDate: new Date('2019/07/30')
     },

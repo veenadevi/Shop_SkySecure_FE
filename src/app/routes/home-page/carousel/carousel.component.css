@@ -3,8 +3,12 @@
     background : var(--white);
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 20px 0;
     max-width: 1620px !important;
+}
+
+:host::ng-deep .carousel-inner  {
+    border-radius: 16px;
 }
 
 .text-style {
