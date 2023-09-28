@@ -30,27 +30,44 @@ export class AddCompareProductModalComponent implements OnInit {
   }
 
   public selectedItem(event){
-    /*let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-    //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
-    let cacheData2 = [];
-    let combinedData = [...cacheData, ...cacheData2];*/
+    
+    if(this.request && this.request.productLists){
 
-    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
-
-
-    var isPresent = cachedProductsToCompare.some(function(el){ return el._id === event._id});
-                    
-    if(isPresent){
-        
+      var isPresent = this.request.productLists.some(function(el){ return el._id === event._id});
+      /*if(isPresent){
+          
         this.toaster.showWarning("Product Already present",'')
+      }
+      else{
+        
+        this.passEntry.emit(event);
+        this.activeModal.close();
+      }*/
+        this.passEntry.emit(event);
+        this.activeModal.close();
     }
     else{
-      
-      this.passEntry.emit(event);
-      this.activeModal.close();
+      let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
+
+      var isPresent = cachedProductsToCompare.some(function(el){ return el._id === event._id});
+                      
+      if(isPresent){
+          
+          this.toaster.showWarning("Product Already present",'')
+      }
+      else{
+        
+        this.passEntry.emit(event);
+        this.activeModal.close();
+      }
     }
+
+    
     
   }
+
+
 
   public closeModal(){
     this.activeModal.close();

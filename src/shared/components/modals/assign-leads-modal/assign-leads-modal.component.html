@@ -10,13 +10,16 @@
             <div class="left-div">
                 <span>
                     Assign To 
-                    <mat-icon>info</mat-icon>
+                    <!-- <mat-icon>info</mat-icon> -->
                 </span>
             </div>
             <div class="right-div">
+                <ng-container *ngIf="channelPartnerList && channelPartnerList.length>0">
                 <div class="card flex justify-content-center">
-                    <p-dropdown placeholder="Select Lead" [options]="crmUsersList" (onChange)="onChange($event)" optionLabel="name"></p-dropdown>
+
+                    <p-dropdown placeholder="Select Lead" [options]="channelPartnerList" (onChange)="onChange($event)" optionLabel="name"></p-dropdown>
                 </div>
+            </ng-container>
             </div>
         </div>
 
@@ -24,7 +27,7 @@
             <div class="left-div">
                 <span>
                     Target Date
-                    <mat-icon>info</mat-icon>
+                    <!-- <mat-icon>info</mat-icon> -->
                 </span>
             </div>
             <div class="right-div">
@@ -38,6 +41,10 @@
     </div>
     
     <div class="modal-footer">
-        <button (click)="submit()">Submit</button>
+
+        <div class="btn-holder">
+            <button id="assign-btn" class="btn primary-btn" (click)="submit()">Assign</button>
+        </div>
+        <!-- <button (click)="submit()">Submit</button> -->
     </div>
 </div>

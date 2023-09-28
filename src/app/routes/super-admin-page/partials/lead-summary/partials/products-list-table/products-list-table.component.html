@@ -8,17 +8,19 @@
 <form [formGroup]="productListForm">
     <table class="table">
       <thead>
-        <th>Product Name</th>
+        <th class="product-name">Product Name</th>
         <th>Quantity</th>
-        <th>Price</th>
-        <th>Tax</th>
-        <th>Total (+Tax)</th>
+        <th>Purchase Type</th>
+        <th>Distributor Price</th>
+        <th>Item Price</th>
+     
+        <th>Total  <span class="gst">(GST Extra)</span></th>
         <th></th>
         
       </thead>
       <tbody formArrayName="items" *ngFor="let group of getFormData.controls; let i=index">
         <tr [formGroupName]="i">
-          <td class="form-group">
+          <td class="form-group product-name">
             <input type="text" class="form-control" formControlName="name" placeholder="name" readonly>
             <span class="text-danger" *ngIf="group.get('name').touched && group.get('name').invalid">Name is required</span>
           </td>
@@ -27,14 +29,21 @@
             <span class="text-danger" *ngIf="group.get('quantity').touched && group.get('quantity')?.hasError('required')">Quantity required</span>
           </td>
           <td class="form-group">
-            <input type="text" class="form-control" (change)="priceChanged($event, group, i)" formControlName="bcy_rate" placeholder="bcy_rate">
-            <span class="text-danger" *ngIf="group.get('bcy_rate').touched && group.get('bcy_rate')?.hasError('required')">Amount required</span>
-            <span class="text-danger" *ngIf="group.get('bcy_rate')?.hasError('invalid')">Please enter a valid Price</span>
+            <input type="text" class="form-control" formControlName="priceType" placeholder="priceType" (change)="valueChanged($event, group, 'priceType')">
+            
           </td>
           <td class="form-group">
-            <input type="text" class="form-control" formControlName="tax_name" placeholder="tax_name">
-            <span class="text-danger" *ngIf="group.get('tax_name').touched && group.get('tax_name')?.hasError('required')">Tax Name required</span>
+            <input type="text" class="form-control" formControlName="distributorPrice" placeholder="distributorPrice" >
+            
           </td>
+
+          
+          <td class="form-group">
+            <input type="text" class="form-control" (change)="priceChanged($event, group, i)" formControlName="bcy_rate" placeholder="bcy_rate">
+            <span class="text-danger" *ngIf="group.get('bcy_rate').touched && group.get('bcy_rate')?.hasError('required')">Amount required</span>
+            <span class="text-danger" *ngIf="group.get('bcy_rate')?.hasError('invalid')">Price Cannot Go beyond Distributor price</span>
+          </td>
+        
           <td class="form-group">
             <input type="text" class="form-control" formControlName="item_total" placeholder="item_total" readonly>
             <span class="text-danger" *ngIf="group.get('item_total').touched && group.get('item_total')?.hasError('required')">Total required</span>
@@ -52,10 +61,21 @@
       <div class="add-new-btn">
         <button (click)="addApp()" class="btn primary-btn">Add new</button>
     </div>
+    <ng-container >
     <div class="add-new-btn">
-      <button (click)="saveChanges()" class="btn primary-btn">Save</button>
+      <button [disabled]="enableEdit" (click)="saveChanges()" class="btn primary-btn">Resend Estimate</button>
     </div>
+  </ng-container>
+
   </div>
+  <div class="row" *ngIf="showMsg">
+    <div class="col-xs-12">
+        <p class="alert alert-success">
+            <strong>Estimate Sent Successfully !</strong>
+
+        </p>
+    </div>
+</div>
 
 </ng-container>
 

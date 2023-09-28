@@ -6,6 +6,20 @@
     font-weight: 700;
 }
 
+.primary-btn {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 9rem;
+    border-radius: 8px;
+    background: var(--btn-gradient);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
+  }
+  
+
 thead th{
     text-align: left;
     padding: 1rem 1rem;
@@ -47,4 +61,30 @@ tbody td{
 
 .action-btn-holder{
     display: flex;
+}
+
+.primary-btn {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 9rem;
+    border-radius: 8px;
+    background: var(--btn-gradient);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
+}
+.form-control{
+    font-size: 0.85rem !important;
+}
+.gst{
+    font-size: 9px;
+}
+.text-danger{
+    font-size: 8px !important;
+}
+
+.product-name{
+    width: 30%;
 }

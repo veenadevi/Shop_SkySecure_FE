@@ -64,7 +64,8 @@ export class AccountListComponent implements OnInit{
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
     this.getAllAccounts();
-    this.getAllCRMUsers();
+    //this.getAllCRMUsers();
+    this.getAllChannelPartners();
     this.getAllMarketPlaceAccountList();
 
   }
@@ -123,6 +124,7 @@ export class AccountListComponent implements OnInit{
 
   public assign(account, i){
     const modalRef = this.modalService.open(AssignLeadsModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
+  
     modalRef.componentInstance.request = account;
     console.log("()))_)_)_)_ Data Index ", i);
 
@@ -136,13 +138,22 @@ export class AccountListComponent implements OnInit{
 
   public getAllCRMUsers(){
     this.subscriptions.push(
-      this.superAdminService.getAllCRMUsers().subscribe( res=> {
+      this.superAdminService.getAllChannelPartners().subscribe( res=> {
         console.log("_+_+_+_+_+_+ ", res);
         this.superAdminStore.setCrmUsers(res);
       })
     )
   }
 
+
+  public getAllChannelPartners(){
+    this.subscriptions.push(
+      this.superAdminService.getAllChannelPartners().subscribe( res=> {
+        console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
+        this.superAdminStore.setChannelPartnerList(res);
+      })
+    )
+  }
 
 
 

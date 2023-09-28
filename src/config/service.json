@@ -34,6 +34,7 @@
         "userSignin" : "api/user/login",
         "profileUpdate" : "api/user/profile-update",
         "createQuotation" : "api/user/createQuotation",
+        "editQuotation" : "/api/user/editQuotation",
         "getQuoteHistory" : "api/user/getQuoteHistory",
         "getAllDashBoardData" : "api/user/allDashBoardData",
         "getAllAccounts" : "api/user/allAccounts",
@@ -72,7 +73,10 @@
         "assignAccountOwner" :  "api/admin/assignAccountOwner",
         "getMarketplaceAccountDetailsById" : "api/getMarketplaceAccountDetailsById",
         "getAllMarketPlaceAccountListURL":"api/admin/getAllMarketPlaceAccountList",
-        "getMyMarketPlaceAccountListURL":"api/admin/getMyMarketplaceAccountList"
+        "getMyMarketPlaceAccountListURL":"api/admin/getMyMarketplaceAccountList",
+
+        "addChannelPartnerURL":"/api/user/channel-partner",
+        "getAllChannelPartner" : "/api/user/channel-partner"
 
     },
 

@@ -65,6 +65,13 @@ export class CartItemsComponent {
   public errortext:string
 
 
+
+  private opts = [
+    { key: 'Year', value: "Year" },
+    { key: 'Month', value: "Month" },
+  ];
+
+
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
  
@@ -329,7 +336,7 @@ public onChangeQuantity(i, price) : void {
   this.cartData[i].quantity = Number(this.cartData[i].quantity)
   this.cartData[i].itemTotal = this.cartData[i].quantity * price;
   this.calTotalPrice();
-  this.saveCart();
+  //this.saveCart();
   
 }
 
@@ -357,7 +364,7 @@ public onChangeQuantity(i, price) : void {
         
     }
     this.calTotalPrice();
-    this.saveCart();
+    //this.saveCart();
   }
 
   public calTotalPrice() {
@@ -619,6 +626,7 @@ public onChangeQuantity(i, price) : void {
     });
 
 
+    
     this.addCartItemsService(req, 'save');
   }
 
@@ -684,7 +692,29 @@ public onChangeQuantity(i, price) : void {
     this.router.navigate(['/products', product.productId]); 
   }
 
+  get firstSelectOptions() {
+    return this.opts.map(({key}) => key);
+  }
+
+  public onSelectChange(event, i){
+    console.log("_+_+_+_+_ event", event.target.value);
+    if(event.target.value === 'Year'){
+      this.cartData[i].itemTotal = this.cartData[i].quantity * this.cartData[i].priceList[0].price;
+      this.cartData[i].price = this.cartData[i].priceList[0].price;
+      this.cartData[i].priceType = 'Year';
+      this.cartData[i].erpPrice = Number(this.cartData[i].priceList[0].ERPPrice);
+    }
+    else{
+      this.cartData[i].itemTotal = this.cartData[i].quantity * this.cartData[i].priceList[1].price;
+      this.cartData[i].price = this.cartData[i].priceList[1].price;
+      this.cartData[i].priceType = 'Month';
+      this.cartData[i].erpPrice = Number(this.cartData[i].priceList[1].ERPPrice);
+    }
+
+   // console.log("+_+_+_ ()( )( ERP", this.cartData[i]);
+    this.calTotalPrice();
+   // this.saveCart();
+  }
+  }
 
 
-
-}

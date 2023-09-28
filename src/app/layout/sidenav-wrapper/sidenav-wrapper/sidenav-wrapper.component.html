@@ -93,11 +93,11 @@
 
          <!-- Account Manager Section -->
 
-          <ng-container *ngIf="userRoleVal === 'admin'|| userRoleVal === 'superadmin'">
+          <!-- <ng-container *ngIf="userRoleVal === 'admin'|| userRoleVal === 'superadmin'">
 
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'am')">
-                <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
+                <img src="../../../../assets/icons/AccountManager.svg">
               </span>
               <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('am')">
                   <span class="text-style">
@@ -107,14 +107,14 @@
                 </div>
             </mat-list-item>
     
-            <!-- Security Sub Menu -->
+          
             <ng-container *ngIf="amSubMenu">
-              <!-- <mat-list-item>
+            <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['super-admin-page']">Dashboard</span>
               </mat-list-item> -->
-              <mat-list-item>
+              <!-- <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click)="routeEvent('amAccounts')">Accounts</span>
-              </mat-list-item>
+              </mat-list-item> -->
               <!-- <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
               </mat-list-item> -->
@@ -125,8 +125,8 @@
 
            
               
-            </ng-container>
-          </ng-container>
+            <!-- </ng-container>
+          </ng-container> -->
         
           
 
@@ -188,7 +188,7 @@
           <ng-container *ngIf="userRoleVal === 'admin' || userRoleVal === 'superadmin'">
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'admin')">
-                <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
+                <img src="../../../../assets/icons/ManagePortal.svg">
               </span>
               <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('admin')">
                   <span class="text-style">
@@ -227,9 +227,9 @@
                 <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paUploadProductPrice')" >Upload Product Price</span>
               </mat-list-item>
               
-              <mat-list-item>
+              <!-- <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paUploadBlog')" >Update Blog</span>
-              </mat-list-item>
+              </mat-list-item> -->
             </ng-container>
           </ng-container>
           

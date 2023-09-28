@@ -216,12 +216,12 @@ th{
     font-size: 12px;
     color: black;
   }
-  .price-symbol:hover {
+  /* .price-symbol:hover {
     transform: scale(1.1);
     font-size: 15px;
     font-weight: bold;
     color: black;
-  }
+  } */
 
 
   .aa{

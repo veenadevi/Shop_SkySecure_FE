@@ -54,7 +54,7 @@ h4{
 }
 .form-control-01 {
     display: block;
-    width: 100%;
+    width: 65%;
     padding: 8px;
     /* font-size: 1rem; */
     font-weight: 400;
@@ -149,4 +149,14 @@ element.style {
     color: red;
     text-align: center;
     /* padding: 20px; */
+}
+
+.justify-content-center{
+    align-items: center;
+    padding: 15px;
+    border: none !important;
+}
+
+.radio-style{
+    padding-top: 10px !important;
 }

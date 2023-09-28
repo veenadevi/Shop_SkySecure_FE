@@ -55,7 +55,12 @@ Removed Montly Split on Sep22 -->
                       <td>
                         <div class="td-column price-details">
                           <span>
-                          {{ item.priceType}}
+                          <!-- {{ item.priceType}} -->
+                          <select class="type" [(ngModel)]="item.priceType" (change)="onSelectChange($event, i)">
+                            <option class="type" *ngFor="let opt of firstSelectOptions" [value]="opt">
+                               {{ opt }}
+                            </option>
+                           </select> 
                           </span>
                         </div>
                       </td>
@@ -129,8 +134,13 @@ Removed Montly Split on Sep22 -->
         <div class="submit-quote">
           <span class="text-style">
             <!-- Enter the quantity of licenses required before proceeding to submit request -->
-            * Prices are Subject to Change
-          </span>
+            * Prices are Subject to Change  
+            <span></span>
+            <span > * The prices provided are exclusive of taxes.</span> 
+          
+          </span> 
+            
+          
           <span class="buttons-section">
             <button class="btn secondary-btn" (click)="saveCart()">Save Cart</button>
             <button class="btn primary-btn" (click)="requestQuote()">Request Quote</button>
