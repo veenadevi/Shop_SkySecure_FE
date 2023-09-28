@@ -7,6 +7,10 @@
     max-width: 1620px !important;
 }
 
+:host::ng-deep .carousel-inner  {
+    border-radius: 16px;
+}
+
 .text-style {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
