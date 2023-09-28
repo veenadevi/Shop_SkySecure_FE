@@ -124,7 +124,7 @@ public getCartItems(multipleProduct, data) : void {
 
     else{
       //var index = productsList.findIndex(el => el.productId === this.params.get('productId'));
-      var index = productsList.findIndex(el => el.productId === data.productId);
+      var index = productsList.findIndex(el => el.productId === data.productId && el.priceType===data.priceType);
 
       
       if(index >=0){
