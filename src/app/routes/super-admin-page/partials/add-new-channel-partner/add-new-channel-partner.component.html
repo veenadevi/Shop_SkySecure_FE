@@ -66,7 +66,7 @@
                 </div>
             </div>
 
-            <h4>Add New Admin User</h4>
+            <!-- <h4>Add New Admin User</h4>
             <div class="address-row">
                 <div class="col-sm-6 form-group">
                     <label for="userName">FirstName</label>
@@ -83,18 +83,89 @@
                     <input formControlName="phoneNo" type="number" class="form-control-01" name="Locality"
                         id="firstName" placeholder="Enter Phone Number" required>
                 </div>
-            </div>
-            <!-- <div class="section-03">
-                <div class="select-user">
-
-                    <h4>Select Channel Partner Admin User</h4>
-                    <select formControlName="adminUser" class="form-control-01">
-                     
-                        <option value="" disabled selected>select user</option>
-                        {{disableErrorMessage}}
-                    </select>
-                </div>
             </div> -->
+            
+            <!--- Prime Ng Radio Button -->
+
+            <div class="card flex justify-content-center">
+                <div class="flex flex-wrap gap-3">
+                    <div class="flex align-items-center">
+                        <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}" [(ngModel)]="addAdminOption" value="new" inputId="ingredient1"></p-radioButton>
+                        <label for="ingredient1" class="ml-2"><h4 class="radio-style">Add New Admin User</h4></label>
+                    </div>
+                    
+                    <div class="flex align-items-center">
+                        <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}" [(ngModel)]="addAdminOption" value="existing" inputId="ingredient2"></p-radioButton>
+                        <label for="ingredient2" class="ml-2"><h4 class="radio-style">Add Existing User</h4></label>
+                    </div>
+                </div>
+            </div>
+            <!-- <ng-container *ngIf="(addAdminOption === 'new') ; else existingUserTemplate"> -->
+            <ng-container>
+                <div class="address-row">
+                    <ng-container *ngIf="(addAdminOption === 'new'); else userSelect">
+                        <div class="col-sm-6 form-group">
+                            <label for="userName">FirstName</label>
+                            <input formControlName="userName" type="address" class="form-control-01" name="userName"
+                                id="userName" placeholder="Enter FirstName" required>
+                        </div>
+                    </ng-container>
+                    <ng-template #userSelect>
+                        <div class="card flex justify-content-center">
+                            <p-dropdown appendTo="body" (onChange)="onDropDownChange($event)" [options]="usersList" optionLabel="firstName" [filter]="true" filterBy="firstName" [showClear]="true" placeholder="Select User">
+                                <ng-template pTemplate="selectedItem">
+                                    <div class="flex align-items-center gap-2">
+                                        <!-- <div>{{ selectedCountry.name }}</div> -->
+                                        <div> {{selectedCSP.firstName}}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-csp pTemplate="item" >
+                                    <div class="flex align-items-center gap-2">
+                                        <div>{{ csp.firstName }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </div>
+                    </ng-template>
+                    
+                    <div class="col-sm-6 form-group">
+                        <label for="address-2">Email Id</label>
+                        <input formControlName="EmailId" type="address" class="form-control-01" name="emailid"
+                            id="address-2" placeholder="Enter EmailId" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Mobile No.</label>
+                        <input formControlName="phoneNo" type="number" class="form-control-01" name="Locality"
+                            id="firstName" placeholder="Enter Phone Number" required>
+                    </div>
+                </div>
+            </ng-container>
+            <!-- <ng-template #existingUserTemplate>
+                <div class="address-row">
+                    <div class="col-sm-6 form-group">
+                        <label for="userName">FirstName</label>
+                        <input formControlName="userName" type="address" class="form-control-01" name="userName"
+                            id="userName" placeholder="Enter FirstName" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="address-2">Email Id</label>
+                        <input formControlName="EmailId" type="address" class="form-control-01" name="emailid"
+                            id="address-2" placeholder="Enter EmailId" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Mobile No.</label>
+                        <input formControlName="phoneNo" type="number" class="form-control-01" name="Locality"
+                            id="firstName" placeholder="Enter Phone Number" required>
+                    </div>
+                </div>
+            </ng-template> -->
+
+
+
+
+
+
+            <!-- Prime Ng Radio Button Ends -->
             <div *ngIf="submitErrorMessage">
                 <p class="error">* Please Fill Add New Admin User Fields or Select Admin User</p>
             </div>

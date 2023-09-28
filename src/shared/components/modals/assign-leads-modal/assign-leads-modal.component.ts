@@ -102,7 +102,7 @@ export class AssignLeadsModalComponent implements OnInit{
      )
    )
   ngOnInit(): void {
-   // this.getAllCRMUsers();
+   this.getAllCRMUsers();
    this.getAllChannelPartner();
   }
 
@@ -121,7 +121,10 @@ export class AssignLeadsModalComponent implements OnInit{
     this.subscriptions.push(
       this.channelPartnerList$.subscribe(res=>{
         
-        this.channelPartnerList = res;
+        this.channelPartnerList = res.channelPartners
+        ;
+        console.log("in model ===",this.channelPartnerList
+        )
         
         //this.selectedUser = res[0];
       })
@@ -155,5 +158,6 @@ export class AssignLeadsModalComponent implements OnInit{
   public onChange(event){
     
     this.selectedUser = event.value;
+    console.log("this.selectedUser  ",this.selectedUser)
   }
 }

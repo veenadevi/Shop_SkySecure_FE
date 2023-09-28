@@ -7,6 +7,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { Country, State, City } from "country-state-city";
 import { Subscription } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
+import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 
 
 interface CreateChannalParterPayload {
@@ -42,10 +43,22 @@ export class AddNewChannelPartnerComponent {
 
   public cityList: any;
 
-  public selectedCountry: any;
+  public selectedCountrys: any;
   public selectedState: any;
   public selectedCity: any;
   public form: FormGroup;
+
+  public selectedCSP : any;
+
+  public addAdminOption : any = "new";
+
+  public usersList : any[] = [];
+
+  countries: any[] | undefined;
+
+  selectedCountry: string | undefined;
+
+  //public addAdminOption = "Add Existing User";
 
   constructor(
     private fb: FormBuilder,
@@ -55,6 +68,7 @@ export class AddNewChannelPartnerComponent {
 
     private formBuilder: FormBuilder,
     private userAccountStore: UserAccountStore,
+    private superAdminService : SuperAdminService,
   ) {
 
     this.myForm = this.fb.group({
@@ -72,12 +86,27 @@ export class AddNewChannelPartnerComponent {
       country : [''],
 
     });
+
+      
   }
 
 
 
   selectedValue: any;
   ngOnInit(): void {
+
+    this.countries = [
+      { name: 'Australia', code: 'AU' },
+      { name: 'Brazil', code: 'BR' },
+      { name: 'China', code: 'CN' },
+      { name: 'Egypt', code: 'EG' },
+      { name: 'France', code: 'FR' },
+      { name: 'Germany', code: 'DE' },
+      { name: 'India', code: 'IN' },
+      { name: 'Japan', code: 'JP' },
+      { name: 'Spain', code: 'ES' },
+      { name: 'United States', code: 'US' }
+  ];
 
 
     this.countryList = Country.getAllCountries();
@@ -132,7 +161,7 @@ export class AddNewChannelPartnerComponent {
       //this.myForm.value.countryName = allCountries[index];
       //this.myForm.controls['countryName'].setValue(allCountries[index]);
       //this.myForm.controls['countryName'].setValue(allCountries.filter(c => c.isoCode === userDetails.countryCode));
-      //this.selectedCountry = allCountries.filter(c => c.isoCode === userDetails.countryCode)[0];
+      //this.selectedCountrys = allCountries.filter(c => c.isoCode === userDetails.countryCode)[0];
     }
 
     //this.countryList
@@ -153,7 +182,7 @@ export class AddNewChannelPartnerComponent {
 
     let country = JSON.parse(event.target.value);
 
-    this.selectedCountry = country;
+    this.selectedCountrys = country;
 
     this.stateList = State?.getStatesOfCountry(country.isoCode);
 
@@ -189,7 +218,7 @@ export class AddNewChannelPartnerComponent {
   public submitErrorMessage: boolean = false;
 
   public submitForm() {
-    if (((this.myForm.get('channelName').value === null) && (this.myForm.get('EmailId').value === null && this.myForm.get('phoneNo').value === null && this.myForm.get('adminUser').value === null))) {
+    /*if (((this.myForm.get('channelName').value === null) && (this.myForm.get('EmailId').value === null && this.myForm.get('phoneNo').value === null && this.myForm.get('adminUser').value === null))) {
       this.submitErrorMessage = true;
       console.log("_____++++ Error Messgae");
     }
@@ -198,15 +227,15 @@ export class AddNewChannelPartnerComponent {
     this.CreateChannelPartner()
       console.log("_____++++ Error False");
       this.submitErrorMessage = false
-    }
-    //this.CreateChannelPartner()
+    }*/
+    this.CreateChannelPartner()
   }
 
   CreateChannelPartner(): any {
     let userAccountdetails = this.userAccountStore.getUserDetails();
-    console.log("+_+_+_+_ FIrstName ", this.myForm.value);
+   
 
-    if (!this.myForm.valid) {
+    /*if (!this.myForm.valid) {
 
       return false;
     } else {
@@ -250,12 +279,12 @@ export class AddNewChannelPartnerComponent {
   
 
     this.form.reset();
-  }
+  }*/
 }
 
 
 public savenewChannelPartner(request:any){
-console.log("+_+_+_+_+_ Res Data ", request);
+
 
   this.subscription.push(
     this.adminPageService.addChannelPartner(request).subscribe(res=>{
@@ -280,6 +309,51 @@ disableErrorMessage(){
     ((this.myForm.get('userName').value === null) && (this.myForm.get('EmailId').value === true && this.myForm.get('phoneNo').value === true && this.myForm.get('adminUser').value === true))) {
     this.submitErrorMessage = false;
   }
+}
+
+public radioClick(){
+  
+
+  if(this.addAdminOption === 'new'){
+    this.myForm.controls['EmailId'].enable();
+    this.myForm.controls['phoneNo'].enable();
+  }
+  else{
+    if(this.usersList.length>0){
+      
+    }
+    else{
+      this.getUsersList();
+    }
+    this.myForm.controls['EmailId'].setValue(null);
+    this.myForm.controls['phoneNo'].setValue(null);
+    this.myForm.controls['userName'].setValue(null);
+    this.myForm.controls['EmailId'].disable();
+    this.myForm.controls['phoneNo'].disable();
+  }
+}
+
+public getUsersList(){
+  this.subscription.push(
+    this.adminPageService.getAllusers().subscribe(res=> {
+      
+      this.usersList = res;
+    })
+  )
+}
+
+public onDropDownChange(item){
+  this.myForm.controls['phoneNo'].enable();
+  this.myForm.controls['EmailId'].enable();
+  this.selectedCSP = item.value;
+  this.myForm.controls['EmailId'].setValue(this.selectedCSP.email);
+  this.myForm.controls['phoneNo'].setValue(this.selectedCSP.mobileNumber);
+  this.myForm.controls['userName'].setValue(this.selectedCSP.firstName);
+
+
+  
+  
+  
 }
 
 

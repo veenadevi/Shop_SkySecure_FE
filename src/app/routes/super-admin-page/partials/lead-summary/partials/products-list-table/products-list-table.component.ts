@@ -25,6 +25,8 @@ export class ProductsListTableComponent implements OnInit{
 
 
   public productsList:any[] = [];
+    public enableEdit:boolean
+    public showMsg:boolean
 
   public cartDetails : any[] = [];
 
@@ -69,8 +71,11 @@ export class ProductsListTableComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.setSampleData();
+    this.enableEdit=false
+    this.showMsg=false
     this.cartDetails = (this.cartData.CartDetails && this.cartData.CartDetails.length>0) ? this.cartData.CartDetails : null;
+    this.setSampleData();
+   
   }
 
 
@@ -105,6 +110,7 @@ export class ProductsListTableComponent implements OnInit{
 
   public priceChanged(event, item, i){
       
+    this.enableEdit=false;
     //item.get('line_items_id')
 
     var index = this.cartDetails.findIndex(el => el.estimateLineItemId === item.get('line_items_id').value);
@@ -115,11 +121,14 @@ export class ProductsListTableComponent implements OnInit{
       let editedRate = item.get('bcy_rate').value;
       let calculatedDistributarPrice = this.cartDetails[index].distributorPrice;
 
-      let calcRate = calculatedDistributarPrice*item.get('quantity').value;
+      let calcRate = calculatedDistributarPrice;
 
       if(editedRate < calcRate){
-        //this.getFormData.controls['bcy_rate'].setErrors({'invalid': true});
+      
+       // item.get('bcy_rate').setValue(item.get('bcy_rate_original').value)
         item.get('bcy_rate').setErrors({'invalid': true});
+        this.enableEdit=true;
+    
       }
 
     }
@@ -131,11 +140,12 @@ export class ProductsListTableComponent implements OnInit{
         let editedRate = item.get('bcy_rate').value;
         let calculatedDistributarPrice = data.priceList[0].distributorPrice;
 
-        let calcRate = calculatedDistributarPrice*item.get('quantity').value;
+        let calcRate = calculatedDistributarPrice;
 
         if(editedRate < calcRate){
         //this.getFormData.controls['bcy_rate'].setErrors({'invalid': true});
           item.get('bcy_rate').setErrors({'invalid': true});
+          this.enableEdit=true;
         }
       }
     }
@@ -150,7 +160,7 @@ export class ProductsListTableComponent implements OnInit{
 
 
   getEmployee() {
-
+    this.enableEdit=false;
   
     if(this.productsData.line_items){
       this.isEstimate=true;
@@ -163,11 +173,18 @@ export class ProductsListTableComponent implements OnInit{
         mobNumber: [emp.mobNumber, [Validators.min(10)]],
         dob: [emp.dob, Validators.required]
       });*/
-      console.log("_+_+_+_ Value ", items);
+      var tempDescription=items.description
+      var name=tempDescription.substring(0, tempDescription.lastIndexOf("-")).trim()
+      var priceType=tempDescription.substring(tempDescription.lastIndexOf("-")+1).trim()
+      console.log("_+_+_+_ Value ", name);
       const grp = this.fb.group({
-        name: [items.description, Validators.required],
+       
+        name: [ name, Validators.required],
+        priceType:[priceType, Validators.required],
+        distributorPrice: parseFloat(this.getDistributorPrice(items).toFixed(2)),
         quantity: [items.quantity, [Validators.required]],
         bcy_rate: [items.bcy_rate, [Validators.min(10)]],
+        bcy_rate_original: [items.bcy_rate, [Validators.min(10)]],
         tax_name: [items.tax_name, Validators.required],
         item_total: [ parseFloat((items.bcy_rate*items.quantity).toFixed(2)) , Validators.required],
         line_items_id: [items.line_item_id, null]
@@ -196,10 +213,31 @@ export class ProductsListTableComponent implements OnInit{
 
   }
 
+  getDistributorPrice(items:any){
+    console.log("fetch distributor for ",items.line_item_id)
+    console.log("this.cartDetails  ",this.cartDetails)
+    if(items.line_item_id){
+
+    
+    var index = this.cartDetails.findIndex(el => el.estimateLineItemId === items.line_item_id);
+    console.log("fetched disprice===",this.cartDetails[index].distributorPrice)
+
+    return this.cartDetails[index].distributorPrice
+  }
+    else{
+    return items.priceList[0].distributorPrice
+
+    }
+
+    
+  }
+
   initiatForm(): FormGroup {
     return this.fb.group({
         name: ['', Validators.required],
         quantity: ['', [Validators.required]],
+        priceType: ['', [Validators.required]],
+        distributorPrice:['', [Validators.required]],
         bcy_rate: ['', [Validators.min(10)]],
         tax_name: ['', Validators.required],
         item_total: ['', Validators.required],
@@ -213,6 +251,8 @@ export class ProductsListTableComponent implements OnInit{
       return this.fb.group({
         name: [data.name, Validators.required],
         quantity: [1, [Validators.required]],
+        priceType:['Year', [Validators.required]],
+        distributorPrice:[ parseFloat(priceListValues.distributorPrice).toFixed(2),[Validators.min(10)]],
         bcy_rate: [ parseFloat(priceListValues.price.toFixed(2)),[Validators.min(10)]],
         tax_name: ['', null],
         item_total: [priceListValues.price, null],
@@ -238,6 +278,8 @@ export class ProductsListTableComponent implements OnInit{
 
       let control = <FormArray>this.productListForm.get('items');
       //control.push(this.initiatForm());
+
+
       
       control.push(this.createNewAppWithValues(receivedEntry));
       this.newlyAddedAppList.push(receivedEntry);
@@ -267,9 +309,12 @@ export class ProductsListTableComponent implements OnInit{
 
     this.subscription.push(
       this.cartService.editQuotation(request).subscribe(res=>{
+        this.showMsg=true
 
       })
     )
+
+  
   }
 
   public setRequestData(){
@@ -355,12 +400,18 @@ export class ProductsListTableComponent implements OnInit{
 
     
     this.getFormData.controls.forEach(element => {
+
+      console.log("first element id==",element.value.line_items_id)
+
       
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === element.value.line_items_id);
+      console.log("matched in cart items  el.estimateLineItemId==",element.value.line_items_id)
+
+      console.log("matched in cart items==",index)
          
       if(index >=0){
 
-        console.log("++++++++======== req ", element.value);
+        console.log("++++++++======== req curent product from cart", element.value);
         let tempArray = {
                 "productId": this.cartDetails[index].productId,
                 "quantity": element.value.quantity,

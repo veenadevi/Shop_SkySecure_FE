@@ -24,6 +24,8 @@ export class SuperAdminStore {
     public channelPartnerList : any;
     public channelPartnerList$=this.channelPartnerSubject.asObservable();
 
+    
+
     public crmUsers$ = this.crmUsersSubject.asObservable();
 
 

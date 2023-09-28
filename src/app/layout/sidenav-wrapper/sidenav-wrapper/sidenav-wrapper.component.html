@@ -93,7 +93,7 @@
 
          <!-- Account Manager Section -->
 
-          <ng-container *ngIf="userRoleVal === 'admin'|| userRoleVal === 'superadmin'">
+          <!-- <ng-container *ngIf="userRoleVal === 'admin'|| userRoleVal === 'superadmin'">
 
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'am')">
@@ -107,14 +107,14 @@
                 </div>
             </mat-list-item>
     
-            <!-- Security Sub Menu -->
+          
             <ng-container *ngIf="amSubMenu">
-              <!-- <mat-list-item>
+            <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['super-admin-page']">Dashboard</span>
               </mat-list-item> -->
-              <mat-list-item>
+              <!-- <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click)="routeEvent('amAccounts')">Accounts</span>
-              </mat-list-item>
+              </mat-list-item> -->
               <!-- <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
               </mat-list-item> -->
@@ -125,8 +125,8 @@
 
            
               
-            </ng-container>
-          </ng-container>
+            <!-- </ng-container>
+          </ng-container> -->
         
           
 
