@@ -218,24 +218,24 @@ export class AddNewChannelPartnerComponent {
   public submitErrorMessage: boolean = false;
 
   public submitForm() {
-    /*if (((this.myForm.get('channelName').value === null) && (this.myForm.get('EmailId').value === null && this.myForm.get('phoneNo').value === null && this.myForm.get('adminUser').value === null))) {
+  if ((this.myForm.get('channelName').value === null) ||  (this.myForm.get('userName')) ) {
       this.submitErrorMessage = true;
-      console.log("_____++++ Error Messgae");
+      console.log("_____submit form ++++ Error Messgae");
     }
     else {
 
     this.CreateChannelPartner()
       console.log("_____++++ Error False");
       this.submitErrorMessage = false
-    }*/
-    this.CreateChannelPartner()
+    }
+  //  this.CreateChannelPartner()
   }
 
   CreateChannelPartner(): any {
     let userAccountdetails = this.userAccountStore.getUserDetails();
    
 
-    /*if (!this.myForm.valid) {
+   if (!this.myForm.valid) {
 
       return false;
     } else {
@@ -279,7 +279,7 @@ export class AddNewChannelPartnerComponent {
   
 
     this.form.reset();
-  }*/
+  }
 }
 
 
