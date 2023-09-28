@@ -134,6 +134,7 @@ input[type="number"]::-webkit-outer-spin-button {
     font-size: 13px;
     font-weight: 600;
     color: #1e1e1e;
+    margin-top: 8px;
 }
 
 .empty-container {
@@ -256,4 +257,27 @@ tbody th{
     display: flex;
     flex-direction: row;
     column-gap: 10px;
+}
+.type{
+    margin: 0;
+    font-family: inherit;
+    /* font-size: inherit; */
+    line-height: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e1e1e;
+    border: 1px solid #918F90 ;
+    border-radius: 5px;
+
+}
+select{
+    padding: 5px;
+    border: 1px solid #918F90 ;
+    border-radius: 5px;
+}
+
+select option{
+    padding: 5px;
+    border: 1px solid #918F90 ;
+    border-radius: 5px;
 }
