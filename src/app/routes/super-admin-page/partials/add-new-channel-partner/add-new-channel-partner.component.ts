@@ -58,19 +58,18 @@ export class AddNewChannelPartnerComponent {
   ) {
 
     this.myForm = this.fb.group({
-      channelName:[, [Validators.required, Validators.required]],
-
-     
-      countryName: ['', Validators.required],
+      channelName:[, Validators.required],
+      countryName: [''],
       addressLine1: [''],
       addressLine2: [''],
       stateName: [''],
       cityName: [''],
       postalCode: [''],
       credit: [''],
-      userName:[''],
+      userName:['', [Validators.required, Validators.required]],
       EmailId: ['', [Validators.required, Validators.email]],
       phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      country : [''],
 
     });
   }
@@ -84,7 +83,7 @@ export class AddNewChannelPartnerComponent {
     this.countryList = Country.getAllCountries();
 
     this.selectedValue = this.countryList[0];
-    this.setForm();
+    //this.setForm();
     this.setSelfData();
 
   }
@@ -200,12 +199,12 @@ export class AddNewChannelPartnerComponent {
       console.log("_____++++ Error False");
       this.submitErrorMessage = false
     }
-
+    //this.CreateChannelPartner()
   }
 
   CreateChannelPartner(): any {
     let userAccountdetails = this.userAccountStore.getUserDetails();
-
+    console.log("+_+_+_+_ FIrstName ", this.myForm.value);
 
     if (!this.myForm.valid) {
 
@@ -245,6 +244,7 @@ export class AddNewChannelPartnerComponent {
     
     }
 
+   
     this.savenewChannelPartner(this.createChannalParterPayload)
 
   
