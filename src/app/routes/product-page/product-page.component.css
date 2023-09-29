@@ -212,9 +212,12 @@
     align-items: center; */
 
     position: fixed;
-    bottom: 64px;
-    left: 20px;
-    z-index: 100;
+
+    bottom: 350px;
+ 
+    left: 68px;
+ 
+    z-index: 100;  
   
     
   }

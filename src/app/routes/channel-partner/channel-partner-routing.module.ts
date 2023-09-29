@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChannelPartnerComponent } from './channel-partner.component';
 import { LeadListComponent } from './partials/lead-list/lead-list.component';
 
+
 import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.component';
 
 const routes: Routes = [{
@@ -23,9 +24,9 @@ const routes: Routes = [{
    
     {
       canActivate: [],
-      path: 'mychannel-lead-summary',
+      path: 'lead-summary',
       component : LeadSummaryComponent
-    }
+    },
     
   ]
   

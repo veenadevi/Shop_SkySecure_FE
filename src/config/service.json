@@ -73,6 +73,8 @@
         "assignAccountOwner" :  "api/admin/assignAccountOwner",
         "getMarketplaceAccountDetailsById" : "api/getMarketplaceAccountDetailsById",
         "getAllMarketPlaceAccountListURL":"api/admin/getAllMarketPlaceAccountList",
+        "getMyChannelLeadList":"api/admin/getMyChannelAccountList",
+
         "getMyMarketPlaceAccountListURL":"api/admin/getMyMarketplaceAccountList",
 
         "addChannelPartnerURL":"/api/user/channel-partner",

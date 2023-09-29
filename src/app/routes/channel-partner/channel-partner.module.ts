@@ -8,6 +8,7 @@ import { LeadListComponent } from './partials/lead-list/lead-list.component';
 import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.component'; 
 import { ChannelPartnerRoutingModule ,ROUTED_COMPONENTS} from './channel-partner-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductListTableComponent } from './partials/lead-summary/partials/product-list-table/product-list-table.component';
 
 
 
@@ -16,7 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ROUTED_COMPONENTS,
     ChannelPartnerComponent,
     LeadListComponent,
-    LeadSummaryComponent
+    LeadSummaryComponent,
+    ProductListTableComponent
   ],
   imports: [
     CommonModule,

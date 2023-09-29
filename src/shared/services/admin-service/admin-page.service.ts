@@ -24,6 +24,7 @@ export class AdminPageService {
   private getAllusersURL:string
   private updateUserRoleURL:string
   private getAllMarketPlaceAccountListURL:string
+  private getAllChannelLeadListURL:string
   private getMyMarketPlaceAccountListURL:string
   private addChannelPartnerURL:string
 
@@ -48,6 +49,7 @@ export class AdminPageService {
     this.updateUserRoleURL=AppService.appUrl.updateUserRole;
     this.getAllMarketPlaceAccountListURL=AppService.appUrl.getAllMarketPlaceAccountListURL;
     this.addChannelPartnerURL=AppService.appUrl.addChannelPartnerURL;
+    this.getAllChannelLeadListURL=AppService.appUrl.getMyChannelLeadList;
  
 
     
@@ -99,9 +101,11 @@ export class AdminPageService {
     return request$;
   }
 
-  public getMyChannelList() : Observable<any> {
+  public getMyChannelLeadList(adminUserId:any) : Observable<any> {
 
-    let url = this.baseUrlForQuote + this.getAllMarketPlaceAccountListURL;
+    let url = this.baseUrlForQuote + this.getAllChannelLeadListURL + '/' + adminUserId;;
+
+    
 
     //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
 

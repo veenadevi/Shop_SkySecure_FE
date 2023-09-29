@@ -1,1 +1,163 @@
-<p>lead-summary works!</p>
+<div id="leadSummary">
+    <ng-container *ngIf="accountDetails && responseData">
+        <div id="lead-summary-header">
+
+            <ng-container *ngIf="estimateData.estimate_number; else noValue">
+                {{estimateData.estimate_number}} : Lead Summary
+              </ng-container>
+              <ng-template #noValue>Quotation Status</ng-template>
+    
+        </div>
+
+
+        <div class="row-div">
+            <div id="leadStatus">
+                <div class="card-container">
+                    <div class="content-holder">
+                        <span class="header">
+                            Lead Status
+                        </span>
+                        <span class="value">
+                            {{responseData.cartData.status}}
+                        </span>
+                    </div>
+                    <div class="content-holder">
+                        <span class="header">
+                            Last Activity
+                        </span>
+                        <span class="value">
+                            {{ responseData.cartData.updatedAt | dateFormat}}
+                        </span>
+                    </div>
+                    <div class="content-holder">
+                        <span class="header">
+                            Lead Expiry
+                        </span>
+                        <span class="value">
+                            <ng-container *ngIf="estimateData.expiry_date; else cartDate">
+                                {{ estimateData.expiry_date | dateFormat}}
+                              </ng-container>
+                              <ng-template #cartDate>-</ng-template>
+
+
+                            <!-- {{productsData.expiry_date | dateFormat}} -->
+                        </span>
+                    </div>
+                    <div class="content-holder">
+                        <span class="header">
+                            Opportunity Size
+                        </span>
+                        <span class="value">
+
+
+                            <ng-container *ngIf="estimateData.totalEstimateCost; else cartValue">
+                                {{estimateData.totalEstimateCost | number : '1.2-2'}}
+                              </ng-container>
+                              <ng-template #cartValue>{{ responseData.TotalCartValue | number : '1.2-2'}}</ng-template>
+
+
+                            
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div id="customerDetails">
+                <div class="card-container customer-details">
+                        <div class="row-holder bottom-border">
+                            <span class="customer-details-header">Customer Details</span>
+                        </div>
+                        <div class="row-holder">
+                            <span class="row-header">
+                                Name
+                            </span>
+                            <span class="row-value">
+
+                                <ng-container *ngIf="contactsData.contact_name!=null; else contactName">
+                                    {{contactsData.contact_name}}
+                                  </ng-container>
+                                  <ng-template #contactName>{{responseData.assignTo.firstName}}</ng-template>
+
+                              
+                            </span>
+                        </div>
+                        <div class="row-holder">
+                            <span class="row-header">
+                                Address
+                            </span>
+                            <span class="row-value">
+
+
+                                <ng-container *ngIf="contactsData.shipping_address!=null; else noAddress">
+                                    {{contactsData.shipping_address.address}}, {{contactsData.shipping_address.street2}}, {{contactsData.shipping_address.city}}
+                                  </ng-container>
+                                  <ng-template #noAddress>{{responseData.assignTo.fullAddress.address1}}</ng-template>
+
+                              
+                               
+                            </span>
+                        </div>
+                        <div class="row-holder">
+                            <span class="row-header">
+                                State
+                            </span>
+                            <span class="row-value">
+
+                                <ng-container *ngIf="contactsData.shipping_address!=null; else noAddress">
+                                    {{contactsData.shipping_address.state}}
+                                  </ng-container>
+                                  <ng-template #noAddress>{{responseData.assignTo.fullAddress.state}}</ng-template>
+                               
+                            </span>
+                        </div>
+                        <div class="row-holder">
+                            <span class="row-header">
+                                Zip Code
+                            </span>
+                            <span class="row-value">
+
+                                <ng-container *ngIf="contactsData.shipping_address!=null; else noAddress">
+                                    {{contactsData.shipping_address.zip}}
+                                  </ng-container>
+                                  <ng-template #noAddress>{{responseData.assignTo.fullAddress.pincode}}</ng-template>
+                               
+                            </span>
+                        </div>
+                </div>
+            </div>
+            <div id="assigneeDetails">
+                <div class="card-container assignee-details">
+                
+                </div>
+                
+            </div>
+        </div>
+
+
+        <div class="row-div">
+            <div id="productItems">
+                <div class="card-container">
+
+                    <ng-container *ngIf="responseData.cartData.status!=='New'; else newQuote">
+                    
+                        <product-list-table [productsData]="estimateData" [cartData]="cartData" [crmData]="responseData"></product-list-table>
+                      </ng-container>
+                      <ng-template #newQuote>
+
+                   
+                        <product-list-table  [productsData]="responseData.cartData" [cartData]="cartData" [crmData]="responseData"></product-list-table> 
+                        
+                       </ng-template>
+                   
+
+                   
+                    
+                </div>
+            </div>
+        </div>
+        
+
+        
+        
+    </ng-container>
+    
+</div>

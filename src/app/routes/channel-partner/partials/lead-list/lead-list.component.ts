@@ -7,6 +7,7 @@ import { AdminPageService } from 'src/shared/services/admin-service/admin-page.s
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class LeadListComponent implements OnInit{
     private modalService : NgbModal,
     private superAdminService : SuperAdminService,
     private superAdminStore : SuperAdminStore,
-    public spinner: NgxSpinnerService
+    public spinner: NgxSpinnerService,
+    private userAccountStore:UserAccountStore
   ){}
 
 
@@ -65,8 +67,9 @@ export class LeadListComponent implements OnInit{
     //this.info = this.sampleData.accounts.info;
     this.getAllAccounts();
     //this.getAllCRMUsers();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
     this.getAllChannelPartners();
-    this.getAllMarketPlaceAccountList();
+    this.getMyChannelLeadList(userAccountdetails._id);
 
   }
 
@@ -88,14 +91,12 @@ export class LeadListComponent implements OnInit{
     )
   }
 
-  public getAllMarketPlaceAccountList(){
+  public getMyChannelLeadList(channelAdminUserId){
     this.spinner.show(); 
-    // let a: any = this.sampleData();
-    // this.accountData = [...a.accounts.data, ...a.accounts.data];
-    // this.info = a.accounts.info;
+   
     this.subscriptions.push(
    
-    this.adminPageService.getAllMarketPlaceAccountList().subscribe( response => {
+    this.adminPageService.getMyChannelLeadList(channelAdminUserId).subscribe( response => {
     
       //console.log("running here directly==")
       this.allMarketPlaceList=response;
@@ -116,7 +117,7 @@ export class LeadListComponent implements OnInit{
     }
     console.log("navigate to detaisl page===",account)
 
-    this.router.navigate(['admin-pages/lead-summary'], {queryParams: queryParams});
+    this.router.navigate(['channel-partner/lead-summary'], {queryParams: queryParams});
 
    // this.router.navigate(['/admin-page/accounts-details'], {queryParams: queryParams});
   }
