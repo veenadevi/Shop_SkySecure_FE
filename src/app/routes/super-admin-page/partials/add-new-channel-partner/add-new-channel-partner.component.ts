@@ -38,10 +38,12 @@ export class AddNewChannelPartnerComponent {
   myForm: FormGroup;
   @Input('request')
   public countryList: any;
+  
 
   public stateList: any;
 
   public cityList: any;
+  public showMsg:boolean
 
   public selectedCountrys: any;
   public selectedState: any;
@@ -114,6 +116,8 @@ export class AddNewChannelPartnerComponent {
     this.selectedValue = this.countryList[0];
     //this.setForm();
     this.setSelfData();
+    this.getUsersList();
+    this.showMsg=false;
 
   }
 
@@ -121,7 +125,7 @@ export class AddNewChannelPartnerComponent {
     //this.form = this.formBuilder.group(
     this.myForm = this.formBuilder.group(
       {
-        channelName: [],
+        channelName: ['', Validators.required],
      
         addressLine1: [],
         addressLine2: [],
@@ -218,24 +222,24 @@ export class AddNewChannelPartnerComponent {
   public submitErrorMessage: boolean = false;
 
   public submitForm() {
-    /*if (((this.myForm.get('channelName').value === null) && (this.myForm.get('EmailId').value === null && this.myForm.get('phoneNo').value === null && this.myForm.get('adminUser').value === null))) {
+    if (this.myForm.invalid){
       this.submitErrorMessage = true;
-      console.log("_____++++ Error Messgae");
+      console.log("_____submit form ++++ Error Messgae");
     }
     else {
 
     this.CreateChannelPartner()
       console.log("_____++++ Error False");
       this.submitErrorMessage = false
-    }*/
-    this.CreateChannelPartner()
+    }
+  //  this.CreateChannelPartner()
   }
 
   CreateChannelPartner(): any {
     let userAccountdetails = this.userAccountStore.getUserDetails();
    
 
-    /*if (!this.myForm.valid) {
+   if (!this.myForm.valid) {
 
       return false;
     } else {
@@ -279,7 +283,7 @@ export class AddNewChannelPartnerComponent {
   
 
     this.form.reset();
-  }*/
+  }
 }
 
 
@@ -288,7 +292,7 @@ public savenewChannelPartner(request:any){
 
   this.subscription.push(
     this.adminPageService.addChannelPartner(request).subscribe(res=>{
-
+      this.showMsg=true
     })
   )
 }
@@ -320,7 +324,7 @@ public radioClick(){
   }
   else{
     if(this.usersList.length>0){
-      
+  // this.getUsersList();
     }
     else{
       this.getUsersList();
@@ -343,12 +347,27 @@ public getUsersList(){
 }
 
 public onDropDownChange(item){
+  
+  const selectedValue = item.target.value;
+  console.log("selectedValue  ===",selectedValue)
+
+
+  const userMap = new Map<string, any>();
+  this.usersList.forEach(user => {
+    userMap.set(user._id.toString(), user);
+  });
+  const selecteduser = userMap.get(selectedValue);
+   console.log("selecteduser  "+selecteduser._id)
+
+
+
+
   this.myForm.controls['phoneNo'].enable();
   this.myForm.controls['EmailId'].enable();
-  this.selectedCSP = item.value;
-  this.myForm.controls['EmailId'].setValue(this.selectedCSP.email);
-  this.myForm.controls['phoneNo'].setValue(this.selectedCSP.mobileNumber);
-  this.myForm.controls['userName'].setValue(this.selectedCSP.firstName);
+  
+  this.myForm.controls['EmailId'].setValue(selecteduser.email);
+  this.myForm.controls['phoneNo'].setValue(selecteduser.mobileNumber);
+  this.myForm.controls['userName'].setValue(selecteduser.firstName);
 
 
   
