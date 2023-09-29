@@ -76,7 +76,9 @@
         "getMyMarketPlaceAccountListURL":"api/admin/getMyMarketplaceAccountList",
 
         "addChannelPartnerURL":"/api/user/channel-partner",
-        "getAllChannelPartner" : "/api/user/channel-partner"
+        "getAllChannelPartner" : "/api/user/channel-partner",
+
+        "assignChannelPartnerURL" : "api/admin/assignChannelPartner"
 
     },
 

@@ -16,6 +16,7 @@ export class SuperAdminService {
 
   private baseUrlForSuperAdmin : string;
 
+
   private baseUrlForOrders : string;
   private baseURLForusers:string;
 
@@ -26,6 +27,8 @@ export class SuperAdminService {
   private assignAccountOwnerUrl : string;
 
   public getAccountDetailsByIdUrl : string
+
+  private assignChannelPartnerURL: string;
 
 
 
@@ -39,8 +42,9 @@ export class SuperAdminService {
   ) {
    
     this.baseUrlForSuperAdmin = environment.gatewayUrlForOrders;
+
     //this.baseUrlForSuperAdmin = "http://localhost:8080/";
-    this.baseUrlForOrders = environment.gatewayUrl;
+    this.baseUrlForOrders = environment.gatewayUrlForOrders;
 
     this.baseURLForusers=environment.gatewayUrlForUserProfile;
 
@@ -50,6 +54,7 @@ export class SuperAdminService {
     this.getAllChannelPartner=AppService.appUrl.getAllChannelPartner;
     this.assignAccountOwnerUrl = AppService.appUrl.assignAccountOwner;
     this.getAccountDetailsByIdUrl = AppService.appUrl.getMarketplaceAccountDetailsById;
+    this.assignChannelPartnerURL=AppService.appUrl.assignChannelPartnerURL
     
   }
 
@@ -98,6 +103,37 @@ export class SuperAdminService {
   }
 
 
+  public assignChannelPartner( request : any): Observable<any> {
+
+
+    const URL =  this.baseUrlForOrders + this.assignChannelPartnerURL;
+
+  
+
+  console.log("+++++++ ____ _ InsideCreate Quotation ", request);
+    
+    const REQUEST$ = this.http.post<any>(URL, request)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          //this.userAccountStore.setUserProfileDetails(response);
+          return of(response);
+        }),
+        map((response: any) => {
+          //this.userAccountStore.setUserProfileDetails(response);
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling
+          return error
+        })
+      );
+
+    return REQUEST$;
+  }
+
    /**
    * Service for Assigning Account Manager
    */
@@ -117,13 +153,13 @@ export class SuperAdminService {
           if (!response) {
             return throwError(response);
           }
-          this.userAccountStore.setUserProfileDetails(response);
-          //this.userAccountStore.setUserProfileDetails(response);
+          // this.userAccountStore.setUserProfileDetails(response);
+          // //this.userAccountStore.setUserProfileDetails(response);
           return of(response);
         }),
         map((response: any) => {
-          this.userAccountStore.setUserProfileDetails(response);
-          return response;
+          // this.userAccountStore.setUserProfileDetails(response);
+          // return response;
         }),
         catchError(error => {
           // create operation mapping for http exception handling
