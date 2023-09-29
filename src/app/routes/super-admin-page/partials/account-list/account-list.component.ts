@@ -93,11 +93,11 @@ export class AccountListComponent implements OnInit{
     // let a: any = this.sampleData();
     // this.accountData = [...a.accounts.data, ...a.accounts.data];
     // this.info = a.accounts.info;
-  this.subscriptions.push(
+    this.subscriptions.push(
    
     this.adminPageService.getAllMarketPlaceAccountList().subscribe( response => {
     
-      console.log("running here directly==")
+      //console.log("running here directly==")
       this.allMarketPlaceList=response;
       this.spinner.hide();
     

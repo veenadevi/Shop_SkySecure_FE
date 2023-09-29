@@ -3,23 +3,25 @@
         <p-table 
             [value]="allMarketPlaceList" 
             [tableStyle]="{ 'min-width': '60rem' }"
-            [paginator]="true"
-            [rows]="15"
-            [showCurrentPageReport]="true"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          
+           
+           
+        
             >
             <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
             <ng-template pTemplate="header">
                 <tr class="thfont">
                     <th>Cart Id</th>
                     <th>Customer Name</th>
-                    <th>Customer Email</th>
+                    <th>Customer Company</th>
                     <th>Customer Phone</th>
+                    <th>Created On</th>
                     <th>Status</th>
-                    <th>GST Number</th>
-                    <th>Place of Supply</th>
-                    <th>Estimate Number</th>
-                    <th>Quote/Estimate Total</th>
+                     <!-- <th>Place of Supply</th> -->
+                    <th>Assigned Partner</th>
+                    <th>Last Updated Date</th>
+                    <th>Estimate No.</th>
+                    <th>Value</th>
 
 
                     <th> </th>
@@ -53,20 +55,27 @@
                         </div>
                         
                     </td>
-                    <td>{{ account.assignTo.firstName }}</td>
-                    <td>{{ account.assignTo.email}}</td>
-                    <td>{{ account.assignTo.mobileNumber }}</td>
+                    <td>{{ account.createdFor.firstName }}</td>
+                    <td>{{ account.createdFor.company}}</td>
+                    <td>{{ account.createdFor.mobileNumber }}</td>
+                    <td>{{ account.cartData.createdAt | dateFormat }}</td>
                     <td>{{ account.cartData.status }}</td>
+                   
+                    <!-- <td>{{ account.createdFor.placeOfSupply}}</td> -->
                     <td>
-
-                        <ng-container *ngIf="account.assignTo.gstinNumber; else noValue">
-                            {{ account.assignTo.gstinNumber}}
+                        <ng-container *ngIf="account?.assignedChannalpartner; else noValuecp1">
+                        {{ account?.assignedChannalpartner.channelPartner?.name }} 
                           </ng-container>
-                          <ng-template #noValue>-</ng-template>
+                          <ng-template #noValuecp1>-</ng-template>
+                     </td> 
+                     <td>
+                        <ng-container *ngIf="account?.cartData?.assignedChannelPartnerId; else noValuecp">
+                        
+                            {{ account?.cartData.leadUpdatedDate | dateFormat }}
+                          </ng-container>
+                          <ng-template #noValuecp>-</ng-template>
+                     </td> 
 
-
-                    </td>
-                    <td>{{ account.assignTo.placeOfSupply}}</td>
                     <td>
                         <ng-container *ngIf="account.zohoBookEstimateData.estimate_number; else noValue">
                             {{ account.zohoBookEstimateData.estimate_number }}
@@ -76,7 +85,7 @@
                     <!-- <td>{{ account.zohoBookEstimateData.estimate_number }}</td> -->
                     <td>
                         <ng-container *ngIf="account.zohoBookEstimateData.totalEstimateCost; else cartValue">
-                            {{ account.zohoBookEstimateData.totalEstimateCost}}
+                            {{ account.zohoBookEstimateData.totalEstimateCost }}
                           </ng-container>
                           <ng-template #cartValue>{{account.TotalCartValue}}</ng-template>
                         
