@@ -152,6 +152,10 @@ export class SidenavWrapperComponent {
           //this.showDialog();
           this.router.navigate(['security-view/recommendation-default']);
         return;
+        // case 'myChannelData':
+        //   this.showDialog();
+        //   this.router.navigate(['routes/my-channel-partner']);
+        // return;
 
       default:
         return null;
@@ -190,7 +194,7 @@ export class SidenavWrapperComponent {
           this.amSubMenu = (this.amSubMenu) ? false : true;
           return;
       
-      
+
         
 
       default:
@@ -278,12 +282,16 @@ export class SidenavWrapperComponent {
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/updateblog']);
           return;
+          case 'paInviteUser':
+            //this.isExpanded = false;
+            this.menuToogled = false;
+            this.router.navigate(['portal-admin-page/invite-user']);
+            return;
 
-       case 'cpManagement':
-          //this.isExpanded = false;
-          this.menuToogled = false;
-          this.router.navigate(['channel-partner/accounts']);
-          return;
+          // case 'paMyChannelData':
+          //   this.menuToogled = false;
+          // this.router.navigate(['routes/my-channel-partner']);
+          // return;
         
 
       default:
