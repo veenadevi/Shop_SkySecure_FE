@@ -278,6 +278,12 @@ export class SidenavWrapperComponent {
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/updateblog']);
           return;
+
+       case 'cpManagement':
+          //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['channel-partner/accounts']);
+          return;
         
 
       default:
