@@ -13,7 +13,7 @@
             >
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Name</th>
+                    <th>Channel Name</th>
                     <th>Admin User</th>
                     <th>Email ID</th>
                     <th>Mobile Number</th>
@@ -23,7 +23,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-csp let-i="rowIndex">
                 <tr>
-                    <td>{{ csp.ChannelPartnerAdminUser.company }}</td>
+                    <td>{{ csp.name }}</td>
                     <td>{{ csp.ChannelPartnerAdminUser.firstName }}</td>
                     <td>{{ csp.ChannelPartnerAdminUser.email }}</td>
                     <td>{{ csp.ChannelPartnerAdminUser.mobileNumber }}</td>

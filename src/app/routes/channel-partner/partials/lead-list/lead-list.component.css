@@ -1,0 +1,39 @@
+.all-accounts-view {
+    min-height: 36em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+    font-size: 8px!important;
+}
+
+.text-style{
+    cursor: pointer;
+    color: #3366CC;
+}
+
+/* #assign-btn {
+    box-sizing: border-box;
+    padding: 7px;
+    border: 1px solid #EFEFEF;
+    color: white;
+    margin: 6px;
+    width: 80px;
+    border-radius: 8px;
+    background: var(--dark-violet, linear-gradient(90deg, #888BCB 0%, #383DA9 100%));
+} */
+
+.primary-btn {
+    padding: 7px;
+    margin: 6px;
+    width: 80px;
+    border-radius: 8px;
+}
+
+
+.thfont{
+    font-size: 13px!important;  
+}
+.trfont{
+    font-size: 13px!important;  
+}

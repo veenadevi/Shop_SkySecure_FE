@@ -10,11 +10,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
-  selector: 'account-list',
-  templateUrl: './account-list.component.html',
-  styleUrls: ['./account-list.component.css']
+  selector: 'lead-list',
+  templateUrl: './lead-list.component.html',
+  styleUrls: ['./lead-list.component.css']
 })
-export class AccountListComponent implements OnInit{
+export class LeadListComponent implements OnInit{
   
 
   public subscriptions : Subscription[] = [];
@@ -23,7 +23,6 @@ export class AccountListComponent implements OnInit{
   public allMarketPlaceList : any;
 
   public info : any;
-  public disableAssign :boolean=true;
 
 
 
@@ -137,24 +136,13 @@ export class AccountListComponent implements OnInit{
     
   }
 
-  public getAllCRMUsers(){
-    this.subscriptions.push(
-      this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+_+_+_+_+ ", res);
-        this.superAdminStore.setCrmUsers(res);
-      })
-    )
-  }
+ 
 
 
   public getAllChannelPartners(){
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
         console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
-        if(res.channelPartners.length>0){
-         this.disableAssign=false
-
-        }
         this.superAdminStore.setChannelPartnerList(res);
       })
     )
@@ -162,5 +150,5 @@ export class AccountListComponent implements OnInit{
 
 
 
- 
+
 }

@@ -87,6 +87,11 @@ const INTERFACE_ROUTES: Routes = [
         path: 'review-page',
         loadChildren: () => import('../routes/review-page/review-page.module').then(m=>m.ReviewPageModule)
       },
+      {
+        canActivate: [],
+        path: 'channel-partner',
+        loadChildren: () => import('../routes/channel-partner/channel-partner.module').then(m=>m.ChannelPartnerModule)
+      },
     ]
   }
 

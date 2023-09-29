@@ -99,6 +99,27 @@ export class AdminPageService {
     return request$;
   }
 
+  public getMyChannelList() : Observable<any> {
+
+    let url = this.baseUrlForQuote + this.getAllMarketPlaceAccountListURL;
+
+    //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+
+
   public getAllAccounts() : Observable<any> {
 
     let url = this.baseUrlForQuote + this.getAllAccountsUrl;

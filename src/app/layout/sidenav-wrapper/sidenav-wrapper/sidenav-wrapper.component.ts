@@ -31,6 +31,7 @@ export class SidenavWrapperComponent {
   @Input() set userRole(value: any){
     
     this.userRoleVal = value;
+    console.log("...my role ----",this.userRoleVal,value)
     //this.userRoleVal = 'superadmin'
     
   }
@@ -51,6 +52,7 @@ export class SidenavWrapperComponent {
   public adminSubMenu : boolean = false;
   public sAdminSubMenu : boolean = false;
   public amSubMenu : boolean = false;
+  public cpSubMenu:boolean=false;
 
   constructor(
     private loginService : LoginService,
@@ -122,6 +124,10 @@ export class SidenavWrapperComponent {
     if(navVal === 'am'){
       this.amSubMenu = true;
     }
+    if(navVal === 'cp'){
+      this.cpSubMenu = true;
+    }
+
 
     /*if(this.isExpanded === false){
       this.userSubMenu = false;
@@ -193,6 +199,10 @@ export class SidenavWrapperComponent {
       case 'am':
           this.amSubMenu = (this.amSubMenu) ? false : true;
           return;
+
+      case 'cp':
+            this.cpSubMenu = (this.cpSubMenu) ? false : true;
+            return;
       
 
         
@@ -282,16 +292,15 @@ export class SidenavWrapperComponent {
           this.menuToogled = false;
           this.router.navigate(['portal-admin-page/updateblog']);
           return;
-          case 'paInviteUser':
+      case 'paInviteUser':
             //this.isExpanded = false;
             this.menuToogled = false;
             this.router.navigate(['portal-admin-page/invite-user']);
             return;
-
-          // case 'paMyChannelData':
-          //   this.menuToogled = false;
-          // this.router.navigate(['routes/my-channel-partner']);
-          // return;
+     case 'cpMyChannelLeads':
+            this.menuToogled = false;
+          this.router.navigate(['channel-partner/mychannelLeads']);
+          return;
         
 
       default:
