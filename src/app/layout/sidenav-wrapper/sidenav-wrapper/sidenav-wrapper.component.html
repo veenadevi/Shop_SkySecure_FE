@@ -230,6 +230,10 @@
               <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paUploadProductPrice')" >Upload Product Price</span>
               </mat-list-item>
+
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paInviteUser')" >Invite User</span>
+              </mat-list-item>
               
               <!-- <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paUploadBlog')" >Update Blog</span>
@@ -237,7 +241,19 @@
             </ng-container>
           </ng-container>
           
-
+          <!-- <ng-container *ngIf="userRoleVal === 'admin' || userRoleVal === 'superadmin'">
+            <mat-list-item>
+              <span class="icon-holder" >
+                <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
+              </span>
+              <div *ngIf="isExpanded" class="menu-item" >
+                  <span class="text-style">
+                    My Channel Data
+                  </span>
+                  <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+                </div>
+            </mat-list-item>
+          </ng-container> -->
         
 
         
