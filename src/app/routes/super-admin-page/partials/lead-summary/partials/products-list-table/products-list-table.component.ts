@@ -13,6 +13,8 @@ import { CartService } from 'src/shared/services/cart.service';
 })
 export class ProductsListTableComponent implements OnInit {
 
+ 
+
   @Input('productsData')
   public productsData: any;
 
@@ -23,20 +25,21 @@ export class ProductsListTableComponent implements OnInit {
   @Input('crmData')
   public crmData: any;
 
+  private opts = [
+    { key: 'Year', value: "Year" },
+    { key: 'Month', value: "Month" },
+  ];
+
 
   public productsList: any[] = [];
   public enableEdit: boolean
   public showMsg: boolean
 
   public cartDetails: any[] = [];
+  public newProductLists: any[] = [];
 
   public isEstimate: Boolean
-
-  private opts = [
-    { key: 'Year', value: "Year" },
-    { key: 'Month', value: "Month" },
-  ];
-
+  public newProductIndex : Number=0
 
 
   public fullCartListData: any;
@@ -80,6 +83,8 @@ export class ProductsListTableComponent implements OnInit {
     this.enableEdit = false
     this.showMsg = false
     this.cartDetails = (this.cartData.CartDetails && this.cartData.CartDetails.length > 0) ? this.cartData.CartDetails : null;
+   
+   console.log("in parent settign current cartdetails ====",this.cartDetails)
     this.setSampleData();
 
   }
@@ -100,12 +105,12 @@ export class ProductsListTableComponent implements OnInit {
     switch (type) {
       case 'quantity':
         let quanTotal = item.get('quantity').value * item.get('bcy_rate').value;
-        item.get('item_total').setValue(quanTotal);
+        item.get('item_total').setValue(quanTotal.toFixed(2));
         return;
 
       case 'bcyRate':
         let priceTotal = item.get('quantity').value * item.get('bcy_rate').value;
-        item.get('item_total').setValue(priceTotal);
+        item.get('item_total').setValue(priceTotal.toFixed(2));
         return;
 
       default:
@@ -124,17 +129,40 @@ export class ProductsListTableComponent implements OnInit {
 
     if (index >= 0) {
 
+      console.log("in exsiting product price change===for ",index)
+
       let editedRate = item.get('bcy_rate').value;
-      let calculatedDistributarPrice = this.cartDetails[index].distributorPrice;
+      console.log("in exsiting product price change===editedRate ",editedRate)
+
+      let priceType = item.get('priceType').value;
+      console.log("in exsiting product price change===priceType ",priceType)
+
+
+      let calculatedDistributarPrice = item.get('distributorPrice').value
+      //this.cartDetails[index].distributorPrice;
+      let calculatedERPPrice=item.get('erp_price').value
+    //  this.cartDetails[index].erpPrice;
 
       let calcRate = calculatedDistributarPrice;
 
-      if (editedRate < calcRate) {
+      console.log("calculatedERPPrice froms screen ===",calculatedERPPrice)
+      console.log("distributorPrice froms screen ===",calculatedDistributarPrice)
+
+      if (editedRate > calculatedERPPrice ) {
 
         // item.get('bcy_rate').setValue(item.get('bcy_rate_original').value)
         item.get('bcy_rate').setErrors({ 'invalid': true });
         this.enableEdit = true;
 
+      }
+      if(editedRate < calcRate  ){
+        item.get('bcy_rate').setErrors({ 'invalid': true });
+        this.enableEdit = false;
+
+      }
+      else{
+        item.get('bcy_rate').setErrors({ 'invalid': false });
+        this.enableEdit = false;
       }
 
     }
@@ -146,9 +174,11 @@ export class ProductsListTableComponent implements OnInit {
         let editedRate = item.get('bcy_rate').value;
         let calculatedDistributarPrice = data.priceList[0].distributorPrice;
 
+        let calculatedERPPrice = data.priceList[0].erp_price;
+
         let calcRate = calculatedDistributarPrice;
 
-        if (editedRate < calcRate) {
+        if (editedRate < calcRate || editedRate>calculatedERPPrice) {
           //this.getFormData.controls['bcy_rate'].setErrors({'invalid': true});
           item.get('bcy_rate').setErrors({ 'invalid': true });
           this.enableEdit = true;
@@ -190,6 +220,7 @@ export class ProductsListTableComponent implements OnInit {
           distributorPrice: parseFloat(this.getDistributorPrice(items).toFixed(2)),
           quantity: [items.quantity, [Validators.required]],
           bcy_rate: [items.bcy_rate, [Validators.min(10)]],
+          erp_price: parseFloat(this.getERPPrice(items).toFixed(2)),
           bcy_rate_original: [items.bcy_rate, [Validators.min(10)]],
           tax_name: [items.tax_name, Validators.required],
           item_total: [parseFloat((items.bcy_rate * items.quantity).toFixed(2)), Validators.required],
@@ -238,12 +269,71 @@ export class ProductsListTableComponent implements OnInit {
 
   }
 
+  getPriceByType(lineItemId: any,type:String) {
+    console.log("fetch distributor for getPriceByType  ", lineItemId.value)
+    console.log("this.cartDetails in  getPriceByType", this.cartDetails)
+    if (lineItemId) {
+      var index = this.cartDetails.findIndex(el => el.estimateLineItemId === lineItemId.value);
+      if(index>=0){
+
+    
+      console.log("matched index to fetch price details ====",index)
+      if(type==='Month'){
+
+       
+        console.log("fetched erpPrice for month===", this.cartDetails[index].priceList[1])
+  
+        return this.cartDetails[index].priceList[1]
+      }
+      else{
+        return this.cartDetails[index].priceList[0]
+      }
+    }
+
+    else {
+    
+      console.log("came as new product ==",this.newProductLists.length,"======",this.newProductLists[0])
+      if(type==='Month'){
+
+       
+        return this.newProductLists[0].priceList[1]
+      }
+      else{
+        return this.newProductLists[0].priceList[0]
+      }
+
+    }
+  }
+
+
+  }
+
+  getERPPrice(items: any) {
+    console.log("fetch distributor for ", items.line_item_id)
+    console.log("this.cartDetails  ", this.cartDetails)
+    if (items.line_item_id) {
+
+
+      var index = this.cartDetails.findIndex(el => el.estimateLineItemId === items.line_item_id);
+      console.log("fetched erpPrice===", this.cartDetails[index].erpPrice)
+
+      return this.cartDetails[index].erpPrice
+    }
+    else {
+      return items.priceList[0].erpPrice
+
+    }
+
+
+  }
+
   initiatForm(): FormGroup {
     return this.fb.group({
       name: ['', Validators.required],
       quantity: ['', [Validators.required]],
       priceType: ['', [Validators.required]],
-      distributorPrice: ['', [Validators.required]],
+      distributorPrice: ['', null],
+      erp_price: ['', null],
       bcy_rate: ['', [Validators.min(10)]],
       tax_name: ['', Validators.required],
       item_total: ['', Validators.required],
@@ -254,11 +344,14 @@ export class ProductsListTableComponent implements OnInit {
   createNewAppWithValues(data): FormGroup {
 
     let priceListValues = data.priceList[0];
+    this.newProductLists.push(data)
+
     return this.fb.group({
       name: [data.name, Validators.required],
       quantity: [1, [Validators.required]],
       priceType: ['Year', [Validators.required]],
       distributorPrice: [parseFloat(priceListValues.distributorPrice).toFixed(2), [Validators.min(10)]],
+      erp_price: [parseFloat(priceListValues.ERPPrice).toFixed(2), [Validators.min(10)]],
       bcy_rate: [parseFloat(priceListValues.price.toFixed(2)), [Validators.min(10)]],
       tax_name: ['', null],
       item_total: [priceListValues.price, null],
@@ -325,6 +418,8 @@ export class ProductsListTableComponent implements OnInit {
 
   public setRequestData() {
 
+    console.log("passin gcrm data from parent page ==",this.crmData)
+
     let assignTo = this.crmData.assignTo;
     let createdBy = this.crmData.createdBy;
     let cartData = this.crmData.cartData;
@@ -335,8 +430,8 @@ export class ProductsListTableComponent implements OnInit {
 
     let prdArray = this.setProductsList();
     let req = {
-      "userId": createdBy._id ? createdBy._id : '',
-      "createdBy": createdBy.createdBy ? createdBy.createdBy : '',
+      "userId": this.cartData.userId,
+      "createdBy": createdBy._id ? createdBy._id : '',
       "products": prdArray,
       /*"products": [
           {
@@ -417,7 +512,8 @@ export class ProductsListTableComponent implements OnInit {
 
       if (index >= 0) {
 
-        console.log("++++++++======== req curent product from cart", element.value);
+        console.log("++++++++======== req curent product from Form", element.value);
+        console.log("++++++++======== req curent product from cart",  this.cartDetails[index].priceList);
         let tempArray = {
           "productId": this.cartDetails[index].productId,
           "quantity": element.value.quantity,
@@ -427,7 +523,8 @@ export class ProductsListTableComponent implements OnInit {
           "discountRate": this.cartDetails[index].discountRate,
           "priceType": this.cartDetails[index].priceType,
           "distributorPrice": this.cartDetails[index].distributorPrice,
-          "itemTotal": element.value.bcy_rate * element.value.quantity
+          "itemTotal": element.value.bcy_rate * element.value.quantity,
+          "priceList": this.cartDetails[index].priceList
         }
 
         this.productsList.push(tempArray);
@@ -439,7 +536,7 @@ export class ProductsListTableComponent implements OnInit {
         console.log("_+_+_+_ Came here 2", this.newlyAddedAppList);
 
         let item = this.newlyAddedAppList.find(x => x._id + 'temp' === element.value.line_items_id);
-
+        console.log("_+_+_+_ Came here as pushing new product", item.priceList);
 
         if (item) {
           console.log("_+_+_+_ Came here 3", item);
@@ -452,7 +549,9 @@ export class ProductsListTableComponent implements OnInit {
             "discountRate": item.priceList[0].discountRate,
             "priceType": item.priceList[0].priceType,
             "distributorPrice": item.priceList[0].distributorPrice,
-            "itemTotal": element.value.bcy_rate * element.value.quantity
+            "itemTotal": element.value.bcy_rate * element.value.quantity,
+            "priceList":item.priceList
+
           }
 
           this.productsList.push(tempArray);
@@ -496,23 +595,53 @@ export class ProductsListTableComponent implements OnInit {
   }
 
 
-  public onSelectChange(event, i) {
-    console.log("_+_+_+_+_ event", event.target.value);
-    if (event.target.value === 'Year') {
-      this.cartData[i].itemTotal = this.cartData[i].quantity * this.cartData[i].priceList[0].price;
-      this.cartData[i].price = this.cartData[i].priceList[0].price;
-      this.cartData[i].priceType = 'Year';
-      this.cartData[i].erpPrice = Number(this.cartData[i].priceList[0].ERPPrice);
+  public onSelectChange(event, item) {
+    var type=event.target.value;
+
+
+    var lineItemId=item.get('line_items_id')
+    console.log("passing curent line Iyem to fetch full price List ",lineItemId)
+
+
+    switch (type) {
+      case 'Month':
+        let currentPrice=this.getPriceByType(lineItemId,type )
+        console.log("fetched pricelistdata  for month===",currentPrice)
+        let quanTotal = item.get('quantity').value * currentPrice.price;
+        item.get('bcy_rate').setValue(currentPrice.price.toFixed(2));
+        item.get('distributorPrice').setValue(currentPrice.distributorPrice);
+        item.get('erp_price').setValue(currentPrice.ERPPrice);
+        item.get('item_total').setValue(quanTotal.toFixed(2));
+        return;
+
+      case 'Year':
+        let currentPrice1=this.getPriceByType(lineItemId,type )
+        console.log("fetched pricelistdata  for year===",currentPrice1)
+        let quanTotal1 = item.get('quantity').value * currentPrice1.price;
+        item.get('bcy_rate').setValue(currentPrice1.price.toFixed(2));
+        item.get('distributorPrice').setValue(currentPrice1.distributorPrice);
+        item.get('erp_price').setValue(currentPrice1.ERPPrice);
+        item.get('item_total').setValue(quanTotal1.toFixed(2));
+        return;
+
+      default:
+        return null;
     }
-    else {
-      this.cartData[i].itemTotal = this.cartData[i].quantity * this.cartData[i].priceList[1].price;
-      this.cartData[i].price = this.cartData[i].priceList[1].price;
-      this.cartData[i].priceType = 'Month';
-      this.cartData[i].erpPrice = Number(this.cartData[i].priceList[1].ERPPrice);
-    }
+
 
 
   }
+
+
+
+
+    
+   
+
+
+  
+
+
 
 
 }
