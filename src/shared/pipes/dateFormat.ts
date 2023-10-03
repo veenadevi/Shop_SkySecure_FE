@@ -24,7 +24,9 @@ export class DateFormatPipe implements PipeTransform {
     var date = new  Date (value);
     //console.log(date.toDateString());
 
-    return date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear();
+    var month = date.getMonth();
+
+    return date.getDate() + '-' + (month+1) + '-' + date.getFullYear();
     //return date;
   }
 }
