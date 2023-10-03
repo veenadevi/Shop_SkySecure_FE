@@ -59,7 +59,8 @@ export class InviteUserComponent {
         //"isRegistered":false,
         //"isCustomer":false,
         "companyName": formData.companyName,
-        "inviteReason":formData.reason,
+        // "inviteReason":formData.reason,
+        "inviteReason":"newUserInvite",
         //"createdBy":"6516ba041c0858005370d13f",
         //"updatedBy":"6516ba041c0858005370d13f"
       }
