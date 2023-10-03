@@ -81,7 +81,7 @@ export class AddNewChannelPartnerComponent {
       stateName: [''],
       cityName: [''],
       postalCode: [''],
-      credit: [''],
+      credit: ['0'],
       userName:['', [Validators.required, Validators.required]],
       EmailId: ['', [Validators.required, Validators.email]],
       phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
