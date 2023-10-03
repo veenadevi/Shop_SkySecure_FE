@@ -507,7 +507,7 @@ export class ProductListTableComponent {
           "price": element.value.bcy_rate,
           "erpPrice": this.cartDetails[index].erpPrice,
           "discountRate": this.cartDetails[index].discountRate,
-          "priceType": this.cartDetails[index].priceType,
+          "priceType": element.value.priceType,
           "distributorPrice": this.cartDetails[index].distributorPrice,
           "itemTotal": element.value.bcy_rate * element.value.quantity,
           "priceList": this.cartDetails[index].priceList

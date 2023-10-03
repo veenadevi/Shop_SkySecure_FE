@@ -34,7 +34,7 @@
             <div class="td-column price-details">
               <span>
               <!-- {{ item.priceType}} -->
-              <select class="type"  (change)="onSelectChange($event,group)">
+              <select class="type"  formControlName="priceType" (change)="onSelectChange($event,group)">
                 <option class="type" *ngFor="let opt of firstSelectOptions" [value]="opt">
                    {{ opt }}
                 </option>
