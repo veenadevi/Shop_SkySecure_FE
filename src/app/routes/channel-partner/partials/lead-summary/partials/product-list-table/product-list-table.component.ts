@@ -82,9 +82,9 @@ export class ProductListTableComponent {
     this.enableEdit = false
     this.showMsg = false
     this.cartDetails = (this.cartData.CartDetails && this.cartData.CartDetails.length > 0) ? this.cartData.CartDetails : null;
-   
-   console.log("in parent settign current cartdetails ====",this.cartDetails)
+ 
     this.setSampleData();
+  
 
   }
 
@@ -128,13 +128,13 @@ export class ProductListTableComponent {
 
     if (index >= 0) {
 
-      console.log("in exsiting product price change===for ",index)
+      
 
       let editedRate = item.get('bcy_rate').value;
-      console.log("in exsiting product price change===editedRate ",editedRate)
+      
 
       let priceType = item.get('priceType').value;
-      console.log("in exsiting product price change===priceType ",priceType)
+   
 
 
       let calculatedDistributarPrice = item.get('distributorPrice').value
@@ -144,8 +144,7 @@ export class ProductListTableComponent {
 
       let calcRate = calculatedDistributarPrice;
 
-      console.log("calculatedERPPrice froms screen ===",calculatedERPPrice)
-      console.log("distributorPrice froms screen ===",calculatedDistributarPrice)
+    
 
       if (editedRate < calcRate || editedRate > calculatedERPPrice ) {
 
@@ -160,9 +159,9 @@ export class ProductListTableComponent {
 
     }
     else {
-      console.log("_+_+_+_+ Came here ");
+      
       let data = this.newlyAddedAppList.find(x => x._id + 'temp' === item.get('line_items_id').value);
-      console.log("_+_+_+_+ Came here with data", item.get('line_items_id').value);
+      
       if (data) {
         let editedRate = item.get('bcy_rate').value;
         let calculatedDistributarPrice = data.priceList[0].distributorPrice;
@@ -204,12 +203,13 @@ export class ProductListTableComponent {
          });*/
         var tempDescription = items.description
         var name = tempDescription.substring(0, tempDescription.lastIndexOf("-")).trim()
-        var priceType = tempDescription.substring(tempDescription.lastIndexOf("-") + 1).trim()
-        console.log("_+_+_+_ Value ", name);
+        var priceType = tempDescription.substring(tempDescription.lastIndexOf("-") + 1).trim();
+       
         const grp = this.fb.group({
 
           name: [name, Validators.required],
           priceType: [priceType, Validators.required],
+          //priceType : [''],
           distributorPrice: parseFloat(this.getDistributorPrice(items).toFixed(2)),
           quantity: [items.quantity, [Validators.required]],
           bcy_rate: [items.bcy_rate, [Validators.min(10)]],
@@ -244,13 +244,12 @@ export class ProductListTableComponent {
   }
 
   getDistributorPrice(items: any) {
-    console.log("fetch distributor for ", items.line_item_id)
-    console.log("this.cartDetails  ", this.cartDetails)
+    
     if (items.line_item_id) {
 
 
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === items.line_item_id);
-      console.log("fetched disprice===", this.cartDetails[index].distributorPrice)
+      
 
       return this.cartDetails[index].distributorPrice
     }
@@ -263,18 +262,17 @@ export class ProductListTableComponent {
   }
 
   getPriceByType(lineItemId: any,type:String) {
-    console.log("fetch distributor for getPriceByType  ", lineItemId.value)
-    console.log("this.cartDetails in  getPriceByType", this.cartDetails)
+    
     if (lineItemId) {
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === lineItemId.value);
       if(index>=0){
 
     
-      console.log("matched index to fetch price details ====",index)
+      
       if(type==='Month'){
 
        
-        console.log("fetched erpPrice for month===", this.cartDetails[index].priceList[1])
+        
   
         return this.cartDetails[index].priceList[1]
       }
@@ -285,7 +283,7 @@ export class ProductListTableComponent {
 
     else {
     
-      console.log("came as new product ==",this.newProductLists.length,"======",this.newProductLists[0])
+     
       if(type==='Month'){
 
        
@@ -302,13 +300,12 @@ export class ProductListTableComponent {
   }
 
   getERPPrice(items: any) {
-    console.log("fetch distributor for ", items.line_item_id)
-    console.log("this.cartDetails  ", this.cartDetails)
+    
     if (items.line_item_id) {
 
 
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === items.line_item_id);
-      console.log("fetched erpPrice===", this.cartDetails[index].erpPrice)
+      
 
       return this.cartDetails[index].erpPrice
     }
@@ -366,7 +363,7 @@ export class ProductListTableComponent {
     modalRef.componentInstance.request = queryParams;
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
 
-      console.log("+_+_+_+ Received Entry", receivedEntry);
+      
 
       let control = <FormArray>this.productListForm.get('items');
       //control.push(this.initiatForm());
@@ -397,7 +394,7 @@ export class ProductListTableComponent {
 
 
     let request = this.setRequestData();
-    //console.log("+_+_+_+_+_ Res Data ", request);
+
 
     this.subscription.push(
       this.cartService.editQuotation(request).subscribe(res => {
@@ -411,7 +408,6 @@ export class ProductListTableComponent {
 
   public setRequestData() {
 
-    console.log("passin gcrm data from parent page ==",this.crmData)
 
     let assignTo = this.crmData.assignTo;
     let createdBy = this.crmData.createdBy;
@@ -483,7 +479,7 @@ export class ProductListTableComponent {
       "zohoBookContactId": zohoBookContactData.contact_id
     }
 
-    //console.log("++++++++======== req ", req);
+   
 
     return req;
   }
@@ -495,18 +491,15 @@ export class ProductListTableComponent {
 
     this.getFormData.controls.forEach(element => {
 
-      console.log("first element id==", element.value.line_items_id)
+      
 
 
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === element.value.line_items_id);
-      console.log("matched in cart items  el.estimateLineItemId==", element.value.line_items_id)
-
-      console.log("matched in cart items==", index)
+  
 
       if (index >= 0) {
 
-        console.log("++++++++======== req curent product from Form", element.value);
-        console.log("++++++++======== req curent product from cart",  this.cartDetails[index].priceList);
+       
         let tempArray = {
           "productId": this.cartDetails[index].productId,
           "quantity": element.value.quantity,
@@ -525,14 +518,13 @@ export class ProductListTableComponent {
       }
       else {
 
-        console.log("_+_+_+_ Came here 1", element.value);
-        console.log("_+_+_+_ Came here 2", this.newlyAddedAppList);
+      
 
         let item = this.newlyAddedAppList.find(x => x._id + 'temp' === element.value.line_items_id);
-        console.log("_+_+_+_ Came here as pushing new product", item.priceList);
+       
 
         if (item) {
-          console.log("_+_+_+_ Came here 3", item);
+          
           let tempArray = {
             "productId": item._id,
             "quantity": element.value.quantity,
@@ -575,8 +567,7 @@ export class ProductListTableComponent {
     });
 
 
-    console.log("++++++++======== Products ", this.productsList);
-    //console.log("++++++++======== Products ", this.cartDetails);
+  
 
 
     return this.productsList;
@@ -593,13 +584,13 @@ export class ProductListTableComponent {
 
 
     var lineItemId=item.get('line_items_id')
-    console.log("passing curent line Iyem to fetch full price List ",lineItemId)
+  
 
 
     switch (type) {
       case 'Month':
         let currentPrice=this.getPriceByType(lineItemId,type )
-        console.log("fetched pricelistdata  for month===",currentPrice)
+        
         let quanTotal = item.get('quantity').value * currentPrice.price;
         item.get('bcy_rate').setValue(currentPrice.price.toFixed(2));
         item.get('distributorPrice').setValue(currentPrice.distributorPrice);
@@ -609,7 +600,7 @@ export class ProductListTableComponent {
 
       case 'Year':
         let currentPrice1=this.getPriceByType(lineItemId,type )
-        console.log("fetched pricelistdata  for year===",currentPrice1)
+       
         let quanTotal1 = item.get('quantity').value * currentPrice1.price;
         item.get('bcy_rate').setValue(currentPrice1.price.toFixed(2));
         item.get('distributorPrice').setValue(currentPrice1.distributorPrice);
@@ -624,6 +615,8 @@ export class ProductListTableComponent {
 
 
   }
+
+
 
 
 
