@@ -212,11 +212,8 @@
     align-items: center; */
 
     position: fixed;
-
-    bottom: 350px;
- 
-    left: 68px;
- 
+    bottom: 15px;
+    left: 4rem;
     z-index: 100;  
   
     
