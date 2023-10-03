@@ -51,7 +51,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { loginRequest, msalConfig } from './auth-config';
 import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
-import { ChannelPartnerComponent } from './routes/channel-partner/channel-partner.component';
+
 
 
 
@@ -131,8 +131,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 
   ],
   declarations: [
-    AppComponent,
-    ChannelPartnerComponent,
+    AppComponent
+   
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -24,8 +24,11 @@ export class AdminPageService {
   private getAllusersURL:string
   private updateUserRoleURL:string
   private getAllMarketPlaceAccountListURL:string
+  private getAllChannelLeadListURL:string
   private getMyMarketPlaceAccountListURL:string
-  private addChannelPartnerURL:string
+  private addChannelPartnerURL:string;
+
+  private inviteUsersURL : string;
 
 
 
@@ -48,6 +51,8 @@ export class AdminPageService {
     this.updateUserRoleURL=AppService.appUrl.updateUserRole;
     this.getAllMarketPlaceAccountListURL=AppService.appUrl.getAllMarketPlaceAccountListURL;
     this.addChannelPartnerURL=AppService.appUrl.addChannelPartnerURL;
+    this.getAllChannelLeadListURL=AppService.appUrl.getMyChannelLeadList;
+    this.inviteUsersURL = AppService.appUrl.inviteUsers;
  
 
     
@@ -98,6 +103,29 @@ export class AdminPageService {
 
     return request$;
   }
+
+  public getMyChannelLeadList(adminUserId:any) : Observable<any> {
+
+    let url = this.baseUrlForQuote + this.getAllChannelLeadListURL + '/' + adminUserId;;
+
+    
+
+    //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+
 
   public getAllAccounts() : Observable<any> {
 
@@ -378,6 +406,32 @@ console.log("+++++++ ____ _ addChannelPartner", request);
     );
 
   return REQUEST$;
+}
+
+
+
+public inviteUsers( request : any): Observable<any> {
+
+  let url = this.baseUrlForUsers + this.inviteUsersURL;
+
+  
+  let request$ = this.http.post(url, request)
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+
+        return response;
+      }),
+      catchError(error => {
+        // create operation mapping for http exception handling 
+        return (error);
+      })
+    );
+
+  return request$;
+
 }
 
 

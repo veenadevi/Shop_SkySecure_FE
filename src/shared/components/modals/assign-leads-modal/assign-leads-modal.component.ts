@@ -143,7 +143,7 @@ export class AssignLeadsModalComponent implements OnInit{
    console.log("++_+_+_+_+_+_+_+ _Data here", this.request);
 
 
-    console.log("closignn date ===",this.closingDate.toISOString())
+    //console.log("closignn date ===",this.closingDate.toISOString())
 
 
 
@@ -169,16 +169,19 @@ export class AssignLeadsModalComponent implements OnInit{
    
     this.subscriptions.push(
       this.superAdminService.assignChannelPartner(req).subscribe(res=>{
-        console.log("++_+_+_+_+_+_+_+ _Response", res);
+        
        // if(res && res.assignownerResult && res.assignownerResult.code === 'SUCCESS'){
         if(res){
          //  res.assignownerResult.ownerName = this.selectedUser;
+         res['assignedName'] = this.selectedUser.name
            this.passedData.emit(res);
           this.activeModal.close();
         }
         
       })
     )
+
+    //this.passedData.emit("ABCD")
     
   }
 

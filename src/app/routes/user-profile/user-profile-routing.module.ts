@@ -3,11 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { QuotationHistoryComponent } from './partials/quotation-history/quotation-history.component';
 import { UserProfileComponent } from './user-profile.component';
 import { ProfileViewComponent } from './partials/profile-view/profile-view.component';
+import { QuotationSummaryComponent } from './partials/quotation-history/partials/quotation-summary/quotation-summary.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: UserProfileComponent,
+    // component: UserProfileComponent,
     children: [
       {
         canActivate: [],
@@ -18,7 +19,12 @@ const routes: Routes = [
         canActivate: [],
         path: 'profile-view',
         component : ProfileViewComponent
-      }
+      },
+      {
+        canActivate: [],
+        path: 'quotation-summary',
+        component : QuotationSummaryComponent
+      },
       
     ]
     /*data: {

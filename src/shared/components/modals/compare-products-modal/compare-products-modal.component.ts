@@ -90,6 +90,7 @@ export class CompareProductsModalComponent {
     this.subscriptions.push(
       this.productList$.subscribe(res=>{
         res;
+        console.log(res,"res")
       })
     )
     
@@ -141,21 +142,13 @@ export class CompareProductsModalComponent {
     
     this.productList = this.productList.filter(function(item) {
       return item._id != $event;
-    });
-
-    //localStorage.setItem('product_list_to_compare', JSON.stringify(this.productList));
-
-
-    localStorage.setItem('compare_products_list', JSON.stringify(this.productList));
-    
-    //this.compareProductsStore.setCompareProductsList(this.productList);
-    //this.compareProductsStore.setCompareProductsList2(this.productList);
-    
+    }); 
+    localStorage.setItem('compare_products_list', JSON.stringify(this.productList)); 
     this.compareProductsStore.setCompareProductsList(this.productList);
 
-    console.log("_+_+_+_ ^&^&^& Remoevd Item ", this.productList);
+    console.log("Remoevd Item ", this.productList);
     
-    //this.compareProductsStore.setProductsCheckedList(this.productList);
+    this.compareProductsStore.setProductsCheckedList(this.productList);
     
   }
 

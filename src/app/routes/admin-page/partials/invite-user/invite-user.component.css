@@ -68,3 +68,13 @@ select{
     width: 50%;
     text-align: center;
 }
+
+.messgae-holder{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.message-content{
+    width:40%;
+}

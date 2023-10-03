@@ -49,6 +49,7 @@
         "validateOTP" : "api/user/validateOTP",
         "getAllUsers":"api/admin/getAllusers",
         "updateUserRole":"api/admin/updateUserRole",
+        "inviteUsers" : "api/user/inviteuser",
 
 
         "app-registration" : "api/user/azure/app-registration",
@@ -73,7 +74,9 @@
         "assignAccountOwner" :  "api/admin/assignAccountOwner",
         "getMarketplaceAccountDetailsById" : "api/getMarketplaceAccountDetailsById",
         "getAllMarketPlaceAccountListURL":"api/admin/getAllMarketPlaceAccountList",
-        "getMyMarketPlaceAccountListURL":"api/admin/getMyMarketplaceAccountList",
+        "getMyChannelLeadList":"api/admin/getMyChannelAccountList",
+
+        "getMyMarketPlaceAccountListURL":"api/user/getMyMarketplaceAccountList",
 
         "addChannelPartnerURL":"/api/user/channel-partner",
         "getAllChannelPartner" : "/api/user/channel-partner",

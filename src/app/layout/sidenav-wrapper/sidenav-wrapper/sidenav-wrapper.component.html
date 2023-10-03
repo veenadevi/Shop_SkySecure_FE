@@ -70,13 +70,13 @@
 
          <!-- ChannelPartnerSection -->
 
-          <ng-container *ngIf="userRoleVal === 'admin'|| userRoleVal === 'superadmin'">
+          <ng-container *ngIf="userRoleVal === 'ChannelPartnerAdmin' ">
 
             <mat-list-item>
-              <span class="icon-holder" (click)="menuExpansion(isExpanded , 'am')">
+              <span class="icon-holder" (click)="menuExpansion(isExpanded , 'cp')">
                 <img src="../../../../assets/icons/AccountManager.svg">
               </span>
-              <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('am')">
+              <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('cp')">
                   <span class="text-style">
                    Channal Partner 
                   </span>
@@ -85,14 +85,14 @@
             </mat-list-item>
     
           
-            <ng-container *ngIf="amSubMenu">
+            <ng-container *ngIf="cpSubMenu">
            
               <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" (click)="routeEvent('amAccounts')">Accounts</span>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click)="routeEvent('cpMyChannelLeads')">My Leads</span>
               </mat-list-item> 
-              <mat-list-item>
+              <!-- <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
-              </mat-list-item>
+              </mat-list-item> -->
               
              
 
@@ -137,7 +137,7 @@
                 <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
               </mat-list-item> -->
               <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminMarketPlaceUser')">Marketplace User</span>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminMarketPlaceUser')">All Users</span>
               </mat-list-item>
 
               <!-- <mat-list-item>
@@ -147,7 +147,7 @@
 
              
               <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('saddNewChannelPartner')">Add New Channel Partner</span>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('saddNewChannelPartner')">Add Channel Partner</span>
               </mat-list-item>
 
               <mat-list-item>

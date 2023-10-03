@@ -3,12 +3,12 @@
     <div class="invite-content">
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
             <div class="forms">
-                <label for="firstname">FirstName</label>
+                <label for="firstname">First Name</label>
                 <input type="text" id="firstName" name="firstName" formControlName="firstName" placeholder="Enter the FirstName">
               
               </div>
               <div class="forms">
-                <label for="lastName">LastName</label>
+                <label for="lastName">Last Name</label>
                 <input type="text" id="lastName" name="lastName" formControlName="lastName" placeholder="Enter the lastName">
               
               </div>
@@ -45,10 +45,29 @@
                 <label for="companyName">CompanyName</label>
                 <input type="text" id="companyName" name="companyName" formControlName="companyName" placeholder="Enter the company Name">
               
-              </div>
+            </div>
+<!-- 
+            <div class="forms">
+              <label for="companyName">Reason</label>
+              <input type="text" id="reason" name="reason" formControlName="reason" placeholder="Enter the Reason">
+            </div> -->
+
             <div class="button">
               <button class="btn primary-btn" type="submit" [disabled]="myForm.invalid">Submit</button>
             </div>
+            
           </form>
+          
     </div>
+    <div class="messgae-holder" *ngIf="showMsg">
+      <div class="row message-content">
+        <div class="col-xs-12">
+            <p class="alert alert-success">
+                <strong>User Invited Successfully !</strong>
+  
+            </p>
+        </div>
+      </div>
+    </div>
+    
 </div>
