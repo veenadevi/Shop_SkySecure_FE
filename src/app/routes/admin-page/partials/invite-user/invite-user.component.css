@@ -1,0 +1,80 @@
+.invite-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+font-family: 'lato',sans-serif;
+padding: 20px 0 20px 0;
+
+}
+h1{
+    font-size: 18px;
+font-weight: bold;
+text-align: center;
+
+}
+.invite-content{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 10%;
+    padding-left: 25%;
+}
+
+.forms{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.forms-01{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 15%;
+}
+.forms-02{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 85%;
+}
+label{
+    font-size: 14px;
+}
+
+input{
+    width: 50%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+select{
+    width: 70%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.mobile-field{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.mobile{
+    width: 41%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.button{
+    width: 50%;
+    text-align: center;
+}
+
+.messgae-holder{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.message-content{
+    width:40%;
+}

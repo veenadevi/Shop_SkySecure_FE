@@ -11,15 +11,17 @@
         <th class="product-name">Product Name</th>
         <th>Quantity</th>
         <th>Purchase Type</th>
-        <th>Distributor Price</th>
         <th>Item Price</th>
+        <th>Distributor Price</th>
+        <th>MRP Price</th>
+       
      
         <th>Total  <span class="gst">(GST Extra)</span></th>
         <th></th>
         
       </thead>
       <tbody formArrayName="items" *ngFor="let group of getFormData.controls; let i=index">
-        <tr [formGroupName]="i">
+        <tr [formGroupName]="i">   
           <td class="form-group product-name">
             <input type="text" class="form-control" formControlName="name" placeholder="name" readonly>
             <span class="text-danger" *ngIf="group.get('name').touched && group.get('name').invalid">Name is required</span>
@@ -29,23 +31,43 @@
             <span class="text-danger" *ngIf="group.get('quantity').touched && group.get('quantity')?.hasError('required')">Quantity required</span>
           </td>
           <td class="form-group">
-            <input type="text" class="form-control" formControlName="priceType" placeholder="priceType" (change)="valueChanged($event, group, 'priceType')">
+            <!-- <input type="text" class="form-control" formControlName="priceType" placeholder="priceType" (change)="valueChanged($event, group, 'priceType')"> -->
             
+            <div class="td-column price-details">
+              <span>
+              <!-- {{ item.priceType}} -->
+              <select class="type"  formControlName="priceType" (change)="onSelectChange($event,group)">
+                <option class="type" *ngFor="let opt of firstSelectOptions" [value]="opt">
+                   {{ opt }}
+                </option>
+               </select> 
+              </span>
+            </div>
+        
+        
           </td>
-          <td class="form-group">
-            <input type="text" class="form-control" formControlName="distributorPrice" placeholder="distributorPrice" >
-            
-          </td>
+       
 
           
           <td class="form-group">
             <input type="text" class="form-control" (change)="priceChanged($event, group, i)" formControlName="bcy_rate" placeholder="bcy_rate">
             <span class="text-danger" *ngIf="group.get('bcy_rate').touched && group.get('bcy_rate')?.hasError('required')">Amount required</span>
-            <span class="text-danger" *ngIf="group.get('bcy_rate')?.hasError('invalid')">Price Cannot Go beyond Distributor price</span>
+            <span class="text-danger" *ngIf="group.get('bcy_rate')?.hasError('invalid')">Item price must be between Distributor Price and MRP</span>
+          </td>
+
+
+          <td class="form-group">
+            <input type="text" class="form-control"  readonly    formControlName="distributorPrice" placeholder="distributorPrice" >
+            
+          </td>
+
+          <td class="form-group">
+            <input type="text" class="form-control"  readonly    formControlName="erp_price" placeholder="erp_price" >
+            
           </td>
         
           <td class="form-group">
-            <input type="text" class="form-control" formControlName="item_total" placeholder="item_total" readonly>
+            <input type="text" class="form-control" readonly formControlName="item_total" placeholder="item_total" readonly>
             <span class="text-danger" *ngIf="group.get('item_total').touched && group.get('item_total')?.hasError('required')">Total required</span>
           </td>
           
@@ -109,6 +131,7 @@
           <td>{{ account.productName }}</td>
           <td>{{ account.quantity}}</td>
           <td>{{ account.priceType }}</td>
+         
           <td>{{ account.price | number : '1.2-2' }}</td>
           <td>{{ account.price *  account.quantity | number : '1.2-2' }}</td>
           <td>

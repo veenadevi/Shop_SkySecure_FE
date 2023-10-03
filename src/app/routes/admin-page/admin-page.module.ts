@@ -16,6 +16,7 @@ import { AddNewProductComponent } from './partials/add-new-product/add-new-produ
 import { UploadProductPriceComponent } from './partials/upload-product-price/upload-product-price.component';
 import { EditProductComponent } from './partials/edit-product/edit-product.component';
 import { UpdateblogComponent } from './partials/updateblog/updateblog.component';
+import { InviteUserComponent } from './partials/invite-user/invite-user.component';
 
 
 
@@ -34,7 +35,8 @@ import { UpdateblogComponent } from './partials/updateblog/updateblog.component'
     AddNewProductComponent,
     UploadProductPriceComponent,
     EditProductComponent,
-    UpdateblogComponent
+    UpdateblogComponent,
+    InviteUserComponent
   ],
   imports: [
     CommonModule,

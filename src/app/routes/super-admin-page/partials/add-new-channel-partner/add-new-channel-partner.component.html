@@ -1,6 +1,6 @@
 <div class="partner-container">
     <div class="content">
-        <h3>Add New Channel Partner </h3>
+        <h3>Add Channel Partner </h3>
         <form [formGroup]="myForm">
             <div class="partner-name">
 
@@ -60,7 +60,7 @@
             </div>
             <div class="section-02">
                 <div class="credit">
-                    <label>Credit Worthyness</label>
+                    <label>Credit Worthyness*</label>
                     <input formControlName="credit" type="number" class="form-control-02" name="Locality" id="credit"
                         placeholder="Enter Credit Worthyness" required>
                 </div>
@@ -111,11 +111,24 @@
                         </div>
                     </ng-container>
                     <ng-template #userSelect>
-                        <div class="card flex justify-content-center">
-                            <p-dropdown appendTo="body" (onChange)="onDropDownChange($event)" [options]="usersList" optionLabel="firstName" [filter]="true" filterBy="firstName" [showClear]="true" placeholder="Select User">
+                        <div class="label">
+                          
+                        </div>
+                        <div class="select"> 
+                            <label>Select User</label>
+
+                            <select class="custom-select" (change)="onDropDownChange($event)">
+                           
+                            <option value="">--Select User as Admin--</option>
+                            <option *ngFor="let user of usersList" [value]="user._id">{{user.firstName}}</option>
+                        </select>
+
+
+
+                            <!-- <p-dropdown class='custom-select-03' appendTo="body" (onChange)="onDropDownChange($event)" [options]="usersList" optionLabel="firstName" [filter]="true" filterBy="firstName" [showClear]="true" placeholder="Select User">
                                 <ng-template pTemplate="selectedItem">
                                     <div class="flex align-items-center gap-2">
-                                        <!-- <div>{{ selectedCountry.name }}</div> -->
+                                       
                                         <div> {{selectedCSP.firstName}}</div>
                                     </div>
                                 </ng-template>
@@ -124,7 +137,7 @@
                                         <div>{{ csp.firstName }}</div>
                                     </div>
                                 </ng-template>
-                            </p-dropdown>
+                            </p-dropdown> -->
                         </div>
                     </ng-template>
                     
@@ -175,7 +188,14 @@
                     <button class="btn primary" (click)="submitForm()">Add Channel Partner</button>
                 </ng-container>
             </div>
+            <div class="row" *ngIf="showMsg">
+                <div class="col-xs-12">
+                    <p class="alert alert-success">
+                        <strong>Channal Partner Created Successfully !</strong>
 
+                    </p>
+                </div>
+            </div>
 
 
         </form>

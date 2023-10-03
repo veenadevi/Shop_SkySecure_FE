@@ -6,6 +6,7 @@ import { MarketplaceuserComponent } from './partials/marketplaceuser/marketplace
 import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.component';
 import { AssignUsersAndRolesComponent } from './partials/assign-users-and-roles/assign-users-and-roles.component';
 import { AddNewChannelPartnerComponent } from './partials/add-new-channel-partner/add-new-channel-partner.component';
+import { ViewChannelPartnersListComponent } from './partials/view-channel-partners-list/view-channel-partners-list.component';
 
 
 const routes: Routes = [{
@@ -42,6 +43,11 @@ const routes: Routes = [{
       canActivate: [],
       path: 'add-new-channel-partner',
       component : AddNewChannelPartnerComponent 
+    },
+    {
+      canActivate: [],
+      path: 'view-channel-partners-list',
+      component : ViewChannelPartnersListComponent 
     }
     
   ]
