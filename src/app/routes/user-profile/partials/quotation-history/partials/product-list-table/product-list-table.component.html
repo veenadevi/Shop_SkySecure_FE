@@ -1,0 +1,167 @@
+<div class="selected-products-header">Selected Products</div>
+
+<!-- Products Table-->
+<ng-container *ngIf="isEstimate; else cartDetails">
+ 
+
+
+<form [formGroup]="productListForm">
+    <table class="table">
+      <thead>
+        <th class="product-name">Product Name</th>
+        <th>Quantity</th>
+        <th>Purchase Type</th>
+        <th>Item Price</th>
+       
+     
+        <th>Total  <span class="gst">(GST Extra)</span></th>
+        <th></th>
+        
+      </thead>
+      <tbody formArrayName="items" *ngFor="let group of getFormData.controls; let i=index">
+        <tr [formGroupName]="i">   
+          <td class="form-group product-name">
+            <input type="text" class="form-control" formControlName="name" placeholder="name" readonly>
+            <span class="text-danger" *ngIf="group.get('name').touched && group.get('name').invalid">Name is required</span>
+          </td>
+          <td class="form-group">
+            <input type="text" class="form-control" formControlName="quantity" placeholder="quantity" (change)="valueChanged($event, group, 'quantity')">
+            <span class="text-danger" *ngIf="group.get('quantity').touched && group.get('quantity')?.hasError('required')">Quantity required</span>
+          </td>
+          <td class="form-group">
+            <!-- <input type="text" class="form-control" formControlName="priceType" placeholder="priceType" (change)="valueChanged($event, group, 'priceType')"> -->
+            
+            <div class="td-column price-details">
+              <span>
+              <!-- {{ item.priceType}} -->
+              <select class="type"  (change)="onSelectChange($event,group)">
+                <option class="type" *ngFor="let opt of firstSelectOptions" [value]="opt">
+                   {{ opt }}
+                </option>
+               </select> 
+              </span>
+            </div>
+        
+        
+          </td>
+       
+
+          
+          <td class="form-group">
+            <input type="text" class="form-control" readonly formControlName="bcy_rate" placeholder="bcy_rate">
+           
+          </td>
+
+
+         
+        
+          <td class="form-group">
+            <input type="text" class="form-control" readonly formControlName="item_total" placeholder="item_total" readonly>
+            <span class="text-danger" *ngIf="group.get('item_total').touched && group.get('item_total')?.hasError('required')">Total required</span>
+          </td>
+          
+          <td>
+            <button (click)="remove(i)" class="btn secondary-btn btn-color">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</form>
+
+  <div class="action-btn-holder">
+      <div class="add-new-btn">
+        <button (click)="addApp()" class="btn primary-btn">Add new</button>
+    </div>
+    <ng-container >
+    <div class="add-new-btn">
+      <button [disabled]="enableEdit" (click)="saveChanges()" class="btn primary-btn">Resend Estimate</button>
+    </div>
+  </ng-container>
+
+  </div>
+  <div class="row" *ngIf="showMsg">
+    <div class="col-xs-12">
+        <p class="alert alert-success">
+            <strong>Estimate Sent Successfully !</strong>
+
+        </p>
+    </div>
+</div>
+
+</ng-container>
+
+<ng-template #cartDetails>
+  
+  <p-table 
+  [value]="fullCartListData" 
+  [tableStyle]="{ 'min-width': '60rem' }"
+  
+  >
+  <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
+  <ng-template pTemplate="header">
+      <tr class="thfont">
+         
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Type</th>
+          <th>Price</th>
+        
+          <th>Total</th>
+
+
+          <th> </th>
+      </tr>
+  </ng-template>
+  
+
+  <ng-template pTemplate="body" let-account let-i="rowIndex">
+      <tr class="trfont">
+          
+          <td>{{ account.productName }}</td>
+          <td>{{ account.quantity}}</td>
+          <td>{{ account.priceType }}</td>
+         
+          <td>{{ account.price | number : '1.2-2' }}</td>
+          <td>{{ account.price *  account.quantity | number : '1.2-2' }}</td>
+          <td>
+
+              <ng-container *ngIf="account.assignTo.gstinNumber; else noValue">
+                  {{ account.assignTo.gstinNumber}}
+                </ng-container>
+                <ng-template #noValue>-</ng-template>
+
+
+          </td>
+          <td>{{ account.assignTo.placeOfSupply}}</td>
+          <td>
+              <ng-container *ngIf="account.zohoBookEstimateData.estimate_number; else noValue">
+                  {{ account.zohoBookEstimateData.estimate_number }}
+                </ng-container>
+                <ng-template #noValue>-</ng-template>
+           </td> 
+          <!-- <td>{{ account.zohoBookEstimateData.estimate_number }}</td> -->
+          <td>
+              <ng-container *ngIf="account.zohoBookEstimateData.totalEstimateCost; else cartValue">
+                  {{ account.zohoBookEstimateData.totalEstimateCost}}
+                </ng-container>
+                <ng-template #cartValue>{{account.TotalCartValue}}</ng-template>
+              
+              
+            
+          
+          </td>
+      
+      </tr>
+  </ng-template>
+  <!-- <ng-template pTemplate="paginatorleft">
+      <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+  </ng-template> -->
+  <!-- <ng-template pTemplate="paginatorright">
+      <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+  </ng-template> -->
+</p-table>
+    
+
+</ng-template>
+
+<!-- <button (click)="save()" [disabled]="productListForm.invalid" class="btn btn-primary">Save</button> -->

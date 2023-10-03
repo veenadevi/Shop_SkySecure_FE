@@ -76,7 +76,7 @@
         "getAllMarketPlaceAccountListURL":"api/admin/getAllMarketPlaceAccountList",
         "getMyChannelLeadList":"api/admin/getMyChannelAccountList",
 
-        "getMyMarketPlaceAccountListURL":"api/admin/getMyMarketplaceAccountList",
+        "getMyMarketPlaceAccountListURL":"api/user/getMyMarketplaceAccountList",
 
         "addChannelPartnerURL":"/api/user/channel-partner",
         "getAllChannelPartner" : "/api/user/channel-partner",
