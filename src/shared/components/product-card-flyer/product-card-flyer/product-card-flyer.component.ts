@@ -148,64 +148,75 @@ public whatsAppMessage:string
   }
 
 
-  public addToCompare($event, item){
-    
-    
-    let compareProductsListLen = this.getProductsCount().length;
-
-    let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
-
-
-    if($event.target.checked){
-
-      if(compareProductsListLen <4){ // If Products added is Less than 4
-
-        
-        //let cachedProductsToCompare = localStorage.setItem('compare_products_list', JSON.stringify(cacheData));
-
-        var index = cachedProductsToCompare.findIndex(el => el._id === item._id);
-      
-          if(index >=0){
-            this.toaster.showWarning("Product already added for Compare",'')
-          }
-          else{
-            if('checked' in item){
-              item.checked = $event.target.checked;
-            }
-            else{
-              item['checked'] = $event.target.checked;
-            }
-            cachedProductsToCompare.push(item);
-            localStorage.setItem('compare_products_list', JSON.stringify(cachedProductsToCompare));
-            this.compareProductsStore.setCompareProductsList(cachedProductsToCompare);
-         
-          }
-
-          
-      
-        
-      }
-      else{ // If 4 products already present
-        $event.target.checked = false;
-        this.toaster.showWarning("You can add only 4 products to compare",'')
-      }
-
+  public addToCompare($event, item, index){
+    if ($event.target.checked) {
+      this.handleAddToCompare(item);
+    } else {
+      this.handleRemoveFromCompare(item);
     }
-    else{
-      
-      cachedProductsToCompare = cachedProductsToCompare.filter(element => element._id != item._id);
-      localStorage.setItem('compare_products_list', JSON.stringify(cachedProductsToCompare));
-      this.compareProductsStore.setCompareProductsList(cachedProductsToCompare);
-     
-    }
-
-
-
-
-    
-
   }
+  
+  private handleAddToCompare(item) {
+    const cachedProductsToCompare = this.getCachedProductsToCompare();
+    const compareProductsListLen = cachedProductsToCompare.length;
+  
+    if (compareProductsListLen < 4) {
+      if (!this.isItemInCompareList(item, cachedProductsToCompare)) {
+        this.addItemToCompareList(item, cachedProductsToCompare);
+      } else {
+        this.showWarningMessage("Product already added for Compare");
+      }
+    } else {
+      this.uncheckCheckboxAndShowWarning("You can add only 4 products to compare", event); // Pass $event here
+    }
+    
+  }
+  
+  private handleRemoveFromCompare(item) {
+    const cachedProductsToCompare = this.getCachedProductsToCompare();
+    if (this.isItemInCompareList(item, cachedProductsToCompare)) {
+      this.removeItemFromCompareList(item, cachedProductsToCompare);
+    }
+  }
+  
+  private getCachedProductsToCompare() {
+    return JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+  }
+  
+  private isItemInCompareList(item, compareList) {
+    return compareList.some(el => el._id === item._id);
+  }
+  
+  private addItemToCompareList(item, compareList) {
+    item.checked = true;
+    compareList.push(item);
+    localStorage.setItem('compare_products_list', JSON.stringify(compareList));
+    this.compareProductsStore.setCompareProductsList(compareList);
+  }
+  
+  private removeItemFromCompareList(item, compareList) {
+    const index = compareList.findIndex(el => el._id === item._id);
+    if (index >= 0) {
+      item.checked = false;
+      compareList.splice(index, 1);
+      localStorage.setItem('compare_products_list', JSON.stringify(compareList));
+      this.compareProductsStore.setCompareProductsList(compareList);
+    }
+  }
+  
+  private showWarningMessage(message) {
+    this.toaster.showWarning(message, '');
+  }
+  
+  private uncheckCheckboxAndShowWarning(message, event) {
+    event.target.checked = false;
+    this.toaster.showWarning(message, '');
+  }
+  
+  
 
+
+  
 
   public onFilterChange($event, item){
     
