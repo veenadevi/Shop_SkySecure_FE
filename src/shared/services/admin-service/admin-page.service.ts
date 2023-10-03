@@ -26,7 +26,9 @@ export class AdminPageService {
   private getAllMarketPlaceAccountListURL:string
   private getAllChannelLeadListURL:string
   private getMyMarketPlaceAccountListURL:string
-  private addChannelPartnerURL:string
+  private addChannelPartnerURL:string;
+
+  private inviteUsersURL : string;
 
 
 
@@ -50,6 +52,7 @@ export class AdminPageService {
     this.getAllMarketPlaceAccountListURL=AppService.appUrl.getAllMarketPlaceAccountListURL;
     this.addChannelPartnerURL=AppService.appUrl.addChannelPartnerURL;
     this.getAllChannelLeadListURL=AppService.appUrl.getMyChannelLeadList;
+    this.inviteUsersURL = AppService.appUrl.inviteUsers;
  
 
     
@@ -403,6 +406,32 @@ console.log("+++++++ ____ _ addChannelPartner", request);
     );
 
   return REQUEST$;
+}
+
+
+
+public inviteUsers( request : any): Observable<any> {
+
+  let url = this.baseUrlForUsers + this.inviteUsersURL;
+
+  
+  let request$ = this.http.post(url, request)
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+
+        return response;
+      }),
+      catchError(error => {
+        // create operation mapping for http exception handling 
+        return (error);
+      })
+    );
+
+  return request$;
+
 }
 
 

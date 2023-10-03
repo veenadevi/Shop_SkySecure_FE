@@ -299,7 +299,7 @@ export class SidenavWrapperComponent {
             return;
      case 'cpMyChannelLeads':
             this.menuToogled = false;
-          this.router.navigate(['channel-partner/mychannelLeads']);
+            this.router.navigate(['channel-partner/mychannelLeads']);
           return;
         
 
