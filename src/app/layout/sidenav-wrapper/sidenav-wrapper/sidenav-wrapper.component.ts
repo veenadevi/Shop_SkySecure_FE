@@ -23,6 +23,8 @@ export class SidenavWrapperComponent {
 
   public menuToogled: boolean = false;
 
+  public userRolesList:any[]=[];
+
   @Input() set userLoggedIn(value: any) {
     this.userLoggedInFlag = value;
 
@@ -42,6 +44,10 @@ export class SidenavWrapperComponent {
 
   @Input() set userName(value: any) {
     this.userFullName = value;
+  }
+  @Input() set userRoleList(value: any) {
+    console.log("fetched userrolelist====",value)
+    this.userRolesList = value;
   }
 
 
