@@ -4,15 +4,15 @@
             <p-table 
                 [value]="allMarketPlaceList" 
                 [tableStyle]="{ 'min-width': '60rem' }"
-              
-               
-               
-            
-                >
+                [paginator]="true"
+                [rows]="15"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+ >
                 <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
                 <ng-template pTemplate="header">
                     <tr class="thfont">
-                        <th>Cart Id</th>
+                        <th>Cart Id1</th>
                         <th>Customer Name</th>
                         <th>Customer Company</th>
                         <th>Customer Phone</th>
@@ -22,7 +22,7 @@
                         <th>Assigned Partner</th>
                         <th>Last Updated Date</th>
                         <th>Estimate No.</th>
-                        <th>Value</th>
+                        <th>Value <span class="gst">(GST Extra)</span></th>
     
     
                         <th> </th>
@@ -64,8 +64,8 @@
                        
                         <!-- <td>{{ account.createdFor.placeOfSupply}}</td> -->
                         <td>
-                            <ng-container *ngIf="account?.assignedChannalpartner; else noValuecp1">
-                            {{ account?.assignedChannalpartner.channelPartner?.name }} 
+                            <ng-container *ngIf="account?.assignedChannalpartner.length>0; else noValuecp1">
+                            {{ account?.assignedChannalpartner?.channelPartner?.name }} 
                               </ng-container>
                               <ng-template #noValuecp1>-</ng-template>
                          </td> 
@@ -78,15 +78,15 @@
                          </td> 
     
                         <td>
-                            <ng-container *ngIf="account.zohoBookEstimateData.estimate_number; else noValue">
-                                {{ account.zohoBookEstimateData.estimate_number }}
+                            <ng-container *ngIf="account.cartData.zohoEstimateNo; else noValue">
+                                {{  account.cartData.zohoEstimateNo }}
                               </ng-container>
                               <ng-template #noValue>-</ng-template>
                          </td> 
                         <!-- <td>{{ account.zohoBookEstimateData.estimate_number }}</td> -->
                         <td>
-                            <ng-container *ngIf="account.zohoBookEstimateData.totalEstimateCost; else cartValue">
-                                {{ account.zohoBookEstimateData.totalEstimateCost }}
+                            <ng-container *ngIf="account.cartData.zohoEstimateValue; else cartValue">
+                                {{ account.cartData.zohoEstimateValue}}
                               </ng-container>
                               <ng-template #cartValue>{{account.TotalCartValue}}</ng-template>
                             

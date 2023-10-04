@@ -9,6 +9,7 @@ import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.compo
 import { ChannelPartnerRoutingModule ,ROUTED_COMPONENTS} from './channel-partner-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductListTableComponent } from './partials/lead-summary/partials/product-list-table/product-list-table.component';
+import { InviteChannelPartnerComponent } from './partials/invite-channel-partner/invite-channel-partner.component';
 
 
 
@@ -18,7 +19,8 @@ import { ProductListTableComponent } from './partials/lead-summary/partials/prod
     ChannelPartnerComponent,
     LeadListComponent,
     LeadSummaryComponent,
-    ProductListTableComponent
+    ProductListTableComponent,
+    InviteChannelPartnerComponent
   ],
   imports: [
     CommonModule,

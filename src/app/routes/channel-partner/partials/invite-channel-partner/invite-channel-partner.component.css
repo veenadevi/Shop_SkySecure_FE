@@ -1,0 +1,121 @@
+.user-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 0 20px 10%;
+}
+.address-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 10px 0 10px 0;
+}
+h3{
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+h4{
+    padding: 20px 0 0 0 ;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+}
+.col-sm-6 {
+    flex: 0 0 auto;
+    width: 30%;
+}
+select{
+    border: 1px solid grey; 
+}
+.custom-select {
+    /* width: 100%; */
+    padding: 4px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+.form-control-01 {
+    display: block;
+    width: 65%;
+    padding: 8px; 
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 13px !important;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: 1px solid black;
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    font-family: 'lato', sans-serif;
+}
+.section-01{
+    display: flex;
+    flex-direction: column;
+    width: 38%;
+    margin-left: 32%;
+   
+}
+.card {
+    border: 0px;
+}
+.justify-content-center{
+    align-items: center;
+    padding: 15px;
+    border: none !important;
+}
+
+.radio-style{
+    padding-top: 10px !important;
+}
+label{
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .error{
+    color: red;
+    text-align: center; 
+}
+.modal-footer {
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.primary {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 10rem;
+    border-radius: 8px;
+    background: var(--btn-gradient);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
+    height: 35px;
+}
+.primary:hover {
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+  }
+  
+  .primary:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  .col-sm-3 {
+    flex: 0 0 auto;
+    width: 8%;
+}

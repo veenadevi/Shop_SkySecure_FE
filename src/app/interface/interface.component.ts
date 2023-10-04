@@ -33,6 +33,9 @@ export class InterfaceComponent {
 
   public userRole : string;
 
+
+  public userRoleList : [];
+
   public visible : boolean;
 
 
@@ -97,6 +100,7 @@ export class InterfaceComponent {
 
         console.log("fetchinng user role ",data.role)
         this.userRole = (data && data.role) ? data.role : null;
+        this.userRoleList=(data && data.userRoleList) ? data.userRoleList : [];
         
         if(data.firstName){
           //this.userName = data.firstName + ' ' + (data.lastName ? data.lastName : '');
