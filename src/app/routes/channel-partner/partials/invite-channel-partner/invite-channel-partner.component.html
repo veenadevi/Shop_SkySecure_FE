@@ -1,0 +1,91 @@
+<div class="user-container">
+    <div class="content">
+       
+        <form>
+            <div class="select   mb-3 mt-2 ">
+                <h3>Add Users</h3>  
+                  <div class="section-01">
+                    <label for="firstName">Select User</label>
+                    <select class="custom-select ">
+                        <option value="" [(ngModel)]="selectedUserId">--Select Invite User --</option>
+                        <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+                      </select>
+                       
+                </div>
+            </div>
+
+            <div class="card flex justify-content-center">
+                <div class="flex flex-wrap gap-3">
+                    <div class="flex align-items-center">
+                        <p-radioButton   value="new"[ngModelOptions]="{standalone: true}" [(ngModel)]="addAdminOption" value="new" inputId="ingredient1"  ></p-radioButton>
+                        <label for="ingredient1" class="ml-2">
+                            <h4 class="radio-style"> Invite New User</h4>
+                        </label>
+                    </div>
+
+                    <div class="flex align-items-center">
+                        <p-radioButton  value="existing"(onClick)="radioClick()" [ngModelOptions]="{standalone: true}" [(ngModel)]="addAdminOption" value="existing" inputId="ingredient2"></p-radioButton>
+                        <label for="ingredient2" class="ml-2">
+                            <h4 class="radio-style">Add Existing User</h4>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <ng-container>
+                <div class="address-row">  
+
+
+                    <ng-container *ngIf="(addAdminOption === 'new'); else userSelect">
+                        <div class="col-sm-6 form-group">
+                            <label for="userName">FirstName</label>
+                            <input formControlName="userName" type="address" class="form-control-01" name="userName"
+                                id="userName" placeholder="Enter FirstName" required>
+                        </div>
+                    </ng-container>
+                    <ng-template #userSelect> 
+                        <div class="label">
+                          
+                        </div>
+                        <div class="select d-flex flex-column"> 
+                            <label>Select User</label> 
+                            <select class="custom-select" (change)="onDropDownChange($event)"> 
+                            <option value="">--Select User as Admin--</option>
+                            <option *ngFor="let user of usersList" [value]="user._id">{{user.firstName}}</option>
+                        </select> 
+                        </div>
+                    </ng-template> 
+
+                    <div class="col-sm-6 form-group">
+                        <label for="address-2">Email Id</label>
+                        <input formControlName="EmailId" type="address" class="form-control-01" name="emailid"
+                            id="address-2" placeholder="Enter EmailId" required>
+                    </div>
+                    <div class="col-sm-3 form-group me-2">
+                        <label for="cod">Country code</label>
+                        <select class="form-control browser-default custom-select form-control">
+                          <option data-countryCode="IN" value="1" selected>IN (+91)</option>
+                          <option data-countryCode="US" value="2" selected>USA (+1)</option>
+                          <option data-countryCode="GB" value="44">UK (+44)</option>
+                        </select>
+                      </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Mobile No.</label>
+                        <input formControlName="phoneNo" type="number" class="form-control-01" name="Locality"
+                            id="firstName" placeholder="Enter Phone Number" required>
+                    </div>
+                </div>
+            </ng-container>
+
+            <div *ngIf="submitErrorMessage">
+                <p class="error">* Please Fill Mandatory fileds like Name and Admin users</p>
+            </div>
+            <div class="modal-footer">
+                <ng-container>
+
+                    <button class="btn  primary" (click)="submitForm()">Add New User</button>
+                </ng-container>
+            </div>
+        </form>
+    </div>
+</div>

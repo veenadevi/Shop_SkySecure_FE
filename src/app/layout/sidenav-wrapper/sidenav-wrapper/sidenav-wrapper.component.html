@@ -70,7 +70,7 @@
 
          <!-- ChannelPartnerSection -->
 
-          <ng-container *ngIf="userRoleVal === 'ChannelPartnerAdmin' ">
+          <ng-container  >
 
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'cp')">
@@ -90,9 +90,9 @@
               <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click)="routeEvent('cpMyChannelLeads')">My Leads</span>
               </mat-list-item> 
-              <!-- <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
-              </mat-list-item> -->
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item"(click)="routeEvent('cpMyChannelInviteUsers')"> Invite users</span>
+              </mat-list-item>
               
              
 
