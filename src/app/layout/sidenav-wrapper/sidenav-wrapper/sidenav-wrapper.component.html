@@ -70,7 +70,7 @@
 
          <!-- ChannelPartnerSection -->
 
-          <ng-container *ngIf="userRoleVal === 'ChannelPartnerAdmin' ">
+          <ng-container  *ngIf="userRolesList.includes('ChannelPartnerAdmin') || userRoleVal === 'ChannelPartnerAdmin'">
 
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'cp')">
@@ -90,9 +90,9 @@
               <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click)="routeEvent('cpMyChannelLeads')">My Leads</span>
               </mat-list-item> 
-              <!-- <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
-              </mat-list-item> -->
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item"(click)="routeEvent('cpMyChannelInviteUsers')"> Invite users</span>
+              </mat-list-item>
               
              
 
@@ -109,7 +109,8 @@
 
           <!-- Admin Section -->
 
-          <ng-container *ngIf="userRoleVal === 'superadmin'">
+          <!-- <ng-container *ngIf="userRoleVal === 'superadmin'"> -->
+            <ng-container *ngIf="userRolesList.includes('SuperAdmin') || userRoleVal === 'superadmin'">
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'sadmin')">
                 <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
@@ -164,7 +165,7 @@
           <!-- account-manager -->
 
 
-          <ng-container *ngIf="userRoleVal === 'admin' || userRoleVal === 'superadmin'">
+          <ng-container *ngIf="userRolesList.includes('PortalAdmin') || userRoleVal === 'PortalAdmin'">
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'admin')">
                 <img src="../../../../assets/icons/ManagePortal.svg">

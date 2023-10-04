@@ -11,7 +11,10 @@
     cursor: pointer;
     color: #3366CC;
 }
-
+.quote-list{
+    width: 75%;
+    margin-left: 8rem;
+}
 /* #assign-btn {
     box-sizing: border-box;
     padding: 7px;
@@ -55,4 +58,7 @@ p{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.gst{
+    font-size: 9px;
 }
