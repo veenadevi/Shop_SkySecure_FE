@@ -70,7 +70,7 @@
 
          <!-- ChannelPartnerSection -->
 
-          <ng-container  *ngIf="userRolesList.includes('ChannelPartnerAdmin')">
+          <ng-container  *ngIf="userRolesList.includes('ChannelPartnerAdmin') || userRoleVal === 'ChannelPartnerAdmin'">
 
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'cp')">
@@ -110,7 +110,7 @@
           <!-- Admin Section -->
 
           <!-- <ng-container *ngIf="userRoleVal === 'superadmin'"> -->
-            <ng-container *ngIf="userRolesList.includes('SuperAdmin')">
+            <ng-container *ngIf="userRolesList.includes('SuperAdmin') || userRoleVal === 'superadmin'">
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'sadmin')">
                 <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
@@ -165,7 +165,7 @@
           <!-- account-manager -->
 
 
-          <ng-container *ngIf="userRolesList.includes('PortalAdmin')">
+          <ng-container *ngIf="userRolesList.includes('PortalAdmin') || userRoleVal === 'PortalAdmin'">
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'admin')">
                 <img src="../../../../assets/icons/ManagePortal.svg">
