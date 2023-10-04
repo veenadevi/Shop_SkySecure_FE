@@ -40,7 +40,8 @@ export class CardFlyerComponent {
       price : product.priceList[0].price,
       erpPrice:product.priceList[0].ERPPrice,
       discountRate:product.priceList[0].discountRate,
-      priceType:this.getPriceType(product.priceList[0].priceType),
+      // priceType:this.getPriceType(product.priceList[0].priceType),
+      priceType:product.priceList[0].priceType,
       priceList : product.priceList
     };
 
