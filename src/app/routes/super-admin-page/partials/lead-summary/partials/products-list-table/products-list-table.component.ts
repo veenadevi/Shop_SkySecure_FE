@@ -149,22 +149,20 @@ export class ProductsListTableComponent implements OnInit {
       console.log("distributorPrice froms screen ===",calculatedDistributarPrice)
 
       if (editedRate > calculatedERPPrice ) {
+        console.log("greater than erp price")
 
         // item.get('bcy_rate').setValue(item.get('bcy_rate_original').value)
         item.get('bcy_rate').setErrors({ 'invalid': true });
         this.enableEdit = true;
 
       }
+      
       if(editedRate < calcRate  ){
         item.get('bcy_rate').setErrors({ 'invalid': true });
         this.enableEdit = false;
 
       }
-      else{
-        item.get('bcy_rate').setErrors({ 'invalid': false });
-        this.enableEdit = false;
-      }
-
+    
     }
     else {
       console.log("_+_+_+_+ Came here ");
@@ -608,7 +606,7 @@ export class ProductsListTableComponent implements OnInit {
         let currentPrice=this.getPriceByType(lineItemId,type )
         console.log("fetched pricelistdata  for month===",currentPrice)
         let quanTotal = item.get('quantity').value * currentPrice.price;
-        item.get('bcy_rate').setValue(currentPrice.price.toFixed(2));
+        item.get('bcy_rate').setValue(currentPrice.price);
         item.get('distributorPrice').setValue(currentPrice.distributorPrice);
         item.get('erp_price').setValue(currentPrice.ERPPrice);
         item.get('item_total').setValue(quanTotal.toFixed(2));
@@ -616,9 +614,10 @@ export class ProductsListTableComponent implements OnInit {
 
       case 'Year':
         let currentPrice1=this.getPriceByType(lineItemId,type )
-        console.log("fetched pricelistdata  for year===",currentPrice1)
+        console.log("fetched pricelistdata  for year===",currentPrice1.price)
         let quanTotal1 = item.get('quantity').value * currentPrice1.price;
-        item.get('bcy_rate').setValue(currentPrice1.price.toFixed(2));
+        console.log("currentPrice1.price  ",parseFloat(currentPrice1.price))
+        item.get('bcy_rate').setValue(currentPrice1.price);
         item.get('distributorPrice').setValue(currentPrice1.distributorPrice);
         item.get('erp_price').setValue(currentPrice1.ERPPrice);
         item.get('item_total').setValue(quanTotal1.toFixed(2));
