@@ -282,7 +282,8 @@ export class HeaderComponent implements OnInit{
     this.userAccountStore.setUserDetails(null);
     this.cartStore.setCartRefreneceId(null);
     //this.router.navigate(['']);
-    window.location.reload();
+  //  window.location.reload();
+    this.router.navigate(['']);
   }
 
   public getAccessIdToken1(userData) {
