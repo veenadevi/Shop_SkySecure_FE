@@ -59,6 +59,8 @@ export class AddNewProductComponent  implements OnInit {
   addAppArrayNew:FormArray;
   defaultDiscount:number;
   showMsg: boolean = false;
+  public msubscriptionType:any
+  public ysubscriptionType:any
 
   createProductPayload: CreateProductPayload;
 
@@ -88,7 +90,7 @@ export class AddNewProductComponent  implements OnInit {
       categories: ['', Validators.required],
       Subcategories: ['', Validators.required],
       OEM: ['', Validators.required],
-      ysubscriptionType: [''],
+      ysubscriptionType: 'Year',
       msubscriptionType: [''],
       file: [null],
       products: [''],
@@ -123,6 +125,7 @@ export class AddNewProductComponent  implements OnInit {
   // }
   //########################## File Upload ########################/
   @ViewChild('fileInput') el: ElementRef;
+  imageURL: any = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
   imageUrl: any = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
   editFile: boolean = true;
   removeUpload: boolean = false;
@@ -251,7 +254,7 @@ export class AddNewProductComponent  implements OnInit {
   // Function to remove uploaded file
   removeUploadedFile() {
     let newFileList = Array.from(this.el.nativeElement.files);
-    this.imageUrl = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
+    this.imageURL = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
     this.editFile = true;
     this.removeUpload = false;
     this.registrationForm.patchValue({
@@ -365,8 +368,8 @@ export class AddNewProductComponent  implements OnInit {
           //"price": productData.yproductPrice,
           "price": this.setYearlyPrice(productData),
           "priceType": "Year",
-          "ERPPrice" : productData.yerpPrice,
-          "distributorPrice":productData.ydistributorPrice,
+          "ERPPrice" : parseFloat(productData.yerpPrice.toString()).toFixed(2),
+          "distributorPrice":parseFloat(productData.ydistributorPrice.toString()).toFixed(2),
           "discountRate" : productData.ydiscount,
           
 
@@ -375,8 +378,8 @@ export class AddNewProductComponent  implements OnInit {
           "Currency": "INR",
           "price": this.setMonthlyPrice(productData),
           "priceType": "Month",
-          "ERPPrice" : productData.merpPrice,
-          "distributorPrice":productData.mdistributorPrice,
+          "ERPPrice" : parseFloat(productData.merpPrice.toString()).toFixed(2),
+          "distributorPrice":parseFloat(productData.mdistributorPrice.toString()).toFixed(2),
           "discountRate" : productData.mdiscount
 
         }
@@ -444,14 +447,16 @@ export class AddNewProductComponent  implements OnInit {
   public setYearlyPrice(data){
 
     let yskySecurePrice = ((Number(data.yerpPrice)) * 0.02) + (Number(data.ydistributorPrice));
-    return yskySecurePrice;
+    return parseFloat(yskySecurePrice.toString()).toFixed(2);
     
   }
 
   public setMonthlyPrice(data){
 
     let mskySecurePrice = ((Number(data.merpPrice)) * 0.02) + (Number(data.mdistributorPrice));
-    return mskySecurePrice;
+    let fixedValue=parseFloat(mskySecurePrice.toString()).toFixed(2);
+    console.log("fixedValue   ...",fixedValue)
+    return fixedValue
     
   }
 
@@ -509,11 +514,11 @@ export class AddNewProductComponent  implements OnInit {
     switch (val) {
       case 'yerpPrice':
         this.tempYerpPrice = ((Number(this.registrationForm.value.yerpPrice)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice));
-        this.registrationForm.controls['ydiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice)));
+        this.registrationForm.controls['ydiscount'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice).toFixed(2));
         return;
       case 'merpPrice':
         this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
-        this.registrationForm.controls['mdiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice)));
+        this.registrationForm.controls['mdiscount'].setValue(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice).toFixed(2));
         return;
 
       default:

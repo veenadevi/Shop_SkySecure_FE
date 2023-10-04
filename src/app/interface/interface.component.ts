@@ -94,6 +94,8 @@ export class InterfaceComponent {
   .pipe(
     map(data => {
       if(data){
+
+        console.log("fetchinng user role ",data.role)
         this.userRole = (data && data.role) ? data.role : null;
         
         if(data.firstName){

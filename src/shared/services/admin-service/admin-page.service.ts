@@ -24,7 +24,11 @@ export class AdminPageService {
   private getAllusersURL:string
   private updateUserRoleURL:string
   private getAllMarketPlaceAccountListURL:string
+  private getAllChannelLeadListURL:string
   private getMyMarketPlaceAccountListURL:string
+  private addChannelPartnerURL:string;
+
+  private inviteUsersURL : string;
 
 
 
@@ -46,6 +50,9 @@ export class AdminPageService {
     this.getAllusersURL=AppService.appUrl.getAllUsers;
     this.updateUserRoleURL=AppService.appUrl.updateUserRole;
     this.getAllMarketPlaceAccountListURL=AppService.appUrl.getAllMarketPlaceAccountListURL;
+    this.addChannelPartnerURL=AppService.appUrl.addChannelPartnerURL;
+    this.getAllChannelLeadListURL=AppService.appUrl.getMyChannelLeadList;
+    this.inviteUsersURL = AppService.appUrl.inviteUsers;
  
 
     
@@ -96,6 +103,29 @@ export class AdminPageService {
 
     return request$;
   }
+
+  public getMyChannelLeadList(adminUserId:any) : Observable<any> {
+
+    let url = this.baseUrlForQuote + this.getAllChannelLeadListURL + '/' + adminUserId;;
+
+    
+
+    //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+
 
   public getAllAccounts() : Observable<any> {
 
@@ -346,6 +376,62 @@ export class AdminPageService {
     );
 
   return uploadedFileResponse;
+}
+
+public addChannelPartner( request : any): Observable<any> {
+
+  const URL = this.baseUrlForUsers + this.addChannelPartnerURL;
+
+
+
+console.log("+++++++ ____ _ addChannelPartner", request);
+  
+  const REQUEST$ = this.http.post<any>(URL, request)
+    .pipe(
+      switchMap(response => {
+        if (!response) {
+          return throwError(response);
+        }
+        //this.userAccountStore.setUserProfileDetails(response);
+        return of(response);
+      }),
+      map((response: any) => {
+        //this.userAccountStore.setUserProfileDetails(response);
+        return response;
+      }),
+      catchError(error => {
+        // create operation mapping for http exception handling
+        return error
+      })
+    );
+
+  return REQUEST$;
+}
+
+
+
+public inviteUsers( request : any): Observable<any> {
+
+  let url = this.baseUrlForUsers + this.inviteUsersURL;
+
+  
+  let request$ = this.http.post(url, request)
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+
+        return response;
+      }),
+      catchError(error => {
+        // create operation mapping for http exception handling 
+        return (error);
+      })
+    );
+
+  return request$;
+
 }
 
 

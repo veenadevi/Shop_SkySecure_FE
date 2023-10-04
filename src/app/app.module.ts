@@ -54,6 +54,7 @@ import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-go
 
 
 
+
 /**
  * Here we pass the configuration parameters to create an MSAL instance.
  * For more info, visit: https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/docs/v2-docs/configuration.md
@@ -130,7 +131,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 
   ],
   declarations: [
-    AppComponent,
+    AppComponent
+   
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

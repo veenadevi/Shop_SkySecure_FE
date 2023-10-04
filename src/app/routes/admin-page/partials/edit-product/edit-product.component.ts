@@ -33,7 +33,8 @@ interface CreateProductPayload {
   productFAQ: Array<any>,
   updatedAt:Date,
   appList:Array<any>,
-  compareWithproducts:Array<any>
+  compareWithproducts:Array<any>,
+  productupdateComment:String
  
 
 }
@@ -51,6 +52,9 @@ export class EditProductComponent  implements OnInit {
   public categories: CategoryDetails[] = [];
   public selectedProductIds :any[]=[];
   public products: any[] = [];
+
+  public tempYerpPrice:any;
+  public tempMerpPrice : any;
   
   public compareproducts: any[] = [];
   public selectedCategory: any = {};
@@ -79,6 +83,10 @@ export class EditProductComponent  implements OnInit {
   selectedProductId1 :  any;
   showMsg: boolean = false;
   listedProducts:any[]=[];
+
+  public tempAppList : any[] = [];
+
+  public sampleImg = 'https://csg1003200209655332.blob.core.windows.net/images/1695186760-linkedin.png';
 
   constructor(
     public fb: FormBuilder,
@@ -121,6 +129,8 @@ export class EditProductComponent  implements OnInit {
       updatedBy:[''],
       updatedDate:[''],
       updatedAt:[''],
+      productversion:[''],
+      productupdateComment:[''],
       addDynamicElementNew: this.fb.group({
         // Nested form controls for dynamic elements
        feature: this.fb.array([0])
@@ -144,6 +154,7 @@ export class EditProductComponent  implements OnInit {
   
   //########################## File Upload ########################/
   @ViewChild('fileInput') el: ElementRef;
+  imageURL: any = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
   imageUrl: any = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
   editFile: boolean = true;
   removeUpload: boolean = false;
@@ -179,8 +190,8 @@ export class EditProductComponent  implements OnInit {
   createAppGroup(): FormGroup {
     return this.fb.group({
       
-      AppName: '',
-      File: ''
+      name: '',
+      imageURL: ''
     });
   }
   private getCategories(): CategoryDetails[] {
@@ -226,7 +237,7 @@ export class EditProductComponent  implements OnInit {
     this.subscriptions.push(
       this.metaDataSvc.fetchProductsByFilters({subCategoryIds: [],brandIds: this.brandIds}).subscribe(response => {
         this.products = response.products;
-        console.log("__TEST__",this.products);
+        
       })
 
     );
@@ -239,7 +250,6 @@ export class EditProductComponent  implements OnInit {
         const newProduct = { id: data._id, name:data.name}
 
         this.compareproducts.push(newProduct)
-        console.log("__TEST COMPARE__",this.compareproducts);
         });
       
 
@@ -250,7 +260,7 @@ export class EditProductComponent  implements OnInit {
   
 
   private getProductDetails(productId) {
-    console.log("fetching product for +======"+productId)
+    
     this.subscriptions.push(
     
       this.metaDataSvc.fetchAdminProductDetails(productId).subscribe(response => {
@@ -276,26 +286,26 @@ export class EditProductComponent  implements OnInit {
 
   createAppList(): FormGroup {
     return this.fb.group({
-      Name: '',
-      imageUrl: ''
+      name: '',
+      imageURL: ''
     });
   }
-  createAppListWithValue(id,name,imageUrl): FormGroup {
+  createAppListWithValue(id,name,imageURL): FormGroup {
     return this.fb.group({
      _id: id,
-      Name: name,
-      imageUrl: imageUrl
+      name: name,
+      imageURL: imageURL
     });
   }
   uploadFile(event: any) {
-    console.log("__TEST__", event);
+    
     const formData: FormData = new FormData();
     formData.append('file', event.target.files[0], event.target.files[0].name);
 
     this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
       .subscribe(
         (response: any) => {
-          console.log('Upload successful', response);
+          
           this.productLogo = response.filePath;
           // Handle the response from the server
         },
@@ -308,12 +318,41 @@ export class EditProductComponent  implements OnInit {
 
   removeImage() {
     this.productLogo = null;
+    
   }
 
+  removeAppImage(index){
+    
+    this.tempAppList[index].imageURL = "";
+  }
+
+
+  public tempAppArrayImgFiles = [];
+
+  uploadFileForApp(event : any, i){
+    const formData: FormData = new FormData();
+    formData.append('file', event.target.files[0], event.target.files[0].name);
+
+    this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
+      .subscribe(
+        (response: any) => {
+          
+          this.tempAppArrayImgFiles.push({
+            'index': i,
+            'val' : response.filePath
+          })
+          //this.productLogo = response.filePath;
+        },
+        error => {
+          console.error('Upload error:', error);
+          // Handle the error response
+        }
+      );
+  }
   // Function to remove uploaded file
   removeUploadedFile() {
     let newFileList = Array.from(this.el.nativeElement.files);
-    this.imageUrl = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
+    this.imageURL = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
     this.editFile = true;
     this.removeUpload = false;
     this.registrationForm.patchValue({
@@ -347,7 +386,7 @@ export class EditProductComponent  implements OnInit {
 
   // Choose Subcategories using select dropdown
   changeSubcategories(e) {
-    console.log("TEST___",e.target.value)
+    
     this.registrationForm.get('Subcategories').setValue(e.target.value, {
       onlySelf: true
     // this.registrationForm.get('Subcategories').setValue(e.target.value.substring(3), {
@@ -373,7 +412,7 @@ export class EditProductComponent  implements OnInit {
   selectProduct(event: any) {
 
     if(this.selectedProductId){
-      console.log("()()()",this.selectedProductId);
+      
     
     
       //this.selectedProductId = event.target.value.substring(3);
@@ -429,8 +468,9 @@ export class EditProductComponent  implements OnInit {
       let userAccountdetails = this.userAccountStore.getUserDetails();
       //createdBy : userAccountdetails.firstName,
 
-      console.log("Final value", this.registrationForm.value);
+   
       var productData = this.registrationForm.value;
+      console.log("passing edit value===",productData.addAppArrayNew.app)
       this.createProductPayload = {
         _id: this.selectedProductId._id,
         name: productData.productName,
@@ -443,42 +483,69 @@ export class EditProductComponent  implements OnInit {
         productSkuId: productData.productSkuId,
         productSkuNumber: productData.productSkuNumber,
         orderNumber: productData.productOrderNumber,
+
+
         priceList: [{
           "Currency": "INR",
-          //"price": productData.yproductPrice,
-          "price": this.setYearlyPrice(productData),
+          "price": productData.yproductPrice,
+         // "price": this.setYearlyPrice(productData),
           "priceType": "Year",
-          "ERPPrice" : productData.yerpPrice,
-          "distributorPrice":productData.ydistributorPrice,
-          "discountRate" : productData.ydiscount
+          "ERPPrice" : Math.round(parseFloat(productData.yerpPrice.toString())).toFixed(2),
+          "distributorPrice":Math.round(parseFloat(productData.ydistributorPrice.toString())).toFixed(2),
+          "discountRate" : productData.ydiscount,
+          
 
         },
         {
           "Currency": "INR",
-          "price": this.setMonthlyPrice(productData),
+          "price": productData.mproductPrice,
           "priceType": "Month",
-          "ERPPrice" : productData.merpPrice,
-          "distributorPrice":productData.mdistributorPrice,
+          "ERPPrice" : parseFloat(productData.merpPrice.toString()).toFixed(2),
+          "distributorPrice":parseFloat(productData.mdistributorPrice.toString()).toFixed(2),
           "discountRate" : productData.mdiscount
 
-        }
+        }],
+
+
       
-      ],
         productFAQ: productData.addFAQArrayNew.faq,
         isActive: true,
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
+        productupdateComment:productData.productupdateComment,
+        
+        
         appList:productData.addAppArrayNew.app,
         bannerLogo: this.productLogo,
       //  createdBy: productData.createdBy,
         updatedBy: userAccountdetails._id,
         compareWithproducts:this.compareProductListIds
       }
-      console.log("-------------------- _editProductPayload_", this.createProductPayload);
+
+      if(this.createProductPayload.appList && this.createProductPayload.appList.length>0){
+
+
+        for(let i=0;i<this.createProductPayload.appList.length;i++){
+          const result = this.tempAppArrayImgFiles.filter((obj) => {
+            return obj.index === i;
+          });
+
+          if(result && result.length>0){
+          //  this.createProductPayload.appList[i].File = result[0].val;
+            this.createProductPayload.appList[i].imageURL = result[0].val;
+          }
+          else{
+            this.createProductPayload.appList[i].imageURL = "";
+          }
+        }
+
+        
+      }
+      
       
       var endPoint = `${environment.gatewayUrl}api/admin/product/edit`
       this.http.patch(endPoint,this.createProductPayload).subscribe((response) => {
-        console.log("__RESPONSE_",response);
+        
         this.showMsg=true
       })
          this.registrationForm.reset();
@@ -491,14 +558,16 @@ export class EditProductComponent  implements OnInit {
   public setYearlyPrice(data){
 
     let yskySecurePrice = ((Number(data.yerpPrice)) * 0.02) + (Number(data.ydistributorPrice));
-    return yskySecurePrice;
+    return Math.round(parseFloat(yskySecurePrice.toString())).toFixed(2);
     
   }
 
   public setMonthlyPrice(data){
 
     let mskySecurePrice = ((Number(data.merpPrice)) * 0.02) + (Number(data.mdistributorPrice));
-    return mskySecurePrice;
+    let fixedValue=parseFloat(mskySecurePrice.toString()).toFixed(2);
+    console.log("fixedValue   ...",fixedValue)
+    return Math.round(parseFloat(fixedValue))
     
   }
   removeFeature(data: any) {
@@ -531,9 +600,9 @@ export class EditProductComponent  implements OnInit {
   }
 
   fillFormDetails(response) {
-    console.log("created By ====="+response.products.createdB)
+    
    let  formattedDate = this.datePipe.transform(response.products.updatedAt, 'dd-MM-YYYY');
-   console.log("fetched Created BY details",response.createdBy)
+   
     this.registrationForm.get('createdBy').setValue(response.createdBy, {
       onlySelf: true
     }) 
@@ -543,6 +612,17 @@ export class EditProductComponent  implements OnInit {
     this.registrationForm.get('updatedAt').setValue(formattedDate, {
       onlySelf: true
     }) 
+    this.registrationForm.get('productversion').setValue(response.products.productversion.$numberDecimal
+      , {
+      onlySelf: true
+    }) 
+
+    this.registrationForm.get('productupdateComment').setValue(response.products.productupdateComment, {
+      onlySelf: true
+    }) 
+
+
+   
     this.registrationForm.get('productName').setValue(response.products.name, {
       onlySelf: true
     })
@@ -602,7 +682,7 @@ export class EditProductComponent  implements OnInit {
       onlySelf: true
     })
 
- console.log("selectedCompareperocuctidss...",response.products.compareWithproducts)
+ 
 
  this.setDefaultCompareProductsSelected(response.products.compareWithproducts);
 
@@ -644,26 +724,39 @@ export class EditProductComponent  implements OnInit {
     
 
     const featureArray = this.addDynamicElementNew.get('feature') as FormArray;
-    console.log("===featureArray ==="+featureArray.length)
+    
     response.featureList.forEach((feature) => {
       featureArray.push(this.createFeatureGroupWithValue(feature.featureId,  feature.name,feature.description,feature.hyperLinkURL)); 
     })
 
     const faqArray = this.addFAQArrayNew.get('faq') as FormArray;
-    console.log("faqArray====="+response.products.productFAQ.length)
+
     response.products.productFAQ.forEach((faq) => {
       faqArray.push(this.createFAQGroupWithValue(faq.Question, faq.Answer)); 
     })
 
+    
 
     const appNewArray = this.addAppArrayNew.get('app') as FormArray;
 
     response.appList.forEach((app) => {
-      console.log("++_+_+__+__++_+ ", app);
+
+      console.log(" passing value to payload  for app ", app.appId,app.name, app.imageURL)
+      
       appNewArray.push(this.createAppListWithValue(app.appId,app.name, app.imageURL));
+
+      
+
       //faqArray.push(this.createFAQGroupWithValue(faq.Question, faq.Answer)); 
     })
 
+    appNewArray.value.forEach(element => {
+      this.tempAppList.push(element);
+    });
+
+    
+     
+      
 
 
 
@@ -685,9 +778,9 @@ if(data){
 
 
     data.forEach(element => {
-      console.log(")()()() Data", element);
+      
       this.compareproducts.map((item) => {
-        console.log(")()()() Data ", item);
+        
         if(item.id === element){
           this.selectedProductId1.push(item);
         }
@@ -716,9 +809,14 @@ if(data){
   addNewApp() {
     const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
     appArray.push(this.createAppGroup());
+    this.tempAppList.push({
+      name : "",
+      imageURL: "",
+      _id : "",
+    })
   }
   changeSubscriptionType(e) {
-    console.log("subscription value "+e.target.value)
+   
     this.registrationForm.get('subscriptionType').setValue(e.target.value, {
       onlySelf: true
     })
@@ -728,6 +826,7 @@ if(data){
     const appArray = this.addAppArrayNew.get('app') as FormArray; // Get the nested FormArray
     if(data>=0){
     appArray.removeAt(data);
+    this.tempAppList.splice(data, 1);
     }
   
   }
@@ -735,5 +834,43 @@ if(data){
   formRest(){
     this.registrationForm.reset();
     return true;
+  }
+  public calDiscountedVal(erp,calVal){
+    return ((erp-calVal)/erp)*100;
+  }
+
+  public onPriceChange(val){
+
+    switch (val) {
+      case 'yerpPrice':
+        this.tempYerpPrice = ((Number(this.registrationForm.value.yerpPrice)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice));
+        this.registrationForm.controls['yproductPrice'].setValue(this.tempYerpPrice)
+       
+        this.registrationForm.controls['ydiscount'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice).toFixed(2));
+        return;
+      case 'merpPrice':
+        this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
+        this.registrationForm.controls['mproductPrice'].setValue(this.tempMerpPrice)
+        this.registrationForm.controls['mdiscount'].setValue(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice).toFixed(2));
+        return;
+
+      default:
+        return null;
+    }
+
+
+    // switch (val) {
+    //   case 'yerpPrice':
+    //     this.tempYerpPrice = ((Number(this.registrationForm.value.yerpPrice)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice));
+    //     this.registrationForm.controls['ydiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.yerpPrice, this.tempYerpPrice)));
+    //     return;
+    //   case 'merpPrice':
+    //     this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
+    //     this.registrationForm.controls['mdiscount'].setValue(Math.round(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice)));
+    //     return;
+
+    //   default:
+    //     return null;
+    // }
   }
 }

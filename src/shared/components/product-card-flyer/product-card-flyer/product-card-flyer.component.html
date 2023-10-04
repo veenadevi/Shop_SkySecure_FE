@@ -31,8 +31,7 @@
                 <div class="add-to-compare-box">
                     <span>
                         <input type="checkbox" id="1"
-                        [checked]="item.checked"
-                        (change)="addToCompare($event, item)"
+                        [checked]="item.checked" (change)="addToCompare($event, item, i)"
                         > Add to Compare
                     </span>
                 </div>

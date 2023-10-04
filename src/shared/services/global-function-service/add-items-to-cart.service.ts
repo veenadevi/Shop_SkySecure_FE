@@ -70,8 +70,9 @@ public getCartItems(multipleProduct, data) : void {
         "price" : (productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].price : '',
         "erpPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].ERPPrice : '',
         "discountRate":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].discountRate : '',
-        "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : ''
-
+        "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : '',
+        "distributorPrice" :(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].distributorPrice : '',
+        "priceList" : productVariant.priceList ? productVariant.priceList : ''
       })
 
       if(productListArray.requiredBundles.length > 0){
@@ -89,8 +90,11 @@ public getCartItems(multipleProduct, data) : void {
               "price" : item.priceList.length>0 ? item.priceList[0].price  : '',
               "erpPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].ERPPrice : '',
               "discountRate":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].discountRate : '',
-              "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : ''
-          });
+              "priceType":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].priceType : '',
+              "distributorPrice":(productVariant && productVariant.priceList.length>0) ? productVariant.priceList[0].distributorPrice : '',
+              "priceList" : productVariant.priceList ? productVariant.priceList : ''
+         
+            });
           }
         });
       }
@@ -109,7 +113,9 @@ public getCartItems(multipleProduct, data) : void {
               "price" : item.priceList.length>0 ? item.priceList[0].price : '',
               "erpPrice":item.item.priceList[0].erpPrice,
               "discountRate":item.item.priceList[0].discountRate,
-              "priceType":item.item.priceList[0].discountRate
+              "priceType":item.item.priceList[0].discountRate,
+              "distributorPrice":data.distributorPrice,
+              "priceList" : productVariant.priceList ? productVariant.priceList : ''
           });
           }
         });
@@ -118,11 +124,39 @@ public getCartItems(multipleProduct, data) : void {
 
     else{
       //var index = productsList.findIndex(el => el.productId === this.params.get('productId'));
-      var index = productsList.findIndex(el => el.productId === data.productId);
+      var index = productsList.findIndex(el => el.productId === data.productId && el.priceType===data.priceType);
 
+      
       if(index >=0){
         //productsList[index].quantity = Number(productsList[index].quantity) + Number(this.params.get('quantity'));
-        productsList[index].quantity = Number(productsList[index].quantity) + Number(data.quantity);
+
+        if( productsList[index].priceType===data.priceType){
+          console.log("=====increase as same priceType====")
+          productsList[index].quantity = Number(productsList[index].quantity) + Number(data.quantity);
+          productsList[index].priceList = data.priceList
+        }
+       else{
+        productsList.push({
+          /*"productId": this.params.get('productId'),
+          "productName" : this.params.get('productName'),
+          "quantity" : this.params.get('quantity'),
+          "price" : this.params.has('price') ? this.params.get('price') : '',
+          "erpPrice" : this.params.get('erpPrice'),
+          "discountRate" : this.params.get('discountRate'),
+          "priceType" : this.params.get('priceType')*/
+          "productId": data.productId,
+          "productName" : data.productName,
+          "quantity" : data.quantity,
+          "price" : data.price ? data.price : '',
+          "erpPrice" : data.erpPrice,
+          "discountRate" : data.discountRate,
+          "priceType" : data.priceType,
+          "distributorPrice":data.distributorPrice,
+          "priceList" : data.priceList ? data.priceList : ''
+        });
+       }
+       console.log(")_)_)_)_)_)_)_ Inside else ", productsList);
+
       }
       else {
         productsList.push({
@@ -139,10 +173,13 @@ public getCartItems(multipleProduct, data) : void {
           "price" : data.price ? data.price : '',
           "erpPrice" : data.erpPrice,
           "discountRate" : data.discountRate,
-          "priceType" : data.priceType
+          "priceType" : data.priceType,
+          "distributorPrice":data.distributorPrice,
+          "priceList" : data.priceList ? data.priceList : ''
 
        
         });
+        console.log(")_)_)_)_)_)_)_ Inside else If", productsList);
       }
 
       if(cartRefId !== '' || cartRefId !== null){

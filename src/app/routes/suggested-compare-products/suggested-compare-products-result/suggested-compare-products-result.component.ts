@@ -39,6 +39,8 @@ export class SuggestedCompareProductsResultComponent {
 
   public itemQuantity : number = 1;
 
+  changeValue : boolean = false;
+
   public emptyProductsLength : any = 0;
   allProperties = [
     // { 'ProductName': 'Product Name' },
@@ -308,10 +310,15 @@ export class SuggestedCompareProductsResultComponent {
         'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
         'entryLevelPricing': productData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productData?.priceList[0].ERPPrice) : '-',
         'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price)  : '-',
-        'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
-       // 'features': data.featureList.length > 0 ? data.featureList : '',
+        // 'priceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
+        'priceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
+        'yearlyPriceList' : productData?.priceList[0] ? productData?.priceList[0] : '-',
+        'monthlyPriceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
+        'monthly1PriceList' : productData?.priceList[1] ? productData?.priceList[1] : '-',
+      //  'features': data.featureList.length > 0 ? data.featureList : '',
        'features': data.featureList,
         'includedProducts' : [],
+        'appList' : data.appListByProduct,
        'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
        '_id' : productData._id,
        'isActive':productData.isActive
@@ -369,6 +376,7 @@ export class SuggestedCompareProductsResultComponent {
        // 'features':bundleFeaturesList,
        // 'features': data.productFamilyFeatures.length > 0 ? data.productFamilyFeatures : '-',
        'features':  data.productFamilyFeatures ,
+       'appList' : data.appListByProduct,
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response,'productFamily'),
         'bundleData':bundleFeaturesList,
         'bannerLogo' : (productData.bannerLogo && productData.bannerLogo !== null) ? productData.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png',
@@ -401,6 +409,7 @@ export class SuggestedCompareProductsResultComponent {
         'priceList' : productVariantData?.priceList[0] ? productVariantData?.priceList[0] : '-',
        // 'features': data.productFamilyVariantFeatures.length > 0 ? data.productFamilyVariantFeatures : '',
         'features': data.productFamilyVariantFeatures,
+        'appList' : data.appListByProduct,
         'includedProducts' : this.setIncludedProductsForFamilyVarients(response,'productFamilyVariant'),
         'bundleData':bundleFeaturesList,
      // 'features':bundleFeaturesList.length>0?bundleFeaturesList:'-',
@@ -530,8 +539,11 @@ export class SuggestedCompareProductsResultComponent {
     var product = productItem.properties;
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    //console.log('----pricelist---'+product.priceList.price)
-    //console.log('----pricelist---'+product.priceList.discountRate)
+    let priceList = [];
+    priceList.push(productItem.properties.yearlyPriceList);
+    priceList.push(productItem.properties.monthlyPriceList);
+
+
     let queryParams;
       // if(product.productVariants.length>0){
         queryParams = {
@@ -542,6 +554,8 @@ export class SuggestedCompareProductsResultComponent {
           erpPrice:product.priceList.ERPPrice,
           discountRate:product.priceList.discountRate,
           priceType:"Year",
+          distributorPrice:product.priceList.distributorPrice,
+          priceList : priceList
         };
 
 
@@ -653,7 +667,7 @@ export class SuggestedCompareProductsResultComponent {
   
 
   this.comparisonCategories = [
-    { "header" : "price" , "headerName" : "Price"},
+    //{ "header" : "price" , "headerName" : "Price"},
     // { "header" : "productName" , "headerName" : "Product Name"},
     { "header" : "developedBy" , "headerName" : "Developed By"},
     { "header" : "solutionCategory" , "headerName" : "Solution Category"},
@@ -661,7 +675,7 @@ export class SuggestedCompareProductsResultComponent {
     // { "header" : "entryLevelPricing" , "headerName" : "Entry Level Pricing"},
     //{ "header" : "includedProducts" , "headerName" : "Included Products"},
     { "header" : "features" , "headerName" : "Features"},
-    
+    {"header" : "appList", "headerName" : "Included Apps"}
     
   ]
 
@@ -980,25 +994,32 @@ export class SuggestedCompareProductsResultComponent {
   priceValue:any;
 
   showMonthlyPrice(i:any) {
-    this.isMonthly = true;
-    // this.priceValue = this.allProducts[i].properties['priceList'].price;
-    // this.priceType = this.allProducts[i].properties['priceList'].priceType;
-    // this.allProducts[i].properties['priceList'].priceType = "Month";
-    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12 
-    this.allProducts[i].properties['priceList'].price  = this.allProducts[i].properties['priceList'].price ;
-    this.allProducts[i].properties['priceList'].priceType = "Year";
-    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price*12;
-    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice*12;
+    
+
+    this.allProducts[i].properties['priceList'].discountRate  = this.allProducts[i].properties['yearlyPriceList'].discountRate ;
+    this.allProducts[i].properties['priceList'].priceType = this.allProducts[i].properties['yearlyPriceList'].priceType;
+    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['yearlyPriceList'].price;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['yearlyPriceList'].ERPPrice;
   }
+
+
 
   showDiscountRate(i: any) {
     // this.isMonthly = false;
-    // this.allProducts[i].properties['priceList'].priceType=this.priceType;
+    // this.allProducts[i].properties['priceList'].discountRate  = this.allProducts[i].properties['yearlyPriceList'].discountRate ;
+    // this.allProducts[i].properties['priceList'].priceType = this.allProducts[i].properties['yearlyPriceList'].priceType;
+    // this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['yearlyPriceList'].price;
+    // this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['yearlyPriceList'].ERPPrice;
 
-    // this.allProducts[i].properties['priceList'].price = this.priceValue;
-    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12;
-    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice/12;
-    this.allProducts[i].properties['priceList'].priceType = "Month";
+    this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['monthlyPriceList'].price;
+    this.allProducts[i].properties['priceList'].discountRate = this.allProducts[i].properties['monthlyPriceList'].discountRate;
+    this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['monthlyPriceList'].ERPPrice;
+    this.allProducts[i].properties['priceList'].priceType =this.allProducts[i].properties['monthlyPriceList'].priceType;
+    
+    //  this.isMonthly = false;
+    //  this.allProducts[i].properties['priceList'].price = this.allProducts[i].properties['priceList'].price/12;
+    //  this.allProducts[i].properties['priceList'].ERPPrice =this.allProducts[i].properties['priceList'].ERPPrice/12;
+    //  this.allProducts[i].properties['priceList'].priceType = "Month";
   }
  
   openLink(url: any): void {
@@ -1008,6 +1029,23 @@ export class SuggestedCompareProductsResultComponent {
 
     }
   } 
+
+
+  changeValueOnHover(val, i){
+    if(val === 'hover'){
+      this.changeValue = true; 
+
+      this.allProducts[i]['hoverFlag'] = true;
+      
+    }
+    else{
+      this.changeValue = false;
+      this.allProducts[i]['hoverFlag'] = false;
+      
+      
+    }
+    
+  }
  
 
  

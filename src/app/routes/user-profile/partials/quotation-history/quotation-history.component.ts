@@ -8,6 +8,7 @@ import { SuperAdminService } from 'src/shared/services/super-admin-service/super
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'quotation-history',
@@ -54,6 +55,7 @@ export class QuotationHistoryComponent implements OnInit {
     private superAdminStore : SuperAdminStore,
     private userProfileService:UserProfileService,
     private userAccountStore : UserAccountStore,
+    public spinner: NgxSpinnerService
   ){}
 
   ngOnInit(): void {
@@ -66,6 +68,7 @@ export class QuotationHistoryComponent implements OnInit {
     console.log("userAccountdetails  ",userAccountdetails._id)
     this.getAllAccounts();
     this.getAllCRMUsers();
+
     this.getAllMarketPlaceAccountList();
    
 
@@ -90,7 +93,8 @@ export class QuotationHistoryComponent implements OnInit {
   }
 
   public getAllMarketPlaceAccountList(){
-    
+   
+    this.spinner.show(); 
     // let a: any = this.sampleData();
     // this.accountData = [...a.accounts.data, ...a.accounts.data];
     // this.info = a.accounts.info;
@@ -99,10 +103,12 @@ export class QuotationHistoryComponent implements OnInit {
       console.log("running here directly==")
       this.allMarketPlaceList=response;
     
-      
+      this.spinner.hide();   
 
     })
+   
   )
+ 
 }
 
   public getAccountById(account){
@@ -113,7 +119,7 @@ export class QuotationHistoryComponent implements OnInit {
 
     }
 
-    this.router.navigate(['admin-pages/lead-summary'], {queryParams: queryParams});
+    this.router.navigate(['user-profile/quotation-summary'], {queryParams: queryParams});
 
    // this.router.navigate(['/admin-page/accounts-details'], {queryParams: queryParams});
   }

@@ -53,8 +53,8 @@ border-radius: 8px;
 }
 
 .video-title {
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
     margin: 0;
     overflow: hidden;
     display: block;
@@ -106,8 +106,8 @@ border-radius: 8px;
     }
     
     .video-title {
-        font-size: 18px;
-        font-weight: 500;
+        font-size: 16px;
+        font-weight: 600;
         margin: 0;
         overflow: hidden;
         display: block;

@@ -1,130 +1,163 @@
 <div class="cart-view-container">
-    <div class="text-header">
-        Cart
-    </div>
+   
 
     <!-- If Cart is Empty -->
 
     <!-- If Cart items is present -->
     
       <ng-container *ngIf="(cartItems$ | async) as cartItems">
-        <ng-container *ngIf="(cartItems.length>0) ; else noCartItems">
-          <div>
-              <table class="table table-borderless">
-                  <thead class="table-header">
+      
+    
+<!--    
+Removed Montly Split on Sep22 -->
+
+      <ng-container *ngIf="(cartItems.length>0) ; else noCartItems">
+        <div class="text-header">
+         Items in your Cart
+       </div>
+        <div>
+            <table class="table table-borderless">
+                <thead class="table-header">
+                  <tr>
+                    <th scope="col" style=
+                      text-align:center!important;
+                  >Product Name</th>
+                    <th scope="col">Purchase type</th>
+                    <th scope="col">MRP(₹)</th>
+                    <th scope="col">Skysecure Price(₹)</th>
+                    <th scope="col">Quantity </th>
+                    <th scope="col">Sub Total(₹)
+                      <span class="gst">(GST Extra)</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="table-row">
+                  <!-- <ng-container *ngFor="let item of (cartItems$ | async); index as i"> -->
+                    <ng-container *ngFor="let item of cartItems; index as i">
+                      
                     <tr>
-                      <th scope="col">Products</th>
-                      <th scope="col">Purchase type</th>
-                      <th scope="col">MRP(₹)</th>
-                      <th scope="col">Skysecure Price(₹)</th>
-                      <th scope="col">Quantity </th>
-                      <th scope="col">Sub Total(₹)</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-row">
-                    <!-- <ng-container *ngFor="let item of (cartItems$ | async); index as i"> -->
-                      <ng-container *ngFor="let item of cartItems; index as i">
-                      <tr>
-                        <th scope="row">
-                          <div class="cart-product-details">
-                            <img class="pd-cart-img" src="{{item.logo ? item.logo : alternateLogo}}" alt="Microsoft" />
-                            <div class="product-name" (click)="navigateToProductDetails(item)">
-                              {{item.productName}}
-                              <div class="cart-title-btns">
-                                <img src=".../../assets/icons/Delete.svg" (click)="removeCartItem(i)"/>
-                                <!-- <button class="cart-remove-btn" (click)="removeCartItem(i)">remove</button> -->
-                                <!-- <span style="font-size: 12px; margin: 0 6px;"> | </span>
-                                <button class="cart-view-btn">View Product</button> -->
-                              </div>
+                      <th scope="row">
+                        <div class="cart-product-details">
+                          <img class="pd-cart-img" src="{{item.logo ? item.logo : alternateLogo}}"  />
+                          <div class="product-name" (click)="navigateToProductDetails(item)">
+                            {{item.productName}}
+                            <div class="cart-title-btns">
+                              <img src=".../../assets/icons/Delete.svg" (click)="removeCartItem(i)"/>
+                              <!-- <button class="cart-remove-btn" (click)="removeCartItem(i)">remove</button> -->
+                              <!-- <span style="font-size: 12px; margin: 0 6px;"> | </span>
+                              <button class="cart-view-btn">View Product</button> -->
                             </div>
                           </div>
-                        </th>
-                        <!-- Base Price -->
+                        </div>
+                      </th>
+                      <!-- Base Price -->
 
-                        <td>
-                          <div class="td-column price-details">
-                            <span>
-                            {{ item.priceType}}
-                            </span>
-                          </div>
-                        </td>
+                      <td>
+                        <div class="td-column price-details">
+                          <span>
+                          <!-- {{ item.priceType}} -->
+                          <select class="type" [(ngModel)]="item.priceType" (change)="onSelectChange($event, i)">
+                            <option class="type" *ngFor="let opt of firstSelectOptions" [value]="opt">
+                               {{ opt }}
+                            </option>
+                           </select> 
+                          </span>
+                        </div>
+                      </td>
 
-                        <td>
-                          <div class="td-column price-details">
-                            <span>
-                            {{ item.erpPrice | number : '1.2-2'}}
-                            </span>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="td-column price-details">
-                            <span>
-                              {{ item.price | number : '1.2-2'}}
-                            </span>
-                          </div>
-                        </td>
-                        <!-- Item Quantity -->
-                        <td>
-                          <div class="td-column">
-                            <span (click) = "quantityEdit(i,  'minus', item.price)">
-                              <img alt="minus"  class="add" src="../../../../../assets/icons/MinusIcon.svg">
-                            </span>
-                            <span>
-                              <input
-                                class="input-field" type="number"  (change)="onChangeQuantity(i,item.price)" [(ngModel)]="item.quantity" value="{{item.quantity}}" (keydown)="onKeyDown($event)">
-                                
-                               
-                            </span>
-                          
-                            <span (click) = "quantityEdit(i , 'plus', item.price)">
-                              <img alt="" class="add" src="../../../../../assets/icons/AddIcon.svg">
-                            </span>
-                          </div>
-                          <div class="error-message">{{item.errortext}}</div>
-                        </td>
+                      <td>
+                        <div class="td-column price-details">
+                          <span>
+                          {{ item.erpPrice | number : '1.2-2'}}
+                          </span>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="td-column price-details">
+                          <span>
+                            {{ item.price | number : '1.2-2'}}
+                          </span>
+                        </div>
+                      </td>
+                      <!-- Item Quantity -->
+                      <td>
+                        <div class="td-column">
+                          <span (click) = "quantityEdit(i,  'minus', item.price)">
+                            <img alt="minus"  class="add" src="../../../../../assets/icons/MinusIcon.svg">
+                          </span>
+                          <span>
+                            <input
+                              class="input-field" type="number"  (change)="onChangeQuantity(i,item.price)" [(ngModel)]="item.quantity" value="{{item.quantity}}" (keydown)="onKeyDown($event)">
+                              
+                             
+                          </span>
+                        
+                          <span (click) = "quantityEdit(i , 'plus', item.price)">
+                            <img alt="" class="add" src="../../../../../assets/icons/AddIcon.svg">
+                          </span>
+                        </div>
+                        <div class="error-message">{{item.errortext}}</div>
+                      </td>
 
-                        <!-- Action -->
-                        <td>
-                          <div class="td-column price-details">
-                            <span>
-                              {{ item.itemTotal | number : '1.2-2'}} 
-                            </span>
-                          </div>
-                        </td>
-                      </tr>
-                    </ng-container>
-                    
-    
-                  </tbody>
+                      <!-- Action -->
+                      <td>
+                        <div class="td-column price-details">
+                          <span>
+                            {{ item.itemTotal | number : '1.2-2'}} 
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                   
+                  
+                  </ng-container>
+                
+                  <tr>
+                    <td [attr.colspan]=6 > 
+                      <hr width="100%">
 
-                </table>
+                    <div class="cart-total">
+                      <span>GRAND TOTAL</span>
+                      <span>₹ {{grandTotal | number : '1.2-2'}}</span>
+                    </div>
+                  </td>
+                  </tr>
+  
+                </tbody>
+
+              </table>
+        </div>
+        <!-- <div class="cart-total">
+          <span>GRAND TOTAL</span>
+          <span>₹ {{grandTotal | number : '1.2-2'}}</span>
+        </div> -->
+        <div class="submit-quote">
+          <span class="text-style">
+            <!-- Enter the quantity of licenses required before proceeding to submit request -->
+            * Prices are Subject to Change  
+            <span></span>
+            <span > * The prices provided are exclusive of taxes.</span> 
+          
+          </span> 
+            
+          
+          <span class="buttons-section">
+            <button class="btn secondary-btn" (click)="saveCart()">Save Cart</button>
+            <button class="btn primary-btn" (click)="requestQuote()">Request Quote</button>
+          </span>
+        </div>
+      </ng-container>
+      <ng-template #noCartItems>
+        <div class="empty-container">
+          <div>
+            <img class="success-state-img" src="../../../../../assets/images/NoProductIllustration.png" alt="home">
           </div>
-          <div class="cart-total">
-            <span>GRAND TOTAL</span>
-            <span>₹ {{grandTotal | number : '1.2-2'}}</span>
+          <div class="text-header">
+            Your Cart is Empty..
           </div>
-          <div class="submit-quote">
-            <span class="text-style">
-              <!-- Enter the quantity of licenses required before proceeding to submit request -->
-              * Prices are Subject to Change
-            </span>
-            <span class="buttons-section">
-              <button class="btn secondary-btn" (click)="saveCart()">Save Cart</button>
-              <button class="btn primary-btn" (click)="requestQuote()">Request Quote</button>
-            </span>
-          </div>
-        </ng-container>
-        <ng-template #noCartItems>
-          <div class="empty-container">
-            <div>
-              <img class="success-state-img" src="../../../../../assets/images/NoProductIllustration.png" alt="home">
-            </div>
-            <div class="text-header">
-              Your Cart is Empty..
-            </div>
-          </div>
-        </ng-template>
-    </ng-container>
+        </div>
+      </ng-template>
+  </ng-container>
 </div>
 <ngx-spinner
   bdColor="rgba(51,51,51,0.8)"

@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, map } from 'rxjs';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'app-assign-leads-modal',
@@ -14,6 +15,8 @@ export class AssignLeadsModalComponent implements OnInit{
   public groupedCities : any;
 
   public crmUsersList : any;
+
+  public channelPartnerList : any;
 
   selectedCity: string | undefined;
 
@@ -28,10 +31,13 @@ export class AssignLeadsModalComponent implements OnInit{
 
   @Output() passedData: EventEmitter<any> = new EventEmitter();
 
+
+
   constructor(
     private superAdminService : SuperAdminService,
     private superAdminStore : SuperAdminStore,
-    private activeModal : NgbActiveModal
+    private activeModal : NgbActiveModal,
+    private userAccountStore :UserAccountStore
   ){
     this.groupedCities = [
       {
@@ -84,8 +90,24 @@ export class AssignLeadsModalComponent implements OnInit{
      )
    )
 
+
+   public channelPartnerList$ = this.superAdminStore.channelPartnerList$
+   .pipe(
+     map(data => {
+       if(data){
+       console.log("_+_+_+_+_+_+ channelPartnerList", data);
+         return data;
+         
+       }
+       else{
+         return data;
+       }
+     }
+     )
+   )
   ngOnInit(): void {
-    this.getAllCRMUsers();
+   this.getAllCRMUsers();
+   this.getAllChannelPartner();
   }
 
   public getAllCRMUsers(){
@@ -99,32 +121,77 @@ export class AssignLeadsModalComponent implements OnInit{
     )
   }
 
+  public getAllChannelPartner(){
+    this.subscriptions.push(
+      this.channelPartnerList$.subscribe(res=>{
+        
+        this.channelPartnerList = res.channelPartners
+        ;
+        console.log("in model ===",this.channelPartnerList
+        )
+        
+        //this.selectedUser = res[0];
+      })
+    )
+  }
+
   public submit(){
     
-    //console.log("++_+_+_+_+_+_+_+ _Data here", this.selectedUser);
-    //console.log("++_+_+_+_+_+_+_+ _Data here", this.request);
 
-    let tempAccountId = []
-    let req = {
-      "accountIds": [this.request.id],
-      "zohoUserId": this.selectedUser.id  
-    }
+    let userAccountdetails = this.userAccountStore.getUserDetails();
+    //console.log("++_+_+_+_+_+_+_+ _Data here", this.selectedUser);
+   console.log("++_+_+_+_+_+_+_+ _Data here", this.request);
+
+
+    //console.log("closignn date ===",this.closingDate.toISOString())
+
+
+
+//Setting up assignChannelPartner PayLoad 
+
+      let req = {
+        "cart_ref_id":this.request.cartData.cart_ref_id,
+        "assignedChannelPartnerId":this.selectedUser._id,
+        "assignedChannelPartnerAdminId":this.selectedUser.ChannelPartnerAdminUser._id,
+        "assignedAccountOwnerId":"",
+        "leadStatusUpdate":"ChannalPartner Assigned",
+        "leadComment":"",
+        "updatedBy":userAccountdetails._id
+
+
+      
+      }
+     
+
+
+
+
+   
     this.subscriptions.push(
-      this.superAdminService.setAssignAccountOwner(req).subscribe(res=>{
-        console.log("++_+_+_+_+_+_+_+ _Response", res);
-        if(res && res.assignownerResult && res.assignownerResult.code === 'SUCCESS'){
-          res.assignownerResult.ownerName = this.selectedUser;
-          this.passedData.emit(res.assignownerResult);
+      this.superAdminService.assignChannelPartner(req).subscribe(res=>{
+        
+       // if(res && res.assignownerResult && res.assignownerResult.code === 'SUCCESS'){
+        if(res){
+         //  res.assignownerResult.ownerName = this.selectedUser;
+         res['assignedName'] = this.selectedUser.name
+           this.passedData.emit(res);
           this.activeModal.close();
         }
         
       })
     )
+
+    //this.passedData.emit("ABCD")
     
+  }
+
+  public onCancelClick(){
+    this.activeModal.close();
   }
 
   public onChange(event){
     
     this.selectedUser = event.value;
+    console.log("this.selectedUser  ",this.selectedUser)
   }
 }
