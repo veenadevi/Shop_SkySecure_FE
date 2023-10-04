@@ -21,73 +21,79 @@ export class SidenavWrapperComponent {
   //isExpanded: boolean = false;
   isExpanded: boolean = true;
 
-  public menuToogled : boolean = false;
+  public menuToogled: boolean = false;
 
-  @Input() set userLoggedIn(value: any){
+  public userRolesList: any[] = ["Customer"];
+
+  @Input() set userLoggedIn(value: any) {
     this.userLoggedInFlag = value;
 
   }
 
-  @Input() set userRole(value: any){
-    
+  @Input() set userRole(value: any) {
+
     this.userRoleVal = value;
-    console.log("...my role ----",this.userRoleVal,value)
+    console.log("...my role ----", this.userRoleVal, value)
     //this.userRoleVal = 'superadmin'
-    
+
   }
 
-  @Input() set menuToogledVal(value: any){
+  @Input() set menuToogledVal(value: any) {
     this.menuToogled = value;
   }
 
-  @Input() set userName(value : any){
-    this.userFullName =  value;
+  @Input() set userName(value: any) {
+    this.userFullName = value;
+  }
+  @Input() set userRoleList(value: any) {
+    console.log("fetched userrolelist====",value)
+    this.userRolesList = value;
   }
 
 
-  public userSubMenu : boolean = false;
-  public dashboardSubMenu : boolean = false;
-  public securitySubMenu : boolean = false;
+  public userSubMenu: boolean = false;
+  public dashboardSubMenu: boolean = false;
+  public securitySubMenu: boolean = false;
   // public profileSubMenu : boolean = false;
-  public adminSubMenu : boolean = false;
-  public sAdminSubMenu : boolean = false;
-  public amSubMenu : boolean = false;
-  public cpSubMenu:boolean=false;
+  public adminSubMenu: boolean = false;
+  public sAdminSubMenu: boolean = false;
+  public amSubMenu: boolean = false;
+  public cpSubMenu: boolean = false;
 
   constructor(
-    private loginService : LoginService,
-    private router : Router,
-    private modalService : NgbModal,
-    private userAccountStore : UserAccountStore,
-    private detectScrollStore : DetectScrollStore
-  ){}
+    private loginService: LoginService,
+    private router: Router,
+    private modalService: NgbModal,
+    private userAccountStore: UserAccountStore,
+    private detectScrollStore: DetectScrollStore
+  ) { }
 
   public userDetails$ = this.userAccountStore.userProfileDetails$
-  .pipe(
-    map(data => {
-      
-      if(data){
-      
-        return data;
+    .pipe(
+      map(data => {
+
+        if (data) {
+
+          return data;
+        }
+        else {
+
+          return null;
+        }
       }
-      else{
-        
-        return null;
-      }
-    }
+      )
     )
-  )
 
   @ViewChild(CdkScrollable) scrollable: CdkScrollable;
-  public ngAfterViewInit(): void{
+  public ngAfterViewInit(): void {
 
-    
+
     this.scrollable.elementScrolled().subscribe(scrolled => {
       //console.log('******* If scrolled', scrolled)
       this.detectScrollStore.setProductFiltersScroll();
     });
 
-    
+
   }
 
   public logout() {
@@ -100,31 +106,31 @@ export class SidenavWrapperComponent {
   }
 
 
-  public menuExpansion(val, navVal){
+  public menuExpansion(val, navVal) {
 
     //this.isExpanded = (val) ? false : true;
     this.isExpanded = true;
-    
 
-    if(navVal === 'security'){
+
+    if (navVal === 'security') {
       this.securitySubMenu = true;
     }
-    if(navVal === 'user'){
+    if (navVal === 'user') {
       this.userSubMenu = true;
     }
-    if(navVal === 'admin'){
+    if (navVal === 'admin') {
       this.adminSubMenu = true;
     }
-    if(navVal === 'sadmin'){
+    if (navVal === 'sadmin') {
       this.sAdminSubMenu = true;
     }
-    if(navVal === 'dashboard'){
+    if (navVal === 'dashboard') {
       this.dashboardSubMenu = true;
     }
-    if(navVal === 'am'){
+    if (navVal === 'am') {
       this.amSubMenu = true;
     }
-    if(navVal === 'cp'){
+    if (navVal === 'cp') {
       this.cpSubMenu = true;
     }
 
@@ -140,28 +146,28 @@ export class SidenavWrapperComponent {
 
   }
 
-  public navAction(val, navVal){
+  public navAction(val, navVal) {
 
     switch (navVal) {
       case 'user':
-          this.userSubMenu = (this.userSubMenu) ? false : true;
-          this.isExpanded = this.isExpanded ? false : true;
-          return;
-      case 'dashboard':
-          //this.dashboardSubMenu = (this.dashboardSubMenu) ? false : true;
-          //this.isExpanded = this.isExpanded ? false : true;
-          return;
-      case 'shop':
-          //this.router.navigate(['/']);
-          return;
-      case 'recommendations':
-          //this.showDialog();
-          this.router.navigate(['security-view/recommendation-default']);
+        this.userSubMenu = (this.userSubMenu) ? false : true;
+        this.isExpanded = this.isExpanded ? false : true;
         return;
-        // case 'myChannelData':
-        //   this.showDialog();
-        //   this.router.navigate(['routes/my-channel-partner']);
-        // return;
+      case 'dashboard':
+        //this.dashboardSubMenu = (this.dashboardSubMenu) ? false : true;
+        //this.isExpanded = this.isExpanded ? false : true;
+        return;
+      case 'shop':
+        //this.router.navigate(['/']);
+        return;
+      case 'recommendations':
+        //this.showDialog();
+        this.router.navigate(['security-view/recommendation-default']);
+        return;
+      // case 'myChannelData':
+      //   this.showDialog();
+      //   this.router.navigate(['routes/my-channel-partner']);
+      // return;
 
       default:
         return null;
@@ -169,43 +175,43 @@ export class SidenavWrapperComponent {
   }
 
 
-  public subMenuClick(val){
+  public subMenuClick(val) {
 
 
-    
+
 
 
     switch (val) {
       case 'user':
-          this.userSubMenu = (this.userSubMenu) ? false : true;
-          return;
+        this.userSubMenu = (this.userSubMenu) ? false : true;
+        return;
       case 'dashboard':
-          this.dashboardSubMenu = (this.dashboardSubMenu) ? false : true;
-          return;
+        this.dashboardSubMenu = (this.dashboardSubMenu) ? false : true;
+        return;
       case 'security':
-          this.securitySubMenu = (this.securitySubMenu) ? false : true;
-          return;
+        this.securitySubMenu = (this.securitySubMenu) ? false : true;
+        return;
       // case 'profile':
       //     this.profileSubMenu = (this.profileSubMenu) ? false : true;
       //     return;
       case 'admin':
-          this.adminSubMenu = (this.adminSubMenu) ? false : true;
-          return;
+        this.adminSubMenu = (this.adminSubMenu) ? false : true;
+        return;
 
       case 'sadmin':
-          this.sAdminSubMenu = (this.sAdminSubMenu) ? false : true;
-          return;
+        this.sAdminSubMenu = (this.sAdminSubMenu) ? false : true;
+        return;
 
       case 'am':
-          this.amSubMenu = (this.amSubMenu) ? false : true;
-          return;
+        this.amSubMenu = (this.amSubMenu) ? false : true;
+        return;
 
       case 'cp':
-            this.cpSubMenu = (this.cpSubMenu) ? false : true;
-            return;
-      
+        this.cpSubMenu = (this.cpSubMenu) ? false : true;
+        return;
 
-        
+
+
 
       default:
         return null;
@@ -213,103 +219,108 @@ export class SidenavWrapperComponent {
 
   }
 
-  public showDialog() : void {
+  public showDialog(): void {
 
     const modalRef = this.modalService.open(SelectOemModalComponent);
   }
 
-  public menuToogleEvent($event){
-    
+  public menuToogleEvent($event) {
 
-    
+
+
 
     this.menuToogled = this.menuToogled ? false : true;
   }
 
 
-  public routeEvent(routeVal){
+  public routeEvent(routeVal) {
 
     switch (routeVal) {
       case 'home':
-          //this.isExpanded = false;
-          this.menuToogled = false;
-          this.router.navigate(['/']);
-          return;
+        //this.isExpanded = false;
+        this.menuToogled = false;
+        this.router.navigate(['/']);
+        return;
       case 'quotation-history':
-          //this.isExpanded = false;
-          this.menuToogled = false;
-          this.router.navigate(['user-profile/quotation-history']);
-          return;
+        //this.isExpanded = false;
+        this.menuToogled = false;
+        this.router.navigate(['user-profile/quotation-history']);
+        return;
       case 'amAccounts':
-          //this.isExpanded = false;
-          this.menuToogled = false;
-          this.router.navigate(['account-manager/accounts']);
-          return;
+        //this.isExpanded = false;
+        this.menuToogled = false;
+        this.router.navigate(['account-manager/accounts']);
+        return;
       case 'sadminAccounts':
-          //this.isExpanded = false;
-          this.menuToogled = false;
-          this.router.navigate(['admin-pages/accounts']);
-          return;
+        //this.isExpanded = false;
+        this.menuToogled = false;
+        this.router.navigate(['admin-pages/accounts']);
+        return;
       case 'sadminMarketPlaceUser':
-          //this.isExpanded = false;
-          this.menuToogled = false;
-          this.router.navigate(['admin-pages/marketplaceuser']);
-          return;
+        //this.isExpanded = false;
+        this.menuToogled = false;
+        this.router.navigate(['admin-pages/marketplaceuser']);
+        return;
       case 'sadminAssignRoles':
-          this.menuToogled = false;
-          this.router.navigate(['admin-pages/assign-roles']);
-          return;
+        this.menuToogled = false;
+        this.router.navigate(['admin-pages/assign-roles']);
+        return;
       case 'saddNewChannelPartner':
-          this.menuToogled = false;
-          this.router.navigate(['admin-pages/add-new-channel-partner']);
-          return;
+        this.menuToogled = false;
+        this.router.navigate(['admin-pages/add-new-channel-partner']);
+        return;
       case 'viewChannelPartners':
-          this.menuToogled = false;
-          this.router.navigate(['admin-pages/view-channel-partners-list']);
-          return;
+        this.menuToogled = false;
+        this.router.navigate(['admin-pages/view-channel-partners-list']);
+        return;
       case 'paFeatureUpdate':
-          //this.isExpanded = false;
-          this.menuToogled = false;
-          this.router.navigate(['portal-admin-page/feature-update']);
-          return;
+        //this.isExpanded = false;
+        this.menuToogled = false;
+        this.router.navigate(['portal-admin-page/feature-update']);
+        return;
       case 'paAddNewProduct':
-          //this.isExpanded = false;
-          this.menuToogled = false;
-          this.router.navigate(['portal-admin-page/add-new-product']);
-          return;
+        //this.isExpanded = false;
+        this.menuToogled = false;
+        this.router.navigate(['portal-admin-page/add-new-product']);
+        return;
       case 'paEditProduct':
-         //this.isExpanded = false;
-          this.menuToogled = false;
-          this.router.navigate(['portal-admin-page/edit-product']);
-          return;
+        //this.isExpanded = false;
+        this.menuToogled = false;
+        this.router.navigate(['portal-admin-page/edit-product']);
+        return;
       case 'paUploadProductPrice':
-          //this.isExpanded = false;
-          this.menuToogled = false;
-          this.router.navigate(['portal-admin-page/upload-product-price']);
-          return;
+        //this.isExpanded = false;
+        this.menuToogled = false;
+        this.router.navigate(['portal-admin-page/upload-product-price']);
+        return;
       case 'paUploadBlog':
-          //this.isExpanded = false;
-          this.menuToogled = false;
-          this.router.navigate(['portal-admin-page/updateblog']);
-          return;
+        //this.isExpanded = false;
+        this.menuToogled = false;
+        this.router.navigate(['portal-admin-page/updateblog']);
+        return;
       case 'paInviteUser':
-            //this.isExpanded = false;
-            this.menuToogled = false;
-            this.router.navigate(['portal-admin-page/invite-user']);
-            return;
-     case 'cpMyChannelLeads':
-            this.menuToogled = false;
-            this.router.navigate(['channel-partner/mychannelLeads']);
-          return;
-        
+        //this.isExpanded = false;
+        this.menuToogled = false;
+        this.router.navigate(['portal-admin-page/invite-user']);
+        return;
+      case 'cpMyChannelLeads':
+        this.menuToogled = false;
+        this.router.navigate(['channel-partner/mychannelLeads']);
+        return;
+
+      case 'cpMyChannelInviteUsers':
+        this.menuToogled = false;
+        this.router.navigate(['channel-partner/invite-channel-partner']);
+        return;
+
 
       default:
         return null;
     }
 
   }
-  
-  
+
+
 
 
 }

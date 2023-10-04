@@ -125,7 +125,7 @@ export class SignUpComponent {
         "email":this.validatedEmail,
         //"password":hashedPass,
         "company":formValue.companyName,
-        "role": "developer",
+        "role": "Customer",
         "countryCode":"+91",
         "mobileNumber":formValue.mobileNumber,
         "addressOne":{"name":"bangalore"},

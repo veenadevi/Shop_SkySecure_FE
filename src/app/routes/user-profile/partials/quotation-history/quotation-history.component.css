@@ -11,7 +11,10 @@
     cursor: pointer;
     color: #3366CC;
 }
-
+.quote-list{
+    width: 75%;
+    margin-left: 8rem;
+}
 /* #assign-btn {
     box-sizing: border-box;
     padding: 7px;
@@ -36,4 +39,26 @@
 }
 .trfont{
     font-size: 13px!important;  
+}
+
+.nodata{
+    text-align: center;
+    padding-top: 30px;
+    color: black;
+    font-size: 24px;
+    font-weight: bolder;
+   
+}
+.no-img{
+    width: 300px;
+    height: 300px;
+  
+}
+p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gst{
+    font-size: 9px;
 }

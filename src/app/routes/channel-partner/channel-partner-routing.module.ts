@@ -5,6 +5,7 @@ import { LeadListComponent } from './partials/lead-list/lead-list.component';
 
 
 import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.component';
+import { InviteChannelPartnerComponent } from './partials/invite-channel-partner/invite-channel-partner.component';
 
 const routes: Routes = [{
   path: '',
@@ -27,7 +28,11 @@ const routes: Routes = [{
       path: 'lead-summary',
       component : LeadSummaryComponent
     },
-    
+    {
+      canActivate: [],
+      path:'invite-channel-partner',
+      component:InviteChannelPartnerComponent
+    }
   ]
   
 }];
