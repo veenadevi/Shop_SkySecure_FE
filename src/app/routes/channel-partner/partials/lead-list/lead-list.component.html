@@ -3,7 +3,12 @@
         <div class="card">
             <p-table 
                 [value]="allMarketPlaceList" 
-                [tableStyle]="{ 'min-width': '60rem' }" >
+                [tableStyle]="{ 'min-width': '60rem' }" 
+                [tableStyle]="{ 'min-width': '60rem' }"
+                [paginator]="true"
+                [rows]="15"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                 <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
                 <ng-template pTemplate="header">
                     <tr class="thfont">

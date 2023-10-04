@@ -23,7 +23,7 @@ export class SidenavWrapperComponent {
 
   public menuToogled: boolean = false;
 
-  public userRolesList:any[]=[];
+  public userRolesList: any[] = ["Customer"];
 
   @Input() set userLoggedIn(value: any) {
     this.userLoggedInFlag = value;
