@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
+import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'app-invite-channel-partner',
@@ -18,6 +20,9 @@ export class InviteChannelPartnerComponent {
   public subscription: Subscription[] = [];
   public showMsg:boolean;
   public submitErrorMessage: boolean = false;
+  public userId:string;
+  public myChannels:any[]=[]
+  
   users = [
     { id: 1, name: 'User 1' },
     { id: 2, name: 'User 2' },
@@ -29,8 +34,11 @@ export class InviteChannelPartnerComponent {
     private fb: FormBuilder,
     
     private adminPageService : AdminPageService,
+    private superAdminService:SuperAdminService,
+    private userAccountStore:UserAccountStore
   ) {
     this.myForm = this.fb.group({ 
+      channelPartner:[''],
       userName: ['', [Validators.required, Validators.required]],
       EmailId: ['', [Validators.required, Validators.email]],
       phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
@@ -41,6 +49,9 @@ export class InviteChannelPartnerComponent {
 
   ngOnInit(): void { 
     this.getUsersList();
+    let userAccountdetails = this.userAccountStore.getUserDetails();
+    this.userId=userAccountdetails._id;
+    this.getMyChannelList();
   }
 
 
@@ -67,6 +78,37 @@ public radioClick(){
   }
 }
 
+
+
+public getMyChannelList(){
+
+  this.subscription.push(
+    this.superAdminService.getMyChannelPartnerList(this.userId).subscribe(response => {
+   
+      this.myChannels = response.myChannelList;
+   
+    })
+
+  );
+
+}
+
+changeChannelList(event: any) {
+    
+  const selectedValue = event.target.value;
+  // console.log("selectedValue  "+selectedValue)
+  const categoryMap = new Map<string, any>();
+  this.myChannels.forEach(category => {
+    categoryMap.set(category._id.toString(), category);
+  });
+  const selectedCategory = categoryMap.get(selectedValue);
+  // console.log("selectedCategory  "+selectedCategory._id)
+
+  
+ 
+
+}
+
 public getUsersList(){
   this.subscription.push(
     this.adminPageService.getAllusers().subscribe(res=> {
@@ -75,15 +117,7 @@ public getUsersList(){
     })
   )
 }
-public savenewChannelPartner(request:any){
 
-
-  this.subscription.push(
-    this.adminPageService.addChannelPartner(request).subscribe(res=>{
-      this.showMsg=true
-    })
-  )
-}
 
 public submitForm() {
   if (this.myForm.invalid){

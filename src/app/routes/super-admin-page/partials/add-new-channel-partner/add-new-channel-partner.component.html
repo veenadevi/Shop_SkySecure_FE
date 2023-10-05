@@ -6,22 +6,22 @@
 
                 <div class="address-row">
                     <div class="col-sm-6 form-group">
-                    <label for="firstName">Channel Partner Name</label>
-                    <input formControlName="channelName" type="channelName" class="form-control-01" name="Locality"
-                        id="channelName" placeholder="Enter Partner Name" required>
-                </div>
+                        <label for="firstName">Channel Partner Name</label>
+                        <input formControlName="channelName" type="channelName" class="form-control-01" name="Locality"
+                            id="channelName" placeholder="Enter Partner Name" required>
+                    </div>
 
-                <div class="col-sm-6 form-group">
-                    <label for="gstin">Enter GST</label>
-                    <input formControlName="gstin" type="gstin" class="form-control-01" name="gstin"
-                        id="gstin" placeholder="Enter GST Number" required>
-                    
+                    <div class="col-sm-6 form-group">
+                        <label for="gstin">Enter GST</label>
+                        <input formControlName="gstin" type="gstin" class="form-control-01" name="gstin" id="gstin"
+                            placeholder="Enter GST Number" required>
+
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label></label>
+                        <button class="btn primary-btn fetchgst" (click)="fetchGST()">Fetch GST Data</button>
+                    </div>
                 </div>
-                <div class="col-sm-3 form-group">
-                    <label></label>
-                <button class="btn primary-btn fetchgst" (click)="fetchGST()" >Fetch GST Data</button>
-            </div>
-            </div>
             </div>
             <h4>Address Fields</h4>
             <div class="address-row">
@@ -46,7 +46,7 @@
                             <option disabled value="'Select Country'">Select Country </option>
                             <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
                         </ng-template>
-                        
+
                     </select>
 
                 </div>
@@ -64,7 +64,7 @@
                             <option disabled value="'Select State'">Select State </option>
                             <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
                         </ng-template>
-                        
+
                     </select>
                 </div>
 
@@ -79,7 +79,7 @@
                             <option disabled value="'Select City'">Select City </option>
                             <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
                         </ng-template>
-                        
+
                     </select>
                 </div>
                 <div class="col-sm-6 form-group">
@@ -96,19 +96,25 @@
                 </div>
             </div>
 
-           
+
             <!--- Prime Ng Radio Button -->
 
             <div class="card flex justify-content-center">
                 <div class="flex flex-wrap gap-3">
                     <div class="flex align-items-center">
-                        <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}" [(ngModel)]="addAdminOption" value="new" inputId="ingredient1"></p-radioButton>
-                        <label for="ingredient1" class="ml-2"><h4 class="radio-style">Add New Admin User</h4></label>
+                        <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="addAdminOption" value="new" inputId="ingredient1"></p-radioButton>
+                        <label for="ingredient1" class="ml-2">
+                            <h4 class="radio-style">Add New Admin User</h4>
+                        </label>
                     </div>
-                    
+
                     <div class="flex align-items-center">
-                        <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}" [(ngModel)]="addAdminOption" value="existing" inputId="ingredient2"></p-radioButton>
-                        <label for="ingredient2" class="ml-2"><h4 class="radio-style">Add Existing User</h4></label>
+                        <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="addAdminOption" value="existing" inputId="ingredient2"></p-radioButton>
+                        <label for="ingredient2" class="ml-2">
+                            <h4 class="radio-style">Add Existing User</h4>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -123,36 +129,43 @@
                         </div>
                     </ng-container>
                     <ng-template #userSelect>
-                        <div class="label">
-                          
-                        </div>
-                        <div class="select"> 
-                            <label>Select User</label>
+                        <div style="width:17%;justify-content: center;align-items: center;">
 
-                            <select class="custom-select" (change)="onDropDownChange($event)">
+
+                            <div class="label">
+                                <label>Select User</label>
+                               
+
+                                <select class="custom-select" (change)="onDropDownChange($event)">
                            
                             <option value="">--Select User as Admin--</option>
                             <option *ngFor="let user of usersList" [value]="user._id">{{user.firstName}}</option>
                         </select>
+                         </div>
+
+                            <!-- <div class="userDropdown">
 
 
+                                <p-dropdown class="localptable" [options]="usersList"
+                                    (onChange)="selectAdminUserDetails($event)" [(ngModel)]="selectedAdminuser"
+                                    optionLabel="firstName" [filter]="true" filterBy="firstName" [showClear]="true"
+                                    [ngModelOptions]="{standalone: true}" placeholder="Select User">
+                                    <ng-template pTemplate="selectedItem">
+                                        <div class="country-item country-item-value" *ngIf="selectedAdminuser">
+                                            <div>{{selectedAdminuser.firstName}}</div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template let-usersList pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{usersList.firstName}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
 
-                            <!-- <p-dropdown class='custom-select-03' appendTo="body" (onChange)="onDropDownChange($event)" [options]="usersList" optionLabel="firstName" [filter]="true" filterBy="firstName" [showClear]="true" placeholder="Select User">
-                                <ng-template pTemplate="selectedItem">
-                                    <div class="flex align-items-center gap-2">
-                                       
-                                        <div> {{selectedCSP.firstName}}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-csp pTemplate="item" >
-                                    <div class="flex align-items-center gap-2">
-                                        <div>{{ csp.firstName }}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown> -->
+                            </div> -->
                         </div>
                     </ng-template>
-                    
+
                     <div class="col-sm-6 form-group">
                         <label for="address-2">Email Id</label>
                         <input formControlName="EmailId" type="address" class="form-control-01" name="emailid"
@@ -165,25 +178,6 @@
                     </div>
                 </div>
             </ng-container>
-            <!-- <ng-template #existingUserTemplate>
-                <div class="address-row">
-                    <div class="col-sm-6 form-group">
-                        <label for="userName">FirstName</label>
-                        <input formControlName="userName" type="address" class="form-control-01" name="userName"
-                            id="userName" placeholder="Enter FirstName" required>
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <label for="address-2">Email Id</label>
-                        <input formControlName="EmailId" type="address" class="form-control-01" name="emailid"
-                            id="address-2" placeholder="Enter EmailId" required>
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <label>Mobile No.</label>
-                        <input formControlName="phoneNo" type="number" class="form-control-01" name="Locality"
-                            id="firstName" placeholder="Enter Phone Number" required>
-                    </div>
-                </div>
-            </ng-template> -->
 
 
 
@@ -204,6 +198,15 @@
                 <div class="col-xs-12">
                     <p class="alert alert-success">
                         <strong>Channal Partner Created Successfully !</strong>
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="duplicate">
+                <div class="col-xs-12">
+                    <p class="alert alert-danger">
+                        <strong>Channal Partner Already Exist !</strong>
 
                     </p>
                 </div>

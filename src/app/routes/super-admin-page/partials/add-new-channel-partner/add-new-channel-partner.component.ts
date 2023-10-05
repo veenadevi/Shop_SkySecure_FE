@@ -40,12 +40,17 @@ export class AddNewChannelPartnerComponent implements OnInit{
   myForm: FormGroup;
   @Input('request')
   public countryList: any;
+
+
+  
+  public selectedAdminuser:any;
   
 
   public stateList: any;
 
   public cityList: any;
   public showMsg:boolean
+  public duplicate:boolean;
 
   public selectedCountrys: any;
   public selectedState: any;
@@ -94,6 +99,7 @@ export class AddNewChannelPartnerComponent implements OnInit{
       EmailId: ['', [Validators.required, Validators.email]],
       phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       country : [''],
+      selectedAdminuser:['']
 
     });
 
@@ -125,6 +131,7 @@ export class AddNewChannelPartnerComponent implements OnInit{
     this.setSelfData();
     this.getUsersList();
     this.showMsg=false;
+    this.duplicate=false;
 
   }
 
@@ -145,6 +152,7 @@ export class AddNewChannelPartnerComponent implements OnInit{
         phoneNo:[''],
         firstName:[''],
         lastName:[''],
+        selectedAdminuser:['']
 
 
 
@@ -288,7 +296,7 @@ export class AddNewChannelPartnerComponent implements OnInit{
 
   
 
-    this.form.reset();
+   
   }
 }
 
@@ -297,9 +305,19 @@ public savenewChannelPartner(request:any){
 
 
   this.subscription.push(
-    this.adminPageService.addChannelPartner(request).subscribe(res=>{
-      this.showMsg=true
-    })
+    this.adminPageService.addChannelPartner(request).subscribe( res =>{
+     
+        this.showMsg=true
+        this.duplicate=false
+        this.myForm.reset();
+     
+    },
+    
+    (error) => {
+    this.duplicate=true
+    this.showMsg=false
+    }
+    )
   )
 }
 
@@ -442,8 +460,8 @@ public getUsersList(){
   )
 }
 
-public onDropDownChange(item){
-  
+public onDropDownChange(item:any){
+  console.log("selectedValue1  ===",item.target.value)
   const selectedValue = item.target.value;
   console.log("selectedValue  ===",selectedValue)
 
@@ -468,6 +486,29 @@ public onDropDownChange(item){
 
   
   
+  
+}
+
+
+selectAdminUserDetails(event: any) {
+
+  console.log("======dropdown selection===",event)
+  this.selectedAdminuser=event.value
+  if(this.selectedAdminuser){
+    this.myForm.controls['phoneNo'].enable();
+  this.myForm.controls['EmailId'].enable();
+  
+  this.myForm.controls['EmailId'].setValue(this.selectedAdminuser.email);
+  this.myForm.controls['phoneNo'].setValue(this.selectedAdminuser.mobileNumber);
+  this.myForm.controls['userName'].setValue(this.selectedAdminuser.firstName);
+
+ 
+  }
+  else{
+    // this.registrationForm.reset();
+    // location.reload();
+    // this.addDynamicElementNew = null;
+  }
   
 }
 

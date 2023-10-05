@@ -81,7 +81,11 @@
         "addChannelPartnerURL":"/api/user/channel-partner",
         "getAllChannelPartner" : "/api/user/channel-partner",
 
-        "assignChannelPartnerURL" : "api/admin/assignChannelPartner"
+        "assignChannelPartnerURL" : "api/admin/assignChannelPartner",
+
+        "getMyChannelsListURL":"api/user/get-my-channel",
+
+        "addUsersToChannelURL":"api/user/channel-partner-user"
 
     },
 
