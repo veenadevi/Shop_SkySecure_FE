@@ -346,6 +346,17 @@ ul .nav-text:hover {
 #check {
     display: none;
 }
+
+
+/* notification-section */
+.notification-dropdown{
+    position: absolute;
+    top: 50px;
+    right: 82px;
+    z-index: 10;
+}
+
+
 @media  ( min-width: 770px) and (max-width: 1024px)  {
     .checkbtn {
         font-size: 20px;
