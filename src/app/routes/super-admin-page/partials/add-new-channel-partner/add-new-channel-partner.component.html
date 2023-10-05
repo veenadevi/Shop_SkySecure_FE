@@ -4,11 +4,24 @@
         <form [formGroup]="myForm">
             <div class="partner-name">
 
-                <div class="section-01">
+                <div class="address-row">
+                    <div class="col-sm-6 form-group">
                     <label for="firstName">Channel Partner Name</label>
                     <input formControlName="channelName" type="channelName" class="form-control-01" name="Locality"
                         id="channelName" placeholder="Enter Partner Name" required>
                 </div>
+
+                <div class="col-sm-6 form-group">
+                    <label for="gstin">Enter GST</label>
+                    <input formControlName="gstin" type="gstin" class="form-control-01" name="gstin"
+                        id="gstin" placeholder="Enter GST Number" required>
+                    
+                </div>
+                <div class="col-sm-3 form-group">
+                    <label></label>
+                <button class="btn primary-btn fetchgst" (click)="fetchGST()" >Fetch GST Data</button>
+            </div>
+            </div>
             </div>
             <h4>Address Fields</h4>
             <div class="address-row">
@@ -38,7 +51,7 @@
                 <div class="col-sm-6 form-group">
                     <label for="State">State*</label>
                     <select formControlName="stateName" class="form-control-01" (change)="onStateChange($event)">
-                        <option disabled value="'Select State'">Select Country </option>
+                        <option disabled value="'Select State'">Select State </option>
                         <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
                     </select>
                 </div>
@@ -66,25 +79,7 @@
                 </div>
             </div>
 
-            <!-- <h4>Add New Admin User</h4>
-            <div class="address-row">
-                <div class="col-sm-6 form-group">
-                    <label for="userName">FirstName</label>
-                    <input formControlName="userName" type="address" class="form-control-01" name="userName"
-                        id="userName" placeholder="Enter FirstName" required>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <label for="address-2">Email Id</label>
-                    <input formControlName="EmailId" type="address" class="form-control-01" name="emailid"
-                        id="address-2" placeholder="Enter EmailId" required>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <label>Mobile No.</label>
-                    <input formControlName="phoneNo" type="number" class="form-control-01" name="Locality"
-                        id="firstName" placeholder="Enter Phone Number" required>
-                </div>
-            </div> -->
-            
+           
             <!--- Prime Ng Radio Button -->
 
             <div class="card flex justify-content-center">

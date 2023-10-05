@@ -13,6 +13,7 @@ import { SuperAdminService } from 'src/shared/services/super-admin-service/super
 interface CreateChannalParterPayload {
   name: String,
   address: Array<any>,
+  gstin:String,
   firstName: String,
   lastName: String,
   email: String,
@@ -21,7 +22,8 @@ interface CreateChannalParterPayload {
   role: String,
   createdBy: String,
   updatedBy: String,
-  isNewUser: boolean
+  isNewUser: boolean,
+  companyBusinessName:String
 
 }
 
@@ -31,7 +33,7 @@ interface CreateChannalParterPayload {
   styleUrls: ['./add-new-channel-partner.component.css']
 })
 
-export class AddNewChannelPartnerComponent {
+export class AddNewChannelPartnerComponent implements OnInit{
 
   createChannalParterPayload: CreateChannalParterPayload;
   public subscription: Subscription[] = [];
@@ -49,6 +51,7 @@ export class AddNewChannelPartnerComponent {
   public selectedState: any;
   public selectedCity: any;
   public form: FormGroup;
+  public companyBusinessName:String;
 
   public selectedCSP : any;
 
@@ -75,7 +78,8 @@ export class AddNewChannelPartnerComponent {
 
     this.myForm = this.fb.group({
       channelName:[, Validators.required],
-      countryName: [''],
+      gstin:[''],
+      countryName: ['India'],
       addressLine1: [''],
       addressLine2: [''],
       stateName: [''],
@@ -91,7 +95,6 @@ export class AddNewChannelPartnerComponent {
 
       
   }
-
 
 
   selectedValue: any;
@@ -114,7 +117,7 @@ export class AddNewChannelPartnerComponent {
     this.countryList = Country.getAllCountries();
 
     this.selectedValue = this.countryList[0];
-    //this.setForm();
+  //  this.setForm();
     this.setSelfData();
     this.getUsersList();
     this.showMsg=false;
@@ -126,7 +129,8 @@ export class AddNewChannelPartnerComponent {
     this.myForm = this.formBuilder.group(
       {
         channelName: ['', Validators.required],
-     
+        gstin:[],
+        countryName:[],
         addressLine1: [],
         addressLine2: [],
         stateName: [],
@@ -196,7 +200,7 @@ export class AddNewChannelPartnerComponent {
 
   public onStateChange(event) {
 
-    //this.cityList  = State?.getStatesOfCountry(event.target.value);
+   //this.stateList  = State?.getStatesOfCountry(event.target.value);
 
     let state = JSON.parse(event.target.value);
     this.selectedState = state;
@@ -208,12 +212,9 @@ export class AddNewChannelPartnerComponent {
 
   public onCityChange(event) {
 
-
-
-
     let city = JSON.parse(event.target.value);
     this.selectedCity = city;
-    //this.cityList = City.getCitiesOfState(state?.countryCode, state.isoCode);
+ //  this.cityList = City.getCitiesOfState(this.selectedState?.countryCode, this.selectedState.isoCode);
 
 
 
@@ -250,7 +251,8 @@ export class AddNewChannelPartnerComponent {
 
       this.createChannalParterPayload = {
         name: channelPartnerData.channelName,
-
+        gstin:channelPartnerData.gstin,
+        companyBusinessName:this.companyBusinessName,
 
         address: [{
           "address": channelPartnerData.addressLine1,
@@ -297,7 +299,73 @@ public savenewChannelPartner(request:any){
   )
 }
 
+public fetchGST(){
+  console.log(this.myForm.value.gstin.length )
 
+  if(this.myForm.value.gstin.length === 15){
+
+    // this.myForm.controls['companyName'].disable();
+    // this.myForm.controls['addressLine1'].disable();
+    // this.myForm.controls['addressLine2'].disable();
+    // this.myForm.controls['postalCode'].disable();
+    // this.myForm.controls['countryName'].disable();
+    // this.myForm.controls['stateName'].disable();
+    // this.myForm.controls['cityName'].disable();
+    
+    this.subscription.push(
+    this.superAdminService.getGSTDetailsById(this.myForm.value.gstin).subscribe(res=>{
+
+      const gstResult= res;
+
+    //  this.gstData = true;
+  
+
+      
+      // this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
+      this.companyBusinessName=res['legal-name'] ? res['legal-name'] : ''
+      this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
+      this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
+      this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
+      this.myForm.controls['stateName'].setValue(res.adress.state);
+
+
+      let resState = res.adress.state;
+      let resCity = res.adress.city;
+
+
+      let stateList  = State?.getStatesOfCountry('IN');
+      this.stateList=State?.getStatesOfCountry('IN');
+      
+      console.log("resState===",resState)
+
+      console.log("this.stateList===",this.stateList)
+
+      let selectedState = stateList.filter(c => c.name === resState)[0];
+     
+      this.selectedState = selectedState;
+
+
+      let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
+      this.cityList=City.getCitiesOfState('IN', this.selectedState.isoCode);
+      
+
+      let selectedCity = cityList.filter(c => c.name === resCity)[0];
+      this.selectedCity = selectedCity;
+
+
+      
+
+
+      
+      //this.myForm.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
+      //this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
+
+      
+    })
+  )
+}
+
+}
 public checknewUser(data){
 
  if(data.firstName){
