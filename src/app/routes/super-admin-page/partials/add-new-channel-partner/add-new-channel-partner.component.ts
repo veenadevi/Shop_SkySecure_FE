@@ -63,6 +63,10 @@ export class AddNewChannelPartnerComponent implements OnInit{
 
   selectedCountry: string | undefined;
 
+  public gstData : boolean = false;
+
+  public gstResponseData : any;
+
   //public addAdminOption = "Add Existing User";
 
   constructor(
@@ -300,7 +304,7 @@ public savenewChannelPartner(request:any){
 }
 
 public fetchGST(){
-  console.log(this.myForm.value.gstin.length )
+  console.log("_+_+_+_+_+ GST Data ", this.myForm.value.gstin.length )
 
   if(this.myForm.value.gstin.length === 15){
 
@@ -312,12 +316,25 @@ public fetchGST(){
     // this.myForm.controls['stateName'].disable();
     // this.myForm.controls['cityName'].disable();
     
+
+    
+
+
     this.subscription.push(
     this.superAdminService.getGSTDetailsById(this.myForm.value.gstin).subscribe(res=>{
 
       const gstResult= res;
 
-    //  this.gstData = true;
+      
+
+      
+
+      this.gstResponseData = res;
+
+      if(res && res.adress){
+        this.gstData = true;
+      }
+      
   
 
       
@@ -333,12 +350,25 @@ public fetchGST(){
       let resCity = res.adress.city;
 
 
+
+
+      
+
       let stateList  = State?.getStatesOfCountry('IN');
+      
+
+      
+
+      let selectedState = stateList.filter(c => c.name === resState)[0];
+         
+      this.selectedState = selectedState;
+
+      
+
+      /*let stateList  = State?.getStatesOfCountry('IN');
       this.stateList=State?.getStatesOfCountry('IN');
       
-      console.log("resState===",resState)
-
-      console.log("this.stateList===",this.stateList)
+      
 
       let selectedState = stateList.filter(c => c.name === resState)[0];
      
@@ -350,16 +380,14 @@ public fetchGST(){
       
 
       let selectedCity = cityList.filter(c => c.name === resCity)[0];
-      this.selectedCity = selectedCity;
+      this.selectedCity = selectedCity;*/
 
 
       
 
 
       
-      //this.myForm.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
-      //this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
-
+      
       
     })
   )

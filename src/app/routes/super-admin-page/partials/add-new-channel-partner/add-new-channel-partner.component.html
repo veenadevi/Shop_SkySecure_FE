@@ -39,8 +39,14 @@
                     <label for="Country">Country*</label>
                     <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)"
                         placeholder="select country">
-                        <option disabled value="'Select Country'">Select Country </option>
-                        <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+                        <ng-container *ngIf="gstData; else noGstData">
+                            <option value="India">India</option>
+                        </ng-container>
+                        <ng-template #noGstData>
+                            <option disabled value="'Select Country'">Select Country </option>
+                            <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+                        </ng-template>
+                        
                     </select>
 
                 </div>
@@ -51,8 +57,14 @@
                 <div class="col-sm-6 form-group">
                     <label for="State">State*</label>
                     <select formControlName="stateName" class="form-control-01" (change)="onStateChange($event)">
-                        <option disabled value="'Select State'">Select State </option>
-                        <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+                        <ng-container *ngIf="gstData; else noGstDataState">
+                            <option value="">{{gstResponseData.adress.state}}</option>
+                        </ng-container>
+                        <ng-template #noGstDataState>
+                            <option disabled value="'Select State'">Select State </option>
+                            <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+                        </ng-template>
+                        
                     </select>
                 </div>
 
@@ -60,9 +72,14 @@
                 <div class="col-sm-6 form-group">
                     <label for="State">City*</label>
                     <select formControlName="cityName" class="form-control-01" (change)="onCityChange($event)">
-                        <option disabled value="'Select City'">Select City </option>
-                        <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
-
+                        <ng-container *ngIf="gstData; else noGstDataCity">
+                            <option value="">{{gstResponseData.adress.city}}</option>
+                        </ng-container>
+                        <ng-template #noGstDataCity>
+                            <option disabled value="'Select City'">Select City </option>
+                            <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
+                        </ng-template>
+                        
                     </select>
                 </div>
                 <div class="col-sm-6 form-group">
