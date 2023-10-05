@@ -24,7 +24,6 @@ import { MicrosoftGraphService } from 'src/shared/services/microsoft-graph.servi
 import { HttpResponseBase } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -64,7 +63,7 @@ export class HeaderComponent implements OnInit{
 
   public userFullName = '';
 
-  hoverOpen = true;
+  notificationDropDown:boolean = false;
 
   @Input() set userName(value : any){
     this.userFullName =  value;
@@ -118,9 +117,9 @@ export class HeaderComponent implements OnInit{
    */
 
   
-  openDropdown() {
+  public openNotificationDropdown() {
 
-    this.hoverOpen = true;
+    this.notificationDropDown = !this.notificationDropDown;
 
   }
 
