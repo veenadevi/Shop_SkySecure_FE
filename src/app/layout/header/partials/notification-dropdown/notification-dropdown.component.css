@@ -41,12 +41,17 @@
 }
 
 
-.container {
-    border-left: 1px solid #D8D8D8;
-    border-right: 1px solid #D8D8D8;
+.content-container {
+    /* border-left: 1px solid #D8D8D8;
+    border-right: 1px solid #D8D8D8; */
     width: 382px;
     border-top: 1px solid #D8D8D8;
     background-color: #fff;
+    cursor: pointer;
+}
+
+.content-container :hover {
+    background-color: var(--neutral-50);
 }
 
 .content {

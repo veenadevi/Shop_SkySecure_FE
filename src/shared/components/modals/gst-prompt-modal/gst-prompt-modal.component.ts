@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup , Validators  } from '@angular/forms';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
 @Component({
   selector: 'app-gst-prompt-modal',
@@ -76,7 +77,8 @@ export class GstPromptModalComponent implements OnInit{
     private formBuilder: FormBuilder,
     private superAdminService : SuperAdminService,
     private cartStore : CartStore,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toaster : ToasterNotificationService
   ){
     //this.myForm = this.fb.group({
     this.myForm = this.fb.group({
@@ -406,7 +408,13 @@ public submitErrorMessage: boolean =false;
           
         }
         
-      })
+      },
+      error => {
+        this.spinner.hide();
+        this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+      }
+      ),
+      
     )
     }
   }
