@@ -98,7 +98,8 @@ export class AddNewChannelPartnerComponent implements OnInit{
       userName:['', [Validators.required, Validators.required]],
       EmailId: ['', [Validators.required, Validators.email]],
       phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      country : ['']
+      country : [''],
+      companyBusinessName:['']
 
     });
 
@@ -134,32 +135,6 @@ export class AddNewChannelPartnerComponent implements OnInit{
 
   }
 
-  public setForm() {
-    //this.form = this.formBuilder.group(
-    this.myForm = this.formBuilder.group(
-      {
-        channelName: ['', Validators.required],
-        gstin:[],
-        countryName:[],
-        addressLine1: [],
-        addressLine2: [],
-        stateName: [],
-        cityName: [],
-        postalCode: [],
-        credit: [''],
-        EmailId:[''],
-        phoneNo:[''],
-        lastName:[''],
-        selectedAdminuser:['']
-
-
-
-
-
-
-      }
-    )
-  }
 
 
   public setSelfData() {
@@ -273,7 +248,7 @@ let controls=this.myForm.controls
       this.createChannalParterPayload = {
         name: channelPartnerData.channelName,
         gstin:channelPartnerData.gstin,
-        companyBusinessName:this.companyBusinessName,
+        companyBusinessName:channelPartnerData.companyBusinessName,
 
         address: [{
           "address": channelPartnerData.addressLine1,
@@ -366,7 +341,8 @@ public fetchGST(){
 
       
       // this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
-      this.companyBusinessName=res['legal-name'] ? res['legal-name'] : ''
+      
+      this.myForm.controls['companyBusinessName'].setValue(res['legal-name'] ? res['legal-name'] : null);
       this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
       this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
       this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);

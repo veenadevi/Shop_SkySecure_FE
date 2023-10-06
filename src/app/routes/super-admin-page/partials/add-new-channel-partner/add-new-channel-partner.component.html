@@ -7,17 +7,22 @@
                 <div class="address-row">
                     <div class="col-sm-6 form-group">
                         <label for="firstName">Channel Partner Name</label>
-                        <input formControlName="channelName" type="channelName" class="form-control-01" name="Locality"
+                        <input formControlName="channelName" type="channelName" class="form-control-03" name="Locality"
                             id="channelName" placeholder="Enter Partner Name" required>
                     </div>
-
                     <div class="col-sm-6 form-group">
+                        <label for="companyBusinessName">Channel Partner Name</label>
+                        <input formControlName="companyBusinessName" type="companyBusinessName" class="form-control-03" name="companyBusinessName"
+                            id="companyBusinessName" placeholder="Enter Company Name" required>
+                    </div>
+
+                    <div class="col-sm-6 form-group gstin">
                         <label for="gstin">Enter GST</label>
-                        <input formControlName="gstin" type="gstin" class="form-control-01" name="gstin" id="gstin"
+                        <input formControlName="gstin" type="gstin" class="form-control-03" name="gstin" id="gstin"
                             placeholder="Enter GST Number">
 
                     </div>
-                    <div class="col-sm-3 form-group">
+                    <div class="col-sm-6 form-group">
                         <label></label>
                         <button class="btn primary-btn fetchgst" (click)="fetchGST()">Fetch GST Data</button>
                     </div>
