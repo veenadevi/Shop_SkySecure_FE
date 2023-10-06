@@ -1,5 +1,5 @@
 .all-accounts-view {
-    min-height: 30em;
+    min-height: 36em;
     display: flex;
     flex-direction: column;
     row-gap: 1em;
@@ -47,7 +47,7 @@
     color: black;
     font-size: 24px;
     font-weight: bolder;
-   
+   min-height: 30em;
 }
 .no-img{
     width: 300px;

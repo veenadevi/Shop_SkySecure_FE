@@ -30,8 +30,10 @@ export class SuperAdminService {
 
   private assignChannelPartnerURL: string;
 
+ 
+  private getMyChannelsListURL:string;
 
-
+  private addUsersToChannelURL:string;
 
 
 
@@ -55,7 +57,9 @@ export class SuperAdminService {
     this.assignAccountOwnerUrl = AppService.appUrl.assignAccountOwner;
     this.getAccountDetailsByIdUrl = AppService.appUrl.getMarketplaceAccountDetailsById;
     this.assignChannelPartnerURL=AppService.appUrl.assignChannelPartnerURL
-    
+
+    this.getMyChannelsListURL=AppService.appUrl.getMyChannelsListURL;
+    this.addUsersToChannelURL=AppService.appUrl.addUsersToChannelURL;
   }
 
 
@@ -102,6 +106,27 @@ export class SuperAdminService {
     return request$;
   }
 
+
+  public getMyChannelPartnerList(id:any) : Observable<any> {
+
+    let url = this.baseURLForusers + this.getMyChannelsListURL+"/"+id;
+
+    
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+  
 
   public assignChannelPartner( request : any): Observable<any> {
 
@@ -217,6 +242,7 @@ export class SuperAdminService {
     //let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/' + id;
 
 
+    let options = this.getOptions();
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(
@@ -248,8 +274,7 @@ export class SuperAdminService {
       return OPTIONS; 
     }
 
-  
-
+   
 
 }
 

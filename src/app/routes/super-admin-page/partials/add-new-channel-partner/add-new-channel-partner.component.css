@@ -55,10 +55,12 @@ h4{
 
 .custom-select {
     width: 100%;
-    padding: 4px;
+    padding: 10px;
     box-sizing: border-box;
     border: 1px solid black;
     border-radius: 8px;
+    font-family: 'lato', sans-serif;
+    font-size: 13px !important;
 }
 
 
@@ -82,7 +84,7 @@ h4{
 }
 .form-control-02 {
     display: block;
-    width: 100%;
+    width: 80%;
     padding: 8px;
     /* font-size: 1rem; */
     font-weight: 400;
@@ -99,7 +101,8 @@ h4{
     font-family: 'lato', sans-serif;
 }
 select{
-    border: 1px solid grey; 
+    border: 1.2px solid grey; 
+    width: 65%;
 }
 
 .section-02{
@@ -169,4 +172,32 @@ element.style {
 
 .radio-style{
     padding-top: 10px !important;
+}
+.fetchgst
+{
+    margin-top: 26px;
+    margin-left: -123px;
+}
+.p-inputtext{
+font-family: lato,sans-serif !important;
+}
+.p-dropdown{
+    width: 100% !important;
+    height: 2.75rem !important;
+}
+
+.p-dropdown-clearable .p-dropdown-label {
+   width: 100% !important;
+}
+.userDropdown{
+    border: 1px solid black;
+    border-radius: 8px;
+    font-family: 'lato', sans-serif;
+    font-size: 13px !important;
+}
+.p-dropdown-clearable{
+    padding-right: 3rem !important;
+}
+.p-dropdown .p-dropdown-trigger{
+width: 3.5rem !important;
 }

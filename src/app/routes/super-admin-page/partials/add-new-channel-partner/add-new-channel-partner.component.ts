@@ -13,6 +13,7 @@ import { SuperAdminService } from 'src/shared/services/super-admin-service/super
 interface CreateChannalParterPayload {
   name: String,
   address: Array<any>,
+  gstin:String,
   firstName: String,
   lastName: String,
   email: String,
@@ -21,7 +22,8 @@ interface CreateChannalParterPayload {
   role: String,
   createdBy: String,
   updatedBy: String,
-  isNewUser: boolean
+  isNewUser: boolean,
+  companyBusinessName:String
 
 }
 
@@ -31,24 +33,30 @@ interface CreateChannalParterPayload {
   styleUrls: ['./add-new-channel-partner.component.css']
 })
 
-export class AddNewChannelPartnerComponent {
+export class AddNewChannelPartnerComponent implements OnInit{
 
   createChannalParterPayload: CreateChannalParterPayload;
   public subscription: Subscription[] = [];
   myForm: FormGroup;
   @Input('request')
   public countryList: any;
+
+
+  
+  public selectedAdminuser:any;
   
 
   public stateList: any;
 
   public cityList: any;
   public showMsg:boolean
+  public duplicate:boolean;
 
   public selectedCountrys: any;
   public selectedState: any;
   public selectedCity: any;
   public form: FormGroup;
+  public companyBusinessName:String;
 
   public selectedCSP : any;
 
@@ -59,6 +67,10 @@ export class AddNewChannelPartnerComponent {
   countries: any[] | undefined;
 
   selectedCountry: string | undefined;
+
+  public gstData : boolean = false;
+
+  public gstResponseData : any;
 
   //public addAdminOption = "Add Existing User";
 
@@ -75,7 +87,8 @@ export class AddNewChannelPartnerComponent {
 
     this.myForm = this.fb.group({
       channelName:[, Validators.required],
-      countryName: [''],
+      gstin:[''],
+      countryName: ['India'],
       addressLine1: [''],
       addressLine2: [''],
       stateName: [''],
@@ -86,12 +99,12 @@ export class AddNewChannelPartnerComponent {
       EmailId: ['', [Validators.required, Validators.email]],
       phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       country : [''],
+      selectedAdminuser:['']
 
     });
 
       
   }
-
 
 
   selectedValue: any;
@@ -114,10 +127,11 @@ export class AddNewChannelPartnerComponent {
     this.countryList = Country.getAllCountries();
 
     this.selectedValue = this.countryList[0];
-    //this.setForm();
+  //  this.setForm();
     this.setSelfData();
     this.getUsersList();
     this.showMsg=false;
+    this.duplicate=false;
 
   }
 
@@ -126,7 +140,8 @@ export class AddNewChannelPartnerComponent {
     this.myForm = this.formBuilder.group(
       {
         channelName: ['', Validators.required],
-     
+        gstin:[],
+        countryName:[],
         addressLine1: [],
         addressLine2: [],
         stateName: [],
@@ -137,6 +152,7 @@ export class AddNewChannelPartnerComponent {
         phoneNo:[''],
         firstName:[''],
         lastName:[''],
+        selectedAdminuser:['']
 
 
 
@@ -196,7 +212,7 @@ export class AddNewChannelPartnerComponent {
 
   public onStateChange(event) {
 
-    //this.cityList  = State?.getStatesOfCountry(event.target.value);
+   //this.stateList  = State?.getStatesOfCountry(event.target.value);
 
     let state = JSON.parse(event.target.value);
     this.selectedState = state;
@@ -208,12 +224,9 @@ export class AddNewChannelPartnerComponent {
 
   public onCityChange(event) {
 
-
-
-
     let city = JSON.parse(event.target.value);
     this.selectedCity = city;
-    //this.cityList = City.getCitiesOfState(state?.countryCode, state.isoCode);
+ //  this.cityList = City.getCitiesOfState(this.selectedState?.countryCode, this.selectedState.isoCode);
 
 
 
@@ -250,7 +263,8 @@ export class AddNewChannelPartnerComponent {
 
       this.createChannalParterPayload = {
         name: channelPartnerData.channelName,
-
+        gstin:channelPartnerData.gstin,
+        companyBusinessName:this.companyBusinessName,
 
         address: [{
           "address": channelPartnerData.addressLine1,
@@ -282,7 +296,7 @@ export class AddNewChannelPartnerComponent {
 
   
 
-    this.form.reset();
+   
   }
 }
 
@@ -291,13 +305,113 @@ public savenewChannelPartner(request:any){
 
 
   this.subscription.push(
-    this.adminPageService.addChannelPartner(request).subscribe(res=>{
-      this.showMsg=true
+    this.adminPageService.addChannelPartner(request).subscribe( res =>{
+     
+        this.showMsg=true
+        this.duplicate=false
+        this.myForm.reset();
+     
+    },
+    
+    (error) => {
+    this.duplicate=true
+    this.showMsg=false
+    }
+    )
+  )
+}
+
+public fetchGST(){
+  console.log("_+_+_+_+_+ GST Data ", this.myForm.value.gstin.length )
+
+  if(this.myForm.value.gstin.length === 15){
+
+    // this.myForm.controls['companyName'].disable();
+    // this.myForm.controls['addressLine1'].disable();
+    // this.myForm.controls['addressLine2'].disable();
+    // this.myForm.controls['postalCode'].disable();
+    // this.myForm.controls['countryName'].disable();
+    // this.myForm.controls['stateName'].disable();
+    // this.myForm.controls['cityName'].disable();
+    
+
+    
+
+
+    this.subscription.push(
+    this.superAdminService.getGSTDetailsById(this.myForm.value.gstin).subscribe(res=>{
+
+      const gstResult= res;
+
+      
+
+      
+
+      this.gstResponseData = res;
+
+      if(res && res.adress){
+        this.gstData = true;
+      }
+      
+  
+
+      
+      // this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
+      this.companyBusinessName=res['legal-name'] ? res['legal-name'] : ''
+      this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
+      this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
+      this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
+      this.myForm.controls['stateName'].setValue(res.adress.state);
+
+
+      let resState = res.adress.state;
+      let resCity = res.adress.city;
+
+
+
+
+      
+
+      let stateList  = State?.getStatesOfCountry('IN');
+      
+
+      
+
+      let selectedState = stateList.filter(c => c.name === resState)[0];
+         
+      this.selectedState = selectedState;
+
+      
+
+      /*let stateList  = State?.getStatesOfCountry('IN');
+      this.stateList=State?.getStatesOfCountry('IN');
+      
+      
+
+      let selectedState = stateList.filter(c => c.name === resState)[0];
+     
+      this.selectedState = selectedState;
+
+
+      let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
+      this.cityList=City.getCitiesOfState('IN', this.selectedState.isoCode);
+      
+
+      let selectedCity = cityList.filter(c => c.name === resCity)[0];
+      this.selectedCity = selectedCity;*/
+
+
+      
+
+
+      
+      
+      
     })
   )
 }
 
-
+}
 public checknewUser(data){
 
  if(data.firstName){
@@ -346,8 +460,8 @@ public getUsersList(){
   )
 }
 
-public onDropDownChange(item){
-  
+public onDropDownChange(item:any){
+  console.log("selectedValue1  ===",item.target.value)
   const selectedValue = item.target.value;
   console.log("selectedValue  ===",selectedValue)
 
@@ -372,6 +486,29 @@ public onDropDownChange(item){
 
   
   
+  
+}
+
+
+selectAdminUserDetails(event: any) {
+
+  console.log("======dropdown selection===",event)
+  this.selectedAdminuser=event.value
+  if(this.selectedAdminuser){
+    this.myForm.controls['phoneNo'].enable();
+  this.myForm.controls['EmailId'].enable();
+  
+  this.myForm.controls['EmailId'].setValue(this.selectedAdminuser.email);
+  this.myForm.controls['phoneNo'].setValue(this.selectedAdminuser.mobileNumber);
+  this.myForm.controls['userName'].setValue(this.selectedAdminuser.firstName);
+
+ 
+  }
+  else{
+    // this.registrationForm.reset();
+    // location.reload();
+    // this.addDynamicElementNew = null;
+  }
   
 }
 
