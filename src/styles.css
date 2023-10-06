@@ -228,24 +228,30 @@ body{
 }
 
 .tertiary-btn {
-  /* color: var(--primary-400-purple); */
+  color: var(--white);
   text-align: center;
   margin-top: 8%;
-  color: var(--primary-500-purple);
-  color: var(--white);
   font-size: 14px;
   font-weight: 500;
   width: 7rem;
   /* width: 100%; */
-  /* border: 1px solid #383536; */
+  border: 1px solid var(--primary-400-purple);
+  transition: all .3s ease;
+  box-shadow: 0 3px 6px #0000001a;
+  background-color: var(--primary-500-purple);
 }
 
 .tertiary-btn:hover {
   transform: translateY(-2px);
+  border: 1px solid var(--primary-400-purple);
+  color: var(--white);
+  background-color: var(--primary-500-purple);
 }
 
 .tertiary-btn:active {
   transform: translateY(2px);
+  color: var(--white);
+  background-color: var(--primary-500-purple);
 }
 
 
