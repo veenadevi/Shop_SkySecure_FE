@@ -313,6 +313,10 @@ export class SidenavWrapperComponent {
         this.router.navigate(['channel-partner/invite-channel-partner']);
         return;
 
+        case 'myleadsFromChannel':
+          this.menuToogled = false;
+          this.router.navigate(['channel-partner/leadsfromMyChannel']);
+          return;
 
       default:
         return null;
