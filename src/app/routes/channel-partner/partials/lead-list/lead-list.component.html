@@ -19,7 +19,7 @@
                         <th>Created On</th>
                         <th>Status</th>
                          <!-- <th>Place of Supply</th> -->
-                        <th>Assigned Partner</th>
+                        <th>Assigned AM</th>
                         <th>Last Updated Date</th>
                         <th>Estimate No.</th>
                         <th>Value  <span class="gst">(GST Extra)</span></th>
@@ -46,8 +46,8 @@
                        
                         <!-- <td>{{ account.createdFor.placeOfSupply}}</td> -->
                         <td>
-                            <ng-container *ngIf="account?.assignedChannalpartner; else noValuecp1">
-                            {{ account?.assignedChannalpartner.channelPartner?.name }} 
+                            <ng-container *ngIf="account?.cartData?.assignedAccountOwnerId else noValuecp1">
+                            {{ account?.assignedChannelpartnerAM.firstName }} 
                               </ng-container>
                               <ng-template #noValuecp1>-</ng-template>
                          </td> 
@@ -79,7 +79,7 @@
                         <td>
                             
                             <div class="btn-holder">
-                                <button id="assign-btn" class="btn primary-btn" (click)="assign(account, i)">Assign</button>
+                                <button id="assign-btn" class="btn primary-btn" [disabled]="disableAssign" (click)="assign(account, i)">Assign</button>
                             </div>
                         </td>
                     </tr>

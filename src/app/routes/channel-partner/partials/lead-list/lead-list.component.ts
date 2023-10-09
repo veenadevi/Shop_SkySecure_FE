@@ -25,7 +25,7 @@ export class LeadListComponent implements OnInit{
 
   public info : any;
   public myChannelpartnerId:string
-
+  public disableAssign :boolean=true;
 
 
    
@@ -131,6 +131,10 @@ export class LeadListComponent implements OnInit{
     this.subscriptions.push(
       this.superAdminService.getMyChannelPartnerAMList(channelAdminUserId).subscribe( res=> {
         console.log("_+_+getMyChannelAMList _+_+_+_+ ", res);
+        if(res.usersList.length>0){
+          this.disableAssign=false
+ 
+         }
         this.superAdminStore.setMyChannelPartnerAMList(res);
       })
     )
