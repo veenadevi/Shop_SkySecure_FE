@@ -40,23 +40,23 @@ export class AccountListComponent implements OnInit{
   ){}
 
 
-  public allAccounts$ = this.adminPageService.getAllAccounts()
-  .pipe(
-    map(data => {
-      console.log("running here ==")
-      if(data){
+  // public allAccounts$ = this.adminPageService.getAllAccounts()
+  // .pipe(
+  //   map(data => {
+  //     console.log("running here ==")
+  //     if(data){
       
-        this.accountData = data.accounts.data;
-        this.info = data.accounts.info;
-        return data;
+  //       this.accountData = data.accounts.data;
+  //       this.info = data.accounts.info;
+  //       return data;
         
-      }
-      else{
-        return data;
-      }
-    }
-    )
-  )
+  //     }
+  //     else{
+  //       return data;
+  //     }
+  //   }
+  //   )
+  // )
 
   ngOnInit(): void {
     this.spinner.show();

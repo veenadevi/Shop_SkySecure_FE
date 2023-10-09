@@ -1,0 +1,45 @@
+.modal-header{
+    background: var(--primary);
+    padding: 1rem;
+    font-size: 18px;
+}
+
+.modal-body{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.field-holder{
+    display: flex;
+    align-items: center;
+}
+
+.left-div{
+    flex-basis: 35%;
+}
+
+.left-div span{
+    display: flex;
+}
+
+.right-div{
+    flex-basis: 75%;
+}
+
+:host ::ng-deep .mat-icon{
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+:host ::ng-deep .material-icons{
+   
+    font-size: 18px;
+    color: #9E9E9E;
+}
+
+:host ::ng-deep .card{
+    border: none;
+}

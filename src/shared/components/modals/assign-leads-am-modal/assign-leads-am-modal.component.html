@@ -1,7 +1,7 @@
 <div class="modal-container">
     <div class="modal-header">
         <span>
-            Assign Leads
+            Assign Leads to Account Manager
         </span>
     </div>
     <div class="modal-body">
@@ -9,15 +9,15 @@
         <div #assignTo class="field-holder">
             <div class="left-div">
                 <span>
-                    Assign To 
+                    Select Account Manager
                     <!-- <mat-icon>info</mat-icon> -->
                 </span>
             </div>
             <div class="right-div">
-                <ng-container *ngIf="channelPartnerList && channelPartnerList.length>0">
+                <ng-container *ngIf="myChannelAMList && myChannelAMList.length>0">
                 <div class="card flex justify-content-center">
 
-                    <p-dropdown placeholder="Select Channel" [options]="channelPartnerList" (onChange)="onChange($event)" optionLabel="name"></p-dropdown>
+                    <p-dropdown placeholder="Select AM" [options]="myChannelAMList" (onChange)="onChange($event)" optionLabel="firstName"></p-dropdown>
                 </div>
             </ng-container>
             </div>
