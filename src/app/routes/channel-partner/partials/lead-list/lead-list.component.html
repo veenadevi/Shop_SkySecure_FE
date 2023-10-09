@@ -8,16 +8,20 @@
                 [paginator]="true"
                 [rows]="15"
                 [showCurrentPageReport]="true"
+                [globalFilterFields]="['Company','Status']"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                 <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
                 <ng-template pTemplate="header">
                     <tr class="thfont">
-                        <th>Cart Id</th>
-                        <th>Customer Name</th>
-                        <th>Customer Company</th>
-                        <th>Customer Phone</th>
+                        <th>S.No</th>
+                        <th> Company</th>
+
+                        <th> Name</th>
+                      
+                        <th> Phone</th>
                         <th>Created On</th>
                         <th>Status</th>
+                       
                          <!-- <th>Place of Supply</th> -->
                         <th>Assigned AM</th>
                         <th>Last Updated Date</th>
@@ -31,15 +35,17 @@
               
     
                 <ng-template pTemplate="body" let-account let-i="rowIndex">
-                    <tr class="trfont">
+            
+                    <tr class="trfont" (click)="getAccountById(account.cartData._id)">
                         <td>
-                            <div class="text-style" (click)="getAccountById(account.cartData._id)">
-                                {{ account.cartData.cart_ref_id }}
+                            <div class="text-style" >
+                               {{i+1}}
                             </div>
                             
                         </td>
-                        <td>{{ account.createdFor.firstName }}</td>
                         <td>{{ account.createdFor.company}}</td>
+                        <td>{{ account.createdFor.firstName }}</td>
+                     
                         <td>{{ account.createdFor.mobileNumber }}</td>
                         <td>{{ account.cartData.createdAt | dateFormat }}</td>
                         <td>{{ account.cartData.status }}</td>
@@ -83,6 +89,7 @@
                             </div>
                         </td>
                     </tr>
+          
                 </ng-template>
                 <!-- <ng-template pTemplate="paginatorleft">
                     <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>

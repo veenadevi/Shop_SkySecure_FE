@@ -64,7 +64,7 @@ export class AccountListComponent implements OnInit{
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
-    this.getAllAccounts();
+    //this.getAllAccounts();
     //this.getAllCRMUsers();
     this.getAllChannelPartners();
     this.getAllMarketPlaceAccountList();
