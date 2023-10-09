@@ -64,6 +64,7 @@ export class GstPromptModalComponent implements OnInit{
 
   public gstResponseData : any;
 
+  public errorMessageText : string = "* Please choose one option: Enter a Company GST number or select the I don't have Company GST number checkbox"
  
  
   public subscriptions : Subscription[] = [];
@@ -537,70 +538,83 @@ public errorMessage: boolean = false;
 this.errorMessage = true;
   }
   else{
-    this.errorMessage = false;
-    this.showContent = !this.showContent;
 
-    
-
-    if(this.myForm.value.gstNo.length === 15){
-
-        this.myForm.controls['companyName'].disable();
-        this.myForm.controls['addressLine1'].disable();
-        this.myForm.controls['addressLine2'].disable();
-        this.myForm.controls['postalCode'].disable();
-        this.myForm.controls['countryName'].disable();
-        this.myForm.controls['stateName'].disable();
-        this.myForm.controls['cityName'].disable();
-        this.subscriptions.push(
-        this.superAdminService.getGSTDetailsById(this.myForm.value.gstNo).subscribe(res=>{
-
-          this.gstResponseData = res;
-  
-          this.gstData = true;
-      
-  
-          
-          this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
-          this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
-          this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
-          this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
-
-
-          let resState = res.adress.state;
-          let resCity = res.adress.city;
-
-
-          let stateList  = State?.getStatesOfCountry('IN');
-          
-
-
-          let selectedState = stateList.filter(c => c.name === resState)[0];
-         
-          this.selectedState = selectedState;
-
-
-          let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
-
-          
-
-          let selectedCity = cityList.filter(c => c.name === resCity)[0];
-          this.selectedCity = selectedCity;
-
-
-          
-
-
-          
-          //this.myForm.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
-          //this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
-  
-          
-        })
-      )
+    let a = 3;
+    if(this.myForm.get('gstNo').value !== 15){
+      this.myForm.get('gstNo').setErrors({ 'invalid': true });
+      this.errorMessageText = "Please Enter Valid GST Numebr!"
+      this.errorMessage = true;
     }
     else{
 
+      this.errorMessage = false;
+      this.showContent = !this.showContent;
+  
+      
+  
+      if(this.myForm.value.gstNo.length === 15){
+  
+          this.myForm.controls['companyName'].disable();
+          this.myForm.controls['addressLine1'].disable();
+          this.myForm.controls['addressLine2'].disable();
+          this.myForm.controls['postalCode'].disable();
+          this.myForm.controls['countryName'].disable();
+          this.myForm.controls['stateName'].disable();
+          this.myForm.controls['cityName'].disable();
+          this.subscriptions.push(
+          this.superAdminService.getGSTDetailsById(this.myForm.value.gstNo).subscribe(res=>{
+  
+            this.gstResponseData = res;
+    
+            this.gstData = true;
+        
+    
+            
+            this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
+            this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
+            this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
+            this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
+  
+  
+            let resState = res.adress.state;
+            let resCity = res.adress.city;
+  
+  
+            let stateList  = State?.getStatesOfCountry('IN');
+            
+  
+  
+            let selectedState = stateList.filter(c => c.name === resState)[0];
+           
+            this.selectedState = selectedState;
+  
+  
+            let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
+  
+            
+  
+            let selectedCity = cityList.filter(c => c.name === resCity)[0];
+            this.selectedCity = selectedCity;
+  
+  
+            
+  
+  
+            
+            //this.myForm.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
+            //this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
+    
+            
+          })
+        )
+      }
+      else{
+  
+      }
+
     }
+
+ 
   }
 
   }

@@ -74,6 +74,7 @@
                   placeholder="Enter your GST NO" >
                  
                   {{disableGstNOField()}}
+                  <span class="text-danger" *ngIf="myForm.get('gstNo').invalid">Please enter valid GST Number</span>
               </div>
               <p class="or ">(Or)</p>
               <div class="col-sm-12">
@@ -289,8 +290,9 @@
  
  
     <div *ngIf="errorMessage">
-      <p class="error">* Please choose one option: Enter a Company GST number or select the I don't have Company GST number checkbox</p>
-      {{disableAnyOneMessage()}}
+      <p class="error">{{errorMessageText}}</p>
+      <!-- <p class="error">* Please choose one option: Enter a Company GST number or select the I don't have Company GST number checkbox</p>
+      {{disableAnyOneMessage()}} -->
     </div>
 
 
