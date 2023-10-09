@@ -3,7 +3,7 @@
        
         <form [formGroup]="myForm">
             <div class="select   mb-3 mt-2 ">
-                <h3>Add Users</h3>  
+                <h3>Add Users for Channel</h3>  
                   <div class="section-01">
                     <label for="channelPartner">Select Channel</label>
 
@@ -87,6 +87,24 @@
 
                     <button class="btn  primary" (click)="submitForm()">Invite User</button>
                 </ng-container>
+            </div>
+
+            <div class="row" *ngIf="showMsg">
+                <div class="col-xs-12">
+                    <p class="alert alert-success">
+                        <strong>Channal Partner User Added Successfully !</strong>
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="duplicate">
+                <div class="col-xs-12">
+                    <p class="alert alert-danger">
+                        <strong>Channal Partner User  Already Assigned !</strong>
+
+                    </p>
+                </div>
             </div>
         </form>
     </div>

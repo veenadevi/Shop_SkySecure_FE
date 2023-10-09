@@ -88,7 +88,7 @@ export class AddNewChannelPartnerComponent implements OnInit{
     this.myForm = this.fb.group({
       channelName:[, Validators.required],
       gstin:[''],
-      countryName: ['India'],
+      countryName: [''],
       addressLine1: [''],
       addressLine2: [''],
       stateName: [''],
@@ -99,7 +99,7 @@ export class AddNewChannelPartnerComponent implements OnInit{
       EmailId: ['', [Validators.required, Validators.email]],
       phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       country : [''],
-      selectedAdminuser:['']
+      companyBusinessName:['']
 
     });
 
@@ -135,33 +135,6 @@ export class AddNewChannelPartnerComponent implements OnInit{
 
   }
 
-  public setForm() {
-    //this.form = this.formBuilder.group(
-    this.myForm = this.formBuilder.group(
-      {
-        channelName: ['', Validators.required],
-        gstin:[],
-        countryName:[],
-        addressLine1: [],
-        addressLine2: [],
-        stateName: [],
-        cityName: [],
-        postalCode: [],
-        credit: [''],
-        EmailId:[''],
-        phoneNo:[''],
-        firstName:[''],
-        lastName:[''],
-        selectedAdminuser:['']
-
-
-
-
-
-
-      }
-    )
-  }
 
 
   public setSelfData() {
@@ -235,6 +208,16 @@ export class AddNewChannelPartnerComponent implements OnInit{
   public submitErrorMessage: boolean = false;
 
   public submitForm() {
+
+let controls=this.myForm.controls
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        console.log("_____invalid for ",name);
+      }
+  }
+
+
+    console.log("while submit this.myForm.invalid=== ",this.myForm.invalid,this.myForm.value)
     if (this.myForm.invalid){
       this.submitErrorMessage = true;
       console.log("_____submit form ++++ Error Messgae");
@@ -245,10 +228,11 @@ export class AddNewChannelPartnerComponent implements OnInit{
       console.log("_____++++ Error False");
       this.submitErrorMessage = false
     }
-  //  this.CreateChannelPartner()
+
   }
 
   CreateChannelPartner(): any {
+    console.log("this.myForm.invalid=== ",this.myForm.invalid)
     let userAccountdetails = this.userAccountStore.getUserDetails();
    
 
@@ -264,7 +248,7 @@ export class AddNewChannelPartnerComponent implements OnInit{
       this.createChannalParterPayload = {
         name: channelPartnerData.channelName,
         gstin:channelPartnerData.gstin,
-        companyBusinessName:this.companyBusinessName,
+        companyBusinessName:channelPartnerData.companyBusinessName,
 
         address: [{
           "address": channelPartnerData.addressLine1,
@@ -357,7 +341,8 @@ public fetchGST(){
 
       
       // this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
-      this.companyBusinessName=res['legal-name'] ? res['legal-name'] : ''
+      
+      this.myForm.controls['companyBusinessName'].setValue(res['legal-name'] ? res['legal-name'] : null);
       this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
       this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
       this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
