@@ -64,38 +64,21 @@ export class CpuserLeadListComponent implements OnInit{
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
-    this.getAllAccounts();
+
     //this.getAllCRMUsers();
     let userAccountdetails = this.userAccountStore.getUserDetails();
     this.getAllChannelPartners();
-    this.getMyChannelLeadList(userAccountdetails._id);
+    this.getChannelAMAccountList(userAccountdetails._id);
 
   }
 
-  public getAllAccounts(){
-    
-      // let a: any = this.sampleData();
-      // this.accountData = [...a.accounts.data, ...a.accounts.data];
-      // this.info = a.accounts.info;
-    this.subscriptions.push(
-      this.adminPageService.getAllAccounts().subscribe( response => {
-        console.log("running here directly==")
-     
-        this.accountData = response.accounts.data;
-        this.info = response.accounts.info;
-        
-        
-
-      })
-    )
-  }
-
-  public getMyChannelLeadList(channelAdminUserId){
+ 
+  public getChannelAMAccountList(channelAMuserId){
     this.spinner.show(); 
    
     this.subscriptions.push(
    
-    this.adminPageService.getMyChannelLeadList(channelAdminUserId).subscribe( response => {
+    this.adminPageService.getChannelAMAccountList(channelAMuserId).subscribe( response => {
     
       //console.log("running here directly==")
       this.allMarketPlaceList=response;
@@ -148,6 +131,14 @@ export class CpuserLeadListComponent implements OnInit{
     )
   }
 
+  public getMyChannelUsersList(){
+    this.subscriptions.push(
+      this.superAdminService.getAllChannelPartners().subscribe( res=> {
+        console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
+        this.superAdminStore.setMyChannelPartnerAMList(res);
+      })
+    )
+  }
 
 
 

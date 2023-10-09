@@ -78,14 +78,21 @@
 
         "getMyMarketPlaceAccountListURL":"api/user/getMyMarketplaceAccountList",
 
-        "addChannelPartnerURL":"/api/user/channel-partner",
-        "getAllChannelPartner" : "/api/user/channel-partner",
+        "addChannelPartnerURL":"api/user/channel-partner",
+        "getAllChannelPartner" : "api/user/channel-partner",
 
         "assignChannelPartnerURL" : "api/admin/assignChannelPartner",
 
         "getMyChannelsListURL":"api/user/get-my-channel",
 
-        "addUsersToChannelURL":"api/user/channel-partner-user"
+        "addUsersToChannelURL":"api/user/channel-partner-user",
+
+        "getMyChannelAMURL" : "api/user/channel-partner-AMListByAdminId",
+
+        "assignLeadstoChannelAMURL" : "api/admin/assignChannelPartnerAM",
+
+        "getChannelAMAccountListURL":"api/admin/getChannelAMAccountList"
+
 
     },
 

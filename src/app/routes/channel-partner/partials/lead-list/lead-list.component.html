@@ -24,29 +24,11 @@
                         <th>Estimate No.</th>
                         <th>Value  <span class="gst">(GST Extra)</span></th>
     
-    <!-- 
-                        <th> </th> -->
+    
+                        <th> </th>
                     </tr>
                 </ng-template>
-                <!-- <ng-template pTemplate="body" let-account let-i="rowIndex">
-                    <tr>
-                        <td>
-                            <div class="text-style" (click)="getAccountById(account)">
-                                {{ account.id }}
-                            </div>
-                            
-                        </td>
-                        <td>{{ account.Owner.name }}</td>
-                        <td>{{ account.Account_Name }}</td>
-                        <td>{{ account.Account_Type }}</td>
-                        <td>
-                            
-                            <div class="btn-holder">
-                                <button id="assign-btn" class="btn" (click)="assign(account, i)">Assign</button>
-                            </div>
-                        </td>
-                    </tr>
-                </ng-template> -->
+              
     
                 <ng-template pTemplate="body" let-account let-i="rowIndex">
                     <tr class="trfont">
@@ -78,15 +60,15 @@
                          </td> 
     
                         <td>
-                            <ng-container *ngIf="account.zohoBookEstimateData.estimate_number; else noValue">
-                                {{ account.zohoBookEstimateData.estimate_number }}
+                            <ng-container *ngIf="account.cartData.zohoEstimateNo; else noValue">
+                                {{  account.cartData.zohoEstimateNo }}
                               </ng-container>
                               <ng-template #noValue>-</ng-template>
                          </td> 
                         <!-- <td>{{ account.zohoBookEstimateData.estimate_number }}</td> -->
                         <td>
-                            <ng-container *ngIf="account.zohoBookEstimateData.totalEstimateCost; else cartValue">
-                                {{ account.zohoBookEstimateData.totalEstimateCost }}
+                            <ng-container *ngIf="account.cartData.zohoEstimateValue; else cartValue">
+                                {{ account.cartData.zohoEstimateValue}}
                               </ng-container>
                               <ng-template #cartValue>{{account.TotalCartValue}}</ng-template>
                             
@@ -94,12 +76,12 @@
                           
                         
                         </td>
-                        <!-- <td>
+                        <td>
                             
                             <div class="btn-holder">
                                 <button id="assign-btn" class="btn primary-btn" (click)="assign(account, i)">Assign</button>
                             </div>
-                        </td> -->
+                        </td>
                     </tr>
                 </ng-template>
                 <!-- <ng-template pTemplate="paginatorleft">

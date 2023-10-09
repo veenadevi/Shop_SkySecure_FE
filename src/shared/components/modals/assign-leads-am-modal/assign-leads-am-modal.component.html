@@ -1,0 +1,51 @@
+<div class="modal-container">
+    <div class="modal-header">
+        <span>
+            Assign Leads to Account Manager
+        </span>
+    </div>
+    <div class="modal-body">
+
+        <div #assignTo class="field-holder">
+            <div class="left-div">
+                <span>
+                    Select Account Manager
+                    <!-- <mat-icon>info</mat-icon> -->
+                </span>
+            </div>
+            <div class="right-div">
+                <ng-container *ngIf="myChannelAMList && myChannelAMList.length>0">
+                <div class="card flex justify-content-center">
+
+                    <p-dropdown placeholder="Select AM" [options]="myChannelAMList" (onChange)="onChange($event)" optionLabel="firstName"></p-dropdown>
+                </div>
+            </ng-container>
+            </div>
+        </div>
+
+        <div #assignDate class="field-holder">
+            <div class="left-div">
+                <span>
+                    Target Date
+                    <!-- <mat-icon>info</mat-icon> -->
+                </span>
+            </div>
+            <div class="right-div">
+                <div class="card flex justify-content-center">
+                    <p-calendar [(ngModel)]="closingDate" [showIcon]="true"></p-calendar>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+    
+    <div class="modal-footer">
+
+        <!-- <div class="btn-holder"> -->
+            <button class="btn secondary-btn"  (click)="onCancelClick()">Cancel</button>
+            <button id="assign-btn" class="btn primary-btn" (click)="submit()">Assign</button>
+        <!-- </div> -->
+        <!-- <button (click)="submit()">Submit</button> -->
+    </div>
+</div>
