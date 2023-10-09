@@ -27,7 +27,7 @@ import { SearchbarRecentlySearchedComponent } from './header/header-serach-bar/p
 import { SearchbarSearchListComponent } from './header/header-serach-bar/partials/searchbar-search-list/searchbar-search-list.component';
 import { SearchbarTrendingProductsComponent } from './header/header-serach-bar/partials/searchbar-trending-products/searchbar-trending-products.component';
 import { ResponsiveToolbarComponent } from './responsive-toolbar/responsive-toolbar.component';
-
+import { NotificationDropdownComponent } from './header/partials/notification-dropdown/notification-dropdown.component';
 
 
 @NgModule({
@@ -55,8 +55,8 @@ import { ResponsiveToolbarComponent } from './responsive-toolbar/responsive-tool
     SearchbarSearchListComponent,
     SearchbarTrendingProductsComponent,
     ResponsiveToolbarComponent,
-   
-    
+    NotificationDropdownComponent,
+
   ],
 
   providers: [

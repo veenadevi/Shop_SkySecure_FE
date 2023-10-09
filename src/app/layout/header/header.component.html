@@ -35,8 +35,14 @@
     </div> -->
 
     <ng-container *ngIf="userLoggedIn">
-    <div class="notificationicon-section">
-      <img class="notification-icon" onclick="openDropdown()" alt="" src="../../../assets/icons/BellWhite.svg">
+    <div class="notificationicon-section" (click)="openNotificationDropdown()">
+      <img class="notification-icon" alt="" src="../../../assets/icons/BellWhite.svg">
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="notificationDropDown">
+    <div class="notification-dropdown">
+      <app-notification-dropdown></app-notification-dropdown>
     </div>
   </ng-container>
 

@@ -6,6 +6,7 @@ import {
 import { MsalGuard } from '@azure/msal-angular';
 /* Feature Imports */
 import { InterfaceComponent }          from './interface.component';
+import { AuthGuard } from 'src/shared/services/auth.guard';
 
 
 /**
@@ -33,7 +34,7 @@ const INTERFACE_ROUTES: Routes = [
         loadChildren: () => import('../routes/cart-view/cart-view.module').then(m=>m.CartViewModule)
       },
       {
-        canActivate: [],
+        canActivate: [AuthGuard],
         path: 'user-profile',
         loadChildren: () => import('../routes/user-profile/user-profile.module').then(m=>m.UserProfileModule)
       },
@@ -53,7 +54,7 @@ const INTERFACE_ROUTES: Routes = [
         loadChildren: () => import('../routes/licence-catalogue/licence-catalogue.module').then(m=>m.LicenceCatalogueModule)
       },
       {
-        canActivate: [],
+        canActivate: [AuthGuard],
         path: 'portal-admin-page',
         loadChildren: () => import('../routes/admin-page/admin-page.module').then(m=>m.AdminPageModule)
       },
@@ -73,12 +74,12 @@ const INTERFACE_ROUTES: Routes = [
         loadChildren: () => import('../routes/company/company.module').then(m=>m.CompanyModule)
       },
       {
-        canActivate: [],
+        canActivate: [AuthGuard],
         path: 'admin-pages',
         loadChildren: () => import('../routes/super-admin-page/super-admin-page.module').then(m=>m.SuperAdminPageModule)
       },
       {
-        canActivate: [],
+        canActivate: [AuthGuard],
         path: 'account-manager',
         loadChildren: () => import('../routes/account-manager/account-manager.module').then(m=>m.AccountManagerModule)
       },
@@ -88,7 +89,7 @@ const INTERFACE_ROUTES: Routes = [
         loadChildren: () => import('../routes/review-page/review-page.module').then(m=>m.ReviewPageModule)
       },
       {
-        canActivate: [],
+        canActivate: [AuthGuard],
         path: 'channel-partner',
         loadChildren: () => import('../routes/channel-partner/channel-partner.module').then(m=>m.ChannelPartnerModule)
       },
