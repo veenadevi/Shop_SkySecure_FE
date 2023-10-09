@@ -13,7 +13,7 @@ import { SuperAdminService } from 'src/shared/services/super-admin-service/super
 interface CreateChannalParterPayload {
   name: String,
   address: Array<any>,
-  gstin:String,
+  gstinNumber:String,
   firstName: String,
   lastName: String,
   email: String,
@@ -247,7 +247,7 @@ let controls=this.myForm.controls
 
       this.createChannalParterPayload = {
         name: channelPartnerData.channelName,
-        gstin:channelPartnerData.gstin,
+        gstinNumber:channelPartnerData.gstin,
         companyBusinessName:channelPartnerData.companyBusinessName,
 
         address: [{

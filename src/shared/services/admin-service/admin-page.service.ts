@@ -32,6 +32,8 @@ export class AdminPageService {
 
   private inviteUsersURL : string;
 
+  private getChannelAMAccountListURL:string;
+
 
 
 
@@ -57,6 +59,9 @@ export class AdminPageService {
     this.inviteUsersURL = AppService.appUrl.inviteUsers;
 
     this.addChannelPartnerUsersURL=AppService.appUrl.addUsersToChannelURL
+    //For Channel AM
+
+    this.getChannelAMAccountListURL=AppService.appUrl.getChannelAMAccountListURL;
  
 
     
@@ -108,6 +113,28 @@ export class AdminPageService {
     return request$;
   }
 
+  public getChannelAMAccountList(channelAMuserId:any) : Observable<any> {
+
+    let url = this.baseUrlForQuote + this.getChannelAMAccountListURL + '/' + channelAMuserId;;
+
+    
+
+    //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+
   public getMyChannelLeadList(adminUserId:any) : Observable<any> {
 
     let url = this.baseUrlForQuote + this.getAllChannelLeadListURL + '/' + adminUserId;;
@@ -128,7 +155,6 @@ export class AdminPageService {
 
     return request$;
   }
-
 
 
   public getAllAccounts() : Observable<any> {
