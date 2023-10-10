@@ -113,12 +113,20 @@ export class LeadListComponent implements OnInit{
     const modalRef = this.modalService.open(AssignLeadsAmModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
   
     modalRef.componentInstance.request = account;
-    console.log("()))_)_)_)_ Data Index ", i);
-
+    
     modalRef.componentInstance.passedData.subscribe((res) => {
+      console.log("()))_)_)_)_ Data Index ", res);
+
       //account.Owner.name
       //console.log("_+_+_+_ Outside ", res.ownerName.name);
-      this.accountData[i].Owner.name = res.ownerName.name;
+     // this.accountData[i].Owner.name = res.ownerName.name;
+
+      this.allMarketPlaceList[i].assignedChannelpartnerAM.firstName =res.assignedName
+        // {
+        //   "channelPartner" : {
+        //   "name" : 'res.assignedName'
+        //   }
+        // }
     })
     
   }

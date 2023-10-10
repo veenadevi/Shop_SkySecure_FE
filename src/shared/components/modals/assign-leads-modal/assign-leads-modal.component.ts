@@ -141,7 +141,8 @@ export class AssignLeadsModalComponent implements OnInit{
        // if(res && res.assignownerResult && res.assignownerResult.code === 'SUCCESS'){
         if(res){
          //  res.assignownerResult.ownerName = this.selectedUser;
-         res['assignedName'] = this.selectedUser.name
+         console.log("this.selectedUser  ",this.selectedUser)
+         res['assignedName'] = this.selectedUser.channelPartnerMaster.name
            this.passedData.emit(res);
           this.activeModal.close();
         }

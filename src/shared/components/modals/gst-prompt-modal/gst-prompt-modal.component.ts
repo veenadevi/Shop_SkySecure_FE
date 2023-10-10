@@ -547,8 +547,8 @@ this.errorMessage = true;
     }
     else{
 
-      this.errorMessage = false;
-      this.showContent = !this.showContent;
+      //this.errorMessage = false;
+      //this.showContent = !this.showContent;
   
       
   
@@ -563,46 +563,56 @@ this.errorMessage = true;
           this.myForm.controls['cityName'].disable();
           this.subscriptions.push(
           this.superAdminService.getGSTDetailsById(this.myForm.value.gstNo).subscribe(res=>{
-  
-            this.gstResponseData = res;
+            
+            this.spinner.show();
+            console.log("(&D*S&D*^ Res ", res);
+
+            if(res === "Invalid GST Number."){
+              this.myForm.get('gstNo').setErrors({ 'invalid': true });
+              this.errorMessageText = "Please Enter Valid GST Numebr!"
+              this.errorMessage = true;
+              this.spinner.hide();
+            }
+            else{
+              this.spinner.hide();
+              this.gstResponseData = res;
     
-            this.gstData = true;
-        
+              this.gstData = true;
+          
+      
+              this.errorMessage = false;
+              this.showContent = !this.showContent;
+  
+  
+              this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
+              this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
+              this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
+              this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
     
-            
-            this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
-            this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
-            this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
-            this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
+    
+              let resState = res.adress.state;
+              let resCity = res.adress.city;
+    
+    
+              let stateList  = State?.getStatesOfCountry('IN');
+              
+    
+    
+              let selectedState = stateList.filter(c => c.name === resState)[0];
+             
+              this.selectedState = selectedState;
+    
+    
+              let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
+    
+              
+    
+              let selectedCity = cityList.filter(c => c.name === resCity)[0];
+              this.selectedCity = selectedCity;
+            }
+
   
   
-            let resState = res.adress.state;
-            let resCity = res.adress.city;
-  
-  
-            let stateList  = State?.getStatesOfCountry('IN');
-            
-  
-  
-            let selectedState = stateList.filter(c => c.name === resState)[0];
-           
-            this.selectedState = selectedState;
-  
-  
-            let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
-  
-            
-  
-            let selectedCity = cityList.filter(c => c.name === resCity)[0];
-            this.selectedCity = selectedCity;
-  
-  
-            
-  
-  
-            
-            //this.myForm.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
-            //this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
     
             
           })

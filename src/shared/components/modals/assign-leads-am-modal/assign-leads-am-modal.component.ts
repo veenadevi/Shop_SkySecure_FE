@@ -106,12 +106,13 @@ export class AssignLeadsAmModalComponent implements OnInit{
 
    
     this.subscriptions.push(
-      this.superAdminService.assignChannelPartner(req).subscribe(res=>{
+      this.superAdminService.assignLeadsToChannelPartnerAM(req).subscribe(res=>{
         
        // if(res && res.assignownerResult && res.assignownerResult.code === 'SUCCESS'){
         if(res){
          //  res.assignownerResult.ownerName = this.selectedUser;
-         res['assignedName'] = this.selectedUser.name
+         console.log("in model=====",this.selectedUser)
+         res['assignedName'] = this.selectedUser.firstName
            this.passedData.emit(res);
           this.activeModal.close();
         }

@@ -30,10 +30,12 @@
             </ng-template>
             <ng-template pTemplate="body" let-csp let-i="rowIndex">
                 <tr>
-                    <td>{{ csp.name }}</td>
-                    <td>{{ csp.ChannelPartnerAdminUser.firstName }}</td>
-                    <td>{{ csp.ChannelPartnerAdminUser.email }}</td>
-                    <td>{{ csp.ChannelPartnerAdminUser.mobileNumber }}</td>
+                    <td>{{ csp.channelPartnerMaster.name }}</td>
+                    <td>
+                        {{ csp.adminUsers[0].firstName}}
+                </td>
+                    <td>{{ csp.adminUsers[0].email }}</td>
+                    <td>{{ csp.adminUsers[0].mobileNumber }}</td>
                     
                 </tr>
             </ng-template>

@@ -135,7 +135,13 @@ export class AccountListComponent implements OnInit{
       console.log("_+_+_+_ Outside Account ", this.allMarketPlaceList);
       console.log("_+_+_+_ Outside Account i", this.allMarketPlaceList[i]);
       //this.accountData[i].Owner.name = res.ownerName.name;
-      this.allMarketPlaceList[i]['assignedChannalpartner']['channelPartner']['name'] = res.assignedName;
+      //this.allMarketPlaceList[i].assignedChannalpartner=['channelPartner']['name'] = res.assignedName;
+      this.allMarketPlaceList[i].assignedChannalpartner=
+            {
+              "channelPartner" : {
+              "name" : res.assignedName
+              }
+            }
       //this.accountData[i].Owner.name = res.assignedName;
 
     })
