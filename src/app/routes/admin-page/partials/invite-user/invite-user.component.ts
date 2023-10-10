@@ -31,6 +31,7 @@ export class InviteUserComponent {
   public stateList: any;
   public cityList: any;
   public usersList : any[] = [];
+  public companyBusinessName:String;
 
 
   constructor(
@@ -53,11 +54,13 @@ export class InviteUserComponent {
       reason : [''],
       gstin:[''],
       countryName: [''],
+      companyBusinessName:[''],
       addressLine1: [''],
       addressLine2: [''],
       stateName: [''],
       cityName: [''],
       postalCode: [''],
+
    
     });
   }
@@ -158,7 +161,7 @@ public fetchGST(){
       
       // this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
       
-      // this.myForm.controls['companyBusinessName'].setValue(res['legal-name'] ? res['legal-name'] : null);
+      this.myForm.controls['companyBusinessName'].setValue(res['legal-name'] ? res['legal-name'] : null);
       this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
       this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
       this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
