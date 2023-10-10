@@ -7,6 +7,7 @@ import { AdminPageService } from 'src/shared/services/admin-service/admin-page.s
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class AccountListComponent implements OnInit{
     private modalService : NgbModal,
     private superAdminService : SuperAdminService,
     private superAdminStore : SuperAdminStore,
-    public spinner: NgxSpinnerService
+    public spinner: NgxSpinnerService,
+    private toaster : ToasterNotificationService
   ){}
 
 
@@ -104,7 +106,12 @@ export class AccountListComponent implements OnInit{
     
       
 
-    })
+    },
+    error => {
+      this.spinner.hide();
+      this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+    }
+    )
   )
 }
 
