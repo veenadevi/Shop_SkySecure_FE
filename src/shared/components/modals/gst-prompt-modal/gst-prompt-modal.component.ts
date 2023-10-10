@@ -541,7 +541,6 @@ this.errorMessage = true;
 
     let a = 3;
     if(this.myForm.get('gstNo').value.length !== 15){
-      console.log("+_+_+_+_+ _GST Value ", this.myForm.get('gstNo').value);
       this.myForm.get('gstNo').setErrors({ 'invalid': true });
       this.errorMessageText = "Please Enter Valid GST Numebr!"
       this.errorMessage = true;

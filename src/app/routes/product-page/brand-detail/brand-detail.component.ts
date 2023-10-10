@@ -162,16 +162,26 @@ export class BrandDetailComponent implements OnInit{
       
     }*/
 
-    this.userAccountStore.userDetails$.subscribe(res=>{
+
+    let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
+    if (encodedVal !== null) {
+      this.addItemsToCartService.addItemsToCart(queryParams);
+    }
+    else{
+      this.viewModal(queryParams);
+    }
+
+    /*this.userAccountStore.userDetails$.subscribe(res=>{
       // console.log("()()()() ", res);
       if(res && res.email !== null){
+        console.log("++++_______ Came Here If BRANDDE");
         this.addItemsToCartService.addItemsToCart(queryParams);
         //this.router.navigate(['/cart'], {queryParams: queryParams});
       }
       else{
         this.viewModal(queryParams);
       }
-    })
+    })*/
   }
 
   public viewModal(queryParams) {
