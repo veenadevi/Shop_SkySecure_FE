@@ -49,7 +49,7 @@ export class GstPromptModalComponent implements OnInit{
   myForm: FormGroup;
 
 
-  isChecked: boolean = false;
+  isChecked: boolean = true;
   nrSelect : any;
 
   toStr = JSON.stringify;
@@ -127,14 +127,14 @@ export class GstPromptModalComponent implements OnInit{
   }
 
 disableGstNOField(){
-  // console.log(this.myForm.get('checkGstNil').value);
+  
   if(this.myForm.get('checkGstNil').value)
     this.myForm.get('gstNo').disable();
 else
 this.myForm.get('gstNo').enable();
 }
 disableCheckGstNil(){
-  // console.log(this.myForm.get('checkGstNil').value);
+  
   if(this.myForm.get('gstNo').value)
     this.myForm.get('checkGstNil').disable();
   else
@@ -249,11 +249,15 @@ disableCheckGstNil(){
   public handleChange(val){
     
 
+    
     this.selectedType = val;
     //this.form.reset();
     this.myForm.reset();
     if(val === 'self'){
       this.setSelfData();
+    }
+    else{
+      this.isChecked = false;
     }
 
   }
@@ -264,11 +268,9 @@ public submitErrorMessage: boolean =false;
     if((this.myForm.get('checkTerms').value === null || this.myForm.get('checkTerms').value === false))
    {
     this.submitErrorMessage = true;
-    console.log("_____++++ Error Messgae");
   }
   else
   {
-    console.log("_____++++ Error False");
     this.submitErrorMessage = false
    
     let userDetails = this.userAccountStore.getUserDetails();
@@ -383,9 +385,9 @@ public submitErrorMessage: boolean =false;
 
    
 
-    console.log("+_+_+_+_ Req ", req);
 
-    this.spinner.show();
+
+    /*this.spinner.show();
     
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
@@ -416,7 +418,7 @@ public submitErrorMessage: boolean =false;
       }
       ),
       
-    )
+    )*/
     }
   }
 
@@ -436,10 +438,18 @@ public submitErrorMessage: boolean =false;
       //  }
    
 
+      let tempEmail = "";
+      if(this.selectedType === 'others'){
+        tempEmail = this.myForm.value.email;
+      }
+      else{
+        tempEmail = userDetails.email;
+      }
+
 
     let request = {
  
-      "email": userDetails.email,
+      "email": tempEmail,
       "isRegistered": (req.gst_treatment === "business_gst") ? true : false,
       //"gstinNumber":"ABCDEG78101",
       "companyBusinessName":req.companyName,
@@ -467,14 +477,14 @@ public submitErrorMessage: boolean =false;
      }
 
 
+    console.log("+_+_+_+_ Updated GST", request);
 
 
-
-     this.subscriptions.push(
+     /*this.subscriptions.push(
       this.userProfileService.updateGST(request).subscribe( response => {
         
       })
-    )
+    )*/
   }
 
   public createQuotationService2(){
@@ -565,7 +575,7 @@ this.errorMessage = true;
           this.superAdminService.getGSTDetailsById(this.myForm.value.gstNo).subscribe(res=>{
             
             this.spinner.show();
-            console.log("(&D*S&D*^ Res ", res);
+            
 
             if(res === "Invalid GST Number."){
               this.myForm.get('gstNo').setErrors({ 'invalid': true });

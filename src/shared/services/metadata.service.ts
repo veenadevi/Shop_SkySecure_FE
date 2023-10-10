@@ -33,6 +33,7 @@ export class MetadataService {
   private fetchAllSubcategory : string;
   private fetchAdminProductDetailsUrl:string;
   private customerSupportUrl : string;
+  private getUserNotificationsUrl : string;
 
 
   constructor(
@@ -59,6 +60,7 @@ export class MetadataService {
     this.fetchAllSubcategory = AppService.appUrl.allSubcategory;
     this.fetchAdminProductDetailsUrl=AppService.appUrl.fetchAdmingProduct;
     this.customerSupportUrl = AppService.appUrl.customerSupport;
+    this.getUserNotificationsUrl = AppService.appUrl.getUserNotifications;
   }
 
   //fetch All Category
@@ -458,5 +460,36 @@ export class MetadataService {
 
     return request$;
   }
+
+
+  /**
+   * Service for Fetching Notifications
+   */
+
+  public getUserNotifications(id: string) : Observable<any> {
+    //id = "63eb236c53c21de2f6841bca";
+    let url = this.baseUrlUsers+ this.getUserNotificationsUrl + '/' + String(id);
+
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+          map(response => {
+            if (!response) {
+              return null;
+            }
+            console.log("_+_+_+_ Retreive Notifications ", response)
+            return response;
+          }),
+          catchError(error => {
+            // create operation mapping for http exception handling 
+            return (error);
+          })
+        );
+
+      return request$;
+    }
+
+
+
 
 }

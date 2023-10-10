@@ -50,6 +50,9 @@
         "getAllUsers":"api/admin/getAllusers",
         "updateUserRole":"api/admin/updateUserRole",
         "inviteUsers" : "api/user/inviteuser",
+        
+
+        "getUserNotifications" : "api/getUserNotifications",
 
 
         "app-registration" : "api/user/azure/app-registration",
