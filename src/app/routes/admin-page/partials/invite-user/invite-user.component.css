@@ -15,8 +15,8 @@ text-align: center;
 .invite-content{
     display: flex;
     flex-direction: column;
-    width: 50%;
-    margin-left: 26%;
+    width: 60%;
+    margin-left: 20%;
 }
 
 .forms{
@@ -65,13 +65,16 @@ select{
 .mobile-field{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    /* width: 100%; */
 }
 .mobile{
-    width: 39%;
+    /* width: 39%; */
     padding: 8px;
     border-radius: 5px;
     border: 1px solid black;
+}
+.mobile-input {
+    margin-left: 32px;
 }
 .button{
     width: 50%;
