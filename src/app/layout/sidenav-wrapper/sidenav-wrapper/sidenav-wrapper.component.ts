@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs';
@@ -13,7 +13,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   templateUrl: './sidenav-wrapper.component.html',
   styleUrls: ['./sidenav-wrapper.component.css']
 })
-export class SidenavWrapperComponent {
+export class SidenavWrapperComponent implements OnInit{
 
   public userLoggedInFlag = false;
   public userRoleVal = '';
@@ -84,6 +84,11 @@ export class SidenavWrapperComponent {
       )
     )
 
+
+    ngOnInit(): void {
+      this.menuToogled = false;
+    }
+
   @ViewChild(CdkScrollable) scrollable: CdkScrollable;
   public ngAfterViewInit(): void {
 
@@ -102,7 +107,9 @@ export class SidenavWrapperComponent {
     this.menuToogled = false;
     localStorage.removeItem('XXXXaccess__tokenXXXX');
     this.userAccountStore.setUserDetails(null);
-    this.router.navigate(['']);
+    //this.router.navigate(['']);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate(['/']));
   }
 
 

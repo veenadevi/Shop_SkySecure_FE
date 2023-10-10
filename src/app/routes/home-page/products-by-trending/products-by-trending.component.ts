@@ -82,6 +82,7 @@ export class ProductsByTrendingComponent {
       quantity : 1,
     };
 
+   
     this.addItemsToCartService.addItemsToCart(queryParams);
     //this.router.navigate(['/cart'], {queryParams: queryParams});
 

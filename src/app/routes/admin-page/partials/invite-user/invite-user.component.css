@@ -15,9 +15,8 @@ text-align: center;
 .invite-content{
     display: flex;
     flex-direction: column;
-    width: 80%;
-    margin-left: 10%;
-    padding-left: 25%;
+    width: 60%;
+    margin-left: 20%;
 }
 
 .forms{
@@ -38,31 +37,44 @@ text-align: center;
     width: 85%;
 }
 label{
-    font-size: 14px;
+    font-size: 12px;
 }
 
 input{
-    width: 50%;
+    /* width: 50%; */
     padding: 8px;
     border-radius: 5px;
     border: 1px solid black;
+    font-size: 14px;
 }
-select{
+.forms-01 select{
     width: 70%;
     padding: 8px;
     border-radius: 5px;
     border: 1px solid black;
+    font-size: 14px;
 }
-.mobile-field{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-.mobile{
-    width: 41%;
+
+select{
     padding: 8px;
     border-radius: 5px;
     border: 1px solid black;
+    font-size: 14px;
+}
+
+.mobile-field{
+    display: flex;
+    flex-direction: row;
+    /* width: 100%; */
+}
+.mobile{
+    /* width: 39%; */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.mobile-input {
+    margin-left: 32px;
 }
 .button{
     width: 50%;
@@ -77,4 +89,17 @@ select{
 
 .message-content{
     width:40%;
+}
+
+.error-message {
+    font-size: 13px;
+    color: rgb(146, 5, 5);
+}
+
+.fetchgst {
+    margin: 18px 0 0 0px;
+}
+
+.primary-btn {
+    padding: 9px;
 }

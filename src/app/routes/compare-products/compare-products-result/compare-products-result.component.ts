@@ -563,16 +563,25 @@ export class CompareProductsResultComponent {
         };
 
 
+        let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
+        if (encodedVal !== null) {
+          this.addItemsToCartService.addItemsToCart(queryParams);
+        }
+        else{
+          this.viewModal(queryParams);
+        }
 
-    this.userAccountStore.userDetails$.subscribe(res=>{
+
+    /*this.userAccountStore.userDetails$.subscribe(res=>{
       
       if(res && res.email !== null){
+        console.log("++++_______ Came Here If CMP");
         this.addItemsToCartService.addItemsToCart(queryParams);
       }
       else{
         this.viewModal(queryParams);
       }
-    })
+    })*/
   }
 
   public removeItem(product){

@@ -3,7 +3,7 @@
        
         <form [formGroup]="myForm">
             <div class="select   mb-3 mt-2 ">
-                <h3>Add Account Manager</h3>  
+                <h3>Manage Channel</h3>  
                   <div class="section-01">
                     <label for="channelPartner">Select Channel</label>
 
@@ -24,18 +24,23 @@
                 </div>
             </div>
 
-            <div class="card flex justify-content-center">
-                <div class="flex flex-wrap gap-3">
-                    <div class="flex align-items-center">
+            <div class="radio-btn">
+                <!-- <div class="btn-cont"> -->
+                    <div class="content-select">
+                    <input type="checkbox" formControlName="isAdmin" class="form-check d-inline" id="chb"  >
+                    <div for="chb" class="form-check-label" ><h4 class="radio-style">Add as Admin?</h4></div>
+                    </div>
+
+                    <div class="content-select">
                         <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}" [(ngModel)]="addAdminOption" value="new" inputId="ingredient1"></p-radioButton>
                         <label for="ingredient1" class="ml-2"><h4 class="radio-style">Add New  User</h4></label>
                     </div>
                     
-                    <div class="flex align-items-center">
+                    <div class="content-select">
                         <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}" [(ngModel)]="addAdminOption" value="existing" inputId="ingredient2"></p-radioButton>
                         <label for="ingredient2" class="ml-2"><h4 class="radio-style">Add Existing User</h4></label>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
             <!-- <ng-container *ngIf="(addAdminOption === 'new') ; else existingUserTemplate"> -->
             <ng-container>
@@ -51,12 +56,12 @@
                         <div class="label">
                           
                         </div>
-                        <div class="select"> 
+                        <div class="col-sm-6 form-group"> 
                             <label>Select User</label>
 
                             <select class="custom-select" (change)="onDropDownChange($event)">
                            
-                            <option value="">--Select User as Admin--</option>
+                            <option value="">--Select User--</option>
                             <option *ngFor="let user of usersList" [value]="user._id">{{user.firstName}}</option>
                         </select>
 

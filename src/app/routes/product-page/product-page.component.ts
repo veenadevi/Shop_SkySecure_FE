@@ -168,7 +168,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges, OnDestroy {
 
   public isTestDivScrolledIntoView: boolean = false;
 
-  footerContainer = document.querySelector(".footer-container");
+ // footerContainer = document.querySelector(".footer-container");
 
   public ngAfterViewInit(): void { 
     this.floatableFilter = document.getElementById("floatableFilter");
@@ -194,19 +194,19 @@ export class ProductPgaeComponent implements OnInit, OnChanges, OnDestroy {
         }
         
          
-        const floatableFilter1 = document.getElementById("floatableFilter"); 
+      //  const floatableFilter1 = document.getElementById("floatableFilter"); 
         const lastProductElement1 = document.querySelector(".product-items-holder > :last-child");  
         let isLastProductVisible = false; 
         window.addEventListener("scroll", () => {
           if (lastProductElement1) {
             const lastProductRect = lastProductElement1.getBoundingClientRect();
-            const filterRect = floatableFilter1.getBoundingClientRect(); 
+            // const filterRect = this.floatableFilter.getBoundingClientRect(); 
             const positionRelativeToViewport = lastProductRect.bottom - window.innerHeight; 
             if (positionRelativeToViewport > 0) { 
-              floatableFilter1.style.display = "block"; 
+              this.floatableFilter.style.display = "block"; 
               isLastProductVisible = true;
             } else if (isLastProductVisible) { 
-              floatableFilter1.style.display = "none"; 
+              this.floatableFilter.style.display = "none"; 
               isLastProductVisible = false;
             }
           }
@@ -953,7 +953,9 @@ export class ProductPgaeComponent implements OnInit, OnChanges, OnDestroy {
 
 
 
-
+  public scrollToFilters(){
+    this.filterSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
+  }
 
 
 

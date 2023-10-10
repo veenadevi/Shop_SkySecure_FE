@@ -19,7 +19,7 @@
                         <th>Created On</th>
                         <th>Status</th>
                          <!-- <th>Place of Supply</th> -->
-                        <th>Assigned Partner</th>
+                       
                         <th>Last Updated Date</th>
                         <th>Estimate No.</th>
                         <th>Value  <span class="gst">(GST Extra)</span></th>
@@ -49,6 +49,7 @@
                 </ng-template> -->
     
                 <ng-template pTemplate="body" let-account let-i="rowIndex">
+                  
                     <tr class="trfont">
                         <td>
                             <div class="text-style" (click)="getAccountById(account.cartData._id)">
@@ -63,12 +64,7 @@
                         <td>{{ account.cartData.status }}</td>
                        
                         <!-- <td>{{ account.createdFor.placeOfSupply}}</td> -->
-                        <td>
-                            <ng-container *ngIf="account?.assignedChannalpartner; else noValuecp1">
-                            {{ account?.assignedChannalpartner.channelPartner?.name }} 
-                              </ng-container>
-                              <ng-template #noValuecp1>-</ng-template>
-                         </td> 
+                      
                          <td>
                             <ng-container *ngIf="account?.cartData?.assignedChannelPartnerId; else noValuecp">
                             
@@ -101,6 +97,7 @@
                             </div>
                         </td> -->
                     </tr>
+            
                 </ng-template>
                 <!-- <ng-template pTemplate="paginatorleft">
                     <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
