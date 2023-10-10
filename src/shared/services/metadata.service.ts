@@ -10,6 +10,7 @@ import { CatrgoryResponse } from '../models/interface/response/category-response
 import { OEMResponse } from '../models/interface/response/oem-response';
 import { ProductsResponse } from '../models/interface/response/products-response';
 import { MetadataStore } from '../stores/metadata.store';
+import { NotificationsStore } from '../stores/notifications.store';
 
 
 @Injectable({ providedIn: 'root' })
@@ -38,7 +39,8 @@ export class MetadataService {
 
   constructor(
     private http: HttpClient,
-    private metadataStore : MetadataStore
+    private metadataStore : MetadataStore,
+    private notificationStore : NotificationsStore
   ) {
     this.baseUrl = environment.gatewayUrl;
     this.baseUrlUsers = environment.gatewayUrlForUserProfile;
@@ -477,6 +479,7 @@ export class MetadataService {
             if (!response) {
               return null;
             }
+            this.notificationStore.setNotificationList(response);
             console.log("_+_+_+_ Retreive Notifications ", response)
             return response;
           }),

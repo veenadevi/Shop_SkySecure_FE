@@ -47,6 +47,7 @@ import { DateFormatPipe } from './pipes/dateFormat';
 import { TermsConditionModalComponent } from './components/modals/terms-condition-modal/terms-condition-modal.component';
 import { SuggestedCompareCardFlyerComponent } from './components/suggested-compare-card-flyer/suggested-compare-card-flyer.component';
 import { AssignLeadsAmModalComponent } from './components/modals/assign-leads-am-modal/assign-leads-am-modal.component';
+import { TimeFormatPipe } from './pipes/timeFormat';
 
 
 
@@ -88,6 +89,7 @@ import { AssignLeadsAmModalComponent } from './components/modals/assign-leads-am
     ContactUsFlyerHorizontalComponent,
     SafeUrlPipe,
     DateFormatPipe,
+    TimeFormatPipe,
     CompareProductsModalComponent,
     CustomBreadCrumbComponent,
     BundleVarientCardFlyerComponent,
@@ -144,6 +146,7 @@ import { AssignLeadsAmModalComponent } from './components/modals/assign-leads-am
     ContactUsFlyerHorizontalComponent,
     SafeUrlPipe,
     DateFormatPipe,
+    TimeFormatPipe,
     CompareProductsModalComponent,
     CustomBreadCrumbComponent,
     BundleVarientCardFlyerComponent,
