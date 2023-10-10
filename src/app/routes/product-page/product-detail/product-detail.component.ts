@@ -824,11 +824,20 @@ featureCount=5;
           queryParams.priceList = product.priceList
         }
 
-      this.userAccountStore.userDetails$.subscribe(res=>{
+
+        let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
+        if (encodedVal !== null) {
+          this.addItemsToCartService.addItemsToCart(queryParams);
+        }
+        else{
+          this.viewModal(queryParams);
+        }
+
+      /*this.userAccountStore.userDetails$.subscribe(res=>{
        
         if(res && res.email !== null){
 
-          
+          console.log("++++_______ Came Here If PRDDETAIL");
           this.addItemsToCartService.addItemsToCart(queryParams);
           
 
@@ -838,7 +847,7 @@ featureCount=5;
         else{
           this.viewModal(queryParams);
         }
-      })
+      })*/
       
     }
 

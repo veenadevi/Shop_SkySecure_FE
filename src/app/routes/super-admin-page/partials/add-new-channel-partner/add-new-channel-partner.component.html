@@ -30,6 +30,8 @@
                 </div>
             </div>
             <h4>Address Fields</h4>
+
+            <div class="partner-name-01">
             <div class="address-row">
                 <div class="col-sm-6 form-group">
                     <label for="address-1">Address Line-1</label>
@@ -57,8 +59,9 @@
 
                 </div>
             </div>
+            </div>
 
-
+            <div class="partner-name-01">
             <div class="address-row">
                 <div class="col-sm-6 form-group">
                     <label for="State">State*</label>
@@ -73,7 +76,7 @@
 
                     </select>
                 </div>
-
+           
 
                 <div class="col-sm-6 form-group">
                     <label for="State">City*</label>
@@ -101,6 +104,7 @@
                         placeholder="Enter Credit Worthyness" required>
                 </div>
             </div>
+            </div>
 
 
             <!--- Prime Ng Radio Button -->
@@ -125,7 +129,9 @@
                 </div>
             </div>
             <!-- <ng-container *ngIf="(addAdminOption === 'new') ; else existingUserTemplate"> -->
+                
             <ng-container>
+                <div class="partner-name-01">
                 <div class="address-row">
                     <ng-container *ngIf="(addAdminOption === 'new'); else userSelect">
                         <div class="col-sm-6 form-group">
@@ -135,10 +141,10 @@
                         </div>
                     </ng-container>
                     <ng-template #userSelect>
-                        <div style="width:17%;justify-content: center;align-items: center;">
+                        <div  class="col-sm-6 form-group">
 
 
-                            <div class="label">
+                            <!-- <div class="label"> -->
                                 <label>Select User</label>
 
 
@@ -148,7 +154,7 @@
                                     <option *ngFor="let user of usersList" [value]="user._id">{{user.firstName}}
                                     </option>
                                 </select>
-                            </div>
+                            <!-- </div> -->
 
                             <!-- <div class="userDropdown">
 
@@ -184,7 +190,9 @@
                             id="firstName" placeholder="Enter Phone Number" required>
                     </div>
                 </div>
+            </div>
             </ng-container>
+       
 
 
 

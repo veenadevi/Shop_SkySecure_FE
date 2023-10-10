@@ -559,17 +559,26 @@ export class SuggestedCompareProductsResultComponent {
         };
 
 
+        let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
+        if (encodedVal !== null) {
+          this.addItemsToCartService.addItemsToCart(queryParams);
+        }
+        else{
+          this.viewModal(queryParams);
+        }
 
-    this.userAccountStore.userDetails$.subscribe(res=>{
+
+    /*this.userAccountStore.userDetails$.subscribe(res=>{
       
       if(res && res.email !== null){
+        console.log("++++_______ Came Here If SUGGCMP");
         this.addItemsToCartService.addItemsToCart(queryParams);
         //this.router.navigate(['/cart'], {queryParams: queryParams});
       }
       else{
         this.viewModal(queryParams);
       }
-    })
+    })*/
   }
 
   public removeItem(product){
