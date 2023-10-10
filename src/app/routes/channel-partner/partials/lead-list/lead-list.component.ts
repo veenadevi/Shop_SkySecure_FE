@@ -8,6 +8,7 @@ import { SuperAdminService } from 'src/shared/services/super-admin-service/super
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
 
 @Component({
@@ -38,7 +39,8 @@ export class LeadListComponent implements OnInit{
     private superAdminService : SuperAdminService,
     private superAdminStore : SuperAdminStore,
     public spinner: NgxSpinnerService,
-    private userAccountStore:UserAccountStore
+    private userAccountStore:UserAccountStore,
+    private toaster : ToasterNotificationService
   ){}
 
 
@@ -56,6 +58,10 @@ export class LeadListComponent implements OnInit{
 
     this.getMyChannelLeadList(userAccountdetails._id);
     this.getMyChannelAMList(userAccountdetails._id);
+    error => {
+      this.spinner.hide();
+      this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+    }
 
   }
 
@@ -87,10 +93,16 @@ export class LeadListComponent implements OnInit{
       //console.log("running here directly==")
       this.allMarketPlaceList=response;
       this.spinner.hide();
-    
+   
+     
       
 
-    })
+    },
+    error => {
+      this.spinner.hide();
+      this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+    }
+    )
   )
 }
 
