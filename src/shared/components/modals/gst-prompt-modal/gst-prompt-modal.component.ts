@@ -137,9 +137,9 @@ disableCheckGstNil(){
   // console.log(this.myForm.get('checkGstNil').value);
   if(this.myForm.get('gstNo').value)
     this.myForm.get('checkGstNil').disable();
-else
-this.myForm.get('checkGstNil').enable();
-}
+  else
+    this.myForm.get('checkGstNil').enable();
+  }
 
 
   public setSelfData(){
@@ -540,7 +540,7 @@ this.errorMessage = true;
   else{
 
     let a = 3;
-    if(this.myForm.get('gstNo').value.length !== 15){
+    if(this.myForm.get('gstNo').value.length !== 15 && this.myForm.get('checkGstNil').value !== true){
       this.myForm.get('gstNo').setErrors({ 'invalid': true });
       this.errorMessageText = "Please Enter Valid GST Numebr!"
       this.errorMessage = true;
