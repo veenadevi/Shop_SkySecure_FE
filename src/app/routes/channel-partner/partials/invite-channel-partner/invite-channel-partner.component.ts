@@ -15,7 +15,8 @@ interface AddChannelPartnerUserPayLoad {
   mobileNumber: String,
   createdBy: String,
   updatedBy: String,
-  isNewUser: boolean,
+  isAdmin:Boolean
+
 
 
 }
@@ -43,6 +44,7 @@ export class InviteChannelPartnerComponent {
   public newuserCheck:boolean=true
   public currentChannelId:string;
   public duplicate:boolean=false
+  public addAsAdmin:boolean=false
 
   users = [
     { id: 1, name: 'User 1' },
@@ -62,7 +64,8 @@ export class InviteChannelPartnerComponent {
       channelPartner: [''],
       userName: ['', [Validators.required, Validators.required]],
       EmailId: ['', [Validators.required, Validators.email]],
-      phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]]
+      phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      isAdmin:[''],
 
     });
   }
@@ -152,7 +155,19 @@ export class InviteChannelPartnerComponent {
 
       console.log("_____++++ Error False");
       this.submitErrorMessage = false
-      this.CreateChannelPartnerUser()
+      this.addAsAdmin=this.myForm.get('isAdmin').value?this.myForm.get('isAdmin').value:false
+
+      console.log("this.addAsAdmin===",this.addAsAdmin)
+      this.CreateChannelPartnerUser();
+
+      // if(this.myForm.get('isAdmin').value){
+      
+      //  console.log("cal to add as admin")
+      // }
+      // else{
+      // //  this.CreateChannelPartnerUser()
+      // }
+    
     }
   }
 
@@ -181,7 +196,8 @@ export class InviteChannelPartnerComponent {
           mobileNumber:channelPartnerData.phoneNo,
           createdBy: userAccountdetails._id,
           updatedBy: userAccountdetails._id,
-          isNewUser:this.newuserCheck
+          isAdmin:this.addAsAdmin
+       
           
 
 
