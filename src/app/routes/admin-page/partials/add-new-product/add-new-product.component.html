@@ -38,8 +38,7 @@
                         <div class="category">
                             <div class="forms">
                                 <div class="label">
-                                    <label
-                                        [ngClass]="{'error': submitted && myForm.categories.errors}">Categories</label>
+                                    <label [ngClass]="{'error': submitted && myForm.categories.errors}">Categories</label>
                                 </div>
                                 <div class="select">
                                     <select class="custom-select " (change)="changeCategories($event)"
