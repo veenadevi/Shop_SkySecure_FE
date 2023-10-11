@@ -40,6 +40,8 @@ export class SuperAdminService {
 
   private assignLeadsToAMURL:string;
 
+  private getChannelPartnerDetailsUrl : string;
+
 
 
   constructor(
@@ -69,6 +71,7 @@ export class SuperAdminService {
 
     this.getMyChannelAMListURL=AppService.appUrl.getMyChannelAMURL;
     this.assignLeadsToAMURL=AppService.appUrl.assignLeadstoChannelAMURL;
+    this.getChannelPartnerDetailsUrl = AppService.appUrl.getChannelPartnerDetailsById;
 
 
   }
@@ -320,6 +323,29 @@ export class SuperAdminService {
     return request$;
   }
 
+
+  /**
+   * To get Channel Partner Details
+   */
+
+  public getChannelPartnerDetails(id) : Observable<any> {
+
+    let url = this.baseUrlForSuperAdmin + this.getChannelPartnerDetailsUrl + id;
+
+    
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
   
 
     /**

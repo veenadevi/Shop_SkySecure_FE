@@ -94,6 +94,8 @@
 
         "assignLeadstoChannelAMURL" : "api/admin/assignChannelPartnerAM",
 
+        "getChannelPartnerDetailsById" : "api/user/channel-partner/",
+
         "getChannelAMAccountListURL":"api/admin/getChannelAMAccountList"
 
 
