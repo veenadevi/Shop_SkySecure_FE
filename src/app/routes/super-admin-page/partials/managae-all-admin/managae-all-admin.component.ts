@@ -5,6 +5,8 @@ import { AdminPageService } from 'src/shared/services/admin-service/admin-page.s
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
+
+
 interface AddChannelPartnerUserPayLoad {
   channelPartnerId: String,
   
@@ -21,14 +23,14 @@ interface AddChannelPartnerUserPayLoad {
 
 }
 @Component({
-  selector: 'app-invite-channel-partner',
-  templateUrl: './invite-channel-partner.component.html',
-  styleUrls: ['./invite-channel-partner.component.css']
+  selector: 'app-managae-all-admin',
+  templateUrl: './managae-all-admin.component.html',
+  styleUrls: ['./managae-all-admin.component.css']
 })
 
 
 
-export class InviteChannelPartnerComponent {
+export class ManagaeAllAdminComponent {
 
 
   addChannelPartnerUserPayLoad: AddChannelPartnerUserPayLoad;
@@ -119,7 +121,7 @@ export class InviteChannelPartnerComponent {
 
   }
 
-  public changeChannelList(event: any) {
+  changeChannelList(event: any) {
 
     const selectedValue = event.target.value;
     // console.log("selectedValue  "+selectedValue)

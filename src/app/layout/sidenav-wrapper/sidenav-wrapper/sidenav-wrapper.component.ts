@@ -289,6 +289,11 @@ export class SidenavWrapperComponent implements OnInit{
         this.menuToogled = false;
         this.router.navigate(['admin-pages/role-assignment']);
         return;
+
+        case 'managae-all-admin':
+          this.menuToogled = false;
+          this.router.navigate(['admin-pages/managae-all-admin']);
+          return;
       case 'paFeatureUpdate':
         //this.isExpanded = false;
         this.menuToogled = false;
