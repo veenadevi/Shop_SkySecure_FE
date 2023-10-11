@@ -18,6 +18,8 @@ import { ViewChannelPartnersListComponent } from './partials/view-channel-partne
 import { MyCustomersComponent } from './partials/my-customers/my-customers.component';
 import { ChannelPartnerDetailsComponent } from './partials/view-channel-partners-list/partials/channel-partner-details/channel-partner-details.component';
 import { RoleAssigmentComponent } from './partials/role-assigment/role-assigment.component';
+// import { ManagaeAllAdminComponent } from './partials/manage-all-admin/managae-all-admin.component';
+import { ManagaeAllAdminComponent } from './partials/managae-all-admin/managae-all-admin.component';
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { RoleAssigmentComponent } from './partials/role-assigment/role-assigment
     ViewChannelPartnersListComponent,
     MyCustomersComponent,
     ChannelPartnerDetailsComponent, 
-    RoleAssigmentComponent
+    RoleAssigmentComponent, 
+    ManagaeAllAdminComponent
   ],
   imports: [
     CommonModule,
