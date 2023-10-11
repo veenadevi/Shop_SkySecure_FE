@@ -17,22 +17,35 @@ export class NotificationDropdownComponent implements OnInit{
   }
 
   public formatTime(updatedTime){
-    var date = new  Date (updatedTime);
+    var date: any = new  Date (updatedTime);
 
-    var todayDate = new Date();
+    var todayDate : any = new Date();
     
 
 
     let time1:any = date.getHours();
     let time2:any = todayDate.getHours();
+    
     let diffTime = time2-time1;
-    if(diffTime <=24){
-      return (time2-time1) + ' hours ago';
+
+
+    const milliseconds = Math.abs(date - todayDate);
+    const hours = Math.floor(milliseconds / 36e5);
+    
+
+    //const hours  = 145;
+
+    if(hours <=24){
+      //return (time2-time1) + ' hours ago';
+      return (hours) + ' hours ago';
+
     }
     else{
 
-      let dayText = (Math.floor(diffTime/24) === 1) ? ' day ago' : ' days ago';
-      return (Math.floor(diffTime/24)) + dayText;
+      //let dayText = (Math.floor(diffTime/24) === 1) ? ' day ago' : ' days ago';
+      //return (Math.floor(diffTime/24)) + dayText;
+      let dayText = (Math.floor(hours/24) === 1) ? ' day ago' : ' days ago';
+      return (Math.floor(hours/24)) + dayText;
     }
     
   }

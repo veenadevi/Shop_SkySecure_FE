@@ -280,6 +280,10 @@ export class SidenavWrapperComponent implements OnInit{
         this.menuToogled = false;
         this.router.navigate(['admin-pages/view-channel-partners-list']);
         return;
+      case 'sMyCustomers':
+        this.menuToogled = false;
+        this.router.navigate(['admin-pages/my-customers']);
+        return;
       case 'paFeatureUpdate':
         //this.isExpanded = false;
         this.menuToogled = false;
@@ -324,6 +328,8 @@ export class SidenavWrapperComponent implements OnInit{
           this.menuToogled = false;
           this.router.navigate(['channel-partner/leadsfromMyChannel']);
           return;
+
+        
 
       default:
         return null;
