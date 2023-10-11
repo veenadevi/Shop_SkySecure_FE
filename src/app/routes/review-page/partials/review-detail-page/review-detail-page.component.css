@@ -125,10 +125,11 @@ hr{
 .check{
     width: 20px;
 }
-.btn{
+.button{
     float: right;
     margin-right: 40px;
     border: none;
+    margin-bottom: 12px;
 }
 .next-btn{
     background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%);
@@ -206,4 +207,44 @@ font-weight: 400;
 .img-guide{
     width: 80px;
     height: 80px;
+}
+
+
+.form-control {
+    display: block;
+    width: 100%;
+    font-size: 13px;
+    padding: 6.5px;
+    /* font-size: 1rem; */
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: 1px solid grey;
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    font-family: 'lato', sans-serif;
+}
+
+
+.form-control-01 {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    /* font-size: 1rem; */
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 13px !important;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: 1px solid grey;
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    font-family: 'lato', sans-serif;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
@@ -19,7 +20,8 @@ export class ViewChannelPartnersListComponent implements OnInit{
 
   constructor(
     private superAdminService : SuperAdminService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router : Router,
   ){}
 
 
@@ -36,6 +38,20 @@ export class ViewChannelPartnersListComponent implements OnInit{
         this.channelPrtnerList = res.channelPartners;
       })
     )
+  }
+
+  public getChannelPartnerDetails(account){
+
+    let acc = JSON.stringify(account);
+    let queryParams ={
+      account : acc,
+
+    }
+    console.log("navigate to details page===",account)
+
+    this.router.navigate(['user/channel-partner'], {queryParams: queryParams});
+
+   // this.router.navigate(['/admin-page/accounts-details'], {queryParams: queryParams});
   }
 
 }

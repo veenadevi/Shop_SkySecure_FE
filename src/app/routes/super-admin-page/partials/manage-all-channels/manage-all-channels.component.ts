@@ -20,16 +20,13 @@ interface AddChannelPartnerUserPayLoad {
 
 
 }
+
 @Component({
-  selector: 'app-invite-channel-partner',
-  templateUrl: './invite-channel-partner.component.html',
-  styleUrls: ['./invite-channel-partner.component.css']
+  selector: 'app-manage-all-channels',
+  templateUrl: './manage-all-channels.component.html',
+  styleUrls: ['./manage-all-channels.component.css']
 })
-
-
-
-export class InviteChannelPartnerComponent {
-
+export class ManageAllChannelsComponent {
 
   addChannelPartnerUserPayLoad: AddChannelPartnerUserPayLoad;
   myForm: FormGroup;
@@ -109,9 +106,9 @@ export class InviteChannelPartnerComponent {
   public getMyChannelList() {
 
     this.subscription.push(
-      this.superAdminService.getMyChannelPartnerList(this.userId).subscribe(response => {
+      this.superAdminService.getAllChannelPartners().subscribe(response => {
 
-        this.myChannels = response.myChannelList;
+        this.myChannels = response.channelPartners;
 
       })
 
@@ -119,7 +116,7 @@ export class InviteChannelPartnerComponent {
 
   }
 
-  public changeChannelList(event: any) {
+  changeChannelList(event: any) {
 
     const selectedValue = event.target.value;
     // console.log("selectedValue  "+selectedValue)

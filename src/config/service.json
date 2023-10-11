@@ -50,6 +50,7 @@
         "getAllUsers":"api/admin/getAllusers",
         "updateUserRole":"api/admin/updateUserRole",
         "inviteUsers" : "api/user/inviteuser",
+        "getAllMyCustomers" : "api/admin/getAllCustomers",
         
 
         "getUserNotifications" : "api/getUserNotifications",
@@ -93,6 +94,8 @@
         "getMyChannelAMURL" : "api/user/channel-partner-AMListByAdminId",
 
         "assignLeadstoChannelAMURL" : "api/admin/assignChannelPartnerAM",
+
+        "getChannelPartnerDetailsById" : "api/user/channel-partner/",
 
         "getChannelAMAccountListURL":"api/admin/getChannelAMAccountList"
 

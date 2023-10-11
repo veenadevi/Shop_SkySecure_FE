@@ -30,7 +30,7 @@
             <div class="col-sm-6 mobile-field">
               <div class="col-sm-3 forms" >
                   <label for="cod">Country code</label>
-                  <select class="form-control browser-default custom-select">
+                  <select class="form-control-01">
                     <option data-countryCode="IN" value="44">IN (+91)</option>
                     <option data-countryCode="US" value="1">USA (+1)</option>
                     <option data-countryCode="GB" value="44">UK (+44)</option>
@@ -74,9 +74,9 @@
         
         </div>
 
-       <div class="row">
+       <div class="row-01">
         <div class="col-sm-4 forms">
-          <div>
+          <div class="check-cont">
           <input type="checkbox" formControlName="isZohoCustomer" class="form-check d-inline " id="chb" >
          
           <div for="chb" class="form-check-label" ><h4 class="customer-chck">Current Zoho Customer?</h4></div>
@@ -84,7 +84,7 @@
         </div>
 
         <div class="col-sm-4 forms">
-          <div>
+          <div class="check-cont">
           <input type="checkbox"  formControlName="triggeremail" class="form-check d-inline " id="chb" >
          
           <div for="chb" class="form-check-label" ><h4 class="customer-chck">Trigger Email?</h4></div>
@@ -105,7 +105,7 @@
           </div>
           <div class="col-sm-4 forms">
               <label for="Country">Country*</label>
-              <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)"
+              <select formControlName="countryName" class="form-control-01" (change)="onCountryChange($event)"
                   placeholder="select country">
                   <ng-container *ngIf="gstData; else noGstData">
                       <option value="India">India</option>
