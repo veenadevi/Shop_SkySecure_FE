@@ -21,7 +21,7 @@
   
 
 thead th{
-    text-align: left;
+    text-align: center;
     padding: 1rem 1rem;
     border: 1px solid #dee2e6;
     border-width: 0 0 1px 0;
@@ -29,8 +29,8 @@ thead th{
     color: #343a40;
     background: #f8f9fa;
     transition: box-shadow 0.2s;
-    font-size: 15px;
-    font-size: 15px;
+    font-size: 13px;
+    /* font-size: 15px; */
 }
 
 tbody tr{
@@ -44,7 +44,7 @@ tbody td{
     text-align: left;
     border: 1px solid #dee2e6;
     border-width: 0 0 1px 0;
-    padding: 1rem 1rem 1rem 0;
+    padding: 1rem 0rem 1rem 0;
 }
 
 :host ::ng-deep .form-control{
@@ -76,10 +76,12 @@ tbody td{
     box-shadow: 0 3px 6px #0000001a;
 }
 .form-control{
-    font-size: 0.85rem !important;
+    font-size: 12px !important;
+    text-align: center;
 }
 .gst{
     font-size: 9px;
+    background-color: transparent;
 }
 .text-danger{
     font-size: 9px !important;
@@ -87,4 +89,80 @@ tbody td{
 
 .product-name{
     width: 30%;
+}
+
+
+.type{
+    margin: 0;
+    font-family: inherit;
+    line-height: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e1e1e;
+    border: 1px solid #918F90;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.form-control-01 {
+    display: block;
+    width: 75%;
+    padding: 3px;
+    /* font-size: 1rem; */
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 13px !important;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: 1px solid black;
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    font-family: 'lato', sans-serif;
+    text-align: center;
+}
+
+.form-control-02 {
+    display: block;
+    width: 75%;
+    padding: 3px;
+    /* font-size: 1rem; */
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 13px !important;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: 1px solid black;
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    font-family: 'lato', sans-serif;
+    text-align: center;
+}
+
+.purchase{
+    width: 12%;
+    text-align: center;
+}
+.price-details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-control-04 {
+    font-size: 0.85rem !important;
+}
+.total{
+    width: 10%;
+}
+.mrp{
+    /* text-align: center; */
+    width: 8%;
+}
+.remove{
+    margin-top: 5px;
 }
