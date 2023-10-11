@@ -28,11 +28,11 @@
           </div> -->
 
       <div class="radio-group">
-        <input type="radio" checked name="myRadios" (change)="handleChange('self')" value="self" />
+        <input type="radio" [checked]="isChecked" name="myRadios" (change)="handleChange('self')" value="self" />
         <span>Self</span>
       </div>
       <div class="radio-group">
-        <input type="radio" name="myRadios" (change)="handleChange('others')" value="others" />
+        <input type="radio" [checked]="!isChecked" name="myRadios" (change)="handleChange('others')" value="others" />
         <span>Others</span>
       </div>
 
@@ -131,8 +131,8 @@
             <div class="col-sm-9 form-group">
               <label for="cod">Country code</label>
               <select class="form-control browser-default custom-select">
-                <option data-countryCode="IN" value="1" selected>IN (+91)</option>
-                <option data-countryCode="US" value="2" selected>USA (+1)</option>
+                <option data-countryCode="IN"  value="1" selected>IN (+91)</option>
+                <option data-countryCode="US" value="2" >USA (+1)</option>
                 <option data-countryCode="GB" value="44">UK (+44)</option>
               </select>
             </div>

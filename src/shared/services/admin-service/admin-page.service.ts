@@ -472,7 +472,10 @@ console.log("+++++++ ____ _ addChannelPartner", request);
 
 public inviteUsers( request : any): Observable<any> {
 
-  let url = this.baseUrlForUsers + this.inviteUsersURL;
+
+
+  //let url = this.baseUrlForUsers + this.inviteUsersURL;
+  let url="http://localhost:2003/api/user/inviteuser"
 
   
   let request$ = this.http.post(url, request)

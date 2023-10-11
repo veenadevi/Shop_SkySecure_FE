@@ -8,7 +8,19 @@
         </div>
         <div class="body-container">
             <div class="notification-card">
-                <div class="content-container">
+                <ng-container *ngFor="let item of notificationList; let i=index">
+                    <div class="content-container">
+                        <div class="icon">
+                            <div class="txt">LA</div>
+                        </div>
+                          <div class="content">{{item.notification.message}} by {{item.createdBy.firstName}}
+                              <div class="time">{{ formatTime(item.createdBy.updatedAt)}}</div>
+                          </div>
+                    </div>
+                </ng-container>
+                
+
+                <!-- <div class="content-container">
                     <div class="icon">
                         <div class="txt">SH</div>
                     </div>
@@ -24,16 +36,7 @@
                       <div class="content">Sina: Thanks
                           <div class="time">10 hours ago</div>
                       </div>
-                </div>
-
-                <div class="content-container">
-                    <div class="icon">
-                        <div class="txt">SH</div>
-                    </div>
-                      <div class="content">Sina: Thanks
-                          <div class="time">10 hours ago</div>
-                      </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="footer-container">

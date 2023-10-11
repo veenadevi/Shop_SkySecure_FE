@@ -60,13 +60,17 @@ export class InviteUserComponent {
       stateName: [''],
       cityName: [''],
       postalCode: [''],
+      isZohoCustomer:[''],
+      triggeremail:['']
 
    
     });
   }
 
   selectedValue: any;
+  userDetails:any;
   ngOnInit(): void {
+    this.userDetails = this.userAccountStore.getUserDetails();
     this.countryList = Country.getAllCountries();
 
     this.selectedValue = this.countryList[0];
@@ -89,7 +93,7 @@ export class InviteUserComponent {
 
   
   public setSelfData() {
-    let userDetails = this.userAccountStore.getUserDetails();
+   
 
     //let formVal = this.form.value;
     let formVal = this.myForm.value;
@@ -98,25 +102,12 @@ export class InviteUserComponent {
 
     //isoCode
 
-    var index = allCountries.findIndex(el => el.isoCode === userDetails.countryCode);
+    var index = allCountries.findIndex(el => el.isoCode === this.userDetails .countryCode);
 
     if (index >= 0) {
 
-      //this.myForm.value.countryName = allCountries[index];
-      //this.myForm.controls['countryName'].setValue(allCountries[index]);
-      //this.myForm.controls['countryName'].setValue(allCountries.filter(c => c.isoCode === userDetails.countryCode));
-      //this.selectedCountrys = allCountries.filter(c => c.isoCode === userDetails.countryCode)[0];
+     
     }
-
-    //this.countryList
-
-
-
-
-    //formVal.countryName = userDetails.countryCode ? userDetails.countryCode : null;
-    //formVal.stateName = userDetails.state ? userDetails.state : null;
-
-    //formVal.gstNo = userDetails.gstinNumber ? userDetails.gstinNumber : null;
 
 
 
@@ -187,23 +178,7 @@ public fetchGST(){
 
       
 
-      /*let stateList  = State?.getStatesOfCountry('IN');
-      this.stateList=State?.getStatesOfCountry('IN');
-      
-      
-
-      let selectedState = stateList.filter(c => c.name === resState)[0];
-     
-      this.selectedState = selectedState;
-
-
-      let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
-      this.cityList=City.getCitiesOfState('IN', this.selectedState.isoCode);
-      
-
-      let selectedCity = cityList.filter(c => c.name === resCity)[0];
-      this.selectedCity = selectedCity;*/
-
+   
 
       
 
@@ -227,29 +202,31 @@ public fetchGST(){
         "firstName": formData.firstName,
         "lastName": formData.lastName,
         "email": formData.email,
-        "company": formData.companyName,
+        "company": formData.companyBusinessName,
         //"role": "User",
-        //"countryCode": "+91",
+         "countryCode": "+91",
         "mobileNumber": formData.mobile,
-        /*"fullAddress": [
+        "fullAddress": [
                   {
-                      "address1": "Electronic City",
-                      "address2": "Phase1",
-                      "state": "Karnataka",
-                      "pincode": "560100",
+                      "address1": formData.addressLine1,
+                      "address2": formData.addressLine2,
+                      "state":  formData.stateName,
+                      "pincode": formData.postalCode,
                       "countryCode":"IN"
                   }
-              ],*/
+              ],
         //"isRegistered":false,
-        //"isCustomer":false,
+        "isCustomer":this.myForm.get('isZohoCustomer').value?this.myForm.get('isZohoCustomer').value:false,
         "companyName": formData.companyName,
+        "gstinNumber":formData.gstin?formData.gstin:"",
         // "inviteReason":formData.reason,
         "inviteReason":"newUserInvite",
-        //"createdBy":"6516ba041c0858005370d13f",
-        //"updatedBy":"6516ba041c0858005370d13f"
+        "createdBy":this.userDetails._id,
+        "updatedBy":this.userDetails._id,
+        "sendEmail":this.myForm.get('triggeremail').value?this.myForm.get('triggeremail').value:true
       }
 
-
+console.log("request===",request)
       this.subscription.push(
         this.adminPageService.inviteUsers(request).subscribe(res=>{
           console.log("+_+_+_ Res ", res);
