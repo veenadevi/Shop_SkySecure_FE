@@ -1,0 +1,100 @@
+.user-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    height: 46rem;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 0 20px 10%;
+}
+ 
+h3{
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+} 
+.address-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+    align-items: center;
+}
+.col-sm-6 {
+    flex: 0 0 auto;
+    width: 50%;
+}
+
+
+.primary {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 10rem;
+    border-radius: 8px;
+    background: var(--btn-gradient);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
+    height: 35px;
+}
+.primary:hover {
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+  }
+  
+  .primary:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  .modal-footer {
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="zip"]::-webkit-inner-spin-button,
+input[type="zip"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+} 
+.custom-select {
+    width: 85%; 
+    box-sizing: border-box; 
+    border-radius: 8px;
+    position: relative;
+}
+.custom-select select {
+    width: 100%;
+    padding: 10px; 
+    border-radius: 5px;
+    outline: none;
+} 
+.custom-select select::after {
+    content: '\25BC';  
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+} 
+.custom-select select option[disabled] {
+    color: #999;
+}
+.form-check{
+    min-height: 0px !important;
+}

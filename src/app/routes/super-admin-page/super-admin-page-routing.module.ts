@@ -8,6 +8,7 @@ import { AssignUsersAndRolesComponent } from './partials/assign-users-and-roles/
 import { AddNewChannelPartnerComponent } from './partials/add-new-channel-partner/add-new-channel-partner.component';
 import { ViewChannelPartnersListComponent } from './partials/view-channel-partners-list/view-channel-partners-list.component';
 import { MyCustomersComponent } from './partials/my-customers/my-customers.component';
+import { RoleAssigmentComponent } from './partials/role-assigment/role-assigment.component';
 
 import { ChannelPartnerDetailsComponent } from './partials/view-channel-partners-list/partials/channel-partner-details/channel-partner-details.component';
 
@@ -57,9 +58,9 @@ const routes: Routes = [{
       component : MyCustomersComponent
     },
     {
-      canActivate: [],
-      path: 'channel-partner-details',
-      component : ChannelPartnerDetailsComponent 
+      canActivate: [], 
+      path: 'role-assignment',
+      component : RoleAssigmentComponent
     }
 
     
