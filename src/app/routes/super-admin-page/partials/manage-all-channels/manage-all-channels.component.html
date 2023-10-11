@@ -12,8 +12,8 @@
                     formControlName="channelPartner"
                    >
                     <option value="">Choose...</option>
-                    <option *ngFor="let channel of myChannels" [value]="channel._id">
-                        {{channel.name}}
+                    <option *ngFor="let channel of myChannels" [value]="channel.channelPartnerMaster._id">
+                        {{channel.channelPartnerMaster.name}}
                     </option>
                 </select>
 

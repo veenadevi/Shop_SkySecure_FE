@@ -11,7 +11,7 @@ import { MyCustomersComponent } from './partials/my-customers/my-customers.compo
 import { RoleAssigmentComponent } from './partials/role-assigment/role-assigment.component';
 
 import { ChannelPartnerDetailsComponent } from './partials/view-channel-partners-list/partials/channel-partner-details/channel-partner-details.component';
-import { ManagaeAllAdminComponent } from './partials/managae-all-admin/managae-all-admin.component';
+import { ManageAllChannelsComponent } from './partials/manage-all-channels/manage-all-channels.component'
 
 const routes: Routes = [{
   path: '',
@@ -65,8 +65,8 @@ const routes: Routes = [{
     },
     {
       canActivate: [], 
-      path: 'managae-all-admin',
-      component : ManagaeAllAdminComponent
+      path: 'manage-all-channel',
+      component : ManageAllChannelsComponent
     }
 
     

@@ -5,8 +5,6 @@ import { AdminPageService } from 'src/shared/services/admin-service/admin-page.s
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
-
-
 interface AddChannelPartnerUserPayLoad {
   channelPartnerId: String,
   
@@ -22,16 +20,13 @@ interface AddChannelPartnerUserPayLoad {
 
 
 }
+
 @Component({
-  selector: 'app-managae-all-admin',
-  templateUrl: './managae-all-admin.component.html',
-  styleUrls: ['./managae-all-admin.component.css']
+  selector: 'app-manage-all-channels',
+  templateUrl: './manage-all-channels.component.html',
+  styleUrls: ['./manage-all-channels.component.css']
 })
-
-
-
-export class ManagaeAllAdminComponent {
-
+export class ManageAllChannelsComponent {
 
   addChannelPartnerUserPayLoad: AddChannelPartnerUserPayLoad;
   myForm: FormGroup;
@@ -111,9 +106,9 @@ export class ManagaeAllAdminComponent {
   public getMyChannelList() {
 
     this.subscription.push(
-      this.superAdminService.getMyChannelPartnerList(this.userId).subscribe(response => {
+      this.superAdminService.getAllChannelPartners().subscribe(response => {
 
-        this.myChannels = response.myChannelList;
+        this.myChannels = response.channelPartners;
 
       })
 
