@@ -259,6 +259,9 @@ nav .navbar .links li:hover .js-sub-menu{
   border-radius: 0 4px 4px 4px;
   z-index: 1;
   display: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 306px;
 }
 
 /* .more-sub-menu .more:hover .more-sub-menu2{
