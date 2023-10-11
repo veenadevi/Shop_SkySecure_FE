@@ -21,6 +21,7 @@ import { RoleAssigmentComponent } from './partials/role-assigment/role-assigment
 
 // import { ManagaeAllAdminComponent } from './partials/manage-all-admin/managae-all-admin.component';
 import { ManageAllChannelsComponent } from './partials/manage-all-channels/manage-all-channels.component';
+import { CustomerDetailsViewComponent } from './partials/my-customers/partials/customer-details-view/customer-details-view.component';
 
 
 
@@ -40,7 +41,7 @@ import { ManageAllChannelsComponent } from './partials/manage-all-channels/manag
     MyCustomersComponent,
     ChannelPartnerDetailsComponent, 
     RoleAssigmentComponent, 
-    ManageAllChannelsComponent
+    ManageAllChannelsComponent, CustomerDetailsViewComponent
   ],
   imports: [
     CommonModule,

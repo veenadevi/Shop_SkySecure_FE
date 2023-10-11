@@ -30,7 +30,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-csp let-i="rowIndex">
                 <tr>
-                    <td><a [routerLink]="['/admin-pages/channel-partner-details']">{{ csp.channelPartnerMaster.name }}</a></td>
+                    <td>{{ csp.channelPartnerMaster.name }}</td>
                     <td>
                         {{ csp.adminUsers[0].firstName}}
                 </td>
