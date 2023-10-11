@@ -9,6 +9,7 @@ import { AddNewChannelPartnerComponent } from './partials/add-new-channel-partne
 import { ViewChannelPartnersListComponent } from './partials/view-channel-partners-list/view-channel-partners-list.component';
 import { MyCustomersComponent } from './partials/my-customers/my-customers.component';
 
+import { ChannelPartnerDetailsComponent } from './partials/view-channel-partners-list/partials/channel-partner-details/channel-partner-details.component';
 
 const routes: Routes = [{
   path: '',
@@ -54,6 +55,11 @@ const routes: Routes = [{
       canActivate: [],
       path: 'my-customers',
       component : MyCustomersComponent
+    },
+    {
+      canActivate: [],
+      path: 'channel-partner-details',
+      component : ChannelPartnerDetailsComponent 
     }
 
     
