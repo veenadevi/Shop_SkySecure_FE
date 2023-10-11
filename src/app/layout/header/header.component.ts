@@ -23,6 +23,7 @@ import { CartService } from 'src/shared/services/cart.service';
 import { MicrosoftGraphService } from 'src/shared/services/microsoft-graph.service';
 import { HttpResponseBase } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NotificationsStore } from 'src/shared/stores/notifications.store';
 
 @Component({
   selector: 'app-header',
@@ -65,6 +66,8 @@ export class HeaderComponent implements OnInit{
 
   notificationDropDown:boolean = false;
 
+  public notificationList : any = [];
+
   @Input() set userName(value : any){
     this.userFullName =  value;
   }
@@ -85,6 +88,7 @@ export class HeaderComponent implements OnInit{
     private microsoftGraphService : MicrosoftGraphService,
     private spinnerService : NgxSpinnerService,
     private cartStore : CartStore,
+    private notificationsStore : NotificationsStore,
 
 
     //from toolbar component
@@ -160,6 +164,27 @@ export class HeaderComponent implements OnInit{
     }
     )
   )
+
+    /**
+   * Service for Getting Notifications
+   */
+
+    public notificationList$ = this.notificationsStore.notificationList$
+    .pipe(
+      map(data => {
+        if(data){
+          
+          console.log("++_+_+_ ()()( *** ", data);
+          this.notificationList = data;
+          //this.numberOf = data.length;
+          return data;
+        }
+        else{
+          // return data;
+        }
+      }
+      )
+    )
 
     // Check Fot Search BAR
 
