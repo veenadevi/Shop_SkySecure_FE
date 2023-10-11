@@ -543,6 +543,30 @@ public errorMessage: boolean = false;
 
 
   public onNextClick(){
+
+    if(this.myForm.get('firstName').value === null || this.myForm.get('email').value === null || this.myForm.get('phoneNo').value === null){
+      this.errorMessage = true;
+
+
+      if(this.myForm.get('firstName').value === null){
+        this.myForm.get('firstName').setErrors({ 'required': true });
+      }
+      if(this.myForm.get('email').value === null){
+        this.myForm.get('email').setErrors({ 'required': true });
+      }
+      if(this.myForm.get('phoneNo').value === null){
+        this.myForm.get('phoneNo').setErrors({ 'required': true });
+      }
+    }
+    else{
+      this.onNextClick2()
+    }
+  }
+
+
+  public onNextClick2(){
+
+
     if((this.myForm.get('checkGstNil').value === null || this.myForm.get('checkGstNil').value === false)
     && (this.myForm.get('gstNo').value === null || this.myForm.get('gstNo').value === '')){
 this.errorMessage = true;

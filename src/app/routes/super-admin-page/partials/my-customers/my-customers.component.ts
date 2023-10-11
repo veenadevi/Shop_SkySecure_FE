@@ -25,6 +25,9 @@ export class MyCustomersComponent {
   public disableAssign :boolean=true;
 
 
+  public myCustomers : any = [];
+
+
 
    
 
@@ -40,80 +43,46 @@ export class MyCustomersComponent {
   ){}
 
 
-  // public allAccounts$ = this.adminPageService.getAllAccounts()
-  // .pipe(
-  //   map(data => {
-  //     console.log("running here ==")
-  //     if(data){
-      
-  //       this.accountData = data.accounts.data;
-  //       this.info = data.accounts.info;
-  //       return data;
-        
-  //     }
-  //     else{
-  //       return data;
-  //     }
-  //   }
-  //   )
-  // )
+ 
 
   ngOnInit(): void {
     this.spinner.show();
     console.log("===============AccountListComponent=======")
     
-    //this.accountData = this.sampleData.accounts.data;
-    //this.info = this.sampleData.accounts.info;
-    //this.getAllAccounts();
-    //this.getAllCRMUsers();
-    this.getAllChannelPartners();
-    this.getAllMarketPlaceAccountList();
+    
+    //this.getAllChannelPartners();
+    //this.getAllMarketPlaceAccountList();
+
+    this.getAllMyCustomers();
+
 
   }
 
-  public getAllAccounts(){
-    
-      // let a: any = this.sampleData();
-      // this.accountData = [...a.accounts.data, ...a.accounts.data];
-      // this.info = a.accounts.info;
-    this.subscriptions.push(
-      this.adminPageService.getAllAccounts().subscribe( response => {
-        console.log("running here directly==")
-     
-        this.accountData = response.accounts.data;
-        this.info = response.accounts.info;
-        
-        
 
+
+  public getAllMyCustomers(){
+
+    this.subscriptions.push(
+      this.adminPageService.getAllMyCustomers().subscribe(res=>{
+        console.log("_+_+_+_+_+_ API Result ", res);
+        this.myCustomers = res;
+        this.spinner.hide();
+      },
+      error => {
+        this.spinner.hide();
+        this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
       })
     )
+
   }
 
-  public getAllMarketPlaceAccountList(){
-    this.spinner.show(); 
-    // let a: any = this.sampleData();
-    // this.accountData = [...a.accounts.data, ...a.accounts.data];
-    // this.info = a.accounts.info;
-    this.subscriptions.push(
-   
-    this.adminPageService.getAllMarketPlaceAccountList().subscribe( response => {
-    
-      //console.log("running here directly==")
-      this.allMarketPlaceList=response;
-      this.spinner.hide();
-    
-      
 
-    },
-    error => {
-      this.spinner.hide();
-      this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
-    }
-    )
-  )
-}
+  public getCustomersById(id){
+    
+  }
 
-  public getAccountById(account){
+
+  /*public getAccountById(account){
 
     let acc = JSON.stringify(account);
     let queryParams ={
@@ -124,57 +93,15 @@ export class MyCustomersComponent {
 
     this.router.navigate(['admin-pages/lead-summary'], {queryParams: queryParams});
 
-   // this.router.navigate(['/admin-page/accounts-details'], {queryParams: queryParams});
-  }
+   
+  }*/
 
 
-  public assign(account, i){
-    const modalRef = this.modalService.open(AssignLeadsModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
   
-    modalRef.componentInstance.request = account;
-    
-
-    modalRef.componentInstance.passedData.subscribe((res) => {
-      //account.Owner.name
-      console.log("_+_+_+_ Outside ", res);
-      console.log("_+_+_+_ Outside Account ", this.allMarketPlaceList);
-      console.log("_+_+_+_ Outside Account i", this.allMarketPlaceList[i]);
-      //this.accountData[i].Owner.name = res.ownerName.name;
-      //this.allMarketPlaceList[i].assignedChannalpartner=['channelPartner']['name'] = res.assignedName;
-      this.allMarketPlaceList[i].assignedChannalpartner=
-            {
-              "channelPartner" : {
-              "name" : res.assignedName
-              }
-            }
-      //this.accountData[i].Owner.name = res.assignedName;
-
-    })
-    
-  }
-
-  public getAllCRMUsers(){
-    this.subscriptions.push(
-      this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+_+_+_+_+ ", res);
-        this.superAdminStore.setCrmUsers(res);
-      })
-    )
-  }
 
 
-  public getAllChannelPartners(){
-    this.subscriptions.push(
-      this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
-        if(res.channelPartners.length>0){
-         this.disableAssign=false
 
-        }
-        this.superAdminStore.setChannelPartnerList(res);
-      })
-    )
-  }
+
 
 
 

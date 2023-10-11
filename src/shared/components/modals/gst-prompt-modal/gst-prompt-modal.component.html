@@ -115,11 +115,17 @@
                 <label for="firstName">First Name*</label>
                 <input formControlName="firstName" type="firstName" class="form-control-01" name="Locality"
                   id="firstName" placeholder="First Name" required>
+                  <div *ngIf="myForm.get('firstName').hasError('required')">
+                    First Name is Required
+                  </div>
               </div>
               <div class="col form-group">
                 <label for="email">Email ID*</label>
                 <input formControlName="email" type="email" class="form-control-01" name="email" id="email"
                   placeholder="Email ID" required>
+                  <div *ngIf="myForm.get('email').hasError('required')">
+                    Email ID is Required
+                  </div>
                 <!-- <div *ngIf="myForm.get('email').hasError('required')">
                   Email is required.
                 </div>
@@ -140,11 +146,14 @@
               <label for="tel">Phone*</label>
               <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel"
                 placeholder="Enter Your Phone No." required>
-              <div *ngIf="myForm.get('phoneNumber').hasError('required')">
+              <!-- <div *ngIf="myForm.get('phoneNumber').hasError('required')">
                 Phone number is required.
-              </div>
-              <div *ngIf="myForm.get('phoneNumber').hasError('pattern')">
+              </div> -->
+              <!-- <div *ngIf="myForm.get('phoneNumber').hasError('pattern')">
                 Phone number must be 10 digits.
+              </div> -->
+              <div *ngIf="myForm.get('phoneNo').hasError('required')">
+                Phone Number is Requierd
               </div>
             </div>
           </ng-container>
