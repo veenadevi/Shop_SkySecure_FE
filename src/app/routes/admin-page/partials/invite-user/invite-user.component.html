@@ -58,7 +58,7 @@
             <label for="companyBusinessName">Company Business Name</label>
             <input formControlName="companyBusinessName" type="companyBusinessName" class="form-control-03"
                 name="companyBusinessName" id="companyBusinessName" placeholder="Enter Company Name"
-                >
+                required>
         </div>
           <div class="col-sm-4 forms">
             <label for="gstin">Enter GST</label>
@@ -70,7 +70,27 @@
             <label></label>
             <button class="btn primary-btn fetchgst" (click)="fetchGST()">Fetch GST Data</button>
           </div>
+
+        
         </div>
+
+       <div class="row">
+        <div class="col-sm-4 forms">
+          <div>
+          <input type="checkbox" formControlName="isZohoCustomer" class="form-check d-inline " id="chb" >
+         
+          <div for="chb" class="form-check-label" ><h4 class="customer-chck">Current Zoho Customer?</h4></div>
+        </div>
+        </div>
+
+        <div class="col-sm-4 forms">
+          <div>
+          <input type="checkbox"  formControlName="triggeremail" class="form-check d-inline " id="chb" >
+         
+          <div for="chb" class="form-check-label" ><h4 class="customer-chck">Trigger Email?</h4></div>
+        </div>
+        </div>
+       </div>
 
         <div class="row">
           <div class="col-sm-4 forms">
