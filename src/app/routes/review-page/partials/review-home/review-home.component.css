@@ -6,19 +6,21 @@
     flex-direction: column;
     width: 100%;
     font-family: 'lato',sans-serif;
-    background-color: #E2EDFF;
+    background-color: var(--primary-800-purple);
 }
 .review-heading{
     font-size: 30px;
     font-weight: bold;
     text-align: center;
     padding-top: 20px;
+    color: #fff;
 }
 p{
     font-size: 18px;
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
+    color: #fff;
 }
 .search-box .form-control {
     padding-left: 3rem;

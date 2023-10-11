@@ -1,0 +1,60 @@
+<div class="user-container">
+    <div class="content">
+
+        <form [formGroup]="myForm">
+            <div class="select   mb-3 mt-2 ">
+                <h3>Manage Users</h3>
+                <div class=" address-row  col-sm-12 form-group"> 
+
+                    <div class="col-sm-6 form-group"  >
+                        <label for="State">Select Users</label>
+                        <div class="custom-select">
+                            <select class="custom-select " (change)="onDropDownChange($event)"
+                                formControlName="channelPartner">
+                                <option value="">-- Select user Role --</option>
+                                <option *ngFor="let user of usersList" [value]="user._id">{{user.firstName}}
+                            </select>
+                        </div>
+                    </div> 
+
+                    <div class=" col-sm-5 me-3 mt-2">
+                        <input type="checkbox" formControlName="superAdmin" class="form-check d-inline"  
+                            id="chb">&nbsp;Super Admin 
+                        <br>
+                        <input type="checkbox" formControlName="portalAdmin" class="form-check d-inline"  
+                            id="chb">&nbsp;Portal Admin 
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- <div *ngIf="submitErrorMessage">
+                <p class="error">* Please Fill Mandatory fileds like Name and Admin users</p>
+            </div> -->
+            <div class="modal-footer mt-3"> 
+                    <button class="btn  primary" (click)="submitForm()"> Assign Role </button> 
+            </div>
+
+            <!-- <div class="row" *ngIf="showMsg">
+                <div class="col-xs-12">
+                    <p class="alert alert-success">
+                        <strong>Channal Partner User Added Successfully !</strong> 
+                    </p>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="duplicate">
+                <div class="col-xs-12">
+                    <p class="alert alert-danger">
+                        <strong>Channal Partner User Already Assigned !</strong>
+
+                    </p>
+                </div>
+            </div> -->
+        </form>
+    </div>
+</div>
+
+ 

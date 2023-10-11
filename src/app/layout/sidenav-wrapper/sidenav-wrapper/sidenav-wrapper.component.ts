@@ -59,6 +59,7 @@ export class SidenavWrapperComponent implements OnInit{
   public sAdminSubMenu: boolean = false;
   public amSubMenu: boolean = false;
   public cpSubMenu: boolean = false;
+  public sAdmincpSubMenu:boolean=false;
 
   constructor(
     private loginService: LoginService,
@@ -140,6 +141,9 @@ export class SidenavWrapperComponent implements OnInit{
     if (navVal === 'cp') {
       this.cpSubMenu = true;
     }
+    if (navVal === 'sacpdmin') {
+      this.sAdmincpSubMenu = true;
+    }
 
 
     /*if(this.isExpanded === false){
@@ -208,6 +212,10 @@ export class SidenavWrapperComponent implements OnInit{
       case 'sadmin':
         this.sAdminSubMenu = (this.sAdminSubMenu) ? false : true;
         return;
+
+      case 'sacpdmin':
+          this.sAdmincpSubMenu = (this.sAdmincpSubMenu) ? false : true;
+          return;
 
       case 'am':
         this.amSubMenu = (this.amSubMenu) ? false : true;
@@ -284,6 +292,16 @@ export class SidenavWrapperComponent implements OnInit{
         this.menuToogled = false;
         this.router.navigate(['admin-pages/my-customers']);
         return;
+
+        case 'role-assignment':
+        this.menuToogled = false;
+        this.router.navigate(['admin-pages/role-assignment']);
+        return;
+
+        case 'managae-all-admin':
+          this.menuToogled = false;
+          this.router.navigate(['admin-pages/managae-all-admin']);
+          return;
       case 'paFeatureUpdate':
         //this.isExpanded = false;
         this.menuToogled = false;
@@ -329,6 +347,10 @@ export class SidenavWrapperComponent implements OnInit{
           this.router.navigate(['channel-partner/leadsfromMyChannel']);
           return;
 
+          case 'manageAllChannels':
+            this.menuToogled = false;
+            this.router.navigate(['admin-pages/manage-all-channel']);
+            return;
         
 
       default:
