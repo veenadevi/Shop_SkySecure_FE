@@ -15,6 +15,7 @@ import { ProductsListTableComponent } from './partials/lead-summary/partials/pro
 import { AssignUsersAndRolesComponent } from './partials/assign-users-and-roles/assign-users-and-roles.component';
 import { AddNewChannelPartnerComponent } from './partials/add-new-channel-partner/add-new-channel-partner.component';
 import { ViewChannelPartnersListComponent } from './partials/view-channel-partners-list/view-channel-partners-list.component';
+import { MyCustomersComponent } from './partials/my-customers/my-customers.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ViewChannelPartnersListComponent } from './partials/view-channel-partne
     ProductsListTableComponent,
     AssignUsersAndRolesComponent,
     AddNewChannelPartnerComponent,
-    ViewChannelPartnersListComponent
+    ViewChannelPartnersListComponent,
+    MyCustomersComponent
   ],
   imports: [
     CommonModule,
