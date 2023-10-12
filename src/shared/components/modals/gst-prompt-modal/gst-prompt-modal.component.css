@@ -568,10 +568,9 @@ h2{
     top: 15px;
   }
 
-  .btn-close{
-    border : none !important;
-  }
+ 
 
-  button[aria-label="Close"]:focus {
-    outline: none;
+  button :focus {
+    outline: none !important;
+    border : none !important;
   }

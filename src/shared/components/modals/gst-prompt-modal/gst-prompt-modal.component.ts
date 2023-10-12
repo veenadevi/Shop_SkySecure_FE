@@ -730,7 +730,9 @@ public errorMessage: boolean = false;
         )
       }
       else{
-        
+        this.myForm.get('gstNo').setErrors({ 'invalid': true });
+        this.errorMessageText = "Please Enter Valid GST Numebr!"
+        this.errorMessage = true;
       }
 
     //}
