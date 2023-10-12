@@ -97,7 +97,8 @@
                         <td>
                             
                             <div class="btn-holder">
-                                <button id="assign-btn" class="btn primary-btn" [disabled]="disableAssign" (click)="assign(account, i)">Assign</button>
+                                <button id="assign-btn" class="btn primary-btn" [disabled]="disableAssign" (click)="assign(account, i)"><img alt="assign" src="../../../../../assets/icons/AssignUser.svg"></button>
+                                <button id="assign-btn" class="btn primary-btn alert-btn" [disabled]="disableAssign" (click)="openReasonModal()"><img alt="remove" src="../../../../../assets/icons/CloseIcon-white.svg"></button>
                             </div>
                         </td>
                     </tr>

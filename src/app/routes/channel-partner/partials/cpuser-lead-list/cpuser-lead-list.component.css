@@ -1,5 +1,5 @@
 .all-accounts-view {
-    min-height: 36em;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     row-gap: 1em;
@@ -24,11 +24,24 @@
 } */
 
 .primary-btn {
-    padding: 7px;
+    /* padding: 7px; */
     margin: 6px;
-    width: 80px;
-    border-radius: 8px;
+    width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 0 !important; */
+    /* border-radius: 8px; */
 }
+
+.primary-btn img {
+    height: 18px;
+}
+
+.alert-btn {
+    background: var(--red);
+}
+
 
 
 .thfont{
