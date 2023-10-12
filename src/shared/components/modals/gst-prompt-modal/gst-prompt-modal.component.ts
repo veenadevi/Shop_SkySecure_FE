@@ -72,7 +72,7 @@ export class GstPromptModalComponent implements OnInit{
 
   public gstResponseData : any;
 
-  public errorMessageText : string = "* Please choose one option: Enter a Company GST number or select the I don't have Company GST number checkbox"
+  public errorMessageText : string = "* Please enter Company GST  or Select the CheckBox"
  
   public submitErrorMessageText = "* Please accept the T&C continue ";
  
@@ -129,7 +129,7 @@ export class GstPromptModalComponent implements OnInit{
         postalCode : [],
         phoneNo : [],
         firstName : [],
-        email : [],
+        email : ['', [Validators.required, Validators.email]],
        checkTerms : [null]
       }
     )
@@ -671,7 +671,7 @@ public errorMessage: boolean = false;
 
             if(res === "Invalid GST Number."){
               this.myForm.get('gstNo').setErrors({ 'invalid': true });
-              this.errorMessageText = "Please Enter Valid GST Numebr!"
+              this.errorMessageText = "Please Enter Valid GST Number!"
               this.errorMessage = true;
               this.spinner.hide();
             }
