@@ -1,22 +1,22 @@
 <div class="invite-container">
-    <h1>Invite User</h1>
+    <h1>Invite Customer</h1>
     <div class="invite-content">
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
           <div class="row">
             <div class="col-sm forms">
               <label for="firstname">First Name</label>
-              <input type="text" id="firstName" name="firstName" formControlName="firstName" placeholder="Enter the FirstName">
+              <input type="text" id="firstName" name="firstName" formControlName="firstName" placeholder="Enter  FirstName">
             </div>
             <div class="col-sm forms">
               <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" name="lastName" formControlName="lastName" placeholder="Enter the LastName">
+              <input type="text" id="lastName" name="lastName" formControlName="lastName" placeholder="Enter  LastName">
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-6 forms">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" formControlName="email">
+              <input type="email" id="email" name="email" formControlName="email"  placeholder="Enter Email">
               <div *ngIf="myForm.get('email').invalid && myForm.get('email').touched" class="error-message">
                 Please enter a valid email address.
               </div>
@@ -37,8 +37,8 @@
                   </select>
                 </div>
               <div class="col-sm-8 forms mobile-input">
-                <label for="mobile">Mobile Number</label>
-                <input type="text" id="mobile" class="mobile"   name="mobile" formControlName="mobile">
+                <label for="mobile">Phone Number</label>
+                <input type="text" id="mobile" class="mobile"   name="mobile" formControlName="mobile"  placeholder="Enter Pbone Number">
                 <div *ngIf="myForm.get('mobile').invalid && myForm.get('mobile').touched" class="error-message">
                   Please enter a valid phone number.
                 </div>
@@ -96,7 +96,7 @@
           <div class="col-sm-4 forms">
               <label for="address-1">Address Line-1</label>
               <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
-                  id="address-1" placeholder="Locality/House/Street no." required>
+                  id="address-1" placeholder="Locality/House/Street no.">
           </div>
           <div class="col-sm-4 forms">
               <label for="address-2">Address Line-2</label>
@@ -137,7 +137,7 @@
      
 
           <div class="col-sm-4 forms">
-              <label for="State">City*</label>
+              <label for="State">City</label>
               <select formControlName="cityName" class="form-control-01" (change)="onCityChange($event)">
                   <ng-container *ngIf="gstData; else noGstDataCity">
                       <option value="">{{gstResponseData.adress.city}}</option>
@@ -150,9 +150,9 @@
               </select>
           </div>
           <div class="col-sm-4 forms">
-              <label for="zip">Postal-Code</label>
+              <label for="zip">Zip Code</label>
               <input formControlName="postalCode" type="zip" class="form-control-01" name="Zip" id="zip"
-                  placeholder="Postal-Code." required>
+                  placeholder="Zip Code" required>
           </div>
       </div>
 
