@@ -560,3 +560,18 @@ h2{
     background-color: #888; /* Adjust the color of the scrollbar thumb */
     height: 150px;
   }
+
+  .close-icon{
+    position: absolute;
+    /* float: right; */
+    right: 25px;
+    top: 15px;
+  }
+
+  .btn-close{
+    border : none !important;
+  }
+
+  button[aria-label="Close"]:focus {
+    outline: none;
+  }

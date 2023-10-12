@@ -282,6 +282,7 @@ disableCheckGstNil(){
     else{
       this.isChecked = false;
       this.buttonDisabled = true;
+      this.showWithoutGST = true;
     }
 
   }
@@ -312,7 +313,7 @@ public submitCityError : boolean = false;
   //   }
   // }
   else if( (this.myForm.get('checkGstNil').value !== null || this.myForm.get('checkGstNil').value === true) &&    (this.myForm.get('cityName').value === null || this.myForm.get('cityName').value.length<=0 || this.myForm.get('stateName').value === null || this.myForm.get('stateName').value.length<=0)){
-    console.log("{}{{}{{} ");
+   
     this.submitErrorMessageText = "Please fill mandaotry Fields";
     this.submitCityError = true;
   }
@@ -620,6 +621,11 @@ public errorMessage: boolean = false;
 
   public onBackGSTDetails(){
     this.showWithoutGST = false;
+    this.activeModal.close();
+  }
+
+  public closeModal(){
+    this.activeModal.close();
   }
 
 

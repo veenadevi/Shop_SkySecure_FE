@@ -4,6 +4,9 @@
   <div class="modal-header">
     <div class="modal-top">
       <h4>Business Details</h4>
+      <div class="close-icon">
+        <button (click)="closeModal()" type="button" class="btn-close" aria-label="Close"></button>
+      </div>
     </div>
 
   </div>
@@ -317,7 +320,7 @@
 
     <ng-container *ngIf="(selectedType === 'others' && showWithoutGST); else otherScenario">
       
-      <button class="btn secondary-btn"  (click)="onBackGSTDetails()">Back</button>
+      <button class="btn secondary-btn"  (click)="onBackGSTDetails()">Cancel</button>
       <button class="btn primary-btn" [disabled]="buttonDisabled" (click)="onNextClick()">Next</button>
     </ng-container>
     <ng-template #otherScenario>
