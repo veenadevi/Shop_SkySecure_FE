@@ -108,6 +108,7 @@ tbody td{
 }
 .remove{
     margin-top: 5px;
+    cursor: pointer;
 }
 .form-control-01 {
     display: block;
