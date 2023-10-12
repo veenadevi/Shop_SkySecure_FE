@@ -211,8 +211,9 @@ ul .nav-text:hover {
 
 .notificationicon-section:hover {
     /* background-color: #efefef; */
-    border: 1px solid #efefef;
+    /* border: 1px solid #efefef; */
     border-radius: 8px;
+    background-color: var(--neutral-900);
     
 }
 
@@ -253,8 +254,8 @@ ul .nav-text:hover {
 
 .cart-button:hover {
     color: #1e1e1e;
-    /* background-color: #efefef; */
-    border: 1px solid #efefef;
+    background-color: var(--neutral-900);
+    /* border: 1px solid #efefef; */
     border-radius: 8px;
 }
 
@@ -278,7 +279,7 @@ ul .nav-text:hover {
 }
 
 .user-icon:hover {
-    border: 1px solid #efefef;
+    background-color: var(--neutral-900);
     border-radius: 8px;
 }
 
