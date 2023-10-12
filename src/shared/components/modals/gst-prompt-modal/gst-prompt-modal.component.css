@@ -500,6 +500,7 @@ input[type="zip"]::-webkit-outer-spin-button {
 .error{
     color: red;
     text-align: center;
+    font: size 12px;
     /* padding: 20px; */
 }
 .condition{
