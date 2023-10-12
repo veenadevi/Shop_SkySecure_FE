@@ -1,149 +1,155 @@
 <div class="details-container">
     <div class="content">
         <h1>Give Your Ratings</h1>
-    <div class="form">
-        <div class="input-cont">
-            <label>Name*</label>
-            <input type="text" placeholder="Name" required >
+    <form [formGroup]="myFrom">
+        <div class="form">
+            <div class="input-cont">
+                <label for="userName">Name*</label>
+                <input formControlName="userName" type="text" placeholder="Name" class="form-control" required >
+            </div>
+    
+            <div class="input-cont">
+                <label for="email">Email*</label>
+                <input formControlName="email" type="email" placeholder="Email" class="form-control"  required>
+            </div>
+    
+            <div class="input-cont">
+                <label for="companyName">Organization Name*</label>
+                <input formControlName="companyName" type="text" class="form-control" placeholder="Organization Name" required >
+            </div>
+    
+            <div class="input-cont">
+                <label for="jobTitle">Job Title*</label>
+                <input formControlName="jobTitle" type="text" class="form-control" placeholder="Job Title" required>
+            </div>
+    
+            <div class="input-cont">
+                <label>Company Size*</label>
+                <select formControlName="companyCapacity">
+                    <option>Please Select</option>
+                    <option>1 to 10 Employees</option>
+                    <option>11 to 50 Employees</option>
+                    <option>51 to 200 Employees</option>
+                    <option>201 to 500 Employees</option>
+                    <option>501 to 1000 Employees</option>
+                    <option>1001 to 5000 Employees</option>
+                    <option>5001 to 1000 Employees</option>
+                    <option>10000+ Employees</option>
+                </select>
+            </div>
+    
+            <div class="input-cont">
+                <label>How long have you used this software?</label>
+                <select formControlName="productUsagePeriod">
+                    <option>Please Select</option>
+                    <option>Free Trail</option>
+                    <option>Less Than 6 Months</option>
+                    <option>6 - 12 Months </option>
+                    <option>1 - 2 Years</option>
+                    <option>2+ Years </option>
+                    
+                </select>
+            </div>
         </div>
 
-        <div class="input-cont">
-            <label>Email*</label>
-            <input type="text" placeholder="Email"  required>
-        </div>
 
-        <div class="input-cont">
-            <label>Organization Name*</label>
-            <input type="text" placeholder="Organization Name" required >
-        </div>
-
-        <div class="input-cont">
-            <label>Job Title*</label>
-            <input type="text" placeholder="Job Title" required>
-        </div>
-
-        <div class="input-cont">
-            <label>Company Size*</label>
-            <select >
-                <option>Please Select</option>
-                <option>1 to 10 Employees</option>
-                <option>11 to 50 Employees</option>
-                <option>51 to 200 Employees</option>
-                <option>201 to 500 Employees</option>
-                <option>501 to 1000 Employees</option>
-                <option>1001 to 5000 Employees</option>
-                <option>5001 to 1000 Employees</option>
-                <option>10000+ Employees</option>
-            </select>
-        </div>
-
-        <div class="input-cont">
-            <label>How long have you used this software?</label>
-            <select >
-                <option>Please Select</option>
-                <option>Free Trail</option>
-                <option>Less Than 6 Months</option>
-                <option>6 - 12 Months </option>
-                <option>1 - 2 Years</option>
-                <option>2+ Years </option>
-                
-            </select>
-        </div>
-    </div>
-<hr>
+        <hr>
 
 
-<div class="rating">
-    <div class="rating-cont">
-        <label>Overall Rating*</label>
-        <div class="star-rating">
-            <span *ngFor="let star of stars" (click)="rate(star)" [class.active]="star <= selectedRating">&#9733;</span>
-          </div>
-        </div>
+    <div class="rating">
+            <div class="rating-cont">
+                <label>Overall Rating*</label>
+                <div class="star-rating">
+                    <span *ngFor="let star of stars" (click)="rate(star)" [class.active]="star <= selectedRating">&#9733;</span>
+                </div>
+            </div>
+        
+
+            <div class="rating-cont">
+                <label>Features*</label>
+                <div class="star-rating">
+                    <span *ngFor="let star of stars" (click)="rate01(star)" [class.active]="star <= selectedRating01">&#9733;</span>
+                </div>
+            </div>
     
 
-    <div class="rating-cont">
-        <label>Features*</label>
-        <div class="star-rating">
-            <span *ngFor="let star of stars" (click)="rate01(star)" [class.active]="star <= selectedRating01">&#9733;</span>
-          </div>
-        </div>
-  
+            <div class="rating-cont">
+                <label>Ease of Use*</label>
+                <div class="star-rating">
+                    <span *ngFor="let star of stars" (click)="rate02(star)" [class.active]="star <= selectedRating02">&#9733;</span>
+                </div>
+            </div>
 
-    <div class="rating-cont">
-        <label>Ease of Use*</label>
-        <div class="star-rating">
-            <span *ngFor="let star of stars" (click)="rate02(star)" [class.active]="star <= selectedRating02">&#9733;</span>
-          </div>
-        </div>
+            <div class="rating-cont">
+                <label>Value of Money*</label>
+                <div class="star-rating">
+                    <span *ngFor="let star of stars" (click)="rate03(star)" [class.active]="star <= selectedRating03">&#9733;</span>
+                </div>
+            </div>
 
-    <div class="rating-cont">
-        <label>Value of Money*</label>
-        <div class="star-rating">
-            <span *ngFor="let star of stars" (click)="rate03(star)" [class.active]="star <= selectedRating03">&#9733;</span>
-          </div>
-        </div>
-
-        <div class="rating-cont">
-            <label>Customer Support*</label>
-            <div class="star-rating">
-                <span *ngFor="let star of stars" (click)="rate04(star)" [class.active]="star <= selectedRating04">&#9733;</span>
-              </div>
+            <div class="rating-cont">
+                <label>Customer Support*</label>
+                <div class="star-rating"><span *ngFor="let star of stars" (click)="rate04(star)" [class.active]="star <= selectedRating04">&#9733;</span></div>
             </div>
     </div>
 
+    
 
     <hr>
 
-    <div class="title">
-        <label>Title of Your Review*</label>
-        <input  type="text" placeholder="Describe Your Experience Short Sentence" required >
-    </div>
-    <div class="your">
-        <label>Your Review*</label>
-        <textarea class="review"  type="text-area" placeholder="Give your Review" required ></textarea>
-    </div>
-    
-    <div class="condition">
-        <input type="checkbox" class="check" id="chb" required>
-        <div class="form-check-label">&nbsp;I certify that my feedback is based on my experience with this product. By submitting, I agree to the terms of use and privacy policy of SoftwareSuggest.
+        <div class="title">
+            <label>Title of Your Review*</label>
+            <input  type="text" placeholder="Describe Your Experience Short Sentence" required >
         </div>
+        <div class="your">
+            <label>Your Review*</label>
+            <textarea class="review"  type="text-area" placeholder="Give your Review" required ></textarea>
+        </div>
+    
+        <div class="condition">
+            <input type="checkbox" class="check" id="chb" required>
+            <div class="form-check-label">&nbsp;I certify that my feedback is based on my experience with this product. By submitting, I agree to the terms of use and privacy policy of SoftwareSuggest.</div>
+        </div>
+
+      <div class="button" >
+        <button class="btn primary-btn"  [routerLink]="['/review-page/review-rating-page']" >Next</button>
       </div>
 
-      <div class="btn" >
-        <button class="next-btn"  [routerLink]="['/review-page/review-rating-page']" >Next</button>
-      </div>
-    </div>
-<div class="guide-container">
-    <div class="guide-heading">Review Guidelines</div>
-    <div class="guide-cont">All reviews will be moderated before publication and must meet our guidelines. Review must be substantive, professional, and avoid self promotion. Moderators will use their discretion to approve reviews.</div>
-    <div class="guide-image">
-        <div class="img-01">
-            <div class="info-img">
-                <img class="img-guide" src="../../../../../assets/images/info.svg">
-            </div>
-            <div class="info-cont">No Incomplete Information</div>
-        </div>
-        <div class="img-01">
-            <div class="info-img">
-                <img class="img-guide" src="../../../../../assets/images/activity.svg">
-            </div>
-            <div class="info-cont">No Self-Promotional Activity</div>
-        </div>
-        <div class="img-01">
-            <div class="info-img">
-                <img class="img-guide" src="../../../../../assets/images/lang.svg">
-            </div>
-            <div class="info-cont">No Hateful or Disparaging Language</div>
-        </div>
-        <div class="img-01">
-            <div class="info-img">
-                <img class="img-guide" src="../../../../../assets/images/fake.svg">
-            </div>
-            <div class="info-cont">No Use of Fake Names or Spam Content.</div>
-        </div>
-    </div>
+    </form>
+
 </div>
+
+
+    <div class="guide-container">
+        <div class="guide-heading">Review Guidelines</div>
+        <div class="guide-cont">All reviews will be moderated before publication and must meet our guidelines. Review must be substantive, professional, and avoid self promotion. Moderators will use their discretion to approve reviews.</div>
+        <div class="guide-image">
+            <div class="img-01">
+                <div class="info-img">
+                    <img class="img-guide" src="../../../../../assets/images/info.svg">
+                </div>
+                <div class="info-cont">No Incomplete Information</div>
+            </div>
+            <div class="img-01">
+                <div class="info-img">
+                    <img class="img-guide" src="../../../../../assets/images/activity.svg">
+                </div>
+                <div class="info-cont">No Self-Promotional Activity</div>
+            </div>
+            <div class="img-01">
+                <div class="info-img">
+                    <img class="img-guide" src="../../../../../assets/images/lang.svg">
+                </div>
+                <div class="info-cont">No Hateful or Disparaging Language</div>
+            </div>
+            <div class="img-01">
+                <div class="info-img">
+                    <img class="img-guide" src="../../../../../assets/images/fake.svg">
+                </div>
+                <div class="info-cont">No Use of Fake Names or Spam Content.</div>
+            </div>
+        </div>
+    </div>
 </div>
 
    

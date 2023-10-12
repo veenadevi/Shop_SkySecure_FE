@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, map } from 'rxjs';
-import { AssignLeadsModalComponent } from 'src/shared/components/modals/assign-leads-modal/assign-leads-modal.component';
+import { AssignLeadsAmModalComponent } from 'src/shared/components/modals/assign-leads-am-modal/assign-leads-am-modal.component';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class LeadListComponent implements OnInit{
   public allMarketPlaceList : any;
 
   public info : any;
-
+  public myChannelpartnerId:string
+  public disableAssign :boolean=true;
 
 
    
@@ -37,27 +39,12 @@ export class LeadListComponent implements OnInit{
     private superAdminService : SuperAdminService,
     private superAdminStore : SuperAdminStore,
     public spinner: NgxSpinnerService,
-    private userAccountStore:UserAccountStore
+    private userAccountStore:UserAccountStore,
+    private toaster : ToasterNotificationService
   ){}
 
 
-  public allAccounts$ = this.adminPageService.getAllAccounts()
-  .pipe(
-    map(data => {
-      console.log("running here ==")
-      if(data){
-      
-        this.accountData = data.accounts.data;
-        this.info = data.accounts.info;
-        return data;
-        
-      }
-      else{
-        return data;
-      }
-    }
-    )
-  )
+ 
 
   ngOnInit(): void {
     this.spinner.show();
@@ -65,11 +52,16 @@ export class LeadListComponent implements OnInit{
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
-    this.getAllAccounts();
+   // this.getAllAccounts();
     //this.getAllCRMUsers();
     let userAccountdetails = this.userAccountStore.getUserDetails();
-    this.getAllChannelPartners();
+
     this.getMyChannelLeadList(userAccountdetails._id);
+    this.getMyChannelAMList(userAccountdetails._id);
+    error => {
+      this.spinner.hide();
+      this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+    }
 
   }
 
@@ -101,10 +93,16 @@ export class LeadListComponent implements OnInit{
       //console.log("running here directly==")
       this.allMarketPlaceList=response;
       this.spinner.hide();
-    
+   
+     
       
 
-    })
+    },
+    error => {
+      this.spinner.hide();
+      this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+    }
+    )
   )
 }
 
@@ -124,15 +122,23 @@ export class LeadListComponent implements OnInit{
 
 
   public assign(account, i){
-    const modalRef = this.modalService.open(AssignLeadsModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
+    const modalRef = this.modalService.open(AssignLeadsAmModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
   
     modalRef.componentInstance.request = account;
-    console.log("()))_)_)_)_ Data Index ", i);
-
+    
     modalRef.componentInstance.passedData.subscribe((res) => {
+      console.log("()))_)_)_)_ Data Index ", res);
+
       //account.Owner.name
       //console.log("_+_+_+_ Outside ", res.ownerName.name);
-      this.accountData[i].Owner.name = res.ownerName.name;
+     // this.accountData[i].Owner.name = res.ownerName.name;
+
+      this.allMarketPlaceList[i].assignedChannelpartnerAM.firstName =res.assignedName
+        // {
+        //   "channelPartner" : {
+        //   "name" : 'res.assignedName'
+        //   }
+        // }
     })
     
   }
@@ -140,15 +146,19 @@ export class LeadListComponent implements OnInit{
  
 
 
-  public getAllChannelPartners(){
+
+  public getMyChannelAMList(channelAdminUserId:any){
     this.subscriptions.push(
-      this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
-        this.superAdminStore.setChannelPartnerList(res);
+      this.superAdminService.getMyChannelPartnerAMList(channelAdminUserId).subscribe( res=> {
+        console.log("_+_+getMyChannelAMList _+_+_+_+ ", res);
+        if(res.usersList.length>0){
+          this.disableAssign=false
+ 
+         }
+        this.superAdminStore.setMyChannelPartnerAMList(res);
       })
     )
   }
-
 
 
 

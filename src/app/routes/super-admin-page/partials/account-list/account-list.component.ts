@@ -7,6 +7,7 @@ import { AdminPageService } from 'src/shared/services/admin-service/admin-page.s
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
 
 @Component({
@@ -36,27 +37,28 @@ export class AccountListComponent implements OnInit{
     private modalService : NgbModal,
     private superAdminService : SuperAdminService,
     private superAdminStore : SuperAdminStore,
-    public spinner: NgxSpinnerService
+    public spinner: NgxSpinnerService,
+    private toaster : ToasterNotificationService
   ){}
 
 
-  public allAccounts$ = this.adminPageService.getAllAccounts()
-  .pipe(
-    map(data => {
-      console.log("running here ==")
-      if(data){
+  // public allAccounts$ = this.adminPageService.getAllAccounts()
+  // .pipe(
+  //   map(data => {
+  //     console.log("running here ==")
+  //     if(data){
       
-        this.accountData = data.accounts.data;
-        this.info = data.accounts.info;
-        return data;
+  //       this.accountData = data.accounts.data;
+  //       this.info = data.accounts.info;
+  //       return data;
         
-      }
-      else{
-        return data;
-      }
-    }
-    )
-  )
+  //     }
+  //     else{
+  //       return data;
+  //     }
+  //   }
+  //   )
+  // )
 
   ngOnInit(): void {
     this.spinner.show();
@@ -64,7 +66,7 @@ export class AccountListComponent implements OnInit{
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
-    this.getAllAccounts();
+    //this.getAllAccounts();
     //this.getAllCRMUsers();
     this.getAllChannelPartners();
     this.getAllMarketPlaceAccountList();
@@ -104,7 +106,12 @@ export class AccountListComponent implements OnInit{
     
       
 
-    })
+    },
+    error => {
+      this.spinner.hide();
+      this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+    }
+    )
   )
 }
 
@@ -135,7 +142,13 @@ export class AccountListComponent implements OnInit{
       console.log("_+_+_+_ Outside Account ", this.allMarketPlaceList);
       console.log("_+_+_+_ Outside Account i", this.allMarketPlaceList[i]);
       //this.accountData[i].Owner.name = res.ownerName.name;
-      this.allMarketPlaceList[i]['assignedChannalpartner']['channelPartner']['name'] = res.assignedName;
+      //this.allMarketPlaceList[i].assignedChannalpartner=['channelPartner']['name'] = res.assignedName;
+      this.allMarketPlaceList[i].assignedChannalpartner=
+            {
+              "channelPartner" : {
+              "name" : res.assignedName
+              }
+            }
       //this.accountData[i].Owner.name = res.assignedName;
 
     })

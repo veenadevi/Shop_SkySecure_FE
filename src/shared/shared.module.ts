@@ -46,6 +46,8 @@ import { DateFormatPipe } from './pipes/dateFormat';
 // import { TermsConditionModalComponent } from './models/terms-condition-modal/terms-condition-modal.component';
 import { TermsConditionModalComponent } from './components/modals/terms-condition-modal/terms-condition-modal.component';
 import { SuggestedCompareCardFlyerComponent } from './components/suggested-compare-card-flyer/suggested-compare-card-flyer.component';
+import { AssignLeadsAmModalComponent } from './components/modals/assign-leads-am-modal/assign-leads-am-modal.component';
+import { TimeFormatPipe } from './pipes/timeFormat';
 
 
 
@@ -87,6 +89,7 @@ import { SuggestedCompareCardFlyerComponent } from './components/suggested-compa
     ContactUsFlyerHorizontalComponent,
     SafeUrlPipe,
     DateFormatPipe,
+    TimeFormatPipe,
     CompareProductsModalComponent,
     CustomBreadCrumbComponent,
     BundleVarientCardFlyerComponent,
@@ -100,7 +103,8 @@ import { SuggestedCompareCardFlyerComponent } from './components/suggested-compa
     GstPromptModalComponent,
     AssignLeadsModalComponent,
     // TermsConditionModalComponent,
-    SuggestedCompareCardFlyerComponent
+    SuggestedCompareCardFlyerComponent,
+    AssignLeadsAmModalComponent
    
   ],
 
@@ -142,6 +146,7 @@ import { SuggestedCompareCardFlyerComponent } from './components/suggested-compa
     ContactUsFlyerHorizontalComponent,
     SafeUrlPipe,
     DateFormatPipe,
+    TimeFormatPipe,
     CompareProductsModalComponent,
     CustomBreadCrumbComponent,
     BundleVarientCardFlyerComponent,

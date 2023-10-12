@@ -81,6 +81,7 @@ export class ProductVariantModalComponent {
     }
 
     this.activeModal.close();
+   
     this.addItemsToCartService.addItemsToCart(queryParams);
     //this.router.navigate(['/cart'], {queryParams: queryParams});
 

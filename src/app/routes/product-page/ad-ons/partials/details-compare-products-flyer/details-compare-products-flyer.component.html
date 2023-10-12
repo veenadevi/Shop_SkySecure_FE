@@ -34,32 +34,29 @@
                     Compare with similar products
                 </div> -->
                 <div class="list-holder">
-
-
-                    <div class="top-border-left">
-                        <div class="half-curve-border-left">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#918F90"/>
-                              </svg>
+                    <div class="vs-line-section">
+                        <div class="top-border-left">
+                            <!-- <div class="half-curve-border-left">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#918F90"/>
+                                  </svg>
+                            </div> -->
+                            <div class="half-border-left"></div>
                         </div>
-                        <div class="half-border-left"></div>
-                    </div>
-
-
-
-                    <div class="vs-section-2">
-                        
-                        <span class="vs-text-2">VS</span>
-                    </div>
-
-                    <div class="top-border-right">
-                        <div class="half-curve-border-right">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#918F90"/>
-                              </svg>
+                        <div class="vs-section-2">
+                            
+                            <span class="vs-text-2">VS</span>
                         </div>
-                        <div class="half-border-right"></div>
+                        <div class="top-border-right">
+                            <!-- <div class="half-curve-border-right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M23 1C24.3333 9 21.8 24.5 1 22.5" stroke="#918F90"/>
+                                  </svg>
+                            </div> -->
+                            <div class="half-border-right"></div>
+                        </div>
                     </div>
+
 
                     <div class="row-holder"  *ngFor="let item of productList | slice:1; let i = index" >
                         <suggested-compare-card-flyer [item] = "item" ></suggested-compare-card-flyer>

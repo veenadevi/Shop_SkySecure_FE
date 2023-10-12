@@ -35,8 +35,32 @@
     </div> -->
 
     <ng-container *ngIf="userLoggedIn">
-    <div class="notificationicon-section">
-      <img class="notification-icon" onclick="openDropdown()" alt="" src="../../../assets/icons/BellWhite.svg">
+    <div class="notificationicon-section" (click)="openNotificationDropdown()">
+
+      
+      <div class="notification_icon">
+        <img class="notification-icon" alt="" src="../../../assets/icons/BellWhite.svg">
+        <ng-container *ngIf="(notificationList$ | async) as notifications">
+          <ng-container *ngIf=" notificationList.length > 0">
+  
+            <span class="notification__badge">{{notificationList.length}}</span>
+          </ng-container>
+        </ng-container>
+      </div>
+        
+    
+
+
+      
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="notificationDropDown">
+    <div class="notification-dropdown">
+      <ng-container *ngIf="notificationList && notificationList.length>0">
+        <app-notification-dropdown [notificationList] = "notificationList"></app-notification-dropdown>
+      </ng-container>
+      
     </div>
   </ng-container>
 

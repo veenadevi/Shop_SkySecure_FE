@@ -236,6 +236,14 @@ ul .nav-text:hover {
     right: 3px;
 }
 
+.notoficationPosition{
+    position: absolute;
+    top: 1px;
+    bottom: 0;
+    left: 0;
+    right: 3px;
+}
+
 .cart-button .cart-icon {
     height: 20px;
     position: absolute;
@@ -278,6 +286,25 @@ ul .nav-text:hover {
     color: white;
     margin-left : 10px;
     margin-top:3px;
+}
+
+.notification_icon{
+    position: absolute;
+}
+
+.notification__badge{
+    position: absolute;
+    top: -4px;
+    right: -7px;
+    height: 16px;
+    width: 16px;
+    background-color:rgb(247, 156, 11);
+    color:  white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 12px;
 }
 
 
@@ -346,6 +373,17 @@ ul .nav-text:hover {
 #check {
     display: none;
 }
+
+
+/* notification-section */
+.notification-dropdown{
+    position: absolute;
+    top: 50px;
+    right: 82px;
+    z-index: 10;
+}
+
+
 @media  ( min-width: 770px) and (max-width: 1024px)  {
     .checkbtn {
         font-size: 20px;

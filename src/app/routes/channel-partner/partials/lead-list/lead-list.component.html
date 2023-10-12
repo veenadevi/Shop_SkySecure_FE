@@ -8,64 +8,52 @@
                 [paginator]="true"
                 [rows]="15"
                 [showCurrentPageReport]="true"
+                [globalFilterFields]="['Company','Status']"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                 <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
                 <ng-template pTemplate="header">
                     <tr class="thfont">
-                        <th>Cart Id</th>
-                        <th>Customer Name</th>
-                        <th>Customer Company</th>
-                        <th>Customer Phone</th>
+                        <th>S.No</th>
+                        <th> Company</th>
+
+                        <th> Name</th>
+                      
+                        <th> Phone</th>
                         <th>Created On</th>
                         <th>Status</th>
+                       
                          <!-- <th>Place of Supply</th> -->
-                        <th>Assigned Partner</th>
+                        <th>Assigned AM</th>
                         <th>Last Updated Date</th>
                         <th>Estimate No.</th>
                         <th>Value  <span class="gst">(GST Extra)</span></th>
     
-    <!-- 
-                        <th> </th> -->
+    
+                        <th> </th>
                     </tr>
                 </ng-template>
-                <!-- <ng-template pTemplate="body" let-account let-i="rowIndex">
-                    <tr>
-                        <td>
-                            <div class="text-style" (click)="getAccountById(account)">
-                                {{ account.id }}
-                            </div>
-                            
-                        </td>
-                        <td>{{ account.Owner.name }}</td>
-                        <td>{{ account.Account_Name }}</td>
-                        <td>{{ account.Account_Type }}</td>
-                        <td>
-                            
-                            <div class="btn-holder">
-                                <button id="assign-btn" class="btn" (click)="assign(account, i)">Assign</button>
-                            </div>
-                        </td>
-                    </tr>
-                </ng-template> -->
+              
     
                 <ng-template pTemplate="body" let-account let-i="rowIndex">
-                    <tr class="trfont">
-                        <td>
+            
+                    <tr class="trfont" >
+                        <td style="width:10%">
                             <div class="text-style" (click)="getAccountById(account.cartData._id)">
-                                {{ account.cartData.cart_ref_id }}
+                               {{i+1}}
                             </div>
                             
                         </td>
-                        <td>{{ account.createdFor.firstName }}</td>
                         <td>{{ account.createdFor.company}}</td>
+                        <td>{{ account.createdFor.firstName }}</td>
+                     
                         <td>{{ account.createdFor.mobileNumber }}</td>
                         <td>{{ account.cartData.createdAt | dateFormat }}</td>
                         <td>{{ account.cartData.status }}</td>
                        
                         <!-- <td>{{ account.createdFor.placeOfSupply}}</td> -->
                         <td>
-                            <ng-container *ngIf="account?.assignedChannalpartner; else noValuecp1">
-                            {{ account?.assignedChannalpartner.channelPartner?.name }} 
+                            <ng-container *ngIf="account?.cartData?.assignedAccountOwnerId else noValuecp1">
+                            {{ account?.assignedChannelpartnerAM.firstName }} 
                               </ng-container>
                               <ng-template #noValuecp1>-</ng-template>
                          </td> 
@@ -78,15 +66,15 @@
                          </td> 
     
                         <td>
-                            <ng-container *ngIf="account.zohoBookEstimateData.estimate_number; else noValue">
-                                {{ account.zohoBookEstimateData.estimate_number }}
+                            <ng-container *ngIf="account.cartData.zohoEstimateNo; else noValue">
+                                {{  account.cartData.zohoEstimateNo }}
                               </ng-container>
                               <ng-template #noValue>-</ng-template>
                          </td> 
                         <!-- <td>{{ account.zohoBookEstimateData.estimate_number }}</td> -->
                         <td>
-                            <ng-container *ngIf="account.zohoBookEstimateData.totalEstimateCost; else cartValue">
-                                {{ account.zohoBookEstimateData.totalEstimateCost }}
+                            <ng-container *ngIf="account.cartData.zohoEstimateValue; else cartValue">
+                                {{ account.cartData.zohoEstimateValue}}
                               </ng-container>
                               <ng-template #cartValue>{{account.TotalCartValue}}</ng-template>
                             
@@ -94,13 +82,14 @@
                           
                         
                         </td>
-                        <!-- <td>
+                        <td>
                             
                             <div class="btn-holder">
-                                <button id="assign-btn" class="btn primary-btn" (click)="assign(account, i)">Assign</button>
+                                <button id="assign-btn" class="btn primary-btn" [disabled]="disableAssign" (click)="assign(account, i)">Assign</button>
                             </div>
-                        </td> -->
+                        </td>
                     </tr>
+          
                 </ng-template>
                 <!-- <ng-template pTemplate="paginatorleft">
                     <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>

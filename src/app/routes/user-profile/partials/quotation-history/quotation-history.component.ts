@@ -66,33 +66,17 @@ export class QuotationHistoryComponent implements OnInit {
     let userAccountdetails = this.userAccountStore.getUserDetails();
     this.userId=userAccountdetails._id;
     console.log("userAccountdetails  ",userAccountdetails._id)
-    this.getAllAccounts();
-    this.getAllCRMUsers();
+    //this.getAllAccounts();
+   // this.getAllCRMUsers();
 
-    this.getAllMarketPlaceAccountList();
+    this.getMyMarketplaceAccountList();
    
 
   }
 
-  public getAllAccounts(){
-    
-      // let a: any = this.sampleData();
-      // this.accountData = [...a.accounts.data, ...a.accounts.data];
-      // this.info = a.accounts.info;
-    this.subscriptions.push(
-      this.adminPageService.getAllAccounts().subscribe( response => {
-        console.log("running here directly==")
-     
-        this.accountData = response.accounts.data;
-        this.info = response.accounts.info;
-        
-        
+  
 
-      })
-    )
-  }
-
-  public getAllMarketPlaceAccountList(){
+  public getMyMarketplaceAccountList(){
    
     this.spinner.show(); 
     // let a: any = this.sampleData();
@@ -125,124 +109,12 @@ export class QuotationHistoryComponent implements OnInit {
   }
 
 
-  public assign(account, i){
-    const modalRef = this.modalService.open(AssignLeadsModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
-    modalRef.componentInstance.request = account;
-    console.log("()))_)_)_)_ Data Index ", i);
+  
 
-    modalRef.componentInstance.passedData.subscribe((res) => {
-      //account.Owner.name
-      //console.log("_+_+_+_ Outside ", res.ownerName.name);
-      this.accountData[i].Owner.name = res.ownerName.name;
-    })
-    
-  }
-
-  public getAllCRMUsers(){
-    this.subscriptions.push(
-      this.superAdminService.getAllCRMUsers().subscribe( res=> {
-        console.log("_+_+_+_+_+_+ ", res);
-        this.superAdminStore.setCrmUsers(res);
-      })
-    )
-  }
+  
 
 
 
 
-  public sampleData(){
-    return {
-      "accounts": {
-        "data": [{
-            "Owner": {
-              "name": "Realize Web Services",
-              "id": "467371000000262001",
-              "email": "rws@altsystech.com"
-            },
-            "Account_Type": null,
-            "Account_Name": "test company",
-            "id": "467371000000719057"
-          },
-          {
-            "Owner": {
-              "name": "Realize Web Services",
-              "id": "467371000000262001",
-              "email": "rws@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "Skysecuretech",
-            "id": "467371000000718025"
-          },
-          {
-            "Owner": {
-              "name": "Realize Web Services",
-              "id": "467371000000262001",
-              "email": "rws@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "Skysecure Technology",
-            "id": "467371000000717034"
-          },
-          {
-            "Owner": {
-              "name": "TestSP",
-              "id": "467371000000386001",
-              "email": "veena@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "SKYSECURE",
-            "id": "467371000000717007"
-          },
-          {
-            "Owner": {
-              "name": "TestSP",
-              "id": "467371000000386001",
-              "email": "veena@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "SKYSECURE OWNER Update",
-            "id": "467371000000717002"
-          },
-          {
-            "Owner": {
-              "name": "TestSP",
-              "id": "467371000000386001",
-              "email": "veena@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "SKYSECURE",
-            "id": "467371000000715007"
-          },
-          {
-            "Owner": {
-              "name": "Realize Web Services",
-              "id": "467371000000262001",
-              "email": "rws@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "Sky Secure",
-            "id": "467371000000715002"
-          },
-          {
-            "Owner": {
-              "name": "Realize Web Services",
-              "id": "467371000000262001",
-              "email": "rws@altsystech.com"
-            },
-            "Account_Type": "Customer",
-            "Account_Name": "Skysecure Technologies",
-            "id": "467371000000714035"
-          },
-        ],
-        "info": {
-          "per_page": 200,
-          "count": 77,
-          "page": 1,
-          "sort_by": "id",
-          "sort_order": "desc",
-          "more_records": false
-        }
-      }
-    }
-  }
+
 }

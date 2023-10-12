@@ -9,12 +9,12 @@
     <table class="table">
       <thead>
         <th class="product-name">Product Name</th>
-        <th>Quantity</th>
-        <th>Purchase Type</th>
-        <th>Item Price</th>
+        <th class="gap">Quantity</th>
+        <th class="gap">Purchase Type</th>
+        <th class="gap">Item Price</th>
        
      
-        <th>Total  <span class="gst">(GST Extra)</span></th>
+        <th class="gap">Total  <span class="gst">(GST Extra)</span></th>
         <th></th>
         
       </thead>
@@ -25,8 +25,10 @@
             <span class="text-danger" *ngIf="group.get('name').touched && group.get('name').invalid">Name is required</span>
           </td>
           <td class="form-group">
-            <input type="text" class="form-control" formControlName="quantity" placeholder="quantity" (change)="valueChanged($event, group, 'quantity')">
+            <div class=" price-details">
+            <input type="text" class="form-control-01" formControlName="quantity" placeholder="quantity" (change)="valueChanged($event, group, 'quantity')">
             <span class="text-danger" *ngIf="group.get('quantity').touched && group.get('quantity')?.hasError('required')">Quantity required</span>
+          </div>
           </td>
           <td class="form-group">
             <!-- <input type="text" class="form-control" formControlName="priceType" placeholder="priceType" (change)="valueChanged($event, group, 'priceType')"> -->
@@ -61,7 +63,8 @@
           </td>
           
           <td>
-            <button (click)="remove(i)" class="btn secondary-btn btn-color">Remove</button>
+            <!-- <button (click)="remove(i)" class="btn secondary-btn btn-color">Remove</button> -->
+            <img class="remove" src=".../../assets/icons/Delete.svg" (click)="remove(i)"/>
           </td>
         </tr>
       </tbody>

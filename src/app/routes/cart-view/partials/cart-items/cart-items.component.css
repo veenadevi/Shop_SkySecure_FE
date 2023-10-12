@@ -146,6 +146,7 @@ input[type="number"]::-webkit-outer-spin-button {
     /* background: var(--primary); */
     align-items: center;
     justify-content: center;
+    min-height: 34em;
    
 }
 /* .delete-icon {
@@ -183,12 +184,12 @@ tbody th{
     font-size: 13px;
     cursor: pointer;
 }
-
+ 
 .cart-title-btns {
     width: 100%;
 
 }
-
+ 
 .cart-remove-btn {
     background: none;
     border: none;
@@ -281,3 +282,5 @@ select option{
     border: 1px solid #918F90 ;
     border-radius: 5px;
 }
+
+ 

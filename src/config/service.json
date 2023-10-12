@@ -50,6 +50,10 @@
         "getAllUsers":"api/admin/getAllusers",
         "updateUserRole":"api/admin/updateUserRole",
         "inviteUsers" : "api/user/inviteuser",
+        "getAllMyCustomers" : "api/admin/getAllCustomers",
+        
+
+        "getUserNotifications" : "api/getUserNotifications",
 
 
         "app-registration" : "api/user/azure/app-registration",
@@ -78,10 +82,23 @@
 
         "getMyMarketPlaceAccountListURL":"api/user/getMyMarketplaceAccountList",
 
-        "addChannelPartnerURL":"/api/user/channel-partner",
-        "getAllChannelPartner" : "/api/user/channel-partner",
+        "addChannelPartnerURL":"api/user/channel-partner",
+        "getAllChannelPartner" : "api/user/channel-partner",
 
-        "assignChannelPartnerURL" : "api/admin/assignChannelPartner"
+        "assignChannelPartnerURL" : "api/admin/assignChannelPartner",
+
+        "getMyChannelsListURL":"api/user/get-my-channel",
+
+        "addUsersToChannelURL":"api/user/channel-partner-user",
+
+        "getMyChannelAMURL" : "api/user/channel-partner-AMListByAdminId",
+
+        "assignLeadstoChannelAMURL" : "api/admin/assignChannelPartnerAM",
+
+        "getChannelPartnerDetailsById" : "api/user/channel-partner/",
+
+        "getChannelAMAccountListURL":"api/admin/getChannelAMAccountList"
+
 
     },
 

@@ -23,6 +23,7 @@ export class SuperAdminService {
   private getAllCRMUsersUrl : string;
 
   private getAllChannelPartner: string;
+  private getMyChannelAM: string;
 
   private assignAccountOwnerUrl : string;
 
@@ -30,8 +31,16 @@ export class SuperAdminService {
 
   private assignChannelPartnerURL: string;
 
+ 
+  private getMyChannelsListURL:string;
 
+  private addUsersToChannelURL:string;
 
+  private getMyChannelAMListURL:string;
+
+  private assignLeadsToAMURL:string;
+
+  private getChannelPartnerDetailsUrl : string;
 
 
 
@@ -55,7 +64,16 @@ export class SuperAdminService {
     this.assignAccountOwnerUrl = AppService.appUrl.assignAccountOwner;
     this.getAccountDetailsByIdUrl = AppService.appUrl.getMarketplaceAccountDetailsById;
     this.assignChannelPartnerURL=AppService.appUrl.assignChannelPartnerURL
-    
+
+    this.getMyChannelsListURL=AppService.appUrl.getMyChannelsListURL;
+    this.addUsersToChannelURL=AppService.appUrl.addUsersToChannelURL;
+
+
+    this.getMyChannelAMListURL=AppService.appUrl.getMyChannelAMURL;
+    this.assignLeadsToAMURL=AppService.appUrl.assignLeadstoChannelAMURL;
+    this.getChannelPartnerDetailsUrl = AppService.appUrl.getChannelPartnerDetailsById;
+
+
   }
 
 
@@ -103,6 +121,27 @@ export class SuperAdminService {
   }
 
 
+  public getMyChannelPartnerList(id:any) : Observable<any> {
+
+    let url = this.baseURLForusers + this.getMyChannelsListURL+"/"+id;
+
+    
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+  
+
   public assignChannelPartner( request : any): Observable<any> {
 
 
@@ -110,7 +149,7 @@ export class SuperAdminService {
 
   
 
-  console.log("+++++++ ____ _ InsideCreate Quotation ", request);
+  console.log("+++++++ ____ _ InsideCreate assignChannelPartner ", request);
     
     const REQUEST$ = this.http.post<any>(URL, request)
       .pipe(
@@ -134,6 +173,58 @@ export class SuperAdminService {
     return REQUEST$;
   }
 
+
+  public getMyChannelPartnerAMList(id:any) : Observable<any> {
+
+    let url = this.baseURLForusers + this.getMyChannelAMListURL+"/"+id;
+
+    
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+
+  public assignLeadsToChannelPartnerAM( request : any): Observable<any> {
+
+
+    const URL =  this.baseUrlForOrders + this.assignLeadsToAMURL;
+
+  
+
+  console.log("+++++++ ____ _ InsideCreate assignLeadsToChannelPartnerAM ", request);
+    
+    const REQUEST$ = this.http.post<any>(URL, request)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          
+          return of(response);
+        }),
+        map((response: any) => {
+         
+          return response;
+        }),
+        catchError(error => {
+         
+          return error
+        })
+      );
+
+    return REQUEST$;
+  }
+
    /**
    * Service for Assigning Account Manager
    */
@@ -142,7 +233,7 @@ export class SuperAdminService {
 
     const URL = this.baseUrlForSuperAdmin + this.assignAccountOwnerUrl;
 
-    //let URL = "http://localhost:8080/" + this.assignAccountOwnerUrl
+   
     const OPTIONS = this.getOptions();
 
     //let request = null;
@@ -217,6 +308,7 @@ export class SuperAdminService {
     //let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/' + id;
 
 
+    let options = this.getOptions();
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(
@@ -231,6 +323,29 @@ export class SuperAdminService {
     return request$;
   }
 
+
+  /**
+   * To get Channel Partner Details
+   */
+
+  public getChannelPartnerDetails(id) : Observable<any> {
+
+    let url = this.baseUrlForSuperAdmin + this.getChannelPartnerDetailsUrl + id;
+
+    
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
   
 
     /**
@@ -248,8 +363,7 @@ export class SuperAdminService {
       return OPTIONS; 
     }
 
-  
-
+   
 
 }
 

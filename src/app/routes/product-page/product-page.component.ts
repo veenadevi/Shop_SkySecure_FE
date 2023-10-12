@@ -19,8 +19,8 @@ import { DetectScrollStore } from 'src/shared/stores/detect-scroll.store';
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.css']
 })
-export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
-[x: string]: any;
+export class ProductPgaeComponent implements OnInit, OnChanges, OnDestroy {
+  [x: string]: any;
 
 
   @ViewChild('filterSection') filterSection!: ElementRef;
@@ -30,22 +30,22 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   isFilterViewScrolledIntoView: boolean;
 
 
-  public dropdownSettings : IDropdownSettings = {};
-  public subCategoryDropdownSettings : IDropdownSettings = {};
+  public dropdownSettings: IDropdownSettings = {};
+  public subCategoryDropdownSettings: IDropdownSettings = {};
 
-  
-  public categories : any[] = [];
-  public subCategories : any[] = [];
-  public brands : any[] = [];
 
-  public defaultSelectedItem : any[] = [];
+  public categories: any[] = [];
+  public subCategories: any[] = [];
+  public brands: any[] = [];
 
-  public selectedCategoryItems : any[] = [];
-  public selectedSubCategoryItems : any[] = [];
-  public selectedBrandItems : any[] = [];
+  public defaultSelectedItem: any[] = [];
 
-  public productList : any[] = [];
-  public productBundlesList : any[] = [];
+  public selectedCategoryItems: any[] = [];
+  public selectedSubCategoryItems: any[] = [];
+  public selectedBrandItems: any[] = [];
+
+  public productList: any[] = [];
+  public productBundlesList: any[] = [];
   public products = [];
   public productBundles = [];
 
@@ -63,10 +63,10 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   private subscriptions: Subscription[] = [];
 
-  public selectedParams ;
-  public selectedParamsVal ;
+  public selectedParams;
+  public selectedParamsVal;
 
-  public listForCompare : any[] = [];
+  public listForCompare: any[] = [];
 
   // public products = [];
   // public productBundles = [];
@@ -97,65 +97,65 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   public tabIndex = 0;
 
 
-  public filters : any;
+  public filters: any;
 
-  public floatableFilter : any;
-  
+  public floatableFilter: any;
+
   constructor(
-    private metaDataSvc : MetadataService,
+    private metaDataSvc: MetadataService,
     private activeRoute: ActivatedRoute,
-    private productListService : ProductListService,
+    private productListService: ProductListService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private metadadataStore : MetadataStore,
-    private compareProductsStore : CompareProductsStore,
-    private modalService : NgbModal,
+    private metadadataStore: MetadataStore,
+    private compareProductsStore: CompareProductsStore,
+    private modalService: NgbModal,
     private renderer: Renderer2,
-    private scrollDispatcher: ScrollDispatcher, 
+    private scrollDispatcher: ScrollDispatcher,
     private zone: NgZone,
-    private detectScrollStore : DetectScrollStore
+    private detectScrollStore: DetectScrollStore
 
-  ){
+  ) {
     const navigation = this.router.getCurrentNavigation();
 
-    
+
   }
 
   public getAllCategories$ = this.metadadataStore.categoryDetails$
-  .pipe(
-    map(data => {
-      if(data){
-        
-        this.categories = data;
-        
-        data.forEach(element => {
-          this.subCategories = [...element.subCategories];
-        });
-        return data;
+    .pipe(
+      map(data => {
+        if (data) {
 
+          this.categories = data;
+
+          data.forEach(element => {
+            this.subCategories = [...element.subCategories];
+          });
+          return data;
+
+        }
+        else {
+
+          return data;
+        }
       }
-      else{
-        
-        return data;
-      }
-    }
+      )
     )
-  )
 
   public getAllOEM$ = this.metadadataStore.oemDetails$
-  .pipe(
-    map(data => {
-      if(data){
-        this.brands = data;
-        return data;
+    .pipe(
+      map(data => {
+        if (data) {
+          this.brands = data;
+          return data;
+        }
+        else {
+
+          return data;
+        }
       }
-      else{
-        
-        return data;
-      }
-    }
+      )
     )
-  )
 
   @ViewChildren('filterView') elms: QueryList<any>;
 
@@ -165,17 +165,17 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   @ViewChild('testDiv', { static: false })
   private testDiv: ElementRef<HTMLDivElement>;
 
-  
-  public isTestDivScrolledIntoView : boolean = false;
 
-  public ngAfterViewInit(): void{
+  public isTestDivScrolledIntoView: boolean = false;
 
+ // footerContainer = document.querySelector(".footer-container");
+
+  public ngAfterViewInit(): void { 
     this.floatableFilter = document.getElementById("floatableFilter");
-    this.floatableFilter.style.display = "none";
-
+    this.floatableFilter.style.display = "none"; 
+ 
     this.subscriptions.push(
-      this.detectScrollStore.productFiltersScroll$.subscribe(res=>{
-    
+      this.detectScrollStore.productFiltersScroll$.subscribe(res => { 
         if (this.filterSection) {
           const rect = this.filterSection.nativeElement.getBoundingClientRect();
           
@@ -191,35 +191,36 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
             
             this.floatableFilter.style.display = "block";
           }
-          
         }
+        
+         
+      //  const floatableFilter1 = document.getElementById("floatableFilter"); 
+        const lastProductElement1 = document.querySelector(".product-items-holder > :last-child");  
+        let isLastProductVisible = false; 
+        window.addEventListener("scroll", () => {
+          if (lastProductElement1) {
+            const lastProductRect = lastProductElement1.getBoundingClientRect();
+            // const filterRect = this.floatableFilter.getBoundingClientRect(); 
+            const positionRelativeToViewport = lastProductRect.bottom - window.innerHeight; 
+            if (positionRelativeToViewport > 0) { 
+              this.floatableFilter.style.display = "block"; 
+              isLastProductVisible = true;
+            } else if (isLastProductVisible) { 
+              this.floatableFilter.style.display = "none"; 
+              isLastProductVisible = false;
+            }
+          }
+        });
+    
       })
-    )
-
+    );
     
-
-    //this.floatableFilter = document.getElementById("floatableFilter");
-    //this.floatableFilter.style.display = "none";
-
-    /*this.scrollDispatcher.scrolled().
-    subscribe((cdk: CdkScrollable)  => {
-    this.zone.run(() => {
-    //Here you can add what to happen when scroll changed
-    //I want to display the scroll position for example
-      const scrollPosition = cdk.getElementRef().nativeElement.scrollTop;
-      console.log(scrollPosition);
-    });
-    });*/
-
-  }
-  
-
-  public ngOnInit() : void { 
-
-
     
+}
 
-    
+
+
+  public ngOnInit(): void {
     this.dropdownSettings = {
       singleSelection: false,
       idField: '_id',
@@ -233,7 +234,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     this.subCategoryDropdownSettings = {
       singleSelection: false,
       idField: '_id',
-      textField: 'name', 
+      textField: 'name',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 0,
@@ -252,13 +253,13 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
   }
 
-  public initializeData(){
+  public initializeData() {
 
 
 
     this.activeRoute.paramMap.subscribe(params => {
-      if(this.categories.length >0 && this.brands.length>0){
-        if(params.has('categoryId')){
+      if (this.categories.length > 0 && this.brands.length > 0) {
+        if (params.has('categoryId')) {
           this.setAllUnChecked();
           this.selectedParams = 'cat';
           this.selectedParamsVal = params.get('categoryId');
@@ -266,54 +267,54 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
           this.getSubCategoriesByID(params.get('categoryId'));
           //this.getAllSubCategoriesByID();
           this.selectAll('cat');
-          
-  
+
+
         }
-        else if(params.has('subcategoryId')){
-  
+        else if (params.has('subcategoryId')) {
+
           this.selectedParams = 'subCat';
           this.selectedParamsVal = params.get('subcategoryId').split('-')[1];
           this.setAllUnChecked();
           this.setSubCategoryChecked(params.get('subcategoryId'));
           this.selectAll('subCat');
-          
+
           this.selectedSubCategoryItems = [];
 
-          this.selectedSubCategoryItems.push({'_id' : params.get('subcategoryId').split('-')[1]});
+          this.selectedSubCategoryItems.push({ '_id': params.get('subcategoryId').split('-')[1] });
           //this.selectedSubCategoryItems.push(params.get('subcategoryId').split('-')[1]);
           this.getFilteredData();
-          
-  
+
+
         }
-        else if(params.has('brandId')){
-          
+        else if (params.has('brandId')) {
+
           this.selectedParams = 'brand';
           this.selectedParamsVal = params.get('brandId');
           this.setAllUnChecked();
           let brand = params.get('brandId');
           this.setBrandChecked(brand);
           this.selectAll('brands');
-          
+
           this.selectedBrandItems = this.brands.filter((data) => {
-            if(data._id == brand) return data;
+            if (data._id == brand) return data;
           })
           this.getFilteredData();
 
-          
-  
+
+
         }
       }
-      
+
     })
   }
 
 
-  public loadDropdownValues() : void {
+  public loadDropdownValues(): void {
     //this.subscriptions.push(this.getAllCategories$.subscribe());
     //this.subscriptions.push(this.getAllOEM$.subscribe());
 
 
-    
+
 
     combineLatest([
       this.getAllCategories$,
@@ -321,7 +322,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     ]).subscribe(([catArray, brandArray]) => {
 
 
-      if( catArray && catArray.length >0 && brandArray.length > 0){
+      if (catArray && catArray.length > 0 && brandArray.length > 0) {
         this.initializeData();
       }
     });
@@ -332,7 +333,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   //   this.subscriptions.push(
   //      this.metaDataSvc.fetchCategory().subscribe( response => {
   //        this.categories = response.categorys;
-         
+
 
   //       //  this.categories.forEach(element => {
   //       //     element['checked'] = true;
@@ -345,124 +346,131 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
 
   public viewModal3(queryParams) {
-    const modalRef = this.modalService.open(CompareProductsModalComponent, {windowClass: 'compare-products-modal-custom-class' });
+    const modalRef = this.modalService.open(CompareProductsModalComponent, { windowClass: 'compare-products-modal-custom-class' });
     modalRef.componentInstance.request = queryParams;
     // this.modalService.open(modal_id, { windowClass: 'custom-class' });
   }
 
 
-  public getSubCategoriesByID(categoryID){
+  public getSubCategoriesByID(categoryID) {
     this.subscriptions.push(
-      this.metaDataSvc.fetchSubCategories(categoryID).subscribe( response => {
-       this.subCategories = response.subCategories;
-       this.selectedSubCategoryItems = this.subCategories;
-       //this.setAllChecked(this.subCategories);
-       this.getFilteredData();
-     })
-   );
-  }
-
-  public getAllSubCategoriesByID(){
-    this.categories.forEach(element => {
-      this.subscriptions.push(
-        this.metaDataSvc.fetchSubCategories(element._id).subscribe( response => {
-         this.allSubCategories = [...response.subCategories];
-    
-       })
-     );
-     this.allSubCategoriesFlag = true;
-    });
-  }
-
-
-  public getFilteredData(){
-    this.filters.brandIds = this.selectedBrandItems.length > 0 ? this.selectedBrandItems.map((data) => {return data._id }) : []
-    this.filters.subCategoryIds = this.selectedSubCategoryItems.length > 0 ? this.selectedSubCategoryItems.map((data) => {
-      
-      return data._id 
-    }) : []
-
-    
-    this.getProductsByFilter(this.filters.subCategoryIds,this.filters.brandIds);
-  }
-
-  private getProductsByFilter(subCategoryIds, brandIds): void {
-    this.subscriptions.push(
-       this.metaDataSvc.fetchProductsByFilters({subCategoryIds,brandIds}).subscribe(response => {
-        this.productList = response.products;
-         this.products = response.products.map((data: any )=> {
-          return { 
-            name: data.name , 
-            description: data.description ,
-            imageUrl: data.imageURL || this.staticProductimageUrl ,
-            solutionLink: data.description,
-            _id: data._id
-          }
-         })
-         this.productBundlesList = response.productBundles;
-         this.productBundles = response.productBundles;
-
-         
-    
-
-         let tempProducts = this.setProductsData(response.products);
-         let tempProductVariants = this.setProductVariantsData(response.productVariants);
-         let tempProductBundleVariants = this.setProductBundleVariantsData(response.productBundleVariants);
-         let tempProductBundles = this.setBundlesData(response.productBundles);
-
-
-
-         this.finalProductList = [...tempProducts, ...tempProductVariants, ...tempProductBundleVariants , ...tempProductBundles];
-
-         
-         //let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-         let cacheData = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
-
-         
-         if(cacheData && cacheData.length>0){
-          cacheData.forEach(element => {
-      
-            let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
-              if(indexToUpdate !== -1){
-                element['checked'] = true;
-                this.finalProductList[indexToUpdate]['checked'] = true;
-      
-              }
-          });
-         }
-
-         //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
-         let cacheData2 = [];
-         if(cacheData2 && cacheData2.length>0){
-          cacheData2.forEach(element => {
-      
-            let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
-              if(indexToUpdate !== -1){
-                element['checked'] = true;
-                this.finalProductList[indexToUpdate]['checked'] = true;
-      
-              }
-          });
-         }
-         /*this.productBundles = response.productBundles.map((data: any )=> {
-          return { 
-            name: data.name , 
-            description: data.description ,
-            imageUrl: data.imageURL || this.staticProductimageUrl ,
-            solutionLink: data.description,
-            _id: data._id
-          }
-         })*/
+      this.metaDataSvc.fetchSubCategories(categoryID).subscribe(response => {
+        this.subCategories = response.subCategories;
+        this.selectedSubCategoryItems = this.subCategories;
+        //this.setAllChecked(this.subCategories);
+        this.getFilteredData();
       })
     );
   }
 
-  public setAllChecked(items) :void {
-      items.forEach(element => {
-        element['checked'] = true;
-      });
+  public getAllSubCategoriesByID() {
+    this.categories.forEach(element => {
+      this.subscriptions.push(
+        this.metaDataSvc.fetchSubCategories(element._id).subscribe(response => {
+          this.allSubCategories = [...response.subCategories];
+
+        })
+      );
+      this.allSubCategoriesFlag = true;
+    });
   }
-  public setAllUnChecked() :void {
+
+
+  public getFilteredData() {
+    this.filters.brandIds = this.selectedBrandItems.length > 0 ? this.selectedBrandItems.map((data) => { return data._id }) : []
+    this.filters.subCategoryIds = this.selectedSubCategoryItems.length > 0 ? this.selectedSubCategoryItems.map((data) => {
+
+      return data._id
+    }) : []
+
+
+    this.getProductsByFilter(this.filters.subCategoryIds, this.filters.brandIds);
+  }
+
+  private getProductsByFilter(subCategoryIds, brandIds): void {
+    this.subscriptions.push(
+      this.metaDataSvc.fetchProductsByFilters({ subCategoryIds, brandIds }).subscribe(response => {
+        this.productList = response.products;
+        this.products = response.products.map((data: any) => {
+          return {
+            name: data.name,
+            description: data.description,
+            imageUrl: data.imageURL || this.staticProductimageUrl,
+            solutionLink: data.description,
+            _id: data._id
+          }
+        })
+        this.productBundlesList = response.productBundles;
+        this.productBundles = response.productBundles;
+
+
+
+
+        let tempProducts = this.setProductsData(response.products);
+        let tempProductVariants = this.setProductVariantsData(response.productVariants);
+        let tempProductBundleVariants = this.setProductBundleVariantsData(response.productBundleVariants);
+        let tempProductBundles = this.setBundlesData(response.productBundles);
+
+
+
+        this.finalProductList = [...tempProducts, ...tempProductVariants, ...tempProductBundleVariants, ...tempProductBundles];
+        console.log("this.finalProductList", this.finalProductList);
+        // Assuming this.finalProductList is an array
+        if (this.finalProductList.length > 0) {
+          const lastElement = this.finalProductList[this.finalProductList.length - 1];
+          console.log("Last element:", lastElement);
+        } else {
+          console.log("The array is empty.");
+        }
+
+        //let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        let cacheData = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
+
+        if (cacheData && cacheData.length > 0) {
+          cacheData.forEach(element => {
+
+            let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
+            if (indexToUpdate !== -1) {
+              element['checked'] = true;
+              this.finalProductList[indexToUpdate]['checked'] = true;
+
+            }
+          });
+        }
+
+        //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let cacheData2 = [];
+        if (cacheData2 && cacheData2.length > 0) {
+          cacheData2.forEach(element => {
+
+            let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
+            if (indexToUpdate !== -1) {
+              element['checked'] = true;
+              this.finalProductList[indexToUpdate]['checked'] = true;
+
+            }
+          });
+        }
+        /*this.productBundles = response.productBundles.map((data: any )=> {
+         return { 
+           name: data.name , 
+           description: data.description ,
+           imageUrl: data.imageURL || this.staticProductimageUrl ,
+           solutionLink: data.description,
+           _id: data._id
+         }
+        })*/
+      })
+    );
+  }
+
+  public setAllChecked(items): void {
+    items.forEach(element => {
+      element['checked'] = true;
+    });
+  }
+  public setAllUnChecked(): void {
 
     this.categories.forEach(element => {
       element['checked'] = false;
@@ -476,22 +484,22 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   }
 
 
-  public selectAll(val){
+  public selectAll(val) {
 
     switch (val) {
       case 'cat':
-          
-          this.checkedListSubCat = this.subCategories;
-          this.checkedListBrands = this.brands;
-          
+
+        this.checkedListSubCat = this.subCategories;
+        this.checkedListBrands = this.brands;
+
         return;
       case 'subCat':
-          this.checkedListCat = this.categories;
-          this.checkedListBrands = this.brands;
+        this.checkedListCat = this.categories;
+        this.checkedListBrands = this.brands;
         return;
       case 'brands':
-          this.checkedListCat = this.categories;
-          this.checkedListSubCat = this.subCategories;
+        this.checkedListCat = this.categories;
+        this.checkedListSubCat = this.subCategories;
         return;
 
       default:
@@ -499,100 +507,100 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
     }
   }
 
-  public setCategoryChecked(catId) : void {
+  public setCategoryChecked(catId): void {
 
     this.checkedListCat = this.categories.filter(item => item._id === catId);
     let indexToUpdate = this.categories.findIndex(item => item._id === catId);
-    if(indexToUpdate !== -1){
+    if (indexToUpdate !== -1) {
       this.categories[indexToUpdate]['checked'] = true;
     }
-    
-    
+
+
   }
 
-  public setSubCategoryChecked(subCatId) : void {
+  public setSubCategoryChecked(subCatId): void {
     this.checkedListSubCat = this.categories.filter(item => item._id === subCatId.split('-')[1]);
     let indexToUpdate = this.subCategories.findIndex(item => item._id === subCatId.split('-')[1]);
-    if(indexToUpdate !== -1){
+    if (indexToUpdate !== -1) {
       this.subCategories[indexToUpdate]['checked'] = true;
     }
   }
 
-  public setBrandChecked(brandId) : void {
+  public setBrandChecked(brandId): void {
     let indexToUpdate = this.brands.findIndex(item => item._id === brandId);
-    if(indexToUpdate !== -1){
+    if (indexToUpdate !== -1) {
       this.brands[indexToUpdate]['checked'] = true;
     }
   }
 
 
-  public setFilters(){
+  public setFilters() {
     this.filters = {
-      brandIds : [],
-      subCategoryIds : []
+      brandIds: [],
+      subCategoryIds: []
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    
+
 
 
   }
 
 
 
-  public selecteCategories(item:any){
-    
+  public selecteCategories(item: any) {
+
 
     this.selectedCategoryItems = item;
 
     this.selectedSubCategoryItems = [];
     item.forEach(element => {
-        this.selectedSubCategoryItems = [...this.selectedSubCategoryItems, ...element.subCategories];
+      this.selectedSubCategoryItems = [...this.selectedSubCategoryItems, ...element.subCategories];
     });
 
     //this.subCategories = this.selectedSubCategoryItems;
-   
-    
+
+
     this.getFilteredData();
 
-    
+
   }
 
-  public selectedSubCategories(item:any){
-    
-    
+  public selectedSubCategories(item: any) {
+
+
     this.selectedSubCategoryItems = item;
-    
-    
+
+
     this.getFilteredData();
 
-    
+
   }
 
-  public selectedBrands(item:any){
-    
-   
+  public selectedBrands(item: any) {
+
+
     this.selectedBrandItems = item;
     this.getFilteredData();
   }
 
 
-  public changeTab(event){
+  public changeTab(event) {
     this.tabIndex = event.index;
-    if(event.index === 0){
+    if (event.index === 0) {
       this.selectedTab = 'products';
     }
-    else{
+    else {
       this.selectedTab = 'productBundles';
     }
   }
 
-  public shareIndividualCheckedList(item:{}){
+  public shareIndividualCheckedList(item: {}) {
   }
 
 
-  public selectedListForCompare(items){
+  public selectedListForCompare(items) {
     this.listForCompare = items;
 
 
@@ -606,52 +614,52 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
 
 
     let cumulativeList = [];
-    
-    if(cacheData && cacheData.length>0){
-      
-      cumulativeList = [...this.listForCompare , ...cacheData];
-      
+
+    if (cacheData && cacheData.length > 0) {
+
+      cumulativeList = [...this.listForCompare, ...cacheData];
+
     }
-    else{
-      
+    else {
+
       cumulativeList = this.listForCompare;
     }
 
     //let uniqueElements = [...new Map(cumulativeList.map(item => [item['_id'], item])).values()];
 
     let uniqueElements = cumulativeList;
-    
+
 
 
     uniqueElements.forEach(element => {
-      
-      let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
-        if(indexToUpdate !== -1){
-         
-          this.finalProductList[indexToUpdate]['checked'] = true;
 
-        }
-        else{
-          this.finalProductList.forEach(element => {
-            if('checked' in element){
-              element.checked = false;
-            }
-            else{
-              element['checked'] = false;
-            }
-          });
-          
-        }
+      let indexToUpdate = this.finalProductList.findIndex(item => item._id === element._id);
+      if (indexToUpdate !== -1) {
+
+        this.finalProductList[indexToUpdate]['checked'] = true;
+
+      }
+      else {
+        this.finalProductList.forEach(element => {
+          if ('checked' in element) {
+            element.checked = false;
+          }
+          else {
+            element['checked'] = false;
+          }
+        });
+
+      }
     });
 
 
-  
-    
+
+
 
     localStorage.setItem('compare_products_list', JSON.stringify(uniqueElements));
     this.compareProductsStore.setCompareProductsList(uniqueElements);
-   
-    
+
+
 
   }
 
@@ -725,7 +733,7 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   }*/
 
   /* compare products length display */
-  public  prdLength = 0;
+  public prdLength = 0;
   public compareProductsListLength = 0;
 
   public compareProductsLength$ = this.compareProductsStore.compareProductsList$
@@ -745,14 +753,14 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
         let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
         this.compareProductsListLength = cachedProductsToCompare.length;
 
-       
-        if(data){
+
+        if (data) {
           return data;
         }
-        else{
+        else {
           return data;
         }
-        
+
       }
       )
     )
@@ -764,15 +772,15 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
    * Set Products Data
    */
 
-  public setProductsData(data){
+  public setProductsData(data) {
 
-    if(data && data.length>0){
+    if (data && data.length > 0) {
       data.forEach(element => {
-          element.productType = 'products';
-          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
-          element.description = element.description;
-          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
-          element['navigationId'] = element._id;
+        element.productType = 'products';
+        element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+        element.description = element.description;
+        element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0) ? element.subcategories[0].name : ''
+        element['navigationId'] = element._id;
       });
     }
 
@@ -783,15 +791,15 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
    * Set Product Variants Data
    */
 
-  public setProductVariantsData(data){
+  public setProductVariantsData(data) {
 
-    if(data && data.length>0){
+    if (data && data.length > 0) {
       data.forEach(element => {
-          element.productType = 'productVariants';
-          element.bannerLogo = (element.product && element.product.bannerLogo) ? element.product.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
-          element.description = element.description;
-          element['solutionCategory'] = (element.product && element.product.subCategories && element.product.subCategories.length > 0) ? element.product.subCategories[0].name : "";
-          element['navigationId'] = element.productId;
+        element.productType = 'productVariants';
+        element.bannerLogo = (element.product && element.product.bannerLogo) ? element.product.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+        element.description = element.description;
+        element['solutionCategory'] = (element.product && element.product.subCategories && element.product.subCategories.length > 0) ? element.product.subCategories[0].name : "";
+        element['navigationId'] = element.productId;
       });
     }
 
@@ -802,15 +810,15 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
    * Set Product Bundle Variants Data
    */
 
-  public setProductBundleVariantsData(data){
+  public setProductBundleVariantsData(data) {
 
-    if(data && data.length>0){
+    if (data && data.length > 0) {
       data.forEach(element => {
-          element.productType = 'productBundleVariants';
-          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
-          element.description = element.description;
-          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
-          element['navigationId'] = element.productsFamilyId;
+        element.productType = 'productBundleVariants';
+        element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+        element.description = element.description;
+        element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0) ? element.subcategories[0].name : ''
+        element['navigationId'] = element.productsFamilyId;
       });
     }
 
@@ -821,15 +829,15 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
    * Set Product Bundles Data
    */
 
-  public setBundlesData(data){
+  public setBundlesData(data) {
 
-    if(data && data.length>0){
+    if (data && data.length > 0) {
       data.forEach(element => {
-          element.productType = 'productBundles';
-          element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
-          element.description = element.description;
-          element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0)? element.subcategories[0].name : ''
-          element['navigationId'] = element._id;
+        element.productType = 'productBundles';
+        element.bannerLogo = (element.bannerLogo && element.bannerLogo !== null) ? element.bannerLogo : 'https://csg1003200209655332.blob.core.windows.net/images/1685441484-MicrosoftLogo_300X300.png';
+        element.description = element.description;
+        element['solutionCategory'] = (element.subcategories && element.subcategories.length > 0) ? element.subcategories[0].name : ''
+        element['navigationId'] = element._id;
       });
     }
 
@@ -837,118 +845,117 @@ export class ProductPgaeComponent implements OnInit, OnChanges , OnDestroy{
   }
 
   ngOnDestroy(): void {
-    
+
   }
 
 
 
 
-public tabChange(productTabSection: any){
- 
-  this.tabIndex = productTabSection;
-  if(productTabSection === 'products'){
-    this.selectedTab = 'products';
+  public tabChange(productTabSection: any) {
+
+    this.tabIndex = productTabSection;
+    if (productTabSection === 'products') {
+      this.selectedTab = 'products';
+    }
+    else {
+      this.selectedTab = 'productBundles';
+    }
   }
-  else{
-    this.selectedTab = 'productBundles';
+
+
+  /*public setCheckedList(){
+  
+    this.subscriptions.push(
+      this.compareProductsStore.productsCheckedList$.subscribe(res=>{
+        // console.log("**&&&&()()()( Got Checked ",this.productList);
+  
+  
+        let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
+        //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
+        let cacheData2 = [];
+        let combinedData = [...cacheData, ...cacheData2];
+        let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+  
+  
+        this.productList.forEach(element => {
+          var index = uniqueElements.findIndex(el => el._id === element._id);
+          if(index >=0){
+            if(element.checked){
+              element.checked = true;
+            }
+            else{
+              element['checked'] = true;
+            }
+          }
+          else{
+            if(element.checked){
+              element.checked = false;
+            }
+            else{
+              element['checked'] = false;
+            }
+          }
+        });
+      })
+    )
+  }*/
+
+  public setCheckedList() {
+
+    this.subscriptions.push(
+      this.compareProductsStore.productsCheckedList$.subscribe(res => {
+
+
+        let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
+        this.productList.forEach(element => {
+          var index = cachedProductsToCompare.findIndex(el => el._id === element._id);
+          if (index >= 0) {
+            if (element.checked) {
+              element.checked = true;
+            }
+            else {
+              element['checked'] = true;
+            }
+          }
+          else {
+            if (element.checked) {
+              element.checked = false;
+            }
+            else {
+              element['checked'] = false;
+            }
+          }
+        });
+      })
+    )
   }
-}
 
 
-/*public setCheckedList(){
-
-  this.subscriptions.push(
-    this.compareProductsStore.productsCheckedList$.subscribe(res=>{
-      // console.log("**&&&&()()()( Got Checked ",this.productList);
 
 
-      let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
-      //let cacheData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
-      let cacheData2 = [];
-      let combinedData = [...cacheData, ...cacheData2];
-      let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
+  /*@ViewChild('testDiv', { static: false })
+  private testDiv: ElementRef<HTMLDivElement>;
+  isTestDivScrolledIntoView: boolean;
+  
+  @HostListener('window:scroll', ['$event'])
+  isScrolledIntoView() {
+    console.log("+++++_______ ", this.testDiv);
+    if (this.testDiv) {
+      const rect = this.testDiv.nativeElement.getBoundingClientRect();
+      const topShown = rect.top >= 0;
+      const bottomShown = rect.bottom <= window.innerHeight;
+      this.isTestDivScrolledIntoView = topShown && bottomShown;
+      console.log("+++++_______ ", this.isTestDivScrolledIntoView);
+    }
+  }*/
 
 
-      this.productList.forEach(element => {
-        var index = uniqueElements.findIndex(el => el._id === element._id);
-        if(index >=0){
-          if(element.checked){
-            element.checked = true;
-          }
-          else{
-            element['checked'] = true;
-          }
-        }
-        else{
-          if(element.checked){
-            element.checked = false;
-          }
-          else{
-            element['checked'] = false;
-          }
-        }
-      });
-    })
-  )
-}*/
-
-public setCheckedList(){
-
-  this.subscriptions.push(
-    this.compareProductsStore.productsCheckedList$.subscribe(res=>{
-      
-
-      let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
-
-      this.productList.forEach(element => {
-        var index = cachedProductsToCompare.findIndex(el => el._id === element._id);
-        if(index >=0){
-          if(element.checked){
-            element.checked = true;
-          }
-          else{
-            element['checked'] = true;
-          }
-        }
-        else{
-          if(element.checked){
-            element.checked = false;
-          }
-          else{
-            element['checked'] = false;
-          }
-        }
-      });
-    })
-  )
-}
 
 
-public scrollToFilters(){
-  this.filterSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
-}
-
-
-/*@ViewChild('testDiv', { static: false })
-private testDiv: ElementRef<HTMLDivElement>;
-isTestDivScrolledIntoView: boolean;
-
-@HostListener('window:scroll', ['$event'])
-isScrolledIntoView() {
-  console.log("+++++_______ ", this.testDiv);
-  if (this.testDiv) {
-    const rect = this.testDiv.nativeElement.getBoundingClientRect();
-    const topShown = rect.top >= 0;
-    const bottomShown = rect.bottom <= window.innerHeight;
-    this.isTestDivScrolledIntoView = topShown && bottomShown;
-    console.log("+++++_______ ", this.isTestDivScrolledIntoView);
+  public scrollToFilters(){
+    this.filterSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
-}*/
-
-
-
-
-
 
 
 

@@ -107,7 +107,7 @@ export class FeatureListTableComponent implements OnInit{
     //}
 
  
-
+    
     this.addItemsToCartService.addItemsToCart(queryParams);
     //this.router.navigate(['/cart'], {queryParams: queryParams});
 

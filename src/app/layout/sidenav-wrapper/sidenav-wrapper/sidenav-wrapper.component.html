@@ -70,7 +70,7 @@
 
          <!-- ChannelPartnerSection -->
 
-          <ng-container  *ngIf="userRolesList?.includes('ChannelPartnerAdmin') || userRoleVal === 'ChannelPartnerAdmin'">
+          <ng-container  *ngIf="userRolesList?.includes('ChannelPartnerAdmin') || userRoleVal === 'ChannelPartnerAdmin' || userRolesList?.includes('ChannelParter AccountManager') ">
 
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'cp')">
@@ -78,7 +78,7 @@
               </span>
               <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('cp')">
                   <span class="text-style">
-                   Channal Partner 
+                   My Channel
                   </span>
                   <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
                 </div>
@@ -87,17 +87,22 @@
           
             <ng-container *ngIf="cpSubMenu">
            
+              <ng-container *ngIf="isExpanded && userRolesList?.includes('ChannelPartnerAdmin') ">
+
               <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" (click)="routeEvent('cpMyChannelLeads')">My Leads</span>
+                <span  class="sub-menu-item" (click)="routeEvent('cpMyChannelLeads')">My Channel Leads</span>
               </mat-list-item> 
               <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item"(click)="routeEvent('cpMyChannelInviteUsers')"> Invite users</span>
+                <span  class="sub-menu-item"(click)="routeEvent('cpMyChannelInviteUsers')">Manage Channel</span>
               </mat-list-item>
-              
-             
+            </ng-container>
+            <ng-container *ngIf="isExpanded && userRolesList?.includes('ChannelParter AccountManager')">
+              <mat-list-item>
+                <span  class="sub-menu-item" (click)="routeEvent('myleadsFromChannel')">My Channel Leads</span>
+              </mat-list-item> 
 
              
-
+            </ng-container>
            
               
             </ng-container>
@@ -112,39 +117,21 @@
           <!-- <ng-container *ngIf="userRoleVal === 'superadmin'"> -->
             <ng-container *ngIf="userRolesList?.includes('SuperAdmin') || userRoleVal === 'superadmin'">
             <mat-list-item>
-              <span class="icon-holder" (click)="menuExpansion(isExpanded , 'sadmin')">
+              <span class="icon-holder" (click)="menuExpansion(isExpanded , 'sacpdmin')">
                 <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
               </span>
-              <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('sadmin')">
+              <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('sacpdmin')">
                   <span class="text-style">
-                    Super Admin
+                    Channel  Management
                   </span>
                   <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
                 </div>
             </mat-list-item>
     
             <!-- Security Sub Menu -->
-            <ng-container *ngIf="sAdminSubMenu">
-              <!-- <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['super-admin-page']">Dashboard</span>
-              </mat-list-item> -->
-
-              <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminAccounts')">All Leads</span>
-
-
-              </mat-list-item>
-              <!-- <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
-              </mat-list-item> -->
-              <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminMarketPlaceUser')">All Users</span>
-              </mat-list-item>
-
-              <!-- <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminAssignRoles')">Assign Roles</span>
-              </mat-list-item> -->
-             
+            <ng-container *ngIf="sAdmincpSubMenu">
+           
+            
 
              
               <mat-list-item>
@@ -155,17 +142,71 @@
                 <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('viewChannelPartners')">View Channel Partners</span>
               </mat-list-item>
 
-           
               
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('manageAllChannels')">Manage Channels</span>
+              </mat-list-item>
+
             </ng-container>
           </ng-container>
 
+          <ng-container *ngIf="userRolesList?.includes('SuperAdmin') || userRoleVal === 'superadmin'">
+            <mat-list-item>
+              <span class="icon-holder" (click)="menuExpansion(isExpanded , 'sadmin')">
+                <img src="../../../../assets/icons/illustration_icons/AdminIcon.svg">
+              </span>
+              <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('sadmin')">
+                  <span class="text-style">
+                  Sales Management
+                  </span>
+                  <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+                </div>
+            </mat-list-item>
+    
+            <!-- Security Sub Menu -->
+            <ng-container *ngIf="sAdminSubMenu">
+           
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paInviteUser')" >Invite Customer</span>
+              </mat-list-item>
+
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminAccounts')">Leads</span>
+
+
+              </mat-list-item>
+              <!-- <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
+              </mat-list-item> -->
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminMarketPlaceUser')">Users</span>
+              </mat-list-item>
+
+              <!-- <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminAssignRoles')">Assign Roles</span>
+              </mat-list-item> -->
+             
+
+         
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sMyCustomers')">Customers</span>
+              </mat-list-item>
+
+             <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item"(click) = "routeEvent('role-assignment')" >User Role Management</span>
+              </mat-list-item>
+              
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item"(click) = "routeEvent('managae-all-admin')" >Manage Channel Partner</span>
+              </mat-list-item>
+            </ng-container>
+          </ng-container>
 
 
           <!-- account-manager -->
 
 
-          <ng-container *ngIf="userRolesList?.includes('PortalAdmin') || userRoleVal === 'PortalAdmin'">
+          <ng-container *ngIf="userRolesList?.includes('PortalAdmin') || userRoleVal === 'PortalAdmin' || userRolesList?.includes('SuperAdmin')">
             <mat-list-item>
               <span class="icon-holder" (click)="menuExpansion(isExpanded , 'admin')">
                 <img src="../../../../assets/icons/ManagePortal.svg">
@@ -180,21 +221,7 @@
     
             <!-- Security Sub Menu -->
             <ng-container *ngIf="adminSubMenu">
-              <!-- <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['portal-admin-page']">Dashboard</span>
-              </mat-list-item>
-              <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['portal-admin-page/accounts']">Accounts</span>
-              </mat-list-item>
-              <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
-              </mat-list-item>
-              <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" [routerLink]="['portal-admin-page/estimate-details']">Estimates</span>
-              </mat-list-item> -->
-              <!-- <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paFeatureUpdate')" >Add New Feature</span>
-              </mat-list-item> -->
+             
               <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paAddNewProduct')" >Add New Product</span>
               </mat-list-item>
@@ -211,9 +238,9 @@
                 <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paInviteUser')" >Invite User</span>
               </mat-list-item>
               
-              <!-- <mat-list-item>
+              <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paUploadBlog')" >Update Blog</span>
-              </mat-list-item> -->
+              </mat-list-item>
             </ng-container>
           </ng-container>
           

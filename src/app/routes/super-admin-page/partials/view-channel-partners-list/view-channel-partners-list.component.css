@@ -1,8 +1,42 @@
 .channel-partners-view{
-    min-height: 36em;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     row-gap: 1em;
     padding: 40px;
     font-size: 8px!important;
 }
+.add{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.header{
+    display: flex;
+    width: 50%;
+}
+.button{
+    display: flex;
+    width: 50%;
+    justify-content: end;
+}
+
+.add-btn {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 6rem;
+    border-radius: 8px;
+    background: var(--btn-gradient);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
+  }
+  
+  .add-btn:hover {
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    /* background: var(--btn-lite-gradient); */
+  }

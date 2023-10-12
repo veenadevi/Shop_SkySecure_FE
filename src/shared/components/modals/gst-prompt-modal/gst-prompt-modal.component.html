@@ -28,11 +28,11 @@
           </div> -->
 
       <div class="radio-group">
-        <input type="radio" checked name="myRadios" (change)="handleChange('self')" value="self" />
+        <input type="radio" [checked]="isChecked" name="myRadios" (change)="handleChange('self')" value="self" />
         <span>Self</span>
       </div>
       <div class="radio-group">
-        <input type="radio" name="myRadios" (change)="handleChange('others')" value="others" />
+        <input type="radio" [checked]="!isChecked" name="myRadios" (change)="handleChange('others')" value="others" />
         <span>Others</span>
       </div>
 
@@ -65,31 +65,66 @@
 
           <div class="company-gst">
             <form [formGroup]="myForm">
-              <p>Please Enter Company GST Number</p>
 
 
-              <div class="col-sm-11 form-group">
-                <!-- <label for="gst-no">GST Number</label> -->
-                <input formControlName="gstNo" type="text" class="form-control " name="gstNo" id="gst-no"
-                  placeholder="Enter your GST NO" >
-                 
-                  {{disableGstNOField()}}
-              </div>
-              <p class="or ">(Or)</p>
-              <div class="col-sm-12">
-                <input type="checkbox" formControlName="checkGstNil" class="form-check d-inline" id="chb"  >
-                <div for="chb" class="form-check-label" >&nbsp;I Don't Have Company GST Number.
+              <ng-container *ngIf="selectedType !== 'others'">
+
+                  <p>Please Enter Company GST Number</p>
+
+
+                  <div class="col-sm-11 form-group">
+                    <input formControlName="gstNo" type="text" class="form-control " name="gstNo" id="gst-no"
+                      placeholder="Enter your GST NO" >
+                    
+                      {{disableGstNOField()}}
+                      <span class="text-danger" *ngIf="myForm.get('gstNo').invalid">Please enter valid GST Number</span>
+                  </div>
+                  <p class="or ">(Or)</p>
+                  <div class="col-sm-12">
+                    <input type="checkbox" formControlName="checkGstNil" class="form-check d-inline" id="chb"  >
+                    <div for="chb" class="form-check-label" >&nbsp;I Don't Have Company GST Number.
+                      
+                      {{disableCheckGstNil()}}
+                    </div>
+                  </div>
+                  <div *ngIf="selectedType === 'others'" class="">
+                    
+                    <div class="form-check-label bottom-border">&nbsp;
+                    </div>
+                  </div>
+
+              </ng-container>
+
+              <ng-container *ngIf="othersGSTShow">
+
+                <p>Please Enter Company GST Number</p>
+
+
+                <div class="col-sm-11 form-group">
+                  <input formControlName="gstNo" type="text" class="form-control " name="gstNo" id="gst-no"
+                    placeholder="Enter your GST NO" >
                   
-                  {{disableCheckGstNil()}}
+                    {{disableGstNOField()}}
+                    <span class="text-danger" *ngIf="myForm.get('gstNo').invalid">Please enter valid GST Number</span>
                 </div>
-              </div>
-              <div *ngIf="selectedType === 'others'" class="">
-                
-                <div class="form-check-label bottom-border">&nbsp;
+                <p class="or ">(Or)</p>
+                <div class="col-sm-12">
+                  <input type="checkbox" formControlName="checkGstNil" class="form-check d-inline" id="chb"  >
+                  <div for="chb" class="form-check-label" >&nbsp;I Don't Have Company GST Number.
+                    
+                    {{disableCheckGstNil()}}
+                  </div>
                 </div>
-              </div>
+                <div *ngIf="selectedType === 'others'" class="">
+                  
+                  <div class="form-check-label bottom-border">&nbsp;
+                  </div>
+                </div>
 
-              <div *ngIf="selectedType === 'others'" class="">
+            </ng-container>
+
+
+              <div *ngIf="selectedType === 'others' && showWithoutGST" class="">
                 
                 <div class="form-check-label" style="margin-top:10px">&nbsp; *Please fill the contact details
                 </div>
@@ -108,65 +143,42 @@
 
 
 
-          <ng-container *ngIf="selectedType === 'others'">
+          <ng-container *ngIf="selectedType === 'others' && showWithoutGST">
             <div class="name-row-01">
               <div class="col form-group">
                 <label for="firstName">First Name*</label>
-                <input formControlName="firstName" type="firstName" class="form-control-01" name="Locality"
+                <input formControlName="firstName" type="firstName" class="form-control-01" name="Locality" (input)="onInputChanges($event)"
                   id="firstName" placeholder="First Name" required>
+                  
               </div>
               <div class="col form-group">
                 <label for="email">Email ID*</label>
-                <input formControlName="email" type="email" class="form-control-01" name="email" id="email"
+                <input formControlName="email" type="email" class="form-control-01" name="email" id="email" (input)="onInputChanges($event)"
                   placeholder="Email ID" required>
-                <!-- <div *ngIf="myForm.get('email').hasError('required')">
-                  Email is required.
-                </div>
-                <div *ngIf="myForm.get('email').hasError('email')">
-                  Invalid email format.
-                </div> -->
               </div>
             </div>
             <div class="col-sm-9 form-group">
               <label for="cod">Country code</label>
               <select class="form-control browser-default custom-select">
-                <option data-countryCode="IN" value="1" selected>IN (+91)</option>
-                <option data-countryCode="US" value="2" selected>USA (+1)</option>
+                <option data-countryCode="IN"  value="1" selected>IN (+91)</option>
+                <option data-countryCode="US" value="2" >USA (+1)</option>
                 <option data-countryCode="GB" value="44">UK (+44)</option>
               </select>
             </div>
             <div class="col-sm-8 form-group">
               <label for="tel">Phone*</label>
-              <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel"
+              <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel" (input)="onInputChanges($event)"
                 placeholder="Enter Your Phone No." required>
-              <div *ngIf="myForm.get('phoneNumber').hasError('required')">
-                Phone number is required.
-              </div>
-              <div *ngIf="myForm.get('phoneNumber').hasError('pattern')">
-                Phone number must be 10 digits.
-              </div>
             </div>
           </ng-container>
 
-          <!-- <div class="col-sm-11 form-group" *ngIf="selectedType != 'self'">
-                    <label for="gst-no">GST Number</label>
-                    <input formControlName="gstNo" type="text" class="form-control " name="gstNo" id="gst-no" placeholder="Enter your GST NO" required>
-                </div> -->
+          
           <div class="col-sm-11 form-group" *ngIf="selectedType ==='hide'">
             <label for="gst-no">GST Number</label>
             <input formControlName="gstNo" type="text" class="form-control " name="gstNo" id="gst-no"
               placeholder="Enter your GST NO" required>
           </div>
-          <!-- <div class="col-sm-6 form-group">
-                  <label for="name-f">First Name</label>
-                  <input type="text" class="form-control" name="fname" id="name-f" placeholder="Enter your first name." required>
-                </div>
-                <div class="col-sm-6 form-group">
-                  <label for="name-l">Last name</label>
-                  <input type="text" class="form-control" name="lname" id="name-l" placeholder="Enter your last name." required>
-                </div> -->
-
-
+          
           <div class="name-row" *ngIf="selectedType === 'hide'">
             <div class="col-sm form-group">
               <label for="companyName">Company Name*</label>
@@ -289,8 +301,9 @@
  
  
     <div *ngIf="errorMessage">
-      <p class="error">* Please choose one option: Enter a Company GST number or select the I don't have Company GST number checkbox</p>
-      {{disableAnyOneMessage()}}
+      <p class="error">{{errorMessageText}}</p>
+      <!-- <p class="error">* Please choose one option: Enter a Company GST number or select the I don't have Company GST number checkbox</p>
+      {{disableAnyOneMessage()}} -->
     </div>
 
 
@@ -301,8 +314,18 @@
   <!-- <button class="btn compare-btn" (click)="showContent = !showContent">Next</button> -->
   
   <div class="modal-footer">
-    <button class="btn secondary-btn"  (click)="onCancelClick()">Cancel</button>
-    <button class="btn primary-btn" (click)="onNextClick()">Next</button>
+
+    <ng-container *ngIf="(selectedType === 'others' && showWithoutGST); else otherScenario">
+      
+      <button class="btn secondary-btn"  (click)="onBackGSTDetails()">Back</button>
+      <button class="btn primary-btn" [disabled]="buttonDisabled" (click)="onNextClick()">Next</button>
+    </ng-container>
+    <ng-template #otherScenario>
+      <button class="btn secondary-btn"  (click)="onCancelClick()">Back</button>
+      <button class="btn primary-btn" [disabled]="buttonDisabled" (click)="onNextClickForGST()">Next</button>
+    </ng-template>
+    
+    
     
   </div>
 </ng-container>
@@ -527,7 +550,10 @@
 
    
         <div *ngIf="submitErrorMessage">
-          <p class="error">* Please accept the T&C continue</p>
+          <p class="error">{{submitErrorMessageText}}</p>
+        </div>
+        <div *ngIf="submitCityError">
+          <p class="error">*Please Fill Mandaotory fields</p>
         </div>
 
           <div class="modal-footer">
@@ -622,3 +648,12 @@ type="ball-scale-multiple"
 
 
 </div>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

@@ -7,7 +7,11 @@ import { LeadSummaryComponent } from './partials/lead-summary/lead-summary.compo
 import { AssignUsersAndRolesComponent } from './partials/assign-users-and-roles/assign-users-and-roles.component';
 import { AddNewChannelPartnerComponent } from './partials/add-new-channel-partner/add-new-channel-partner.component';
 import { ViewChannelPartnersListComponent } from './partials/view-channel-partners-list/view-channel-partners-list.component';
+import { MyCustomersComponent } from './partials/my-customers/my-customers.component';
+import { RoleAssigmentComponent } from './partials/role-assigment/role-assigment.component';
 
+import { ChannelPartnerDetailsComponent } from './partials/view-channel-partners-list/partials/channel-partner-details/channel-partner-details.component';
+import { ManageAllChannelsComponent } from './partials/manage-all-channels/manage-all-channels.component'
 
 const routes: Routes = [{
   path: '',
@@ -48,7 +52,23 @@ const routes: Routes = [{
       canActivate: [],
       path: 'view-channel-partners-list',
       component : ViewChannelPartnersListComponent 
+    },
+    {
+      canActivate: [],
+      path: 'my-customers',
+      component : MyCustomersComponent
+    },
+    {
+      canActivate: [], 
+      path: 'role-assignment',
+      component : RoleAssigmentComponent
+    },
+    {
+      canActivate: [], 
+      path: 'manage-all-channel',
+      component : ManageAllChannelsComponent
     }
+
     
   ]
   

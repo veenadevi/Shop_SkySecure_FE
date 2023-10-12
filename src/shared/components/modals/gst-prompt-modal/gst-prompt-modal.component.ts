@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup , Validators  } from '@angular/forms';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
 @Component({
   selector: 'app-gst-prompt-modal',
@@ -21,6 +22,10 @@ export class GstPromptModalComponent implements OnInit{
   showPrivacyContent: boolean = false;
   showButton: boolean=true;
  
+
+  public buttonDisabled : boolean = false;
+
+  //public submitDisabled : boolean = true;
 
   @Input('request')
   public request : any;
@@ -44,11 +49,15 @@ export class GstPromptModalComponent implements OnInit{
 
   public form: FormGroup;
 
+  public othersGSTShow = false;
+
+  public showWithoutGST : boolean = true;
+
   public selectedType : any = 'self';
   myForm: FormGroup;
 
 
-  isChecked: boolean = false;
+  isChecked: boolean = true;
   nrSelect : any;
 
   toStr = JSON.stringify;
@@ -63,7 +72,9 @@ export class GstPromptModalComponent implements OnInit{
 
   public gstResponseData : any;
 
+  public errorMessageText : string = "* Please choose one option: Enter a Company GST number or select the I don't have Company GST number checkbox"
  
+  public submitErrorMessageText = "* Please accept the T&C continue ";
  
   public subscriptions : Subscription[] = [];
   constructor(
@@ -76,7 +87,8 @@ export class GstPromptModalComponent implements OnInit{
     private formBuilder: FormBuilder,
     private superAdminService : SuperAdminService,
     private cartStore : CartStore,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toaster : ToasterNotificationService
   ){
     //this.myForm = this.fb.group({
     this.myForm = this.fb.group({
@@ -124,19 +136,19 @@ export class GstPromptModalComponent implements OnInit{
   }
 
 disableGstNOField(){
-  // console.log(this.myForm.get('checkGstNil').value);
+  
   if(this.myForm.get('checkGstNil').value)
     this.myForm.get('gstNo').disable();
 else
 this.myForm.get('gstNo').enable();
 }
 disableCheckGstNil(){
-  // console.log(this.myForm.get('checkGstNil').value);
+  
   if(this.myForm.get('gstNo').value)
     this.myForm.get('checkGstNil').disable();
-else
-this.myForm.get('checkGstNil').enable();
-}
+  else
+    this.myForm.get('checkGstNil').enable();
+  }
 
 
   public setSelfData(){
@@ -243,29 +255,67 @@ this.myForm.get('checkGstNil').enable();
 
   }
 
+  public onInputChanges(event){
+    console.log("_+__+_+_+_ Came here");
+    if(this.myForm.get('firstName').value && this.myForm.get('firstName').value.length>0 && this.myForm.get('email').value && this.myForm.get('email').value.length>0 && this.myForm.get('phoneNo').value && this.myForm.get('phoneNo').value.length>0){
+      this.buttonDisabled = false;
+    }
+    else{
+      this.buttonDisabled = true;
+    }
+  }
+
   public handleChange(val){
     
 
+    
     this.selectedType = val;
     //this.form.reset();
     this.myForm.reset();
     if(val === 'self'){
       this.setSelfData();
+      this.buttonDisabled = false;
+      this.showWithoutGST = false;
+    }
+    else{
+      this.isChecked = false;
+      this.buttonDisabled = true;
     }
 
   }
 
 public submitErrorMessage: boolean =false;
 
+public submitCityError : boolean = false;
+
   public createQuotationService(){
+
+    console.log("++__+_+_+_+_ *&*&* &*&*& , ", this.myForm.get('cityName').value);
+    
+
+
     if((this.myForm.get('checkTerms').value === null || this.myForm.get('checkTerms').value === false))
    {
+    this.submitErrorMessageText = "* Please accept the T&C continue ";
     this.submitErrorMessage = true;
-    console.log("_____++++ Error Messgae");
+  }
+
+  // else if(this.myForm.get('checkGstNil').value !== null || this.myForm.get('checkGstNil').value === true){
+  //   if((this.myForm.get('cityName').value === null || this.myForm.get('cityName').value.length<=0 || this.myForm.get('stateName').value === null || this.myForm.get('stateName').value.length<=0)){
+  //     this.submitErrorMessageText = "Please fill mandaotry Fields";
+  //     this.submitCityError = true;
+  //   }
+  //   else{
+
+  //   }
+  // }
+  else if( (this.myForm.get('checkGstNil').value !== null || this.myForm.get('checkGstNil').value === true) &&    (this.myForm.get('cityName').value === null || this.myForm.get('cityName').value.length<=0 || this.myForm.get('stateName').value === null || this.myForm.get('stateName').value.length<=0)){
+    console.log("{}{{}{{} ");
+    this.submitErrorMessageText = "Please fill mandaotry Fields";
+    this.submitCityError = true;
   }
   else
   {
-    console.log("_____++++ Error False");
     this.submitErrorMessage = false
    
     let userDetails = this.userAccountStore.getUserDetails();
@@ -380,16 +430,16 @@ public submitErrorMessage: boolean =false;
 
    
 
-    console.log("+_+_+_+_ Req ", req);
+
 
     this.spinner.show();
     
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
-        
-        if(response && response.Accounts && response.Accounts){
-          if(response.Accounts.code === 'SUCCESS'){
-            this.spinner.hide();
+        this.spinner.hide();
+        if(response && response.UserCart){
+          
+            
             this.cartStore.setCartRefreneceId(null);
             this.cartService.getCartItems(null).subscribe();
             
@@ -397,16 +447,20 @@ public submitErrorMessage: boolean =false;
             
             this.activeModal.close();
             
-          } 
-          else {
-            
-          }
+          
+          
         }
         else{
           
         }
         
-      })
+      },
+      error => {
+        this.spinner.hide();
+        this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+      }
+      ),
+      
     )
     }
   }
@@ -427,10 +481,18 @@ public submitErrorMessage: boolean =false;
       //  }
    
 
+      let tempEmail = "";
+      if(this.selectedType === 'others'){
+        tempEmail = this.myForm.value.email;
+      }
+      else{
+        tempEmail = userDetails.email;
+      }
+
 
     let request = {
  
-      "email": userDetails.email,
+      "email": tempEmail,
       "isRegistered": (req.gst_treatment === "business_gst") ? true : false,
       //"gstinNumber":"ABCDEG78101",
       "companyBusinessName":req.companyName,
@@ -458,7 +520,7 @@ public submitErrorMessage: boolean =false;
      }
 
 
-
+    console.log("+_+_+_+_ Updated GST", request);
 
 
      this.subscriptions.push(
@@ -524,75 +586,148 @@ public errorMessage: boolean = false;
 
 
   public onNextClick(){
-    if((this.myForm.get('checkGstNil').value === null || this.myForm.get('checkGstNil').value === false)
-    && (this.myForm.get('gstNo').value === null || this.myForm.get('gstNo').value === '')){
-this.errorMessage = true;
-  }
-  else{
-    this.errorMessage = false;
-    this.showContent = !this.showContent;
-
-    
-
-    if(this.myForm.value.gstNo.length === 15){
-
-        this.myForm.controls['companyName'].disable();
-        this.myForm.controls['addressLine1'].disable();
-        this.myForm.controls['addressLine2'].disable();
-        this.myForm.controls['postalCode'].disable();
-        this.myForm.controls['countryName'].disable();
-        this.myForm.controls['stateName'].disable();
-        this.myForm.controls['cityName'].disable();
-        this.subscriptions.push(
-        this.superAdminService.getGSTDetailsById(this.myForm.value.gstNo).subscribe(res=>{
-
-          this.gstResponseData = res;
-  
-          this.gstData = true;
-      
-  
-          
-          this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
-          this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
-          this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
-          this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
 
 
-          let resState = res.adress.state;
-          let resCity = res.adress.city;
-
-
-          let stateList  = State?.getStatesOfCountry('IN');
-          
-
-
-          let selectedState = stateList.filter(c => c.name === resState)[0];
-         
-          this.selectedState = selectedState;
-
-
-          let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
-
-          
-
-          let selectedCity = cityList.filter(c => c.name === resCity)[0];
-          this.selectedCity = selectedCity;
-
-
-          
-
-
-          
-          //this.myForm.controls['addressLine1'].setValue(userDetails.addressOne ? userDetails.addressOne : null);
-          //this.myForm.controls['addressLine2'].setValue(userDetails.addressTwo ? userDetails.addressTwo : null);
-  
-          
-        })
-      )
+    if(this.selectedType === 'others'){
+      this.othersGSTShow = true;
+      this.showWithoutGST = false;
     }
     else{
-
+      this.onNextClick2();
     }
+
+    // if(this.myForm.get('firstName').value === null || this.myForm.get('email').value === null || this.myForm.get('phoneNo').value === null){
+    //   
+
+
+    //   if(this.myForm.get('firstName').value === null){
+    //     this.myForm.get('firstName').setErrors({ 'required': true });
+    //   }
+    //   if(this.myForm.get('email').value === null){
+    //     this.myForm.get('email').setErrors({ 'required': true });
+    //   }
+    //   if(this.myForm.get('phoneNo').value === null){
+    //     this.myForm.get('phoneNo').setErrors({ 'required': true });
+    //   }
+    // }
+    // else{
+    //   this.onNextClick2()
+    // }
+  }
+
+
+  public onBackGSTDetails(){
+    this.showWithoutGST = false;
+  }
+
+
+  public onNextClickForGST(){
+    this.onNextClick2();
+  }
+
+  public onNextClick2(){
+
+    this.errorMessage = false;
+    
+    if((this.myForm.get('checkGstNil').value === null || this.myForm.get('checkGstNil').value === false)
+    && (this.myForm.get('gstNo').value === null || this.myForm.get('gstNo').value === '')){
+      this.errorMessage = true;
+    }
+    
+    else{
+      console.log("+_+_+_+_+_+ (*(*(* ", this.myForm.get('checkGstNil').value);
+      console.log("+_+_+_+_+_+ (*(*(* ", this.myForm.get('gstNo').value);
+    
+    /*if((this.myForm.get('checkGstNil').value !== true || this.myForm.get('checkGstNil').value !== null) && this.selectedType === 'others'){
+      this.myForm.get('gstNo').setErrors({ 'invalid': true });
+      this.errorMessageText = "Please Enter Valid GST Numebr!"
+      this.errorMessage = true;
+    }*/
+    //else{
+
+      
+      this.showContent = true;
+      
+       
+      console.log("((((((((+_+_+_+_+ Came here ", this.myForm.get('checkGstNil').value)
+  
+      if((this.myForm.get('checkGstNil').value === true || this.myForm.get('checkGstNil').value === null) && this.myForm.value.gstNo.length === 15){
+  
+          
+
+          this.myForm.controls['companyName'].disable();
+          this.myForm.controls['addressLine1'].disable();
+          this.myForm.controls['addressLine2'].disable();
+          this.myForm.controls['postalCode'].disable();
+          this.myForm.controls['countryName'].disable();
+          this.myForm.controls['stateName'].disable();
+          this.myForm.controls['cityName'].disable();
+          this.subscriptions.push(
+          this.superAdminService.getGSTDetailsById(this.myForm.value.gstNo).subscribe(res=>{
+            
+           // this.submitDisabled = false;
+            this.spinner.show();
+            
+
+            if(res === "Invalid GST Number."){
+              this.myForm.get('gstNo').setErrors({ 'invalid': true });
+              this.errorMessageText = "Please Enter Valid GST Numebr!"
+              this.errorMessage = true;
+              this.spinner.hide();
+            }
+            else{
+              this.spinner.hide();
+              this.gstResponseData = res;
+    
+              this.gstData = true;
+          
+      
+              this.errorMessage = false;
+              //this.showContent = !this.showContent;
+              this.showContent = true;
+  
+  
+              this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
+              this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
+              this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
+              this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
+    
+    
+              let resState = res.adress.state;
+              let resCity = res.adress.city;
+    
+    
+              let stateList  = State?.getStatesOfCountry('IN');
+              
+    
+    
+              let selectedState = stateList.filter(c => c.name === resState)[0];
+             
+              this.selectedState = selectedState;
+    
+    
+              let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
+    
+              
+    
+              let selectedCity = cityList.filter(c => c.name === resCity)[0];
+              this.selectedCity = selectedCity;
+            }
+
+  
+  
+    
+            
+          })
+        )
+      }
+      else{
+        
+      }
+
+    //}
+
+ 
   }
 
   }

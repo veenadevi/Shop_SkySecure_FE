@@ -47,25 +47,26 @@ export class CardFlyerComponent {
 
    // let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com"));
 
-    this.userAccountStore.userDetails$.subscribe(res=>{
-      // console.log("()()()() ", res);
+
+    let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
+    if (encodedVal !== null) {
+      this.addItemsToCartService.addItemsToCart(queryParams);
+    }
+    else{
+      this.viewModal(queryParams);
+    }
+
+
+    /*this.userAccountStore.userDetails$.subscribe(res=>{
+      
       if(res && res.email !== null){
-        this.addItemsToCartService.addItemsToCart(queryParams);
-        //this.router.navigate(['/cart'], {queryParams: queryParams});
+        console.log("++++_______ Came Here If CARDF");
+        this.addItemsToCart(queryParams);
       }
       else{
         this.viewModal(queryParams);
       }
-    })
-    /*if(loggedinData.length > 0 ){
-      //this.userLoggedIn = true;
-      this.router.navigate(['/cart'], {queryParams: queryParams});
-    }
-
-    else{
-      //this.showModal = !this.showModal;
-      this.viewModal(queryParams);
-    }*/
+    })*/
 
     
     

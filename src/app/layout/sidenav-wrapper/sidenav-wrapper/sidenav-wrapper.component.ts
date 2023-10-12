@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs';
@@ -13,7 +13,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   templateUrl: './sidenav-wrapper.component.html',
   styleUrls: ['./sidenav-wrapper.component.css']
 })
-export class SidenavWrapperComponent {
+export class SidenavWrapperComponent implements OnInit{
 
   public userLoggedInFlag = false;
   public userRoleVal = '';
@@ -59,6 +59,7 @@ export class SidenavWrapperComponent {
   public sAdminSubMenu: boolean = false;
   public amSubMenu: boolean = false;
   public cpSubMenu: boolean = false;
+  public sAdmincpSubMenu:boolean=false;
 
   constructor(
     private loginService: LoginService,
@@ -84,6 +85,11 @@ export class SidenavWrapperComponent {
       )
     )
 
+
+    ngOnInit(): void {
+      this.menuToogled = false;
+    }
+
   @ViewChild(CdkScrollable) scrollable: CdkScrollable;
   public ngAfterViewInit(): void {
 
@@ -102,7 +108,9 @@ export class SidenavWrapperComponent {
     this.menuToogled = false;
     localStorage.removeItem('XXXXaccess__tokenXXXX');
     this.userAccountStore.setUserDetails(null);
-    this.router.navigate(['']);
+    //this.router.navigate(['']);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate(['/']));
   }
 
 
@@ -132,6 +140,9 @@ export class SidenavWrapperComponent {
     }
     if (navVal === 'cp') {
       this.cpSubMenu = true;
+    }
+    if (navVal === 'sacpdmin') {
+      this.sAdmincpSubMenu = true;
     }
 
 
@@ -201,6 +212,10 @@ export class SidenavWrapperComponent {
       case 'sadmin':
         this.sAdminSubMenu = (this.sAdminSubMenu) ? false : true;
         return;
+
+      case 'sacpdmin':
+          this.sAdmincpSubMenu = (this.sAdmincpSubMenu) ? false : true;
+          return;
 
       case 'am':
         this.amSubMenu = (this.amSubMenu) ? false : true;
@@ -273,6 +288,20 @@ export class SidenavWrapperComponent {
         this.menuToogled = false;
         this.router.navigate(['admin-pages/view-channel-partners-list']);
         return;
+      case 'sMyCustomers':
+        this.menuToogled = false;
+        this.router.navigate(['admin-pages/my-customers']);
+        return;
+
+        case 'role-assignment':
+        this.menuToogled = false;
+        this.router.navigate(['admin-pages/role-assignment']);
+        return;
+
+        case 'managae-all-admin':
+          this.menuToogled = false;
+          this.router.navigate(['admin-pages/managae-all-admin']);
+          return;
       case 'paFeatureUpdate':
         //this.isExpanded = false;
         this.menuToogled = false;
@@ -313,6 +342,16 @@ export class SidenavWrapperComponent {
         this.router.navigate(['channel-partner/invite-channel-partner']);
         return;
 
+        case 'myleadsFromChannel':
+          this.menuToogled = false;
+          this.router.navigate(['channel-partner/leadsfromMyChannel']);
+          return;
+
+          case 'manageAllChannels':
+            this.menuToogled = false;
+            this.router.navigate(['admin-pages/manage-all-channel']);
+            return;
+        
 
       default:
         return null;

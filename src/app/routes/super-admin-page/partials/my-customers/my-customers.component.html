@@ -1,0 +1,54 @@
+<div class="my-customers-view">
+    <ng-container *ngIf="(myCustomers && myCustomers.length>0) ; else noDataFound">
+        <div class="card">
+            <p-table 
+                [value]="myCustomers" 
+                [tableStyle]="{ 'min-width': '60rem' }"
+                [paginator]="true"
+                [rows]="15"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+ >
+                
+                <ng-template pTemplate="header">
+                    <tr class="thfont">
+                        <th>S NO</th>
+                        <th>Company Name</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile Number</th>
+                        <th>GST No</th>
+
+                    </tr>
+                </ng-template>
+                
+    
+                <ng-template pTemplate="body" let-customer let-i="rowIndex">
+                    <tr class="trfont">
+                        <td>
+                            <div class="text-style" (click)="getCustomersById(customer._id)">
+                                {{i+1}}
+                            </div>
+                            
+                        </td>
+                        <td>{{customer.company}}</td>
+                        <td>{{customer.firstName}}</td>
+                        <td>{{customer.email}}</td>
+                        <td>{{customer.mobileNumber}}</td>
+                        <td>{{customer.gstinNumber}}</td>
+                        
+                    </tr>
+                </ng-template>
+                
+            </p-table>
+        </div>
+
+    </ng-container>
+
+    <ng-template #noDataFound>
+        <div class="nodata"  >
+            <p>No data found !</p>
+            <img class="no-img" src="../../../../../assets/images/nodata.jpg">
+        </div>
+    </ng-template>
+</div>

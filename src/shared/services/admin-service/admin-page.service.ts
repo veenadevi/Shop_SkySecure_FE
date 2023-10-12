@@ -27,8 +27,13 @@ export class AdminPageService {
   private getAllChannelLeadListURL:string
   private getMyMarketPlaceAccountListURL:string
   private addChannelPartnerURL:string;
+  private getAllMyCustomersUrl : String;
+
+  private addChannelPartnerUsersURL:string;
 
   private inviteUsersURL : string;
+
+  private getChannelAMAccountListURL:string;
 
 
 
@@ -53,6 +58,12 @@ export class AdminPageService {
     this.addChannelPartnerURL=AppService.appUrl.addChannelPartnerURL;
     this.getAllChannelLeadListURL=AppService.appUrl.getMyChannelLeadList;
     this.inviteUsersURL = AppService.appUrl.inviteUsers;
+    this.getAllMyCustomersUrl = AppService.appUrl.getAllMyCustomers;
+
+    this.addChannelPartnerUsersURL=AppService.appUrl.addUsersToChannelURL
+    //For Channel AM
+
+    this.getChannelAMAccountListURL=AppService.appUrl.getChannelAMAccountListURL;
  
 
     
@@ -104,6 +115,28 @@ export class AdminPageService {
     return request$;
   }
 
+  public getChannelAMAccountList(channelAMuserId:any) : Observable<any> {
+
+    let url = this.baseUrlForQuote + this.getChannelAMAccountListURL + '/' + channelAMuserId;;
+
+    
+
+    //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+
   public getMyChannelLeadList(adminUserId:any) : Observable<any> {
 
     let url = this.baseUrlForQuote + this.getAllChannelLeadListURL + '/' + adminUserId;;
@@ -124,7 +157,6 @@ export class AdminPageService {
 
     return request$;
   }
-
 
 
   public getAllAccounts() : Observable<any> {
@@ -408,11 +440,44 @@ console.log("+++++++ ____ _ addChannelPartner", request);
   return REQUEST$;
 }
 
+public addChannelPartnerUsers( request : any): Observable<any> {
+
+  const URL = this.baseUrlForUsers + this.addChannelPartnerUsersURL;
+
+
+
+console.log("+++++++ ____ _ addChannelPartner", request);
+  
+  const REQUEST$ = this.http.post<any>(URL, request)
+    .pipe(
+      switchMap(response => {
+        if (!response) {
+          return throwError(response);
+        }
+        //this.userAccountStore.setUserProfileDetails(response);
+        return of(response);
+      }),
+      map((response: any) => {
+        //this.userAccountStore.setUserProfileDetails(response);
+        return response;
+      }),
+      catchError(error => {
+        // create operation mapping for http exception handling
+        return error
+      })
+    );
+
+  return REQUEST$;
+}
+
 
 
 public inviteUsers( request : any): Observable<any> {
 
+
+
   let url = this.baseUrlForUsers + this.inviteUsersURL;
+  //let url="http://localhost:2003/api/user/inviteuser"
 
   
   let request$ = this.http.post(url, request)
@@ -433,6 +498,27 @@ public inviteUsers( request : any): Observable<any> {
   return request$;
 
 }
+
+  /**
+   * Service for Fetching All Customers
+   */
+
+  public getAllMyCustomers() : Observable<any> {
+
+    let url = this.baseUrlForUsers + this.getAllMyCustomersUrl;
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
 
 
 

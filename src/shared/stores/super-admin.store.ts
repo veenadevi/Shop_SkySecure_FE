@@ -21,8 +21,13 @@ export class SuperAdminStore {
     private crmUsersSubject = new BehaviorSubject<any>(null);
 
     private channelPartnerSubject=new BehaviorSubject<any>(null);
+    private myChannelAMListSubject=new BehaviorSubject<any>(null);
+
     public channelPartnerList : any;
+    public myChannelAMList:any;
+    
     public channelPartnerList$=this.channelPartnerSubject.asObservable();
+    public myChannelAMList$=this.myChannelAMListSubject.asObservable();
 
     
 
@@ -56,7 +61,14 @@ export class SuperAdminStore {
   }
 
 
-  
+  public setMyChannelPartnerAMList(data : any) : void {
+    
+
+    this.myChannelAMListSubject.next(data);
+
+    
+
+  }
   
   
   
@@ -70,6 +82,9 @@ export class SuperAdminStore {
     return this.channelPartnerList;
   }
 
+  public getMyChannelPartnerAMList(): any {
+    return this.myChannelAMList;
+  }
   
   /**
    * Clear Cart 
