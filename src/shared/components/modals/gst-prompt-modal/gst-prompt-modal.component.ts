@@ -257,8 +257,10 @@ disableCheckGstNil(){
 
   public onInputChanges(event){
     console.log("_+__+_+_+_ Came here");
-    if(this.myForm.get('firstName').value && this.myForm.get('firstName').value.length>0 && this.myForm.get('email').value && this.myForm.get('email').value.length>0 && this.myForm.get('phoneNo').value && this.myForm.get('phoneNo').value.length>0){
-      this.buttonDisabled = false;
+    //if(this.myForm.get('firstName').value && this.myForm.get('firstName').value.length>0 && this.myForm.get('email').value && this.myForm.get('email').value.length>0 && this.myForm.get('phoneNo').value && this.myForm.get('phoneNo').value.length>0){
+    //makign phone as non Mandatory 
+    if(this.myForm.get('firstName').value && this.myForm.get('firstName').value.length>0 && this.myForm.get('email').value && this.myForm.get('email').value.length>0 ){ 
+    this.buttonDisabled = false;
     }
     else{
       this.buttonDisabled = true;
