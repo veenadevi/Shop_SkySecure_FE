@@ -67,7 +67,7 @@ export class CpuserLeadListComponent implements OnInit{
 
     //this.getAllCRMUsers();
     let userAccountdetails = this.userAccountStore.getUserDetails();
-    this.getAllChannelPartners();
+    //this.getAllChannelPartners();
     this.getChannelAMAccountList(userAccountdetails._id);
 
   }

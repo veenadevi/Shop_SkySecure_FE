@@ -648,7 +648,7 @@ public errorMessage: boolean = false;
     
     /*if((this.myForm.get('checkGstNil').value !== true || this.myForm.get('checkGstNil').value !== null) && this.selectedType === 'others'){
       this.myForm.get('gstNo').setErrors({ 'invalid': true });
-      this.errorMessageText = "Please Enter Valid GST Numebr!"
+      this.errorMessageText = "Please Enter Valid GST Number!"
       this.errorMessage = true;
     }*/
     //else{
@@ -731,7 +731,7 @@ public errorMessage: boolean = false;
       }
       else{
         this.myForm.get('gstNo').setErrors({ 'invalid': true });
-        this.errorMessageText = "Please Enter Valid GST Numebr!"
+        this.errorMessageText = "Please Enter Valid GST Number!"
         this.errorMessage = true;
       }
 
