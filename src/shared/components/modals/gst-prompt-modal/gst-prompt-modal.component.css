@@ -560,3 +560,17 @@ h2{
     background-color: #888; /* Adjust the color of the scrollbar thumb */
     height: 150px;
   }
+
+  .close-icon{
+    position: absolute;
+    /* float: right; */
+    right: 12px;
+    top: 8px;
+  }
+
+ 
+
+  button :focus {
+    outline: none !important;
+    border : none !important;
+  }
