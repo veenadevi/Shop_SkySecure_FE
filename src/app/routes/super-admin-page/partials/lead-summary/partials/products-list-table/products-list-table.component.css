@@ -107,7 +107,7 @@ tbody td{
 
 .form-control-01 {
     display: block;
-    width: 75%;
+    width: 60%;
     padding: 3px;
     /* font-size: 1rem; */
     font-weight: 400;
@@ -127,7 +127,7 @@ tbody td{
 
 .form-control-02 {
     display: block;
-    width: 75%;
+    width: 60%;
     padding: 3px;
     /* font-size: 1rem; */
     font-weight: 400;
@@ -153,6 +153,8 @@ tbody td{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    row-gap: 10px;
 }
 
 .total{
@@ -166,3 +168,7 @@ tbody td{
     margin-top: 5px;
     cursor: pointer;
 }
+form .form-control:focus{
+    border-color: #ced4da;
+    box-shadow: none;
+  }
