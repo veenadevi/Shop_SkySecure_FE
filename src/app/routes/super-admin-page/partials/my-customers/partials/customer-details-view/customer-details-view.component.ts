@@ -15,7 +15,12 @@ export class CustomerDetailsViewComponent implements OnInit{
 
   private subscriptions : Subscription[] = [];
 
+
   public customerData : any;
+  public customerInvoices : any;
+  public customerMasterData : any;
+  public customerProfits : any;
+  public default : any;
 
   constructor(
     public route : ActivatedRoute,
@@ -48,7 +53,16 @@ export class CustomerDetailsViewComponent implements OnInit{
     )*/
 
     this.customerData = sampleData;
-    console.log("+_+_+_+ Data ", this.customerData.customerEstimates);
+    console.log("+_+_+_+ Data ", this.customerData);
+
+    //customerEstimates = this.customerData.customerEstimates;
+    this.customerInvoices = this.customerData.customerInvoices;
+    this.customerMasterData = this.customerData.customerMasterData;
+    this.customerProfits = this.customerData.customerProfits;
+    this.default = this.customerData.default;
+
+    
+
 
   }
 

@@ -1,16 +1,32 @@
 <div id="customers-details-view">
 
+<ng-container *ngIf="customerData">
+
 
 
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">My Dashboard</li>
-      </ol>
+      
+      <div class="company-header"> 
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                        </i>
+                    </div>
+                    <div>
+                        {{customerMasterData.company_name}}
+                    <div class="page-title-subheading">
+                        Contact Name - {{customerMasterData.contact_name}}
+                    </div>
+                    </div>
+                </div>
+                  
+            </div>
+        </div> 
+      </div>
       <!-- Icon Cards-->
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-3">
@@ -907,5 +923,5 @@
 
 
 
-
+</ng-container>
 </div>
