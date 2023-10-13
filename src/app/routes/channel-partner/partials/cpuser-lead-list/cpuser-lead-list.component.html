@@ -24,8 +24,8 @@
                         <th>Estimate No.</th>
                         <th>Value  <span class="gst">(GST Extra)</span></th>
     
-    <!-- 
-                        <th> </th> -->
+    
+                        <th> </th>
                     </tr>
                 </ng-template>
                 <!-- <ng-template pTemplate="body" let-account let-i="rowIndex">
@@ -85,17 +85,14 @@
                                 {{ account.cartData.zohoEstimateValue}}
                               </ng-container>
                               <ng-template #cartValue>{{account.TotalCartValue}}</ng-template>
-                            
-                            
-                          
-                        
                         </td>
-                        <!-- <td>
-                            
+
+                        <td>
                             <div class="btn-holder">
-                                <button id="assign-btn" class="btn primary-btn" (click)="assign(account, i)">Assign</button>
+                                <button id="assign-btn" class="btn primary-btn" (click)="openReasonModal()"><img alt="edit" src="../../../../../assets/icons/Editwhite.svg"></button>
                             </div>
-                        </td> -->
+                        </td>
+
                     </tr>
             
                 </ng-template>

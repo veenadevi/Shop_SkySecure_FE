@@ -1,6 +1,15 @@
+.card-section {
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.card-section:hover {
+    background-color: var(--primary-50-purple);
+}
+
 .card-item{
     border-radius: 5px;
-    height: 10rem;
+    height: 12rem;
     width: 10rem;
     /* background: var(--secondary); */
     cursor: pointer;

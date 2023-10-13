@@ -78,6 +78,8 @@ export class MyCustomersComponent {
 
 
   public getCustomersById(id){
+   
+    this.router.navigate(['admin-pages/customer-view'],{ queryParams: { customerId: id}});
     
   }
 
