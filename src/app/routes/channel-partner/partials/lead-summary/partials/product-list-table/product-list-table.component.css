@@ -4,6 +4,8 @@
     color: #7A7979;
     padding: 0.8rem;
     font-weight: 700;
+    background: var(--primary-50-purple);
+    border-radius: 10px 10px 0 0;
 }
 
 .primary-btn {
@@ -27,7 +29,7 @@ thead th{
     border-width: 0 0 1px 0;
    
     color: #343a40;
-    background: #f8f9fa;
+    /* background: #f8f9fa; */
     transition: box-shadow 0.2s;
     font-size: 13px;
     /* font-size: 15px; */
