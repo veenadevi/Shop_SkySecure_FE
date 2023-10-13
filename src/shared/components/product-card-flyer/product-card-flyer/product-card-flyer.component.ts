@@ -165,10 +165,11 @@ public whatsAppMessage:string
         this.addItemToCompareList(item, cachedProductsToCompare);
         this.toaster.showSuccess("The Product has been included for comaprision",'')
       } else {
-        this.showWarningMessage("Product already added for Compare");
+        // this.showWarningMessage("Product already added for Compare");
+        this.toaster.showWarning("Product already added for Compare",'')
       }
     } else {
-      this.uncheckCheckboxAndShowWarning("You can add only 4 products to compare", item); // Pass $event here
+      this.toaster.showWarning("You can add only 4 products to compare",""); // Pass $event here
     }
     
   }
