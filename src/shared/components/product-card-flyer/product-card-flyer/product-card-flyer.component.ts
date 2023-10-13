@@ -148,7 +148,7 @@ public whatsAppMessage:string
   }
 
 
-  public addToCompare($event, item, index){
+  public addToCompare($event, item, i){
     if ($event.target.checked) {
       this.handleAddToCompare(item);
     } else {
@@ -163,11 +163,12 @@ public whatsAppMessage:string
     if (compareProductsListLen < 4) {
       if (!this.isItemInCompareList(item, cachedProductsToCompare)) {
         this.addItemToCompareList(item, cachedProductsToCompare);
+        this.toaster.showSuccess("The Product has been included for comaprision",'')
       } else {
         this.showWarningMessage("Product already added for Compare");
       }
     } else {
-      this.uncheckCheckboxAndShowWarning("You can add only 4 products to compare", event); // Pass $event here
+      this.uncheckCheckboxAndShowWarning("You can add only 4 products to compare", item); // Pass $event here
     }
     
   }
