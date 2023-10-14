@@ -404,14 +404,6 @@ public submitCityError : boolean = false;
     }
 
 
-    
-
-    
-
-    
-    
-
-
     if(formVal.gstNo === null || formVal.gstNo === ''){
       
       
@@ -429,7 +421,6 @@ public submitCityError : boolean = false;
 
     
     
-    this.updateGSTService(req);
 
    
 
@@ -441,7 +432,7 @@ public submitCityError : boolean = false;
       this.cartService.createQuotation(req).subscribe( response => {
         this.spinner.hide();
         if(response && response.UserCart){
-          
+          this.updateGSTService(req);
             
             this.cartStore.setCartRefreneceId(null);
             this.cartService.getCartItems(null).subscribe();
@@ -465,6 +456,8 @@ public submitCityError : boolean = false;
       ),
       
     )
+   
+
     }
   }
 
@@ -648,7 +641,7 @@ public errorMessage: boolean = false;
     
     /*if((this.myForm.get('checkGstNil').value !== true || this.myForm.get('checkGstNil').value !== null) && this.selectedType === 'others'){
       this.myForm.get('gstNo').setErrors({ 'invalid': true });
-      this.errorMessageText = "Please Enter Valid GST Numebr!"
+      this.errorMessageText = "Please Enter Valid GST Number!"
       this.errorMessage = true;
     }*/
     //else{
@@ -731,7 +724,7 @@ public errorMessage: boolean = false;
       }
       else{
         this.myForm.get('gstNo').setErrors({ 'invalid': true });
-        this.errorMessageText = "Please Enter Valid GST Numebr!"
+        this.errorMessageText = "Please Enter Valid GST Number!"
         this.errorMessage = true;
       }
 

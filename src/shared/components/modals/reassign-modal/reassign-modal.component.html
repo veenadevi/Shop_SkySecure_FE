@@ -1,0 +1,20 @@
+<div class="reason-container">
+    <h3 class="reason-headline">Reason To Reassign or Reject</h3>
+    <form>
+        <div class="message-text-style">
+            <span class="p-float-label">
+              <textarea 
+                id="messageText" 
+                formControlName="messageText"
+                pInputTextarea></textarea>
+              <label for="messageText">Message</label>
+            </span>
+          </div>
+    </form>
+
+    <div class="button-section">
+        <button class="btn primary-btn alert-btn" (click)="closeModal()">Reject</button>
+        <button class="btn primary-btn">Reassign</button>
+    </div>
+
+</div>

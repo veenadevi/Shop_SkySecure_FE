@@ -8,7 +8,7 @@ import { SuperAdminService } from 'src/shared/services/super-admin-service/super
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
-
+import { ReassignModalComponent } from 'src/shared/components/modals/reassign-modal/reassign-modal.component';
 @Component({
   selector: 'app-cpuser-lead-list',
   templateUrl: './cpuser-lead-list.component.html',
@@ -67,7 +67,7 @@ export class CpuserLeadListComponent implements OnInit{
 
     //this.getAllCRMUsers();
     let userAccountdetails = this.userAccountStore.getUserDetails();
-    this.getAllChannelPartners();
+    //this.getAllChannelPartners();
     this.getChannelAMAccountList(userAccountdetails._id);
 
   }
@@ -138,6 +138,18 @@ export class CpuserLeadListComponent implements OnInit{
         this.superAdminStore.setMyChannelPartnerAMList(res);
       })
     )
+  }
+
+
+
+  
+  public openReasonModal(){
+    this.viewModal(null);
+  }
+
+  public viewModal(req) {
+    const modalRef = this.modalService.open(ReassignModalComponent);
+    modalRef.componentInstance.request = req;
   }
 
 

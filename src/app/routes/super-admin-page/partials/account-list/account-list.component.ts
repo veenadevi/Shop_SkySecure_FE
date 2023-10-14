@@ -8,6 +8,7 @@ import { SuperAdminService } from 'src/shared/services/super-admin-service/super
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
+import { GetReasonModalComponent } from 'src/shared/components/modals/get-reason-modal/get-reason-modal.component';
 
 
 @Component({
@@ -178,7 +179,14 @@ export class AccountListComponent implements OnInit{
     )
   }
 
+  public openReasonModal(){
+    this.viewModal(null);
+  }
 
+  public viewModal(req) {
+    const modalRef = this.modalService.open(GetReasonModalComponent);
+    modalRef.componentInstance.request = req;
+  }
 
  
 }

@@ -196,7 +196,7 @@ public fetchGST(){
     if (this.myForm.valid) {
 
       let formData = this.myForm.value;
-      
+      console.log("this.myForm.get('triggeremail').value===",formData.isZohoCustomer)
       //companyName email firstName lastName mobile
       let request = {
         "firstName": formData.firstName,
@@ -210,20 +210,20 @@ public fetchGST(){
                   {
                       "address1": formData.addressLine1,
                       "address2": formData.addressLine2,
-                      "state":  formData.stateName,
+                      "state":  this.selectedState.name,
                       "pincode": formData.postalCode,
                       "countryCode":"IN"
                   }
               ],
         //"isRegistered":false,
-        "isCustomer":this.myForm.get('isZohoCustomer').value?this.myForm.get('isZohoCustomer').value:false,
+        "isCustomer":formData.isZohoCustomer?formData.isZohoCustomer:false,
         "companyName": formData.companyName,
         "gstinNumber":formData.gstin?formData.gstin:"",
         // "inviteReason":formData.reason,
         "inviteReason":"newUserInvite",
         "createdBy":this.userDetails._id,
         "updatedBy":this.userDetails._id,
-        "sendEmail":this.myForm.get('triggeremail').value?this.myForm.get('triggeremail').value:true
+        "sendEmail":formData.triggeremail?formData.triggeremail:false
       }
 
 console.log("request===",request)

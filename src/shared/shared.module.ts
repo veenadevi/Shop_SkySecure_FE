@@ -48,6 +48,8 @@ import { TermsConditionModalComponent } from './components/modals/terms-conditio
 import { SuggestedCompareCardFlyerComponent } from './components/suggested-compare-card-flyer/suggested-compare-card-flyer.component';
 import { AssignLeadsAmModalComponent } from './components/modals/assign-leads-am-modal/assign-leads-am-modal.component';
 import { TimeFormatPipe } from './pipes/timeFormat';
+import { GetReasonModalComponent } from './components/modals/get-reason-modal/get-reason-modal.component';
+import { ReassignModalComponent } from './components/modals/reassign-modal/reassign-modal.component';
 
 
 
@@ -104,7 +106,9 @@ import { TimeFormatPipe } from './pipes/timeFormat';
     AssignLeadsModalComponent,
     // TermsConditionModalComponent,
     SuggestedCompareCardFlyerComponent,
-    AssignLeadsAmModalComponent
+    AssignLeadsAmModalComponent,
+    GetReasonModalComponent,
+    ReassignModalComponent
    
   ],
 
