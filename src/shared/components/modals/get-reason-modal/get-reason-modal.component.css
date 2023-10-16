@@ -17,12 +17,12 @@
 }
 
 textarea {
-    width: 28em;
+    width: 26em;
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid black;
     border-radius: 8px;
-    height: 7em;
+    height: 6em;
 }
 
 .button-section {

@@ -56,11 +56,11 @@
                             </div>
                             
                         </td>
-                        <td>{{ account.createdFor.firstName }}</td>
-                        <td>{{ account.createdFor.company}}</td>
-                        <td>{{ account.createdFor.mobileNumber }}</td>
-                        <td>{{ account.cartData.createdAt | dateFormat }}</td>
-                        <td>{{ account.cartData.status }}</td>
+                        <td>{{ (account.createdFor && account.createdFor.firstName) ? account.createdFor.firstName : '-'}}</td>
+                        <td>{{ (account.createdFor && account.createdFor.company) ? account.createdFor.company : '-'}}</td>
+                        <td>{{ (account.createdFor && account.createdFor.mobileNumber) ? account.createdFor.mobileNumber : '-'}}</td>
+                        <td>{{ (account.createdFor && account.createdFor.createdAt) ? (account.cartData.createdAt | dateFormat) : '-'}}</td>
+                        <td>{{ (account.createdFor && account.createdFor.status) ? account.cartData.status : '-' }}</td>
                        
                         <!-- <td>{{ account.createdFor.placeOfSupply}}</td> -->
                         <td>
