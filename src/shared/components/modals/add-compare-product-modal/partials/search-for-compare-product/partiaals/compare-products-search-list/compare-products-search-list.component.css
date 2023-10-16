@@ -65,3 +65,14 @@
     /* border-bottom: 2px solid var(--text-grey) !important;*/
     margin-bottom: 10px; 
 }
+
+
+/* media-query */
+
+
+@media  ( min-width: 1920px) and (max-width: 2560px) {
+    .list-row div{
+        height: 30px;
+        font-size: 18px;
+    }
+}

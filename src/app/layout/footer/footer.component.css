@@ -593,3 +593,86 @@ a:hover{
     color: var(--primary);
     margin: 0;
 }
+
+
+
+@media  ( min-width: 1920px) and (max-width: 2560px) {
+    .logo {
+        height: 55px;
+    }
+    .logo-part{
+        display: flex;
+        flex-direction: column;
+        padding-left: 10px;
+    }
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        margin: 0 10%;
+    }
+    .top-section {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .contact-us-content {
+        /* margin-left: 5px; */
+        font-size: 18px;
+        /* margin-top: 5px; */
+    }
+    .second-section {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 50px;
+        width: 100%;
+    }
+   
+    .conditions-section {
+        display: flex;
+        flex-direction: row;
+        column-gap: 4px;
+        color: #e0e0e0;
+        width: 50%;
+        padding-left: 10px;
+    }
+    .rights-reserved {
+        font-size: 12px;
+        color: var(--primary);
+        margin: 0;
+        width: 50%;
+        padding-right: 10px;
+    }
+    .rights-reserved-content{
+        float: right;
+    }
+    p{
+        font-size: 18px;
+    }
+    .address-type{
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .center{
+        margin-top: 0px;
+      }
+      a{
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 18px;
+        color: var(--primary) ;
+    }
+    .headline {
+        font-size: 22px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    .hover-icon {
+        height: 40px;
+    }
+}
