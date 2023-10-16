@@ -478,3 +478,18 @@ nav .navbar .nav-links{
   /* You can reset or remove any hover-specific styles here */
   pointer-events: none; /* This prevents hover interactions */
 }
+
+
+
+@media  ( min-width: 1920px) and (max-width: 2560px) {
+  nav .navbar .links li a {
+    text-decoration: none;
+    white-space: nowrap;
+    color: #686A77;
+    font-family: 'Lato', sans-serif !important;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+}
