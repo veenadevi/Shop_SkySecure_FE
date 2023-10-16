@@ -259,3 +259,15 @@ option{
         border-radius: 8px;
     }    
 }
+.backBtn{
+    width: 20px;
+    color: var(--neutral-900 ); 
+}
+.backBtnDiv{
+    cursor: pointer;
+}
+  
+.backBtnDiv:hover {
+    text-decoration: underline;
+    color: blue;
+  }

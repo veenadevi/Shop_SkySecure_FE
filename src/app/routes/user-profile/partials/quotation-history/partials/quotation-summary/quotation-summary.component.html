@@ -1,5 +1,10 @@
 <div id="leadSummary">
-    <ng-container *ngIf="accountDetails && responseData">
+    <ng-container *ngIf="accountDetails && responseData"> 
+         
+            <div (click)= "navigateTo('/user-profile/quotation-history')" class="backBtnDiv">
+                <img src="../../../../assets/icons/arrow-right.svg" class="backBtn">Go Back 
+            </div> 
+          
         <div id="lead-summary-header">
 
             <ng-container *ngIf="estimateData.estimate_number; else noValue">
