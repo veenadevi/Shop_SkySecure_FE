@@ -130,7 +130,22 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
     /* width: 100em; */
     /* background-color: red;  */
 
-    @media  ( min-width: 1920px) and (max-width: 2560px) {
+    @media  ( min-width: 1920px) and (max-width: 2198px) {
+        .nav-expanded {
+            width: 275px !important;
+        }
+
+.text-style {
+    font-size: 16px;
+    margin-top: 3px;
+    font-family: 'lato', sans-serif;
+}
+ .mat-drawer.mat-drawer-side {
+    box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.25);
+    width: 14%;
+}
+    }
+    @media  ( min-width: 2198px) and (max-width: 2560px) {
         .nav-expanded {
             width: 275px !important;
         }

@@ -196,3 +196,19 @@ option{
     color: #4E4C4D;
     font-size: 13px;
 }
+
+
+/* //media query// */
+
+@media  ( min-width: 1920px) and (max-width: 2560px) {
+    #leadSummary{
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        min-height: 36em;
+        font-family: 'Lato', sans-serif !important;
+        margin:0 12% 0 12%;
+        font-size: 16px;
+    }
+}
