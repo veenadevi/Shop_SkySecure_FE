@@ -209,7 +209,7 @@ justify-content: center;
 .backBtnDiv {
     cursor: pointer;
 }
-/* .backBtnDiv:hover {
-    text-decoration: underline;
-    color: blue;
-  } */
+ 
+  .secondary-btn{
+    width:8rem;
+  }
