@@ -601,7 +601,7 @@ export class ProductListTableComponent {
       case 'Year':
         let currentPrice1=this.getPriceByType(lineItemId,type )
        
-        let quanTotal1 = item.get('quantity').value * currentPrice1.price.$numberDecimal;
+        let quanTotal1 = item.get('quantity').value * currentPrice1.price;
         item.get('bcy_rate').setValue(currentPrice1.price);
         item.get('distributorPrice').setValue(currentPrice1.distributorPrice);
         item.get('erp_price').setValue(currentPrice1.ERPPrice);
