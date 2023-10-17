@@ -89,11 +89,15 @@
             </div>
             <div class="modal-footer">
                 <ng-container>
-
-                    <button class="btn  primary" (click)="submitForm()">Invite User</button>
-                    <div onclick="history.back()" class="backBtnDiv ml-4">
+                     <!-- <div onclick="history.back()" class="backBtnDiv ml-4">
                         <img src="../../../../assets/icons/arrow-right.svg" class="backBtn">Go Back
-                    </div> 
+                    </div>  -->
+                    <button onclick="history.back()" class="backBtnDiv mr-4 btn secondary-btn">
+                        Go Back
+                    </button>
+                    
+                    <button class="btn  primary" (click)="submitForm()">Invite User</button>
+                   
                 </ng-container>
             </div>
 
