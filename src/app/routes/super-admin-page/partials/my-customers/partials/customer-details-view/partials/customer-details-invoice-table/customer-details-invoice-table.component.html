@@ -1,0 +1,43 @@
+<ng-container *ngIf="(customerInvoices && customerInvoices.length>0); else noDataFound">
+    <div class="card">
+        <p-table 
+            [value]="customerInvoices" 
+            
+            [paginator]="true"
+            [scrollable] = "false"
+            
+            [rows]="5"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+            <ng-template pTemplate="header">
+                <tr class="thfont">
+                    <th>Invoice No</th>
+                    <th>Created By</th>
+                    <th>Due Date</th>
+                    <th>Balance</th>
+                    <th>Total</th>
+                    
+                </tr>
+            </ng-template>
+          
+
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+        
+                <tr class="trfont" >
+                    <td>{{item.invoice_number}}</td>
+                    <td>{{item.created_by}}</td>
+                    <td>{{item.due_date}}</td>
+                    <td>{{item.balance}}</td>
+                    <td>{{item.total}}</td>
+                </tr>
+      
+            </ng-template>
+        </p-table>
+    </div>
+</ng-container>
+<ng-template #noDataFound>
+    <div class="nodata"  >
+        <p>No data found !</p>
+        <img class="no-img" src="../../../../../assets/images/nodata.jpg">
+    </div>
+</ng-template>

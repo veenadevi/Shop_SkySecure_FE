@@ -22,6 +22,9 @@ import { RoleAssigmentComponent } from './partials/role-assigment/role-assigment
 // import { ManagaeAllAdminComponent } from './partials/manage-all-admin/managae-all-admin.component';
 import { ManageAllChannelsComponent } from './partials/manage-all-channels/manage-all-channels.component';
 import { CustomerDetailsViewComponent } from './partials/my-customers/partials/customer-details-view/customer-details-view.component';
+import { CustomerDetailsIconCardsComponent } from './partials/my-customers/partials/customer-details-view/partials/customer-details-icon-cards/customer-details-icon-cards.component';
+import { CustomerDetailsInvoiceTableComponent } from './partials/my-customers/partials/customer-details-view/partials/customer-details-invoice-table/customer-details-invoice-table.component';
+import { CustomerDetailsEstimatesTableComponent } from './partials/my-customers/partials/customer-details-view/partials/customer-details-estimates-table/customer-details-estimates-table.component';
 
 
 
@@ -41,13 +44,13 @@ import { CustomerDetailsViewComponent } from './partials/my-customers/partials/c
     MyCustomersComponent,
     ChannelPartnerDetailsComponent, 
     RoleAssigmentComponent, 
-    ManageAllChannelsComponent, CustomerDetailsViewComponent
+    ManageAllChannelsComponent, CustomerDetailsViewComponent, CustomerDetailsIconCardsComponent, CustomerDetailsInvoiceTableComponent, CustomerDetailsEstimatesTableComponent
   ],
   imports: [
     CommonModule,
     NgbModule,
     SharedModule,
-    SuperAdminPageRoutingModule
+    SuperAdminPageRoutingModule,
   ],
   exports: [
     RouterModule,
