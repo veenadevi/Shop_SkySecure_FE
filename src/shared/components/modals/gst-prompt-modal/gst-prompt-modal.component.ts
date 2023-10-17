@@ -376,6 +376,7 @@ public submitCityError : boolean = false;
     
 
     req.currency_id = "1014673000000000064";
+   
 
     req.RequestingForOther = (this.selectedType === 'others') ? true : false;
 
@@ -507,7 +508,8 @@ public submitCityError : boolean = false;
          ],
      
       
-       "updatedBy": userDetails._id
+       "updatedBy": userDetails._id,
+       "isCustomer":true,
      
      }
 
