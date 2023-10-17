@@ -5,9 +5,9 @@
     <ng-container *ngIf="accountDetails && responseData">
         
         <div id="lead-summary-header">
-            <div onclick="history.back()" class="backBtnDiv ">
+            <!-- <div onclick="history.back()" class="backBtnDiv ">
                 <img src="../../../../assets/icons/arrow-right.svg" class="backBtn">Go Back
-            </div> 
+            </div>  -->
             
             <ng-container *ngIf="estimateData.estimate_number; else noValue">
                 {{estimateData.estimate_number}} : Lead Summary
