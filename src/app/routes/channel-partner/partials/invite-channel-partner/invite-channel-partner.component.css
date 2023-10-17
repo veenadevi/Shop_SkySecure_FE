@@ -150,7 +150,7 @@ element.style {
     font-weight: 500;
     border: none;
     outline: none;
-    width: 10rem;
+    width: 8rem;
     border-radius: 8px;
     background: var(--btn-gradient);
     transition: all .3s ease;
@@ -228,7 +228,7 @@ label {
 .backBtnDiv {
     cursor: pointer;
 }
-.backBtnDiv:hover {
-    text-decoration: underline;
-    color: blue;
+.secondary-btn{
+    width:8rem;
   }
+ 
