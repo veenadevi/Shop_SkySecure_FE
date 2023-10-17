@@ -86,7 +86,11 @@ export class SignUpComponent {
         ],
         confirmPassword: ['', Validators.required],*/
         companyName : ['', Validators.required],
-        mobileNumber : ['', Validators.required]
+        mobileNumber : ['', [
+          Validators.required,
+          Validators.pattern('^[6-9][0-9]{9}$'),
+          Validators.maxLength(10)
+        ]]
         //acceptTerms: [false, Validators.requiredTrue]
       },
       {
@@ -103,12 +107,20 @@ export class SignUpComponent {
   get f2(): { [key: string]: AbstractControl } {
     return this.formEmail.controls;
   }
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key; 
+    if (key === 'E') {
+      event.preventDefault();  
+    }
+  }
+   
 
   onSubmit(): void {
     this.submitted = true;
     
     if (this.form.invalid) { // If Invalid Return
       // console.log("()()() Invalid");
+      console.log(this.form.value);
       return;
     }
     else{ // If Valid
