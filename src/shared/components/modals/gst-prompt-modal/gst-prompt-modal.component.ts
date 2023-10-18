@@ -438,7 +438,7 @@ public submitCityError : boolean = false;
             this.cartStore.setCartRefreneceId(null);
             this.cartService.getCartItems(null).subscribe();
             
-            this.router.navigate(['/cart/cart-submit']);
+            this.router.navigate(['/user-profile/quotation-history']);
             
             this.activeModal.close();
             
