@@ -78,7 +78,21 @@
                         </div>
                         <div class="row-holder">
                             <span class="row-header">
-                                Name
+                               Customer Name
+                            </span>
+                            <span class="row-value">
+
+                                <ng-container *ngIf="contactsData.contact_firstName!=null; else contactName">
+                                    {{contactsData.contact_firstName}},  ({{contactsData.contact_Email.Email}})
+                                  </ng-container>
+                                  <ng-template #contactName>{{responseData.assignTo.firstName}} ({{responseData.assignTo.email}})</ng-template>
+
+                              
+                            </span>
+                        </div>
+                        <div class="row-holder">
+                            <span class="row-header">
+                               Company Name
                             </span>
                             <span class="row-value">
 
@@ -113,6 +127,19 @@
                             <span class="row-value">
 
                                 <ng-container *ngIf="contactsData.shipping_address!=null; else noAddress">
+                                    {{contactsData.shipping_address.state}},{{contactsData.shipping_address.zip}}
+                                  </ng-container>
+                                  <ng-template #noAddress>{{responseData.assignTo.fullAddress.state}},{{responseData.assignTo.fullAddress.pincode}}</ng-template>
+                               
+                            </span>
+                        </div>
+                        <!-- <div class="row-holder">
+                            <span class="row-header">
+                                State
+                            </span>
+                            <span class="row-value">
+
+                                <ng-container *ngIf="contactsData.shipping_address!=null; else noAddress">
                                     {{contactsData.shipping_address.state}}
                                   </ng-container>
                                   <ng-template #noAddress>{{responseData.assignTo.fullAddress.state}}</ng-template>
@@ -131,7 +158,7 @@
                                   <ng-template #noAddress>{{responseData.assignTo.fullAddress.pincode}}</ng-template>
                                
                             </span>
-                        </div>
+                        </div> -->
                 </div>
             </div>
             <div id="assigneeDetails">
