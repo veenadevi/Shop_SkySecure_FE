@@ -33,26 +33,27 @@ export class CustomerDetailsViewComponent implements OnInit{
 
   ngOnInit(): void {
     
-    /*let params = this.route.snapshot.queryParamMap;
+    let params = this.route.snapshot.queryParamMap;
 
     if(params.has('customerId')){
+      this.setCustomerDetailsData(params.get('customerId'));
     }
     else{
       return;
-    }*/
+    }
 
-    this.setCustomerDetailsData();
+    //this.setCustomerDetailsData();
 
 
   }
 
 
-  public setCustomerDetailsData(){
+  public setCustomerDetailsData(id){
 
 
     this.spinner.show();
     this.subscriptions.push(
-      this.adminPageService.getCustomerDetailsById(null).subscribe(res=>{
+      this.adminPageService.getCustomerDetailsById(id).subscribe(res=>{
         this.spinner.hide();
         this.customerData = res;
         this.customerEstimates = this.customerData.customerEstimates;
