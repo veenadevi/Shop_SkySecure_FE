@@ -81,3 +81,40 @@ p{
 .gst{
     font-size: 9px;
 }
+
+
+
+@media  ( min-width: 1920px) and (max-width: 2560px) {
+    .all-accounts-view {
+        min-height: 75em;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+        padding: 40px;
+        font-size: 8px!important;
+        margin: 0 10%;
+    }
+    :host ::ng-deep.p-datatable .p-datatable-thead > tr > th {
+        text-align: center;
+        padding: 1rem 1rem;
+        border: 1px solid #dee2e6;
+        border-width: 0 0 1px 0;
+        font-weight: 700;
+        color: #343a40;
+        background: #f8f9fa;
+        transition: box-shadow 0.2s;
+        font-size: 16px;
+    }
+    .text-style {
+        cursor: pointer;
+        color: #3366CC;
+        font-size: 16px;
+    }
+    :host ::ng-deep.p-datatable .p-datatable-tbody > tr > td {
+        text-align: center;
+        border: 1px solid #dee2e6;
+        border-width: 0 0 1px 0;
+        padding: 1rem 1rem;
+        font-size: 16px;
+    }
+}

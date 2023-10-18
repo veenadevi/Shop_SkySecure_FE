@@ -463,9 +463,9 @@ export class ProductListTableComponent {
       "RequestingForOther": false, //Check
       "contact_persons": [
         {
-          "first_name": zohoBookContactData.contact_persons_name,
-          "email": zohoBookContactData.contact_persons_email,
-          "phone": zohoBookContactData.contact_persons_phone,
+          "first_name": zohoBookEstimateData.contact_persons[0].first_name,
+          "email": zohoBookEstimateData.contact_persons[0].email,
+          "phone": zohoBookEstimateData.contact_persons[0].phone?zohoBookEstimateData.contact_persons[0].phone:zohoBookEstimateData.contact_persons[0].mobile,
           "is_primary_contact": true, //check
           "enable_portal": false //check
         }
@@ -601,7 +601,7 @@ export class ProductListTableComponent {
       case 'Year':
         let currentPrice1=this.getPriceByType(lineItemId,type )
        
-        let quanTotal1 = item.get('quantity').value * currentPrice1.price.$numberDecimal;
+        let quanTotal1 = item.get('quantity').value * currentPrice1.price;
         item.get('bcy_rate').setValue(currentPrice1.price);
         item.get('distributorPrice').setValue(currentPrice1.distributorPrice);
         item.get('erp_price').setValue(currentPrice1.ERPPrice);

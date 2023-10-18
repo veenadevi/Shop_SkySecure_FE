@@ -1,3 +1,6 @@
+.user-container {
+    min-height: 100vh;
+}
 
 .partner-container{
     display: flex;
@@ -200,3 +203,16 @@ display: flex;
 align-items: center;
 justify-content: center;
 }
+
+.backBtn {
+    width: 20px;
+    color: var(--neutral-900);
+}
+
+.backBtnDiv {
+    cursor: pointer;
+}
+ 
+  .secondary-btn{
+    width:8rem;
+  }

@@ -17,7 +17,7 @@ interface AddChannelPartnerUserPayLoad {
   updatedBy: String,
   isAdmin:Boolean
 
-
+ 
 
 }
 @Component({
@@ -254,4 +254,5 @@ export class InviteChannelPartnerComponent {
 
   }
 
+  
 }

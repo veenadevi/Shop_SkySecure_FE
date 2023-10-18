@@ -108,7 +108,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     }),
     NgxGoogleAnalyticsModule.forRoot('G-KC04RJ3FYD'),
     NgxGoogleAnalyticsRouterModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    
  
     
    
