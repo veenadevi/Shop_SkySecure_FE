@@ -1,7 +1,5 @@
 <div id="leadSummary">
-    <div onclick="history.back()" class="backBtnDiv ">
-        <img src="../../../../assets/icons/arrow-right.svg" class="backBtn">Go Back
-    </div> 
+
     <ng-container *ngIf="accountDetails && responseData">
         
         <div id="lead-summary-header">
@@ -10,9 +8,16 @@
             </div>  -->
             
             <ng-container *ngIf="estimateData.estimate_number; else noValue">
+                <div onclick="history.back()" class="back-btn-container">
+                    <img src="../../../../assets/icons/arrow-right.svg" class="back-btn">
+                </div>
                 {{estimateData.estimate_number}} : Lead Summary
               </ng-container>
-              <ng-template #noValue>Quotation Status</ng-template>
+              <ng-template #noValue>
+                <div onclick="history.back()" class="back-btn-container">
+                    <img src="../../../../assets/icons/arrow-right.svg" class="back-btn">
+                </div>
+                Quotation Status</ng-template>
     
         </div>
 
