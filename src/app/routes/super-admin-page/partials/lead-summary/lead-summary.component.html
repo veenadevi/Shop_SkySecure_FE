@@ -141,11 +141,11 @@
 
                     <div class="comment">
                         <label>Assigned Owner Comments</label>
-                        <textarea type="textarea" class="comment-area" ></textarea>
+                        <textarea id="assignedComments" [(ngModel)]="assignedOwnerComments" type="textarea" (input)="assignedCommentsChange($event)" class="comment-area" ></textarea>
                     </div>
                     <div class="select-status">
 
-                        <select class="status-option" >
+                        <select class="status-option" (change)="onEstimateChange($event)">
                             <option>Select Estimate Status</option>
                             <option>Estimate Accepted </option>
                                 <option> On Hold</option>
@@ -167,12 +167,12 @@
 
                     <ng-container *ngIf="responseData.cartData.status!=='New'; else newQuote">
                     
-                        <products-list-table [productsData]="estimateData" [cartData]="cartData" [crmData]="responseData"></products-list-table>
+                        <products-list-table [productsData]="estimateData" [cartData]="cartData" [crmData]="responseData" [assignedOwnerComments]="assignedOwnerComments" [estimateStatus]="estimateStatus"></products-list-table>
                       </ng-container>
                       <ng-template #newQuote>
 
                    
-                        <products-list-table  [productsData]="responseData.cartData" [cartData]="cartData" [crmData]="responseData"></products-list-table> 
+                        <products-list-table  [productsData]="responseData.cartData" [cartData]="cartData" [crmData]="responseData" [assignedOwnerComments]="assignedOwnerComments" [estimateStatus]="estimateStatus"></products-list-table> 
                         
                        </ng-template>
                    

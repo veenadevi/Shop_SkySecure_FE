@@ -72,6 +72,19 @@ export class LeadSummaryComponent implements OnInit{
     )
   }
 
+  public assignedOwnerComments :any;
+  public estimateStatus : any;
+
+  public assignedCommentsChange(event){
+    
+    //this.assignedOwnerComments = document.getElementById('assignedComments');
+    this.assignedOwnerComments = this.assignedOwnerComments;
+  }
+
+  public onEstimateChange(event){
+    
+    this.estimateStatus = event.target.value;
+  }
 
   
 
