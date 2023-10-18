@@ -529,7 +529,8 @@ public inviteUsers( request : any): Observable<any> {
 
   public getCustomerDetailsById(id) : Observable<any> {
 
-    let url = this.baseUrlForQuote + this.getCustomerDetailsByIdUrl + "1014673000000483001";
+    //let url = this.baseUrlForQuote + this.getCustomerDetailsByIdUrl + "1014673000000483001";
+    let url = this.baseUrlForQuote + this.getCustomerDetailsByIdUrl + id;
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(

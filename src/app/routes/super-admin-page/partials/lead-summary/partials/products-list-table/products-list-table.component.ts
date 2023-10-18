@@ -25,6 +25,13 @@ export class ProductsListTableComponent implements OnInit {
   @Input('crmData')
   public crmData: any;
 
+  @Input('estimateStatus')
+  public estimateStatus : any;
+
+
+  @Input('assignedOwnerComments')
+  public assignedOwnerComments : any;
+
   private opts = [
     { key: 'Year', value: "Year" },
     { key: 'Month', value: "Month" },
@@ -418,6 +425,9 @@ export class ProductsListTableComponent implements OnInit {
 
     console.log("passin gcrm data from parent page ==",this.crmData)
 
+
+    
+
     let assignTo = this.crmData.assignTo;
     let createdBy = this.crmData.createdBy;
     let cartData = this.crmData.cartData;
@@ -483,12 +493,14 @@ export class ProductsListTableComponent implements OnInit {
       "gst_treatment": zohoBookContactData.gst_treatment,
 
       "zohoAccountNo": zohoCRMAccountData.accountId,
+      "leadStatusUpdate" : this.estimateStatus,
+      "leadComment" : this.assignedOwnerComments,
 
       "zohoEstimateId": cartData.zohoEstimateId,
-      "zohoBookContactId": zohoBookContactData.contact_id
+      "zohoBookContactId": zohoBookContactData.contact_id,
     }
 
-    //console.log("++++++++======== req ", req);
+    
 
     return req;
   }

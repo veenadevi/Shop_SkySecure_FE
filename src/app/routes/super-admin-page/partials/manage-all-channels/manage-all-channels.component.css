@@ -1,3 +1,6 @@
+.user-container {
+    min-height: 100vh;
+}
 
 .partner-container{
     display: flex;
@@ -209,7 +212,7 @@ justify-content: center;
 .backBtnDiv {
     cursor: pointer;
 }
-.backBtnDiv:hover {
-    text-decoration: underline;
-    color: blue;
+ 
+  .secondary-btn{
+    width:8rem;
   }

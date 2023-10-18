@@ -12,6 +12,9 @@
     padding: 8px;
     font-weight: 600;
     color: #1e1e1e;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .row-div{
@@ -156,6 +159,7 @@
 .row-value{
     color: #4E4C4D;
     font-size: 13px;
+    width: 70%;
 }
 
 .assignee-details .row-header{
@@ -246,6 +250,7 @@ option{
     .row-value {
         color: #4E4C4D;
         font-size: 16px;
+        width: 70%;
     }
     label {
         color: #4E4C4D;
@@ -263,4 +268,35 @@ option{
         height: 95px;
         border-radius: 8px;
     }  
+}
+
+.backBtn {
+    width: 20px;
+    color: var(--neutral-900);
+}
+
+.backBtnDiv {
+    cursor: pointer;
+    font-size: 16px;
+}
+.backBtnDiv:hover {
+    text-decoration: underline;
+    color: blue;
+  }
+
+  .back-btn-container{
+    text-align: center;
+    display: flex;
+    padding: 4px;
+    border-radius: 100%;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.back-btn-container:hover {
+    background-color: var(--neutral-100);
+}
+
+.back-btn {
+    height: 20px;
 }

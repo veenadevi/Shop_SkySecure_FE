@@ -1,0 +1,19 @@
+.nodata{
+    text-align: center;
+    padding-top: 10px;
+    color: black;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    font-size: 12px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    font-size: 12px;
+}
+
+.no-img{
+    width:50%;
+}
