@@ -482,9 +482,9 @@ export class ProductsListTableComponent implements OnInit {
       "RequestingForOther": false, //Check
       "contact_persons": [
         {
-          "first_name": zohoBookContactData.contact_persons_name,
-          "email": zohoBookContactData.contact_persons_email,
-          "phone": zohoBookContactData.contact_persons_phone,
+          "first_name": zohoBookEstimateData.contact_persons[0].first_name,
+          "email": zohoBookEstimateData.contact_persons[0].email,
+          "phone": zohoBookEstimateData.contact_persons[0].phone?zohoBookEstimateData.contact_persons[0].phone:zohoBookEstimateData.contact_persons[0].mobile,
           "is_primary_contact": true, //check
           "enable_portal": false //check
         }
