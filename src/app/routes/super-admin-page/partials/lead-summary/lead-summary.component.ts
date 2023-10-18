@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute ,Router} from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs';
@@ -35,6 +35,7 @@ export class LeadSummaryComponent implements OnInit{
 
   constructor(
     private route : ActivatedRoute,
+    private router: Router,
     private superAdminService : SuperAdminService,
     private primengConfig: PrimeNGConfig
   ){}
@@ -86,7 +87,9 @@ export class LeadSummaryComponent implements OnInit{
     this.estimateStatus = event.target.value;
   }
 
-  
+ public navigateToLeadSummary() {
+  this.router.navigate(['/admin-pages/accounts']);
+ }
 
  
 

@@ -1,16 +1,23 @@
 <div id="leadSummary">
     <ng-container *ngIf="accountDetails && responseData"> 
          
-            <div (click)="navigateToQuotationHistory()"  class="backBtnDiv">
+            <!-- <div (click)="navigateToQuotationHistory()"  class="backBtnDiv">
                 <img src="../../../../assets/icons/arrow-right.svg" class="backBtn">Go Back 
-            </div> 
+            </div>  -->
           
         <div id="lead-summary-header">
 
             <ng-container *ngIf="estimateData.estimate_number; else noValue">
+                <div (click)="navigateToQuotationHistory()" class="back-btn-container">
+                    <img  class="back-btn" src="../../../../assets/icons/arrow-right.svg">
+                </div>
                 {{estimateData.estimate_number}} : Lead Summary
               </ng-container>
-              <ng-template #noValue>Quotation Status</ng-template>
+              <ng-template #noValue>
+                <div (click)="navigateToQuotationHistory()" class="back-btn-container">
+                    <img  class="back-btn" src="../../../../assets/icons/arrow-right.svg">
+                </div>
+                Quotation Status</ng-template>
     
         </div>
 

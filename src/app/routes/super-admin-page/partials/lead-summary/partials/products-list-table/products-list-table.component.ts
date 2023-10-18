@@ -497,7 +497,7 @@ export class ProductsListTableComponent implements OnInit {
       "leadComment" : this.assignedOwnerComments,
 
       "zohoEstimateId": cartData.zohoEstimateId,
-      "zohoBookContactId": zohoBookContactData.contact_id
+      "zohoBookContactId": zohoBookContactData.contact_id,
     }
 
     
