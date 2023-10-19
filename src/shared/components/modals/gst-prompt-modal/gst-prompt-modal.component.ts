@@ -446,7 +446,7 @@ public submitCityError : boolean = false;
             this.cartStore.setCartRefreneceId(null);
             this.cartService.getCartItems(null).subscribe();
             
-            this.router.navigate(['/cart/cart-submit']);
+            this.router.navigate(['/user-profile/quotation-history']);
             
             this.activeModal.close();
             
@@ -731,7 +731,7 @@ public errorMessage: boolean = false;
       }
       else{
         this.myForm.get('gstNo').setErrors({ 'invalid': true });
-        this.errorMessageText = "Please Enter Valid GST Numebr!"
+        this.errorMessageText = "Please Enter Valid GST Number!"
         this.errorMessage = true;
       }
 

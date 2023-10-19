@@ -17,7 +17,7 @@
                 <!-- [rowsPerPageOptions]="[10, 25, 50]" -->
                 <ng-template pTemplate="header">
                     <tr class="thfont">
-                        <th>Cart Id</th>
+                        <th>S.No</th>
                         <th>Created On</th>
                         <th>Status</th>
                      
@@ -53,7 +53,8 @@
                     <tr class="trfont">
                         <td>
                             <div class="text-style" (click)="getAccountById(account.cartData._id)">
-                                {{ account.cartData.cart_ref_id }}
+                                <!-- {{ account.cartData.cart_ref_id }} -->
+                                {{i+1}}
                             </div>
                             
                         </td>

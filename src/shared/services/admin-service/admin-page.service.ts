@@ -15,6 +15,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 export class AdminPageService {
   private baseUrl: string;
   private baseUrlForQuote : string;
+  private baseUrlForOrders : string;
   private addFeatureUrl : string;
   private getAllDashBoardDataUrl :  string;
   private getAllAccountsUrl : string;
@@ -28,6 +29,7 @@ export class AdminPageService {
   private getMyMarketPlaceAccountListURL:string
   private addChannelPartnerURL:string;
   private getAllMyCustomersUrl : String;
+  private getCustomerDetailsByIdUrl : String;
 
   private addChannelPartnerUsersURL:string;
 
@@ -59,6 +61,7 @@ export class AdminPageService {
     this.getAllChannelLeadListURL=AppService.appUrl.getMyChannelLeadList;
     this.inviteUsersURL = AppService.appUrl.inviteUsers;
     this.getAllMyCustomersUrl = AppService.appUrl.getAllMyCustomers;
+    this.getCustomerDetailsByIdUrl = AppService.appUrl.getCustomerDetailsById;
 
     this.addChannelPartnerUsersURL=AppService.appUrl.addUsersToChannelURL
     //For Channel AM
@@ -506,6 +509,28 @@ public inviteUsers( request : any): Observable<any> {
   public getAllMyCustomers() : Observable<any> {
 
     let url = this.baseUrlForUsers + this.getAllMyCustomersUrl;
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
+  /**
+   * Service for Fetching All Customer Details By Id
+   */
+
+  public getCustomerDetailsById(id) : Observable<any> {
+
+    //let url = this.baseUrlForQuote + this.getCustomerDetailsByIdUrl + "1014673000000483001";
+    let url = this.baseUrlForQuote + this.getCustomerDetailsByIdUrl + id;
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(

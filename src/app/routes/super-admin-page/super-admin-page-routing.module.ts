@@ -12,7 +12,7 @@ import { RoleAssigmentComponent } from './partials/role-assigment/role-assigment
 
 import { ChannelPartnerDetailsComponent } from './partials/view-channel-partners-list/partials/channel-partner-details/channel-partner-details.component';
 import { ManageAllChannelsComponent } from './partials/manage-all-channels/manage-all-channels.component'
-
+import { CustomerDetailsViewComponent } from './partials/my-customers/partials/customer-details-view/customer-details-view.component';
 const routes: Routes = [{
   path: '',
   component: SuperAdminPageComponent,
@@ -67,7 +67,12 @@ const routes: Routes = [{
       canActivate: [], 
       path: 'manage-all-channel',
       component : ManageAllChannelsComponent
-    }
+    },
+    {
+      canActivate: [],
+      path: 'customer-view',
+      component : CustomerDetailsViewComponent
+    },
 
     
   ]

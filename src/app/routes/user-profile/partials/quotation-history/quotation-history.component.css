@@ -62,3 +62,7 @@ p{
 .gst{
     font-size: 9px;
 }
+::ng-deep .p-paginator .p-paginator-current{
+    font-size: 13px !important;
+
+}

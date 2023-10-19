@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute ,Router} from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
@@ -34,6 +34,7 @@ export class QuotationSummaryComponent {
 
   constructor(
     private route : ActivatedRoute,
+    private router: Router,
     private superAdminService : SuperAdminService,
     private primengConfig: PrimeNGConfig
   ){}
@@ -72,10 +73,11 @@ export class QuotationSummaryComponent {
   }
 
 
-  
+  navigateToQuotationHistory() {
+    this.router.navigate(['/user-profile/quotation-history']);
+}
 
  
 
 
 }
-

@@ -51,6 +51,7 @@
         "updateUserRole":"api/admin/updateUserRole",
         "inviteUsers" : "api/user/inviteuser",
         "getAllMyCustomers" : "api/admin/getAllCustomers",
+        "getCustomerDetailsById" : "api/admin/getCustomerDetailsById/",
         
 
         "getUserNotifications" : "api/getUserNotifications",
@@ -107,4 +108,3 @@
     }
     
 }
-

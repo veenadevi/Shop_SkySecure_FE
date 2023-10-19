@@ -1,11 +1,23 @@
 <div id="leadSummary">
-    <ng-container *ngIf="accountDetails && responseData">
-        <div id="lead-summary-header">
 
+    <ng-container *ngIf="accountDetails && responseData">
+        
+        <div id="lead-summary-header">
+            <!-- <div onclick="history.back()" class="backBtnDiv ">
+                <img src="../../../../assets/icons/arrow-right.svg" class="backBtn">Go Back
+            </div>  -->
+            
             <ng-container *ngIf="estimateData.estimate_number; else noValue">
+                <div onclick="history.back()" class="back-btn-container">
+                    <img src="../../../../assets/icons/arrow-right.svg" class="back-btn">
+                </div>
                 {{estimateData.estimate_number}} : Lead Summary
               </ng-container>
-              <ng-template #noValue>Quotation Status</ng-template>
+              <ng-template #noValue>
+                <div onclick="history.back()" class="back-btn-container">
+                    <img src="../../../../assets/icons/arrow-right.svg" class="back-btn">
+                </div>
+                Quotation Status</ng-template>
     
         </div>
 
@@ -13,6 +25,9 @@
         <div class="row-div">
             <div id="leadStatus">
                 <div class="card-container">
+                    <div class="content-holder bottom-border">
+                        <span class="customer-header">Lead Details</span>
+                    </div>
                     <div class="content-holder">
                         <span class="header">
                             Lead Status
@@ -63,12 +78,26 @@
             </div>
             <div id="customerDetails">
                 <div class="card-container customer-details">
-                        <div class="row-holder bottom-border">
+                        <div class="row-holder-01 bottom-border">
                             <span class="customer-details-header">Customer Details</span>
                         </div>
                         <div class="row-holder">
                             <span class="row-header">
-                                Name
+                               Customer Name
+                            </span>
+                            <span class="row-value">
+
+                                <ng-container *ngIf="contactsData.contact_firstName!=null; else contactName">
+                                    {{contactsData.contact_firstName}},  ({{contactsData.contact_Email.Email}})
+                                  </ng-container>
+                                  <ng-template #contactName>{{responseData.assignTo.firstName}} ({{responseData.assignTo.email}})</ng-template>
+
+                              
+                            </span>
+                        </div>
+                        <div class="row-holder">
+                            <span class="row-header">
+                               Company Name
                             </span>
                             <span class="row-value">
 
@@ -103,6 +132,19 @@
                             <span class="row-value">
 
                                 <ng-container *ngIf="contactsData.shipping_address!=null; else noAddress">
+                                    {{contactsData.shipping_address.state}},{{contactsData.shipping_address.zip}}
+                                  </ng-container>
+                                  <ng-template #noAddress>{{responseData.assignTo.fullAddress.state}},{{responseData.assignTo.fullAddress.pincode}}</ng-template>
+                               
+                            </span>
+                        </div>
+                        <!-- <div class="row-holder">
+                            <span class="row-header">
+                                State
+                            </span>
+                            <span class="row-value">
+
+                                <ng-container *ngIf="contactsData.shipping_address!=null; else noAddress">
                                     {{contactsData.shipping_address.state}}
                                   </ng-container>
                                   <ng-template #noAddress>{{responseData.assignTo.fullAddress.state}}</ng-template>
@@ -121,15 +163,37 @@
                                   <ng-template #noAddress>{{responseData.assignTo.fullAddress.pincode}}</ng-template>
                                
                             </span>
-                        </div>
+                        </div> -->
                 </div>
             </div>
-            <div id="assigneeDetails">
+            <!-- <div id="assigneeDetails">
                 <div class="card-container assignee-details">
-                
+                <div class="status">
+                    <div class="row-holder-01 bottom-border">
+                        <span class="customer-details">Estimate Status</span>
+                    </div>
+
+                  
+
+                    <div class="comment">
+                        <label>Assigned Owner Comments</label>
+                        <textarea type="textarea" class="comment-area" ></textarea>
+                    </div>
+                    <div class="select-status">
+
+                        <select class="status-option" >
+                            <option>Select Estimate Status</option>
+                            <option>Estimate Accepted </option>
+                                <option> On Hold</option>
+                                <option>Deal Won</option>
+                                <option>Deal Lost</option>
+                        </select>
+                    </div>
+                    
+                </div>
                 </div>
                 
-            </div>
+            </div> -->
         </div>
 
 
