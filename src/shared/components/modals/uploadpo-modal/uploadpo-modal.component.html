@@ -1,0 +1,31 @@
+<div class="contact-us-wrapper"  >
+    <div class="card-container">
+        <div class="modal-header">
+             
+            <span class="header-text"> UploadPo</span>
+            
+            <button (click) = "closeModal()" type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"> 
+            <div class="upload">
+                <label>Upload PO</label>
+                <div class="avatar-edit">
+                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                        (change)="uploadFile($event)" />
+                    
+                    <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
+                        (click)="removeFile()">Remove</button>
+                    <label for="imageUpload" *ngIf="editFile"
+                        [ngClass]="['custom-label', 'upload-image']"></label>
+                    <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
+                        (click)="removeUploadedFile()"></label>
+                </div>
+                <div class="savebtn">
+                    <button class="btn primary-btn">Save </button>
+                </div>
+                 
+            </div>
+        </div>
+        
+    </div>
+</div>

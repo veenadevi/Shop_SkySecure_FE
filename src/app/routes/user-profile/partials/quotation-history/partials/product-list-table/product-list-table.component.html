@@ -73,12 +73,15 @@
 
   <div class="action-btn-holder">
       <div class="add-new-btn">
-        <button (click)="addApp()" class="btn primary-btn">Add new</button>
+        <button (click)="addApp('compare')" class="btn primary-btn">Add new</button>
     </div>
     <ng-container >
     <div class="add-new-btn">
       <button [disabled]="enableEdit" (click)="saveChanges()" class="btn primary">Request New Quote</button>
     </div>
+    <div class="add-new-btn">
+      <button (click)="uploadPo('upload')" class="btn primary-btn">Upload Po</button>
+  </div>
   </ng-container>
 
   </div>
