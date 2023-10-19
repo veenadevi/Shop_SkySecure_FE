@@ -50,6 +50,7 @@ import { AssignLeadsAmModalComponent } from './components/modals/assign-leads-am
 import { TimeFormatPipe } from './pipes/timeFormat';
 import { GetReasonModalComponent } from './components/modals/get-reason-modal/get-reason-modal.component';
 import { ReassignModalComponent } from './components/modals/reassign-modal/reassign-modal.component';
+import { UploadpoModalComponent } from './components/modals/uploadpo-modal/uploadpo-modal.component';
 
 
 
@@ -108,7 +109,8 @@ import { ReassignModalComponent } from './components/modals/reassign-modal/reass
     SuggestedCompareCardFlyerComponent,
     AssignLeadsAmModalComponent,
     GetReasonModalComponent,
-    ReassignModalComponent
+    ReassignModalComponent,
+    UploadpoModalComponent
    
   ],
 
