@@ -12,6 +12,7 @@ import { UploadProductPriceComponent } from './partials/upload-product-price/upl
 import { EditProductComponent } from './partials/edit-product/edit-product.component';
 import { UpdateblogComponent } from './partials/updateblog/updateblog.component';
 import { InviteUserComponent } from './partials/invite-user/invite-user.component';
+import { CreateProductOfferComponent } from './partials/create-product-offer/create-product-offer.component';
 // import { MarketplaceuserComponent } from '../super-admin-page/partials/marketplaceuser/marketplaceuser.component';
 
 const routes: Routes = [
@@ -81,6 +82,11 @@ const routes: Routes = [
         canActivate: [],
         path: 'invite-user',
         component : InviteUserComponent
+      },
+      {
+        canActivate: [],
+        path: 'create-product-offer',
+        component : CreateProductOfferComponent
       },
     ]
     
