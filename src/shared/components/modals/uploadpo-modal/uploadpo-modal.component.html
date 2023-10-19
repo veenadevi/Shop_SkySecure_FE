@@ -47,16 +47,7 @@
                     <span class="drop-title">Drop files here</span>
                 </div>
                 or
-                <input type="file" id="images" accept="image/*" required>
-                <button *ngIf="productLogo" (click)="removeFile()">
-                    <img style="margin-left: 10px;" src="../../../../assets/icons/closecircle.svg">
-                </button>
-                <label for="imageUpload" *ngIf="editFile"
-                [ngClass]="['custom-label', 'upload-image']">
-                </label>
-                <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
-                    (click)="removeUploadedFile()">
-                </label>
+                <input type="file" id="images" accept="image/*,application/pdf" required>
             </label>
 
             <div class="savebtn">
