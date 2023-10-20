@@ -36,7 +36,8 @@ export class CartService {
     this.baseUrl = environment.gatewayUrlForOrders;
     this.userCartUrl = AppService.appUrl.userCart;
     this.createQuotationUrl = AppService.appUrl.createQuotation;
-    this.editQuoatationUrl=AppService.appUrl.editQuotation
+    this.editQuoatationUrl=AppService.appUrl.editQuotation;
+
 
     
   }
@@ -237,6 +238,29 @@ export class CartService {
       );
 
     return REQUEST$;
+  }
+
+  public encryptdata(request){
+    //let url = `${this.baseUrl}orders/encryptFormData`;
+    let url = `${this.baseUrl}api/orders/encryptFormData`;
+    let data = {
+    request : request
+    }
+    
+
+
+    let request$ = this.http.get<Observable<any>>(url, {params:data})
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+        return response;
+      }),
+    );
+
+    return request$;
+    //return this.http.get(url,{params:data})
   }
 
 

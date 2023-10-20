@@ -403,8 +403,6 @@ public onChangeQuantity(i, price) : void {
     
   }
 
-  public buyNow(){
-  }
 
   public requestQuote(){
 
@@ -715,6 +713,59 @@ public onChangeQuantity(i, price) : void {
     this.calTotalPrice();
    // this.saveCart();
   }
+
+  public buyNow(){
+
+    this.checkout();
+
   }
+
+  public encRequestRes : any;
+  public accessCode = "AVEI22KJ67BJ07IEJB";
+  public merchantId = "2941397";
+  public workingKey = "BDBA61F56C8E4C2028818322A0E3C091";
+  public selectedAddress : any = {
+    name : 'testing',
+    address : 'test address',
+    city : 'test city',
+    pincode : '23456',
+    state : 'state test',
+    phone : '1234567890'
+  }
+
+  checkout(){
+
+    let order_no = "0001";
+    let testAmount = "10.00"
+
+    //let redirect_url = 'http%3A%2F%2Flocalhost%3A3008%2Fhandleresponse';
+    let redirect_url = 'https://dev-shop.skysecuretech.com/';
+    let useremail = 'vigneshblog4@gmail.com';
+    let request = `merchant_id=213313&order_id=${order_no}&currency=INR&amount=${testAmount}&redirect_url=${redirect_url}&cancel_url=${redirect_url}&language=EN&billing_name=${this.selectedAddress.name}&billing_address=${this.selectedAddress.address}&billing_city=${this.selectedAddress.city}&billing_state=MH&billing_zip=${this.selectedAddress.pincode}&billing_country=India&billing_tel=${this.selectedAddress.phone}&delivery_name=${this.selectedAddress.name}&delivery_address=${this.selectedAddress.address}&delivery_city=${this.selectedAddress.city}&delivery_state=${this.selectedAddress.state}&delivery_zip=${this.selectedAddress.pincode}&delivery_country=India&delivery_tel=${this.selectedAddress.phone}&billing_email=${useremail}`
+    
+    /*this.cartService.encryptdata(request).subscribe(
+      data => {
+      
+      }, error => {
+      console.log(error)
+      }
+      );*/
+
+
+      this.subscriptions.push(
+        this.cartService.encryptdata(request).subscribe( data=>{
+          console.log('---------------------', data['response'])
+          this.encRequestRes = data['response']; 
+              /*setTimeout(()=>{
+                  //this.form.nativeElement.submit();
+                  console.log("+_+_+_+ ()( )()( ", this.encRequestRes);
+              },1000)*/
+        }, error => {
+          console.log("++++++ Error",error)
+          })
+      )
+  }
+
+}
 
 
