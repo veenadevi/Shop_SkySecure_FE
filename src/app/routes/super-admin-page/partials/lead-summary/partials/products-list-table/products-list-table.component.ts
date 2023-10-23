@@ -93,7 +93,7 @@ export class ProductsListTableComponent implements OnInit {
    
    console.log("in parent settign current cartdetails ====",this.cartDetails)
     this.setSampleData();
-
+ 
   }
 
 
@@ -107,7 +107,7 @@ export class ProductsListTableComponent implements OnInit {
   }
 
   public valueChanged(event, item, type) {
-
+console.log("value changed method called")
 
     switch (type) {
       case 'quantity':
@@ -123,70 +123,63 @@ export class ProductsListTableComponent implements OnInit {
       default:
         return null;
     }
+    // this.priceChanged(event,item,i:any)
   }
 
 
   public priceChanged(event, item, i) {
 
-    this.enableEdit = false;
-    //item.get('line_items_id')
-
-    var index = this.cartDetails.findIndex(el => el.estimateLineItemId === item.get('line_items_id').value);
-    //var index = this.cartDetails.findIndex(el => el.estimateLineItemId === this.productsData.line_items[i].line_item_id);
-
+    this.enableEdit = false; 
+    var index = this.cartDetails.findIndex(el => el.estimateLineItemId === item.get('line_items_id').value); 
     if (index >= 0) {
 
       console.log("in exsiting product price change===for ",index)
 
-      let editedRate = item.get('bcy_rate').value;
-      console.log("in exsiting product price change===editedRate ",editedRate)
-
+      let editedRate = item.get('bcy_rate').value; 
       let priceType = item.get('priceType').value;
-      console.log("in exsiting product price change===priceType ",priceType)
-
-
-      let calculatedDistributarPrice = item.get('distributorPrice').value
-      //this.cartDetails[index].distributorPrice;
-      let calculatedERPPrice=item.get('erp_price').value
-    //  this.cartDetails[index].erpPrice;
-
+       console.log("in exsiting product price change===priceType ",priceType) 
+      let calculatedDistributarPrice = item.get('distributorPrice').value 
+      let calculatedERPPrice=item.get('erp_price').value 
       let calcRate = calculatedDistributarPrice;
-
-      console.log("calculatedERPPrice froms screen ===",calculatedERPPrice)
-      console.log("distributorPrice froms screen ===",calculatedDistributarPrice)
-
-      if (editedRate > calculatedERPPrice ) {
-        console.log("greater than erp price")
-
-        // item.get('bcy_rate').setValue(item.get('bcy_rate_original').value)
+ 
+      if (editedRate > calculatedERPPrice ) { 
+        // console.log(editedRate,"editedRate")
+        // console.log("greater than erp price") 
+        item.get('bcy_rate').setErrors({ 'invalid': true });
+        this.enableEdit = true;
+        // console.log(editedRate,"editedRate-calculatedERPPrice",calculatedERPPrice)
+      }
+      
+      if(editedRate < calcRate  ){
+        console.log(editedRate,"-editedRate- ",calcRate)
+        console.log("less than erp price")
         item.get('bcy_rate').setErrors({ 'invalid': true });
         this.enableEdit = true;
 
       }
-      
-      if(editedRate < calcRate  ){
-        item.get('bcy_rate').setErrors({ 'invalid': true });
-        this.enableEdit = false;
-
-      }
     
     }
-    else {
-      console.log("_+_+_+_+ Came here ");
+    else { 
       let data = this.newlyAddedAppList.find(x => x._id + 'temp' === item.get('line_items_id').value);
-      console.log("_+_+_+_+ Came here with data", item.get('line_items_id').value);
+      console.log("Came here data", item.get('line_items_id').value,"data",data);
+      
       if (data) {
+
         let editedRate = item.get('bcy_rate').value;
-        let calculatedDistributarPrice = data.priceList[0].distributorPrice;
-
-        let calculatedERPPrice = data.priceList[0].erp_price;
-
+        let calculatedDistributarPrice = data.priceList[0].distributorPrice; 
+        let calculatedERPPrice=data.priceList[0].ERPPrice
+        console.log("calculatedERPPrice",calculatedERPPrice  );
         let calcRate = calculatedDistributarPrice;
-
-        if (editedRate < calcRate || editedRate>calculatedERPPrice) {
-          //this.getFormData.controls['bcy_rate'].setErrors({'invalid': true});
+       
+        if (editedRate < calcRate ) {
+          console.log(editedRate,"editedRate-calculatedERPPrice",calculatedERPPrice) 
           item.get('bcy_rate').setErrors({ 'invalid': true });
           this.enableEdit = true;
+        } 
+        if (editedRate > calculatedERPPrice ) { 
+          item.get('bcy_rate').setErrors({ 'invalid': true });
+          this.enableEdit = true;
+         
         }
       }
     }
@@ -194,7 +187,7 @@ export class ProductsListTableComponent implements OnInit {
     this.valueChanged(event, item, 'bcyRate')
 
     //formData.form.controls['email'].setErrors({'incorrect': true});
-
+ 
   }
 
 
