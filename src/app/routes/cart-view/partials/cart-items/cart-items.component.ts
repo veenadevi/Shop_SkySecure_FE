@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
@@ -62,7 +62,8 @@ export class CartItemsComponent {
   public grandTotal = 0
   public monthlyItemsGrandTotal=0
   public   yearlyItemsGrandTotal=0
-  public errortext:string
+  public errortext:string;
+
 
 
 
@@ -733,6 +734,8 @@ public onChangeQuantity(i, price) : void {
     phone : '1234567890'
   }
 
+  @ViewChild('form') form: ElementRef;
+
   checkout(){
 
     let order_no = "0001";
@@ -754,12 +757,15 @@ public onChangeQuantity(i, price) : void {
 
       this.subscriptions.push(
         this.cartService.encryptdata(request).subscribe( data=>{
-          console.log('---------------------', data['response'])
-          this.encRequestRes = data['response']; 
-              /*setTimeout(()=>{
-                  //this.form.nativeElement.submit();
-                  console.log("+_+_+_+ ()( )()( ", this.encRequestRes);
-              },1000)*/
+          console.log('---------------------', data)
+
+          this.encRequestRes = data;
+          //this.encRequestRes = data['response']; 
+
+              setTimeout(()=>{
+                  this.form.nativeElement.submit();
+                  //console.log("+_+_+_+ ()( )()( ", this.encRequestRes);
+              },1000)
         }, error => {
           console.log("++++++ Error",error)
           })
