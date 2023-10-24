@@ -242,8 +242,8 @@ export class CartService {
 
   public encryptdata(request){
     //let url = `${this.baseUrl}orders/encryptFormData`;
-    //let url = `${this.baseUrl}api/orders/encryptFormData`;
-    let url = "http://localhost:8080/api/orders/encryptFormData";
+    let url = `${this.baseUrl}api/orders/encryptFormData`;
+    //let url = "http://localhost:8080/api/orders/encryptFormData";
     let data = {
     request : request
     }
