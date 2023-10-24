@@ -327,6 +327,11 @@ export class SidenavWrapperComponent implements OnInit{
         this.menuToogled = false;
         this.router.navigate(['portal-admin-page/updateblog']);
         return;
+        case 'paCreateProductOffer':
+          //this.isExpanded = false;
+          this.menuToogled = false;
+          this.router.navigate(['portal-admin-page/create-product-offer']);
+          return;
       case 'paInviteUser':
         //this.isExpanded = false;
         this.menuToogled = false;

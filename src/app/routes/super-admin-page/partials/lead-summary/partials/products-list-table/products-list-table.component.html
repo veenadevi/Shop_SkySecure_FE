@@ -54,7 +54,7 @@
             <div class=" price-details">
             <input type="text" class="form-control-02" (change)="priceChanged($event, group, i)" formControlName="bcy_rate" placeholder="bcy_rate">
             <span class="text-danger" *ngIf="group.get('bcy_rate').touched && group.get('bcy_rate')?.hasError('required')">Amount required</span>
-            <span class="text-danger" *ngIf="group.get('bcy_rate')?.hasError('invalid')">Item price must be between Distributor Price and MRP</span>
+            <span class="text-danger" *ngIf="group.get('bcy_rate').touched && group.get('bcy_rate')?.hasError('invalid')">Item price must be between Distributor Price and MRP</span>
           </div>
           </td>
 
