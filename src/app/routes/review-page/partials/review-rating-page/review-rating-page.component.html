@@ -1,163 +1,138 @@
 <div class="rating-container">
     <div class="rating-content">
         
-        <div class="input-cont">
-            <label>How frequently do you use this software?</label>
-            <select  formControlName="productUsage">
-                <option>Please Select</option>
-                <option>daily</option>
-                <option> weekly</option>
-                <option>monthly </option>
-                <option>yearly</option>
-               
-                
-            </select>
-        </div>
-        <div class="review-field-main">
-            <label class="review_form_field_label">What is your role in using this software?</label>
-            <div class="smalltextafterlabel">(Select all that apply)</div>
-            <div class="custom-control ">
-            <input type="checkbox" id="role_checkbox_1"  class="custom-control-input" value="I am a user">
-            <label class="custom-control-label" >I am a user</label>
-            </div>
-            <div class="custom-control ">
-            <input type="checkbox" id="role_checkbox_2"  class="custom-control-input" value="I am the administrator">
-            <label class="custom-control-label" >I am the administrator</label>
-            </div>
-            <div class="custom-control ">
-            <input type="checkbox" id="role_checkbox_3"  class="custom-control-input" value="I am on the team that set up, implemented, or customized this product">
-            <label class="custom-control-label" >I am on the team that set up, implemented, or customized this product</label>
-            </div>
-            <div class="custom-control ">
-            <input type="checkbox" id="role_checkbox_4"  class="custom-control-input" value="I helped select or purchase this product">
-            <label class="custom-control-label">I helped select or purchase this product</label>
-            </div>
-            <div class="custom-control ">
-            <input type="checkbox" id="role_checkbox_5"  class="custom-control-input" value="I am a reseller">
-            <label class="custom-control-label">I am a reseller</label>
-            </div>
-            </div>
-            <hr>
+        <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
 
-            <div class="pros">
-                <label>Pros:<span style="font-weight: 600;">What did you find most impressive about This Product *</span></label>
-                <textarea class="review"  type="text-area" placeholder="What is the most benefecial about this product? What feature are most impactful? Is this value for money?" required ></textarea>
+            <!-- How frequently do you use this software? -->
+            <div class="input-cont">
+              <label for="frequentSoftwareUsage">How frequently do you use this software?</label>
+              <select formControlName="frequentSoftwareUsage" id="frequentSoftwareUsage">
+                <option value="">Please Select</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+              </select>
             </div>
-
-            
-            <div class="pros">
-                <label>  Cons:<span style="font-weight: 600;"> Please provide which Tutor LMS features/part can be improved*</span></label>
-                <textarea class="review"  type="text-area" placeholder="What is the least benefecial about this product?" required ></textarea>
-            </div>
-
-            
-            <div class="software-review-main">
-                <div class="heading">How likely are you to recommend This Product? *</div>
-                <div class="likely_not_likely">
-                <span>Not likely </span>
-                <img class=" lazyloaded" src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg" data-src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg" alt="imoji">
-                
-                <ul class="rating_numbar_main">
-                <li data-rating-value="1" class="numbar_li selected">1</li>
-                <li data-rating-value="2" class="numbar_li selected">2</li>
-                <li data-rating-value="3" class="numbar_li selected">3</li>
-                <li data-rating-value="4" class="numbar_li selected">4</li>
-                <li data-rating-value="5" class="numbar_li selected">5</li>
-                <li data-rating-value="6" class="numbar_li ">6</li>
-                <li data-rating-value="7" class="numbar_li ">7</li>
-                <li data-rating-value="8" class="numbar_li ">8</li>
-                <li data-rating-value="9" class="numbar_li" >9</li>
-                <li data-rating-value="10" class="numbar_li">10</li>
-                <input type="hidden" class="last_select_numbar review_number_required" name="SsReviewAll[recommendation_rating]" value="9" required="">
-                </ul>
           
+            <!-- What is your role in using this software? -->
+            <div class="review-field-main">
+              <label class="review_form_field_label">What is your role in using this software?</label>
+              <div class="smalltextafterlabel">(Select all that apply)</div>
+          
+              <div class="custom-control">
+                <input type="checkbox" id="role_checkbox_1" value="I am a user">
+                <label for="role_checkbox_1">I am a user</label>
+              </div>
+          
+              <div class="custom-control">
+                <input type="checkbox"  id="role_checkbox_2" value="I am the administrator">
+                <label for="role_checkbox_2">I am the administrator</label>
+              </div>
+          
+              <div class="custom-control">
+                <input type="checkbox" id="role_checkbox_3" value="I am on the team that set up, implemented, or customized this product">
+                <label for="role_checkbox_3">I am on the team that set up, implemented, or customized this product</label>
+              </div>
+          
+              <div class="custom-control">
+                <input type="checkbox"  id="role_checkbox_4" value="I helped select or purchase this product">
+                <label for="role_checkbox_4">I helped select or purchase this product</label>
+              </div>
+          
+              <div class="custom-control">
+                <input type="checkbox"  id="role_checkbox_5" value="I am a reseller">
+                <label for="role_checkbox_5">I am a reseller</label>
+              </div>
+            </div>
+          
+            <!-- Pros -->
+            <div class="pros">
+              <label for="pros">Pros:<span style="font-weight: 600;">What did you find most impressive about This Product *</span></label>
+              <textarea formControlName="pros" id="pros" placeholder="What is the most beneficial about this product? What feature is most impactful? Is this value for money?" required></textarea>
+            </div>
+          
+            <!-- Cons -->
+            <div class="pros">
+              <label for="cons">Cons:<span style="font-weight: 600;">Please provide which Tutor LMS features/part can be improved*</span></label>
+              <textarea formControlName="cons" id="cons" placeholder="What is the least beneficial about this product?" required></textarea>
+            </div>
+          
+            <!-- How likely are you to recommend This Product? -->
+            <div class="software-review-main">
+              <div class="heading">How likely are you to recommend This Product? *</div>
+              <div class="likely_not_likely">
+                <span>Not likely </span>
+                <img class="lazyloaded" src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg"
+                     data-src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg" alt="imoji">
+                <ul class="rating_numbar_main">
+                  <li *ngFor="let rating of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" [attr.data-rating-value]="rating"
+                      [ngClass]="{'numbar_li selected': rating === reviewForm.get('productRecommendRate').value}"
+                      (click)="reviewForm.get('productRecommendRate').setValue(rating)">{{rating}}
+                  </li>
+                </ul>
                 <div class="likely_not_likely">
-                <span>Extremely likely </span>
-                <img class=" lazyloaded" src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg" data-src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg" alt="imoji">
+                  <span>Extremely likely </span>
+                  <img class="lazyloaded" src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg"
+                       data-src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg" alt="imoji">
                 </div>
+              </div>
             </div>
+          
+            <!-- How would you rate after sales service/customer support of This Product? -->
+            <div class="software-review-main">
+              <div class="heading">How would you rate after sales service/customer support of This Product? *</div>
+              <div class="likely_not_likely">
+                <span>Not likely </span>
+                <img class="lazyloaded" src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg"
+                     data-src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg" alt="imoji">
+                <ul class="rating_numbar_main">
+                  <li *ngFor="let rating of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"[attr.data-rating-value]="rating"
+                      [ngClass]="{'numbar_li selected': rating === reviewForm.get('salesAndSupportRate').value}"
+                      (click)="reviewForm.get('salesAndSupportRate').setValue(rating)">{{rating}}
+                  </li>
+                </ul>
+                <div class="likely_not_likely">
+                  <span>Extremely likely </span>
+                  <img class="lazyloaded" src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg"
+                       data-src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg" alt="imoji">
                 </div>
-
-<!-- /section-02/ -->
-
-                <div class="software-review-main">
-                    <div class="heading">How would you rate after sales service/customer support of  This Product? *</div>
-                    <div class="likely_not_likely">
-                    <span>Not likely </span>
-                    <img class=" lazyloaded" src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg" data-src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg" alt="imoji">
-                    
-                    <ul class="rating_numbar_main">
-                    <li data-rating-value="1" class="numbar_li selected">1</li>
-                    <li data-rating-value="2" class="numbar_li selected">2</li>
-                    <li data-rating-value="3" class="numbar_li selected">3</li>
-                    <li data-rating-value="4" class="numbar_li selected">4</li>
-                    <li data-rating-value="5" class="numbar_li selected">5</li>
-                    <li data-rating-value="6" class="numbar_li ">6</li>
-                    <li data-rating-value="7" class="numbar_li ">7</li>
-                    <li data-rating-value="8" class="numbar_li ">8</li>
-                    <li data-rating-value="9" class="numbar_li" >9</li>
-                    <li data-rating-value="10" class="numbar_li">10</li>
-                    <input type="hidden" class="last_select_numbar review_number_required" name="SsReviewAll[recommendation_rating]" value="9" required="">
-                    </ul>
-              
-                    <div class="likely_not_likely">
-                    <span>Extremely likely </span>
-                    <img class=" lazyloaded" src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg" data-src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg" alt="imoji">
-                    </div>
-                </div>
-                    </div>
-
-                    <div class="user-info">
-                        <label>What other products like This product have you used or evaluated? *</label>
-                        <textarea class="review"  type="text-area" placeholder="Have you tried any other Software/ like This Product? Any comparison between the two products?" required ></textarea>
-                    </div>
-        
-                    
-                    <div class="user-info">
-                        <label> Any Missing Feature?*</label>
-                        <textarea class="review"  type="text-area" placeholder="Any features you find missing in This  Product?" required ></textarea>
-                    </div>
-
-<div class="buttons">
-    <div class="btn-01" >
-        <button class="pre-btn" [routerLink]="['/review-page/review-detail-page']"  >previous</button>
-      </div>
-      <div class="btn-02" >
-        <button class="next-btn" [routerLink]="['/review-page/review-final-page']"  >Next</button>
-      </div>
-</div>
-
-                    
-    </div>
-
-    <div class="guide-container">
-        <div class="guide-heading">Review Guidelines</div>
-        <div class="guide-cont">All reviews will be moderated before publication and must meet our guidelines. Review must be substantive, professional, and avoid self promotion. Moderators will use their discretion to approve reviews.</div>
-        <div class="guide-image">
-            <div class="img-01">
-                <div class="info-img">
-                    <img class="img-guide" src="../../../../../assets/images/info.svg">
-                </div>
-                <div class="info-cont">No Incomplete Information</div>
+              </div>
             </div>
-            <div class="img-01">
-                <div class="info-img">
-                    <img class="img-guide" src="../../../../../assets/images/activity.svg">
-                </div>
-                <div class="info-cont">No Self-Promotional Activity</div>
+          
+            <!-- What other products like This product have you used or evaluated? -->
+            <div class="user-info">
+              <label for="otherProducts">What other products like This product have you used or evaluated? *</label>
+              <textarea formControlName="otherProductExperience" id="otherProductExperience"
+                        placeholder="Have you tried any other Software/ like This Product? Any comparison between the two products?" required></textarea>
             </div>
-            <div class="img-01">
-                <div class="info-img">
-                    <img class="img-guide" src="../../../../../assets/images/lang.svg">
-                </div>
-                <div class="info-cont">No Hateful or Disparaging Language</div>
+          
+            <!-- Any Missing Feature? -->
+            <div class="user-info">
+              <label for="missingFeatures">Any Missing Feature?*</label>
+              <textarea formControlName="missingFeature" id="missingFeature"
+                        placeholder="Any features you find missing in This  Product?" required></textarea>
             </div>
-            <div class="img-01">
-                <div class="info-img">
-                    <img class="img-guide" src="../../../../../assets/images/fake.svg">
-                </div>
-                <div class="info-cont">No Use of Fake Names or Spam Content.</div>
+          
+            <div class="buttons">
+              <div class="btn-01">
+                <button class="pre-btn" (click)="goToProductReviewpage()">Previous</button>
+              </div>
+              <div class="btn-02">
+                <button class="next-btn">Next</button>
+              </div>
             </div>
-        </div>
+          </form>
+          
+          <div class="guide-container">
+            <div class="guide-heading">Review Guidelines</div>
+            <div class="guide-cont">
+              All reviews will be moderated before publication and must meet our guidelines. Reviews must be substantive, professional, and avoid self-promotion. Moderators will use their discretion to approve reviews.
+            </div>
+            <div class="guide-image">
+              <!-- Your guide images and content here -->
+            </div>
+          </div>
+          
     </div>
 </div>

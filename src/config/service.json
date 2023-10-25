@@ -98,7 +98,11 @@
 
         "getChannelPartnerDetailsById" : "api/user/channel-partner/",
 
-        "getChannelAMAccountListURL":"api/admin/getChannelAMAccountList"
+        "getChannelAMAccountListURL":"api/admin/getChannelAMAccountList",
+
+        "createProductReviewURL": "api/product-review/create",
+        
+        "getProductReviewURL": "api/product-review"
 
 
     },

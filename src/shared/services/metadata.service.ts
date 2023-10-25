@@ -35,6 +35,8 @@ export class MetadataService {
   private fetchAdminProductDetailsUrl:string;
   private customerSupportUrl : string;
   private getUserNotificationsUrl : string;
+  private createProductReviewUrl : string;
+  private fetchProductReviewUrl : string;
 
 
   constructor(
@@ -63,6 +65,8 @@ export class MetadataService {
     this.fetchAdminProductDetailsUrl=AppService.appUrl.fetchAdmingProduct;
     this.customerSupportUrl = AppService.appUrl.customerSupport;
     this.getUserNotificationsUrl = AppService.appUrl.getUserNotifications;
+    this.createProductReviewUrl = AppService.appUrl.createProductReviewURL;
+    this.fetchProductReviewUrl = AppService.appUrl.getProductReviewURL;
   }
 
   //fetch All Category
@@ -493,6 +497,62 @@ export class MetadataService {
     }
 
 
+
+    
+  /**
+   * Update Product Review
+   */
+
+  public createProductReview(productReviewPayload) : Observable<any> {
+    //id = "63eb236c53c21de2f6841bca";
+    let url = this.baseUrlUsers+ this.createProductReviewUrl;
+
+
+    let request$ = this.http.post(url,productReviewPayload)
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+        return response;
+      }),
+      catchError(error => {
+        // create operation mapping for http exception handling 
+        return (error);
+      })
+    );
+
+      return request$;
+    }
+
+
+    
+  /**
+   *  Fetch Product Review By Id
+   */
+
+  public getProductReviewById(id: string) : Observable<any> {
+
+    let url = this.baseUrlUsers+ this.fetchProductReviewUrl + '/' + String(id);
+
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+          map(response => {
+            if (!response) {
+              return null;
+            }
+            console.log("____TEST____",response);
+            return response;
+          }),
+          catchError(error => {
+            // create operation mapping for http exception handling 
+            return (error);
+          })
+        );
+
+      return request$;
+    }
 
 
 }
