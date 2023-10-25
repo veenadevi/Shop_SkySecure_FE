@@ -99,10 +99,10 @@
                             </span>
                             <span class="row-value">
 
-                                <ng-container *ngIf="contactsData.contact_name!=null; else contactName">
+                                <ng-container *ngIf="contactsData.contact_name!=null; else companyNameNull">
                                     {{contactsData.contact_name}}
                                   </ng-container>
-                                  <ng-template #contactName>{{responseData.assignTo.firstName}}</ng-template>
+                                  <ng-template #companyNameNull>-</ng-template>
 
                               
                             </span>

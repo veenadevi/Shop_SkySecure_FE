@@ -56,9 +56,9 @@
           <div class="card text-black bg-card o-hidden h-100">
             <div class="card-body">
               
-              <div class="mr-5">Transaction Value</div>
+              <div class="mr-5">Transaction Value(6 months)</div>
               <div class="card-value">
-                {{customerProfits.total.income_total}}
+                {{customerProfits.total.income_total | number : '1.2-2'}}
               </div>
             </div>
             
