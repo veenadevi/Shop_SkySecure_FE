@@ -223,7 +223,7 @@ public fetchGST(){
         "inviteReason":"newUserInvite",
         "createdBy":this.userDetails._id,
         "updatedBy":this.userDetails._id,
-        "sendEmail":this.myForm.get('triggeremail').value?this.myForm.get('triggeremail').value:true
+       "sendEmail":formData.triggeremail?formData.triggeremail:false
       }
 
 console.log("request===",request)
