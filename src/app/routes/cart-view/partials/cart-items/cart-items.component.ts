@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
@@ -62,7 +62,8 @@ export class CartItemsComponent {
   public grandTotal = 0
   public monthlyItemsGrandTotal=0
   public   yearlyItemsGrandTotal=0
-  public errortext:string
+  public errortext:string;
+
 
 
 
@@ -733,6 +734,8 @@ public onChangeQuantity(i, price) : void {
     phone : '1234567890'
   }
 
+  @ViewChild('form') form: ElementRef;
+
   checkout(){
 
     let order_no = "0001";
@@ -741,7 +744,7 @@ public onChangeQuantity(i, price) : void {
     //let redirect_url = 'http%3A%2F%2Flocalhost%3A3008%2Fhandleresponse';
     let redirect_url = 'https://dev-shop.skysecuretech.com/';
     let useremail = 'vigneshblog4@gmail.com';
-    let request = `merchant_id=213313&order_id=${order_no}&currency=INR&amount=${testAmount}&redirect_url=${redirect_url}&cancel_url=${redirect_url}&language=EN&billing_name=${this.selectedAddress.name}&billing_address=${this.selectedAddress.address}&billing_city=${this.selectedAddress.city}&billing_state=MH&billing_zip=${this.selectedAddress.pincode}&billing_country=India&billing_tel=${this.selectedAddress.phone}&delivery_name=${this.selectedAddress.name}&delivery_address=${this.selectedAddress.address}&delivery_city=${this.selectedAddress.city}&delivery_state=${this.selectedAddress.state}&delivery_zip=${this.selectedAddress.pincode}&delivery_country=India&delivery_tel=${this.selectedAddress.phone}&billing_email=${useremail}`
+    let request = `merchant_id=${this.merchantId}&order_id=${order_no}&currency=INR&amount=${testAmount}&redirect_url=${redirect_url}&cancel_url=${redirect_url}&language=EN&billing_name=${this.selectedAddress.name}&billing_address=${this.selectedAddress.address}&billing_city=${this.selectedAddress.city}&billing_state=MH&billing_zip=${this.selectedAddress.pincode}&billing_country=India&billing_tel=${this.selectedAddress.phone}&delivery_name=${this.selectedAddress.name}&delivery_address=${this.selectedAddress.address}&delivery_city=${this.selectedAddress.city}&delivery_state=${this.selectedAddress.state}&delivery_zip=${this.selectedAddress.pincode}&delivery_country=India&delivery_tel=${this.selectedAddress.phone}&billing_email=${useremail}`
     
     /*this.cartService.encryptdata(request).subscribe(
       data => {
@@ -754,12 +757,15 @@ public onChangeQuantity(i, price) : void {
 
       this.subscriptions.push(
         this.cartService.encryptdata(request).subscribe( data=>{
-          console.log('---------------------', data['response'])
-          this.encRequestRes = data['response']; 
-              /*setTimeout(()=>{
-                  //this.form.nativeElement.submit();
-                  console.log("+_+_+_+ ()( )()( ", this.encRequestRes);
-              },1000)*/
+          console.log('---------------------', data)
+
+          this.encRequestRes = data;
+          //this.encRequestRes = data['response']; 
+
+              setTimeout(()=>{
+                  this.form.nativeElement.submit();
+                  //console.log("+_+_+_+ ()( )()( ", this.encRequestRes);
+              },1000)
         }, error => {
           console.log("++++++ Error",error)
           })
