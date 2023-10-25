@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import Validation from '../utils/validation';
 import { AuthService } from 'src/shared/services/auth.service';
@@ -10,6 +10,8 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 import * as CryptoJS from 'crypto-js';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
+import { NgOtpInputConfig } from 'ng-otp-input';
+ 
 
 @Component({
   selector: 'login',
@@ -20,6 +22,9 @@ export class LoginComponent {
 
   form: FormGroup;
   submitted = false;
+  otp:any
+  showOtpComponent = true;
+  @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any;
 
   private subscriptions : Subscription[] = [];
 
@@ -185,7 +190,7 @@ export class LoginComponent {
 
     //var passKey= "!ndia2320@securesky";
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-      let hashedPass = CryptoJS.AES.encrypt(this.form.value.otp, key).toString();
+      let hashedPass = CryptoJS.AES.encrypt(this.otp, key).toString();
       let req = {
         "emailId":this.form.value.email,
         //"emailId" : "veena@skysecuretech.com",
@@ -256,6 +261,43 @@ export class LoginComponent {
   }
   public navigateToHomePage(){
     this.router.navigate(['']);
+  }
+
+ 
+ 
+
+  config = {
+    allowNumbersOnly: true,
+    length: 6,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder: "",
+    inputStyles: {  
+      width: "50px",
+      height: "50px",
+    },
+  };
+   
+  // setVal(val:any) {
+  //   console.log("set value",this.ngOtpInput.setValue(val))
+  //   this.ngOtpInput.setValue(val);
+  // }
+  // onConfigChange() {
+  //   this.showOtpComponent = false;
+  //   this.otp = null;
+  //   setTimeout(() => {
+  //     console.log("set valuetimeout")
+  //     this.showOtpComponent = true;
+  //   }, 0);
+  // }
+   
+
+  onOtpChange(otp: any) {
+    this.otp = otp;
+    console.log("this.otp", this.otp);
+    if (otp.length === 6) {
+      this.login();
+    }
   }
 }
 

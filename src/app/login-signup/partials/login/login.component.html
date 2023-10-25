@@ -32,12 +32,19 @@
 
               <div *ngIf= "otpField" class="form-group">
                 <label>OTP</label>
-                <input
+                <!-- <input
                   type="text"
                   formControlName="otp"
                   placeholder="Enter OTP"
                   class="form-control"
-                />
+                /> -->
+
+                <ng-otp-input
+                #ngOtpInput
+                (onInputChange)="onOtpChange($event)"
+                *ngIf="showOtpComponent"
+                [config]="config"
+              ></ng-otp-input>
               </div>
 
           
