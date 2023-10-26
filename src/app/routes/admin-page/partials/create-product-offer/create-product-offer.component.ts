@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 import { DatePipe } from '@angular/common';
 
 interface CreateProductPayload {
@@ -48,6 +49,7 @@ interface CreateProductPayload {
 
 
 export class CreateProductOfferComponent  implements OnInit {
+  public subscription : Subscription[] = [];
   submitted = false;
   public subscriptions: Subscription[] = [];
   public categories: CategoryDetails[] = [];
@@ -98,7 +100,8 @@ export class CreateProductOfferComponent  implements OnInit {
     private router : Router,
     private route: ActivatedRoute,
     private userAccountStore :UserAccountStore,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private adminPageService : AdminPageService
   ) {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
@@ -434,10 +437,37 @@ export class CreateProductOfferComponent  implements OnInit {
     featureArray.push(this.createFeatureGroup());
   }
 
-  onSubmit(): any {
+  onSubmit() : any{
     this.submitted = true;
-  }
+  
+      let request = {
+        "productId": "64ba0c3098d9240055576ff6",
+        "name": "Get 30% Year End Offer",
+        "description": "offer description",
+        "isOEM": true,
+        "oemId": "64be4f09b95a8a00552a0aa2",
+        "isActive": true,
+        "startDate": "2023-10-17",
+        "endDate": "2023-12-30",
+        "offerCode": "SKYSEC2023",
+        "discountPercentage": 30,
+        "totalClicks": 0,
+        "createdBy": "64fab2539166f500542451b5",
+        "updatedBy": "64fab2539166f500542451b5"
+      }
 
+console.log("request===",request)
+      this.subscription.push(
+        this.adminPageService.createProductOffer(request).subscribe(res=>{
+          console.log("+_+_+_ Res ", res);
+          this.showMsg=true;
+          // this.myForm.reset();
+        })
+      )
+
+      //console.log('Form submitted:', this.myForm.value);
+   
+  }
   // Submit Registration Form
   editProduct(): any {
   //  this.submitted = true;
