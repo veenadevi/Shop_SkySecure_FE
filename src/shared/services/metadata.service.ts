@@ -505,7 +505,7 @@ export class MetadataService {
 
   public createProductReview(productReviewPayload) : Observable<any> {
     //id = "63eb236c53c21de2f6841bca";
-    let url = this.baseUrlUsers+ this.createProductReviewUrl;
+    let url = this.baseUrl+ this.createProductReviewUrl;
 
 
     let request$ = this.http.post(url,productReviewPayload)
@@ -533,7 +533,7 @@ export class MetadataService {
 
   public getProductReviewById(id: string) : Observable<any> {
 
-    let url = this.baseUrlUsers+ this.fetchProductReviewUrl + '/' + String(id);
+    let url = this.baseUrl+ this.fetchProductReviewUrl + '/' + String(id);
 
 
     let request$ = this.http.get<Observable<any>>(url)

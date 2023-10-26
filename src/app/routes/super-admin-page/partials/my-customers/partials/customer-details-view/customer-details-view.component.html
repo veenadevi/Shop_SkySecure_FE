@@ -30,18 +30,18 @@
       <!-- Icon Cards-->
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-black bg-card o-hidden h-100">
+          <div class="card text-black bg-card o-hidden h-100 totalTrans">
             <div class="card-body">
               
               <div class="mr-5">Total Estimates</div>
               <div class="card-value">
-                {{customerEstimates ? customerEstimates.length : 0}}
+               {{customerEstimates ? customerEstimates.length : 0}}
               </div>
             </div>
           </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-black bg-card o-hidden h-100">
+          <div class="card text-black bg-card o-hidden h-100 totalTrans">
             <div class="card-body">
               
               <div class="mr-5">Total Invoices</div>
@@ -53,12 +53,12 @@
           </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card text-black bg-card o-hidden h-100">
+          <div class="card text-black bg-card o-hidden h-100 totalTrans">
             <div class="card-body">
               
               <div class="mr-5">Transaction Value(6 months)</div>
               <div class="card-value">
-                {{customerProfits.total.income_total | number : '1.2-2'}}
+                &#8377;  {{customerProfits.total.income_total | number : '1.2-2'}}
               </div>
             </div>
             
