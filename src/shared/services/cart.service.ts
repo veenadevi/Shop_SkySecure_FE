@@ -16,6 +16,7 @@ import { UserAccountStore } from '../stores/user-account.store';
 import { UserCartRequest } from '../models/interface/request/user-cart.request';
 import { UserCartRequestModel } from '../models/concrete/user-cart.model';
 import { CartStore } from '../stores/cart.store';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
@@ -247,10 +248,20 @@ export class CartService {
     let data = {
     request : request
     }
+
+    let key = "&&((SkysecureRealize&&For&&PaymentGateway&&!!IsTheBestApp^!@$%"
+    let hashedPass = CryptoJS.AES.encrypt('101', key).toString();
+
+    request = {
+      "currency" : "INR", // or any supported currency
+      "amount" : hashedPass,
+      "redirect_url" : 'https://dev-shop.skysecuretech.com/',
+      "cancel_url" : 'https://dev-shop.skysecuretech.com/',
+    }
     
 
 
-    let request$ = this.http.get<Observable<any>>(url, {params:data})
+    let request$ = this.http.post<Observable<any>>(url, request)
     .pipe(
       map(response => {
         if (!response) {
