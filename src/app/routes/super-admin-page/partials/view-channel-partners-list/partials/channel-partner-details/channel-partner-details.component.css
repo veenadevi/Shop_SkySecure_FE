@@ -1,0 +1,106 @@
+#channel-partner-details {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+    font-size: 12px;
+}
+
+.content-wrapper {
+    min-height: calc(100vh - 56px);
+    padding-top: 1rem; 
+}
+
+.bg-card{
+    background: #fff;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03),
+      0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03),
+      0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05),
+      0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+    border-radius: 0.25rem;
+}
+.row {
+    margin-top: 16px;
+}
+.card-value {
+    font-size: 2em;
+    /* margin-top: 10px; */
+}
+.card-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.card-body img{
+    height: 36px;
+    /* margin-right: 16px; */
+}
+
+.app-page-title .page-title-heading,
+.app-page-title .page-title-subheading {
+  margin: 0;
+  padding: 0;
+}
+.app-page-title .page-title-heading {
+  font-size: 15px;
+  font-weight: 400;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.app-page-title .page-title-subheading {
+  padding: 3px 0 0;
+  font-size: 0.88rem;
+  opacity: 0.6;
+}
+.app-page-title .page-title-subheading .breadcrumb {
+  padding: 0;
+  margin: 3px 0 0;
+  background: 0 0;
+}
+
+.app-page-title .channel-partner-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--neutral-1000);
+}
+
+.lead-icon-section {
+    padding: 10px;
+    display: flex;
+    margin-right: 16px;
+    background: var(--primary-50-purple);
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+.lead-assign-icon-section {
+    display: flex;
+    padding: 10px;
+    margin-right: 16px;
+    background: var(--warning-100);
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+.lead-closed-icon-section {
+    display: flex;
+    padding: 10px;
+    margin-right: 16px;
+    background: var(--success-100);
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+.lead-reject-icon-section {
+    display: flex;
+    padding: 10px;
+    margin-right: 16px;
+    background: var(--error-100);
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
