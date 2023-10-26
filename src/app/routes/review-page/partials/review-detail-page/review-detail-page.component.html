@@ -1,7 +1,10 @@
 <div class="details-container">
     <div class="content">
-        <h1>Give Your Ratings</h1>
+      
+        <!-- <p> {{ productName }}</p> -->
+
         <form [formGroup]="reviewForm">
+          <h4 class="d-flex justify-content-center mb-3 mt-3">{{ productName }}</h4>
             <div class="form">
               <div class="input-cont">
                 <label for="userName">Name*</label>
@@ -66,11 +69,16 @@
           
             <div class="title">
               <label>Title of Your Review*</label>
-              <input formControlName="reviewTitle" type="text" placeholder="Describe Your Experience Short Sentence" required>
+              <input formControlName="reviewTitle" type="text" maxlength="15"  placeholder="Describe Your Experience Short Sentence" required>
+             
+              <!-- <div  *ngIf=" reviewForm.get('reviewTitle').hasError('maxlength')">
+                <div class="text-danger">Review title cannot exceed 15 characters.</div>
+              </div> -->
+             
             </div>
             <div class="your">
               <label>Your Review*</label>
-              <textarea formControlName="reviewContent" class="review" placeholder="Give your Review" required></textarea>
+              <textarea formControlName="reviewContent" maxlength="150"class="review" placeholder="Give your Review" required></textarea>
             </div>
           
             <div class="condition">

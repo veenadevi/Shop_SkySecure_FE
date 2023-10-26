@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
@@ -15,7 +17,9 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 export class ReviewDetailPageComponent {
   reviewForm: FormGroup;
   selectedUserId: number;
-
+  productId: string;
+  productName
+  
   public usersList: any[] = [];
   public userId: string;
   public subscription: Subscription[] = [];
@@ -36,7 +40,8 @@ export class ReviewDetailPageComponent {
     featuresRating: 0,
     easyToUseRating: 0,
     valueOfMoneyRating: 0,
-    customerSupportRating: 0
+    customerSupportRating: 0,
+    productName:''
   };
 
   selectedRatings: { [key: string]: number } = {
@@ -59,7 +64,9 @@ export class ReviewDetailPageComponent {
     private route: ActivatedRoute,
     private router: Router,
     private metaDataStore: MetadataStore,
-    private metaDataService: MetadataService) {
+    private metaDataService: MetadataService,
+    
+    ) {
 
     this.reviewForm = this.fb.group({
       userName: ['', Validators.required],
@@ -68,7 +75,7 @@ export class ReviewDetailPageComponent {
       jobTitle: ['', Validators.required],
       companySize: ['', Validators.required],
       softwareUsageDuration: ['', Validators.required],
-      reviewTitle: ['', Validators.required],
+      reviewTitle: ['', Validators.required, ],
       reviewContent: ['', Validators.required],
       agreeTermsAndConditions: [false, Validators.requiredTrue],
     });
@@ -88,10 +95,27 @@ export class ReviewDetailPageComponent {
       if (event instanceof NavigationError) {
       }
     });
+    this.route.queryParams.subscribe(params => {
+      this.productId = params.productId;
+      this.productName = params.productName;
+    });
   }
 
+  // get getFormData(): FormArray {
+  //   return <FormArray>this.reviewForm.get(' reviewTitle');
+  // }
 
+//   checkInputLength(inputField) {
+//     const maxLength = 15;
+//     const inputValue = inputField.value;
+//     const errorElement = document.getElementById("inputTextError");
 
+//     if (inputValue.length > maxLength) {
+//         errorElement.textContent = "Input text exceeds the maximum length of 15 characters.";
+//     } else {
+//         errorElement.textContent = ""; // Clear the error message
+//     }
+// }
 
   ngOnInit(): void {
     this.reviewPayload = this.metaDataStore.getProductReviewDetails();
@@ -118,10 +142,19 @@ export class ReviewDetailPageComponent {
     }
   }
 
-  rate(aspect: any, star: number): void {
-    this.selectedRatings[aspect.key] = star;
-    console.log("____TEST RATE___", this.selectedRatings);
-  }
+ // Define a variable to store the cumulative rating
+// cumulativeRating: number = 0;
+rate(aspect: any, star: number): void {
+  this.selectedRatings[aspect.key] = star;
+   console.log("____TEST RATE___", this.selectedRatings);
+   console.log("customerSupportRating",this.selectedRatings[aspect.key] )
+  //  this.cumulativeRating += star;
+  //  console.log("____TEST RATE___ ", this.selectedRatings); 
+  //  const averageRating = this.cumulativeRating / 5;
+  //  console.log("Cumulative Rating:", this.cumulativeRating);
+  //  console.log("Average Rating:", averageRating);
+ 
+}
 
   onSubmit(): void {
     if (this.reviewForm.valid) {
@@ -142,11 +175,17 @@ export class ReviewDetailPageComponent {
         featuresRating: this.selectedRatings.featuresRating,
         easyToUseRating: this.selectedRatings.easyToUseRating,
         valueOfMoneyRating: this.selectedRatings.valueOfMoneyRating,
-        customerSupportRating: this.selectedRatings.customerSupportRating
+        customerSupportRating: this.selectedRatings.customerSupportRating,
+        productName:this.productName
+       
       };
+      console.log("productName",this,this.productName)
       console.log("____TEST____REVIEW__PAYLOAD___", this.reviewPayload);
       this.metaDataStore.setProductReviewDetails(this.reviewPayload);
-      this.router.navigate([`/review-page/review-rating-page`]);
+      // this.router.navigate([`/review-page/review-rating-page`]);
+      this.router.navigate([`/review-page/review-rating-page`], {
+      queryParams: { productName: this.productName }
+    });
     } else {
       console.log("___ERROR____")
       // Handle form validation errors or show a message to the user

@@ -25,11 +25,28 @@ export class ReviewHomeComponent {
   public getSearchResults(searchKey: string) {
     this.globalSearchSvc.fetchSearchResults(searchKey).subscribe(res => {
       this.productList = res.products;
+      const productNames = this.productList.map(product => product.name);
+      // console.log("this.productList",res.products);
+      // console.log("this.productList",res.products.name);
+      console.log("productNames",productNames);
+
     });
   }
 
-  public selectProduct(productId: string) {
-     this.router.navigate([`/review-page/review-detail-page/${productId}`]);
+  // public selectProduct(productId: string) {
+  //    this.router.navigate([`/review-page/review-detail-page/${productId}`]);
+  // }
+  public selectProduct(productId: string, productName: string) {
+    this.router.navigate([`/review-page/review-detail-page/${productId}`], {
+      queryParams: { productName: productName }
+    });
+    this.selectProductName(productName)
   }
+  public selectProductName( productName: string) {
+    console.log("productNames",productName);
+  }
+  
+  
+ 
 
 }

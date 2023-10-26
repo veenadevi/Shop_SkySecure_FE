@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { MetadataStore } from 'src/shared/stores/metadata.store';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-review-rating-page',
@@ -10,7 +10,10 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 })
 export class ReviewRatingPageComponent  {
    reviewForm: FormGroup;
+
+  productName
     productReviewDetails: {
+     
       frequentSoftwareUsage: "",
       role: "I am a user",
       pros: "",
@@ -38,7 +41,8 @@ export class ReviewRatingPageComponent  {
       reseller: 'I am a reseller',
     };
 
-    constructor( private fb: FormBuilder, private metaDataStore: MetadataStore, private router: Router) {
+    constructor( private fb: FormBuilder, private metaDataStore: MetadataStore, private router: Router,
+      private route: ActivatedRoute,) {
       this.reviewForm = this.fb.group({
         frequentSoftwareUsage: ['', Validators.required],
         roles: this.fb.group({
@@ -56,11 +60,15 @@ export class ReviewRatingPageComponent  {
         missingFeature: ['', Validators.required]
       });
       this.productReviewDetails = this.metaDataStore.getProductReviewDetails();
+      console.log(" this.productReviewDetails---", this.productReviewDetails)
+    //  this.productName=this.productReviewDetails
+    //  console.log(" ----productName---", this.productName)
     }
 
 
     ngOnInit(): void {
       this.productReviewDetails = this.metaDataStore.getProductReviewOtherDetails();
+      console.log("this.productreview-NAME ", this.productName=this.metaDataStore.getProductReviewDetails().productName)
       if (this.productReviewDetails.frequentSoftwareUsage?.length > 2) {
         const roleControl = this.reviewForm.get('role');
         if (roleControl) {
@@ -108,7 +116,9 @@ export class ReviewRatingPageComponent  {
         }
         };
         this.metaDataStore.setProductReviewOtherDetails(this.productReviewDetails);
-        this.router.navigate([`/review-page/review-final-page`]);
+        this.router.navigate([`/review-page/review-final-page`], {
+          queryParams: { productName: this.productName }
+        });
       } else {
         // Handle form validation errors or show a message to the user
       }
