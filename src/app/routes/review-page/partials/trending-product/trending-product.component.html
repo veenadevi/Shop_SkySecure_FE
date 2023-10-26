@@ -1,0 +1,70 @@
+
+<ng-container *ngIf="trendingProductsList && trendingProductsList.length > 0">
+    <h2>Trending Products</h2>
+    <div class="card-container">
+      <ng-container *ngFor="let product of trendingProductsList">
+      <div class="card" (click)="selectProduct(product._id)">
+      <div class="image">
+        <img class="card-img" src="../../../../../assets/icons/Microsoft.svg">
+        <!-- <img class="mat-card-img" mat-card-image [src]="staticProductimageUrl" alt="Photo of test title" /> -->
+      </div>
+      <div class="cat-name-solu">
+      <div class="card-cont">
+        <div class="header">
+          {{product.name}}
+        </div>
+   
+      </div>
+      <div class="card-cont-01">
+        <div class="header">
+            Solution Category:
+        </div>
+        <p class="solution-link">{{ (product.subcategories && product.subcategories.length > 0)? product.subcategories[0].name : ''}}</p>
+    </div>
+    </div>
+      </div>
+    </ng-container>
+    </div>
+    <!-- <product-card-item [productList] = trendingProductsList [routePath]="'home'"></product-card-item> -->
+   
+  </ng-container>
+  
+  <!-- <div class="container">
+      <div>
+          <span class="text-header alignLeft">Trending Products</span>
+          <span class="text-normal brown-color alignRight">
+              See All
+              <img src="../../../../assets/icons/arrow-right-1.svg">
+          </span>
+      </div>
+  
+      <div class="product-container">
+          <mat-card class="mat-card-hero"  *ngFor="let product of trendingProductsList">
+              <mat-card-header [routerLink]="['/products', product._id]">
+                <img class="mat-card-img" mat-card-image [src]="staticProductimageUrl" alt="Photo of test title" />
+                <div class="review-header">
+                  <p class="review-box">4.3
+                    <mat-icon class="review-icon">star</mat-icon>
+                  </p>
+                  <p><a class="review" href="url">See reviews
+                    </a></p>
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="title-container">
+                  <mat-card-title>{{product.name}}</mat-card-title>
+                  <mat-icon class="product-bookmark">bookmark_border</mat-icon>
+                </div>
+                <p class="product-descirption">{{product.description}}</p>
+                <mat-card-subtitle>SOLUTION:</mat-card-subtitle>
+                <p class="solution-link"><a href="url">{{product.name}}</a></p>
+                <div class="product-actions">
+                  <button class="btn compare-btn">Add to compare</button>
+                  <button class="btn request-btn" (click)="requestQuote(product)">Request quote</button>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          
+      </div>
+  
+  </div> -->

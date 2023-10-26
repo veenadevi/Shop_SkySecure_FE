@@ -91,9 +91,10 @@ export class ReviewRatingPageComponent  {
         this.reviewForm.patchValue(this.productReviewDetails);
       }
     }
-
+    public NextErrorMessage: boolean =false;
     onSubmit(): void {
       if (this.reviewForm.valid) {
+        this.NextErrorMessage = false;
         const formData = this.reviewForm.value;
         this.updateRoles();
         this.productReviewDetails = {
@@ -120,6 +121,7 @@ export class ReviewRatingPageComponent  {
           queryParams: { productName: this.productName }
         });
       } else {
+        this.NextErrorMessage = true;
         // Handle form validation errors or show a message to the user
       }
     }

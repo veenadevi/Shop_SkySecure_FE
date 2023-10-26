@@ -85,10 +85,14 @@
               <input type="checkbox" class="check" id="chb" formControlName="agreeTermsAndConditions" required>
               <div class="form-check-label">&nbsp;I certify that my feedback is based on my experience with this product. By submitting, I agree to the terms of use and privacy policy of SoftwareSuggest.</div>
             </div>
-          
+            <div *ngIf="NextErrorMessage">
+              <p class="error">* Please Fill All Mandatory Fields</p>
+            </div>
             <div class="button">
               <button class="btn primary-btn" (click)="onSubmit()">Next</button>
+             
             </div>
+            <!-- {{disableErrorMessage}} -->
           </form>
           
 

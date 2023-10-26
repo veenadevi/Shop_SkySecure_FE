@@ -142,6 +142,7 @@ export class ReviewDetailPageComponent {
     }
   }
 
+<<<<<<< Updated upstream
  // Define a variable to store the cumulative rating
 // cumulativeRating: number = 0;
 rate(aspect: any, star: number): void {
@@ -156,8 +157,16 @@ rate(aspect: any, star: number): void {
  
 }
 
+=======
+  rate(aspect: any, star: number): void {
+    this.selectedRatings[aspect.key] = star;
+    console.log("____TEST RATE___", this.selectedRatings);
+  }
+  public NextErrorMessage: boolean =false;
+>>>>>>> Stashed changes
   onSubmit(): void {
     if (this.reviewForm.valid) {
+      this.NextErrorMessage = false;
       // You can submit the form data here
       const formData = this.reviewForm.value;
       this.reviewPayload = {
@@ -188,10 +197,16 @@ rate(aspect: any, star: number): void {
     });
     } else {
       console.log("___ERROR____")
+      this.NextErrorMessage = true;
       // Handle form validation errors or show a message to the user
     }
   }
 
+  // disableErrorMessage(){
+  //   if(this.reviewForm.value === true){
+  //     this.NextErrorMessage=false;
+  //   }
+  // }
   updateReviewPayload(payload, providedObject): any {
     for (const key in payload) {
       if (providedObject.hasOwnProperty(key)) {

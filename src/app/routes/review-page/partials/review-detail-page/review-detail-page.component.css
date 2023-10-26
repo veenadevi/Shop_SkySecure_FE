@@ -248,6 +248,14 @@ font-weight: 400;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     font-family: 'lato', sans-serif;
 }
+<<<<<<< Updated upstream
 .text-danger{
     font-size: 8px !important;
+=======
+.error{
+    color: red;
+    text-align: center;
+    font: size 12px;
+    /* padding: 20px; */
+>>>>>>> Stashed changes
 }

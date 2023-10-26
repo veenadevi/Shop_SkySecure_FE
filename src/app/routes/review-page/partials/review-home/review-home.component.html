@@ -18,8 +18,12 @@
     </div>
   </div>
 
+<!-- <ng-container *ngIf="let product of productList.length>0">
 
+  <h2>Our Products</h2>
+</ng-container> -->
 
+<<<<<<< Updated upstream
   <h2>Our Products</h2>
   <div class="card-container">
     <ng-container *ngFor="let product of productList">
@@ -38,4 +42,27 @@
       </div>
     </ng-container>
   </div>
+=======
+<div class="card-container">
+  <ng-container *ngFor="let product of productList">
+   
+  <div class="card" (click)="selectProduct(product._id)">
+  <div class="image">
+    <img class="card-img" src="../../../../../assets/icons/Microsoft.svg">
+  </div>
+  <div class="card-cont">
+    <div class="header">
+      {{product.name}}
+    </div>
+    <div class="sponser">
+By Microsoft
+    </div>
+  </div>
+  </div>
+</ng-container>
+</div>
+
+<trending-product></trending-product>
+
+>>>>>>> Stashed changes
 </div>

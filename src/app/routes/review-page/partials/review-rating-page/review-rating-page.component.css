@@ -34,7 +34,7 @@ select{
 label{
     font-weight: 600;
     color:#333333;
-    font-size: 15px;
+    font-size: 14px;
 }
 .review-field-main{
     display: flex;
@@ -48,7 +48,7 @@ label{
 .review_form_field_label {
     font-weight: 600;
     color:#333333;
-    font-size: 15px;
+    font-size: 14px;
 }
 .smalltextafterlabel {
     color: #999;
@@ -70,7 +70,7 @@ border: #adb5bd solid 1px;
 cursor: pointer;
 }
 .custom-control-label{
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
 }
 
@@ -127,10 +127,11 @@ textarea{
     gap: 10px;
 }
 .rating_numbar_main .numbar_li.selected {
-    background: #001965;
+    background: var(--btn-gradient);
     color: #ffffff;
-    border: 2px solid #4278F5;
+    border: 2px solid var(--btn-gradient);
 }
+
 .numbar_rating_main ul li {
     width: 30px;
     display: flex;
@@ -150,7 +151,7 @@ textarea{
     align-items: center;
 }
 .heading{
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -286,4 +287,11 @@ font-weight: 400;
 .img-guide{
     width: 80px;
     height: 80px;
+}
+
+.error{
+    color: red;
+    text-align: center;
+    font: size 12px;
+    /* padding: 20px; */
 }
