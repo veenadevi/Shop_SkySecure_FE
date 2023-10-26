@@ -44,8 +44,7 @@ export class InviteUserComponent {
     ) {
     this.myForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      mobile: ['', [
-        Validators.required,
+      mobile: ['', [ 
         Validators.pattern(/^(\+\d{1,3})?\d{10}$/) // Country code (optional) + 10 digits
       ]],
       firstName : [''],

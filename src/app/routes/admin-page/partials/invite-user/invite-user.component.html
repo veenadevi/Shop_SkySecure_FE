@@ -38,7 +38,7 @@
                 </div>
               <div class="col-sm-8 forms mobile-input">
                 <label for="mobile">Phone Number</label>
-                <input type="text" id="mobile" class="mobile"   name="mobile" formControlName="mobile"  placeholder="Enter Pbone Number">
+                <input type="text" id="mobile" class="mobile"   name="mobile" formControlName="mobile"  placeholder="Enter Phone Number">
                 <div *ngIf="myForm.get('mobile').invalid && myForm.get('mobile').touched" class="error-message">
                   Please enter a valid phone number.
                 </div>
@@ -62,7 +62,7 @@
         </div>
           <div class="col-sm-4 forms">
             <label for="gstin">Enter GST</label>
-            <input formControlName="gstin" type="gstin" class="form-control-03" name="gstin" id="gstin"
+            <input formControlName="package" type="gstin" class="form-control-03" name="gstin" id="gstin"
                 placeholder="Enter GST Number">
           </div>
   
