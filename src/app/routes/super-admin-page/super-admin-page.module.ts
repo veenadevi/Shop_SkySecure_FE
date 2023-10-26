@@ -25,6 +25,8 @@ import { CustomerDetailsViewComponent } from './partials/my-customers/partials/c
 import { CustomerDetailsIconCardsComponent } from './partials/my-customers/partials/customer-details-view/partials/customer-details-icon-cards/customer-details-icon-cards.component';
 import { CustomerDetailsInvoiceTableComponent } from './partials/my-customers/partials/customer-details-view/partials/customer-details-invoice-table/customer-details-invoice-table.component';
 import { CustomerDetailsEstimatesTableComponent } from './partials/my-customers/partials/customer-details-view/partials/customer-details-estimates-table/customer-details-estimates-table.component';
+import { AccountManagersListComponent } from './partials/view-channel-partners-list/partials/channel-partner-details/partials/account-managers-list/account-managers-list.component';
+import { ActiveLeadListComponent } from './partials/view-channel-partners-list/partials/channel-partner-details/partials/active-lead-list/active-lead-list.component';
 
 
 
@@ -44,7 +46,7 @@ import { CustomerDetailsEstimatesTableComponent } from './partials/my-customers/
     MyCustomersComponent,
     ChannelPartnerDetailsComponent, 
     RoleAssigmentComponent, 
-    ManageAllChannelsComponent, CustomerDetailsViewComponent, CustomerDetailsIconCardsComponent, CustomerDetailsInvoiceTableComponent, CustomerDetailsEstimatesTableComponent
+    ManageAllChannelsComponent, CustomerDetailsViewComponent, CustomerDetailsIconCardsComponent, CustomerDetailsInvoiceTableComponent, CustomerDetailsEstimatesTableComponent, AccountManagersListComponent, ActiveLeadListComponent
   ],
   imports: [
     CommonModule,
