@@ -52,8 +52,8 @@
                        
                         <!-- <td>{{ account.createdFor.placeOfSupply}}</td> -->
                         <td>
-                            <ng-container *ngIf="account?.cartData?.assignedAccountOwnerId else noValuecp1">
-                            {{ account?.assignedChannelpartnerAM.firstName }} 
+                            <ng-container *ngIf="account?.assignedChannelpartnerAM else noValuecp1">
+                            {{ account?.assignedChannelpartnerAM?.firstName }} 
                               </ng-container>
                               <ng-template #noValuecp1>-</ng-template>
                          </td> 

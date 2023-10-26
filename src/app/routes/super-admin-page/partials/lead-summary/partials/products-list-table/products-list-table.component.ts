@@ -443,6 +443,7 @@ this.enableinvoice=true
     let req = {
       "userId": this.cartData.userId,
       "createdBy": createdBy._id ? createdBy._id : '',
+      "updatedBy":this.userDetails._id,
       "products": prdArray,
       /*"products": [
           {

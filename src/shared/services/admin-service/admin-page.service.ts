@@ -145,8 +145,7 @@ export class AdminPageService {
 
   public getMyChannelLeadList(adminUserId:any) : Observable<any> {
 
-    let url = this.baseUrlForQuote + this.getAllChannelLeadListURL + '/' + adminUserId;;
-
+    let url = this.baseUrlForQuote + this.getAllChannelLeadListURL + '/' + adminUserId;
     
 
     //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
