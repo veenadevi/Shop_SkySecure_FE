@@ -142,7 +142,6 @@ export class ReviewDetailPageComponent {
     }
   }
 
-<<<<<<< Updated upstream
  // Define a variable to store the cumulative rating
 // cumulativeRating: number = 0;
 rate(aspect: any, star: number): void {
@@ -157,13 +156,8 @@ rate(aspect: any, star: number): void {
  
 }
 
-=======
-  rate(aspect: any, star: number): void {
-    this.selectedRatings[aspect.key] = star;
-    console.log("____TEST RATE___", this.selectedRatings);
-  }
+
   public NextErrorMessage: boolean =false;
->>>>>>> Stashed changes
   onSubmit(): void {
     if (this.reviewForm.valid) {
       this.NextErrorMessage = false;

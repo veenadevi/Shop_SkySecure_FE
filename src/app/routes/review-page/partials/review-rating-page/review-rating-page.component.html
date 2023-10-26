@@ -118,12 +118,13 @@
               <div class="btn-01">
                 <button class="btn secondary-btn" (click)="goToProductReviewpage()">Previous</button>
               </div>
-              <div *ngIf="NextErrorMessage">
-                <p class="error">* Please Fill All Mandatory Fields</p>
-              </div>
+             
               <div class="btn-02">
                 <button class="btn primary-btn">Next</button>
               </div>
+            </div>
+            <div *ngIf="NextErrorMessage">
+              <p class="error">* Please Fill All Mandatory Fields</p>
             </div>
           </form>
           
