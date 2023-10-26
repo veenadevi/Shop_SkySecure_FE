@@ -50,6 +50,7 @@
         "getAllUsers":"api/admin/getAllusers",
         "updateUserRole":"api/admin/updateUserRole",
         "inviteUsers" : "api/user/inviteuser",
+        "createProductOffer":"api/product-offer/create",
         "getAllMyCustomers" : "api/admin/getAllCustomers",
         "getCustomerDetailsById" : "api/admin/getCustomerDetailsById/",
         
