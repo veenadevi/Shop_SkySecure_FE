@@ -42,6 +42,10 @@ export class LoginComponent {
 
   public otpField : boolean = false;
 
+  public timerInterval: any;
+
+  display: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService : AuthService,
@@ -110,15 +114,17 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
+    
     this.submitted = true;
     this.signUpSuccess=false
+    
     if (this.form.invalid) { // If Invalid Return
       return;
     }
     else{ // If Valid
       
       
-
+    
       console.log("*(*(*(*(* ", this.form.value.email);
       let req = {
         "emailId" : this.form.value.email,
@@ -138,11 +144,13 @@ export class LoginComponent {
               this.otpField = false;
             }
             else{
+             
               console.log("()()()()( Inside Else", res);
               this.enableSignInButton = true;
               this.enableOTPButton = false;
               this.newEmailAlert = false;
               this.otpField = true;
+              this.timer(1);
             }
           },
           err => {
@@ -184,6 +192,34 @@ export class LoginComponent {
     }
     
   }
+
+
+  timer(minute) {
+    // let minute = 1;
+    let seconds: number = minute * 45;
+    let textSec: any = '0';
+    let statSec: number = 45;
+
+    const prefix = minute < 10 ? '0' : '';
+
+    this.timerInterval = setInterval(() => {
+      seconds--;
+      if (statSec != 0) statSec--;
+      else statSec = 45;
+
+      if (statSec < 10) {
+        textSec = '0' + statSec;
+      } else textSec = statSec;
+
+      this.display = `${prefix}${Math.floor(0.45)}:${textSec}`;
+
+      if (seconds == 0) {
+        console.log('finished');
+        clearInterval(this.timerInterval);
+      }
+    }, 1000);
+  }
+
 
   public login(){
     //Login Logic

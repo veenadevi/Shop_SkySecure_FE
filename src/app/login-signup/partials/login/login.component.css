@@ -50,7 +50,7 @@ input{
     font-size: 13px;
 }
 .primary-btn{
-    margin-left: 35%;
+    /* margin-left: 35%; */
     margin-top: 25px;
     font-size: 18px;
     cursor: pointer;
@@ -617,4 +617,19 @@ input{
     height: 150px;
     width: 150px;
 }
+}
+
+.signin-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.resend{
+    text-align: center;
+    padding-top: 20px;
+}
+.re-OTP{
+    color: #b02a37;
+    cursor: pointer;
+    text-decoration: none;
 }
