@@ -74,7 +74,12 @@ const routes: Routes = [{
       canActivate: [], 
       path: 'manage-all-channel',
       component : ManageAllChannelsComponent
-    }
+    },
+    {
+      canActivate: [], 
+      path: 'channel-partner-details',
+      component : ChannelPartnerDetailsComponent
+    },
 
     
   ]

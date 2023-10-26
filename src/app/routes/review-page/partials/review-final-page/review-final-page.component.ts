@@ -1,17 +1,24 @@
-import { Component,ViewChild ,ElementRef} from '@angular/core';
+import { Component,ViewChild ,ElementRef, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { MetadataStore } from 'src/shared/stores/metadata.store';
+import { MetadataService } from 'src/shared/services/metadata.service';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 
 @Component({
   selector: 'app-review-final-page',
   templateUrl: './review-final-page.component.html',
   styleUrls: ['./review-final-page.component.css']
 })
-export class ReviewFinalPageComponent {
+export class ReviewFinalPageComponent implements OnInit{
   registrationForm: FormGroup;
+  productReview : any =  {}
   constructor(
     public fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private metaDataStore: MetadataStore,
+    private metaDataService: MetadataService,
+    private toaster : ToasterNotificationService
   ) {
     this.registrationForm = this.fb.group({
       file: [null],
@@ -59,6 +66,21 @@ export class ReviewFinalPageComponent {
     this.registrationForm.patchValue({
       file: [null]
     });
+  }
+
+  ngOnInit(): void {
+    this.productReview =  {...this.metaDataStore.getProductReviewDetails(), ...this.metaDataStore.getProductReviewOtherDetails()};
+    console.log("___TEST___FULL PAYLOAD____",this.productReview);
+  }  
+
+  createProductReview(): void {
+    this.metaDataService.createProductReview(this.productReview).subscribe((data) => {
+      console.log("___DATA____",data);
+      if(data) this.toaster.showSuccess("Product Review Created Successfully",'');
+      else {
+        this.toaster.showError("Failed To Create Product Review","");
+      }
+    })
   }
 
 }

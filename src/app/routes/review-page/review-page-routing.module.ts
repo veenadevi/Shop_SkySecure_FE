@@ -21,7 +21,7 @@ const routes: Routes = [{
     },
     {
       canActivate: [],
-      path: 'review-detail-page',
+      path: 'review-detail-page/:id',
       component : ReviewDetailPageComponent
     },
     {

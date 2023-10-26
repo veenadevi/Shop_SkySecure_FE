@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
-
+import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 @Component({
   selector: 'view-channel-partners-list',
   templateUrl: './view-channel-partners-list.component.html',
@@ -15,43 +16,41 @@ export class ViewChannelPartnersListComponent implements OnInit{
 
   public subscription : Subscription[] = [];
 
-  public channelPrtnerList : any[] = [];
+  public channelPartnerList : any[] = [];
 
 
   constructor(
     private superAdminService : SuperAdminService,
+    private adminPageService : AdminPageService,
     private spinner: NgxSpinnerService,
     private router : Router,
+    private toaster : ToasterNotificationService
   ){}
 
 
   public ngOnInit(): void {
     this.spinner.show();
-    this.setTableData();
+    this.getAllChannelPartners();
   }
 
-  public setTableData(){
+  public getAllChannelPartners(){
 
     this.subscription.push(
       this.superAdminService.getAllChannelPartners().subscribe(res=>{
         this.spinner.hide();
-        this.channelPrtnerList = res.channelPartners;
+        console.log("_+_+_+_+_+_ APIs Result ", res);
+        this.channelPartnerList = res.channelPartners;
       })
     )
   }
 
-  public getChannelPartnerDetails(account){
 
-    let acc = JSON.stringify(account);
-    let queryParams ={
-      account : acc,
+  public getChannelPartnerDetails(id){
 
-    }
-    console.log("navigate to details page===",account)
+    this.router.navigate(['admin-pages/channel-partner-details',id]);
 
-    this.router.navigate(['user/channel-partner'], {queryParams: queryParams});
+    console.log("navigate to details page===",id)
 
-   // this.router.navigate(['/admin-page/accounts-details'], {queryParams: queryParams});
   }
 
 }

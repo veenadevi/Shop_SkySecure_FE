@@ -91,6 +91,10 @@
     <div class="add-new-btn">
       <button [disabled]="enableEdit" (click)="saveChanges()" class="btn primary-btn">Resend Estimate</button>
     </div>
+
+    <div class="add-new-btn">
+      <button  [disabled]="enableinvoice" class="btn primary-btn" (click)="sendInvoice()">Send Invoice</button>
+  </div>
   </ng-container>
 
   </div>
@@ -101,6 +105,15 @@
 
         </p>
     </div>
+</div>
+
+<div class="row" *ngIf="showInvoiceMsg">
+  <div class="col-xs-12">
+      <p class="alert alert-success">
+          <strong>Invoice Sent Successfully !</strong>
+
+      </p>
+  </div>
 </div>
 
 </ng-container>

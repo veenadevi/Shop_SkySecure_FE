@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,ViewChild} from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,6 +19,9 @@ export class SignUpComponent {
   formEmail : FormGroup;
   submitted = false;
   submittedEmail = false
+  otp:any
+  showOtpComponent = true;
+  @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any;
 
   emailFormFlag : boolean = true;
   signUpFormFlag : boolean = false;
@@ -210,7 +213,7 @@ export class SignUpComponent {
             // this.invalidDomain=true
           }
           else{
-           console.log("inside els====")
+           console.log("inside els====",res)
             //this.emailFormFlag = false;
             //this.signUpFormFlag = true;
             this.enableSignInButton = true;
@@ -228,24 +231,27 @@ export class SignUpComponent {
   }
 
   public validateOTP(){
-
+   console.log("iNSIDE VALIDATE OTP")
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-      let hashedPass = CryptoJS.AES.encrypt(this.formEmail.value.otp, key).toString();
+      let hashedPass = CryptoJS.AES.encrypt( this.otp, key).toString();
       let req = {
         "emailId":this.formEmail.value.email,
         "otp": hashedPass
       }
 
-      
+      console.log("this.formEmail.value.email",this.formEmail.value.email)
       
       this.subscriptions.push(
         this.userProfileService.validateOTP(req).subscribe( res => {
-          if(res && res.data){
+          console.log("RES & RES.DATA",res && res.data)
+          if(res && res.data ){
             this.emailFormFlag = false;
             this.signUpFormFlag = true;
             //this.callSignIn();
+            // console.log("iNSIDE VALIDATE OTP IF PART")
           }
           else{
+            // console.log("iNSIDE VALIDATE OTP ELSE PART",res && res.data)
             this.inValidOTP=true
          //   this.formEmail.value.otp='';
            // this.formEmail.setValue({otp: ''});
@@ -259,9 +265,32 @@ export class SignUpComponent {
   }
   public signIn(){
 
- 
+    console.log("iNSIDE SIGN IN")
       this.router.navigate(['login'], { queryParams: { email: this.validatedEmail} });
 
+  }
+
+
+
+  config = {
+    allowNumbersOnly: true,
+    length: 6,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder: "",
+    inputStyles: {  
+      width: "50px",
+      height: "50px",
+    },
+  };
+  
+
+  onOtpChange(otp: any) {
+    this.otp = otp;
+    console.log("this.otp", this.otp);
+    if (otp.length === 6) {
+      //  this. onSubmitEmail();
+    }
   }
 
 }
