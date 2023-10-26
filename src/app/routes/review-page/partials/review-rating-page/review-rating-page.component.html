@@ -49,13 +49,13 @@
             <!-- Pros -->
             <div class="pros">
               <label for="pros">Pros:<span style="font-weight: 600;">What did you find most impressive about This Product *</span></label>
-              <textarea formControlName="pros" id="pros" maxlength="150"   placeholder="What is the most beneficial about this product? What feature is most impactful? Is this value for money?" required></textarea>
+              <textarea formControlName="pros" id="pros" minlength="150"   placeholder="What is the most beneficial about this product? What feature is most impactful? Is this value for money?" required></textarea>
             </div>
           
             <!-- Cons -->
             <div class="pros">
               <label for="cons">Cons:<span style="font-weight: 600;">Please provide which Tutor LMS features/part can be improved*</span></label>
-              <textarea formControlName="cons" id="cons"  maxlength="150" placeholder="What is the least beneficial about this product?" required></textarea>
+              <textarea formControlName="cons" id="cons"  milength="150" placeholder="What is the least beneficial about this product?" required></textarea>
             </div>
           
             <!-- How likely are you to recommend This Product? -->
@@ -103,14 +103,14 @@
             <!-- What other products like This product have you used or evaluated? -->
             <div class="user-info">
               <label for="otherProducts">What other products like This product have you used or evaluated? *</label>
-              <textarea formControlName="otherProductExperience" id="otherProductExperience" maxlength="150"
+              <textarea formControlName="otherProductExperience" id="otherProductExperience" minlength="150"
                         placeholder="Have you tried any other Software/ like This Product? Any comparison between the two products?" required></textarea>
             </div>
           
             <!-- Any Missing Feature? -->
             <div class="user-info">
               <label for="missingFeatures">Any Missing Feature?*</label>
-              <textarea formControlName="missingFeature" id="missingFeature" maxlength="150"
+              <textarea formControlName="missingFeature" id="missingFeature" minlength="150"
                         placeholder="Any features you find missing in This  Product?" required></textarea>
             </div>
           
