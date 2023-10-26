@@ -26,6 +26,8 @@ export class CartService {
   private createQuotationUrl : string;
   private editQuoatationUrl :string;
 
+  private createInvoiceURL :string;
+
 
 
   constructor(
@@ -39,7 +41,7 @@ export class CartService {
     this.createQuotationUrl = AppService.appUrl.createQuotation;
     this.editQuoatationUrl=AppService.appUrl.editQuotation;
 
-
+    this.createInvoiceURL=AppService.appUrl.createInvoice;
     
   }
 
@@ -218,6 +220,37 @@ export class CartService {
   
 
   console.log("+++++++ ____ _ InsideCreate Quotation ", request);
+    
+    const REQUEST$ = this.http.post<any>(URL, request)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          //this.userAccountStore.setUserProfileDetails(response);
+          return of(response);
+        }),
+        map((response: any) => {
+          //this.userAccountStore.setUserProfileDetails(response);
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling
+          return error
+        })
+      );
+
+    return REQUEST$;
+  }
+
+  public createInvoice( request : any): Observable<any> {
+
+
+    const URL = this.baseUrl + this.createInvoiceURL;
+
+  
+
+  console.log("+++++++ ____ _ Inside createInvoice ", request);
     
     const REQUEST$ = this.http.post<any>(URL, request)
       .pipe(

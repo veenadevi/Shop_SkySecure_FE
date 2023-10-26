@@ -41,6 +41,8 @@
         "getMyAssignedAccounts" : "api/admin/getMyMarketplaceAccountList",
         "getAccountsById" : "api/user/getAccountDetails",
         "userGstUpdate" : "api/user/user-gst-update",
+
+        "createInvoice" : "/api/user/createInvoice",
         
 
         "userSignUp":"api/user/signup",
