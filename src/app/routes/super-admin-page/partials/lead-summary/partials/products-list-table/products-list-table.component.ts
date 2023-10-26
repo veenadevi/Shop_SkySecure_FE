@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 
 @Component({
@@ -40,7 +41,10 @@ export class ProductsListTableComponent implements OnInit {
 
   public productsList: any[] = [];
   public enableEdit: boolean
+  public enableinvoice:boolean
   public showMsg: boolean
+
+  public showInvoiceMsg: boolean
 
   public cartDetails: any[] = [];
   public newProductLists: any[] = [];
@@ -82,18 +86,21 @@ export class ProductsListTableComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private cartService: CartService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private userAccountStore: UserAccountStore,
   ) { }
-
+  userDetails:any;
 
   ngOnInit(): void {
     this.enableEdit = false
+    this.enableinvoice=false
+    this.userDetails = this.userAccountStore.getUserDetails();
     this.showMsg = false
     this.cartDetails = (this.cartData.CartDetails && this.cartData.CartDetails.length > 0) ? this.cartData.CartDetails : null;
    
    console.log("in parent settign current cartdetails ====",this.cartDetails)
     this.setSampleData();
-
+ 
   }
 
 
@@ -107,7 +114,8 @@ export class ProductsListTableComponent implements OnInit {
   }
 
   public valueChanged(event, item, type) {
-
+console.log("value changed method called")
+this.enableinvoice=true
 
     switch (type) {
       case 'quantity':
@@ -123,70 +131,64 @@ export class ProductsListTableComponent implements OnInit {
       default:
         return null;
     }
+    // this.priceChanged(event,item,i:any)
   }
 
 
   public priceChanged(event, item, i) {
 
-    this.enableEdit = false;
-    //item.get('line_items_id')
-
-    var index = this.cartDetails.findIndex(el => el.estimateLineItemId === item.get('line_items_id').value);
-    //var index = this.cartDetails.findIndex(el => el.estimateLineItemId === this.productsData.line_items[i].line_item_id);
-
+    this.enableEdit = false; 
+    this.enableinvoice=true
+    var index = this.cartDetails.findIndex(el => el.estimateLineItemId === item.get('line_items_id').value); 
     if (index >= 0) {
 
       console.log("in exsiting product price change===for ",index)
 
-      let editedRate = item.get('bcy_rate').value;
-      console.log("in exsiting product price change===editedRate ",editedRate)
-
+      let editedRate = item.get('bcy_rate').value; 
       let priceType = item.get('priceType').value;
-      console.log("in exsiting product price change===priceType ",priceType)
-
-
-      let calculatedDistributarPrice = item.get('distributorPrice').value
-      //this.cartDetails[index].distributorPrice;
-      let calculatedERPPrice=item.get('erp_price').value
-    //  this.cartDetails[index].erpPrice;
-
+       console.log("in exsiting product price change===priceType ",priceType) 
+      let calculatedDistributarPrice = item.get('distributorPrice').value 
+      let calculatedERPPrice=item.get('erp_price').value 
       let calcRate = calculatedDistributarPrice;
-
-      console.log("calculatedERPPrice froms screen ===",calculatedERPPrice)
-      console.log("distributorPrice froms screen ===",calculatedDistributarPrice)
-
-      if (editedRate > calculatedERPPrice ) {
-        console.log("greater than erp price")
-
-        // item.get('bcy_rate').setValue(item.get('bcy_rate_original').value)
+ 
+      if (editedRate > calculatedERPPrice ) { 
+        // console.log(editedRate,"editedRate")
+        // console.log("greater than erp price") 
+        item.get('bcy_rate').setErrors({ 'invalid': true });
+        this.enableEdit = true;
+        // console.log(editedRate,"editedRate-calculatedERPPrice",calculatedERPPrice)
+      }
+      
+      if(editedRate < calcRate  ){
+        console.log(editedRate,"-editedRate- ",calcRate)
+        console.log("less than erp price")
         item.get('bcy_rate').setErrors({ 'invalid': true });
         this.enableEdit = true;
 
       }
-      
-      if(editedRate < calcRate  ){
-        item.get('bcy_rate').setErrors({ 'invalid': true });
-        this.enableEdit = false;
-
-      }
     
     }
-    else {
-      console.log("_+_+_+_+ Came here ");
+    else { 
       let data = this.newlyAddedAppList.find(x => x._id + 'temp' === item.get('line_items_id').value);
-      console.log("_+_+_+_+ Came here with data", item.get('line_items_id').value);
+      console.log("Came here data", item.get('line_items_id').value,"data",data);
+      
       if (data) {
+
         let editedRate = item.get('bcy_rate').value;
-        let calculatedDistributarPrice = data.priceList[0].distributorPrice;
-
-        let calculatedERPPrice = data.priceList[0].erp_price;
-
+        let calculatedDistributarPrice = data.priceList[0].distributorPrice; 
+        let calculatedERPPrice=data.priceList[0].ERPPrice
+        console.log("calculatedERPPrice",calculatedERPPrice  );
         let calcRate = calculatedDistributarPrice;
-
-        if (editedRate < calcRate || editedRate>calculatedERPPrice) {
-          //this.getFormData.controls['bcy_rate'].setErrors({'invalid': true});
+       
+        if (editedRate < calcRate ) {
+          console.log(editedRate,"editedRate-calculatedERPPrice",calculatedERPPrice) 
           item.get('bcy_rate').setErrors({ 'invalid': true });
           this.enableEdit = true;
+        } 
+        if (editedRate > calculatedERPPrice ) { 
+          item.get('bcy_rate').setErrors({ 'invalid': true });
+          this.enableEdit = true;
+         
         }
       }
     }
@@ -194,7 +196,7 @@ export class ProductsListTableComponent implements OnInit {
     this.valueChanged(event, item, 'bcyRate')
 
     //formData.form.controls['email'].setErrors({'incorrect': true});
-
+ 
   }
 
 
@@ -395,6 +397,7 @@ export class ProductsListTableComponent implements OnInit {
   }
 
   remove(index: number) {
+    this.enableinvoice=true
     const control = <FormArray>this.productListForm.get('items');
     control.removeAt(index);
   }
@@ -440,6 +443,7 @@ export class ProductsListTableComponent implements OnInit {
     let req = {
       "userId": this.cartData.userId,
       "createdBy": createdBy._id ? createdBy._id : '',
+      "updatedBy":this.userDetails._id,
       "products": prdArray,
       /*"products": [
           {
@@ -499,6 +503,52 @@ export class ProductsListTableComponent implements OnInit {
       "zohoEstimateId": cartData.zohoEstimateId,
       "zohoBookContactId": zohoBookContactData.contact_id,
     }
+
+    
+
+    return req;
+  }
+
+  public setInvoiceRequestData() {
+
+    console.log("passin gcrm data from parent page ==",this.crmData)
+
+
+    
+
+    let assignTo = this.crmData.assignTo;
+    let createdBy = this.crmData.createdBy;
+    let cartData = this.crmData.cartData;
+    let zohoBookContactData = this.crmData.zohoBookContactData;
+    let zohoCRMAccountData = this.crmData.zohoCRMAccountData;
+    let zohoBookEstimateData = this.crmData.zohoBookEstimateData;
+
+
+    let prdArray = this.setProductsList();
+    let req = {
+      "reference_number":"",
+      "updatedBy":this.userDetails._id,
+      "payment_terms":"",
+      "payment_terms_label": "Due on Receipt",
+      "payment_options": {
+          "payment_gateways": []
+      },
+      "customer_id": zohoBookContactData.contact_id,
+      "products": prdArray,
+
+      "contact_persons_ids": zohoBookEstimateData.contact_persons_ids,
+       "is_inclusive_tax": false,
+
+
+       "allow_partial_payments": false,
+       "invoiced_estimate_id": cartData.zohoEstimateId,
+       "billing_address_id": zohoBookContactData.billing_address.address_id,
+       "shipping_address_id": zohoBookContactData.shipping_address.address_id,
+       "gst_treatment": zohoBookContactData.gst_treatment,
+       "gst_no": createdBy.gstinNumber,
+       "place_of_supply": zohoBookContactData.shipping_address.state_code,
+       "cart_ref_id": cartData.cart_ref_id,
+ }
 
     
 
@@ -603,9 +653,26 @@ export class ProductsListTableComponent implements OnInit {
   get firstSelectOptions() {
     return this.opts.map(({ key }) => key);
   }
+  public sendInvoice() {
 
+
+
+
+    let request = this.setInvoiceRequestData();
+    //console.log("+_+_+_+_+_ Res Data ", request);
+
+    this.subscription.push(
+      this.cartService.createInvoice(request).subscribe(res => {
+        this.showInvoiceMsg = true
+
+      })
+    )
+
+
+  }
 
   public onSelectChange(event, item) {
+    this.enableinvoice=true
     var type=event.target.value;
 
 

@@ -11,9 +11,29 @@ export class NotificationDropdownComponent implements OnInit{
 
   @Input('notificationList')
   public notificationList : any;
+  public isOpen = true;
+
 
   ngOnInit(): void {
     console.log("_+_+_+_+_ Value ", this.notificationList);
+  }
+
+  public onFocusOutEvent(event: any){
+    
+
+    setTimeout(()=>{  
+      this.isOpen = !this.isOpen;
+
+    }, 300);
+
+    // this.isOpen = true;
+    // this.generalSearchOpen = false;
+    // this.keywordSearchOpen = true
+  }
+
+  public mouseInside(event : any){
+    
+    event.preventDefault();
   }
 
   public formatTime(updatedTime){

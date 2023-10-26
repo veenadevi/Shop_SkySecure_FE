@@ -8,7 +8,10 @@ import { LoginSignupRoutingModule } from './login-signup-routing.module';
 import { LoginSignupComponent } from './login-signup.component';
 import { LoginComponent } from './partials/login/login.component';
 import { SignUpComponent } from './partials/sign-up/sign-up.component';
-
+import { NgOtpInputModule } from 'ng-otp-input';
+import { NgxOtpInputModule } from 'ngx-otp-input';
+ 
+ 
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { SignUpComponent } from './partials/sign-up/sign-up.component';
     MaterialModule,
     PrimeNgModule,
     SharedModule,
-    LoginSignupRoutingModule
+    LoginSignupRoutingModule,
+    NgOtpInputModule,
+    NgxOtpInputModule
+   
   ],
   exports: [
     MaterialModule,

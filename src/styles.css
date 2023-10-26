@@ -63,6 +63,28 @@
     --primary-black :#1e1e1e;
     --secondary-black : #202124;
 
+
+    /* success colors */
+    --success-100 : #e9f8f5;
+    --success-200 : #beebe2;
+    --success-300 : #7CD7C4;
+    --success-400 : #51c9b1;
+    --success-500 : #25BC9D;
+
+    /* warning color */
+    --warning-100 : #FFECDB;
+    --warning-200 : #FFD9B7;
+    --warning-300 : #FEC594;
+    --warning-400 : #FEB270;
+    --warning-500 : #FE9F4C;
+
+    /* Error color */
+    --error-100 : #F8E9E9;
+    --error-200 : #EABEBE;
+    --error-300 : #D47D7D;
+    --error-400 : #C65252;
+    --error-500 : #B82727;
+
   }
 
 

@@ -1,121 +1,88 @@
 <div class="details-container">
     <div class="content">
         <h1>Give Your Ratings</h1>
-    <form [formGroup]="myFrom">
-        <div class="form">
-            <div class="input-cont">
+        <form [formGroup]="reviewForm">
+            <div class="form">
+              <div class="input-cont">
                 <label for="userName">Name*</label>
-                <input formControlName="userName" type="text" placeholder="Name" class="form-control" required >
-            </div>
-    
-            <div class="input-cont">
+                <input formControlName="userName" type="text" placeholder="Name" class="form-control" required>
+              </div>
+          
+              <div class="input-cont">
                 <label for="email">Email*</label>
-                <input formControlName="email" type="email" placeholder="Email" class="form-control"  required>
-            </div>
-    
-            <div class="input-cont">
-                <label for="companyName">Organization Name*</label>
-                <input formControlName="companyName" type="text" class="form-control" placeholder="Organization Name" required >
-            </div>
-    
-            <div class="input-cont">
+                <input formControlName="email" type="email" placeholder="Email" class="form-control" required>
+              </div>
+          
+              <div class="input-cont">
+                <label for="organizationName">Organization Name*</label>
+                <input formControlName="organizationName" type="text" class="form-control" placeholder="Organization Name" required>
+              </div>
+          
+              <div class="input-cont">
                 <label for="jobTitle">Job Title*</label>
                 <input formControlName="jobTitle" type="text" class="form-control" placeholder="Job Title" required>
-            </div>
-    
-            <div class="input-cont">
+              </div>
+          
+              <div class="input-cont">
                 <label>Company Size*</label>
-                <select formControlName="companyCapacity">
-                    <option>Please Select</option>
-                    <option>1 to 10 Employees</option>
-                    <option>11 to 50 Employees</option>
-                    <option>51 to 200 Employees</option>
-                    <option>201 to 500 Employees</option>
-                    <option>501 to 1000 Employees</option>
-                    <option>1001 to 5000 Employees</option>
-                    <option>5001 to 1000 Employees</option>
-                    <option>10000+ Employees</option>
+                <select formControlName="companySize">
+                  <option>Please Select</option>
+                  <option>1 to 10 Employees</option>
+                  <option>11 to 50 Employees</option>
+                  <option>51 to 200 Employees</option>
+                  <option>201 to 500 Employees</option>
+                  <option>501 to 1000 Employees</option>
+                  <option>1001 to 5000 Employees</option>
+                  <option>5001 to 10000 Employees</option>
+                  <option>10000+ Employees</option>
                 </select>
-            </div>
-    
-            <div class="input-cont">
+              </div>
+          
+              <div class="input-cont">
                 <label>How long have you used this software?</label>
-                <select formControlName="productUsagePeriod">
-                    <option>Please Select</option>
-                    <option>Free Trail</option>
-                    <option>Less Than 6 Months</option>
-                    <option>6 - 12 Months </option>
-                    <option>1 - 2 Years</option>
-                    <option>2+ Years </option>
-                    
+                <select formControlName="softwareUsageDuration">
+                  <option>Please Select</option>
+                  <option>Free Trial</option>
+                  <option>Less Than 6 Months</option>
+                  <option>6 - 12 Months</option>
+                  <option>1 - 2 Years</option>
+                  <option>2+ Years</option>
                 </select>
+              </div>
             </div>
-        </div>
-
-
-        <hr>
-
-
-    <div class="rating">
-            <div class="rating-cont">
-                <label>Overall Rating*</label>
+          
+            <hr>
+          
+            <div class="rating">
+              <div class="rating-cont" *ngFor="let aspect of aspectList; let i = index">
+                <label>{{ aspect.name }}*</label>
                 <div class="star-rating">
-                    <span *ngFor="let star of stars" (click)="rate(star)" [class.active]="star <= selectedRating">&#9733;</span>
+                  <span *ngFor="let star of stars" (click)="rate(aspect, star)" [class.active]="star <= selectedRatings[aspect.key]">&#9733;</span>
                 </div>
+              </div>
             </div>
-        
-
-            <div class="rating-cont">
-                <label>Features*</label>
-                <div class="star-rating">
-                    <span *ngFor="let star of stars" (click)="rate01(star)" [class.active]="star <= selectedRating01">&#9733;</span>
-                </div>
+          
+            <hr>
+          
+            <div class="title">
+              <label>Title of Your Review*</label>
+              <input formControlName="reviewTitle" type="text" placeholder="Describe Your Experience Short Sentence" required>
             </div>
-    
-
-            <div class="rating-cont">
-                <label>Ease of Use*</label>
-                <div class="star-rating">
-                    <span *ngFor="let star of stars" (click)="rate02(star)" [class.active]="star <= selectedRating02">&#9733;</span>
-                </div>
+            <div class="your">
+              <label>Your Review*</label>
+              <textarea formControlName="reviewContent" class="review" placeholder="Give your Review" required></textarea>
             </div>
-
-            <div class="rating-cont">
-                <label>Value of Money*</label>
-                <div class="star-rating">
-                    <span *ngFor="let star of stars" (click)="rate03(star)" [class.active]="star <= selectedRating03">&#9733;</span>
-                </div>
+          
+            <div class="condition">
+              <input type="checkbox" class="check" id="chb" formControlName="agreeTermsAndConditions" required>
+              <div class="form-check-label">&nbsp;I certify that my feedback is based on my experience with this product. By submitting, I agree to the terms of use and privacy policy of SoftwareSuggest.</div>
             </div>
-
-            <div class="rating-cont">
-                <label>Customer Support*</label>
-                <div class="star-rating"><span *ngFor="let star of stars" (click)="rate04(star)" [class.active]="star <= selectedRating04">&#9733;</span></div>
+          
+            <div class="button">
+              <button class="btn primary-btn" (click)="onSubmit()">Next</button>
             </div>
-    </div>
-
-    
-
-    <hr>
-
-        <div class="title">
-            <label>Title of Your Review*</label>
-            <input  type="text" placeholder="Describe Your Experience Short Sentence" required >
-        </div>
-        <div class="your">
-            <label>Your Review*</label>
-            <textarea class="review"  type="text-area" placeholder="Give your Review" required ></textarea>
-        </div>
-    
-        <div class="condition">
-            <input type="checkbox" class="check" id="chb" required>
-            <div class="form-check-label">&nbsp;I certify that my feedback is based on my experience with this product. By submitting, I agree to the terms of use and privacy policy of SoftwareSuggest.</div>
-        </div>
-
-      <div class="button" >
-        <button class="btn primary-btn"  [routerLink]="['/review-page/review-rating-page']" >Next</button>
-      </div>
-
-    </form>
+          </form>
+          
 
 </div>
 

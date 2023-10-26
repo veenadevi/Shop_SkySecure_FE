@@ -14,6 +14,7 @@
     <input type="text" 
         class="form-control" 
         placeholder="Search by products, categories, brands & more"
+        (input)="onSearchInputChange($event)"
  >
         <!-- (focusout)="onFocusOutEvent($event)" -->
         
@@ -24,118 +25,20 @@
 
 <h2>Our Products</h2>
 <div class="card-container">
-
-  <div class="card" [routerLink]="['review-detail-page']">
+  <ng-container *ngFor="let product of productList">
+  <div class="card" (click)="selectProduct(product._id)">
   <div class="image">
     <img class="card-img" src="../../../../../assets/icons/Microsoft.svg">
   </div>
   <div class="card-cont">
     <div class="header">
-      Microsoft 365 E5 Insider Risk Management
+      {{product.name}}
     </div>
     <div class="sponser">
 By Microsoft
     </div>
   </div>
   </div>
-
-  <div class="card" [routerLink]="['review-detail-page']">
-    <div class="image">
-      <img class="card-img" src="../../../../../assets/icons/Microsoft.svg">
-    </div>
-    <div class="card-cont">
-      <div class="header">
-        Microsoft 365 E5 eDiscovery and Audit
-      </div>
-      <div class="sponser">
-  By Microsoft
-      </div>
-    </div>
-    </div>
-
-    <div class="card" [routerLink]="['review-detail-page']">
-      <div class="image">
-        <img class="card-img" src="../../../../../assets/icons/Microsoft.svg">
-      </div>
-      <div class="card-cont">
-        <div class="header">
-          Microsoft Defender for Cloud Apps
-        </div>
-        <div class="sponser">
-    By Microsoft
-        </div>
-      </div>
-      </div>
-
-    <div class="card" [routerLink]="['review-detail-page']">
-      <div class="image">
-        <img class="card-img" src="../../../../../assets/icons/Microsoft.svg">
-      </div>
-      <div class="card-cont">
-        <div class="header">
-          Microsoft 365 E5 eDiscovery and Audit
-        </div>
-        <div class="sponser">
-    By Microsoft
-        </div>
-      </div>
-      </div>
-
-      
-  <div class="card" [routerLink]="['review-detail-page']">
-    <div class="image">
-      <img class="card-img" src="../../../../../assets/icons/Microsoft.svg">
-    </div>
-    <div class="card-cont">
-      <div class="header">
-        Microsoft 365 E5 Insider Risk Management
-      </div>
-      <div class="sponser">
-  By Microsoft
-      </div>
-    </div>
-    </div>
-  
-    <div class="card" [routerLink]="['review-detail-page']">
-      <div class="image">
-        <img class="card-img" src="../../../../../assets/icons/Microsoft.svg">
-      </div>
-      <div class="card-cont">
-        <div class="header">
-          Microsoft 365 E5 eDiscovery and Audit
-        </div>
-        <div class="sponser">
-    By Microsoft
-        </div>
-      </div>
-      </div>
-  
-      <div class="card" [routerLink]="['review-detail-page']">
-        <div class="image">
-          <img class="card-img" src="../../../../../assets/icons/Microsoft.svg">
-        </div>
-        <div class="card-cont">
-          <div class="header">
-            Microsoft Defender for Cloud Apps
-          </div>
-          <div class="sponser">
-      By Microsoft
-          </div>
-        </div>
-        </div>
-  
-      <div class="card" [routerLink]="['review-detail-page']">
-        <div class="image">
-          <img class="card-img" src="../../../../../assets/icons/Microsoft.svg">
-        </div>
-        <div class="card-cont">
-          <div class="header">
-            Microsoft 365 E5 eDiscovery and Audit
-          </div>
-          <div class="sponser">
-      By Microsoft
-          </div>
-        </div>
-        </div>
+</ng-container>
 </div>
 </div>

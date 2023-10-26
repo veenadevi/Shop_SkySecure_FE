@@ -133,7 +133,19 @@ export class LeadListComponent implements OnInit{
       //console.log("_+_+_+_ Outside ", res.ownerName.name);
      // this.accountData[i].Owner.name = res.ownerName.name;
 
-      this.allMarketPlaceList[i].assignedChannelpartnerAM.firstName =res.assignedName
+    //  this.allMarketPlaceList[i]?.assignedChannelpartnerAM?.firstName =res.assignedName
+
+      this.allMarketPlaceList[i].assignedChannelpartnerAM=
+            {
+             
+              "firstName" : res.assignedName
+            
+            }
+        console.log("after assignment ==",this.allMarketPlaceList[i].assignedChannelpartnerAM.firstName)
+         //   this.allMarketPlaceList[i].assignedChannelpartnerAM.
+      //this.accountData[i].Owner.name = res.assignedName;
+
+    
         // {
         //   "channelPartner" : {
         //   "name" : 'res.assignedName'

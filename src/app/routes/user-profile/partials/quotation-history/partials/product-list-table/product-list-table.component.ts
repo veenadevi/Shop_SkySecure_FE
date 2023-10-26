@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
+import { UploadpoModalComponent } from 'src/shared/components/modals/uploadpo-modal/uploadpo-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
 
 @Component({
@@ -363,7 +364,12 @@ export class ProductListTableComponent {
     return <FormArray>this.productListForm.get('items');
   }
 
-  addApp() {
+
+
+  uploadPo(modalType: string){
+    const modalRef = this.modalService.open(  UploadpoModalComponent, { size: 'md', windowClass: 'add-compare-products-custom-class' });
+  }
+  addApp(modalType: string) {
 
     const modalRef = this.modalService.open(AddCompareProductModalComponent, { size: 'lg', windowClass: 'add-compare-products-custom-class' });
     let queryParams = {

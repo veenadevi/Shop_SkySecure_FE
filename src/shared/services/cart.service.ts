@@ -16,6 +16,7 @@ import { UserAccountStore } from '../stores/user-account.store';
 import { UserCartRequest } from '../models/interface/request/user-cart.request';
 import { UserCartRequestModel } from '../models/concrete/user-cart.model';
 import { CartStore } from '../stores/cart.store';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
@@ -24,6 +25,8 @@ export class CartService {
 
   private createQuotationUrl : string;
   private editQuoatationUrl :string;
+
+  private createInvoiceURL :string;
 
 
 
@@ -36,8 +39,9 @@ export class CartService {
     this.baseUrl = environment.gatewayUrlForOrders;
     this.userCartUrl = AppService.appUrl.userCart;
     this.createQuotationUrl = AppService.appUrl.createQuotation;
-    this.editQuoatationUrl=AppService.appUrl.editQuotation
+    this.editQuoatationUrl=AppService.appUrl.editQuotation;
 
+    this.createInvoiceURL=AppService.appUrl.createInvoice;
     
   }
 
@@ -237,6 +241,71 @@ export class CartService {
       );
 
     return REQUEST$;
+  }
+
+  public createInvoice( request : any): Observable<any> {
+
+
+    const URL = this.baseUrl + this.createInvoiceURL;
+
+  
+
+  console.log("+++++++ ____ _ Inside createInvoice ", request);
+    
+    const REQUEST$ = this.http.post<any>(URL, request)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          //this.userAccountStore.setUserProfileDetails(response);
+          return of(response);
+        }),
+        map((response: any) => {
+          //this.userAccountStore.setUserProfileDetails(response);
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling
+          return error
+        })
+      );
+
+    return REQUEST$;
+  }
+
+  public encryptdata(request){
+    //let url = `${this.baseUrl}orders/encryptFormData`;
+    let url = `${this.baseUrl}api/orders/encryptFormData`;
+    //let url = "http://localhost:8080/api/orders/encryptFormData";
+    let data = {
+    request : request
+    }
+
+    let key = "&&((SkysecureRealize&&For&&PaymentGateway&&!!IsTheBestApp^!@$%"
+    let hashedPass = CryptoJS.AES.encrypt('101', key).toString();
+
+    request = {
+      "currency" : "INR", // or any supported currency
+      "amount" : hashedPass,
+      "redirect_url" : 'https://dev-shop.skysecuretech.com/',
+      "cancel_url" : 'https://dev-shop.skysecuretech.com/',
+    }
+    
+
+
+    let request$ = this.http.post<Observable<any>>(url, request)
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+        return response;
+      }),
+    );
+
+    return request$;
+    //return this.http.get(url,{params:data})
   }
 
 

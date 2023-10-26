@@ -1,1 +1,118 @@
-<p>channel-partner-details works!</p>
+<div id="channel-partner-details">
+    <ng-container *ngIf="!channelPartnerDetailedList">
+        <div class="content-wrapper">
+            <div class="container-fluid">
+    
+                <div class="company-header"> 
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                                    </i>
+                                </div>
+                                <div class="page-title-subheading">
+                                    SKYSECURE TECHNOLOGIES PRIVATE LIMITED
+                                <div class="channel-partner-name">
+                                    Channel - TestCPReject
+                                </div>
+                                </div>
+                            </div>
+                              
+                        </div>
+                    </div> 
+                </div>
+    
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-black bg-card o-hidden h-100">
+                            <div class="card-body">
+                                <div class="lead-icon-section">
+                                    <img class="lead-icon" src="../../../../../../../assets/icons/LeadsIcon.svg">
+                                </div>
+                                <div>
+                                    <div class="mr-5">Total Active Leads</div>
+                                    <div class="card-value">
+                                      12
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-black bg-card o-hidden h-100">
+                            <div class="card-body">
+                                <div class="lead-assign-icon-section">
+                                    <img class="lead-assign-icon" src="../../../../../../../assets/icons/LeadAssignIcon.svg">
+                                </div>
+                                <div>
+                                    <div class="mr-5">Total Assigned Leads</div>
+                                    <div class="card-value">
+                                      4
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-black bg-card o-hidden h-100">
+                            <div class="card-body">
+                                <div class="lead-closed-icon-section">
+                                    <img class="lead-closed-icon" src="../../../../../../../assets/icons/LeadClosedIcon.svg">
+                                </div>
+                                <div>
+                                    <div class="mr-5">Closed Leads</div>
+                                    <div class="card-value">
+                                      6
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-black bg-card o-hidden h-100">
+                            <div class="card-body">
+                                <div class="lead-reject-icon-section">
+                                    <img class="lead-reject-icon" src="../../../../../../../assets/icons/LeadRejectIcon.svg">
+                                </div>
+                                <div>
+                                    <div class="mr-5">Rejected Leads</div>
+                                    <div class="card-value">
+                                      2
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row">
+    
+                    <div class="col-lg-6">
+                        <div class="card mb-3">
+                          <div class="card-header">
+                            <i class="fa fa-bar-chart"></i> Estimate Data
+                          </div>
+                          <div class="card-body">
+                            <app-active-lead-list></app-active-lead-list>
+                          </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-lg-6">
+                        <div class="card mb-3">
+                          <div class="card-header">
+                            <i class="fa fa-bar-chart"></i> Estimate Data
+                          </div>
+                          <div class="card-body">
+                            <app-account-managers-list></app-account-managers-list>
+                          </div>
+                        </div>
+                    </div>
+    
+                </div>
+    
+            </div>
+        </div>
+    </ng-container>
+</div>
