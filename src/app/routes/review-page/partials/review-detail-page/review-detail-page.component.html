@@ -4,30 +4,30 @@
         <!-- <p> {{ productName }}</p> -->
 
         <form [formGroup]="reviewForm">
-          <h4 class="d-flex justify-content-center mb-3 mt-3">{{ productName }}</h4>
+          <h4 class="d-flex justify-content-center mb-3 mt-3">  Write a Review For {{ productName }}</h4>
             <div class="form">
               <div class="input-cont">
-                <label for="userName">Name*</label>
+                <label for="userName">Name<span class="astrik">*</span></label>
                 <input formControlName="userName" type="text" placeholder="Name" class="form-control" required>
               </div>
           
               <div class="input-cont">
-                <label for="email">Email*</label>
+                <label for="email">Email<span class="astrik">*</span></label>
                 <input formControlName="email" type="email" placeholder="Email" class="form-control" required>
               </div>
           
               <div class="input-cont">
-                <label for="organizationName">Organization Name*</label>
+                <label for="organizationName">Organization Name<span class="astrik">*</span></label>
                 <input formControlName="organizationName" type="text" class="form-control" placeholder="Organization Name" required>
               </div>
           
               <div class="input-cont">
-                <label for="jobTitle">Job Title*</label>
+                <label for="jobTitle">Job Title<span class="astrik">*</span></label>
                 <input formControlName="jobTitle" type="text" class="form-control" placeholder="Job Title" required>
               </div>
           
               <div class="input-cont">
-                <label>Company Size*</label>
+                <label>Company Size<span class="astrik">*</span></label>
                 <select formControlName="companySize">
                   <option>Please Select</option>
                   <option>1 to 10 Employees</option>
@@ -42,7 +42,7 @@
               </div>
           
               <div class="input-cont">
-                <label>How long have you used this software?</label>
+                <label>How long have you used this software?<span class="astrik">*</span></label>
                 <select formControlName="softwareUsageDuration">
                   <option>Please Select</option>
                   <option>Free Trial</option>
@@ -58,7 +58,7 @@
           
             <div class="rating">
               <div class="rating-cont" *ngFor="let aspect of aspectList; let i = index">
-                <label>{{ aspect.name }}*</label>
+                <label>{{ aspect.name }}<span class="astrik">*</span></label>
                 <div class="star-rating">
                   <span *ngFor="let star of stars" (click)="rate(aspect, star)" [class.active]="star <= selectedRatings[aspect.key]">&#9733;</span>
                 </div>
@@ -68,8 +68,8 @@
             <hr>
           
             <div class="title">
-              <label>Title of Your Review*</label>
-              <input formControlName="reviewTitle" type="text" maxlength="15"  placeholder="Describe Your Experience Short Sentence" required>
+              <label>Title of Your Review<span class="astrik">*</span><span style="font-size: 12px;color: gray;">(Min-Character count: {{ characterCount01 }}/15)</span></label>
+              <input [(ngModel)]="text01" (input)="countCharacters01()" formControlName="reviewTitle" type="text" minlength="15"  placeholder="Please provide a review Title with a minimum of 15 characters..." required>
              
               <!-- <div  *ngIf=" reviewForm.get('reviewTitle').hasError('maxlength')">
                 <div class="text-danger">Review title cannot exceed 15 characters.</div>
@@ -77,10 +77,13 @@
              
             </div>
             <div class="your">
-              <label>Your Review*</label>
-              <textarea formControlName="reviewContent" minlength="150" class="review" placeholder="Give your Review" required></textarea>
+              <label>Your Review<span class="astrik">*</span><span style="font-size: 12px;color: gray;">(Min-Character count: {{ characterCount }}/150)</span></label>
+              
+              <textarea [(ngModel)]="text" (input)="countCharacters()" formControlName="reviewContent" minlength="150" class="review" placeholder="Please provide a review with a minimum of 150 characters..." required></textarea>
+              
             </div>
-          
+            <!-- <textarea [(ngModel)]="text" (input)="countCharacters()"></textarea> -->
+            
             <div class="condition">
               <input type="checkbox" class="check" id="chb" formControlName="agreeTermsAndConditions" required>
               <div class="form-check-label">&nbsp;I certify that my feedback is based on my experience with this product. By submitting, I agree to the terms of use and privacy policy of SoftwareSuggest.</div>

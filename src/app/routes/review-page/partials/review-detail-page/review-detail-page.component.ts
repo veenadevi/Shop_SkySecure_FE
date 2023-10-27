@@ -210,4 +210,17 @@ rate(aspect: any, star: number): void {
     return payload;
   }
 
+  text: string = '';
+  characterCount: number = 0;
+
+  countCharacters() {
+    this.characterCount = this.text.length;
+  }
+  text01: string = '';
+  characterCount01: number = 0;
+  countCharacters01() {
+    this.characterCount01 = this.text01.length;
+  }
+
+
 }
