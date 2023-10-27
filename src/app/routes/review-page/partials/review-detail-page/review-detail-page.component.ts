@@ -3,11 +3,12 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { map,Subscription } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
-
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
+ 
 
 @Component({
   selector: 'app-review-detail-page',
@@ -65,7 +66,7 @@ export class ReviewDetailPageComponent {
     private router: Router,
     private metaDataStore: MetadataStore,
     private metaDataService: MetadataService,
-    
+    private userAccountStore : UserAccountStore,
     ) {
 
     this.reviewForm = this.fb.group({
@@ -78,6 +79,8 @@ export class ReviewDetailPageComponent {
       reviewTitle: ['', Validators.required, ],
       reviewContent: ['', Validators.required],
       agreeTermsAndConditions: [false, Validators.requiredTrue],
+       
+      
     });
 
     this.router.events.subscribe((event: Event) => {
@@ -99,26 +102,17 @@ export class ReviewDetailPageComponent {
       this.productId = params.productId;
       this.productName = params.productName;
     });
+    this.aspectList.forEach((aspect) => {
+      this.reviewForm .addControl(aspect.key, this.fb.control('', Validators.required));
+    });
   }
 
-  // get getFormData(): FormArray {
-  //   return <FormArray>this.reviewForm.get(' reviewTitle');
-  // }
 
-//   checkInputLength(inputField) {
-//     const maxLength = 15;
-//     const inputValue = inputField.value;
-//     const errorElement = document.getElementById("inputTextError");
-
-//     if (inputValue.length > maxLength) {
-//         errorElement.textContent = "Input text exceeds the maximum length of 15 characters.";
-//     } else {
-//         errorElement.textContent = ""; // Clear the error message
-//     }
-// }
-
-  ngOnInit(): void {
-    this.reviewPayload = this.metaDataStore.getProductReviewDetails();
+data
+  ngOnInit(): void { 
+   
+     this.reviewPayload = this.metaDataStore.getProductReviewDetails();
+     console.log("OnInit",this.reviewPayload)
     if (this.reviewPayload?.productId?.length > 2) {
       this.reviewForm.patchValue(this.reviewPayload);
       this.selectedRatings = {
@@ -133,13 +127,20 @@ export class ReviewDetailPageComponent {
       this.metaDataService.getProductReviewById(this.currentUrl).subscribe((data) => {
         this.reviewPayload = this.updateReviewPayload(this.reviewPayload, data.productReview);
         this.metaDataStore.setProductReviewDetails(this.reviewPayload);
+        console.log("===this.reviewPayload===",this.data=this.reviewPayload);
+         console.log("===data.productReview===",this.data=data.productReview)
+        console.log("===setProductReviewDetails===",this.data=this.metaDataStore.setProductReviewDetails.name)
         this.metaDataStore.setProductReviewOtherDetails(data.productReview);
         this.reviewForm.patchValue(data.productReview);
+        console.log("-- ONINIT IN ELSE--", this.reviewForm.patchValue(data.productReview))
         this.selectedRatings = { ...data.productReview };
       }, error => {
-        console.log("____TEST___ERROR", error);
+        console.log(" TEST ERROR", error);
       })
     }
+
+    this.setSelfData();
+    
   }
 
  // Define a variable to store the cumulative rating
@@ -148,11 +149,7 @@ rate(aspect: any, star: number): void {
   this.selectedRatings[aspect.key] = star;
    console.log("____TEST RATE___", this.selectedRatings);
    console.log("customerSupportRating",this.selectedRatings[aspect.key] )
-  //  this.cumulativeRating += star;
-  //  console.log("____TEST RATE___ ", this.selectedRatings); 
-  //  const averageRating = this.cumulativeRating / 5;
-  //  console.log("Cumulative Rating:", this.cumulativeRating);
-  //  console.log("Average Rating:", averageRating);
+   
  
 }
 
@@ -223,4 +220,15 @@ rate(aspect: any, star: number): void {
   }
 
 
+ 
+  
+  public setSelfData(){
+    let userDetails = this.userAccountStore.getUserDetails();
+    console.log("userDetails-GST ",userDetails.name,"",userDetails.email,"",userDetails.company )  
+    this.reviewForm.controls['userName'].setValue(userDetails.firstName ? userDetails.firstName : null);
+    this.reviewForm.controls['email'].setValue(userDetails.email ? userDetails.email : null);
+    this.reviewForm.controls['organizationName'].setValue(userDetails.company ? userDetails.company : null);
+
+  }
+  
 }
