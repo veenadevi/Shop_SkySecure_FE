@@ -143,4 +143,27 @@ export class ReviewRatingPageComponent  {
       var product= this.metaDataStore.getProductReviewDetails();
       this.router.navigate([`/review-page/review-detail-page/${product?.productId}`]);
     }
+
+
+    text: string = '';
+    characterCount: number = 0;
+  
+    countCharacters() {
+      this.characterCount = this.text.length;
+    }
+    text01: string = '';
+    characterCount01: number = 0;
+    countCharacters01() {
+      this.characterCount01 = this.text01.length;
+    }
+    text02: string = '';
+    characterCount02: number = 0;
+    countCharacters02() {
+      this.characterCount02 = this.text02.length;
+    }
+    text03: string = '';
+    characterCount03: number = 0;
+    countCharacters03() {
+      this.characterCount03 = this.text03.length;
+    }
 };

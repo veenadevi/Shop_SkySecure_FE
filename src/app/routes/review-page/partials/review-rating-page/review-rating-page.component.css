@@ -35,6 +35,7 @@ label{
     font-weight: 600;
     color:#333333;
     font-size: 14px;
+    padding-left: 5px;
 }
 .review-field-main{
     display: flex;
@@ -249,7 +250,7 @@ textarea{
 .guide-heading{
     text-align: center;
     padding-top: 10px;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -257,7 +258,7 @@ textarea{
     /* width: 90%; */
     text-align: center;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
     color: #6C6C6C;
     /* margin-left: 5%; */
     padding-top: 15px;
@@ -267,7 +268,7 @@ textarea{
 .guide-image{
     display: flex;
     flex-direction: row;
-padding: 40px;
+padding: 10px;
 justify-content: space-between;
 }
 .img-01{
@@ -290,8 +291,18 @@ font-weight: 400;
 }
 
 .error{
-    color: red;
+    color: #B82727;
     text-align: center;
     font: size 12px;
     /* padding: 20px; */
+}
+
+.astrik{
+    color: #B82727;
+    font-size: 15px;
+}
+
+.emoji-cont{
+    font-size: 13px;
+    font-weight: 600;
 }
