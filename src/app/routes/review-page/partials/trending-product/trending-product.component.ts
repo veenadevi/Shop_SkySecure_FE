@@ -16,7 +16,7 @@ export class TrendingProductComponent {
 
   private subscriptions : Subscription[] = [];
   public trendingProductsList : any[] = [];
-  
+  productName
   public staticProductimageUrl = 'https://csg1003200209655332.blob.core.windows.net/images/1681727933-Microsofticon.png';
 
   constructor(
@@ -28,14 +28,13 @@ export class TrendingProductComponent {
   ) {
 
   }
-
   public trendingProducts$ = this.metadataStore.trendingProducts$
   .pipe(
     map(data => {
       
       if(data){
         //this.loaderService.hide(LoadingType.Full)
-       
+       console.log("data",data)
         return data;
         //return data.splice(0,7);
       }
@@ -52,17 +51,44 @@ export class TrendingProductComponent {
     this.setTrendingProductsGrid();
   }
 
-  public setTrendingProductsGrid(){
+  // public setTrendingProductsGrid(){
 
-    this.subscriptions.push(
-      this.trendingProducts$.subscribe( response => {
-        this.trendingProductsList = response;
-      })
-    )
+  //   this.subscriptions.push(
+  //     this.trendingProducts$.subscribe( response => {
+  //       this.trendingProductsList = response;
+  //       console.log("treandig res",this.trendingProductsList)
+  //        this.productName = this.trendingProductsList.map((product) => product.name);
+  //       console.log("Names:", this.productName);
+         
+  //     })
+  //   )
     
-  }
+  // }
 
-  
+  public setTrendingProductsGrid() {
+    this.subscriptions.push(
+      this.trendingProducts$.subscribe(response => {
+        this.trendingProductsList = response;
+        console.log("trending res", this.trendingProductsList);
+        this.productName = this.trendingProductsList.map((product) => product.name);
+        console.log("Names:", this.productName);
+      })
+    );
+  }
+  selectedProductName: string;
+
+  // Function to set the selected product name
+  public selectProduct(productId: string, productName: string) {
+    this.selectedProductName = productName; // Set the selected product name
+    this.router.navigate([`/review-page/review-detail-page/${productId}`], {
+      queryParams: { productName: this.selectedProductName } });
+  }
+//   public selectProduct(productId: string) {
+//   this.router.navigate([`/review-page/review-detail-page/${productId}`], {
+//     queryParams: { productName: this.selectedProductName }
+//   });
+// }
+
   public requestQuote (product : ProductsDetails) : void {
 
     
@@ -83,13 +109,10 @@ export class TrendingProductComponent {
       quantity : 1,
     };
 
-   
+   console.log("queryparam",existingItems)
     this.addItemsToCartService.addItemsToCart(queryParams);
     //this.router.navigate(['/cart'], {queryParams: queryParams});
-
-
-
-
+    //console.log("queryparam",existingItems)
   }
 
   public navigateToProducts(product: any): void {
@@ -104,7 +127,17 @@ export class TrendingProductComponent {
   }
   
 
-  public selectProduct(productId: string) {
-    this.router.navigate([`/review-page/review-detail-page/${productId}`]);
- }
+//   public selectProduct(productId: string) {
+//     this.router.navigate([`/review-page/review-detail-page/${productId}`], {
+//       queryParams: { productName: this.productName }
+//     });
+//  }
+
+
+//  public selectProduct(productId: string, productName: string) {
+//   this.router.navigate([`/review-page/review-detail-page/${productId}`], {
+//     queryParams: { productName: this.productName }
+//   });
+//   // this.selectProductName(productName)
+// }
 }

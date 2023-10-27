@@ -2,7 +2,10 @@
     <div class="rating-content">
      
         <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
-          <h4 class="d-flex justify-content-center mb-3 mt-3">Write a Review For - {{ productName }}</h4>
+          <div
+             class="d-flex justify-content-center mb-3 mt-3 productName">  Write a Review For -  {{ productName }} 
+          </div>
+          <!-- <h4 class="d-flex justify-content-center mb-3 mt-3">Write a Review For - {{ productName }}</h4> -->
             <!-- How frequently do you use this software? -->
             <div class="input-cont">
               <label for="frequentSoftwareUsage">How frequently do you use this software?</label>

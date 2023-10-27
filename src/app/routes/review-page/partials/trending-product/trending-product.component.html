@@ -3,7 +3,7 @@
     <h2>Trending Products</h2>
     <div class="card-container">
       <ng-container *ngFor="let product of trendingProductsList">
-      <div class="card" (click)="selectProduct(product._id)">
+      <div class="card" (click)="selectProduct(product._id,product.name)">
       <div class="image">
         <img class="card-img" src="../../../../../assets/icons/Microsoft.svg">
         <!-- <img class="mat-card-img" mat-card-image [src]="staticProductimageUrl" alt="Photo of test title" /> -->
