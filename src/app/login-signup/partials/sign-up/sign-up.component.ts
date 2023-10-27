@@ -41,6 +41,9 @@ export class SignUpComponent {
 
   public validatedEmail : string ;
 
+  public timerInterval: any;
+  display: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService : AuthService,
@@ -129,7 +132,7 @@ export class SignUpComponent {
     else{ // If Valid
       // console.log("()()() Valid");
       
-      
+    
       //console.log(JSON.stringify(this.form.value, null, 2));
       let formValue = this.form.value;
       let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
@@ -160,6 +163,32 @@ export class SignUpComponent {
       )
     }
     
+  }
+
+  timer(minute) {
+    // let minute = 1;
+    let seconds: number = minute * 45;
+    let textSec: any = '0';
+    let statSec: number = 45;
+
+    const prefix = minute < 10 ? '0' : '';
+
+    this.timerInterval = setInterval(() => {
+      seconds--;
+      if (statSec != 0) statSec--;
+      else statSec = 45;
+
+      if (statSec < 10) {
+        textSec = '0' + statSec;
+      } else textSec = statSec;
+
+      this.display = `${prefix}${Math.floor(0.45)}:${textSec}`;
+
+      if (seconds == 0) {
+        console.log('finished');
+        clearInterval(this.timerInterval);
+      }
+    }, 1000);
   }
 
   onReset(): void {
@@ -220,6 +249,7 @@ export class SignUpComponent {
             this.invalidDomain=false;
             this.enableOTPButton = false;
             this.otpField = true;
+            this.timer(1);
           }
         }
 
