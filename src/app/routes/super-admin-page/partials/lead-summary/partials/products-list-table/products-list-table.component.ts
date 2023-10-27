@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
+import { InvoiceDueDateModalComponent } from 'src/shared/components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
@@ -656,17 +657,26 @@ this.enableinvoice=true
   public sendInvoice() {
 
 
-
-
     let request = this.setInvoiceRequestData();
-    //console.log("+_+_+_+_+_ Res Data ", request);
+    //const modalRef = this.modalService.open(AssignLeadsModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
+  
+    //modalRef.componentInstance.request = account;
+
+    const modalRef = this.modalService.open(InvoiceDueDateModalComponent, {size: '700px', windowClass: 'invoice-due-date-modal-custom-class'});
+  
+    modalRef.componentInstance.request = request;
+    
+
+
+    /*
+    let request = this.setInvoiceRequestData();
 
     this.subscription.push(
       this.cartService.createInvoice(request).subscribe(res => {
         this.showInvoiceMsg = true
 
       })
-    )
+    ) */
 
 
   }

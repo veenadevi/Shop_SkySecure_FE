@@ -308,5 +308,27 @@ export class CartService {
     //return this.http.get(url,{params:data})
   }
 
+  public paymentGatewayCCAvenueRequest(request){
+    
+    let url = "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"
+   
+    
+    
+
+
+    let request$ = this.http.post<Observable<any>>(url, request)
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+        return response;
+      }),
+    );
+
+    return request$;
+    //return this.http.get(url,{params:data})
+  }
+
 
 }

@@ -755,6 +755,9 @@ public onChangeQuantity(i, price) : void {
       );*/
 
 
+
+
+
       this.subscriptions.push(
         this.cartService.encryptdata(request).subscribe( data=>{
           console.log('---------------------', data)
@@ -764,12 +767,26 @@ public onChangeQuantity(i, price) : void {
 
               setTimeout(()=>{
                   this.form.nativeElement.submit();
+                  //this.checkOutCCAvenue(this.encRequestRes);
                   //console.log("+_+_+_+ ()( )()( ", this.encRequestRes);
               },1000)
         }, error => {
           console.log("++++++ Error",error)
           })
       )
+  }
+
+  public checkOutCCAvenue(encryptedData){
+    let reqForCCAvenue = {
+      "encRequest" : encryptedData, // or any supported currency
+      "access_code" : this.accessCode,
+    }
+
+    this.subscriptions.push(
+      this.cartService.paymentGatewayCCAvenueRequest(reqForCCAvenue).subscribe(res=>{
+        console.log("+_+_+_+_+_+_+ Response from CCCAVENUE", res);
+      })
+    )
   }
 
 }
