@@ -87,6 +87,7 @@ select{
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+    column-gap: 10px;
 }
 
 .messgae-holder{
@@ -109,7 +110,7 @@ select{
 }
 
 .primary-btn {
-    padding: 9px;
+    padding: 8px;
 }
 .check-cont{
     display: flex;
