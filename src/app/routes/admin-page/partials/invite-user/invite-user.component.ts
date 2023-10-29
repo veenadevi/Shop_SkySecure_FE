@@ -115,7 +115,7 @@ export class InviteUserComponent {
 
 
 public fetchGST(){
-  console.log("_+_+_+_+_+ GST Data ", this.myForm.value.gstin.length )
+ // console.log("_+_+_+_+_+ GST Data ", this.myForm.value.gstin.length )
 
   if(this.myForm.value.gstin.length === 15){
 
@@ -196,7 +196,7 @@ public fetchGST(){
     if (this.myForm.valid) {
 
       let formData = this.myForm.value;
-      console.log("this.myForm.get('triggeremail').value===",formData.isZohoCustomer)
+     // console.log("this.myForm.get('triggeremail').value===",formData.isZohoCustomer)
       //companyName email firstName lastName mobile
       let request = {
         "firstName": formData.firstName,

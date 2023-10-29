@@ -696,7 +696,7 @@ public onChangeQuantity(i, price) : void {
   }
 
   public onSelectChange(event, i){
-    console.log("_+_+_+_+_ event", event.target.value);
+   // console.log("_+_+_+_+_ event", event.target.value);
     if(event.target.value === 'Year'){
       this.cartData[i].itemTotal = this.cartData[i].quantity * this.cartData[i].priceList[0].price;
       this.cartData[i].price = this.cartData[i].priceList[0].price;
@@ -760,7 +760,7 @@ public onChangeQuantity(i, price) : void {
 
       this.subscriptions.push(
         this.cartService.encryptdata(request).subscribe( data=>{
-          console.log('---------------------', data)
+        //  console.log('---------------------', data)
 
           this.encRequestRes = data;
           //this.encRequestRes = data['response']; 

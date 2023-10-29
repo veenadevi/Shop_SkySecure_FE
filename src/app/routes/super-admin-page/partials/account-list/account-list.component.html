@@ -94,10 +94,10 @@
                               <ng-template #noValue>-</ng-template>
                          </td> 
                          <td>
-                            <ng-container *ngIf="account.cartData.zohoEstimateNo; else noValue">
-                                {{  account.cartData.zohoEstimateNo }}
+                            <ng-container *ngIf="account.cartData.zohoInvoiceNo; else noInvoice">
+                                {{  account.cartData.zohoInvoiceNo }}
                               </ng-container>
-                              <ng-template #noValue>-</ng-template>
+                              <ng-template #noInvoice>-</ng-template>
                          </td> 
                         <!-- <td>{{ account.zohoBookEstimateData.estimate_number }}</td> -->
                         <td>

@@ -43,6 +43,9 @@ export class ProductsListTableComponent implements OnInit {
   public productsList: any[] = [];
   public enableEdit: boolean
   public enableinvoice:boolean
+  public allowAddProduct:boolean
+  public isReadOnly:boolean;
+
   public showMsg: boolean
 
   public showInvoiceMsg: boolean
@@ -93,12 +96,23 @@ export class ProductsListTableComponent implements OnInit {
   userDetails:any;
 
   ngOnInit(): void {
+    this.isReadOnly=false
     this.enableEdit = false
     this.enableinvoice=false
+    this.allowAddProduct=false
     this.userDetails = this.userAccountStore.getUserDetails();
     this.showMsg = false
     this.cartDetails = (this.cartData.CartDetails && this.cartData.CartDetails.length > 0) ? this.cartData.CartDetails : null;
    
+    if(this.cartData.status==='Invoiced'){
+
+    this.enableEdit = true
+    this.enableinvoice=true
+    this.allowAddProduct=true
+
+    this.isReadOnly=true
+    }
+
    console.log("in parent settign current cartdetails ====",this.cartDetails)
     this.setSampleData();
  
@@ -204,7 +218,7 @@ this.enableinvoice=true
 
 
   getEmployee() {
-    this.enableEdit = false;
+   // this.enableEdit = false;
 
     if (this.productsData.line_items) {
       this.isEstimate = true;
@@ -658,15 +672,24 @@ this.enableinvoice=true
 
 
     let request = this.setInvoiceRequestData();
-    //const modalRef = this.modalService.open(AssignLeadsModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
-  
-    //modalRef.componentInstance.request = account;
+
+
+
 
     const modalRef = this.modalService.open(InvoiceDueDateModalComponent, {size: '700px', windowClass: 'invoice-due-date-modal-custom-class'});
   
+
+
     modalRef.componentInstance.request = request;
     
+    modalRef.componentInstance.passedData.subscribe((res:any) => {
+      
+      console.log("after model close====")
+      this.enableEdit = true
+    this.enableinvoice=true
+    this.allowAddProduct=true
 
+    })
 
     /*
     let request = this.setInvoiceRequestData();

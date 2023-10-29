@@ -25,7 +25,7 @@ export class HeaderCardFlyerComponent implements OnInit{
     if(this.product && this.product.properties){
       
       this.productItem = this.product.properties;
-      console.log("()()()()() In Flyer", this.productItem);
+     // console.log("()()()()() In Flyer", this.productItem);
     }
     
   }

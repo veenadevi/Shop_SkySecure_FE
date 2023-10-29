@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/shared/services/cart.service';
@@ -34,6 +34,8 @@ export class InvoiceDueDateModalComponent implements OnInit{
 
   @Input('request')
   public request : any;
+
+  @Output() passedData: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private cartService : CartService,
@@ -151,6 +153,7 @@ export class InvoiceDueDateModalComponent implements OnInit{
   console.log("error free",this.request)
   this.subscription.push(
     this.cartService.createInvoice(this.request).subscribe(res => {
+      this.passedData.emit(res);
       this.showInvoiceMsg = true;
       this.activeModal.close();
 
