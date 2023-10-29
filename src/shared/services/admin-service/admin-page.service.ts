@@ -421,7 +421,7 @@ public addChannelPartner( request : any): Observable<any> {
 
 
 
-console.log("+++++++ ____ _ addChannelPartner", request);
+//console.log("+++++++ ____ _ addChannelPartner", request);
   
   const REQUEST$ = this.http.post<any>(URL, request)
     .pipe(
@@ -451,7 +451,7 @@ public addChannelPartnerUsers( request : any): Observable<any> {
 
 
 
-console.log("+++++++ ____ _ addChannelPartner", request);
+//console.log("+++++++ ____ _ addChannelPartner", request);
   
   const REQUEST$ = this.http.post<any>(URL, request)
     .pipe(

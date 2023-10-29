@@ -33,7 +33,7 @@ export class SidenavWrapperComponent implements OnInit{
   @Input() set userRole(value: any) {
 
     this.userRoleVal = value;
-    console.log("...my role ----", this.userRoleVal, value)
+   // console.log("...my role ----", this.userRoleVal, value)
     //this.userRoleVal = 'superadmin'
 
   }

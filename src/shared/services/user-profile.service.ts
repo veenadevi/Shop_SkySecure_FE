@@ -140,7 +140,7 @@ export class UserProfileService {
     const OPTIONS = this.getOptions2();
 
     let request = req;
-    console.log("+++++++++++++ Here 1");
+   
 
     let REQUEST$ = this.http.patch<Observable<any>>(URL, request, OPTIONS)
       .pipe(

@@ -27,7 +27,7 @@
           </td>
           <td class="form-group">
             <div class=" price-details">
-            <input type="text" class="form-control-01" formControlName="quantity" placeholder="quantity" (change)="valueChanged($event, group, 'quantity')">
+            <input type="text" [readOnly]="isReadOnly" class="form-control-01" formControlName="quantity" placeholder="quantity" (change)="valueChanged($event, group, 'quantity')">
             <span class="text-danger" *ngIf="group.get('quantity').touched && group.get('quantity')?.hasError('required')">Quantity required</span>
           </div>
           </td>
@@ -37,7 +37,7 @@
             <div class="td-column price-details">
               <span>
               <!-- {{ item.priceType}} -->
-              <select class="type" formControlName="priceType" (change)="onSelectChange($event,group)">
+              <select class="type" [disabled]="isReadOnly" formControlName="priceType" (change)="onSelectChange($event,group)">
                 <option class="type" *ngFor="let opt of firstSelectOptions" [value]="opt">
                    {{ opt }}
                 </option>
@@ -52,7 +52,7 @@
           
           <td class="form-group">
             <div class=" price-details">
-            <input type="text" class="form-control-02" (change)="priceChanged($event, group, i)" formControlName="bcy_rate" placeholder="bcy_rate">
+            <input type="text" [readOnly]="isReadOnly" class="form-control-02" (change)="priceChanged($event, group, i)" formControlName="bcy_rate" placeholder="bcy_rate">
             <span class="text-danger" *ngIf="group.get('bcy_rate').touched && group.get('bcy_rate')?.hasError('required')">Amount required</span>
             <span class="text-danger" *ngIf="group.get('bcy_rate')?.hasError('invalid')">Item price must be between Distributor Price and MRP</span>
           </div>
@@ -85,7 +85,7 @@
 
   <div class="action-btn-holder">
       <div class="add-new-btn">
-        <button (click)="addApp()" class="btn primary-btn">Add new</button>
+        <button [disabled]="allowAddProduct" (click)="addApp()" class="btn primary-btn">Add new</button>
     </div>
     <ng-container >
     <div class="add-new-btn">

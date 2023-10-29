@@ -174,7 +174,7 @@ export class HeaderComponent implements OnInit{
       map(data => {
         if(data){
           
-          console.log("++_+_+_ ()()( *** ", data);
+        //  console.log("++_+_+_ ()()( *** ", data);
           this.notificationList = data;
           //this.numberOf = data.length;
           return data;
