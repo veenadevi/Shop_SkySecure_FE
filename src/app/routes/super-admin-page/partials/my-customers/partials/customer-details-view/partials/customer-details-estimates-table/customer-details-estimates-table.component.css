@@ -17,3 +17,16 @@
 .no-img{
     width:50%;
 }
+
+:host ::ng-deep.p-paginator.p-paginator-bottom
+{
+    font-size: 13px;
+}
+
+:host ::ng-deep.p-paginator .p-paginator-pages .p-paginator-page{
+    height: 2rem;
+    min-width:2rem
+}
+:host ::ng-deep .tooltip .ui-tooltip-text {
+   font-size: 8px; 
+  }
