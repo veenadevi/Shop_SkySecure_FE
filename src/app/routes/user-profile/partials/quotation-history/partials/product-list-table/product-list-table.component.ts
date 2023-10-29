@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
+import { UploadpoModalComponent } from 'src/shared/components/modals/uploadpo-modal/uploadpo-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
 
 @Component({
@@ -363,7 +364,12 @@ export class ProductListTableComponent {
     return <FormArray>this.productListForm.get('items');
   }
 
-  addApp() {
+
+
+  uploadPo(modalType: string){
+    const modalRef = this.modalService.open(  UploadpoModalComponent, { size: 'md', windowClass: 'add-compare-products-custom-class' });
+  }
+  addApp(modalType: string) {
 
     const modalRef = this.modalService.open(AddCompareProductModalComponent, { size: 'lg', windowClass: 'add-compare-products-custom-class' });
     let queryParams = {
@@ -616,9 +622,9 @@ export class ProductListTableComponent {
 
       case 'Year':
         let currentPrice1=this.getPriceByType(lineItemId,type )
-        console.log("fetched pricelistdata  for year===",currentPrice1.price.$numberDecimal)
-        let quanTotal1 = item.get('quantity').value * currentPrice1.price.$numberDecimal;
-        item.get('bcy_rate').setValue(currentPrice1.price.$numberDecimal);
+        console.log("fetched pricelistdata  for year===",currentPrice1.price)
+        let quanTotal1 = item.get('quantity').value * currentPrice1.price;
+        item.get('bcy_rate').setValue(currentPrice1.price);
         item.get('distributorPrice').setValue(currentPrice1.distributorPrice);
         item.get('erp_price').setValue(currentPrice1.ERPPrice);
         item.get('item_total').setValue(quanTotal1.toFixed(2));

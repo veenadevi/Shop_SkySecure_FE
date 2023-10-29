@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import Validation from '../utils/validation';
 import { AuthService } from 'src/shared/services/auth.service';
@@ -10,6 +10,8 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 import * as CryptoJS from 'crypto-js';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
+import { NgOtpInputConfig } from 'ng-otp-input';
+ 
 
 @Component({
   selector: 'login',
@@ -20,6 +22,9 @@ export class LoginComponent {
 
   form: FormGroup;
   submitted = false;
+  otp:any
+  showOtpComponent = true;
+  @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any;
 
   private subscriptions : Subscription[] = [];
 
@@ -36,6 +41,10 @@ export class LoginComponent {
   public inValidOTP:boolean=false;
 
   public otpField : boolean = false;
+
+  public timerInterval: any;
+
+  display: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -105,15 +114,17 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
+    
     this.submitted = true;
     this.signUpSuccess=false
+    
     if (this.form.invalid) { // If Invalid Return
       return;
     }
     else{ // If Valid
       
       
-
+    
       console.log("*(*(*(*(* ", this.form.value.email);
       let req = {
         "emailId" : this.form.value.email,
@@ -123,21 +134,23 @@ export class LoginComponent {
         this.userProfileService.sendOTP(req).subscribe(
           res=>{
             
-            console.log("()()()()( ", res);
+           // console.log("()()()()( ", res);
             
             if(res.message){
-              console.log("()()()()( Inside If", res);
+             // console.log("()()()()( Inside If", res);
               this.enableSignInButton = false;
               this.enableOTPButton = false;
               this.newEmailAlert = true;
               this.otpField = false;
             }
             else{
-              console.log("()()()()( Inside Else", res);
+             
+             // console.log("()()()()( Inside Else", res);
               this.enableSignInButton = true;
               this.enableOTPButton = false;
               this.newEmailAlert = false;
               this.otpField = true;
+              this.timer(1);
             }
           },
           err => {
@@ -150,7 +163,7 @@ export class LoginComponent {
         ) 
       )
 
-      console.log("(()()() ", this.newEmailAlert);
+    //  console.log("(()()() ", this.newEmailAlert);
 
       /*let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
       let hashedPass = CryptoJS.AES.encrypt(this.form.value.password, key).toString();
@@ -180,12 +193,40 @@ export class LoginComponent {
     
   }
 
+
+  timer(minute) {
+    // let minute = 1;
+    let seconds: number = minute * 45;
+    let textSec: any = '0';
+    let statSec: number = 45;
+
+    const prefix = minute < 10 ? '0' : '';
+
+    this.timerInterval = setInterval(() => {
+      seconds--;
+      if (statSec != 0) statSec--;
+      else statSec = 45;
+
+      if (statSec < 10) {
+        textSec = '0' + statSec;
+      } else textSec = statSec;
+
+      this.display = `${prefix}${Math.floor(0.45)}:${textSec}`;
+
+      if (seconds == 0) {
+        console.log('finished');
+        clearInterval(this.timerInterval);
+      }
+    }, 1000);
+  }
+
+
   public login(){
     //Login Logic
 
     //var passKey= "!ndia2320@securesky";
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-      let hashedPass = CryptoJS.AES.encrypt(this.form.value.otp, key).toString();
+      let hashedPass = CryptoJS.AES.encrypt(this.otp, key).toString();
       let req = {
         "emailId":this.form.value.email,
         //"emailId" : "veena@skysecuretech.com",
@@ -194,7 +235,7 @@ export class LoginComponent {
 
       this.subscriptions.push(
         this.userProfileService.validateOTP(req).subscribe( res => {
-          console.log("*(*(*(*(*( OTP Res", res);
+        // console.log("*(*(*(*(*( OTP Res", res);
           if(res && res.data){
             this.callSignIn();
           }
@@ -231,11 +272,11 @@ export class LoginComponent {
           
 
           if(this.params && this.params.has('productId')){
-            console.log("_+_+_)+_+_+_+_+ Inside Product ID ", this.params);
+           // console.log("_+_+_)+_+_+_+_+ Inside Product ID ", this.params);
             this.router.navigate(['']);
           }
           else{
-            console.log("_+_+_)+_+_+_+_+ Inside Product Else ", this.params);
+         //   console.log("_+_+_)+_+_+_+_+ Inside Product Else ", this.params);
             this.router.navigate(['']);
           }
           
@@ -256,6 +297,43 @@ export class LoginComponent {
   }
   public navigateToHomePage(){
     this.router.navigate(['']);
+  }
+
+ 
+ 
+
+  config = {
+    allowNumbersOnly: true,
+    length: 6,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder: "",
+    inputStyles: {  
+      width: "50px",
+      height: "50px",
+    },
+  };
+   
+  // setVal(val:any) {
+  //   console.log("set value",this.ngOtpInput.setValue(val))
+  //   this.ngOtpInput.setValue(val);
+  // }
+  // onConfigChange() {
+  //   this.showOtpComponent = false;
+  //   this.otp = null;
+  //   setTimeout(() => {
+  //     console.log("set valuetimeout")
+  //     this.showOtpComponent = true;
+  //   }, 0);
+  // }
+   
+
+  onOtpChange(otp: any) {
+    this.otp = otp;
+   // console.log("this.otp", this.otp);
+    if (otp.length === 6) {
+      this.login();
+    }
   }
 }
 

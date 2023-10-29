@@ -46,7 +46,7 @@
                 <p style="font-size: medium;
                 font-weight: 700;margin-bottom: 0;">{{item.name}}</p>
                 <p style="font-size: 13px;
-                margin-bottom: 0;">{{item.solutionCategory}}</p>
+                margin-bottom: 0;"> {{ item.solutionCategory ? item.solutionCategory : item.subcategories.description }}</p>
                 <p style="font-size: 13px;
                 margin-bottom: 0;font-weight: 700;">
                 <ng-container *ngIf="item.priceList && item.priceList.length>0">

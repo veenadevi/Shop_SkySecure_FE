@@ -59,14 +59,14 @@ export class QuotationSummaryComponent {
     console.log("value pass to fetch details ==",data)
     this.subscriptions.push(
       this.superAdminService.getLeadSummaryDetails(data).subscribe(res=>{
-        console.log("+_+_+_C Data After Click", res.zohoBookEstimateData);
+       // console.log("+_+_+_C Data After Click", res.zohoBookEstimateData);
         this.responseData = res;
         this.cartData=res.cartData;
         this.estimateData = res.zohoBookEstimateData;
         this.accountsData =  res.zohoCRMAccountData;
         this.contactsData = res.zohoBookContactData?res.zohoBookContactData:null
 
-        console.log("cartDetailsData  ",this.cartData)
+      //  console.log("cartDetailsData  ",this.cartData)
 
       })
     )

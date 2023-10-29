@@ -4,6 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { InvoiceDueDateModalComponent } from 'src/shared/components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
 
 @Component({
   selector: 'product-list-table',
@@ -32,7 +34,11 @@ export class ProductListTableComponent {
 
   public productsList: any[] = [];
   public enableEdit: boolean
+  public enableinvoice:boolean
+  public allowAddProduct:boolean
+  public isReadOnly:boolean;
   public showMsg: boolean
+  public showInvoiceMsg: boolean
 
   public cartDetails: any[] = [];
   public newProductLists: any[] = [];
@@ -74,15 +80,28 @@ export class ProductListTableComponent {
   constructor(
     private fb: FormBuilder,
     private cartService: CartService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private userAccountStore: UserAccountStore,
   ) { }
-
+  userDetails:any;
 
   ngOnInit(): void {
+    this.isReadOnly=false
     this.enableEdit = false
+    this.enableinvoice=false
+    this.allowAddProduct=false
+   
     this.showMsg = false
+    this.userDetails = this.userAccountStore.getUserDetails();
     this.cartDetails = (this.cartData.CartDetails && this.cartData.CartDetails.length > 0) ? this.cartData.CartDetails : null;
- 
+    if(this.cartData.status==='Invoiced'){
+
+      this.enableEdit = true
+      this.enableinvoice=true
+      this.allowAddProduct=true
+  
+      this.isReadOnly=true
+      }
     this.setSampleData();
   
 
@@ -100,7 +119,7 @@ export class ProductListTableComponent {
 
   public valueChanged(event, item, type) {
 
-
+    this.enableinvoice=true
     switch (type) {
       case 'quantity':
         let quanTotal = item.get('quantity').value * item.get('bcy_rate').value;
@@ -121,6 +140,7 @@ export class ProductListTableComponent {
   public priceChanged(event, item, i) {
 
     this.enableEdit = false;
+    this.enableinvoice=true
     //item.get('line_items_id')
 
     var index = this.cartDetails.findIndex(el => el.estimateLineItemId === item.get('line_items_id').value);
@@ -188,7 +208,7 @@ export class ProductListTableComponent {
 
 
   getEmployee() {
-    this.enableEdit = false;
+   // this.enableEdit = false;
 
     if (this.productsData.line_items) {
       this.isEstimate = true;
@@ -355,6 +375,7 @@ export class ProductListTableComponent {
 
   addApp() {
 
+    this.enableinvoice=true
     const modalRef = this.modalService.open(AddCompareProductModalComponent, { size: 'lg', windowClass: 'add-compare-products-custom-class' });
     let queryParams = {
       "screen": 'edit-product-in-accounts',
@@ -380,6 +401,7 @@ export class ProductListTableComponent {
   }
 
   remove(index: number) {
+    this.enableinvoice=true
     const control = <FormArray>this.productListForm.get('items');
     control.removeAt(index);
   }
@@ -484,6 +506,51 @@ export class ProductListTableComponent {
     return req;
   }
 
+  public setInvoiceRequestData() {
+
+    //console.log("passin gcrm data from parent page ==",this.crmData)
+
+
+    
+
+    let assignTo = this.crmData.assignTo;
+    let createdBy = this.crmData.createdBy;
+    let cartData = this.crmData.cartData;
+    let zohoBookContactData = this.crmData.zohoBookContactData;
+    let zohoCRMAccountData = this.crmData.zohoCRMAccountData;
+    let zohoBookEstimateData = this.crmData.zohoBookEstimateData;
+
+
+    let prdArray = this.setProductsList();
+    let req = {
+      "reference_number":"",
+      "updatedBy":this.userDetails._id,
+      "payment_terms":"",
+      "payment_terms_label": "Due on Receipt",
+      "payment_options": {
+          "payment_gateways": []
+      },
+      "customer_id": zohoBookContactData.contact_id,
+      "products": prdArray,
+
+      "contact_persons_ids": zohoBookEstimateData.contact_persons_ids,
+       "is_inclusive_tax": false,
+
+
+       "allow_partial_payments": false,
+       "invoiced_estimate_id": cartData.zohoEstimateId,
+       "billing_address_id": zohoBookContactData.billing_address.address_id,
+       "shipping_address_id": zohoBookContactData.shipping_address.address_id,
+       "gst_treatment": zohoBookContactData.gst_treatment,
+       "gst_no": createdBy.gstinNumber,
+       "place_of_supply": zohoBookContactData.shipping_address.state_code,
+       "cart_ref_id": cartData.cart_ref_id,
+ }
+
+    
+
+    return req;
+  }
   public setProductsList() {
 
     this.productsList = [];
@@ -577,9 +644,47 @@ export class ProductListTableComponent {
   get firstSelectOptions() {
     return this.opts.map(({ key }) => key);
   }
+  public sendInvoice() {
+
+
+
+
+    let request = this.setInvoiceRequestData();
+
+
+
+
+
+
+    const modalRef = this.modalService.open(InvoiceDueDateModalComponent, {size: '700px', windowClass: 'invoice-due-date-modal-custom-class'});
+  
+
+
+    modalRef.componentInstance.request = request;
+    
+    modalRef.componentInstance.passedData.subscribe((res:any) => {
+      
+      console.log("after model close====")
+      this.enableEdit = true
+    this.enableinvoice=true
+    this.allowAddProduct=true
+
+    })
+    //console.log("+_+_+_+_+_ Res Data ", request);
+
+    // this.subscription.push(
+    //   this.cartService.createInvoice(request).subscribe(res => {
+    //     this.showInvoiceMsg = true
+
+    //   })
+    // )
+
+
+  }
 
 
   public onSelectChange(event, item) {
+    this.enableinvoice=true
     var type=event.target.value;
 
 
@@ -601,7 +706,7 @@ export class ProductListTableComponent {
       case 'Year':
         let currentPrice1=this.getPriceByType(lineItemId,type )
        
-        let quanTotal1 = item.get('quantity').value * currentPrice1.price.$numberDecimal;
+        let quanTotal1 = item.get('quantity').value * currentPrice1.price;
         item.get('bcy_rate').setValue(currentPrice1.price);
         item.get('distributorPrice').setValue(currentPrice1.distributorPrice);
         item.get('erp_price').setValue(currentPrice1.ERPPrice);

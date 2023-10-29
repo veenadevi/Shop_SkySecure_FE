@@ -1,0 +1,61 @@
+<div class="contact-us-wrapper"  >
+    <div class="card-container">
+        <div class="modal-header">
+             
+            <span class="header-text"> Upload Quote File</span>
+            
+            <!-- <button (click) = "closeModal()" type="button" class="btn-close" aria-label="Close"></button> -->
+        </div>
+        <div class="modal-body"> 
+            <!-- <div class="upload">
+                <label>Upload PO</label>
+                <div class="avatar-edit">
+                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                        (change)="uploadFile($event)" />
+                    
+                    <button *ngIf="productLogo" style="margin: 10px;" class="btn btn-warning"
+                        (click)="removeFile()">Remove</button>
+                    <label for="imageUpload" *ngIf="editFile"
+                        [ngClass]="['custom-label', 'upload-image']"></label>
+                    <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
+                        (click)="removeUploadedFile()"></label>
+                </div>
+                <div class="savebtn">
+                    <button class="btn primary-btn">Save </button>
+                </div>
+                 
+            </div> -->
+
+            <!-- <div class="upload-container">
+                <div class="upload-file-section">
+                    <img class="upload-file-icon" src="../../../../assets/icons/UploadFileIcon.svg">
+                    <span>Drop Files Here</span>
+                    <span>or</span>
+                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                    (change)="uploadFile($event)" />
+                </div>
+            <label for="imageUpload" *ngIf="editFile"
+                [ngClass]="['custom-label', 'upload-image']"></label>
+            <label *ngIf="removeUpload" [ngClass]="['custom-label', 'remove-image']"
+                (click)="removeUploadedFile()"></label>
+            </div> -->
+
+
+            <label for="images" class="drop-container" id="dropcontainer">
+                <div class="drop-container-headline">
+                    <img class="upload-file-icon" src="../../../../assets/icons/UploadFileIcon.svg">
+                    <span class="drop-title">Drop files here</span>
+                </div>
+                or
+                <input type="file" id="images" accept="image/*,application/pdf" required>
+            </label>
+
+            <div class="savebtn">
+                <button (click)="closeModal()" class="close-btn">cancel</button>
+                <button class="btn primary-btn">Save </button>
+            </div>
+
+        </div>
+        
+    </div>
+</div>

@@ -1,160 +1,168 @@
 <div class="invite-container">
-    <h1>Invite User</h1>
+    <h1>Invite Customer</h1>
     <div class="invite-content">
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-          <div class="row">
-            <div class="col-sm forms">
-              <label for="firstname">First Name</label>
-              <input type="text" id="firstName" name="firstName" formControlName="firstName" placeholder="Enter the FirstName">
-            </div>
-            <div class="col-sm forms">
-              <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" name="lastName" formControlName="lastName" placeholder="Enter the LastName">
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="col-sm-6 forms">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" formControlName="email">
-              <div *ngIf="myForm.get('email').invalid && myForm.get('email').touched" class="error-message">
-                Please enter a valid email address.
-              </div>
-            </div>
-
-            <!-- <div class="col-sm-6 forms">
-              <label for="companyName">CompanyName</label>
-              <input type="text" id="companyName" name="companyName" formControlName="companyName" placeholder="Enter the company Name">
-            </div> -->
-
-            <div class="col-sm-6 mobile-field">
-              <div class="col-sm-3 forms" >
-                  <label for="cod">Country code</label>
-                  <select class="form-control-01">
-                    <option data-countryCode="IN" value="44">IN (+91)</option>
-                    <option data-countryCode="US" value="1">USA (+1)</option>
-                    <option data-countryCode="GB" value="44">UK (+44)</option>
-                  </select>
-                </div>
-              <div class="col-sm-8 forms mobile-input">
-                <label for="mobile">Mobile Number</label>
-                <input type="text" id="mobile" class="mobile"   name="mobile" formControlName="mobile">
-                <div *ngIf="myForm.get('mobile').invalid && myForm.get('mobile').touched" class="error-message">
-                  Please enter a valid phone number.
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-
-
-        <hr>
 
         <!-- GST integration -->
-
-        <div class="row">
-          <div class="col-sm-4 forms">
-            <label for="companyBusinessName">Company Business Name</label>
-            <input formControlName="companyBusinessName" type="companyBusinessName" class="form-control-03"
-                name="companyBusinessName" id="companyBusinessName" placeholder="Enter Company Name"
-                required>
-        </div>
-          <div class="col-sm-4 forms">
-            <label for="gstin">Enter GST</label>
-            <input formControlName="gstin" type="gstin" class="form-control-03" name="gstin" id="gstin"
-                placeholder="Enter GST Number">
+        <div *ngIf="showDefaultContent">
+          <div class="row">
+            <div class="col-sm-4 forms">
+              <label for="companyBusinessName">Company Business Name</label>
+              <input formControlName="companyBusinessName" type="companyBusinessName" class="form-control-03"
+                  name="companyBusinessName" id="companyBusinessName" placeholder="Enter Company Name"
+                  required>
+          </div>
+            <div class="col-sm-4 forms">
+              <label for="gstin">Enter GST</label>
+              <input formControlName="gstin" type="gstin" class="form-control-03" name="gstin" id="gstin"
+                  placeholder="Enter GST Number">
+            </div>
+    
+            <div class="col-sm-2 forms" >
+              <label></label>
+              <button class="btn primary-btn fetchgst" (click)="fetchGST()">Fetch GST Data</button>
+            </div>
+  
+          
           </div>
   
-          <div class="col-sm-2 forms" >
-            <label></label>
-            <button class="btn primary-btn fetchgst" (click)="fetchGST()">Fetch GST Data</button>
+         <div class="row-01">
+          <div class="col-sm-4 forms">
+            <div class="check-cont">
+            <input type="checkbox" formControlName="isZohoCustomer" class="form-check d-inline " id="chb" >
+           
+            <div for="chb" class="form-check-label" ><h4 class="customer-chck">Current Zoho Customer?</h4></div>
           </div>
+          </div>
+  
+          <div class="col-sm-4 forms">
+            <div class="check-cont">
+            <input type="checkbox"  formControlName="triggeremail" class="form-check d-inline " id="chb" >
+           
+            <div for="chb" class="form-check-label" ><h4 class="customer-chck">Trigger Email?</h4></div>
+          </div>
+          </div>
+         </div>
+  
+          <div class="row">
+            <div class="col-sm-4 forms">
+                <label for="address-1">Address Line-1</label>
+                <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
+                    id="address-1" placeholder="Locality/House/Street no.">
+            </div>
+            <div class="col-sm-4 forms">
+                <label for="address-2">Address Line-2</label>
+                <input formControlName="addressLine2" type="address" class="form-control-01" name="address"
+                    id="address-2" placeholder="Village/City Name." required>
+            </div>
+            <div class="col-sm-4 forms">
+                <label for="Country">Country*</label>
+                <select formControlName="countryName" class="form-control-01" (change)="onCountryChange($event)"
+                    placeholder="select country">
+                    <ng-container *ngIf="gstData; else noGstData">
+                        <option value="India">India</option>
+                    </ng-container>
+                    <ng-template #noGstData>
+                        <option disabled value="'Select Country'">Select Country </option>
+                        <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+                    </ng-template>
+  
+                </select>
+  
+            </div>
+        </div>
+  
+          <div class="row">
+            <div class="col-sm-4 forms">
+                <label for="State">State*</label>
+                <select formControlName="stateName" class="form-control-01" (change)="onStateChange($event)">
+                    <ng-container *ngIf="gstData; else noGstDataState">
+                        <option value="">{{gstResponseData.adress.state}}</option>
+                    </ng-container>
+                    <ng-template #noGstDataState>
+                        <option disabled value="'Select State'">Select State </option>
+                        <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+                    </ng-template>
+  
+                </select>
+            </div>
+       
+  
+            <div class="col-sm-4 forms">
+                <label for="State">City</label>
+                <select formControlName="cityName" class="form-control-01" (change)="onCityChange($event)">
+                    <ng-container *ngIf="gstData; else noGstDataCity">
+                        <option value="">{{gstResponseData.adress.city}}</option>
+                    </ng-container>
+                    <ng-template #noGstDataCity>
+                        <option disabled value="'Select City'">Select City </option>
+                        <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
+                    </ng-template>
+  
+                </select>
+            </div>
+            <div class="col-sm-4 forms">
+                <label for="zip">Zip Code</label>
+                <input formControlName="postalCode" type="zip" class="form-control-01" name="Zip" id="zip"
+                    placeholder="Zip Code" required>
+            </div>
+        </div>
+        </div>
+      
 
-        
-        </div>
 
-       <div class="row-01">
-        <div class="col-sm-4 forms">
-          <div class="check-cont">
-          <input type="checkbox" formControlName="isZohoCustomer" class="form-check d-inline " id="chb" >
-         
-          <div for="chb" class="form-check-label" ><h4 class="customer-chck">Current Zoho Customer?</h4></div>
-        </div>
-        </div>
+      <!-- <hr> -->
 
-        <div class="col-sm-4 forms">
-          <div class="check-cont">
-          <input type="checkbox"  formControlName="triggeremail" class="form-check d-inline " id="chb" >
-         
-          <div for="chb" class="form-check-label" ><h4 class="customer-chck">Trigger Email?</h4></div>
+      <div *ngIf="showAlternateContent">
+        <div class="row">
+          <div class="col-sm forms">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstName" name="firstName" formControlName="firstName" placeholder="Enter  FirstName">
+          </div>
+          <div class="col-sm forms">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" formControlName="lastName" placeholder="Enter  LastName">
+          </div>
         </div>
-        </div>
-       </div>
 
         <div class="row">
-          <div class="col-sm-4 forms">
-              <label for="address-1">Address Line-1</label>
-              <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
-                  id="address-1" placeholder="Locality/House/Street no." required>
+          <div class="col-sm-6 forms">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" formControlName="email"  placeholder="Enter Email">
+            <div *ngIf="myForm.get('email').invalid && myForm.get('email').touched" class="error-message">
+              Please enter a valid email address.
+            </div>
           </div>
-          <div class="col-sm-4 forms">
-              <label for="address-2">Address Line-2</label>
-              <input formControlName="addressLine2" type="address" class="form-control-01" name="address"
-                  id="address-2" placeholder="Village/City Name." required>
-          </div>
-          <div class="col-sm-4 forms">
-              <label for="Country">Country*</label>
-              <select formControlName="countryName" class="form-control-01" (change)="onCountryChange($event)"
-                  placeholder="select country">
-                  <ng-container *ngIf="gstData; else noGstData">
-                      <option value="India">India</option>
-                  </ng-container>
-                  <ng-template #noGstData>
-                      <option disabled value="'Select Country'">Select Country </option>
-                      <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
-                  </ng-template>
 
-              </select>
+          <!-- <div class="col-sm-6 forms">
+            <label for="companyName">CompanyName</label>
+            <input type="text" id="companyName" name="companyName" formControlName="companyName" placeholder="Enter the company Name">
+          </div> -->
 
+          <div class="col-sm-6 mobile-field">
+            <div class="col-sm-3 forms" >
+                <label for="cod">Country code</label>
+                <select class="form-control-01">
+                  <option data-countryCode="IN" value="44">IN (+91)</option>
+                  <option data-countryCode="US" value="1">USA (+1)</option>
+                  <option data-countryCode="GB" value="44">UK (+44)</option>
+                </select>
+              </div>
+            <div class="col-sm-8 forms mobile-input">
+              <label for="mobile">Phone Number</label>
+              <input type="text" id="mobile" class="mobile"   name="mobile" formControlName="mobile"  placeholder="Enter Phone Number">
+              <div *ngIf="myForm.get('mobile').invalid && myForm.get('mobile').touched" class="error-message">
+                Please enter a valid phone number.
+              </div>
+            </div>
           </div>
+
+        </div>
       </div>
+    
 
-        <div class="row">
-          <div class="col-sm-4 forms">
-              <label for="State">State*</label>
-              <select formControlName="stateName" class="form-control-01" (change)="onStateChange($event)">
-                  <ng-container *ngIf="gstData; else noGstDataState">
-                      <option value="">{{gstResponseData.adress.state}}</option>
-                  </ng-container>
-                  <ng-template #noGstDataState>
-                      <option disabled value="'Select State'">Select State </option>
-                      <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
-                  </ng-template>
 
-              </select>
-          </div>
-     
-
-          <div class="col-sm-4 forms">
-              <label for="State">City*</label>
-              <select formControlName="cityName" class="form-control-01" (change)="onCityChange($event)">
-                  <ng-container *ngIf="gstData; else noGstDataCity">
-                      <option value="">{{gstResponseData.adress.city}}</option>
-                  </ng-container>
-                  <ng-template #noGstDataCity>
-                      <option disabled value="'Select City'">Select City </option>
-                      <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
-                  </ng-template>
-
-              </select>
-          </div>
-          <div class="col-sm-4 forms">
-              <label for="zip">Postal-Code</label>
-              <input formControlName="postalCode" type="zip" class="form-control-01" name="Zip" id="zip"
-                  placeholder="Postal-Code." required>
-          </div>
-      </div>
 
 
 
@@ -165,7 +173,15 @@
             </div> -->
 
             <div class="button">
-              <button class="btn primary-btn" type="submit" [disabled]="myForm.invalid">Submit</button>
+              <ng-container *ngIf="showAlternateContent === true">
+                <button  class="btn secondary-btn" (click)="showDefault()">Back</button>
+              </ng-container>
+
+              <button class="btn primary-btn" *ngIf="showAlternateContent === true" type="submit" [disabled]="myForm.invalid">Submit</button>
+             
+            <ng-container *ngIf="showDefaultContent === true">
+              <button class="btn secondary-btn" (click)="showAlternate()">Next</button>
+            </ng-container>
             </div>
             
           </form>

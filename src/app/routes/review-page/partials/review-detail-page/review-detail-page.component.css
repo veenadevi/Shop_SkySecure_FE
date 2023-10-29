@@ -51,7 +51,7 @@ select{
 label{
     font-weight: 600;
     color:#333333;
-    font-size: 15px;
+    font-size: 13px;
 }
 hr{
     border-top: 1px solid rgb(126, 119, 119);
@@ -64,11 +64,15 @@ hr{
     cursor: pointer;
     background-color: white;
     margin-left: -5px;
+    color: #BDBCBC;
   }
   
   .star-rating span {
     margin: 0 3px;
+    
+   
   }
+
   
   .star-rating span.active {
     color: orange;
@@ -115,15 +119,17 @@ hr{
         display: flex;
         width: 100%;
         flex-direction: row;
-        margin-top: 0px;
+        margin-top: 10px;
         padding-left: 40px;
         padding-right: 40px;
+        margin-bottom: 20px;
 }
 .form-check-label{
-    margin-top: 25px;
+    margin-top: 3px;
+    font-size: 14px;
 }
 .check{
-    width: 20px;
+    width:15px;
 }
 .button{
     float: right;
@@ -247,4 +253,22 @@ font-weight: 400;
     border-radius: var(--bs-border-radius);
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     font-family: 'lato', sans-serif;
+}
+.text-danger{
+    font-size: 8px !important;
+}
+.error{
+    color: #B82727;
+    text-align: center;
+    font: size 12px;
+    /* padding: 20px; */
+}
+
+.astrik{
+    color: #B82727;
+    font-size: 15px;
+}
+.productName{
+    font-size: 16px;
+    font-weight: 600;
 }

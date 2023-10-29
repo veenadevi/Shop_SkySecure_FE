@@ -10,13 +10,12 @@
       <thead>
         <th class="product-name">Product Name</th>
         <th>Quantity</th>
-        <th>Purchase Type</th>
+        <th class="purchase">Purchase Type</th>
         <th>Item Price</th>
         <th>Distributor Price</th>
-        <th>MRP Price</th>
-       
-     
-        <th>Total  <span class="gst">(GST Extra)</span></th>
+        <th class="mrp">MRP Price</th>
+
+        <th class="total">Total  <span class="gst">(GST Extra)</span></th>
         <th></th>
         
       </thead>
@@ -27,8 +26,10 @@
             <span class="text-danger" *ngIf="group.get('name').touched && group.get('name').invalid">Name is required</span>
           </td>
           <td class="form-group">
-            <input type="text" class="form-control" formControlName="quantity" placeholder="quantity" (change)="valueChanged($event, group, 'quantity')">
+            <div class=" price-details">
+            <input type="text" [readOnly]="isReadOnly" class="form-control-01" formControlName="quantity" placeholder="quantity" (change)="valueChanged($event, group, 'quantity')">
             <span class="text-danger" *ngIf="group.get('quantity').touched && group.get('quantity')?.hasError('required')">Quantity required</span>
+          </div>
           </td>
           <td class="form-group">
             <!-- <input type="text" class="form-control" formControlName="priceType" placeholder="priceType" (change)="valueChanged($event, group, 'priceType')"> -->
@@ -36,7 +37,7 @@
             <div class="td-column price-details">
               <span>
               <!-- {{ item.priceType}} -->
-              <select class="type"  formControlName="priceType" (change)="onSelectChange($event,group)">
+              <select class="type" [disabled]="isReadOnly" formControlName="priceType" (change)="onSelectChange($event,group)">
                 <option class="type" *ngFor="let opt of firstSelectOptions" [value]="opt">
                    {{ opt }}
                 </option>
@@ -50,9 +51,11 @@
 
           
           <td class="form-group">
-            <input type="text" class="form-control" (change)="priceChanged($event, group, i)" formControlName="bcy_rate" placeholder="bcy_rate">
+            <div class=" price-details">
+            <input type="text"  [readOnly]="isReadOnly" class="form-control-02" (change)="priceChanged($event, group, i)" formControlName="bcy_rate" placeholder="bcy_rate">
             <span class="text-danger" *ngIf="group.get('bcy_rate').touched && group.get('bcy_rate')?.hasError('required')">Amount required</span>
-            <span class="text-danger" *ngIf="group.get('bcy_rate')?.hasError('invalid')">Item price must be between Distributor Price and MRP</span>
+            <span class="text-danger" *ngIf="group.get('bcy_rate').touched && group.get('bcy_rate')?.hasError('invalid')">Item price must be between Distributor Price and MRP</span>
+          </div>
           </td>
 
 
@@ -72,7 +75,8 @@
           </td>
           
           <td>
-            <button (click)="remove(i)" class="btn secondary-btn btn-color">Remove</button>
+            <!-- <button (click)="remove(i)" class="btn secondary-btn btn-color">Remove</button> -->
+            <img class="remove" src=".../../assets/icons/Delete.svg" (click)="remove(i)"/>
           </td>
         </tr>
       </tbody>
@@ -81,15 +85,15 @@
 
   <div class="action-btn-holder">
       <div class="add-new-btn">
-        <button (click)="addApp()" class="btn primary-btn">Add Product</button>
+        <button [disabled]="allowAddProduct" (click)="addApp()" class="btn primary-btn">Add Product</button>
     </div>
     <ng-container >
     <div class="add-new-btn">
       <button [disabled]="enableEdit" (click)="saveChanges()" class="btn primary-btn">Resend Estimate</button>
     </div>
-    <!-- <div class="add-new-btn">
-      <button  class="btn primary-btn">Generate Invoice</button>
-  </div> -->
+    <div class="add-new-btn">
+      <button  [disabled]="enableinvoice" class="btn primary-btn" (click)="sendInvoice()">Send Invoice</button>
+  </div>
   </ng-container>
 
   </div>
@@ -100,6 +104,15 @@
 
         </p>
     </div>
+</div>
+
+<div class="row" *ngIf="showInvoiceMsg">
+  <div class="col-xs-12">
+      <p class="alert alert-success">
+          <strong>Invoice Sent Successfully !</strong>
+
+      </p>
+  </div>
 </div>
 
 </ng-container>

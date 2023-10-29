@@ -90,7 +90,7 @@ export class DetailsCompareProductsFlyerComponent {
 
   public setProductList(){
 
-    console.log("setting suggestion product ===",this.productSuggestionList)
+   // console.log("setting suggestion product ===",this.productSuggestionList)
     // let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
     // //let cachedData2 = JSON.parse(localStorage.getItem('product_list_to_compare2') || '[]');
     // let cachedData2 = [];
@@ -120,7 +120,7 @@ export class DetailsCompareProductsFlyerComponent {
     var productsIds = this.productList.map((data)=> data._id);
 
     let dataId = productsIds;
-    console.log("passing comapre product ",dataId)
+    //console.log("passing comapre product ",dataId)
 
     this.router.navigate(['/suggested-compare-products/results'], { state: { dataIds: dataId } });
 

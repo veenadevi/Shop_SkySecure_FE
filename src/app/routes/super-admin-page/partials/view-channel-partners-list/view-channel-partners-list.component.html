@@ -11,7 +11,7 @@
 
     <div class="card">
         <p-table 
-            [value]="channelPrtnerList" 
+            [value]="channelPartnerList" 
             [tableStyle]="{ 'min-width': '50rem' }"
             [paginator]="true"
             [rows]="15"
@@ -30,7 +30,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-csp let-i="rowIndex">
                 <tr>
-                    <td>{{ csp.channelPartnerMaster.name }}</td>
+                    <td><a (click)="getChannelPartnerDetails(csp)">{{ csp.channelPartnerMaster.name }}</a></td>
                     <td>
                         {{ csp.adminUsers[0].firstName}}
                 </td>

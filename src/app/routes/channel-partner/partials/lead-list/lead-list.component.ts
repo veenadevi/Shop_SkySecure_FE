@@ -72,7 +72,7 @@ export class LeadListComponent implements OnInit{
       // this.info = a.accounts.info;
     this.subscriptions.push(
       this.adminPageService.getAllAccounts().subscribe( response => {
-        console.log("running here directly==")
+       // console.log("running here directly==")
      
         this.accountData = response.accounts.data;
         this.info = response.accounts.info;
@@ -133,12 +133,15 @@ export class LeadListComponent implements OnInit{
       //console.log("_+_+_+_ Outside ", res.ownerName.name);
      // this.accountData[i].Owner.name = res.ownerName.name;
 
-      this.allMarketPlaceList[i].assignedChannelpartnerAM.firstName =res.assignedName
-        // {
-        //   "channelPartner" : {
-        //   "name" : 'res.assignedName'
-        //   }
-        // }
+    //  this.allMarketPlaceList[i]?.assignedChannelpartnerAM?.firstName =res.assignedName
+
+      this.allMarketPlaceList[i].assignedChannelpartnerAM=
+            {
+             
+              "firstName" : res.assignedName
+            
+            }
+      
     })
     
   }
@@ -150,7 +153,7 @@ export class LeadListComponent implements OnInit{
   public getMyChannelAMList(channelAdminUserId:any){
     this.subscriptions.push(
       this.superAdminService.getMyChannelPartnerAMList(channelAdminUserId).subscribe( res=> {
-        console.log("_+_+getMyChannelAMList _+_+_+_+ ", res);
+       // console.log("_+_+getMyChannelAMList _+_+_+_+ ", res);
         if(res.usersList.length>0){
           this.disableAssign=false
  

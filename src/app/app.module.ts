@@ -7,7 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ToastrModule, ToastrService } from "ngx-toastr";
-import { NgOtpInputModule } from 'ng-otp-input';
+import { NgOtpInputComponent, NgOtpInputModule } from 'ng-otp-input';
+
+ 
+ 
 
 
 import { IPublicClientApplication, PublicClientApplication, InteractionType } from '@azure/msal-browser';
@@ -51,7 +54,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { loginRequest, msalConfig } from './auth-config';
 import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+import { NgxOtpInputModule } from 'ngx-otp-input';
 
+import { Directive, Input, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Login } from '@mui/icons-material';
 
 
 
@@ -98,17 +105,19 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     NgxSpinnerModule,
     CommonModule,
     BrowserAnimationsModule,
+    NgOtpInputModule,
+    NgxOtpInputModule,
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right',
       closeButton:true,
       preventDuplicates: false,
     //  timeOut:2000,
-      maxOpened:4
+      maxOpened:4,
 
     }),
     NgxGoogleAnalyticsModule.forRoot('G-KC04RJ3FYD'),
-    NgxGoogleAnalyticsRouterModule,
-    NgOtpInputModule
+    NgxGoogleAnalyticsRouterModule
+    
  
     
    
@@ -122,6 +131,13 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
         provide: MSAL_GUARD_CONFIG,
         useFactory: MSALGuardConfigFactory
     },
+  
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => Login),
+        multi: true,
+      },
+    
     LoaderService,
     MsalService,
     MsalGuard,

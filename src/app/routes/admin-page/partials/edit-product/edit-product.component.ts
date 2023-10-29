@@ -470,7 +470,7 @@ export class EditProductComponent  implements OnInit {
 
    
       var productData = this.registrationForm.value;
-      console.log("passing edit value===",productData.addAppArrayNew.app)
+     // console.log("passing edit value===",productData.addAppArrayNew.app)
       this.createProductPayload = {
         _id: this.selectedProductId._id,
         name: productData.productName,
@@ -566,7 +566,7 @@ export class EditProductComponent  implements OnInit {
 
     let mskySecurePrice = ((Number(data.merpPrice)) * 0.02) + (Number(data.mdistributorPrice));
     let fixedValue=parseFloat(mskySecurePrice.toString()).toFixed(2);
-    console.log("fixedValue   ...",fixedValue)
+   // console.log("fixedValue   ...",fixedValue)
     return Math.round(parseFloat(fixedValue))
     
   }
@@ -741,7 +741,7 @@ export class EditProductComponent  implements OnInit {
 
     response.appList.forEach((app) => {
 
-      console.log(" passing value to payload  for app ", app.appId,app.name, app.imageURL)
+     // console.log(" passing value to payload  for app ", app.appId,app.name, app.imageURL)
       
       appNewArray.push(this.createAppListWithValue(app.appId,app.name, app.imageURL));
 

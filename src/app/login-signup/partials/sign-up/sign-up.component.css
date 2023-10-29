@@ -457,7 +457,17 @@ input[type="number"]::-webkit-outer-spin-button {
     }
 }
 
+:host ::ng-deep   .otp-input   {
+    margin-right: 16px !important;
+}
+ 
 
-
-
-
+.resend{
+    text-align: center;
+    padding-top: 20px;
+}
+.re-OTP{
+    color: #b02a37;
+    cursor: pointer;
+    text-decoration: none;
+}

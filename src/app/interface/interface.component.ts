@@ -98,7 +98,7 @@ export class InterfaceComponent {
     map(data => {
       if(data){
 
-        console.log("fetchinng user role ",data.role)
+        //console.log("fetchinng user role ",data.role)
         this.userRole = (data && data.role) ? data.role : null;
         this.userRoleList=(data && data.userRoleList) ? data.userRoleList : [];
         
@@ -196,7 +196,7 @@ export class InterfaceComponent {
   }
 
   public menuToogleEvent(event){
-    console.log("()()()() ", event);
+   // console.log("()()()() ", event);
 
     this.menuToogled = this.menuToogled ? false : true;
   }

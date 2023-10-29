@@ -35,6 +35,8 @@ export class AdminPageService {
 
   private inviteUsersURL : string;
 
+  private createProductOfferURL: String;
+
   private getChannelAMAccountListURL:string;
 
 
@@ -60,6 +62,7 @@ export class AdminPageService {
     this.addChannelPartnerURL=AppService.appUrl.addChannelPartnerURL;
     this.getAllChannelLeadListURL=AppService.appUrl.getMyChannelLeadList;
     this.inviteUsersURL = AppService.appUrl.inviteUsers;
+    this.createProductOfferURL = AppService.appUrl.createProductOffer;
     this.getAllMyCustomersUrl = AppService.appUrl.getAllMyCustomers;
     this.getCustomerDetailsByIdUrl = AppService.appUrl.getCustomerDetailsById;
 
@@ -142,8 +145,7 @@ export class AdminPageService {
 
   public getMyChannelLeadList(adminUserId:any) : Observable<any> {
 
-    let url = this.baseUrlForQuote + this.getAllChannelLeadListURL + '/' + adminUserId;;
-
+    let url = this.baseUrlForQuote + this.getAllChannelLeadListURL + '/' + adminUserId;
     
 
     //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
@@ -419,7 +421,7 @@ public addChannelPartner( request : any): Observable<any> {
 
 
 
-console.log("+++++++ ____ _ addChannelPartner", request);
+//console.log("+++++++ ____ _ addChannelPartner", request);
   
   const REQUEST$ = this.http.post<any>(URL, request)
     .pipe(
@@ -449,7 +451,7 @@ public addChannelPartnerUsers( request : any): Observable<any> {
 
 
 
-console.log("+++++++ ____ _ addChannelPartner", request);
+//console.log("+++++++ ____ _ addChannelPartner", request);
   
   const REQUEST$ = this.http.post<any>(URL, request)
     .pipe(
@@ -544,6 +546,38 @@ public inviteUsers( request : any): Observable<any> {
 
     return request$;
   }
+
+
+  public createProductOffer( request : any): Observable<any> {
+
+
+
+    let url = this.baseUrl + this.createProductOfferURL;
+    
+  
+    
+    let request$ = this.http.post(url, request)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+  
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+  
+    return request$;
+  
+  }
+
+
+
+ 
 
 
 

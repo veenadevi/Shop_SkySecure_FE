@@ -343,7 +343,7 @@ public submitCityError : boolean = false;
     }
    
 
-
+    req.updatedBy=userDetails._id;
 
     if(this.gstData){
       req.billing_address = {
@@ -376,6 +376,7 @@ public submitCityError : boolean = false;
     
 
     req.currency_id = "1014673000000000064";
+   
 
     req.RequestingForOther = (this.selectedType === 'others') ? true : false;
 
@@ -404,14 +405,6 @@ public submitCityError : boolean = false;
     }
 
 
-    
-
-    
-
-    
-    
-
-
     if(formVal.gstNo === null || formVal.gstNo === ''){
       
       
@@ -429,7 +422,6 @@ public submitCityError : boolean = false;
 
     
     
-  
 
    
 
@@ -441,7 +433,7 @@ public submitCityError : boolean = false;
       this.cartService.createQuotation(req).subscribe( response => {
         this.spinner.hide();
         if(response && response.UserCart){
-            this.updateGSTService(req);
+          this.updateGSTService(req);
             
             this.cartStore.setCartRefreneceId(null);
             this.cartService.getCartItems(null).subscribe();
@@ -465,6 +457,8 @@ public submitCityError : boolean = false;
       ),
       
     )
+   
+
     }
   }
 
@@ -514,7 +508,8 @@ public submitCityError : boolean = false;
          ],
      
       
-       "updatedBy": userDetails._id
+       "updatedBy": userDetails._id,
+       "isCustomer":true,
      
      }
 
@@ -648,7 +643,7 @@ public errorMessage: boolean = false;
     
     /*if((this.myForm.get('checkGstNil').value !== true || this.myForm.get('checkGstNil').value !== null) && this.selectedType === 'others'){
       this.myForm.get('gstNo').setErrors({ 'invalid': true });
-      this.errorMessageText = "Please Enter Valid GST Numebr!"
+      this.errorMessageText = "Please Enter Valid GST Number!"
       this.errorMessage = true;
     }*/
     //else{

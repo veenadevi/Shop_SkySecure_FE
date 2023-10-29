@@ -211,8 +211,9 @@ ul .nav-text:hover {
 
 .notificationicon-section:hover {
     /* background-color: #efefef; */
-    border: 1px solid #efefef;
+    /* border: 1px solid #efefef; */
     border-radius: 8px;
+    background-color: var(--neutral-900);
     
 }
 
@@ -253,8 +254,8 @@ ul .nav-text:hover {
 
 .cart-button:hover {
     color: #1e1e1e;
-    /* background-color: #efefef; */
-    border: 1px solid #efefef;
+    background-color: var(--neutral-900);
+    /* border: 1px solid #efefef; */
     border-radius: 8px;
 }
 
@@ -278,7 +279,7 @@ ul .nav-text:hover {
 }
 
 .user-icon:hover {
-    border: 1px solid #efefef;
+    background-color: var(--neutral-900);
     border-radius: 8px;
 }
 
@@ -688,4 +689,41 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
     /* -webkit-overflow-scrolling: touch; */
     position: relative;
     margin-top: 15px;
+}
+
+
+@media  ( min-width: 1920px) and (max-width: 2560px) {
+    .notification-icon {
+        height: 25px;
+    }
+    .cart-button .cart-icon {
+        height: 25px;
+        position: absolute;
+        top: 8px;
+        right: 6px;
+    }
+    .username {
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .icon-color {
+        color: white;
+        margin-left: 10px;
+        margin-top: 5px;
+    }   
+    .realize-logo {
+        height: 50px;
+        cursor: pointer;
+    }
+    
+
+.navbar {
+    background-color: #1e1e1e;
+    height: 65px;
+    padding: 0px 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} 
 }

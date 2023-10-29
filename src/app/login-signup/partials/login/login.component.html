@@ -32,12 +32,19 @@
 
               <div *ngIf= "otpField" class="form-group">
                 <label>OTP</label>
-                <input
+                <!-- <input
                   type="text"
                   formControlName="otp"
                   placeholder="Enter OTP"
                   class="form-control"
-                />
+                /> -->
+
+                <ng-otp-input
+                #ngOtpInput
+                (onInputChange)="onOtpChange($event)"
+                *ngIf="showOtpComponent"
+                [config]="config"
+              ></ng-otp-input>
               </div>
 
           
@@ -83,7 +90,9 @@
           <ng-container *ngIf="enableOTPButton">
               <div class="signin-btn">
                 <button (click)="onSubmit()" class="btn primary-btn">Send OTP</button>
+             
               </div>
+            
 
           
           <div class="cancel-btn">
@@ -111,9 +120,15 @@
           
           <div class="buttons">
           <ng-container *ngIf="enableSignInButton">
+
+            <div class="resend">
+               <span>{{display}}  <a class="re-OTP" (click)="onSubmit()">Resend OTP</a></span>
+            </div>
             <div class="signin-btn">
               <button (click)="login()" class="btn primary-btn">Sign In</button>
+              
             </div>
+           
             <div class="cancel-btn">
               <button (click)="navigateToHomePage()" class="secondary-btn">Cancel</button>
             </div>

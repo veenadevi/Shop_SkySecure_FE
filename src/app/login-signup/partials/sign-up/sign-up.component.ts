@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,ViewChild} from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,6 +19,9 @@ export class SignUpComponent {
   formEmail : FormGroup;
   submitted = false;
   submittedEmail = false
+  otp:any
+  showOtpComponent = true;
+  @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any;
 
   emailFormFlag : boolean = true;
   signUpFormFlag : boolean = false;
@@ -37,6 +40,9 @@ export class SignUpComponent {
   public otpField : boolean = false;
 
   public validatedEmail : string ;
+
+  public timerInterval: any;
+  display: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -86,7 +92,11 @@ export class SignUpComponent {
         ],
         confirmPassword: ['', Validators.required],*/
         companyName : ['', Validators.required],
-        mobileNumber : ['', Validators.required]
+        mobileNumber : ['', [
+          Validators.required,
+          Validators.pattern('^[6-9][0-9]{9}$'),
+          Validators.maxLength(10)
+        ]]
         //acceptTerms: [false, Validators.requiredTrue]
       },
       {
@@ -103,18 +113,26 @@ export class SignUpComponent {
   get f2(): { [key: string]: AbstractControl } {
     return this.formEmail.controls;
   }
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key; 
+    if (key === 'E') {
+      event.preventDefault();  
+    }
+  }
+   
 
   onSubmit(): void {
     this.submitted = true;
     
     if (this.form.invalid) { // If Invalid Return
       // console.log("()()() Invalid");
+   //   console.log(this.form.value);
       return;
     }
     else{ // If Valid
       // console.log("()()() Valid");
       
-      
+    
       //console.log(JSON.stringify(this.form.value, null, 2));
       let formValue = this.form.value;
       let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
@@ -145,6 +163,32 @@ export class SignUpComponent {
       )
     }
     
+  }
+
+  timer(minute) {
+    // let minute = 1;
+    let seconds: number = minute * 45;
+    let textSec: any = '0';
+    let statSec: number = 45;
+
+    const prefix = minute < 10 ? '0' : '';
+
+    this.timerInterval = setInterval(() => {
+      seconds--;
+      if (statSec != 0) statSec--;
+      else statSec = 45;
+
+      if (statSec < 10) {
+        textSec = '0' + statSec;
+      } else textSec = statSec;
+
+      this.display = `${prefix}${Math.floor(0.45)}:${textSec}`;
+
+      if (seconds == 0) {
+        console.log('finished');
+        clearInterval(this.timerInterval);
+      }
+    }, 1000);
   }
 
   onReset(): void {
@@ -178,8 +222,8 @@ export class SignUpComponent {
           
     //console.log("sign up for exisitng user")
           if(res.message){
-            console.log("coming for error message")
-            console.log("error message========"+res.message)
+           // console.log("coming for error message")
+           // console.log("error message========"+res.message)
             if(res.message=='Error: Invalid Domain'){
               
               this.invalidDomain=true;
@@ -190,7 +234,7 @@ export class SignUpComponent {
               this.emailExisitAlert=true
             }
             this.inValidOTP=false
-            console.log("outside iff====")
+           // console.log("outside iff====")
             this.enableSignInButton = false;
             this.enableOTPButton = true;
             this.otpField = false;
@@ -198,13 +242,14 @@ export class SignUpComponent {
             // this.invalidDomain=true
           }
           else{
-           console.log("inside els====")
+          // console.log("inside els====",res)
             //this.emailFormFlag = false;
             //this.signUpFormFlag = true;
             this.enableSignInButton = true;
             this.invalidDomain=false;
             this.enableOTPButton = false;
             this.otpField = true;
+            this.timer(1);
           }
         }
 
@@ -216,24 +261,27 @@ export class SignUpComponent {
   }
 
   public validateOTP(){
-
+  // console.log("iNSIDE VALIDATE OTP")
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-      let hashedPass = CryptoJS.AES.encrypt(this.formEmail.value.otp, key).toString();
+      let hashedPass = CryptoJS.AES.encrypt( this.otp, key).toString();
       let req = {
         "emailId":this.formEmail.value.email,
         "otp": hashedPass
       }
 
-      
+   //   console.log("this.formEmail.value.email",this.formEmail.value.email)
       
       this.subscriptions.push(
         this.userProfileService.validateOTP(req).subscribe( res => {
-          if(res && res.data){
+        //  console.log("RES & RES.DATA",res && res.data)
+          if(res && res.data ){
             this.emailFormFlag = false;
             this.signUpFormFlag = true;
             //this.callSignIn();
+            // console.log("iNSIDE VALIDATE OTP IF PART")
           }
           else{
+            // console.log("iNSIDE VALIDATE OTP ELSE PART",res && res.data)
             this.inValidOTP=true
          //   this.formEmail.value.otp='';
            // this.formEmail.setValue({otp: ''});
@@ -247,9 +295,32 @@ export class SignUpComponent {
   }
   public signIn(){
 
- 
+    //console.log("iNSIDE SIGN IN")
       this.router.navigate(['login'], { queryParams: { email: this.validatedEmail} });
 
+  }
+
+
+
+  config = {
+    allowNumbersOnly: true,
+    length: 6,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder: "",
+    inputStyles: {  
+      width: "50px",
+      height: "50px",
+    },
+  };
+  
+
+  onOtpChange(otp: any) {
+    this.otp = otp;
+    //console.log("this.otp", this.otp);
+    if (otp.length === 6) {
+      //  this. onSubmitEmail();
+    }
   }
 
 }

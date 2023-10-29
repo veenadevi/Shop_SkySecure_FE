@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
-// import * as sampleData from '../sample.json';
+import * as sampleData from '../sample.json';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({

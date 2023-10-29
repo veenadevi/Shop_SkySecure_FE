@@ -24,11 +24,12 @@
                 
     
                 <ng-template pTemplate="body" let-customer let-i="rowIndex">
-                    <tr class="trfont">
-                        <td>
-                            <div class="text-style" (click)="getCustomersById(customer.zohoBooksCustomerId)">
-                                {{i+1}}
-                            </div>
+                    <tr class="trfont" (click)="getCustomersById(customer.zohoBooksCustomerId)">
+                        <td >
+                            {{i+1}}
+                            <!-- <div  (click)="getCustomersById(customer.zohoBooksCustomerId)">
+                                
+                            </div> -->
                             
                         </td>
                         <td>{{customer.company}}</td>

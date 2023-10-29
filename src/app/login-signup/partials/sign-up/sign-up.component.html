@@ -29,12 +29,18 @@
 
             <div *ngIf= "otpField" class="form-group">
               <label>OTP</label>
-              <input
+              <!-- <input
                 type="text"
                 formControlName="otp"
                 placeholder="Enter OTP"
                 class="form-control"
-              />
+              /> -->
+              <ng-otp-input  
+                #ngOtpInput
+                (onInputChange)="onOtpChange($event)"
+                *ngIf="showOtpComponent"
+                [config]="config"
+              ></ng-otp-input>
             </div>
         
 
@@ -46,6 +52,7 @@
         </div>
         <div class="buttons">
           <ng-container *ngIf="emailExisitAlert">
+          
             <div class="signin-btn">
               <button (click)="signIn()" class="btn primary-btn">Sign In</button>
             </div>
@@ -77,6 +84,9 @@
           <div class="buttons">
         
           <ng-container *ngIf="enableSignInButton">
+            <div class="resend">
+              <span>{{display}}  <a class="re-OTP" (click)="onSubmitEmail()">Resend OTP</a></span>
+           </div>
             <div class="signin-btn">
               <button (click)="validateOTP()" class="btn primary-btn">Sign up</button>
             </div>
@@ -200,12 +210,15 @@
               [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }"
               maxlength="10" 
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-            />
+              (keydown)="onKeyDown($event)"
+              />
             <div *ngIf="submitted && f.mobileNumber.errors" class="invalid-feedback">
               <div *ngIf="f.mobileNumber.errors.required">Oops! You forgot to provide your Mobile Number.</div>
+              <div *ngIf="form.controls.mobileNumber.errors.pattern">Mobile Number must start with 6, 7, 8, or 9 digits only.</div>
+              
             </div>
-          </div>
-     
+          </div> 
+ 
           
       
           <div class="form-group">

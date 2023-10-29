@@ -1,10 +1,14 @@
-import { Component , Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { map,Subscription } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
-import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
+import { MetadataService } from 'src/shared/services/metadata.service';
+import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
-
+ 
 
 @Component({
   selector: 'app-review-detail-page',
@@ -12,78 +16,218 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
   styleUrls: ['./review-detail-page.component.css']
 })
 export class ReviewDetailPageComponent {
-  @Input() maxRating = 5;
-  @Input() selectedRating = -0;
-  @Input() selectedRating01 = -0;
-  @Input() selectedRating02 = -0;
-  @Input() selectedRating03 = -0;
-  @Input() selectedRating04 = -0;
-  @Output() ratingChanged = new EventEmitter<number>();
-
-  myFrom: FormGroup;
+  reviewForm: FormGroup;
   selectedUserId: number;
-
+  productId: string;
+  productName
+  
   public usersList: any[] = [];
   public userId: string;
   public subscription: Subscription[] = [];
+  public currentUrl: string;
+  stars: number[] = [1, 2, 3, 4, 5];
+  reviewPayload = {
+    productId: '',
+    userName: '',
+    email: '',
+    organizationName: '',
+    jobTitle: '',
+    companySize: '',
+    softwareUsageDuration: '',
+    reviewTitle: '',
+    reviewContent: '',
+    agreeTermsAndConditions: false,
+    overAllRating: 0,
+    featuresRating: 0,
+    easyToUseRating: 0,
+    valueOfMoneyRating: 0,
+    customerSupportRating: 0,
+    productName:''
+  };
 
+  selectedRatings: { [key: string]: number } = {
+    overAllRating: 0,
+    featuresRating: 0,
+    easyToUseRating: 0,
+    valueOfMoneyRating: 0,
+    customerSupportRating: 0
+  };
 
-  stars: number[];
-
-  constructor(  
+  aspectList = [
+    { name: 'Overall Rating', key: 'overAllRating', rating: 0 },
+    { name: 'Features', key: 'featuresRating', rating: 0 },
+    { name: 'Ease of Use', key: 'easyToUseRating', rating: 0 },
+    { name: 'Value of Money', key: 'valueOfMoneyRating', rating: 0 },
+    { name: 'Customer Support', key: 'customerSupportRating', rating: 0 }
+  ];
+  constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private metaDataStore: MetadataStore,
+    private metaDataService: MetadataService,
+    private userAccountStore : UserAccountStore,
+    ) {
 
-    private adminPageService: AdminPageService,
-    private superAdminService: SuperAdminService,
-    private userAccountStore: UserAccountStore) 
-    {
-    this.stars = Array(this.maxRating).fill(0).map((_, index) => index + 1);
+    this.reviewForm = this.fb.group({
+      userName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      organizationName: ['', Validators.required],
+      jobTitle: ['', Validators.required],
+      companySize: ['', Validators.required],
+      softwareUsageDuration: ['', Validators.required],
+      reviewTitle: ['', Validators.required, ],
+      reviewContent: ['', Validators.required],
+      agreeTermsAndConditions: [false, Validators.requiredTrue],
+       
+      
+    });
 
-    this.myFrom = this.fb.group({
-      channelPartner: [''],
-      userName: ['', [Validators.required, Validators.required]],
-      EmailId: ['', [Validators.required, Validators.email]],
-      phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]]
-  
+    this.router.events.subscribe((event: Event) => {
+      this.currentUrl = this.route.snapshot.paramMap.get('id');
+
+      if (event instanceof NavigationStart) {
+        this.currentUrl = this.route.snapshot.paramMap.get('id');
+      }
+
+      if (event instanceof NavigationEnd) {
+        this.currentUrl = this.route.snapshot.paramMap.get('id');
+        this.ngOnInit();
+      }
+
+      if (event instanceof NavigationError) {
+      }
+    });
+    this.route.queryParams.subscribe(params => {
+      this.productId = params.productId;
+      this.productName = params.productName;
+    });
+    this.aspectList.forEach((aspect) => {
+      this.reviewForm .addControl(aspect.key, this.fb.control('', Validators.required));
     });
   }
 
 
-
-
-  ngOnInit(): void {
-    this.getUsersList();
-    let userAccountdetails = this.userAccountStore.getUserDetails();
-    this.userId = userAccountdetails._id;
-  }
-
-  public getUsersList() {
-    this.subscription.push(
-      this.adminPageService.getAllusers().subscribe(res => {
-
-        this.usersList = res;
+data
+  ngOnInit(): void { 
+   
+     this.reviewPayload = this.metaDataStore.getProductReviewDetails();
+     //("OnInit",this.reviewPayload)
+    if (this.reviewPayload?.productId?.length > 2) {
+      this.reviewForm.patchValue(this.reviewPayload);
+      this.selectedRatings = {
+        overAllRating: this.reviewPayload.overAllRating,
+        featuresRating: this.reviewPayload.featuresRating,
+        easyToUseRating: this.reviewPayload.easyToUseRating,
+        valueOfMoneyRating: this.reviewPayload.valueOfMoneyRating,
+        customerSupportRating: this.reviewPayload.customerSupportRating
+      }
+    }
+    else {
+      this.metaDataService.getProductReviewById(this.currentUrl).subscribe((data) => {
+        this.reviewPayload = this.updateReviewPayload(this.reviewPayload, data.productReview);
+        this.metaDataStore.setProductReviewDetails(this.reviewPayload);
+        //console.log("===this.reviewPayload===",this.data=this.reviewPayload);
+         //console.log("===data.productReview===",this.data=data.productReview)
+        //console.log("===setProductReviewDetails===",this.data=this.metaDataStore.setProductReviewDetails.name)
+        this.metaDataStore.setProductReviewOtherDetails(data.productReview);
+        this.reviewForm.patchValue(data.productReview);
+       // console.log("-- ONINIT IN ELSE--", this.reviewForm.patchValue(data.productReview))
+        this.selectedRatings = { ...data.productReview };
+      }, error => {
+        console.log(" TEST ERROR", error);
       })
-    )
+    }
+
+    this.setSelfData();
+    
   }
 
-  rate(rating: number) {
-    this.selectedRating = rating;
-    this.ratingChanged.emit(rating);
+ // Define a variable to store the cumulative rating
+// cumulativeRating: number = 0;
+rate(aspect: any, star: number): void {
+  this.selectedRatings[aspect.key] = star;
+
+   
+ 
+}
+
+
+  public NextErrorMessage: boolean =false;
+  onSubmit(): void {
+    if (this.reviewForm.valid) {
+      this.NextErrorMessage = false;
+      // You can submit the form data here
+      const formData = this.reviewForm.value;
+      this.reviewPayload = {
+        productId: this.currentUrl,
+        userName: formData.userName,
+        email: formData.email,
+        organizationName: formData.organizationName,
+        jobTitle: formData.jobTitle,
+        companySize: formData.companySize,
+        softwareUsageDuration: formData.softwareUsageDuration,
+        reviewTitle: formData.reviewTitle,
+        reviewContent: formData.reviewContent,
+        agreeTermsAndConditions: formData.agreeTermsAndConditions,
+        overAllRating: this.selectedRatings.overAllRating,
+        featuresRating: this.selectedRatings.featuresRating,
+        easyToUseRating: this.selectedRatings.easyToUseRating,
+        valueOfMoneyRating: this.selectedRatings.valueOfMoneyRating,
+        customerSupportRating: this.selectedRatings.customerSupportRating,
+        productName:this.productName
+       
+      };
+     // console.log("productName",this,this.productName)
+   //   console.log("____TEST____REVIEW__PAYLOAD___", this.reviewPayload);
+      this.metaDataStore.setProductReviewDetails(this.reviewPayload);
+      // this.router.navigate([`/review-page/review-rating-page`]);
+      this.router.navigate([`/review-page/review-rating-page`], {
+      queryParams: { productName: this.productName }
+    });
+    } else {
+     // console.log("___ERROR____")
+      this.NextErrorMessage = true;
+      // Handle form validation errors or show a message to the user
+    }
   }
-  rate01(rating: number) {
-    this.selectedRating01 = rating;
-    this.ratingChanged.emit(rating);
+
+  // disableErrorMessage(){
+  //   if(this.reviewForm.value === true){
+  //     this.NextErrorMessage=false;
+  //   }
+  // }
+  updateReviewPayload(payload, providedObject): any {
+    for (const key in payload) {
+      if (providedObject.hasOwnProperty(key)) {
+        payload[key] = providedObject[key];
+      }
+    }
+    return payload;
   }
-  rate02(rating: number) {
-    this.selectedRating02 = rating;
-    this.ratingChanged.emit(rating);
+
+  text: string = '';
+  characterCount: number = 0;
+
+  countCharacters() {
+    this.characterCount = this.text.length;
   }
-  rate03(rating: number) {
-    this.selectedRating03 = rating;
-    this.ratingChanged.emit(rating);
+  text01: string = '';
+  characterCount01: number = 0;
+  countCharacters01() {
+    this.characterCount01 = this.text01.length;
   }
-  rate04(rating: number) {
-    this.selectedRating04 = rating;
-    this.ratingChanged.emit(rating);
+
+
+ 
+  
+  public setSelfData(){
+    let userDetails = this.userAccountStore.getUserDetails();
+   // console.log("userDetails-GST ",userDetails.name,"",userDetails.email,"",userDetails.company )  
+    this.reviewForm.controls['userName'].setValue(userDetails.firstName ? userDetails.firstName : null);
+    this.reviewForm.controls['email'].setValue(userDetails.email ? userDetails.email : null);
+    this.reviewForm.controls['organizationName'].setValue(userDetails.company ? userDetails.company : null);
+
   }
+  
 }

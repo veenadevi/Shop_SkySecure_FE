@@ -21,9 +21,11 @@
                         <th>Created On</th>
                         <th>Status</th>
                      
-                         <th>Last Updated Date</th>
+                         <th>Updated On</th>
                         <th>Estimate No.</th>
-                        <th>Quotation Value  <span class="gst">(GST Extra)</span></th>
+                        <th>Invoice No.</th>
+                        <th>Quotation Value </th>
+                        <!-- <th>Quotation Value  <span class="gst">(GST Extra)</span></th> -->
     
     
                   
@@ -53,8 +55,7 @@
                     <tr class="trfont">
                         <td>
                             <div class="text-style" (click)="getAccountById(account.cartData._id)">
-                                <!-- {{ account.cartData.cart_ref_id }} -->
-                                {{i+1}}
+                                {{i+1 }}
                             </div>
                             
                         </td>
@@ -67,12 +68,18 @@
                          <td>
                             <ng-container *ngIf="account?.cartData?.assignedChannelPartnerId; else noValuecp">
                             
-                                {{ account?.cartData.leadUpdatedDate | dateFormat }}
+                                {{ account?.cartData.updatedAt | dateFormat }}
                               </ng-container>
                               <ng-template #noValuecp>-</ng-template>
                          </td> 
     
                         <td>
+                            <ng-container *ngIf="account.cartData.zohoEstimateNo; else noValue">
+                                {{ account.cartData.zohoEstimateNo}}
+                              </ng-container>
+                              <ng-template #noValue>-</ng-template>
+                         </td> 
+                         <td>
                             <ng-container *ngIf="account.cartData.zohoEstimateNo; else noValue">
                                 {{ account.cartData.zohoEstimateNo}}
                               </ng-container>

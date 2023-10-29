@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
@@ -62,7 +62,8 @@ export class CartItemsComponent {
   public grandTotal = 0
   public monthlyItemsGrandTotal=0
   public   yearlyItemsGrandTotal=0
-  public errortext:string
+  public errortext:string;
+
 
 
 
@@ -403,8 +404,6 @@ public onChangeQuantity(i, price) : void {
     
   }
 
-  public buyNow(){
-  }
 
   public requestQuote(){
 
@@ -654,7 +653,7 @@ public onChangeQuantity(i, price) : void {
       status : "New"
     });
 
-    console.log("_)(*&^^%% Val here ", this.cartData.length);
+   // console.log("_)(*&^^%% Val here ", this.cartData.length);
 
     
 
@@ -679,7 +678,7 @@ public onChangeQuantity(i, price) : void {
             return forkJoin(allObs$);
           })
         ).subscribe((forkJoinResponse) => {
-          console.log("+_)(*&^^ ^", forkJoinResponse);
+        //  console.log("+_)(*&^^ ^", forkJoinResponse);
           this.spinner.hide();
           //forkJoinResponse will be an array of responses for each of the this.serviceTwo.getAllServiceTwoData CALL
           //Do whatever you want to do with this array
@@ -697,7 +696,7 @@ public onChangeQuantity(i, price) : void {
   }
 
   public onSelectChange(event, i){
-    console.log("_+_+_+_+_ event", event.target.value);
+   // console.log("_+_+_+_+_ event", event.target.value);
     if(event.target.value === 'Year'){
       this.cartData[i].itemTotal = this.cartData[i].quantity * this.cartData[i].priceList[0].price;
       this.cartData[i].price = this.cartData[i].priceList[0].price;
@@ -715,6 +714,81 @@ public onChangeQuantity(i, price) : void {
     this.calTotalPrice();
    // this.saveCart();
   }
+
+  public buyNow(){
+
+    this.checkout();
+
   }
+
+  public encRequestRes : any;
+  public accessCode = "AVEI22KJ67BJ07IEJB";
+  public merchantId = "2941397";
+  public workingKey = "BDBA61F56C8E4C2028818322A0E3C091";
+  public selectedAddress : any = {
+    name : 'testing',
+    address : 'test address',
+    city : 'test city',
+    pincode : '23456',
+    state : 'state test',
+    phone : '1234567890'
+  }
+
+  @ViewChild('form') form: ElementRef;
+
+  checkout(){
+
+    let order_no = "0001";
+    let testAmount = "10.00"
+
+    //let redirect_url = 'http%3A%2F%2Flocalhost%3A3008%2Fhandleresponse';
+    let redirect_url = 'https://dev-shop.skysecuretech.com/';
+    let useremail = 'vigneshblog4@gmail.com';
+    let request = `merchant_id=${this.merchantId}&order_id=${order_no}&currency=INR&amount=${testAmount}&redirect_url=${redirect_url}&cancel_url=${redirect_url}&language=EN&billing_name=${this.selectedAddress.name}&billing_address=${this.selectedAddress.address}&billing_city=${this.selectedAddress.city}&billing_state=MH&billing_zip=${this.selectedAddress.pincode}&billing_country=India&billing_tel=${this.selectedAddress.phone}&delivery_name=${this.selectedAddress.name}&delivery_address=${this.selectedAddress.address}&delivery_city=${this.selectedAddress.city}&delivery_state=${this.selectedAddress.state}&delivery_zip=${this.selectedAddress.pincode}&delivery_country=India&delivery_tel=${this.selectedAddress.phone}&billing_email=${useremail}`
+    
+    /*this.cartService.encryptdata(request).subscribe(
+      data => {
+      
+      }, error => {
+      console.log(error)
+      }
+      );*/
+
+
+
+
+
+      this.subscriptions.push(
+        this.cartService.encryptdata(request).subscribe( data=>{
+        //  console.log('---------------------', data)
+
+          this.encRequestRes = data;
+          //this.encRequestRes = data['response']; 
+
+              setTimeout(()=>{
+                  this.form.nativeElement.submit();
+                  //this.checkOutCCAvenue(this.encRequestRes);
+                  //console.log("+_+_+_+ ()( )()( ", this.encRequestRes);
+              },1000)
+        }, error => {
+          console.log("++++++ Error",error)
+          })
+      )
+  }
+
+  public checkOutCCAvenue(encryptedData){
+    let reqForCCAvenue = {
+      "encRequest" : encryptedData, // or any supported currency
+      "access_code" : this.accessCode,
+    }
+
+    this.subscriptions.push(
+      this.cartService.paymentGatewayCCAvenueRequest(reqForCCAvenue).subscribe(res=>{
+        console.log("+_+_+_+_+_+_+ Response from CCCAVENUE", res);
+      })
+    )
+  }
+
+}
 
 

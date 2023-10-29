@@ -79,6 +79,9 @@ html {
     margin-top: 10px;
   }
   
+  .totalTrans{
+    background-color: #f2e9f3;
+  }
   #mainNav .navbar-collapse {
     overflow: auto;
     max-height: 75vh; }
@@ -477,8 +480,4 @@ html {
   margin: 3px 0 0;
   background: 0 0;
 }
-.totalTrans{
-  background-color: #f2e9f3;
-}
-
   

@@ -1,0 +1,32 @@
+.reason-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+}
+
+.reason-headline {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--neutral-700);
+}
+
+.message-text-style {
+    margin: 1.5em;
+}
+
+textarea {
+    width: 26em;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 6em;
+}
+
+.button-section {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}

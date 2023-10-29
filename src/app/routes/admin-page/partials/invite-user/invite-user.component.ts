@@ -44,8 +44,7 @@ export class InviteUserComponent {
     ) {
     this.myForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      mobile: ['', [
-        Validators.required,
+      mobile: ['', [ 
         Validators.pattern(/^(\+\d{1,3})?\d{10}$/) // Country code (optional) + 10 digits
       ]],
       firstName : [''],
@@ -116,7 +115,7 @@ export class InviteUserComponent {
 
 
 public fetchGST(){
-  console.log("_+_+_+_+_+ GST Data ", this.myForm.value.gstin.length )
+ // console.log("_+_+_+_+_+ GST Data ", this.myForm.value.gstin.length )
 
   if(this.myForm.value.gstin.length === 15){
 
@@ -193,10 +192,11 @@ public fetchGST(){
 }
 
   onSubmit() {
+    
     if (this.myForm.valid) {
 
       let formData = this.myForm.value;
-      
+     // console.log("this.myForm.get('triggeremail').value===",formData.isZohoCustomer)
       //companyName email firstName lastName mobile
       let request = {
         "firstName": formData.firstName,
@@ -210,28 +210,29 @@ public fetchGST(){
                   {
                       "address1": formData.addressLine1,
                       "address2": formData.addressLine2,
-                      "state":  formData.stateName,
+                      "state":  this.selectedState.name,
                       "pincode": formData.postalCode,
                       "countryCode":"IN"
                   }
               ],
         //"isRegistered":false,
-        "isCustomer":this.myForm.get('isZohoCustomer').value?this.myForm.get('isZohoCustomer').value:false,
+        "isCustomer":formData.isZohoCustomer?formData.isZohoCustomer:false,
         "companyName": formData.companyName,
         "gstinNumber":formData.gstin?formData.gstin:"",
         // "inviteReason":formData.reason,
         "inviteReason":"newUserInvite",
         "createdBy":this.userDetails._id,
         "updatedBy":this.userDetails._id,
-       "sendEmail":formData.triggeremail?formData.triggeremail:false
+        "sendEmail":formData.triggeremail?formData.triggeremail:false
       }
 
-console.log("request===",request)
+     // console.log("request===",request)
       this.subscription.push(
         this.adminPageService.inviteUsers(request).subscribe(res=>{
-          console.log("+_+_+_ Res ", res);
+         // console.log("+_+_+_ Res ", res);
           this.showMsg=true;
           this.myForm.reset();
+          window.location.reload();
         })
       )
 
@@ -275,6 +276,15 @@ console.log("request===",request)
  
  
    }
-
-
+   showDefaultContent: boolean = true;
+   showAlternateContent: boolean = false;
+   showDefault() {
+    this.showDefaultContent = true;
+    this.showAlternateContent = false;
+  }
+  
+  showAlternate() {
+    this.showDefaultContent = false;
+    this.showAlternateContent = true;
+  }
 }

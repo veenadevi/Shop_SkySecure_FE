@@ -41,6 +41,8 @@
         "getMyAssignedAccounts" : "api/admin/getMyMarketplaceAccountList",
         "getAccountsById" : "api/user/getAccountDetails",
         "userGstUpdate" : "api/user/user-gst-update",
+
+        "createInvoice" : "/api/user/createInvoice",
         
 
         "userSignUp":"api/user/signup",
@@ -50,6 +52,7 @@
         "getAllUsers":"api/admin/getAllusers",
         "updateUserRole":"api/admin/updateUserRole",
         "inviteUsers" : "api/user/inviteuser",
+        "createProductOffer":"api/product-offer/create",
         "getAllMyCustomers" : "api/admin/getAllCustomers",
         "getCustomerDetailsById" : "api/admin/getCustomerDetailsById/",
         
@@ -98,7 +101,11 @@
 
         "getChannelPartnerDetailsById" : "api/user/channel-partner/",
 
-        "getChannelAMAccountListURL":"api/admin/getChannelAMAccountList"
+        "getChannelAMAccountListURL":"api/admin/getChannelAMAccountList",
+
+        "createProductReviewURL": "api/product-review/create",
+        
+        "getProductReviewURL": "api/product-review"
 
 
     },
