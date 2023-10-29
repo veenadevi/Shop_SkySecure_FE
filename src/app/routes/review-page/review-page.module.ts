@@ -8,6 +8,8 @@ import { ReviewDetailPageComponent } from './partials/review-detail-page/review-
 import { ReviewRatingPageComponent } from './partials/review-rating-page/review-rating-page.component';
 import { ReviewFinalPageComponent } from './partials/review-final-page/review-final-page.component';
 import { MaterialModule } from 'src/app/material.module';
+import { TrendingProductComponent } from './partials/trending-product/trending-product.component';
+import { SharedModule } from 'primeng/api';
 
 
 
@@ -18,17 +20,21 @@ import { MaterialModule } from 'src/app/material.module';
     ReviewDetailPageComponent,
     ReviewRatingPageComponent,
     ReviewFinalPageComponent,
+    TrendingProductComponent,
+   
 
    
   ],
   imports: [
     CommonModule,
     ReviewPageRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule,
     
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class ReviewPageModule {

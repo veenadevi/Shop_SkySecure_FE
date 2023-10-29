@@ -414,13 +414,13 @@ export class ProductPgaeComponent implements OnInit, OnChanges, OnDestroy {
 
 
         this.finalProductList = [...tempProducts, ...tempProductVariants, ...tempProductBundleVariants, ...tempProductBundles];
-        console.log("this.finalProductList", this.finalProductList);
+       // console.log("this.finalProductList", this.finalProductList);
         // Assuming this.finalProductList is an array
         if (this.finalProductList.length > 0) {
           const lastElement = this.finalProductList[this.finalProductList.length - 1];
-          console.log("Last element:", lastElement);
+        //  console.log("Last element:", lastElement);
         } else {
-          console.log("The array is empty.");
+        // console.log("The array is empty.");
         }
 
         //let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');

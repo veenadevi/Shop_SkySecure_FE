@@ -46,7 +46,7 @@ export class SidenavWrapperComponent implements OnInit{
     this.userFullName = value;
   }
   @Input() set userRoleList(value: any) {
-    console.log("fetched userrolelist====",value)
+    //console.log("fetched userrolelist====",value)
     this.userRolesList = value;
   }
 

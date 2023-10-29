@@ -1,8 +1,11 @@
 <div class="rating-container">
     <div class="rating-content">
-        
+     
         <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
-
+          <div
+             class="d-flex justify-content-center mb-3 mt-3 productName">  Write a Review For -  {{ productName }} 
+          </div>
+          <!-- <h4 class="d-flex justify-content-center mb-3 mt-3">Write a Review For - {{ productName }}</h4> -->
             <!-- How frequently do you use this software? -->
             <div class="input-cont">
               <label for="frequentSoftwareUsage">How frequently do you use this software?</label>
@@ -48,21 +51,21 @@
           
             <!-- Pros -->
             <div class="pros">
-              <label for="pros">Pros:<span style="font-weight: 600;">What did you find most impressive about This Product *</span></label>
-              <textarea formControlName="pros" id="pros" placeholder="What is the most beneficial about this product? What feature is most impactful? Is this value for money?" required></textarea>
+              <label for="pros">Pros:<span style="font-weight: 600;">What did you find most impressive about This Product <span class="astrik">*</span><span style="font-size: 12px;color: #6C6C6C;">(Min-Character count: {{ characterCount }}/150)</span></span></label>
+              <textarea [(ngModel)]="text" (input)="countCharacters()" formControlName="pros" id="pros" minlength="150"   placeholder="What is the most beneficial about this product? What feature is most impactful? Is this value for money?" required></textarea>
             </div>
           
             <!-- Cons -->
             <div class="pros">
-              <label for="cons">Cons:<span style="font-weight: 600;">Please provide which Tutor LMS features/part can be improved*</span></label>
-              <textarea formControlName="cons" id="cons" placeholder="What is the least beneficial about this product?" required></textarea>
+              <label for="cons">Cons:<span style="font-weight: 600;">Please provide which {{ productName }} features/part can be improved<span class="astrik">*</span><span style="font-size: 12px;color: #6C6C6C;">(Min-Character count: {{ characterCount01 }}/150)</span></span></label>
+              <textarea  [(ngModel)]="text01" (input)="countCharacters01()" formControlName="cons" id="cons"  minlength="150" placeholder="What is the least beneficial about this product?" required></textarea>
             </div>
           
             <!-- How likely are you to recommend This Product? -->
             <div class="software-review-main">
-              <div class="heading">How likely are you to recommend This Product? *</div>
+              <div class="heading">How likely are you to recommend This Product?<span class="astrik">*</span></div>
               <div class="likely_not_likely">
-                <span>Not likely </span>
+                <span class="emoji-cont">Not likely </span>
                 <img class="lazyloaded" src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg"
                      data-src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg" alt="imoji">
                 <ul class="rating_numbar_main">
@@ -72,7 +75,7 @@
                   </li>
                 </ul>
                 <div class="likely_not_likely">
-                  <span>Extremely likely </span>
+                  <span class="emoji-cont">Extremely likely </span>
                   <img class="lazyloaded" src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg"
                        data-src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg" alt="imoji">
                 </div>
@@ -81,9 +84,9 @@
           
             <!-- How would you rate after sales service/customer support of This Product? -->
             <div class="software-review-main">
-              <div class="heading">How would you rate after sales service/customer support of This Product? *</div>
+              <div class="heading">How would you rate after sales service/customer support of This Product?<span class="astrik">*</span></div>
               <div class="likely_not_likely">
-                <span>Not likely </span>
+                <span class="emoji-cont">Not likely </span>
                 <img class="lazyloaded" src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg"
                      data-src="https://www.softwaresuggest.com/assets2/img/sad_imoji_review.svg" alt="imoji">
                 <ul class="rating_numbar_main">
@@ -93,7 +96,7 @@
                   </li>
                 </ul>
                 <div class="likely_not_likely">
-                  <span>Extremely likely </span>
+                  <span class="emoji-cont">Extremely likely </span>
                   <img class="lazyloaded" src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg"
                        data-src="https://www.softwaresuggest.com/assets2/img/happy_imoji_review.svg" alt="imoji">
                 </div>
@@ -102,25 +105,29 @@
           
             <!-- What other products like This product have you used or evaluated? -->
             <div class="user-info">
-              <label for="otherProducts">What other products like This product have you used or evaluated? *</label>
-              <textarea formControlName="otherProductExperience" id="otherProductExperience"
+              <label for="otherProducts">What other products like This product have you used or evaluated?<span class="astrik">*</span><span style="font-size: 12px;color: #6C6C6C;">(Min-Character count: {{ characterCount02 }}/150)</span></label>
+              <textarea [(ngModel)]="text02" (input)="countCharacters02()" formControlName="otherProductExperience" id="otherProductExperience" minlength="150"
                         placeholder="Have you tried any other Software/ like This Product? Any comparison between the two products?" required></textarea>
             </div>
           
             <!-- Any Missing Feature? -->
             <div class="user-info">
-              <label for="missingFeatures">Any Missing Feature?*</label>
-              <textarea formControlName="missingFeature" id="missingFeature"
+              <label for="missingFeatures">Any Missing Feature?<span class="astrik">*</span> <span style="font-size: 12px;color: #6C6C6C;">(Min-Character count: {{ characterCount03 }}/150)</span></label>
+              <textarea [(ngModel)]="text03" (input)="countCharacters03()" formControlName="missingFeature" id="missingFeature" minlength="150"
                         placeholder="Any features you find missing in This  Product?" required></textarea>
             </div>
           
             <div class="buttons">
               <div class="btn-01">
-                <button class="pre-btn" (click)="goToProductReviewpage()">Previous</button>
+                <button class="btn secondary-btn" (click)="goToProductReviewpage()">Previous</button>
               </div>
+             
               <div class="btn-02">
-                <button class="next-btn">Next</button>
+                <button class="btn primary-btn">Next</button>
               </div>
+            </div>
+            <div *ngIf="NextErrorMessage">
+              <p class="error">* Please Fill All Mandatory Fields</p>
             </div>
           </form>
           

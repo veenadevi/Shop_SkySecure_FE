@@ -1,0 +1,71 @@
+<div class="modal-container">
+    <div class="modal-header">
+        <span>
+            Select Invoice Due Date
+        </span>
+        <div class="close-btn-section">
+            <button (click)="closeModal()" type="button" class="close" aria-label="Close">
+                <img class="close-icon" src="../../../../assets/icons/closecircle.svg">
+            </button>
+        </div>
+    </div>
+   
+    <div class="modal-body">
+
+        <div #terms class="field-holder">
+            <div class="left-div">
+                <span>
+                    Terms
+                </span>
+            </div>
+            <div class="right-div">
+                <ng-container>
+                <div class="card flex justify-content-center">
+                    <p-dropdown placeholder="Select Term" [options]="termsList" (onChange)="onChange($event)" optionLabel="value"></p-dropdown>
+                </div>
+            </ng-container>
+            </div>
+        </div>
+
+        <div #assignDate class="field-holder">
+            <div class="left-div">
+                <span>
+                    Target Date
+                    
+                </span>
+            </div>
+            <div class="right-div">
+                <div class="card flex justify-content-center">
+                    <p-calendar [(ngModel)]="closingDate" [showIcon]="true" [minDate]="currentDate" [disabled]="calendarFlag"></p-calendar>
+                </div>
+            </div>
+        </div>
+
+        <div #assignDate class="field-holder">
+            <div class="left-div">
+                <span>
+                    Date of Supply
+                    
+                </span>
+            </div>
+            <div class="right-div">
+                <div class="card flex justify-content-center">
+                    <p-calendar [(ngModel)]="supplyDate" [showIcon]="true" [minDate]="currentDate" ></p-calendar>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+    
+    <div class="modal-footer">
+
+        <div *ngIf="submitError">
+            <p class="error">*Please Fill Mandaotory fields</p>
+          </div>
+            <!-- <button class="btn secondary-btn"  (click)="onCancelClick()">Cancel</button>
+            <button id="assign-btn" class="btn primary-btn" (click)="submit()">Assign</button> -->
+            <button id="assign-btn" class="btn primary-btn" [disabled]="disableSendInvoice" (click)="onSubmit()">Send Invoice</button> 
+       
+    </div>
+</div>

@@ -1,11 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { map,Subscription } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 import { MetadataService } from 'src/shared/services/metadata.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
-
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
+ 
 
 @Component({
   selector: 'app-review-detail-page',
@@ -15,7 +18,9 @@ import { MetadataStore } from 'src/shared/stores/metadata.store';
 export class ReviewDetailPageComponent {
   reviewForm: FormGroup;
   selectedUserId: number;
-
+  productId: string;
+  productName
+  
   public usersList: any[] = [];
   public userId: string;
   public subscription: Subscription[] = [];
@@ -36,7 +41,8 @@ export class ReviewDetailPageComponent {
     featuresRating: 0,
     easyToUseRating: 0,
     valueOfMoneyRating: 0,
-    customerSupportRating: 0
+    customerSupportRating: 0,
+    productName:''
   };
 
   selectedRatings: { [key: string]: number } = {
@@ -59,7 +65,9 @@ export class ReviewDetailPageComponent {
     private route: ActivatedRoute,
     private router: Router,
     private metaDataStore: MetadataStore,
-    private metaDataService: MetadataService) {
+    private metaDataService: MetadataService,
+    private userAccountStore : UserAccountStore,
+    ) {
 
     this.reviewForm = this.fb.group({
       userName: ['', Validators.required],
@@ -68,9 +76,11 @@ export class ReviewDetailPageComponent {
       jobTitle: ['', Validators.required],
       companySize: ['', Validators.required],
       softwareUsageDuration: ['', Validators.required],
-      reviewTitle: ['', Validators.required],
+      reviewTitle: ['', Validators.required, ],
       reviewContent: ['', Validators.required],
       agreeTermsAndConditions: [false, Validators.requiredTrue],
+       
+      
     });
 
     this.router.events.subscribe((event: Event) => {
@@ -88,13 +98,21 @@ export class ReviewDetailPageComponent {
       if (event instanceof NavigationError) {
       }
     });
+    this.route.queryParams.subscribe(params => {
+      this.productId = params.productId;
+      this.productName = params.productName;
+    });
+    this.aspectList.forEach((aspect) => {
+      this.reviewForm .addControl(aspect.key, this.fb.control('', Validators.required));
+    });
   }
 
 
-
-
-  ngOnInit(): void {
-    this.reviewPayload = this.metaDataStore.getProductReviewDetails();
+data
+  ngOnInit(): void { 
+   
+     this.reviewPayload = this.metaDataStore.getProductReviewDetails();
+     //("OnInit",this.reviewPayload)
     if (this.reviewPayload?.productId?.length > 2) {
       this.reviewForm.patchValue(this.reviewPayload);
       this.selectedRatings = {
@@ -109,22 +127,36 @@ export class ReviewDetailPageComponent {
       this.metaDataService.getProductReviewById(this.currentUrl).subscribe((data) => {
         this.reviewPayload = this.updateReviewPayload(this.reviewPayload, data.productReview);
         this.metaDataStore.setProductReviewDetails(this.reviewPayload);
+        //console.log("===this.reviewPayload===",this.data=this.reviewPayload);
+         //console.log("===data.productReview===",this.data=data.productReview)
+        //console.log("===setProductReviewDetails===",this.data=this.metaDataStore.setProductReviewDetails.name)
         this.metaDataStore.setProductReviewOtherDetails(data.productReview);
         this.reviewForm.patchValue(data.productReview);
+       // console.log("-- ONINIT IN ELSE--", this.reviewForm.patchValue(data.productReview))
         this.selectedRatings = { ...data.productReview };
       }, error => {
-        console.log("____TEST___ERROR", error);
+        console.log(" TEST ERROR", error);
       })
     }
+
+    this.setSelfData();
+    
   }
 
-  rate(aspect: any, star: number): void {
-    this.selectedRatings[aspect.key] = star;
-    console.log("____TEST RATE___", this.selectedRatings);
-  }
+ // Define a variable to store the cumulative rating
+// cumulativeRating: number = 0;
+rate(aspect: any, star: number): void {
+  this.selectedRatings[aspect.key] = star;
 
+   
+ 
+}
+
+
+  public NextErrorMessage: boolean =false;
   onSubmit(): void {
     if (this.reviewForm.valid) {
+      this.NextErrorMessage = false;
       // You can submit the form data here
       const formData = this.reviewForm.value;
       this.reviewPayload = {
@@ -142,17 +174,29 @@ export class ReviewDetailPageComponent {
         featuresRating: this.selectedRatings.featuresRating,
         easyToUseRating: this.selectedRatings.easyToUseRating,
         valueOfMoneyRating: this.selectedRatings.valueOfMoneyRating,
-        customerSupportRating: this.selectedRatings.customerSupportRating
+        customerSupportRating: this.selectedRatings.customerSupportRating,
+        productName:this.productName
+       
       };
-      console.log("____TEST____REVIEW__PAYLOAD___", this.reviewPayload);
+     // console.log("productName",this,this.productName)
+   //   console.log("____TEST____REVIEW__PAYLOAD___", this.reviewPayload);
       this.metaDataStore.setProductReviewDetails(this.reviewPayload);
-      this.router.navigate([`/review-page/review-rating-page`]);
+      // this.router.navigate([`/review-page/review-rating-page`]);
+      this.router.navigate([`/review-page/review-rating-page`], {
+      queryParams: { productName: this.productName }
+    });
     } else {
-      console.log("___ERROR____")
+     // console.log("___ERROR____")
+      this.NextErrorMessage = true;
       // Handle form validation errors or show a message to the user
     }
   }
 
+  // disableErrorMessage(){
+  //   if(this.reviewForm.value === true){
+  //     this.NextErrorMessage=false;
+  //   }
+  // }
   updateReviewPayload(payload, providedObject): any {
     for (const key in payload) {
       if (providedObject.hasOwnProperty(key)) {
@@ -162,4 +206,28 @@ export class ReviewDetailPageComponent {
     return payload;
   }
 
+  text: string = '';
+  characterCount: number = 0;
+
+  countCharacters() {
+    this.characterCount = this.text.length;
+  }
+  text01: string = '';
+  characterCount01: number = 0;
+  countCharacters01() {
+    this.characterCount01 = this.text01.length;
+  }
+
+
+ 
+  
+  public setSelfData(){
+    let userDetails = this.userAccountStore.getUserDetails();
+   // console.log("userDetails-GST ",userDetails.name,"",userDetails.email,"",userDetails.company )  
+    this.reviewForm.controls['userName'].setValue(userDetails.firstName ? userDetails.firstName : null);
+    this.reviewForm.controls['email'].setValue(userDetails.email ? userDetails.email : null);
+    this.reviewForm.controls['organizationName'].setValue(userDetails.company ? userDetails.company : null);
+
+  }
+  
 }

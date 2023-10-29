@@ -51,6 +51,7 @@ import { TimeFormatPipe } from './pipes/timeFormat';
 import { GetReasonModalComponent } from './components/modals/get-reason-modal/get-reason-modal.component';
 import { ReassignModalComponent } from './components/modals/reassign-modal/reassign-modal.component';
 import { UploadpoModalComponent } from './components/modals/uploadpo-modal/uploadpo-modal.component';
+import { InvoiceDueDateModalComponent } from './components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
 
 
 
@@ -110,7 +111,8 @@ import { UploadpoModalComponent } from './components/modals/uploadpo-modal/uploa
     AssignLeadsAmModalComponent,
     GetReasonModalComponent,
     ReassignModalComponent,
-    UploadpoModalComponent
+    UploadpoModalComponent,
+    InvoiceDueDateModalComponent
    
   ],
 

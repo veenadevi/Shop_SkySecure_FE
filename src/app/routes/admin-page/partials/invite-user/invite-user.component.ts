@@ -226,10 +226,10 @@ public fetchGST(){
         "sendEmail":formData.triggeremail?formData.triggeremail:false
       }
 
-      console.log("request===",request)
+     // console.log("request===",request)
       this.subscription.push(
         this.adminPageService.inviteUsers(request).subscribe(res=>{
-          console.log("+_+_+_ Res ", res);
+         // console.log("+_+_+_ Res ", res);
           this.showMsg=true;
           this.myForm.reset();
           window.location.reload();
@@ -276,6 +276,15 @@ public fetchGST(){
  
  
    }
-
-
+   showDefaultContent: boolean = true;
+   showAlternateContent: boolean = false;
+   showDefault() {
+    this.showDefaultContent = true;
+    this.showAlternateContent = false;
+  }
+  
+  showAlternate() {
+    this.showDefaultContent = false;
+    this.showAlternateContent = true;
+  }
 }

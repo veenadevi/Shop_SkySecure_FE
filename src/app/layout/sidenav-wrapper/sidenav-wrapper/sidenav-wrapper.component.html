@@ -166,9 +166,7 @@
             <!-- Security Sub Menu -->
             <ng-container *ngIf="sAdminSubMenu">
            
-              <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paInviteUser')" >Invite Customer</span>
-              </mat-list-item>
+            
 
               <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminAccounts')">Leads</span>
@@ -178,9 +176,7 @@
               <!-- <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item">Quotations</span>
               </mat-list-item> -->
-              <mat-list-item>
-                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminMarketPlaceUser')">Users</span>
-              </mat-list-item>
+            
 
               <!-- <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminAssignRoles')">Assign Roles</span>
@@ -190,6 +186,14 @@
          
               <mat-list-item>
                 <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sMyCustomers')">Customers</span>
+              </mat-list-item>
+
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('sadminMarketPlaceUser')">Users</span>
+              </mat-list-item>
+
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('paInviteUser')" >Invite Customer</span>
               </mat-list-item>
 
              <mat-list-item>
