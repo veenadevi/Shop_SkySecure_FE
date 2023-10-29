@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ToastrModule, ToastrService } from "ngx-toastr";
 import { NgOtpInputComponent, NgOtpInputModule } from 'ng-otp-input';
+
  
  
 
@@ -115,8 +116,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 
     }),
     NgxGoogleAnalyticsModule.forRoot('G-KC04RJ3FYD'),
-    NgxGoogleAnalyticsRouterModule,
-    
+    NgxGoogleAnalyticsRouterModule
     
  
     

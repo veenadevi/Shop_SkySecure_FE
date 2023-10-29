@@ -179,6 +179,10 @@ body{
   width:100% !important;
 }
 
+.invoice-due-date-modal-custom-class{
+  width:100% !important;
+}
+
 .gst-prompt-modal-custom-class{
   width:100% !important;
 }

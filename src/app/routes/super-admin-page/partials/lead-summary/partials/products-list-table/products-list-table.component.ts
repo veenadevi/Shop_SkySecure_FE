@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
+import { InvoiceDueDateModalComponent } from 'src/shared/components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
@@ -42,6 +43,9 @@ export class ProductsListTableComponent implements OnInit {
   public productsList: any[] = [];
   public enableEdit: boolean
   public enableinvoice:boolean
+  public allowAddProduct:boolean
+  public isReadOnly:boolean;
+
   public showMsg: boolean
 
   public showInvoiceMsg: boolean
@@ -92,12 +96,23 @@ export class ProductsListTableComponent implements OnInit {
   userDetails:any;
 
   ngOnInit(): void {
+    this.isReadOnly=false
     this.enableEdit = false
     this.enableinvoice=false
+    this.allowAddProduct=false
     this.userDetails = this.userAccountStore.getUserDetails();
     this.showMsg = false
     this.cartDetails = (this.cartData.CartDetails && this.cartData.CartDetails.length > 0) ? this.cartData.CartDetails : null;
    
+    if(this.cartData.status==='Invoiced'){
+
+    this.enableEdit = true
+    this.enableinvoice=true
+    this.allowAddProduct=true
+
+    this.isReadOnly=true
+    }
+
    console.log("in parent settign current cartdetails ====",this.cartDetails)
     this.setSampleData();
  
@@ -203,7 +218,7 @@ this.enableinvoice=true
 
 
   getEmployee() {
-    this.enableEdit = false;
+   // this.enableEdit = false;
 
     if (this.productsData.line_items) {
       this.isEstimate = true;
@@ -264,7 +279,7 @@ this.enableinvoice=true
 
 
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === items.line_item_id);
-      console.log("fetched disprice===", this.cartDetails[index].distributorPrice)
+    //  console.log("fetched disprice===", this.cartDetails[index].distributorPrice)
 
       return this.cartDetails[index].distributorPrice
     }
@@ -371,7 +386,7 @@ this.enableinvoice=true
   }
 
   addApp() {
-
+    this.enableinvoice=true
     const modalRef = this.modalService.open(AddCompareProductModalComponent, { size: 'lg', windowClass: 'add-compare-products-custom-class' });
     let queryParams = {
       "screen": 'edit-product-in-accounts',
@@ -656,17 +671,35 @@ this.enableinvoice=true
   public sendInvoice() {
 
 
-
-
     let request = this.setInvoiceRequestData();
-    //console.log("+_+_+_+_+_ Res Data ", request);
+
+
+
+
+    const modalRef = this.modalService.open(InvoiceDueDateModalComponent, {size: '700px', windowClass: 'invoice-due-date-modal-custom-class'});
+  
+
+
+    modalRef.componentInstance.request = request;
+    
+    modalRef.componentInstance.passedData.subscribe((res:any) => {
+      
+      console.log("after model close====")
+      this.enableEdit = true
+    this.enableinvoice=true
+    this.allowAddProduct=true
+
+    })
+
+    /*
+    let request = this.setInvoiceRequestData();
 
     this.subscription.push(
       this.cartService.createInvoice(request).subscribe(res => {
         this.showInvoiceMsg = true
 
       })
-    )
+    ) */
 
 
   }

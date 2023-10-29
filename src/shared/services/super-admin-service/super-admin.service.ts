@@ -149,7 +149,7 @@ export class SuperAdminService {
 
   
 
-  console.log("+++++++ ____ _ InsideCreate assignChannelPartner ", request);
+ // console.log("+++++++ ____ _ InsideCreate assignChannelPartner ", request);
     
     const REQUEST$ = this.http.post<any>(URL, request)
       .pipe(
@@ -201,7 +201,7 @@ export class SuperAdminService {
 
   
 
-  console.log("+++++++ ____ _ InsideCreate assignLeadsToChannelPartnerAM ", request);
+ // console.log("+++++++ ____ _ InsideCreate assignLeadsToChannelPartnerAM ", request);
     
     const REQUEST$ = this.http.post<any>(URL, request)
       .pipe(

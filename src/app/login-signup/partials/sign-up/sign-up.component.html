@@ -52,6 +52,7 @@
         </div>
         <div class="buttons">
           <ng-container *ngIf="emailExisitAlert">
+          
             <div class="signin-btn">
               <button (click)="signIn()" class="btn primary-btn">Sign In</button>
             </div>
@@ -83,6 +84,9 @@
           <div class="buttons">
         
           <ng-container *ngIf="enableSignInButton">
+            <div class="resend">
+              <span>{{display}}  <a class="re-OTP" (click)="onSubmitEmail()">Resend OTP</a></span>
+           </div>
             <div class="signin-btn">
               <button (click)="validateOTP()" class="btn primary-btn">Sign up</button>
             </div>

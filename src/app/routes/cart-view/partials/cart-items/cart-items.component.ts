@@ -653,7 +653,7 @@ public onChangeQuantity(i, price) : void {
       status : "New"
     });
 
-    console.log("_)(*&^^%% Val here ", this.cartData.length);
+   // console.log("_)(*&^^%% Val here ", this.cartData.length);
 
     
 
@@ -678,7 +678,7 @@ public onChangeQuantity(i, price) : void {
             return forkJoin(allObs$);
           })
         ).subscribe((forkJoinResponse) => {
-          console.log("+_)(*&^^ ^", forkJoinResponse);
+        //  console.log("+_)(*&^^ ^", forkJoinResponse);
           this.spinner.hide();
           //forkJoinResponse will be an array of responses for each of the this.serviceTwo.getAllServiceTwoData CALL
           //Do whatever you want to do with this array
@@ -696,7 +696,7 @@ public onChangeQuantity(i, price) : void {
   }
 
   public onSelectChange(event, i){
-    console.log("_+_+_+_+_ event", event.target.value);
+   // console.log("_+_+_+_+_ event", event.target.value);
     if(event.target.value === 'Year'){
       this.cartData[i].itemTotal = this.cartData[i].quantity * this.cartData[i].priceList[0].price;
       this.cartData[i].price = this.cartData[i].priceList[0].price;
@@ -755,21 +755,38 @@ public onChangeQuantity(i, price) : void {
       );*/
 
 
+
+
+
       this.subscriptions.push(
         this.cartService.encryptdata(request).subscribe( data=>{
-          console.log('---------------------', data)
+        //  console.log('---------------------', data)
 
           this.encRequestRes = data;
           //this.encRequestRes = data['response']; 
 
               setTimeout(()=>{
                   this.form.nativeElement.submit();
+                  //this.checkOutCCAvenue(this.encRequestRes);
                   //console.log("+_+_+_+ ()( )()( ", this.encRequestRes);
               },1000)
         }, error => {
           console.log("++++++ Error",error)
           })
       )
+  }
+
+  public checkOutCCAvenue(encryptedData){
+    let reqForCCAvenue = {
+      "encRequest" : encryptedData, // or any supported currency
+      "access_code" : this.accessCode,
+    }
+
+    this.subscriptions.push(
+      this.cartService.paymentGatewayCCAvenueRequest(reqForCCAvenue).subscribe(res=>{
+        console.log("+_+_+_+_+_+_+ Response from CCCAVENUE", res);
+      })
+    )
   }
 
 }

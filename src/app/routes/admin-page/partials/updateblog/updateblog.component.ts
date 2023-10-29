@@ -25,14 +25,14 @@ export class UpdateblogComponent {
  removeUpload: boolean = false;
 
   uploadFile(event: any) {
-    console.log("__TEST__", event);
+   // console.log("__TEST__", event);
     const formData: FormData = new FormData();
     formData.append('file', event.target.files[0], event.target.files[0].name);
 
     this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
       .subscribe(
         (response: any) => {
-          console.log('Upload successful', response);
+         // console.log('Upload successful', response);
           this.productLogo = response.filePath;
           // Handle the response from the server
         },

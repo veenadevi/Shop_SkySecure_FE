@@ -29,11 +29,11 @@ public addItemsToCart(data : any) : void {
     
     
     if(data.productId){
-      console.log("++++_______ Came Here If", data);
+     // console.log("++++_______ Came Here If", data);
       this.getCartItems(false, data);
     }
     else if(data.productVariant){
-      console.log("++++_______ Came Here Else", data);
+    //  console.log("++++_______ Came Here Else", data);
       this.getCartItems(true, data);
     }
         
@@ -55,7 +55,7 @@ public getCartItems(multipleProduct, data) : void {
 
     if(multipleProduct){
       
-      console.log("+++++++ Inside Multiple");
+    //  console.log("+++++++ Inside Multiple");
       //let productVariant = JSON.parse(this.params.get('productVariant'));
       let productVariant = data.productVariant;
       
@@ -131,7 +131,7 @@ public getCartItems(multipleProduct, data) : void {
         //productsList[index].quantity = Number(productsList[index].quantity) + Number(this.params.get('quantity'));
 
         if( productsList[index].priceType===data.priceType){
-          console.log("=====increase as same priceType====")
+        //  console.log("=====increase as same priceType====")
           productsList[index].quantity = Number(productsList[index].quantity) + Number(data.quantity);
           productsList[index].priceList = data.priceList
         }
@@ -155,7 +155,7 @@ public getCartItems(multipleProduct, data) : void {
           "priceList" : data.priceList ? data.priceList : ''
         });
        }
-       console.log(")_)_)_)_)_)_)_ Inside else ", productsList);
+     //  console.log(")_)_)_)_)_)_)_ Inside else ", productsList);
 
       }
       else {
@@ -179,7 +179,7 @@ public getCartItems(multipleProduct, data) : void {
 
        
         });
-        console.log(")_)_)_)_)_)_)_ Inside else If", productsList);
+        //console.log(")_)_)_)_)_)_)_ Inside else If", productsList);
       }
 
       if(cartRefId !== '' || cartRefId !== null){
@@ -191,7 +191,7 @@ public getCartItems(multipleProduct, data) : void {
         req.products.push(productsList);
       }
 
-      console.log("+++++++ Final Price ", req);
+   //   console.log("+++++++ Final Price ", req);
   
       //console.log("+_+_+_+_+_+_ ", this.addCartItemsService(req, 'add'));
       this.addCartItemsService(req, 'add');
@@ -216,7 +216,7 @@ public addCartItemsService(req, state) {
           return forkJoin(allObs$);
         })
       ).subscribe((forkJoinResponse) => {
-        console.log("+_)(*&^^ ^", forkJoinResponse);
+       // console.log("+_)(*&^^ ^", forkJoinResponse);
         this.spinner.hide();
         this.toaster.showSuccess("The product has been added to Cart",'')
         //forkJoinResponse will be an array of responses for each of the this.serviceTwo.getAllServiceTwoData CALL

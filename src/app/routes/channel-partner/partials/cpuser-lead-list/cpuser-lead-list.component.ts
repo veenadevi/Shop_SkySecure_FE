@@ -97,7 +97,7 @@ export class CpuserLeadListComponent implements OnInit{
       account : acc,
 
     }
-    console.log("navigate to detaisl page===",account)
+   // console.log("navigate to detaisl page===",account)
 
     this.router.navigate(['channel-partner/lead-summary'], {queryParams: queryParams});
 
@@ -109,7 +109,7 @@ export class CpuserLeadListComponent implements OnInit{
     const modalRef = this.modalService.open(AssignLeadsModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
   
     modalRef.componentInstance.request = account;
-    console.log("()))_)_)_)_ Data Index ", i);
+   // console.log("()))_)_)_)_ Data Index ", i);
 
     modalRef.componentInstance.passedData.subscribe((res) => {
       //account.Owner.name
@@ -125,7 +125,7 @@ export class CpuserLeadListComponent implements OnInit{
   public getAllChannelPartners(){
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
+       // console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
         this.superAdminStore.setChannelPartnerList(res);
       })
     )
@@ -134,7 +134,7 @@ export class CpuserLeadListComponent implements OnInit{
   public getMyChannelUsersList(){
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
+        //console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
         this.superAdminStore.setMyChannelPartnerAMList(res);
       })
     )

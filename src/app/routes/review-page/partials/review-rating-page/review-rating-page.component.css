@@ -34,7 +34,8 @@ select{
 label{
     font-weight: 600;
     color:#333333;
-    font-size: 15px;
+    font-size: 14px;
+    padding-left: 5px;
 }
 .review-field-main{
     display: flex;
@@ -48,7 +49,7 @@ label{
 .review_form_field_label {
     font-weight: 600;
     color:#333333;
-    font-size: 15px;
+    font-size: 14px;
 }
 .smalltextafterlabel {
     color: #999;
@@ -70,7 +71,7 @@ border: #adb5bd solid 1px;
 cursor: pointer;
 }
 .custom-control-label{
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
 }
 
@@ -127,10 +128,11 @@ textarea{
     gap: 10px;
 }
 .rating_numbar_main .numbar_li.selected {
-    background: #001965;
+    background: var(--btn-gradient);
     color: #ffffff;
-    border: 2px solid #4278F5;
+    border: 2px solid var(--btn-gradient);
 }
+
 .numbar_rating_main ul li {
     width: 30px;
     display: flex;
@@ -150,7 +152,7 @@ textarea{
     align-items: center;
 }
 .heading{
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -248,7 +250,7 @@ textarea{
 .guide-heading{
     text-align: center;
     padding-top: 10px;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -256,7 +258,7 @@ textarea{
     /* width: 90%; */
     text-align: center;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
     color: #6C6C6C;
     /* margin-left: 5%; */
     padding-top: 15px;
@@ -266,7 +268,7 @@ textarea{
 .guide-image{
     display: flex;
     flex-direction: row;
-padding: 40px;
+padding: 10px;
 justify-content: space-between;
 }
 .img-01{
@@ -286,4 +288,26 @@ font-weight: 400;
 .img-guide{
     width: 80px;
     height: 80px;
+}
+
+.error{
+    color: #B82727;
+    text-align: center;
+    font: size 12px;
+    /* padding: 20px; */
+}
+
+.astrik{
+    color: #B82727;
+    font-size: 15px;
+}
+
+.emoji-cont{
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.productName{
+    font-size: 16px;
+    font-weight: 600;
 }

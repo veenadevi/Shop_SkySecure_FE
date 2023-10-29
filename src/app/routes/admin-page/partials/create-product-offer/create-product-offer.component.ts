@@ -456,10 +456,10 @@ export class CreateProductOfferComponent  implements OnInit {
         "updatedBy": "64fab2539166f500542451b5"
       }
 
-console.log("request===",request)
+//console.log("request===",request)
       this.subscription.push(
         this.adminPageService.createProductOffer(request).subscribe(res=>{
-          console.log("+_+_+_ Res ", res);
+        //  console.log("+_+_+_ Res ", res);
           this.showMsg=true;
           // this.myForm.reset();
         })
@@ -484,7 +484,7 @@ console.log("request===",request)
 
    
       var productData = this.registrationForm.value;
-      console.log("passing edit value===",productData.addAppArrayNew.app)
+      //console.log("passing edit value===",productData.addAppArrayNew.app)
       this.createProductPayload = {
         _id: this.selectedProductId._id,
         name: productData.productName,
@@ -580,7 +580,7 @@ console.log("request===",request)
 
     let mskySecurePrice = ((Number(data.merpPrice)) * 0.02) + (Number(data.mdistributorPrice));
     let fixedValue=parseFloat(mskySecurePrice.toString()).toFixed(2);
-    console.log("fixedValue   ...",fixedValue)
+   // console.log("fixedValue   ...",fixedValue)
     return Math.round(parseFloat(fixedValue))
     
   }
@@ -748,7 +748,7 @@ console.log("request===",request)
 
     response.appList.forEach((app) => {
 
-      console.log(" passing value to payload  for app ", app.appId,app.name, app.imageURL)
+     // console.log(" passing value to payload  for app ", app.appId,app.name, app.imageURL)
       
       appNewArray.push(this.createAppListWithValue(app.appId,app.name, app.imageURL));
 

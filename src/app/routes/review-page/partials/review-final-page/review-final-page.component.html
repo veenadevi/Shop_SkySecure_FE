@@ -1,7 +1,8 @@
 <div class="final-container">
     <div class="final-content">
+        <h4 class="d-flex justify-content-center mb-3 mt-3">{{ productName }}</h4>
 <div class="thanks-card">
-    <div class="star">
+    <!-- <div class="star">
        
             <div class="rating-stars">
                 <mat-icon class="review-icon">star</mat-icon>
@@ -11,7 +12,36 @@
                 <mat-icon class="review-icon">star_border</mat-icon>
             </div>  
       
-    </div>
+    </div> -->
+
+    <div class="star">
+        <div class="rating-stars">
+          <mat-icon class="review-icon" *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+            {{ i < overAllRating ? 'star' : 'star_border' }}
+          </mat-icon>
+         
+        </div>
+        
+      </div>
+      <!-- <div class="star">
+        <div class="rating-stars">
+         
+          <ng-container *ngFor="let _ of [].constructor(starRating.whole); let i = index">
+            <mat-icon class="review-icon">star</mat-icon>
+          </ng-container>
+      
+       
+          <ng-container *ngIf="starRating.fractional > 0">
+            <mat-icon class="review-icon">star_half</mat-icon>
+          </ng-container>
+      
+         
+          <ng-container *ngFor="let _ of [].constructor(5 - starRating.whole - (starRating.fractional > 0 ? 1 : 0)); let i = index">
+            <mat-icon class="review-icon">star_border</mat-icon>
+          </ng-container>
+        </div>
+      </div> -->
+      
     <div class="star-cont">
         Thanks for Submitting Review
     </div>

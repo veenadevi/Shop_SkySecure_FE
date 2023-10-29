@@ -33,7 +33,7 @@ export class SidenavWrapperComponent implements OnInit{
   @Input() set userRole(value: any) {
 
     this.userRoleVal = value;
-    console.log("...my role ----", this.userRoleVal, value)
+   // console.log("...my role ----", this.userRoleVal, value)
     //this.userRoleVal = 'superadmin'
 
   }
@@ -46,7 +46,7 @@ export class SidenavWrapperComponent implements OnInit{
     this.userFullName = value;
   }
   @Input() set userRoleList(value: any) {
-    console.log("fetched userrolelist====",value)
+    //console.log("fetched userrolelist====",value)
     this.userRolesList = value;
   }
 

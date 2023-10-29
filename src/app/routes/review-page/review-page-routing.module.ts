@@ -5,6 +5,7 @@ import { ReviewHomeComponent } from './partials/review-home/review-home.componen
 import { ReviewDetailPageComponent } from './partials/review-detail-page/review-detail-page.component';
 import { ReviewRatingPageComponent } from './partials/review-rating-page/review-rating-page.component';
 import { ReviewFinalPageComponent } from './partials/review-final-page/review-final-page.component';
+import { TrendingProductComponent } from './partials/trending-product/trending-product.component';
 
 
 const routes: Routes = [{
@@ -33,6 +34,11 @@ const routes: Routes = [{
       canActivate: [],
       path: 'review-final-page',
       component : ReviewFinalPageComponent
+    },
+    {
+      canActivate: [],
+      path: 'trending-product',
+      component : TrendingProductComponent
     },
   ]
   

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { InvoiceDueDateModalComponent } from 'src/shared/components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
 
 @Component({
   selector: 'product-list-table',
@@ -34,6 +35,8 @@ export class ProductListTableComponent {
   public productsList: any[] = [];
   public enableEdit: boolean
   public enableinvoice:boolean
+  public allowAddProduct:boolean
+  public isReadOnly:boolean;
   public showMsg: boolean
   public showInvoiceMsg: boolean
 
@@ -83,11 +86,22 @@ export class ProductListTableComponent {
   userDetails:any;
 
   ngOnInit(): void {
+    this.isReadOnly=false
     this.enableEdit = false
+    this.enableinvoice=false
+    this.allowAddProduct=false
+   
     this.showMsg = false
     this.userDetails = this.userAccountStore.getUserDetails();
     this.cartDetails = (this.cartData.CartDetails && this.cartData.CartDetails.length > 0) ? this.cartData.CartDetails : null;
- 
+    if(this.cartData.status==='Invoiced'){
+
+      this.enableEdit = true
+      this.enableinvoice=true
+      this.allowAddProduct=true
+  
+      this.isReadOnly=true
+      }
     this.setSampleData();
   
 
@@ -194,7 +208,7 @@ export class ProductListTableComponent {
 
 
   getEmployee() {
-    this.enableEdit = false;
+   // this.enableEdit = false;
 
     if (this.productsData.line_items) {
       this.isEstimate = true;
@@ -361,6 +375,7 @@ export class ProductListTableComponent {
 
   addApp() {
 
+    this.enableinvoice=true
     const modalRef = this.modalService.open(AddCompareProductModalComponent, { size: 'lg', windowClass: 'add-compare-products-custom-class' });
     let queryParams = {
       "screen": 'edit-product-in-accounts',
@@ -493,7 +508,7 @@ export class ProductListTableComponent {
 
   public setInvoiceRequestData() {
 
-    console.log("passin gcrm data from parent page ==",this.crmData)
+    //console.log("passin gcrm data from parent page ==",this.crmData)
 
 
     
@@ -635,14 +650,34 @@ export class ProductListTableComponent {
 
 
     let request = this.setInvoiceRequestData();
+
+
+
+
+
+
+    const modalRef = this.modalService.open(InvoiceDueDateModalComponent, {size: '700px', windowClass: 'invoice-due-date-modal-custom-class'});
+  
+
+
+    modalRef.componentInstance.request = request;
+    
+    modalRef.componentInstance.passedData.subscribe((res:any) => {
+      
+      console.log("after model close====")
+      this.enableEdit = true
+    this.enableinvoice=true
+    this.allowAddProduct=true
+
+    })
     //console.log("+_+_+_+_+_ Res Data ", request);
 
-    this.subscription.push(
-      this.cartService.createInvoice(request).subscribe(res => {
-        this.showInvoiceMsg = true
+    // this.subscription.push(
+    //   this.cartService.createInvoice(request).subscribe(res => {
+    //     this.showInvoiceMsg = true
 
-      })
-    )
+    //   })
+    // )
 
 
   }

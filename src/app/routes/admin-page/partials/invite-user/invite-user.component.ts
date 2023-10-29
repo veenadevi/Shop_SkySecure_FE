@@ -115,7 +115,7 @@ export class InviteUserComponent {
 
 
 public fetchGST(){
-  console.log("_+_+_+_+_+ GST Data ", this.myForm.value.gstin.length )
+ // console.log("_+_+_+_+_+ GST Data ", this.myForm.value.gstin.length )
 
   if(this.myForm.value.gstin.length === 15){
 
@@ -196,7 +196,7 @@ public fetchGST(){
     if (this.myForm.valid) {
 
       let formData = this.myForm.value;
-      console.log("this.myForm.get('triggeremail').value===",formData.isZohoCustomer)
+     // console.log("this.myForm.get('triggeremail').value===",formData.isZohoCustomer)
       //companyName email firstName lastName mobile
       let request = {
         "firstName": formData.firstName,
@@ -226,10 +226,10 @@ public fetchGST(){
         "sendEmail":formData.triggeremail?formData.triggeremail:false
       }
 
-      console.log("request===",request)
+     // console.log("request===",request)
       this.subscription.push(
         this.adminPageService.inviteUsers(request).subscribe(res=>{
-          console.log("+_+_+_ Res ", res);
+         // console.log("+_+_+_ Res ", res);
           this.showMsg=true;
           this.myForm.reset();
           window.location.reload();
@@ -276,6 +276,15 @@ public fetchGST(){
  
  
    }
-
-
+   showDefaultContent: boolean = true;
+   showAlternateContent: boolean = false;
+   showDefault() {
+    this.showDefaultContent = true;
+    this.showAlternateContent = false;
+  }
+  
+  showAlternate() {
+    this.showDefaultContent = false;
+    this.showAlternateContent = true;
+  }
 }
