@@ -15,6 +15,9 @@
 .message-text-style {
     margin: 1.5em;
 }
+.modal-header{
+    border-bottom: 0px;
+}
 
 textarea {
     width: 26em;
@@ -33,4 +36,13 @@ textarea {
 
 .alert-btn {
     background: var(--red);
+}
+.close-icon {
+    height: 24px;
+    border: 0px;
+}
+
+.close{
+   
+    border: 0px;
 }
