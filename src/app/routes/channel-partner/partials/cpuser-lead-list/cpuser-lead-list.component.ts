@@ -125,7 +125,7 @@ export class CpuserLeadListComponent implements OnInit{
   public getAllChannelPartners(){
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
+       // console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
         this.superAdminStore.setChannelPartnerList(res);
       })
     )
@@ -134,7 +134,7 @@ export class CpuserLeadListComponent implements OnInit{
   public getMyChannelUsersList(){
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
+        //console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
         this.superAdminStore.setMyChannelPartnerAMList(res);
       })
     )

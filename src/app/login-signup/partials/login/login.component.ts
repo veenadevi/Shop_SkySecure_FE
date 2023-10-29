@@ -134,10 +134,10 @@ export class LoginComponent {
         this.userProfileService.sendOTP(req).subscribe(
           res=>{
             
-            console.log("()()()()( ", res);
+           // console.log("()()()()( ", res);
             
             if(res.message){
-              console.log("()()()()( Inside If", res);
+             // console.log("()()()()( Inside If", res);
               this.enableSignInButton = false;
               this.enableOTPButton = false;
               this.newEmailAlert = true;
@@ -145,7 +145,7 @@ export class LoginComponent {
             }
             else{
              
-              console.log("()()()()( Inside Else", res);
+             // console.log("()()()()( Inside Else", res);
               this.enableSignInButton = true;
               this.enableOTPButton = false;
               this.newEmailAlert = false;
@@ -163,7 +163,7 @@ export class LoginComponent {
         ) 
       )
 
-      console.log("(()()() ", this.newEmailAlert);
+    //  console.log("(()()() ", this.newEmailAlert);
 
       /*let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
       let hashedPass = CryptoJS.AES.encrypt(this.form.value.password, key).toString();
@@ -235,7 +235,7 @@ export class LoginComponent {
 
       this.subscriptions.push(
         this.userProfileService.validateOTP(req).subscribe( res => {
-          console.log("*(*(*(*(*( OTP Res", res);
+        // console.log("*(*(*(*(*( OTP Res", res);
           if(res && res.data){
             this.callSignIn();
           }
@@ -272,11 +272,11 @@ export class LoginComponent {
           
 
           if(this.params && this.params.has('productId')){
-            console.log("_+_+_)+_+_+_+_+ Inside Product ID ", this.params);
+           // console.log("_+_+_)+_+_+_+_+ Inside Product ID ", this.params);
             this.router.navigate(['']);
           }
           else{
-            console.log("_+_+_)+_+_+_+_+ Inside Product Else ", this.params);
+         //   console.log("_+_+_)+_+_+_+_+ Inside Product Else ", this.params);
             this.router.navigate(['']);
           }
           
@@ -330,7 +330,7 @@ export class LoginComponent {
 
   onOtpChange(otp: any) {
     this.otp = otp;
-    console.log("this.otp", this.otp);
+   // console.log("this.otp", this.otp);
     if (otp.length === 6) {
       this.login();
     }

@@ -88,16 +88,16 @@ rating
 
   ngOnInit(): void {
     this.productReview =  {...this.metaDataStore.getProductReviewDetails(), ...this.metaDataStore.getProductReviewOtherDetails()};
-    console.log("___TEST___FULL PAYLOAD____",this.productReview); 
-    console.log("productName ",this.productName=this.productReview.productName); 
-    console.log("customerSupportRating",this.customerSupportRating=this.productReview.customerSupportRating  )
-    console.log("featuresRating",this.featuresRating=this.productReview.featuresRating)
-    console.log("overAllRating",this.overAllRating=this.productReview.overAllRating)
-    console.log("valueOfMoneyRating",this.valueOfMoneyRating =this.productReview.valueOfMoneyRating )
-    console.log("easyToUseRating",this.easyToUseRating=this.productReview.easyToUseRating )
+    // console.log("___TEST___FULL PAYLOAD____",this.productReview); 
+    // console.log("productName ",this.productName=this.productReview.productName); 
+    // console.log("customerSupportRating",this.customerSupportRating=this.productReview.customerSupportRating  )
+    // console.log("featuresRating",this.featuresRating=this.productReview.featuresRating)
+    // console.log("overAllRating",this.overAllRating=this.productReview.overAllRating)
+    // console.log("valueOfMoneyRating",this.valueOfMoneyRating =this.productReview.valueOfMoneyRating )
+    // console.log("easyToUseRating",this.easyToUseRating=this.productReview.easyToUseRating )
     const averageRating = this.customerSupportRating+ this.featuresRating+this.overAllRating+this.valueOfMoneyRating+this.easyToUseRating;
    this.rating= this.averageRating % 5;
-   console.log("this.rating",this.rating)
+   //console.log("this.rating",this.rating)
   
   
    
@@ -109,7 +109,7 @@ rating
 
   createProductReview(): void {
     this.metaDataService.createProductReview(this.productReview).subscribe((data) => {
-      console.log("___DATA____",data);
+    //  console.log("___DATA____",data);
       if(data) this.toaster.showSuccess("Product Review Created Successfully",'');
       else {
         this.toaster.showError("Failed To Create Product Review","");

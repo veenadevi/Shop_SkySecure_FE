@@ -9,7 +9,7 @@
 
 .text-style{
     cursor: pointer;
-    color: #3366CC;
+    /* color: #3366CC; */
 }
 
 /* #assign-btn {
@@ -80,8 +80,21 @@ p{
 }
 .gst{
     font-size: 9px;
+    color: red;
 }
 
+:host ::ng-deep.p-paginator.p-paginator-bottom
+{
+    font-size: 13px;
+}
+
+:host ::ng-deep.p-paginator .p-paginator-pages .p-paginator-page{
+    height: 2rem;
+    min-width:2rem
+}
+:host ::ng-deep .tooltip .ui-tooltip-text {
+   font-size: 8px; 
+  }
 
 
 @media  ( min-width: 1920px) and (max-width: 2560px) {
@@ -107,7 +120,7 @@ p{
     }
     .text-style {
         cursor: pointer;
-        color: #3366CC;
+        /* color: #3366CC; */
         font-size: 16px;
     }
     :host ::ng-deep.p-datatable .p-datatable-tbody > tr > td {
@@ -117,4 +130,13 @@ p{
         padding: 1rem 1rem;
         font-size: 16px;
     }
+    :host ::ng-deep.p-paginator.p-paginator-bottom
+{
+    font-size: 13px;
+}
+
+:host ::ng-deep.p-paginator .p-paginator-pages .p-paginator-page{
+    height: 2rem;
+    min-width:2rem
+}
 }

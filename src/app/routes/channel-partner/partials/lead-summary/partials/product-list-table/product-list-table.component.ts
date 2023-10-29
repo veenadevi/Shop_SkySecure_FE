@@ -493,7 +493,7 @@ export class ProductListTableComponent {
 
   public setInvoiceRequestData() {
 
-    console.log("passin gcrm data from parent page ==",this.crmData)
+    //console.log("passin gcrm data from parent page ==",this.crmData)
 
 
     

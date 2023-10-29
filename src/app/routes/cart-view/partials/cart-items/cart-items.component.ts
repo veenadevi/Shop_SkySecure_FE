@@ -653,7 +653,7 @@ public onChangeQuantity(i, price) : void {
       status : "New"
     });
 
-    console.log("_)(*&^^%% Val here ", this.cartData.length);
+   // console.log("_)(*&^^%% Val here ", this.cartData.length);
 
     
 
@@ -678,7 +678,7 @@ public onChangeQuantity(i, price) : void {
             return forkJoin(allObs$);
           })
         ).subscribe((forkJoinResponse) => {
-          console.log("+_)(*&^^ ^", forkJoinResponse);
+        //  console.log("+_)(*&^^ ^", forkJoinResponse);
           this.spinner.hide();
           //forkJoinResponse will be an array of responses for each of the this.serviceTwo.getAllServiceTwoData CALL
           //Do whatever you want to do with this array

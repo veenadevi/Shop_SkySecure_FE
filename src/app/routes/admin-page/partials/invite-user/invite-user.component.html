@@ -15,7 +15,7 @@
           </div>
             <div class="col-sm-4 forms">
               <label for="gstin">Enter GST</label>
-              <input formControlName="package" type="gstin" class="form-control-03" name="gstin" id="gstin"
+              <input formControlName="gstin" type="gstin" class="form-control-03" name="gstin" id="gstin"
                   placeholder="Enter GST Number">
             </div>
     
@@ -177,7 +177,7 @@
                 <button  class="btn secondary-btn" (click)="showDefault()">Back</button>
               </ng-container>
 
-              <button class="btn primary-btn" type="submit" [disabled]="myForm.invalid">Submit</button>
+              <button class="btn primary-btn" *ngIf="showAlternateContent === true" type="submit" [disabled]="myForm.invalid">Submit</button>
              
             <ng-container *ngIf="showDefaultContent === true">
               <button class="btn secondary-btn" (click)="showAlternate()">Next</button>

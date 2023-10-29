@@ -155,6 +155,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .gst{
     font-size: 9px;
+    color:#494eb1;
 }
 .success-state-img {
     opacity: 50%;

@@ -1,14 +1,25 @@
 .modal-header{
     background: var(--primary);
     padding: 1rem;
-    font-size: 18px;
+    font-size: 14px;
+    font-family: 'lato', sans-serif;
 }
 
 .modal-body{
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    row-gap: 2rem;
+    row-gap: 1.5rem;
+    font-family: 'lato', sans-serif;
+}
+.close-icon {
+    height: 24px;
+    border: 0px;
+}
+
+.close{
+   
+    border: 0px;
 }
 
 .field-holder{
@@ -22,6 +33,7 @@
 
 .left-div span{
     display: flex;
+    font-size: 13px;
 }
 
 .right-div{
@@ -37,9 +49,31 @@
 :host ::ng-deep .material-icons{
    
     font-size: 18px;
-    color: #9E9E9E;
+    color: #a9abdb;
 }
 
 :host ::ng-deep .card{
     border: none;
+}
+
+:host ::ng-deep.p-button
+{
+    background:#a9abdb;
+}
+
+:host ::ng-deep.p-inputtext
+{
+    font-size: .8rem;
+}
+
+:host ::ng-deep.p-dropdown-panel .p-dropdown-items .p-dropdown-item
+{
+    font-size: .8rem;
+}
+
+.error{
+    color: red;
+    text-align: center;
+    font-size: 12px;
+    /* padding: 20px; */
 }

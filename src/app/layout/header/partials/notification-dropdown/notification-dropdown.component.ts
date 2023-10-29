@@ -15,7 +15,7 @@ export class NotificationDropdownComponent implements OnInit{
 
 
   ngOnInit(): void {
-    console.log("_+_+_+_+_ Value ", this.notificationList);
+  //  console.log("_+_+_+_+_ Value ", this.notificationList);
   }
 
   public onFocusOutEvent(event: any){

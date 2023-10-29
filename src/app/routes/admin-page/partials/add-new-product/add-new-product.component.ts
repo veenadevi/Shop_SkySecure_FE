@@ -455,7 +455,7 @@ export class AddNewProductComponent  implements OnInit {
 
     let mskySecurePrice = ((Number(data.merpPrice)) * 0.02) + (Number(data.mdistributorPrice));
     let fixedValue=parseFloat(mskySecurePrice.toString()).toFixed(2);
-    console.log("fixedValue   ...",fixedValue)
+    //console.log("fixedValue   ...",fixedValue)
     return fixedValue
     
   }

@@ -126,7 +126,7 @@ export class SignUpComponent {
     
     if (this.form.invalid) { // If Invalid Return
       // console.log("()()() Invalid");
-      console.log(this.form.value);
+   //   console.log(this.form.value);
       return;
     }
     else{ // If Valid
@@ -222,8 +222,8 @@ export class SignUpComponent {
           
     //console.log("sign up for exisitng user")
           if(res.message){
-            console.log("coming for error message")
-            console.log("error message========"+res.message)
+           // console.log("coming for error message")
+           // console.log("error message========"+res.message)
             if(res.message=='Error: Invalid Domain'){
               
               this.invalidDomain=true;
@@ -234,7 +234,7 @@ export class SignUpComponent {
               this.emailExisitAlert=true
             }
             this.inValidOTP=false
-            console.log("outside iff====")
+           // console.log("outside iff====")
             this.enableSignInButton = false;
             this.enableOTPButton = true;
             this.otpField = false;
@@ -242,7 +242,7 @@ export class SignUpComponent {
             // this.invalidDomain=true
           }
           else{
-           console.log("inside els====",res)
+          // console.log("inside els====",res)
             //this.emailFormFlag = false;
             //this.signUpFormFlag = true;
             this.enableSignInButton = true;
@@ -261,7 +261,7 @@ export class SignUpComponent {
   }
 
   public validateOTP(){
-   console.log("iNSIDE VALIDATE OTP")
+  // console.log("iNSIDE VALIDATE OTP")
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
       let hashedPass = CryptoJS.AES.encrypt( this.otp, key).toString();
       let req = {
@@ -269,11 +269,11 @@ export class SignUpComponent {
         "otp": hashedPass
       }
 
-      console.log("this.formEmail.value.email",this.formEmail.value.email)
+   //   console.log("this.formEmail.value.email",this.formEmail.value.email)
       
       this.subscriptions.push(
         this.userProfileService.validateOTP(req).subscribe( res => {
-          console.log("RES & RES.DATA",res && res.data)
+        //  console.log("RES & RES.DATA",res && res.data)
           if(res && res.data ){
             this.emailFormFlag = false;
             this.signUpFormFlag = true;
@@ -295,7 +295,7 @@ export class SignUpComponent {
   }
   public signIn(){
 
-    console.log("iNSIDE SIGN IN")
+    //console.log("iNSIDE SIGN IN")
       this.router.navigate(['login'], { queryParams: { email: this.validatedEmail} });
 
   }
@@ -317,7 +317,7 @@ export class SignUpComponent {
 
   onOtpChange(otp: any) {
     this.otp = otp;
-    console.log("this.otp", this.otp);
+    //console.log("this.otp", this.otp);
     if (otp.length === 6) {
       //  this. onSubmitEmail();
     }

@@ -364,13 +364,13 @@ export class HeaderComponent implements OnInit{
 
     
       this.cartService.getCartItems(data).subscribe();
-      console.log("()()( ) Being called here");
+     // console.log("()()( ) Being called here");
     
 
   }
 
   public getUserNotifications(res){
-    console.log("_+_+_+_+_+_ REs ");
+    //console.log("_+_+_+_+_+_ REs ");
     this.metaDataSvc.getUserNotifications(res._id).subscribe();
   }
 

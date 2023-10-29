@@ -265,7 +265,7 @@ this.enableinvoice=true
 
 
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === items.line_item_id);
-      console.log("fetched disprice===", this.cartDetails[index].distributorPrice)
+    //  console.log("fetched disprice===", this.cartDetails[index].distributorPrice)
 
       return this.cartDetails[index].distributorPrice
     }
@@ -372,7 +372,7 @@ this.enableinvoice=true
   }
 
   addApp() {
-
+    this.enableinvoice=true
     const modalRef = this.modalService.open(AddCompareProductModalComponent, { size: 'lg', windowClass: 'add-compare-products-custom-class' });
     let queryParams = {
       "screen": 'edit-product-in-accounts',

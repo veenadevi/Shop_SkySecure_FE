@@ -44,9 +44,9 @@ export class InviteUserComponent {
     ) {
     this.myForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      // mobile: ['', [ 
-      //   Validators.pattern(/^(\+\d{1,3})?\d{10}$/) // Country code (optional) + 10 digits
-      // ]],
+      mobile: ['', [ 
+        Validators.pattern(/^(\+\d{1,3})?\d{10}$/) // Country code (optional) + 10 digits
+      ]],
       firstName : [''],
       lastName : [''],
       companyName : [''],
@@ -54,8 +54,8 @@ export class InviteUserComponent {
       gstin:[''],
       countryName: [''],
       companyBusinessName:[''],
-      // addressLine1: [''],
-      // addressLine2: [''],
+      addressLine1: [''],
+      addressLine2: [''],
       stateName: [''],
       cityName: [''],
       postalCode: [''],
@@ -226,10 +226,10 @@ public fetchGST(){
         "sendEmail":formData.triggeremail?formData.triggeremail:false
       }
 
-      console.log("request===",request)
+     // console.log("request===",request)
       this.subscription.push(
         this.adminPageService.inviteUsers(request).subscribe(res=>{
-          console.log("+_+_+_ Res ", res);
+         // console.log("+_+_+_ Res ", res);
           this.showMsg=true;
           this.myForm.reset();
           window.location.reload();

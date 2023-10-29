@@ -128,7 +128,7 @@ export class InviteChannelPartnerComponent {
       cpMap.set(category._id.toString(), category);
     });
     const selectedChannelPartner = cpMap.get(selectedValue);
-    console.log("selectedCategory  " + selectedChannelPartner._id)
+   // console.log("selectedCategory  " + selectedChannelPartner._id)
     this.currentChannelId=selectedChannelPartner._id
 
 
@@ -149,15 +149,15 @@ export class InviteChannelPartnerComponent {
   public submitForm() {
     if (this.myForm.invalid) {
       this.submitErrorMessage = true;
-      console.log("_____submit form ++++ Error Messgae");
+      //console.log("_____submit form ++++ Error Messgae");
     }
     else {
 
-      console.log("_____++++ Error False");
+     // console.log("_____++++ Error False");
       this.submitErrorMessage = false
       this.addAsAdmin=this.myForm.get('isAdmin').value?this.myForm.get('isAdmin').value:false
 
-      console.log("this.addAsAdmin===",this.addAsAdmin)
+    //  console.log("this.addAsAdmin===",this.addAsAdmin)
       this.CreateChannelPartnerUser();
 
       // if(this.myForm.get('isAdmin').value){
@@ -173,7 +173,7 @@ export class InviteChannelPartnerComponent {
 
 
   CreateChannelPartnerUser(): any {
-    console.log("this.myForm.invalid=== ", this.myForm.invalid)
+   // console.log("this.myForm.invalid=== ", this.myForm.invalid)
     let userAccountdetails = this.userAccountStore.getUserDetails();
 
 
@@ -237,13 +237,13 @@ export class InviteChannelPartnerComponent {
   public onDropDownChange(item) {
 
     const selectedValue = item.target.value;
-    console.log("selectedValue  ===", selectedValue)
+    //console.log("selectedValue  ===", selectedValue)
     const userMap = new Map<string, any>();
     this.usersList.forEach(user => {
       userMap.set(user._id.toString(), user);
     });
     const selecteduser = userMap.get(selectedValue);
-    console.log("selecteduser  " + selecteduser._id)
+   // console.log("selecteduser  " + selecteduser._id)
     this.myForm.controls['phoneNo'].enable();
     this.myForm.controls['EmailId'].enable();
 

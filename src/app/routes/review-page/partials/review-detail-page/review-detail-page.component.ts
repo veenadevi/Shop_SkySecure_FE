@@ -112,7 +112,7 @@ data
   ngOnInit(): void { 
    
      this.reviewPayload = this.metaDataStore.getProductReviewDetails();
-     console.log("OnInit",this.reviewPayload)
+     //("OnInit",this.reviewPayload)
     if (this.reviewPayload?.productId?.length > 2) {
       this.reviewForm.patchValue(this.reviewPayload);
       this.selectedRatings = {
@@ -127,12 +127,12 @@ data
       this.metaDataService.getProductReviewById(this.currentUrl).subscribe((data) => {
         this.reviewPayload = this.updateReviewPayload(this.reviewPayload, data.productReview);
         this.metaDataStore.setProductReviewDetails(this.reviewPayload);
-        console.log("===this.reviewPayload===",this.data=this.reviewPayload);
-         console.log("===data.productReview===",this.data=data.productReview)
-        console.log("===setProductReviewDetails===",this.data=this.metaDataStore.setProductReviewDetails.name)
+        //console.log("===this.reviewPayload===",this.data=this.reviewPayload);
+         //console.log("===data.productReview===",this.data=data.productReview)
+        //console.log("===setProductReviewDetails===",this.data=this.metaDataStore.setProductReviewDetails.name)
         this.metaDataStore.setProductReviewOtherDetails(data.productReview);
         this.reviewForm.patchValue(data.productReview);
-        console.log("-- ONINIT IN ELSE--", this.reviewForm.patchValue(data.productReview))
+       // console.log("-- ONINIT IN ELSE--", this.reviewForm.patchValue(data.productReview))
         this.selectedRatings = { ...data.productReview };
       }, error => {
         console.log(" TEST ERROR", error);
@@ -147,8 +147,7 @@ data
 // cumulativeRating: number = 0;
 rate(aspect: any, star: number): void {
   this.selectedRatings[aspect.key] = star;
-   console.log("____TEST RATE___", this.selectedRatings);
-   console.log("customerSupportRating",this.selectedRatings[aspect.key] )
+
    
  
 }
@@ -179,15 +178,15 @@ rate(aspect: any, star: number): void {
         productName:this.productName
        
       };
-      console.log("productName",this,this.productName)
-      console.log("____TEST____REVIEW__PAYLOAD___", this.reviewPayload);
+     // console.log("productName",this,this.productName)
+   //   console.log("____TEST____REVIEW__PAYLOAD___", this.reviewPayload);
       this.metaDataStore.setProductReviewDetails(this.reviewPayload);
       // this.router.navigate([`/review-page/review-rating-page`]);
       this.router.navigate([`/review-page/review-rating-page`], {
       queryParams: { productName: this.productName }
     });
     } else {
-      console.log("___ERROR____")
+     // console.log("___ERROR____")
       this.NextErrorMessage = true;
       // Handle form validation errors or show a message to the user
     }
@@ -224,7 +223,7 @@ rate(aspect: any, star: number): void {
   
   public setSelfData(){
     let userDetails = this.userAccountStore.getUserDetails();
-    console.log("userDetails-GST ",userDetails.name,"",userDetails.email,"",userDetails.company )  
+   // console.log("userDetails-GST ",userDetails.name,"",userDetails.email,"",userDetails.company )  
     this.reviewForm.controls['userName'].setValue(userDetails.firstName ? userDetails.firstName : null);
     this.reviewForm.controls['email'].setValue(userDetails.email ? userDetails.email : null);
     this.reviewForm.controls['organizationName'].setValue(userDetails.company ? userDetails.company : null);
