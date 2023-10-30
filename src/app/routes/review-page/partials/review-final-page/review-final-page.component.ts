@@ -87,17 +87,21 @@ rating
   }
 
   ngOnInit(): void {
+    console.log("Final Product-page",this.productReview )
     this.productReview =  {...this.metaDataStore.getProductReviewDetails(), ...this.metaDataStore.getProductReviewOtherDetails()};
-    // console.log("___TEST___FULL PAYLOAD____",this.productReview); 
-    // console.log("productName ",this.productName=this.productReview.productName); 
-    // console.log("customerSupportRating",this.customerSupportRating=this.productReview.customerSupportRating  )
-    // console.log("featuresRating",this.featuresRating=this.productReview.featuresRating)
-    // console.log("overAllRating",this.overAllRating=this.productReview.overAllRating)
-    // console.log("valueOfMoneyRating",this.valueOfMoneyRating =this.productReview.valueOfMoneyRating )
-    // console.log("easyToUseRating",this.easyToUseRating=this.productReview.easyToUseRating )
-    const averageRating = this.customerSupportRating+ this.featuresRating+this.overAllRating+this.valueOfMoneyRating+this.easyToUseRating;
-   this.rating= this.averageRating % 5;
-   //console.log("this.rating",this.rating)
+     console.log("___TEST___FULL PAYLOAD____",this.productReview); 
+    //console.log("productName ",this.productName=this.productReview.productName); 
+    console.log("customerSupportRating",this.customerSupportRating=this.productReview.customerSupportRating  )
+    console.log("featuresRating",this.featuresRating=this.productReview.featuresRating)
+    console.log("overAllRating",this.overAllRating=this.productReview.overAllRating)
+    console.log("valueOfMoneyRating",this.valueOfMoneyRating =this.productReview.valueOfMoneyRating )
+    console.log("easyToUseRating",this.easyToUseRating=this.productReview.easyToUseRating )
+     const averageRating = this.customerSupportRating+ this.featuresRating+this.overAllRating+this.valueOfMoneyRating+this.easyToUseRating;
+    this.averageRating = (this.overAllRating + this.featuresRating + this.valueOfMoneyRating + this.customerSupportRating + this.easyToUseRating) / 5;
+    console.log("averageRating",this.averageRating)
+   // this.rating= this.averageRating / 5;
+   console.log("const averageRating",averageRating)
+  
   
   
    
