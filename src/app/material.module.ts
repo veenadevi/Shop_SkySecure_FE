@@ -33,8 +33,7 @@ import { CdkTableModule} from '@angular/cdk/table';
 
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
-
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -119,8 +118,8 @@ import { NgChartsModule } from 'ng2-charts';
     MatTabsModule,
     CdkTableModule,
     MatButtonToggleModule,
-
-    NgChartsModule
+    NgChartsModule,
+    MatTooltipModule
   ],
   exports: [
     MatButtonModule, 
@@ -150,7 +149,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatExpansionModule,
     CdkTableModule,
     MatButtonToggleModule,
-
+    MatTooltipModule,
     NgChartsModule
     
   ] ,

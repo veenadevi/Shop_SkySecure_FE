@@ -38,7 +38,7 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 // import { MatIconModule } from '@angular/material/icon';
 // import { MatListModule } from '@angular/material/list';
 // import { MatExpansionModule } from '@angular/material/expansion';
-// import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
