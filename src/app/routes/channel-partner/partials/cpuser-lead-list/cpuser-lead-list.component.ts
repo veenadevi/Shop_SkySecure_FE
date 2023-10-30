@@ -143,8 +143,8 @@ export class CpuserLeadListComponent implements OnInit{
 
 
   
-  public openReasonModal(){
-    this.viewModal(null);
+  public openReasonModal(account){
+    this.viewModal(account);
   }
 
   public viewModal(req) {

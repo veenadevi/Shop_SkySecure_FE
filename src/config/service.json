@@ -105,7 +105,9 @@
 
         "createProductReviewURL": "api/product-review/create",
         
-        "getProductReviewURL": "api/product-review"
+        "getProductReviewURL": "api/product-review",
+
+        "rejectRevertLeadAsAM" : "api/admin/rejectRevertLeadAsAM"
 
 
     },
