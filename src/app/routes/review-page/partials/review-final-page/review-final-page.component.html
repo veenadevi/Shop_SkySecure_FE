@@ -17,7 +17,7 @@
     <div class="star">
         <div class="rating-stars">
           <mat-icon class="review-icon" *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
-            {{ i < overAllRating ? 'star' : 'star_border' }}
+            {{ i < averageRating ? 'star' : 'star_border' }}
           </mat-icon>
          
         </div>
