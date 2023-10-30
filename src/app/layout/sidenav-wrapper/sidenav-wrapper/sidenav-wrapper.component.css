@@ -20,24 +20,50 @@
 /* mat-sidenav-container { */
     /* height: 100%; */
 /* } */
-mat-sidenav-container mat-sidenav mat-nav-list .menu-item {
+
+/* .custom-sidenav:hover {
+    background: var(--primary-400-purple) !important;
+    color: var(--white) !important; 
+} */
+
+/* :host ::ng-deep :where(mat-list-item, mat-icon, svg, .text-style):hover {
+    background: var(--primary-400-purple) !important;
+    color: white !important;
+} */
+
+.custom-hover {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* .custom-hover:hover {
+    background: var(--primary-400-purple) !important;
+    color: white !important;
+} */
+
+:host ::ng-deep mat-sidenav-container mat-sidenav mat-nav-list .menu-item {
     margin-left: 8px;
     display: flex;
     justify-content: space-between;
     width:100%;
     align-items: center;
 }
-mat-sidenav-container mat-sidenav mat-nav-list .chevron-button {
+:host ::ng-deep mat-sidenav-container mat-sidenav mat-nav-list .chevron-button {
     transition: 300ms ease-in-out;
     transform: rotate(0deg);
     /* /* display: flex; */
     margin-left: 10px;
     margin-top: 5px;
 }
-mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
+:host ::ng-deep mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
     transform: rotate(180deg);
     float: right;
     margin-left: 10px;
+}
+:host ::ng-deep .mat-drawer-side {
+    border: none;
 }
 
 /* :host ::ng-deep .mat-mdc-list-base .mdc-list-item__content{ */
@@ -59,12 +85,12 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
 }
 
 .nav-expanded{
-    width:225px !important;
+    width:238px !important;
 }
 
 :host ::ng-deep .mat-drawer.mat-drawer-side{
     box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.25);
-    width: 16%;
+    width: 17%;
 }
 
 :host ::ng-deep mat-sidenav-container {
@@ -112,6 +138,23 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
     font-size: 13px;
     margin-top: 3px;
     font-family: 'lato', sans-serif;
+ }
+
+ :host ::ng-deep .mdc-list-item:hover{
+    background: var(--primary-400-purple) !important;
+    color: white !important;
+ }
+
+ :host ::ng-deep .mdc-list-item:hover .text-style{
+    color: white !important;
+ } 
+
+ :host ::ng-deep .mdc-list-item:hover svg{
+    color: white !important;
+ }
+
+ :host ::ng-deep .mdc-list-item:hover .chevron-button {
+    color: white !important;
  }
 
  :host ::ng-deep .mat-nav-list .mat-list-item:focus,

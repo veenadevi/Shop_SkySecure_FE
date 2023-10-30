@@ -18,3 +18,7 @@
     color: #3366CC;
     font-weight: 550;
 }
+
+.custom-hover:hover {
+    background: var(--primary-100-purple);
+}
