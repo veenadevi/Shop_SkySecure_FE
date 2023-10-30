@@ -1,0 +1,142 @@
+.all-accounts-view {
+    min-height: 75em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+    font-size: 8px!important;
+}
+
+.text-style{
+    cursor: pointer;
+    /* color: #3366CC; */
+}
+
+/* #assign-btn {
+    box-sizing: border-box;
+    padding: 7px;
+    border: 1px solid #EFEFEF;
+    color: white;
+    margin: 6px;
+    width: 80px;
+    border-radius: 8px;
+    background: var(--dark-violet, linear-gradient(90deg, #888BCB 0%, #383DA9 100%));
+} */
+
+.btn-holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.primary-btn {
+    /* padding: 7px; */
+    margin: 6px;
+    width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 0 !important; */
+    /* border-radius: 8px; */
+}
+
+.primary-btn img {
+    height: 20px;
+}
+
+.alert-btn {
+    background: var(--red);
+}
+
+.alert-btn img {
+    height: 20px;
+}
+
+
+.thfont{
+    font-size: 13px!important;  
+}
+.trfont{
+    font-size: 13px!important;  
+}
+
+.nodata{
+    text-align: center;
+    padding-top: 30px;
+    color: black;
+    font-size: 24px;
+    font-weight: bolder;
+   min-height: 32em;
+}
+.no-img{
+    width: 300px;
+    height: 300px;
+  
+}
+p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gst{
+    font-size: 9px;
+    color: red;
+}
+
+:host ::ng-deep.p-paginator.p-paginator-bottom
+{
+    font-size: 13px;
+}
+
+:host ::ng-deep.p-paginator .p-paginator-pages .p-paginator-page{
+    height: 2rem;
+    min-width:2rem
+}
+:host ::ng-deep .tooltip .ui-tooltip-text {
+   font-size: 8px; 
+  }
+
+
+@media  ( min-width: 1920px) and (max-width: 2560px) {
+    .all-accounts-view {
+        min-height: 75em;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+        padding: 40px;
+        font-size: 8px!important;
+        margin: 0 10%;
+    }
+    :host ::ng-deep.p-datatable .p-datatable-thead > tr > th {
+        text-align: center;
+        padding: 1rem 1rem;
+        border: 1px solid #dee2e6;
+        border-width: 0 0 1px 0;
+        font-weight: 700;
+        color: #343a40;
+        background: #f8f9fa;
+        transition: box-shadow 0.2s;
+        font-size: 16px;
+    }
+    .text-style {
+        cursor: pointer;
+        /* color: #3366CC; */
+        font-size: 16px;
+    }
+    :host ::ng-deep.p-datatable .p-datatable-tbody > tr > td {
+        text-align: center;
+        border: 1px solid #dee2e6;
+        border-width: 0 0 1px 0;
+        padding: 1rem 1rem;
+        font-size: 16px;
+    }
+    :host ::ng-deep.p-paginator.p-paginator-bottom
+{
+    font-size: 13px;
+}
+
+:host ::ng-deep.p-paginator .p-paginator-pages .p-paginator-page{
+    height: 2rem;
+    min-width:2rem
+}
+}
