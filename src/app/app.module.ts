@@ -59,6 +59,7 @@ import { NgxOtpInputModule } from 'ngx-otp-input';
 import { Directive, Input, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Login } from '@mui/icons-material';
+import { FinanceUserPageComponent } from './routes/finance-user/finance-user-page.component';
 
 
 
@@ -147,7 +148,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+   
    
   ],
 

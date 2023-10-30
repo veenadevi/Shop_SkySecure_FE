@@ -93,6 +93,11 @@ const INTERFACE_ROUTES: Routes = [
         path: 'channel-partner',
         loadChildren: () => import('../routes/channel-partner/channel-partner.module').then(m=>m.ChannelPartnerModule)
       },
+      {
+        canActivate: [AuthGuard],
+        path: 'finance-user-page',
+        loadChildren: () => import('../routes/finance-user/finance-user-page.module').then(m=>m.FinanceUserPageModule)
+      },
     ]
   }
 

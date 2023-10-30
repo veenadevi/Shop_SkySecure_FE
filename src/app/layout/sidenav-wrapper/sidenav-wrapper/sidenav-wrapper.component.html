@@ -284,6 +284,33 @@
           </ng-container> -->
         
 
+          <ng-container *ngIf="userRolesList?.includes('PortalAdmin') || userRoleVal === 'PortalAdmin' || userRolesList?.includes('SuperAdmin')">
+            <mat-list-item>
+              <span class="icon-holder" (click)="menuExpansion(isExpanded , 'admin')">
+                <img src="../../../../assets/icons/ManagePortal.svg">
+              </span>
+              <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('fu')">
+                  <span class="text-style">
+                    Finance User
+                  </span>
+                  <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+                </div>
+            </mat-list-item>
+    
+            <!-- Security Sub Menu -->
+            <ng-container *ngIf="fuSubMenu">
+             
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('fuLeads')" >Leads</span>
+              </mat-list-item>
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('home')" >  Shop</span>
+              </mat-list-item>
+           
+
+        
+            </ng-container>
+          </ng-container>
         
 
         </mat-nav-list>
