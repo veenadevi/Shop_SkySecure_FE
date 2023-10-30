@@ -54,7 +54,7 @@
                 <ng-template pTemplate="body" let-account let-i="rowIndex">
                     <tr class="trfont">
                         <td>
-                            <div class="text-style" (click)="getAccountById(account.cartData._id)">
+                            <div class="text-style" (click)="getAccountById(account.cartData._id, account.cartData.status)">
                                 {{i+1 }}
                             </div>
                             

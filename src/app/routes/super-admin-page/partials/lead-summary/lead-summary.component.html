@@ -211,7 +211,7 @@
             <div id="productItems">
                 <div class="card-container">
 
-                    <ng-container *ngIf="responseData.cartData.status!=='New'; else newQuote">
+                    <ng-container *ngIf="responseData.cartData.status!=='In Cart'; else newQuote">
                     
                         <products-list-table [productsData]="estimateData" [cartData]="cartData" [crmData]="responseData" [assignedOwnerComments]="assignedOwnerComments" [estimateStatus]="estimateStatus"></products-list-table>
                       </ng-container>
