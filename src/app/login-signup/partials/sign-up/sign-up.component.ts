@@ -309,8 +309,8 @@ export class SignUpComponent {
     disableAutoFocus: false,
     placeholder: "",
     inputStyles: {  
-      width: "50px",
-      height: "50px",
+      width: "43px",
+      height: "43px",
     },
   };
   
