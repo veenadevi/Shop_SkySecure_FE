@@ -150,6 +150,11 @@ export class CpuserLeadListComponent implements OnInit{
   public viewModal(req) {
     const modalRef = this.modalService.open(ReassignModalComponent);
     modalRef.componentInstance.request = req;
+
+    modalRef.componentInstance.passedData.subscribe((res) => {
+    window.location.reload();
+    })
+
   }
 
 

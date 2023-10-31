@@ -36,6 +36,8 @@ export class GstPromptModalComponent implements OnInit{
 
   public gstNo : any;
 
+  public otherNextClickFlag : boolean = false;
+
 
   public countryList : any;
 
@@ -585,14 +587,26 @@ public errorMessage: boolean = false;
 
   public onNextClick(){
 
+    this.otherNextClickFlag = true;
+  
 
-    if(this.selectedType === 'others'){
-      this.othersGSTShow = true;
-      this.showWithoutGST = false;
+
+    if(this.myForm.invalid){
+      
     }
+
     else{
-      this.onNextClick2();
+      if(this.selectedType === 'others'){
+        this.othersGSTShow = true;
+        this.showWithoutGST = false;
+      }
+      else{
+        this.onNextClick2();
+      }
     }
+
+
+    
 
     // if(this.myForm.get('firstName').value === null || this.myForm.get('email').value === null || this.myForm.get('phoneNo').value === null){
     //   

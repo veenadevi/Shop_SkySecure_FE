@@ -164,6 +164,8 @@
                 <label for="email">Email ID*</label>
                 <input formControlName="email" type="email" class="form-control-01" name="email" id="email" (input)="onInputChanges($event)"
                   placeholder="Email ID" required>
+                  <div class="error-message" *ngIf="otherNextClickFlag && myForm.get('email').hasError('required')">Email ID is required</div>
+                  <div class="error-message" *ngIf="otherNextClickFlag && myForm.get('email').hasError('email')">Please enter valid email address</div>
               </div>
             </div>
             <div class="col-sm-9 form-group">

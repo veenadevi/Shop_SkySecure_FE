@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -27,6 +27,8 @@ export class ReassignModalComponent implements OnInit{
 
   @Input('request')
   public request : any;
+
+  @Output() passedData: EventEmitter<any> = new EventEmitter();
 
 
   public ngOnInit(): void {
@@ -78,7 +80,10 @@ export class ReassignModalComponent implements OnInit{
       this.subscription.push(
         this.adminPageService.rejectReassign(reqBody).subscribe(res=>{
           
+          this.passedData.emit("Success");
           this.activeModal.close();
+          
+          //window.location.reload();
 
         })
       )
