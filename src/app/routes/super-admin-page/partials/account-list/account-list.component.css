@@ -60,6 +60,10 @@
     font-size: 13px!important;  
 }
 
+.custom-hover:hover {
+    background: var(--primary-100-purple);
+}
+
 .nodata{
     text-align: center;
     padding-top: 30px;
@@ -94,7 +98,15 @@ p{
 }
 :host ::ng-deep .tooltip .ui-tooltip-text {
    font-size: 8px; 
-  }
+}
+
+:host ::ng-deep .p-tooltip {
+    padding: 2px !important;
+}
+
+:host ::ng-deep .p-tooltip .p-tooltip-text {
+    font-size: 13px !important;
+}
 
 
 @media  ( min-width: 1920px) and (max-width: 2560px) {

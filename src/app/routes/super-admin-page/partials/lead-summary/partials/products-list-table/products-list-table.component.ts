@@ -220,6 +220,7 @@ this.enableinvoice=true
   getEmployee() {
    // this.enableEdit = false;
 
+   console.log("+_+_+_+_+_+ _Sample here", this.productsData);
     if (this.productsData.line_items) {
       this.isEstimate = true;
 

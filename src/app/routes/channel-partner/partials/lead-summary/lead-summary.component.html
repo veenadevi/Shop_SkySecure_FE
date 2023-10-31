@@ -204,6 +204,7 @@
                                 <option>Deal Won</option>
                                 <option>Deal Lost</option>
                         </select>
+                        <button class="btn tertiary-btn">save</button>
                     </div>
                     
                 </div>
@@ -217,7 +218,7 @@
             <div id="productItems">
                 <div class="card-container">
 
-                    <ng-container *ngIf="responseData.cartData.status!=='New'; else newQuote">
+                    <ng-container *ngIf="responseData.cartData.status!=='In Cart'; else newQuote">
                     
                         <product-list-table [productsData]="estimateData" [cartData]="cartData" [crmData]="responseData"></product-list-table>
                       </ng-container>

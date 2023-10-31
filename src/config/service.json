@@ -43,6 +43,9 @@
         "userGstUpdate" : "api/user/user-gst-update",
 
         "createInvoice" : "/api/user/createInvoice",
+
+
+        "handleResponse" : "api/orders/handleResponse",
         
 
         "userSignUp":"api/user/signup",
@@ -105,7 +108,9 @@
 
         "createProductReviewURL": "api/product-review/create",
         
-        "getProductReviewURL": "api/product-review"
+        "getProductReviewURL": "api/product-review",
+
+        "rejectRevertLeadAsAM" : "api/admin/rejectRevertLeadAsAM"
 
 
     },

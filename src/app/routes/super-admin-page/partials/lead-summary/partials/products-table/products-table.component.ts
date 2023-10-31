@@ -37,7 +37,6 @@ export class ProductsTableComponent {
 
   ngOnInit(): void {
 
-    console.log("+_+_+_+_ Products Data ", this.productsData);
     this.setTableData();
    
   }
@@ -46,6 +45,7 @@ export class ProductsTableComponent {
   public setTableData(){
 
     this.lineItems = this.productsData.line_items;
+    
   }
 
 

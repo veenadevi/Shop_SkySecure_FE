@@ -574,3 +574,9 @@ h2{
     outline: none !important;
     border : none !important;
   }
+
+.error-message{
+    color: red;
+    text-align: center;
+    font: size 12px;
+}

@@ -145,21 +145,26 @@ data
 
  // Define a variable to store the cumulative rating
 // cumulativeRating: number = 0;
+
 rate(aspect: any, star: number): void {
   this.selectedRatings[aspect.key] = star;
-
-   
- 
+  // Update the form control with the new star rating value
+   this.reviewForm.controls[aspect.key].setValue(star);
+  console.log("this.selectedRatings[aspect.key]",this.selectedRatings[aspect.key])
 }
 
 
   public NextErrorMessage: boolean =false;
   onSubmit(): void {
+    console.log("ON SUBMIT",this.reviewForm.value)
     if (this.reviewForm.valid) {
       this.NextErrorMessage = false;
+  
       // You can submit the form data here
       const formData = this.reviewForm.value;
-      this.reviewPayload = {
+  
+      // The form controls should now contain the updated selectedRatings values
+      const reviewPayload = {
         productId: this.currentUrl,
         userName: formData.userName,
         email: formData.email,
@@ -170,23 +175,20 @@ rate(aspect: any, star: number): void {
         reviewTitle: formData.reviewTitle,
         reviewContent: formData.reviewContent,
         agreeTermsAndConditions: formData.agreeTermsAndConditions,
-        overAllRating: this.selectedRatings.overAllRating,
-        featuresRating: this.selectedRatings.featuresRating,
-        easyToUseRating: this.selectedRatings.easyToUseRating,
-        valueOfMoneyRating: this.selectedRatings.valueOfMoneyRating,
-        customerSupportRating: this.selectedRatings.customerSupportRating,
-        productName:this.productName
-       
+        overAllRating: formData.overAllRating,
+        featuresRating: formData.featuresRating,
+        easyToUseRating: formData.easyToUseRating,
+        valueOfMoneyRating: formData.valueOfMoneyRating,
+        customerSupportRating: formData.customerSupportRating,
+        productName: this.productName
       };
-     // console.log("productName",this,this.productName)
-   //   console.log("____TEST____REVIEW__PAYLOAD___", this.reviewPayload);
-      this.metaDataStore.setProductReviewDetails(this.reviewPayload);
-      // this.router.navigate([`/review-page/review-rating-page`]);
+  
+      this.metaDataStore.setProductReviewDetails(reviewPayload);
+  console.log("reviewPayload",reviewPayload)
       this.router.navigate([`/review-page/review-rating-page`], {
-      queryParams: { productName: this.productName }
-    });
+        queryParams: { productName: this.productName }
+      });
     } else {
-     // console.log("___ERROR____")
       this.NextErrorMessage = true;
       // Handle form validation errors or show a message to the user
     }
@@ -220,14 +222,15 @@ rate(aspect: any, star: number): void {
 
 
  
-  
-  public setSelfData(){
+  setSelfData(){
     let userDetails = this.userAccountStore.getUserDetails();
    // console.log("userDetails-GST ",userDetails.name,"",userDetails.email,"",userDetails.company )  
     this.reviewForm.controls['userName'].setValue(userDetails.firstName ? userDetails.firstName : null);
     this.reviewForm.controls['email'].setValue(userDetails.email ? userDetails.email : null);
     this.reviewForm.controls['organizationName'].setValue(userDetails.company ? userDetails.company : null);
-
+    console.log("this.reviewForm.controls['organizationName'].setValue(userDetails.company ? userDetails.company : null)",
+    this.reviewForm.controls['organizationName'].setValue(userDetails.company ? userDetails.company : null))
   }
+  
   
 }

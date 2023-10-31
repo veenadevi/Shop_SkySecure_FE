@@ -17,7 +17,7 @@
     <div class="star">
         <div class="rating-stars">
           <mat-icon class="review-icon" *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
-            {{ i < overAllRating ? 'star' : 'star_border' }}
+            {{ i < averageRating ? 'star' : 'star_border' }}
           </mat-icon>
          
         </div>
@@ -45,6 +45,7 @@
     <div class="star-cont">
         Thanks for Submitting Review
     </div>
+   
 </div>
 
 <div class="points">
@@ -79,8 +80,17 @@
     </div> -->
 
     <div class="btn">
-        <button class="btn primary-btn" (click)="createProductReview()">Save Review</button>
+        <button class="btn primary-btn"  (click)="createProductReview()">Save Review</button> 
     </div>
+   
+</div>
+<div class="row"  *ngIf="showMsg" >
+  <div class="col-xs-12">
+      <p class="alert alert-success">
+          <strong>Estimate Sent Successfully !</strong>
+
+      </p>
+  </div>
 </div>
 
     </div>

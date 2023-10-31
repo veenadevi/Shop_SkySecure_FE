@@ -50,21 +50,23 @@
                 </ng-template> -->
     
                 <ng-template pTemplate="body" let-account let-i="rowIndex">
-                    <tr class="trfont">
+                    <tr class="trfont custom-hover">
                        
                         <td >
-                            <div class="text-style .ui-tooltip-text "   pTooltip={{account.cartData.cart_ref_id}}  (click)="getAccountById(account.cartData._id)">
+                            <div class="text-style .ui-tooltip-text "  matTooltip={{account.cartData.cart_ref_id}} matTooltipPosition="below" (click)="getAccountById(account.cartData._id)">
                                   {{ i+1 }} 
                             </div>
+
                          
                             
                         </td>
                        
                         <td>
-                            <div class="text-style" (click)="getAccountById(account.cartData._id)">
+                            <div class="text-style"   matTooltip="View Lead Detail" matTooltipPosition="below" (click)="getAccountById(account.cartData._id)">
                             {{ (account.createdFor && account.createdFor.company) ? account.createdFor.company :  account.createdFor.companyBusinessName
                         }}
-                    </div> </td>
+                    </div>                
+                    </td>
                     <td>
                             {{ (account.createdFor && account.createdFor.firstName) ? account.createdFor.firstName : '-'}}</td>
                        
@@ -113,8 +115,8 @@
                         <td>
                             
                             <div class="btn-holder">
-                                <button id="assign-btn" class="btn primary-btn" [disabled]="disableAssign" (click)="assign(account, i)"><img alt="assign" src="../../../../../assets/icons/AssignUser.svg"></button>
-                                <button id="assign-btn" class="btn primary-btn alert-btn" [disabled]="disableAssign" (click)="openReasonModal()"><img alt="remove" src="../../../../../assets/icons/CloseIcon-white.svg"></button>
+                                <button id="assign-btn" matTooltip="Assign Lead" matTooltipPosition="below" class="btn primary-btn" [disabled]="disableAssign" (click)="assign(account, i)"><img alt="assign" src="../../../../../assets/icons/AssignUser.svg"></button>
+                                <button id="assign-btn" matTooltip="Remove Lead" matTooltipPosition="below" class="btn primary-btn alert-btn" [disabled]="disableAssign" (click)="openReasonModal()"><img alt="remove" src="../../../../../assets/icons/CloseIcon-white.svg"></button>
                             </div>
                         </td>
                     </tr>
