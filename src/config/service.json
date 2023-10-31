@@ -43,6 +43,9 @@
         "userGstUpdate" : "api/user/user-gst-update",
 
         "createInvoice" : "/api/user/createInvoice",
+
+
+        "handleResponse" : "api/orders/handleResponse",
         
 
         "userSignUp":"api/user/signup",
