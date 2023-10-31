@@ -10,7 +10,22 @@
 
   <ng-container *ngIf="emailFormFlag">
     <div class="register-form">
-      
+      <form [formGroup]="formEmail" >
+        <div class="form-group">
+          <label for="emailOrMobile">Email or Mobile Number</label>
+          <input type="text" class="form-control" id="emailOrMobile" formControlName="emailOrMobile" placeholder="Enter your email or mobile number">
+          <!-- <div *ngIf="signupForm.get('emailOrMobile').hasError('invalidEmailOrMobile') && signupForm.get('emailOrMobile').touched">
+            <div class="alert alert-danger">
+              Please enter a valid email or a 10-digit mobile number.
+            </div>
+          </div> -->
+          <div *ngIf="submittedEmail && f2.email.errors" class="invalid-feedback">
+            <div *ngIf="f2.email.errors.required">Email is required</div>
+            <div *ngIf="f2.email.errors.email">Email is invalid</div>
+          </div>
+        </div>
+        
+      <!-- </form>
       <form [formGroup]="formEmail">
           <div class="form-group">
               <label>Email</label>
@@ -29,19 +44,19 @@
 
             <div *ngIf= "otpField" class="form-group">
               <label>OTP</label>
-              <!-- <input
+              <input
                 type="text"
                 formControlName="otp"
                 placeholder="Enter OTP"
                 class="form-control"
-              /> -->
+              />
               <ng-otp-input  
                 #ngOtpInput
                 (onInputChange)="onOtpChange($event)"
                 *ngIf="showOtpComponent"
                 [config]="config"
               ></ng-otp-input>
-            </div>
+            </div> -->
         
 
 
@@ -60,6 +75,7 @@
           </ng-container>
           <ng-container *ngIf="enableOTPButton">
           <div class="signin-btn" >
+            
             <!-- <button type="submit" class="primary-btn">Send OTP</button> -->
             <button type="submit" (click) = "onSubmitEmail()" class="btn primary-btn" >Send OTP</button>
           </div>
@@ -84,9 +100,10 @@
           <div class="buttons">
         
           <ng-container *ngIf="enableSignInButton">
-            <div class="resend">
-              <span>{{display}}  <a class="re-OTP" (click)="onSubmitEmail()">Resend OTP</a></span>
-           </div>
+           
+           <div class="resend" >
+            <span>{{display}}  <a class="re-OTP" (click)="onSubmitEmail()">Time Left</a></span>
+         </div>
             <div class="signin-btn">
               <button (click)="validateOTP()" class="btn primary-btn">Sign up</button>
             </div>
