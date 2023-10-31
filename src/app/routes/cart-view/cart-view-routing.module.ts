@@ -5,6 +5,7 @@ import { CartEmptyComponent } from './partials/cart-empty/cart-empty.component';
 import { CartItemsComponent } from './partials/cart-items/cart-items.component';
 import { CartSubmitComponent } from './partials/cart-submit/cart-submit.component';
 import { MsalGuard } from '@azure/msal-angular';
+import { PaymentGatewayResponseComponent } from './partials/payment-gateway-response/payment-gateway-response.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
           title: 'Cart Submitted'
         }
       },
+      {
+        path: 'payment-status',
+        component : PaymentGatewayResponseComponent,
+        canActivate : []
+      }
   
     ]
   },
