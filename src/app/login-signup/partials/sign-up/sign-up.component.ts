@@ -17,6 +17,7 @@ export class SignUpComponent {
 
   form: FormGroup;
   formEmail : FormGroup;
+  signupForm: FormGroup;
   submitted = false;
   submittedEmail = false
   otp:any
@@ -42,6 +43,8 @@ export class SignUpComponent {
   public validatedEmail : string ;
 
   public timerInterval: any;
+
+  public isMobile: boolean = false;
   display: any;
 
   constructor(
@@ -49,9 +52,45 @@ export class SignUpComponent {
     private authService : AuthService,
     public router : Router,
     public route : ActivatedRoute,
-    private userProfileService : UserProfileService
-    ) {}
+    private userProfileService : UserProfileService,
 
+    private fb: FormBuilder
+    ) {
+      this.signupForm = this.fb.group({
+        emailOrMobile: ['', [Validators.required, this.emailOrMobileValidator]]
+      });
+    }
+    emailOrMobileValidator(control: AbstractControl): { [key: string]: any } | null {
+      
+      const value = control.value;
+      let invalidEmailOrMobile :any = false;
+      if (value) {
+        // Regular expression for email validation
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        // Regular expression for mobile number validation (adjust it based on your requirements)
+        const mobilePattern = /^\d{10}$/;
+        if (emailPattern.test(value) || mobilePattern.test(value)) {
+
+          if (mobilePattern.test(value)){
+            this.isMobile = true;
+          }
+          return { invalidEmailOrMobile: false };
+
+        }
+      }
+    
+        return { invalidEmailOrMobile: true };
+      
+      
+    }
+    
+    onSubmit01() {
+      // Handle OTP generation and sending here based on whether it's an email or mobile number.
+
+      const emailOrMobile = this.signupForm.get('emailOrMobile').value;
+
+    }
+  
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
     
@@ -113,6 +152,9 @@ export class SignUpComponent {
   get f2(): { [key: string]: AbstractControl } {
     return this.formEmail.controls;
   }
+  get f3(): { [key: string]: AbstractControl } {
+    return this.signupForm.controls;
+  }
   onKeyDown(event: KeyboardEvent): void {
     const key = event.key; 
     if (key === 'E') {
@@ -141,6 +183,7 @@ export class SignUpComponent {
         "firstName":formValue.firstName,
         "lastName":formValue.lastName,
         "email":this.validatedEmail,
+        
         //"password":hashedPass,
         "company":formValue.companyName,
         "role": "Customer",
@@ -214,7 +257,8 @@ export class SignUpComponent {
 
       let req = {
         "emailId" : this.formEmail.value.email,
-        "action":"signUp"
+        "action":"signUp",
+        "isMobile" : this.isMobile,
       }
 
       this.subscriptions.push(
