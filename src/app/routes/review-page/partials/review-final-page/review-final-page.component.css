@@ -53,7 +53,8 @@
 .star-cont{
     padding-top: 10px;
     padding-bottom: 20px;
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: 500;
 }
 .points{
     display: flex;
@@ -133,4 +134,8 @@ label{
 }
 input{
     cursor: pointer;
+}
+.productName{
+    font-size: 18px;
+    font-weight: 600;
 }
