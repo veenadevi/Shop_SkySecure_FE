@@ -308,6 +308,11 @@ export class SidenavWrapperComponent implements OnInit{
           this.menuToogled = false;
           this.router.navigate(['admin-pages/managae-all-admin']);
           return;
+          
+        case 'UserReviewList':
+          this.menuToogled = false;
+          this.router.navigate(['portal-admin-page/user-review-list']);
+          return;
       case 'paFeatureUpdate':
         //this.isExpanded = false;
         this.menuToogled = false;
