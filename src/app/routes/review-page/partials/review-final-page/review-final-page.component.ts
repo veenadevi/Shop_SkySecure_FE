@@ -24,6 +24,7 @@ export class ReviewFinalPageComponent implements OnInit{
   overAllRating
   averageRating
 rating
+public showMsg: boolean
 
   constructor(
     public fb: FormBuilder,
@@ -87,6 +88,8 @@ rating
   }
 
   ngOnInit(): void {
+
+    this.showMsg = false
     console.log("Final Product-page",this.productReview )
     this.productReview =  {...this.metaDataStore.getProductReviewDetails(), ...this.metaDataStore.getProductReviewOtherDetails()};
      console.log("___TEST___FULL PAYLOAD____",this.productReview); 
@@ -114,9 +117,12 @@ rating
   createProductReview(): void {
     this.metaDataService.createProductReview(this.productReview).subscribe((data) => {
     //  console.log("___DATA____",data);
-      if(data) this.toaster.showSuccess("Product Review Created Successfully",'');
+      if(data)
+      this.showMsg = !this.showMsg;
+      //  this.toaster.showSuccess("Product Review Created Successfully",'');
       else {
-        this.toaster.showError("Failed To Create Product Review","");
+        // this.toaster.showError("Failed To Create Product Review","");
+        this.showMsg = this.showMsg
       }
     })
   }
@@ -127,8 +133,7 @@ rating
   //   return { whole, fractional };
   // }
  
-
- 
+   
 }
 
 
