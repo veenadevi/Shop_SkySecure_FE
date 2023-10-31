@@ -132,32 +132,32 @@ export class CustomBreadCrumbComponent {
       //   console.log("oemDetails$",res)
       // });
 
-      // this.categoryDetails$
-      // .pipe(
-      //   concatMap((categoryDetails) => {
-      //     // Process categoryDetails if needed
-      //     console.log("categoryDetails$", categoryDetails);
+      this.categoryDetails$
+      .pipe(
+        concatMap((categoryDetails) => {
+          // Process categoryDetails if needed
+          console.log("categoryDetails$", categoryDetails);
   
-      //     // Return the oemDetails$ observable to continue the sequence
-      //     return this.oemDetails$;
-      //   })
-      // )
-      // .subscribe((oemDetails) => {
-      //   // Process oemDetails
-      //   console.log("oemDetails$", oemDetails);
+          // Return the oemDetails$ observable to continue the sequence
+          return this.oemDetails$;
+        })
+      )
+      .subscribe((oemDetails) => {
+        // Process oemDetails
+        console.log("oemDetails$", oemDetails);
   
-      //   // Now, both categoryDetails and oemDetails have been processed sequentially.
-      // });
+        // Now, both categoryDetails and oemDetails have been processed sequentially.
+      });
 
-      // this.items = [
-      //     { label: this.categoryName , id : 'cat'}, 
-      //     { label: this.subCategoryName , id : 'subCat'}, 
-      //     { label: this.oemName , id : 'brand'}, 
-      //     { label: this.product.name , id: 'name'}, 
-      //   ];
+      this.items = [
+          { label: this.categoryName , id : 'cat'}, 
+          { label: this.subCategoryName , id : 'subCat'}, 
+          { label: this.oemName , id : 'brand'}, 
+          { label: this.product.name , id: 'name'}, 
+        ];
 
-      // this.home = { icon: 'pi pi-home', routerLink: '/' , id : 'home' };
-      // console.log("items",this.product.name,"",this.home)
+      this.home = { icon: 'pi pi-home', routerLink: '/' , id : 'home' };
+      console.log("items",this.product.name,"",this.home)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
