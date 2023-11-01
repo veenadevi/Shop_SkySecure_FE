@@ -32,6 +32,8 @@ export  class SignUpComponent  {
   signUpFormFlag: boolean = false;
   public emailViaSignIn: String
 
+  public isSignupError:boolean=false
+
   public enableSignInButton = false;
   public inValidOTP: boolean = false;
 
@@ -50,6 +52,8 @@ export  class SignUpComponent  {
 
   public isMobile: boolean = false;
 
+  public isResend:boolean=false;
+
   display: any;
   static isMobile: boolean;
 
@@ -64,7 +68,7 @@ export  class SignUpComponent  {
     this.formEmail = this.fb.group(
       {
         emailOrMobile: [this.emailViaSignIn, [Validators.required,emailOrMobileValidator]],
-        otp: [],
+       // otp: [],
       }
     )
 }
@@ -97,7 +101,7 @@ export  class SignUpComponent  {
       {
         firstName: ['', Validators.required],
 
-        emailOrMobile: [],
+        email: [],
         lastName: [],
         password: [],
         confirmPassword: [],
@@ -114,7 +118,7 @@ export  class SignUpComponent  {
         validators: [Validation.match('password', 'confirmPassword')]
       }
     );
-    this.form.controls.emailOrMobile.disable();
+   // this.form.controls.emailOrMobile.disable();
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -150,31 +154,41 @@ export  class SignUpComponent  {
       //console.log(JSON.stringify(this.form.value, null, 2));
       let formValue = this.form.value;
       let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-      let hashedPass = CryptoJS.AES.encrypt(formValue.password, key).toString();
+    //  let hashedPass = CryptoJS.AES.encrypt(formValue.password, key).toString();
       let req = {
         "firstName": formValue.firstName,
         "lastName": formValue.lastName,
-        "validatedEmail": this.validatedEmail,
+        "email": (!this.isMobile)?this.validatedEmail:formValue.email,
 
         //"password":hashedPass,
         "company": formValue.companyName,
         "role": "Customer",
         "countryCode": "+91",
-        "mobileNumber": formValue.mobileNumber,
+        "mobileNumber": (this.isMobile)?this.validatedEmail:formValue.emailformValue.mobileNumber,
         "addressOne": { "name": "bangalore" },
         "addressTwo": { "name": "bangalore" },
         "state": "Karnataga",
         "pinCode": "766789",
-        "country": "IN"
+        "country": "IN",
+        "isMobile":this.isMobile
       }
 
       this.subscriptions.push(
 
-        this.authService.signUp(req).subscribe(res => {
+        this.authService.signUp(req).subscribe((res) => {
+         
 
           this.router.navigate(['login'], { queryParams: { email: this.validatedEmail, succuessMessage: "Registered Successfully" } });
           //localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
-        })
+          
+        },
+        (error) => {
+          this.isSignupError=true
+          console.log("sign up error -------")
+
+        }
+        
+        )
       )
     }
 
@@ -182,25 +196,27 @@ export  class SignUpComponent  {
 
   timer(minute) {
     // let minute = 1;
-    let seconds: number = minute * 45;
+    let seconds: number = minute * 59;
     let textSec: any = '0';
-    let statSec: number = 45;
+    let statSec: number = 59;
 
     const prefix = minute < 10 ? '0' : '';
 
     this.timerInterval = setInterval(() => {
       seconds--;
       if (statSec != 0) statSec--;
-      else statSec = 45;
+      else statSec = 59;
 
       if (statSec < 10) {
         textSec = '0' + statSec;
       } else textSec = statSec;
 
-      this.display = `${prefix}${Math.floor(0.45)}:${textSec}`;
+      this.display = `${prefix}${Math.floor(0.59)}:${textSec}`;
 
       if (seconds == 0) {
         console.log('finished');
+        this.isResend=true
+
         clearInterval(this.timerInterval);
       }
     }, 1000);
@@ -216,12 +232,23 @@ export  class SignUpComponent  {
   }
 
   public onSubmitEmail() {
+    const mobilePattern = /^\d{10}$/;
+    this.isMobile= mobilePattern.test(this.formEmail.value.emailOrMobile) 
 
-
+    this.isResend=false
     this.validatedEmail = this.formEmail.value.emailOrMobile;
     console.log(" this.validatedEmail   ", this.validatedEmail)
     this.submittedEmail = true;
-    this.form.controls['emailOrMobile'].setValue(this.validatedEmail);
+    console.log("is this mobile =====",this.isMobile)
+    if(this.isMobile){
+      this.form.controls['mobileNumber'].setValue(this.validatedEmail);
+      this.form.controls.mobileNumber.disable();
+    }
+    else{
+      this.form.controls['email'].setValue(this.validatedEmail);
+      this.form.controls.email.disable();
+    }
+   
     if (this.formEmail.invalid) { // If Invalid Return
 
 
@@ -230,10 +257,9 @@ export  class SignUpComponent  {
     }
     else { // If Valid
 
-      console.log("pass====")
+    
 
-      const mobilePattern = /^\d{10}$/;
-     this.isMobile= mobilePattern.test(this.formEmail.value.emailOrMobile) 
+   
       let req = {
         "emailId": this.formEmail.value.emailOrMobile,
         "action": "signUp",
@@ -250,12 +276,16 @@ export  class SignUpComponent  {
             if (res.message == 'Error: Invalid Domain') {
 
               this.invalidDomain = true;
-              this.enableOTPButton = true;
+              this.enableOTPButton = false;
 
             }
-            else {
+            else if(res.message == 'Error: User already  exists') {
               this.emailExisitAlert = true
+              this.otpField = false;
+              this.enableOTPButton=false
             }
+        else{
+
             this.inValidOTP = false
             // console.log("outside iff====")
             this.enableSignInButton = false;
@@ -263,6 +293,8 @@ export  class SignUpComponent  {
             this.otpField = false;
             // this.emailExisitAlert=true
             // this.invalidDomain=true
+          }
+
           }
           else {
             // console.log("inside els====",res)
@@ -287,12 +319,15 @@ export  class SignUpComponent  {
     // console.log("iNSIDE VALIDATE OTP")
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
     let hashedPass = CryptoJS.AES.encrypt(this.otp, key).toString();
+    
     let req = {
-      "emailId": this.formEmail.value.email,
-      "otp": hashedPass
+    
+      "emailId":(!this.isMobile)?this.formEmail.value.emailOrMobile:'',
+      "otp": hashedPass,
+      "mobileNumber":(this.isMobile)?this.formEmail.value.emailOrMobile:'',
     }
 
-    //   console.log("this.formEmail.value.email",this.formEmail.value.email)
+   console.log("signup req",req)
 
     this.subscriptions.push(
       this.userProfileService.validateOTP(req).subscribe(res => {
@@ -308,7 +343,9 @@ export  class SignUpComponent  {
           this.inValidOTP = true
           //   this.formEmail.value.otp='';
           // this.formEmail.setValue({otp: ''});
-          this.formEmail.get('otp').reset();
+        //  this.formEmail.get('otp').reset();
+
+          //this.ngOtpInput.formEmail.setValue('', { emitEvent: true });
 
           this.emailFormFlag = true;
           this.signUpFormFlag = false;

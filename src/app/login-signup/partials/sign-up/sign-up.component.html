@@ -31,7 +31,7 @@
         </div>
         
       <!-- </form>
-      <form [formGroup]="formEmail">
+    
           <div class="form-group">
               <label>Email</label>
               <input
@@ -45,23 +45,20 @@
                 <div *ngIf="f2.email.errors.required">Email is required</div>
                 <div *ngIf="f2.email.errors.email">Email is invalid</div>
               </div>
-            </div>
-
+            </div> -->
+        
             <div *ngIf= "otpField" class="form-group">
               <label>OTP</label>
-              <input
-                type="text"
-                formControlName="otp"
-                placeholder="Enter OTP"
-                class="form-control"
-              />
+            
               <ng-otp-input  
-                #ngOtpInput
+                #ngOtpInput 
+                
+                formControlName="otp"
                 (onInputChange)="onOtpChange($event)"
                 *ngIf="showOtpComponent"
                 [config]="config"
               ></ng-otp-input>
-            </div> -->
+            </div>
         
 
 
@@ -81,7 +78,7 @@
           <ng-container *ngIf="enableOTPButton">
           <div class="signin-btn" >
             
-            <!-- <button type="submit" class="primary-btn">Send OTP</button> -->
+       
             <button type="submit" (click) = "onSubmitEmail()" class="btn primary-btn" >Send OTP</button>
           </div>
           <div class="cancel-btn">
@@ -94,7 +91,7 @@
           Invalid OTP; Please Enter Correct OTP 
          </div>
          <div *ngIf="emailExisitAlert" class="new-email-alert">
-          The email already exist. Please proceed with Login. 
+          The email/Mobile already Registered. Please proceed with Login. 
           
         </div>
         <div *ngIf="invalidDomain" class="new-email-alert">
@@ -106,9 +103,14 @@
         
           <ng-container *ngIf="enableSignInButton">
            
-           <div class="resend" >
-            <span>{{display}}  <a class="re-OTP" (click)="onSubmitEmail()">Time Left</a></span>
+           <div class="resend" *ngIf="!isResend" >
+            <span>{{display}}  <a class="re-OTP" >Seconds Left</a></span>
          </div>
+         <div class="resend" *ngIf="isResend" >
+          <span>{{display}}  <a class="re-OTP" (click)="onSubmitEmail()">Resend OTP</a></span>
+       </div>
+
+        
             <div class="signin-btn">
               <button (click)="validateOTP()" class="btn primary-btn">Sign up</button>
             </div>
@@ -244,6 +246,10 @@
           
       
           <div class="form-group">
+
+            <div *ngIf="isSignupError">
+              <div class="error-message">SignUp Failed! Please try again</div>
+            </div>
             <div class="btns">
 
               <button (click)="onSubmit()" class="btn btn-primary">Register</button>
