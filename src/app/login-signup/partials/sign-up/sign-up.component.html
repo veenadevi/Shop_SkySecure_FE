@@ -26,7 +26,7 @@
           <div *ngIf="submittedEmail" >
             
             <div *ngIf="this.formEmail.get('emailOrMobile').hasError('required')" class="error-message">Email/Mobile Number is required</div>
-            <div *ngIf="this.formEmail.get('emailOrMobile').hasError('required') &&  formEmail.get('emailOrMobile').invalid" class="error-message">Enter valid Email/Mobile</div>
+            <div *ngIf="!this.formEmail.get('emailOrMobile').hasError('required') && this.formEmail.get('emailOrMobile').invalid" class="error-message">Enter valid Email/Mobile</div>
           </div>
         </div>
         
