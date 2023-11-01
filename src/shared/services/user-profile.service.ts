@@ -210,6 +210,8 @@ export class UserProfileService {
     
     
     let url = this.baseUrl + this.initiateOTP;   
+    //let url="http://localhost:2003/api/user/userOTPValidation"
+
     let request$ = this.http.post<Observable<any>>(url, request)
       .pipe(
         map(response => {

@@ -13,15 +13,20 @@
       <form [formGroup]="formEmail" >
         <div class="form-group">
           <label for="emailOrMobile">Email or Mobile Number</label>
-          <input type="text" class="form-control" id="emailOrMobile" formControlName="emailOrMobile" placeholder="Enter your email or mobile number">
+          <input type="text" class="form-control" id="emailOrMobile" 
+          formControlName="emailOrMobile" 
+          placeholder="Enter your email or mobile number"
+          
+          >
           <!-- <div *ngIf="signupForm.get('emailOrMobile').hasError('invalidEmailOrMobile') && signupForm.get('emailOrMobile').touched">
             <div class="alert alert-danger">
               Please enter a valid email or a 10-digit mobile number.
             </div>
           </div> -->
-          <div *ngIf="submittedEmail && f2.email.errors" class="invalid-feedback">
-            <div *ngIf="f2.email.errors.required">Email is required</div>
-            <div *ngIf="f2.email.errors.email">Email is invalid</div>
+          <div *ngIf="submittedEmail" >
+            
+            <div *ngIf="this.formEmail.get('emailOrMobile').hasError('required')" class="error-message">Email/Mobile Number is required</div>
+            <div *ngIf="this.formEmail.get('emailOrMobile').hasError('required') &&  formEmail.get('emailOrMobile').invalid" class="error-message">Enter valid Email/Mobile</div>
           </div>
         </div>
         
@@ -227,7 +232,7 @@
               [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }"
               maxlength="10" 
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              (keydown)="onKeyDown($event)"
+              
               />
             <div *ngIf="submitted && f.mobileNumber.errors" class="invalid-feedback">
               <div *ngIf="f.mobileNumber.errors.required">Oops! You forgot to provide your Mobile Number.</div>
