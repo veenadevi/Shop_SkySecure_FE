@@ -153,7 +153,7 @@
                         </div> -->
                 </div>
             </div>
-            <!-- <div id="assigneeDetails">
+           <div id="assigneeDetails">
                 <div class="card-container assignee-details">
                 <div class="status">
                     <div class="row-holder-01 bottom-border">
@@ -192,12 +192,13 @@
                                 <option>Deal Won</option>
                                 <option>Deal Lost</option>
                         </select>
+                        <button class="link-btn">save</button>
                     </div>
                     
                 </div>
                 </div>
                 
-            </div> -->
+            </div> 
 
 
             
@@ -211,7 +212,7 @@
             <div id="productItems">
                 <div class="card-container">
 
-                    <ng-container *ngIf="responseData.cartData.status!=='New'; else newQuote">
+                    <ng-container *ngIf="responseData.cartData.status!=='In Cart'; else newQuote">
                     
                         <products-list-table [productsData]="estimateData" [cartData]="cartData" [crmData]="responseData" [assignedOwnerComments]="assignedOwnerComments" [estimateStatus]="estimateStatus"></products-list-table>
                       </ng-container>

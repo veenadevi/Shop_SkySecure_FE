@@ -61,6 +61,7 @@ export class UserAccountStore {
    */
   public setUserProfileDetails(data : any) : void {
     this.userProfileDetails = data;
+   // console.log("set user profile on login====",data)
     this.userProfileDetailsSubject.next(data);
   }
 
@@ -70,6 +71,7 @@ export class UserAccountStore {
    */
   public setUserDetails(data : any) : void {
     this.userDetails = data;
+   // console.log("set user profile on login====",data)
     this.userDetailsSubject.next(data);
   }
 

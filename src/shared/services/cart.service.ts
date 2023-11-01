@@ -28,6 +28,8 @@ export class CartService {
 
   private createInvoiceURL :string;
 
+  public handleResponseURL : string;
+
 
 
   constructor(
@@ -42,6 +44,7 @@ export class CartService {
     this.editQuoatationUrl=AppService.appUrl.editQuotation;
 
     this.createInvoiceURL=AppService.appUrl.createInvoice;
+    this.handleResponseURL = AppService.appUrl.handleResponse;
     
   }
 
@@ -288,7 +291,7 @@ export class CartService {
     request = {
       "currency" : "INR", // or any supported currency
       "amount" : hashedPass,
-      "redirect_url" : 'https://dev-shop.skysecuretech.com/',
+      "redirect_url" : this.baseUrl+this.handleResponseURL,
       "cancel_url" : 'https://dev-shop.skysecuretech.com/',
     }
     

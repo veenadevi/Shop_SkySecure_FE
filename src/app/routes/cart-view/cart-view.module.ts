@@ -9,6 +9,7 @@ import { CartViewRoutingModule ,  ROUTED_COMPONENTS} from './cart-view-routing.m
 import { CartItemsComponent } from './partials/cart-items/cart-items.component';
 import { CartEmptyComponent } from './partials/cart-empty/cart-empty.component';
 import { CartSubmitComponent } from './partials/cart-submit/cart-submit.component';
+import { PaymentGatewayResponseComponent } from './partials/payment-gateway-response/payment-gateway-response.component';
 
 
 
@@ -19,7 +20,8 @@ import { CartSubmitComponent } from './partials/cart-submit/cart-submit.componen
     ROUTED_COMPONENTS,
     CartItemsComponent,
     CartEmptyComponent,
-    CartSubmitComponent
+    CartSubmitComponent,
+    PaymentGatewayResponseComponent
   ],
   imports: [
     CommonModule,

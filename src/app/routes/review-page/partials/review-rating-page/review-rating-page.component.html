@@ -51,14 +51,14 @@
           
             <!-- Pros -->
             <div class="pros">
-              <label for="pros">Pros:<span style="font-weight: 600;">What did you find most impressive about This Product <span class="astrik">*</span><span style="font-size: 12px;color: #6C6C6C;">(Min-Character count: {{ characterCount }}/150)</span></span></label>
+              <label for="pros">Pros:<span style="font-weight: 600;">What did you find most impressive about This  {{ productName }}  <span class="astrik">*</span><span style="font-size: 12px;color: #6C6C6C;">(Min-Character count: {{ characterCount }}/150)</span></span></label>
               <textarea [(ngModel)]="text" (input)="countCharacters()" formControlName="pros" id="pros" minlength="150"   placeholder="What is the most beneficial about this product? What feature is most impactful? Is this value for money?" required></textarea>
             </div>
           
             <!-- Cons -->
             <div class="pros">
-              <label for="cons">Cons:<span style="font-weight: 600;">Please provide which {{ productName }} features/part can be improved<span class="astrik">*</span><span style="font-size: 12px;color: #6C6C6C;">(Min-Character count: {{ characterCount01 }}/150)</span></span></label>
-              <textarea  [(ngModel)]="text01" (input)="countCharacters01()" formControlName="cons" id="cons"  minlength="150" placeholder="What is the least beneficial about this product?" required></textarea>
+              <label for="cons">Cons:<span style="font-weight: 600;">Please provide which {{ productName }} features/part can be improved<span class="astrik">*</span><span style="font-size: 12px;color: #6C6C6C;"></span></span></label>
+              <textarea  [(ngModel)]="text01" (input)="countCharacters01()" formControlName="cons" id="cons"   placeholder="What is the least beneficial about this product?" required></textarea>
             </div>
           
             <!-- How likely are you to recommend This Product? -->
@@ -112,8 +112,8 @@
           
             <!-- Any Missing Feature? -->
             <div class="user-info">
-              <label for="missingFeatures">Any Missing Feature?<span class="astrik">*</span> <span style="font-size: 12px;color: #6C6C6C;">(Min-Character count: {{ characterCount03 }}/150)</span></label>
-              <textarea [(ngModel)]="text03" (input)="countCharacters03()" formControlName="missingFeature" id="missingFeature" minlength="150"
+              <label for="missingFeatures">Any Missing Feature?<span class="astrik">*</span> <span style="font-size: 12px;color: #6C6C6C;"></span></label>
+              <textarea [(ngModel)]="text03" (input)="countCharacters03()" formControlName="missingFeature" id="missingFeature" 
                         placeholder="Any features you find missing in This  Product?" required></textarea>
             </div>
           

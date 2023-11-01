@@ -155,15 +155,17 @@
           <ng-container *ngIf="selectedType === 'others' && showWithoutGST">
             <div class="name-row-01">
               <div class="col form-group">
-                <label for="firstName">First Name*</label>
+                <label for="firstName">Name*</label>
                 <input formControlName="firstName" type="firstName" class="form-control-01" name="Locality" (input)="onInputChanges($event)"
-                  id="firstName" placeholder="First Name" required>
+                  id="firstName" placeholder="Name" required>
                   
               </div>
               <div class="col form-group">
                 <label for="email">Email ID*</label>
                 <input formControlName="email" type="email" class="form-control-01" name="email" id="email" (input)="onInputChanges($event)"
                   placeholder="Email ID" required>
+                  <div class="error-message" *ngIf="otherNextClickFlag && myForm.get('email').hasError('required')">Email ID is required</div>
+                  <div class="error-message" *ngIf="otherNextClickFlag && myForm.get('email').hasError('email')">Please enter valid email address</div>
               </div>
             </div>
             <div class="col-sm-9 form-group">
@@ -175,7 +177,7 @@
               </select>
             </div>
             <div class="col-sm-8 form-group">
-              <label for="tel">Phone*</label>
+              <label for="tel">Phone</label>
               <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel" (input)="onInputChanges($event)"
                 placeholder="Enter Your Phone No." >
             </div>
@@ -205,7 +207,7 @@
               </select>
             </div>
             <div class="col-sm-4 form-group" *ngIf="selectedType === 'hide'">
-              <label for="tel">Phone*</label>
+              <label for="tel">Phone</label>
               <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel"
                 placeholder="Enter Your Phone No." required>
               <div *ngIf="myForm.get('phoneNumber').hasError('required')">
@@ -216,6 +218,7 @@
               </div>
             </div>
           </div>
+         
 
           <div class="address-row" *ngIf="selectedType === 'hide'">
             <div class="col-sm-6 form-group">
@@ -544,8 +547,13 @@
                 placeholder="Postal-Code." required>
             </div>
           </div>
-
-
+<!-- 
+          <div class="col-sm-12">
+       
+            <input>
+          
+          
+          </div> -->
 
 
           <div class="col-sm-12">

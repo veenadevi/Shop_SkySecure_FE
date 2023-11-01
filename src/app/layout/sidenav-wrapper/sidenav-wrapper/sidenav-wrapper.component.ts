@@ -61,6 +61,8 @@ export class SidenavWrapperComponent implements OnInit{
   public cpSubMenu: boolean = false;
   public sAdmincpSubMenu:boolean=false;
 
+  public fuSubMenu:boolean=false;
+
   constructor(
     private loginService: LoginService,
     private router: Router,
@@ -144,7 +146,9 @@ export class SidenavWrapperComponent implements OnInit{
     if (navVal === 'sacpdmin') {
       this.sAdmincpSubMenu = true;
     }
-
+    if (navVal === 'fu') {
+      this.fuSubMenu = true;
+    }
 
     /*if(this.isExpanded === false){
       this.userSubMenu = false;
@@ -225,7 +229,9 @@ export class SidenavWrapperComponent implements OnInit{
         this.cpSubMenu = (this.cpSubMenu) ? false : true;
         return;
 
-
+        case 'fu':
+          this.fuSubMenu = (this.fuSubMenu) ? false : true;
+          return;
 
 
       default:
@@ -302,6 +308,11 @@ export class SidenavWrapperComponent implements OnInit{
           this.menuToogled = false;
           this.router.navigate(['admin-pages/managae-all-admin']);
           return;
+          
+        case 'UserReviewList':
+          this.menuToogled = false;
+          this.router.navigate(['portal-admin-page/user-review-list']);
+          return;
       case 'paFeatureUpdate':
         //this.isExpanded = false;
         this.menuToogled = false;
@@ -355,9 +366,12 @@ export class SidenavWrapperComponent implements OnInit{
           case 'manageAllChannels':
             this.menuToogled = false;
             this.router.navigate(['admin-pages/manage-all-channel']);
-            return;
+            return
         
-
+            case 'fuLeads':
+              this.menuToogled = false;
+              this.router.navigate(['finance-user-page/leads']);
+              return;
       default:
         return null;
     }
