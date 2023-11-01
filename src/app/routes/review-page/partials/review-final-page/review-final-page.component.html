@@ -1,6 +1,6 @@
 <div class="final-container">
     <div class="final-content">
-        <h4 class="d-flex justify-content-center mb-3 mt-3">{{ productName }}</h4>
+        <h4 class="d-flex justify-content-center mb-3 mt-3 productName">{{ productName }}</h4>
 <div class="thanks-card">
     <!-- <div class="star">
        
@@ -82,17 +82,15 @@
     <div class="btn">
         <button class="btn primary-btn"  (click)="createProductReview()">Save Review</button> 
     </div>
-   
-</div>
-<div class="row"  *ngIf="showMsg" >
-  <div class="col-xs-12">
-      <p class="alert alert-success">
-          <strong>Estimate Sent Successfully !</strong>
-
-      </p>
-  </div>
-</div>
-
+    
+</div> 
+    </div>
+    <div class="row"  *ngIf="showMsg" >
+      <div class="col-12 d-flex  justify-content-end">
+          <p class="alert alert-success">
+              <strong>Product Review Created Successfully !</strong> 
+          </p>
+      </div>
     </div>
 
 </div>

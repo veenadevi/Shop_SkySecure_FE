@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             <div class="text-style" (click)="getAccountById(account.cartData._id)">   
-                            {{ account.createdFor.company}}
+                            {{ account.createdFor.company??account.createdFor.companyBusinessName}}
                             </div></td>
                         <td>{{ account.createdFor.firstName }}</td>
                      
