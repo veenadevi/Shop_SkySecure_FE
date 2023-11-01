@@ -484,7 +484,7 @@ export class MetadataService {
               return null;
             }
             this.notificationStore.setNotificationList(response);
-            console.log("_+_+_+_ Retreive Notifications ", response)
+          //  console.log("_+_+_+_ Retreive Notifications ", response)
             return response;
           }),
           catchError(error => {

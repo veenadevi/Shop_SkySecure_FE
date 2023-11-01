@@ -304,6 +304,8 @@ export class LoginComponent {
           
           localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
           var decoded = jwtDecode(res.data);
+
+          //console.log("decoded value=====",decoded)
           
           this.userAccountStore.setUserDetails(decoded);
           
