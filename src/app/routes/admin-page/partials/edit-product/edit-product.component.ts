@@ -34,7 +34,8 @@ interface CreateProductPayload {
   updatedAt:Date,
   appList:Array<any>,
   compareWithproducts:Array<any>,
-  productupdateComment:String
+  productupdateComment:String,
+  productVideoURL: Array<any>,
  
 
 }
@@ -83,6 +84,7 @@ export class EditProductComponent  implements OnInit {
   selectedProductId1 :  any;
   showMsg: boolean = false;
   listedProducts:any[]=[];
+  productVideoEmbedURL:string;
 
   public tempAppList : any[] = [];
 
@@ -131,6 +133,7 @@ export class EditProductComponent  implements OnInit {
       updatedAt:[''],
       productversion:[''],
       productupdateComment:[''],
+      productVideoEmbedURL:[''],
       addDynamicElementNew: this.fb.group({
         // Nested form controls for dynamic elements
        feature: this.fb.array([0])
@@ -470,6 +473,12 @@ export class EditProductComponent  implements OnInit {
 
    
       var productData = this.registrationForm.value;
+      var productVideoArray=[]
+      if(productData.productVideoEmbedURL){
+        productVideoArray.push(productData.productVideoEmbedURL)
+        console.log("setting video url array ",productVideoArray[0])
+      }
+     
      // console.log("passing edit value===",productData.addAppArrayNew.app)
       this.createProductPayload = {
         _id: this.selectedProductId._id,
@@ -513,7 +522,7 @@ export class EditProductComponent  implements OnInit {
         isVariant: productData.isVariant == 'true'? true: false ,
         featureList: productData.addDynamicElementNew.feature,
         productupdateComment:productData.productupdateComment,
-        
+        productVideoURL:productVideoArray,
         
         appList:productData.addAppArrayNew.app,
         bannerLogo: this.productLogo,
@@ -621,6 +630,9 @@ export class EditProductComponent  implements OnInit {
       onlySelf: true
     }) 
 
+    this.registrationForm.get('productVideoEmbedURL').setValue(response.products.productVideoURL[0], {
+      onlySelf: true
+    }) 
 
    
     this.registrationForm.get('productName').setValue(response.products.name, {
