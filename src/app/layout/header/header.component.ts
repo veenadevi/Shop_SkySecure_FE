@@ -34,7 +34,8 @@ import { NotificationsStore } from 'src/shared/stores/notifications.store';
 
 export class HeaderComponent implements OnInit{
  
-
+  @Input('matTooltip')
+  @Input('matTooltipPosition')
   @Output() loginEvent = new EventEmitter();
   
   public menuClicked = false;

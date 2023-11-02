@@ -53,8 +53,8 @@
 
           <!-- Dashboard Sub Menu -->
           <ng-container *ngIf="dashboardSubMenu">
-            <mat-list-item>
-              <span *ngIf="isExpanded" class="sub-menu-item text-style" (click) = "routeEvent('quotation-history')">Quotation History</span>
+            <mat-list-item (click) = "routeEvent('quotation-history')">
+              <span *ngIf="isExpanded" class="sub-menu-item text-style">Quotation History</span>
             </mat-list-item>
 
           </ng-container>
@@ -248,7 +248,7 @@
               </mat-list-item>
 
               <mat-list-item (click) = "routeEvent('paEditProduct')" >
-                <span *ngIf="isExpanded" class="sub-menu-item text-style">Edit product</span>
+                <span *ngIf="isExpanded" class="sub-menu-item text-style">Edit Product</span>
               </mat-list-item>
 
               <mat-list-item (click) = "routeEvent('paUploadProductPrice')" >
