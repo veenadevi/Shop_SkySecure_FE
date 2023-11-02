@@ -292,7 +292,7 @@ export class CartService {
       "currency" : "INR", // or any supported currency
       "amount" : hashedPass,
       //"redirect_url" : this.baseUrl+this.handleResponseURL,
-      "redirect_url" : "http://localhost:4200/api/orders/handleResponse",
+      "redirect_url" : "http://localhost:8080/api/orders/handleResponse",
       "cancel_url" : 'https://dev-shop.skysecuretech.com/',
     }
     
