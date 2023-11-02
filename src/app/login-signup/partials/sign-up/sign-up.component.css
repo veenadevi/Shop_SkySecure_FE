@@ -474,7 +474,7 @@ input[type="number"]::-webkit-outer-spin-button {
     text-decoration: none;
 }
 :host ::ng-deep  .ng-otp-input-wrapper .otp-input {
-    margin-right: 16px !important;
+    margin-right: 27px !important;
     font-size: 20px !important;
 } 
 
@@ -482,3 +482,18 @@ input[type="number"]::-webkit-outer-spin-button {
     font-size: 12px;
     color: rgb(146, 5, 5);
 }
+
+
+.new-email-alert{
+    text-align: center;
+    font-size: 13px;
+    color: rgb(146, 5, 5);
+    padding-top: 10px;
+    padding-left: 15px;
+}
+/* .disclaimer{
+    text-align: center;
+    font-size: 13px;
+    color: rgb(146, 5, 5);
+    padding-top: 10px;
+} */

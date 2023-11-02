@@ -15,7 +15,7 @@
           <label for="emailOrMobile">Email or Mobile Number</label>
           <input type="text" class="form-control" id="emailOrMobile" 
           formControlName="emailOrMobile" 
-          placeholder="Enter your email or mobile number"
+          placeholder="Enter your email or Whatsapp number"
           
           >
           <!-- <div *ngIf="signupForm.get('emailOrMobile').hasError('invalidEmailOrMobile') && signupForm.get('emailOrMobile').touched">
@@ -229,7 +229,7 @@
             <input
               type="number"  ng-maxlength="5"
               formControlName="mobileNumber"
-              placeholder="10 Digit MobileNumber"
+              placeholder="Enter your Whatsapp Number"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }"
               maxlength="10" 
@@ -246,10 +246,12 @@
           
       
           <div class="form-group">
-
-            <div *ngIf="isSignupError">
-              <div class="error-message">SignUp Failed! Please try again</div>
+            <div *ngIf="isSignupError" class="new-email-alert">
+              The Email or Mobile Number Already exists. Please Try Again. 
             </div>
+            <!-- <div *ngIf="isSignupError">
+              <div class="error-message">SignUp Failed! Please try again</div>
+            </div> -->
             <div class="btns">
 
               <button (click)="onSubmit()" class="btn btn-primary">Register</button>

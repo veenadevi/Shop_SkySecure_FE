@@ -111,7 +111,7 @@
         </ng-container>
         </div>
           <div *ngIf="newEmailAlert" class="new-email-alert">
-            The email does not exist. Please proceed with the Sign-up process. 
+            The Email or Mobile Number does not exist. Please proceed with the Sign-up process. 
           </div>
 
           <div *ngIf="inValidOTP" class="new-email-alert">
@@ -126,6 +126,9 @@
            </div>
            <div class="resend" *ngIf="isResend" >
             <span>{{display}}  <a class="re-OTP" (click)="onSubmit()">Resend OTP</a></span>
+         </div>
+         <div class="disclaimer" *ngIf="isMobile">
+          * Please Enter Valid Whatsapp Number To Recieve OTP.
          </div>
             <div class="signin-btn">
               <button (click)="login()" class="btn primary-btn">Sign In</button>
