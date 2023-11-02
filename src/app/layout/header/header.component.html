@@ -35,7 +35,7 @@
     </div> -->
 
     <ng-container *ngIf="userLoggedIn">
-    <div class="notificationicon-section" (click)="openNotificationDropdown()">
+    <div class="notificationicon-section"  matTooltip="Notification" matTooltipPosition="below" (click)="openNotificationDropdown()">
 
       
       <div class="notification_icon">
@@ -67,7 +67,7 @@
 
 <ng-container *ngIf="userLoggedIn">
   <div class="cart-section">
-    <button class="cart-button" title="Cart" [matBadge]="cartItemCounts" (click)="cartFynction()">
+    <button class="cart-button" matTooltip="Cart" matTooltipPosition="below" [matBadge]="cartItemCounts" (click)="cartFynction()">
       <div class="cartposition">
         <img alt="cart" class="cart-icon" src="../../../assets/icons/CartWhite.svg">
         <!-- <span>Cart</span> -->
