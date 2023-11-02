@@ -52,6 +52,9 @@ import { GetReasonModalComponent } from './components/modals/get-reason-modal/ge
 import { ReassignModalComponent } from './components/modals/reassign-modal/reassign-modal.component';
 import { UploadpoModalComponent } from './components/modals/uploadpo-modal/uploadpo-modal.component';
 import { InvoiceDueDateModalComponent } from './components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
+import { CustomerReviewComponent } from './components/customer-review/customer-review.component';
+import { VideoReviewComponent } from './components/video-review/video-review.component';
+import { ProductReviewAverageComponent } from './components/product-review-average/product-review-average.component';
 
 
 
@@ -112,7 +115,10 @@ import { InvoiceDueDateModalComponent } from './components/modals/invoice-due-da
     GetReasonModalComponent,
     ReassignModalComponent,
     UploadpoModalComponent,
-    InvoiceDueDateModalComponent
+    InvoiceDueDateModalComponent,
+    CustomerReviewComponent,
+    VideoReviewComponent,
+    ProductReviewAverageComponent
    
   ],
 
@@ -167,7 +173,9 @@ import { InvoiceDueDateModalComponent } from './components/modals/invoice-due-da
     BundleMindmapComponent,
     GstPromptModalComponent,
     SuggestedCompareCardFlyerComponent,
-   
+    CustomerReviewComponent,
+    VideoReviewComponent,
+    ProductReviewAverageComponent,
   ],
   
 
