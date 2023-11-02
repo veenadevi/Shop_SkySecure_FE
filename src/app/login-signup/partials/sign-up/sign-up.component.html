@@ -57,6 +57,7 @@
                 (onInputChange)="onOtpChange($event)"
                 *ngIf="showOtpComponent"
                 [config]="config"
+                
               ></ng-otp-input>
             </div>
         
@@ -134,7 +135,7 @@
 
 
     <div class="register-form">
-        <form [formGroup]="form">
+        <form [formGroup]="form" >
 
           <div class="form-group">
             <label>Email</label>
