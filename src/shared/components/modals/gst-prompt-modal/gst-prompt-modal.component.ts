@@ -11,6 +11,8 @@ import { SuperAdminService } from 'src/shared/services/super-admin-service/super
 import { CartStore } from 'src/shared/stores/cart.store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
+import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
+import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 
 @Component({
   selector: 'app-gst-prompt-modal',
@@ -48,7 +50,7 @@ export class GstPromptModalComponent implements OnInit{
   public selectedCountry : any;
   public selectedState : any;
   public selectedCity : any;
-
+public refferedName :any;
   public form: FormGroup;
 
   public othersGSTShow = false;
@@ -90,7 +92,9 @@ export class GstPromptModalComponent implements OnInit{
     private superAdminService : SuperAdminService,
     private cartStore : CartStore,
     private spinner: NgxSpinnerService,
-    private toaster : ToasterNotificationService
+    private toaster : ToasterNotificationService,
+    private adminPageService : AdminPageService,
+    private superAdminStore : SuperAdminStore,
   ){
     //this.myForm = this.fb.group({
     this.myForm = this.fb.group({
@@ -108,7 +112,7 @@ export class GstPromptModalComponent implements OnInit{
     this.setForm();
     this.setSelfData();
     
-    
+    this.getAllMyCustomers();
     
   }
 
@@ -132,7 +136,8 @@ export class GstPromptModalComponent implements OnInit{
         phoneNo : [],
         firstName : [],
         email : ['', [Validators.required, Validators.email]],
-       checkTerms : [null]
+       checkTerms : [null],
+       refferedName : []
       }
     )
   }
@@ -827,4 +832,26 @@ public errorMessage: boolean = false;
       this.errorMessage=false;
     }
   }
+
+  public accountData : any;
+  public allMarketPlaceList : any;
+ 
+  public GstPromptModal : any = [];
+  public getAllMyCustomers(){
+
+    this.subscriptions.push(
+      this.adminPageService.getAllMyCustomers().subscribe(res=>{
+        console.log("_+_+_+_+_+_ API Result ", res);
+        this.GstPromptModal = res;
+        // this.spinner.hide();
+      },
+      error => {
+        this.spinner.hide();
+        this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+      })
+    )
+
+  }
+
+
 }

@@ -277,6 +277,10 @@
                 placeholder="Postal-Code." required>
             </div>
           </div>
+          
+           
+
+         
 
           <!-- <div class="col-sm-2 form-group">
                   <label for="cod">Country code</label>
@@ -546,6 +550,27 @@
               <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
                 placeholder="Postal-Code." required>
             </div>
+          </div>
+
+
+         
+          
+          <div class="col-sm-6" *ngIf="selectedType === 'self' " >
+            <label for="State">Reffered By*</label>
+            <select formControlName="refferedName" class="form-control" >
+              <option disabled value="'Select City'">Select </option>
+              <option >{{GstPromptModal.company}}</option>
+
+            </select>
+          </div>
+
+          <div class="col-sm-6" *ngIf="selectedType === 'others' " >
+            <label for="State">Reffered By*</label>
+            <select formControlName="refferedName" class="form-control" >
+              <option disabled value="'Select City'">Select </option>
+              <option >{{GstPromptModal.company}}</option>
+
+            </select>
           </div>
 <!-- 
           <div class="col-sm-12">
