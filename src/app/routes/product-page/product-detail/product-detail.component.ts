@@ -376,8 +376,9 @@ export class ProductDetailComponent implements OnInit{
 
         this.completeFeatureList = response.featureList;
 
-        if(this.productparent && this.productparent.productVideoURL && this.productparent.productVideoURL.length>0){
-          this.productVideoURL = this.productparent.productVideoURL[0].source ;
+        if(this.product && this.product.productVideoURL && this.product.productVideoURL.length>0){
+          this.productVideoURL = this.product.productVideoURL[0] ;
+          console.log("this.productVideoURL  ",this.productVideoURL)
         } 
         else{
           this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";

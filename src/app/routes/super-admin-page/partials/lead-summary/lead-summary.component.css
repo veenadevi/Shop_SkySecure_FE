@@ -257,6 +257,11 @@ option{
     padding: 6px;
 }
 
+svg {
+    /* color: var(--primary-500-purple); */
+    height: 20px;
+}
+
 /* //media query// */
 
 @media  ( min-width: 1920px) and (max-width: 2560px) {
