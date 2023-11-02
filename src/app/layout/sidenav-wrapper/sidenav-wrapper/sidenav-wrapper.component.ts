@@ -15,6 +15,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 })
 export class SidenavWrapperComponent implements OnInit{
 
+
   public userLoggedInFlag = false;
   public userRoleVal = '';
   public userFullName = '';

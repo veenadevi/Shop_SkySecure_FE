@@ -277,7 +277,14 @@ option{
     padding: 6px;
 }
 
+svg {
+    color: var(--primary-500-purple);
+    height: 20px;
+}
 
+svg:hover {
+    color: var(--primary-700-purple);
+}
 
  /* //media query// */
 

@@ -282,6 +282,7 @@ body{
 
 .link-btn{
   color: var(--primary-500-purple);
+  font-size: 13px;
   transition: all .3s ease;
   border: none;
   outline: none;
