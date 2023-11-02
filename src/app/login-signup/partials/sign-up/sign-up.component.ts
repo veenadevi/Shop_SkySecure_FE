@@ -27,7 +27,7 @@ export  class SignUpComponent  {
   otp: any
   showOtpComponent = true;
   @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any;
-
+  @ViewChild('ngOtpInput') ngOtpInputRef:any;
   emailFormFlag: boolean = true;
   signUpFormFlag: boolean = false;
   public emailViaSignIn: String
@@ -339,8 +339,12 @@ export  class SignUpComponent  {
           // console.log("iNSIDE VALIDATE OTP IF PART")
         }
         else {
-          // console.log("iNSIDE VALIDATE OTP ELSE PART",res && res.data)
+         // console.log("iNSIDE VALIDATE OTP ELSE PART",res && res.data)
           this.inValidOTP = true
+          let eleId=this.ngOtpInputRef.getBoxId(0);
+            this.ngOtpInputRef.focusTo(eleId);
+           // console.log("eleId",eleId)
+            this.ngOtpInputRef.setValue('');
           //   this.formEmail.value.otp='';
           // this.formEmail.setValue({otp: ''});
         //  this.formEmail.get('otp').reset();

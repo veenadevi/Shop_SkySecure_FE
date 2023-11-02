@@ -12,6 +12,7 @@ import * as CryptoJS from 'crypto-js';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { NgOtpInputConfig } from 'ng-otp-input';
  
+ 
 
 @Component({
   selector: 'login',
@@ -25,8 +26,8 @@ export class LoginComponent {
   submitted = false;
   otp:any
   showOtpComponent = true;
-  @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any;
-
+  // @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any;
+  @ViewChild('ngOtpInput') ngOtpInputRef:any;
   private subscriptions : Subscription[] = [];
 
   public params : any;
@@ -276,18 +277,24 @@ export class LoginComponent {
             this.callSignIn();
           }
           else{
+            // console.log("INSIDE INVALID OTP " );
             this.inValidOTP=true;
-            this.form.get('otp').reset();
+          
+            let eleId=this.ngOtpInputRef.getBoxId(0);
+            this.ngOtpInputRef.focusTo(eleId);
+            //console.log("eleId",eleId)
+            this.ngOtpInputRef.setValue(''); 
+            // this.form.get('otp').reset();
             this.enableSignInButton = true;
           //  this.enableOTPButton = true;
           //  this.newEmailAlert = true;
             this.otpField = true;
           }
         })
-      )
-
-    
+      ) 
   }
+
+  
 
   public callSignIn(){
 
