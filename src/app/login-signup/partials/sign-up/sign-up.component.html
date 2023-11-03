@@ -166,51 +166,10 @@
       
 
       
-          <!-- <div class="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              formControlName="password"
-              placeholder="Type here..."
-              class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-            />
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-              <div *ngIf="f.password.errors.required">Password is required</div>
-              <div *ngIf="f.password.errors.minlength">
-                Secure your account with atleast 6 characters
-              </div>
-              <div *ngIf="f.password.errors.maxlength">
-                Password must not exceed 40 characters
-              </div>
-            </div>
-          </div>
-      
-          <div class="form-group">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              formControlName="confirmPassword"
-              placeholder="..........."
-              class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
-            />
-            <div
-              *ngIf="submitted && f.confirmPassword.errors"
-              class="invalid-feedback"
-            >
-              <div *ngIf="f.confirmPassword.errors.required">
-                Confirm Password is required
-              </div>
-              <div *ngIf="f.confirmPassword.errors.matching">
-                Confirm Password does not match
-              </div>
-            </div>
-          </div> -->
-
+          
 
           <!-- Company Name-->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Company Name</label>
             <input
               type="text"
@@ -222,6 +181,20 @@
             <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
               <div *ngIf="f.companyName.errors.required">Oops! You forgot to provide your Company Name.</div>
             </div>
+          </div> -->
+
+          <!-- Company Name Dropdown -->
+          <div class="form-group">
+            <label>Company Name</label>
+            <input 
+              [ngModelOptions]="{standalone: true}"
+              list="id-car" 
+              [(ngModel)]="selectedCar" 
+              value="{{(selectedCarObj && selectedCarObj.length>0)  ? selectedCarObj.company : ''}}"
+              (ngModelChange)="onChange()">
+            <datalist id="id-car">
+              <option *ngFor="let car of myCustomers" [value]="car.company">{{car.company}}</option>
+            </datalist>
           </div>
 
           <!-- Mobile Number-->
