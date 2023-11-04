@@ -280,7 +280,7 @@ export class HeaderComponent implements OnInit{
 
 
     this.getCategories();
-    this.getProducts();
+    //this.getProducts();
     this.getOEMs();
     this.getTrendingProducts();
     //this.getCartId();

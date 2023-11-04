@@ -556,19 +556,20 @@
          
           
           <div class="col-sm-6" *ngIf="selectedType === 'self' " >
-            <label for="State">Reffered By*</label>
-            <select formControlName="refferedName" class="form-control" >
-              <option disabled value="'Select City'">Select </option>
-              <option >{{GstPromptModal.company}}</option>
+            <label for="State">Refered By*</label>
+            <select formControlName="refferedName" class="form-control" (change)="onChannelParterChange($event)">
+              <option disabled value="'Select '">Select </option>
+              <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.channelPartnerMaster.companyBusinessName}}</option>
+           
 
             </select>
-          </div>
+          </div> 
 
           <div class="col-sm-6" *ngIf="selectedType === 'others' " >
-            <label for="State">Reffered By*</label>
-            <select formControlName="refferedName" class="form-control" >
-              <option disabled value="'Select City'">Select </option>
-              <option >{{GstPromptModal.company}}</option>
+            <label for="State">Refered By*</label>
+            <select formControlName="referedName" class="form-control" (change)="onChannelParterChange($event)">
+              <option disabled value="'Select '">Select </option>
+              <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.channelPartnerMaster.companyBusinessName}}</option>
 
             </select>
           </div>

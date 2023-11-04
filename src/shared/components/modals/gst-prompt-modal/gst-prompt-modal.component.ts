@@ -50,6 +50,9 @@ export class GstPromptModalComponent implements OnInit{
   public selectedCountry : any;
   public selectedState : any;
   public selectedCity : any;
+
+  public selectedChannelPartnerId:any;
+  public selectedChannelPartnerAdminId:any
 public refferedName :any;
   public form: FormGroup;
 
@@ -94,6 +97,7 @@ public refferedName :any;
     private spinner: NgxSpinnerService,
     private toaster : ToasterNotificationService,
     private adminPageService : AdminPageService,
+    
     private superAdminStore : SuperAdminStore,
   ){
     //this.myForm = this.fb.group({
@@ -246,6 +250,19 @@ disableCheckGstNil(){
   }
 
 
+  public onChannelParterChange(event){
+    
+    
+    console.log("selected partner id ==",event)
+    
+    let partner = JSON.parse(event.target.value);
+    this.selectedChannelPartnerId = partner._id;
+    this.selectedChannelPartnerAdminId=partner.adminUsers[0]._id
+    console.log("selected partner id ==",this.selectedChannelPartnerId)
+    
+
+  }
+
   public onRadioButtonClick(){
     
 
@@ -383,6 +400,9 @@ public submitCityError : boolean = false;
     
 
     req.currency_id = "1014673000000000064";
+    req.selectedChannelPartnerId= this.selectedChannelPartnerId
+
+    req.selectedChannelPartnerAdminId=this.selectedChannelPartnerAdminId
    
 
     req.RequestingForOther = (this.selectedType === 'others') ? true : false;
@@ -424,7 +444,7 @@ public submitCityError : boolean = false;
 
 
 
-  
+  console.log("req passing for quote ===",req)
 
 
     
@@ -434,7 +454,7 @@ public submitCityError : boolean = false;
 
 
 
-    this.spinner.show();
+   this.spinner.show();
     
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
@@ -462,8 +482,9 @@ public submitCityError : boolean = false;
         this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
       }
       ),
+    
       
-    )
+    )  
    
 
     }
@@ -836,13 +857,15 @@ public errorMessage: boolean = false;
   public accountData : any;
   public allMarketPlaceList : any;
  
-  public GstPromptModal : any = [];
+  public channelPartnerList : any = [];
+
+
   public getAllMyCustomers(){
 
     this.subscriptions.push(
-      this.adminPageService.getAllMyCustomers().subscribe(res=>{
+      this.superAdminService.getAllChannelPartners().subscribe(res=>{
         console.log("_+_+_+_+_+_ API Result ", res);
-        this.GstPromptModal = res;
+        this.channelPartnerList = res.channelPartners;
         // this.spinner.hide();
       },
       error => {
