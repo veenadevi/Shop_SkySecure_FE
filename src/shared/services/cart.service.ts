@@ -277,7 +277,7 @@ export class CartService {
     return REQUEST$;
   }
 
-  public encryptdata(request){
+  public encryptdata(request, amount){
     //let url = `${this.baseUrl}orders/encryptFormData`;
     let url = `${this.baseUrl}api/orders/encryptFormData`;
     //let url = "http://localhost:8080/api/orders/encryptFormData";
@@ -285,8 +285,12 @@ export class CartService {
     request : request
     }
 
+    console.log("AJDGSHJ ", amount.toFixed(2));
+
+    //console.log("+_+_+_+_ Key Here ", request.amount);
+
     let key = "&&((SkysecureRealize&&For&&PaymentGateway&&!!IsTheBestApp^!@$%"
-    let hashedPass = CryptoJS.AES.encrypt('101', key).toString();
+    let hashedPass = CryptoJS.AES.encrypt(amount.toFixed(2), key).toString();
 
     request = {
       "currency" : "INR", // or any supported currency
@@ -306,9 +310,10 @@ export class CartService {
         }
         return response;
       }),
-    );
+    ); 
 
     return request$;
+    //return null;
     //return this.http.get(url,{params:data})
   }
 

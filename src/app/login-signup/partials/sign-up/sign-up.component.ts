@@ -8,6 +8,7 @@ import * as CryptoJS from 'crypto-js';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { BlockableUI } from 'primeng/api';
 import { CompressOutlined } from '@mui/icons-material';
+import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
 @Component({
   selector: 'sign-up',
@@ -54,8 +55,13 @@ export  class SignUpComponent  {
 
   public isResend:boolean=false;
 
+  public myCustomers : any;
+
   display: any;
   static isMobile: boolean;
+
+
+  public selectedCompnayName : any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,7 +69,8 @@ export  class SignUpComponent  {
     public router: Router,
     public route: ActivatedRoute,
     private userProfileService: UserProfileService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private adminPageService : AdminPageService
   ) {
     this.formEmail = this.fb.group(
       {
@@ -95,7 +102,7 @@ export  class SignUpComponent  {
 
 
 
-
+    this.getAllMyCustomers();
     
     this.form = this.formBuilder.group(
       {
@@ -297,9 +304,7 @@ export  class SignUpComponent  {
 
           }
           else {
-            // console.log("inside els====",res)
-            //this.emailFormFlag = false;
-            //this.signUpFormFlag = true;
+            
             this.enableSignInButton = true;
             this.invalidDomain = false;
             this.enableOTPButton = false;
@@ -335,19 +340,16 @@ export  class SignUpComponent  {
         if (res && res.data) {
           this.emailFormFlag = false;
           this.signUpFormFlag = true;
-          //this.callSignIn();
-          // console.log("iNSIDE VALIDATE OTP IF PART")
+          
         }
         else {
-         // console.log("iNSIDE VALIDATE OTP ELSE PART",res && res.data)
+         
           this.inValidOTP = true
           let eleId=this.ngOtpInputRef.getBoxId(0);
             this.ngOtpInputRef.focusTo(eleId);
-           // console.log("eleId",eleId)
+           
             this.ngOtpInputRef.setValue('');
-          //   this.formEmail.value.otp='';
-          // this.formEmail.setValue({otp: ''});
-        //  this.formEmail.get('otp').reset();
+          
 
           //this.ngOtpInput.formEmail.setValue('', { emitEvent: true });
 
@@ -385,6 +387,62 @@ export  class SignUpComponent  {
     if (otp.length === 6) {
       //  this. onSubmitEmail();
     }
+  }
+
+
+
+  // public onCompanyNameChange(){
+  //   if(this.myCustomers && this.myCustomers.length>0){
+  //     console.log("+_+_+_+ Changed Compnay Name ", this.selectedCompnayName);
+  //     console.log("+_+_+_+ Changed Compnay Name ", this.myCustomers);
+  //     this.selectedCarObj = this.myCustomers.find((c)=> c.company===this.selectedCompnayName);
+  //     console.log(this.selectedCarObj)
+  //   }
+    
+  // }
+
+  cars = [{
+    make: 'Ford',
+    model: 'GTX',
+    color: 'green'
+  }, {
+    make: 'Ferarri',
+    model: 'Enzo',
+    color: 'red'
+  }, {
+    make: 'VW',
+    model: 'Amarok',
+    color: 'white'
+  }];
+
+  selectedCar = "";
+  selectedCarObj: any = {};
+
+  
+
+  onChange = () => {
+    console.log(this.selectedCar);
+    //this.selectedCarObj = this.cars.find((c)=> c.make==this.selectedCar);
+    this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCar);
+    console.log(this.selectedCarObj)
+  }
+
+
+
+  public getAllMyCustomers(){
+
+    this.subscriptions.push(
+      this.adminPageService.getAllMyCustomers().subscribe(res=>{
+        console.log("_+_+_+_+_+_ API Result ", res);
+        this.myCustomers = res;
+        //this.spinner.hide();
+      },
+      error => {
+        //this.spinner.hide();
+        //this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+      })
+    )
+
   }
 
 }

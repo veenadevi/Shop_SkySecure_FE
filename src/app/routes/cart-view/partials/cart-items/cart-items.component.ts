@@ -738,28 +738,30 @@ public onChangeQuantity(i, price) : void {
 
   checkout(){
 
-    let order_no = "0001";
-    let testAmount = "10.00"
+    //let order_no = "0001";
+    //let testAmount = "10.00";
 
+    let cartRefId = this.cartStore.getCartRefreneceId();
+
+    let testAmount = this.calculateTotal(this.cartData);
+
+    console.log("+_+_+_+_ Amount ", cartRefId);
+    console.log("_+_+_+ This cat Data", testAmount);
+    
     //let redirect_url = 'http%3A%2F%2Flocalhost%3A3008%2Fhandleresponse';
+    //let redirect_url = 'https://dev-shop.skysecuretech.com/';
     let redirect_url = 'https://dev-shop.skysecuretech.com/';
     let useremail = 'vigneshblog4@gmail.com';
-    let request = `merchant_id=${this.merchantId}&order_id=${order_no}&currency=INR&amount=${testAmount}&redirect_url=${redirect_url}&cancel_url=${redirect_url}&language=EN&billing_name=${this.selectedAddress.name}&billing_address=${this.selectedAddress.address}&billing_city=${this.selectedAddress.city}&billing_state=MH&billing_zip=${this.selectedAddress.pincode}&billing_country=India&billing_tel=${this.selectedAddress.phone}&delivery_name=${this.selectedAddress.name}&delivery_address=${this.selectedAddress.address}&delivery_city=${this.selectedAddress.city}&delivery_state=${this.selectedAddress.state}&delivery_zip=${this.selectedAddress.pincode}&delivery_country=India&delivery_tel=${this.selectedAddress.phone}&billing_email=${useremail}`
+    let request = `merchant_id=${this.merchantId}&order_id=${cartRefId}&currency=INR&amount=${testAmount}&redirect_url=${redirect_url}&cancel_url=${redirect_url}&language=EN&billing_name=${this.selectedAddress.name}&billing_address=${this.selectedAddress.address}&billing_city=${this.selectedAddress.city}&billing_state=MH&billing_zip=${this.selectedAddress.pincode}&billing_country=India&billing_tel=${this.selectedAddress.phone}&delivery_name=${this.selectedAddress.name}&delivery_address=${this.selectedAddress.address}&delivery_city=${this.selectedAddress.city}&delivery_state=${this.selectedAddress.state}&delivery_zip=${this.selectedAddress.pincode}&delivery_country=India&delivery_tel=${this.selectedAddress.phone}&billing_email=${useremail}`
     
-    /*this.cartService.encryptdata(request).subscribe(
-      data => {
-      
-      }, error => {
-      console.log(error)
-      }
-      );*/
+  
 
 
 
 
 
-      this.subscriptions.push(
-        this.cartService.encryptdata(request).subscribe( data=>{
+     this.subscriptions.push(
+        this.cartService.encryptdata(request, testAmount).subscribe( data=>{
         //  console.log('---------------------', data)
 
           this.encRequestRes = data;
@@ -767,13 +769,21 @@ public onChangeQuantity(i, price) : void {
 
               setTimeout(()=>{
                   this.form.nativeElement.submit();
-                  //this.checkOutCCAvenue(this.encRequestRes);
-                  //console.log("+_+_+_+ ()( )()( ", this.encRequestRes);
+                  
               },1000)
         }, error => {
           console.log("++++++ Error",error)
           })
       )
+  }
+
+  public calculateTotal(cartData){
+    let total = 0;
+    for(var i=0;i<cartData.length;i++){
+      total = total + Number(cartData[i].itemTotal);
+    }
+
+    return total;
   }
 
   public checkOutCCAvenue(encryptedData){

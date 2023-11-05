@@ -277,6 +277,10 @@
                 placeholder="Postal-Code." required>
             </div>
           </div>
+          
+           
+
+         
 
           <!-- <div class="col-sm-2 form-group">
                   <label for="cod">Country code</label>
@@ -546,6 +550,28 @@
               <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
                 placeholder="Postal-Code." required>
             </div>
+          </div>
+
+
+         
+          
+          <div class="col-sm-6" *ngIf="selectedType === 'self' " >
+            <label for="State">Refered By*</label>
+            <select formControlName="refferedName" class="form-control" (change)="onChannelParterChange($event)">
+              <option disabled value="'Select '">Select </option>
+              <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.channelPartnerMaster.companyBusinessName}}</option>
+           
+
+            </select>
+          </div> 
+
+          <div class="col-sm-6" *ngIf="selectedType === 'others' " >
+            <label for="State">Refered By*</label>
+            <select formControlName="referedName" class="form-control" (change)="onChannelParterChange($event)">
+              <option disabled value="'Select '">Select </option>
+              <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.channelPartnerMaster.companyBusinessName}}</option>
+
+            </select>
           </div>
 <!-- 
           <div class="col-sm-12">

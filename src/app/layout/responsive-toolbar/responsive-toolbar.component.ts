@@ -144,7 +144,7 @@ export class ResponsiveToolbarComponent  implements OnInit{
 
     this.getCategories();
 
-    this.getProducts();
+    //this.getProducts();
 
     this.getOEMs();
 
