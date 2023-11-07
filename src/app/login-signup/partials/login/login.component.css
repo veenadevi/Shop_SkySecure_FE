@@ -61,10 +61,11 @@ input{
     display: flex;
     flex-direction: row;
     padding-top: 30px;
-
+justify-content: center;
+align-items: center;
 }
 .no-account-01{
-    padding-left: 26%;
+    padding-left: 0%;
     font-family: 'lato',sans-serif;
 }
 .no-account-02{
@@ -118,10 +119,120 @@ input{
     font-size: 12px;
     color: rgb(146, 5, 5);
 }
+.signin-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.resend{
+    text-align: center;
+    padding-top: 20px;
+}
+.re-OTP{
+    color: #b02a37;
+    cursor: pointer;
+    text-decoration: none;
+}
+:host ::ng-deep  .ng-otp-input-wrapper .otp-input {
+    margin-right: 16px !important;
+    font-size: 20px !important;
+} 
+.error-message {
+    font-size: 12px;
+    color: rgb(146, 5, 5);
+} 
+
+.disclaimer{
+    text-align: center;
+    font-size: 13px;
+    color: rgb(146, 5, 5);
+    padding-top: 10px;
+}
 
 
 
 /* media-query */
+
+@media  ( min-width: 1920px) and (max-width: 2560px) {
+    h1 {
+        font-size: 30px;
+        font-weight: bolder;
+        font-family: 'lato',sans-serif;
+        text-align: center;
+    }
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15%;
+    padding-top: 7px;
+    font-family: 'lato',sans-serif;
+}
+.no-account {
+    display: flex;
+    flex-direction: row;
+    padding-top: 30px;
+    justify-content: center;
+}
+.no-account-01 {
+    padding-left: 0;
+    font-family: 'lato',sans-serif;
+    font-size: 20px;
+}
+.no-account-02 {
+    color: #383DA9;
+    font-weight: bold;
+    font-family: 'lato',sans-serif;
+    cursor: pointer;
+    padding-left: 1%;
+    font-size: 20px;
+}
+.disclaimer {
+    text-align: center;
+    font-size: 18px;
+    color: rgb(146, 5, 5);
+    padding-top: 10px;
+}
+
+.resend {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 18px;
+}
+label {
+    padding-bottom: 5px;
+    font-weight: 500;
+    font-size: 20px;
+}
+input {
+    box-sizing: border-box;
+    border: 2px solid #918F90;
+    border-radius: 8px;
+    padding: 10px;
+    width: 85%;
+    font-size: 16px;
+}
+.primary-btn{
+    margin-top: 25px;
+    font-size: 25px;
+    cursor: pointer;
+}
+.primary-btn {
+    color: var(--white);
+    font-size: 22px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 9rem;
+    border-radius: 8px;
+    background: var(--btn-gradient);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
+    padding: 9px;
+}
+}
+
+
 @media  ( min-width: 1024px) and (max-width: 1200px)  {
 .back-btn{
     padding-top: 0px;
@@ -148,6 +259,19 @@ input{
 .error-message {
     font-size: 12px;
     color: rgb(146, 5, 5);
+}
+.no-account {
+    display: flex;
+    flex-direction: row;
+    padding-top: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.no-account-01 {
+    padding-left: 0%;
+    font-family: 'lato',sans-serif;
 }
 }
 
@@ -197,7 +321,7 @@ input{
     .form-group{
         display: flex;
         flex-direction: column;
-        padding-left: 0%;
+        padding-left: 4%;
         padding-top: 7px;
         font-family: 'lato',sans-serif;
     }
@@ -219,7 +343,7 @@ input{
     .no-account-01{
         padding-left: 0%;
         font-family: 'lato',sans-serif;
-        font-size: 12px;
+        font-size: 13px;
     }
     .no-account-02{
         color:#383DA9;
@@ -227,7 +351,7 @@ input{
         font-family: 'lato',sans-serif;
         cursor: pointer;
         padding-left: 1%;
-        font-size: 12px;
+        font-size: 13px;
     }
     
     .new-email-alert{
@@ -254,50 +378,96 @@ input{
         background-color: #080F24;
         height: 70px;
     }
-.buttons{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    /* column-gap: 15px; */
-}
-.signin-btn{
-    display: flex;
-    width: 40%;
-    margin: 5%;
-}
-.cancel-btn{
-    display: flex;
-    width: 40%;
-    margin: 5%;
-}
-.primary-btn{
-    box-sizing: border-box;
+    .buttons{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        column-gap: 15px;
+    }
+    .button-02{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        column-gap: 15px;
+    }
+    
+    .signin-btn{
+        display: flex;
+        /* width: 40%;
+        margin: 5%; */
+    }
+    .cancel-btn{
+        display: flex;
+        /* width: 40%;
+        margin: 5%; */
+    }
+    /* .primary-btn{
+        box-sizing: border-box;
+        border: none;
+        background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
+        border-radius: 5px;
+        padding: 5px;
+        width:6rem;
+        font-family: 'lato',sans-serif;
+        margin-top: 25px;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        margin-left: 0%;
+    } */
+    
+    .primary-btn{
+    margin-left: 0;
+    font-family: 'lato',sans-serif;
+    margin-top: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
     border: none;
-    /* background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%)); */
+    outline: none;
+    width: 6rem;
     border-radius: 5px;
-    padding: 5px;
-    width:100%;
+    background: var(--btn-gradient);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
+    }
+    
+    /* .secondary-btn{
+        box-sizing: border-box;
+        border: 1px solid  #080F24;
+        background-color: transparent;
+        border-radius: 5px;
+        padding: 5px;
+        width: 6rem;
+        font-family: 'lato',sans-serif;
+        margin-top: 25px;
+        color:  #080F24;
+        font-size: 15px;
+        cursor: pointer;
+    } */
+    .secondary-btn{
     font-family: 'lato',sans-serif;
     margin-top: 25px;
-    /* color: white; */
-    font-size: 15px;
     cursor: pointer;
-    margin-left: 0%;
-}
-
-.secondary-btn{
-    box-sizing: border-box;
-    /* border: 1px solid  #080F24; */
-    /* background-color: transparent; */
+    color: var(--primary-500-purple);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 6rem;
     border-radius: 5px;
+    background: var(--white);
+    border: 1px solid var(--primary-300-purple);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
     padding: 5px;
-    width: 100%;
-    font-family: 'lato',sans-serif;
-    margin-top: 25px;
-    /* color:  #080F24; */
-    font-size: 15px;
-    cursor: pointer;
-}
+    }
 .error-message {
     font-size: 12px;
     color: rgb(146, 5, 5);
@@ -345,14 +515,14 @@ input{
         box-sizing: border-box;
         border: 2px solid #918F90;
         border-radius: 8px;
-        padding: 7px;
+        padding: 5px;
         width: 95%;
         /* border: none; */
     }
     .form-group{
         display: flex;
         flex-direction: column;
-        padding-left: 0%;
+        padding-left: 2%;
         padding-top: 7px;
         font-family: 'lato',sans-serif;
     }
@@ -409,50 +579,96 @@ input{
         background-color: #080F24;
         height: 70px;
     }
-.buttons{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    /* column-gap: 15px; */
-}
-.signin-btn{
-    display: flex;
-    width: 40%;
-    margin: 5%;
-}
-.cancel-btn{
-    display: flex;
-    width: 40%;
-    margin: 5%;
-}
-.primary-btn{
-    box-sizing: border-box;
+    .buttons{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        column-gap: 15px;
+    }
+    .button-02{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        column-gap: 15px;
+    }
+    
+    .signin-btn{
+        display: flex;
+        /* width: 40%;
+        margin: 5%; */
+    }
+    .cancel-btn{
+        display: flex;
+        /* width: 40%;
+        margin: 5%; */
+    }
+    /* .primary-btn{
+        box-sizing: border-box;
+        border: none;
+        background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
+        border-radius: 5px;
+        padding: 5px;
+        width:6rem;
+        font-family: 'lato',sans-serif;
+        margin-top: 25px;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        margin-left: 0%;
+    } */
+    
+    .primary-btn{
+    margin-left: 0;
+    font-family: 'lato',sans-serif;
+    margin-top: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
     border: none;
-    /* background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%)); */
+    outline: none;
+    width: 6rem;
     border-radius: 5px;
-    padding: 5px;
-    width:100%;
+    background: var(--btn-gradient);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
+    }
+    
+    /* .secondary-btn{
+        box-sizing: border-box;
+        border: 1px solid  #080F24;
+        background-color: transparent;
+        border-radius: 5px;
+        padding: 5px;
+        width: 6rem;
+        font-family: 'lato',sans-serif;
+        margin-top: 25px;
+        color:  #080F24;
+        font-size: 15px;
+        cursor: pointer;
+    } */
+    .secondary-btn{
     font-family: 'lato',sans-serif;
     margin-top: 25px;
-    /* color: white; */
-    font-size: 15px;
     cursor: pointer;
-    margin-left: 0%;
-}
-
-.secondary-btn{
-    box-sizing: border-box;
-    /* border: 1px solid  #080F24; */
-    /* background-color: transparent; */
+    color: var(--primary-500-purple);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 6rem;
     border-radius: 5px;
+    background: var(--white);
+    border: 1px solid var(--primary-300-purple);
+    transition: all .3s ease;
+    box-shadow: 0 3px 6px #0000001a;
     padding: 5px;
-    width: 100%;
-    font-family: 'lato',sans-serif;
-    margin-top: 25px;
-    /* color:  #080F24; */
-    font-size: 15px;
-    cursor: pointer;
-}
+    }
 .error-message {
     font-size: 12px;
     color: rgb(146, 5, 5);
@@ -507,7 +723,7 @@ input{
     .form-group{
         display: flex;
         flex-direction: column;
-        padding-left: 0%;
+        padding-left: 5%;
         padding-top: 7px;
         font-family: 'lato',sans-serif;
     }
@@ -529,7 +745,7 @@ input{
     .no-account-01{
         padding-left: 0%;
         font-family: 'lato',sans-serif;
-        font-size: 12px;
+        font-size: 13px;
     }
     .no-account-02{
         color: #383DA9;
@@ -537,7 +753,7 @@ input{
         font-family: 'lato',sans-serif;
         cursor: pointer;
         padding-left: 1%;
-        font-size: 12px;
+        font-size: 13px;
     }
     
     .new-email-alert{
@@ -567,47 +783,93 @@ input{
     }
 .buttons{
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+}
+.button-02{
+    display: flex;
     flex-direction: row;
     width: 100%;
-    /* column-gap: 15px; */
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
 }
+
 .signin-btn{
     display: flex;
-    width: 40%;
-    margin: 5%;
+    /* width: 40%;
+    margin: 5%; */
 }
 .cancel-btn{
     display: flex;
-    width: 40%;
-    margin: 5%;
+    /* width: 40%;
+    margin: 5%; */
 }
-.primary-btn{
+/* .primary-btn{
     box-sizing: border-box;
     border: none;
-    /* background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%)); */
+    background: var(--button-primary, linear-gradient(180deg, #038 0%, #4A86EA 100%));
     border-radius: 5px;
     padding: 5px;
-    width:100%;
+    width:6rem;
     font-family: 'lato',sans-serif;
     margin-top: 25px;
-    /* color: white; */
+    color: white;
     font-size: 15px;
     cursor: pointer;
     margin-left: 0%;
+} */
+
+.primary-btn{
+margin-left: 0;
+font-family: 'lato',sans-serif;
+margin-top: 25px;
+font-size: 18px;
+cursor: pointer;
+color: var(--white);
+font-size: 14px;
+font-weight: 500;
+border: none;
+outline: none;
+width: 6rem;
+border-radius: 5px;
+background: var(--btn-gradient);
+transition: all .3s ease;
+box-shadow: 0 3px 6px #0000001a;
 }
 
-.secondary-btn{
+/* .secondary-btn{
     box-sizing: border-box;
     border: 1px solid  #080F24;
     background-color: transparent;
     border-radius: 5px;
     padding: 5px;
-    width: 100%;
+    width: 6rem;
     font-family: 'lato',sans-serif;
     margin-top: 25px;
     color:  #080F24;
     font-size: 15px;
     cursor: pointer;
+} */
+.secondary-btn{
+font-family: 'lato',sans-serif;
+margin-top: 25px;
+cursor: pointer;
+color: var(--primary-500-purple);
+font-size: 14px;
+font-weight: 500;
+border: none;
+outline: none;
+width: 6rem;
+border-radius: 5px;
+background: var(--white);
+border: 1px solid var(--primary-300-purple);
+transition: all .3s ease;
+box-shadow: 0 3px 6px #0000001a;
+padding: 5px;
 }
 .welcome-img{
     display: block;
@@ -632,32 +894,4 @@ input{
 }
 }
 
-.signin-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.resend{
-    text-align: center;
-    padding-top: 20px;
-}
-.re-OTP{
-    color: #b02a37;
-    cursor: pointer;
-    text-decoration: none;
-}
-:host ::ng-deep  .ng-otp-input-wrapper .otp-input {
-    margin-right: 16px !important;
-    font-size: 20px !important;
-} 
-.error-message {
-    font-size: 12px;
-    color: rgb(146, 5, 5);
-} 
 
-.disclaimer{
-    text-align: center;
-    font-size: 13px;
-    color: rgb(146, 5, 5);
-    padding-top: 10px;
-}

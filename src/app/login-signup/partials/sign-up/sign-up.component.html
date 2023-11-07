@@ -110,7 +110,9 @@
          <div class="resend" *ngIf="isResend" >
           <span>{{display}}  <a class="re-OTP" (click)="onSubmitEmail()">Resend OTP</a></span>
        </div>
-
+       <div class="disclaimer" *ngIf="isMobile">
+        * Please Enter Valid Whatsapp Number To Recieve OTP.
+       </div>
         
             <div class="signin-btn">
               <button (click)="validateOTP()" class="btn primary-btn">Sign up</button>

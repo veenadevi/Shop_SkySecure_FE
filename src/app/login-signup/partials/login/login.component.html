@@ -86,7 +86,7 @@
 <div class="forgot-pwd">
             <!-- <span class="psw"> <a href="#">Forgot password?</a></span> -->
           </div>
-          <div class="buttons">
+          <div class="button-02">
           <ng-container *ngIf="enableOTPButton">
               <div class="signin-btn">
                 <button (click)="onSubmit()" class="btn primary-btn">Send OTP</button>
@@ -120,16 +120,19 @@
           
           <div class="buttons">
           <ng-container *ngIf="enableSignInButton">
-
+<div class="OTP-timer">
             <div class="resend" *ngIf="!isResend" >
               <span>{{display}}  <a class="re-OTP" >Seconds Left</a></span>
            </div>
            <div class="resend" *ngIf="isResend" >
             <span>{{display}}  <a class="re-OTP" (click)="onSubmit()">Resend OTP</a></span>
          </div>
+
+        </div>
          <div class="disclaimer" *ngIf="isMobile">
           * Please Enter Valid Whatsapp Number To Recieve OTP.
          </div>
+         <div class="button-02">
             <div class="signin-btn">
               <button (click)="login()" class="btn primary-btn">Sign In</button>
               
@@ -138,6 +141,7 @@
             <div class="cancel-btn">
               <button (click)="navigateToHomePage()" class="secondary-btn">Cancel</button>
             </div>
+          </div>
           </ng-container>
         
           </div>
