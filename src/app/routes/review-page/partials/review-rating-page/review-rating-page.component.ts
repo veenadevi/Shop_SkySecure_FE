@@ -141,7 +141,9 @@ export class ReviewRatingPageComponent  {
 
     goToProductReviewpage() {
       var product= this.metaDataStore.getProductReviewDetails();
-      this.router.navigate([`/review-page/review-detail-page/${product?.productId}`]);
+
+      this.router.navigate([`/review-page/review-detail-page/${product?.productId}`],{
+        queryParams: { isFromSecondPage: true } });
     }
 
 
