@@ -15,7 +15,7 @@
           <label for="emailOrMobile">Email or Mobile Number</label>
           <input type="text" class="form-control" id="emailOrMobile" 
           formControlName="emailOrMobile" 
-          placeholder="Enter your email or mobile number"
+          placeholder="Enter your email or Whatsapp number"
           
           >
           <!-- <div *ngIf="signupForm.get('emailOrMobile').hasError('invalidEmailOrMobile') && signupForm.get('emailOrMobile').touched">
@@ -53,10 +53,11 @@
               <ng-otp-input  
                 #ngOtpInput 
                 
-                formControlName="otp"
+               
                 (onInputChange)="onOtpChange($event)"
                 *ngIf="showOtpComponent"
                 [config]="config"
+                
               ></ng-otp-input>
             </div>
         
@@ -134,7 +135,7 @@
 
 
     <div class="register-form">
-        <form [formGroup]="form">
+        <form [formGroup]="form" >
 
           <div class="form-group">
             <label>Email</label>
@@ -165,51 +166,10 @@
       
 
       
-          <!-- <div class="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              formControlName="password"
-              placeholder="Type here..."
-              class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-            />
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-              <div *ngIf="f.password.errors.required">Password is required</div>
-              <div *ngIf="f.password.errors.minlength">
-                Secure your account with atleast 6 characters
-              </div>
-              <div *ngIf="f.password.errors.maxlength">
-                Password must not exceed 40 characters
-              </div>
-            </div>
-          </div>
-      
-          <div class="form-group">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              formControlName="confirmPassword"
-              placeholder="..........."
-              class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
-            />
-            <div
-              *ngIf="submitted && f.confirmPassword.errors"
-              class="invalid-feedback"
-            >
-              <div *ngIf="f.confirmPassword.errors.required">
-                Confirm Password is required
-              </div>
-              <div *ngIf="f.confirmPassword.errors.matching">
-                Confirm Password does not match
-              </div>
-            </div>
-          </div> -->
-
+          
 
           <!-- Company Name-->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Company Name</label>
             <input
               type="text"
@@ -221,6 +181,20 @@
             <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
               <div *ngIf="f.companyName.errors.required">Oops! You forgot to provide your Company Name.</div>
             </div>
+          </div> -->
+
+          <!-- Company Name Dropdown -->
+          <div class="form-group">
+            <label>Company Name</label>
+            <input 
+              [ngModelOptions]="{standalone: true}"
+              list="id-car" 
+              [(ngModel)]="selectedCar" 
+              value="{{(selectedCarObj && selectedCarObj.length>0)  ? selectedCarObj.company : ''}}"
+              (ngModelChange)="onChange()">
+            <datalist id="id-car">
+              <option *ngFor="let car of myCustomers" [value]="car.company">{{car.company}}</option>
+            </datalist>
           </div>
 
           <!-- Mobile Number-->
@@ -229,7 +203,7 @@
             <input
               type="number"  ng-maxlength="5"
               formControlName="mobileNumber"
-              placeholder="10 Digit MobileNumber"
+              placeholder="Enter your Whatsapp Number"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }"
               maxlength="10" 
@@ -246,10 +220,12 @@
           
       
           <div class="form-group">
-
-            <div *ngIf="isSignupError">
-              <div class="error-message">SignUp Failed! Please try again</div>
+            <div *ngIf="isSignupError" class="new-email-alert">
+              The Email or Mobile Number Already exists. Please Try Again. 
             </div>
+            <!-- <div *ngIf="isSignupError">
+              <div class="error-message">SignUp Failed! Please try again</div>
+            </div> -->
             <div class="btns">
 
               <button (click)="onSubmit()" class="btn btn-primary">Register</button>

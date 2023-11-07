@@ -11,6 +11,8 @@ import { SuperAdminService } from 'src/shared/services/super-admin-service/super
 import { CartStore } from 'src/shared/stores/cart.store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
+import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
+import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 
 @Component({
   selector: 'app-gst-prompt-modal',
@@ -49,6 +51,9 @@ export class GstPromptModalComponent implements OnInit{
   public selectedState : any;
   public selectedCity : any;
 
+  public selectedChannelPartnerId:any;
+  public selectedChannelPartnerAdminId:any
+public refferedName :any;
   public form: FormGroup;
 
   public othersGSTShow = false;
@@ -90,7 +95,10 @@ export class GstPromptModalComponent implements OnInit{
     private superAdminService : SuperAdminService,
     private cartStore : CartStore,
     private spinner: NgxSpinnerService,
-    private toaster : ToasterNotificationService
+    private toaster : ToasterNotificationService,
+    private adminPageService : AdminPageService,
+    
+    private superAdminStore : SuperAdminStore,
   ){
     //this.myForm = this.fb.group({
     this.myForm = this.fb.group({
@@ -108,7 +116,7 @@ export class GstPromptModalComponent implements OnInit{
     this.setForm();
     this.setSelfData();
     
-    
+    this.getAllMyCustomers();
     
   }
 
@@ -132,7 +140,8 @@ export class GstPromptModalComponent implements OnInit{
         phoneNo : [],
         firstName : [],
         email : ['', [Validators.required, Validators.email]],
-       checkTerms : [null]
+       checkTerms : [null],
+       refferedName : []
       }
     )
   }
@@ -241,6 +250,19 @@ disableCheckGstNil(){
   }
 
 
+  public onChannelParterChange(event){
+    
+    
+    console.log("selected partner id ==",event)
+    
+    let partner = JSON.parse(event.target.value);
+    this.selectedChannelPartnerId = partner._id;
+    this.selectedChannelPartnerAdminId=partner.adminUsers[0]._id
+    console.log("selected partner id ==",this.selectedChannelPartnerId)
+    
+
+  }
+
   public onRadioButtonClick(){
     
 
@@ -314,7 +336,7 @@ public submitCityError : boolean = false;
 
   //   }
   // }
-  else if( (this.myForm.get('checkGstNil').value !== null || this.myForm.get('checkGstNil').value === true) &&    (this.myForm.get('cityName').value === null || this.myForm.get('cityName').value.length<=0 || this.myForm.get('stateName').value === null || this.myForm.get('stateName').value.length<=0)){
+  else if( (this.myForm.get('checkGstNil').value !== null || this.myForm.get('checkGstNil').value === true) &&    (this.myForm.get('cityName').value === null || this.myForm.get('cityName').value.length<=0 || this.myForm.get('stateName').value === null || this.myForm.get('stateName').value.length<=0 || this.myForm.get('postalCode').value === null || this.myForm.get('postalCode').value.length<=0 || this.myForm.get('addressLine1').value === null || this.myForm.get('addressLine1').value.length<=0 )){
    
     this.submitErrorMessageText = "Please fill mandaotry Fields";
     this.submitCityError = true;
@@ -350,6 +372,7 @@ public submitCityError : boolean = false;
     if(this.gstData){
       req.billing_address = {
         "attention": "name",
+        
         "address": this.gstResponseData.adress.floor,
         "street2": this.gstResponseData.adress.street,
         "state_code": this.selectedState.isoCode,
@@ -378,6 +401,9 @@ public submitCityError : boolean = false;
     
 
     req.currency_id = "1014673000000000064";
+    req.selectedChannelPartnerId= this.selectedChannelPartnerId
+
+    req.selectedChannelPartnerAdminId=this.selectedChannelPartnerAdminId
    
 
     req.RequestingForOther = (this.selectedType === 'others') ? true : false;
@@ -419,7 +445,7 @@ public submitCityError : boolean = false;
 
 
 
-  
+  console.log("req passing for quote ===",req)
 
 
     
@@ -429,7 +455,7 @@ public submitCityError : boolean = false;
 
 
 
-    this.spinner.show();
+   this.spinner.show();
     
     this.subscriptions.push(
       this.cartService.createQuotation(req).subscribe( response => {
@@ -457,8 +483,9 @@ public submitCityError : boolean = false;
         this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
       }
       ),
+    
       
-    )
+    )  
    
 
     }
@@ -827,4 +854,28 @@ public errorMessage: boolean = false;
       this.errorMessage=false;
     }
   }
+
+  public accountData : any;
+  public allMarketPlaceList : any;
+ 
+  public channelPartnerList : any = [];
+
+
+  public getAllMyCustomers(){
+
+    this.subscriptions.push(
+      this.superAdminService.getAllChannelPartners().subscribe(res=>{
+        console.log("_+_+_+_+_+_ API Result ", res);
+        this.channelPartnerList = res.channelPartners;
+        // this.spinner.hide();
+      },
+      error => {
+        this.spinner.hide();
+        this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+      })
+    )
+
+  }
+
+
 }

@@ -1,0 +1,39 @@
+<div class="review-average-container">
+    <div class="overall-rating-section">
+        <label class="overall-headline">Overall Rating</label>
+        <div class="star-rating">
+            <span class="star" *ngFor="let _ of [].constructor(5)">&#9733;</span>
+        </div>
+    </div>
+
+    <div class="vertical-line"></div>
+
+    <div class="overall-vote-section">
+        <div class="rating-bar-details">
+            <span class="Rated-star">&#9733;</span>
+            <span class="rate-value">5</span>
+            <mat-progress-bar style="margin-left: 8px;" mode="determinate" value="80"></mat-progress-bar>
+        </div>
+        <div class="rating-bar-details">
+            <span class="Rated-star">&#9733;</span>
+            <span class="rate-value">4</span>
+            <mat-progress-bar style="margin-left: 8px;" mode="determinate" value="60"></mat-progress-bar>
+        </div>
+        <div class="rating-bar-details">
+            <span class="Rated-star">&#9733;</span>
+            <span class="rate-value">3</span>
+            <mat-progress-bar style="margin-left: 8px;" mode="determinate" value="50"></mat-progress-bar>
+        </div>
+        <div class="rating-bar-details">
+            <span class="Rated-star">&#9733;</span>
+            <span class="rate-value">2</span>
+            <mat-progress-bar style="margin-left: 8px;" mode="determinate" value="20"></mat-progress-bar>
+        </div>
+        <div class="rating-bar-details">
+            <span class="Rated-star">&#9733;</span>
+            <span class="rate-value">1</span>
+            <mat-progress-bar style="margin-left: 8px;" mode="determinate" value="10"></mat-progress-bar>
+        </div>
+    </div>
+
+</div>

@@ -170,13 +170,13 @@ export class CustomBreadCrumbComponent {
   private updateBreadcrumb(): void {
     // Update your breadcrumb items based on the new 'product' and 'prdType'
     this.items = [
-      { label: this.categoryName, id: 'cat' },
-      { label: this.subCategoryName, id: 'subCat' },
+      { label: this.product.categories[0].name, id: 'cat' },
+      { label: this.product.subcategories.name, id: 'subCat' },
       { label: this.oemName, id: 'brand' },
       { label: this.product.name, id: 'name' },
     ];
     this.home = { icon: 'pi pi-home', routerLink: '/', id: 'home' };
-    console.log("items", this.product.name, this.home);
+    console.log(" this.product.categories[0].name", this.product.categories[0].name,"this.product.subcategories.name,",this.product.subcategories.name);
   }
 
 

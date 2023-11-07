@@ -78,7 +78,7 @@
 
               <ng-container *ngIf="selectedType !== 'others'">
 
-                  <p>Please Enter Company GST Number</p>
+                  <p>Please Enter Company GST Number <a class="find-gst" href="https://www.knowyourgst.com/gst-number-search/by-name-pan/" target="_blank">(Search your GSTIN)</a></p>
 
 
                   <div class="col-sm-11 form-group">
@@ -106,7 +106,7 @@
 
               <ng-container *ngIf="othersGSTShow">
 
-                <p>Please Enter Company GST Number</p>
+                <p>Please Enter Company GST Number <a class="find-gst" href="https://www.knowyourgst.com/gst-number-search/by-name-pan/" target="_blank">(Search your GSTIN)</a></p>
 
 
                 <div class="col-sm-11 form-group">
@@ -222,12 +222,12 @@
 
           <div class="address-row" *ngIf="selectedType === 'hide'">
             <div class="col-sm-6 form-group">
-              <label for="address-1">Address Line-1</label>
+              <label for="address-1">Address Line-1*</label>
               <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
                 id="address-1" placeholder="Locality/House/Street no." required>
             </div>
             <div class="col-sm-6 form-group">
-              <label for="address-2">Address Line-2</label>
+              <label for="address-2">Address Line-2*</label>
               <input formControlName="addressLine2" type="address" class="form-control-01" name="address" id="address-2"
                 placeholder="Village/City Name." required>
             </div>
@@ -272,11 +272,15 @@
               </select>
             </div>
             <div class="col-sm-6 form-group">
-              <label for="zip">Postal-Code</label>
+              <label for="zip">Postal-Code*</label>
               <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
                 placeholder="Postal-Code." required>
             </div>
           </div>
+          
+           
+
+         
 
           <!-- <div class="col-sm-2 form-group">
                   <label for="cod">Country code</label>
@@ -353,12 +357,12 @@
           <ng-container *ngIf="selectedType === 'others'">
             <div class="address-row" *ngIf="selectedType === 'others'">
               <div class="col-sm-6 form-group">
-                <label for="address-1">Address Line-1</label>
+                <label for="address-1">Address Line-1*</label>
                 <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
                   id="address-1" placeholder="Locality/House/Street no." required>
               </div>
               <div class="col-sm-6 form-group">
-                <label for="address-2">Address Line-2</label>
+                <label for="address-2">Address Line-2*</label>
                 <input formControlName="addressLine2" type="address" class="form-control-01" name="address"
                   id="address-2" placeholder="Village/City Name." required>
               </div>
@@ -422,7 +426,7 @@
                 </select>
               </div>
               <div class="col-sm-6 form-group">
-                <label for="zip">Postal-Code</label>
+                <label for="zip">Postal-Code*</label>
                 <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
                   placeholder="Postal-Code." required>
               </div>
@@ -467,12 +471,12 @@
 
           <div class="address-row" *ngIf="selectedType === 'self'">
             <div class="col-sm-6 form-group">
-              <label for="address-1">Address Line-1</label>
+              <label for="address-1">Address Line-1*</label>
               <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
                 id="address-1" placeholder="Locality/House/Street no." required>
             </div>
             <div class="col-sm-6 form-group">
-              <label for="address-2">Address Line-2</label>
+              <label for="address-2">Address Line-2*</label>
               <input formControlName="addressLine2" type="address" class="form-control-01" name="address" id="address-2"
                 placeholder="Village/City Name." required>
             </div>
@@ -542,10 +546,32 @@
               </select>
             </div>
             <div class="col-sm-6 form-group">
-              <label for="zip">Postal-Code</label>
+              <label for="zip">Postal-Code*</label>
               <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
                 placeholder="Postal-Code." required>
             </div>
+          </div>
+
+
+         
+          
+          <div class="col-sm-6" *ngIf="selectedType === 'self' " >
+            <label for="State">Refered By*</label>
+            <select formControlName="refferedName" class="form-control" (change)="onChannelParterChange($event)">
+              <option disabled value="'Select '">Select </option>
+              <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.channelPartnerMaster.companyBusinessName}}</option>
+           
+
+            </select>
+          </div> 
+
+          <div class="col-sm-6" *ngIf="selectedType === 'others' " >
+            <label for="State">Refered By*</label>
+            <select formControlName="referedName" class="form-control" (change)="onChannelParterChange($event)">
+              <option disabled value="'Select '">Select </option>
+              <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.channelPartnerMaster.companyBusinessName}}</option>
+
+            </select>
           </div>
 <!-- 
           <div class="col-sm-12">
