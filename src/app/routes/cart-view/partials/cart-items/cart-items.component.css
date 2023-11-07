@@ -51,6 +51,7 @@
     width: 4em;
     height: 2em;
     text-align: center;
+    font-size: 13px;
 }
 
 .table{
@@ -77,6 +78,7 @@
     text-align: center;
     -webkit-appearance: none;
     line-height: 1%;
+    font-size: 13px;
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {

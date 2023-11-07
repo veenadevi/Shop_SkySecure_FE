@@ -95,7 +95,7 @@ export class QuotationHistoryComponent implements OnInit {
  
 }
 
-  public getAccountById(account){
+  public getAccountById(account, status){
 
     let acc = JSON.stringify(account);
     let queryParams ={
@@ -103,7 +103,14 @@ export class QuotationHistoryComponent implements OnInit {
 
     }
 
-    this.router.navigate(['user-profile/quotation-summary'], {queryParams: queryParams});
+    if(status === 'In Cart'){
+      this.router.navigate(['/cart']);
+    }
+    else{
+      this.router.navigate(['user-profile/quotation-summary'], {queryParams: queryParams});
+    }
+
+    
 
    // this.router.navigate(['/admin-page/accounts-details'], {queryParams: queryParams});
   }

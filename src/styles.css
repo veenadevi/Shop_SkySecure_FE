@@ -280,6 +280,24 @@ body{
   background-color: var(--primary-500-purple);
 }
 
+.link-btn{
+  color: var(--primary-500-purple);
+  font-size: 13px;
+  transition: all .3s ease;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.link-btn:hover {
+  transform: translateY(-2px);
+  color: var(--primary-700-purple);
+}
+
+.link-btn:active {
+  transform: translateY(2px);
+  color: var(--primary-500-purple);
+}
 
 #custom-checkbox{
   accent-color: var(--primary-500-purple);

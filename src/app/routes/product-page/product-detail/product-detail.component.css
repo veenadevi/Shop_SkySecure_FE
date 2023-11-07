@@ -2189,6 +2189,30 @@ border-color:var(--primary-400-purple);
   padding-left: 5px;
   font-size: 14px;
 }
+
+.review-container-section {
+  display: flex;
+  align-items: center;
+}
+
+.review-container {
+  background-color: #fff;
+    margin: 1%;
+    padding: 1.25rem;
+    width: 100%;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    font-family: 'lato',sans-serif;
+}
+
+.review-headline {
+  width: 100%;
+}
+
+
+
+
+
 /* <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
 /* media-query */

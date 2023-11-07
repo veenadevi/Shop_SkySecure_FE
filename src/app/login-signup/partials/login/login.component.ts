@@ -1,8 +1,8 @@
 import { Component,ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import Validation from '../utils/validation';
 import { AuthService } from 'src/shared/services/auth.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
@@ -11,6 +11,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import * as CryptoJS from 'crypto-js';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { NgOtpInputConfig } from 'ng-otp-input';
+ 
  
 
 @Component({
@@ -21,11 +22,12 @@ import { NgOtpInputConfig } from 'ng-otp-input';
 export class LoginComponent {
 
   form: FormGroup;
+
   submitted = false;
   otp:any
   showOtpComponent = true;
-  @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any;
-
+  // @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any;
+  @ViewChild('ngOtpInput') ngOtpInputRef:any;
   private subscriptions : Subscription[] = [];
 
   public params : any;
@@ -43,6 +45,15 @@ export class LoginComponent {
   public otpField : boolean = false;
 
   public timerInterval: any;
+
+  public isMobile: boolean = false;
+
+  public isResend:boolean=false;
+
+  static isMobile: boolean;
+
+
+
 
   display: any;
 
@@ -74,7 +85,7 @@ export class LoginComponent {
 
     this.form = this.formBuilder.group(
       {
-        email: [this.emailViaSignup, [Validators.required, Validators.email]],
+        emailOrMobile: [this.emailViaSignup, [Validators.required,emailOrMobileValidator]],
         otp : []
         /*password: [
           '',
@@ -92,10 +103,22 @@ export class LoginComponent {
     let formValue = this.form.value;
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
     let hashedPass = CryptoJS.AES.encrypt(formValue.password, key).toString();
+
+
+
+
+
+    const mobilePattern = /^\d{10}$/;
+    this.isMobile= mobilePattern.test(this.form.value.emailOrMobile) 
+
+    this.isResend=false
+
+    
     let req = {
     
-      "email":formValue.email,
+      "email":formValue.emailOrMobile,
       "password":hashedPass,
+      "isMobile": this.isMobile,
      
       }
       // console.log("*(*(*(*(*(*( ",req);
@@ -117,18 +140,23 @@ export class LoginComponent {
     
     this.submitted = true;
     this.signUpSuccess=false
+    this.isResend=false
     
     if (this.form.invalid) { // If Invalid Return
       return;
     }
     else{ // If Valid
       
-      
+      const mobilePattern = /^\d{10}$/;
+      this.isMobile= mobilePattern.test(this.form.value.emailOrMobile) 
+  
+      this.isResend=false
     
-      console.log("*(*(*(*(* ", this.form.value.email);
+      console.log("*(*(*(*(* ", this.form.value.emailOrMobile);
       let req = {
-        "emailId" : this.form.value.email,
-        "action":"login"
+        "emailId" : this.form.value.emailOrMobile,
+        "action":"login",
+        "isMobile": this.isMobile,
       }
       this.subscriptions.push(
         this.userProfileService.sendOTP(req).subscribe(
@@ -196,25 +224,26 @@ export class LoginComponent {
 
   timer(minute) {
     // let minute = 1;
-    let seconds: number = minute * 45;
+    let seconds: number = minute * 59;
     let textSec: any = '0';
-    let statSec: number = 45;
+    let statSec: number = 59;
 
     const prefix = minute < 10 ? '0' : '';
 
     this.timerInterval = setInterval(() => {
       seconds--;
       if (statSec != 0) statSec--;
-      else statSec = 45;
+      else statSec = 59;
 
       if (statSec < 10) {
         textSec = '0' + statSec;
       } else textSec = statSec;
 
-      this.display = `${prefix}${Math.floor(0.45)}:${textSec}`;
+      this.display = `${prefix}${Math.floor(0.59)}:${textSec}`;
 
       if (seconds == 0) {
         console.log('finished');
+        this.isResend=true
         clearInterval(this.timerInterval);
       }
     }, 1000);
@@ -222,15 +251,23 @@ export class LoginComponent {
 
 
   public login(){
-    //Login Logic
+  
 
-    //var passKey= "!ndia2320@securesky";
+    const mobilePattern = /^\d{10}$/;
+    this.isMobile= mobilePattern.test(this.form.value.emailOrMobile) 
+
+    this.isResend=false
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
       let hashedPass = CryptoJS.AES.encrypt(this.otp, key).toString();
-      let req = {
-        "emailId":this.form.value.email,
-        //"emailId" : "veena@skysecuretech.com",
-        "otp": hashedPass
+      // let req = {
+      //   "emailId":this.form.value.email,
+      //   //"emailId" : "veena@skysecuretech.com",
+      //   "otp": hashedPass
+      // }
+      let req={
+        "emailId":(!this.isMobile)?this.form.value.emailOrMobile:'',
+        "otp": hashedPass,
+        "mobileNumber":(this.isMobile)?this.form.value.emailOrMobile:'',
       }
 
       this.subscriptions.push(
@@ -240,18 +277,24 @@ export class LoginComponent {
             this.callSignIn();
           }
           else{
+            // console.log("INSIDE INVALID OTP " );
             this.inValidOTP=true;
-            this.form.get('otp').reset();
+          
+            let eleId=this.ngOtpInputRef.getBoxId(0);
+            this.ngOtpInputRef.focusTo(eleId);
+            //console.log("eleId",eleId)
+            this.ngOtpInputRef.setValue(''); 
+            // this.form.get('otp').reset();
             this.enableSignInButton = true;
           //  this.enableOTPButton = true;
           //  this.newEmailAlert = true;
             this.otpField = true;
           }
         })
-      )
-
-    
+      ) 
   }
+
+  
 
   public callSignIn(){
 
@@ -259,14 +302,17 @@ export class LoginComponent {
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
       let hashedPass = CryptoJS.AES.encrypt(passKey, key).toString();
       let req = {
-        "emailId":this.form.value.email,
-        "password": hashedPass
+        "emailOrMobile":this.form.value.emailOrMobile,
+        "password": hashedPass,
+        "isMobile":this.isMobile
       }
       this.subscriptions.push(
         this.authService.signin(req).subscribe( res=> {
           
           localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
           var decoded = jwtDecode(res.data);
+
+          //console.log("decoded value=====",decoded)
           
           this.userAccountStore.setUserDetails(decoded);
           
@@ -309,8 +355,8 @@ export class LoginComponent {
     disableAutoFocus: false,
     placeholder: "",
     inputStyles: {  
-      width: "50px",
-      height: "50px",
+      width: "43px",
+      height: "43px", 
     },
   };
    
@@ -337,3 +383,34 @@ export class LoginComponent {
   }
 }
 
+export  function emailOrMobileValidator(control: AbstractControl):Observable<ValidationErrors | any>  {
+  console.log("passing email as====", control.value)
+
+  //console.log("is access?", this.isMobile)
+
+  const value = control.value;
+  //let invalidEmailOrMobile: any = false;
+  if (value) {
+    // Regular expression for email validation
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    // Regular expression for mobile number validation (adjust it based on your requirements)
+    const mobilePattern = /^\d{10}$/;
+    if (emailPattern.test(value) || mobilePattern.test(value)) {
+
+      if (mobilePattern.test(value)) {
+
+        LoginComponent.isMobile = true;
+      }
+      return null;
+
+    }
+  }
+  
+ // invalidEmailOrMobile=true
+  //console.log("what is validatation result ==", invalidEmailOrMobile)
+ 
+
+  return of( {invalidEmailOrMobile:true});
+
+
+}

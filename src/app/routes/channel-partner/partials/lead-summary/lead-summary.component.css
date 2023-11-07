@@ -189,8 +189,7 @@ h4{
     padding:8px;
     margin: 10px;
     border-radius: 8px;
-    width: 94%;
-font-size: 13px;
+    font-size: 13px;
 }
 label{
     color: #4E4C4D;
@@ -278,7 +277,14 @@ option{
     padding: 6px;
 }
 
+svg {
+    color: var(--primary-500-purple);
+    height: 20px;
+}
 
+svg:hover {
+    color: var(--primary-700-purple);
+}
 
  /* //media query// */
 

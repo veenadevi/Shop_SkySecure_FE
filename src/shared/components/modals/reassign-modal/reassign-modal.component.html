@@ -1,7 +1,7 @@
 <div class="reason-container">
   <div class="modal-header">
     <span>
-        Select Invoice Due Date
+        Update Comments/Reasons
     </span>
     <div class="close-btn-section">
         <button (click)="closeModal()" type="button" class="close" aria-label="Close">
@@ -10,13 +10,8 @@
     </div>
 </div>
 
-    <!-- <h3 class="reason-headline">Reason To Reassign or Reject</h3>
-    <div class="close-btn-section">
-      <button (click)="closeModal()" type="button" class="close" aria-label="Close">
-          <img class="close-icon" src="../../../../assets/icons/closecircle.svg">
-      </button>
-  </div> -->
-    <form>
+    
+    <form [formGroup]="form">
         <div class="message-text-style">
             <span class="p-float-label">
               <textarea 
@@ -24,13 +19,16 @@
                 formControlName="messageText"
                 pInputTextarea></textarea>
               <label for="messageText">Message</label>
+              <div *ngIf="submitted && f.messageText.errors">
+                <div *ngIf="submitted && f.messageText.errors.required" class="error-message">Reason is required</div>
+              </div>
             </span>
           </div>
     </form>
 
     <div class="button-section">
         <button class="btn primary-btn alert-btn" (click)="closeModal()">Reject</button>
-        <button class="btn primary-btn">Reassign</button>
+        <button class="btn primary-btn" (click)="reAssign()">Reassign</button>
     </div>
 
 </div>

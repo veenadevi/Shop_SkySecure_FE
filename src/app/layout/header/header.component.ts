@@ -34,7 +34,8 @@ import { NotificationsStore } from 'src/shared/stores/notifications.store';
 
 export class HeaderComponent implements OnInit{
  
-
+  @Input('matTooltip')
+  @Input('matTooltipPosition')
   @Output() loginEvent = new EventEmitter();
   
   public menuClicked = false;
@@ -134,7 +135,7 @@ export class HeaderComponent implements OnInit{
     map(data => {
       if(data){
                 // this.userDetails = data.userDetails;
-        // console.log("++++++++++ Came inside User", this.userDetails);
+       // console.log("++++++++++ Came inside User", data);
         return data;
       }
       else{
@@ -174,7 +175,7 @@ export class HeaderComponent implements OnInit{
       map(data => {
         if(data){
           
-        //  console.log("++_+_+_ ()()( *** ", data);
+         //console.log("++_+_+_ ()()( *** ", data);
           this.notificationList = data;
           //this.numberOf = data.length;
           return data;
@@ -226,7 +227,7 @@ export class HeaderComponent implements OnInit{
     
     this.spinnerService.show();
     this.subscriptions.push(this.userDetails$.subscribe(res => {
-      if(res && res.email){
+      if(res &&(res.email || res.mobileNumber)){
         this.userLoggedIn = true;
       }
       else{
@@ -279,7 +280,7 @@ export class HeaderComponent implements OnInit{
 
 
     this.getCategories();
-    this.getProducts();
+    //this.getProducts();
     this.getOEMs();
     this.getTrendingProducts();
     //this.getCartId();

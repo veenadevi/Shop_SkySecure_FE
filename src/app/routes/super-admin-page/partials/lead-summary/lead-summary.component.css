@@ -192,9 +192,15 @@ h4{
     padding:8px;
     margin: 10px;
     border-radius: 8px;
-    width: 94%;
     font-size: 13px;
 }
+.save-btn {
+    color: var(--primary-500-purple);
+    background: none;
+    outline: none;
+    border: none;
+}
+
 label{
     color: #4E4C4D;
     font-size: 13px;
@@ -249,6 +255,11 @@ option{
     width: 100%;
     font-size: 12px;
     padding: 6px;
+}
+
+svg {
+    /* color: var(--primary-500-purple); */
+    height: 20px;
 }
 
 /* //media query// */

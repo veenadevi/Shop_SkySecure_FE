@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, map } from 'rxjs';
@@ -10,7 +10,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 import { GetReasonModalComponent } from 'src/shared/components/modals/get-reason-modal/get-reason-modal.component';
 
-
 @Component({
   selector: 'account-list',
   templateUrl: './account-list.component.html',
@@ -18,6 +17,8 @@ import { GetReasonModalComponent } from 'src/shared/components/modals/get-reason
 })
 export class AccountListComponent implements OnInit{
   
+  @Input('matTooltip')
+  @Input('matTooltipPosition')
 
   public subscriptions : Subscription[] = [];
 
@@ -29,7 +30,6 @@ export class AccountListComponent implements OnInit{
 
 
 
-   
 
 
   constructor(

@@ -114,7 +114,10 @@ input{
 
 }
 
-
+.error-message {
+    font-size: 12px;
+    color: rgb(146, 5, 5);
+}
 
 
 
@@ -141,6 +144,10 @@ input{
     padding-left: 5%;
     padding-top: 7px;
     font-family: 'lato',sans-serif;
+}
+.error-message {
+    font-size: 12px;
+    color: rgb(146, 5, 5);
 }
 }
 
@@ -291,7 +298,10 @@ input{
     font-size: 15px;
     cursor: pointer;
 }
-
+.error-message {
+    font-size: 12px;
+    color: rgb(146, 5, 5);
+}
 
 }
 
@@ -443,7 +453,10 @@ input{
     font-size: 15px;
     cursor: pointer;
 }
-
+.error-message {
+    font-size: 12px;
+    color: rgb(146, 5, 5);
+}
 
 }
 
@@ -632,4 +645,19 @@ input{
     color: #b02a37;
     cursor: pointer;
     text-decoration: none;
+}
+:host ::ng-deep  .ng-otp-input-wrapper .otp-input {
+    margin-right: 16px !important;
+    font-size: 20px !important;
+} 
+.error-message {
+    font-size: 12px;
+    color: rgb(146, 5, 5);
+} 
+
+.disclaimer{
+    text-align: center;
+    font-size: 13px;
+    color: rgb(146, 5, 5);
+    padding-top: 10px;
 }
