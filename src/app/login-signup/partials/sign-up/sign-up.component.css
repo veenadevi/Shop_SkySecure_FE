@@ -799,3 +799,108 @@ input[type="number"]::-webkit-outer-spin-button {
     height: 43px;
     
 }
+.disclaimer{
+    text-align: center;
+    font-size: 13px;
+    color: rgb(146, 5, 5);
+    padding-top: 10px;
+}
+
+@media  ( min-width: 1920px) and (max-width: 2560px) {
+    .heading{
+        font-family: 'lato',sans-serif;
+        padding: 6% 0 0 0;
+        margin-top: 25%;
+    }
+    .signup-container{
+        display: flex;
+        padding: 10%;
+        flex-direction: column;
+        row-gap: 20%;
+        margin-top: 5%;
+    }
+    h1{
+        font-size: 24px;
+        font-weight: bolder;
+        font-family: 'lato',sans-serif;
+        text-align: center;
+    }
+    label{
+        padding-bottom: 5px;
+        font-weight: 500;
+        font-size: 20px;
+    }
+    .primary-btn{
+        margin-top: 25px;
+        color: white;
+        font-size: 22px;
+        cursor: pointer;
+    }
+    .primary-btn {
+        color: var(--white);
+        font-size: 20px;
+        font-weight: 500;
+        border: none;
+        outline: none;
+        width: 9rem;
+        border-radius: 8px;
+        background: var(--btn-gradient);
+        transition: all .3s ease;
+        box-shadow: 0 3px 6px #0000001a;
+    }
+    
+    input{
+        box-sizing: border-box;
+        border: 2px solid #918F90;
+        border-radius: 8px;
+        padding: 10px;
+        width: 100%;
+    }    
+    .disclaimer {
+        text-align: center;
+        font-size: 18px;
+        color: rgb(146, 5, 5);
+        padding-top: 10px;
+    }
+    .float-right {
+        font-family: 'lato',sans-serif;
+        margin-top: 25px;
+        cursor: pointer;
+        color: var(--primary-500-purple);
+        font-size:20px;
+        font-weight: 500;
+        border: none;
+        outline: none;
+        width: 7rem;
+        border-radius: 5px;
+        background: var(--white);
+        border: 1px solid var(--primary-300-purple);
+        transition: all .3s ease;
+        box-shadow: 0 3px 6px #0000001a;
+    }
+    .btn-primary{
+        margin-left: 0;
+        font-family: 'lato',sans-serif;
+        margin-top: 25px;
+        
+        cursor: pointer;
+        color: var(--white);
+        font-size: 20px;
+        font-weight: 500;
+        border: none;
+        outline: none;
+        width: 8rem;
+        border-radius: 8px;
+        background: var(--btn-gradient);
+        transition: all .3s ease;
+        box-shadow: 0 3px 6px #0000001a;
+    }
+    .policyaggrement {
+        font-size: 18px;
+        color: grey;
+        padding-left: 0%;
+        padding-top: 4%;
+        text-align: center;
+    }
+
+}
