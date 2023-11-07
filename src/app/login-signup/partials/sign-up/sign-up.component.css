@@ -904,3 +904,47 @@ input[type="number"]::-webkit-outer-spin-button {
     }
 
 }
+
+@media screen and (min-width: 320px) and (max-width: 348px) {  
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 15px !important;
+        width: 38px !important;
+        height: 38px !important;
+  }
+}
+@media screen and (min-width: 349px) and (max-width: 480px) {  
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 12px !important;
+        width: 34px !important;
+        height: 37px !important;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 540px) {
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 3px !important;
+        width: 27px !important;
+        height: 35px !important;
+  }
+}
+@media screen and (min-width: 540px) and (max-width: 720px) {
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 4px !important;
+        width: 30px !important;
+        height: 35px !important;
+  }
+}
+@media screen and (min-width: 721px) and (max-width: 992px) {
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 10px !important;
+        width: 35px !important;
+        height: 35px !important;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1540px) {
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 8px !important;
+        width: 35px !important;
+        height: 38px !important;
+  }
+}
