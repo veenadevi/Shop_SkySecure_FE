@@ -336,7 +336,7 @@ public submitCityError : boolean = false;
 
   //   }
   // }
-  else if( (this.myForm.get('checkGstNil').value !== null || this.myForm.get('checkGstNil').value === true) &&    (this.myForm.get('cityName').value === null || this.myForm.get('cityName').value.length<=0 || this.myForm.get('stateName').value === null || this.myForm.get('stateName').value.length<=0)){
+  else if( (this.myForm.get('checkGstNil').value !== null || this.myForm.get('checkGstNil').value === true) &&    (this.myForm.get('cityName').value === null || this.myForm.get('cityName').value.length<=0 || this.myForm.get('stateName').value === null || this.myForm.get('stateName').value.length<=0 || this.myForm.get('postalCode').value === null || this.myForm.get('postalCode').value.length<=0 || this.myForm.get('addressLine1').value === null || this.myForm.get('addressLine1').value.length<=0 )){
    
     this.submitErrorMessageText = "Please fill mandaotry Fields";
     this.submitCityError = true;
@@ -372,6 +372,7 @@ public submitCityError : boolean = false;
     if(this.gstData){
       req.billing_address = {
         "attention": "name",
+        
         "address": this.gstResponseData.adress.floor,
         "street2": this.gstResponseData.adress.street,
         "state_code": this.selectedState.isoCode,
