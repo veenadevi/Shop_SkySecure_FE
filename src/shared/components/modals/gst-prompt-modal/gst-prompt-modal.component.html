@@ -222,9 +222,9 @@
 
           <div class="address-row" *ngIf="selectedType === 'hide'">
             <div class="col-sm-6 form-group">
-              <label for="address-1">Address Line-1*</label>
+              <label for="address-1">Address Line-1</label>
               <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
-                id="address-1" placeholder="Locality/House/Street no." required>
+                id="address-1" placeholder="Locality/House/Street no." >
             </div>
             <div class="col-sm-6 form-group">
               <label for="address-2">Address Line-2*</label>
@@ -357,9 +357,9 @@
           <ng-container *ngIf="selectedType === 'others'">
             <div class="address-row" *ngIf="selectedType === 'others'">
               <div class="col-sm-6 form-group">
-                <label for="address-1">Address Line-1*</label>
+                <label for="address-1">Address Line-1</label>
                 <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
-                  id="address-1" placeholder="Locality/House/Street no." required>
+                  id="address-1" placeholder="Locality/House/Street no." >
               </div>
               <div class="col-sm-6 form-group">
                 <label for="address-2">Address Line-2*</label>
@@ -471,9 +471,9 @@
 
           <div class="address-row" *ngIf="selectedType === 'self'">
             <div class="col-sm-6 form-group">
-              <label for="address-1">Address Line-1*</label>
+              <label for="address-1">Address Line-1</label>
               <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
-                id="address-1" placeholder="Locality/House/Street no." required>
+                id="address-1" placeholder="Locality/House/Street no." >
             </div>
             <div class="col-sm-6 form-group">
               <label for="address-2">Address Line-2*</label>
@@ -557,7 +557,7 @@
           
           <div class="col-sm-6" *ngIf="selectedType === 'self' " >
             <label for="State">Refered By*</label>
-            <select formControlName="refferedName" class="form-control" (change)="onChannelParterChange($event)">
+            <select formControlName="referedName" class="form-control" (change)="onChannelParterChange($event)">
               <option disabled value="'Select '">Select </option>
               <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.channelPartnerMaster.companyBusinessName}}</option>
            
