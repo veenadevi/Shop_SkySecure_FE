@@ -146,7 +146,12 @@ export  class SignUpComponent  {
   // }
 
 
+ 
+
+
   onSubmit(): void {
+
+    console.log("+_+_+_+_+_+", this.selectedCar);
     this.submitted = true;
 
     if (this.form.invalid) { // If Invalid Return
@@ -415,17 +420,35 @@ export  class SignUpComponent  {
     color: 'white'
   }];
 
-  selectedCar = "";
-  selectedCarObj: any = {};
 
-  
+  selectedCar: string;
+  showOptions: boolean = false;
+  // myCustomers = [/* your options array */];
 
-  onChange = () => {
-    console.log(this.selectedCar);
+  onChange() {
+    console.log("__+_+_+_ ",this.selectedCar);
     //this.selectedCarObj = this.cars.find((c)=> c.make==this.selectedCar);
     this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCar);
     console.log(this.selectedCarObj)
   }
+
+  selectOption(option) {
+    console.log("+_+_+_+_+_+_ ", option);
+    this.selectedCar = option;
+    this.showOptions = false;
+  }
+
+  // selectedCar = "";
+  selectedCarObj: any = {};
+
+  
+
+  // onChange = () => {
+    // console.log(this.selectedCar);
+    //this.selectedCarObj = this.cars.find((c)=> c.make==this.selectedCar);
+    // this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCar);
+    // console.log(this.selectedCarObj)
+  // }
 
 
 
@@ -476,6 +499,9 @@ export  function emailOrMobileValidator(control: AbstractControl):Observable<Val
  
 
   return of( {invalidEmailOrMobile:true});
+
+
+ 
 
 
 }
