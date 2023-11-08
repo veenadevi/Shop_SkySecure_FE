@@ -106,3 +106,31 @@ p{
         font-size: 16px;
     }
 }
+
+.btn-holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.primary-btn {
+    /* padding: 7px; */
+    margin: 6px;
+    width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 0 !important; */
+    /* border-radius: 8px; */
+}
+
+.primary-btn img {
+    height: 20px;
+}
+
+.alert-btn {
+    background: var(--red);
+}
+
+.alert-btn img {
+    height: 20px;
+}
