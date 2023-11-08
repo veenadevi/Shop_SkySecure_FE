@@ -30,7 +30,7 @@ export  class SignUpComponent  {
   @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any;
   @ViewChild('ngOtpInput') ngOtpInputRef:any;
   emailFormFlag: boolean = true;
-  signUpFormFlag: boolean = false;
+  signUpFormFlag: boolean =false;
   public emailViaSignIn: String
 
   public isSignupError:boolean=false
@@ -430,6 +430,7 @@ export  class SignUpComponent  {
     //this.selectedCarObj = this.cars.find((c)=> c.make==this.selectedCar);
     this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCar);
     console.log(this.selectedCarObj)
+    this.showOptions = true;
   }
 
   selectOption(option) {

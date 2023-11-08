@@ -974,12 +974,12 @@ input[type="number"]::-webkit-outer-spin-button {
     top: 100%;
     left: 0;
     width: 100%;
-    display: none;
+    /* display: none; */
   }
   
   .options li {
     padding: 8px;
-    cursor: pointer;
+cursor: pointer;
   }
   
   .custom-select input:focus + .options {

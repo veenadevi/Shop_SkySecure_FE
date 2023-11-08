@@ -186,7 +186,7 @@
           </div> -->
 
           <!-- Company Name Dropdown -->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Company Name</label>
             <input 
               [ngModelOptions]="{standalone: true}"
@@ -198,13 +198,13 @@
               <option  *ngFor="let car of myCustomers" [value]="car.company">{{car.company}}</option>
             </datalist>
 
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="companyInput">Company Name</label>
             <div class="custom-select">
-              <input class="" type="text" id="companyInput" [(ngModel)]="selectedCar"  (ngModelChange)="onChange()">
-              <ul class="options">
+              <input class="" type="text" id="companyInput"(ngModelChange)="onChange()"  [(ngModel)]="selectedCar"   [ngModelOptions]="{standalone: true}">
+              <ul class="options"*ngIf="showOptions">
                 <li *ngFor="let car of myCustomers" (click)="selectOption(car.company)">{{car.company}}</li>
               </ul>
             </div>
