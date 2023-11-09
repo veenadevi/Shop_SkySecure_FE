@@ -186,7 +186,7 @@
           </div> -->
 
           <!-- Company Name Dropdown -->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Company Name</label>
             <input 
               [ngModelOptions]="{standalone: true}"
@@ -194,10 +194,22 @@
               [(ngModel)]="selectedCar" 
               value="{{(selectedCarObj && selectedCarObj.length>0)  ? selectedCarObj.company : ''}}"
               (ngModelChange)="onChange()">
-            <datalist id="id-car">
-              <option *ngFor="let car of myCustomers" [value]="car.company">{{car.company}}</option>
+            <datalist id="id-car" >
+              <option  *ngFor="let car of myCustomers" [value]="car.company">{{car.company}}</option>
             </datalist>
+
+          </div> -->
+
+          <div class="form-group">
+            <label for="companyInput">Company Name</label>
+            <div class="custom-select">
+              <input class="" type="text" id="companyInput"(ngModelChange)="onChange()"  placeholder="Your Company Name" [(ngModel)]="selectedCar"   [ngModelOptions]="{standalone: true}">
+              <ul class="options"*ngIf="showOptions && selectedCar.length>0">
+                <li *ngFor="let car of companyListArray" (click)="selectOption(car.company)">{{car.company}}</li>
+              </ul>
+            </div>
           </div>
+          
 
           <!-- Mobile Number-->
           <div class="form-group">
