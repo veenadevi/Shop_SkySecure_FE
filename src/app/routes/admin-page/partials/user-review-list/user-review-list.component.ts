@@ -64,7 +64,7 @@ export class UserReviewListComponent {
     this.subscriptions.push(
       this.adminPageService.getProductReviewsList().subscribe(res=>{
         console.log("***** Res", res);
-        this.ProductReviewsData = res.ProductReviews;
+        this.ProductReviewsData = res.productReviews;
       })
     )
   }
