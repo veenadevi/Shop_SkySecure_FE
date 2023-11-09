@@ -750,7 +750,7 @@ public onChangeQuantity(i, price) : void {
     
     //let redirect_url = 'http%3A%2F%2Flocalhost%3A3008%2Fhandleresponse';
     //let redirect_url = 'https://dev-shop.skysecuretech.com/';
-    let redirect_url = 'https://dev-shop.skysecuretech.com/';
+    let redirect_url = 'https://dev-shop.skysecuretech.com/api/orders/handleResponse'
     let useremail = 'vigneshblog4@gmail.com';
     let request = `merchant_id=${this.merchantId}&order_id=${cartRefId}&currency=INR&amount=${testAmount}&redirect_url=${redirect_url}&cancel_url=${redirect_url}&language=EN&billing_name=${this.selectedAddress.name}&billing_address=${this.selectedAddress.address}&billing_city=${this.selectedAddress.city}&billing_state=MH&billing_zip=${this.selectedAddress.pincode}&billing_country=India&billing_tel=${this.selectedAddress.phone}&delivery_name=${this.selectedAddress.name}&delivery_address=${this.selectedAddress.address}&delivery_city=${this.selectedAddress.city}&delivery_state=${this.selectedAddress.state}&delivery_zip=${this.selectedAddress.pincode}&delivery_country=India&delivery_tel=${this.selectedAddress.phone}&billing_email=${useremail}`
     
@@ -761,7 +761,7 @@ public onChangeQuantity(i, price) : void {
 
 
      this.subscriptions.push(
-        this.cartService.encryptdata(request, testAmount).subscribe( data=>{
+        this.cartService.encryptdata(request, testAmount, cartRefId).subscribe( data=>{
         //  console.log('---------------------', data)
 
           this.encRequestRes = data;
