@@ -39,7 +39,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'payment-status',
+        path: 'payment-status/:id',
         component : PaymentGatewayResponseComponent,
         canActivate : []
       }
