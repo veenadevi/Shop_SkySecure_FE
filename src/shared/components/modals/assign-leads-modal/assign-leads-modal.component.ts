@@ -123,7 +123,6 @@ export class AssignLeadsModalComponent implements OnInit{
         "assignedChannelPartnerId":this.selectedUser._id,
         "assignedAccountOwnerId":"",
         "leadStatusUpdate":"ChannalPartner Assigned",
-        "leadComment":"",
         "updatedBy":userAccountdetails._id
 
 

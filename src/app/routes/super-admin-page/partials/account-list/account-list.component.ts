@@ -139,9 +139,7 @@ export class AccountListComponent implements OnInit{
 
     modalRef.componentInstance.passedData.subscribe((res) => {
       //account.Owner.name
-      console.log("_+_+_+_ Outside ", res);
-      console.log("_+_+_+_ Outside Account ", this.allMarketPlaceList);
-      console.log("_+_+_+_ Outside Account i", this.allMarketPlaceList[i]);
+     
       //this.accountData[i].Owner.name = res.ownerName.name;
       //this.allMarketPlaceList[i].assignedChannalpartner=['channelPartner']['name'] = res.assignedName;
       this.allMarketPlaceList[i].assignedChannalpartner=
@@ -150,7 +148,7 @@ export class AccountListComponent implements OnInit{
               "name" : res.assignedName
               }
             }
-      //this.accountData[i].Owner.name = res.assignedName;
+   //console.log("after assign",this.allMarketPlaceList[i].assignedChannalpartner)
 
     })
     

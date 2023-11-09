@@ -64,7 +64,7 @@ export class InviteChannelPartnerComponent {
       channelPartner: [''],
       userName: ['', [Validators.required, Validators.required]],
       EmailId: ['', [Validators.required, Validators.email]],
-      phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      phoneNo: ['', [Validators.pattern(/^\d{10}$/)]],
       isAdmin:[''],
 
     });
