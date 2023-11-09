@@ -1,0 +1,46 @@
+.payment-status-view-container {
+    min-height: 30em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 40px;
+    margin-left:13%;
+    margin-right: 14%;
+    margin-top: 2%;
+}
+
+/* CSS For Billing Info */
+
+.left {
+    width: 38%;
+    float: left;
+    background: #e4e4e6;
+}
+.billingInfo {
+    background: #004a8f;
+    color: #fff;
+    padding: 20px 35px;
+}
+h4 {
+    font-size: 22px;
+    font-weight: normal;
+}
+.heading {
+    position: relative;
+    font-size: 16px;
+    padding: 0 0 0 40px;
+}
+.heading p {
+    padding-bottom: 5px;
+}
+h5 {
+    font-size: 25px;
+    font-weight: normal;
+    word-wrap: break-word;
+    width: 250px;
+}
+.borb_fff {
+    border-bottom: 1px solid #336ea5;
+    padding: 10px 0 0px 0;
+    margin: 0px 0 10px 0;
+}

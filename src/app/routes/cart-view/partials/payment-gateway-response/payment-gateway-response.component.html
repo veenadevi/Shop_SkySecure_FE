@@ -1,1 +1,88 @@
-<p>payment-gateway-response works!</p>
+<ng-container *ngIf="statusResponse">
+    
+    <div class="payment-status-view-container">
+        <div class="left">
+            <div class="billingInfo">
+                <h4 class="hideInMobile">Billing Confirmation</h4>
+                <div class="spacer20 hideInMobile"></div>
+                <div class="borb_fff hideInMobile"></div>
+                <div class="heading rightside"> 
+                    <!-- <img src="/transaction/images/hdfc/icons/amount.png" class="icon"> -->
+                    <p>Amount</p>
+                    <h5 class="amount"><span>INR</span>&nbsp;<span>{{statusResponse.totalAmount}}</span></h5>
+                    <span style="display: none;" id="hdfcsurchargelabel">Internet handling fee of <span>INR</span>.<label id="hdfcsurchargefees"></label> will be added to the transaction amount.</span>
+                    <span style="display: none;" id="hdfcsurchargelabelzero">No convenience fee or service charge is payable by the customer on Debit card / UPI transactions.</span>
+                    <span style="display: none;" id="cashBackLabel">Cash back of&nbsp;INR&nbsp;<label id="cashBackValue">0.00</label>&nbsp;applies.</span>
+                    <span class="error" style="display: none;" id="promoError"></span>
+                </div>
+                <div class="borb_fff hideInMobile emidiscount emidiscountText" style="display: none;"></div>
+                <div class="heading rightside emidiscount emidiscountText" style="display: none;"> <img src="/transaction/images/hdfc/icons/emi_discount.png" class="icon">
+                    <p>EMI Discount</p>
+                    <h5 class="amount"><span>INR</span>&nbsp;<span id="emidiscountText">0.00</span></h5>
+                </div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <div class="heading rightside remove-coupon" style="display: none;"> <img src="/transaction/images/hdfc/icons/discount.png" class="icon">
+                    <p>Discount&nbsp;<label id="appliedCouponCode"></label></p>
+                    <h5 class="amount"><span id="amountDisc">INR</span>&nbsp; <span id="discountAmt">0.0</span>&nbsp;<a href="#" class="remove-link removecoupen">Remove</a></h5>
+                </div>
+                
+                
+                <div class="borb_fff hideInMobile"></div>
+                <div class="heading"> 
+                    <!-- <img src="/transaction/images/hdfc/icons/order.png" class="icon"> -->
+                    
+                    <p>Order No</p>
+                    
+                    
+                    <h5 class="orderNo">
+                        {{statusResponse.orderId}}
+                    </h5>
+                </div>
+                <div class="borb_fff hideInMobile"></div>
+                <div class="heading"> 
+                    <!-- <img src="/transaction/images/hdfc/icons/order.png" class="icon"> -->
+                    
+                    <p>Order Status</p>
+                    
+                    
+                    <h5 class="orderNo">
+                        {{statusResponse.orderStatus}}
+                    </h5>
+                </div>
+            </div>
+            
+            <!-- <div class="otherInfo">
+                <div class="heading"> 
+                    <img src="/transaction/images/hdfc/icons/merchant.png" class="icon">
+                    <p>Merchant</p>
+                    <span class="narrow bold">SKYSECURE TECHNOLOGIES PRIVATE LIMITED</span> 
+                </div>
+                <div class="borb_ccc hideInMobile"></div>
+                <div class="heading"> 
+                    <img src="/transaction/images/hdfc/icons/website.png" class="icon">
+                    <p>Website</p>
+                    <a class="wordBreak narrow" href="https://dev-shop.skysecuretech.com" target="_blank">https://dev-shop.skysecuretech.com</a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    
+</ng-container>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
