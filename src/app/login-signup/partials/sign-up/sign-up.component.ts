@@ -57,6 +57,8 @@ export  class SignUpComponent  {
 
   public myCustomers : any;
 
+  public companyListArray : any;
+
   display: any;
   static isMobile: boolean;
 
@@ -113,7 +115,7 @@ export  class SignUpComponent  {
         password: [],
         confirmPassword: [],
 
-        companyName: ['', Validators.required],
+        companyName: [],
         mobileNumber: ['', [
           Validators.required,
           Validators.pattern('^[6-9][0-9]{9}$'),
@@ -151,32 +153,31 @@ export  class SignUpComponent  {
 
   onSubmit(): void {
 
-    console.log("+_+_+_+_+_+", this.selectedCar);
+    
+    
     this.submitted = true;
 
     if (this.form.invalid) { // If Invalid Return
-      // console.log("()()() Invalid");
-      //   console.log(this.form.value);
+      
       return;
     }
-    else { // If Valid
-      // console.log("()()() Valid");
-
-
-      //console.log(JSON.stringify(this.form.value, null, 2));
+    else if(!this.selectedCar || this.selectedCar.length<=0){
+      
+    }
+    else { 
+      
       let formValue = this.form.value;
       let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-    //  let hashedPass = CryptoJS.AES.encrypt(formValue.password, key).toString();
+    
       let req = {
         "firstName": formValue.firstName,
         "lastName": formValue.lastName,
+        //"email": (!this.isMobile)?this.validatedEmail:formValue.email,
         "email": (!this.isMobile)?this.validatedEmail:formValue.email,
-
-        //"password":hashedPass,
-        "company": formValue.companyName,
+        "company": this.selectedCar,
         "role": "Customer",
         "countryCode": "+91",
-        "mobileNumber": (this.isMobile)?this.validatedEmail:formValue.emailformValue.mobileNumber,
+        "mobileNumber": (this.isMobile)?this.validatedEmail:formValue.mobileNumber,
         "addressOne": { "name": "bangalore" },
         "addressTwo": { "name": "bangalore" },
         "state": "Karnataga",
@@ -185,18 +186,20 @@ export  class SignUpComponent  {
         "isMobile":this.isMobile
       }
 
+      
+
       this.subscriptions.push(
 
         this.authService.signUp(req).subscribe((res) => {
          
 
           this.router.navigate(['login'], { queryParams: { email: this.validatedEmail, succuessMessage: "Registered Successfully" } });
-          //localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
+          
           
         },
         (error) => {
           this.isSignupError=true
-          console.log("sign up error -------")
+         
 
         }
         
@@ -226,7 +229,7 @@ export  class SignUpComponent  {
       this.display = `${prefix}${Math.floor(0.59)}:${textSec}`;
 
       if (seconds == 0) {
-        console.log('finished');
+       
         this.isResend=true
 
         clearInterval(this.timerInterval);
@@ -249,9 +252,9 @@ export  class SignUpComponent  {
 
     this.isResend=false
     this.validatedEmail = this.formEmail.value.emailOrMobile;
-    console.log(" this.validatedEmail   ", this.validatedEmail)
+   
     this.submittedEmail = true;
-    console.log("is this mobile =====",this.isMobile)
+   
     if(this.isMobile){
       this.form.controls['mobileNumber'].setValue(this.validatedEmail);
       this.form.controls.mobileNumber.disable();
@@ -264,7 +267,7 @@ export  class SignUpComponent  {
     if (this.formEmail.invalid) { // If Invalid Return
 
 
-      console.log(" validation failed",this.formEmail.get('emailOrMobile').hasError('emailOrMobile'))
+     
       return;
     }
     else { // If Valid
@@ -281,10 +284,9 @@ export  class SignUpComponent  {
       this.subscriptions.push(
         this.userProfileService.sendOTP(req).subscribe(res => {
 
-          //console.log("sign up for exisitng user")
+         
           if (res.message) {
-            // console.log("coming for error message")
-            // console.log("error message========"+res.message)
+            
             if (res.message == 'Error: Invalid Domain') {
 
               this.invalidDomain = true;
@@ -299,12 +301,11 @@ export  class SignUpComponent  {
         else{
 
             this.inValidOTP = false
-            // console.log("outside iff====")
+            
             this.enableSignInButton = false;
             this.enableOTPButton = true;
             this.otpField = false;
-            // this.emailExisitAlert=true
-            // this.invalidDomain=true
+            
           }
 
           }
@@ -326,7 +327,7 @@ export  class SignUpComponent  {
   }
 
   public validateOTP() {
-    // console.log("iNSIDE VALIDATE OTP")
+   
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
     let hashedPass = CryptoJS.AES.encrypt(this.otp, key).toString();
     
@@ -337,11 +338,11 @@ export  class SignUpComponent  {
       "mobileNumber":(this.isMobile)?this.formEmail.value.emailOrMobile:'',
     }
 
-   console.log("signup req",req)
+   
 
     this.subscriptions.push(
       this.userProfileService.validateOTP(req).subscribe(res => {
-        //  console.log("RES & RES.DATA",res && res.data)
+        
         if (res && res.data) {
           this.emailFormFlag = false;
           this.signUpFormFlag = true;
@@ -366,7 +367,7 @@ export  class SignUpComponent  {
   }
   public signIn() {
 
-    //console.log("iNSIDE SIGN IN")
+
     this.router.navigate(['login'], { queryParams: { email: this.validatedEmail } });
 
   }
@@ -388,7 +389,7 @@ export  class SignUpComponent  {
 
   onOtpChange(otp: any) {
     this.otp = otp;
-    //console.log("this.otp", this.otp);
+  
     if (otp.length === 6) {
       //  this. onSubmitEmail();
     }
@@ -396,15 +397,6 @@ export  class SignUpComponent  {
 
 
 
-  // public onCompanyNameChange(){
-  //   if(this.myCustomers && this.myCustomers.length>0){
-  //     console.log("+_+_+_+ Changed Compnay Name ", this.selectedCompnayName);
-  //     console.log("+_+_+_+ Changed Compnay Name ", this.myCustomers);
-  //     this.selectedCarObj = this.myCustomers.find((c)=> c.company===this.selectedCompnayName);
-  //     console.log(this.selectedCarObj)
-  //   }
-    
-  // }
 
   cars = [{
     make: 'Ford',
@@ -426,15 +418,18 @@ export  class SignUpComponent  {
   // myCustomers = [/* your options array */];
 
   onChange() {
-    console.log("__+_+_+_ ",this.selectedCar);
-    //this.selectedCarObj = this.cars.find((c)=> c.make==this.selectedCar);
+    
+    
     this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCar);
-    console.log(this.selectedCarObj)
+    let sampleStr : any = this.selectedCar.toLowerCase();
+
+    this.companyListArray = this.myCustomers.filter(function (str) { return str.company.toLowerCase().includes(sampleStr); });
+    
     this.showOptions = true;
   }
 
   selectOption(option) {
-    console.log("+_+_+_+_+_+_ ", option);
+    
     this.selectedCar = option;
     this.showOptions = false;
   }
@@ -444,12 +439,7 @@ export  class SignUpComponent  {
 
   
 
-  // onChange = () => {
-    // console.log(this.selectedCar);
-    //this.selectedCarObj = this.cars.find((c)=> c.make==this.selectedCar);
-    // this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCar);
-    // console.log(this.selectedCarObj)
-  // }
+ 
 
 
 
@@ -457,8 +447,9 @@ export  class SignUpComponent  {
 
     this.subscriptions.push(
       this.adminPageService.getAllMyCustomers().subscribe(res=>{
-        console.log("_+_+_+_+_+_ API Result ", res);
+        
         this.myCustomers = res;
+        this.companyListArray = this.myCustomers;
         //this.spinner.hide();
       },
       error => {
@@ -473,12 +464,11 @@ export  class SignUpComponent  {
 
 
 export  function emailOrMobileValidator(control: AbstractControl):Observable<ValidationErrors | any>  {
-  console.log("passing email as====", control.value)
+  
 
-  //console.log("is access?", this.isMobile)
 
   const value = control.value;
-  //let invalidEmailOrMobile: any = false;
+  
   if (value) {
     // Regular expression for email validation
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -494,9 +484,7 @@ export  function emailOrMobileValidator(control: AbstractControl):Observable<Val
 
     }
   }
-  
- // invalidEmailOrMobile=true
-  //console.log("what is validatation result ==", invalidEmailOrMobile)
+
  
 
   return of( {invalidEmailOrMobile:true});
