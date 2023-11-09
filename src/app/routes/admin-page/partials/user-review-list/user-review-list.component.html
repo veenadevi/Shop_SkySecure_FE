@@ -12,31 +12,36 @@
                 
                 <ng-template pTemplate="header">
                     <tr class="thfont">
-                        <th>S NO</th>
-                        <th>companySize</th>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>Customer Name</th>
+                        <th>Email-Id</th>
+                        <th>Company Name</th>
                         <th>Role</th>
-                        <th>job</th>
+                        <!-- <th>Product Name</th> -->
+                        <th>Overall Rating</th>
+                        <!-- <th></th> -->
 
                     </tr>
+
+                    
                 </ng-template>
                 
     
                 <ng-template pTemplate="body" let-item let-i="rowIndex">
                     <tr class="trfont text-style" >
-                        <td >
-                            {{i+1}}
+                        <!-- <td > -->
+                            <!-- {{i+1}} -->
                             <!-- <div  (click)="getCustomersById(customer.zohoBooksCustomerId)">
                                 
                             </div> -->
                             
-                        </td>
-                        <td>{{item.companySize}}</td>
+                        <!-- </td> -->
                         <td>{{item.userName}}</td>
                         <td>{{item.email}}</td>
-                        <td>{{item.role}}</td>
+                        <!-- <td>{{item.email}}</td> -->
+                        <td>{{item.organizationName}}</td>
                         <td>{{item.jobTitle}}</td>
+                        <!-- <td>{{item.productId}}</td> -->
+                        <td>{{item.overAllRating}}</td>
                         
                     </tr>
                 </ng-template>
