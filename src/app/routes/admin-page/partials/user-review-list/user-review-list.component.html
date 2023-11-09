@@ -1,8 +1,8 @@
 <div class="my-customers-view">
-    <ng-container *ngIf="(myCustomers && myCustomers.length>0) ; else noDataFound">
+    <ng-container *ngIf="(ProductReviewsData && ProductReviewsData.length>0) ; else noDataFound">
         <div class="card">
             <p-table 
-                [value]="myCustomers" 
+                [value]="ProductReviewsData" 
                 [tableStyle]="{ 'min-width': '60rem' }"
                 [paginator]="true"
                 [rows]="15"
@@ -13,18 +13,18 @@
                 <ng-template pTemplate="header">
                     <tr class="thfont">
                         <th>S NO</th>
-                        <th>Company Name</th>
+                        <th>companySize</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Mobile Number</th>
-                        <th>GST No</th>
+                        <th>Role</th>
+                        <th>job</th>
 
                     </tr>
                 </ng-template>
                 
     
-                <ng-template pTemplate="body" let-customer let-i="rowIndex">
-                    <tr class="trfont text-style" (click)="getCustomersById(customer.zohoBooksCustomerId)">
+                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                    <tr class="trfont text-style" >
                         <td >
                             {{i+1}}
                             <!-- <div  (click)="getCustomersById(customer.zohoBooksCustomerId)">
@@ -32,11 +32,11 @@
                             </div> -->
                             
                         </td>
-                        <td>{{customer.company}}</td>
-                        <td>{{customer.firstName}}</td>
-                        <td>{{customer.email}}</td>
-                        <td>{{customer.mobileNumber}}</td>
-                        <td>{{customer.gstinNumber}}</td>
+                        <td>{{item.companySize}}</td>
+                        <td>{{item.userName}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.role}}</td>
+                        <td>{{item.jobTitle}}</td>
                         
                     </tr>
                 </ng-template>
