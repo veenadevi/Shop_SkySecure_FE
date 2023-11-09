@@ -301,7 +301,7 @@ export class CartService {
       "amount" : hashedPass,
       //"redirect_url" : this.baseUrl+this.handleResponseURL,
       //"redirect_url" : "http://localhost:8080/api/orders/handleResponse",
-      "redirect_url" : 'https://dev-shop.skysecuretech.com/api/orders/handleResponse',
+      "redirect_url" : 'https://dev-altsys-realize-order.azurewebsites.net/api/orders/handleResponse',
       "cancel_url" : 'https://dev-shop.skysecuretech.com/',
     }
     
