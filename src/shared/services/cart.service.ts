@@ -30,6 +30,8 @@ export class CartService {
 
   public handleResponseURL : string;
 
+  public paymentStatusByIdUrl : string
+
 
 
   constructor(
@@ -45,6 +47,7 @@ export class CartService {
 
     this.createInvoiceURL=AppService.appUrl.createInvoice;
     this.handleResponseURL = AppService.appUrl.handleResponse;
+    this.paymentStatusByIdUrl = AppService.appUrl.paymentStatusByid;
     
   }
 
@@ -296,7 +299,8 @@ export class CartService {
       "currency" : "INR", // or any supported currency
       "amount" : hashedPass,
       //"redirect_url" : this.baseUrl+this.handleResponseURL,
-      "redirect_url" : "http://localhost:8080/api/orders/handleResponse",
+      //"redirect_url" : "http://localhost:8080/api/orders/handleResponse",
+      "redirect_url" : 'https://dev-shop.skysecuretech.com/api/orders/handleResponse',
       "cancel_url" : 'https://dev-shop.skysecuretech.com/',
     }
     
@@ -315,6 +319,27 @@ export class CartService {
     return request$;
     //return null;
     //return this.http.get(url,{params:data})
+  }
+
+
+  public getPaymentStatusUpdate(request){
+
+
+    
+    let url = this.baseUrl + this.paymentStatusByIdUrl + request;
+
+    let request$ = this.http.get<Observable<any>>(url)
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+       
+        return response;
+      }),
+    );
+
+    return request$;
   }
 
   public paymentGatewayCCAvenueRequest(request){

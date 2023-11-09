@@ -46,6 +46,7 @@
 
 
         "handleResponse" : "api/orders/handleResponse",
+        "paymentStatusByid" : "api/orders/paymentStatusByid/",
         
 
         "userSignUp":"api/user/signup",
