@@ -280,7 +280,7 @@ export class CartService {
     return REQUEST$;
   }
 
-  public encryptdata(request, amount){
+  public encryptdata(request, amount, ref_id){
     //let url = `${this.baseUrl}orders/encryptFormData`;
     let url = `${this.baseUrl}api/orders/encryptFormData`;
     //let url = "http://localhost:8080/api/orders/encryptFormData";
@@ -296,6 +296,7 @@ export class CartService {
     let hashedPass = CryptoJS.AES.encrypt(amount.toFixed(2), key).toString();
 
     request = {
+      "order_id" : ref_id,
       "currency" : "INR", // or any supported currency
       "amount" : hashedPass,
       //"redirect_url" : this.baseUrl+this.handleResponseURL,
