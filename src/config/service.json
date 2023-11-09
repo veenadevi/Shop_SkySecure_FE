@@ -111,7 +111,9 @@
         
         "getProductReviewURL": "api/product-review",
 
-        "rejectRevertLeadAsAM" : "api/admin/rejectRevertLeadAsAM"
+        "rejectRevertLeadAsAM" : "api/admin/rejectRevertLeadAsAM",
+
+        "getProductReviewsList": "api/product-reviews"
 
 
     },

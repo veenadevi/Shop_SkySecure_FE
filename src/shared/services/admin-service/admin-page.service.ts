@@ -65,6 +65,7 @@ export class AdminPageService {
     this.getAllChannelLeadListURL=AppService.appUrl.getMyChannelLeadList;
     this.inviteUsersURL = AppService.appUrl.inviteUsers;
     this.createProductOfferURL = AppService.appUrl.createProductOffer;
+    
     this.getAllMyCustomersUrl = AppService.appUrl.getAllMyCustomers;
     this.getCustomerDetailsByIdUrl = AppService.appUrl.getCustomerDetailsById;
     this.rejectReassignURL = AppService.appUrl.rejectRevertLeadAsAM;
@@ -528,6 +529,27 @@ public inviteUsers( request : any): Observable<any> {
     return request$;
   }
 
+
+
+  public getProductReviewsList() : Observable<any> {
+
+    //let url = this.baseUrlForQuote + this.getAccountsByIdUrl + '/' + accountsId;
+
+    
+    let url = "https://dev-productapi.realize.skysecuretech.com/api/product-reviews"
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
 
   public createProductOffer( request : any): Observable<any> {
 
