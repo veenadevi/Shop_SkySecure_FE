@@ -953,12 +953,13 @@ input[type="number"]::-webkit-outer-spin-button {
     position: relative;
     display: inline-block;
     width: 100%;
+    background-color: var(--bs-body-bg);
   }
   
   .custom-select input {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    /* border: 2px solid #918F90; */
   }
   
   .options {
@@ -974,7 +975,7 @@ input[type="number"]::-webkit-outer-spin-button {
     top: 100%;
     left: 0;
     width: 100%;
-    /* display: none; */
+     display: none; 
   }
   
   .options li {
@@ -983,6 +984,14 @@ cursor: pointer;
   }
   
   .custom-select input:focus + .options {
-    display: block;
+    display: block; 
   }
-  
+ 
+  .custom-select input:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+} 
+ 

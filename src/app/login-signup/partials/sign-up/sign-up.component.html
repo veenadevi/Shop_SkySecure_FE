@@ -203,7 +203,7 @@
           <div class="form-group">
             <label for="companyInput">Company Name</label>
             <div class="custom-select">
-              <input class="" type="text" id="companyInput"(ngModelChange)="onChange()"  [(ngModel)]="selectedCar"   [ngModelOptions]="{standalone: true}">
+              <input class="" type="text" id="companyInput"(ngModelChange)="onChange()"  placeholder="Your Company Name" [(ngModel)]="selectedCar"   [ngModelOptions]="{standalone: true}">
               <ul class="options"*ngIf="showOptions && selectedCar.length>0">
                 <li *ngFor="let car of companyListArray" (click)="selectOption(car.company)">{{car.company}}</li>
               </ul>
