@@ -113,6 +113,8 @@
 
         "rejectRevertLeadAsAM" : "api/admin/rejectRevertLeadAsAM",
 
+        "rejectRevertSuperAdminAsCpAdmin" : "api/admin/rejectRevertSuperAdminAsCpAdmin",
+
         "getProductReviewsList": "api/product-reviews"
 
 
