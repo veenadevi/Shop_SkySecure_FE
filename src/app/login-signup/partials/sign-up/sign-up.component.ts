@@ -150,13 +150,14 @@ export  class SignUpComponent  {
     this.submitted = true;
 
     if (this.form.invalid) { // If Invalid Return
-      // console.log("()()() Invalid");
+      console.log("()()() Invalid");
       //   console.log(this.form.value);
       return;
     }
     else { // If Valid
       // console.log("()()() Valid");
 
+      console.log("()()() Invalid In");
 
       //console.log(JSON.stringify(this.form.value, null, 2));
       let formValue = this.form.value;
@@ -171,7 +172,7 @@ export  class SignUpComponent  {
         "company": formValue.companyName,
         "role": "Customer",
         "countryCode": "+91",
-        "mobileNumber": (this.isMobile)?this.validatedEmail:formValue.emailformValue.mobileNumber,
+        "mobileNumber": (this.isMobile)?this.validatedEmail:formValue.mobileNumber,
         "addressOne": { "name": "bangalore" },
         "addressTwo": { "name": "bangalore" },
         "state": "Karnataga",

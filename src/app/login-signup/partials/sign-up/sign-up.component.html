@@ -169,7 +169,7 @@
           
 
           <!-- Company Name-->
-          <!-- <div class="form-group">
+          <div class="form-group">
             <label>Company Name</label>
             <input
               type="text"
@@ -181,21 +181,22 @@
             <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
               <div *ngIf="f.companyName.errors.required">Oops! You forgot to provide your Company Name.</div>
             </div>
-          </div> -->
+          </div>
 
           <!-- Company Name Dropdown -->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Company Name</label>
             <input 
               [ngModelOptions]="{standalone: true}"
               list="id-car" 
+              formControlName="companyName"
               [(ngModel)]="selectedCar" 
               value="{{(selectedCarObj && selectedCarObj.length>0)  ? selectedCarObj.company : ''}}"
               (ngModelChange)="onChange()">
             <datalist id="id-car">
               <option *ngFor="let car of myCustomers" [value]="car.company">{{car.company}}</option>
             </datalist>
-          </div>
+          </div> -->
 
           <!-- Mobile Number-->
           <div class="form-group">
@@ -229,7 +230,7 @@
             <div class="btns">
 
               <button (click)="onSubmit()" class="btn btn-primary">Register</button>
-            <button type="button" (click)="onReset()" class="btn btn-warning float-right" > Reset </button>
+            <!-- <button type="button" (click)="onReset()" class="btn btn-warning float-right" > Reset </button> -->
             </div>
             
           </div>
