@@ -37,6 +37,8 @@ export class AdminPageService {
 
   private rejectReassignURL : string;
 
+  private cpRejectReassignURL :string;
+
   private createProductOfferURL: String;
 
   private getChannelAMAccountListURL:string;
@@ -69,6 +71,7 @@ export class AdminPageService {
     this.getAllMyCustomersUrl = AppService.appUrl.getAllMyCustomers;
     this.getCustomerDetailsByIdUrl = AppService.appUrl.getCustomerDetailsById;
     this.rejectReassignURL = AppService.appUrl.rejectRevertLeadAsAM;
+    this.cpRejectReassignURL= AppService.appUrl.rejectRevertSuperAdminAsCpAdmin;
 
     this.addChannelPartnerUsersURL=AppService.appUrl.addUsersToChannelURL
     //For Channel AM
@@ -633,6 +636,32 @@ public inviteUsers( request : any): Observable<any> {
   
   }
 
+  public cpRejectReassign( request : any): Observable<any> {
+
+
+
+    let url = this.baseUrlForQuote + this.cpRejectReassignURL;
+    
+  
+    
+    let request$ = this.http.post(url, request)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+  
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+  
+    return request$;
+  
+  }
 
 
 }

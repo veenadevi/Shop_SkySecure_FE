@@ -11,7 +11,7 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 import { GetReasonModalComponent } from 'src/shared/components/modals/get-reason-modal/get-reason-modal.component';
 
-
+import { CpReassignModalComponent } from 'src/shared/components/modals/cp-reassign-modal/cp-reassign-modal.component';
 @Component({
   selector: 'lead-list',
   templateUrl: './lead-list.component.html',
@@ -164,12 +164,27 @@ export class LeadListComponent implements OnInit{
     )
   }
 
-  public openReasonModal(){
-    this.viewModal(null);
+  // public openReasonModal(){
+  //   this.viewModal(null);
+  // }
+
+  // public viewModal(req) {
+  //   const modalRef = this.modalService.open(GetReasonModalComponent);
+  //   modalRef.componentInstance.request = req;
+  // }
+
+
+  public openReasonModal(account){
+    this.viewModal(account);
   }
 
   public viewModal(req) {
-    const modalRef = this.modalService.open(GetReasonModalComponent);
+    const modalRef = this.modalService.open(CpReassignModalComponent);
     modalRef.componentInstance.request = req;
+
+    modalRef.componentInstance.passedData.subscribe((res) => {
+    window.location.reload();
+    })
+
   }
 }

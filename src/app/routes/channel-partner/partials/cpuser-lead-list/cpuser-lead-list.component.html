@@ -103,10 +103,11 @@
 
                         <td>
                             <div class="btn-holder">
-                                <button id="assign-btn" class="btn primary-btn" (click)="openReasonModal(account)"><img alt="edit" src="../../../../../assets/icons/Editwhite.svg"></button>
+                                <!-- <button id="assign-btn" class="btn primary-btn" (click)="openReasonModal(account)"><img alt="edit" src="../../../../../assets/icons/Editwhite.svg"></button> -->
+                                <button id="assign-btn" matTooltip="Reject/Revert" matTooltipPosition="below" class="btn primary-btn alert-btn"  (click)="openReasonModal(account)"><img alt="remove" src="../../../../../assets/icons/CloseIcon-white.svg"></button>
                             </div>
                         </td>
-
+                       
                     </tr>
             
                 </ng-template>
