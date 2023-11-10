@@ -43,8 +43,9 @@ textarea {
 }
 
 .close{
-   
+   background-color: white;
     border: 0px;
+    margin-left: 95%;
 }
 
 .error-message{
