@@ -76,6 +76,7 @@ export  class SignUpComponent  {
   ) {
     this.formEmail = this.fb.group(
       {
+       
         emailOrMobile: [this.emailViaSignIn, [Validators.required,emailOrMobileValidator]],
        // otp: [],
       }
@@ -94,14 +95,15 @@ export  class SignUpComponent  {
 
   
   ngOnInit(): void {
-
+   
 
     this.route.queryParams.subscribe(params => {
       this.emailViaSignIn = params['email'];
 
     });
+    this.formEmail.get('emailOrMobile').setValue( this.emailViaSignIn)
 
-
+    console.log("this.emailViaSignIn  ",this.emailViaSignIn)
 
 
     this.getAllMyCustomers();
@@ -161,7 +163,7 @@ export  class SignUpComponent  {
       
       return;
     }
-    else if(!this.selectedCar || this.selectedCar.length<=0){
+    else if(!this.selectedCompany || this.selectedCompany.length<=0){
       
     }
     else { 
@@ -174,7 +176,7 @@ export  class SignUpComponent  {
         "lastName": formValue.lastName,
         //"email": (!this.isMobile)?this.validatedEmail:formValue.email,
         "email": (!this.isMobile)?this.validatedEmail:formValue.email,
-        "company": this.selectedCar,
+        "company": this.selectedCompany,
         "role": "Customer",
         "countryCode": "+91",
         "mobileNumber": (this.isMobile)?this.validatedEmail:formValue.mobileNumber,
@@ -239,7 +241,21 @@ export  class SignUpComponent  {
 
   onReset(): void {
     this.submitted = false;
-    this.form.reset();
+    this.selectedCompany=""
+    const mobilePattern = /^\d{10}$/;
+
+    this.isMobile= mobilePattern.test(this.formEmail.value.emailOrMobile) 
+
+   if(!this.isMobile){
+    this.formEmail.get('mobileNumber').setValue(null);
+
+   }
+   else{
+    this.form.controls['email'].setValue(null);
+   }
+
+   this.formEmail.get('firstName').reset();
+   // this.form.reset();
   }
 
   public navigateToLogin() {
@@ -290,8 +306,8 @@ export  class SignUpComponent  {
             if (res.message == 'Error: Invalid Domain') {
 
               this.invalidDomain = true;
-              this.enableOTPButton = false;
-
+              this.enableOTPButton = true;
+            
             }
             else if(res.message == 'Error: User already  exists') {
               this.emailExisitAlert = true
@@ -413,24 +429,34 @@ export  class SignUpComponent  {
   }];
 
 
-  selectedCar: string;
+  selectedCompany: string;
   showOptions: boolean = false;
   // myCustomers = [/* your options array */];
 
   onChange() {
+    console.log("this.selectedCompany  ",this.selectedCompany)
     
-    
-    this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCar);
-    let sampleStr : any = this.selectedCar.toLowerCase();
+    this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCompany);
+    console.log(" this.selectedCarObj   ", this.selectedCarObj)
+    console.log("this.selectedCompany  ",this.selectedCompany)
 
-    this.companyListArray = this.myCustomers.filter(function (str) { return str.company.toLowerCase().includes(sampleStr); });
+    if(this.selectedCompany && this.selectedCompany.length>3){
+      let sampleStr : any = this.selectedCompany.toLowerCase();
+      console.log("sampleStr ",sampleStr)
+
+      this.companyListArray = this.myCustomers.filter(function (str) { return str.company.toLowerCase().includes(sampleStr); });
+      
+      this.showOptions = true;
+    }
     
-    this.showOptions = true;
+    
   }
 
   selectOption(option) {
+
+    console.log("option  ===",option)
     
-    this.selectedCar = option;
+    this.selectedCompany = option;
     this.showOptions = false;
   }
 

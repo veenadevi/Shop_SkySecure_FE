@@ -337,7 +337,7 @@ export class LoginComponent {
 
   public signUp(){
   
-    this.router.navigate(['login/signUp'],{ queryParams: { email: this.form.value.email}});
+    this.router.navigate(['login/signUp'],{ queryParams: { email: this.form.value.emailOrMobile}});
 
   
   }
