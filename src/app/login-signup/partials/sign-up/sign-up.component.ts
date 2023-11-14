@@ -252,20 +252,20 @@ export  class SignUpComponent  {
 
   onReset(): void {
     this.submitted = false;
-    this.selectedCompany=""
+    this.selectedCompanyName=""
     const mobilePattern = /^\d{10}$/;
 
     this.isMobile= mobilePattern.test(this.formEmail.value.emailOrMobile) 
 
    if(!this.isMobile){
-    this.formEmail.get('mobileNumber').setValue(null);
+    this.form.controls['mobileNumber'].setValue(null);
 
    }
    else{
     this.form.controls['email'].setValue(null);
    }
 
-   this.formEmail.get('firstName').reset();
+   this.form.controls['firstName'].setValue(null);
    // this.form.reset();
   }
 
