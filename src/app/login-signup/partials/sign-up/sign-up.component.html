@@ -202,11 +202,25 @@
 
           <div class="form-group">
             <label for="companyInput">Company Name</label>
-            <div class="custom-select">
+            <!-- <div class="custom-select">
               <input class=""   type="text" id="companyInput" (ngModelChange)="onChange()"  placeholder="Your Company Name" [(ngModel)]="selectedCompany"   [ngModelOptions]="{standalone: true}">
-              <ul class="options"*ngIf="showOptions && selectedCompany.length>0">
-                <li *ngFor="let companyItem of companyListArray" (click)="selectOption(companyItem.company)">{{companyItem.company}}</li>
+              <ul class="options" *ngIf="showOptions && selectedCompany.length>0" (click)="selectOption($event)">
+                <li *ngFor="let companyItem of companyListArray" >{{companyItem.company}}</li>
               </ul>
+              
+              
+            </div> -->
+            <div class="card flex justify-content-center">
+              <p-autoComplete 
+                [ngModelOptions]="{standalone: true}" 
+                [(ngModel)]="selectedCompanyName" 
+                [forceSelection]="false" 
+                [suggestions]="companyListArray" 
+                (completeMethod)="filterCompany($event)" 
+                [style]="{'width':'100%'}" 
+                [inputStyle]="{'width':'100%'}"
+                field="company">
+              </p-autoComplete>
             </div>
           </div>
           

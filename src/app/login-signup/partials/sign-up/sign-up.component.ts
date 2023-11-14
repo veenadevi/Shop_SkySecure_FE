@@ -10,11 +10,18 @@ import { BlockableUI } from 'primeng/api';
 import { CompressOutlined } from '@mui/icons-material';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
+interface AutoCompleteCompleteEvent {
+  originalEvent: Event;
+  query: string;
+}
+
 @Component({
   selector: 'sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
+
+
 
 
 
@@ -157,14 +164,18 @@ export  class SignUpComponent  {
 
     
     
+
+    let finalCompnayName = (typeof(this.selectedCompanyName) === 'string') ? this.selectedCompanyName : this.selectedCompanyName.company;
+    
+    
     this.submitted = true;
 
     if (this.form.invalid) { // If Invalid Return
       
       return;
     }
-    else if(!this.selectedCompany || this.selectedCompany.length<=0){
-      
+    else if(!finalCompnayName || finalCompnayName.length<=0){
+        return;
     }
     else { 
       
@@ -176,7 +187,7 @@ export  class SignUpComponent  {
         "lastName": formValue.lastName,
         //"email": (!this.isMobile)?this.validatedEmail:formValue.email,
         "email": (!this.isMobile)?this.validatedEmail:formValue.email,
-        "company": this.selectedCompany,
+        "company": finalCompnayName,
         "role": "Customer",
         "countryCode": "+91",
         "mobileNumber": (this.isMobile)?this.validatedEmail:formValue.mobileNumber,
@@ -452,6 +463,10 @@ export  class SignUpComponent  {
     
   }
 
+  identify(index, item) {
+    return item.id;
+  }
+
   selectOption(option) {
 
     console.log("option  ===",option)
@@ -459,6 +474,24 @@ export  class SignUpComponent  {
     this.selectedCompany = option;
     this.showOptions = false;
   }
+
+
+  public selectedCompanyName; 
+
+  filterCompany(event: AutoCompleteCompleteEvent) {
+    let filtered: any[] = [];
+    let query = event.query;
+
+    for (let i = 0; i < (this.myCustomers as any[]).length; i++) {
+        let country = (this.myCustomers as any[])[i];
+        if (country.company.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(country);
+        }
+    }
+
+    this.companyListArray = filtered;
+}
+
 
   // selectedCar = "";
   selectedCarObj: any = {};
