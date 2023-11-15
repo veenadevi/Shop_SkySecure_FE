@@ -138,3 +138,41 @@ select{
     justify-content: space-between;
 }
 
+
+.options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    background: #fff;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+     display: none; 
+  }
+  
+  .options li {
+    padding: 8px;
+cursor: pointer;
+  }
+  
+  .custom-select input:focus + .options {
+    display: block; 
+  }
+ 
+  .custom-select input:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+} 
+:host ::ng-deep .p-inputtext {
+    margin: 0;
+    padding: 7px;
+    border: 1px solid black;
+}
