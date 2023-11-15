@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -426,7 +426,19 @@ public onChangeQuantity(i, price) : void {
         cart_ref_id : cartRefId ? cartRefId : '0001111'
       };
 
-      this.viewModal(req);
+
+      
+      //this.router.navigate(['/cart/request-quote']);
+
+
+      const navigationExtras: NavigationExtras = {
+        state: {
+          req : req
+        }
+      };
+      this.router.navigate(['/cart/request-quote'], navigationExtras);
+      
+      //this.viewModal(req);
 
       
 /*

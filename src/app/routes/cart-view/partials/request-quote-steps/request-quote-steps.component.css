@@ -1,0 +1,14 @@
+.steps-routing-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 10px 40px 40px 40px;
+    background: var(--primary);
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.custom-style{
+    background: none !important;
+}

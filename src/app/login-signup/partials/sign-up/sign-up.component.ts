@@ -110,7 +110,7 @@ export  class SignUpComponent  {
     });
     this.formEmail.get('emailOrMobile').setValue( this.emailViaSignIn)
 
-    console.log("this.emailViaSignIn  ",this.emailViaSignIn)
+  
 
 
     this.getAllMyCustomers();
@@ -445,15 +445,14 @@ export  class SignUpComponent  {
   // myCustomers = [/* your options array */];
 
   onChange() {
-    console.log("this.selectedCompany  ",this.selectedCompany)
+    
     
     this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCompany);
-    console.log(" this.selectedCarObj   ", this.selectedCarObj)
-    console.log("this.selectedCompany  ",this.selectedCompany)
+    
 
     if(this.selectedCompany && this.selectedCompany.length>3){
       let sampleStr : any = this.selectedCompany.toLowerCase();
-      console.log("sampleStr ",sampleStr)
+     
 
       this.companyListArray = this.myCustomers.filter(function (str) { return str.company.toLowerCase().includes(sampleStr); });
       
@@ -469,7 +468,7 @@ export  class SignUpComponent  {
 
   selectOption(option) {
 
-    console.log("option  ===",option)
+ 
     
     this.selectedCompany = option;
     this.showOptions = false;
