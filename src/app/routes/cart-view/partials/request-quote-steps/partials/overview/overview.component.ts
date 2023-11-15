@@ -1,5 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { map } from 'rxjs';
+import { Router } from '@angular/router';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
+import { Subscription, map } from 'rxjs';
+import { CartService } from 'src/shared/services/cart.service';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
+import { UserProfileService } from 'src/shared/services/user-profile.service';
+import { CartStore } from 'src/shared/stores/cart.store';
 import { RequestQuoteDetailsStore } from 'src/shared/stores/request-quote-details.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
@@ -15,9 +22,17 @@ export class OverviewComponent implements OnInit{
 
   public finalReq : any;
 
+  public subscriptions : Subscription[] = [];
+
   constructor(
     private userAccountStore : UserAccountStore,
-    private requestQuoteDetailsStore : RequestQuoteDetailsStore
+    private requestQuoteDetailsStore : RequestQuoteDetailsStore,
+    private spinner : NgxSpinnerService,
+    private cartService : CartService,
+    private cartStore : CartStore,
+    private router : Router,
+    private toaster : ToasterNotificationService,
+    private userProfileService : UserProfileService
   ){}
 
 
@@ -41,7 +56,87 @@ export class OverviewComponent implements OnInit{
 
   public createQuotation(){
     this.setReqBody();
-    console.log("+_+_+_ Req Body", this.finalReq);
+
+    this.spinner.show();
+    
+    this.subscriptions.push(
+      this.cartService.createQuotation(this.finalReq).subscribe( response => {
+        this.spinner.hide();
+        if(response && response.UserCart){
+          this.updateGSTService(this.finalReq);
+            
+            this.cartStore.setCartRefreneceId(null);
+            this.cartService.getCartItems(null).subscribe();
+            
+            this.router.navigate(['/user-profile/quotation-history']);
+            
+            
+            
+          
+          
+        }
+        else{
+          
+        }
+        
+      },
+      error => {
+        this.spinner.hide();
+        this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+      }
+      ),
+    
+      
+    )  
+    
+  }
+
+  public updateGSTService(req){
+
+    
+
+       
+      let userDetails = this.userAccountStore.getUserDetails();
+
+      let request = {
+
+        "email": req.emailId,
+        "isRegistered": (req.gst_treatment === "business_gst") ? true : false,
+        //"gstinNumber":"ABCDEG78101",
+        "companyBusinessName":req.companyName,
+        "placeOfSupply": req.billing_address.state_code,
+          "fullAddress" : [
+                {
+                    "address1" : req.billing_address.address,
+                    "address2" : req.billing_address.street2,
+                    //"state" : this.selectedState.name,
+                    "state" :   req.billing_address.state_code,
+                    "district" : req.billing_address.city,
+                    "pincode" : req.billing_address.zip,
+                    //"countryCode" : this.selectedState.isoCode,
+                    "countryCode" : "IN",
+                }
+            ],
+        
+        
+          "updatedBy": userDetails._id,
+          "isCustomer":true,
+        
+        }
+
+        if(req.gst_treatment === "business_gst"){
+          request["gstinNumber"] = req.gst_no ;
+        }
+
+
+      console.log("+_+_+_+_ Updated GST", request);
+
+
+        this.subscriptions.push(
+        this.userProfileService.updateGST(request).subscribe( response => {
+          
+        })
+      )
   }
 
   public setReqBody(){
@@ -81,37 +176,24 @@ export class OverviewComponent implements OnInit{
 
     this.finalReq['gst_no'] = storeDetails.gstNo;
     this.finalReq['gst_treatment'] = (storeDetails.gstFlag) ? 'business_gst' : 'business_none';
-    this.finalReq['RequestingForOther'] = (storeDetails.gstType === 'self') ? true : false;
+    this.finalReq['RequestingForOther'] = (storeDetails.gstType === 'self') ? false : true;
     this.finalReq['currency_id'] = "1014673000000000064";
+
+    this.finalReq['selectedChannelPartnerId'] = "654b346f8bddb500715ba10d";
+    this.finalReq['selectedChannelPartnerAdminId'] = "654b2d8e8bddb500715b9fbc";
+
+   
     
 
 
 
-/*
-    "currency_id": "1014673000000000064",
-    "selectedChannelPartnerId": "654b346f8bddb500715ba10d",
-    "selectedChannelPartnerAdminId": "654b2d8e8bddb500715b9fbc",
-    "RequestingForOther": false,
-    "contact_persons": [
-        {
-            "first_name": "Vignesh S",
-            "email": "vignesh@skysecuretech.com",
-            "phone": "8072316022",
-            "is_primary_contact": true,
-            "enable_portal": false
-        }
-    ],
-    "gst_no": "29ABDCS1510L1ZB",
-    "gst_treatment": "business_gst"
-   
-     req.gst_treatment = "business_none";
-   
 
-    */
 
 
 
    
     
   }
+
+ 
 }
