@@ -454,7 +454,7 @@ public submitCityError : boolean = false;
    
 
 
-
+/*
    this.spinner.show();
     
     this.subscriptions.push(
@@ -485,7 +485,7 @@ public submitCityError : boolean = false;
       ),
     
       
-    )  
+    )  */
    
 
     }

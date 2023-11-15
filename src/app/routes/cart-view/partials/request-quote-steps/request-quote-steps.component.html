@@ -1,0 +1,79 @@
+<!-- <div class="steps-routing-container">
+    <div style="width:100%">
+        <request-steps-routing></request-steps-routing>
+    </div>
+    
+</div> -->
+
+<div class="steps-routing-container">
+    <div style="width:100%">
+        <mat-horizontal-stepper class="custom-style" #stepper>
+            <!-- keep icons as numbers during edit-->
+            <!--
+          <ng-template matStepperIcon="edit" let-index="index">
+                {{index +1}}
+            </ng-template>
+          -->
+        
+            <!-- change default 'edit' icon -->
+          <!-- <ng-template matStepperIcon="edit">
+                <mat-icon>bubble_chart</mat-icon>
+            </ng-template> -->
+        
+            <!-- change default 'done' icon -->
+            <!--
+          <ng-template matStepperIcon="done">
+                <mat-icon>done_all</mat-icon>
+            </ng-template>
+          -->
+        
+            <!-- changed step icons -->
+            <!-- <ng-template matStepperIcon="home">
+                <mat-icon>home</mat-icon>
+            </ng-template>
+            <ng-template matStepperIcon="form">
+                <mat-icon>format_align_center</mat-icon>
+            </ng-template>
+            <ng-template matStepperIcon="last">
+                <mat-icon>done_all</mat-icon>
+            </ng-template> -->
+          
+            <mat-step label="GST Details" state="home">
+                <div>
+                    <!-- <button mat-button matStepperNext>Continue</button> -->
+                    
+                    <gst-details (gstDetailsAction)="gstDetailsAction($event)"></gst-details>
+                </div>
+            </mat-step>
+        
+          <mat-step label="Business Details" state="form">
+            <div>
+              <business-details (businessDetailsAction)="businessDetailsAction($event)"></business-details>
+            </div>
+            <!-- <form [formGroup]="formGroup">
+              <mat-form-field>
+                <input matInput placeholder="Address" formControlName="secondCtrl" required>
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form> -->
+          </mat-step>
+        
+          <mat-step label="Overview" state="last">
+            <ng-container *ngIf="reqBody">
+              <overview [reqBody]="reqBody"></overview>
+            </ng-container>
+            
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        
+        </mat-horizontal-stepper>
+    </div>
+    
+    
+</div>
