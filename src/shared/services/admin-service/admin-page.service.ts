@@ -528,6 +528,28 @@ public inviteUsers( request : any): Observable<any> {
     return request$;
   }
 
+  /**
+   * Service for Fetching All Customer Details By Id
+   */
+
+  public getCustomerDetailsById(id) : Observable<any> {
+
+    //let url = this.baseUrlForQuote + this.getCustomerDetailsByIdUrl + "1014673000000483001";
+    let url = this.baseUrlForQuote + this.getCustomerDetailsByIdUrl + id;
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
 
   public createProductOffer( request : any): Observable<any> {
 
@@ -558,27 +580,7 @@ public inviteUsers( request : any): Observable<any> {
 
 
 
-  /**
-   * Service for Fetching All Customer Details By Id
-   */
-
-  public getCustomerDetailsById(id) : Observable<any> {
-
-    //let url = this.baseUrlForQuote + this.getCustomerDetailsByIdUrl + "1014673000000483001";
-    let url = this.baseUrlForQuote + this.getCustomerDetailsByIdUrl + id;
-
-    let request$ = this.http.get<Observable<any>>(url)
-      .pipe(
-        map(response => {
-          if (!response) {
-            return null;
-          }
-          return response;
-        }),
-      );
-
-    return request$;
-  }
+ 
 
   /**
    * Reject Reassign Service
