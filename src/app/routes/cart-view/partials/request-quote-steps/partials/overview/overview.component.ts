@@ -149,6 +149,8 @@ export class OverviewComponent implements OnInit{
     console.log("+_+_+_ STore Details", storeDetails);
     this.finalReq['updatedBy'] = userDetails._id;
     this.finalReq['billing_address'] = storeDetails.billing_address;
+
+    this.finalReq.companyName = storeDetails.companyName;
     
     if(storeDetails.gstType === 'self'){
       this.finalReq['contact_persons'] = [
