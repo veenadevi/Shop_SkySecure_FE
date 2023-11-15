@@ -44,8 +44,8 @@ p{
 
 .error-message{
     color: red;
-    text-align: center;
-    font: size 12px;
+    text-align: left;
+    font-size:  12px;
 }
 
 .or{

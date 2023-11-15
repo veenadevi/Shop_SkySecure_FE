@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
@@ -23,6 +23,20 @@ export class OverviewComponent implements OnInit{
   public finalReq : any;
 
   public subscriptions : Subscription[] = [];
+  public visible: boolean = false;
+
+
+  public isAcceptChecked: boolean = false;
+  public isDeclinedChecked: boolean = false;
+
+  public tandcCheckBox : boolean = false;
+
+
+  public dataPresent : boolean = false;
+
+  @Output() overViewAction = new EventEmitter();
+
+
 
   constructor(
     private userAccountStore : UserAccountStore,
@@ -51,43 +65,54 @@ export class OverviewComponent implements OnInit{
   )
 
   ngOnInit(): void {
-    this.reqBody$.subscribe();
+    this.reqBody$.subscribe(res=>{
+      this.setReqBody();
+    });
   }
 
-  public createQuotation(){
-    this.setReqBody();
+  
 
-    this.spinner.show();
-    
-    this.subscriptions.push(
-      this.cartService.createQuotation(this.finalReq).subscribe( response => {
-        this.spinner.hide();
-        if(response && response.UserCart){
-          this.updateGSTService(this.finalReq);
-            
-            this.cartStore.setCartRefreneceId(null);
-            this.cartService.getCartItems(null).subscribe();
-            
-            this.router.navigate(['/user-profile/quotation-history']);
-            
-            
-            
-          
-          
-        }
-        else{
-          
-        }
-        
-      },
-      error => {
-        this.spinner.hide();
-        this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
-      }
-      ),
-    
+  public createQuotation(){
+
+    if(!this.tandcCheckBox){
+
+    }
+    else{
+      //this.setReqBody();
+
+      this.spinner.show();
       
-    )  
+      this.subscriptions.push(
+        this.cartService.createQuotation(this.finalReq).subscribe( response => {
+          this.spinner.hide();
+          if(response && response.UserCart){
+            this.updateGSTService(this.finalReq);
+              
+              this.cartStore.setCartRefreneceId(null);
+              this.cartService.getCartItems(null).subscribe();
+              
+              this.router.navigate(['/user-profile/quotation-history']);
+              
+              
+              
+            
+            
+          }
+          else{
+            
+          }
+          
+        },
+        error => {
+          this.spinner.hide();
+          this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+        }
+        ),
+      
+        
+      ) 
+    }
+ 
     
   }
 
@@ -129,7 +154,7 @@ export class OverviewComponent implements OnInit{
         }
 
 
-      console.log("+_+_+_+_ Updated GST", request);
+    
 
 
         this.subscriptions.push(
@@ -146,7 +171,7 @@ export class OverviewComponent implements OnInit{
 
     this.finalReq = this.reqBody;
 
-    console.log("+_+_+_ STore Details", storeDetails);
+   
     this.finalReq['updatedBy'] = userDetails._id;
     this.finalReq['billing_address'] = storeDetails.billing_address;
 
@@ -184,16 +209,38 @@ export class OverviewComponent implements OnInit{
     this.finalReq['selectedChannelPartnerId'] = "654b346f8bddb500715ba10d";
     this.finalReq['selectedChannelPartnerAdminId'] = "654b2d8e8bddb500715b9fbc";
 
-   
+    this.dataPresent = true;
     
+  }
 
+  showDialog() {
+    this.visible = true;
+  }
 
+  public checkboxChanged(val){
 
+    if(val === 0){
+      this.isAcceptChecked = true;
+      this.isDeclinedChecked = false;
+      this.tandcCheckBox = true;
+    }
+    else{
+      this.isAcceptChecked = false;
+      this.isDeclinedChecked = true;
+      this.tandcCheckBox = false;
+    }
+    this.visible = false;
+  }
 
+  public goBack(){
 
-
-
-   
+    let storeDetails = this.requestQuoteDetailsStore.getReqQuoteDetails();
+    if(storeDetails.gstFlag){
+      this.overViewAction.emit(0);
+    }
+    else{
+      this.overViewAction.emit(1);
+    }
     
   }
 

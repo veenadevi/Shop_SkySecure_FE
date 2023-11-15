@@ -63,7 +63,7 @@
         
           <mat-step label="Overview" state="last">
             <ng-container *ngIf="reqBody">
-              <overview [reqBody]="reqBody"></overview>
+              <overview [reqBody]="reqBody" (overViewAction)="overViewAction($event)"></overview>
             </ng-container>
             
             <!-- <div>

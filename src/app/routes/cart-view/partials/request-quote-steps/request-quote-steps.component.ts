@@ -111,5 +111,14 @@ export class RequestQuoteStepsComponent {
     
   }
 
+  public overViewAction(event){
+    if(event === 0){
+      this.myStepper.selectedIndex = 0;
+    }
+    else{
+      this.myStepper.selectedIndex = 1;
+    }
+  }
+
 
 }
