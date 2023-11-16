@@ -119,6 +119,9 @@
           <label for="zip">Postal-Code</label>
           <input formControlName="postalCode" type="number" class="form-control" name="Zip" id="zip"
             placeholder="Postal-Code.">
+            <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('postalCode').hasError('pattern')">
+              Postal-Code should be 6 digits long and in numbers only.
+            </div>
         </div>
       </div>
 
