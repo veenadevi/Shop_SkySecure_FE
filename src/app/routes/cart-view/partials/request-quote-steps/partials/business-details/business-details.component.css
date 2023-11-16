@@ -97,4 +97,16 @@ label {
     font-family: 'lato', sans-serif;
 }
 
+/* Primeng Auto Focus Change */
+:host ::ng-deep .p-autocomplete{
+   
+    width:100% !important;
+    height: 35px !important;
+    
+}
+
+:host ::ng-deep .p-inputtext{
+    border: 1.6px solid #918F90 !important;
+}
+
 

@@ -1,8 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { City, Country, State } from 'country-state-city';
+import { Subscription } from 'rxjs';
+import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 import { RequestQuoteDetailsStore } from 'src/shared/stores/request-quote-details.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+
+interface AutoCompleteCompleteEvent {
+  originalEvent: Event;
+  query: string;
+}
 
 @Component({
   selector: 'business-details',
@@ -26,16 +33,29 @@ export class BusinessDetailsComponent implements OnInit{
 
   public countryStateError : boolean = false;
 
+  public selectedCompanyName; 
+
+  public myCustomers : any = [];
+
+  public companyListArray : any = [];
+
+  public subscriptions : Subscription[] = [];
+  public companyNameErrorFlag : boolean = false;
+
   @Output() businessDetailsAction = new EventEmitter();
+
+
 
 
   constructor(
     private reqQuoteDetailsStore : RequestQuoteDetailsStore,
     private formBuilder: FormBuilder,
-    private userAccountStore : UserAccountStore
+    private userAccountStore : UserAccountStore,
+    private adminPageService : AdminPageService
   ){}
 
   ngOnInit(): void {
+    this.getAllMyCustomers();
     console.log("+_+_+_+_ Req Details Store Came in");
     let reqBody = this.reqQuoteDetailsStore.getReqQuoteDetails();
     console.log("+_+_+_+_ Req Details Store ", reqBody);
@@ -52,7 +72,7 @@ export class BusinessDetailsComponent implements OnInit{
 
     this.businessDetailsForm = this.formBuilder.group(
       {
-        companyName : ['', Validators.required],
+        companyName : [''],
         //phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
         countryCode : [],
         addressLine1 :[''],
@@ -110,6 +130,7 @@ public goBack(){
   public onNextClick(){
 
     this.countryStateError = false;
+    this.companyNameErrorFlag = false;
     //console.log("+_+_+_+_+_+_ **** ", this.businessDetailsForm.get('countryName').value);
     
     this.onNextClickFlag = true;
@@ -118,7 +139,11 @@ public goBack(){
         //alert('Invalid');
         console.log("+++__+_ Invlaid");
     }
+    else if(!this.selectedCompanyName || this.selectedCompanyName === ''){
+      this.companyNameErrorFlag = true;
+    }
     else{
+      this.companyNameErrorFlag = false;
       console.log("+++__+_ Else");
       if(!this.selectedCountry || !this.selectedState || !this.selectedCity){
         console.log("+++__+_ AAAA");
@@ -144,6 +169,7 @@ public goBack(){
 
         let reqBody = this.reqQuoteDetailsStore.getReqQuoteDetails();
         reqBody.billing_address = businessDetails;
+        reqBody.companyName = (typeof(this.selectedCompanyName) === 'string') ? this.selectedCompanyName : this.selectedCompanyName.company;
         this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
       
         this.businessDetailsAction.emit('next');
@@ -153,6 +179,37 @@ public goBack(){
 
 
     }
+
+  }
+
+  filterCompany(event: AutoCompleteCompleteEvent) {
+    let filtered: any[] = [];
+    let query = event.query;
+
+    for (let i = 0; i < (this.myCustomers as any[]).length; i++) {
+        let country = (this.myCustomers as any[])[i];
+        if (country.company.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(country);
+        }
+    }
+
+    this.companyListArray = filtered;
+  }
+
+  public getAllMyCustomers(){
+
+    this.subscriptions.push(
+      this.adminPageService.getAllMyCustomers().subscribe(res=>{
+        
+        this.myCustomers = res;
+        this.companyListArray = this.myCustomers;
+        //this.spinner.hide();
+      },
+      error => {
+        //this.spinner.hide();
+        //this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+      })
+    )
 
   }
 
