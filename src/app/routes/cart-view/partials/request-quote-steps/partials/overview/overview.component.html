@@ -1,8 +1,8 @@
 <div class="overview-container">
 
 
-    <div *ngIf="dataPresent" class="row jumbotron box8 container-style">
-        <div class="form-check-label" style="margin-top:5px">&nbsp; Overview</div>
+    <div *ngIf="dataPresent" class="row jumbotron box8 container-style card-2">
+        <!-- <div class="form-check-label" style="margin-top:5px">&nbsp; Overview</div> -->
 
         <!-- Read Only Fields-->
         <div class="text-row">
@@ -105,7 +105,10 @@
             </div>
         
 
-        
+            <div class="btn-holder">
+                <button class="btn secondary-btn"  (click)="goBack()">Back</button>
+                <button class="btn primary-btn" (click)="createQuotation()">Submit</button>
+            </div>
         
 
 
@@ -185,10 +188,7 @@
     </div>
 
 
-    <div class="btn-holder">
-        <button class="btn secondary-btn"  (click)="goBack()">Back</button>
-        <button class="btn primary-btn" (click)="createQuotation()">Submit</button>
-    </div>
+
     
 
 </div>

@@ -1,19 +1,23 @@
 <div class="gst-details-view">
 
-    <p>Please fill the mentioned details to generate estimation</p>
+    
 
-    <div id="customerToogle">
-        <div class="radio-group">
-            <input type="radio" [checked]="isChecked" name="myRadios" (change)="handleChange('self')" value="self" />
-            <span>Self</span>
-        </div>
-        <div class="radio-group">
-            <input type="radio" [checked]="!isChecked" name="myRadios" (change)="handleChange('others')" value="others" />
-            <span>Others</span>
-        </div>
-    </div>
+    <div class="row jumbotron box8 container-style card-2">
 
-    <div class="row jumbotron box8 container-style">
+      <p>Please fill the mentioned details to generate estimation</p>
+
+        <div id="customerToogle">
+            <div class="radio-group">
+                <input type="radio" [checked]="isChecked" name="myRadios" (change)="handleChange('self')" value="self" />
+                <span>Self</span>
+            </div>
+            <div class="radio-group">
+                <input type="radio" [checked]="!isChecked" name="myRadios" (change)="handleChange('others')" value="others" />
+                <span>Others</span>
+            </div>
+        </div>
+
+
         <ng-container *ngIf="selectedGSTType ==='self'; else othersGSTDetails"> 
 
             <form [formGroup]="gstForm">
@@ -106,17 +110,18 @@
                   
             </form>
         </ng-template>
+        <div *ngIf="gstErrorMessageFlag">
+          <p class="error-message">{{gstErrorMessage}}</p>
+        </div>
+    
+        <div class="btn-holder">
+    
+          <button class="btn secondary-btn" (click)="onCancelClick()">Cancel</button>
+          <button class="btn primary-btn" (click)="onNextClick()">Next</button>
+    
+        </div>
     </div>
-    <div *ngIf="gstErrorMessageFlag">
-        <p class="error-message">{{gstErrorMessage}}</p>
-    </div>
-
-    <div class="btn-holder">
-
-      <button class="btn secondary-btn" (click)="onCancelClick()">Cancel</button>
-      <button class="btn primary-btn" (click)="onNextClick()">Next</button>
-
-    </div>
+    
     
 
 </div>
