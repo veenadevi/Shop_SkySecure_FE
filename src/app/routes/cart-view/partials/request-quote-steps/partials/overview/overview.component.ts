@@ -175,6 +175,8 @@ export class OverviewComponent implements OnInit{
     this.finalReq['updatedBy'] = userDetails._id;
     this.finalReq['billing_address'] = storeDetails.billing_address;
 
+    
+
     this.finalReq.companyName = storeDetails.companyName;
     
     if(storeDetails.gstType === 'self'){
@@ -188,6 +190,8 @@ export class OverviewComponent implements OnInit{
         }
       ]
 
+      this.finalReq.billing_address.phone = userDetails.mobileNumber;
+
     }
     else{
       this.finalReq['contact_persons'] = [
@@ -199,6 +203,7 @@ export class OverviewComponent implements OnInit{
           "enable_portal": false
         }
       ]
+      this.finalReq.billing_address.phone = storeDetails.phoneNo;
     }
 
     this.finalReq['gst_no'] = storeDetails.gstNo;

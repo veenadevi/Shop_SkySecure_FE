@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="name-row-01">
+      <!-- <div class="name-row-01">
         <div class="col col-sm-3 form-group">
           <label for="cod">Country code</label>
           <select class="form-control browser-default custom-select">
@@ -39,11 +39,11 @@
                 Phone number must be 10 digits.
               </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="name-row-01">
         <div class="col col-sm-6 form-group">
-          <label for="address-1">Address Line-1*</label>
+          <label for="address-1">Address Line-1</label>
           <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
             id="address-1" placeholder="Locality/House/Street no." >
             <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('addressLine1').hasError('required')">
@@ -51,9 +51,12 @@
             </div>
         </div>
         <div class="col col-sm-6 form-group">
-          <label for="address-2">Address Line-2</label>
+          <label for="address-2">Address Line-2*</label>
           <input formControlName="addressLine2" type="address" class="form-control-01" name="address" id="address-2"
             placeholder="Village/City Name." required>
+            <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('addressLine2').hasError('required')">
+              Address is Mandatory.
+          </div>
         </div>
       </div>
 

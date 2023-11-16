@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { City, Country, State } from 'country-state-city';
 import { RequestQuoteDetailsStore } from 'src/shared/stores/request-quote-details.store';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'business-details',
@@ -31,6 +32,7 @@ export class BusinessDetailsComponent implements OnInit{
   constructor(
     private reqQuoteDetailsStore : RequestQuoteDetailsStore,
     private formBuilder: FormBuilder,
+    private userAccountStore : UserAccountStore
   ){}
 
   ngOnInit(): void {
@@ -51,10 +53,10 @@ export class BusinessDetailsComponent implements OnInit{
     this.businessDetailsForm = this.formBuilder.group(
       {
         companyName : ['', Validators.required],
-        phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+        //phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
         countryCode : [],
-        addressLine1 :['', Validators.required],
-        addressLine2 :[''],
+        addressLine1 :[''],
+        addressLine2 :['',Validators.required],
         countryName :[],
         stateName :[],
         citryName : [],
@@ -126,6 +128,8 @@ public goBack(){
         console.log("+++__+_ BBBB");
         this.countryStateError = false;
 
+        let userDetails = this.userAccountStore.getUserDetails();
+
         let businessDetails = {
           "attention": "Name",
           "address": this.businessDetailsForm.get('addressLine1').value,
@@ -135,7 +139,7 @@ public goBack(){
           "state": this.selectedState.name,
           "zip": this.businessDetailsForm.get('postalCode').value,
           "country": this.selectedCountry.isoCode,
-          "phone": this.businessDetailsForm.get('phoneNo').value,
+          "phone": ""
         }
 
         let reqBody = this.reqQuoteDetailsStore.getReqQuoteDetails();
