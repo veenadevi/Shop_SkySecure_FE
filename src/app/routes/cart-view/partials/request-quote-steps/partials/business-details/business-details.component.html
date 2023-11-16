@@ -2,13 +2,13 @@
 
 
 
-  <div class="row jumbotron box8 container-style">
+  <div class="row jumbotron box8 container-style card-2">
 
     <div class="form-check-label" style="margin-top:5px">&nbsp; *Please fill the Business details.</div>
     <form [formGroup]="businessDetailsForm">
 
 
-      <div class="name-row-01">
+      <!-- <div class="name-row-01">
         <div class="col form-group">
           <label for="companyName">Company Name*</label>
             <input formControlName="companyName" type="companyName" class="form-control-01" name="companyName"
@@ -17,9 +17,38 @@
                   <span>Company Name is Mandatory.</span>
               </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="name-row-01">
+        <div class="col form-group">
+          <label for="companyInput">Company Name*</label>
+            <!-- <div class="custom-select">
+              <input class=""   type="text" id="companyInput" (ngModelChange)="onChange()"  placeholder="Your Company Name" [(ngModel)]="selectedCompany"   [ngModelOptions]="{standalone: true}">
+              <ul class="options" *ngIf="showOptions && selectedCompany.length>0" (click)="selectOption($event)">
+                <li *ngFor="let companyItem of companyListArray" >{{companyItem.company}}</li>
+              </ul>
+              
+              
+            </div> -->
+            <div class="card flex justify-content-center">
+              <p-autoComplete 
+                [ngModelOptions]="{standalone: true}" 
+                [(ngModel)]="selectedCompanyName" 
+                [forceSelection]="false" 
+                [suggestions]="companyListArray" 
+                (completeMethod)="filterCompany($event)" 
+                [style]="{'width':'100%'}" 
+                [inputStyle]="{'width':'100%'}"
+                field="company">
+              </p-autoComplete>
+            </div>
+            <div class="error-message" *ngIf="onNextClickFlag && companyNameErrorFlag">
+              <span>Company Name is Mandatory.</span>
+            </div>
+        </div>
+      </div>
+
+      <!-- <div class="name-row-01">
         <div class="col col-sm-3 form-group">
           <label for="cod">Country code</label>
           <select class="form-control browser-default custom-select">
@@ -39,11 +68,11 @@
                 Phone number must be 10 digits.
               </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="name-row-01">
         <div class="col col-sm-6 form-group">
-          <label for="address-1">Address Line-1*</label>
+          <label for="address-1">Address Line-1</label>
           <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
             id="address-1" placeholder="Locality/House/Street no." >
             <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('addressLine1').hasError('required')">
@@ -51,9 +80,12 @@
             </div>
         </div>
         <div class="col col-sm-6 form-group">
-          <label for="address-2">Address Line-2</label>
+          <label for="address-2">Address Line-2*</label>
           <input formControlName="addressLine2" type="address" class="form-control-01" name="address" id="address-2"
             placeholder="Village/City Name." required>
+            <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('addressLine2').hasError('required')">
+              Address is Mandatory.
+          </div>
         </div>
       </div>
 
@@ -84,9 +116,9 @@
           </select>
         </div>
         <div class="col col-sm-6 form-group">
-          <label for="zip">Postal-Code*</label>
+          <label for="zip">Postal-Code</label>
           <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
-            placeholder="Postal-Code." required>
+            placeholder="Postal-Code.">
         </div>
       </div>
 

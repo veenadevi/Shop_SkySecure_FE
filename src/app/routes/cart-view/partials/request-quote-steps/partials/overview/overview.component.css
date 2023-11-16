@@ -9,7 +9,15 @@
 }
 
 .container-style{
-    width:50%;
+    width:75%;
+    background-color: #fff;
+    border-radius: 6px;
+    padding : 15px;
+    font-family: 'lato', sans-serif !important;
+}
+
+.card-2 {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .text-row{
@@ -63,7 +71,7 @@ label {
 
 .btn-holder{
     display: flex;
-    column-gap: 10%;
+    column-gap: 7%;
     margin-top: 30px;
     align-items: center;
     justify-content: center;

@@ -1,8 +1,8 @@
 <div class="overview-container">
 
 
-    <div *ngIf="dataPresent" class="row jumbotron box8 container-style">
-        <div class="form-check-label" style="margin-top:5px">&nbsp; Overview</div>
+    <div *ngIf="dataPresent" class="row jumbotron box8 container-style card-2">
+        <!-- <div class="form-check-label" style="margin-top:5px">&nbsp; Overview</div> -->
 
         <!-- Read Only Fields-->
         <div class="text-row">
@@ -16,7 +16,7 @@
             </div>
             <div class="col col-sm-4 form-group">
                 <label for="address-2">Phone No</label>
-                <span class="value-field">{{finalReq.contact_persons[0].phone}}</span>
+                <span class="value-field">{{finalReq.billing_address.phone}}</span>
             </div>
         </div>
 
@@ -92,7 +92,7 @@
         
             <div class="col-sm-12">
 
-                <input type="checkbox" [(ngModel)]="tandcCheckBox"  class="form-check d-inline" id="chb" required>
+                <input type="checkbox" [(ngModel)]="tandcCheckBox"  [disabled]="disabledFlag" class="form-check d-inline" id="chb" required>
                 
                 <div for="chb" class="form-check-label">&nbsp;I accept all <span class="condition"  (click)="showDialog()"> T&C.</span>
                    
@@ -105,7 +105,10 @@
             </div>
         
 
-        
+            <div class="btn-holder">
+                <button class="btn secondary-btn"  (click)="goBack()">Back</button>
+                <button class="btn primary-btn" (click)="createQuotation()">Submit</button>
+            </div>
         
 
 
@@ -185,10 +188,7 @@
     </div>
 
 
-    <div class="btn-holder">
-        <button class="btn secondary-btn"  (click)="goBack()">Back</button>
-        <button class="btn primary-btn" (click)="createQuotation()">Submit</button>
-    </div>
+
     
 
 </div>
