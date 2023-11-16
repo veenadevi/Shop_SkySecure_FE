@@ -23,12 +23,17 @@
                        
                 </div>
             </div>
-
+          
+            <div *ngIf="selectedAccountManagers.length>0">
+                <span> Channel users</span>
+               
             <div class="card"  >
+                
+              
                 <p-table 
                 [value]="selectedAccountManagers" 
                     [tableStyle]="{ 'min-width': '50rem' }"
-                    [paginator]="true"
+                    [paginator]="false"
                     [rows]="15"
                     [showCurrentPageReport]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -41,8 +46,8 @@
                             <th>Role</th>  
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-csp let-i="rowIndex">
-                        <tr *ngFor="let accountManager of selectedAccountManagers ">
+                    <ng-template pTemplate="body" let-accountManager let-i="rowIndex">
+                        <tr >
                             <td>{{ accountManager.firstName }}</td> 
                             <td>{{ accountManager.email }}</td> 
                             <td>{{ accountManager.mobileNumber }}</td>
@@ -51,8 +56,9 @@
                     </ng-template>
                 </p-table>
             </div>
+        </div>
 
-
+        
             <div class="radio-btn">
                 <!-- <div class="btn-cont"> -->
                     <div class="content-select">

@@ -48,7 +48,7 @@ export class CpReassignModalComponent implements OnInit {
     this.activeModal.close();
   }
 
-  public CpReAssign(){
+  public CpReAssign(isReassign){
     this.submitted = true;
     if (this.form.invalid) { // If Invalid Return
       
@@ -56,6 +56,15 @@ export class CpReassignModalComponent implements OnInit {
     }
     else{
       
+
+      let statusMessage=""
+
+      if(isReassign){
+        statusMessage="ChannalPartner  ReAssinged"
+      }
+      else{
+        statusMessage="ChannalPartner  Rejected"
+      }
 
       let userAccountdetails = this.userAccountStore.getUserDetails();
 
@@ -65,15 +74,15 @@ export class CpReassignModalComponent implements OnInit {
       let reqBody = {
         "cart_ref_id":this.request.cartData.cart_ref_id,
         "assignedAccountOwnerId":"",
-        "leadStatusUpdate":"ChannalPartner Admin Reverted",
+        "leadStatusUpdate":statusMessage,
         "leadComment":[{
             "commentBy": userAccountdetails.firstName,
             "comment": this.form.value.messageText
       
       
         }],
-        "isRevert":true,
-        "isReject":false,
+        "isRevert":isReassign,
+        "isReject":(!isReassign),
         "updatedBy": userAccountdetails._id,
         "assignedChannelPartnerId":this.request.cartData.assignedChannelPartnerId,
         "assignedChannelPartnerAdminId":this.request.cartData.assignedChannelPartnerAdminId
