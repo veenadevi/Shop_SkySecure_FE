@@ -729,8 +729,21 @@ public onChangeQuantity(i, price) : void {
 
   public buyNow(){
 
+
+    //this.receiveOrderStatus()
     this.checkout();
 
+  }
+
+  public receiveOrderStatus(){
+    this.subscriptions.push(
+      this.cartService.encryptForCCAvenue(null).subscribe(res=>{
+        console.log("++++)))))) Res", res);
+        this.cartService.getOrderStatus(res).subscribe(res=>{
+          console.log("+_+_+_ ))))))))))) Further Response ", res)
+        })
+      })
+    )
   }
 
   public encRequestRes : any;

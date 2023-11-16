@@ -76,12 +76,15 @@ export class OverviewComponent implements OnInit{
 
   public createQuotation(){
 
+
+    console.log("+_+_+_+_+ This", this.finalReq);
+
     if(!this.tandcCheckBox){
 
     }
     else{
-      //this.setReqBody();
-
+      
+      /*
       this.spinner.show();
       
       this.subscriptions.push(
@@ -112,8 +115,8 @@ export class OverviewComponent implements OnInit{
         ),
       
         
-      ) 
-    }
+      ) */
+    } 
  
     
   }
@@ -213,8 +216,8 @@ export class OverviewComponent implements OnInit{
     this.finalReq['RequestingForOther'] = (storeDetails.gstType === 'self') ? false : true;
     this.finalReq['currency_id'] = "1014673000000000064";
 
-    this.finalReq['selectedChannelPartnerId'] = "654b346f8bddb500715ba10d";
-    this.finalReq['selectedChannelPartnerAdminId'] = "654b2d8e8bddb500715b9fbc";
+    this.finalReq['selectedChannelPartnerId'] = storeDetails.selectedChannelPartnerId;
+    this.finalReq['selectedChannelPartnerAdminId'] = storeDetails.selectedChannelPartnerAdminId;
 
     this.dataPresent = true;
     

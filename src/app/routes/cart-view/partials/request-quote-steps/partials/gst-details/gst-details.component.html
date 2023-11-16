@@ -18,6 +18,20 @@
         </div>
 
 
+        <ng-container *ngIf="channelPartnerList && channelPartnerList.length>0">
+
+        </ng-container>
+        <div class="name-row-01">
+          <div class="col col-sm-6 form-group">
+            <label for="State">Referred By*</label>
+            <select class="form-control" (change)="onReferredByChange($event)">
+              <option disabled selected>----Select User----</option>
+              <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.channelPartnerMaster.companyBusinessName}}</option>
+            </select>
+          </div>
+        </div>
+
+
         <ng-container *ngIf="selectedGSTType ==='self'; else othersGSTDetails"> 
 
             <form [formGroup]="gstForm">

@@ -18,6 +18,9 @@ export class RequestQuoteDetailsModel implements RequestQuoteDetails {
     public state : string;
     public city : string;
 
+    public selectedChannelPartnerId : string
+    public selectedChannelPartnerAdminId  : string;
+
     public billing_address : billingAddress;
    
   

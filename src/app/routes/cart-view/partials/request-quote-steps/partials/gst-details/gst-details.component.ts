@@ -3,8 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Country, State } from 'country-state-city';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription, first } from 'rxjs';
 import { RequestQuoteDetailsModel } from 'src/shared/models/concrete/request-quote-details.model';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 import { RequestQuoteDetailsStore } from 'src/shared/stores/request-quote-details.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
@@ -31,6 +33,12 @@ export class GstDetailsComponent implements OnInit{
 
   public onGSTDetailsCLicked : boolean = false;
 
+  public referredBy : any;
+
+  public channelPartnerList : any;
+
+  public subscriptions : Subscription[] = [];
+
 
   constructor(
 
@@ -39,14 +47,17 @@ export class GstDetailsComponent implements OnInit{
     private superAdminService : SuperAdminService,
     private spinner: NgxSpinnerService,
     private reqQuoteDetailsStore : RequestQuoteDetailsStore,
-    private router : Router
+    private router : Router,
+    private toaster : ToasterNotificationService,
 
   ){}
 
 
   ngOnInit(): void {
     
+
     this.setGSTDetailsForm();
+    this.getAllMyCustomers();
     this.setSelfData();
   }
 
@@ -97,7 +108,6 @@ export class GstDetailsComponent implements OnInit{
   }
 
   public onInputChanges(event){
-    console.log("_+__+_+_+_ Came here");
     //if(this.myForm.get('firstName').value && this.myForm.get('firstName').value.length>0 && this.myForm.get('email').value && this.myForm.get('email').value.length>0 && this.myForm.get('phoneNo').value && this.myForm.get('phoneNo').value.length>0){
     //makign phone as non Mandatory 
     if(this.gstFormOthers.get('firstName').value && this.gstFormOthers.get('firstName').value.length>0 && this.gstFormOthers.get('email').value && this.gstFormOthers.get('email').value.length>0 ){ 
@@ -109,14 +119,24 @@ export class GstDetailsComponent implements OnInit{
   }
 
   public onNextClick(){
+
+    this.gstErrorMessageFlag = false;
+    this.gstErrorMessage = "Please Enter Valid GST No.";
     
     this.onGSTDetailsCLicked = true;
     this.gstErrorMessage = "Please fill mandaotry Fields";
     if(this.selectedGSTType === 'self'){
       if( this.gstForm.get('checkGstNil').value === null || this.gstForm.get('checkGstNil').value === false){
-        console.log("+_+_+_+_ &*&*& inside if");
+        
 
-        if(this.gstForm.get('gstNo').value.length === 15){
+
+        if(!this.referredBy){
+          this.gstErrorMessageFlag = true;
+          this.gstErrorMessage = "Please Select Refereed By";
+          return;
+        }
+
+        else if(this.gstForm.get('gstNo').value.length === 15){
           this.gstErrorMessageFlag = false;
           this.getGSTData(this.gstForm.get('gstNo').value);
           
@@ -128,14 +148,26 @@ export class GstDetailsComponent implements OnInit{
         
         
       }
+      
       else{
-        this.gstErrorMessageFlag = false;
-        let reqBody = this.reqQuoteDetailsStore.getReqQuoteDetails();
-        reqBody.gstNo = null;
-        reqBody.gstType = "self";
-        reqBody.gstFlag = false;
-        this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
-        this.gstDetailsAction.emit('next');
+
+        if(!this.referredBy){
+          this.gstErrorMessageFlag = true;
+          this.gstErrorMessage = "Please Select Refereed By";
+          return;
+        }
+        else{
+          this.gstErrorMessageFlag = false;
+          let reqBody = this.reqQuoteDetailsStore.getReqQuoteDetails();
+          reqBody.gstNo = null;
+          reqBody.gstType = "self";
+          reqBody.gstFlag = false;
+          reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.adminUsers[0]._id : '';
+          reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy._id : '';
+          this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
+          this.gstDetailsAction.emit('next');
+        }
+        
 
       }
     }
@@ -144,15 +176,24 @@ export class GstDetailsComponent implements OnInit{
       if(this.gstFormOthers.invalid){
         return;
       }
+      else if(!this.referredBy){
+        this.gstErrorMessageFlag = true;
+        this.gstErrorMessage = "Please Select Refereed By";
+        return;
+      }
       else{
         let reqBody : RequestQuoteDetailsModel = this.reqQuoteDetailsStore.getReqQuoteDetails();
         reqBody.name = this.gstFormOthers.get('firstName').value;
         reqBody.emailId = this.gstFormOthers.get('email').value;
         reqBody.countryCode = "IN";
         reqBody.phoneNo = this.gstFormOthers.get('phoneNo').value;
+
+        reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.adminUsers[0]._id : '';
+        reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy._id : '';
+        
         this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
         if( this.gstFormOthers.get('checkGstNil').value === null || this.gstFormOthers.get('checkGstNil').value === false){
-          console.log("+_+_+_+_ &*&*& inside if");
+         
   
           if(this.gstFormOthers.get('gstNo').value && this.gstFormOthers.get('gstNo').value.length === 15){
             this.gstErrorMessageFlag = false;
@@ -172,6 +213,8 @@ export class GstDetailsComponent implements OnInit{
           reqBody.gstNo = null;
           reqBody.gstType = "others";
           reqBody.gstFlag = false;
+          reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.adminUsers[0]._id : '';
+          reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy._id : '';
           this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
           this.gstDetailsAction.emit('next');
   
@@ -225,6 +268,11 @@ export class GstDetailsComponent implements OnInit{
                       "country": "IN",
                       "phone": userDetails.mobileNumber
                    }
+
+               
+                    reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.adminUsers[0]._id : '';
+                    reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy._id : '';
+                    
 
                    this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
                    this.gstDetailsAction.emit('nextOverview');
@@ -321,6 +369,41 @@ export class GstDetailsComponent implements OnInit{
 
   public onCancelClick(){
     this.router.navigate(['/cart']);
+  }
+
+  public onReferredByChange(event){
+    
+    //this.referredBy = event.target.value;
+    this.referredBy = JSON.parse(event.target.value);
+  }
+
+  
+
+
+  public getAllMyCustomers(){
+
+    this.subscriptions.push(
+      this.superAdminService.getAllChannelPartners().subscribe(res=>{
+       
+        // let firstValue : any = [{
+        //   "channelPartnerMaster": { 
+        //       "companyBusinessName": "Select User",
+        //   },  
+        // }]
+
+        
+        this.channelPartnerList = res.channelPartners;
+
+        // this.channelPartnerList = [...firstValue, ...this.channelPartnerList];
+        // console.log("+_+_+_+_+_+_ Selected API ", this.channelPartnerList)
+        // this.spinner.hide();
+      },
+      error => {
+        this.spinner.hide();
+        this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+      })
+    )
+
   }
 
 }
