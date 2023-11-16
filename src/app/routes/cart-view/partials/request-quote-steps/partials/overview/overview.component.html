@@ -92,7 +92,7 @@
         
             <div class="col-sm-12">
 
-                <input type="checkbox" [(ngModel)]="tandcCheckBox"  class="form-check d-inline" id="chb" required>
+                <input type="checkbox" [(ngModel)]="tandcCheckBox"  [disabled]="disabledFlag" class="form-check d-inline" id="chb" required>
                 
                 <div for="chb" class="form-check-label">&nbsp;I accept all <span class="condition"  (click)="showDialog()"> T&C.</span>
                    

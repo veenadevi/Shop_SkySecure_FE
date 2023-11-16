@@ -34,6 +34,8 @@ export class OverviewComponent implements OnInit{
 
   public dataPresent : boolean = false;
 
+  public disabledFlag : boolean = false;
+
   @Output() overViewAction = new EventEmitter();
 
 
@@ -224,15 +226,18 @@ export class OverviewComponent implements OnInit{
 
   public checkboxChanged(val){
 
+    this.disabledFlag = false;
     if(val === 0){
       this.isAcceptChecked = true;
       this.isDeclinedChecked = false;
       this.tandcCheckBox = true;
+      this.disabledFlag = false;
     }
     else{
       this.isAcceptChecked = false;
       this.isDeclinedChecked = true;
       this.tandcCheckBox = false;
+      this.disabledFlag = true;
     }
     this.visible = false;
   }
