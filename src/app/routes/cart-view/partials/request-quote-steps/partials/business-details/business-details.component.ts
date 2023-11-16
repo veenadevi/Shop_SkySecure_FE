@@ -80,7 +80,7 @@ export class BusinessDetailsComponent implements OnInit{
         countryName :[],
         stateName :[],
         citryName : [],
-        postalCode : [],
+        postalCode : ['',[Validators.pattern(/^\d{6}$/) ]],//accepting only numbers
       });
   }
 
