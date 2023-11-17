@@ -52,7 +52,7 @@ p{
 
 .error-message{
     color: red;
-    text-align: left;
+    text-align: center;
     font-size:  12px;
 }
 
@@ -60,16 +60,22 @@ p{
     text-align: center;
     margin-top: 15px;
     margin-bottom: 15px;
+    color: orange;
 }
 
 .check-box-holder{
     display: flex;
-    column-gap: 4%;
+    column-gap: 1%;
 }
-
+.mandatory{
+    color: red;
+}
+.nogstLable{
+    font-size: 14px;
+}
 .btn-holder{
     display: flex;
-    column-gap: 7%;
+    column-gap: 5%;
     align-items: center;
     justify-content: center;
     margin-top: 15px;

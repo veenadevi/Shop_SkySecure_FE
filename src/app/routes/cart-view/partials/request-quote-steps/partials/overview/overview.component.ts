@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
@@ -20,6 +20,9 @@ export class OverviewComponent implements OnInit{
   @Input('reqBody')
   public reqBody : any;
 
+  @Input('cartData')
+  public cartData:any
+
   public finalReq : any;
 
   public subscriptions : Subscription[] = [];
@@ -31,12 +34,15 @@ export class OverviewComponent implements OnInit{
 
   public tandcCheckBox : boolean = false;
 
+  public tandcCheckBoxErrorMessage:boolean=false;
+
 
   public dataPresent : boolean = false;
 
   public disabledFlag : boolean = false;
 
   @Output() overViewAction = new EventEmitter();
+  @ViewChild('form') form: ElementRef;
 
 
 
@@ -80,11 +86,13 @@ export class OverviewComponent implements OnInit{
     console.log("+_+_+_+_+ This", this.finalReq);
 
     if(!this.tandcCheckBox){
+    
+    this.tandcCheckBoxErrorMessage = true;
 
     }
     else{
       
-      /*
+      
       this.spinner.show();
       
       this.subscriptions.push(
@@ -115,7 +123,7 @@ export class OverviewComponent implements OnInit{
         ),
       
         
-      ) */
+      ) 
     } 
  
     
@@ -218,6 +226,7 @@ export class OverviewComponent implements OnInit{
 
     this.finalReq['selectedChannelPartnerId'] = storeDetails.selectedChannelPartnerId;
     this.finalReq['selectedChannelPartnerAdminId'] = storeDetails.selectedChannelPartnerAdminId;
+    this.finalReq['selectedChannelPartnerName'] = storeDetails.selectedChannelPartnerName;
 
     this.dataPresent = true;
     
@@ -234,7 +243,7 @@ export class OverviewComponent implements OnInit{
       this.isAcceptChecked = true;
       this.isDeclinedChecked = false;
       this.tandcCheckBox = true;
-      this.disabledFlag = false;
+      this.disabledFlag = true;
     }
     else{
       this.isAcceptChecked = false;
@@ -257,5 +266,115 @@ export class OverviewComponent implements OnInit{
     
   }
 
+  // public cartData : any[] = [];
+  // public qcartItems$ = this.cartStore.cartItems$
+  // .pipe(
+  //   map(data => {
+  //     if(data){
+  //       this.cartData = data.usercart[0].userCartDetails;
+        
+  //       return this.cartData;
+  //     }
+  //     else{
+  //       return data;
+  //     }
+  //   }
+  //   )
+  // )
+
+  public buyNow(){
+
+
+    //this.receiveOrderStatus()
+    this.checkout();
+
+  }
+
+  public receiveOrderStatus(){
+    this.subscriptions.push(
+      this.cartService.encryptForCCAvenue(null).subscribe(res=>{
+        console.log("++++)))))) Res", res);
+        this.cartService.getOrderStatus(res).subscribe(res=>{
+          console.log("+_+_+_ ))))))))))) Further Response ", res)
+        })
+      })
+    )
+  }
+
+  public encRequestRes : any;
+  public accessCode = "AVEI22KJ67BJ07IEJB";
+  public merchantId = "2941397";
+  public workingKey = "BDBA61F56C8E4C2028818322A0E3C091";
+  public selectedAddress : any = {
+    name : 'testing',
+    address : 'test address',
+    city : 'test city',
+    pincode : '23456',
+    state : 'state test',
+    phone : '1234567890'
+  }
+  public calculateTotal(cartData){
+    let total = 0;
+    for(var i=0;i<cartData.length;i++){
+      total = total + Number(cartData[i].itemTotal);
+    }
+
+    return total;
+  }
+
+  public checkOutCCAvenue(encryptedData){
+    let reqForCCAvenue = {
+      "encRequest" : encryptedData, // or any supported currency
+      "access_code" : this.accessCode,
+    }
+
+    this.subscriptions.push(
+      this.cartService.paymentGatewayCCAvenueRequest(reqForCCAvenue).subscribe(res=>{
+        console.log("+_+_+_+_+_+_+ Response from CCCAVENUE", res);
+      })
+    )
+  }
+
+  checkout(){
+
+    //let order_no = "0001";
+    //let testAmount = "10.00";
+
+    let cartRefId = this.cartStore.getCartRefreneceId();
+    console.log(" cart data from input ======",this.cartData)
+
+    let testAmount = this.calculateTotal(this.cartData);
+
+    console.log("+_+_+_+_ Amount ", cartRefId);
+    console.log("_+_+_+ This cat Data", testAmount);
+    
+    //let redirect_url = 'http%3A%2F%2Flocalhost%3A3008%2Fhandleresponse';
+    //let redirect_url = 'https://dev-shop.skysecuretech.com/';
+    let redirect_url = 'https://dev-altsys-realize-order.azurewebsites.net/api/orders/handleResponse'
+    let useremail = 'vigneshblog4@gmail.com';
+    let request = `merchant_id=${this.merchantId}&order_id=${cartRefId}&currency=INR&amount=${testAmount}&redirect_url=${redirect_url}&cancel_url=${redirect_url}&language=EN&billing_name=${this.selectedAddress.name}&billing_address=${this.selectedAddress.address}&billing_city=${this.selectedAddress.city}&billing_state=MH&billing_zip=${this.selectedAddress.pincode}&billing_country=India&billing_tel=${this.selectedAddress.phone}&delivery_name=${this.selectedAddress.name}&delivery_address=${this.selectedAddress.address}&delivery_city=${this.selectedAddress.city}&delivery_state=${this.selectedAddress.state}&delivery_zip=${this.selectedAddress.pincode}&delivery_country=India&delivery_tel=${this.selectedAddress.phone}&billing_email=${useremail}`
+    
+  
+
+
+
+
+
+     this.subscriptions.push(
+        this.cartService.encryptdata(request, testAmount, cartRefId).subscribe( data=>{
+        //  console.log('---------------------', data)
+
+          this.encRequestRes = data;
+          //this.encRequestRes = data['response']; 
+
+              setTimeout(()=>{
+                  this.form.nativeElement.submit();
+                  
+              },1000)
+        }, error => {
+          console.log("++++++ Error",error)
+          })
+      )
+  }
  
 }

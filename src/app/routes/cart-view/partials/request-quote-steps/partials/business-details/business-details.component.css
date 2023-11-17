@@ -22,8 +22,11 @@
 
 .error-message{
     color: red;
-    text-align: left;
+    text-align: center;
     font-size: 13px;
+}
+.mandatory{
+    color: red;
 }
 
 .btn-holder{

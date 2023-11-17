@@ -80,7 +80,7 @@ export class BusinessDetailsComponent implements OnInit{
         countryName :[],
         stateName :[],
         citryName : [],
-        postalCode : ['',[Validators.pattern(/^\d{6}$/), Validators.required]],//accepting only numbers
+        postalCode : [''],//accepting only numbers
       });
   }
 
@@ -134,18 +134,22 @@ public goBack(){
     //console.log("+_+_+_+_+_+_ **** ", this.businessDetailsForm.get('countryName').value);
     
     this.onNextClickFlag = true;
+    console.log("this.selectedCompanyName  ",this.selectedCompanyName)
+    if(!this.selectedCompanyName || this.selectedCompanyName === '' || this.selectedCompanyName ==='undefined'){
+      this.companyNameErrorFlag = true;
+    }
 
     if(this.businessDetailsForm.invalid){
         //alert('Invalid');
         console.log("+++__+_ Invlaid");
     }
-    else if(!this.selectedCompanyName || this.selectedCompanyName === ''){
-      this.companyNameErrorFlag = true;
-    }
+   
+   
     else{
       this.companyNameErrorFlag = false;
       console.log("+++__+_ Else");
       if(!this.selectedCountry || !this.selectedState || !this.selectedCity){
+        
         console.log("+++__+_ AAAA");
         this.countryStateError = true;
       }

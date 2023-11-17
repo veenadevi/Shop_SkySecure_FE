@@ -433,7 +433,8 @@ public onChangeQuantity(i, price) : void {
 
       const navigationExtras: NavigationExtras = {
         state: {
-          req : req
+          req : req,
+          cartData:this.cartData
         }
       };
       this.router.navigate(['/cart/request-quote'], navigationExtras);
