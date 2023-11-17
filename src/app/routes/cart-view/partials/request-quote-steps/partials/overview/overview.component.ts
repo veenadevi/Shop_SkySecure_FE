@@ -39,7 +39,7 @@ export class OverviewComponent implements OnInit{
 
   public dataPresent : boolean = false;
 
-  public disabledFlag : boolean = false;
+  public disabledFlag : boolean = true;
 
   @Output() overViewAction = new EventEmitter();
   @ViewChild('form') form: ElementRef;
@@ -86,13 +86,16 @@ export class OverviewComponent implements OnInit{
     console.log("+_+_+_+_+ This", this.finalReq);
 
     if(!this.tandcCheckBox){
-    
+      console.log("Inside create quation", this.finalReq);
+      
     this.tandcCheckBoxErrorMessage = true;
 
     }
-    else{
-      
-      
+     else{
+      if(this.tandcCheckBox)
+      console.log("Insideelse if part");
+      this.tandcCheckBoxErrorMessage = false;
+    
       this.spinner.show();
       
       this.subscriptions.push(
@@ -238,14 +241,16 @@ export class OverviewComponent implements OnInit{
 
   public checkboxChanged(val){
 
-    this.disabledFlag = false;
-    if(val === 0){
+    this.disabledFlag = !(this.isAcceptChecked || this.isDeclinedChecked   );
+    if(val === 0   && this.isAcceptChecked ){
+      console.log("Inside If")
       this.isAcceptChecked = true;
       this.isDeclinedChecked = false;
       this.tandcCheckBox = true;
-      this.disabledFlag = true;
+    //  this.disabledFlag = true;
     }
     else{
+      console.log("Inside else")
       this.isAcceptChecked = false;
       this.isDeclinedChecked = true;
       this.tandcCheckBox = false;
