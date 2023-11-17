@@ -103,7 +103,7 @@ export class CartService {
 
     //let url = this.baseUrl + this.userCartUrl + '/' + userAccountdetails._id;
     let url = this.baseUrl + this.userCartUrl + '/' + userData._id;
-    //let options = this.getOptions();
+    let options = this.getOptions();
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(
@@ -177,8 +177,8 @@ export class CartService {
   // }
 
   console.log("+++++++ ____ _ InsideCreate Quotation ", request);
-    
-    const REQUEST$ = this.http.post<any>(URL, request)
+    let options = this.getOptions();
+    const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -206,7 +206,8 @@ export class CartService {
 
   private getOptions() : { headers: HttpHeaders } { 
  
-    let token = this.userAccountStore.getAccessIdToken();
+    let token = localStorage.getItem("XXXXaccess__tokenXXXX");
+
     const OPTIONS : { headers : HttpHeaders } = { 
       headers : new HttpHeaders() 
         .set('authorization', token) 
@@ -226,8 +227,8 @@ export class CartService {
   
 
   console.log("+++++++ ____ _ InsideCreate Quotation ", request);
-    
-    const REQUEST$ = this.http.post<any>(URL, request)
+    let options = this.getOptions();
+    const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -257,8 +258,8 @@ export class CartService {
   
 
   console.log("+++++++ ____ _ Inside createInvoice ", request);
-    
-    const REQUEST$ = this.http.post<any>(URL, request)
+    let options = this.getOptions();
+    const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -311,8 +312,8 @@ export class CartService {
 
         let testReq = {}
 
-
-        let request$ = this.http.get<Observable<any>>(testUrl)
+        let options = this.getOptions();
+        let request$ = this.http.get<Observable<any>>(testUrl, options)
         .pipe(
           map(response => {
             if (!response) {
@@ -400,8 +401,8 @@ export class CartService {
 
     
     let url = this.baseUrl + this.paymentStatusByIdUrl + request;
-
-    let request$ = this.http.get<Observable<any>>(url)
+    let options = this.getOptions()
+    let request$ = this.http.get<Observable<any>>(url, options)
     .pipe(
       map(response => {
         if (!response) {
@@ -422,8 +423,8 @@ export class CartService {
     
     
 
-
-    let request$ = this.http.post<Observable<any>>(url, request)
+    let options = this.getOptions();
+    let request$ = this.http.post<Observable<any>>(url, request, options)
     .pipe(
       map(response => {
         if (!response) {
