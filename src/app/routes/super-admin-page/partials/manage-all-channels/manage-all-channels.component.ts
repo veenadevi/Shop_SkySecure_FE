@@ -43,10 +43,11 @@ export class ManageAllChannelsComponent {
   public duplicate:boolean=false
   public addAsAdmin:boolean=false
   selectedChannelPartner:any;
-  userIdPassing:any;
+  channelPartnerId:any;
   selectedValue:any
   public value:any
   public selectedAccountManagers: any[] = [];
+  public selectedAdmin: any[] = [];
   users = [
     { id: 1, name: 'User 1' },
     { id: 2, name: 'User 2' },
@@ -79,7 +80,7 @@ export class ManageAllChannelsComponent {
     this.userId = userAccountdetails._id;
     console.log("this.userId",this.userId)
     this.getMyChannelList(); 
-    this.getMyChannelPartnerList(this.selectedValue);
+    this.getChannelPartnerUsers(this.selectedValue);
   }
 
 
@@ -148,12 +149,12 @@ export class ManageAllChannelsComponent {
       
     });
      this.selectedChannelPartner = cpMap.get(selectedValue);
-     this.userIdPassing=this.selectedChannelPartner._id;
-    console.log("selectedCategory" + this.selectedChannelPartner._id, )
+     this.channelPartnerId=this.selectedChannelPartner._id;
+   // console.log("selectedCategory" + this.selectedChannelPartner._id, )
     this.currentChannelId=this.selectedChannelPartner._id;
 
-     this.getMyChannelPartnerList(this.userIdPassing);
-       console.log("this.userIdPassing",this.userIdPassing)
+     this.getChannelPartnerUsers(this.channelPartnerId);
+     //  console.log("this.userIdPassing",this.channelPartnerId)
 
        
          
@@ -180,21 +181,39 @@ export class ManageAllChannelsComponent {
   //   console.log("this.userIdPassing", this.userIdPassing);
   // }
   
-  getMyChannelPartnerList(userId: any) {
-    const selectedCategory = this.myChannels.find(category => category._id === userId);
+  getChannelPartnerUsers(channelPartnerId: any) {
+    this.selectedAccountManagers =[]
+    const selectedChannel = this.myChannels.find(channel => channel._id === channelPartnerId);
   
-    if (selectedCategory) {
+    if (selectedChannel) {
       // console.log("Selected Category:", selectedCategory,"length",selectedCategory.length);
+
+
+
+    
+      selectedChannel.adminUsers.forEach(item => {
+        item.role = "Channel Partner Admin";
+      });
+     
+     
+      
+
+      selectedChannel.channelParterAccountManager.forEach(item => {
+        item.role = "Account Manager";
+      });
   
-      this.selectedAccountManagers = selectedCategory.channelParterAccountManager;
-      // this.selectedAccountManagers=this.data
+      this.selectedAccountManagers = [... selectedChannel.adminUsers, ...selectedChannel.channelParterAccountManager];
+
+     
+
+    
       console.log("Selected Account Managers:", this.selectedAccountManagers );
     } else {
-      console.log("Category not found for userId:", userId);
+      console.log("Category not found for channelPartnerId:", channelPartnerId);
        this.selectedAccountManagers = [];
     }
   
-    console.log("this.userIdPassing", this.userIdPassing);
+   
   }
   
   
