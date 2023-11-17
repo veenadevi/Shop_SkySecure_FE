@@ -42,7 +42,7 @@ export class SuperAdminService {
 
   private getChannelPartnerDetailsUrl : string;
 
-
+private userAdminList: String;
 
   constructor(
     private http: HttpClient,
@@ -72,7 +72,7 @@ export class SuperAdminService {
     this.getMyChannelAMListURL=AppService.appUrl.getMyChannelAMURL;
     this.assignLeadsToAMURL=AppService.appUrl.assignLeadstoChannelAMURL;
     this.getChannelPartnerDetailsUrl = AppService.appUrl.getChannelPartnerDetailsById;
-
+    // this.userAdminList=AppService.appUrl.getMyChannelsListURL;
 
   }
 
@@ -126,7 +126,7 @@ export class SuperAdminService {
     let url = this.baseURLForusers + this.getMyChannelsListURL+"/"+id;
 
     
-
+console.log("url",this.getMyChannelsListURL)
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(
         map(response => {
@@ -330,9 +330,7 @@ export class SuperAdminService {
 
   public getChannelPartnerDetails(id) : Observable<any> {
 
-    let url = this.baseUrlForSuperAdmin + this.getChannelPartnerDetailsUrl + id;
-
-    
+    let url = this.baseUrlForSuperAdmin + this.getChannelPartnerDetailsUrl + id; 
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(
@@ -346,7 +344,24 @@ export class SuperAdminService {
 
     return request$;
   }
-  
+
+
+  public getChannelAdminUserList(userId:any) : Observable<any> {
+
+    let url = this.baseUrlForSuperAdmin + this.userAdminList + '/' + userId;; 
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
 
     /**
    * Stages our Http Request Headers

@@ -15,6 +15,9 @@ export interface RequestQuoteDetails{
     state : string;
     city : string;
     billing_address : any;
+    selectedChannelPartnerId : string
+    selectedChannelPartnerAdminId  : string;
+
 
     
 }

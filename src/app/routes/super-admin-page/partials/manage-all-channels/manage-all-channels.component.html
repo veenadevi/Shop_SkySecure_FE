@@ -8,7 +8,7 @@
                     <label for="channelPartner">Select Channel</label>
 
 
-                    <select class="custom-select " (change)="changeChannelList($event)"
+                    <select class="custom-select " (change)="changeChannelList($event)" 
                     formControlName="channelPartner"
                    >
                     <option value="">Choose...</option>
@@ -23,7 +23,42 @@
                        
                 </div>
             </div>
+          
+            <div *ngIf="selectedAccountManagers.length>0">
+                <span> Channel users</span>
+               
+            <div class="card"  >
+                
+              
+                <p-table 
+                [value]="selectedAccountManagers" 
+                    [tableStyle]="{ 'min-width': '50rem' }"
+                    [paginator]="false"
+                    [rows]="15"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    >
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Channel Name</th>  
+                            <th>Email ID</th>
+                            <th>Mobile Number</th>
+                            <th>Role</th>  
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-accountManager let-i="rowIndex">
+                        <tr >
+                            <td>{{ accountManager.firstName }}</td> 
+                            <td>{{ accountManager.email }}</td> 
+                            <td>{{ accountManager.mobileNumber }}</td>
+                            <td>{{ accountManager.role }}</td>
+                          </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
 
+        
             <div class="radio-btn">
                 <!-- <div class="btn-cont"> -->
                     <div class="content-select">

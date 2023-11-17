@@ -19,6 +19,12 @@
 .card-2 {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+.error-message{
+    color: red;
+    text-align: center;
+    font-size:  12px;
+}
+
 
 .text-row{
     display: flex;

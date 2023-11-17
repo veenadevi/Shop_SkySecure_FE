@@ -433,7 +433,8 @@ public onChangeQuantity(i, price) : void {
 
       const navigationExtras: NavigationExtras = {
         state: {
-          req : req
+          req : req,
+          cartData:this.cartData
         }
       };
       this.router.navigate(['/cart/request-quote'], navigationExtras);
@@ -729,8 +730,21 @@ public onChangeQuantity(i, price) : void {
 
   public buyNow(){
 
+
+    //this.receiveOrderStatus()
     this.checkout();
 
+  }
+
+  public receiveOrderStatus(){
+    this.subscriptions.push(
+      this.cartService.encryptForCCAvenue(null).subscribe(res=>{
+        console.log("++++)))))) Res", res);
+        this.cartService.getOrderStatus(res).subscribe(res=>{
+          console.log("+_+_+_ ))))))))))) Further Response ", res)
+        })
+      })
+    )
   }
 
   public encRequestRes : any;

@@ -48,7 +48,7 @@ export class ReassignModalComponent implements OnInit{
     this.activeModal.close();
   }
 
-  public reAssign(){
+  public reAssign(isReassign:boolean){
     this.submitted = true;
     if (this.form.invalid) { // If Invalid Return
       
@@ -59,19 +59,27 @@ export class ReassignModalComponent implements OnInit{
 
       let userAccountdetails = this.userAccountStore.getUserDetails();
 
-      console.log("+_+_ Reassign", this.request);
-      console.log("+_+_ Reassign", userAccountdetails);
+      
+      console.log("====isReassign==",isReassign)
+    let statusMessage=""
+
+      if(isReassign){
+        statusMessage="ChannalPartner AM ReAssinged"
+      }
+      else{
+        statusMessage="ChannalPartner AM Rejected"
+      }
 
       let reqBody = {
         "cart_ref_id":this.request.cartData.cart_ref_id,
         "assignedAccountOwnerId":"",
-        "leadStatusUpdate":"ChannalPartner AM Reverted",
+        "leadStatusUpdate":statusMessage,
         "leadComment":[{
             "commentBy":userAccountdetails.firstName,
             "comment": this.form.value.messageText
         }],
-        "isRevert":false,
-        "isReject":true,
+        "isRevert":isReassign,
+        "isReject":(!isReassign),
         "updatedBy":userAccountdetails._id,
         "assignedChannelPartnerId": this.request.cartData.assignedChannelPartnerId
       }

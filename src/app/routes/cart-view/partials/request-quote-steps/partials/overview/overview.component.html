@@ -26,7 +26,7 @@
               <span class="value-field">{{finalReq.gst_no}}</span>
             </div>
             <div class="col col-sm-4 form-group">
-              <label for="address-2">Compnay Name</label>
+              <label for="address-2">Company Name</label>
               <span class="value-field">{{finalReq.companyName}}</span>
             </div>
             <div class="col col-sm-4 form-group">
@@ -40,7 +40,7 @@
         <div class="text-row">
             <div class="col col-sm-4 form-group">
                 <label for="address-1">Referred By</label>
-                <span class="value-field">&nbsp;</span>
+                <span class="value-field">{{(finalReq.selectedChannelPartnerName) ? finalReq.selectedChannelPartnerName : '-'}}</span>
             </div>
             <div class="col col-sm-4 form-group">
                 <label for="address-2">Quotation For</label>
@@ -97,17 +97,31 @@
                 <div for="chb" class="form-check-label">&nbsp;I accept all <span class="condition"  (click)="showDialog()"> T&C.</span>
                    
                 </div>
-       
+            </div>
+                <div class="col-sm-12">
+
+                <ng-container  *ngIf="tandcCheckBoxErrorMessage">
+                    <span class="error-message">Please accept Terms and Condition</span> 
+                  </ng-container>
+                </div>
                 <!-- <span class="checkBoxHolder"><input type="checkbox" formControlName="checkTerms"  class="form-check d-inline" id="chb" required></span>
                 
                 <span> I accept All</span> <span class="condition"  (click)="onTermsClick()"> T&C.</span> -->
                 
-            </div>
-        
+           
+                <form #form ngNoForm
+                id="nonseamless" 
+                method="post" 
+                name="redirect" 
+                action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction">
+                  <input type="hidden" id="encRequest" name="encRequest" value="{{encRequestRes}}">
+                  <input type="hidden" name="access_code" id="access_code" value="{{accessCode}}">
+              </form>
 
             <div class="btn-holder">
                 <button class="btn secondary-btn"  (click)="goBack()">Back</button>
-                <button class="btn primary-btn" (click)="createQuotation()">Submit</button>
+                <button class="btn secondary-btn" (click)="buyNow()">Buy Now</button>
+                <button class="btn primary-btn" (click)="createQuotation()">Request Quote</button>
             </div>
         
 

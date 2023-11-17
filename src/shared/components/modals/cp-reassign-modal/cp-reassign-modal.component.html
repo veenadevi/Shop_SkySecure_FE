@@ -1,14 +1,14 @@
 <div class="reason-container">
-    <!-- <div class="close-btn-section"> -->
-      <button (click)="closeModal()" type="button" class="close" aria-label="Close">
-          <img class="close-icon" src="../../../../assets/icons/closecircle.svg">
-      </button>
-  <!-- </div> -->
+   
     <div class="modal-header">
       <span>
-          Update Comments/Reasons
+          Update Your Comments
       </span>
-     
+      <div class="close-btn-section">
+        <button (click)="closeModal()" type="button" class="close" aria-label="Close">
+            <img class="close-icon" src="../../../../assets/icons/closecircle.svg">
+        </button>
+    </div>
   </div>
   
       
@@ -28,8 +28,8 @@
       </form>
   
       <div class="button-section">
-          <button class="btn primary-btn alert-btn" (click)="closeModal()">Reject</button>
-          <button class="btn primary-btn" (click)="CpReAssign()">Reassign</button>
+          <button class="btn primary-btn alert-btn" (click)="CpReAssign(false)">Reject</button>
+          <button class="btn primary-btn" (click)="CpReAssign(true)">Reassign</button>
       </div>
   
   </div>

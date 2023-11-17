@@ -18,6 +18,20 @@
         </div>
 
 
+        <ng-container *ngIf="channelPartnerList && channelPartnerList.length>0">
+
+        </ng-container>
+        <div class="name-row-01">
+          <div class="col col-sm-6 form-group">
+            <label for="State">Referred By<span class="mandatory">*</span></label>
+            <select class="form-control" (change)="onReferredByChange($event)">
+              <option disabled selected>--Select Channel Partner--</option>
+              <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.channelPartnerMaster.companyBusinessName}}</option>
+            </select>
+          </div>
+        </div>
+
+
         <ng-container *ngIf="selectedGSTType ==='self'; else othersGSTDetails"> 
 
             <form [formGroup]="gstForm">
@@ -28,7 +42,7 @@
                 
 
 
-                  <div class="col-sm-11 form-group">
+                  <div class="col-sm-6 form-group">
                     <input formControlName="gstNo" type="text" class="form-control " name="gstNo" id="gst-no"
                       placeholder="Enter your GST NO" >
                     
@@ -38,7 +52,7 @@
                   <p class="or ">(Or)</p>
                   <div class="col-sm-12 check-box-holder">
                     <input type="checkbox" formControlName="checkGstNil" class="form-check d-inline" id="chb"  >
-                    <div for="chb" class="form-check-label" >&nbsp;I Don't Have Company GST Number.
+                    <div for="chb" class="nogstLable" >&nbsp;I Don't Have Company GST Number.
                       
                       {{disableCheckGstNil()}}
                     </div>
@@ -102,7 +116,7 @@
                   <p class="or ">(Or)</p>
                   <div class="col-sm-12 check-box-holder">
                     <input type="checkbox" formControlName="checkGstNil" class="form-check d-inline" id="chb"  >
-                    <div for="chb" class="form-check-label" >&nbsp;I Don't Have Company GST Number.
+                    <div for="chb" class="nogstLable" >&nbsp;I Don't Have Company GST Number.
                       
                       {{disableCheckGstNil()}}
                     </div>

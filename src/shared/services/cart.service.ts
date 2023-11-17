@@ -280,6 +280,78 @@ export class CartService {
     return REQUEST$;
   }
 
+  public getOrderStatus(req){
+
+
+    //let url = "http://localhost:8080/api/orders/encryptForCCAvenue";
+        
+
+        let request = {
+          "reference_no": "1698922729925", 
+          "order_no": "1698922759496",
+        }
+        
+
+        //var testUrl = "https://apitest.ccavenue.com/apis/servlet/DoWebTrans?command=orderStatusTracker&version=1.2&request_type=JSON&response_type=JSON&access_code=";
+        //var testUrl = "https://test.ccavenue.com/apis/servlet/DoWebTrans";
+
+
+        var testUrl = "https://apitest.ccavenue.com/apis/servlet/DoWebTrans?command=orderStatusTracker&version=1.2&request_type=JSON&response_type=JSON&access_code=AVEI22KJ67BJ07IEJB&enc_request="+req;
+    
+    
+        let reqBody = {
+          'command' : 'orderStatusTracker',
+          'version' : '1.2',
+          'request_type' : 'JSON',
+          'response_type' : 'JSON', 
+          'access_code' : 'AVEI22KJ67BJ07IEJB',
+          'enc_request' : req
+
+        }
+
+        let testReq = {}
+
+
+        let request$ = this.http.get<Observable<any>>(testUrl)
+        .pipe(
+          map(response => {
+            if (!response) {
+              return null;
+            }
+            return response;
+          }),
+        ); 
+    
+        return request$;
+  }
+
+  public encryptForCCAvenue(req){
+        
+        //let url = `${this.baseUrl}api/orders/encryptForCCAvenue`;
+        let url = "http://localhost:8080/api/orders/encryptForCCAvenue";
+        
+
+        let request = {
+          "reference_no": "1698922729925", 
+          "order_no": "1698922759496",
+        }
+        
+    
+    
+        let request$ = this.http.post<Observable<any>>(url, request)
+        .pipe(
+          map(response => {
+            if (!response) {
+              return null;
+            }
+            return response;
+          }),
+        ); 
+    
+        return request$;
+        
+  }
+
   public encryptdata(request, amount, ref_id){
     //let url = `${this.baseUrl}orders/encryptFormData`;
     let url = `${this.baseUrl}api/orders/encryptFormData`;
