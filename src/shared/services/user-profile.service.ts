@@ -25,9 +25,10 @@ export class UserProfileService {
   private validateOTPUrl : string;
   private userGstUpdateUrl : string;
   private getMyMarketPlaceAccountListURL:string;
+
   
 
-
+  private options:{headers:HttpHeaders}
 
   constructor(
     private http: HttpClient,
@@ -45,7 +46,7 @@ export class UserProfileService {
     this.validateOTPUrl  = AppService.appUrl.validateOTP;
     this.userGstUpdateUrl = AppService.appUrl.userGstUpdate;
     this.getMyMarketPlaceAccountListURL=AppService.appUrl.getMyMarketPlaceAccountListURL
-    
+    this.options=this.getOptions2();
     
   }
 
@@ -184,7 +185,7 @@ export class UserProfileService {
     //let url = this.baseUrlForQuote + this.getQuotationUrl + '/640f59c83d2d10005c34023e';
     
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url,this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -287,7 +288,7 @@ export class UserProfileService {
       "saveToSentItems": "false"
     }
 
-    const REQUEST$ = this.http.post<any>(url, request, OPTIONS)
+    const REQUEST$ = this.http.post<any>(url, request, )
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -332,11 +333,14 @@ export class UserProfileService {
    */
 
   private getOptions2() : { headers: HttpHeaders } { 
+
+    let token = localStorage.getItem("XXXXaccess__tokenXXXX");
  
-    let token = this.userAccountStore.getAccessIdToken();
+  //  let token = this.userAccountStore.getAccessIdToken();
     const OPTIONS : { headers : HttpHeaders } = { 
       headers : new HttpHeaders() 
-        .set('Content-Type', 'application/json') 
+        .set('authorization', token) 
+        .append('Content-Type', 'application/json') 
     }; 
  
     return OPTIONS; 
@@ -347,7 +351,7 @@ export class UserProfileService {
     let url = this.baseUrlForQuote + this.getMyMarketPlaceAccountListURL+ '/' + userId;
   
   
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url,this.options)
       .pipe(
         map(response => {
           if (!response) {

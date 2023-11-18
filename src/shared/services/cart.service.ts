@@ -31,6 +31,7 @@ export class CartService {
   public handleResponseURL : string;
 
   public paymentStatusByIdUrl : string
+  private options:{headers:HttpHeaders}
 
 
 
@@ -48,6 +49,7 @@ export class CartService {
     this.createInvoiceURL=AppService.appUrl.createInvoice;
     this.handleResponseURL = AppService.appUrl.handleResponse;
     this.paymentStatusByIdUrl = AppService.appUrl.paymentStatusByid;
+    this.options=this.getOptions();
     
   }
 
@@ -69,7 +71,7 @@ export class CartService {
     //     ]
     //   })
     
-    const REQUEST$ = this.http.post<any>(URL, request)
+    const REQUEST$ = this.http.post<any>(URL, request,this.options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -103,9 +105,10 @@ export class CartService {
 
     //let url = this.baseUrl + this.userCartUrl + '/' + userAccountdetails._id;
     let url = this.baseUrl + this.userCartUrl + '/' + userData._id;
+    console.log("getCartItems  ===URL ",url)
     let options = this.getOptions();
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url,options)
       .pipe(
         map(response => {
           if (!response) {
@@ -119,7 +122,7 @@ export class CartService {
           return response;
         }),
       );
-
+console.log("retrive ===",request$)
     return request$;
   }
 

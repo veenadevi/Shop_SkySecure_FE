@@ -42,6 +42,7 @@ export class AdminPageService {
   private createProductOfferURL: String;
 
   private getChannelAMAccountListURL:string;
+  private options:{headers:HttpHeaders}
 
 
 
@@ -77,7 +78,7 @@ export class AdminPageService {
     //For Channel AM
 
     this.getChannelAMAccountListURL=AppService.appUrl.getChannelAMAccountListURL;
- 
+     this.options = this.getOptions();
 
     
   }
@@ -115,7 +116,7 @@ export class AdminPageService {
 
     //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url, this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -157,7 +158,7 @@ export class AdminPageService {
 
     //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url,this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -382,7 +383,7 @@ export class AdminPageService {
 
   private getOptions() : { headers: HttpHeaders } { 
  
-    let token = this.userAccountStore.getAccessIdToken();
+    let token = localStorage.getItem("XXXXaccess__tokenXXXX");;
     const OPTIONS : { headers : HttpHeaders } = { 
       headers : new HttpHeaders() 
         .set('authorization', token) 
@@ -391,7 +392,6 @@ export class AdminPageService {
  
     return OPTIONS; 
   }
-
  
 
   uploadFile(event: any) {
