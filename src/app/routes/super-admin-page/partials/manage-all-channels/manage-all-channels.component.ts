@@ -78,7 +78,7 @@ export class ManageAllChannelsComponent {
     this.getUsersList();
     let userAccountdetails = this.userAccountStore.getUserDetails();
     this.userId = userAccountdetails._id;
-    console.log("this.userId",this.userId)
+   
     this.getMyChannelList(); 
     this.getChannelPartnerUsers(this.selectedValue);
   }
@@ -116,7 +116,7 @@ export class ManageAllChannelsComponent {
       this.superAdminService.getAllChannelPartners().subscribe(response => {
 
         this.myChannels = response.channelPartners;
-        console.log("this.myChannels ", this.myChannels );
+     
         // console.log("email:",this.myChannels[0].channelParterAccountManager[0].email);
 
       })
@@ -207,9 +207,8 @@ export class ManageAllChannelsComponent {
      
 
     
-      console.log("Selected Account Managers:", this.selectedAccountManagers );
     } else {
-      console.log("Category not found for channelPartnerId:", channelPartnerId);
+   
        this.selectedAccountManagers = [];
     }
   
@@ -224,7 +223,7 @@ export class ManageAllChannelsComponent {
     this.subscription.push(
       this.adminPageService.getAllusers().subscribe(res => {
         this.usersList = res;
-        console.log("this.usersList ", this.usersList);
+
       })
     );
   }
@@ -272,7 +271,7 @@ export class ManageAllChannelsComponent {
       this.submitErrorMessage = false
       this.addAsAdmin=this.myForm.get('isAdmin').value?this.myForm.get('isAdmin').value:false
 
-      console.log("this.addAsAdmin===",this.addAsAdmin)
+  
       this.CreateChannelPartnerUser();
 
       // if(this.myForm.get('isAdmin').value){

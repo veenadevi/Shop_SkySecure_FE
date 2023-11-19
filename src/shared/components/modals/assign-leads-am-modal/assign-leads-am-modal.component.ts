@@ -87,8 +87,7 @@ export class AssignLeadsAmModalComponent implements OnInit{
 
     let userAccountdetails = this.userAccountStore.getUserDetails();
     //console.log("++_+_+_+_+_+_+_+ _Data here", this.selectedUser);
-   console.log("++_+_+_+_+_+_+_+ _Data here", this.request);
-
+  
       let req = {
         "cart_ref_id":this.request.cartData.cart_ref_id,
         "assignedAccountOwnerId":this.selectedUser._id,
@@ -111,7 +110,7 @@ export class AssignLeadsAmModalComponent implements OnInit{
        // if(res && res.assignownerResult && res.assignownerResult.code === 'SUCCESS'){
         if(res){
          //  res.assignownerResult.ownerName = this.selectedUser;
-         console.log("in model=====",this.selectedUser)
+      
          res['assignedName'] = this.selectedUser.firstName
            this.passedData.emit(res);
           this.activeModal.close();
@@ -131,6 +130,6 @@ export class AssignLeadsAmModalComponent implements OnInit{
   public onChange(event){
     
     this.selectedUser = event.value;
-    console.log("this.selectedUser  ",this.selectedUser)
+   
   }
 }

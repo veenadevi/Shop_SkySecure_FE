@@ -15,7 +15,7 @@ export class SuperAdminPageComponent implements OnInit{
 
   public ngOnInit(): void {
 
-    console.log("===============SuperAdminPageComponent=======")
+  
     
   }
 

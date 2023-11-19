@@ -382,7 +382,7 @@ export class LoginComponent {
 }
 
 export  function emailOrMobileValidator(control: AbstractControl):Observable<ValidationErrors | any>  {
-  console.log("passing email as====", control.value)
+ // console.log("passing email as====", control.value)
 
   //console.log("is access?", this.isMobile)
 

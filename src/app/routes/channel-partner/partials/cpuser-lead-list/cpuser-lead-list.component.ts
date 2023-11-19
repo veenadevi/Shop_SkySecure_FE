@@ -60,7 +60,7 @@ export class CpuserLeadListComponent implements OnInit{
 
   ngOnInit(): void {
     this.spinner.show();
-    console.log("===============AccountListComponent=======")
+   // console.log("===============AccountListComponent=======")
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;

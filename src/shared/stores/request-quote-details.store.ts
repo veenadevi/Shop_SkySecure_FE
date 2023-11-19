@@ -46,7 +46,7 @@ export class RequestQuoteDetailsStore {
    * Return RequestQuote Details
    */
   public getReqQuoteDetails(): any {
-    console.log("+_+_+_ Data here", this.reqQuoteDetails);
+
     return this.reqQuoteDetails;
   }
 

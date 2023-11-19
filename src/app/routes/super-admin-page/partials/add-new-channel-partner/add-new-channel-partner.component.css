@@ -20,6 +20,9 @@
     margin-left: 25%;
    
 }
+.mandatory{
+    color: red;
+}
 h3{
     text-align: center;
     padding-top: 20px;
@@ -57,7 +60,7 @@ h4{
     width:30%
 }
 .partner-name{
-    margin-left: 12%;
+    margin-left: 1%;
 }
 
 .custom-select {

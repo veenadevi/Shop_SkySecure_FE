@@ -43,6 +43,7 @@ export class SuperAdminService {
   private getChannelPartnerDetailsUrl : string;
 
 private userAdminList: String;
+private options:{headers:HttpHeaders}
 
   constructor(
     private http: HttpClient,
@@ -73,7 +74,7 @@ private userAdminList: String;
     this.assignLeadsToAMURL=AppService.appUrl.assignLeadstoChannelAMURL;
     this.getChannelPartnerDetailsUrl = AppService.appUrl.getChannelPartnerDetailsById;
     // this.userAdminList=AppService.appUrl.getMyChannelsListURL;
-
+    this.options = this.getOptions();
   }
 
 
@@ -126,7 +127,7 @@ private userAdminList: String;
     let url = this.baseURLForusers + this.getMyChannelsListURL+"/"+id;
 
     
-console.log("url",this.getMyChannelsListURL)
+
     let options = this.getOptions();
     let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
@@ -181,7 +182,7 @@ console.log("url",this.getMyChannelsListURL)
 
     
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url,this.options)
       .pipe(
         map(response => {
           if (!response) {

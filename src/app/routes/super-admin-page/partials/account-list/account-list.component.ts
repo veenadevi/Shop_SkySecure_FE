@@ -63,7 +63,7 @@ export class AccountListComponent implements OnInit{
 
   ngOnInit(): void {
     this.spinner.show();
-    console.log("===============AccountListComponent=======")
+   
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
@@ -81,7 +81,7 @@ export class AccountListComponent implements OnInit{
       // this.info = a.accounts.info;
     this.subscriptions.push(
       this.adminPageService.getAllAccounts().subscribe( response => {
-        console.log("running here directly==")
+        
      
         this.accountData = response.accounts.data;
         this.info = response.accounts.info;
@@ -157,7 +157,7 @@ export class AccountListComponent implements OnInit{
   public getAllCRMUsers(){
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+_+_+_+_+ ", res);
+      
         this.superAdminStore.setCrmUsers(res);
       })
     )
@@ -167,7 +167,7 @@ export class AccountListComponent implements OnInit{
   public getAllChannelPartners(){
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
+       
         if(res.channelPartners.length>0){
          this.disableAssign=false
 

@@ -8,7 +8,7 @@
         <div *ngIf="showDefaultContent">
           <div class="row">
             <div class="col-sm-4 forms">
-              <label for="companyInput">Company Business Name</label>
+              <label for="companyInput">Company Business Name<span class="mandatory">*</span></label>
               <!-- <input formControlName="companyBusinessName" type="companyBusinessName" class="form-control-03"
                   name="companyBusinessName" id="companyBusinessName" placeholder="Enter Company Name"
                   required> -->
@@ -66,12 +66,12 @@
                     id="address-1" placeholder="Locality/House/Street no.">
             </div>
             <div class="col-sm-4 forms">
-                <label for="address-2">Address Line-2</label>
+                <label for="address-2">Address Line-2<span class="mandatory">*</span></label>
                 <input formControlName="addressLine2" type="address" class="form-control-01" name="address"
                     id="address-2" placeholder="Village/City Name." required>
             </div>
             <div class="col-sm-4 forms">
-                <label for="Country">Country*</label>
+                <label for="Country">Country<span class="mandatory">*</span></label>
                 <select formControlName="countryName" class="form-control-01" (change)="onCountryChange($event)"
                     placeholder="select country">
                     <ng-container *ngIf="gstData; else noGstData">
@@ -89,7 +89,7 @@
   
           <div class="row">
             <div class="col-sm-4 forms">
-                <label for="State">State*</label>
+                <label for="State">State<span class="mandatory">*</span></label>
                 <select formControlName="stateName" class="form-control-01" (change)="onStateChange($event)">
                     <ng-container *ngIf="gstData; else noGstDataState">
                         <option value="">{{gstResponseData.adress.state}}</option>
@@ -104,7 +104,7 @@
        
   
             <div class="col-sm-4 forms">
-                <label for="State">City</label>
+                <label for="State">City<span class="mandatory">*</span></label>
                 <select formControlName="cityName" class="form-control-01" (change)="onCityChange($event)">
                     <ng-container *ngIf="gstData; else noGstDataCity">
                         <option value="">{{gstResponseData.adress.city}}</option>
@@ -131,7 +131,7 @@
       <div *ngIf="showAlternateContent">
         <div class="row">
           <div class="col-sm forms">
-            <label for="firstname">First Name</label>
+            <label for="firstname">First Name<span class="mandatory">*</span></label>
             <input type="text" id="firstName" name="firstName" formControlName="firstName" placeholder="Enter  FirstName">
           </div>
           <div class="col-sm forms">

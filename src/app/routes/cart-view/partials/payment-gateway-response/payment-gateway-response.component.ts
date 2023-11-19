@@ -27,7 +27,7 @@ constructor(
 
     let orderStatusId = this.route.snapshot.paramMap.get('id');
     //let orderStatusId = '654c842732b0f57bddc2c484';
-    console.log("+_+_+_ The value here is ", orderStatusId);
+   // console.log("+_+_+_ The value here is ", orderStatusId);
 
     this.spinner.show();
     this.getStatusUpdate(orderStatusId);
@@ -39,7 +39,7 @@ constructor(
   public getStatusUpdate(id){
     this.subscription.push(
       this.cartService.getPaymentStatusUpdate(id).subscribe(res=>{
-        console.log("+_+_+_ Final Update ", res);
+       // console.log("+_+_+_ Final Update ", res);
         this.statusResponse = res;
         this.spinner.hide();
       })

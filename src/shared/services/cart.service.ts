@@ -105,7 +105,7 @@ export class CartService {
 
     //let url = this.baseUrl + this.userCartUrl + '/' + userAccountdetails._id;
     let url = this.baseUrl + this.userCartUrl + '/' + userData._id;
-    console.log("getCartItems  ===URL ",url)
+
     let options = this.getOptions();
 
     let request$ = this.http.get<Observable<any>>(url,options)
@@ -122,7 +122,7 @@ export class CartService {
           return response;
         }),
       );
-console.log("retrive ===",request$)
+
     return request$;
   }
 
@@ -179,7 +179,7 @@ console.log("retrive ===",request$)
   
   // }
 
-  console.log("+++++++ ____ _ InsideCreate Quotation ", request);
+
     let options = this.getOptions();
     const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
@@ -229,7 +229,7 @@ console.log("retrive ===",request$)
 
   
 
-  console.log("+++++++ ____ _ InsideCreate Quotation ", request);
+
     let options = this.getOptions();
     const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
@@ -260,7 +260,7 @@ console.log("retrive ===",request$)
 
   
 
-  console.log("+++++++ ____ _ Inside createInvoice ", request);
+
     let options = this.getOptions();
     const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
@@ -364,7 +364,7 @@ console.log("retrive ===",request$)
     request : request
     }
 
-    console.log("AJDGSHJ ", amount.toFixed(2));
+
 
     //console.log("+_+_+_+_ Key Here ", request.amount);
 

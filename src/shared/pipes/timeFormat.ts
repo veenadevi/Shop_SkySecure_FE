@@ -29,7 +29,7 @@ export class TimeFormatPipe implements PipeTransform {
 
     let time1:any = date.getHours();
     let time2:any = todayDate.getHours();
-    console.log("_+_++_+_+_+_+_ ", time2 - time1);
+  
     return date;
   }
 }
