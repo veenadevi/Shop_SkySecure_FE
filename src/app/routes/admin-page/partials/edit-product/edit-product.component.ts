@@ -11,6 +11,7 @@ import { ActivatedRoute, Event, NavigationEnd, NavigationError, NavigationStart,
 import { environment } from 'src/environments/environment';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { DatePipe } from '@angular/common';
+import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
 interface CreateProductPayload {
   _id: String,
@@ -85,6 +86,7 @@ export class EditProductComponent  implements OnInit {
   showMsg: boolean = false;
   listedProducts:any[]=[];
   productVideoEmbedURL:string;
+  showerrorMsg:boolean
 
   public tempAppList : any[] = [];
 
@@ -99,7 +101,8 @@ export class EditProductComponent  implements OnInit {
     private router : Router,
     private route: ActivatedRoute,
     private userAccountStore :UserAccountStore,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private adminPageService : AdminPageService,
   ) {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
@@ -551,14 +554,32 @@ export class EditProductComponent  implements OnInit {
         
       }
       
+
+     
+        this.subscriptions.push(
+          this.adminPageService.productEdit(this.createProductPayload).subscribe(
+            response => {
+            this.showMsg=true
+            this.registrationForm.reset();
+            this.selectedProductId.reset();
+          },
+
+          error=>{
+            this.showerrorMsg=true
+            this.registrationForm.reset();
+            this.selectedProductId.reset();
+          }
+          )
+        )
       
-      var endPoint = `${environment.gatewayUrl}api/admin/product/edit`
-      this.http.patch(endPoint,this.createProductPayload).subscribe((response) => {
+    
+      
+      // var endPoint = `${environment.gatewayUrl}api/admin/product/edit`
+      // this.http.patch(endPoint,this.createProductPayload).subscribe((response) => {
         
-        this.showMsg=true
-      })
-         this.registrationForm.reset();
-         this.selectedProductId.reset();
+      //   this.showMsg=true
+      // })
+        
          
     }
   }

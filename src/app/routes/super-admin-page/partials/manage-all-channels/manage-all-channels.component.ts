@@ -20,7 +20,7 @@ interface AddChannelPartnerUserPayLoad {
 
 
 }
-
+ 
 @Component({
   selector: 'app-manage-all-channels',
   templateUrl: './manage-all-channels.component.html',
@@ -42,7 +42,12 @@ export class ManageAllChannelsComponent {
   public currentChannelId:string;
   public duplicate:boolean=false
   public addAsAdmin:boolean=false
-
+  selectedChannelPartner:any;
+  channelPartnerId:any;
+  selectedValue:any
+  public value:any
+  public selectedAccountManagers: any[] = [];
+  public selectedAdmin: any[] = [];
   users = [
     { id: 1, name: 'User 1' },
     { id: 2, name: 'User 2' },
@@ -61,7 +66,7 @@ export class ManageAllChannelsComponent {
       channelPartner: [''],
       userName: ['', [Validators.required, Validators.required]],
       EmailId: ['', [Validators.required, Validators.email]],
-      phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      phoneNo: ['', [Validators.pattern(/^\d{10}$/)]],
       isAdmin:[''],
 
     });
@@ -73,7 +78,9 @@ export class ManageAllChannelsComponent {
     this.getUsersList();
     let userAccountdetails = this.userAccountStore.getUserDetails();
     this.userId = userAccountdetails._id;
-    this.getMyChannelList();
+   
+    this.getMyChannelList(); 
+    this.getChannelPartnerUsers(this.selectedValue);
   }
 
 
@@ -109,38 +116,148 @@ export class ManageAllChannelsComponent {
       this.superAdminService.getAllChannelPartners().subscribe(response => {
 
         this.myChannels = response.channelPartners;
+     
+        // console.log("email:",this.myChannels[0].channelParterAccountManager[0].email);
 
       })
 
     );
 
   }
+ 
+
+// public getMyChannelPartnerList(userId:any){ 
+//   // console.log("running here directly" )
+//   this.subscription.push( 
+//   this.superAdminService.getMyChannelPartnerList(userId).subscribe( response => {
+  
+//     // console.log("running here directly==",response)
+//     this.myChannels=response;  
+//     console.log(" this.myChannels", this.myChannels )
+//   })
+//    )
+// }
+
 
   changeChannelList(event: any) {
 
     const selectedValue = event.target.value;
-    // console.log("selectedValue  "+selectedValue)
+     console.log("selectedValue  "+selectedValue)
     const cpMap = new Map<string, any>();
     this.myChannels.forEach(category => {
       cpMap.set(category._id.toString(), category);
+      
     });
-    const selectedChannelPartner = cpMap.get(selectedValue);
-    console.log("selectedCategory  " + selectedChannelPartner._id)
-    this.currentChannelId=selectedChannelPartner._id
+     this.selectedChannelPartner = cpMap.get(selectedValue);
+     this.channelPartnerId=this.selectedChannelPartner._id;
+   // console.log("selectedCategory" + this.selectedChannelPartner._id, )
+    this.currentChannelId=this.selectedChannelPartner._id;
 
+     this.getChannelPartnerUsers(this.channelPartnerId);
+     //  console.log("this.userIdPassing",this.channelPartnerId)
 
-
-
+       
+         
   }
+
+
+
+  // getMyChannelPartnerList(userId: any) {
+  //   const selectedCategory = this.myChannels.find(category => category._id === userId);
+  
+  //   if (selectedCategory) {
+  //     console.log("Selected Category:", selectedCategory);
+  
+  //     selectedCategory.channelParterAccountManager.forEach(accountManager => {
+  //       console.log("Account Manager Details:", accountManager.firstName,
+  //       "Account Manager Email:", accountManager.email,"Account Manager Email:", accountManager.role,
+  //       "mobileNumber",accountManager.mobileNumber);
+  //      this.value=accountManager
+  //     });
+  //   } else {
+  //     console.log("Category not found for userId:", userId);
+  //   }
+  
+  //   console.log("this.userIdPassing", this.userIdPassing);
+  // }
+  
+  getChannelPartnerUsers(channelPartnerId: any) {
+    this.selectedAccountManagers =[]
+    const selectedChannel = this.myChannels.find(channel => channel._id === channelPartnerId);
+  
+    if (selectedChannel) {
+      // console.log("Selected Category:", selectedCategory,"length",selectedCategory.length);
+
+
+
+    
+      selectedChannel.adminUsers.forEach(item => {
+        item.role = "Channel Partner Admin";
+      });
+     
+     
+      
+
+      selectedChannel.channelParterAccountManager.forEach(item => {
+        item.role = "Account Manager";
+      });
+  
+      this.selectedAccountManagers = [... selectedChannel.adminUsers, ...selectedChannel.channelParterAccountManager];
+
+     
+
+    
+    } else {
+   
+       this.selectedAccountManagers = [];
+    }
+  
+   
+  }
+  
+  
+
+ 
 
   public getUsersList() {
     this.subscription.push(
       this.adminPageService.getAllusers().subscribe(res => {
-
         this.usersList = res;
+
       })
-    )
+    );
   }
+   
+  
+  
+  
+  
+
+
+  // getMyChannelPartnerList(item:any){ 
+  //   const cpMap = new Map<string, any>();
+  //   this.myChannels.forEach(category => {
+  //     cpMap.set(category._id.toString(), category); 
+  //     console.log("category",category)
+  //     category.channelParterAccountManager.forEach(accountManager => {
+  //       console.log("Account Manager Details:", accountManager);
+  //       // Access specific properties from accountManager if needed
+  //       console.log("Account Manager Email:", accountManager.email);
+  //     });
+  //   });
+
+  //   console.log("this.userIdPassing",this.userIdPassing);
+    
+  // }
+  // public getUsersList() {
+  //   this.subscription.push(
+  //     this.adminPageService.getAllusers().subscribe(res => {
+
+  //       this.usersList = res;
+  //       console.log("this.usersList ",this.usersList )
+  //     })
+  //   )
+  // }
 
 
   public submitForm() {
@@ -154,7 +271,7 @@ export class ManageAllChannelsComponent {
       this.submitErrorMessage = false
       this.addAsAdmin=this.myForm.get('isAdmin').value?this.myForm.get('isAdmin').value:false
 
-      console.log("this.addAsAdmin===",this.addAsAdmin)
+  
       this.CreateChannelPartnerUser();
 
       // if(this.myForm.get('isAdmin').value){

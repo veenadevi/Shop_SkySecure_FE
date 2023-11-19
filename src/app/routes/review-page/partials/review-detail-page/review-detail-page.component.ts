@@ -19,7 +19,9 @@ export class ReviewDetailPageComponent {
   reviewForm: FormGroup;
   selectedUserId: number;
   productId: string;
-  productName
+  productName:string;
+
+  isFromSecondPage:boolean=false;
   
   public usersList: any[] = [];
   public userId: string;
@@ -101,6 +103,7 @@ export class ReviewDetailPageComponent {
     this.route.queryParams.subscribe(params => {
       this.productId = params.productId;
       this.productName = params.productName;
+      this.isFromSecondPage=params.isFromSecondPage
     });
     this.aspectList.forEach((aspect) => {
       this.reviewForm .addControl(aspect.key, this.fb.control('', Validators.required));
@@ -108,40 +111,64 @@ export class ReviewDetailPageComponent {
   }
 
 
-data
+
   ngOnInit(): void { 
+
+    /**
+     * no need to set old data - w
+     */
+  
    
-     this.reviewPayload = this.metaDataStore.getProductReviewDetails();
-     //("OnInit",this.reviewPayload)
-    if (this.reviewPayload?.productId?.length > 2) {
-      this.reviewForm.patchValue(this.reviewPayload);
-      this.selectedRatings = {
-        overAllRating: this.reviewPayload.overAllRating,
-        featuresRating: this.reviewPayload.featuresRating,
-        easyToUseRating: this.reviewPayload.easyToUseRating,
-        valueOfMoneyRating: this.reviewPayload.valueOfMoneyRating,
-        customerSupportRating: this.reviewPayload.customerSupportRating
-      }
+    //  this.reviewPayload = this.metaDataStore.getProductReviewDetails();
+
+    //  console.log("on init what is ===",this.reviewPayload)
+    //  //("OnInit",this.reviewPayload)
+    // if (this.reviewPayload?.productId?.length > 2) {
+    //   this.reviewForm.patchValue(this.reviewPayload);
+    //   this.selectedRatings = {
+    //     overAllRating: this.reviewPayload.overAllRating,
+    //     featuresRating: this.reviewPayload.featuresRating,
+    //     easyToUseRating: this.reviewPayload.easyToUseRating,
+    //     valueOfMoneyRating: this.reviewPayload.valueOfMoneyRating,
+    //     customerSupportRating: this.reviewPayload.customerSupportRating
+    //   }
+    // }
+    // else {
+      
+    // }
+    if(this.isFromSecondPage){
+      this.setPreviousRecords()
     }
-    else {
-      this.metaDataService.getProductReviewById(this.currentUrl).subscribe((data) => {
-        this.reviewPayload = this.updateReviewPayload(this.reviewPayload, data.productReview);
-        this.metaDataStore.setProductReviewDetails(this.reviewPayload);
-        //console.log("===this.reviewPayload===",this.data=this.reviewPayload);
-         //console.log("===data.productReview===",this.data=data.productReview)
-        //console.log("===setProductReviewDetails===",this.data=this.metaDataStore.setProductReviewDetails.name)
-        this.metaDataStore.setProductReviewOtherDetails(data.productReview);
-        this.reviewForm.patchValue(data.productReview);
-       // console.log("-- ONINIT IN ELSE--", this.reviewForm.patchValue(data.productReview))
-        this.selectedRatings = { ...data.productReview };
-      }, error => {
-        console.log(" TEST ERROR", error);
-      })
-    }
+   
 
     this.setSelfData();
     
   }
+  setPreviousRecords(){
+
+    this.reviewPayload = this.metaDataStore.getProductReviewDetails();
+
+
+    //console.log("review payload ====on click previous ",this.reviewPayload,"setting con trolvaluye" ,this.reviewPayload.reviewTitle)
+    this.reviewForm.get('reviewTitle').setValue(this.reviewPayload.reviewTitle.length>0 ? this.reviewPayload.reviewTitle : 'veena');  
+    this.reviewForm.get('reviewContent').setValue(this.reviewPayload?.reviewContent.length>0 ? this.reviewPayload?.reviewContent : 've');  
+    this.reviewForm.patchValue(this.reviewPayload);
+    this.text01=this.reviewPayload.reviewTitle;
+    this.text=this.reviewPayload.reviewContent;
+    if (this.reviewPayload?.productId?.length > 2) {
+   
+        this.selectedRatings = {
+         overAllRating: this.reviewPayload.overAllRating,
+          featuresRating: this.reviewPayload.featuresRating,
+          easyToUseRating: this.reviewPayload.easyToUseRating,
+           valueOfMoneyRating: this.reviewPayload.valueOfMoneyRating,
+          customerSupportRating: this.reviewPayload.customerSupportRating
+         }
+
+        
+  }
+}
+
 
  // Define a variable to store the cumulative rating
 // cumulativeRating: number = 0;
@@ -150,13 +177,13 @@ rate(aspect: any, star: number): void {
   this.selectedRatings[aspect.key] = star;
   // Update the form control with the new star rating value
    this.reviewForm.controls[aspect.key].setValue(star);
-  console.log("this.selectedRatings[aspect.key]",this.selectedRatings[aspect.key])
+ // console.log("this.selectedRatings[aspect.key]",this.selectedRatings[aspect.key])
 }
 
 
   public NextErrorMessage: boolean =false;
   onSubmit(): void {
-    console.log("ON SUBMIT",this.reviewForm.value)
+    //console.log("ON SUBMIT",this.reviewForm.value)
     if (this.reviewForm.valid) {
       this.NextErrorMessage = false;
   
@@ -184,7 +211,7 @@ rate(aspect: any, star: number): void {
       };
   
       this.metaDataStore.setProductReviewDetails(reviewPayload);
-  console.log("reviewPayload",reviewPayload)
+    console.log("reviewPayload",reviewPayload)
       this.router.navigate([`/review-page/review-rating-page`], {
         queryParams: { productName: this.productName }
       });
@@ -212,11 +239,13 @@ rate(aspect: any, star: number): void {
   characterCount: number = 0;
 
   countCharacters() {
+   // console.log("gettign called to type ===content")
     this.characterCount = this.text.length;
   }
   text01: string = '';
   characterCount01: number = 0;
   countCharacters01() {
+   // console.log("gettign called to type ===title")
     this.characterCount01 = this.text01.length;
   }
 
@@ -228,8 +257,7 @@ rate(aspect: any, star: number): void {
     this.reviewForm.controls['userName'].setValue(userDetails.firstName ? userDetails.firstName : null);
     this.reviewForm.controls['email'].setValue(userDetails.email ? userDetails.email : null);
     this.reviewForm.controls['organizationName'].setValue(userDetails.company ? userDetails.company : null);
-    console.log("this.reviewForm.controls['organizationName'].setValue(userDetails.company ? userDetails.company : null)",
-    this.reviewForm.controls['organizationName'].setValue(userDetails.company ? userDetails.company : null))
+    
   }
   
   

@@ -34,7 +34,7 @@ export class TrendingProductComponent {
       
       if(data){
         //this.loaderService.hide(LoadingType.Full)
-       console.log("data",data)
+    
         return data;
         //return data.splice(0,7);
       }
@@ -69,9 +69,9 @@ export class TrendingProductComponent {
     this.subscriptions.push(
       this.trendingProducts$.subscribe(response => {
         this.trendingProductsList = response;
-        console.log("trending res", this.trendingProductsList);
+       
         this.productName = this.trendingProductsList.map((product) => product.name);
-        console.log("Names:", this.productName);
+      
       })
     );
   }
@@ -83,49 +83,41 @@ export class TrendingProductComponent {
     this.router.navigate([`/review-page/review-detail-page/${productId}`], {
       queryParams: { productName: this.selectedProductName } });
   }
-//   public selectProduct(productId: string) {
-//   this.router.navigate([`/review-page/review-detail-page/${productId}`], {
-//     queryParams: { productName: this.selectedProductName }
-//   });
-// }
 
-  public requestQuote (product : ProductsDetails) : void {
+
+  // public requestQuote (product : ProductsDetails) : void {
 
     
-    var existingItems = this.cartStore.getCartItems();
-    // if(existingItems && existingItems.usercart.length > 0){
+  //   var existingItems = this.cartStore.getCartItems();
+  //   // if(existingItems && existingItems.usercart.length > 0){
       
-    //   existingItems.usercart[0].userCartDetails.push({
-    //     "productId": product,
-    //     "quantity" : 1
-    //   });
-    // }
-    //this.cartStore.setCartItems(product);
-    // this.router.navigate(['/cart']);
+  //   //   existingItems.usercart[0].userCartDetails.push({
+  //   //     "productId": product,
+  //   //     "quantity" : 1
+  //   //   });
+  //   // }
+  //   //this.cartStore.setCartItems(product);
+  //   // this.router.navigate(['/cart']);
 
-    let queryParams = {
-      productName : product.name,
-      productId : product._id,
-      quantity : 1,
-    };
+  //   let queryParams = {
+  //     productName : product.name,
+  //     productId : product._id,
+  //     quantity : 1,
+  //   };
 
-   console.log("queryparam",existingItems)
-    this.addItemsToCartService.addItemsToCart(queryParams);
-    //this.router.navigate(['/cart'], {queryParams: queryParams});
-    //console.log("queryparam",existingItems)
-  }
+  //  console.log("queryparam",existingItems)
+  //   this.addItemsToCartService.addItemsToCart(queryParams);
+  //   //this.router.navigate(['/cart'], {queryParams: queryParams});
+  //   //console.log("queryparam",existingItems)
+  // }
 
-  public navigateToProducts(product: any): void {
-    this.requestQuote(product);
-  }
+  // public navigateToProducts(product: any): void {
+  //   this.requestQuote(product);
+  // }
 
-  public navigateToCart(cart : any) {
-  }
 
-  public navigateToProductDetails(product:any){
-    //['/products', product._id]
-  }
-  
+
+
 
 //   public selectProduct(productId: string) {
 //     this.router.navigate([`/review-page/review-detail-page/${productId}`], {

@@ -27,10 +27,10 @@ export class UserReviewListComponent {
   public disableAssign :boolean=true;
 
 
-  public myCustomers : any = [];
+  // public myCustomers : any = [];
 
 
-
+  public ProductReviewsData : any;
    
 
 
@@ -49,41 +49,48 @@ export class UserReviewListComponent {
 
   ngOnInit(): void {
     this.spinner.show();
-    console.log("===============AccountListComponent=======")
+   // console.log("===============ReviewListComponent=======")
     
     
     //this.getAllChannelPartners();
     //this.getAllMarketPlaceAccountList();
 
-    this.getAllMyCustomers();
+    this.getProductReviewsData();
 
 
   }
 
-
-
-  public getAllMyCustomers(){
-
+  public getProductReviewsData(){
     this.subscriptions.push(
-      this.adminPageService.getAllMyCustomers().subscribe(res=>{
-        console.log("_+_+_+_+_+_ API Result ", res);
-        this.myCustomers = res;
-        this.spinner.hide();
-      },
-      error => {
-        this.spinner.hide();
-        this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+      this.adminPageService.getProductReviewsList().subscribe(res=>{
+       // console.log("***** Res", res);
+        this.ProductReviewsData = res.productReviews;
       })
     )
-
   }
 
+  // public getProductReviewsList(){
 
-  public getCustomersById(id){
+  //   this.subscriptions.push(
+  //     this.adminPageService.getProductReviewsList().subscribe(res=>{
+  //       console.log("_+_+_+_+_+_ API Result ", res);
+  //       this.myCustomers = res;
+  //       this.spinner.hide();
+  //     },
+  //     error => {
+  //       this.spinner.hide();
+  //       this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+  //     })
+  //   )
+
+  // }
+
+
+  // public getCustomersById(id){
    
-    this.router.navigate(['admin-pages/customer-view'],{ queryParams: { customerId: id}});
+  //   this.router.navigate(['admin-pages/customer-view'],{ queryParams: { customerId: id}});
     
-  }
+  // }
 
 
   /*public getAccountById(account){

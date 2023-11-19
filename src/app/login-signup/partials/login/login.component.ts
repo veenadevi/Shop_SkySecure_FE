@@ -69,7 +69,6 @@ export class LoginComponent {
   ngOnInit(): void {
     this.signUpSuccess=false
     this.params = this.route.snapshot.queryParamMap;
-    // console.log("()()()()() Inside is valid", this.params);
 
     this.route.queryParams.subscribe(params => {
       
@@ -79,8 +78,7 @@ export class LoginComponent {
     if(params['succuessMessage']){
       this.signUpSuccess=true
     }
-   // console.log("is success isnup  "  +this.signUpSuccess)
-      // Use the email value as needed
+
     });
 
     this.form = this.formBuilder.group(
@@ -121,7 +119,7 @@ export class LoginComponent {
       "isMobile": this.isMobile,
      
       }
-      // console.log("*(*(*(*(*(*( ",req);
+   
       this.subscriptions.push(
         
       // this.authService.signUp(req).subscribe( res=> {
@@ -152,7 +150,7 @@ export class LoginComponent {
   
       this.isResend=false
     
-      console.log("*(*(*(*(* ", this.form.value.emailOrMobile);
+    
       let req = {
         "emailId" : this.form.value.emailOrMobile,
         "action":"login",
@@ -162,10 +160,10 @@ export class LoginComponent {
         this.userProfileService.sendOTP(req).subscribe(
           res=>{
             
-           // console.log("()()()()( ", res);
+           
             
             if(res.message){
-             // console.log("()()()()( Inside If", res);
+             
               this.enableSignInButton = false;
               this.enableOTPButton = false;
               this.newEmailAlert = true;
@@ -173,7 +171,7 @@ export class LoginComponent {
             }
             else{
              
-             // console.log("()()()()( Inside Else", res);
+            
               this.enableSignInButton = true;
               this.enableOTPButton = false;
               this.newEmailAlert = false;
@@ -191,7 +189,7 @@ export class LoginComponent {
         ) 
       )
 
-    //  console.log("(()()() ", this.newEmailAlert);
+   
 
       /*let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
       let hashedPass = CryptoJS.AES.encrypt(this.form.value.password, key).toString();
@@ -242,7 +240,7 @@ export class LoginComponent {
       this.display = `${prefix}${Math.floor(0.59)}:${textSec}`;
 
       if (seconds == 0) {
-        console.log('finished');
+       
         this.isResend=true
         clearInterval(this.timerInterval);
       }
@@ -272,17 +270,17 @@ export class LoginComponent {
 
       this.subscriptions.push(
         this.userProfileService.validateOTP(req).subscribe( res => {
-        // console.log("*(*(*(*(*( OTP Res", res);
+        
           if(res && res.data){
             this.callSignIn();
           }
           else{
-            // console.log("INSIDE INVALID OTP " );
+            
             this.inValidOTP=true;
           
             let eleId=this.ngOtpInputRef.getBoxId(0);
             this.ngOtpInputRef.focusTo(eleId);
-            //console.log("eleId",eleId)
+            
             this.ngOtpInputRef.setValue(''); 
             // this.form.get('otp').reset();
             this.enableSignInButton = true;
@@ -312,17 +310,17 @@ export class LoginComponent {
           localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
           var decoded = jwtDecode(res.data);
 
-          //console.log("decoded value=====",decoded)
+      
           
           this.userAccountStore.setUserDetails(decoded);
           
 
           if(this.params && this.params.has('productId')){
-           // console.log("_+_+_)+_+_+_+_+ Inside Product ID ", this.params);
+           
             this.router.navigate(['']);
           }
           else{
-         //   console.log("_+_+_)+_+_+_+_+ Inside Product Else ", this.params);
+         
             this.router.navigate(['']);
           }
           
@@ -337,7 +335,7 @@ export class LoginComponent {
 
   public signUp(){
   
-    this.router.navigate(['login/signUp'],{ queryParams: { email: this.form.value.email}});
+    this.router.navigate(['login/signUp'],{ queryParams: { email: this.form.value.emailOrMobile}});
 
   
   }
@@ -384,7 +382,7 @@ export class LoginComponent {
 }
 
 export  function emailOrMobileValidator(control: AbstractControl):Observable<ValidationErrors | any>  {
-  console.log("passing email as====", control.value)
+ // console.log("passing email as====", control.value)
 
   //console.log("is access?", this.isMobile)
 

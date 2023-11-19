@@ -3,10 +3,13 @@ export const environment = {
     name : "Dev Env",
    // gatewayUrl : "https://dev-altsys-realize-api.azurewebsites.net/",
    //Updating Product API ULR  --Veena
-   gatewayUrl : "https://dev-productapi.realize.skysecuretech.com/",
+ //  gatewayUrl : "https://dev-productapi.realize.skysecuretech.com/",
+ gatewayUrl:"http://localhost:8002/",
     //gatewayUrl : "http://localhost:8002/",
-    gatewayUrlForUserProfile : "https://dev-altsys-realize-users-api.azurewebsites.net/",
-    gatewayUrlForOrders : "https://dev-altsys-realize-order.azurewebsites.net/",
+ //   gatewayUrlForUserProfile : "https://dev-altsys-realize-users-api.azurewebsites.net/",
+ gatewayUrlForUserProfile : "http://localhost:2003/",
+  //gatewayUrlForOrders : "https://dev-altsys-realize-order.azurewebsites.net/",
+  gatewayUrlForOrders : "http://localhost:8080/",
 
     /* Azure Config */
     signUpSignIn : "B2C_1_sisu",

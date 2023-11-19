@@ -22,7 +22,13 @@ Removed Montly Split on Sep22 -->
                     <th scope="col" style=
                       text-align:center!important;
                   >Product Name</th>
-                    <th scope="col">Purchase type</th>
+                    <th scope="col">Purchase type
+                    <div class="tooltip-container">
+                      <img src="../../../../../assets/icons/info-icon.png"  class="info-icon">
+                      <div class="tooltip-text"> <p>*License with Purchase type 'Year' are valid for 1 Year.</p> 
+                        <p>*License with Purchase type 'Month' are valid for 1 Month.</p> </div>
+                    </div>
+                  </th>
                     <th scope="col">MRP(₹)</th>
                     <th scope="col">Skysecure Price(₹)</th>
                     <th scope="col">Quantity </th>
@@ -144,7 +150,7 @@ Removed Montly Split on Sep22 -->
           <span class="buttons-section">
             <!-- <button class="btn secondary-btn" (click)="buyNow()">Buy Now</button> -->
             <button class="btn secondary-btn" (click)="saveCart()">Save Cart</button>
-            <button class="btn primary-btn" (click)="requestQuote()">Request Quote</button>
+            <button class="btn primary-btn" (click)="requestQuote()">Checkout</button>
             
           </span>
           <form #form ngNoForm

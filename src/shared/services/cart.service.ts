@@ -30,6 +30,9 @@ export class CartService {
 
   public handleResponseURL : string;
 
+  public paymentStatusByIdUrl : string
+  private options:{headers:HttpHeaders}
+
 
 
   constructor(
@@ -45,6 +48,8 @@ export class CartService {
 
     this.createInvoiceURL=AppService.appUrl.createInvoice;
     this.handleResponseURL = AppService.appUrl.handleResponse;
+    this.paymentStatusByIdUrl = AppService.appUrl.paymentStatusByid;
+    this.options=this.getOptions();
     
   }
 
@@ -66,7 +71,7 @@ export class CartService {
     //     ]
     //   })
     
-    const REQUEST$ = this.http.post<any>(URL, request)
+    const REQUEST$ = this.http.post<any>(URL, request,this.options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -100,9 +105,10 @@ export class CartService {
 
     //let url = this.baseUrl + this.userCartUrl + '/' + userAccountdetails._id;
     let url = this.baseUrl + this.userCartUrl + '/' + userData._id;
-    //let options = this.getOptions();
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let options = this.getOptions();
+
+    let request$ = this.http.get<Observable<any>>(url,options)
       .pipe(
         map(response => {
           if (!response) {
@@ -173,9 +179,9 @@ export class CartService {
   
   // }
 
-  console.log("+++++++ ____ _ InsideCreate Quotation ", request);
-    
-    const REQUEST$ = this.http.post<any>(URL, request)
+
+    let options = this.getOptions();
+    const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -203,7 +209,8 @@ export class CartService {
 
   private getOptions() : { headers: HttpHeaders } { 
  
-    let token = this.userAccountStore.getAccessIdToken();
+    let token = localStorage.getItem("XXXXaccess__tokenXXXX");
+
     const OPTIONS : { headers : HttpHeaders } = { 
       headers : new HttpHeaders() 
         .set('authorization', token) 
@@ -222,9 +229,9 @@ export class CartService {
 
   
 
-  console.log("+++++++ ____ _ InsideCreate Quotation ", request);
-    
-    const REQUEST$ = this.http.post<any>(URL, request)
+
+    let options = this.getOptions();
+    const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -253,9 +260,9 @@ export class CartService {
 
   
 
-  console.log("+++++++ ____ _ Inside createInvoice ", request);
-    
-    const REQUEST$ = this.http.post<any>(URL, request)
+
+    let options = this.getOptions();
+    const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -277,7 +284,79 @@ export class CartService {
     return REQUEST$;
   }
 
-  public encryptdata(request, amount){
+  public getOrderStatus(req){
+
+
+    //let url = "http://localhost:8080/api/orders/encryptForCCAvenue";
+        
+
+        let request = {
+          "reference_no": "1698922729925", 
+          "order_no": "1698922759496",
+        }
+        
+
+        //var testUrl = "https://apitest.ccavenue.com/apis/servlet/DoWebTrans?command=orderStatusTracker&version=1.2&request_type=JSON&response_type=JSON&access_code=";
+        //var testUrl = "https://test.ccavenue.com/apis/servlet/DoWebTrans";
+
+
+        var testUrl = "https://apitest.ccavenue.com/apis/servlet/DoWebTrans?command=orderStatusTracker&version=1.2&request_type=JSON&response_type=JSON&access_code=AVEI22KJ67BJ07IEJB&enc_request="+req;
+    
+    
+        let reqBody = {
+          'command' : 'orderStatusTracker',
+          'version' : '1.2',
+          'request_type' : 'JSON',
+          'response_type' : 'JSON', 
+          'access_code' : 'AVEI22KJ67BJ07IEJB',
+          'enc_request' : req
+
+        }
+
+        let testReq = {}
+
+        let options = this.getOptions();
+        let request$ = this.http.get<Observable<any>>(testUrl, options)
+        .pipe(
+          map(response => {
+            if (!response) {
+              return null;
+            }
+            return response;
+          }),
+        ); 
+    
+        return request$;
+  }
+
+  public encryptForCCAvenue(req){
+        
+        //let url = `${this.baseUrl}api/orders/encryptForCCAvenue`;
+        let url = "http://localhost:8080/api/orders/encryptForCCAvenue";
+        
+
+        let request = {
+          "reference_no": "1698922729925", 
+          "order_no": "1698922759496",
+        }
+        
+    
+    
+        let request$ = this.http.post<Observable<any>>(url, request)
+        .pipe(
+          map(response => {
+            if (!response) {
+              return null;
+            }
+            return response;
+          }),
+        ); 
+    
+        return request$;
+        
+  }
+
+  public encryptdata(request, amount, ref_id){
     //let url = `${this.baseUrl}orders/encryptFormData`;
     let url = `${this.baseUrl}api/orders/encryptFormData`;
     //let url = "http://localhost:8080/api/orders/encryptFormData";
@@ -285,7 +364,7 @@ export class CartService {
     request : request
     }
 
-    console.log("AJDGSHJ ", amount.toFixed(2));
+
 
     //console.log("+_+_+_+_ Key Here ", request.amount);
 
@@ -293,10 +372,12 @@ export class CartService {
     let hashedPass = CryptoJS.AES.encrypt(amount.toFixed(2), key).toString();
 
     request = {
+      "order_id" : ref_id,
       "currency" : "INR", // or any supported currency
       "amount" : hashedPass,
       //"redirect_url" : this.baseUrl+this.handleResponseURL,
-      "redirect_url" : "http://localhost:8080/api/orders/handleResponse",
+      //"redirect_url" : "http://localhost:8080/api/orders/handleResponse",
+      "redirect_url" : 'https://dev-altsys-realize-order.azurewebsites.net/api/orders/handleResponse',
       "cancel_url" : 'https://dev-shop.skysecuretech.com/',
     }
     
@@ -317,6 +398,27 @@ export class CartService {
     //return this.http.get(url,{params:data})
   }
 
+
+  public getPaymentStatusUpdate(request){
+
+
+    
+    let url = this.baseUrl + this.paymentStatusByIdUrl + request;
+    let options = this.getOptions()
+    let request$ = this.http.get<Observable<any>>(url, options)
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+       
+        return response;
+      }),
+    );
+
+    return request$;
+  }
+
   public paymentGatewayCCAvenueRequest(request){
     
     let url = "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"
@@ -324,8 +426,8 @@ export class CartService {
     
     
 
-
-    let request$ = this.http.post<Observable<any>>(url, request)
+    let options = this.getOptions();
+    let request$ = this.http.post<Observable<any>>(url, request, options)
     .pipe(
       map(response => {
         if (!response) {
