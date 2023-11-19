@@ -480,15 +480,21 @@ export  class SignUpComponent  {
   filterCompany(event: AutoCompleteCompleteEvent) {
     let filtered: any[] = [];
     let query = event.query;
+    //console.log("query  ",query)
+    if(query&&query.length>=3){
+
+   
 
     for (let i = 0; i < (this.myCustomers as any[]).length; i++) {
         let country = (this.myCustomers as any[])[i];
+      //  console.log("country  ",country)
         if (country.company.toLowerCase().indexOf(query.toLowerCase()) == 0) {
             filtered.push(country);
         }
     }
 
     this.companyListArray = filtered;
+  }
 }
 
 
@@ -508,6 +514,7 @@ export  class SignUpComponent  {
         
         this.myCustomers = res;
         this.companyListArray = this.myCustomers;
+       // console.log(" this.companyListArray", this.companyListArray.length)
         //this.spinner.hide();
       },
       error => {
