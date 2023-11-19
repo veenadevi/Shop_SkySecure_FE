@@ -141,20 +141,20 @@ public goBack(){
 
     if(this.businessDetailsForm.invalid){
         //alert('Invalid');
-        console.log("+++__+_ Invlaid");
+     //   console.log("+++__+_ Invlaid");
     }
    
    
     else{
       this.companyNameErrorFlag = false;
-      console.log("+++__+_ Else");
+     // console.log("+++__+_ Else");
       if(!this.selectedCountry || !this.selectedState || !this.selectedCity){
         
-        console.log("+++__+_ AAAA");
+        //console.log("+++__+_ AAAA");
         this.countryStateError = true;
       }
       else{
-        console.log("+++__+_ BBBB");
+       // console.log("+++__+_ BBBB");
         this.countryStateError = false;
 
         let userDetails = this.userAccountStore.getUserDetails();

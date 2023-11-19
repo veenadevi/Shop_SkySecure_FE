@@ -149,7 +149,7 @@ export class ReviewDetailPageComponent {
     this.reviewPayload = this.metaDataStore.getProductReviewDetails();
 
 
-    console.log("review payload ====on click previous ",this.reviewPayload,"setting con trolvaluye" ,this.reviewPayload.reviewTitle)
+    //console.log("review payload ====on click previous ",this.reviewPayload,"setting con trolvaluye" ,this.reviewPayload.reviewTitle)
     this.reviewForm.get('reviewTitle').setValue(this.reviewPayload.reviewTitle.length>0 ? this.reviewPayload.reviewTitle : 'veena');  
     this.reviewForm.get('reviewContent').setValue(this.reviewPayload?.reviewContent.length>0 ? this.reviewPayload?.reviewContent : 've');  
     this.reviewForm.patchValue(this.reviewPayload);
@@ -177,13 +177,13 @@ rate(aspect: any, star: number): void {
   this.selectedRatings[aspect.key] = star;
   // Update the form control with the new star rating value
    this.reviewForm.controls[aspect.key].setValue(star);
-  console.log("this.selectedRatings[aspect.key]",this.selectedRatings[aspect.key])
+ // console.log("this.selectedRatings[aspect.key]",this.selectedRatings[aspect.key])
 }
 
 
   public NextErrorMessage: boolean =false;
   onSubmit(): void {
-    console.log("ON SUBMIT",this.reviewForm.value)
+    //console.log("ON SUBMIT",this.reviewForm.value)
     if (this.reviewForm.valid) {
       this.NextErrorMessage = false;
   
@@ -239,13 +239,13 @@ rate(aspect: any, star: number): void {
   characterCount: number = 0;
 
   countCharacters() {
-    console.log("gettign called to type ===content")
+   // console.log("gettign called to type ===content")
     this.characterCount = this.text.length;
   }
   text01: string = '';
   characterCount01: number = 0;
   countCharacters01() {
-    console.log("gettign called to type ===title")
+   // console.log("gettign called to type ===title")
     this.characterCount01 = this.text01.length;
   }
 

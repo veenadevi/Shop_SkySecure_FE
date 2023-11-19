@@ -622,7 +622,7 @@ public onChangeQuantity(i, price) : void {
   }
   public saveCart() {
 
-    console.log("callig save")
+   // console.log("callig save")
   
     let cartRefId = this.cartStore.getCartRefreneceId();
     //let userAccountdetails = this.userAccountStore.getUserProfileDetails();
@@ -739,9 +739,9 @@ public onChangeQuantity(i, price) : void {
   public receiveOrderStatus(){
     this.subscriptions.push(
       this.cartService.encryptForCCAvenue(null).subscribe(res=>{
-        console.log("++++)))))) Res", res);
+      //  console.log("++++)))))) Res", res);
         this.cartService.getOrderStatus(res).subscribe(res=>{
-          console.log("+_+_+_ ))))))))))) Further Response ", res)
+        //  console.log("+_+_+_ ))))))))))) Further Response ", res)
         })
       })
     )
@@ -771,8 +771,8 @@ public onChangeQuantity(i, price) : void {
 
     let testAmount = this.calculateTotal(this.cartData);
 
-    console.log("+_+_+_+_ Amount ", cartRefId);
-    console.log("_+_+_+ This cat Data", testAmount);
+    //console.log("+_+_+_+_ Amount ", cartRefId);
+   // console.log("_+_+_+ This cat Data", testAmount);
     
     //let redirect_url = 'http%3A%2F%2Flocalhost%3A3008%2Fhandleresponse';
     //let redirect_url = 'https://dev-shop.skysecuretech.com/';
@@ -820,7 +820,7 @@ public onChangeQuantity(i, price) : void {
 
     this.subscriptions.push(
       this.cartService.paymentGatewayCCAvenueRequest(reqForCCAvenue).subscribe(res=>{
-        console.log("+_+_+_+_+_+_+ Response from CCCAVENUE", res);
+       // console.log("+_+_+_+_+_+_+ Response from CCCAVENUE", res);
       })
     )
   }

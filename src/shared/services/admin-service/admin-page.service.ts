@@ -42,6 +42,7 @@ export class AdminPageService {
   private createProductOfferURL: String;
 
   private getChannelAMAccountListURL:string;
+  private options:{headers:HttpHeaders}
 
 
 
@@ -77,7 +78,7 @@ export class AdminPageService {
     //For Channel AM
 
     this.getChannelAMAccountListURL=AppService.appUrl.getChannelAMAccountListURL;
- 
+     this.options = this.getOptions();
 
     
   }
@@ -115,7 +116,7 @@ export class AdminPageService {
 
     //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url, this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -136,7 +137,7 @@ export class AdminPageService {
 
     //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url,this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -157,7 +158,7 @@ export class AdminPageService {
 
     //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url,this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -197,7 +198,7 @@ export class AdminPageService {
 
     //let url = "https://realize.wiremockapi.cloud/api/user/allAccounts";
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url,this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -382,7 +383,7 @@ export class AdminPageService {
 
   private getOptions() : { headers: HttpHeaders } { 
  
-    let token = this.userAccountStore.getAccessIdToken();
+    let token = localStorage.getItem("XXXXaccess__tokenXXXX");;
     const OPTIONS : { headers : HttpHeaders } = { 
       headers : new HttpHeaders() 
         .set('authorization', token) 
@@ -391,7 +392,6 @@ export class AdminPageService {
  
     return OPTIONS; 
   }
-
  
 
   uploadFile(event: any) {
@@ -460,7 +460,7 @@ public addChannelPartnerUsers( request : any): Observable<any> {
 
 //console.log("+++++++ ____ _ addChannelPartner", request);
   
-  const REQUEST$ = this.http.post<any>(URL, request)
+  const REQUEST$ = this.http.post<any>(URL, request,this.options)
     .pipe(
       switchMap(response => {
         if (!response) {
@@ -519,7 +519,7 @@ public inviteUsers( request : any): Observable<any> {
 
     let url = this.baseUrlForUsers + this.getAllMyCustomersUrl;
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url,this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -617,7 +617,7 @@ public inviteUsers( request : any): Observable<any> {
     
   
     
-    let request$ = this.http.post(url, request)
+    let request$ = this.http.post(url, request,this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -663,6 +663,33 @@ public inviteUsers( request : any): Observable<any> {
   
   }
 
+
+  public productEdit( request : any): Observable<any> {
+
+    var endPoint = 'api/admin/product/edit'
+
+    let url = this.baseUrl + endPoint;
+    
+
+    
+    let request$ = this.http.patch(url, request,this.options)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+  
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+  
+    return request$;
+  
+  }
 
 }
 

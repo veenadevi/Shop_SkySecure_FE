@@ -177,3 +177,6 @@ cursor: pointer;
     border: 1px solid black;
     font-size: 13px;
 }
+.mandatory{
+    color: red;
+}

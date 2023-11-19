@@ -39,7 +39,7 @@ export class OverviewComponent implements OnInit{
 
   public dataPresent : boolean = false;
 
-  public disabledFlag : boolean = false;
+  public disabledFlag : boolean = true;
 
   @Output() overViewAction = new EventEmitter();
   @ViewChild('form') form: ElementRef;
@@ -83,16 +83,19 @@ export class OverviewComponent implements OnInit{
   public createQuotation(){
 
 
-    console.log("+_+_+_+_+ This", this.finalReq);
+    //console.log("+_+_+_+_+ This", this.finalReq);
 
     if(!this.tandcCheckBox){
-    
+      //console.log("Inside create quation", this.finalReq);
+      
     this.tandcCheckBoxErrorMessage = true;
 
     }
-    else{
-      
-      
+     else{
+      if(this.tandcCheckBox)
+     // console.log("Insideelse if part");
+      this.tandcCheckBoxErrorMessage = false;
+    
       this.spinner.show();
       
       this.subscriptions.push(
@@ -227,6 +230,7 @@ export class OverviewComponent implements OnInit{
     this.finalReq['selectedChannelPartnerId'] = storeDetails.selectedChannelPartnerId;
     this.finalReq['selectedChannelPartnerAdminId'] = storeDetails.selectedChannelPartnerAdminId;
     this.finalReq['selectedChannelPartnerName'] = storeDetails.selectedChannelPartnerName;
+    this.finalReq['leadStatusUpdate'] = 'ChannalPartner Assigned';
 
     this.dataPresent = true;
     
@@ -238,14 +242,16 @@ export class OverviewComponent implements OnInit{
 
   public checkboxChanged(val){
 
-    this.disabledFlag = false;
-    if(val === 0){
+    this.disabledFlag = !(this.isAcceptChecked || this.isDeclinedChecked   );
+    if(val === 0   && this.isAcceptChecked ){
+      //console.log("Inside If")
       this.isAcceptChecked = true;
       this.isDeclinedChecked = false;
       this.tandcCheckBox = true;
-      this.disabledFlag = true;
+    //  this.disabledFlag = true;
     }
     else{
+      //console.log("Inside else")
       this.isAcceptChecked = false;
       this.isDeclinedChecked = true;
       this.tandcCheckBox = false;
@@ -293,9 +299,9 @@ export class OverviewComponent implements OnInit{
   public receiveOrderStatus(){
     this.subscriptions.push(
       this.cartService.encryptForCCAvenue(null).subscribe(res=>{
-        console.log("++++)))))) Res", res);
+       // console.log("++++)))))) Res", res);
         this.cartService.getOrderStatus(res).subscribe(res=>{
-          console.log("+_+_+_ ))))))))))) Further Response ", res)
+       //   console.log("+_+_+_ ))))))))))) Further Response ", res)
         })
       })
     )
@@ -330,7 +336,7 @@ export class OverviewComponent implements OnInit{
 
     this.subscriptions.push(
       this.cartService.paymentGatewayCCAvenueRequest(reqForCCAvenue).subscribe(res=>{
-        console.log("+_+_+_+_+_+_+ Response from CCCAVENUE", res);
+    //    console.log("+_+_+_+_+_+_+ Response from CCCAVENUE", res);
       })
     )
   }
@@ -341,12 +347,12 @@ export class OverviewComponent implements OnInit{
     //let testAmount = "10.00";
 
     let cartRefId = this.cartStore.getCartRefreneceId();
-    console.log(" cart data from input ======",this.cartData)
+   // console.log(" cart data from input ======",this.cartData)
 
     let testAmount = this.calculateTotal(this.cartData);
 
-    console.log("+_+_+_+_ Amount ", cartRefId);
-    console.log("_+_+_+ This cat Data", testAmount);
+    //console.log("+_+_+_+_ Amount ", cartRefId);
+    //console.log("_+_+_+ This cat Data", testAmount);
     
     //let redirect_url = 'http%3A%2F%2Flocalhost%3A3008%2Fhandleresponse';
     //let redirect_url = 'https://dev-shop.skysecuretech.com/';

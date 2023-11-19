@@ -49,7 +49,7 @@ export class UserReviewListComponent {
 
   ngOnInit(): void {
     this.spinner.show();
-    console.log("===============ReviewListComponent=======")
+   // console.log("===============ReviewListComponent=======")
     
     
     //this.getAllChannelPartners();
@@ -63,7 +63,7 @@ export class UserReviewListComponent {
   public getProductReviewsData(){
     this.subscriptions.push(
       this.adminPageService.getProductReviewsList().subscribe(res=>{
-        console.log("***** Res", res);
+       // console.log("***** Res", res);
         this.ProductReviewsData = res.productReviews;
       })
     )

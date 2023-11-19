@@ -54,7 +54,7 @@ export class ReviewHomeComponent {
       })
     ).subscribe((userDetails) => {
       // Work with the user details here
-      console.log("User Details:", userDetails);
+   
     });
   }
 

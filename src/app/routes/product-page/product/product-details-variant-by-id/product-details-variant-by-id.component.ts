@@ -587,7 +587,7 @@ featureCount=5;
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
         this.prdLength = uniqueElements.length;
 
-        console.log("++++++++++++++++++++++ ", this.prdLength);
+       // console.log("++++++++++++++++++++++ ", this.prdLength);
         
         if(data){
           return data;

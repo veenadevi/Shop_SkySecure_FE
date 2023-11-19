@@ -60,7 +60,7 @@ export class ReassignModalComponent implements OnInit{
       let userAccountdetails = this.userAccountStore.getUserDetails();
 
       
-      console.log("====isReassign==",isReassign)
+  
     let statusMessage=""
 
       if(isReassign){

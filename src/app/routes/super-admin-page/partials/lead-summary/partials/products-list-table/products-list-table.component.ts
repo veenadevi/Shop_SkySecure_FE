@@ -113,7 +113,7 @@ export class ProductsListTableComponent implements OnInit {
     this.isReadOnly=true
     }
 
-   console.log("in parent settign current cartdetails ====",this.cartDetails)
+  
     this.setSampleData();
  
   }
@@ -129,7 +129,7 @@ export class ProductsListTableComponent implements OnInit {
   }
 
   public valueChanged(event, item, type) {
-console.log("value changed method called")
+
 this.enableinvoice=true
 
     switch (type) {
@@ -157,11 +157,11 @@ this.enableinvoice=true
     var index = this.cartDetails.findIndex(el => el.estimateLineItemId === item.get('line_items_id').value); 
     if (index >= 0) {
 
-      console.log("in exsiting product price change===for ",index)
+      
 
       let editedRate = item.get('bcy_rate').value; 
       let priceType = item.get('priceType').value;
-       console.log("in exsiting product price change===priceType ",priceType) 
+      
       let calculatedDistributarPrice = item.get('distributorPrice').value 
       let calculatedERPPrice=item.get('erp_price').value 
       let calcRate = calculatedDistributarPrice;
@@ -175,8 +175,7 @@ this.enableinvoice=true
       }
       
       if(editedRate < calcRate  ){
-        console.log(editedRate,"-editedRate- ",calcRate)
-        console.log("less than erp price")
+       
         item.get('bcy_rate').setErrors({ 'invalid': true });
         this.enableEdit = true;
 
@@ -185,18 +184,18 @@ this.enableinvoice=true
     }
     else { 
       let data = this.newlyAddedAppList.find(x => x._id + 'temp' === item.get('line_items_id').value);
-      console.log("Came here data", item.get('line_items_id').value,"data",data);
+   
       
       if (data) {
 
         let editedRate = item.get('bcy_rate').value;
         let calculatedDistributarPrice = data.priceList[0].distributorPrice; 
         let calculatedERPPrice=data.priceList[0].ERPPrice
-        console.log("calculatedERPPrice",calculatedERPPrice  );
+        
         let calcRate = calculatedDistributarPrice;
        
         if (editedRate < calcRate ) {
-          console.log(editedRate,"editedRate-calculatedERPPrice",calculatedERPPrice) 
+       
           item.get('bcy_rate').setErrors({ 'invalid': true });
           this.enableEdit = true;
         } 
@@ -220,7 +219,7 @@ this.enableinvoice=true
   getEmployee() {
    // this.enableEdit = false;
 
-   console.log("+_+_+_+_+_+ _Sample here", this.productsData);
+ 
     if (this.productsData.line_items) {
       this.isEstimate = true;
 
@@ -235,7 +234,7 @@ this.enableinvoice=true
         var tempDescription = items.description
         var name = tempDescription.substring(0, tempDescription.lastIndexOf("-")).trim()
         var priceType = tempDescription.substring(tempDescription.lastIndexOf("-") + 1).trim()
-        console.log("_+_+_+_ Value ", name);
+       
         const grp = this.fb.group({
 
           name: [name, Validators.required],
@@ -293,18 +292,17 @@ this.enableinvoice=true
   }
 
   getPriceByType(lineItemId: any,type:String) {
-    console.log("fetch distributor for getPriceByType  ", lineItemId.value)
-    console.log("this.cartDetails in  getPriceByType", this.cartDetails)
+ 
     if (lineItemId) {
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === lineItemId.value);
       if(index>=0){
 
     
-      console.log("matched index to fetch price details ====",index)
+    
       if(type==='Month'){
 
        
-        console.log("fetched erpPrice for month===", this.cartDetails[index].priceList[1])
+    
   
         return this.cartDetails[index].priceList[1]
       }
@@ -332,13 +330,12 @@ this.enableinvoice=true
   }
 
   getERPPrice(items: any) {
-    console.log("fetch distributor for ", items.line_item_id)
-    console.log("this.cartDetails  ", this.cartDetails)
+
     if (items.line_item_id) {
 
 
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === items.line_item_id);
-      console.log("fetched erpPrice===", this.cartDetails[index].erpPrice)
+
 
       return this.cartDetails[index].erpPrice
     }
@@ -396,7 +393,6 @@ this.enableinvoice=true
     modalRef.componentInstance.request = queryParams;
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
 
-      console.log("+_+_+_+ Received Entry", receivedEntry);
 
       let control = <FormArray>this.productListForm.get('items');
       //control.push(this.initiatForm());
@@ -442,7 +438,7 @@ this.enableinvoice=true
 
   public setRequestData() {
 
-    console.log("passin gcrm data from parent page ==",this.crmData)
+   
 
 
     
@@ -527,7 +523,7 @@ this.enableinvoice=true
 
   public setInvoiceRequestData() {
 
-    console.log("passin gcrm data from parent page ==",this.crmData)
+  
 
 
     
@@ -578,18 +574,15 @@ this.enableinvoice=true
 
     this.getFormData.controls.forEach(element => {
 
-      console.log("first element id==", element.value.line_items_id)
 
 
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === element.value.line_items_id);
-      console.log("matched in cart items  el.estimateLineItemId==", element.value.line_items_id)
 
-      console.log("matched in cart items==", index)
+
 
       if (index >= 0) {
 
-        console.log("++++++++======== req curent product from Form", element.value);
-        console.log("++++++++======== req curent product from cart",  this.cartDetails[index].priceList);
+    
         let tempArray = {
           "productId": this.cartDetails[index].productId,
           "quantity": element.value.quantity,
@@ -608,14 +601,13 @@ this.enableinvoice=true
       }
       else {
 
-        console.log("_+_+_+_ Came here 1", element.value);
-        console.log("_+_+_+_ Came here 2", this.newlyAddedAppList);
+
 
         let item = this.newlyAddedAppList.find(x => x._id + 'temp' === element.value.line_items_id);
-        console.log("_+_+_+_ Came here as pushing new product", item.priceList);
+
 
         if (item) {
-          console.log("_+_+_+_ Came here 3", item);
+         
           let tempArray = {
             "productId": item._id,
             "quantity": element.value.quantity,
@@ -685,7 +677,7 @@ this.enableinvoice=true
     
     modalRef.componentInstance.passedData.subscribe((res:any) => {
       
-      console.log("after model close====")
+ 
       this.enableEdit = true
     this.enableinvoice=true
     this.allowAddProduct=true
@@ -711,13 +703,13 @@ this.enableinvoice=true
 
 
     var lineItemId=item.get('line_items_id')
-    console.log("passing curent line Iyem to fetch full price List ",lineItemId)
+  
 
 
     switch (type) {
       case 'Month':
         let currentPrice=this.getPriceByType(lineItemId,type )
-        console.log("fetched pricelistdata  for month===",currentPrice)
+       
         let quanTotal = item.get('quantity').value * currentPrice.price;
         item.get('bcy_rate').setValue(currentPrice.price);
         item.get('distributorPrice').setValue(currentPrice.distributorPrice);
@@ -727,9 +719,9 @@ this.enableinvoice=true
 
       case 'Year':
         let currentPrice1=this.getPriceByType(lineItemId,type )
-        console.log("fetched pricelistdata  for year===",currentPrice1.price)
+      
         let quanTotal1 = item.get('quantity').value * currentPrice1.price;
-        console.log("currentPrice1.price  ",parseFloat(currentPrice1.price))
+      
         item.get('bcy_rate').setValue(currentPrice1.price);
         item.get('distributorPrice').setValue(currentPrice1.distributorPrice);
         item.get('erp_price').setValue(currentPrice1.ERPPrice);

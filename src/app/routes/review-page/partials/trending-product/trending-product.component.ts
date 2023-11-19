@@ -34,7 +34,7 @@ export class TrendingProductComponent {
       
       if(data){
         //this.loaderService.hide(LoadingType.Full)
-       console.log("data",data)
+    
         return data;
         //return data.splice(0,7);
       }
@@ -69,9 +69,9 @@ export class TrendingProductComponent {
     this.subscriptions.push(
       this.trendingProducts$.subscribe(response => {
         this.trendingProductsList = response;
-        console.log("trending res", this.trendingProductsList);
+       
         this.productName = this.trendingProductsList.map((product) => product.name);
-        console.log("Names:", this.productName);
+      
       })
     );
   }

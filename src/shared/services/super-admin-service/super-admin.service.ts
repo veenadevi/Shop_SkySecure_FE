@@ -43,6 +43,7 @@ export class SuperAdminService {
   private getChannelPartnerDetailsUrl : string;
 
 private userAdminList: String;
+private options:{headers:HttpHeaders}
 
   constructor(
     private http: HttpClient,
@@ -73,7 +74,7 @@ private userAdminList: String;
     this.assignLeadsToAMURL=AppService.appUrl.assignLeadstoChannelAMURL;
     this.getChannelPartnerDetailsUrl = AppService.appUrl.getChannelPartnerDetailsById;
     // this.userAdminList=AppService.appUrl.getMyChannelsListURL;
-
+    this.options = this.getOptions();
   }
 
 
@@ -86,8 +87,8 @@ private userAdminList: String;
     let url = this.baseUrlForSuperAdmin + this.getAllCRMUsersUrl;
 
     
-
-    let request$ = this.http.get<Observable<any>>(url)
+    let options = this.getOptions();
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -106,8 +107,8 @@ private userAdminList: String;
     let url = this.baseURLForusers + this.getAllChannelPartner;
 
     
-
-    let request$ = this.http.get<Observable<any>>(url)
+    let options = this.getOptions();
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -126,8 +127,9 @@ private userAdminList: String;
     let url = this.baseURLForusers + this.getMyChannelsListURL+"/"+id;
 
     
-console.log("url",this.getMyChannelsListURL)
-    let request$ = this.http.get<Observable<any>>(url)
+
+    let options = this.getOptions();
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -150,8 +152,8 @@ console.log("url",this.getMyChannelsListURL)
   
 
  // console.log("+++++++ ____ _ InsideCreate assignChannelPartner ", request);
-    
-    const REQUEST$ = this.http.post<any>(URL, request)
+    let options = this.getOptions();
+    const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -180,7 +182,7 @@ console.log("url",this.getMyChannelsListURL)
 
     
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url,this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -202,8 +204,8 @@ console.log("url",this.getMyChannelsListURL)
   
 
  // console.log("+++++++ ____ _ InsideCreate assignLeadsToChannelPartnerAM ", request);
-    
-    const REQUEST$ = this.http.post<any>(URL, request)
+    let options = this.getOptions();
+    const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -273,9 +275,9 @@ console.log("url",this.getMyChannelsListURL)
 
     let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/' + id;
 
-    
+    let options = this.getOptions();
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -310,7 +312,7 @@ console.log("url",this.getMyChannelsListURL)
 
     let options = this.getOptions();
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -332,7 +334,8 @@ console.log("url",this.getMyChannelsListURL)
 
     let url = this.baseUrlForSuperAdmin + this.getChannelPartnerDetailsUrl + id; 
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let options = this.getOptions();
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -350,7 +353,8 @@ console.log("url",this.getMyChannelsListURL)
 
     let url = this.baseUrlForSuperAdmin + this.userAdminList + '/' + userId;; 
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let options = this.getOptions();
+    let request$ = this.http.get<Observable<any>>(url,options)
       .pipe(
         map(response => {
           if (!response) {
@@ -369,10 +373,11 @@ console.log("url",this.getMyChannelsListURL)
 
     private getOptions() : { headers: HttpHeaders } { 
  
-      let token = this.userAccountStore.getAccessIdToken();
+      let token = localStorage.getItem("XXXXaccess__tokenXXXX");;
       const OPTIONS : { headers : HttpHeaders } = { 
         headers : new HttpHeaders() 
-          .set('Content-Type', 'application/json') 
+          .set('authorization', token) 
+          .append('Content-Type', 'application/json') 
       }; 
    
       return OPTIONS; 

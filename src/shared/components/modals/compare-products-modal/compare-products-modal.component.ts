@@ -90,7 +90,7 @@ export class CompareProductsModalComponent {
     this.subscriptions.push(
       this.productList$.subscribe(res=>{
         res;
-        console.log(res,"res")
+  
       })
     )
     
@@ -146,7 +146,7 @@ export class CompareProductsModalComponent {
     localStorage.setItem('compare_products_list', JSON.stringify(this.productList)); 
     this.compareProductsStore.setCompareProductsList(this.productList);
 
-    console.log("Remoevd Item ", this.productList);
+  
     
     this.compareProductsStore.setProductsCheckedList(this.productList);
     

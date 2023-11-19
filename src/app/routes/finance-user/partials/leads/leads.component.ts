@@ -64,7 +64,7 @@ export class LeadsComponent implements OnInit{
 
   ngOnInit(): void {
     this.spinner.show();
-    console.log("===============AccountListComponent=======")
+   // console.log("===============AccountListComponent=======")
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
@@ -82,7 +82,7 @@ export class LeadsComponent implements OnInit{
       // this.info = a.accounts.info;
     this.subscriptions.push(
       this.adminPageService.getAllAccounts().subscribe( response => {
-        console.log("running here directly==")
+      //  console.log("running here directly==")
      
         this.accountData = response.accounts.data;
         this.info = response.accounts.info;
@@ -124,7 +124,7 @@ export class LeadsComponent implements OnInit{
       account : acc,
 
     }
-    console.log("navigate to detaisl page===",account)
+   // console.log("navigate to detaisl page===",account)
 
     this.router.navigate(['admin-pages/lead-summary'], {queryParams: queryParams});
 
@@ -140,9 +140,7 @@ export class LeadsComponent implements OnInit{
 
     modalRef.componentInstance.passedData.subscribe((res) => {
       //account.Owner.name
-      console.log("_+_+_+_ Outside ", res);
-      console.log("_+_+_+_ Outside Account ", this.allMarketPlaceList);
-      console.log("_+_+_+_ Outside Account i", this.allMarketPlaceList[i]);
+     
       //this.accountData[i].Owner.name = res.ownerName.name;
       //this.allMarketPlaceList[i].assignedChannalpartner=['channelPartner']['name'] = res.assignedName;
       this.allMarketPlaceList[i].assignedChannalpartner=
@@ -160,7 +158,7 @@ export class LeadsComponent implements OnInit{
   public getAllCRMUsers(){
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+_+_+_+_+ ", res);
+       // console.log("_+_+_+_+_+_+ ", res);
         this.superAdminStore.setCrmUsers(res);
       })
     )
@@ -170,7 +168,7 @@ export class LeadsComponent implements OnInit{
   public getAllChannelPartners(){
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
+      //  console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
         if(res.channelPartners.length>0){
          this.disableAssign=false
 

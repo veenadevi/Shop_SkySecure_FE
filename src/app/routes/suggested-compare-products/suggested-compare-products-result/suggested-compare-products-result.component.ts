@@ -98,7 +98,7 @@ export class SuggestedCompareProductsResultComponent {
   public ngOnInit(): void {
 
     
-    console.log("+_0000 In Here");
+    
     
     let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
 
@@ -513,7 +513,7 @@ export class SuggestedCompareProductsResultComponent {
 
   public getPriceType(val){
 
-    console.log("+++++ Val ", val);
+   
 
     switch (val.toLowerCase()) {
       case 'month':

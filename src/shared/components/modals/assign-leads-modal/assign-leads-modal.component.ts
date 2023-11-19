@@ -64,7 +64,7 @@ export class AssignLeadsModalComponent implements OnInit{
    .pipe(
      map(data => {
        if(data){
-       console.log("_+_+_+_+_+_+ channelPartnerList", data);
+      
          return data;
          
        }
@@ -96,8 +96,7 @@ export class AssignLeadsModalComponent implements OnInit{
         
         this.channelPartnerList = res.channelPartners
         ;
-        console.log("in model ===",this.channelPartnerList
-        )
+        
         
         //this.selectedUser = res[0];
       })
@@ -108,11 +107,6 @@ export class AssignLeadsModalComponent implements OnInit{
     
 
     let userAccountdetails = this.userAccountStore.getUserDetails();
-    //console.log("++_+_+_+_+_+_+_+ _Data here", this.selectedUser);
-   console.log("++_+_+_+_+_+_+_+ _Data here", this.request);
-
-
-    //console.log("closignn date ===",this.closingDate.toISOString())
 
 
 
@@ -140,7 +134,7 @@ export class AssignLeadsModalComponent implements OnInit{
        // if(res && res.assignownerResult && res.assignownerResult.code === 'SUCCESS'){
         if(res){
          //  res.assignownerResult.ownerName = this.selectedUser;
-         console.log("this.selectedUser  ",this.selectedUser)
+       
          res['assignedName'] = this.selectedUser.channelPartnerMaster.name
            this.passedData.emit(res);
           this.activeModal.close();
@@ -160,6 +154,6 @@ export class AssignLeadsModalComponent implements OnInit{
   public onChange(event){
     
     this.selectedUser = event.value;
-    console.log("this.selectedUser  ",this.selectedUser)
+
   }
 }

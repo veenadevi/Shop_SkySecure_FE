@@ -68,8 +68,7 @@ export class CpReassignModalComponent implements OnInit {
 
       let userAccountdetails = this.userAccountStore.getUserDetails();
 
-      console.log("+_+_ Reassign", this.request);
-      console.log("+_+_ Reassign", userAccountdetails);
+
 
       let reqBody = {
         "cart_ref_id":this.request.cartData.cart_ref_id,
