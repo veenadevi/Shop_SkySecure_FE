@@ -335,9 +335,10 @@ export class CartService {
        // let url = "http://localhost:8080/api/orders/encryptForCCAvenue";
         
 
+       // Request for sending CCAVenue Data for Order Numbet and Tracking Id
         let request = {
-          "reference_no": "1698922729925", 
-          "order_no": "1698922759496",
+          "reference_no": 312010595715, 
+          "order_no": 101091,
         }
         
     
@@ -346,7 +347,9 @@ export class CartService {
         .pipe(
           map(response => {
             if (!response) {
+              console.log("+_+_+_+_+_+ Vaklue here", response);
               return null;
+              
             }
             return response;
           }),
