@@ -50,6 +50,7 @@
                 </ng-template> -->
     
                 <ng-template pTemplate="body" let-account let-i="rowIndex">
+                    
                     <tr class="trfont custom-hover">
                        
                         <td >
@@ -72,11 +73,11 @@
                        
                         <td>{{ (account.createdFor && account.createdFor.mobileNumber) ? account.createdFor.mobileNumber : '-'}}</td>
                         <td>{{ (account.createdFor && account.createdFor.createdAt) ? (account.cartData.createdAt | dateFormat) : '-'}}</td>
-                        <td>{{ account.cartData.status ? account.cartData.status : '-' }}</td>
-                       
+                        <!-- <td>{{ account.cartData.status ? account.cartData.status: '-'}}/ {{account.cartData.leadStatusUpdate?account.cartData.leadStatusUpdate: 'UnAssigned' }}</td> -->
+                        <td> {{account.cartData.leadStatusUpdate?account.cartData.leadStatusUpdate: 'UnAssigned' }}</td>
                         <!-- <td>{{ account.createdFor.placeOfSupply}}</td> -->
                         <td>
-                            <ng-container *ngIf="account?.assignedChannalpartner; else noValuecp1">
+                            <ng-container *ngIf="account?.assignedChannalpartner else noValuecp1">
                             {{ account?.assignedChannalpartner?.channelPartner?.name }} 
                               </ng-container>
                               <ng-template #noValuecp1>-</ng-template>

@@ -86,7 +86,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
   ) {
 
     this.myForm = this.fb.group({
-      channelName: [, Validators.required],
+      channelName: [],
       gstin: [''],
       countryName: [''],
       addressLine1: [''],
@@ -95,11 +95,11 @@ export class AddNewChannelPartnerComponent implements OnInit {
       cityName: [''],
       postalCode: [''],
       credit: ['0'],
-      userName: ['', [Validators.required, Validators.required]],
+      userName: ['', [Validators.required]],
       EmailId: ['', [Validators.required, Validators.email]],
       phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       country: [''],
-      companyBusinessName: ['']
+      companyBusinessName: ['', Validators.required]
 
     });
 
@@ -212,15 +212,15 @@ export class AddNewChannelPartnerComponent implements OnInit {
     let controls = this.myForm.controls
     for (const name in controls) {
       if (controls[name].invalid) {
-        console.log("_____invalid for ", name);
+       
       }
     }
 
 
-    console.log("while submit this.myForm.invalid=== ", this.myForm.invalid, this.myForm.value)
+    
     if (this.myForm.invalid) {
       this.submitErrorMessage = true;
-      console.log("_____submit form ++++ Error Messgae");
+     
     }
     else {
 
@@ -232,7 +232,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
   }
 
   CreateChannelPartner(): any {
-    console.log("this.myForm.invalid=== ", this.myForm.invalid)
+    
     let userAccountdetails = this.userAccountStore.getUserDetails();
 
 
@@ -246,7 +246,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
       var channelPartnerData = this.myForm.value;
 
       this.createChannalParterPayload = {
-        name: channelPartnerData.channelName,
+        name: channelPartnerData.companyBusinessName,
         gstinNumber: channelPartnerData.gstin,
         companyBusinessName: channelPartnerData.companyBusinessName,
 
@@ -306,7 +306,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
   }
 
   public fetchGST() {
-    console.log("_+_+_+_+_+ GST Data ", this.myForm.value.gstin.length)
+    
 
     if (this.myForm.value.gstin.length === 15) {
 
@@ -446,9 +446,9 @@ export class AddNewChannelPartnerComponent implements OnInit {
   }
 
   public onDropDownChange(item: any) {
-    console.log("selectedValue1  ===", item.target.value)
+   
     const selectedValue = item.target.value;
-    console.log("selectedValue  ===", selectedValue)
+    
 
 
     const userMap = new Map<string, any>();
@@ -456,7 +456,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
       userMap.set(user._id.toString(), user);
     });
     const selecteduser = userMap.get(selectedValue);
-    console.log("selecteduser  " + selecteduser._id)
+   
 
 
 
@@ -477,7 +477,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
 
   selectAdminUserDetails(event: any) {
 
-    console.log("======dropdown selection===", event)
+   
     this.selectedAdminuser = event.value
     if (this.selectedAdminuser) {
       this.myForm.controls['phoneNo'].enable();

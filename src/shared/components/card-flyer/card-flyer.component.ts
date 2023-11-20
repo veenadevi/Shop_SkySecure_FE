@@ -82,7 +82,7 @@ export class CardFlyerComponent {
 
   public getPriceType(val){
 
-    console.log("+++++ Val ", val);
+
 
     switch (val.toLowerCase()) {
       case 'month':

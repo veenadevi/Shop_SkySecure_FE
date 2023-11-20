@@ -10,6 +10,11 @@ import { CartItemsComponent } from './partials/cart-items/cart-items.component';
 import { CartEmptyComponent } from './partials/cart-empty/cart-empty.component';
 import { CartSubmitComponent } from './partials/cart-submit/cart-submit.component';
 import { PaymentGatewayResponseComponent } from './partials/payment-gateway-response/payment-gateway-response.component';
+import { RequestQuoteStepsComponent } from './partials/request-quote-steps/request-quote-steps.component';
+import { RequestStepsRoutingComponent } from './partials/request-quote-steps/partials/request-steps-routing/request-steps-routing.component';
+import { GstDetailsComponent } from './partials/request-quote-steps/partials/gst-details/gst-details.component';
+import { BusinessDetailsComponent } from './partials/request-quote-steps/partials/business-details/business-details.component';
+import { OverviewComponent } from './partials/request-quote-steps/partials/overview/overview.component';
 
 
 
@@ -21,7 +26,12 @@ import { PaymentGatewayResponseComponent } from './partials/payment-gateway-resp
     CartItemsComponent,
     CartEmptyComponent,
     CartSubmitComponent,
-    PaymentGatewayResponseComponent
+    PaymentGatewayResponseComponent,
+    RequestQuoteStepsComponent,
+    RequestStepsRoutingComponent,
+    GstDetailsComponent,
+    BusinessDetailsComponent,
+    OverviewComponent
   ],
   imports: [
     CommonModule,

@@ -67,7 +67,7 @@ export class GetFreeCallModalComponent implements OnInit{
 
     this.submitted = true;
     if (this.form.invalid) { // If Invalid Return
-      console.log("()()() Invalid");
+     
       return;
     }
     else{
@@ -85,7 +85,7 @@ export class GetFreeCallModalComponent implements OnInit{
   
       this.subscriptions.push(
         this.metadataService.sendCustomerSupport(req).subscribe( res=>{
-          console.log("()()() ", res);
+        
           this.activeModal.close();
         })
       )

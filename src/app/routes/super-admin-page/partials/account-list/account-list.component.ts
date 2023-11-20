@@ -63,7 +63,7 @@ export class AccountListComponent implements OnInit{
 
   ngOnInit(): void {
     this.spinner.show();
-    console.log("===============AccountListComponent=======")
+   
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
@@ -81,7 +81,7 @@ export class AccountListComponent implements OnInit{
       // this.info = a.accounts.info;
     this.subscriptions.push(
       this.adminPageService.getAllAccounts().subscribe( response => {
-        console.log("running here directly==")
+        
      
         this.accountData = response.accounts.data;
         this.info = response.accounts.info;
@@ -139,9 +139,7 @@ export class AccountListComponent implements OnInit{
 
     modalRef.componentInstance.passedData.subscribe((res) => {
       //account.Owner.name
-      console.log("_+_+_+_ Outside ", res);
-      console.log("_+_+_+_ Outside Account ", this.allMarketPlaceList);
-      console.log("_+_+_+_ Outside Account i", this.allMarketPlaceList[i]);
+     
       //this.accountData[i].Owner.name = res.ownerName.name;
       //this.allMarketPlaceList[i].assignedChannalpartner=['channelPartner']['name'] = res.assignedName;
       this.allMarketPlaceList[i].assignedChannalpartner=
@@ -150,7 +148,7 @@ export class AccountListComponent implements OnInit{
               "name" : res.assignedName
               }
             }
-      //this.accountData[i].Owner.name = res.assignedName;
+   //console.log("after assign",this.allMarketPlaceList[i].assignedChannalpartner)
 
     })
     
@@ -159,7 +157,7 @@ export class AccountListComponent implements OnInit{
   public getAllCRMUsers(){
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+_+_+_+_+ ", res);
+      
         this.superAdminStore.setCrmUsers(res);
       })
     )
@@ -169,7 +167,7 @@ export class AccountListComponent implements OnInit{
   public getAllChannelPartners(){
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
-        console.log("_+_+getAllChannelPartners _+_+_+_+ ", res);
+       
         if(res.channelPartners.length>0){
          this.disableAssign=false
 

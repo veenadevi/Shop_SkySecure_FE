@@ -22,7 +22,10 @@ export class ReviewHomeComponent {
 
   onSearchInputChange(event: any) {
     this.searchKey = event.target.value;
-    this.getSearchResults(this.searchKey);
+    if(this.searchKey.length>4){
+      this.getSearchResults(this.searchKey);
+    }
+   
   }
 
   // public getSearchResults(searchKey: string) {
@@ -51,7 +54,7 @@ export class ReviewHomeComponent {
       })
     ).subscribe((userDetails) => {
       // Work with the user details here
-      console.log("User Details:", userDetails);
+   
     });
   }
 

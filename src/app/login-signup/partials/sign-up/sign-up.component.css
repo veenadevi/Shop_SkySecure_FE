@@ -187,6 +187,22 @@ input[type="number"]::-webkit-outer-spin-button {
     text-align: center;
 
 }
+
+
+/* Primeng Auto Focus Change */
+:host ::ng-deep .p-autocomplete{
+   
+    width:100% !important;
+    height: 41px !important;
+    
+}
+
+:host ::ng-deep .p-inputtext{
+    border: 1.6px solid #918F90 !important;
+}
+
+
+
 /* media query */
 @media  ( min-width: 1024px) and (max-width: 1200px)  {
     .back-btn{
@@ -799,3 +815,200 @@ input[type="number"]::-webkit-outer-spin-button {
     height: 43px;
     
 }
+.disclaimer{
+    text-align: center;
+    font-size: 13px;
+    color: rgb(146, 5, 5);
+    padding-top: 10px;
+}
+
+@media  ( min-width: 1920px) and (max-width: 2560px) {
+    .heading{
+        font-family: 'lato',sans-serif;
+        padding: 6% 0 0 0;
+        margin-top: 25%;
+    }
+    .signup-container{
+        display: flex;
+        padding: 10%;
+        flex-direction: column;
+        row-gap: 20%;
+        margin-top: 5%;
+    }
+    h1{
+        font-size: 24px;
+        font-weight: bolder;
+        font-family: 'lato',sans-serif;
+        text-align: center;
+    }
+    label{
+        padding-bottom: 5px;
+        font-weight: 500;
+        font-size: 20px;
+    }
+    .primary-btn{
+        margin-top: 25px;
+        color: white;
+        font-size: 22px;
+        cursor: pointer;
+    }
+    .primary-btn {
+        color: var(--white);
+        font-size: 20px;
+        font-weight: 500;
+        border: none;
+        outline: none;
+        width: 9rem;
+        border-radius: 8px;
+        background: var(--btn-gradient);
+        transition: all .3s ease;
+        box-shadow: 0 3px 6px #0000001a;
+    }
+    
+    input{
+        box-sizing: border-box;
+        border: 2px solid #918F90;
+        border-radius: 8px;
+        padding: 10px;
+        width: 100%;
+    }    
+    .disclaimer {
+        text-align: center;
+        font-size: 18px;
+        color: rgb(146, 5, 5);
+        padding-top: 10px;
+    }
+    .float-right {
+        font-family: 'lato',sans-serif;
+        margin-top: 25px;
+        cursor: pointer;
+        color: var(--primary-500-purple);
+        font-size:20px;
+        font-weight: 500;
+        border: none;
+        outline: none;
+        width: 7rem;
+        border-radius: 5px;
+        background: var(--white);
+        border: 1px solid var(--primary-300-purple);
+        transition: all .3s ease;
+        box-shadow: 0 3px 6px #0000001a;
+    }
+    .btn-primary{
+        margin-left: 0;
+        font-family: 'lato',sans-serif;
+        margin-top: 25px;
+        
+        cursor: pointer;
+        color: var(--white);
+        font-size: 20px;
+        font-weight: 500;
+        border: none;
+        outline: none;
+        width: 8rem;
+        border-radius: 8px;
+        background: var(--btn-gradient);
+        transition: all .3s ease;
+        box-shadow: 0 3px 6px #0000001a;
+    }
+    .policyaggrement {
+        font-size: 18px;
+        color: grey;
+        padding-left: 0%;
+        padding-top: 4%;
+        text-align: center;
+    }
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 348px) {  
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 15px !important;
+        width: 38px !important;
+        height: 38px !important;
+  }
+}
+@media screen and (min-width: 349px) and (max-width: 480px) {  
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 12px !important;
+        width: 34px !important;
+        height: 37px !important;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 540px) {
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 3px !important;
+        width: 27px !important;
+        height: 35px !important;
+  }
+}
+@media screen and (min-width: 540px) and (max-width: 720px) {
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 4px !important;
+        width: 30px !important;
+        height: 35px !important;
+  }
+}
+@media screen and (min-width: 721px) and (max-width: 992px) {
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 10px !important;
+        width: 35px !important;
+        height: 35px !important;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1540px) {
+    :host ::ng-deep .ng-otp-input-wrapper .otp-input {
+        margin-right: 8px !important;
+        width: 35px !important;
+        height: 38px !important;
+  }
+}
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    background-color: var(--bs-body-bg);
+    border-radius: 10px;
+  }
+  
+  .custom-select input {
+    width: 100%;
+    padding: 8px;
+    /* border: 2px solid #918F90; */
+  }
+  
+  .options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    background: #fff;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+     display: none; 
+  }
+  
+  .options li {
+    padding: 8px;
+cursor: pointer;
+  }
+  
+  .custom-select input:focus + .options {
+    display: block; 
+  }
+ 
+  .custom-select input:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+} 
+

@@ -42,7 +42,8 @@ export class SuperAdminService {
 
   private getChannelPartnerDetailsUrl : string;
 
-
+private userAdminList: String;
+private options:{headers:HttpHeaders}
 
   constructor(
     private http: HttpClient,
@@ -72,8 +73,8 @@ export class SuperAdminService {
     this.getMyChannelAMListURL=AppService.appUrl.getMyChannelAMURL;
     this.assignLeadsToAMURL=AppService.appUrl.assignLeadstoChannelAMURL;
     this.getChannelPartnerDetailsUrl = AppService.appUrl.getChannelPartnerDetailsById;
-
-
+    // this.userAdminList=AppService.appUrl.getMyChannelsListURL;
+    this.options = this.getOptions();
   }
 
 
@@ -86,8 +87,8 @@ export class SuperAdminService {
     let url = this.baseUrlForSuperAdmin + this.getAllCRMUsersUrl;
 
     
-
-    let request$ = this.http.get<Observable<any>>(url)
+    let options = this.getOptions();
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -106,8 +107,8 @@ export class SuperAdminService {
     let url = this.baseURLForusers + this.getAllChannelPartner;
 
     
-
-    let request$ = this.http.get<Observable<any>>(url)
+    let options = this.getOptions();
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -127,7 +128,8 @@ export class SuperAdminService {
 
     
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let options = this.getOptions();
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -150,8 +152,8 @@ export class SuperAdminService {
   
 
  // console.log("+++++++ ____ _ InsideCreate assignChannelPartner ", request);
-    
-    const REQUEST$ = this.http.post<any>(URL, request)
+    let options = this.getOptions();
+    const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -180,7 +182,7 @@ export class SuperAdminService {
 
     
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url,this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -202,8 +204,8 @@ export class SuperAdminService {
   
 
  // console.log("+++++++ ____ _ InsideCreate assignLeadsToChannelPartnerAM ", request);
-    
-    const REQUEST$ = this.http.post<any>(URL, request)
+    let options = this.getOptions();
+    const REQUEST$ = this.http.post<any>(URL, request, options)
       .pipe(
         switchMap(response => {
           if (!response) {
@@ -273,9 +275,9 @@ export class SuperAdminService {
 
     let url = this.baseUrlForSuperAdmin + this.getAccountDetailsByIdUrl + '/' + id;
 
-    
+    let options = this.getOptions();
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -310,7 +312,7 @@ export class SuperAdminService {
 
     let options = this.getOptions();
 
-    let request$ = this.http.get<Observable<any>>(url)
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -330,11 +332,10 @@ export class SuperAdminService {
 
   public getChannelPartnerDetails(id) : Observable<any> {
 
-    let url = this.baseUrlForSuperAdmin + this.getChannelPartnerDetailsUrl + id;
+    let url = this.baseUrlForSuperAdmin + this.getChannelPartnerDetailsUrl + id; 
 
-    
-
-    let request$ = this.http.get<Observable<any>>(url)
+    let options = this.getOptions();
+    let request$ = this.http.get<Observable<any>>(url, options)
       .pipe(
         map(response => {
           if (!response) {
@@ -346,7 +347,25 @@ export class SuperAdminService {
 
     return request$;
   }
-  
+
+
+  public getChannelAdminUserList(userId:any) : Observable<any> {
+
+    let url = this.baseUrlForSuperAdmin + this.userAdminList + '/' + userId;; 
+
+    let options = this.getOptions();
+    let request$ = this.http.get<Observable<any>>(url,options)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
 
     /**
    * Stages our Http Request Headers
@@ -354,10 +373,11 @@ export class SuperAdminService {
 
     private getOptions() : { headers: HttpHeaders } { 
  
-      let token = this.userAccountStore.getAccessIdToken();
+      let token = localStorage.getItem("XXXXaccess__tokenXXXX");;
       const OPTIONS : { headers : HttpHeaders } = { 
         headers : new HttpHeaders() 
-          .set('Content-Type', 'application/json') 
+          .set('authorization', token) 
+          .append('Content-Type', 'application/json') 
       }; 
    
       return OPTIONS; 

@@ -378,7 +378,7 @@ export class ProductDetailComponent implements OnInit{
 
         if(this.product && this.product.productVideoURL && this.product.productVideoURL.length>0){
           this.productVideoURL = this.product.productVideoURL[0] ;
-          console.log("this.productVideoURL  ",this.productVideoURL)
+        //  console.log("this.productVideoURL  ",this.productVideoURL)
         } 
         else{
           this.productVideoURL = "https://www.youtube.com/embed/LWjxyc4FGGs?rel=0";
@@ -804,7 +804,7 @@ featureCount=5;
 
         if(this.selectedOption === 'default'){
         //  queryParams.price = (queryParams.price/12).toFixed(2);
-        console.log("sednign erp price for month ====",product.priceList[1].erpPrice)
+      //  console.log("sednign erp price for month ====",product.priceList[1].erpPrice)
 
         queryParams.price = product.priceList[1].price,
         queryParams.erpPrice=product.priceList[1].ERPPrice,

@@ -1,0 +1,235 @@
+<div class="business-details-container">
+
+
+
+  <div class="row jumbotron box8 container-style card-2">
+
+    <div class="form-check-label" style="margin-top:5px">&nbsp; *Please fill the Business details.</div>
+    <form [formGroup]="businessDetailsForm">
+
+
+      <!-- <div class="name-row-01">
+        <div class="col form-group">
+          <label for="companyName">Company Name*</label>
+            <input formControlName="companyName" type="companyName" class="form-control-01" name="companyName"
+              id="companyName" placeholder="Company Name" required>
+              <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('companyName').hasError('required')">
+                  <span>Company Name is Mandatory.</span>
+              </div>
+        </div>
+      </div> -->
+
+      <div class="name-row-01">
+        <div class="col form-group">
+          <label for="companyInput">Company Name<span class="mandatory">*</span></label>
+            <!-- <div class="custom-select">
+              <input class=""   type="text" id="companyInput" (ngModelChange)="onChange()"  placeholder="Your Company Name" [(ngModel)]="selectedCompany"   [ngModelOptions]="{standalone: true}">
+              <ul class="options" *ngIf="showOptions && selectedCompany.length>0" (click)="selectOption($event)">
+                <li *ngFor="let companyItem of companyListArray" >{{companyItem.company}}</li>
+              </ul>
+              
+              
+            </div> -->
+            <div class="card flex justify-content-center">
+              <p-autoComplete 
+                [ngModelOptions]="{standalone: true}" 
+                [(ngModel)]="selectedCompanyName" 
+                [forceSelection]="false" 
+                [suggestions]="companyListArray" 
+                (completeMethod)="filterCompany($event)" 
+                [style]="{'width':'100%'}" 
+                [inputStyle]="{'width':'100%'}"
+                field="company">
+              </p-autoComplete>
+            </div>
+            <div class="error-message" *ngIf="onNextClickFlag && companyNameErrorFlag">
+              <span>Company Name is Mandatory.</span>
+            </div>
+        </div>
+      </div>
+
+      <!-- <div class="name-row-01">
+        <div class="col col-sm-3 form-group">
+          <label for="cod">Country code</label>
+          <select class="form-control browser-default custom-select">
+            <option data-countryCode="IN"  value="1" selected>IN (+91)</option>
+            <option data-countryCode="US" value="2" >USA (+1)</option>
+            <option data-countryCode="GB" value="44">UK (+44)</option>
+          </select>
+        </div>
+        <div class="col col-sm-9 form-group">
+          <label for="tel">Phone</label>
+            <input formControlName="phoneNo" type="tel" name="phone" class="form-control-01" id="tel"
+              placeholder="Enter Your Phone No." required>
+              <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('phoneNo').hasError('required')">
+                Phone number is required.
+              </div>
+              <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('phoneNo').hasError('pattern')">
+                Phone number must be 10 digits.
+              </div>
+        </div>
+      </div> -->
+
+      <div class="name-row-01">
+        <div class="col col-sm-6 form-group">
+          <label for="address-1">Address Line-1</label>
+          <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
+            id="address-1" placeholder="Locality/House/Street no." >
+            <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('addressLine1').hasError('required')">
+                Address is Mandatory.
+            </div>
+        </div>
+        <div class="col col-sm-6 form-group">
+          <label for="address-2">Address Line-2<span class="mandatory">*</span></label>
+          <input formControlName="addressLine2" type="address" class="form-control-01" name="address" id="address-2"
+            placeholder="Village/City Name." required>
+            <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('addressLine2').hasError('required')">
+              Address is Mandatory.
+          </div>
+        </div>
+      </div>
+
+      <div class="name-row-01">
+        <div class="col col-sm-6 form-group">
+          <label for="Country">Country<span class="mandatory">*</span></label>
+          <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)">
+            <option disabled value="'Select Country'">Select Country </option>
+            <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+          </select>
+        </div>
+        <div class="col col-sm-6 form-group">
+          <label for="State">State<span class="mandatory">*</span></label>
+          <select formControlName="stateName" class="form-control" (change)="onStateChange($event)">
+            <option disabled value="'Select State'">Select State </option>
+            <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="name-row-01">
+        <div class="col col-sm-6 form-group">
+          <label for="State">City<span class="mandatory">*</span></label>
+          <select formControlName="cityName" class="form-control" (change)="onCityChange($event)">
+            <option disabled value="'Select City'">Select City </option>
+            <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
+
+          </select>
+        </div>
+        <div class="col col-sm-6 form-group">
+          <label for="zip">Postal-Code</label>
+          <input formControlName="postalCode" type="number" class="form-control" name="Zip" id="zip"
+            placeholder="Postal-Code.">
+            <!-- <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('postalCode').hasError('pattern')">
+              Postal-Code should be 6 digits long and in numbers only.
+            </div> -->
+        </div>
+      </div>
+      <div class="col col-sm-6">
+      <ng-container  *ngIf="countryStateError">
+        <span class="error-message">Country, State and City fields are mandatory.</span> 
+      </ng-container>
+    </div>
+      <div class="btn-holder">
+        <button class="btn secondary-btn" (click)="goBack()">Back</button>
+        <button class="btn primary-btn" (click)="onNextClick()">Next</button>
+      </div>
+      
+
+      <!-- <div class="name-row">
+          <div class="col-sm form-group">
+            <label for="companyName">Company Name*</label>
+            <input formControlName="companyName" type="companyName" class="form-control-01" name="companyName"
+              id="companyName" placeholder="Company Name" required>
+              <div *ngIf="onNextClickFlag && businessDetailsForm.get('companyName').hasError('required')">
+                  Company Name is Mandatory.
+              </div>
+          </div>
+          <div class="col-sm-2 form-group">
+            <label for="cod">Country code</label>
+            <select class="form-control browser-default custom-select">
+              <option data-countryCode="IN" value="44">IN (+91)</option>
+              <option data-countryCode="US" value="1">USA (+1)</option>
+              <option data-countryCode="GB" value="44">UK (+44)</option>
+  
+
+            </select>
+          </div>
+          <div class="col-sm-4 form-group">
+            <label for="tel">Phone</label>
+            <input formControlName="phoneNo" type="tel" name="phone" class="form-control-02" id="tel"
+              placeholder="Enter Your Phone No." required>
+            <div *ngIf="onNextClickFlag && businessDetailsForm.get('phoneNo').hasError('required')">
+              Phone number is required.
+            </div>
+            <div *ngIf="onNextClickFlag && businessDetailsForm.get('phoneNo').hasError('pattern')">
+              Phone number must be 10 digits.
+            </div>
+          </div>
+        </div>
+       
+  
+        <div class="address-row">
+          <div class="col-sm-6 form-group">
+            <label for="address-1">Address Line-1</label>
+            <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
+              id="address-1" placeholder="Locality/House/Street no." >
+              <div *ngIf="onNextClickFlag && businessDetailsForm.get('addressLine1').hasError('required')">
+                  Address is Mandatory.
+              </div>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="address-2">Address Line-2*</label>
+            <input formControlName="addressLine2" type="address" class="form-control-01" name="address" id="address-2"
+              placeholder="Village/City Name." required>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="Country">Country*</label>
+            <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)">
+              <option disabled value="'Select Country'">Select Country </option>
+              <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+            </select>
+            
+  
+  
+            
+      
+    
+          </div>
+        </div>
+  
+  
+        <div class="address-row">
+          <div class="col-sm-6 form-group">
+            <label for="State">State*</label>
+            <select formControlName="stateName" class="form-control" (change)="onStateChange($event)">
+              <option disabled value="'Select State'">Select Country </option>
+              <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+            </select>
+          </div>
+
+  
+          <div class="col-sm-6 form-group">
+            <label for="State">City*</label>
+            <select formControlName="cityName" class="form-control" (change)="onCityChange($event)">
+              <option disabled value="'Select City'">Select City </option>
+              <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
+  
+            </select>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="zip">Postal-Code*</label>
+            <input formControlName="postalCode" type="zip" class="form-control" name="Zip" id="zip"
+              placeholder="Postal-Code." required>
+          </div>
+        </div> -->
+
+  </form>
+
+
+  </div>
+    
+
+
+    
+
+</div>

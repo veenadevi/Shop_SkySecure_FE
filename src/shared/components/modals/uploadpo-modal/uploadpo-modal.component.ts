@@ -40,8 +40,7 @@ export class UploadpoModalComponent {
     this.imageURL = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
     this.editFile = true;
     this.removeUpload = false;
-    console.log("saved Data",newFileList)
-    console.log("saved Data", this.editFile )
+ 
     // this.myForm.patchValue({
     //   file: [null]
     // });
@@ -69,8 +68,7 @@ export class UploadpoModalComponent {
         (response: any) => {
           
           this.productLogo = response.filePath;
-         
-          console.log("response.filePath",response.filePath)
+  
         },
        
         error => {
@@ -95,7 +93,7 @@ export class UploadpoModalComponent {
           this.tempAppArrayImgFiles.push({ 
             'val' : response.filePath 
           })
-          console.log(response.filePath); 
+         
         },
         error => {
           console.error('Upload error:', error);

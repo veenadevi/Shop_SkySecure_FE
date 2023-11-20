@@ -253,12 +253,12 @@ disableCheckGstNil(){
   public onChannelParterChange(event){
     
     
-    console.log("selected partner id ==",event)
+   
     
     let partner = JSON.parse(event.target.value);
     this.selectedChannelPartnerId = partner._id;
     this.selectedChannelPartnerAdminId=partner.adminUsers[0]._id
-    console.log("selected partner id ==",this.selectedChannelPartnerId)
+
     
 
   }
@@ -280,7 +280,7 @@ disableCheckGstNil(){
   }
 
   public onInputChanges(event){
-    console.log("_+__+_+_+_ Came here");
+
     //if(this.myForm.get('firstName').value && this.myForm.get('firstName').value.length>0 && this.myForm.get('email').value && this.myForm.get('email').value.length>0 && this.myForm.get('phoneNo').value && this.myForm.get('phoneNo').value.length>0){
     //makign phone as non Mandatory 
     if(this.myForm.get('firstName').value && this.myForm.get('firstName').value.length>0 && this.myForm.get('email').value && this.myForm.get('email').value.length>0 ){ 
@@ -317,7 +317,6 @@ public submitCityError : boolean = false;
 
   public createQuotationService(){
 
-    console.log("++__+_+_+_+_ *&*&* &*&*& , ", this.myForm.get('cityName').value);
     
 
 
@@ -445,7 +444,7 @@ public submitCityError : boolean = false;
 
 
 
-  console.log("req passing for quote ===",req)
+
 
 
     
@@ -547,7 +546,7 @@ public submitCityError : boolean = false;
      }
 
 
-    console.log("+_+_+_+_ Updated GST", request);
+
 
 
      this.subscriptions.push(
@@ -679,8 +678,7 @@ public errorMessage: boolean = false;
     }
     
     else{
-      console.log("+_+_+_+_+_+ (*(*(* ", this.myForm.get('checkGstNil').value);
-      console.log("+_+_+_+_+_+ (*(*(* ", this.myForm.get('gstNo').value);
+  
     
     /*if((this.myForm.get('checkGstNil').value !== true || this.myForm.get('checkGstNil').value !== null) && this.selectedType === 'others'){
       this.myForm.get('gstNo').setErrors({ 'invalid': true });
@@ -692,8 +690,7 @@ public errorMessage: boolean = false;
       
       this.showContent = true;
       
-       
-      console.log("((((((((+_+_+_+_+ Came here ", this.myForm.get('checkGstNil').value)
+   
   
       if((this.myForm.get('checkGstNil').value === true || this.myForm.get('checkGstNil').value === null) && this.myForm.value.gstNo.length === 15){
   
@@ -865,7 +862,7 @@ public errorMessage: boolean = false;
 
     this.subscriptions.push(
       this.superAdminService.getAllChannelPartners().subscribe(res=>{
-        console.log("_+_+_+_+_+_ API Result ", res);
+     
         this.channelPartnerList = res.channelPartners;
         // this.spinner.hide();
       },

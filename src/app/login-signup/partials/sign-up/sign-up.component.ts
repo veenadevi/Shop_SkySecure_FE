@@ -10,11 +10,18 @@ import { BlockableUI } from 'primeng/api';
 import { CompressOutlined } from '@mui/icons-material';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
+interface AutoCompleteCompleteEvent {
+  originalEvent: Event;
+  query: string;
+}
+
 @Component({
   selector: 'sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
+
+
 
 
 
@@ -30,7 +37,7 @@ export  class SignUpComponent  {
   @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any;
   @ViewChild('ngOtpInput') ngOtpInputRef:any;
   emailFormFlag: boolean = true;
-  signUpFormFlag: boolean = false;
+  signUpFormFlag: boolean =false;
   public emailViaSignIn: String
 
   public isSignupError:boolean=false
@@ -57,6 +64,8 @@ export  class SignUpComponent  {
 
   public myCustomers : any;
 
+  public companyListArray : any;
+
   display: any;
   static isMobile: boolean;
 
@@ -74,6 +83,7 @@ export  class SignUpComponent  {
   ) {
     this.formEmail = this.fb.group(
       {
+       
         emailOrMobile: [this.emailViaSignIn, [Validators.required,emailOrMobileValidator]],
        // otp: [],
       }
@@ -92,14 +102,15 @@ export  class SignUpComponent  {
 
   
   ngOnInit(): void {
-
+   
 
     this.route.queryParams.subscribe(params => {
       this.emailViaSignIn = params['email'];
 
     });
+    this.formEmail.get('emailOrMobile').setValue( this.emailViaSignIn)
 
-
+  
 
 
     this.getAllMyCustomers();
@@ -113,7 +124,7 @@ export  class SignUpComponent  {
         password: [],
         confirmPassword: [],
 
-        companyName: ['', Validators.required],
+        companyName: [],
         mobileNumber: ['', [
           Validators.required,
           Validators.pattern('^[6-9][0-9]{9}$'),
@@ -146,30 +157,37 @@ export  class SignUpComponent  {
   // }
 
 
+ 
+
+
   onSubmit(): void {
+
+    
+    
+
+    let finalCompnayName = (typeof(this.selectedCompanyName) === 'string') ? this.selectedCompanyName : this.selectedCompanyName.company;
+    
+    
     this.submitted = true;
 
     if (this.form.invalid) { // If Invalid Return
-      console.log("()()() Invalid");
-      //   console.log(this.form.value);
+      
       return;
     }
-    else { // If Valid
-      // console.log("()()() Valid");
-
-      console.log("()()() Invalid In");
-
-      //console.log(JSON.stringify(this.form.value, null, 2));
+    else if(!finalCompnayName || finalCompnayName.length<=0){
+        return;
+    }
+    else { 
+      
       let formValue = this.form.value;
       let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
-    //  let hashedPass = CryptoJS.AES.encrypt(formValue.password, key).toString();
+    
       let req = {
         "firstName": formValue.firstName,
         "lastName": formValue.lastName,
+        //"email": (!this.isMobile)?this.validatedEmail:formValue.email,
         "email": (!this.isMobile)?this.validatedEmail:formValue.email,
-
-        //"password":hashedPass,
-        "company": formValue.companyName,
+        "company": finalCompnayName,
         "role": "Customer",
         "countryCode": "+91",
         "mobileNumber": (this.isMobile)?this.validatedEmail:formValue.mobileNumber,
@@ -181,18 +199,20 @@ export  class SignUpComponent  {
         "isMobile":this.isMobile
       }
 
+      
+
       this.subscriptions.push(
 
         this.authService.signUp(req).subscribe((res) => {
          
 
           this.router.navigate(['login'], { queryParams: { email: this.validatedEmail, succuessMessage: "Registered Successfully" } });
-          //localStorage.setItem('XXXXaccess__tokenXXXX', res.data);
+          
           
         },
         (error) => {
           this.isSignupError=true
-          console.log("sign up error -------")
+         
 
         }
         
@@ -222,7 +242,7 @@ export  class SignUpComponent  {
       this.display = `${prefix}${Math.floor(0.59)}:${textSec}`;
 
       if (seconds == 0) {
-        console.log('finished');
+       
         this.isResend=true
 
         clearInterval(this.timerInterval);
@@ -232,7 +252,21 @@ export  class SignUpComponent  {
 
   onReset(): void {
     this.submitted = false;
-    this.form.reset();
+    this.selectedCompanyName=""
+    const mobilePattern = /^\d{10}$/;
+
+    this.isMobile= mobilePattern.test(this.formEmail.value.emailOrMobile) 
+
+   if(!this.isMobile){
+    this.form.controls['mobileNumber'].setValue(null);
+
+   }
+   else{
+    this.form.controls['email'].setValue(null);
+   }
+
+   this.form.controls['firstName'].setValue(null);
+   // this.form.reset();
   }
 
   public navigateToLogin() {
@@ -245,9 +279,9 @@ export  class SignUpComponent  {
 
     this.isResend=false
     this.validatedEmail = this.formEmail.value.emailOrMobile;
-    console.log(" this.validatedEmail   ", this.validatedEmail)
+   
     this.submittedEmail = true;
-    console.log("is this mobile =====",this.isMobile)
+   
     if(this.isMobile){
       this.form.controls['mobileNumber'].setValue(this.validatedEmail);
       this.form.controls.mobileNumber.disable();
@@ -260,7 +294,7 @@ export  class SignUpComponent  {
     if (this.formEmail.invalid) { // If Invalid Return
 
 
-      console.log(" validation failed",this.formEmail.get('emailOrMobile').hasError('emailOrMobile'))
+     
       return;
     }
     else { // If Valid
@@ -277,15 +311,14 @@ export  class SignUpComponent  {
       this.subscriptions.push(
         this.userProfileService.sendOTP(req).subscribe(res => {
 
-          //console.log("sign up for exisitng user")
+         
           if (res.message) {
-            // console.log("coming for error message")
-            // console.log("error message========"+res.message)
+            
             if (res.message == 'Error: Invalid Domain') {
 
               this.invalidDomain = true;
-              this.enableOTPButton = false;
-
+              this.enableOTPButton = true;
+            
             }
             else if(res.message == 'Error: User already  exists') {
               this.emailExisitAlert = true
@@ -295,12 +328,11 @@ export  class SignUpComponent  {
         else{
 
             this.inValidOTP = false
-            // console.log("outside iff====")
+            
             this.enableSignInButton = false;
             this.enableOTPButton = true;
             this.otpField = false;
-            // this.emailExisitAlert=true
-            // this.invalidDomain=true
+            
           }
 
           }
@@ -322,7 +354,7 @@ export  class SignUpComponent  {
   }
 
   public validateOTP() {
-    // console.log("iNSIDE VALIDATE OTP")
+   
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
     let hashedPass = CryptoJS.AES.encrypt(this.otp, key).toString();
     
@@ -333,11 +365,11 @@ export  class SignUpComponent  {
       "mobileNumber":(this.isMobile)?this.formEmail.value.emailOrMobile:'',
     }
 
-   console.log("signup req",req)
+   
 
     this.subscriptions.push(
       this.userProfileService.validateOTP(req).subscribe(res => {
-        //  console.log("RES & RES.DATA",res && res.data)
+        
         if (res && res.data) {
           this.emailFormFlag = false;
           this.signUpFormFlag = true;
@@ -362,7 +394,7 @@ export  class SignUpComponent  {
   }
   public signIn() {
 
-    //console.log("iNSIDE SIGN IN")
+
     this.router.navigate(['login'], { queryParams: { email: this.validatedEmail } });
 
   }
@@ -384,7 +416,7 @@ export  class SignUpComponent  {
 
   onOtpChange(otp: any) {
     this.otp = otp;
-    //console.log("this.otp", this.otp);
+  
     if (otp.length === 6) {
       //  this. onSubmitEmail();
     }
@@ -392,15 +424,6 @@ export  class SignUpComponent  {
 
 
 
-  // public onCompanyNameChange(){
-  //   if(this.myCustomers && this.myCustomers.length>0){
-  //     console.log("+_+_+_+ Changed Compnay Name ", this.selectedCompnayName);
-  //     console.log("+_+_+_+ Changed Compnay Name ", this.myCustomers);
-  //     this.selectedCarObj = this.myCustomers.find((c)=> c.company===this.selectedCompnayName);
-  //     console.log(this.selectedCarObj)
-  //   }
-    
-  // }
 
   cars = [{
     make: 'Ford',
@@ -416,17 +439,71 @@ export  class SignUpComponent  {
     color: 'white'
   }];
 
-  selectedCar = "";
+
+  selectedCompany: string;
+  showOptions: boolean = false;
+  // myCustomers = [/* your options array */];
+
+  onChange() {
+    
+    
+    this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCompany);
+    
+
+    if(this.selectedCompany && this.selectedCompany.length>3){
+      let sampleStr : any = this.selectedCompany.toLowerCase();
+     
+
+      this.companyListArray = this.myCustomers.filter(function (str) { return str.company.toLowerCase().includes(sampleStr); });
+      
+      this.showOptions = true;
+    }
+    
+    
+  }
+
+  identify(index, item) {
+    return item.id;
+  }
+
+  selectOption(option) {
+
+ 
+    
+    this.selectedCompany = option;
+    this.showOptions = false;
+  }
+
+
+  public selectedCompanyName; 
+
+  filterCompany(event: AutoCompleteCompleteEvent) {
+    let filtered: any[] = [];
+    let query = event.query;
+    //console.log("query  ",query)
+    if(query&&query.length>=3){
+
+   
+
+    for (let i = 0; i < (this.myCustomers as any[]).length; i++) {
+        let country = (this.myCustomers as any[])[i];
+      //  console.log("country  ",country)
+        if (country.company.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(country);
+        }
+    }
+
+    this.companyListArray = filtered;
+  }
+}
+
+
+  // selectedCar = "";
   selectedCarObj: any = {};
 
   
 
-  onChange = () => {
-    console.log(this.selectedCar);
-    //this.selectedCarObj = this.cars.find((c)=> c.make==this.selectedCar);
-    this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCar);
-    console.log(this.selectedCarObj)
-  }
+ 
 
 
 
@@ -434,8 +511,10 @@ export  class SignUpComponent  {
 
     this.subscriptions.push(
       this.adminPageService.getAllMyCustomers().subscribe(res=>{
-        console.log("_+_+_+_+_+_ API Result ", res);
+        
         this.myCustomers = res;
+        this.companyListArray = this.myCustomers;
+       // console.log(" this.companyListArray", this.companyListArray.length)
         //this.spinner.hide();
       },
       error => {
@@ -450,12 +529,11 @@ export  class SignUpComponent  {
 
 
 export  function emailOrMobileValidator(control: AbstractControl):Observable<ValidationErrors | any>  {
-  console.log("passing email as====", control.value)
+  
 
-  //console.log("is access?", this.isMobile)
 
   const value = control.value;
-  //let invalidEmailOrMobile: any = false;
+  
   if (value) {
     // Regular expression for email validation
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -471,12 +549,13 @@ export  function emailOrMobileValidator(control: AbstractControl):Observable<Val
 
     }
   }
-  
- // invalidEmailOrMobile=true
-  //console.log("what is validatation result ==", invalidEmailOrMobile)
+
  
 
   return of( {invalidEmailOrMobile:true});
+
+
+ 
 
 
 }

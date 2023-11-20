@@ -73,11 +73,11 @@ export class CustomBreadCrumbComponent {
           var tempId;
           if(this.prdType === 'productFamilyVariant'){
             tempId = this.product.subcategories[0].oemId;
-            console.log("tthis.prdType ", this.prdType )
+        
           }
           else{
             tempId = this.product.oemId;
-            console.log("this.product.oemId ",this.product.oemId )
+      
           }
           var tempOemName;
           var tempOemId;
@@ -97,7 +97,7 @@ export class CustomBreadCrumbComponent {
           });
 
           if(isPresent){
-            console.log("tempOemName",tempOemName,"tempOemId",tempOemId)
+           
             this.oemName = tempOemName
             this.oemId = tempOemId;
           }
@@ -136,7 +136,7 @@ export class CustomBreadCrumbComponent {
       .pipe(
         concatMap((categoryDetails) => {
           // Process categoryDetails if needed
-          console.log("categoryDetails$", categoryDetails);
+     
   
           // Return the oemDetails$ observable to continue the sequence
           return this.oemDetails$;
@@ -144,7 +144,7 @@ export class CustomBreadCrumbComponent {
       )
       .subscribe((oemDetails) => {
         // Process oemDetails
-        console.log("oemDetails$", oemDetails);
+  
   
         // Now, both categoryDetails and oemDetails have been processed sequentially.
       });
@@ -157,7 +157,7 @@ export class CustomBreadCrumbComponent {
         ];
 
       this.home = { icon: 'pi pi-home', routerLink: '/' , id : 'home' };
-      console.log("items",this.product.name,"",this.home)
+    
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -176,7 +176,7 @@ export class CustomBreadCrumbComponent {
       { label: this.product.name, id: 'name' },
     ];
     this.home = { icon: 'pi pi-home', routerLink: '/', id: 'home' };
-    console.log(" this.product.categories[0].name", this.product.categories[0].name,"this.product.subcategories.name,",this.product.subcategories.name);
+   // console.log(" this.product.categories[0].name", this.product.categories[0].name,"this.product.subcategories.name,",this.product.subcategories.name);
   }
 
 
@@ -205,16 +205,16 @@ export class CustomBreadCrumbComponent {
 
     switch (event.item.id) {
       case 'cat':
-        console.log("this.catId ", this.catId,"" )
+        
           this.router.navigate([`/products/category/${this.catId}`]);
           return;
       case 'subCat':
-        console.log("this.catId this.subCatId", this.catId,"", this.subCatId)
+     
           this.router.navigate([`/products/sub-category/${this.catId}-${this.subCatId}`]);
         //this.router.navigate([`/products/sub-category/${category._id}-${subCategory._id}`], { state: { category , subCategory} });
           return;
       case 'brand':
-        console.log("this.oemId", this.oemId)
+     
           this.router.navigate([`/products/brand/${this.oemId}`]);
           return;
       default:

@@ -46,6 +46,7 @@
 
 
         "handleResponse" : "api/orders/handleResponse",
+        "paymentStatusByid" : "api/orders/paymentStatusByid/",
         
 
         "userSignUp":"api/user/signup",
@@ -110,7 +111,11 @@
         
         "getProductReviewURL": "api/product-review",
 
-        "rejectRevertLeadAsAM" : "api/admin/rejectRevertLeadAsAM"
+        "rejectRevertLeadAsAM" : "api/admin/rejectRevertLeadAsAM",
+
+        "rejectRevertSuperAdminAsCpAdmin" : "api/admin/rejectRevertSuperAdminAsCpAdmin",
+
+        "getProductReviewsList": "api/product-reviews"
 
 
     },

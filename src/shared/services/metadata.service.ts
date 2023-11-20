@@ -37,7 +37,7 @@ export class MetadataService {
   private getUserNotificationsUrl : string;
   private createProductReviewUrl : string;
   private fetchProductReviewUrl : string;
-
+  private options:{headers:HttpHeaders};
 
   constructor(
     private http: HttpClient,
@@ -67,6 +67,7 @@ export class MetadataService {
     this.getUserNotificationsUrl = AppService.appUrl.getUserNotifications;
     this.createProductReviewUrl = AppService.appUrl.createProductReviewURL;
     this.fetchProductReviewUrl = AppService.appUrl.getProductReviewURL;
+    this.options = this.getOptions();
   }
 
   //fetch All Category
@@ -422,9 +423,9 @@ export class MetadataService {
   public fetchAdminProductDetails(id: string) : Observable<any> {
     //id = "63eb236c53c21de2f6841bca";
     let url = this.baseUrl+ this.fetchAdminProductDetailsUrl + String(id);
-    console.log("fetch API"+url)
 
-    let request$ = this.http.get<Observable<any>>(url)
+
+    let request$ = this.http.get<Observable<any>>(url,this.options)
       .pipe(
         map(response => {
           if (!response) {
@@ -542,7 +543,7 @@ export class MetadataService {
             if (!response) {
               return null;
             }
-            console.log("____TEST____",response);
+         
             return response;
           }),
           catchError(error => {
@@ -554,5 +555,15 @@ export class MetadataService {
       return request$;
     }
 
-
+    private getOptions() : { headers: HttpHeaders } { 
+ 
+      let token = localStorage.getItem("XXXXaccess__tokenXXXX");;
+      const OPTIONS : { headers : HttpHeaders } = { 
+        headers : new HttpHeaders() 
+          .set('authorization', token) 
+          .append('Content-Type', 'application/json') 
+      }; 
+   
+      return OPTIONS; 
+    }
 }

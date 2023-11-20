@@ -24,7 +24,8 @@ export const environment = {
     name : "Prod Env",
     gatewayUrl : "https://productapi.realize.skysecuretech.com/",
     gatewayUrlForUserProfile : "https://usersapi.realizeweb.skysecuretech.com/",
-    gatewayUrlForOrders : "https://orderapi.realize.skysecuretech.com/",
+   gatewayUrlForOrders : "https://orderapi.realize.skysecuretech.com/",
+ // gatewayUrlForOrders : "http://localhost:8080/",
 
 
     /* Azure Config */

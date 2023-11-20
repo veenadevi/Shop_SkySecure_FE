@@ -9,6 +9,12 @@ import { Subscription } from 'rxjs';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 
+
+interface AutoCompleteCompleteEvent {
+  originalEvent: Event;
+  query: string;
+}
+
 @Component({
   selector: 'app-invite-user',
   templateUrl: './invite-user.component.html',
@@ -32,8 +38,11 @@ export class InviteUserComponent {
   public cityList: any;
   public usersList : any[] = [];
   public companyBusinessName:String;
-
-
+  private subscriptions: Subscription[] = [];
+  public companyListArray : any;
+  public myCustomers : any;
+  selectedCompany: string;
+  showOptions: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -76,6 +85,7 @@ export class InviteUserComponent {
 
     this.setSelfData();
     this.getUsersList();
+    this.getAllMyCustomers();
 
   }
 
@@ -111,6 +121,25 @@ export class InviteUserComponent {
 
 
   }
+
+
+  public getAllMyCustomers(){
+
+    this.subscriptions.push(
+      this.adminPageService.getAllMyCustomers().subscribe(res=>{
+        
+        this.myCustomers = res;
+        this.companyListArray = this.myCustomers;
+        //this.spinner.hide();
+      },
+      error => {
+        //this.spinner.hide();
+        //this.toaster.showWarning("Some Error Occurred! Please try again after sometime.",'')
+      })
+    )
+
+  }
+
 
 
 
@@ -192,6 +221,7 @@ public fetchGST(){
 }
 
   onSubmit() {
+    let finalCompnayName = (typeof(this.selectedCompanyName) === 'string') ? this.selectedCompanyName : this.selectedCompanyName.company;
     
     if (this.myForm.valid) {
 
@@ -202,7 +232,9 @@ public fetchGST(){
         "firstName": formData.firstName,
         "lastName": formData.lastName,
         "email": formData.email,
-        "company": formData.companyBusinessName,
+        // "company": formData.companyBusinessName,
+      
+        "company": formData.finalCompnayName,
         //"role": "User",
          "countryCode": "+91",
         "mobileNumber": formData.mobile,
@@ -238,6 +270,9 @@ public fetchGST(){
 
       //console.log('Form submitted:', this.myForm.value);
     }
+    else if(!finalCompnayName || finalCompnayName.length<=0){
+      return;
+  }
   }
 
 
@@ -287,4 +322,61 @@ public fetchGST(){
     this.showDefaultContent = false;
     this.showAlternateContent = true;
   }
+
+
+ 
+  // myCustomers = [/* your options array */];
+
+  onChange() {
+    
+    
+    this.selectedCarObj = this.myCustomers.find((c)=> c.company==this.selectedCompany);
+    
+
+    if(this.selectedCompany && this.selectedCompany.length>3){
+      let sampleStr : any = this.selectedCompany.toLowerCase();
+     
+
+      this.companyListArray = this.myCustomers.filter(function (str) { return str.company.toLowerCase().includes(sampleStr); });
+      
+      this.showOptions = true;
+    }
+    
+    
+  }
+
+  identify(index, item) {
+    return item.id;
+  }
+
+  selectOption(option) {
+
+ 
+    
+    this.selectedCompany = option;
+    this.showOptions = false;
+  }
+
+
+  public selectedCompanyName; 
+
+  filterCompany(event: AutoCompleteCompleteEvent) {
+    let filtered: any[] = [];
+    let query = event.query;
+
+    for (let i = 0; i < (this.myCustomers as any[]).length; i++) {
+        let country = (this.myCustomers as any[])[i];
+        if (country.company.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(country);
+        }
+    }
+
+    this.companyListArray = filtered;
+}
+
+
+  // selectedCar = "";
+  selectedCarObj: any = {};
+
+  
 }

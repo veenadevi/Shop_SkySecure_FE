@@ -28,7 +28,7 @@ export class ProductCardFlyerComponent implements OnInit{
   mrpPriceType : any;
 
   showYearlyPrice(i:any) {
-    console.log("moue over==")
+   
     this.isMonthly = true;
     // this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price;
     // this.priceValue = this.productsList[i].priceList[0].price;
@@ -46,7 +46,7 @@ export class ProductCardFlyerComponent implements OnInit{
   }
 
   showDiscountRate(i: any) {
-    console.log("moue leav e==")
+
     // this.productsList[i].priceList[1].price = this.productsList[i].priceList[1].price;
     // this.productsList[i].priceList[1].ERPPrice =this.productsList[i].priceList[1].ERPPrice;
     // console.log("moue leav e== set ",this.productsList[i].priceList[1].priceType)
@@ -81,7 +81,7 @@ public whatsAppMessage:string
       element.displayDiscount=element.priceList[1].discountRate
         //element.priceList[2].priceType = "Month";
 
-        console.log("setting up display erp price ",element.displayPriceType)
+    
     });
  
   }
@@ -345,7 +345,7 @@ public whatsAppMessage:string
     //let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
     let queryParams;
-      console.log("passing distrubutor pri e",product.priceList[0].distributorPrice)
+
     
     queryParams = {
           productName : product.name,

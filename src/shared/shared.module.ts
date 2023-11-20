@@ -55,6 +55,7 @@ import { InvoiceDueDateModalComponent } from './components/modals/invoice-due-da
 import { CustomerReviewComponent } from './components/customer-review/customer-review.component';
 import { VideoReviewComponent } from './components/video-review/video-review.component';
 import { ProductReviewAverageComponent } from './components/product-review-average/product-review-average.component';
+import { CpReassignModalComponent } from './components/modals/cp-reassign-modal/cp-reassign-modal.component';
 
 
 
@@ -118,7 +119,8 @@ import { ProductReviewAverageComponent } from './components/product-review-avera
     InvoiceDueDateModalComponent,
     CustomerReviewComponent,
     VideoReviewComponent,
-    ProductReviewAverageComponent
+    ProductReviewAverageComponent,
+    CpReassignModalComponent
    
   ],
 
