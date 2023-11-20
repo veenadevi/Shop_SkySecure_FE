@@ -203,7 +203,7 @@ public goBack(){
   public getAllMyCustomers(){
 
     this.subscriptions.push(
-      this.adminPageService.getAllMyCustomers().subscribe(res=>{
+      this.adminPageService.getAllCompany().subscribe(res=>{
         
         this.myCustomers = res;
         this.companyListArray = this.myCustomers;
