@@ -146,7 +146,7 @@ public goBack(){
    
    
     else{
-      this.companyNameErrorFlag = false;
+     // this.companyNameErrorFlag = false;
      // console.log("+++__+_ Else");
       if(!this.selectedCountry || !this.selectedState || !this.selectedCity){
         
