@@ -113,7 +113,7 @@ export  class SignUpComponent  {
   
 
 
-    this.getAllMyCustomers();
+    this.getAllCompany();
     
     this.form = this.formBuilder.group(
       {
@@ -507,10 +507,10 @@ export  class SignUpComponent  {
 
 
 
-  public getAllMyCustomers(){
+  public getAllCompany(){
 
     this.subscriptions.push(
-      this.adminPageService.getAllMyCustomers().subscribe(res=>{
+      this.adminPageService.getAllCompany().subscribe(res=>{
         
         this.myCustomers = res;
         this.companyListArray = this.myCustomers;

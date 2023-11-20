@@ -58,6 +58,9 @@
         "inviteUsers" : "api/user/inviteuser",
         "createProductOffer":"api/product-offer/create",
         "getAllMyCustomers" : "api/admin/getAllCustomers",
+
+        "getAllCompany" : "/api/user/getAllCompanyList",
+
         "getCustomerDetailsById" : "api/admin/getCustomerDetailsById/",
         
 
