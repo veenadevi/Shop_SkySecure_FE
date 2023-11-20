@@ -72,7 +72,7 @@
                         
                     </div>
                     <div class="col form-group">
-                      <label for="email">Email ID*</label>
+                      <label for="email">Email ID<span class="mandatory">*</span></label>
                       <input formControlName="email" type="email" class="form-control-01" name="email" id="email" (input)="onInputChanges($event)"
                         placeholder="Email ID" required>
                         <div class="error-message" *ngIf="onGSTDetailsCLicked && gstFormOthers.get('email').hasError('required')">Email ID is required</div>
@@ -90,7 +90,7 @@
                     </select>
                   </div>
                   <div class="col col-sm-9 form-group">
-                    <label for="tel">Phone</label>
+                    <label for="tel">Phone<span class="mandatory">*</span></label>
                     <input formControlName="phoneNo" type="tel" name="phone" class="form-control-01" id="tel" (input)="onInputChanges($event)"
                       placeholder="Enter Your Phone No." >
                       <div class="error-message" *ngIf="onGSTDetailsCLicked && gstFormOthers.get('phoneNo').hasError('required')">Phone No. is required</div>
