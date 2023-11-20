@@ -243,6 +243,13 @@ export class LoginComponent {
        
         this.isResend=true
         clearInterval(this.timerInterval);
+
+        this.otpField = false;
+       
+        this.enableSignInButton = false;
+            this.enableOTPButton = true;
+
+        clearInterval(this.timerInterval);
       }
     }, 1000);
   }
