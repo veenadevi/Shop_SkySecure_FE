@@ -331,8 +331,8 @@ export class CartService {
 
   public encryptForCCAvenue(req){
         
-        //let url = `${this.baseUrl}api/orders/encryptForCCAvenue`;
-        let url = "http://localhost:8080/api/orders/encryptForCCAvenue";
+        let url = `${this.baseUrl}api/orders/encryptForCCAvenue`;
+       // let url = "http://localhost:8080/api/orders/encryptForCCAvenue";
         
 
         let request = {
