@@ -29,6 +29,10 @@ export class AdminPageService {
   private getMyMarketPlaceAccountListURL:string
   private addChannelPartnerURL:string;
   private getAllMyCustomersUrl : String;
+
+  private getAllCompanyUrl : String;
+
+
   private getCustomerDetailsByIdUrl : String;
 
   private addChannelPartnerUsersURL:string;
@@ -70,6 +74,7 @@ export class AdminPageService {
     this.createProductOfferURL = AppService.appUrl.createProductOffer;
     
     this.getAllMyCustomersUrl = AppService.appUrl.getAllMyCustomers;
+    this.getAllCompanyUrl=AppService.appUrl.getAllCompany;
     this.getCustomerDetailsByIdUrl = AppService.appUrl.getCustomerDetailsById;
     this.rejectReassignURL = AppService.appUrl.rejectRevertLeadAsAM;
     this.cpRejectReassignURL= AppService.appUrl.rejectRevertSuperAdminAsCpAdmin;
@@ -554,6 +559,23 @@ public inviteUsers( request : any): Observable<any> {
     return request$;
   }
 
+
+  public getAllCompany() : Observable<any> {
+
+    let url = this.baseUrlForUsers + this.getAllCompanyUrl;
+
+    let request$ = this.http.get<Observable<any>>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
 
 
   public getProductReviewsList() : Observable<any> {
