@@ -117,8 +117,8 @@
         </div>
         <div class="col col-sm-6 form-group">
           <label for="zip">Postal-Code</label>
-          <input formControlName="postalCode" type="number" class="form-control" name="Zip" id="zip"
-            placeholder="Postal-Code.">
+          <input formControlName="postalCode" type="number" class="form-control" name="Zip" id="zip" 
+            placeholder="Postal-Code."(keydown)="onKeyDown($event)">
             <!-- <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('postalCode').hasError('pattern')">
               Postal-Code should be 6 digits long and in numbers only.
             </div> -->
