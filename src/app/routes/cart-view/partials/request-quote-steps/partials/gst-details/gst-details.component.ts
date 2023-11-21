@@ -190,9 +190,9 @@ export class GstDetailsComponent implements OnInit{
         reqBody.countryCode = "IN";
         reqBody.phoneNo = this.gstFormOthers.get('phoneNo').value;
 
-        reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.adminUsers[0]._id : '';
-        reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy._id : '';
-        reqBody.selectedChannelPartnerName = (this.referredBy) ? this.referredBy.channelPartnerMaster.companyBusinessName : '';
+        reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.ChannelPartnerAdminId: '';
+        reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy.ChannelPartnerId : '';
+        reqBody.selectedChannelPartnerName = (this.referredBy) ? this.referredBy.companyBusinessName: '';
         
         this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
         if( this.gstFormOthers.get('checkGstNil').value === null || this.gstFormOthers.get('checkGstNil').value === false){
@@ -216,9 +216,9 @@ export class GstDetailsComponent implements OnInit{
           reqBody.gstNo = null;
           reqBody.gstType = "others";
           reqBody.gstFlag = false;
-          reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.adminUsers[0]._id : '';
-          reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy._id : ''
-          reqBody.selectedChannelPartnerName=(this.referredBy) ? this.referredBy.channelPartnerMaster.companyBusinessName : '';
+          reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.ChannelPartnerAdminId : '';
+          reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy.ChannelPartnerId: ''
+          reqBody.selectedChannelPartnerName=(this.referredBy) ? this.referredBy.companyBusinessName : '';
           this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
           this.gstDetailsAction.emit('next');
   
@@ -274,9 +274,9 @@ export class GstDetailsComponent implements OnInit{
                    }
 
                
-                    reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.adminUsers[0]._id : '';
-                    reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy._id : '';
-                    reqBody.selectedChannelPartnerName=(this.referredBy) ? this.referredBy.channelPartnerMaster.companyBusinessName : '';
+                    reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.ChannelPartnerAdminId : '';
+                    reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy.ChannelPartnerId: '';
+                    reqBody.selectedChannelPartnerName=(this.referredBy) ? this.referredBy.companyBusinessName : '';
 
                    this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
                    this.gstDetailsAction.emit('nextOverview');
