@@ -23,6 +23,8 @@ export class SuperAdminService {
   private getAllCRMUsersUrl : string;
 
   private getAllChannelPartner: string;
+
+  private getReferToChannelPartner:string;
   private getMyChannelAM: string;
 
   private assignAccountOwnerUrl : string;
@@ -62,6 +64,10 @@ private options:{headers:HttpHeaders}
 
     this.getAllCRMUsersUrl = AppService.appUrl.getAllCRMUsers;
     this.getAllChannelPartner=AppService.appUrl.getAllChannelPartner;
+
+    this.getReferToChannelPartner=AppService.appUrl.getReferToChannelPartner;
+
+
     this.assignAccountOwnerUrl = AppService.appUrl.assignAccountOwner;
     this.getAccountDetailsByIdUrl = AppService.appUrl.getMarketplaceAccountDetailsById;
     this.assignChannelPartnerURL=AppService.appUrl.assignChannelPartnerURL
@@ -120,6 +126,27 @@ private options:{headers:HttpHeaders}
 
     return request$;
   }
+
+
+  public getReferToChannelPartners() : Observable<any> {
+
+    let url = this.baseURLForusers + this.getReferToChannelPartner;
+
+    
+    let options = this.getOptions();
+    let request$ = this.http.get<Observable<any>>(url, options)
+      .pipe(
+        map(response => {
+          if (!response) {
+            return null;
+          }
+          return response;
+        }),
+      );
+
+    return request$;
+  }
+
 
 
   public getMyChannelPartnerList(id:any) : Observable<any> {
