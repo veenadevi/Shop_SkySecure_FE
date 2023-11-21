@@ -96,6 +96,8 @@
         "addChannelPartnerURL":"api/user/channel-partner",
         "getAllChannelPartner" : "api/user/channel-partner",
 
+        "getReferToChannelPartner" : "api/user/refer-channel-partner",
+
         "assignChannelPartnerURL" : "api/admin/assignChannelPartner",
 
         "getMyChannelsListURL":"api/user/get-my-channel",

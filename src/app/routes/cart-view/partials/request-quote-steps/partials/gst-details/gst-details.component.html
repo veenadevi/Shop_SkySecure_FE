@@ -26,7 +26,7 @@
             <label for="State">Referred By<span class="mandatory">*</span></label>
             <select class="form-control" (change)="onReferredByChange($event)">
               <option disabled selected>--Select Channel Partner--</option>
-              <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.channelPartnerMaster.companyBusinessName}}</option>
+              <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.companyBusinessName}}</option>
             </select>
           </div>
         </div>

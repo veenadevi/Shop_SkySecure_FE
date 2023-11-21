@@ -279,6 +279,8 @@ export  class SignUpComponent  {
   }
 
   public onSubmitEmail() {
+
+    
     const mobilePattern = /^\d{10}$/;
     this.isMobile= mobilePattern.test(this.formEmail.value.emailOrMobile) 
 
@@ -289,12 +291,17 @@ export  class SignUpComponent  {
    
     if(this.isMobile){
       this.form.controls['mobileNumber'].setValue(this.validatedEmail);
+      this.form.controls['email'].setValue('');
       this.form.controls.mobileNumber.disable();
+      this.form.controls.email.enable()
+
     }
     else{
       this.form.controls['email'].setValue(this.validatedEmail);
       this.form.controls.email.disable();
+      this.form.controls.mobileNumber.enable();
     }
+
    
     if (this.formEmail.invalid) { // If Invalid Return
 
@@ -363,9 +370,10 @@ export  class SignUpComponent  {
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
     let hashedPass = CryptoJS.AES.encrypt(this.otp, key).toString();
     
+    console.log("sendign data for signup",this.isMobile)
     let req = {
     
-      "emailId":(!this.isMobile)?this.formEmail.value.emailOrMobile:'',
+      "emailId":(this.isMobile)?'':this.formEmail.value.emailOrMobile,
       "otp": hashedPass,
       "mobileNumber":(this.isMobile)?this.formEmail.value.emailOrMobile:'',
     }

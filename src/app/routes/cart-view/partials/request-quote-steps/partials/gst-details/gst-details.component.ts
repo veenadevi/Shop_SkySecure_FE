@@ -163,9 +163,9 @@ export class GstDetailsComponent implements OnInit{
           reqBody.gstNo = null;
           reqBody.gstType = "self";
           reqBody.gstFlag = false;
-          reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.adminUsers[0]._id : '';
-          reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy._id : '';
-          reqBody.selectedChannelPartnerName=(this.referredBy) ? this.referredBy.channelPartnerMaster.companyBusinessName : '';
+          reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.ChannelPartnerAdminId: '';
+          reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy.ChannelPartnerId : '';
+          reqBody.selectedChannelPartnerName=(this.referredBy) ? this.referredBy.companyBusinessName : '';
           this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
           this.gstDetailsAction.emit('next');
         }
@@ -387,20 +387,12 @@ export class GstDetailsComponent implements OnInit{
   public getAllMyCustomers(){
 
     this.subscriptions.push(
-      this.superAdminService.getAllChannelPartners().subscribe(res=>{
+      this.superAdminService.getReferToChannelPartners().subscribe(res=>{
        
-        // let firstValue : any = [{
-        //   "channelPartnerMaster": { 
-        //       "companyBusinessName": "Select User",
-        //   },  
-        // }]
 
         
         this.channelPartnerList = res.channelPartners;
 
-        // this.channelPartnerList = [...firstValue, ...this.channelPartnerList];
-        // console.log("+_+_+_+_+_+_ Selected API ", this.channelPartnerList)
-        // this.spinner.hide();
       },
       error => {
         this.spinner.hide();

@@ -108,11 +108,6 @@ export class OverviewComponent implements OnInit{
               this.cartService.getCartItems(null).subscribe();
               
               this.router.navigate(['/user-profile/quotation-history']);
-              
-              
-              
-            
-            
           }
           else{
             
