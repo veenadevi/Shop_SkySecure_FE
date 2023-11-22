@@ -274,7 +274,9 @@ export class SignUpComponent {
 
       if (seconds == 0) {
 
+
         this.isResend = true
+
         clearInterval(this.timerInterval);
 
         this.otpField = false;
