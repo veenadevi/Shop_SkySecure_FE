@@ -243,7 +243,7 @@ export class LoginComponent {
        
         this.isResend=true
         clearInterval(this.timerInterval);
-
+        this.inValidOTP=false;
         this.otpField = false;
        
         this.enableSignInButton = false;
@@ -283,7 +283,7 @@ export class LoginComponent {
           }
           else{
             
-            this.inValidOTP=true;
+           
           
             let eleId=this.ngOtpInputRef.getBoxId(0);
             this.ngOtpInputRef.focusTo(eleId);
@@ -294,6 +294,7 @@ export class LoginComponent {
           //  this.enableOTPButton = true;
           //  this.newEmailAlert = true;
             this.otpField = true;
+            this.inValidOTP=true;
           }
         })
       ) 
