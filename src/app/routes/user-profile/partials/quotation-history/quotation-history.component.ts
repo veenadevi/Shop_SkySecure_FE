@@ -118,8 +118,7 @@ export class QuotationHistoryComponent implements OnInit {
 
   
 
-  
-
+ 
 
 
 
