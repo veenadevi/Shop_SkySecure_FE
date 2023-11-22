@@ -497,7 +497,7 @@ public inviteUsers( request : any): Observable<any> {
   //let url="http://localhost:2003/api/user/inviteuser"
 
   
-  let request$ = this.http.post(url, request)
+  let request$ = this.http.post(url, request,this.options)
     .pipe(
       map(response => {
         if (!response) {
