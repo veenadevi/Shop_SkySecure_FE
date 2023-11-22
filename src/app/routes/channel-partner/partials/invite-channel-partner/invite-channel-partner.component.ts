@@ -190,13 +190,7 @@ export class InviteChannelPartnerComponent {
     //  console.log("this.addAsAdmin===",this.addAsAdmin)
       this.CreateChannelPartnerUser();
 
-      // if(this.myForm.get('isAdmin').value){
       
-      //  console.log("cal to add as admin")
-      // }
-      // else{
-      // //  this.CreateChannelPartnerUser()
-      // }
     
     }
   }
@@ -252,6 +246,7 @@ export class InviteChannelPartnerComponent {
           this.showMsg=true
           this.duplicate=false
           this.myForm.reset();
+          location.reload();
        
       },
       

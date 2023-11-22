@@ -336,6 +336,7 @@ export class ManageAllChannelsComponent {
           this.showMsg=true
           this.duplicate=false
           this.myForm.reset();
+          location.reload();
        
       },
       
