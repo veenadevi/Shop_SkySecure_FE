@@ -66,6 +66,8 @@ export  class SignUpComponent  {
 
   public companyListArray : any;
 
+  public isCompanyError:boolean=false
+
   display: any;
   static isMobile: boolean;
 
@@ -92,14 +94,6 @@ export  class SignUpComponent  {
 
 
 
-
-  //   onSubmit01() {
-  //     // Handle OTP generation and sending here based on whether it's an email or mobile number.
-
-  //  //   const emailOrMobile = this.signupForm.get('emailOrMobile').value;
-
-  //   }
-
   
   ngOnInit(): void {
    
@@ -117,16 +111,15 @@ export  class SignUpComponent  {
     
     this.form = this.formBuilder.group(
       {
-        firstName: ['', Validators.required],
-
+        firstName: ['',Validators.required],
         email: [],
         lastName: [],
         password: [],
         confirmPassword: [],
 
-        companyName: [],
+        selectedCompanyName: ['',Validators.required],
         mobileNumber: ['', [
-          Validators.required,
+          
           Validators.pattern('^[6-9][0-9]{9}$'),
           Validators.maxLength(10)
         ]]
@@ -146,37 +139,46 @@ export  class SignUpComponent  {
   get f2(): { [key: string]: AbstractControl } {
     return this.formEmail.controls;
   }
-  // get f3(): { [key: string]: AbstractControl } {
-  //   return this.signupForm.controls;
-  // }
-  // onKeyDown(event: KeyboardEvent): void {
-  //   const key = event.key;
-  //   if (key === 'E') {
-  //     event.preventDefault();
-  //   }
-  // }
+  
 
 
  
 
 
   onSubmit(): void {
-
-    
-    
-
-    let finalCompnayName = (typeof(this.selectedCompanyName) === 'string') ? this.selectedCompanyName : this.selectedCompanyName.company;
-    
-    
     this.submitted = true;
+    
+    let finalCompanyName=""
 
-    if (this.form.invalid) { // If Invalid Return
+
+
+    
+    if( this.selectedCompanyName===undefined){
+     
+
+
       
+      this.isCompanyError=true
+     
+    }
+   
+  else{
+    finalCompanyName = (this.selectedCompanyName) ? this.selectedCompanyName : this.selectedCompanyName.company;
+    this.isCompanyError=false
+    
+  
+    
+  }
+    
+    
+
+   
+
+    if (this.form.invalid  && this.isCompanyError) { // If Invalid Return
+     
       return;
     }
-    else if(!finalCompnayName || finalCompnayName.length<=0){
-        return;
-    }
+  
     else { 
       
       let formValue = this.form.value;
@@ -187,7 +189,7 @@ export  class SignUpComponent  {
         "lastName": formValue.lastName,
         //"email": (!this.isMobile)?this.validatedEmail:formValue.email,
         "email": (!this.isMobile)?this.validatedEmail:formValue.email,
-        "company": finalCompnayName,
+        "company": finalCompanyName,
         "role": "Customer",
         "countryCode": "+91",
         "mobileNumber": (this.isMobile)?this.validatedEmail:formValue.mobileNumber,
@@ -257,6 +259,7 @@ export  class SignUpComponent  {
   }
 
   onReset(): void {
+    this.isCompanyError=false
     this.submitted = false;
     this.selectedCompanyName=""
     const mobilePattern = /^\d{10}$/;
@@ -371,7 +374,7 @@ export  class SignUpComponent  {
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
     let hashedPass = CryptoJS.AES.encrypt(this.otp, key).toString();
     
-    console.log("sendign data for signup",this.isMobile)
+   
     let req = {
     
       "emailId":(this.isMobile)?'':this.formEmail.value.emailOrMobile,

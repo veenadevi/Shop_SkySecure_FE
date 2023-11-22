@@ -151,17 +151,18 @@
           </div>
 
           <div class="form-group">
-            <label>First Name</label>
+            <label>First Name<span class="mandatory"> * </span></label>
             <input
               type="text"
               formControlName="firstName"
               placeholder="John"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+            
             />
-            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+          <!--[ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+             <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
               <div *ngIf="f.firstName.errors.required">Oops! You forgot to provide your First Name</div>
-            </div>
+            </div> -->
           </div>
       
           
@@ -201,17 +202,12 @@
           </div> -->
 
           <div class="form-group">
-            <label for="companyInput">Company Name</label>
-            <!-- <div class="custom-select">
-              <input class=""   type="text" id="companyInput" (ngModelChange)="onChange()"  placeholder="Your Company Name" [(ngModel)]="selectedCompany"   [ngModelOptions]="{standalone: true}">
-              <ul class="options" *ngIf="showOptions && selectedCompany.length>0" (click)="selectOption($event)">
-                <li *ngFor="let companyItem of companyListArray" >{{companyItem.company}}</li>
-              </ul>
-              
-              
-            </div> -->
+            <label for="companyInput">Company Name <span class="mandatory"> * </span></label>
+          
             <div class="card flex justify-content-center">
+             
               <p-autoComplete 
+               
                 [ngModelOptions]="{standalone: true}" 
                 [(ngModel)]="selectedCompanyName" 
                 [forceSelection]="false" 
@@ -221,8 +217,13 @@
                 [inputStyle]="{'width':'100%'}"
                 field="company">
               </p-autoComplete>
+             
+
+           
+              
             </div>
-          </div>
+          
+          </div>  
           
 
           <!-- Mobile Number-->
@@ -233,16 +234,16 @@
               formControlName="mobileNumber"
               placeholder="Enter your Whatsapp Number"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }"
+             
               maxlength="10" 
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               
               />
-            <div *ngIf="submitted && f.mobileNumber.errors" class="invalid-feedback">
+            <!-- <div *ngIf="submitted && f.mobileNumber.errors" class="invalid-feedback">
               <div *ngIf="f.mobileNumber.errors.required">Oops! You forgot to provide your Mobile Number.</div>
               <div *ngIf="form.controls.mobileNumber.errors.pattern">Mobile Number must start with 6, 7, 8, or 9 digits only.</div>
               
-            </div>
+            </div> -->
           </div> 
  
           
@@ -251,13 +252,18 @@
             <div *ngIf="isSignupError" class="new-email-alert">
               The Email or Mobile Number Already exists. Please Try Again. 
             </div>
-            <!-- <div *ngIf="isSignupError">
-              <div class="error-message">SignUp Failed! Please try again</div>
-            </div> -->
+
+            <!-- <div *ngIf="submitted && form.get('selectedCompanyName').hasError('required') " class="invalid-feedback">
+              <div>Please Enter CompanyName</div>
+            
+          </div> -->
+            <div *ngIf="isCompanyError">
+              <div class="error-message commonError">Please Fill Mandatory Fields</div>
+            </div>
             <div class="btns">
 
               <button (click)="onSubmit()" class="btn btn-primary">Register</button>
-            <button type="button" (click)="onReset()" class="btn btn-warning float-right" > Reset </button>
+              <button type="button" (click)="onReset()" class="btn btn-warning float-right" > Reset </button>
             </div>
             
           </div>
