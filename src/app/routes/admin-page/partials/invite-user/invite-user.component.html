@@ -1,31 +1,37 @@
 <div class="invite-container">
     <h1>Invite Customer</h1>
     <div class="invite-content">
-        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="myForm">
 
 
         <!-- GST integration -->
         <div *ngIf="showDefaultContent">
           <div class="row">
             <div class="col-sm-4 forms">
-              <label for="companyInput">Company Business Name<span class="mandatory">*</span></label>
-              <!-- <input formControlName="companyBusinessName" type="companyBusinessName" class="form-control-03"
+              <label for="companyInput">Company Business Name<span class="mandatory"> * </span></label>
+              <ng-container *ngIf="getGstCompany; else fromSGT">
+             
+              <input formControlName="companyBusinessName" type="companyBusinessName" class="form-control-03"
                   name="companyBusinessName" id="companyBusinessName" placeholder="Enter Company Name"
-                  required> -->
+                  >
+                </ng-container>
+                <ng-template #fromSGT>
                   <div class="form-control-03">
                     <p-autoComplete 
                       [ngModelOptions]="{standalone: true}" 
                       [(ngModel)]="selectedCompanyName" 
                       [forceSelection]="false" 
                       [suggestions]="companyListArray" 
-                      (completeMethod)="filterCompany($event)" 
+                      (completeMethod)="filterCompany($event)"  
                       [style]="{'width':'100%'}" 
                       [inputStyle]="{'width':'100%'}"
                       field="company"
                       placeholder="Enter your Company Name">
                     </p-autoComplete>
                   </div>
+                </ng-template>
           </div>
+        
      
             <div class="col-sm-4 forms">
               <label for="gstin">Enter GST</label>
@@ -66,7 +72,7 @@
                     id="address-1" placeholder="Locality/House/Street no.">
             </div>
             <div class="col-sm-4 forms">
-                <label for="address-2">Address Line-2<span class="mandatory">*</span></label>
+                <label for="address-2">Address Line-2<span class="mandatory"> * </span></label>
                 <input formControlName="addressLine2" type="address" class="form-control-01" name="address"
                     id="address-2" placeholder="Village/City Name." required>
             </div>
@@ -89,7 +95,7 @@
   
           <div class="row">
             <div class="col-sm-4 forms">
-                <label for="State">State<span class="mandatory">*</span></label>
+                <label for="State">State<span class="mandatory"> * </span></label>
                 <select formControlName="stateName" class="form-control-01" (change)="onStateChange($event)">
                     <ng-container *ngIf="gstData; else noGstDataState">
                         <option value="">{{gstResponseData.adress.state}}</option>
@@ -104,7 +110,7 @@
        
   
             <div class="col-sm-4 forms">
-                <label for="State">City<span class="mandatory">*</span></label>
+                <label for="State">City</label>
                 <select formControlName="cityName" class="form-control-01" (change)="onCityChange($event)">
                     <ng-container *ngIf="gstData; else noGstDataCity">
                         <option value="">{{gstResponseData.adress.city}}</option>
@@ -119,7 +125,7 @@
             <div class="col-sm-4 forms">
                 <label for="zip">Zip Code</label>
                 <input formControlName="postalCode" type="zip" class="form-control-01" name="Zip" id="zip"
-                    placeholder="Zip Code" required>
+                    placeholder="Zip Code" >
             </div>
         </div>
         </div>
@@ -131,7 +137,7 @@
       <div *ngIf="showAlternateContent">
         <div class="row">
           <div class="col-sm forms">
-            <label for="firstname">First Name<span class="mandatory">*</span></label>
+            <label for="firstname">First Name<span class="mandatory"> * </span></label>
             <input type="text" id="firstName" name="firstName" formControlName="firstName" placeholder="Enter  FirstName">
           </div>
           <div class="col-sm forms">
@@ -186,12 +192,18 @@
               <input type="text" id="reason" name="reason" formControlName="reason" placeholder="Enter the Reason">
             </div> -->
 
+            <div *ngIf="isDataError">
+              <div class="error-message commonError">Please Fill Mandatory Fields</div>
+            </div>
+            <div *ngIf="contactError">
+              <div class="error-message commonError">Please Fill either Email or Phone  Number </div>
+            </div>
             <div class="button">
               <ng-container *ngIf="showAlternateContent === true">
                 <button  class="btn secondary-btn" (click)="showDefault()">Back</button>
               </ng-container>
 
-              <button class="btn primary-btn" *ngIf="showAlternateContent === true" type="submit" [disabled]="myForm.invalid">Submit</button>
+              <button class="btn primary-btn" *ngIf="showAlternateContent === true" (click)="onSubmit()" [disabled]="myForm.invalid">Submit</button>
              
             <ng-container *ngIf="showDefaultContent === true">
               <button class="btn secondary-btn" (click)="showAlternate()">Next</button>

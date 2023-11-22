@@ -43,6 +43,12 @@ export class InviteUserComponent {
   public myCustomers : any;
   selectedCompany: string;
   showOptions: boolean = false;
+   companyValue:any
+
+
+  getGstCompany:boolean=false;
+  isDataError:boolean=false
+  contactError:boolean=false
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -52,11 +58,11 @@ export class InviteUserComponent {
     private adminPageService : AdminPageService,
     ) {
     this.myForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.email]],
       mobile: ['', [ 
         Validators.pattern(/^(\+\d{1,3})?\d{10}$/) // Country code (optional) + 10 digits
       ]],
-      firstName : [''],
+      firstName : ['',Validators.required],
       lastName : [''],
       companyName : [''],
       reason : [''],
@@ -147,6 +153,7 @@ public fetchGST(){
  // console.log("_+_+_+_+_+ GST Data ", this.myForm.value.gstin.length )
 
   if(this.myForm.value.gstin.length === 15){
+    this.getGstCompany=true
 
     // this.myForm.controls['companyName'].disable();
     // this.myForm.controls['addressLine1'].disable();
@@ -181,6 +188,7 @@ public fetchGST(){
       // this.myForm.controls['companyName'].setValue(res['legal-name'] ? res['legal-name'] : null);
       
       this.myForm.controls['companyBusinessName'].setValue(res['legal-name'] ? res['legal-name'] : null);
+      this.selectedCompanyName=res['legal-name'] ? res['legal-name'] : null;
       this.myForm.controls['addressLine1'].setValue(res.adress.floor ? res.adress.floor : null);
       this.myForm.controls['addressLine2'].setValue(res.adress.street ? res.adress.street : null);
       this.myForm.controls['postalCode'].setValue(res.adress.pincode ? res.adress.pincode : null);
@@ -221,9 +229,29 @@ public fetchGST(){
 }
 
   onSubmit() {
-    let finalCompnayName = (typeof(this.selectedCompanyName) === 'string') ? this.selectedCompanyName : this.selectedCompanyName.company;
     
-    if (this.myForm.valid) {
+    let finalCompnayName=""
+
+    if( this.selectedCompanyName===undefined){
+  
+     
+    }
+   
+  else{
+    finalCompnayName = (this.selectedCompanyName) ? this.selectedCompanyName : this.selectedCompanyName.company;
+  }
+    //finalCompnayName = (typeof(this.selectedCompanyName) === 'string') ? this.selectedCompanyName : this.selectedCompanyName.company;
+    
+
+    let isMobileOREmail= this.myForm.get('mobile').value.length>0 || this.myForm.get('email').value.length>0
+
+  
+    if(!isMobileOREmail){
+      this.contactError=true
+      return
+    }
+    else if (this.myForm.valid) {
+      this.contactError=false
 
       let formData = this.myForm.value;
      // console.log("this.myForm.get('triggeremail').value===",formData.isZohoCustomer)
@@ -234,7 +262,7 @@ public fetchGST(){
         "email": formData.email,
         // "company": formData.companyBusinessName,
       
-        "company": formData.finalCompnayName,
+        "company":this.companyValue,
         //"role": "User",
          "countryCode": "+91",
         "mobileNumber": formData.mobile,
@@ -249,7 +277,9 @@ public fetchGST(){
               ],
         //"isRegistered":false,
         "isCustomer":formData.isZohoCustomer?formData.isZohoCustomer:false,
-        "companyName": formData.companyName,
+        "companyBusinessName": this.companyValue,
+        //formData.companyBusinessName?formData.companyBusinessName:formData.finalCompnayName,
+
         "gstinNumber":formData.gstin?formData.gstin:"",
         // "inviteReason":formData.reason,
         "inviteReason":"newUserInvite",
@@ -258,17 +288,19 @@ public fetchGST(){
         "sendEmail":formData.triggeremail?formData.triggeremail:false
       }
 
-     // console.log("request===",request)
+    
       this.subscription.push(
         this.adminPageService.inviteUsers(request).subscribe(res=>{
          // console.log("+_+_+_ Res ", res);
+     
           this.showMsg=true;
-          this.myForm.reset();
+        //  this.myForm.reset();
           window.location.reload();
         })
       )
+    
 
-      //console.log('Form submitted:', this.myForm.value);
+     // console.log('Form submitted:',request);
     }
     else if(!finalCompnayName || finalCompnayName.length<=0){
       return;
@@ -319,8 +351,36 @@ public fetchGST(){
   }
   
   showAlternate() {
-    this.showDefaultContent = false;
-    this.showAlternateContent = true;
+    let formData = this.myForm.value;
+   
+   
+    if( this.selectedCompanyName===undefined){
+  
+      this.companyValue  =formData.companyBusinessName.length>0?formData.companyBusinessName:''
+    }
+   
+  else{
+    this.companyValue = (this.selectedCompanyName) ? this.selectedCompanyName : this.selectedCompanyName.company;
+  }
+
+
+    // console.log("formData.companyBusinessName  ",formData.companyBusinessName)
+    //  companyValue=!formData.companyBusinessName?formData.companyBusinessName:formData.finalCompnayName
+   
+   
+    if(  this.companyValue===undefined|| formData.addressLine2.length==0 || (this.selectedState===undefined)){
+    
+      this.showDefaultContent = true;
+      this.showAlternateContent = false; 
+      this.isDataError=true
+    }
+ else{
+
+  this.isDataError=false
+  this.showDefaultContent = false;
+  this.showAlternateContent = true;
+ }
+   
   }
 
 

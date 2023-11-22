@@ -149,25 +149,25 @@ export class SignUpComponent {
   onSubmit(): void {
     this.isCompanyError = false
 
-    console.log("this.form.invalid   ",this.form.invalid)
+   // console.log("this.form.invalid   ",this.form.invalid)
     this.submitted = true;
 
     let finalCompanyName = ""
 
 
-    console.log("this.selectedCompanyName   ",this.selectedCompanyName)
+   // console.log("this.selectedCompanyName   ",this.selectedCompanyName)
 
     if ( this.selectedCompanyName === undefined) {
 
 
-     console.log("inside first if")
+   //  console.log("inside first if")
 
       this.isCompanyError = true
 
     }
     else if(typeof this.selectedCompanyName === "string"){
 
-      console.log("inside 1st else")
+     // console.log("inside 1st else")
       if(this.selectedCompanyName.length>0){
         finalCompanyName=this.selectedCompanyName
         this.isCompanyError = false
@@ -184,7 +184,7 @@ export class SignUpComponent {
       finalCompanyName = this.selectedCompanyName.company
     //  this.isCompanyError = false
 
-    console.log("this.form.invalid  ",this.form.invalid)
+    //console.log("this.form.invalid  ",this.form.invalid)
 
       if(finalCompanyName.length!<0){
         this.isCompanyError = true
