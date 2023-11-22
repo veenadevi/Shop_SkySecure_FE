@@ -247,13 +247,14 @@ export  class SignUpComponent  {
        
         this.isResend=true
         clearInterval(this.timerInterval);
-
+          
         this.otpField = false;
        
         this.enableSignInButton = false;
             this.enableOTPButton = true;
 
         clearInterval(this.timerInterval);
+        this.inValidOTP=false;
       }
     }, 1000);
   }
