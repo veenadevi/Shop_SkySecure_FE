@@ -1104,4 +1104,12 @@ featureCount=5;
         element.unsubscribe();
     });
   }
+
+ 
+  writeReview(){ 
+        this.router.navigate([`/review-page/review-detail-page/${this.product._id}`], {
+          queryParams: { productName: this.product.name}        
+        });  
+       // console.log("ProductName",this.product.name)      
+  }
 }
