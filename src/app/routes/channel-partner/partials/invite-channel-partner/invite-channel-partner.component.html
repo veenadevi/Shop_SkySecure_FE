@@ -11,8 +11,8 @@
                     <select class="custom-select " (change)="changeChannelList($event)"
                         formControlName="channelPartner">
                         <option value="">Choose...</option>
-                        <option *ngFor="let channel of myChannels" [value]="channel._id">
-                            {{channel.name}}
+                        <option *ngFor="let channel of myChannels" [value]="channel.channelPartnerMaster._id">
+                            {{channel.channelPartnerMaster.name}} 
                         </option>
                     </select>
 
@@ -23,106 +23,147 @@
                 </div>
             </div>
 
-            <div class="radio-btn">
-                <!-- <div class="btn-cont"> -->
-                <div class="content-select">
-                    <input type="checkbox" formControlName="isAdmin" class="form-check d-inline" id="chb">
-                    <div for="chb" class="form-check-label">
-                        <h4 class="radio-style">Add as Admin?</h4>
-                    </div>
-                </div>
-
-                <div class="content-select">
-                    <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}"
-                        [(ngModel)]="addAdminOption" value="new" inputId="ingredient1"></p-radioButton>
-                    <label for="ingredient1" class="ml-2">
-                        <h4 class="radio-style">Add New User</h4>
-                    </label>
-                </div>
-
-                <div class="content-select">
-                    <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}"
-                        [(ngModel)]="addAdminOption" value="existing" inputId="ingredient2"></p-radioButton>
-                    <label for="ingredient2" class="ml-2">
-                        <h4 class="radio-style">Add Existing User</h4>
-                    </label>
-                </div>
-                <!-- </div> -->
+            <div *ngIf="selectedAccountManagers.length>0">
+                <span class="font-14"> Channel users</span>
+            
+                <div class="card">
+                    <p-table [value]="selectedAccountManagers" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="false"
+                        [rows]="15" [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Channel Name</th>
+                                <th>Email ID</th>
+                                <th>Mobile Number</th>
+                                <th>Role</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-accountManager let-i="rowIndex">
+                            <tr>
+                                <td>{{ accountManager.firstName }}</td>
+                                <td>{{ accountManager.email }}</td>
+                                <td>{{ accountManager.mobileNumber }}</td>
+                                <td>{{ accountManager.role }}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+            
+                </div> 
+            
             </div>
-            <!-- <ng-container *ngIf="(addAdminOption === 'new') ; else existingUserTemplate"> -->
-            <ng-container>
-                <div class="address-row">
-                    <ng-container *ngIf="(addAdminOption === 'new'); else userSelect">
-                        <div class="col-sm-6 form-group">
-                            <label for="userName">FirstName</label>
-                            <input formControlName="userName" type="address" class="form-control-01" name="userName"
-                                id="userName" placeholder="Enter FirstName" required>
-                        </div>
-                    </ng-container>
-                    <ng-template #userSelect>
-                        <div class="label">
+            
 
-                        </div>
-                        <div class="col-sm-6 form-group  d-flex align-item-center flex-column">
-                            <label>Select User</label>
+          
 
-                            <select class="custom-select" (change)="onDropDownChange($event)">
-
-                                <option value="">--Select User--</option>
-                                <option *ngFor="let user of usersList" [value]="user._id">{{user.firstName}}</option>
-                            </select>
-
-
-
-
-                        </div>
-                    </ng-template>
-
-                    <div class="col-sm-6 form-group">
-                        <label for="address-2">Email Id</label>
-                        <input formControlName="EmailId" type="address" class="form-control-01" name="EmailId"
-                            id="address-2" placeholder="Enter EmailId" required>
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <label>Mobile No.</label>
-                        <input formControlName="phoneNo" type="number" class="form-control-01" name="phoneNo"
-                            id="phoneNo" placeholder="Enter Phone Number" >
-                    </div>
+            <div>
+                <div>
+                    
                 </div>
-            </ng-container>
-
-            <div *ngIf="submitErrorMessage">
-                <p class="error">* Please Fill Mandatory fileds like Name and Admin users</p>
-            </div>
-            <div class="modal-footer">
+                <div>
+                    <!-- <label for="">Add New user</label> -->
+                    <h4 class="addNewuser   mt-4 mb-0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add New user</h4>
+                </div>
+                <div class="radio-btn"> 
+                    <div class="content-select">
+                        <input type="checkbox" formControlName="isAdmin" class="form-check d-inline" id="chb">
+                        <div for="chb" class="form-check-label">
+                            <h4 class="radio-style">Add as Admin?</h4>
+                        </div>
+                    </div>
+    
+                    <div class="content-select">
+                        <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="addAdminOption" value="new" inputId="ingredient1"></p-radioButton>
+                        <label for="ingredient1" class="ml-2">
+                            <h4 class="radio-style">Add New User</h4>
+                        </label>
+                    </div>
+    
+                    <div class="content-select">
+                        <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="addAdminOption" value="existing" inputId="ingredient2"></p-radioButton>
+                        <label for="ingredient2" class="ml-2">
+                            <h4 class="radio-style">Add Existing User</h4>
+                        </label>
+                    </div>
+                    <!-- </div> -->
+                </div>
+                <!-- <ng-container *ngIf="(addAdminOption === 'new') ; else existingUserTemplate"> -->
                 <ng-container>
-                    <button onclick="history.back()" class="backBtnDiv mr-4 btn secondary-btn">
-                        Go Back
-                    </button>
-                    <button class="btn  primary" (click)="submitForm()">Invite User</button> 
-                    <!-- <div onclick="history.back()" class="backBtnDiv ml-4">
-                        <img src="../../../../assets/icons/arrow-right.svg" class="backBtn">Go Back
-                    </div>  -->
+                    <div class="address-row">
+                        <ng-container *ngIf="(addAdminOption === 'new'); else userSelect">
+                            <div class="col-sm-6 form-group">
+                                <label for="userName">FirstName</label>
+                                <input formControlName="userName" type="address" class="form-control-01" name="userName"
+                                    id="userName" placeholder="Enter FirstName" required>
+                            </div>
+                        </ng-container>
+                        <ng-template #userSelect>
+                            <div class="label">
+    
+                            </div>
+                            <div class="col-sm-6 form-group  d-flex align-item-center flex-column">
+                                <label>Select User</label>
+    
+                                <select class="custom-select" (change)="onDropDownChange($event)">
+    
+                                    <option value="">--Select User--</option>
+                                    <option *ngFor="let user of usersList" [value]="user._id">{{user.firstName}}</option>
+                                </select>
+    
+    
+    
+    
+                            </div>
+                        </ng-template>
+    
+                        <div class="col-sm-6 form-group">
+                            <label for="address-2">Email Id</label>
+                            <input formControlName="EmailId" type="address" class="form-control-01" name="EmailId"
+                                id="address-2" placeholder="Enter EmailId" required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Mobile No.</label>
+                            <input formControlName="phoneNo" type="number" class="form-control-01" name="phoneNo"
+                                id="phoneNo" placeholder="Enter Phone Number" >
+                        </div>
+                    </div>
                 </ng-container>
-            </div>
-
-            <div class="row" *ngIf="showMsg">
-                <div class="col-xs-12">
-                    <p class="alert alert-success">
-                        <strong>Channal Partner User Added Successfully !</strong>
-
-                    </p>
+    
+                <div *ngIf="submitErrorMessage">
+                    <p class="error">* Please Fill Mandatory fileds like Name and Admin users</p>
+                </div>
+                <div class="modal-footer">
+                    <ng-container>
+                        <button onclick="history.back()" class="backBtnDiv mr-4 btn secondary-btn">
+                            Go Back
+                        </button>
+                        <button class="btn  primary" (click)="submitForm()">Invite User</button> 
+                        <!-- <div onclick="history.back()" class="backBtnDiv ml-4">
+                            <img src="../../../../assets/icons/arrow-right.svg" class="backBtn">Go Back
+                        </div>  -->
+                    </ng-container>
+                </div>
+    
+                <div class="row" *ngIf="showMsg">
+                    <div class="col-xs-12">
+                        <p class="alert alert-success">
+                            <strong>Channal Partner User Added Successfully !</strong>
+    
+                        </p>
+                    </div>
+                </div>
+    
+                <div class="row" *ngIf="duplicate">
+                    <div class="col-xs-12">
+                        <p class="alert alert-danger">
+                            <strong>Channal Partner User Already Assigned !</strong>
+    
+                        </p>
+                    </div>
                 </div>
             </div>
-
-            <div class="row" *ngIf="duplicate">
-                <div class="col-xs-12">
-                    <p class="alert alert-danger">
-                        <strong>Channal Partner User Already Assigned !</strong>
-
-                    </p>
-                </div>
-            </div>
+           
         </form>
     </div>
 </div>

@@ -150,8 +150,8 @@ export class ReviewDetailPageComponent {
 
 
     //console.log("review payload ====on click previous ",this.reviewPayload,"setting con trolvaluye" ,this.reviewPayload.reviewTitle)
-    this.reviewForm.get('reviewTitle').setValue(this.reviewPayload.reviewTitle.length>0 ? this.reviewPayload.reviewTitle : 'veena');  
-    this.reviewForm.get('reviewContent').setValue(this.reviewPayload?.reviewContent.length>0 ? this.reviewPayload?.reviewContent : 've');  
+    this.reviewForm.get('reviewTitle').setValue(this.reviewPayload.reviewTitle.length>0 ? this.reviewPayload.reviewTitle : '');  
+    this.reviewForm.get('reviewContent').setValue(this.reviewPayload?.reviewContent.length>0 ? this.reviewPayload?.reviewContent : '');  
     this.reviewForm.patchValue(this.reviewPayload);
     this.text01=this.reviewPayload.reviewTitle;
     this.text=this.reviewPayload.reviewContent;
