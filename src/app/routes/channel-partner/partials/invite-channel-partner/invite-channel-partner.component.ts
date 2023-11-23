@@ -66,7 +66,7 @@ export class InviteChannelPartnerComponent {
     this.myForm = this.fb.group({
       channelPartner: [''],
       userName: ['', [Validators.required, Validators.required]],
-      EmailId: ['', [Validators.required, Validators.email]],
+      EmailId: ['', [ Validators.email]],
       phoneNo: ['', [Validators.pattern(/^\d{10}$/)]],
       isAdmin:[''],
 

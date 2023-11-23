@@ -1,5 +1,5 @@
 .user-container {
-    min-height: 100vh;
+    min-height: 70vh;
 }
 
 .partner-container{
@@ -51,9 +51,10 @@ h4{
 .address-row{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 90%;
     justify-content: space-evenly;
-    padding: 10px 0 10px 0;
+    padding: 10px 0 30px 0;
+    margin-left: 7%;
 }
 .col-sm-6 {
     flex: 0 0 auto;
@@ -129,6 +130,7 @@ select{
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+    padding-bottom: 25px;
 }
 
 element.style {
@@ -165,6 +167,7 @@ element.style {
   .error{
     color: red;
     text-align: center;
+    font-size: 13px;
     /* padding: 20px; */
 }
 
@@ -234,4 +237,46 @@ justify-content: center;
     text-align: left;
     padding: 0.5rem 0.5rem;
     font-size: 13px;
+}
+
+
+.user-invite-card{
+    background: #f7f7f9;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.oldUsers{
+    background-color: #f7f7f9;;
+}
+h1{
+    text-align: center;
+    font-size: 14px;
+    padding-top: 10px;
+}
+:host ::ng-deep.p-radiobutton {
+    width: 18px;
+    height: 16px;
+}
+:host ::ng-deep.p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
+    width: 8px;
+    height: 8px;
+    transition-duration: 0.2s;
+    background-color: #ffffff;
+}
+
+
+:host ::ng-deep.p-radiobutton .p-radiobutton-box.p-highlight {
+    border-color: #3f51b5;
+    background: #3f51b5;
+}
+:host ::ng-deep.p-radiobutton .p-radiobutton-box {
+    border: 2px solid #ced4da;
+    background: #ffffff;
+    width: 16px;
+    height: 16px;
+    color: #495057;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }

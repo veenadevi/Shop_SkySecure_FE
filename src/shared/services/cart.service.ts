@@ -17,6 +17,7 @@ import { UserCartRequest } from '../models/interface/request/user-cart.request';
 import { UserCartRequestModel } from '../models/concrete/user-cart.model';
 import { CartStore } from '../stores/cart.store';
 import * as CryptoJS from 'crypto-js';
+const qs = require('qs');
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
@@ -171,6 +172,8 @@ export class CartService {
 
     const URL = this.baseUrl + this.createQuotationUrl;
 
+   // const URL = 'http://localhost:8080/api/user/createQuotation'
+
   //   let request = {
   //     companyName: "TestAltsys_new",
   //     userId : "640c46225cd0c77a80ce3e03",
@@ -283,6 +286,33 @@ export class CartService {
 
     return REQUEST$;
   }
+  public trackOrderStatus(req){
+
+        //let url = `${this.baseUrl}api/orders/encryptForCCAvenue`;
+        let url = "http://localhost:8080/api/orders/getStatusResponse";
+        
+
+      
+        
+    
+    
+        let request$ = this.http.post<Observable<any>>(url, req)
+        .pipe(
+          map(response => {
+            if (!response) {
+              console.log("+_+_+_+_+_+ Vaklue here", response);
+              return null;
+              
+            }
+            return response;
+          }),
+        ); 
+    
+        return request$;
+        
+
+    
+  }
 
   public getOrderStatus(req){
 
@@ -297,7 +327,7 @@ export class CartService {
         
 
         //var testUrl = "https://apitest.ccavenue.com/apis/servlet/DoWebTrans?command=orderStatusTracker&version=1.2&request_type=JSON&response_type=JSON&access_code=";
-        //var testUrl = "https://test.ccavenue.com/apis/servlet/DoWebTrans";
+     // var testUrl = "https://test.ccavenue.com/apis/servlet/DoWebTrans";
 
 
         var testUrl = "https://apitest.ccavenue.com/apis/servlet/DoWebTrans?command=orderStatusTracker&version=1.2&request_type=JSON&response_type=JSON&access_code=AVEI22KJ67BJ07IEJB&enc_request="+req;
@@ -316,7 +346,7 @@ export class CartService {
         let testReq = {}
 
         let options = this.getOptions();
-        let request$ = this.http.get<Observable<any>>(testUrl, options)
+        let request$ = this.http.post<Observable<any>>(testUrl,reqBody)
         .pipe(
           map(response => {
             if (!response) {
@@ -325,20 +355,20 @@ export class CartService {
             return response;
           }),
         ); 
-    
+    console.log("===request from webdransw==",request$)
         return request$;
   }
 
   public encryptForCCAvenue(req){
         
-        let url = `${this.baseUrl}api/orders/encryptForCCAvenue`;
-       // let url = "http://localhost:8080/api/orders/encryptForCCAvenue";
+        //let url = `${this.baseUrl}api/orders/encryptForCCAvenue`;
+        let url = "http://localhost:8080/api/orders/encryptForCCAvenue";
         
 
        // Request for sending CCAVenue Data for Order Numbet and Tracking Id
         let request = {
-          "reference_no": 312010595715, 
-          "order_no": 101091,
+          "reference_no": 312010606393, 
+          "order_no": 101125,
         }
         
     
