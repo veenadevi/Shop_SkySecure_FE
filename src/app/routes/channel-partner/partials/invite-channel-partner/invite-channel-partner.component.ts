@@ -212,7 +212,7 @@ export class InviteChannelPartnerComponent {
 
         this.addChannelPartnerUserPayLoad = {
    
-          channelPartnerId:this.currentChannelId,
+          channelPartnerId:this.channelPartnerId,
           firstName:channelPartnerData.userName,
           lastName:'',
           email:channelPartnerData.EmailId,
