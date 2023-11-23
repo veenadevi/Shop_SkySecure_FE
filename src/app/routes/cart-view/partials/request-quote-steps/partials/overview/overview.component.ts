@@ -283,24 +283,24 @@ export class OverviewComponent implements OnInit{
   //   )
   // )
 
-  public buyNow(){
+  // public buyNow(){
 
 
-   this.receiveOrderStatus()
-  //this.checkout();
+  //  this.receiveOrderStatus()
+  // //this.checkout();
 
-  }
+  // }
 
-  public receiveOrderStatus(){
-    this.subscriptions.push(
-      this.cartService.encryptForCCAvenue(null).subscribe(res=>{
-       console.log("++++)))))) Res", res);
-        this.cartService.trackOrderStatus(res).subscribe(res=>{
-        console.log("+_+_+_ ))))))))))) Further Response ", res)
-        })
-      })
-    )
-  }
+  // public receiveOrderStatus(){
+  //   this.subscriptions.push(
+  //     this.cartService.encryptForCCAvenue(null).subscribe(res=>{
+  //      console.log("++++)))))) Res", res);
+  //       // this.cartService.trackOrderStatus(res).subscribe(res=>{
+  //       // console.log("+_+_+_ ))))))))))) Further Response ", res)
+  //       // })
+  //     })
+  //   )
+  // }
 
   public encRequestRes : any;
   public accessCode = "AVEI22KJ67BJ07IEJB";
