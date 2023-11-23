@@ -237,7 +237,7 @@ label {
   }
  
   :host ::ng-deep.p-datatable .p-datatable-thead > tr > th {
-    text-align: center;
+    text-align: left;
     padding: 0.5rem 0.5rem;
     border: 1px solid #dee2e6;
     border-width: 0 0 1px 0;
@@ -253,7 +253,7 @@ label {
    
     padding: 0.5rem 0.5rem;
     font-size: 13px;
-    text-align: center;
+    text-align: left;
 }
 .font-14{
     font-size: 14px;
@@ -261,5 +261,5 @@ label {
 .addNewuser{
     text-align: left;
     padding-top:25px;
-    font-size: 13px;
+    font-size: 14px;
 }

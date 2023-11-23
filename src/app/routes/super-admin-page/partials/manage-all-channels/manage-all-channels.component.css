@@ -218,7 +218,7 @@ justify-content: center;
   }
 
   :host ::ng-deep.p-datatable .p-datatable-thead > tr > th {
-    text-align: center;
+    text-align: left;
     padding: 0.5rem 0.5rem;
     border: 1px solid #dee2e6;
     border-width: 0 0 1px 0;
@@ -231,7 +231,7 @@ justify-content: center;
 
 
 :host ::ng-deep.p-datatable .p-datatable-tbody > tr > td {
-   
-    padding: 1rem 1rem;
+    text-align: left;
+    padding: 0.5rem 0.5rem;
     font-size: 13px;
 }
