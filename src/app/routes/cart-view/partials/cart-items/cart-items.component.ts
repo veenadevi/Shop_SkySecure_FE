@@ -1,3 +1,4 @@
+import { isFakeTouchstartFromScreenReader } from '@angular/cdk/a11y';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
@@ -63,6 +64,8 @@ export class CartItemsComponent {
   public monthlyItemsGrandTotal=0
   public   yearlyItemsGrandTotal=0
   public errortext:string;
+
+  enableSave:boolean=false
 
 
 
@@ -333,9 +336,17 @@ public cartData : any[] = [];
 
   }
 public onChangeQuantity(i, price) : void {
- 
+  this.enableSave =false
+  this.cartData[i].errortext=""
   this.cartData[i].quantity = Number(this.cartData[i].quantity)
   this.cartData[i].itemTotal = this.cartData[i].quantity * price;
+
+  console.log("this.cartData[i].quantity   =====",this.cartData[i].quantity)
+ if(this.cartData[i].quantity==0){
+    console.log("enetred 0000")
+    this.enableSave =true
+    this.cartData[i].errortext="Quantity cannot be 0"
+  }
   this.calTotalPrice();
   //this.saveCart();
   
@@ -344,7 +355,7 @@ public onChangeQuantity(i, price) : void {
 
   public quantityEdit(i, opr, price) : void {
 
-
+    this.enableSave =false
     if(opr === 'plus'){
       this.cartData[i].errortext=""
       this.cartData[i].quantity = Number(this.cartData[i].quantity) + 1;
