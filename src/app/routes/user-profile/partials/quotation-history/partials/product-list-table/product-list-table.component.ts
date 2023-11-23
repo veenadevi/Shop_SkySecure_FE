@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { UploadpoModalComponent } from 'src/shared/components/modals/uploadpo-modal/uploadpo-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'product-list-table',
@@ -76,7 +77,8 @@ export class ProductListTableComponent {
   constructor(
     private fb: FormBuilder,
     private cartService: CartService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private userAccountStore: UserAccountStore,
   ) { }
 
 
@@ -403,7 +405,7 @@ export class ProductListTableComponent {
 
   public saveChanges() {
 
-
+   
 
 
     let request = this.setRequestData();
@@ -420,11 +422,13 @@ export class ProductListTableComponent {
   }
 
   public setRequestData() {
+    let userAccountdetails = this.userAccountStore.getUserDetails();
 
 
 
     let assignTo = this.crmData.assignTo;
     let createdBy = this.crmData.createdBy;
+    let updatedBy = userAccountdetails._id;
     let cartData = this.crmData.cartData;
     let zohoBookContactData = this.crmData.zohoBookContactData;
     let zohoCRMAccountData = this.crmData.zohoCRMAccountData;
@@ -435,6 +439,7 @@ export class ProductListTableComponent {
     let req = {
       "userId": this.cartData.userId,
       "createdBy": createdBy._id ? createdBy._id : '',
+      "updatedBy":updatedBy,
       "products": prdArray,
       /*"products": [
           {

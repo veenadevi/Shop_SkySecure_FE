@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute ,Router} from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PrimeNGConfig } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
@@ -36,7 +37,8 @@ export class QuotationSummaryComponent {
     private route : ActivatedRoute,
     private router: Router,
     private superAdminService : SuperAdminService,
-    private primengConfig: PrimeNGConfig
+    private primengConfig: PrimeNGConfig,
+    public spinner: NgxSpinnerService
   ){}
 
 
@@ -56,7 +58,7 @@ export class QuotationSummaryComponent {
 
   public getLeadSummary(data){
 
-
+    this.spinner.show(); 
     this.subscriptions.push(
       this.superAdminService.getLeadSummaryDetails(data).subscribe(res=>{
        // console.log("+_+_+_C Data After Click", res.zohoBookEstimateData);
@@ -67,7 +69,7 @@ export class QuotationSummaryComponent {
         this.contactsData = res.zohoBookContactData?res.zohoBookContactData:null
 
       //  console.log("cartDetailsData  ",this.cartData)
-
+      this.spinner.hide();   
       })
     )
   }
