@@ -45,7 +45,10 @@ export class InviteChannelPartnerComponent {
   public currentChannelId:string;
   public duplicate:boolean=false
   public addAsAdmin:boolean=false
-
+  public selectedAccountManagers: any[] = [];
+  selectedValue:any;
+  channelPartnerId:any;
+  selectedChannelPartner:any;
   users = [
     { id: 1, name: 'User 1' },
     { id: 2, name: 'User 2' },
@@ -63,7 +66,7 @@ export class InviteChannelPartnerComponent {
     this.myForm = this.fb.group({
       channelPartner: [''],
       userName: ['', [Validators.required, Validators.required]],
-      EmailId: ['', [Validators.required, Validators.email]],
+      EmailId: ['', [ Validators.email]],
       phoneNo: ['', [Validators.pattern(/^\d{10}$/)]],
       isAdmin:[''],
 
@@ -77,6 +80,7 @@ export class InviteChannelPartnerComponent {
     let userAccountdetails = this.userAccountStore.getUserDetails();
     this.userId = userAccountdetails._id;
     this.getMyChannelList();
+    this.getChannelPartnerUsers(this.selectedValue);
   }
 
 
@@ -127,15 +131,40 @@ export class InviteChannelPartnerComponent {
     this.myChannels.forEach(category => {
       cpMap.set(category._id.toString(), category);
     });
-    const selectedChannelPartner = cpMap.get(selectedValue);
-   // console.log("selectedCategory  " + selectedChannelPartner._id)
-    this.currentChannelId=selectedChannelPartner._id
-
+    this.selectedChannelPartner = cpMap.get(selectedValue);
+    console.log("selectedCategory  " , this.selectedChannelPartner._id)
+    this.channelPartnerId=this.selectedChannelPartner._id;
+    this.getChannelPartnerUsers(this.channelPartnerId);
+    console.log("this.channelPartnerId= ",this.channelPartnerId)
 
 
 
   }
+ 
+  getChannelPartnerUsers(channelPartnerId: any) {
+    this.selectedAccountManagers =[]
+    
+    const selectedChannel = this.myChannels.find(channel => channel._id === channelPartnerId);
+   
+    console.log(this.myChannels,"this.myChannels") 
+   
+    if (selectedChannel) { 
+      selectedChannel.adminUsers.forEach(item => {
+        item.role = "Channel Partner Admin";
+      }); 
 
+      selectedChannel.channelParterAccountManager.forEach(item => {
+        item.role = "Account Manager";
+      });
+  
+      this.selectedAccountManagers = [... selectedChannel.adminUsers, ...selectedChannel.channelParterAccountManager];
+  
+    } else {
+   
+       this.selectedAccountManagers = [];
+    }
+  }
+ 
   public getUsersList() {
     this.subscription.push(
       this.adminPageService.getAllusers().subscribe(res => {
@@ -145,7 +174,8 @@ export class InviteChannelPartnerComponent {
     )
   }
 
-
+ 
+  
   public submitForm() {
     if (this.myForm.invalid) {
       this.submitErrorMessage = true;
@@ -160,13 +190,7 @@ export class InviteChannelPartnerComponent {
     //  console.log("this.addAsAdmin===",this.addAsAdmin)
       this.CreateChannelPartnerUser();
 
-      // if(this.myForm.get('isAdmin').value){
       
-      //  console.log("cal to add as admin")
-      // }
-      // else{
-      // //  this.CreateChannelPartnerUser()
-      // }
     
     }
   }
@@ -188,7 +212,7 @@ export class InviteChannelPartnerComponent {
 
         this.addChannelPartnerUserPayLoad = {
    
-          channelPartnerId:this.currentChannelId,
+          channelPartnerId:this.channelPartnerId,
           firstName:channelPartnerData.userName,
           lastName:'',
           email:channelPartnerData.EmailId,
@@ -222,6 +246,7 @@ export class InviteChannelPartnerComponent {
           this.showMsg=true
           this.duplicate=false
           this.myForm.reset();
+          location.reload();
        
       },
       

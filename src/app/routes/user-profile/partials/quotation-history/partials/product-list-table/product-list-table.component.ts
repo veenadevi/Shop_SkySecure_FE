@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { UploadpoModalComponent } from 'src/shared/components/modals/uploadpo-modal/uploadpo-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
+import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 @Component({
   selector: 'product-list-table',
@@ -76,7 +77,8 @@ export class ProductListTableComponent {
   constructor(
     private fb: FormBuilder,
     private cartService: CartService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private userAccountStore: UserAccountStore,
   ) { }
 
 
@@ -403,11 +405,11 @@ export class ProductListTableComponent {
 
   public saveChanges() {
 
-
+   
 
 
     let request = this.setRequestData();
-    //console.log("+_+_+_+_+_ Res Data ", request);
+  // console.log("+_+_+_+_+_ edit qupte Data ", request);
 
     this.subscription.push(
       this.cartService.editQuotation(request).subscribe(res => {
@@ -420,11 +422,13 @@ export class ProductListTableComponent {
   }
 
   public setRequestData() {
+    let userAccountdetails = this.userAccountStore.getUserDetails();
 
 
 
     let assignTo = this.crmData.assignTo;
     let createdBy = this.crmData.createdBy;
+    let updatedBy = userAccountdetails._id;
     let cartData = this.crmData.cartData;
     let zohoBookContactData = this.crmData.zohoBookContactData;
     let zohoCRMAccountData = this.crmData.zohoCRMAccountData;
@@ -435,6 +439,7 @@ export class ProductListTableComponent {
     let req = {
       "userId": this.cartData.userId,
       "createdBy": createdBy._id ? createdBy._id : '',
+      "updatedBy":updatedBy,
       "products": prdArray,
       /*"products": [
           {
@@ -532,22 +537,25 @@ export class ProductListTableComponent {
       }
       else {
 
-    
+    //console.log("cominf for new products====")
 
         let item = this.newlyAddedAppList.find(x => x._id + 'temp' === element.value.line_items_id);
-  
+        var priceIndex=0
 
         if (item) {
+          if(element.value.priceType==='Month'){
+            priceIndex=1
+          }
        
           let tempArray = {
             "productId": item._id,
             "quantity": element.value.quantity,
             "productName": item.name,
             "price": element.value.bcy_rate,
-            "erpPrice": item.priceList[0].ERPPrice,
-            "discountRate": item.priceList[0].discountRate,
-            "priceType": item.priceList[0].priceType,
-            "distributorPrice": item.priceList[0].distributorPrice,
+            "erpPrice": item.priceList[priceIndex].ERPPrice,
+            "discountRate": item.priceList[priceIndex].discountRate,
+            "priceType": element.value.priceType,
+            "distributorPrice": item.priceList[priceIndex].distributorPrice,
             "itemTotal": element.value.bcy_rate * element.value.quantity,
             "priceList":item.priceList
 
@@ -630,6 +638,32 @@ export class ProductListTableComponent {
 
   }
 
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
+
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '/') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '*') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '.') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  
+    if (key === 'e') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === 'E') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
 
 
 }

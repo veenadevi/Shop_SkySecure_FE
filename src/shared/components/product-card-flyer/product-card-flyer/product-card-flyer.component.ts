@@ -8,7 +8,7 @@ import { LoginAlertModalComponent } from '../../login-alert-modal/login-alert-mo
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
-
+ 
 @Component({
   selector: 'product-card-flyer',
   templateUrl: './product-card-flyer.component.html',
@@ -26,7 +26,7 @@ export class ProductCardFlyerComponent implements OnInit{
   priceValue:any;
   priceType:any;
   mrpPriceType : any;
-
+ 
   showYearlyPrice(i:any) {
    
     this.isMonthly = true;
@@ -102,7 +102,8 @@ public whatsAppMessage:string
     private modalService : NgbModal,
     private userAccountStore : UserAccountStore,
     private toaster : ToasterNotificationService,
-    private addItemsToCartService : AddItemsToCartService
+    private addItemsToCartService : AddItemsToCartService,
+    
   ){}
 
 
@@ -146,19 +147,20 @@ public whatsAppMessage:string
     }
     
   }
-
-
+ 
   public addToCompare($event, item, i){
+    
     if ($event.target.checked) {
-      this.handleAddToCompare(item);
+      this.handleAddToCompare(item,$event);
     } else {
       this.handleRemoveFromCompare(item);
     }
   }
   
-  private handleAddToCompare(item) {
+  private handleAddToCompare(item,$event) {
     const cachedProductsToCompare = this.getCachedProductsToCompare();
     const compareProductsListLen = cachedProductsToCompare.length;
+  console.log("cachedProductsToCompare ", cachedProductsToCompare,"compareProductsListLen ",compareProductsListLen )
   
     if (compareProductsListLen < 4) {
       if (!this.isItemInCompareList(item, cachedProductsToCompare)) {
@@ -167,12 +169,19 @@ public whatsAppMessage:string
       } else {
         // this.showWarningMessage("Product already added for Compare");
         this.toaster.showWarning("Product already added for Compare",'')
-      }
+      } 
     } else {
-      this.toaster.showWarning("You can add only 4 products to compare",""); // Pass $event here
+      if(compareProductsListLen<=4){
+        // Uncheck the checkbox
+         // item.checked = true;
+       //  this.toaster.showWarning("You can add only 4 products to compare", '');
+         this.uncheckCheckboxAndShowWarning($event);
+       }  
     }
     
   }
+ 
+  
   
   private handleRemoveFromCompare(item) {
     const cachedProductsToCompare = this.getCachedProductsToCompare();
@@ -210,9 +219,10 @@ public whatsAppMessage:string
     this.toaster.showWarning(message, '');
   }
   
-  private uncheckCheckboxAndShowWarning(message, event) {
+  private uncheckCheckboxAndShowWarning(  event) {
     event.target.checked = false;
-    this.toaster.showWarning(message, '');
+    // this.toaster.showWarning(message, '');
+    this.toaster.showWarning("You can add only 4 products to compare", '');
   }
   
   

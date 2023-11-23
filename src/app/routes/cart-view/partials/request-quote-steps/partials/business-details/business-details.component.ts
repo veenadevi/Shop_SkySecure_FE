@@ -203,7 +203,7 @@ public goBack(){
   public getAllMyCustomers(){
 
     this.subscriptions.push(
-      this.adminPageService.getAllMyCustomers().subscribe(res=>{
+      this.adminPageService.getAllCompany().subscribe(res=>{
         
         this.myCustomers = res;
         this.companyListArray = this.myCustomers;
@@ -216,5 +216,30 @@ public goBack(){
     )
 
   }
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
 
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '/') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '*') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '.') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  
+    if (key === 'e') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === 'E') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
 }

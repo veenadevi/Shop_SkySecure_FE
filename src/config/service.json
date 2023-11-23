@@ -34,7 +34,7 @@
         "userSignin" : "api/user/login",
         "profileUpdate" : "api/user/profile-update",
         "createQuotation" : "api/user/createQuotation",
-        "editQuotation" : "/api/user/editQuotation",
+        "editQuotation" : "api/user/editQuotation",
         "getQuoteHistory" : "api/user/getQuoteHistory",
         "getAllDashBoardData" : "api/user/allDashBoardData",
         "getAllAccounts" : "api/user/allAccounts",
@@ -42,7 +42,7 @@
         "getAccountsById" : "api/user/getAccountDetails",
         "userGstUpdate" : "api/user/user-gst-update",
 
-        "createInvoice" : "/api/user/createInvoice",
+        "createInvoice" : "api/user/createInvoice",
 
 
         "handleResponse" : "api/orders/handleResponse",
@@ -58,6 +58,9 @@
         "inviteUsers" : "api/user/inviteuser",
         "createProductOffer":"api/product-offer/create",
         "getAllMyCustomers" : "api/admin/getAllCustomers",
+
+        "getAllCompany" : "api/user/getAllCompanyList",
+
         "getCustomerDetailsById" : "api/admin/getCustomerDetailsById/",
         
 
@@ -92,6 +95,8 @@
 
         "addChannelPartnerURL":"api/user/channel-partner",
         "getAllChannelPartner" : "api/user/channel-partner",
+
+        "getReferToChannelPartner" : "api/user/refer-channel-partner",
 
         "assignChannelPartnerURL" : "api/admin/assignChannelPartner",
 

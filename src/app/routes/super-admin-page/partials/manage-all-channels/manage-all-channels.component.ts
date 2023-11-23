@@ -36,10 +36,11 @@ export class ManageAllChannelsComponent {
   public subscription: Subscription[] = [];
   public showMsg: boolean;
   public submitErrorMessage: boolean = false;
+  public CPError:boolean=false
   public userId: string;
   public myChannels: any[] = []
   public newuserCheck:boolean=true
-  public currentChannelId:string;
+  public currentChannelId:string='';
   public duplicate:boolean=false
   public addAsAdmin:boolean=false
   selectedChannelPartner:any;
@@ -65,8 +66,8 @@ export class ManageAllChannelsComponent {
     this.myForm = this.fb.group({
       channelPartner: [''],
       userName: ['', [Validators.required, Validators.required]],
-      EmailId: ['', [Validators.required, Validators.email]],
-      phoneNo: ['', [Validators.pattern(/^\d{10}$/)]],
+      EmailId: ['', [ Validators.required,,Validators.email]],
+      phoneNo: ['', [Validators.required,,Validators.pattern(/^\d{10}$/)]],
       isAdmin:[''],
 
     });
@@ -75,11 +76,12 @@ export class ManageAllChannelsComponent {
 
 
   ngOnInit(): void {
+    this.getMyChannelList(); 
     this.getUsersList();
     let userAccountdetails = this.userAccountStore.getUserDetails();
     this.userId = userAccountdetails._id;
    
-    this.getMyChannelList(); 
+   
     this.getChannelPartnerUsers(this.selectedValue);
   }
 
@@ -261,13 +263,23 @@ export class ManageAllChannelsComponent {
 
 
   public submitForm() {
-    if (this.myForm.invalid) {
-      this.submitErrorMessage = true;
-      console.log("_____submit form ++++ Error Messgae");
+    
+
+    if( this.currentChannelId.length<=0){
+      this.CPError=true
+      //console.log('chennal error ')
+      return;
     }
+    if (this.myForm.invalid) {
+      this.CPError=false
+      this.submitErrorMessage = true;
+    //  console.log("_____submit form ++++ Error Messgae");
+      return;
+    }
+
     else {
 
-      console.log("_____++++ Error False");
+     // console.log("_____++++ Error False");
       this.submitErrorMessage = false
       this.addAsAdmin=this.myForm.get('isAdmin').value?this.myForm.get('isAdmin').value:false
 
@@ -336,6 +348,7 @@ export class ManageAllChannelsComponent {
           this.showMsg=true
           this.duplicate=false
           this.myForm.reset();
+          location.reload();
        
       },
       
