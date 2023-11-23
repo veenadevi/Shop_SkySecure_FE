@@ -407,7 +407,7 @@ export class ProductListTableComponent {
 
 
     let request = this.setRequestData();
-    //console.log("+_+_+_+_+_ Res Data ", request);
+ // console.log("+_+_+_+_+_ edit qupte Data ", request);
 
     this.subscription.push(
       this.cartService.editQuotation(request).subscribe(res => {
