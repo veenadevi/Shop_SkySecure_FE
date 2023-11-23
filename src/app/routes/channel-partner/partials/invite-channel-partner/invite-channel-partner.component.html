@@ -5,7 +5,7 @@
             <div class="select   mb-3 mt-2 ">
                 <h3>Manage Channel</h3>
                 <div class="section-01">
-                    <label for="channelPartner">Select Channel</label>
+                    <label for="channelPartner">Select Channel<span style="color: red;">*</span></label>
 
 
                     <select class="custom-select " (change)="changeChannelList($event)"
@@ -55,14 +55,9 @@
 
           
 
-            <div>
-                <div>
-                    
-                </div>
-                <div>
-                    <!-- <label for="">Add New user</label> -->
-                    <h4 class="addNewuser   mt-4 mb-0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add New user</h4>
-                </div>
+            <div class="user-invite-card">
+                <h1>Add Channel partner User</h1>
+               
                 <div class="radio-btn"> 
                     <div class="content-select">
                         <input type="checkbox" formControlName="isAdmin" class="form-check d-inline" id="chb">
@@ -93,7 +88,7 @@
                     <div class="address-row">
                         <ng-container *ngIf="(addAdminOption === 'new'); else userSelect">
                             <div class="col-sm-6 form-group">
-                                <label for="userName">FirstName</label>
+                                <label for="userName">FirstName<span style="color: red;">*</span></label>
                                 <input formControlName="userName" type="address" class="form-control-01" name="userName"
                                     id="userName" placeholder="Enter FirstName" required>
                             </div>
@@ -103,7 +98,7 @@
     
                             </div>
                             <div class="col-sm-6 form-group  d-flex align-item-center flex-column">
-                                <label>Select User</label>
+                                <label>Select User<span style="color: red;">*</span></label>
     
                                 <select class="custom-select" (change)="onDropDownChange($event)">
     
@@ -118,7 +113,7 @@
                         </ng-template>
     
                         <div class="col-sm-6 form-group">
-                            <label for="address-2">Email Id</label>
+                            <label for="address-2">Email Id<span style="color: red;">*</span></label>
                             <input formControlName="EmailId" type="address" class="form-control-01" name="EmailId"
                                 id="address-2" placeholder="Enter EmailId" required>
                         </div>
@@ -144,6 +139,7 @@
                         </div>  -->
                     </ng-container>
                 </div>
+            </div>
     
                 <div class="row" *ngIf="showMsg">
                     <div class="col-xs-12">
@@ -162,7 +158,7 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            
            
         </form>
     </div>
