@@ -19,7 +19,7 @@ export class GstDetailsComponent implements OnInit{
 
   @Output() gstDetailsAction = new EventEmitter();
 
-
+  contactError:boolean=false
   public isChecked : boolean = true;
   public selectedGSTType : string = 'self';
 
@@ -119,6 +119,7 @@ export class GstDetailsComponent implements OnInit{
   }
 
   public onNextClick(){
+   
 
     this.gstErrorMessageFlag = false;
     this.gstErrorMessage = "Please Enter Valid GST No.";
@@ -151,6 +152,7 @@ export class GstDetailsComponent implements OnInit{
       
       else{
 
+       
         if(!this.referredBy){
           this.gstErrorMessageFlag = true;
           this.gstErrorMessage = "Please Select Refereed By";
@@ -175,9 +177,15 @@ export class GstDetailsComponent implements OnInit{
     }
 
     else{ // Others
+      let isMobileOREmail= this.gstFormOthers.get('phoneNo').value.length>0 || this.gstFormOthers.get('email').value.length>0;
+      if(!isMobileOREmail){
+        this.contactError=true
+        return
+      }
       if(this.gstFormOthers.invalid){
         return;
       }
+      
       else if(!this.referredBy){
         this.gstErrorMessageFlag = true;
         this.gstErrorMessage = "Please Select Refereed By";
@@ -185,6 +193,7 @@ export class GstDetailsComponent implements OnInit{
       }
       else{
         let reqBody : RequestQuoteDetailsModel = this.reqQuoteDetailsStore.getReqQuoteDetails();
+       
         reqBody.name = this.gstFormOthers.get('firstName').value;
         reqBody.emailId = this.gstFormOthers.get('email').value;
         reqBody.countryCode = "IN";
@@ -193,8 +202,9 @@ export class GstDetailsComponent implements OnInit{
         reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.ChannelPartnerAdminId: '';
         reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy.ChannelPartnerId : '';
         reqBody.selectedChannelPartnerName = (this.referredBy) ? this.referredBy.companyBusinessName: '';
-        
+        this.contactError=false;
         this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
+       
         if( this.gstFormOthers.get('checkGstNil').value === null || this.gstFormOthers.get('checkGstNil').value === false){
          
   
@@ -210,7 +220,9 @@ export class GstDetailsComponent implements OnInit{
           
           
         }
+       
         else{
+         
           this.gstErrorMessageFlag = false;
           let reqBody = this.reqQuoteDetailsStore.getReqQuoteDetails();
           reqBody.gstNo = null;
@@ -223,6 +235,16 @@ export class GstDetailsComponent implements OnInit{
           this.gstDetailsAction.emit('next');
   
         }
+        // let isMobileOREmail= this.gstFormOthers.get('phoneNo').value.length>0 || this.gstFormOthers.get('email').value.length>0
+
+  
+      // if(!isMobileOREmail){
+      //   this.contactError=true
+      //   return
+      // }
+      // else{
+      //   this.contactError=false;
+      // }
       }
     }
   }
