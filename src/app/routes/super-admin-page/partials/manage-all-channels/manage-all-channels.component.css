@@ -167,6 +167,7 @@ element.style {
   .error{
     color: red;
     text-align: center;
+    font-size: 13px;
     /* padding: 20px; */
 }
 
@@ -240,11 +241,14 @@ justify-content: center;
 
 
 .user-invite-card{
-    background: var(--primary-50-purple);
+    background: #f7f7f9;
     border-radius: 10px;
     margin-top: 20px;
     width: 100%;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.oldUsers{
+    background-color: #f7f7f9;;
 }
 h1{
     text-align: center;

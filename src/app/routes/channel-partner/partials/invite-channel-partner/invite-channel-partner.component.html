@@ -5,12 +5,12 @@
             <div class="select   mb-3 mt-2 ">
                 <h3>Manage Channel</h3>
                 <div class="section-01">
-                    <label for="channelPartner">Select Channel<span style="color: red;">*</span></label>
+                    <label for="channelPartner">Select Channel<span style="color: red;"> * </span></label>
 
 
                     <select class="custom-select " (change)="changeChannelList($event)"
                         formControlName="channelPartner">
-                        <option value="">Choose...</option>
+                        <option value="">...Select Channel...</option>
                         <option *ngFor="let channel of myChannels" [value]="channel.channelPartnerMaster._id">
                             {{channel.channelPartnerMaster.name}} 
                         </option>
@@ -24,9 +24,9 @@
             </div>
 
             <div *ngIf="selectedAccountManagers.length>0">
-                <span class="font-14"> Channel users</span>
+                <h1>Channel Partner Users</h1>
             
-                <div class="card">
+                <div class="card oldUsers">
                     <p-table [value]="selectedAccountManagers" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="false"
                         [rows]="15" [showCurrentPageReport]="true"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
@@ -56,7 +56,7 @@
           
 
             <div class="user-invite-card">
-                <h1>Add Channel partner User</h1>
+                <h1>Add Channel Partner User</h1>
                
                 <div class="radio-btn"> 
                     <div class="content-select">
@@ -88,7 +88,7 @@
                     <div class="address-row">
                         <ng-container *ngIf="(addAdminOption === 'new'); else userSelect">
                             <div class="col-sm-6 form-group">
-                                <label for="userName">FirstName<span style="color: red;">*</span></label>
+                                <label for="userName">FirstName<span style="color: red;"> * </span></label>
                                 <input formControlName="userName" type="address" class="form-control-01" name="userName"
                                     id="userName" placeholder="Enter FirstName" required>
                             </div>
@@ -116,17 +116,19 @@
                             <label for="address-2">Email Id<span style="color: red;">*</span></label>
                             <input formControlName="EmailId" type="address" class="form-control-01" name="EmailId"
                                 id="address-2" placeholder="Enter EmailId" required>
+                            <div class="error" *ngIf="myForm.get('EmailId').hasError('email')">Please enter valid email address</div>
                         </div>
                         <div class="col-sm-6 form-group">
                             <label>Mobile No.</label>
                             <input formControlName="phoneNo" type="number" class="form-control-01" name="phoneNo"
                                 id="phoneNo" placeholder="Enter Phone Number" >
+                                <div class="error" *ngIf="myForm.get('phoneNo').hasError('pattern')">Please enter valid email address</div>
                         </div>
                     </div>
                 </ng-container>
     
                 <div *ngIf="submitErrorMessage">
-                    <p class="error">* Please Fill Mandatory fileds like Name and Admin users</p>
+                    <p class="error">* Please Fill Mandatory - Name ,EmailId ,Mobile </p>
                 </div>
                 <div class="modal-footer">
                     <ng-container>

@@ -409,7 +409,7 @@ export class ProductListTableComponent {
 
 
     let request = this.setRequestData();
- // console.log("+_+_+_+_+_ edit qupte Data ", request);
+  // console.log("+_+_+_+_+_ edit qupte Data ", request);
 
     this.subscription.push(
       this.cartService.editQuotation(request).subscribe(res => {
@@ -537,22 +537,25 @@ export class ProductListTableComponent {
       }
       else {
 
-    
+    //console.log("cominf for new products====")
 
         let item = this.newlyAddedAppList.find(x => x._id + 'temp' === element.value.line_items_id);
-  
+        var priceIndex=0
 
         if (item) {
+          if(element.value.priceType==='Month'){
+            priceIndex=1
+          }
        
           let tempArray = {
             "productId": item._id,
             "quantity": element.value.quantity,
             "productName": item.name,
             "price": element.value.bcy_rate,
-            "erpPrice": item.priceList[0].ERPPrice,
-            "discountRate": item.priceList[0].discountRate,
-            "priceType": item.priceList[0].priceType,
-            "distributorPrice": item.priceList[0].distributorPrice,
+            "erpPrice": item.priceList[priceIndex].ERPPrice,
+            "discountRate": item.priceList[priceIndex].discountRate,
+            "priceType": element.value.priceType,
+            "distributorPrice": item.priceList[priceIndex].distributorPrice,
             "itemTotal": element.value.bcy_rate * element.value.quantity,
             "priceList":item.priceList
 

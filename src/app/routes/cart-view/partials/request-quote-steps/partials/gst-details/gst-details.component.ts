@@ -20,6 +20,7 @@ export class GstDetailsComponent implements OnInit{
   @Output() gstDetailsAction = new EventEmitter();
 
   contactError:boolean=false
+  isOthers=false;
   public isChecked : boolean = true;
   public selectedGSTType : string = 'self';
 
@@ -80,8 +81,8 @@ export class GstDetailsComponent implements OnInit{
           checkGstNil : [],
           companyName : [],
           firstName :['', Validators.required],
-          email: ['', [Validators.required, Validators.email]],
-          phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+          email: ['', [ Validators.email]],
+          phoneNo: ['', [Validators.pattern(/^\d{10}$/)]],
         });
   }
 
@@ -127,24 +128,26 @@ export class GstDetailsComponent implements OnInit{
     this.onGSTDetailsCLicked = true;
     this.gstErrorMessage = "Please fill mandaotry Fields";
     if(this.selectedGSTType === 'self'){
+
+      if(!this.referredBy){
+        this.gstErrorMessageFlag = true;
+        this.gstErrorMessage = "Please Select Referred By";
+        return;
+      }
       if( this.gstForm.get('checkGstNil').value === null || this.gstForm.get('checkGstNil').value === false){
         
 
+        console.log("gst value check ")
+       
 
-        if(!this.referredBy){
-          this.gstErrorMessageFlag = true;
-          this.gstErrorMessage = "Please Select Refered By";
-          return;
-        }
-
-        else if(this.gstForm.get('gstNo').value.length === 15){
+         if(this.gstForm.get('gstNo').value.length === 15){
           this.gstErrorMessageFlag = false;
           this.getGSTData(this.gstForm.get('gstNo').value);
           
         }
         else{
           this.gstErrorMessageFlag = true;
-          this.gstErrorMessage = "Please Enter Valid GST No.";
+          this.gstErrorMessage = "Please Enter Valid GST No. or Select check box for Non GST";
         }
         
         
@@ -152,13 +155,13 @@ export class GstDetailsComponent implements OnInit{
       
       else{
 
-       
-        if(!this.referredBy){
-          this.gstErrorMessageFlag = true;
-          this.gstErrorMessage = "Please Select Refereed By";
-          return;
-        }
-        else{
+        console.log("gst value All good ")
+        // if(!this.referredBy){
+        //   this.gstErrorMessageFlag = true;
+        //   this.gstErrorMessage = "Please Select Refereed By";
+        //   return;
+        // }
+        // else{
           this.gstErrorMessageFlag = false;
           let reqBody = this.reqQuoteDetailsStore.getReqQuoteDetails();
          
@@ -170,27 +173,36 @@ export class GstDetailsComponent implements OnInit{
           reqBody.selectedChannelPartnerName=(this.referredBy) ? this.referredBy.companyBusinessName : '';
           this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
           this.gstDetailsAction.emit('next');
-        }
+        //}
         
 
       }
     }
 
-    else{ // Others
+    else{ 
+
+      this.isOthers=true
+      this.contactError=false
+      // Others
+      if(!this.referredBy){
+        this.gstErrorMessageFlag = true;
+        this.gstErrorMessage = "Please Select Referred By";
+        return;
+      }
+
       let isMobileOREmail= this.gstFormOthers.get('phoneNo').value.length>0 || this.gstFormOthers.get('email').value.length>0;
+      console.log("isMobileOREmail  ===",isMobileOREmail)
       if(!isMobileOREmail){
         this.contactError=true
         return
       }
       if(this.gstFormOthers.invalid){
-        return;
+        console.log("form validation fails")
+       return;
       }
       
-      else if(!this.referredBy){
-        this.gstErrorMessageFlag = true;
-        this.gstErrorMessage = "Please Select Refereed By";
-        return;
-      }
+    
+     
       else{
         let reqBody : RequestQuoteDetailsModel = this.reqQuoteDetailsStore.getReqQuoteDetails();
        
@@ -204,9 +216,12 @@ export class GstDetailsComponent implements OnInit{
         reqBody.selectedChannelPartnerName = (this.referredBy) ? this.referredBy.companyBusinessName: '';
         this.contactError=false;
         this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
+
+      //  console.log("before  for gst check ")
+  
        
         if( this.gstFormOthers.get('checkGstNil').value === null || this.gstFormOthers.get('checkGstNil').value === false){
-         
+         console.log("coming for gst check ")
   
           if(this.gstFormOthers.get('gstNo').value && this.gstFormOthers.get('gstNo').value.length === 15){
             this.gstErrorMessageFlag = false;
@@ -214,8 +229,9 @@ export class GstDetailsComponent implements OnInit{
 
           }
           else{
+            //console.log("coming for gst fails ")
             this.gstErrorMessageFlag = true;
-            this.gstErrorMessage = "Please Enter Valid GST No.";
+            this.gstErrorMessage = "Please Enter Valid GST No. or Select check box for Non GST";
           }
           
           
@@ -388,6 +404,7 @@ export class GstDetailsComponent implements OnInit{
       this.setSelfData();
     }
     else{
+      this.gstErrorMessageFlag = false
       this.isChecked = false;
       this.selectedGSTType = 'others'
     }
