@@ -33,7 +33,7 @@ export class QuotationHistoryComponent implements OnInit {
   public allAccounts$ = this.adminPageService.getAllAccounts()
   .pipe(
     map(data => {
-      console.log("running here ==")
+     // console.log("running here ==")
       if(data){
         this.accountData = data.accounts.data;
         this.info = data.accounts.info;
@@ -59,13 +59,13 @@ export class QuotationHistoryComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    console.log("===============AccountListComponent=======")
+   // console.log("===============AccountListComponent=======")
     
     //this.accountData = this.sampleData.accounts.data;
     //this.info = this.sampleData.accounts.info;
     let userAccountdetails = this.userAccountStore.getUserDetails();
     this.userId=userAccountdetails._id;
-    console.log("userAccountdetails  ",userAccountdetails._id)
+    //console.log("userAccountdetails  ",userAccountdetails._id)
     //this.getAllAccounts();
    // this.getAllCRMUsers();
 
@@ -84,7 +84,7 @@ export class QuotationHistoryComponent implements OnInit {
     // this.info = a.accounts.info;
   this.subscriptions.push(
     this.userProfileService.getMyMarketplaceAccountList(this.userId).subscribe( response => {
-      console.log("running here directly==")
+      //console.log("running here directly==")
       this.allMarketPlaceList=response;
     
       this.spinner.hide();   
@@ -118,8 +118,7 @@ export class QuotationHistoryComponent implements OnInit {
 
   
 
-  
-
+ 
 
 
 

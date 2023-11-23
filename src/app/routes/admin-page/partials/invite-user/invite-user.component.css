@@ -179,4 +179,12 @@ cursor: pointer;
 }
 .mandatory{
     color: red;
+    
+}
+
+.commonError{
+    text-align: center;
+    font-size: 13px;
+    color: red;
+    padding-top: 10px;
 }

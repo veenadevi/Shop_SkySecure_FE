@@ -102,17 +102,12 @@ export class OverviewComponent implements OnInit{
         this.cartService.createQuotation(this.finalReq).subscribe( response => {
           this.spinner.hide();
           if(response && response.UserCart){
-            this.updateGSTService(this.finalReq);
+           // this.updateGSTService(this.finalReq);
               
               this.cartStore.setCartRefreneceId(null);
               this.cartService.getCartItems(null).subscribe();
               
               this.router.navigate(['/user-profile/quotation-history']);
-              
-              
-              
-            
-            
           }
           else{
             
@@ -248,7 +243,7 @@ export class OverviewComponent implements OnInit{
       this.isAcceptChecked = true;
       this.isDeclinedChecked = false;
       this.tandcCheckBox = true;
-    //  this.disabledFlag = true;
+     this.disabledFlag = true;
     }
     else{
       //console.log("Inside else")
@@ -291,18 +286,18 @@ export class OverviewComponent implements OnInit{
   public buyNow(){
 
 
-    //this.receiveOrderStatus()
-    this.checkout();
+  // this.receiveOrderStatus()
+  this.checkout();
 
   }
 
   public receiveOrderStatus(){
     this.subscriptions.push(
       this.cartService.encryptForCCAvenue(null).subscribe(res=>{
-       // console.log("++++)))))) Res", res);
-        this.cartService.getOrderStatus(res).subscribe(res=>{
-       //   console.log("+_+_+_ ))))))))))) Further Response ", res)
-        })
+       console.log("++++)))))) Res", res);
+        // this.cartService.trackOrderStatus(res).subscribe(res=>{
+        // console.log("+_+_+_ ))))))))))) Further Response ", res)
+        // })
       })
     )
   }

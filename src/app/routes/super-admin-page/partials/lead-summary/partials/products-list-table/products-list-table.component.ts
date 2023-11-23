@@ -424,15 +424,15 @@ this.enableinvoice=true
 
 
     let request = this.setRequestData();
-    //console.log("+_+_+_+_+_ Res Data ", request);
+    console.log("+_+_+_+_+_ Res Data ", request);
 
-    this.subscription.push(
-      this.cartService.editQuotation(request).subscribe(res => {
-        this.showMsg = true
+    // this.subscription.push(
+    //   this.cartService.editQuotation(request).subscribe(res => {
+    //     this.showMsg = true
 
-      })
-    )
-
+    //   })
+    // )
+    history.back()
 
   }
 
@@ -601,22 +601,24 @@ this.enableinvoice=true
       }
       else {
 
-
+        var priceIndex=0
 
         let item = this.newlyAddedAppList.find(x => x._id + 'temp' === element.value.line_items_id);
 
 
         if (item) {
-         
+          if(element.value.priceType==='Month'){
+            priceIndex=1
+          }
           let tempArray = {
             "productId": item._id,
             "quantity": element.value.quantity,
             "productName": item.name,
             "price": element.value.bcy_rate,
-            "erpPrice": item.priceList[0].ERPPrice,
-            "discountRate": item.priceList[0].discountRate,
-            "priceType": item.priceList[0].priceType,
-            "distributorPrice": item.priceList[0].distributorPrice,
+            "erpPrice": item.priceList[priceIndex].ERPPrice,
+            "discountRate": item.priceList[priceIndex].discountRate,
+            "priceType": element.value.priceType,
+            "distributorPrice": item.priceList[priceIndex].distributorPrice,
             "itemTotal": element.value.bcy_rate * element.value.quantity,
             "priceList":item.priceList
 
@@ -626,6 +628,10 @@ this.enableinvoice=true
         }
 
         else {
+
+          if(element.value.priceType==='Month'){
+            priceIndex=1
+          }
           let item2 = this.newlyAddedAppList.find(x => x._id === element.value.line_items_id);
           if (item2) {
             let tempArray = {
@@ -633,10 +639,10 @@ this.enableinvoice=true
               "quantity": element.value.quantity,
               "productName": item2.name,
               "price": element.value.bcy_rate,
-              "erpPrice": item2.priceList[0].ERPPrice,
-              "discountRate": item2.priceList[0].discountRate,
-              "priceType": item2.priceList[0].priceType,
-              "distributorPrice": item2.priceList[0].distributorPrice,
+              "erpPrice": item2.priceList[priceIndex].ERPPrice,
+              "discountRate": item2.priceList[priceIndex].discountRate,
+              "priceType": element.value.priceType,
+              "distributorPrice": item2.priceList[priceIndex].distributorPrice,
               "itemTotal": element.value.bcy_rate * element.value.quantity
             }
 
@@ -741,6 +747,32 @@ this.enableinvoice=true
 
     
    
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
+
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '/') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '*') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '.') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  
+    if (key === 'e') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === 'E') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
 
 
   
