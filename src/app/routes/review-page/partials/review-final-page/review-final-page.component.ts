@@ -93,20 +93,21 @@ public showMsg: boolean
    // console.log("Final Product-page",this.productReview )
     this.productReview =  {...this.metaDataStore.getProductReviewDetails(), ...this.metaDataStore.getProductReviewOtherDetails()};
      //console.log("___TEST___FULL PAYLOAD____",this.productReview); 
-    //console.log("productName ",this.productName=this.productReview.productName); 
+    // console.log("productRecommendRate",this.productReview.productRecommendRate,"this.salesAndSupportRate","this.productReview",this.productReview); 
+    // console.log(this.productReview.salesAndSupportRate,"customerSupportRating",this.productReview.customerSupportRating,"featuresRating",this.productReview.featuresRating,"overAllRating",this.productReview.overAllRating,"valueOfMoneyRating",this.productReview.valueOfMoneyRating,"easyToUseRating",this.productReview.easyToUseRating)
+    // const averageRatingValue = this.productReview.customerSupportRating+ this.productReview.featuresRating+this.productReview.overAllRating+this.productReview.overAllRating+this.productReview.easyToUseRating;
+    this.averageRating = (this.productReview.customerSupportRating+ this.productReview.featuresRating+this.productReview.overAllRating+this.productReview.overAllRating+this.productReview.easyToUseRating) / 5;
     
-     const averageRatingValue = this.customerSupportRating+ this.featuresRating+this.overAllRating+this.valueOfMoneyRating+this.easyToUseRating;
-    this.averageRating = (this.overAllRating + this.featuresRating + this.valueOfMoneyRating + this.customerSupportRating + this.easyToUseRating) / 5;
-    
-   // this.rating= this.averageRating / 5;
+   //this.rating= this.averageRating / 5;
   
   
   
   
    
   // const starRating = this.getStarRating(averageRating);
-  // console.log("Star Rating (Whole):", starRating.whole);
-  // console.log("Star Rating (Fractional):", starRating.fractional);
+  // console.log("Star Rating (Whole):", this.rating);
+  //  console.log(" averageRatingValue ", this.averageRating =Math.round(this.averageRating) )
+  //  console.log("Star Rating (Fractional):", this.averageRating );
   
   }  
 

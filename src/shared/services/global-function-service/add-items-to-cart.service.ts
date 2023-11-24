@@ -27,13 +27,14 @@ export class AddItemsToCartService {
 
 public addItemsToCart(data : any) : void {
     
-    
+    //console.log("---in cart service ----",data.params)
+   
     if(data.productId){
-     // console.log("++++_______ Came Here If", data);
+     //console.log("++++_______ Came Here If", data);
       this.getCartItems(false, data);
     }
     else if(data.productVariant){
-    //  console.log("++++_______ Came Here Else", data);
+   //console.log("++++_______ Came Here Else", data);
       this.getCartItems(true, data);
     }
         
@@ -45,6 +46,10 @@ public getCartItems(multipleProduct, data) : void {
     let userAccountdetails = this.userAccountStore.getUserDetails();
     let cartRefId = this.cartStore.getCartRefreneceId();
     let productsList = this.cartStore.getProductListItems() ? this.cartStore.getProductListItems() : [];
+
+
+    console.log("is user already have cart?====",cartRefId)
+    console.log("=====productsList to addcart ===",productsList.length)
 
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
@@ -123,6 +128,8 @@ public getCartItems(multipleProduct, data) : void {
     }
 
     else{
+
+      console.log("came to cart service ",productsList.length)
       //var index = productsList.findIndex(el => el.productId === this.params.get('productId'));
       var index = productsList.findIndex(el => el.productId === data.productId && el.priceType===data.priceType);
 
@@ -202,6 +209,8 @@ public getCartItems(multipleProduct, data) : void {
 
 public addCartItemsService(req, state) {
 
+  console.log("addCartItemsService=====req  ",req)
+
   this.spinner.show();
   this.cartService.addCartItems(req)
       .pipe(
@@ -210,7 +219,7 @@ public addCartItemsService(req, state) {
           //Lets map so to an observable of API call
           const allObs$ = this.cartService.getCartItems(null);
 
-
+      console.log("to add product to cart===")
           //forkJoin will wait for the response to come for all of the observables
           
           return forkJoin(allObs$);

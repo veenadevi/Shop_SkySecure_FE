@@ -674,7 +674,7 @@ public onChangeQuantity(i, price) : void {
       updatedBy : userAccountdetails._id,
       products : this.cartData,
       cart_ref_id : cartRefId,
-      status : "New"
+      status : "In Cart"
     });
 
    // console.log("_)(*&^^%% Val here ", this.cartData.length);
