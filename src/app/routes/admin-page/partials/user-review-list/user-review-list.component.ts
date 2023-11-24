@@ -65,6 +65,7 @@ export class UserReviewListComponent {
       this.adminPageService.getProductReviewsList().subscribe(res=>{
        // console.log("***** Res", res);
         this.ProductReviewsData = res.productReviews;
+         this.spinner.hide();
       })
     )
   }
