@@ -11,6 +11,8 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import * as CryptoJS from 'crypto-js';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { NgOtpInputConfig } from 'ng-otp-input';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
+
  
  
 
@@ -63,7 +65,9 @@ export class LoginComponent {
     public router : Router,
     public route : ActivatedRoute,
     private userAccountStore : UserAccountStore,
-    private userProfileService : UserProfileService
+    private userProfileService : UserProfileService,
+    private addItemsToCartService : AddItemsToCartService,
+
     ) {}
 
   ngOnInit(): void {
@@ -321,8 +325,16 @@ export class LoginComponent {
           
           this.userAccountStore.setUserDetails(decoded);
           
-
+         // console.log("Login Success=====")
+         // console.log("params passed =====",this.params)
+          var paramsMap=this.params
           if(this.params && this.params.has('productId')){
+
+           // console.log("user logged in ",localStorage.getItem("XXXXaccess__tokenXXXX"));
+
+          //  console.log("can as ====")
+
+          this.addItemsToCartService.addItemsToCart(paramsMap.params);
            
             this.router.navigate(['']);
           }

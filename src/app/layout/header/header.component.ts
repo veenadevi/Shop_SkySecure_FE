@@ -307,9 +307,10 @@ export class HeaderComponent implements OnInit{
     localStorage.removeItem('XXXXaccess__tokenXXXX');
     this.userAccountStore.setUserDetails(null);
     this.cartStore.setCartRefreneceId(null);
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-    this.router.navigate(['/']));
-    window.location.reload();
+   // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    //this.router.navigate(['/']));
+    this.router.navigate(['/']);
+  //window.location.reload();
   }
 
   public getAccessIdToken1(userData) {
