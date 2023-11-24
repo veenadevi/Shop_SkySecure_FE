@@ -21,8 +21,9 @@ export class GstDetailsComponent implements OnInit{
 
   contactError:boolean=false
   isOthers=false;
-  public isChecked : boolean = true;
-  public selectedGSTType : string = 'self';
+  public isCheckedSelf : boolean = false;
+  public isCheckedOthers : boolean = false;
+  public selectedGSTType : string;
 
 
   public gstForm;
@@ -399,13 +400,15 @@ export class GstDetailsComponent implements OnInit{
 
   public handleChange(val){
     if(val === 'self'){
-      this.isChecked = true;
+      this.isCheckedSelf = true;
+      this.isCheckedOthers=false;
       this.selectedGSTType = 'self';
       this.setSelfData();
     }
     else{
       this.gstErrorMessageFlag = false
-      this.isChecked = false;
+      this.isCheckedOthers = true;
+      this.isCheckedSelf = false;
       this.selectedGSTType = 'others'
     }
   }
@@ -414,6 +417,11 @@ export class GstDetailsComponent implements OnInit{
     this.router.navigate(['/cart']);
   }
 
+  public onBackClick(){
+    this.isCheckedSelf=false;
+    this.isCheckedOthers=false;
+    this.selectedGSTType = '';
+  }
   public onReferredByChange(event){
     
     //this.referredBy = event.target.value;
