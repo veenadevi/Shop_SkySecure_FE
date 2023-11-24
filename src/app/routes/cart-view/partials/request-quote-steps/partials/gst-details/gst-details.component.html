@@ -134,8 +134,10 @@
         <div *ngIf="gstErrorMessageFlag">
           <p class="error-message commonError">{{gstErrorMessage}}</p>
         </div>
+        <div *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">
         <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('firstName')?.hasError('required')">
           Please enter Name</div>  
+        </div>
         <div *ngIf="contactError">
           <div class="error-message commonError">Please enter either Email or Phone</div>
         </div>

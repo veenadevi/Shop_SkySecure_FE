@@ -421,6 +421,10 @@ export class GstDetailsComponent implements OnInit{
     this.isCheckedSelf=false;
     this.isCheckedOthers=false;
     this.selectedGSTType = '';
+    this.gstErrorMessageFlag = false;
+    
+    
+    
   }
   public onReferredByChange(event){
     
