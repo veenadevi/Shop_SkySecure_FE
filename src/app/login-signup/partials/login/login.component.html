@@ -14,7 +14,7 @@
         <form [formGroup]="form">
           <div class="heading"><h1>Sign in!</h1></div>
             <div class="form-group">
-                <label>Email or Mobile Number</label>
+                <label class="label">Email or Mobile Number<span class="mandatory"> * </span></label>
                 <input
                   type="text"
                   formControlName="emailOrMobile"
@@ -22,8 +22,8 @@
                   class="form-control"
                  
                 />
-                <div *ngIf="submitted" >
-                  <div *ngIf="this.form.get('emailOrMobile').hasError('required')" class="error-message" >Email/Mobile Number is required</div>
+                <div>
+                  <div *ngIf="submitted && this.form.get('emailOrMobile').hasError('required')" class="error-message" >Email/Mobile Number is required</div>
                   <div *ngIf="!this.form.get('emailOrMobile').hasError('required')&& this.form.get('emailOrMobile').invalid" class="error-message">Enter valid Email/Mobile</div>
                   
                   

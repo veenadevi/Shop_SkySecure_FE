@@ -57,6 +57,7 @@
         "updateUserRole":"api/admin/updateUserRole",
         "inviteUsers" : "api/user/inviteuser",
         "createProductOffer":"api/product-offer/create",
+        
         "getAllMyCustomers" : "api/admin/getAllCustomers",
 
         "getAllCompany" : "api/user/getAllCompanyList",
@@ -120,8 +121,10 @@
 
         "rejectRevertSuperAdminAsCpAdmin" : "api/admin/rejectRevertSuperAdminAsCpAdmin",
 
-        "getProductReviewsList": "api/product-reviews"
+        "getProductReviewsList": "api/product-reviews",
 
+        "getAllUserReviewsListURL":"api/product-reviews"
+        
 
     },
 
