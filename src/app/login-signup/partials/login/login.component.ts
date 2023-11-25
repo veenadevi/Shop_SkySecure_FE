@@ -35,6 +35,8 @@ export class LoginComponent {
   public params : any;
   public emailViaSignup:String
 
+  public cartObj:any;
+
   public enableSignInButton = false;
   public signUpSuccess:boolean=false
 
@@ -66,7 +68,8 @@ export class LoginComponent {
     public route : ActivatedRoute,
     private userAccountStore : UserAccountStore,
     private userProfileService : UserProfileService,
-    private addItemsToCartService : AddItemsToCartService,
+    private addItemsToCartService : AddItemsToCartService
+   
 
     ) {}
 
@@ -75,15 +78,21 @@ export class LoginComponent {
     this.params = this.route.snapshot.queryParamMap;
 
     this.route.queryParams.subscribe(params => {
+      console.log("params    =====",params)
       
       this.emailViaSignup= params['email'];
-     
+      this.cartObj=params
+      // console.log("params    =====",this.cartObj)
+
+      // console.log("currentRouteName    =====",this.cartObj['currentRouteName'])
 
     if(params['succuessMessage']){
       this.signUpSuccess=true
     }
 
     });
+
+    
 
     this.form = this.formBuilder.group(
       {
@@ -307,6 +316,8 @@ export class LoginComponent {
 
   public callSignIn(){
 
+    console.log("==========callSignIn  ")
+
     var passKey= "!ndia2320@securesky";
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
       let hashedPass = CryptoJS.AES.encrypt(passKey, key).toString();
@@ -327,25 +338,38 @@ export class LoginComponent {
           
          // console.log("Login Success=====")
          // console.log("params passed =====",this.params)
-          var paramsMap=this.params
-          if(this.params && this.params.has('productId')){
+        //  var paramsMap=this.params.queryParams
 
-           // console.log("user logged in ",localStorage.getItem("XXXXaccess__tokenXXXX"));
 
-          //  console.log("can as ====")
 
-          this.addItemsToCartService.addItemsToCart(paramsMap.params);
-           
-            this.router.navigate(['']);
+          // console.log("========this.params=====",this.cartObj)
+
+          // console.log("navigator route ",this.cartObj.currentRouteName)
+       
+          if(this.cartObj && this.cartObj.hasOwnProperty('productId')){
+
+        //  console.log("user logged in ",localStorage.getItem("XXXXaccess__tokenXXXX"));
+
+        //  console.log("can as ====")
+
+          this.addItemsToCartService.addItemsToCart(this.cartObj);
+         
+     
+      this.router.navigate([this.cartObj.currentRouteName]);
+
+         this.cartObj=null
           }
           else{
+          //  console.log('coming to else part')
          
-            this.router.navigate(['']);
+           this.router.navigate(['']);
+         
           }
           
         })
       )
   }
+
 
   onReset(): void {
     this.submitted = false;
