@@ -32,7 +32,8 @@ export class InviteChannelPartnerComponent {
 
 
   addChannelPartnerUserPayLoad: AddChannelPartnerUserPayLoad;
-  myForm: FormGroup;
+  myForm: FormGroup
+  CPError:boolean=false
   selectedUserId: number;
   public addAdminOption: any = "new";
   public usersList: any[] = [];
@@ -47,7 +48,7 @@ export class InviteChannelPartnerComponent {
   public addAsAdmin:boolean=false
   public selectedAccountManagers: any[] = [];
   selectedValue:any;
-  channelPartnerId:any;
+  channelPartnerId:String='';
   selectedChannelPartner:any;
   users = [
     { id: 1, name: 'User 1' },
@@ -177,6 +178,13 @@ export class InviteChannelPartnerComponent {
  
   
   public submitForm() {
+
+    if( this.channelPartnerId.length<=0){
+      this.CPError=true
+      //console.log('chennal error ')
+      return;
+    }
+    
     if (this.myForm.invalid) {
       this.submitErrorMessage = true;
       //console.log("_____submit form ++++ Error Messgae");

@@ -4,24 +4,30 @@
 
     <div class="row jumbotron box8 container-style card-2">
 
-      <p>Please fill the mentioned details to generate estimation</p>
-
-        <div id="customerToogle">
-            <div class="radio-group">
-                <input type="radio" [checked]="isChecked" name="myRadios" (change)="handleChange('self')" value="self" />
-                <span>Self</span>
+      <p *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">Please fill the mentioned details to generate estimation</p>
+<p *ngIf="!isCheckedSelf && !isCheckedOthers" style="text-align: center;font-weight: bold;">Requesting Quotation for ?</p>
+        <div id="customerToogle" *ngIf="!isCheckedSelf && !isCheckedOthers" class="self">
+          <div class="radiobtns">
+            <div class="radio-group" (click)="handleChange('self')">
+                <input type="radio" [checked]="isCheckedSelf" name="myRadios" (change)="handleChange('self')" value="self" />
+                <span>This quotation is for Myself.</span>
             </div>
-            <div class="radio-group">
-                <input type="radio" [checked]="!isChecked" name="myRadios" (change)="handleChange('others')" value="others" />
-                <span>Others</span>
+            <div class="radio-group"  (click)="handleChange('others')">
+                <input type="radio" [checked]="isCheckedOthers" name="myRadios" (change)="handleChange('others')" value="others" />
+                <span>This quotation is for Others</span>
             </div>
+          </div>
+            <div class="btn-holder">
+            <button class="btn secondary-btn" (click)="onCancelClick()">Cancel</button>
+          </div>
         </div>
 
 
         <ng-container *ngIf="channelPartnerList && channelPartnerList.length>0">
 
         </ng-container>
-        <div class="name-row-01">
+        <!-- <div *ngIf="
+        (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)" class="name-row-01">
           <div class="col col-sm-6 form-group">
             <label for="State">Referred By<span class="mandatory">*</span></label>
             <select class="form-control" (change)="onReferredByChange($event)">
@@ -29,10 +35,10 @@
               <option *ngFor="let item of channelPartnerList" [value]="item | json">{{item.companyBusinessName}}</option>
             </select>
           </div>
-        </div>
+        </div> -->
 
 
-        <ng-container *ngIf="selectedGSTType ==='self'; else othersGSTDetails"> 
+        <ng-container *ngIf="selectedGSTType ==='self'"> 
 
             <form [formGroup]="gstForm">
 
@@ -61,7 +67,7 @@
             </form>
             
         </ng-container>
-        <ng-template #othersGSTDetails>
+        <ng-container *ngIf="selectedGSTType ==='others'">
         
             <form [formGroup]="gstFormOthers">
 
@@ -70,14 +76,25 @@
                       <label for="firstName">Name <span class="mandatory"> * </span> </label>
                       <input formControlName="firstName" type="firstName" class="form-control-01" name="Locality" (input)="onInputChanges($event)"
                         id="firstName" placeholder="Name" required>
-                       
+                        <div *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">
+                          <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('firstName')?.hasError('required')">
+                            Please enter Name</div>  
+                          </div>
                     </div>
                     <div class="col  form-group">
                       <label for="email">Email ID<span class="mandatory">*</span></label>
                       <input formControlName="email" type="email" class="form-control-01" name="email" id="email" (input)="onInputChanges($event)"
                         placeholder="Email ID" >
                         <!-- <div class="error-message" *ngIf="onGSTDetailsCLicked && gstFormOthers.get('email').hasError('required')">Email ID is required</div> -->
-                        <div class="error-message" *ngIf="onGSTDetailsCLicked && gstFormOthers.get('email').hasError('email')">Please enter valid email address</div>
+                        <!-- <div class="error-message" *ngIf="onGSTDetailsCLicked && gstFormOthers.get('email').hasError('email')">Please enter valid email address</div> -->
+                        <div *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">
+                          <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('email')?.hasError('required')">
+                            Please enter Email</div>  
+                         
+                          <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('email')?.hasError('pattern')">
+                            Please enter Valid Email</div>  
+                          </div>
+                          
                     </div>
                 </div>
 
@@ -95,7 +112,13 @@
                     <input formControlName="phoneNo" type="tel" name="phone" class="form-control-01" id="tel" (input)="onInputChanges($event)"
                       placeholder="Enter Your Phone No." >
                       <!-- <div class="error-message" *ngIf="onGSTDetailsCLicked && gstFormOthers.get('phoneNo').hasError('required')">Phone No. is required</div> -->
-                      <div class="error-message" *ngIf="onGSTDetailsCLicked && gstFormOthers.get('phoneNo').hasError('pattern')">Please enter valid Phone Number</div>
+                      <div *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">
+                        <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('phoneNo')?.hasError('required')">
+                          Please enter Phone Number</div>  
+                       
+                        <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('phoneNo')?.hasError('pattern')">
+                          Please enter Valid 10 Degit Phone Number</div>  
+                        </div>
                   </div>
                 </div>
 
@@ -124,18 +147,20 @@
                   </div>
                   
             </form>
-        </ng-template>
+        </ng-container>
         <div *ngIf="gstErrorMessageFlag">
           <p class="error-message commonError">{{gstErrorMessage}}</p>
         </div>
+        <!-- <div *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">
         <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('firstName')?.hasError('required')">
           Please enter Name</div>  
-        <div *ngIf="contactError">
+        </div> -->
+        <!-- <div *ngIf="contactError">
           <div class="error-message commonError">Please enter either Email or Phone</div>
-        </div>
-        <div class="btn-holder">
+        </div> -->
+        <div class="btn-holder" *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">
     
-          <button class="btn secondary-btn" (click)="onCancelClick()">Cancel</button>
+          <button class="btn secondary-btn" (click)="onBackClick()">Back</button>
           <button class="btn primary-btn" (click)="onNextClick()">Next</button>
     
         </div>

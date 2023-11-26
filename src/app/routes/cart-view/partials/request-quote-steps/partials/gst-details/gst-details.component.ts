@@ -19,10 +19,11 @@ export class GstDetailsComponent implements OnInit{
 
   @Output() gstDetailsAction = new EventEmitter();
 
-  contactError:boolean=false
+  //contactError:boolean=false
   isOthers=false;
-  public isChecked : boolean = true;
-  public selectedGSTType : string = 'self';
+  public isCheckedSelf : boolean = false;
+  public isCheckedOthers : boolean = false;
+  public selectedGSTType : string;
 
 
   public gstForm;
@@ -81,8 +82,8 @@ export class GstDetailsComponent implements OnInit{
           checkGstNil : [],
           companyName : [],
           firstName :['', Validators.required],
-          email: ['', [ Validators.email]],
-          phoneNo: ['', [Validators.pattern(/^\d{10}$/)]],
+          email: ['', [ Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)]],
+          phoneNo: ['', [Validators.required,Validators.pattern(/^\d{10}$/)]],
         });
   }
 
@@ -129,11 +130,11 @@ export class GstDetailsComponent implements OnInit{
     this.gstErrorMessage = "Please fill mandaotry Fields";
     if(this.selectedGSTType === 'self'){
 
-      if(!this.referredBy){
-        this.gstErrorMessageFlag = true;
-        this.gstErrorMessage = "Please Select Referred By";
-        return;
-      }
+      // if(!this.referredBy){
+      //   this.gstErrorMessageFlag = true;
+      //   this.gstErrorMessage = "Please Select Referred By";
+      //   return;
+      // }
       if( this.gstForm.get('checkGstNil').value === null || this.gstForm.get('checkGstNil').value === false){
         
 
@@ -182,20 +183,20 @@ export class GstDetailsComponent implements OnInit{
     else{ 
 
       this.isOthers=true
-      this.contactError=false
+      //this.contactError=false
       // Others
-      if(!this.referredBy){
-        this.gstErrorMessageFlag = true;
-        this.gstErrorMessage = "Please Select Referred By";
-        return;
-      }
+      // if(!this.referredBy){
+      //   this.gstErrorMessageFlag = true;
+      //   this.gstErrorMessage = "Please Select Referred By";
+      //   return;
+      // }
 
-      let isMobileOREmail= this.gstFormOthers.get('phoneNo').value.length>0 || this.gstFormOthers.get('email').value.length>0;
-      console.log("isMobileOREmail  ===",isMobileOREmail)
-      if(!isMobileOREmail){
-        this.contactError=true
-        return
-      }
+      // let isMobileOREmail= this.gstFormOthers.get('phoneNo').value.length>0 || this.gstFormOthers.get('email').value.length>0;
+      // console.log("isMobileOREmail  ===",isMobileOREmail)
+      // if(!isMobileOREmail){
+      //   this.contactError=true
+      //   return
+      // }
       if(this.gstFormOthers.invalid){
         console.log("form validation fails")
        return;
@@ -214,7 +215,7 @@ export class GstDetailsComponent implements OnInit{
         reqBody.selectedChannelPartnerAdminId = (this.referredBy) ? this.referredBy.ChannelPartnerAdminId: '';
         reqBody.selectedChannelPartnerId = (this.referredBy) ? this.referredBy.ChannelPartnerId : '';
         reqBody.selectedChannelPartnerName = (this.referredBy) ? this.referredBy.companyBusinessName: '';
-        this.contactError=false;
+       // this.contactError=false;
         this.reqQuoteDetailsStore.setReqQuoteDetails(reqBody);
 
       //  console.log("before  for gst check ")
@@ -399,13 +400,15 @@ export class GstDetailsComponent implements OnInit{
 
   public handleChange(val){
     if(val === 'self'){
-      this.isChecked = true;
+      this.isCheckedSelf = true;
+      this.isCheckedOthers=false;
       this.selectedGSTType = 'self';
       this.setSelfData();
     }
     else{
       this.gstErrorMessageFlag = false
-      this.isChecked = false;
+      this.isCheckedOthers = true;
+      this.isCheckedSelf = false;
       this.selectedGSTType = 'others'
     }
   }
@@ -414,6 +417,15 @@ export class GstDetailsComponent implements OnInit{
     this.router.navigate(['/cart']);
   }
 
+  public onBackClick(){
+    this.isCheckedSelf=false;
+    this.isCheckedOthers=false;
+    this.selectedGSTType = '';
+    this.gstErrorMessageFlag = false;
+    
+    
+    
+  }
   public onReferredByChange(event){
     
     //this.referredBy = event.target.value;

@@ -12,98 +12,109 @@
                     </div> -->
                     <div class="col-sm-6 form-group">
                         <label for="companyBusinessName">Company Business Name<span class="mandatory">*</span></label>
+                        
                         <input formControlName="companyBusinessName" type="companyBusinessName" class="form-control-03"
-                            name="companyBusinessName" id="companyBusinessName" placeholder="Enter Company Name"
-                            >
-                    </div>
+                            name="companyBusinessName" id="companyBusinessName" placeholder="Enter Company Name">
+                            <div class="error-message commonError" *ngIf="submitted && myForm.get('companyBusinessName')?.hasError('required')">
+                                Please enter Company BusinessName</div>
+                    
+                        </div>
 
                     <div class="col-sm-6 form-group gstin">
-                        <label for="gstin">Enter GST</label>
+                        <!-- <label for="gstin">Enter GST</label> -->
+                        <div class="gst-label">
+                            <span>Enter GST <a class="find-gst" href="https://www.knowyourgst.com/gst-number-search/by-name-pan/" target="_blank">(Search GSTIN)</a></span>
+                          </div>
                         <input formControlName="gstin" type="gstin" class="form-control-03" name="gstin" id="gstin"
                             placeholder="Enter GST Number">
 
                     </div>
-                    <div class="col-sm-6 form-group" >
+                    <div class="col-sm-6 form-group">
                         <label></label>
-                        <button class="btn primary-btn fetchgst"  (click)="fetchGST()">Fetch GST Data</button>
+                        <button class="btn primary-btn fetchgst" (click)="fetchGST()">Fetch GST Data</button>
                     </div>
                 </div>
             </div>
             <h4>Address Fields</h4>
 
             <div class="partner-name-01">
-            <div class="address-row">
-                <div class="col-sm-6 form-group">
-                    <label for="address-1">Address Line-1</label>
-                    <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
-                        id="address-1" placeholder="Locality/House/Street no." >
-                </div>
-                <div class="col-sm-6 form-group">
-                    <label for="address-2">Address Line-2<span class="mandatory">*</span></label>
-                    <input formControlName="addressLine2" type="address" class="form-control-01" name="address"
-                        id="address-2" placeholder="Village/City Name." required>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <label for="Country">Country<span class="mandatory">*</span></label>
-                    <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)"
-                        placeholder="select country">
-                        <ng-container *ngIf="gstData; else noGstData">
-                            <option value="India">India</option>
-                        </ng-container>
-                        <ng-template #noGstData>
-                            <option disabled value="'Select Country'">Select Country </option>
-                            <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
-                        </ng-template>
+                <div class="address-row">
+                    <div class="col-sm-6 form-group">
+                        <label for="address-1">Address Line-1</label>
+                        <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
+                            id="address-1" placeholder="Locality/House/Street no.">
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="address-2">Address Line-2<span class="mandatory">*</span></label>
+                        <input formControlName="addressLine2" type="address" class="form-control-01" name="address"
+                            id="address-2" placeholder="Village/City Name." required>
 
-                    </select>
+                            <div class="error-message commonError" *ngIf="submitted &&myForm.get('addressLine2')?.hasError('required')">
+                                Please enter Address</div>  
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="Country">Country<span class="mandatory">*</span></label>
+                        <select formControlName="countryName" class="form-control" (change)="onCountryChange($event)"
+                            placeholder="select country">
+                            <ng-container *ngIf="gstData; else noGstData">
+                                <option value="India">India</option>
+                            </ng-container>
+                            <ng-template #noGstData>
+                                <option disabled value="'Select Country'">Select Country </option>
+                                <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
+                            </ng-template>
 
+                        </select>
+
+                    </div>
                 </div>
-            </div>
             </div>
 
             <div class="partner-name-01">
-            <div class="address-row">
-                <div class="col-sm-6 form-group">
-                    <label for="State">State<span class="mandatory">*</span></label>
-                    <select formControlName="stateName" class="form-control-01" (change)="onStateChange($event)">
-                        <ng-container *ngIf="gstData; else noGstDataState">
-                            <option value="">{{gstResponseData.adress.state}}</option>
-                        </ng-container>
-                        <ng-template #noGstDataState>
-                            <option disabled value="'Select State'">Select State </option>
-                            <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
-                        </ng-template>
+                <div class="address-row">
+                    <div class="col-sm-6 form-group">
+                        <label for="State">State<span class="mandatory">*</span></label>
+                        <select formControlName="stateName" class="form-control-01" (change)="onStateChange($event)">
+                            <ng-container *ngIf="gstData; else noGstDataState">
+                                <option value="">{{gstResponseData.adress.state}}</option>
+                            </ng-container>
+                            <ng-template #noGstDataState>
+                                <option disabled value="'Select State'">Select State </option>
+                                <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
+                            </ng-template>
 
-                    </select>
-                </div>
-           
+                        </select>
+                    </div>
 
-                <div class="col-sm-6 form-group">
-                    <label for="State">City<span class="mandatory">*</span></label>
-                    <select formControlName="cityName" class="form-control-01" (change)="onCityChange($event)">
-                        <ng-container *ngIf="gstData; else noGstDataCity">
-                            <option value="">{{gstResponseData.adress.city}}</option>
-                        </ng-container>
-                        <ng-template #noGstDataCity>
-                            <option disabled value="'Select City'">Select City </option>
-                            <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
-                        </ng-template>
 
-                    </select>
+                    <div class="col-sm-6 form-group">
+                        <label for="State">City<span class="mandatory">*</span></label>
+                        <select formControlName="cityName" class="form-control-01" (change)="onCityChange($event)">
+                            <ng-container *ngIf="gstData; else noGstDataCity">
+                                <option value="">{{gstResponseData.adress.city}}</option>
+                            </ng-container>
+                            <ng-template #noGstDataCity>
+                                <option disabled value="'Select City'">Select City </option>
+                                <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
+                            </ng-template>
+
+                        </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="zip">Postal-Code</label>
+                        <input formControlName="postalCode" type="zip" class="form-control-01" name="Zip" id="zip"
+                            placeholder="Postal-Code.">
+                    </div>
                 </div>
-                <div class="col-sm-6 form-group">
-                    <label for="zip">Postal-Code</label>
-                    <input formControlName="postalCode" type="zip" class="form-control-01" name="Zip" id="zip"
-                        placeholder="Postal-Code.">
+                <div class="section-02">
+                    <div class="credit">
+                        <label>Credit Worthyness<span class="mandatory">*</span></label>
+                        <input formControlName="credit" type="number" class="form-control-02" name="Locality"
+                            id="credit" placeholder="Enter Credit Worthyness" required>
+                            <div class="error-message commonError" *ngIf="submitted && myForm.get('credit')?.hasError('required')">
+                                Please enter Credit Worthyness</div>
+                    </div>
                 </div>
-            </div>
-            <div class="section-02">
-                <div class="credit">
-                    <label>Credit Worthyness<span class="mandatory">*</span></label>
-                    <input formControlName="credit" type="number" class="form-control-02" name="Locality" id="credit"
-                        placeholder="Enter Credit Worthyness" required>
-                </div>
-            </div>
             </div>
 
 
@@ -112,39 +123,43 @@
             <div class="card flex justify-content-center">
                 <div class="flex flex-wrap gap-3">
                     <div class="flex align-items-center">
-                        <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}"
-                            [(ngModel)]="addAdminOption" value="new" inputId="ingredient1"></p-radioButton>
+                        <!-- <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="addAdminOption" value="new" inputId="ingredient1"></p-radioButton> -->
                         <label for="ingredient1" class="ml-2">
                             <h4 class="radio-style">Add New Admin User</h4>
                         </label>
                     </div>
 
-                    <div class="flex align-items-center">
+                    <!-- <div class="flex align-items-center">
                         <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}"
                             [(ngModel)]="addAdminOption" value="existing" inputId="ingredient2"></p-radioButton>
                         <label for="ingredient2" class="ml-2">
                             <h4 class="radio-style">Add Existing User</h4>
                         </label>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- <ng-container *ngIf="(addAdminOption === 'new') ; else existingUserTemplate"> -->
-                
+
             <ng-container>
                 <div class="partner-name-01">
-                <div class="address-row">
-                    <ng-container *ngIf="(addAdminOption === 'new'); else userSelect">
-                        <div class="col-sm-6 form-group">
-                            <label for="userName">FirstName<span class="mandatory">*</span></label>
-                            <input formControlName="userName" type="address" class="form-control-01" name="userName"
-                                id="userName" placeholder="Enter FirstName" >
-                        </div>
-                    </ng-container>
-                    <ng-template #userSelect>
+                    <div class="address-row">
+                        <!-- <ng-container *ngIf="(addAdminOption === 'new'); else userSelect"> -->
+                        <ng-container *ngIf="(addAdminOption === 'new')">
+                            <div class="col-sm-6 form-group">
+                                <label for="userName">Name<span class="mandatory">*</span></label>
+                                <input formControlName="userName" type="address" class="form-control-01" name="userName"
+                                    id="userName" placeholder="Enter FirstName">
+                                    <div class="error-message commonError" *ngIf="submitted &&myForm.get('userName')?.hasError('required')">
+                                        Please enter Name</div>  
+                            </div>
+                        </ng-container>
+                        <!-- <ng-template #userSelect>
                         <div  class="col-sm-6 form-group">
 
 
-                            <!-- <div class="label"> -->
+                          
+                            
                                 <label>Select User<span class="mandatory">*</span></label>
 
 
@@ -154,45 +169,36 @@
                                     <option *ngFor="let user of usersList" [value]="user._id">{{user.firstName}}
                                     </option>
                                 </select>
-                            <!-- </div> -->
-
-                            <!-- <div class="userDropdown">
-
-
-                                <p-dropdown class="localptable" [options]="usersList"
-                                    (onChange)="selectAdminUserDetails($event)" [(ngModel)]="selectedAdminuser"
-                                    optionLabel="firstName" [filter]="true" filterBy="firstName" [showClear]="true"
-                                    [ngModelOptions]="{standalone: true}" placeholder="Select User">
-                                    <ng-template pTemplate="selectedItem">
-                                        <div class="country-item country-item-value" *ngIf="selectedAdminuser">
-                                            <div>{{selectedAdminuser.firstName}}</div>
-                                        </div>
-                                    </ng-template>
-                                    <ng-template let-usersList pTemplate="item">
-                                        <div class="country-item">
-                                            <div>{{usersList.firstName}}</div>
-                                        </div>
-                                    </ng-template>
-                                </p-dropdown>
-
-                            </div> -->
+                         
+                                
                         </div>
-                    </ng-template>
+                    </ng-template> -->
 
-                    <div class="col-sm-6 form-group">
-                        <label for="address-2">Email Id<span class="mandatory">*</span></label>
-                        <input formControlName="EmailId" type="address" class="form-control-01" name="emailid"
-                            id="address-2" placeholder="Enter EmailId" required>
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <label>Mobile No.<span class="mandatory">*</span></label>
-                        <input formControlName="phoneNo" type="number" class="form-control-01" name="Locality"
-                            id="firstName" placeholder="Enter Phone Number" required>
+                        <div class="col-sm-6 form-group">
+                            <label for="address-2">Email Id<span class="mandatory">*</span></label>
+                            <input formControlName="EmailId" type="address" class="form-control-01" name="emailid"
+                                id="address-2" placeholder="Enter EmailId" required>
+
+                            <div class="error-message commonError" *ngIf="submitted && myForm.get('EmailId')?.hasError('required')">
+                                Please enter Email</div>
+                            <div class="error-message commonError" *ngIf="myForm.get('EmailId')?.hasError('pattern')">
+                                Please enter Valid Email</div>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Mobile No.<span class="mandatory">*</span></label>
+                            <input formControlName="phoneNo" type="number" class="form-control-01" name="Locality"
+                                id="firstName" placeholder="Enter Phone Number" required>
+
+                                <div class="error-message commonError" *ngIf="submitted &&myForm.get('phoneNo')?.hasError('required')">
+                                    Please enter Phone Number</div>  
+                                 
+                                  <div class="error-message commonError" *ngIf="myForm.get('phoneNo')?.hasError('pattern')">
+                                    Please enter Valid 10 Degit Phone Number</div>  
+                        </div>
                     </div>
                 </div>
-            </div>
             </ng-container>
-       
+
 
 
 
@@ -200,8 +206,8 @@
 
 
             <!-- Prime Ng Radio Button Ends -->
-            <div *ngIf="submitErrorMessage">
-                <p class="error">* Please Fill Mandatory fileds like Name and Admin users</p>
+            <div *ngIf="submitted&&countryStateError">
+                <p class="error">Country, State and City fields are mandatory.</p>
             </div>
             <div class="modal-footer">
                 <ng-container>
