@@ -12,10 +12,10 @@
     <div class="register-form">
       <form [formGroup]="formEmail" >
         <div class="form-group">
-          <label for="emailOrMobile">Email or Mobile Number</label>
+          <label for="emailOrMobile">Email or Mobile Number <span class="mandatory"> * </span></label>
           <input type="text" class="form-control" id="emailOrMobile" 
           formControlName="emailOrMobile" 
-          placeholder="Enter your Email or Whatsapp number"
+          placeholder="Enter Email or Mobile Number(Whats app enabled)"
           
           >
           <!-- <div *ngIf="signupForm.get('emailOrMobile').hasError('invalidEmailOrMobile') && signupForm.get('emailOrMobile').touched">

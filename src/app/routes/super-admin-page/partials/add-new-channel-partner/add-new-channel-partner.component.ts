@@ -220,15 +220,18 @@ export class AddNewChannelPartnerComponent implements OnInit {
        
       }
     }
+    console.log("this.selectedCountry  ",this.selectedCountrys)
+    console.log("this.selectedState  ",this.selectedState)
+    console.log("this.selectedCity  ",this.selectedCity)
 
-    if(!this.selectedCountry || !this.selectedState || !this.selectedCity){
+    if(!this.selectedCountry && !this.selectedState && !this.selectedCity){
         
       //console.log("+++__+_ AAAA");
       this.countryStateError = true;
      // return;
     }
     
-    if (this.myForm.invalid && this.countryStateError) {
+    if (this.myForm.invalid || this.countryStateError) {
      // this.submitErrorMessage = true;
      
     }
@@ -269,11 +272,11 @@ export class AddNewChannelPartnerComponent implements OnInit {
         address: [{
           "address": channelPartnerData.addressLine1,
           "street2": channelPartnerData.addressLine2,
-          "state_code": "KA",
-          "city": "Bengaluru",
-          "state": "Karnataka",
-          "zip": "560022",
-          "country": "IN"
+          "state_code": this.selectedState.isoCode,
+          "city":this.selectedCity.name,
+          "state": this.selectedState.name,
+          "zip": channelPartnerData.postalCode,
+          "country":  this.selectedCountrys.name
 
         }],
 

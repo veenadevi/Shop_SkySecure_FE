@@ -42,10 +42,11 @@ export class GetFreeCallModalComponent implements OnInit{
       this.form = this.formBuilder.group(
         {
           //emailId: ['', [Validators.required, Validators.email]],
-          emailId: ['', [Validators.required, Validators.email]],
-          phoneNo : ['', Validators.required],
-          companyName : [],
-          messageText : []
+          emailId: ['', [ Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)]],
+          phoneNo: ['', [Validators.required,Validators.pattern(/^\d{10}$/)]],
+        
+          companyName : ['', [Validators.required]],
+          messageText :  ['', [Validators.required]]
         }
       )
     }
