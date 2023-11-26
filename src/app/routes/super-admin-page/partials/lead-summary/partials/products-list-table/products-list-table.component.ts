@@ -582,20 +582,22 @@ this.enableinvoice=true
 
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === element.value.line_items_id);
 
-
+      var priceIndex=0
 
       if (index >= 0) {
 
-    
+        if(element.value.priceType==='Month'){
+          priceIndex=1
+        }
         let tempArray = {
           "productId": this.cartDetails[index].productId,
           "quantity": element.value.quantity,
           "productName": this.cartDetails[index].productName,
           "price": element.value.bcy_rate,
-          "erpPrice": this.cartDetails[index].erpPrice,
-          "discountRate": this.cartDetails[index].discountRate,
+          "erpPrice": this.cartDetails[index].priceList[priceIndex].ERPPrice,
+          "discountRate": this.cartDetails[index].priceList[priceIndex].discountRate,
           "priceType": element.value.priceType,
-          "distributorPrice": this.cartDetails[index].distributorPrice,
+          "distributorPrice": this.cartDetails[index].priceList[priceIndex].distributorPrice,
           "itemTotal": element.value.bcy_rate * element.value.quantity,
           "priceList": this.cartDetails[index].priceList
         }
@@ -691,7 +693,7 @@ this.enableinvoice=true
       this.enableEdit = true
     this.enableinvoice=true
     this.allowAddProduct=true
-
+    history.back()
     })
 
     /*

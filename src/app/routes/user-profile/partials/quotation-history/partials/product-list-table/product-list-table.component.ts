@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { UploadpoModalComponent } from 'src/shared/components/modals/uploadpo-modal/uploadpo-modal.component';
@@ -79,6 +80,7 @@ export class ProductListTableComponent {
     private cartService: CartService,
     private modalService: NgbModal,
     private userAccountStore: UserAccountStore,
+    public spinner: NgxSpinnerService,
   ) { }
 
 
@@ -417,7 +419,7 @@ export class ProductListTableComponent {
 
       })
     )
-
+    history.back()
 
   }
 
@@ -515,19 +517,21 @@ export class ProductListTableComponent {
 
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === element.value.line_items_id);
      
-
+      var priceIndex=0
       if (index >= 0) {
-
+        if(element.value.priceType==='Month'){
+          priceIndex=1
+        }
      
         let tempArray = {
           "productId": this.cartDetails[index].productId,
           "quantity": element.value.quantity,
           "productName": this.cartDetails[index].productName,
           "price": element.value.bcy_rate,
-          "erpPrice": this.cartDetails[index].erpPrice,
-          "discountRate": this.cartDetails[index].discountRate,
+          "erpPrice": this.cartDetails[index].priceList[priceIndex].ERPPrice,
+          "discountRate": this.cartDetails[index].priceList[priceIndex].discountRate,
           "priceType": element.value.priceType,
-          "distributorPrice": this.cartDetails[index].distributorPrice,
+          "distributorPrice": this.cartDetails[index].priceList[priceIndex].distributorPrice,
           "itemTotal": element.value.bcy_rate * element.value.quantity,
           "priceList": this.cartDetails[index].priceList
         }
