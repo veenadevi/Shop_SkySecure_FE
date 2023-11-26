@@ -91,9 +91,10 @@
                           <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('email')?.hasError('required')">
                             Please enter Email</div>  
                          
-                          <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('email')?.hasError('pattern')">
-                            Please enter Valid Email</div>  
+                         
                           </div>
+                          <div class="error-message commonError" *ngIf="gstFormOthers.get('email')?.hasError('pattern')">
+                            Please enter Valid Email</div>  
                           
                     </div>
                 </div>
@@ -116,7 +117,7 @@
                         <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('phoneNo')?.hasError('required')">
                           Please enter Phone Number</div>  
                        
-                        <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('phoneNo')?.hasError('pattern')">
+                        <div class="error-message commonError" *ngIf="gstFormOthers.get('phoneNo')?.hasError('pattern')">
                           Please enter Valid 10 Degit Phone Number</div>  
                         </div>
                   </div>
