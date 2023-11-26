@@ -221,13 +221,14 @@ public addCartItemsService(req, state) {
 
       console.log("to add product to cart===")
           //forkJoin will wait for the response to come for all of the observables
-          
+          this.spinner.hide();
+          this.toaster.showSuccess("The product has been added to Cart",'')
           return forkJoin(allObs$);
         })
       ).subscribe((forkJoinResponse) => {
        // console.log("+_)(*&^^ ^", forkJoinResponse);
-        this.spinner.hide();
-        this.toaster.showSuccess("The product has been added to Cart",'')
+       // this.spinner.hide();
+       // this.toaster.showSuccess("The product has been added to Cart",'')
         //forkJoinResponse will be an array of responses for each of the this.serviceTwo.getAllServiceTwoData CALL
         //Do whatever you want to do with this array
       

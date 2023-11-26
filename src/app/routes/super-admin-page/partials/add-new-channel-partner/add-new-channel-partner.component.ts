@@ -41,12 +41,14 @@ export class AddNewChannelPartnerComponent implements OnInit {
   @Input('request')
   public countryList: any;
 
-
+  submitted = false;
 
   public selectedAdminuser: any;
 
 
   public stateList: any;
+
+  public countryStateError:boolean=false
 
   public cityList: any;
   public showMsg: boolean
@@ -96,7 +98,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
       postalCode: [''],
       credit: ['0'],
       userName: ['', [Validators.required]],
-      EmailId: ['', [Validators.required, Validators.email]],
+      EmailId: ['', [ Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)]],
       phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       country: [''],
       companyBusinessName: ['', Validators.required]
@@ -109,6 +111,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
 
   selectedValue: any;
   ngOnInit(): void {
+    this.submitted=false
 
     this.countries = [
       { name: 'Australia', code: 'AU' },
@@ -208,6 +211,8 @@ export class AddNewChannelPartnerComponent implements OnInit {
   public submitErrorMessage: boolean = false;
 
   public submitForm() {
+    this.submitted=true
+    this.countryStateError=false
 
     let controls = this.myForm.controls
     for (const name in controls) {
@@ -216,17 +221,28 @@ export class AddNewChannelPartnerComponent implements OnInit {
       }
     }
 
-
+    if(!this.selectedCountry || !this.selectedState || !this.selectedCity){
+        
+      //console.log("+++__+_ AAAA");
+      this.countryStateError = true;
+     // return;
+    }
     
-    if (this.myForm.invalid) {
-      this.submitErrorMessage = true;
+    if (this.myForm.invalid && this.countryStateError) {
+     // this.submitErrorMessage = true;
      
     }
+   
     else {
 
-      this.CreateChannelPartner()
-      console.log("_____++++ Error False");
-      this.submitErrorMessage = false
+     
+   
+        this.CreateChannelPartner()
+        console.log("_____++++ Error False");
+      
+        this.submitted=false
+        this.countryStateError = false;
+    
     }
 
   }
@@ -407,12 +423,12 @@ export class AddNewChannelPartnerComponent implements OnInit {
   }
 
 
-  disableErrorMessage() {
-    if (((this.myForm.get('userName').value === true) && (this.myForm.get('EmailId').value === null && this.myForm.get('phoneNo').value === null && this.myForm.get('adminUser').value === null)) ||
-      ((this.myForm.get('userName').value === null) && (this.myForm.get('EmailId').value === true && this.myForm.get('phoneNo').value === true && this.myForm.get('adminUser').value === true))) {
-      this.submitErrorMessage = false;
-    }
-  }
+  // disableErrorMessage() {
+  //   if (((this.myForm.get('userName').value === true) && (this.myForm.get('EmailId').value === null && this.myForm.get('phoneNo').value === null && this.myForm.get('adminUser').value === null)) ||
+  //     ((this.myForm.get('userName').value === null) && (this.myForm.get('EmailId').value === true && this.myForm.get('phoneNo').value === true && this.myForm.get('adminUser').value === true))) {
+  //     this.submitErrorMessage = false;
+  //   }
+  // }
 
   public radioClick() {
 
