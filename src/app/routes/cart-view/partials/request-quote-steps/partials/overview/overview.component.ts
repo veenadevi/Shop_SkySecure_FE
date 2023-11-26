@@ -225,7 +225,7 @@ export class OverviewComponent implements OnInit{
     this.finalReq['selectedChannelPartnerId'] = storeDetails.selectedChannelPartnerId;
     this.finalReq['selectedChannelPartnerAdminId'] = storeDetails.selectedChannelPartnerAdminId;
     this.finalReq['selectedChannelPartnerName'] = storeDetails.selectedChannelPartnerName;
-    this.finalReq['leadStatusUpdate'] = 'ChannalPartner Assigned';
+    //this.finalReq['leadStatusUpdate'] = 'ChannalPartner Assigned';
 
     this.dataPresent = true;
     
