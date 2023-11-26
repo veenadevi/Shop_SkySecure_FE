@@ -70,15 +70,15 @@
             <div for="chb" class="form-check-label" ><h4 class="radio-style">Add as Admin?</h4></div>
             </div>
 
-            <div class="content-select">
-                <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}" [(ngModel)]="addAdminOption" value="new" inputId="ingredient1"></p-radioButton>
+            <!-- <div class="content-select">
+                <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}" [(ngModel)]="addAdminOption" value="new" inputId="ingredient1"></p-radioButton> 
                 <label for="ingredient1" class="ml-2"><h4 class="radio-style">Add New  User</h4></label>
-            </div>
+            </div> -->
             
-            <div class="content-select">
+            <!-- <div class="content-select">
                 <p-radioButton name="pizza" (onClick)="radioClick()" [ngModelOptions]="{standalone: true}" [(ngModel)]="addAdminOption" value="existing" inputId="ingredient2"></p-radioButton>
                 <label for="ingredient2" class="ml-2"><h4 class="radio-style">Add Existing User</h4></label>
-            </div>
+            </div> -->
         <!-- </div> -->
     </div>
     <!-- <ng-container *ngIf="(addAdminOption === 'new') ; else existingUserTemplate"> -->
@@ -86,9 +86,9 @@
         <div class="address-row">
             <ng-container *ngIf="(addAdminOption === 'new'); else userSelect">
                 <div class="col-sm-6 form-group">
-                    <label for="userName">FirstName<span style="color: red;"> * </span></label>
+                    <label for="userName">Name<span style="color: red;"> * </span></label>
                     <input formControlName="userName" type="address" class="form-control-01" name="userName"
-                        id="userName" placeholder="Enter FirstName" required>
+                        id="userName" placeholder="Enter Name" required>
                 </div>
             </ng-container>
             <ng-template #userSelect>

@@ -6,6 +6,7 @@ import { AddCompareProductModalComponent } from 'src/shared/components/modals/ad
 import { CartService } from 'src/shared/services/cart.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import { InvoiceDueDateModalComponent } from 'src/shared/components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'product-list-table',
@@ -82,6 +83,7 @@ export class ProductListTableComponent {
     private cartService: CartService,
     private modalService: NgbModal,
     private userAccountStore: UserAccountStore,
+    public spinner: NgxSpinnerService,
   ) { }
   userDetails:any;
 
@@ -109,12 +111,13 @@ export class ProductListTableComponent {
 
 
   public setSampleData() {
-
+    this.spinner.show()
     this.productListForm = this.fb.group({
       items: this.fb.array([])
     });
+    
     this.getEmployee();
-
+    this.spinner.hide()
   }
 
   public valueChanged(event, item, type) {
@@ -184,9 +187,11 @@ export class ProductListTableComponent {
       
       if (data) {
         let editedRate = item.get('bcy_rate').value;
-        let calculatedDistributarPrice = data.priceList[0].distributorPrice;
+        let calculatedDistributarPrice = item.get('distributorPrice').value
+        data.priceList[0].distributorPrice;
 
-        let calculatedERPPrice = data.priceList[0].erp_price;
+        let calculatedERPPrice =item.get('erp_price').value
+        // data.priceList[0].erp_price;
 
         let calcRate = calculatedDistributarPrice;
 
@@ -209,6 +214,8 @@ export class ProductListTableComponent {
 
   getEmployee() {
    // this.enableEdit = false;
+
+
 
     if (this.productsData.line_items) {
       this.isEstimate = true;
@@ -240,6 +247,7 @@ export class ProductListTableComponent {
           line_items_id: [items.line_item_id, null]
         });
         control.push(grp);
+       
       }
     }
     else {
@@ -420,7 +428,9 @@ export class ProductListTableComponent {
   //  console.log("request  ",request)
     this.subscription.push(
       this.cartService.editQuotation(request).subscribe(res => {
+        
         this.showMsg = true
+        history.back()
 
       })
     )
@@ -563,19 +573,22 @@ export class ProductListTableComponent {
 
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === element.value.line_items_id);
   
-
+      var priceIndex=0
       if (index >= 0) {
 
+        if(element.value.priceType==='Month'){
+          priceIndex=1
+        }
        
         let tempArray = {
           "productId": this.cartDetails[index].productId,
           "quantity": element.value.quantity,
           "productName": this.cartDetails[index].productName,
           "price": element.value.bcy_rate,
-          "erpPrice": this.cartDetails[index].erpPrice,
-          "discountRate": this.cartDetails[index].discountRate,
+          "erpPrice": this.cartDetails[index].priceList[priceIndex].ERPPrice,
+          "discountRate": this.cartDetails[index].priceList[priceIndex].discountRate,
           "priceType": element.value.priceType,
-          "distributorPrice": this.cartDetails[index].distributorPrice,
+          "distributorPrice": this.cartDetails[index].priceList[priceIndex].distributorPrice,
           "itemTotal": element.value.bcy_rate * element.value.quantity,
           "priceList": this.cartDetails[index].priceList
         }
@@ -671,6 +684,7 @@ export class ProductListTableComponent {
       this.enableEdit = true
     this.enableinvoice=true
     this.allowAddProduct=true
+    history.back();
 
     })
     //console.log("+_+_+_+_+_ Res Data ", request);

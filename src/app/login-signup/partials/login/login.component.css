@@ -9,7 +9,7 @@
 .back-btn{
     padding-top: 0px;
     padding-left: 0;
-    margin-top: -140px;
+    margin-top: -120px;
     margin-left: -35px;
     cursor: pointer;
 }
@@ -17,6 +17,9 @@
     font-family: 'lato',sans-serif;
     padding: 6% 0 0 0;
    
+}
+.mandatory{
+    color: red;
 }
 h1{
     font-size: 20px;
@@ -49,16 +52,23 @@ input{
     padding-top: 5px;
     font-size: 13px;
 }
+.form-control{
+font-size: 14px;
+}
 .primary-btn{
     /* margin-left: 35%; */
     margin-top: 25px;
-    font-size: 18px;
+    font-size: 17px !important;
     cursor: pointer;
+}
+.label{
+    font-size: 15px;
 }
 
 
 .no-account{
     display: flex;
+    font-size: 13px;
     flex-direction: row;
     padding-top: 30px;
 justify-content: center;
@@ -74,6 +84,7 @@ align-items: center;
     font-family: 'lato',sans-serif;
     cursor: pointer;
     padding-left: 1%;
+    font-size: 15px;
 }
 
 .new-email-alert{
@@ -144,7 +155,7 @@ align-items: center;
 
 .disclaimer{
     text-align: center;
-    font-size: 13px;
+    font-size: 14px;
     color: rgb(146, 5, 5);
     padding-top: 10px;
 }
@@ -185,7 +196,7 @@ align-items: center;
     font-family: 'lato',sans-serif;
     cursor: pointer;
     padding-left: 1%;
-    font-size: 20px;
+    font-size: 15px !important;
 }
 .disclaimer {
     text-align: center;
@@ -328,7 +339,7 @@ input{
     .forgot-pwd{
         padding-left: 21%;
         padding-top: 5px;
-        font-size: 13px;
+        font-size: 14px;
     }
  
     
@@ -343,7 +354,7 @@ input{
     .no-account-01{
         padding-left: 0%;
         font-family: 'lato',sans-serif;
-        font-size: 13px;
+        font-size: 14px;
     }
     .no-account-02{
         color:#383DA9;
@@ -351,7 +362,7 @@ input{
         font-family: 'lato',sans-serif;
         cursor: pointer;
         padding-left: 1%;
-        font-size: 13px;
+        font-size: 15px;
     }
     
     .new-email-alert{
@@ -529,7 +540,7 @@ input{
     .forgot-pwd{
         padding-left: 21%;
         padding-top: 5px;
-        font-size: 13px;
+        font-size: 14px;
     }
  
     
@@ -730,7 +741,7 @@ input{
     .forgot-pwd{
         padding-left: 21%;
         padding-top: 5px;
-        font-size: 13px;
+        font-size: 14px;
     }
  
     
@@ -745,7 +756,7 @@ input{
     .no-account-01{
         padding-left: 0%;
         font-family: 'lato',sans-serif;
-        font-size: 13px;
+        font-size: 14px;
     }
     .no-account-02{
         color: #383DA9;

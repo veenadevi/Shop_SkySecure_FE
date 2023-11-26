@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartStore } from 'src/shared/stores/cart.store';
@@ -96,6 +96,7 @@ public whatsAppMessage:string
 
   constructor(
     private router : Router,
+    private route:ActivatedRoute,
     private compareProductsStore : CompareProductsStore,
     private authService : MsalService,
     private cartStore : CartStore,
@@ -103,6 +104,8 @@ public whatsAppMessage:string
     private userAccountStore : UserAccountStore,
     private toaster : ToasterNotificationService,
     private addItemsToCartService : AddItemsToCartService,
+    
+
     
   ){}
 
@@ -354,7 +357,7 @@ public whatsAppMessage:string
 
     //let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
-    let queryParams;
+    var queryParams;
 
     
     queryParams = {
@@ -369,23 +372,27 @@ public whatsAppMessage:string
           priceList : product.priceList
 
         };
-    /*if(loggedinData.length > 0 ){
-      
-      var existingItems = this.cartStore.getCartItems();
-
-      this.router.navigate(['/cart'], {queryParams: queryParams});
-    }
-
-    else {
-      this.viewModal(queryParams);
-    }*/
+  
 
     let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
     if (encodedVal !== null) {
+
+    
       this.addItemsToCartService.addItemsToCart(queryParams);
     }
     else{
-      this.viewModal(queryParams);
+
+      var currentRouteName = this.route.snapshot.data.title;
+      currentRouteName='/products/'+this.route.snapshot.url[0].path+'/'+ this.route.snapshot.url[1].path
+
+      console.log("===calign after log  gain==========",this.route.snapshot)
+
+      console.log("===routing==========",currentRouteName)
+
+      this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})
+
+    
+    
     }
     /*this.userAccountStore.userDetails$.subscribe(res=>{
       

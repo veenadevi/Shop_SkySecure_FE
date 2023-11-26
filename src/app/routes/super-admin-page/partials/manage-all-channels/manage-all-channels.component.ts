@@ -263,7 +263,7 @@ export class ManageAllChannelsComponent {
 
 
   public submitForm() {
-    
+    console.log("for cp error ===",this.currentChannelId)
 
     if( this.currentChannelId.length<=0){
       this.CPError=true

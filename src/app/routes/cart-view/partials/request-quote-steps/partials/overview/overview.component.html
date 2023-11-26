@@ -30,14 +30,15 @@
               <span class="value-field">{{finalReq.companyName}}</span>
             </div>
             <div class="col col-sm-4 form-group">
-                &nbsp;
-            </div>
+              <label for="address-2">Quotation For</label>
+              <span class="value-field">{{(finalReq.RequestingForOther) ? 'Others' : 'Self'}}</span>
+          </div>
             
         </div>
 
         
 
-        <div class="text-row">
+        <!-- <div class="text-row">
             <div class="col col-sm-4 form-group">
                 <label for="address-1">Referred By</label>
                 <span class="value-field">{{(finalReq.selectedChannelPartnerName) ? finalReq.selectedChannelPartnerName : '-'}}</span>
@@ -51,7 +52,7 @@
             </div>
             
 
-        </div>
+        </div> -->
 
         <ng-container *ngIf="finalReq && finalReq.billing_address">
             <div class="text-row">

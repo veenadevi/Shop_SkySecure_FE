@@ -30,6 +30,8 @@ export class AdminPageService {
   private addChannelPartnerURL:string;
   private getAllMyCustomersUrl : String;
 
+  private getAllUserReviewsListURL:String;
+
   private getAllCompanyUrl : String;
 
 
@@ -83,6 +85,7 @@ export class AdminPageService {
     //For Channel AM
 
     this.getChannelAMAccountListURL=AppService.appUrl.getChannelAMAccountListURL;
+    this.getAllUserReviewsListURL=AppService.appUrl.getAllUserReviewsListURL
      this.options = this.getOptions();
 
     
@@ -580,10 +583,10 @@ public inviteUsers( request : any): Observable<any> {
 
   public getProductReviewsList() : Observable<any> {
 
-    //let url = this.baseUrlForQuote + this.getAccountsByIdUrl + '/' + accountsId;
+   let url = this.baseUrl + this.getAllUserReviewsListURL
 
     
-    let url = "https://dev-productapi.realize.skysecuretech.com/api/product-reviews"
+   // let url = "https://dev-productapi.realize.skysecuretech.com/api/product-reviews"
 
     let request$ = this.http.get<Observable<any>>(url)
       .pipe(

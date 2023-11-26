@@ -58,7 +58,7 @@ export class CartService {
   public addCartItems( request : UserCartRequest): Observable<any> {
 
     const URL = this.baseUrl + this.userCartUrl;
-    //const OPTIONS = this.getOptions();
+    // const OPTIONS = this.getOptions();
 
 
 
@@ -71,6 +71,9 @@ export class CartService {
     //     }
     //     ]
     //   })
+    this.options=this.getOptions();
+
+    //console.log("passing auth for add cart  ",this.options)
     
     const REQUEST$ = this.http.post<any>(URL, request,this.options)
       .pipe(
@@ -210,9 +213,13 @@ export class CartService {
    * Stages our Http Request Headers
    */
 
+
+  
   private getOptions() : { headers: HttpHeaders } { 
  
     let token = localStorage.getItem("XXXXaccess__tokenXXXX");
+
+    console.log("fetched token ====",token)
 
     const OPTIONS : { headers : HttpHeaders } = { 
       headers : new HttpHeaders() 

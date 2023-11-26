@@ -11,6 +11,8 @@ import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import * as CryptoJS from 'crypto-js';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { NgOtpInputConfig } from 'ng-otp-input';
+import { AddItemsToCartService } from 'src/shared/services/global-function-service/add-items-to-cart.service';
+
  
  
 
@@ -32,6 +34,8 @@ export class LoginComponent {
 
   public params : any;
   public emailViaSignup:String
+
+  public cartObj:any;
 
   public enableSignInButton = false;
   public signUpSuccess:boolean=false
@@ -63,7 +67,10 @@ export class LoginComponent {
     public router : Router,
     public route : ActivatedRoute,
     private userAccountStore : UserAccountStore,
-    private userProfileService : UserProfileService
+    private userProfileService : UserProfileService,
+    private addItemsToCartService : AddItemsToCartService
+   
+
     ) {}
 
   ngOnInit(): void {
@@ -71,15 +78,21 @@ export class LoginComponent {
     this.params = this.route.snapshot.queryParamMap;
 
     this.route.queryParams.subscribe(params => {
+      console.log("params    =====",params)
       
       this.emailViaSignup= params['email'];
-     
+      this.cartObj=params
+      // console.log("params    =====",this.cartObj)
+
+      // console.log("currentRouteName    =====",this.cartObj['currentRouteName'])
 
     if(params['succuessMessage']){
       this.signUpSuccess=true
     }
 
     });
+
+    
 
     this.form = this.formBuilder.group(
       {
@@ -303,6 +316,8 @@ export class LoginComponent {
 
   public callSignIn(){
 
+    console.log("==========callSignIn  ")
+
     var passKey= "!ndia2320@securesky";
     let key = "&&((SkysecureRealize&&!!IsTheBestApp^!@$%"
       let hashedPass = CryptoJS.AES.encrypt(passKey, key).toString();
@@ -321,19 +336,40 @@ export class LoginComponent {
           
           this.userAccountStore.setUserDetails(decoded);
           
+         // console.log("Login Success=====")
+         // console.log("params passed =====",this.params)
+        //  var paramsMap=this.params.queryParams
 
-          if(this.params && this.params.has('productId')){
-           
-            this.router.navigate(['']);
+
+
+          // console.log("========this.params=====",this.cartObj)
+
+          // console.log("navigator route ",this.cartObj.currentRouteName)
+       
+          if(this.cartObj && this.cartObj.hasOwnProperty('productId')){
+
+        //  console.log("user logged in ",localStorage.getItem("XXXXaccess__tokenXXXX"));
+
+        //  console.log("can as ====")
+
+          this.addItemsToCartService.addItemsToCart(this.cartObj);
+         
+     
+      this.router.navigate([this.cartObj.currentRouteName]);
+
+         this.cartObj=null
           }
           else{
+          //  console.log('coming to else part')
          
-            this.router.navigate(['']);
+           this.router.navigate(['']);
+         
           }
           
         })
       )
   }
+
 
   onReset(): void {
     this.submitted = false;
