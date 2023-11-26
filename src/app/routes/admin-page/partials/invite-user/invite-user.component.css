@@ -181,10 +181,17 @@ cursor: pointer;
     color: red;
     
 }
+.find-gst{
+    text-decoration: none;
+    color: var(--primary-500-purple);
+}
+.gstTxt{
+    font-size:13px ;
+}
 
 .commonError{
     text-align: center;
     font-size: 13px;
     color: red;
-    padding-top: 10px;
+    padding-top: 10px;  
 }

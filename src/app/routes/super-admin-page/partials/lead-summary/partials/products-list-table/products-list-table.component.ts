@@ -180,7 +180,7 @@ this.enableinvoice=true
       if(editedRate < calcRate  ){
        
         item.get('bcy_rate').setErrors({ 'invalid': true });
-        this.enableEdit = true;
+        this.enableEdit = false;
 
       }
     
@@ -192,15 +192,17 @@ this.enableinvoice=true
       if (data) {
 
         let editedRate = item.get('bcy_rate').value;
-        let calculatedDistributarPrice = data.priceList[0].distributorPrice; 
-        let calculatedERPPrice=data.priceList[0].ERPPrice
+        let calculatedDistributarPrice =item.get('distributorPrice').value 
+        // data.priceList[0].distributorPrice; 
+        let calculatedERPPrice=item.get('erp_price').value
+        //data.priceList[0].ERPPrice
         
         let calcRate = calculatedDistributarPrice;
        
         if (editedRate < calcRate ) {
        
           item.get('bcy_rate').setErrors({ 'invalid': true });
-          this.enableEdit = true;
+          this.enableEdit = false;
         } 
         if (editedRate > calculatedERPPrice ) { 
           item.get('bcy_rate').setErrors({ 'invalid': true });
