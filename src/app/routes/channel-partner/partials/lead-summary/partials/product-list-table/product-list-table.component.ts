@@ -187,9 +187,11 @@ export class ProductListTableComponent {
       
       if (data) {
         let editedRate = item.get('bcy_rate').value;
-        let calculatedDistributarPrice = data.priceList[0].distributorPrice;
+        let calculatedDistributarPrice = item.get('distributorPrice').value
+        data.priceList[0].distributorPrice;
 
-        let calculatedERPPrice = data.priceList[0].erp_price;
+        let calculatedERPPrice =item.get('erp_price').value
+        // data.priceList[0].erp_price;
 
         let calcRate = calculatedDistributarPrice;
 
