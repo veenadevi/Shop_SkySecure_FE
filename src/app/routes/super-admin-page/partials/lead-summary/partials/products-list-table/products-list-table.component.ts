@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { InvoiceDueDateModalComponent } from 'src/shared/components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
@@ -92,6 +93,7 @@ export class ProductsListTableComponent implements OnInit {
     private cartService: CartService,
     private modalService: NgbModal,
     private userAccountStore: UserAccountStore,
+    public spinner: NgxSpinnerService,
   ) { }
   userDetails:any;
 
@@ -111,6 +113,7 @@ export class ProductsListTableComponent implements OnInit {
     this.allowAddProduct=true
 
     this.isReadOnly=true
+    
     }
 
   
@@ -421,17 +424,18 @@ this.enableinvoice=true
   public saveChanges() {
 
 
-
+    this.spinner.show()
 
     let request = this.setRequestData();
-    console.log("+_+_+_+_+_ Res Data ", request);
+    //console.log("+_+_+_+_+_ Res Data ", request);
 
-    // this.subscription.push(
-    //   this.cartService.editQuotation(request).subscribe(res => {
-    //     this.showMsg = true
+    this.subscription.push(
+      this.cartService.editQuotation(request).subscribe(res => {
+        this.showMsg = true
+        this.spinner.hide()
 
-    //   })
-    // )
+      })
+    )
     history.back()
 
   }
