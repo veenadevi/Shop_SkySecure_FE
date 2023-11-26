@@ -88,7 +88,7 @@
 
 
                     <div class="col-sm-6 form-group">
-                        <label for="State">City<span class="mandatory">*</span></label>
+                        <label for="State">City</label>
                         <select formControlName="cityName" class="form-control-01" (change)="onCityChange($event)">
                             <ng-container *ngIf="gstData; else noGstDataCity">
                                 <option value="">{{gstResponseData.adress.city}}</option>
@@ -149,7 +149,7 @@
                             <div class="col-sm-6 form-group">
                                 <label for="userName">Name<span class="mandatory">*</span></label>
                                 <input formControlName="userName" type="address" class="form-control-01" name="userName"
-                                    id="userName" placeholder="Enter FirstName">
+                                    id="userName" placeholder="Enter Name">
                                     <div class="error-message commonError" *ngIf="submitted &&myForm.get('userName')?.hasError('required')">
                                         Please enter Name</div>  
                             </div>
@@ -193,7 +193,7 @@
                                     Please enter Phone Number</div>  
                                  
                                   <div class="error-message commonError" *ngIf="myForm.get('phoneNo')?.hasError('pattern')">
-                                    Please enter Valid 10 Degit Phone Number</div>  
+                                    Please enter Valid 10 digit Phone Number</div>  
                         </div>
                     </div>
                 </div>
@@ -207,7 +207,7 @@
 
             <!-- Prime Ng Radio Button Ends -->
             <div *ngIf="submitted&&countryStateError">
-                <p class="error">Country, State and City fields are mandatory.</p>
+                <p class="error">Country, State  fields are mandatory.</p>
             </div>
             <div class="modal-footer">
                 <ng-container>

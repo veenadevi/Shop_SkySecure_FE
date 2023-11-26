@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { InvoiceDueDateModalComponent } from 'src/shared/components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
@@ -92,6 +93,7 @@ export class ProductsListTableComponent implements OnInit {
     private cartService: CartService,
     private modalService: NgbModal,
     private userAccountStore: UserAccountStore,
+    public spinner: NgxSpinnerService,
   ) { }
   userDetails:any;
 
@@ -111,6 +113,7 @@ export class ProductsListTableComponent implements OnInit {
     this.allowAddProduct=true
 
     this.isReadOnly=true
+    
     }
 
   
@@ -177,7 +180,7 @@ this.enableinvoice=true
       if(editedRate < calcRate  ){
        
         item.get('bcy_rate').setErrors({ 'invalid': true });
-        this.enableEdit = true;
+        this.enableEdit = false;
 
       }
     
@@ -189,15 +192,17 @@ this.enableinvoice=true
       if (data) {
 
         let editedRate = item.get('bcy_rate').value;
-        let calculatedDistributarPrice = data.priceList[0].distributorPrice; 
-        let calculatedERPPrice=data.priceList[0].ERPPrice
+        let calculatedDistributarPrice =item.get('distributorPrice').value 
+        // data.priceList[0].distributorPrice; 
+        let calculatedERPPrice=item.get('erp_price').value
+        //data.priceList[0].ERPPrice
         
         let calcRate = calculatedDistributarPrice;
        
         if (editedRate < calcRate ) {
        
           item.get('bcy_rate').setErrors({ 'invalid': true });
-          this.enableEdit = true;
+          this.enableEdit = false;
         } 
         if (editedRate > calculatedERPPrice ) { 
           item.get('bcy_rate').setErrors({ 'invalid': true });
@@ -421,17 +426,18 @@ this.enableinvoice=true
   public saveChanges() {
 
 
-
+    this.spinner.show()
 
     let request = this.setRequestData();
-    console.log("+_+_+_+_+_ Res Data ", request);
+    //console.log("+_+_+_+_+_ Res Data ", request);
 
-    // this.subscription.push(
-    //   this.cartService.editQuotation(request).subscribe(res => {
-    //     this.showMsg = true
+    this.subscription.push(
+      this.cartService.editQuotation(request).subscribe(res => {
+        this.showMsg = true
+        this.spinner.hide()
 
-    //   })
-    // )
+      })
+    )
     history.back()
 
   }
@@ -578,20 +584,22 @@ this.enableinvoice=true
 
       var index = this.cartDetails.findIndex(el => el.estimateLineItemId === element.value.line_items_id);
 
-
+      var priceIndex=0
 
       if (index >= 0) {
 
-    
+        if(element.value.priceType==='Month'){
+          priceIndex=1
+        }
         let tempArray = {
           "productId": this.cartDetails[index].productId,
           "quantity": element.value.quantity,
           "productName": this.cartDetails[index].productName,
           "price": element.value.bcy_rate,
-          "erpPrice": this.cartDetails[index].erpPrice,
-          "discountRate": this.cartDetails[index].discountRate,
+          "erpPrice": this.cartDetails[index].priceList[priceIndex].ERPPrice,
+          "discountRate": this.cartDetails[index].priceList[priceIndex].discountRate,
           "priceType": element.value.priceType,
-          "distributorPrice": this.cartDetails[index].distributorPrice,
+          "distributorPrice": this.cartDetails[index].priceList[priceIndex].distributorPrice,
           "itemTotal": element.value.bcy_rate * element.value.quantity,
           "priceList": this.cartDetails[index].priceList
         }
@@ -687,7 +695,7 @@ this.enableinvoice=true
       this.enableEdit = true
     this.enableinvoice=true
     this.allowAddProduct=true
-
+    history.back()
     })
 
     /*
