@@ -4,24 +4,30 @@
 
     <div class="row jumbotron box8 container-style card-2">
 
-      <p>Please fill the mentioned details to generate estimation</p>
-
-        <div id="customerToogle">
+      <p *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">Please fill the mentioned details to generate estimation</p>
+<p *ngIf="!isCheckedSelf && !isCheckedOthers" style="text-align: center;font-weight: bold;">Please choose whether the quotation is for 'Myself' or 'Others'</p>
+        <div id="customerToogle" *ngIf="!isCheckedSelf && !isCheckedOthers" class="self">
+          <div class="radiobtns">
             <div class="radio-group">
-                <input type="radio" [checked]="isChecked" name="myRadios" (change)="handleChange('self')" value="self" />
-                <span>Self</span>
+                <input type="radio" [checked]="isCheckedSelf" name="myRadios" (change)="handleChange('self')" value="self" />
+                <span>Requesting Quotation For Myself</span>
             </div>
             <div class="radio-group">
-                <input type="radio" [checked]="!isChecked" name="myRadios" (change)="handleChange('others')" value="others" />
-                <span>Others</span>
+                <input type="radio" [checked]="isCheckedOthers" name="myRadios" (change)="handleChange('others')" value="others" />
+                <span>Requesting Quotation For Others</span>
             </div>
+          </div>
+            <div class="btn-holder">
+            <button class="btn secondary-btn" (click)="onCancelClick()">Cancel</button>
+          </div>
         </div>
 
 
         <ng-container *ngIf="channelPartnerList && channelPartnerList.length>0">
 
         </ng-container>
-        <div class="name-row-01">
+        <div *ngIf="
+        (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)" class="name-row-01">
           <div class="col col-sm-6 form-group">
             <label for="State">Referred By<span class="mandatory">*</span></label>
             <select class="form-control" (change)="onReferredByChange($event)">
@@ -32,7 +38,7 @@
         </div>
 
 
-        <ng-container *ngIf="selectedGSTType ==='self'; else othersGSTDetails"> 
+        <ng-container *ngIf="selectedGSTType ==='self'"> 
 
             <form [formGroup]="gstForm">
 
@@ -61,7 +67,7 @@
             </form>
             
         </ng-container>
-        <ng-template #othersGSTDetails>
+        <ng-container *ngIf="selectedGSTType ==='others'">
         
             <form [formGroup]="gstFormOthers">
 
@@ -124,18 +130,20 @@
                   </div>
                   
             </form>
-        </ng-template>
+        </ng-container>
         <div *ngIf="gstErrorMessageFlag">
           <p class="error-message commonError">{{gstErrorMessage}}</p>
         </div>
+        <div *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">
         <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('firstName')?.hasError('required')">
           Please enter Name</div>  
+        </div>
         <div *ngIf="contactError">
           <div class="error-message commonError">Please enter either Email or Phone</div>
         </div>
-        <div class="btn-holder">
+        <div class="btn-holder" *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">
     
-          <button class="btn secondary-btn" (click)="onCancelClick()">Cancel</button>
+          <button class="btn secondary-btn" (click)="onBackClick()">Back</button>
           <button class="btn primary-btn" (click)="onNextClick()">Next</button>
     
         </div>

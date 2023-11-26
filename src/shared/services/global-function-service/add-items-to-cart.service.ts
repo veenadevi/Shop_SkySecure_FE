@@ -30,11 +30,11 @@ public addItemsToCart(data : any) : void {
     //console.log("---in cart service ----",data.params)
    
     if(data.productId){
-     //console.log("++++_______ Came Here If", data);
+   // console.log("++++_______ Came Here If", data);
       this.getCartItems(false, data);
     }
     else if(data.productVariant){
-   //console.log("++++_______ Came Here Else", data);
+  //console.log("++++_______ Came Here Else", data);
       this.getCartItems(true, data);
     }
         
@@ -48,8 +48,8 @@ public getCartItems(multipleProduct, data) : void {
     let productsList = this.cartStore.getProductListItems() ? this.cartStore.getProductListItems() : [];
 
 
-    console.log("is user already have cart?====",cartRefId)
-    console.log("=====productsList to addcart ===",productsList.length)
+   // console.log("is user already have cart?====",cartRefId)
+   // console.log("=====productsList to addcart ===",productsList.length)
 
     let req = new UserCartRequestModel({
       userId : userAccountdetails._id,
@@ -129,7 +129,7 @@ public getCartItems(multipleProduct, data) : void {
 
     else{
 
-      console.log("came to cart service ",productsList.length)
+      //console.log("came to cart service ",productsList.length)
       //var index = productsList.findIndex(el => el.productId === this.params.get('productId'));
       var index = productsList.findIndex(el => el.productId === data.productId && el.priceType===data.priceType);
 
