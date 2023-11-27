@@ -10,11 +10,11 @@
           <div class="radiobtns">
             <div class="radio-group" (click)="handleChange('self')">
                 <input type="radio" [checked]="isCheckedSelf" name="myRadios" (change)="handleChange('self')" value="self" />
-                <span>This quotation is for Myself.</span>
+                <span>Request for <span style="font-weight: bold;">Myself</span></span>
             </div>
             <div class="radio-group"  (click)="handleChange('others')">
                 <input type="radio" [checked]="isCheckedOthers" name="myRadios" (change)="handleChange('others')" value="others" />
-                <span>This quotation is for Others</span>
+                <span>Requesting for <span style="font-weight: bold;"> Others</span></span>
             </div>
           </div>
             <div class="btn-holder">
