@@ -35,6 +35,8 @@ export class ProductDetailComponent implements OnInit{
   displayPriceType:number;
   displayDiscount:number;
 
+  //public productReviews : any;
+
 
   showMonthlyPrice() {
     this.isMonthly = true;
@@ -354,6 +356,11 @@ export class ProductDetailComponent implements OnInit{
         }
      
 
+
+        /** Setting Product Reviews */
+        /*if(response.productReviewList && response.productReviewList.length>0){
+          this.productReviews = response.productReviewList
+        }*/
         
      
        
@@ -630,12 +637,14 @@ featureCount=5;
   }
 
   async addToCompare(item:any, type:any):Promise<void> {
+    
     //let returnedData = this.getCompareProductsCount(); 
     //let cacheData = JSON.parse(localStorage.getItem('product_list_to_compare') || '[]');
 
     let compareProductsListLen = this.getProductsCount().length;
 
     let cachedProductsToCompare = JSON.parse(localStorage.getItem('compare_products_list') || '[]');
+
 
 
    
@@ -686,6 +695,7 @@ featureCount=5;
         this.compareProductsStore.setCompareProductsList(cachedProductsToCompare);
 
   
+        
   
 
         this.toaster.showSuccess("The product has been included for comparison.",'')
@@ -831,7 +841,12 @@ featureCount=5;
           this.addItemsToCartService.addItemsToCart(queryParams);
         }
         else{
-          this.viewModal(queryParams);
+          //this.viewModal(queryParams);
+
+          //console.log("+_+_+_+_+_+_ ", window.location.pathname);
+          let currentRouteName = window.location.pathname;
+          this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})
+
         }
 
       /*this.userAccountStore.userDetails$.subscribe(res=>{

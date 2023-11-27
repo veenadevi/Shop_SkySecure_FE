@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from 'src/shared/services/login.service';
@@ -24,6 +24,7 @@ export class CardFlyerComponent {
 
   constructor(
     private router: Router,
+    private route:ActivatedRoute,
     private authService : MsalService,
     private loginService : LoginService,
     private modalService : NgbModal,
@@ -53,7 +54,22 @@ export class CardFlyerComponent {
       this.addItemsToCartService.addItemsToCart(queryParams);
     }
     else{
-      this.viewModal(queryParams);
+
+      console.log("))()()()( ", window.location.pathname)
+      if(window.location.pathname === '/'){
+        let currentRouteName = '';
+        this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})
+      }
+      else{
+        
+      }
+      /*this.viewModal(queryParams);
+
+      var currentRouteName = this.route.snapshot.data.title;
+      currentRouteName='/products/'+this.route.snapshot.url[0].path+'/'+ this.route.snapshot.url[1].path
+
+
+      this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})*/
     }
 
 
