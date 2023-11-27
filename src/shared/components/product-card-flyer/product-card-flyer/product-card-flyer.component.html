@@ -108,7 +108,8 @@
                     <div class="text-style" *ngIf="item.type=='product' || item.type=='productBundles' || item.type=='productBundleVariants'">
                        
                       
-                       {{ (item.subcategories && item.subcategories.length > 0)? item.subcategories[0].name : ''}}
+                       <!-- {{ (item.subcategories && item.subcategories.length > 0)? item.subcategories[0].name : ''}} -->
+                       {{item.subcategories.name}}
                        
                     </div>
                     <div class="text-style" *ngIf="item.type=='productVariants'">
