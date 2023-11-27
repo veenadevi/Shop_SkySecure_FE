@@ -48,6 +48,7 @@ p{
 .radio-group {
     display: flex;
     column-gap: 5px;
+    cursor: pointer;
 }
 
 .error-message{
@@ -65,13 +66,14 @@ p{
 
 .check-box-holder{
     display: flex;
-    column-gap: 1%;
+    column-gap: 5px;
 }
 .mandatory{
     color: red;
 }
 .nogstLable{
     font-size: 14px;
+    padding-top: 2px;
 }
 .btn-holder{
     display: flex;

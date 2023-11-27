@@ -12,6 +12,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectOemModalComponent } from 'src/shared/components/modals/select-oem-modal/select-oem-modal.component';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
+import { Event } from '@mui/icons-material';
 
 
 @Component({
@@ -67,6 +68,12 @@ export class InterfaceComponent {
     private router : Router
   ){
     this.typeSelected = 'ball-atom';
+
+    this.router.events.subscribe(event => {
+      this.menuToogled = false;
+    })
+
+    
   }
 
   /*public userDetails$ = this.userAccountStore.userProfileDetails$
@@ -196,9 +203,9 @@ export class InterfaceComponent {
   }
 
   public menuToogleEvent(event){
-   // console.log("()()()() ", event);
-
+   
     this.menuToogled = this.menuToogled ? false : true;
+
   }
   
 
