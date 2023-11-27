@@ -342,9 +342,40 @@
     
             <!-- </p-card>
             </div> -->
+
+           
+
+            <!-- <div class="review-container-section">
+
+
+                    
+                <div class="review-container">
+                    <div class="scroll-to-style" id="scrollElementForReviewsRef" #scrollElementForReviewsRef>
+                        &nbsp;>
+                    </div>
+                    <div class="review-headline">
+                        <h5>Reviews</h5>
+                    </div>
+
+
+                    <ng-container *ngIf="productReviews ; else noReviews">
+                        
+                        <product-reviews [productReviews] = "productReviews"></product-reviews>
+                    </ng-container>
+                    <ng-template #noReviews>
+                        No reviews for this product as of now !
+                    </ng-template>
+                    
+                </div>
+            </div> -->
     
     
             <ng-container *ngIf="product.description ">
+
+
+
+
+                
                 <div id="description" #descriptionRef>
                     <div class="scroll-to-style-description" id="scrollElementForDescriptionRef" #scrollElementForDescriptionRef>
                         &nbsp;
@@ -630,6 +661,29 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+
+                <div class="review-container-section">
+                    
+                    <div class="review-container">
+                        <div class="scroll-to-style" id="scrollElementForReviewsRef" #scrollElementForReviewsRef>
+                            &nbsp;>
+                        </div>
+                        <div class="review-headline">
+                            <h5>Reviews</h5>
+                        </div>
+    
+    
+                        <ng-container *ngIf="productReviews ; else noReviews">
+                            <!-- <product-review-average></product-review-average> -->
+                            <product-reviews [productReviews] = "productReviews"></product-reviews>
+                        </ng-container>
+                        <ng-template #noReviews>
+                            No reviews for this product as of now !
+                        </ng-template>
+                        
                     </div>
                 </div>
     
@@ -1160,5 +1214,8 @@
 
         </div>
     </div>
+
+
+
     <!-- <iframe src="https://web.powerva.microsoft.com/environments/Default-547b64a7-e66e-48df-a146-3e898cbcb60f/bots/crdba_skysecure/webchat?__version__=2" frameborder="0" style="width: 500px; height: 600px; margin-left: 7.25%;"></iframe> -->
 </ng-container>
