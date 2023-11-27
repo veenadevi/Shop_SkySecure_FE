@@ -355,7 +355,7 @@ export class LoginComponent {
           this.addItemsToCartService.addItemsToCart(this.cartObj);
          
      
-      this.router.navigate([this.cartObj.currentRouteName]);
+        this.router.navigate([this.cartObj.currentRouteName]);
 
          this.cartObj=null
           }

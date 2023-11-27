@@ -564,7 +564,10 @@ export class SuggestedCompareProductsResultComponent {
           this.addItemsToCartService.addItemsToCart(queryParams);
         }
         else{
-          this.viewModal(queryParams);
+          //this.viewModal(queryParams);
+          let currentRouteName = window.location.pathname;
+          this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})
+
         }
 
 
