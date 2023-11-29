@@ -3,7 +3,7 @@
         <p-table [columns]="scrollableCols" [value]="comparisonCategories" [scrollable]="true"  frozenWidth="200px">
             
             <ng-template pTemplate="header" let-columns>
-              <tr>
+              <tr class="d-flex">
 
                 <th class="comparison-category-header ">
                         <span>
@@ -71,13 +71,13 @@
                                 </div>
                             </div>
                             
-                            <ng-template #noPrice>
+                            <ng-template class="tdData "#noPrice>
                                 -
                             </ng-template> 
                         </div>
                     </th>
                     <ng-template #emptyFlyer>
-                        <th>
+                        <th class="d-flex; justify-content-center">
                             <empty-header-card-flyer [index] = "i" (selectedProductItem)="selectedProductItem($event)"></empty-header-card-flyer>
                             <div class="add">
                                 <button class="btn primary-btn" (click)="addProductModal(i)">
@@ -143,7 +143,7 @@
                             </div>
                         </div>
                         
-                        <ng-template #noPrice>
+                        <ng-template class="tdData " #noPrice>
                             -
                         </ng-template> 
                     </td>

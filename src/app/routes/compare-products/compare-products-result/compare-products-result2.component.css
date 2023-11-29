@@ -25,6 +25,7 @@ th{
 
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
   padding: 5px 1rem 5px 1rem;
+  /* text-align: center !important; */
 }
 
 .feature-text {
@@ -108,8 +109,9 @@ th{
   }
   .add{
     width: 100%;
-    padding-left: 20px;
+    /* padding-left: 20px; */
     margin-bottom: 30px !important;
+    text-align: center;
   }
   .add .primary-btn {
     /* background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%); */
@@ -123,9 +125,11 @@ th{
     margin-left: 25%;
   }
   .p-datatable .p-datatable-tbody > tr > td {
-    text-align: center;
+    text-align: center !important;
   }
-
+.tdData{
+  text-align: center !important ;
+}
   .button-holder{
     margin-bottom: 30px !important;
   }
@@ -236,6 +240,7 @@ th{
   :host ::ng-deep .p-datatable .p-datatable-thead{
     position: fixed;
     top:102px;
+    width: 98% !important;
   }
 
   /* :host ::ng-deep .p-datatable .p-datatable-tbody tr:first-child 

@@ -129,7 +129,9 @@ border-radius: 5px;
 .button-holder{
   margin-bottom: 30px !important;
 }
-
+.tablerow{
+  display: flex;
+}
 
 
 .features-align{
@@ -235,6 +237,7 @@ border-radius: 5px;
 :host ::ng-deep .p-datatable .p-datatable-thead{
   position: fixed;
   top:102px;
+  width: 98%;
 }
 
 /* :host ::ng-deep .p-datatable .p-datatable-tbody tr:first-child 
