@@ -48,6 +48,11 @@ export class AddNewProductComponent  implements OnInit {
   public subCategories: any[] = [];
   public fileToUpload: File | null = null;
   public productLogo: string;
+  isPerpetual: boolean = false;
+  
+  showData: boolean = false;
+
+ 
   // City names
   City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan']
 
@@ -61,7 +66,10 @@ export class AddNewProductComponent  implements OnInit {
   showMsg: boolean = false;
   public msubscriptionType:any
   public ysubscriptionType:any
-
+  temp1YerpPrice:any
+  temp3YerpPrice :any
+  tempLYerpPrice:any; 
+  tempEYerpPrice:any;
   createProductPayload: CreateProductPayload;
 
   constructor(
@@ -81,6 +89,18 @@ export class AddNewProductComponent  implements OnInit {
       productOrderNumber: [''],
       yproductPrice: [''],
       yerpPrice: [''],
+      yerpPrice1:[''],
+      ydistributorPrice1:[''],
+      ydiscount1: [''],
+      yerpPrice3:[''],
+      ydistributorPrice3:[''],
+      ydiscount3: [''],
+      yerpPriceE:[''],
+      ydistributorPriceE:[''],
+      ydiscountL: [''],
+      yerpPriceL:[''],
+      ydistributorPriceL:[''],
+      ydiscountE: [''],
       ydistributorPrice:[''],
       ydiscount: [''],
       mproductPrice: [''],
@@ -520,10 +540,43 @@ export class AddNewProductComponent  implements OnInit {
         this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
         this.registrationForm.controls['mdiscount'].setValue(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice).toFixed(2));
         return;
+      case 'yerpPrice1':
+        this.temp1YerpPrice = ((Number(this.registrationForm.value.yerpPrice1)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice1));
+        this.registrationForm.controls['ydiscount1'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPrice1, this.temp1YerpPrice).toFixed(2));
+        return;
+      case 'yerpPrice3':
+        this.temp3YerpPrice = ((Number(this.registrationForm.value.yerpPrice3)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice3));
+        this.registrationForm.controls['ydiscount3'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPrice3, this.temp3YerpPrice).toFixed(2));
+        return;
+      case 'yerpPriceL':
+        this.tempLYerpPrice = ((Number(this.registrationForm.value.yerpPriceL)) * 0.02) + (Number(this.registrationForm.value.ydistributorPriceL));
+        this.registrationForm.controls['ydiscountL'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPriceL, this.tempLYerpPrice).toFixed(2));
+        return;
+      case 'yerpPriceE':
+        this.tempEYerpPrice = ((Number(this.registrationForm.value.yerpPriceE)) * 0.02) + (Number(this.registrationForm.value.ydistributorPriceE));
+        this.registrationForm.controls['ydiscountE'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPriceE, this.tempEYerpPrice).toFixed(2));
+        return;         
 
       default:
         return null;
     }
   }
 
+  toggleDataDisplay(event:any){
+    this.showData =event.target.checked;
+  }
+ 
+  onCheckboxChange(checkedCheckbox: HTMLInputElement, otherCheckbox: HTMLInputElement): void { 
+    if (checkedCheckbox.id === 'perpetualCheckbox') {
+      otherCheckbox.checked = checkedCheckbox.checked;
+    }
+  }
+ 
+
+  onCheckIsPerpetual(event: Event): void {
+    this.isPerpetual = (event.target as HTMLInputElement).checked;
+  }
+  onPerpetualSelected(checkbox: HTMLInputElement): void {
+    this.isPerpetual = checkbox.checked;
+  }
 }
