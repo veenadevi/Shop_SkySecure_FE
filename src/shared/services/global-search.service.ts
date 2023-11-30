@@ -15,15 +15,20 @@ export class GlobalSearchService {
   private baseUrl: string;
   private globalSearchUrl : string;
 
+  private globalSearchByProduct : string;
+
 
   constructor(
     private http: HttpClient,
   ) {
     this.baseUrl = environment.gatewayUrl;
     this.globalSearchUrl = AppService.appUrl.globalSearchByKey;
+    this.globalSearchByProduct = AppService.appUrl.globalSearchByProducts;
 
     //this.quotaDetailsUri = this.ouxConfigSvc.getAppConfigValue('apiUri').e2eQuotaACV;
   }
+
+
 
 
 
@@ -54,6 +59,35 @@ export class GlobalSearchService {
 
     return request$;
   }
+
+    //fetch Only Products by search
+    public fetchSearchResultsByProducts(searchKey : string): Observable<any> {
+
+      //seachByproduct
+      let url = this.baseUrl + this.globalSearchByProduct;
+      //let options = this.getOptions();
+      const OPTIONS = {
+          params: new HttpParams()
+            .set('search', searchKey)
+        };
+  
+      let request$ = this.http.get<any>(url, OPTIONS)
+        .pipe(
+          map(response => {
+            if (!response) {
+              return null;
+            }
+            //this.orderStore.setOrderRefreshDate(response);
+            return response;
+          }),
+          catchError(error => {
+            // create operation mapping for http exception handling 
+            return (error);
+          })
+        );
+  
+      return request$;
+    }
 
 
   public fetchCategoryMock() : Observable<any> {

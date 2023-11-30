@@ -16,6 +16,7 @@
         "allOEM" : "api/oem", 
         "allProducts" : "api/product",
         "globalSearchByKey" : "api/products/search",
+        "globalSearchByProducts" : "api/products/searchProductList",
         "subCategoryByCategory" : "api/sub-category/",
         "getProductsBySubCategoryIds" : "api/products",
         "getSingleProduct": "api/product/",
