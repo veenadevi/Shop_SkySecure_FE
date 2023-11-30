@@ -52,7 +52,7 @@
         
           <mat-step   state="form">
             <div>
-              <button    class="btn"> 2.Business Details</button>
+              <button    class="button"> 2.Business Details</button>
               <business-details (businessDetailsAction)="businessDetailsAction($event)"></business-details>
             </div>
             <!-- <form [formGroup]="formGroup">
@@ -68,7 +68,7 @@
         
           <mat-step   state="last">
             <ng-container *ngIf="reqBody && cartData" >
-              <button    class="btn"> 3.Overview</button>
+              <button    class="button"> 3.Overview</button>
               <overview [reqBody]="reqBody" (overViewAction)="overViewAction($event)" [cartData]="cartData"></overview>
             </ng-container>
             
