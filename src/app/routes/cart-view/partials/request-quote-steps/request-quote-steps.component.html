@@ -38,16 +38,21 @@
                 <mat-icon>done_all</mat-icon>
             </ng-template> -->
           
-            <mat-step label="GST Details" state="home">
+            <mat-step  matStepperIcon="done" state="home">
                 <div>
-                    <!-- <button mat-button matStepperNext>Continue</button> -->
+                    <!-- <button    class="btn"> 1.GST Details</button> -->
+                    <span  class="button">1.GST Details</span>
                     
                     <gst-details (gstDetailsAction)="gstDetailsAction($event)"></gst-details>
-                </div>
+                   
+                </div>  
+                 
             </mat-step>
+           
         
-          <mat-step label="Business Details" state="form">
+          <mat-step   state="form">
             <div>
+              <button    class="btn"> 2.Business Details</button>
               <business-details (businessDetailsAction)="businessDetailsAction($event)"></business-details>
             </div>
             <!-- <form [formGroup]="formGroup">
@@ -61,8 +66,9 @@
             </form> -->
           </mat-step>
         
-          <mat-step label="Overview" state="last">
+          <mat-step   state="last">
             <ng-container *ngIf="reqBody && cartData" >
+              <button    class="btn"> 3.Overview</button>
               <overview [reqBody]="reqBody" (overViewAction)="overViewAction($event)" [cartData]="cartData"></overview>
             </ng-container>
             
