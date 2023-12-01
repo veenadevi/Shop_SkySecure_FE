@@ -8,6 +8,7 @@ import { LoaderService } from 'src/shared/services/loader.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { HttpClient } from '@angular/common/http';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
 
 interface CreateProductPayload {
@@ -28,7 +29,10 @@ interface CreateProductPayload {
   featureList: Array<any>,
   productFAQ: Array<any>,
   appList:Array<any>,
-  productId: String
+  productId: String,
+  isPerpetual : boolean,
+  isCommercial : boolean,
+  isEducational : boolean
 }
 
 @Component({
@@ -81,6 +85,7 @@ export class AddNewProductComponent  implements OnInit {
     private metadataStore: MetadataStore,
     private http: HttpClient,
     private userAccountStore : UserAccountStore,
+    private adminPageService : AdminPageService
   ) {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
@@ -492,7 +497,11 @@ export class AddNewProductComponent  implements OnInit {
 
         bannerLogo: this.productLogo,
         createdBy: userAccountdetails._id,
-        updatedBy: userAccountdetails._id
+        updatedBy: userAccountdetails._id,
+        isPerpetual : this.isPerpetual,
+        isCommercial : this.isCommercial,
+        isEducational : !this.isCommercial
+
       }
 
       
@@ -519,12 +528,22 @@ export class AddNewProductComponent  implements OnInit {
       //console.log("_--------------------APP Array", this.tempAppArrayImgFiles);
       console.log("_--------------------createProductPayload_", this.createProductPayload);
       
+
+      this.subscriptions.push(
+        this.adminPageService.createNewProduct(this.createProductPayload).subscribe(res=>{
+          
+          this.showMsg=true
+
+        })
+      )
+
+
       
-      this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
+      /*this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
         
         this.showMsg=true
 
-      })
+      })*/
 
       this.registrationForm.reset(); 
     }

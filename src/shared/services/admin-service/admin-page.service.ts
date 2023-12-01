@@ -261,6 +261,42 @@ export class AdminPageService {
     return request$;
   }
 
+
+  /**
+   * Service to Create New Product
+   */
+
+
+
+  public createNewProduct( request : any): Observable<any> {
+
+    //const URL = this.baseUrl + this.addFeatureUrl;
+
+    const url = "https://dev-productapi.realize.skysecuretech.com/api/admin/product/create"
+  
+    
+    const REQUEST$ = this.http.post<any>(url, request, this.options)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          
+          return of(response);
+        }),
+        map((response: any) => {
+          
+          return response;
+        }),
+        catchError(error => {
+          
+          return error
+        })
+      );
+
+    return REQUEST$;
+  }
+
   /**
    * 
    * Service for Editing Product/Features
