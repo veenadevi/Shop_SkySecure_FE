@@ -72,6 +72,8 @@ export class AddNewProductComponent  implements OnInit {
   tempEYerpPrice:any;
   createProductPayload: CreateProductPayload;
 
+  public isCommercial : boolean = true;
+
   constructor(
     public fb: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -291,7 +293,7 @@ export class AddNewProductComponent  implements OnInit {
   changeCategories(event: any) {
     
     const selectedValue = event.target.value;
-    // console.log("selectedValue  "+selectedValue)
+    
     const categoryMap = new Map<string, any>();
     this.categories.forEach(category => {
       categoryMap.set(category._id.toString(), category);
@@ -309,6 +311,19 @@ export class AddNewProductComponent  implements OnInit {
     this.registrationForm.get('Subcategories').setValue(e.target.value, {
       onlySelf: true
     })
+
+    console.log("+_+_+_+_+_+_+ e.target", e.target.value);
+   if(e.target.value === "6566d8ab8132a82bb7dd3f0e"){
+      this.isCommercial = true;
+      this.isPerpetual = true;
+    }
+    else if(e.target.value === "6566d8c08132a82bb7dd3f10"){
+      this.isCommercial = false;
+      this.isPerpetual = true;
+    }
+    else{
+      this.isPerpetual = false;
+    }
   }
 
 
@@ -373,17 +388,67 @@ export class AddNewProductComponent  implements OnInit {
 
       let userAccountdetails = this.userAccountStore.getUserDetails();
       var productData = this.registrationForm.value;
-      this.createProductPayload = {
-        name: productData.productName,
-        shortDescription: productData.productShortDescription,
-        description: productData.productDescription,
-        oemId: productData.OEM,
-        subCategoryId: productData.Subcategories,
-        productId: productData.products,
-        productSkuId: productData.productSkuId,
-        productSkuNumber: productData.productSkuNumber,
-        orderNumber: productData.productOrderNumber,
-        priceList: [{
+
+
+      let tempPriceList;
+
+      if(this.isPerpetual){
+
+
+        if(this.isCommercial){
+          tempPriceList = [{
+            "Currency": "INR",
+            //"price": productData.yproductPrice,
+            "price": this.temp1YerpPrice,
+            "priceType": "1Year",
+            "ERPPrice" : parseFloat(productData.yerpPrice1.toString()).toFixed(2),
+            "distributorPrice":parseFloat(productData.ydistributorPrice1.toString()).toFixed(2),
+            "discountRate" : productData.ydiscount1,
+            
+  
+          },
+          {
+            "Currency": "INR",
+            "price": this.temp3YerpPrice,
+            "priceType": "3Year",
+            "ERPPrice" : parseFloat(productData.yerpPrice3.toString()).toFixed(2),
+            "distributorPrice":parseFloat(productData.ydistributorPrice3.toString()).toFixed(2),
+            "discountRate" : productData.ydiscount3
+  
+          },
+          {
+            "Currency": "INR",
+            "price": this.tempLYerpPrice,
+            "priceType": "Lifetime",
+            "ERPPrice" : parseFloat(productData.yerpPriceL.toString()).toFixed(2),
+            "distributorPrice":parseFloat(productData.ydistributorPriceL.toString()).toFixed(2),
+            "discountRate" : productData.ydiscountL
+  
+          }
+        
+          ]
+        }
+
+        else{
+          tempPriceList = [{
+            "Currency": "INR",
+            "price": this.tempEYerpPrice,
+            "priceType": "Lifetime",
+            "ERPPrice" : parseFloat(productData.yerpPriceE.toString()).toFixed(2),
+            "distributorPrice":parseFloat(productData.ydistributorPriceE.toString()).toFixed(2),
+            "discountRate" : productData.ydiscountE
+  
+          }
+        
+          ]
+        }
+
+
+ 
+
+      }
+      else{
+        tempPriceList = [{
           "Currency": "INR",
           //"price": productData.yproductPrice,
           "price": this.setYearlyPrice(productData),
@@ -404,7 +469,21 @@ export class AddNewProductComponent  implements OnInit {
 
         }
       
-      ],
+        ]
+      }
+
+
+      this.createProductPayload = {
+        name: productData.productName,
+        shortDescription: productData.productShortDescription,
+        description: productData.productDescription,
+        oemId: productData.OEM,
+        subCategoryId: productData.Subcategories,
+        productId: productData.products,
+        productSkuId: productData.productSkuId,
+        productSkuNumber: productData.productSkuNumber,
+        orderNumber: productData.productOrderNumber,
+        priceList: tempPriceList,
         isActive: true,
        
         featureList: productData.addDynamicElementNew.feature,
@@ -438,7 +517,7 @@ export class AddNewProductComponent  implements OnInit {
       }
 
       //console.log("_--------------------APP Array", this.tempAppArrayImgFiles);
-      //console.log("_--------------------createProductPayload_", this.createProductPayload);
+      console.log("_--------------------createProductPayload_", this.createProductPayload);
       
       
       this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
@@ -573,10 +652,10 @@ export class AddNewProductComponent  implements OnInit {
   }
  
 
-  onCheckIsPerpetual(event: Event): void {
+  /*onCheckIsPerpetual(event: Event): void {
     this.isPerpetual = (event.target as HTMLInputElement).checked;
   }
   onPerpetualSelected(checkbox: HTMLInputElement): void {
     this.isPerpetual = checkbox.checked;
-  }
+  }*/
 }

@@ -223,6 +223,8 @@
                         <input type="checkbox"   (change)=" onCheckIsPerpetual($event)"  > 
                         <label >Yearly & Monthly</label>
                      </div> -->
+
+                    <ng-container *ngIf="!isPerpetual">
                     <div class="header-year" >
                         <h4>Yearly Price Details :</h4>
                     </div>
@@ -440,18 +442,21 @@
                     </fieldset>
                    
 
+                    </ng-container>
 
                     
 
                     <!-- perpetual starts-->
+
+                    <ng-container *ngIf="isCommercial">
                     <div class="perpetual"  >
-                        <input type="checkbox"   #perpetualCheckbox (change)="onPerpetualSelected(perpetualCheckbox)" (change)="onCheckboxChange(perpetualCheckbox, commercialCheckbox)"  id="perpetualCheckbox">&nbsp;
-                        <label  for="perpetualCheckbox">Perpetual</label> 
+                        <!-- <input type="checkbox"   #perpetualCheckbox (change)="onPerpetualSelected(perpetualCheckbox)" (change)="onCheckboxChange(perpetualCheckbox, commercialCheckbox)"  id="perpetualCheckbox">&nbsp;
+                        <label  for="perpetualCheckbox">Perpetual</label>  -->
                   
-                        <div >
+                        <!-- <div>
                             &nbsp;&nbsp;&nbsp;&nbsp;  <input type="checkbox"  #commercialCheckbox (change)="onCheckboxChange(commercialCheckbox, perpetualCheckbox)"   id="commercialCheckbox"  >&nbsp;
                              <label for="commercialCheckbox">Commercial</label>
-                        </div>
+                        </div> -->
                         <br>
                         <!-- 1year paln price -->
                         <div class="header-year"*ngIf="isPerpetual">
@@ -717,13 +722,18 @@
                         </div>
 
                     </div>
+                </ng-container>
 
 
+                <ng-container *ngIf="!isCommercial">
                     <!-- educational -->
+                    <div class="header-year" *ngIf="isPerpetual">
+                        <h4>Life Time Price Details :</h4>
+                    </div>
                     <div class="educational" >
-                        <input type="checkbox"  id="chb"  (change)="toggleDataDisplay($event)">&nbsp;
-                        <label for="">Educational</label> 
-                        <div class="section-04"    *ngIf="showData">
+                        <!-- <input type="checkbox"  id="chb"  (change)="toggleDataDisplay($event)">&nbsp; -->
+                        <!-- <label for="">Educational</label>  -->
+                        <div class="section-04">
                             <div class="subscription">
                                 <div class="forms">
                                     <div class="label">
@@ -803,6 +813,7 @@
                         </div>
                     </div>
 
+                </ng-container>
 
 
 
@@ -931,7 +942,7 @@
 
 
                 <div class="btn-02">
-                    <!-- <button class="btn btn-success" (click)="CreateProduct()">Create</button> -->
+                    <button class="btn btn-success" (click)="CreateProduct()">Create</button>
                 </div>
 
                 <div class="row" *ngIf="showMsg">
