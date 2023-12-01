@@ -56,6 +56,7 @@ import { CustomerReviewComponent } from './components/customer-review/customer-r
 import { VideoReviewComponent } from './components/video-review/video-review.component';
 import { ProductReviewAverageComponent } from './components/product-review-average/product-review-average.component';
 import { CpReassignModalComponent } from './components/modals/cp-reassign-modal/cp-reassign-modal.component';
+import { ProductReviewsComponent } from './components/product-reviews/product-reviews.component';
 
 
 
@@ -120,7 +121,8 @@ import { CpReassignModalComponent } from './components/modals/cp-reassign-modal/
     CustomerReviewComponent,
     VideoReviewComponent,
     ProductReviewAverageComponent,
-    CpReassignModalComponent
+    CpReassignModalComponent,
+    ProductReviewsComponent
    
   ],
 
@@ -178,6 +180,7 @@ import { CpReassignModalComponent } from './components/modals/cp-reassign-modal/
     CustomerReviewComponent,
     VideoReviewComponent,
     ProductReviewAverageComponent,
+    ProductReviewsComponent
   ],
   
 

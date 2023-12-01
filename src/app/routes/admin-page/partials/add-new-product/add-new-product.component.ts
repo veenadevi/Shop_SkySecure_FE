@@ -8,6 +8,7 @@ import { LoaderService } from 'src/shared/services/loader.service';
 import { MetadataStore } from 'src/shared/stores/metadata.store';
 import { HttpClient } from '@angular/common/http';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
 
 interface CreateProductPayload {
@@ -28,7 +29,10 @@ interface CreateProductPayload {
   featureList: Array<any>,
   productFAQ: Array<any>,
   appList:Array<any>,
-  productId: String
+  productId: String,
+  isPerpetual : boolean,
+  isCommercial : boolean,
+  isEducational : boolean
 }
 
 @Component({
@@ -48,6 +52,11 @@ export class AddNewProductComponent  implements OnInit {
   public subCategories: any[] = [];
   public fileToUpload: File | null = null;
   public productLogo: string;
+  isPerpetual: boolean = false;
+  
+  showData: boolean = false;
+
+ 
   // City names
   City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan']
 
@@ -61,8 +70,13 @@ export class AddNewProductComponent  implements OnInit {
   showMsg: boolean = false;
   public msubscriptionType:any
   public ysubscriptionType:any
-
+  temp1YerpPrice:any
+  temp3YerpPrice :any
+  tempLYerpPrice:any; 
+  tempEYerpPrice:any;
   createProductPayload: CreateProductPayload;
+
+  public isCommercial : boolean = true;
 
   constructor(
     public fb: FormBuilder,
@@ -71,6 +85,7 @@ export class AddNewProductComponent  implements OnInit {
     private metadataStore: MetadataStore,
     private http: HttpClient,
     private userAccountStore : UserAccountStore,
+    private adminPageService : AdminPageService
   ) {
     this.registrationForm = this.fb.group({
       productName: ['', Validators.required],
@@ -81,6 +96,18 @@ export class AddNewProductComponent  implements OnInit {
       productOrderNumber: [''],
       yproductPrice: [''],
       yerpPrice: [''],
+      yerpPrice1:[''],
+      ydistributorPrice1:[''],
+      ydiscount1: [''],
+      yerpPrice3:[''],
+      ydistributorPrice3:[''],
+      ydiscount3: [''],
+      yerpPriceE:[''],
+      ydistributorPriceE:[''],
+      ydiscountL: [''],
+      yerpPriceL:[''],
+      ydistributorPriceL:[''],
+      ydiscountE: [''],
       ydistributorPrice:[''],
       ydiscount: [''],
       mproductPrice: [''],
@@ -271,7 +298,7 @@ export class AddNewProductComponent  implements OnInit {
   changeCategories(event: any) {
     
     const selectedValue = event.target.value;
-    // console.log("selectedValue  "+selectedValue)
+    
     const categoryMap = new Map<string, any>();
     this.categories.forEach(category => {
       categoryMap.set(category._id.toString(), category);
@@ -289,6 +316,19 @@ export class AddNewProductComponent  implements OnInit {
     this.registrationForm.get('Subcategories').setValue(e.target.value, {
       onlySelf: true
     })
+
+    console.log("+_+_+_+_+_+_+ e.target", e.target.value);
+   if(e.target.value === "6566d8ab8132a82bb7dd3f0e"){
+      this.isCommercial = true;
+      this.isPerpetual = true;
+    }
+    else if(e.target.value === "6566d8c08132a82bb7dd3f10"){
+      this.isCommercial = false;
+      this.isPerpetual = true;
+    }
+    else{
+      this.isPerpetual = false;
+    }
   }
 
 
@@ -353,17 +393,67 @@ export class AddNewProductComponent  implements OnInit {
 
       let userAccountdetails = this.userAccountStore.getUserDetails();
       var productData = this.registrationForm.value;
-      this.createProductPayload = {
-        name: productData.productName,
-        shortDescription: productData.productShortDescription,
-        description: productData.productDescription,
-        oemId: productData.OEM,
-        subCategoryId: productData.Subcategories,
-        productId: productData.products,
-        productSkuId: productData.productSkuId,
-        productSkuNumber: productData.productSkuNumber,
-        orderNumber: productData.productOrderNumber,
-        priceList: [{
+
+
+      let tempPriceList;
+
+      if(this.isPerpetual){
+
+
+        if(this.isCommercial){
+          tempPriceList = [{
+            "Currency": "INR",
+            //"price": productData.yproductPrice,
+            "price": this.temp1YerpPrice,
+            "priceType": "1Year",
+            "ERPPrice" : parseFloat(productData.yerpPrice1.toString()).toFixed(2),
+            "distributorPrice":parseFloat(productData.ydistributorPrice1.toString()).toFixed(2),
+            "discountRate" : productData.ydiscount1,
+            
+  
+          },
+          {
+            "Currency": "INR",
+            "price": this.temp3YerpPrice,
+            "priceType": "3Year",
+            "ERPPrice" : parseFloat(productData.yerpPrice3.toString()).toFixed(2),
+            "distributorPrice":parseFloat(productData.ydistributorPrice3.toString()).toFixed(2),
+            "discountRate" : productData.ydiscount3
+  
+          },
+          {
+            "Currency": "INR",
+            "price": this.tempLYerpPrice,
+            "priceType": "Lifetime",
+            "ERPPrice" : parseFloat(productData.yerpPriceL.toString()).toFixed(2),
+            "distributorPrice":parseFloat(productData.ydistributorPriceL.toString()).toFixed(2),
+            "discountRate" : productData.ydiscountL
+  
+          }
+        
+          ]
+        }
+
+        else{
+          tempPriceList = [{
+            "Currency": "INR",
+            "price": this.tempEYerpPrice,
+            "priceType": "Lifetime",
+            "ERPPrice" : parseFloat(productData.yerpPriceE.toString()).toFixed(2),
+            "distributorPrice":parseFloat(productData.ydistributorPriceE.toString()).toFixed(2),
+            "discountRate" : productData.ydiscountE
+  
+          }
+        
+          ]
+        }
+
+
+ 
+
+      }
+      else{
+        tempPriceList = [{
           "Currency": "INR",
           //"price": productData.yproductPrice,
           "price": this.setYearlyPrice(productData),
@@ -384,7 +474,21 @@ export class AddNewProductComponent  implements OnInit {
 
         }
       
-      ],
+        ]
+      }
+
+
+      this.createProductPayload = {
+        name: productData.productName,
+        shortDescription: productData.productShortDescription,
+        description: productData.productDescription,
+        oemId: productData.OEM,
+        subCategoryId: productData.Subcategories,
+        productId: productData.products,
+        productSkuId: productData.productSkuId,
+        productSkuNumber: productData.productSkuNumber,
+        orderNumber: productData.productOrderNumber,
+        priceList: tempPriceList,
         isActive: true,
        
         featureList: productData.addDynamicElementNew.feature,
@@ -393,7 +497,11 @@ export class AddNewProductComponent  implements OnInit {
 
         bannerLogo: this.productLogo,
         createdBy: userAccountdetails._id,
-        updatedBy: userAccountdetails._id
+        updatedBy: userAccountdetails._id,
+        isPerpetual : this.isPerpetual,
+        isCommercial : this.isCommercial,
+        isEducational : !this.isCommercial
+
       }
 
       
@@ -418,14 +526,24 @@ export class AddNewProductComponent  implements OnInit {
       }
 
       //console.log("_--------------------APP Array", this.tempAppArrayImgFiles);
-      //console.log("_--------------------createProductPayload_", this.createProductPayload);
+      console.log("_--------------------createProductPayload_", this.createProductPayload);
       
+
+      this.subscriptions.push(
+        this.adminPageService.createNewProduct(this.createProductPayload).subscribe(res=>{
+          
+          this.showMsg=true
+
+        })
+      )
+
+
       
-      this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
+      /*this.http.post('https://dev-productapi.realize.skysecuretech.com/api/admin/product/create',this.createProductPayload).subscribe((response) => {
         
         this.showMsg=true
 
-      })
+      })*/
 
       this.registrationForm.reset(); 
     }
@@ -520,10 +638,43 @@ export class AddNewProductComponent  implements OnInit {
         this.tempMerpPrice = ((Number(this.registrationForm.value.merpPrice)) * 0.02) + (Number(this.registrationForm.value.mdistributorPrice));
         this.registrationForm.controls['mdiscount'].setValue(this.calDiscountedVal(this.registrationForm.value.merpPrice, this.tempMerpPrice).toFixed(2));
         return;
+      case 'yerpPrice1':
+        this.temp1YerpPrice = ((Number(this.registrationForm.value.yerpPrice1)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice1));
+        this.registrationForm.controls['ydiscount1'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPrice1, this.temp1YerpPrice).toFixed(2));
+        return;
+      case 'yerpPrice3':
+        this.temp3YerpPrice = ((Number(this.registrationForm.value.yerpPrice3)) * 0.02) + (Number(this.registrationForm.value.ydistributorPrice3));
+        this.registrationForm.controls['ydiscount3'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPrice3, this.temp3YerpPrice).toFixed(2));
+        return;
+      case 'yerpPriceL':
+        this.tempLYerpPrice = ((Number(this.registrationForm.value.yerpPriceL)) * 0.02) + (Number(this.registrationForm.value.ydistributorPriceL));
+        this.registrationForm.controls['ydiscountL'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPriceL, this.tempLYerpPrice).toFixed(2));
+        return;
+      case 'yerpPriceE':
+        this.tempEYerpPrice = ((Number(this.registrationForm.value.yerpPriceE)) * 0.02) + (Number(this.registrationForm.value.ydistributorPriceE));
+        this.registrationForm.controls['ydiscountE'].setValue(this.calDiscountedVal(this.registrationForm.value.yerpPriceE, this.tempEYerpPrice).toFixed(2));
+        return;         
 
       default:
         return null;
     }
   }
 
+  toggleDataDisplay(event:any){
+    this.showData =event.target.checked;
+  }
+ 
+  onCheckboxChange(checkedCheckbox: HTMLInputElement, otherCheckbox: HTMLInputElement): void { 
+    if (checkedCheckbox.id === 'perpetualCheckbox') {
+      otherCheckbox.checked = checkedCheckbox.checked;
+    }
+  }
+ 
+
+  /*onCheckIsPerpetual(event: Event): void {
+    this.isPerpetual = (event.target as HTMLInputElement).checked;
+  }
+  onPerpetualSelected(checkbox: HTMLInputElement): void {
+    this.isPerpetual = checkbox.checked;
+  }*/
 }

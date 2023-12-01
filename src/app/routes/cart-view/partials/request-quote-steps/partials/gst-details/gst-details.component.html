@@ -2,25 +2,67 @@
 
     
 
-    <div class="row jumbotron box8 container-style card-2">
+    <div class="row jumbotron box8 container-style card-2 d-flex justify-content-between"> 
+        <!-- <div class="row  d-flex align-items-center"> -->
+        
+          <!-- <div class="col-8"> -->
+            <p *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">Please fill the mentioned details to generate estimation</p>
+            <div class="quote-front-page">
 
-      <p *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">Please fill the mentioned details to generate estimation</p>
-<p *ngIf="!isCheckedSelf && !isCheckedOthers" style="text-align: center;font-weight: bold;">Requesting Quotation for ?</p>
+              <div  *ngIf="!isCheckedSelf && !isCheckedOthers" class="self col-4">
+                <div>
+                  <img src="../../../../../../../assets/images/request_quote.png" class="image">
+                </div>
+              </div>
+             
+                <div id="customerToogle"  *ngIf="!isCheckedSelf && !isCheckedOthers" class="self col-8">
+                  <p *ngIf="!isCheckedSelf && !isCheckedOthers" class="quote-head" >Request Quotation </p> 
+                  <div class="radiobtns">
+                    <div class="radio-group" (click)="handleChange('self')">
+                        <input class="radio-circle" type="radio" [checked]="isCheckedSelf" name="myRadios" (change)="handleChange('self')" value="self" />
+                        <!-- <span>Requesting for <span class="highlight" >Myself</span></span> -->
+                          <span>Requesting for Myself</span>
+                    </div>
+                    <div class="radio-group"  (click)="handleChange('others')">
+                        <input type="radio" class="radio-circle" [checked]="isCheckedOthers" name="myRadios" (change)="handleChange('others')" value="others" />
+                        <!-- <span>Requesting for <span class="highlight" > Others</span></span> -->
+                        <span>Requesting for Others</span>
+                    </div>
+                  </div>
+                    <div class="btn-holder">
+                    <button class="btn secondary-btn-btn" (click)="onCancelClick()">Cancel</button>
+                  </div>
+                </div>
+              <!-- </div> -->
+          <!-- </div> -->
+      
+        </div>
+      
+    
+
+
+
+     <!-- <p *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">Please fill the mentioned details to generate estimation</p>
+      <div class="quote-front-page">
+      <p *ngIf="!isCheckedSelf && !isCheckedOthers" class="quote-head" >Requesting Quotation for ?</p>  
         <div id="customerToogle" *ngIf="!isCheckedSelf && !isCheckedOthers" class="self">
           <div class="radiobtns">
             <div class="radio-group" (click)="handleChange('self')">
-                <input type="radio" [checked]="isCheckedSelf" name="myRadios" (change)="handleChange('self')" value="self" />
-                <span>Requesting for <span style="font-weight: bold;">Myself</span></span>
+                <input class="radio-circle" type="radio" [checked]="isCheckedSelf" name="myRadios" (change)="handleChange('self')" value="self" />
+             
+                <input type="radio" class="radio">  <span>Requesting for Myself</span>
             </div>
             <div class="radio-group"  (click)="handleChange('others')">
-                <input type="radio" [checked]="isCheckedOthers" name="myRadios" (change)="handleChange('others')" value="others" />
-                <span>Requesting for <span style="font-weight: bold;"> Others</span></span>
+                <input type="radio" class="radio-circle" [checked]="isCheckedOthers" name="myRadios" (change)="handleChange('others')" value="others" />
+               
+                <input type="radio"><span>Requesting for Others</span>
             </div>
           </div>
             <div class="btn-holder">
-            <button class="btn secondary-btn" (click)="onCancelClick()">Cancel</button>
+            <button class="btn secondary-btn-btn" (click)="onCancelClick()">Cancel</button>
           </div>
         </div>
+      </div>   -->
 
 
         <ng-container *ngIf="channelPartnerList && channelPartnerList.length>0">
@@ -170,6 +212,11 @@
     
 
 </div>
+
+
+
+
+ 
 
 <ngx-spinner
   bdColor="rgba(51,51,51,0.8)"

@@ -82,7 +82,12 @@ export class SearchForCompareProductComponent {
     .subscribe((results) => {
       if(results.length>2){
         this.generalSearchOpen = false;
-        this.globalSearchSvc.fetchSearchResults(results).subscribe(res => {
+        /*this.globalSearchSvc.fetchSearchResults(results).subscribe(res => {
+          this.searchResults = res;
+          this.searchResultsStore.setSearchResults(this.searchResults);
+          this.keywordSearchOpen = true;
+        });*/
+        this.globalSearchSvc.fetchSearchResultsByProducts(results).subscribe(res => {
           this.searchResults = res;
           this.searchResultsStore.setSearchResults(this.searchResults);
           this.keywordSearchOpen = true;

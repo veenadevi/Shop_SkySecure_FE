@@ -742,8 +742,8 @@ public onChangeQuantity(i, price) : void {
   public buyNow(){
 
 
-    //this.receiveOrderStatus()
-    this.checkout();
+    this.receiveOrderStatus()
+    //this.checkout();
 
   }
 

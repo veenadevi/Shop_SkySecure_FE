@@ -35,7 +35,7 @@ export class ProductDetailComponent implements OnInit{
   displayPriceType:number;
   displayDiscount:number;
 
-  //public productReviews : any;
+  public productReviews : any;
 
 
   showMonthlyPrice() {
@@ -358,9 +358,9 @@ export class ProductDetailComponent implements OnInit{
 
 
         /** Setting Product Reviews */
-        /*if(response.productReviewList && response.productReviewList.length>0){
+        if(response.productReviewList && response.productReviewList.length>0){
           this.productReviews = response.productReviewList
-        }*/
+        }
         
      
        
