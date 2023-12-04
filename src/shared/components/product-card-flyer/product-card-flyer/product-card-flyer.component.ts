@@ -27,35 +27,50 @@ export class ProductCardFlyerComponent implements OnInit{
   priceType:any;
   mrpPriceType : any;
  
+  
+  
+
+data:any;
   showYearlyPrice(i:any) {
    
-    this.isMonthly = true;
-    // this.productsList[i].priceList[0].price = this.productsList[i].priceList[0].price;
-    // this.priceValue = this.productsList[i].priceList[0].price;
-    // this.priceType = this.productsList[i].priceList[0].priceType;
-    // this.productsList[i].priceList[1].priceType = this.productsList[i].priceList[0].priceType;
-    // this.productsList[i].priceList[1].price = this.productsList[i].priceList[0].price;
-    // this.productsList[i].priceList[1].ERPPrice =this.productsList[i].priceList[0].ERPPrice;
-
+    this.isMonthly = true; 
 
 
     this.productsList[i].displayPrice= this.productsList[i].priceList[0].price
     this.productsList[i].displayERPPrice= this.productsList[i].priceList[0].ERPPrice
     this.productsList[i].displayPriceType= this.productsList[i].priceList[0].priceType
     this.productsList[i].displayDiscount= this.productsList[i].priceList[0].discountRate
+
+    // this.productsList[i].displayPrice1= this.productsList[i].priceList[1].price
+    // this.productsList[i].displayERPPrice1= this.productsList[i].priceList[1].ERPPrice
+    // this.productsList[i].displayPriceType1= this.productsList[i].priceList[1].priceType
+    // this.productsList[i].displayDiscount1= this.productsList[i].priceList[1].discountRate
+
+    this.productsList[i].displayPrice= this.productsList[i].priceList[2].price
+    this.productsList[i].displayERPPrice= this.productsList[i].priceList[2].ERPPrice
+    this.productsList[i].displayPriceType= this.productsList[i].priceList[2].priceType
+    this.productsList[i].displayDiscount= this.productsList[i].priceList[2].discountRate
+
   }
 
-  showDiscountRate(i: any) {
-
-    // this.productsList[i].priceList[1].price = this.productsList[i].priceList[1].price;
-    // this.productsList[i].priceList[1].ERPPrice =this.productsList[i].priceList[1].ERPPrice;
-    // console.log("moue leav e== set ",this.productsList[i].priceList[1].priceType)
-    // this.productsList[i].priceList[1].priceType =this.productsList[i].priceList[1].priceType;
-
+  showDiscountRate(i: any) { 
+    this.isMonthly = false;
     this.productsList[i].displayPrice= this.productsList[i].priceList[1].price
     this.productsList[i].displayERPPrice= this.productsList[i].priceList[1].ERPPrice
     this.productsList[i].displayPriceType= this.productsList[i].priceList[1].priceType
     this.productsList[i].displayDiscount= this.productsList[i].priceList[1].discountRate
+
+    // this.productsList[i].displayPrice= this.productsList[i].priceList[0].price
+    // this.productsList[i].displayERPPrice= this.productsList[i].priceList[0].ERPPrice
+    // this.productsList[i].displayPriceType= this.productsList[i].priceList[0].priceType
+    // this.productsList[i].displayDiscount= this.productsList[i].priceList[0].discountRate
+
+    this.productsList[i].displayPrice= this.productsList[i].priceList[2].price
+    this.productsList[i].displayERPPrice= this.productsList[i].priceList[2].ERPPrice
+    this.productsList[i].displayPriceType= this.productsList[i].priceList[2].priceType
+    this.productsList[i].displayDiscount= this.productsList[i].priceList[2].discountRate
+
+  //  this.data=this.productsList[i]
   }
   // originalAmount: number = 100;
   // modifiedAmountValue: number = 150;
@@ -65,7 +80,7 @@ export class ProductCardFlyerComponent implements OnInit{
 
   //@Input() products : Array<any> = [];
 
-  public productsList : any[] = [];
+public productsList : any[] = [];
 public whatsAppMessage:string
 
   @Input() set products(value : any){
@@ -81,7 +96,15 @@ public whatsAppMessage:string
       element.displayDiscount=element.priceList[1].discountRate
         //element.priceList[2].priceType = "Month";
 
-    
+        element.displayPrice=element.priceList[2].price
+        element.displayERPPrice=element.priceList[2].ERPPrice
+        element.displayPriceType=element.priceList[2].priceType
+        element.displayDiscount=element.priceList[2].discountRate
+
+      //   element.displayPrice=element.priceList[0].price
+      // element.displayERPPrice=element.priceList[0].ERPPrice
+      // element.displayPriceType=element.priceList[0].priceType
+      // element.displayDiscount=element.priceList[0].discountRate
     });
  
   }
@@ -112,7 +135,10 @@ public whatsAppMessage:string
 
   ngOnInit(): void {
     
-
+    // this.productsList[i].displayPrice= this.productsList[i].priceList[1].price
+    // this.productsList[i].displayERPPrice= this.productsList[i].priceList[1].ERPPrice
+    // this.productsList[i].displayPriceType= this.productsList[i].priceList[1].priceType
+    // this.productsList[i].displayDiscount= this.productsList[i].priceList[1].discountRate
   //localStorage.removeItem('compare_products_list');
   this.whatsAppMessage="Hello! I've contacted you through your website 'Skysecure MarketPlace." 
     
