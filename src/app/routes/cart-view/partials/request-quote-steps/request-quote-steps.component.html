@@ -7,7 +7,7 @@
 
 <div class="steps-routing-container">
     <div style="width:100%">
-        <mat-horizontal-stepper class="custom-style" #stepper>
+        <mat-horizontal-stepper appStepperPosition="bottom " class="custom-style" #stepper>
             <!-- keep icons as numbers during edit-->
             <!--
           <ng-template matStepperIcon="edit" let-index="index">
@@ -37,11 +37,13 @@
             <ng-template matStepperIcon="last">
                 <mat-icon>done_all</mat-icon>
             </ng-template> -->
-          
+            <!-- <mat-stepper labelPosition="bottom" #stepper> -->
             <mat-step  matStepperIcon="done" state="home">
+              <ng-template matStepLabel  labelPosition="bottom"> 1.GST Details</ng-template> 
                 <div>
+                  <!-- <ng-template matStepLabel  labelPosition="bottom">1.GST Details</ng-template> -->
                     <!-- <button    class="btn"> 1.GST Details</button> -->
-                    <span  class="button">1.GST Details</span>
+                    <!-- <span  class="button">1.GST Details</span> -->
                     
                     <gst-details (gstDetailsAction)="gstDetailsAction($event)"></gst-details>
                    
@@ -50,10 +52,13 @@
             </mat-step>
            
         
-          <mat-step   state="form">
+          <mat-step   state="form" label="2.Business Details" >
             <div>
-              <button    class="button"> 2.Business Details</button>
-              <business-details (businessDetailsAction)="businessDetailsAction($event)"></business-details>
+              <!-- <ng-template matStepLabel  labelPosition="bottom">2.Business Details</ng-template> -->
+              <!-- <button    class="button"> 2.Business Details</button> -->
+              <business-details (businessDetailsAction)="businessDetailsAction($event)">
+                <!-- <button    class="button"> 2.Business Details</button> -->
+              </business-details>
             </div>
             <!-- <form [formGroup]="formGroup">
               <mat-form-field>
@@ -66,9 +71,9 @@
             </form> -->
           </mat-step>
         
-          <mat-step   state="last">
+          <mat-step   state="last"  label="3.Overview">
             <ng-container *ngIf="reqBody && cartData" >
-              <button    class="button"> 3.Overview</button>
+              <!-- <button    class="button"> 3.Overview</button> -->
               <overview [reqBody]="reqBody" (overViewAction)="overViewAction($event)" [cartData]="cartData"></overview>
             </ng-container>
             

@@ -9,13 +9,13 @@
             <p *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">Please fill the mentioned details to generate estimation</p>
             <div class="quote-front-page">
 
-              <div  *ngIf="!isCheckedSelf && !isCheckedOthers" class="self col-4">
+              <div  *ngIf="!isCheckedSelf && !isCheckedOthers" class="self col-6">
                 <div>
                   <img src="../../../../../../../assets/images/request_quote.png" class="image">
                 </div>
               </div>
              
-                <div id="customerToogle"  *ngIf="!isCheckedSelf && !isCheckedOthers" class="self col-8">
+                <div id="customerToogle"  *ngIf="!isCheckedSelf && !isCheckedOthers" class="self col-6">
                   <p *ngIf="!isCheckedSelf && !isCheckedOthers" class="quote-head" >Request Quotation </p> 
                   <div class="radiobtns">
                     <div class="radio-group" (click)="handleChange('self')">
