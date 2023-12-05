@@ -8,6 +8,11 @@
 th{
     width:21%
 }
+.priceData{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 .comparison-category-header{
     width:16%;
     vertical-align: bottom;
@@ -24,7 +29,8 @@ th{
 }
 
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
-  padding: 5px 1rem 5px 1rem;
+  /* padding: 5px 1rem 5px 1rem; */
+  padding: 1rem 1rem 1rem 1rem;
   /* text-align: center !important; */
 }
 
@@ -254,7 +260,7 @@ th{
 
   :host ::ng-deep .p-datatable .p-datatable-tbody td 
   { 
-    width: 21%;
+    width: 20%;
   }
 
   :host ::ng-deep .p-datatable .p-datatable-tbody td:first-child 
