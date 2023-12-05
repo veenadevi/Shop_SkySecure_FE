@@ -16,7 +16,10 @@
     font-size: 0.8rem;
 }
 
-
+:host ::ng-deep .p-icon{
+    width: 10px;
+    height: 10px;
+}
   
 @media (min-width:320px) and (max-width:480px){
     .border-none{
