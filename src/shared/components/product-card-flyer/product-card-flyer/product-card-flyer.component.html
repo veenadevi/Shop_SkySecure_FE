@@ -49,16 +49,74 @@
                 </div>
                 <div class="price"> 
                     <!-- <new price hover functions> -->
-                    <div class="product-price-section">
+
+                    <ng-container *ngIf="item.isPerpetual ; else subscriptionProductsTemplate">
+                        
+
+                            <ng-container *ngIf="item.isCommercial ; else educationalProducts">
+                                <div class="product-price-section">
+
+                                </div>
+
+                            </ng-container>
+                            <ng-template #educationalProducts>
+                                <div class="product-price-section">
+                                    
+                                    <p *ngIf="item.priceList && item.priceList.length>0 && item.priceList[0].discountRate != null"
+                                        class="discounted-text">
+                                        -{{item.priceList[0].discountRate}}%&nbsp;</p>
+                                    <div class="price">
+                                        <span class="price-symbol">&#8377; {{item.priceList[0].ERPPrice | number : '1.2-2'}} /
+                                            {{item.priceList[0].priceType}}</span>
+                                    </div>
+                                     
+                                    <p class="gst">(GST Extra)</p>
+                                </div>
+                                
+                            </ng-template>
+
+                    </ng-container>
+                    <ng-template #subscriptionProductsTemplate>
+                        <div class="product-price-section">
+                
+                            <p *ngIf="item.priceList && item.priceList.length>0 && item.priceList[0].discountRate != null"
+                                class="discounted-text">
+                                -{{item.displayDiscount}}%&nbsp;</p>
+                            <div class="price"  (mouseenter)="showYearlyPrice(i)" (mouseleave)="showDiscountRate(i)">
+                                <span class="price-symbol">&#8377; {{item.displayPrice | number : '1.2-2'}} /
+                                    {{item.displayPriceType}}</span>
+                            </div>
+                             
+                            <p class="gst">(GST Extra)</p>
+                    
+                        </div>
+                        <span>
+                            <span class="text-style-mrp">MRP:</span>
+                            <span class="text-price strike-through" (mouseenter)="showYearlyPrice(i)" (mouseleave)="showDiscountRate(i)">
+                                ₹ {{((item.priceList && item.priceList.length>0) ? item.displayERPPrice : '' ) | number : '1.2-2'}} /
+                                {{item.displayPriceType}}</span>
+                             <!-- <span class="text-price strike-through" *ngIf="item.priceList[0].isPerpetual" (mouseenter)="showYearlyPrice(i)"
+                                (mouseleave)="showDiscountRate(i)">
+                                ₹ {{((item.priceList && item.priceList.length>0) ? item.displayERPPrice : '' ) | number : '1.2-2'}} /
+                                {{item.displayPriceType}}</span>
+                            
+                            <span class="text-price strike-through" *ngIf="item.priceList[0].isPerpetual && item.priceList[0].isEducational  ">
+                                ₹ {{((item.priceList && item.priceList.length>0) ? item.displayERPPrice : '' ) | number : '1.2-2'}} /
+                                {{item.displayPriceType}}</span>
+                            <span class="text-price strike-through" *ngIf="item.priceList[0].isPerpetual && item.priceList[2]  ">
+                                ₹ {{((item.priceList && item.priceList.length>0) ? item.displayERPPrice : '' ) | number : '1.2-2'}} /
+                                {{item.displayPriceType}}</span>   -->
+                           
+                              
+                        </span> 
+                    </ng-template>  
+                    <!-- <div class="product-price-section">
                 
                         <p *ngIf="item.priceList && item.priceList.length>0 && item.priceList[0].discountRate != null"
                             class="discounted-text">
                 
                             -{{item.displayDiscount}}%&nbsp;</p>
-                            <!-- <p *ngIf="item.priceList && item.priceList.length>0 && item.priceList[0].isPerpetual && item.priceList[2].discountRate != null"
-                                class="discounted-text">
-                    
-                                -{{item.displayDiscount}}%&nbsp;</p> -->
+                           
                     
                 
                 
@@ -85,8 +143,8 @@
 
                         <p class="gst">(GST Extra)</p>
                 
-                    </div>
-                    <span>
+                    </div> -->
+                    <!-- <span>
                         <span class="text-style-mrp">MRP:</span>
                         <span class="text-price strike-through" (mouseenter)="showYearlyPrice(i)" (mouseleave)="showDiscountRate(i)">
                             ₹ {{((item.priceList && item.priceList.length>0) ? item.displayERPPrice : '' ) | number : '1.2-2'}} /
@@ -104,7 +162,7 @@
                             {{item.displayPriceType}}</span>  
                        
                           
-                    </span> 
+                    </span>  -->
                 
                 </div>
                

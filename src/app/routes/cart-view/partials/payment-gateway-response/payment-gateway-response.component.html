@@ -1,13 +1,17 @@
 <ng-container *ngIf="statusResponse">
-    
+
     <div class="payment-status-view-container">
+        <pre>{{statusResponse |json}}</pre>
+    </div>
+    
+    <!-- <div class="payment-status-view-container">
         <div class="left">
             <div class="billingInfo">
                 <h4 class="hideInMobile">Billing Confirmation</h4>
                 <div class="spacer20 hideInMobile"></div>
                 <div class="borb_fff hideInMobile"></div>
                 <div class="heading rightside"> 
-                    <!-- <img src="/transaction/images/hdfc/icons/amount.png" class="icon"> -->
+                    
                     <p>Amount</p>
                     <h5 class="amount"><span>INR</span>&nbsp;<span>{{statusResponse.totalAmount}}</span></h5>
                     <span style="display: none;" id="hdfcsurchargelabel">Internet handling fee of <span>INR</span>.<label id="hdfcsurchargefees"></label> will be added to the transaction amount.</span>
@@ -38,7 +42,7 @@
                 
                 <div class="borb_fff hideInMobile"></div>
                 <div class="heading"> 
-                    <!-- <img src="/transaction/images/hdfc/icons/order.png" class="icon"> -->
+                    
                     
                     <p>Order No</p>
                     
@@ -49,7 +53,7 @@
                 </div>
                 <div class="borb_fff hideInMobile"></div>
                 <div class="heading"> 
-                    <!-- <img src="/transaction/images/hdfc/icons/order.png" class="icon"> -->
+                    
                     
                     <p>Order Status</p>
                     
@@ -60,21 +64,9 @@
                 </div>
             </div>
             
-            <!-- <div class="otherInfo">
-                <div class="heading"> 
-                    <img src="/transaction/images/hdfc/icons/merchant.png" class="icon">
-                    <p>Merchant</p>
-                    <span class="narrow bold">SKYSECURE TECHNOLOGIES PRIVATE LIMITED</span> 
-                </div>
-                <div class="borb_ccc hideInMobile"></div>
-                <div class="heading"> 
-                    <img src="/transaction/images/hdfc/icons/website.png" class="icon">
-                    <p>Website</p>
-                    <a class="wordBreak narrow" href="https://dev-shop.skysecuretech.com" target="_blank">https://dev-shop.skysecuretech.com</a>
-                </div>
-            </div> -->
+            
         </div>
-    </div>
+    </div> -->
     
 </ng-container>
 
