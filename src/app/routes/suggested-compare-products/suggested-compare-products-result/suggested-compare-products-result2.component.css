@@ -6,7 +6,7 @@
 }
 
 th{
-  width:21%
+  width:20.5%
 }
 .comparison-category-header{
   width:16%;
@@ -237,7 +237,7 @@ border-radius: 5px;
 :host ::ng-deep .p-datatable .p-datatable-thead{
   position: fixed;
   top:102px;
-  width: 98%;
+  width: 97%;
 }
 
 /* :host ::ng-deep .p-datatable .p-datatable-tbody tr:first-child 

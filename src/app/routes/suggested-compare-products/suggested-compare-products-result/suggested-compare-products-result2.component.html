@@ -3,7 +3,7 @@
         <p-table [columns]="scrollableCols" [value]="comparisonCategories" [scrollable]="true"  frozenWidth="200px">
             
             <ng-template pTemplate="header" let-columns>
-              <tr class="d-flex">
+              <tr  >
 
                 <th class="comparison-category-header ">
                         <span>
@@ -12,12 +12,12 @@
                 </th>
                 <ng-container *ngFor="let item of allProducts; let i = index">
                     <th *ngIf="item && item.properties && item.properties._id ; else emptyFlyer">
-                        <header-card-flyer [product]="item"></header-card-flyer>
+                        <header-card-flyer [product]="item" ></header-card-flyer>
                         <div class="button-holder">
                             <div class="td-column">
-                                <button class="btn secondary-btn" (click)="removeItem(item)">
+                                <!-- <button class="btn secondary-btn" (click)="removeItem(item)">
                                     Remove 
-                                </button>
+                                </button> -->
                                 <ng-container *ngIf="item.properties.isActive">
                                 <button class="btn primary-btn" (click)="requestQuote(item)">
                                    
@@ -166,7 +166,7 @@
                                     <div class="tick-symbol">
                                         <img src="../../../../assets/icons/SecondaryTickIcon.svg">
                                     </div>
-                                    <span class="feature-text-left-align pointer-style " (click)="navigateToProductDetails(features)">{{features.name}}</span>
+                                    <span class="feature-text-left-align pointer-style " (click)="navigateToProductDetails(features)">{{features.name}} </span>
                                 </div>   
                                 <div class="tick-container"   *ngFor="let features of item.properties[rowData.header]">
     
