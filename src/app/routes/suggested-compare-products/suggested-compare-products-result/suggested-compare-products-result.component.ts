@@ -566,6 +566,7 @@ export class SuggestedCompareProductsResultComponent {
         else{
           //this.viewModal(queryParams);
           let currentRouteName = window.location.pathname;
+          queryParams.priceList = JSON.stringify(queryParams.priceList);
           this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})
 
         }

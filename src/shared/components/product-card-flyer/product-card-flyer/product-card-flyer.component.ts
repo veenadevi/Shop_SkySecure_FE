@@ -415,6 +415,7 @@ public whatsAppMessage:string
 
       console.log("===routing==========",currentRouteName)
 
+      queryParams.priceList = JSON.stringify(queryParams.priceList);
       this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})
 
     

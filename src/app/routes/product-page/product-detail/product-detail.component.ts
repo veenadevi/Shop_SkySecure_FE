@@ -874,6 +874,7 @@ featureCount=5;
 
           //console.log("+_+_+_+_+_+_ ", window.location.pathname);
           let currentRouteName = window.location.pathname;
+          queryParams.priceList = JSON.stringify(queryParams.priceList);
           this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})
 
         }
