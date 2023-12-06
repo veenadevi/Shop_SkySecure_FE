@@ -96,10 +96,10 @@ public whatsAppMessage:string
       element.displayDiscount=element.priceList[1].discountRate
         //element.priceList[2].priceType = "Month";
 
-        element.displayPrice=element.priceList[2].price
+        /*element.displayPrice=element.priceList[2].price
         element.displayERPPrice=element.priceList[2].ERPPrice
         element.displayPriceType=element.priceList[2].priceType
-        element.displayDiscount=element.priceList[2].discountRate
+        element.displayDiscount=element.priceList[2].discountRate*/
 
       //   element.displayPrice=element.priceList[0].price
       // element.displayERPPrice=element.priceList[0].ERPPrice
