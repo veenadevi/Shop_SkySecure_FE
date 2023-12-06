@@ -36,7 +36,7 @@ constructor(
     
   }
 
-  public getStatusUpdate(id){
+  /*public getStatusUpdate(id){
     this.subscription.push(
       this.cartService.getPaymentStatusUpdate(id).subscribe(res=>{
        // console.log("+_+_+_ Final Update ", res);
@@ -44,6 +44,23 @@ constructor(
         this.spinner.hide();
       })
     )
-  }
+  }*/
+
+
+  public getStatusUpdate(id){
+
+    //https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/{merchantId}/{merchantTransactionId}
+    
+
+    this.subscription.push(
+     
+      this.cartService.checkPaymentStatusUpdate(id).subscribe(res=>{
+        this.spinner.hide();
+        this.statusResponse = res;
+        console.log("+_+_+_+_+_ REs ", res);
+      })
+    )
+    console.log("+_+_+_ Status ", id);
+  } 
 
 }

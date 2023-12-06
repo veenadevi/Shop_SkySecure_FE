@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'header-card-flyer',
@@ -15,6 +16,10 @@ export class HeaderCardFlyerComponent implements OnInit{
   public alternateLogo = 'https://csg1003200209655332.blob.core.windows.net/images/1683273444-MicrosoftLogo_300X300.png';
 
 
+  constructor(
+    private router : Router,
+    
+  ){}
   ngOnInit(): void {
     if(this.product && this.product.properties){
       
@@ -23,5 +28,7 @@ export class HeaderCardFlyerComponent implements OnInit{
     }
     
   }
-
+  public navigateToProductDetails(product:any){
+    this.router.navigate(['/products', product._id]); 
+  }
 }

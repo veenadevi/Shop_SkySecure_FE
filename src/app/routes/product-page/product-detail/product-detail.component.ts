@@ -27,7 +27,7 @@ export class ProductDetailComponent implements OnInit{
   monthlyPrice: number = this.discountRate / 12;
   isMonthly: boolean = true;
   
-
+  public i: number;
 
 
   displayPrice:number;
@@ -48,7 +48,36 @@ export class ProductDetailComponent implements OnInit{
     this.product.priceList[0].ERPPrice  =this.product.priceList[0].ERPPrice *12;
   }
  
+  showYearlyPrice(i:any ) {
+    // console.log('Mouse entered. Showing yearly price.' );
+    this.isMonthly = true; 
+    this.displayPrice= this.product.priceList[0].price
+    this.displayERPPrice= this.product.priceList[0].ERPPrice
+    this.displayPriceType= this.product.priceList[0].priceType
+    this.displayDiscount= this.product.priceList[0].discountRate
 
+    this.displayPrice= this.product.priceList[1].price
+    this.displayERPPrice= this.product.priceList[1].ERPPrice
+    this.displayPriceType= this.product.priceList[1].priceType
+    this.displayDiscount= this.product.priceList[1].discountRate
+  console.log("  this.displayERPPrice",this.displayERPPrice) 
+  if(this.product.priceList[0] && i === 0){
+    this.isMonthly = true; 
+    console.log(" Inide if condition") 
+     
+  }
+   
+  }
+  showDiscountRates(i:any ) {
+    console.log('Mouse entered. Showing discount price.');
+    this.isMonthly = false; 
+   
+    this.displayPrice= this.product.priceList[1].price
+    this.displayERPPrice= this.product.priceList[1].ERPPrice
+    this.displayPriceType= this.product.priceList[1].priceType
+    this.displayDiscount= this.product.priceList[1].discountRate
+  }
+ 
   quantity: number = 1;
 
   onKeyDown(event: KeyboardEvent): void {
@@ -845,6 +874,7 @@ featureCount=5;
 
           //console.log("+_+_+_+_+_+_ ", window.location.pathname);
           let currentRouteName = window.location.pathname;
+          queryParams.priceList = JSON.stringify(queryParams.priceList);
           this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})
 
         }

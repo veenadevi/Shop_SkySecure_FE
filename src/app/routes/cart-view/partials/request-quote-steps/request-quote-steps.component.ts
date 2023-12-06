@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild,Input,ElementRef} from '@angular/core';
 import { FormGroup,FormControl } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
@@ -9,13 +9,24 @@ import { Router } from '@angular/router';
   selector: 'request-quote-steps',
   templateUrl: './request-quote-steps.component.html',
   styleUrls: ['./request-quote-steps.component.css'],
+  host: {
+    'class': 'mat-stepper-horizontal',
+    '[class.mat-stepper-label-position-end]': 'labelPosition == "end"',
+    '[class.mat-stepper-label-position-bottom]': 'labelPosition == "bottom"',
+    'aria-orientation': 'horizontal',
+    'role': 'tablist',
+  },
   providers: [{
     provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
   }]
 })
 export class RequestQuoteStepsComponent {
-  
+  @Input()
+  labelPosition: 'bottom' | 'end' = 'end';
   interests = [];
+
+  @Input('appStepperPosition') position: 'top' | 'bottom';
+  element: any;
 
   public navigation : any;
   public cartData:any;
@@ -23,9 +34,11 @@ export class RequestQuoteStepsComponent {
   public reqBody : any;
 
   constructor(
-    private router : Router
+    private router : Router,
+    private elementRef: ElementRef
   ){
     this.navigation = this.router.getCurrentNavigation();
+    this.element = elementRef.nativeElement;
   }
 
   formGroup = new FormGroup({ secondCtrl: new FormControl(''), })
@@ -76,7 +89,13 @@ export class RequestQuoteStepsComponent {
     //console.log("+_+_+_ ", this.navigation.extras.state);
   }
 
-
+  ngAfterViewInit(): void {
+    if (this.position === 'bottom') {
+      const header = this.element.children[0];
+      const content = this.element.children[1];
+      this.element.insertBefore(content, header);
+    }
+  }
   @ViewChild('stepper') private myStepper: MatStepper;
 
   public nextStep(){

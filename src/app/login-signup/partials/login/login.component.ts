@@ -81,7 +81,19 @@ export class LoginComponent {
       console.log("params    =====",params)
       
       this.emailViaSignup= params['email'];
-      this.cartObj=params
+      
+      
+      let tempParams = JSON.parse(params.priceList);
+      //this.cartObj.priceList = tempParams;
+      
+      
+      const newItem = { ...params }
+
+      newItem.priceList = JSON.parse(params.priceList);
+      
+      this.cartObj=newItem
+      
+      console.log("++++++++ th", this.cartObj);
       // console.log("params    =====",this.cartObj)
 
       // console.log("currentRouteName    =====",this.cartObj['currentRouteName'])
