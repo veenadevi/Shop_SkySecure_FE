@@ -293,3 +293,8 @@ option{
 .back-btn {
     height: 20px;
 }
+
+.gst{
+    font-size: 9px;
+    color: #494eb1;
+}
