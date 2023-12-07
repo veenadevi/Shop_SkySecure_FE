@@ -16,7 +16,7 @@ export class HeaderSerachBarComponent {
   
 
   public isOpen = false;
-  public keywordSearchOpen = false;
+  public keywordSearchOpen = true;
   public generalSearchOpen = false;
 
   public inputText = '';
