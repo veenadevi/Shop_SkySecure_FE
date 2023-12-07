@@ -2,11 +2,11 @@
   /* padding: 1%; */
   margin: 0 1% 1% 1%;
   font-family: 'lato',sans-serif;
-  margin-top:270px;
+  margin-top:290px;
 }
 
 th{
-  width:20.5%
+  width:21%
 }
 .comparison-category-header{
   width:16%;
@@ -292,4 +292,9 @@ width: 50%;
 font-size: 12px;
 max-width: 60px;
 text-align: center;
+}
+
+.margin{
+  margin: 0px !important;
+ 
 }
