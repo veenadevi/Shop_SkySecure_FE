@@ -60,6 +60,9 @@ export class SearchComponent {
   }
 
   public onSearchQueryInput(event: Event): void {
+    this.isOpen = true;
+    this.generalSearchOpen = false;
+    this.keywordSearchOpen = true;
     const searchQuery = (event.target as HTMLInputElement).value;
     this.searchSubject.next(searchQuery?.trim());
   }
