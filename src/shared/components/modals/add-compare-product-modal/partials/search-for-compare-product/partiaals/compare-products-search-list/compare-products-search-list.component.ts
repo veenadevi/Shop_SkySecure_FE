@@ -48,6 +48,8 @@ export class CompareProductsSearchListComponent {
       this.searchResultsCategoryList = data?.categoryList || [];
       this.searchResultsSubCategoryList = data?.subCategoryList || [];
 
+      this.searchResultsSubCategoryList = this.searchResultsSubCategoryList.filter(c => c.products.length>0);
+
       this.searchResultsProductBundleList = [...tempProductBundleVariantsData , ...tempBundlesData];
       
       //this.searchResultsProductBundleList = data?.productBundles || [];

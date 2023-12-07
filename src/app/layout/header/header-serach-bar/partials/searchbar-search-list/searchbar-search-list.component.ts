@@ -46,6 +46,9 @@ export class SearchbarSearchListComponent {
       this.searchResultsCategoryList = data?.categoryList || [];
       this.searchResultsSubCategoryList = data?.subCategoryList || [];
 
+      this.searchResultsSubCategoryList = this.searchResultsSubCategoryList.filter(c => c.products.length>0);
+      //console.log("+_+_+_+_+_+_ ", this.searchResultsSubCategoryList);
+
       this.searchResultsProductBundleList = [...tempProductBundleVariantsData , ...tempBundlesData];
       
       //this.searchResultsProductBundleList = data?.productBundles || [];
