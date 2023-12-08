@@ -18,7 +18,7 @@ export class CarouselComponent {
       eventLocation:'',
       eventDescription:'',
       // img: '../../../../assets/images/banner/MicrosoftDefender.png',
-      img: '../../../../assets/images/banner/AboutBanner.png',
+      img: '../../../../assets/images/Final banner - section 1300 x 200 px.png',
       eventStartDate: new Date('2019/05/20'),
       eventEndingDate: new Date('2019/05/24')
     },
@@ -27,7 +27,7 @@ export class CarouselComponent {
       eventLocation:'',
       eventDescription:'',
       // img: '../../../../assets/images/banner/AzureActiveDirectory.png',
-      img: '../../../../assets/images/banner/MicrosoftOEMBanner.png',
+      img: '../../../../assets/images/Final banner 2 - section 1300 x 200 px.png',
       eventStartDate: new Date('2019/07/28'),
       eventEndingDate: new Date('2019/07/30')
     },
@@ -35,7 +35,7 @@ export class CarouselComponent {
       event:' Event 3',
       eventLocation:'',
       eventDescription:'',
-      img: '../../../../assets/images/banner/AutoDeploymentBanner.png',
+      img: '../../../../assets/images/Final banner - section 3 -1300 x 200 px.jpg',
       eventStartDate: new Date('2020/05/20'),
       eventEndingDate: new Date('2020/05/24')
     },

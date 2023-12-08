@@ -1,6 +1,6 @@
 .container{
     width: 100%;
-    background : var(--white);
+    /* background : var(--white); */
     display: flex;
     flex-direction: column;
     padding: 20px 20px 0;
