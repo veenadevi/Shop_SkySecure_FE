@@ -4746,3 +4746,7 @@ height: 35px;
 .scroll{
   width: 18%;
 }
+.heading{
+  font-weight: 600;
+  font-size: 13px;
+}
