@@ -358,7 +358,7 @@ padding-left: 100px;
     display: flex;
     margin-top: 10px;
     height: 10px;
-    width: 10px;
+    width: 20%;
   }
 
 nav .navbar .links li a{
@@ -369,9 +369,50 @@ nav .navbar .links li a{
   font-size: 19px !important;
   height: auto !important;
   width: auto !important;
-  background-color: var(--primary);
+  /* background-color: var(--primary); */
   padding-left: 0px;
-  padding-top: 17px;
+  padding-top: 12px;
+}
+nav .navbar .links li .arrow-01 {
+  height: 100%;
+  width: 9px;
+  line-height: 30px;
+  text-align: center;
+  display: inline-block;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+nav .navbar .nav-links{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  margin-top: 3px;
+  padding-right: 250px;
+}
+
+
+}
+
+@media  ( min-width: 920px) and (max-width: 1024px) {
+  nav .navbar .links{
+    display: flex;
+    margin-top: 10px;
+    height: 10px;
+    width: 20%;
+  }
+
+nav .navbar .links li a{
+  font-size: 11px;
+  
+}
+.mat-icon-size{
+  font-size: 19px !important;
+  height: auto !important;
+  width: auto !important;
+  /* background-color: var(--primary); */
+  padding-left: 20px;
+  padding-top: 12px;
 }
 nav .navbar .links li .arrow-01 {
   height: 100%;
@@ -391,7 +432,6 @@ nav .navbar .nav-links{
   padding-right: 250px;
 }
 }
-
 @media  ( min-width: 480px) and (max-width: 770px) {
   nav .navbar .links{
     display: flex;
@@ -407,9 +447,9 @@ nav .navbar .links li a{
   font-size: 19px !important;
   height: auto !important;
   width: auto !important;
-  background-color: var(--primary);
+  /* background-color: var(--primary); */
   padding-left: 0px;
-  padding-top: 17px;
+  padding-top: 12px;
 }
 nav .navbar .links li .arrow-01 {
   height: 100%;
@@ -437,7 +477,9 @@ nav .navbar .nav-links{
     height: 10px;
     width: 10px;
   }
-
+  .hamburger-icon-holder{
+    width:5%;
+  }
 nav .navbar .links li a{
   font-size: 8px;
 }
@@ -445,9 +487,9 @@ nav .navbar .links li a{
   font-size: 15px !important;
   height: auto !important;
   width: auto !important;
-  background-color: var(--primary);
+  /* background-color: var(--primary); */
   padding-left: 0px;
-  padding-top: 20px;
+  padding-top: 14px;
 }
 nav .navbar .links li .arrow-01 {
   height: 100%;
