@@ -120,6 +120,12 @@ export class ProductListTableComponent {
     this.spinner.hide()
   }
 
+  public detectInputChange(event, item){
+    
+    if(event.target.value < 1){
+      item.get('quantity').setValue(1);
+    }
+  }
   public valueChanged(event, item, type) {
 
     this.enableinvoice=true

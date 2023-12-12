@@ -806,6 +806,9 @@ featureCount=5;
     }
 
   public requestQuote (product : any) : void {
+
+    
+    
     if(product.quantity>0){
       let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
@@ -841,31 +844,40 @@ featureCount=5;
           queryParams.distributorPrice=product.priceList[0].distributorPrice,
           queryParams.priceList = product.priceList
         }
-        if(this.selectedOptionForPerptual === '3Years'){
-          //  queryParams.price = (queryParams.price/12).toFixed(2);
-        //  console.log("sednign erp price for month ====",product.priceList[1].erpPrice)
-  
-          queryParams.price = product.priceList[1].price,
-          queryParams.erpPrice=product.priceList[1].ERPPrice,
-          queryParams.discountRate=product.priceList[1].discountRate,
-          queryParams.priceType= product.priceList[1].priceType,
-          queryParams.distributorPrice=product.priceList[1].distributorPrice,
-          queryParams.priceList = product.priceList
-         
-          }
-          else{
-            queryParams.price = (Number(queryParams.price));
-  
-            queryParams.price = product.priceList[0].price,
-            queryParams.erpPrice=product.priceList[0].ERPPrice,
-            queryParams.discountRate=product.priceList[0].discountRate,
-            queryParams.priceType= product.priceList[0].priceType,
-            queryParams.distributorPrice=product.priceList[0].distributorPrice,
+
+
+
+        if(product.isPerpetual){
+
+          if(this.selectedOptionForPerptual === '3Years'){
+            //  queryParams.price = (queryParams.price/12).toFixed(2);
+          //  console.log("sednign erp price for month ====",product.priceList[1].erpPrice)
+    
+            queryParams.price = product.priceList[1].price,
+            queryParams.erpPrice=product.priceList[1].ERPPrice,
+            queryParams.discountRate=product.priceList[1].discountRate,
+            queryParams.priceType= product.priceList[1].priceType,
+            queryParams.distributorPrice=product.priceList[1].distributorPrice,
             queryParams.priceList = product.priceList
-          }
+           
+            }
+            else{
+              queryParams.price = (Number(queryParams.price));
+    
+              queryParams.price = product.priceList[0].price,
+              queryParams.erpPrice=product.priceList[0].ERPPrice,
+              queryParams.discountRate=product.priceList[0].discountRate,
+              queryParams.priceType= product.priceList[0].priceType,
+              queryParams.distributorPrice=product.priceList[0].distributorPrice,
+              queryParams.priceList = product.priceList
+            }
+
+        }
+
   
 
 
+          
         let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
         if (encodedVal !== null) {
           this.addItemsToCartService.addItemsToCart(queryParams);

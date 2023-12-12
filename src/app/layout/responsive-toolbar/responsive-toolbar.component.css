@@ -304,6 +304,31 @@ nav .navbar .links li:hover .js-sub-menu{
   /* max-width: 150px; */
 }
 
+.more-sub-menu2-scroll{
+  width: 250px;
+  /* max-width: 250px; */
+  
+   
+   /* border-bottom: 2px solid rgba(255,255,255,0.1); */
+   /* width: 250px; */
+   position: absolute;
+   top: 30px;
+   left: 0;
+   line-height: 40px;
+   /* background: #3E8DA8; */
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+   border-radius: 0 0 4px 4px;
+   display: none;
+   /* display: block; */
+   z-index: 2;
+ 
+   max-height: 306px;
+   overflow-x: hidden;
+   overflow-y: scroll;
+   
+   background-color: white;
+}
+
 
 .more-sub-menu2{
  width: 250px;
