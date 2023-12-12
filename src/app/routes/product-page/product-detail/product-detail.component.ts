@@ -430,8 +430,8 @@ export class ProductDetailComponent implements OnInit{
 
    
    this.displayDiscount= this.product.priceList[0].discountRate
-   console.log("discount",this.product.priceList[0].length)
-   this.displayDiscount2= this.product.priceList[2].discountRate
+   
+   this.displayDiscount2= this.product.priceList.length>2 ? this.product.priceList[2].discountRate : '';
 
    this.selectedProductItem=response.compareProductList;
    this.selectedProductItem.unshift(response.product);
