@@ -27,7 +27,7 @@
           </td>
           <td class="form-group">
             <div class=" price-details">
-            <input type="number" [readOnly]="isReadOnly" class="form-control-01" formControlName="quantity" placeholder="quantity" (change)="valueChanged($event, group, 'quantity')" (keydown)="onKeyDown($event)">
+            <input type="number" [readOnly]="isReadOnly" class="form-control-01" (keyup)="detectInputChange($event, group)" formControlName="quantity" placeholder="quantity" (change)="valueChanged($event, group, 'quantity')" (keydown)="onKeyDown($event)">
             <span class="text-danger" *ngIf="group.get('quantity').touched && group.get('quantity')?.hasError('required')">Quantity required</span>
           </div>
           </td>

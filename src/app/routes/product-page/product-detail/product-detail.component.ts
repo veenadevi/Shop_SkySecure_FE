@@ -23,6 +23,7 @@ import { TermsConditionModalComponent } from 'src/shared/components/modals/terms
 })
 export class ProductDetailComponent implements OnInit{
   selectedOption: string = 'default'; 
+  selectedOptionForPerptual:string='3years'
   discountRate: number =120; 
   monthlyPrice: number = this.discountRate / 12;
   isMonthly: boolean = true;
@@ -48,35 +49,6 @@ export class ProductDetailComponent implements OnInit{
     this.product.priceList[0].ERPPrice  =this.product.priceList[0].ERPPrice *12;
   }
  
-  showYearlyPrice(i:any ) {
-    // console.log('Mouse entered. Showing yearly price.' );
-    this.isMonthly = true; 
-    this.displayPrice= this.product.priceList[0].price
-    this.displayERPPrice= this.product.priceList[0].ERPPrice
-    this.displayPriceType= this.product.priceList[0].priceType
-    this.displayDiscount= this.product.priceList[0].discountRate
-
-    this.displayPrice= this.product.priceList[1].price
-    this.displayERPPrice= this.product.priceList[1].ERPPrice
-    this.displayPriceType= this.product.priceList[1].priceType
-    this.displayDiscount= this.product.priceList[1].discountRate
-  console.log("  this.displayERPPrice",this.displayERPPrice) 
-  if(this.product.priceList[0] && i === 0){
-    this.isMonthly = true; 
-    console.log(" Inide if condition") 
-     
-  }
-   
-  }
-  showDiscountRates(i:any ) {
-    console.log('Mouse entered. Showing discount price.');
-    this.isMonthly = false; 
-   
-    this.displayPrice= this.product.priceList[1].price
-    this.displayERPPrice= this.product.priceList[1].ERPPrice
-    this.displayPriceType= this.product.priceList[1].priceType
-    this.displayDiscount= this.product.priceList[1].discountRate
-  }
  
   quantity: number = 1;
 
@@ -456,6 +428,11 @@ export class ProductDetailComponent implements OnInit{
    this.displayPriceType= this.product.priceList[1].priceType
    this.displayDiscount= this.product.priceList[1].discountRate
 
+   
+   this.displayDiscount= this.product.priceList[0].discountRate
+   console.log("discount",this.product.priceList[0].length)
+   this.displayDiscount2= this.product.priceList[2].discountRate
+
    this.selectedProductItem=response.compareProductList;
    this.selectedProductItem.unshift(response.product);
 
@@ -465,7 +442,8 @@ export class ProductDetailComponent implements OnInit{
     );
   }
 
-
+  displayDiscount0;
+  displayDiscount2;
   private getSimilerProducts(subCategoryId: String) {
     this.subscriptions.push(
       this.metaDataSvc.fetchAllProductsBySubCategoryIds([subCategoryId]).subscribe(response => {
@@ -828,6 +806,9 @@ featureCount=5;
     }
 
   public requestQuote (product : any) : void {
+
+    
+    
     if(product.quantity>0){
       let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
@@ -865,6 +846,38 @@ featureCount=5;
         }
 
 
+
+        if(product.isPerpetual){
+
+          if(this.selectedOptionForPerptual === '3Years'){
+            //  queryParams.price = (queryParams.price/12).toFixed(2);
+          //  console.log("sednign erp price for month ====",product.priceList[1].erpPrice)
+    
+            queryParams.price = product.priceList[1].price,
+            queryParams.erpPrice=product.priceList[1].ERPPrice,
+            queryParams.discountRate=product.priceList[1].discountRate,
+            queryParams.priceType= product.priceList[1].priceType,
+            queryParams.distributorPrice=product.priceList[1].distributorPrice,
+            queryParams.priceList = product.priceList
+           
+            }
+            else{
+              queryParams.price = (Number(queryParams.price));
+    
+              queryParams.price = product.priceList[0].price,
+              queryParams.erpPrice=product.priceList[0].ERPPrice,
+              queryParams.discountRate=product.priceList[0].discountRate,
+              queryParams.priceType= product.priceList[0].priceType,
+              queryParams.distributorPrice=product.priceList[0].distributorPrice,
+              queryParams.priceList = product.priceList
+            }
+
+        }
+
+  
+
+
+          
         let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
         if (encodedVal !== null) {
           this.addItemsToCartService.addItemsToCart(queryParams);

@@ -131,7 +131,17 @@ export class ProductsListTableComponent implements OnInit {
 
   }
 
+  public detectInputChange(event, item){
+    
+    if(event.target.value < 1){
+      item.get('quantity').setValue(1);
+    }
+  }
+
   public valueChanged(event, item, type) {
+
+
+    console.log("+_+_+_+_+_+__ ", item.get('quantity').value);
 
 this.enableinvoice=true
 

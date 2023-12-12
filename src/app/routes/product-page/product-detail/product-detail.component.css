@@ -702,7 +702,7 @@ button[disabled] {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-right: 12px;
+  margin-right: 0px;
 }
 
 .buy-now-btn {
@@ -4662,7 +4662,7 @@ h5 {
 .radio-btn{
   display: flex;
   flex-direction: row;
-  column-gap: 1px;
+  column-gap: 50px;
   margin-top: 10px;
   margin-bottom: 10px;
   justify-content: space-around;
@@ -4745,4 +4745,8 @@ height: 35px;
 
 .scroll{
   width: 18%;
+}
+.heading{
+  font-weight: 600;
+  font-size: 13px;
 }

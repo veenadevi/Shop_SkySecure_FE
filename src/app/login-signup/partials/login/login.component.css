@@ -442,13 +442,18 @@ input{
     font-weight: 500;
     border: none;
     outline: none;
-    width: 6rem;
+    width: 7rem;
+    padding: 6px;
     border-radius: 5px;
     background: var(--btn-gradient);
     transition: all .3s ease;
     box-shadow: 0 3px 6px #0000001a;
     }
-    
+    .primary-btn {
+        /* margin-top: 25px; */
+        font-size: 14px !important;
+        cursor: pointer;
+    }
     /* .secondary-btn{
         box-sizing: border-box;
         border: 1px solid  #080F24;
@@ -643,13 +648,18 @@ input{
     font-weight: 500;
     border: none;
     outline: none;
-    width: 6rem;
+    width: 7rem;
+    padding: 6px;
     border-radius: 5px;
     background: var(--btn-gradient);
     transition: all .3s ease;
     box-shadow: 0 3px 6px #0000001a;
     }
-    
+    .primary-btn {
+        /* margin-top: 25px; */
+        font-size: 14px !important;
+        cursor: pointer;
+    }
     /* .secondary-btn{
         box-sizing: border-box;
         border: 1px solid  #080F24;
@@ -838,20 +848,27 @@ input{
 margin-left: 0;
 font-family: 'lato',sans-serif;
 margin-top: 25px;
-font-size: 18px;
+/* font-size: 14px; */
 cursor: pointer;
 color: var(--white);
 font-size: 14px;
 font-weight: 500;
 border: none;
 outline: none;
-width: 6rem;
+width: 7rem;
 border-radius: 5px;
 background: var(--btn-gradient);
 transition: all .3s ease;
 box-shadow: 0 3px 6px #0000001a;
+padding: 6px;
 }
 
+
+.primary-btn {
+    /* margin-top: 25px; */
+    font-size: 14px !important;
+    cursor: pointer;
+}
 /* .secondary-btn{
     box-sizing: border-box;
     border: 1px solid  #080F24;

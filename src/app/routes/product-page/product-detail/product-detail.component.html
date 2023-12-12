@@ -57,8 +57,8 @@
                               <input type="radio" [(ngModel)]="selectedOption" value="other"> Other
                             </label>
                           </div> -->
-                         
-                          <div *ngIf="!product.isPerpetual;else other_content">
+                        <ng-container *ngIf="!product.isPerpetual;else second">
+                            <!-- <h3>normal products</h3> -->
                             <div class="radio-btn">
                                 <div class="radio-group">
                                     <input type="radio" checked name="myRadios" [(ngModel)]="selectedOption" value="default">
@@ -85,14 +85,160 @@
                                             src="../../../../assets/icons/AddIcon.svg">
                                     </span>
                                 </span> 
-                            </div>
-                            <button class="btn tertiary-btn" (click)="requestQuote(product)">Add To Cart</button>
-                        </div>
-                        
-                        <ng-template #other_content> 
-                            <button class="btn tertiary-btn" (click)="requestQuote(product)">Add To Cart</button>
-                        </ng-template>
+                            
+                                <button class="btn tertiary-btn" (click)="requestQuote(product)">Add To Cart</button>
+                           </div>
+                        </ng-container>
+                        <ng-template #second>
+                             <ng-container *ngIf="product.isPerpetual && product.priceList[0]?.ERPPrice == 'NaN' && product.priceList[1]?.ERPPrice == 'NaN'  && product.priceList[2] ; ">
+                                <!-- <h3> commercial-2</h3> -->
+                                <div class="radio-btn">
+                                    <div class="radio-group"> 
+                                        <span class="heading">It is Life time product</span>
+                                    </div>
+                                </div>
+                                <div class="buy-now-prod">
+                                    <span class="plus-minus">
+                                        <span>
+                                            <img id="add-minus-quantity" (click)="decreaseBuyQuantity(product.quantity)" alt="minus" class="add"
+                                                src="../../../../../assets/icons/MinusIcon.svg">
+                                        </span>
+                                        <span>
+                                            <input type="number" min="0" class="input-field" [(ngModel)]="product.quantity"
+                                                (keydown)="onKeyDown($event)">
+                                        </span>
+                                        <span>
+                                            <img id="add-minus-quantity" alt="" (click)="addBuyQuantity(product.quantity)" class="add"
+                                                src="../../../../assets/icons/AddIcon.svg">
+                                        </span>
+                                    </span> 
+                                </div>
+                                <button class="btn tertiary-btn" (click)="requestQuote(product)">Add To Cart</button>
+                                
+                            </ng-container>
+                            <ng-container *ngIf="product.isPerpetual  && product.priceList[2]?.ERPPrice == 'NaN'  && product.priceList[1]">
+                                <!-- <h6> commercial -1 </h6> -->
+                                <div class="radio-btn">
+                                    <div class="radio-group">
+                                        <input type="radio" checked name="myRadios" [(ngModel)]="selectedOptionForPerptual" value="3years">
+                                        <span class="radio-label">3 Years</span>
+                                    </div>
+                                
+                                    <div class="radio-group">
+                                        <input type="radio" name="myRadios" [(ngModel)]="selectedOptionForPerptual" value="1year">
+                                        <span class="radio-label">1 Year</span>
+                                    </div>
+                                </div>
 
+                                <!-- <div class="radio-btn">
+                                    <div class="radio-group"> 
+                                        <span class="heading">It is Life time product</span>
+                                    </div>
+                                </div> -->
+                                <div class="buy-now-prod">
+                                    <span class="plus-minus">
+                                        <span>
+                                            <img id="add-minus-quantity" (click)="decreaseBuyQuantity(product.quantity)" alt="minus" class="add"
+                                                src="../../../../../assets/icons/MinusIcon.svg">
+                                        </span>
+                                        <span>
+                                            <input type="number" min="0" class="input-field" [(ngModel)]="product.quantity"
+                                                (keydown)="onKeyDown($event)">
+                                        </span>
+                                        <span>
+                                            <img id="add-minus-quantity" alt="" (click)="addBuyQuantity(product.quantity)" class="add"
+                                                src="../../../../assets/icons/AddIcon.svg">
+                                        </span>
+                                    </span> 
+                                </div>
+                                <button class="btn tertiary-btn" (click)="requestQuote(product)">Add To Cart</button>
+                            </ng-container> 
+                            <ng-container *ngIf="product.isPerpetual && product.isEducational    && product.priceList[0]">
+                                <!-- <h3> commercial -Educational </h3> -->
+                                <div class="radio-btn">
+                                    <div class="radio-group"> 
+                                        <span class="heading">It is Life time product</span>
+                                    </div>
+                                </div>
+                                <div class="buy-now-prod">
+                                    <span class="plus-minus">
+                                        <span>
+                                            <img id="add-minus-quantity" (click)="decreaseBuyQuantity(product.quantity)" alt="minus" class="add"
+                                                src="../../../../../assets/icons/MinusIcon.svg">
+                                        </span>
+                                        <span>
+                                            <input type="number" min="0" class="input-field" [(ngModel)]="product.quantity"
+                                                (keydown)="onKeyDown($event)">
+                                        </span>
+                                        <span>
+                                            <img id="add-minus-quantity" alt="" (click)="addBuyQuantity(product.quantity)" class="add"
+                                                src="../../../../assets/icons/AddIcon.svg">
+                                        </span>
+                                    </span> 
+                                </div>
+                                <button class="btn tertiary-btn" (click)="requestQuote(product)">Add To Cart</button>
+                            </ng-container>
+                        </ng-template>
+                        <!-- <ng-template #third>
+                            <h3>Educational</h3>
+                        </ng-template> -->
+                         
+                           <!--<div *ngIf="!product.isPerpetual;else other_content">
+                            <div class="radio-btn">
+                                <div class="radio-group">
+                                    <input type="radio" checked name="myRadios" [(ngModel)]="selectedOption" value="default">
+                                    <span class="radio-label">Month</span>
+                                </div>
+                            
+                                <div class="radio-group">
+                                    <input type="radio" name="myRadios" [(ngModel)]="selectedOption" value="other">
+                                    <span class="radio-label">Year</span>
+                                </div>
+                            </div>
+                            <div class="buy-now-prod">
+                                <span class="plus-minus">
+                                    <span>
+                                        <img id="add-minus-quantity" (click)="decreaseBuyQuantity(product.quantity)" alt="minus" class="add"
+                                            src="../../../../../assets/icons/MinusIcon.svg">
+                                    </span>
+                                    <span>
+                                        <input type="number" min="0" class="input-field" [(ngModel)]="product.quantity"
+                                            (keydown)="onKeyDown($event)">
+                                    </span>
+                                    <span>
+                                        <img id="add-minus-quantity" alt="" (click)="addBuyQuantity(product.quantity)" class="add"
+                                            src="../../../../assets/icons/AddIcon.svg">
+                                    </span>
+                                </span> 
+                            
+                                <button class="btn tertiary-btn" (click)="requestQuote(product)">Add To Cart</button>
+                           </div> 
+                    </div>-->
+                         <!--<ng-template #other_content> 
+                            <div class="radio-btn">
+                                <div class="radio-group"> 
+                                    <span class="heading">It is Life time product</span>
+                                </div>
+                            </div>
+                            <div class="buy-now-prod">
+                                <span class="plus-minus">
+                                    <span>
+                                        <img id="add-minus-quantity" (click)="decreaseBuyQuantity(product.quantity)" alt="minus" class="add"
+                                            src="../../../../../assets/icons/MinusIcon.svg">
+                                    </span>
+                                    <span>
+                                        <input type="number" min="0" class="input-field" [(ngModel)]="product.quantity"
+                                            (keydown)="onKeyDown($event)">
+                                    </span>
+                                    <span>
+                                        <img id="add-minus-quantity" alt="" (click)="addBuyQuantity(product.quantity)" class="add"
+                                            src="../../../../assets/icons/AddIcon.svg">
+                                    </span>
+                                </span> 
+                            </div>
+                            <button class="btn tertiary-btn" (click)="requestQuote(product)">Add To Cart</button> 
+                        </ng-template>-->
+                   
 
                        
                     </div>
@@ -120,10 +266,24 @@
                         <ng-container  >
                             <div class="product-price-detail price">
                                 <div class="product-price-section" style="display:inline-flex">
-                                    <p *ngIf="product.priceList[0].discountRate != null" class="discounted-text">
+                                    <p *ngIf="product.priceList[0]?.discountRate != null && !product.isPerpetual  " class="discounted-text">
                                         -{{displayDiscount}}%
                                     </p>
-                                    
+                                    <!-- commercial Lifetime -->
+                                    <p *ngIf="product.priceList[2]?.discountRate && product.priceList[2]?.priceType== 'Lifetime'" class="discounted-text">
+                                        -{{displayDiscount2}}%
+                                    </p>
+                                    <p *ngIf="product.priceList[1]?.discountRate && product.priceList[0]?.priceType== '1Year' && product.priceList[1]?.priceType== '3Year'" class="discounted-text">
+                                        -{{displayDiscount}}%
+                                    </p>
+
+                                    <!-- <p *ngIf="product.priceList[0]?.discountRate && product.isEducational && product.priceList[0].priceType =='Lifetime'"   class="discounted-text">
+                                        -{{displayDiscount}}%  
+                                    </p>  -->
+                                    <p *ngIf="product.isEducational && product.priceList[0]?.discountRate != null"
+                                        class="discounted-text">
+                                        -{{ displayDiscount}}%</p>
+                                     
                                         <!-- <div class="price" (mouseenter)="showDiscountRate()" (mouseleave)="showMonthlyPrice()">
                                             <span class="price-symbol">&#8377;  {{ isMonthly ? (product.priceList[0].price/12 | number : '1.2-2') : (product.priceList[0].price  | number : '1.2-2') }} </span>
                                             <span class="product-price-type"> /  {{isMonthly ? 'Month' : (product.priceList[0].priceType)}}</span>
@@ -144,23 +304,39 @@
                                                 <span class="product-price-type"> /  {{product.priceList[0].priceType}}</span>       
                                             </div>
                                           </div>
-                                          <div class="price"*ngIf="product.isPerpetual && product.priceList[0] "  (mouseenter)="showYearlyPrice(0)" (mouseleave)="showDiscountRates(0)">
-                                            <span class="price-symbol">&#8377;  {{ isMonthly ? (product.priceList[0].price | number : '1.2-2') : (product.priceList[0].price  | number : '1.2-2') }} </span>
-                                            <span class="product-price-type"> /  {{product.priceList[0].priceType}}</span>       
-                                        </div>
-
-                                        <!-- <div class="price"*ngIf="product.isPerpetual && product.priceList[1] "  (mouseenter)="showYearlyPrice(i)" (mouseleave)="showDiscountRates(i)">
-                                            <span class="price-symbol">&#8377;  {{ isMonthly ? (product.priceList[1].price | number : '1.2-2') : (product.priceList[1].price  | number : '1.2-2') }} </span>
-                                            <span class="product-price-type"> /  {{product.priceList[1].priceType}}</span>       
-                                        </div>
-                                          -->
-                                        <div class="price"*ngIf="product.isPerpetual && product.priceList[2] "  >
+                                         
+                                        <!-- <div class="price"*ngIf="product.isPerpetual && product.priceList[2] "  >
                                             <span class="price-symbol">&#8377;  {{ isMonthly ? (product.priceList[2].price | number : '1.2-2') : (product.priceList[2].price  | number : '1.2-2') }} </span>
                                             <span class="product-price-type"> /  {{product.priceList[2].priceType}}</span>       
-                                        </div>
-                                         
+                                        </div>   -->
 
                                         
+                                          <div *ngIf="product.isPerpetual && product.priceList[0]?.ERPPrice == 'NaN' && product.priceList[1]?.ERPPrice == 'NaN'  && product.priceList[2]">
+                                            <div class="price">
+                                                <span class="price-symbol">&#8377; {{ isMonthly ? (product.priceList[2].price | number : '1.2-2') : (product.priceList[2]?.price | number : '1.2-2') }}</span>
+                                                <span class="product-price-type"> / {{ product.priceList[2]?.priceType }}</span>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="product.isPerpetual && selectedOptionForPerptual=== '3years' && product.priceList[2]?.ERPPrice == 'NaN'  && product.priceList[1]">
+                                           <div class="price">
+                                                <span class="price-symbol">&#8377; {{ isMonthly ? (product.priceList[1].price | number : '1.2-2') : (product.priceList[1]?.price | number : '1.2-2') }}</span>
+                                                <span class="product-price-type"> / {{ product.priceList[1]?.priceType }}</span>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="product.isPerpetual && selectedOptionForPerptual=== '1year' && product.priceList[2]?.ERPPrice == 'NaN'  && product.priceList[0]">
+                                            <div class="price">
+                                                 <span class="price-symbol">&#8377; {{ isMonthly ? (product.priceList[0].price | number : '1.2-2') : (product.priceList[0]?.price | number : '1.2-2') }}</span>
+                                                 <span class="product-price-type"> / {{ product.priceList[0]?.priceType }}</span>
+                                             </div>
+                                         </div> 
+                                         
+                                         <!-- Educational -->
+                                         <div *ngIf="  product.isEducational && product.priceList[0].priceType == 'Lifetime'">
+                                            <div class="price">
+                                                <span class="price-symbol">&#8377; {{ isMonthly ? (product.priceList[0].price | number : '1.2-2') : (product.priceList[0]?.price | number : '1.2-2') }}</span>
+                                                <span class="product-price-type"> / {{ product.priceList[0]?.priceType }}</span>
+                                            </div>
+                                        </div>
                                      
                                     <p  class="gst">(GST Extra)</p>
                                 </div>
@@ -188,29 +364,39 @@
                                                 &#8377; {{product.priceList[0].ERPPrice | number : '1.2-2'}} /  {{product.priceList[0].priceType}}
                                                 <span class="product-price-type"></span></p>
                                         </span>
-                                      </div>
-                                      
-                                      
-                                      <div>
-                                        <span *ngIf="product.isPerpetual && product.priceList[0] "  (mouseenter)="showYearlyPrice(0)" (mouseleave)="showDiscountRates(0)" >
-                                            <p class="amount"  >
-                                                &#8377; {{product.priceList[0].ERPPrice | number : '1.2-2'}} /  {{product.priceList[0].priceType}}
-                                                <span class="product-price-type"></span></p>
-                                        </span>
-                                      </div>
-                                      <!-- <div>
-                                        <span *ngIf="product.isPerpetual && product.priceList[1]  "  (mouseenter)="showYearlyPrice(i)" (mouseleave)="showDiscountRates(i)" >
-                                            <p class="amount"  >
-                                                &#8377; {{product.priceList[1].ERPPrice | number : '1.2-2'}} /  {{product.priceList[1].priceType}}
-                                                <span class="product-price-type"></span></p>
-                                                 
-                                        </span>
-                                      </div> -->
+                                      </div>  
 
-                                      <span *ngIf="product.isPerpetual && product.priceList[2] "  (mouseenter)="showYearlyPrice(i)" (mouseleave)="showDiscountRates(i)" >
+                                      <!-- <span *ngIf="product.isPerpetual && product.priceList[2] "  (mouseenter)="showYearlyPrice(i)" (mouseleave)="showDiscountRates(i)" >
                                             <p class="amount"  >
                                                 &#8377; {{product.priceList[2].ERPPrice | number : '1.2-2'}} /  {{product.priceList[2].priceType}}
                                                 <span class="product-price-type"></span></p>
+                                        </span> -->
+
+                                        
+                                          <span *ngIf="product.isPerpetual && product.priceList[0]?.ERPPrice == 'NaN' && product.priceList[1]?.ERPPrice == 'NaN'  && product.priceList[2]" >
+                                            <p class="amount">
+                                                &#8377; {{ product.priceList[2]?.ERPPrice | number : '1.2-2' }} / {{ product.priceList[2]?.priceType }}
+                                                <span class="product-price-type"></span>
+                                            </p>
+                                        </span>
+                                        <span *ngIf="product.isPerpetual && selectedOptionForPerptual=== '1year' && product.priceList[2]?.ERPPrice == 'NaN'  && product.priceList[0]"  >
+                                            <p class="amount">
+                                                &#8377; {{ product.priceList[0]?.ERPPrice | number : '1.2-2' }} / {{ product.priceList[0]?.priceType }}
+                                                <span class="product-price-type"></span>
+                                            </p>
+                                        </span>
+                                        <span *ngIf="product.isPerpetual && selectedOptionForPerptual=== '3years' && product.priceList[2]?.ERPPrice == 'NaN'  && product.priceList[1]"  >
+                                            <p class="amount">
+                                                &#8377; {{ product.priceList[1]?.ERPPrice | number : '1.2-2' }} / {{ product.priceList[1]?.priceType }}
+                                                <span class="product-price-type"></span>
+                                            </p>
+                                        </span>   
+                                        <!-- educational  -->
+                                        <span *ngIf="product.isEducational && product.priceList[0].priceType == 'Lifetime'" >
+                                            <p class="amount">
+                                                &#8377; {{ product.priceList[0]?.ERPPrice | number : '1.2-2' }} / {{ product.priceList[0]?.priceType }}
+                                                <span class="product-price-type"></span>
+                                            </p>
                                         </span>
 
                                 </div>
