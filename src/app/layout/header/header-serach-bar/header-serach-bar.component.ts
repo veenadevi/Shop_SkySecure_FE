@@ -16,7 +16,7 @@ export class HeaderSerachBarComponent {
   
 
   public isOpen = false;
-  public keywordSearchOpen = false;
+  public keywordSearchOpen = true;
   public generalSearchOpen = false;
 
   public inputText = '';
@@ -61,6 +61,10 @@ export class HeaderSerachBarComponent {
   }
 
   public onSearchQueryInput(event: Event): void {
+    this.isOpen = true;
+    this.generalSearchOpen = false;
+    this.keywordSearchOpen = true;
+    
     const searchQuery = (event.target as HTMLInputElement).value;
     this.searchSubject.next(searchQuery?.trim());
   }

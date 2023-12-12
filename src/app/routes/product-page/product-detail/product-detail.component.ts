@@ -23,11 +23,12 @@ import { TermsConditionModalComponent } from 'src/shared/components/modals/terms
 })
 export class ProductDetailComponent implements OnInit{
   selectedOption: string = 'default'; 
+  selectedOptionForPerptual:string='3years'
   discountRate: number =120; 
   monthlyPrice: number = this.discountRate / 12;
   isMonthly: boolean = true;
   
-
+  public i: number;
 
 
   displayPrice:number;
@@ -35,7 +36,7 @@ export class ProductDetailComponent implements OnInit{
   displayPriceType:number;
   displayDiscount:number;
 
-  //public productReviews : any;
+  public productReviews : any;
 
 
   showMonthlyPrice() {
@@ -48,7 +49,7 @@ export class ProductDetailComponent implements OnInit{
     this.product.priceList[0].ERPPrice  =this.product.priceList[0].ERPPrice *12;
   }
  
-
+ 
   quantity: number = 1;
 
   onKeyDown(event: KeyboardEvent): void {
@@ -358,9 +359,9 @@ export class ProductDetailComponent implements OnInit{
 
 
         /** Setting Product Reviews */
-        /*if(response.productReviewList && response.productReviewList.length>0){
+        if(response.productReviewList && response.productReviewList.length>0){
           this.productReviews = response.productReviewList
-        }*/
+        }
         
      
        
@@ -427,6 +428,11 @@ export class ProductDetailComponent implements OnInit{
    this.displayPriceType= this.product.priceList[1].priceType
    this.displayDiscount= this.product.priceList[1].discountRate
 
+   
+   this.displayDiscount= this.product.priceList[0].discountRate
+   console.log("discount",this.product.priceList[0].length)
+   this.displayDiscount2= this.product.priceList[2].discountRate
+
    this.selectedProductItem=response.compareProductList;
    this.selectedProductItem.unshift(response.product);
 
@@ -436,7 +442,8 @@ export class ProductDetailComponent implements OnInit{
     );
   }
 
-
+  displayDiscount0;
+  displayDiscount2;
   private getSimilerProducts(subCategoryId: String) {
     this.subscriptions.push(
       this.metaDataSvc.fetchAllProductsBySubCategoryIds([subCategoryId]).subscribe(response => {
@@ -799,6 +806,9 @@ featureCount=5;
     }
 
   public requestQuote (product : any) : void {
+
+    
+    
     if(product.quantity>0){
       let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
@@ -836,6 +846,38 @@ featureCount=5;
         }
 
 
+
+        if(product.isPerpetual){
+
+          if(this.selectedOptionForPerptual === '3Years'){
+            //  queryParams.price = (queryParams.price/12).toFixed(2);
+          //  console.log("sednign erp price for month ====",product.priceList[1].erpPrice)
+    
+            queryParams.price = product.priceList[1].price,
+            queryParams.erpPrice=product.priceList[1].ERPPrice,
+            queryParams.discountRate=product.priceList[1].discountRate,
+            queryParams.priceType= product.priceList[1].priceType,
+            queryParams.distributorPrice=product.priceList[1].distributorPrice,
+            queryParams.priceList = product.priceList
+           
+            }
+            else{
+              queryParams.price = (Number(queryParams.price));
+    
+              queryParams.price = product.priceList[0].price,
+              queryParams.erpPrice=product.priceList[0].ERPPrice,
+              queryParams.discountRate=product.priceList[0].discountRate,
+              queryParams.priceType= product.priceList[0].priceType,
+              queryParams.distributorPrice=product.priceList[0].distributorPrice,
+              queryParams.priceList = product.priceList
+            }
+
+        }
+
+  
+
+
+          
         let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
         if (encodedVal !== null) {
           this.addItemsToCartService.addItemsToCart(queryParams);
@@ -845,6 +887,7 @@ featureCount=5;
 
           //console.log("+_+_+_+_+_+_ ", window.location.pathname);
           let currentRouteName = window.location.pathname;
+          queryParams.priceList = JSON.stringify(queryParams.priceList);
           this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})
 
         }

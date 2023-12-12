@@ -2,7 +2,7 @@
   /* padding: 1%; */
   margin: 0 1% 1% 1%;
   font-family: 'lato',sans-serif;
-  margin-top:270px;
+  margin-top:290px;
 }
 
 th{
@@ -129,7 +129,9 @@ border-radius: 5px;
 .button-holder{
   margin-bottom: 30px !important;
 }
-
+.tablerow{
+  display: flex;
+}
 
 
 .features-align{
@@ -235,6 +237,7 @@ border-radius: 5px;
 :host ::ng-deep .p-datatable .p-datatable-thead{
   position: fixed;
   top:102px;
+  width: 97%;
 }
 
 /* :host ::ng-deep .p-datatable .p-datatable-tbody tr:first-child 
@@ -289,4 +292,9 @@ width: 50%;
 font-size: 12px;
 max-width: 60px;
 text-align: center;
+}
+
+.margin{
+  margin: 0px !important;
+ 
 }

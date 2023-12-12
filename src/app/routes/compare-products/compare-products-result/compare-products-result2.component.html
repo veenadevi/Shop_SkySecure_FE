@@ -3,9 +3,9 @@
         <p-table [columns]="scrollableCols" [value]="comparisonCategories" [scrollable]="true"  frozenWidth="200px">
             
             <ng-template pTemplate="header" let-columns>
-              <tr>
+              <tr class="d-flex">
 
-                <th class="comparison-category-header ">
+                <th class="comparison-category-header  priceData ">
                         <span>
                             Price
                         </span>
@@ -28,56 +28,43 @@
                               </div>
                         </div>
                         <div>
-                            <div class="product-price-detail" *ngIf="(item.properties['price'] !== '-') ; else noPrice ">
-                                <div  class="product-price-section" style="display:inline-flex">
-                                    <p class="discounted-text">
-                                        <!-- - {{item.properties['priceList'].discountRate}}% -->
+
+
+
+                          <div class="product-price-detail" *ngIf="(item.properties['price'] !== '-') ; else noPrice ">
+                                 
+                                <div>
+                                    <p class="discounted-text margin"> 
                                         <span *ngIf="!item.hoverFlag">- {{item.properties['monthlyPriceList'].discountRate}}%</span>
                                         <span *ngIf="item.hoverFlag">- {{item.properties['yearlyPriceList'].discountRate}}%</span>
-                                    </p>
-                                    
-                                    <!-- <div class="price" (mouseover)="showMonthlyPrice(i)" (mouseout)="showDiscountRate(i)">
-                                        <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span>
-                                    </div> -->
-                                    <div class="price" (mouseover)="changeValueOnHover('hover', i)" (mouseout)="changeValueOnHover('out', i)">
-                                        <!-- <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span> -->
-                                        <span *ngIf="!item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['monthlyPriceList'].price | number : '1.2-2'}} / Month</span>
-                                        <span *ngIf="item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['yearlyPriceList'].price | number : '1.2-2'}} / Year</span>
-                                    </div>
-                                    <!-- <div class="price" (mouseover)="changeValueOnHover('hover', item)" (mouseout)="changeValueOnHover('out', item)">
-                                        <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span>
-                                    </div> -->
-                                       
-                                    <p  class="gst">&nbsp;(GST Extra)</p>
-                    
+
+                                        <span class="price" (mouseover)="changeValueOnHover('hover', i)" (mouseout)="changeValueOnHover('out', i)">
+                                            <span *ngIf="!item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['monthlyPriceList'].price | number : '1.2-2'}} / Month</span>
+                                            <span *ngIf="item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['yearlyPriceList'].price | number : '1.2-2'}} / Year</span>
+                                        
+                                        </span>
+                                    </p> 
                                 </div>
-                                <div style="display:inline-flex;align-items: center;">
-                                    <p class="mrp"> MRP:&nbsp;</p>
-                                    <span class="price-symbol-01">&#8377;</span>
-                                    <span>
-                                        <p class="amount">
+                                <p  class="gst margin ">&nbsp;(GST Extra)</p>
+                                <div >
+                                      <p class=" margin">
+                                        <span class="mrp">MRP:&nbsp;</span>
+                                        <span class="amount">
                                             <span *ngIf="!item.hoverFlag">{{item.properties['monthlyPriceList'].ERPPrice | number : '1.2-2'}} / Month</span>
                                             <span *ngIf="item.hoverFlag">{{item.properties['yearlyPriceList'].ERPPrice | number : '1.2-2'}} / Year</span>
-                                            
-                                         </p>
-                                        <!-- <p class="amount" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
-                                           {{item.properties['priceList'].ERPPrice | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}
-                                        </p> -->
-                                        <!-- <p class="amount" >
-                                            <span *ngIf="!changeValue">{{item.properties['monthlyPriceList'].ERPPrice | number : '1.2-2'}}</span>
-                                            <span *ngIf="changeValue">{{item.properties['yearlyPriceList'].ERPPrice | number : '1.2-2'}}</span>
-                                         </p> -->
-                                    </span>
+                                        
+                                        </span>
+                                      </p>
+                                      
                                 </div>
                             </div>
-                            
-                            <ng-template #noPrice>
+                            <ng-template class="tdData "#noPrice>
                                 -
                             </ng-template> 
                         </div>
                     </th>
                     <ng-template #emptyFlyer>
-                        <th>
+                        <th class="d-flex; justify-content-center">
                             <empty-header-card-flyer [index] = "i" (selectedProductItem)="selectedProductItem($event)"></empty-header-card-flyer>
                             <div class="add">
                                 <button class="btn primary-btn" (click)="addProductModal(i)">
@@ -143,7 +130,7 @@
                             </div>
                         </div>
                         
-                        <ng-template #noPrice>
+                        <ng-template class="tdData " #noPrice>
                             -
                         </ng-template> 
                     </td>

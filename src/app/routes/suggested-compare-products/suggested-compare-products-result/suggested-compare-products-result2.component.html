@@ -3,7 +3,7 @@
         <p-table [columns]="scrollableCols" [value]="comparisonCategories" [scrollable]="true"  frozenWidth="200px">
             
             <ng-template pTemplate="header" let-columns>
-              <tr>
+              <tr  >
 
                 <th class="comparison-category-header ">
                         <span>
@@ -12,12 +12,12 @@
                 </th>
                 <ng-container *ngFor="let item of allProducts; let i = index">
                     <th *ngIf="item && item.properties && item.properties._id ; else emptyFlyer">
-                        <header-card-flyer [product]="item"></header-card-flyer>
+                        <header-card-flyer [product]="item" ></header-card-flyer>
                         <div class="button-holder">
                             <div class="td-column">
-                                <button class="btn secondary-btn" (click)="removeItem(item)">
+                                <!-- <button class="btn secondary-btn" (click)="removeItem(item)">
                                     Remove 
-                                </button>
+                                </button> -->
                                 <ng-container *ngIf="item.properties.isActive">
                                 <button class="btn primary-btn" (click)="requestQuote(item)">
                                    
@@ -29,45 +29,30 @@
                         </div>
                         <div>
                             <div class="product-price-detail" *ngIf="(item.properties['price'] !== '-') ; else noPrice ">
-                                <div  class="product-price-section" style="display:inline-flex">
-                                    <p class="discounted-text">
-                                        <!-- - {{item.properties['priceList'].discountRate}}% -->
+                                 
+                                <div>
+                                    <p class="discounted-text margin"> 
                                         <span *ngIf="!item.hoverFlag">- {{item.properties['monthlyPriceList'].discountRate}}%</span>
                                         <span *ngIf="item.hoverFlag">- {{item.properties['yearlyPriceList'].discountRate}}%</span>
-                                    </p>
-                                    
-                                    <!-- <div class="price" (mouseover)="showMonthlyPrice(i)" (mouseout)="showDiscountRate(i)">
-                                        <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span>
-                                    </div> -->
-                                    <div class="price" (mouseover)="changeValueOnHover('hover', i)" (mouseout)="changeValueOnHover('out', i)">
-                                        <!-- <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span> -->
-                                        <span *ngIf="!item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['monthlyPriceList'].price | number : '1.2-2'}} / Month</span>
-                                        <span *ngIf="item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['yearlyPriceList'].price | number : '1.2-2'}} / Year</span>
-                                    </div>
-                                    <!-- <div class="price" (mouseover)="changeValueOnHover('hover', item)" (mouseout)="changeValueOnHover('out', item)">
-                                        <span class="price-symbol">&#8377;  {{item.properties['priceList'].price | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}</span>
-                                    </div> -->
-                                       
-                                    <p  class="gst">&nbsp;(GST Extra)</p>
-                    
+
+                                        <span class="price" (mouseover)="changeValueOnHover('hover', i)" (mouseout)="changeValueOnHover('out', i)">
+                                            <span *ngIf="!item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['monthlyPriceList'].price | number : '1.2-2'}} / Month</span>
+                                            <span *ngIf="item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['yearlyPriceList'].price | number : '1.2-2'}} / Year</span>
+                                        
+                                        </span>
+                                    </p> 
                                 </div>
-                                <div style="display:inline-flex;align-items: center;">
-                                    <p class="mrp"> MRP:&nbsp;</p>
-                                    <span class="price-symbol-01">&#8377;</span>
-                                    <span>
-                                        <p class="amount">
+                                <p  class="gst margin ">&nbsp;(GST Extra)</p>
+                                <div >
+                                      <p class="margin">
+                                        <span class="mrp">MRP:&nbsp;</span>
+                                        <span class="amount">
                                             <span *ngIf="!item.hoverFlag">{{item.properties['monthlyPriceList'].ERPPrice | number : '1.2-2'}} / Month</span>
                                             <span *ngIf="item.hoverFlag">{{item.properties['yearlyPriceList'].ERPPrice | number : '1.2-2'}} / Year</span>
-                                            
-                                         </p>
-                                        <!-- <p class="amount" (mouseenter)="showMonthlyPrice(i)" (mouseleave)="showDiscountRate(i)">
-                                           {{item.properties['priceList'].ERPPrice | number : '1.2-2'}} /  {{item.properties['priceList'].priceType}}
-                                        </p> -->
-                                        <!-- <p class="amount" >
-                                            <span *ngIf="!changeValue">{{item.properties['monthlyPriceList'].ERPPrice | number : '1.2-2'}}</span>
-                                            <span *ngIf="changeValue">{{item.properties['yearlyPriceList'].ERPPrice | number : '1.2-2'}}</span>
-                                         </p> -->
-                                    </span>
+                                        
+                                        </span>
+                                      </p>
+                                      
                                 </div>
                             </div>
                             
@@ -166,7 +151,7 @@
                                     <div class="tick-symbol">
                                         <img src="../../../../assets/icons/SecondaryTickIcon.svg">
                                     </div>
-                                    <span class="feature-text-left-align pointer-style " (click)="navigateToProductDetails(features)">{{features.name}}</span>
+                                    <span class="feature-text-left-align pointer-style " (click)="navigateToProductDetails(features)">{{features.name}} </span>
                                 </div>   
                                 <div class="tick-container"   *ngFor="let features of item.properties[rowData.header]">
     

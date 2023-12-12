@@ -128,7 +128,7 @@
                       <i class="fa fa-caret-right right" aria-hidden="true"></i>
                     </div>
 
-                    <ul class="more-sub-menu2">
+                    <ul class="more-sub-menu2" [ngClass]="(category.subCategories.length>8) ? 'more-sub-menu2-scroll' : 'more-sub-menu2'">
 
  
 

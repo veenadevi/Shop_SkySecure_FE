@@ -395,6 +395,11 @@ ul .nav-text:hover {
         margin-left: 10px;
         margin-top: 2px;
     }
+    .realize-logo {
+        height: 40px;
+        cursor: pointer;
+        padding-left: 15px;
+    }
     .usericon {
         height: 18px;
         margin-top: 5px;
@@ -410,6 +415,14 @@ ul .nav-text:hover {
         color: white;
         margin-left: 3px;
         margin-top: 6px;
+    }
+    .navbar {
+        background-color: #1e1e1e;
+        height: 56px;
+        padding: 0px 2px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 }
 @media (max-width: 952px) {
@@ -566,7 +579,8 @@ ul .nav-text:hover {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: 5px;
+    margin-top: 3px;
+    margin-left: 50px;
 }
 .usersection-icon {
     margin-right: 16px;

@@ -2,11 +2,16 @@
     /* padding: 1%; */
     margin: 0 1% 1% 1%;
     font-family: 'lato',sans-serif;
-    margin-top:270px;
+    margin-top:284px; 
 }
 
 th{
     width:21%
+}
+.priceData{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 .comparison-category-header{
     width:16%;
@@ -24,7 +29,9 @@ th{
 }
 
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
-  padding: 5px 1rem 5px 1rem;
+  /* padding: 5px 1rem 5px 1rem; */
+  padding: 1rem 1rem 1rem 1rem;
+  /* text-align: center !important; */
 }
 
 .feature-text {
@@ -108,8 +115,9 @@ th{
   }
   .add{
     width: 100%;
-    padding-left: 20px;
+    /* padding-left: 20px; */
     margin-bottom: 30px !important;
+    text-align: center;
   }
   .add .primary-btn {
     /* background: linear-gradient(180deg, #003388 -21.43%, #4A86EA 144.64%); */
@@ -123,9 +131,11 @@ th{
     margin-left: 25%;
   }
   .p-datatable .p-datatable-tbody > tr > td {
-    text-align: center;
+    text-align: center !important;
   }
-
+.tdData{
+  text-align: center !important ;
+}
   .button-holder{
     margin-bottom: 30px !important;
   }
@@ -236,6 +246,7 @@ th{
   :host ::ng-deep .p-datatable .p-datatable-thead{
     position: fixed;
     top:102px;
+    width: 98% !important;
   }
 
   /* :host ::ng-deep .p-datatable .p-datatable-tbody tr:first-child 
@@ -249,7 +260,7 @@ th{
 
   :host ::ng-deep .p-datatable .p-datatable-tbody td 
   { 
-    width: 21%;
+    width: 20%;
   }
 
   :host ::ng-deep .p-datatable .p-datatable-tbody td:first-child 
@@ -291,3 +302,69 @@ th{
   max-width: 60px;
   text-align: center;
 }
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .bundle-card-container {
+    padding-right: 17px !important;
+  }
+
+  .card-section {
+    display: flex;
+    align-items: center;
+    width: 100% !important;
+    justify-content: flex-start;
+  }
+
+  .logo-container {
+    flex-basis: 100%;
+  }
+  .p-datatable .p-datatable-thead { 
+      width: 100% !important;
+  }
+  .secondary-btn  {
+      font-size: 12px; 
+      padding: 0px !important;
+      margin-left: 7px !important;
+      /* width: 93px; */
+  }
+  .primary-btn {
+      font-size: 12px; 
+      padding: 6px !important;
+      /* padding-left: 7px !important; */
+      margin-left: 7px !important; 
+      /* width: 68px; */
+  }
+ 
+  .price-symbol{
+    font-size: 12px;
+  }
+}
+@media (min-width: 1441px) and (max-width: 2992px) {
+  .bundle-card-container {
+    padding-right: 0px !important;
+  }
+
+  .card-section {
+    display: flex;
+    align-items: center;
+    width: 100% !important;
+    justify-content: flex-start;
+  }
+
+  .logo-container {
+    flex-basis: 100%;
+  }
+  .p-datatable .p-datatable-thead { 
+      width: 100% !important;
+  }
+  .add  .primary-btn { 
+      margin-left: 8%;
+  }
+}
+.margin{
+  margin: 0px !important;
+ 
+}
+/* .padding{
+  padding-left: 37px;
+} */

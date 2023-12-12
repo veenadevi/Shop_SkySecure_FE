@@ -536,6 +536,9 @@ export class SuggestedCompareProductsResultComponent {
   public requestQuote (productItem : any) : void {
 
  
+    console.log("-------- ", productItem);
+
+
     var product = productItem.properties;
     let loggedinData = this.authService.instance.getAllAccounts().filter(event => (event.environment === "altsysrealizeappdev.b2clogin.com" || event.environment === "realizeSkysecuretech.b2clogin.com" || event.environment === "realizeskysecuretech.b2clogin.com"));
 
@@ -549,15 +552,18 @@ export class SuggestedCompareProductsResultComponent {
         queryParams = {
           productName : product.productName,
           productId : product._id,
-          quantity : productItem.quantity,
+          quantity : product.quantity?productItem.quantity:1,
           price : product.priceList.price,
           erpPrice:product.priceList.ERPPrice,
           discountRate:product.priceList.discountRate,
-          priceType:"Year",
+          //priceType:"Year",
+          priceType:product.priceList.priceType,
           distributorPrice:product.priceList.distributorPrice,
           priceList : priceList
         };
 
+
+        
 
         let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
         if (encodedVal !== null) {
@@ -566,6 +572,7 @@ export class SuggestedCompareProductsResultComponent {
         else{
           //this.viewModal(queryParams);
           let currentRouteName = window.location.pathname;
+          queryParams.priceList = JSON.stringify(queryParams.priceList);
           this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})
 
         }
@@ -574,7 +581,7 @@ export class SuggestedCompareProductsResultComponent {
     /*this.userAccountStore.userDetails$.subscribe(res=>{
       
       if(res && res.email !== null){
-        console.log("++++_______ Came Here If SUGGCMP");
+     
         this.addItemsToCartService.addItemsToCart(queryParams);
         //this.router.navigate(['/cart'], {queryParams: queryParams});
       }
@@ -787,8 +794,7 @@ export class SuggestedCompareProductsResultComponent {
         let uniqueElements = [...new Map(combinedData.map(item => [item['_id'], item])).values()];
 
         let finalProducts = [...uniqueElements, event.receivedEntry];
-        console.log("event.receivedEntry   ",event.receivedEntry)
-        console.log("finalProducts"  ,finalProducts)
+        
 
         
         localStorage.setItem('product_list_to_compare', JSON.stringify(finalProducts));
@@ -864,6 +870,8 @@ export class SuggestedCompareProductsResultComponent {
         "receivedEntry" : receivedEntry,
         "index" : index
       }
+
+    
 
       this.selectedProductItem(productJson);
       //this.selectedProductItem.emit(productJson);

@@ -50,15 +50,19 @@ export class CardFlyerComponent {
 
 
     let encodedVal = localStorage.getItem('XXXXaccess__tokenXXXX');
+    
     if (encodedVal !== null) {
       this.addItemsToCartService.addItemsToCart(queryParams);
     }
     else{
 
-      console.log("))()()()( ", window.location.pathname)
+
+      queryParams.priceList = JSON.stringify(queryParams.priceList);
       if(window.location.pathname === '/'){
         let currentRouteName = '';
-        this.router.navigate(['login'], {queryParams:{...queryParams,currentRouteName:currentRouteName}})
+
+        this.router.navigate(['login'], {queryParams: {...queryParams,currentRouteName:currentRouteName}})
+
       }
       else{
         

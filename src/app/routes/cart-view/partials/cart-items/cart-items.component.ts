@@ -14,6 +14,8 @@ import { GlobalSearchService } from 'src/shared/services/global-search.service';
 import { LoginService } from 'src/shared/services/login.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
+import * as CryptoJS from 'crypto-js';
+var SHA256 = require("crypto-js/sha256");
 
 @Component({
   selector: 'app-cart-items',
@@ -743,7 +745,52 @@ public onChangeQuantity(i, price) : void {
 
 
     //this.receiveOrderStatus()
-    this.checkout();
+    //this.checkout();
+
+    this.paymentGateway();
+
+  }
+
+  public paymentGateway(){
+
+
+    let samplePayload = {
+      "merchantId": "PGTESTPAYUAT",
+      "merchantTransactionId": "Test2",
+      "merchantUserId": "MUID123",
+      "amount": "200020",
+      "redirectUrl": "http://localhost:4200/cart/payment-status/Test2",
+      //"redirectUrl": "https://dev-altsys-realize-order.azurewebsites.net/api/orders/handleResponse",
+      //"cancel_url" : 'https://dev-shop.skysecuretech.com/',
+      "redirectMode": "REDIRECT",
+      "callbackUrl": "https://webhook.site/callback-url",
+      "mobileNumber": "9999999999",
+      "paymentInstrument": {
+        "type": "PAY_PAGE"
+      }
+    }
+
+    
+    var encoded = btoa(JSON.stringify(samplePayload));
+
+    var saltKey = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399"
+    //let shaString = CryptoJS.SHA256(encoded + '/pg/v1/pay' + saltKey).toString;
+
+    let shaString = SHA256(encoded + '/pg/v1/pay' + saltKey).toString();
+
+    
+
+    let encodedVal = shaString + "###" + '1'; 
+    console.log("+_+_+_+_+_ Val here ", encodedVal);
+
+    this.cartService.postPaymentGateway(encoded, encodedVal).subscribe(res=>{
+      console.log("+_+_+_+ CAll Happenend", res);
+      let resData : any = res;
+      let url = resData.data.instrumentResponse.redirectInfo.url;
+      window.open(url,'_self');
+
+    });
+
 
   }
 
@@ -753,6 +800,7 @@ public onChangeQuantity(i, price) : void {
       //  console.log("++++)))))) Res", res);
         this.cartService.getOrderStatus(res).subscribe(res=>{
         //  console.log("+_+_+_ ))))))))))) Further Response ", res)
+        
         })
       })
     )

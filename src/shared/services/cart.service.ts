@@ -18,6 +18,7 @@ import { UserCartRequestModel } from '../models/concrete/user-cart.model';
 import { CartStore } from '../stores/cart.store';
 import * as CryptoJS from 'crypto-js';
 const qs = require('qs');
+var SHA256 = require("crypto-js/sha256");
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
@@ -396,6 +397,29 @@ export class CartService {
         
   }
 
+
+  public postPaymentGateway(base64Val, sha256Val){
+
+
+    let req = {
+      "request" : base64Val
+    }
+
+    let url = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
+    //let url = "https://api-preprod.phonepe.com/apis/pg-sandbox";
+    let request$ = this.http.post<Observable<any>>(url, req, this.getOptionsForPaymentGateway(sha256Val))
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+        return response;
+      }),
+    ); 
+
+    return request$;
+  }
+
   public encryptdata(request, amount, ref_id){
     //let url = `${this.baseUrl}orders/encryptFormData`;
     let url = `${this.baseUrl}api/orders/encryptFormData`;
@@ -459,6 +483,39 @@ export class CartService {
     return request$;
   }
 
+
+  public checkPaymentStatusUpdate(merchantTransID){
+
+
+    //SHA256("/pg/v1/status/{merchantId}/{merchantTransactionId}" + saltKey) + "###" + saltIndex
+
+    var saltKey = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399"
+
+    let shaString = SHA256('/pg/v1/status/PGTESTPAYUAT/'+merchantTransID + saltKey).toString();
+
+    var encodedVal = shaString + '###' + '1';
+
+
+    //https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/{merchantId}/{merchantTransactionId}
+    let url = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/PGTESTPAYUAT/"+merchantTransID;
+    let options = this.getOptionsForPaymentGatewayStatus(encodedVal,'PGTESTPAYUAT')
+    let request$ = this.http.get<Observable<any>>(url, options)
+    .pipe(
+      map(response => {
+        if (!response) {
+          return null;
+        }
+       
+        return response;
+      }),
+    );
+
+    return request$;
+
+  }
+
+
+
   public paymentGatewayCCAvenueRequest(request){
     
     let url = "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"
@@ -480,6 +537,44 @@ export class CartService {
     return request$;
     //return this.http.get(url,{params:data})
   }
+
+
+
+  
+
+    /**
+   * Stages our Http Request Headers
+   */
+
+    private getOptionsForPaymentGateway(val) : { headers: HttpHeaders } { 
+ 
+      let token = localStorage.getItem("XXXXaccess__tokenXXXX");;
+      const OPTIONS : { headers : HttpHeaders } = { 
+        headers : new HttpHeaders() 
+          .set('Content-Type', 'application/json')
+          .append('X-VERIFY', val) 
+      }; 
+   
+      return OPTIONS; 
+    }
+
+     /**
+   * Stages our Http Request Headers
+   */
+
+     private getOptionsForPaymentGatewayStatus(verify,merchantId) : { headers: HttpHeaders } { 
+ 
+      let token = localStorage.getItem("XXXXaccess__tokenXXXX");;
+      const OPTIONS : { headers : HttpHeaders } = { 
+        headers : new HttpHeaders() 
+          .set('Content-Type', 'application/json')
+          .append('X-VERIFY', verify)
+          .append('X-MERCHANT-ID',merchantId)
+
+      }; 
+   
+      return OPTIONS; 
+    }
 
 
 }
