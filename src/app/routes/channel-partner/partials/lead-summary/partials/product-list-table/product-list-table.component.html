@@ -27,7 +27,9 @@
           </td>
           <td class="form-group">
             <div class=" price-details">
-            <input type="number" [readOnly]="isReadOnly" class="form-control-01" formControlName="quantity" placeholder="quantity" (keyup)="detectInputChange($event, group)" (change)="valueChanged($event, group, 'quantity')" (keydown)="onKeyDown($event)">
+            <!-- <input type="number" [readOnly]="isReadOnly" class="form-control-01" formControlName="quantity" placeholder="quantity" (keyup)="detectInputChange($event, group)" (change)="valueChanged($event, group, 'quantity')" (keydown)="onKeyDown($event)"> -->
+            <input type="number" [readOnly]="isReadOnly" class="form-control-01" formControlName="quantity" placeholder="quantity" (change)="valueChanged($event, group, 'quantity')" (keydown)="onKeyDown($event)">
+            
             <span class="text-danger" *ngIf="group.get('quantity').touched && group.get('quantity')?.hasError('required')">Quantity required</span>
           </div>
           </td>
@@ -52,7 +54,7 @@
           
           <td class="form-group">
             <div class=" price-details">
-            <input type="number" [readOnly]="isReadOnly" class="form-control-02" (keyup)="detectInputChange($event, group)" (change)="priceChanged($event, group, i)" formControlName="bcy_rate" placeholder="bcy_rate" (keydown)="onKeyDown($event)">
+            <input type="number" [readOnly]="isReadOnly" class="form-control-02"  (change)="priceChanged($event, group, i)" formControlName="bcy_rate" placeholder="bcy_rate" (keydown)="onKeyDown($event)">
             <span class="text-danger" *ngIf="group.get('bcy_rate').touched && group.get('bcy_rate')?.hasError('required')">Amount required</span>
             <span class="text-danger" *ngIf="group.get('bcy_rate')?.hasError('invalid')">Item price must be between Distributor Price and MRP</span>
           </div>
