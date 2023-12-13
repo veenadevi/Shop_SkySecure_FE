@@ -29,11 +29,76 @@
                         </div>
                         <div>
 
-
-
-                          <div class="product-price-detail" *ngIf="(item.properties['price'] !== '-') ; else noPrice ">
-                                 
+                            <div class="product-price-detail" *ngIf="(item.properties['price'] !== '-') ; else noPrice ">
+                                <div class="product-price-section" style="display:inline-flex">
+                                    <!-- <p class="discounted-text">
+                                        - {{item.properties['priceList'].discountRate}}%
+                                    </p> -->
+                                    <div class="discounted-text">
+                                        - {{item.properties['priceList'].discountRate}}%
+                                    </div>
+                            
+                                    <div class="price" (mouseover)="changeValueOnHover('hover', i)" (mouseout)="changeValueOnHover('out', i)">
+                                        <span *ngIf="!item.hoverFlag" class="price-symbol res992px" >&#8377; {{item.properties['monthlyPriceList'].price |
+                                            number
+                                            : '1.2-2'}} / Month</span>
+                                        <span *ngIf="item.hoverFlag" class="price-symbol res992px">&#8377; {{item.properties['yearlyPriceList'].price |
+                                            number :
+                                            '1.2-2'}} / Year</span>
+                                    </div>
+                            
+                                <span class="gst">
+                                    &nbsp;(GST Extra)
+                                </span>
+                                    <!-- <p class="gst">&nbsp;(GST Extra)</p> -->
+                             
+                                </div>
                                 <div>
+                                    <span class="mrp">MRP:&nbsp;</span>
+                                    <span class="amount">
+                                        <span class="price-symbol-01">&#8377;</span>
+                                        <span *ngIf="!item.hoverFlag">{{item.properties['monthlyPriceList'].ERPPrice | number : '1.2-2'}} /
+                                            Month</span>
+                                        <span *ngIf="item.hoverFlag">{{item.properties['yearlyPriceList'].ERPPrice | number : '1.2-2'}} /
+                                            Year</span>
+                                    </span>
+                                </div>
+                            
+
+
+                                
+                                    <!-- <div class="res992px">
+                                        <p class="discounted-text margin"> 
+                                            <span *ngIf="!item.hoverFlag">- {{item.properties['monthlyPriceList'].discountRate}}%</span>
+                                            <span *ngIf="item.hoverFlag">- {{item.properties['yearlyPriceList'].discountRate}}%</span>
+    
+                                            <span class="price" (mouseover)="changeValueOnHover('hover', i)" (mouseout)="changeValueOnHover('out', i)">
+                                                <span *ngIf="!item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['monthlyPriceList'].price | number : '1.2-2'}} / Month</span>
+                                                <span *ngIf="item.hoverFlag" class="price-symbol">&#8377;  {{item.properties['yearlyPriceList'].price | number : '1.2-2'}} / Year</span>
+                                            
+                                            </span>
+                                        </p> 
+                                    </div>
+                                    <p  class="gst margin padding">&nbsp;(GST Extra)</p>
+                                    <div class="res992px">
+                                          <p>
+                                            <span class="mrp">MRP:&nbsp;</span>
+                                            <span class="amount">
+                                                <span *ngIf="!item.hoverFlag">{{item.properties['monthlyPriceList'].ERPPrice | number : '1.2-2'}} / Month</span>
+                                                <span *ngIf="item.hoverFlag">{{item.properties['yearlyPriceList'].ERPPrice | number : '1.2-2'}} / Year</span>
+                                            
+                                            </span>
+                                          </p>
+                                          
+                                    </div> -->
+                                
+                         
+                            </div>
+                          
+
+                          <!-- <div class="product-price-detail" *ngIf="(item.properties['price'] !== '-') ; else noPrice "> -->
+                             
+                                <!-- <div>
                                     <p class="discounted-text margin"> 
                                         <span *ngIf="!item.hoverFlag">- {{item.properties['monthlyPriceList'].discountRate}}%</span>
                                         <span *ngIf="item.hoverFlag">- {{item.properties['yearlyPriceList'].discountRate}}%</span>
@@ -46,10 +111,11 @@
                                     </p> 
                                 </div>
                                 <p  class="gst margin ">&nbsp;(GST Extra)</p>
-                                <div >
+                                <div>
                                       <p class=" margin">
                                         <span class="mrp">MRP:&nbsp;</span>
                                         <span class="amount">
+                                            <span class="price-symbol-01">&#8377;</span>
                                             <span *ngIf="!item.hoverFlag">{{item.properties['monthlyPriceList'].ERPPrice | number : '1.2-2'}} / Month</span>
                                             <span *ngIf="item.hoverFlag">{{item.properties['yearlyPriceList'].ERPPrice | number : '1.2-2'}} / Year</span>
                                         
@@ -57,7 +123,7 @@
                                       </p>
                                       
                                 </div>
-                            </div>
+                            </div> -->
                             <ng-template class="tdData "#noPrice>
                                 -
                             </ng-template> 
