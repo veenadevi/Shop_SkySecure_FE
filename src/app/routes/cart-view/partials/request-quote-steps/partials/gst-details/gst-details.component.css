@@ -333,3 +333,214 @@ label {
     width: 500px;
   }
    
+
+
+  @media  ( min-width: 320px) and (max-width:550px)  {
+    .quote-front-page{
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+    .container-style {
+        width: 539px;
+        background-color: #fff;
+        border-radius: 6px;
+        padding: 15px;
+        font-family: 'lato', sans-serif !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .radiobtns {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        padding: 20px;
+        width: 300px;
+    }
+    .image {
+        height: 200px;
+        width: 250px;
+        /* display: none; */
+    }
+    .self {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: flex-end;
+        align-items: center;
+    }
+    .row>* {
+        flex-shrink: 0;
+        width: 60%;
+        max-width: 100%;
+        padding-right: calc(var(--bs-gutter-x) * .5);
+        padding-left: calc(var(--bs-gutter-x) * .5);
+        margin-top: var(--bs-gutter-y);
+    margin-left: 20%;
+      }
+      .gst-details-view {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+        padding: 40px;
+        background: var(--primary);
+        /* align-items: center; */
+        /* justify-content: center; */
+    }
+    #customerToogle{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0px;
+        column-gap: 2rem;
+        width: 100%;
+    }
+    .name-row-01{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: space-between;
+        column-gap: 20px;
+    }
+}
+
+@media  ( min-width:550px) and (max-width:770px)  {
+    .quote-front-page{
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+    .container-style {
+        width: 539px;
+        background-color: #fff;
+        border-radius: 6px;
+        padding: 15px;
+        font-family: 'lato', sans-serif !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .radiobtns {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        padding: 20px;
+        width: 300px;
+    }
+    .image {
+        height: 200px;
+        width: 250px;
+        /* display: none; */
+    }
+    .row>* {
+        flex-shrink: 0;
+        width: 100%;
+        max-width: 100%;
+        padding-right: calc(var(--bs-gutter-x) * .5);
+        padding-left: calc(var(--bs-gutter-x) * .5);
+        margin-top: var(--bs-gutter-y);
+    /* margin-left: 20%; */
+      }
+      .gst-details-view {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+        padding: 40px;
+        background: var(--primary);
+        /* align-items: center; */
+        /* justify-content: center; */
+    }
+    .quote-head{
+        text-align: center;
+        font-weight: bold;
+        margin-top: 20px;
+        color: #2E3489;
+        width: 150px;
+    }
+    .col-6 {
+        flex: 0 0 auto;
+        width: 95%;
+        align-items: center;
+    }
+    .col-sm-6 {
+        flex: 0 0 auto;
+        width: 72%;
+    }
+}
+
+@media  ( min-width:770px) and (max-width:1024px)  {
+    .quote-front-page{
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+    .container-style {
+        width: 539px;
+        background-color: #fff;
+        border-radius: 6px;
+        padding: 15px;
+        font-family: 'lato', sans-serif !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .radiobtns {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        padding: 20px;
+        width: 300px;
+    }
+    .image {
+        height: 200px;
+        width: 250px;
+        /* display: none; */
+    }
+    .row>* {
+        flex-shrink: 0;
+        width: 100%;
+        max-width: 100%;
+        padding-right: calc(var(--bs-gutter-x) * .5);
+        padding-left: calc(var(--bs-gutter-x) * .5);
+        margin-top: var(--bs-gutter-y);
+    /* margin-left: 20%; */
+      }
+      .gst-details-view {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+        padding: 40px;
+        background: var(--primary);
+        /* align-items: center; */
+        /* justify-content: center; */
+    }
+    .quote-head{
+        text-align: center;
+        font-weight: bold;
+        margin-top: 20px;
+        color: #2E3489;
+        width: 150px;
+    }
+    .col-6 {
+        flex: 0 0 auto;
+        width: 95%;
+        align-items: center;
+    }
+    .col-sm-6 {
+        flex: 0 0 auto;
+        width: 72%;
+    }
+}
