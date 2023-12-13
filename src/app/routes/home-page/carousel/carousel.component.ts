@@ -22,8 +22,16 @@ export class CarouselComponent {
       eventStartDate: new Date('2019/05/20'),
       eventEndingDate: new Date('2019/05/24')
     },
-     {
+    {
       event:' Event 2',
+      eventLocation:'',
+      eventDescription:'',
+      img: '../../../../assets/images/offerbanner.png',
+      eventStartDate: new Date('2018/05/20'),
+      eventEndingDate: new Date('2018/05/24')
+    },
+     {
+      event:' Event 3',
       eventLocation:'',
       eventDescription:'',
       // img: '../../../../assets/images/banner/AzureActiveDirectory.png',
@@ -32,7 +40,7 @@ export class CarouselComponent {
       eventEndingDate: new Date('2019/07/30')
     },
     {
-      event:' Event 3',
+      event:' Event 4',
       eventLocation:'',
       eventDescription:'',
       img: '../../../../assets/images/Final banner - section 3 -1300 x 200 px.jpg',

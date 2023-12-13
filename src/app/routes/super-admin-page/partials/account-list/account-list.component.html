@@ -64,8 +64,8 @@
                        
                         <td>
                             <div class="text-style"   matTooltip="View Lead Detail" matTooltipPosition="below" (click)="getAccountById(account.cartData._id)">
-                            {{ (account.createdFor && account.createdFor.company) ? account.createdFor.company :  account.createdFor.companyBusinessName
-                        }}
+                            <!-- {{ (account.createdFor && account.createdFor.company) ? account.createdFor.company :  account.createdFor.companyBusinessName}} -->
+                            {{ (account.createdFor && account.createdFor.company) ? account.createdFor.company : ''}}
                     </div>                
                     </td>
                     <td>
