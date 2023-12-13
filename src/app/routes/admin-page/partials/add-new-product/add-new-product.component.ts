@@ -529,13 +529,14 @@ export class AddNewProductComponent  implements OnInit {
       console.log("_--------------------createProductPayload_", this.createProductPayload);
       
 
+      /*
       this.subscriptions.push(
         this.adminPageService.createNewProduct(this.createProductPayload).subscribe(res=>{
           
           this.showMsg=true
 
         })
-      )
+      )*/
 
 
       
