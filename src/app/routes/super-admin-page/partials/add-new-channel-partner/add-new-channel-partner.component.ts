@@ -239,13 +239,16 @@ export class AddNewChannelPartnerComponent implements OnInit {
     else {
 
      
+      
    
+      
         this.CreateChannelPartner()
         console.log("_____++++ Error False");
       
         this.submitted=false
         this.countryStateError = false;
     
+        
     }
 
   }
@@ -261,6 +264,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
     } else {
 
 
+      console.log("+_+_+_+_+ This", this.selectedCity);
 
       var channelPartnerData = this.myForm.value;
 
@@ -276,7 +280,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
           "city":this.selectedCity.name,
           "state": this.selectedState.name,
           "zip": channelPartnerData.postalCode,
-          "country":  this.selectedCountrys.name
+          "country":  "IN"
 
         }],
 
@@ -295,6 +299,8 @@ export class AddNewChannelPartnerComponent implements OnInit {
       }
 
 
+
+      //console.log("+_+_+_+_+_+_+_ ", this.createChannalParterPayload);
       this.savenewChannelPartner(this.createChannalParterPayload)
 
 
@@ -385,6 +391,13 @@ export class AddNewChannelPartnerComponent implements OnInit {
 
           this.selectedState = selectedState;
 
+
+          let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
+          this.cityList=City.getCitiesOfState('IN', this.selectedState.isoCode);
+          
+    
+          let selectedCity = cityList.filter(c => c.name === resCity)[0];
+          this.selectedCity = selectedCity;
 
 
           /*let stateList  = State?.getStatesOfCountry('IN');
