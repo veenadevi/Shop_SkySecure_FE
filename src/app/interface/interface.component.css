@@ -10,7 +10,10 @@ mat-sidenav-content {
   padding-top: 100px;
 }
 
-
+.footerElement{
+position: relative;
+z-index: 999;
+}
 
 
 .example-container {

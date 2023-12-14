@@ -72,12 +72,17 @@
       &nbsp;
       
     </div>
-    <div class="ad-on-container">
+    <div class="ad-on-container" >
       <div class="inner-container">
         <ad-ons [productsList] = "listForCompare"></ad-ons>
       </div>
       
-      <img class="responsive-img" src="../../../assets/images/banner/AutomatedDeployment.png">
+      <!-- <img class="responsive-img" #adOnContainer  src="../../../assets/images/banner/AutomatedDeployment.png"> -->
+      <!-- Add this HTML for the floatable image -->
+<!-- <div id="floatableImage" class="floatable-image-container"> -->
+  <img class="responsive-img" #floatableImageElement id="floatableImageElement" src="../../../assets/images/banner/AutomatedDeployment.png">
+<!-- </div> -->
+
     </div>
    
   </div>
@@ -100,5 +105,5 @@
 
 </div>
 
-
+ 
 <!--  Changes For Sticky -->
