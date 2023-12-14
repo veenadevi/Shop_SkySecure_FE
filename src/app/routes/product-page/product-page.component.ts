@@ -161,46 +161,61 @@ export class ProductPgaeComponent implements OnInit, OnChanges, OnDestroy {
 
   detectedElms = [];
 
-
+ 
   @ViewChild('testDiv', { static: false })
   private testDiv: ElementRef<HTMLDivElement>;
-
+  @ViewChild('floatableImageElement') floatableImageElement: ElementRef;
 
   public isTestDivScrolledIntoView: boolean = false;
-
- // footerContainer = document.querySelector(".footer-container");
-
+ 
   public ngAfterViewInit(): void { 
     this.floatableFilter = document.getElementById("floatableFilter");
-    this.floatableFilter.style.display = "none"; 
- 
+     this.floatableFilter.style.display = "none";  
     this.subscriptions.push(
       this.detectScrollStore.productFiltersScroll$.subscribe(res => { 
         if (this.filterSection) {
           const rect = this.filterSection.nativeElement.getBoundingClientRect();
-          
+        
           const topShown = rect.top >= 0;
           const bottomShown = rect.bottom <= window.innerHeight;
-          
-          this.isTestDivScrolledIntoView = topShown && bottomShown;
-          if(rect.bottom > 110){
-           
-            this.floatableFilter.style.display = "none";
-          }
-          else{
-            
-            this.floatableFilter.style.display = "block";
-          }
-        }
         
-         
-      //  const floatableFilter1 = document.getElementById("floatableFilter"); 
+          this.isTestDivScrolledIntoView = topShown && bottomShown;
+        
+          // console.log('isTestDivScrolledIntoView:', this.isTestDivScrolledIntoView);
+        
+          if (rect.bottom > 110) {
+            this.floatableFilter.style.display = 'none';
+          } else {
+            this.floatableFilter.style.display = 'block';
+          }
+        } 
+//floatable image 
+        const imageContainer = document.getElementById('floatableImageElement');
+
+        if (imageContainer) {
+          const rect = imageContainer.getBoundingClientRect();
+          this.floatableImageElement.nativeElement.style.display = rect.top > 0 ? 'block' : 'none';
+        }
+ // from footer hide
+        // const lastProductElement = document.querySelector('.product-items-holder > :last-child');
+
+        // if (lastProductElement && this.footerElement) {
+        //   const lastProductRect = lastProductElement.getBoundingClientRect();
+        //   const footerRect = this.footerElement.nativeElement.getBoundingClientRect();
+
+        //   const isOverlap = !(lastProductRect.bottom < footerRect.top || lastProductRect.top > footerRect.bottom);
+
+        //   this.floatableImageElement.nativeElement.style.display = isOverlap ? 'none' : 'block';
+        // }
+
+
+    
         const lastProductElement1 = document.querySelector(".product-items-holder > :last-child");  
         let isLastProductVisible = false; 
         window.addEventListener("scroll", () => {
           if (lastProductElement1) {
             const lastProductRect = lastProductElement1.getBoundingClientRect();
-            // const filterRect = this.floatableFilter.getBoundingClientRect(); 
+            
             const positionRelativeToViewport = lastProductRect.bottom - window.innerHeight; 
             if (positionRelativeToViewport > 0) { 
               this.floatableFilter.style.display = "block"; 
@@ -210,6 +225,15 @@ export class ProductPgaeComponent implements OnInit, OnChanges, OnDestroy {
               isLastProductVisible = false;
             }
           }
+          //last position
+          const lastProductElement = document.querySelector('.product-items-holder > :last-child');
+
+          if (lastProductElement) {
+            const lastProductRect = lastProductElement.getBoundingClientRect();
+            const positionRelativeToViewport = lastProductRect.bottom - window.innerHeight; 
+            this.floatableImageElement.nativeElement.style.display = positionRelativeToViewport > 0 ? 'block' : 'none';
+          }
+        
         });
     
       })
@@ -953,11 +977,11 @@ export class ProductPgaeComponent implements OnInit, OnChanges, OnDestroy {
 
 
 
-  public scrollToFilters(){
-    this.filterSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
-  }
-
-
+   public scrollToFilters(){
+    console.log("on click of filters")
+    this.filterSection.nativeElement.scrollIntoView({ behavior: 'auto' }); 
+ 
+    }
 
 
 }
