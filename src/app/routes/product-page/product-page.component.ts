@@ -977,11 +977,23 @@ export class ProductPgaeComponent implements OnInit, OnChanges, OnDestroy {
 
 
 
-   public scrollToFilters(){
-    console.log("on click of filters")
-    this.filterSection.nativeElement.scrollIntoView({ behavior: 'auto' }); 
+  //  public scrollToFilters(){
+  //   console.log("on click of filters")
+  //   this.filterSection.nativeElement.scrollIntoView({ behavior: 'auto' }); 
  
+  //   }
+  public scrollToFilters(): void {
+    console.log("on click of filters"); 
+    if (window.scrollY === 0) {  
+      this.filterSection.nativeElement.scrollIntoView({ behavior: 'auto' });
+    } else { 
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        this.filterSection.nativeElement.scrollIntoView({ behavior: 'auto' });
+      }, 500);  
     }
+  }
+ 
 
 
 }
