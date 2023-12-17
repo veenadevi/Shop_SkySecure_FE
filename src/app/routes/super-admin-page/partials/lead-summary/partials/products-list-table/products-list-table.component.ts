@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { InvoiceDueDateModalComponent } from 'src/shared/components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
+import { IonService } from 'src/shared/services/ion-service/ion-service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 
@@ -94,6 +95,7 @@ export class ProductsListTableComponent implements OnInit {
     private modalService: NgbModal,
     private userAccountStore: UserAccountStore,
     public spinner: NgxSpinnerService,
+    private ionService : IonService
   ) { }
   userDetails:any;
 
@@ -691,8 +693,7 @@ this.enableinvoice=true
     let request = this.setInvoiceRequestData();
 
 
-
-
+    
     const modalRef = this.modalService.open(InvoiceDueDateModalComponent, {size: '700px', windowClass: 'invoice-due-date-modal-custom-class'});
   
 
@@ -717,6 +718,26 @@ this.enableinvoice=true
 
       })
     ) */
+
+
+  }
+
+
+  /**
+   * Function For Testing ION End To End
+   * 
+   */
+
+  public sendIonInvoice(){
+
+    let request = this.setInvoiceRequestData();
+    console.log(")))))))))) ", request);
+
+    this.subscription.push(
+      this.ionService.createIonOrder(request).subscribe(res=> {
+        console.log("+++++ Res For ION", res);
+      })
+    )
 
 
   }
