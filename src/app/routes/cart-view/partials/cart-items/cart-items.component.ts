@@ -754,6 +754,7 @@ public onChangeQuantity(i, price) : void {
   public paymentGateway(){
 
 
+    /*
     let samplePayload = {
       "merchantId": "PGTESTPAYUAT",
       "merchantTransactionId": "Test2",
@@ -768,12 +769,29 @@ public onChangeQuantity(i, price) : void {
       "paymentInstrument": {
         "type": "PAY_PAGE"
       }
+    }*/
+
+    
+    let samplePayload = {
+      "merchantId": "SKYSECUREONLINE",
+      "merchantTransactionId": "ProdTest1",
+      "merchantUserId": "MUID123",
+      "amount": "1100",
+      "redirectUrl": "http://localhost:4200/cart/payment-status/ProdTest1",
+      "redirectMode": "REDIRECT",
+      "callbackUrl": "https://webhook.site/callback-url",
+      "mobileNumber": "8072316022",
+      "paymentInstrument": {
+        "type": "PAY_PAGE"
+      }
     }
+
 
     
     var encoded = btoa(JSON.stringify(samplePayload));
 
-    var saltKey = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399"
+    //var saltKey = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399" // For Test
+    var saltKey = "2df88685-6acc-4324-92e0-61b8c1c1dbd5";
     //let shaString = CryptoJS.SHA256(encoded + '/pg/v1/pay' + saltKey).toString;
 
     let shaString = SHA256(encoded + '/pg/v1/pay' + saltKey).toString();
