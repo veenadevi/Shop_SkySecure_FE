@@ -405,8 +405,8 @@ export class CartService {
       "request" : base64Val
     }
 
-    let url = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
-    //let url = "https://api-preprod.phonepe.com/apis/pg-sandbox";
+    //let url = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
+    let url = "https://api.phonepe.com/apis/hermes";
     let request$ = this.http.post<Observable<any>>(url, req, this.getOptionsForPaymentGateway(sha256Val))
     .pipe(
       map(response => {

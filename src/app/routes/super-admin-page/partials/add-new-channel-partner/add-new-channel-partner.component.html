@@ -76,7 +76,7 @@
                         <label for="State">State<span class="mandatory">*</span></label>
                         <select formControlName="stateName" class="form-control-01" (change)="onStateChange($event)">
                             <ng-container *ngIf="gstData; else noGstDataState">
-                                <option value="">{{gstResponseData.adress.state}}</option>
+                                <option value="">{{gstResponseData.adress.state}} </option>
                             </ng-container>
                             <ng-template #noGstDataState>
                                 <option disabled value="'Select State'">Select State </option>
@@ -215,15 +215,14 @@
                     <button class="btn primary" (click)="submitForm()">Add Channel Partner</button>
                 </ng-container>
             </div>
-            <div class="row" *ngIf="showMsg">
-                <div class="col-xs-12">
+            <div class="row"  *ngIf="showMsg" >
+                <div class="col-12 d-flex  justify-content-center">
                     <p class="alert alert-success">
                         <strong>Channal Partner Created Successfully !</strong>
-
                     </p>
                 </div>
-            </div>
-
+              </div>
+           
             <div class="row" *ngIf="duplicate">
                 <div class="col-xs-12">
                     <p class="alert alert-danger">

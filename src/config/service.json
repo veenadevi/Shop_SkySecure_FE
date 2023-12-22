@@ -124,7 +124,10 @@
 
         "getProductReviewsList": "api/product-reviews",
 
-        "getAllUserReviewsListURL":"api/product-reviews"
+        "getAllUserReviewsListURL":"api/product-reviews",
+
+
+        "createIonOrder" : "api/ion/createOrder"
         
 
     },

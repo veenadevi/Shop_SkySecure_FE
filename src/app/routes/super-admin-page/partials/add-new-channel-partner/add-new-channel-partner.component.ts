@@ -331,7 +331,10 @@ export class AddNewChannelPartnerComponent implements OnInit {
   }
 
   public fetchGST() {
-    
+    if (this.gstResponseData) {
+      console.log("this.gstResponseData",this.gstResponseData) 
+      return;  
+    }
 
     if (this.myForm.value.gstin.length === 15) {
 
