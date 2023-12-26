@@ -14,7 +14,8 @@ export class SearchbarSearchListComponent {
 
   @Input('searchResults')
   public searchResults : any;
-
+  @Input() inputText: string;
+  @Input() hasPerformedSearch: boolean = false;
   searchResultsProducts : ProductsDetails[] = [];
   searchResultsCategoryList : any[] = [];
   searchResultsSubCategoryList : any[] = [];
@@ -47,16 +48,17 @@ export class SearchbarSearchListComponent {
       this.searchResultsSubCategoryList = data?.subCategoryList || [];
 
       this.searchResultsSubCategoryList = this.searchResultsSubCategoryList.filter(c => c.products.length>0);
-      //console.log("+_+_+_+_+_+_ ", this.searchResultsSubCategoryList);
+      console.log("+_+_+_+_+_+_ ", this.searchResultsSubCategoryList);
 
       this.searchResultsProductBundleList = [...tempProductBundleVariantsData , ...tempBundlesData];
       
       //this.searchResultsProductBundleList = data?.productBundles || [];
+      console.log("Data",data,"searchResultsProducts",this.searchResultsProducts);
       return data;
     }
     )
   )
-
+ 
   public ngOnInit() : void{
 
     this.subscriptions.push(this.searchResults$.subscribe());

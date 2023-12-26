@@ -1,8 +1,10 @@
-<div class="container-holder text-style p-3">
+<div class="container-holder text-style p-3"    
+    >
    
     <ng-container>
         
-        <div class="nodata"  *ngIf="(searchResultsProductBundleList.length <= 0 && searchResultsProducts.length <= 0 && searchResultsCategoryList.length <= 0 && searchResultsSubCategoryList.length <= 0)" >
+        <div class="nodata"  
+          *ngIf="(  inputText  && searchResultsProductBundleList.length <= 0 && searchResultsProducts.length <= 0 && searchResultsCategoryList.length <= 0 && searchResultsSubCategoryList.length <= 0)" >
             <p>no data found !</p>
             <img class="no-img" src="../../../../../assets/images/nodata.jpg">
         </div>
@@ -18,7 +20,7 @@
         </div>
 
         
-        <div class="list-row" *ngIf="searchResultsProducts.length > 0"> 
+        <div class="list-row" *ngIf=" hasPerformedSearch &&  searchResultsProducts.length > 0"> 
             <div class="text-header">
                 <span>Products</span>
             </div>

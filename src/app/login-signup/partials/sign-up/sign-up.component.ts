@@ -7,7 +7,7 @@ import Validation from '../utils/validation';
 import * as CryptoJS from 'crypto-js';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { BlockableUI } from 'primeng/api';
-import { CompressOutlined } from '@mui/icons-material';
+import { CompressOutlined, Pattern } from '@mui/icons-material';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
 interface AutoCompleteCompleteEvent {
@@ -86,7 +86,9 @@ export class SignUpComponent {
     this.formEmail = this.fb.group(
       {
 
-        emailOrMobile: [this.emailViaSignIn, [Validators.required, emailOrMobileValidator]],
+        emailOrMobile: [this.emailViaSignIn, 
+          [Validators.required, emailOrMobileValidator, ],
+          ],
         // otp: [],
       }
     )
@@ -119,9 +121,8 @@ export class SignUpComponent {
 
         selectedCompanyName: [''],
         mobileNumber: ['', [
-
           Validators.pattern('^[6-9][0-9]{9}$'),
-          Validators.maxLength(10)
+           Validators.maxLength(10)
         ]]
       }
         //acceptTerms: [false, Validators.requiredTrue]
@@ -587,15 +588,22 @@ export function emailOrMobileValidator(control: AbstractControl): Observable<Val
     // Regular expression for email validation
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     // Regular expression for mobile number validation (adjust it based on your requirements)
-    const mobilePattern = /^\d{10}$/;
-    if (emailPattern.test(value) || mobilePattern.test(value)) {
+    //const mobilePattern = /^\d{10}$/;
+    const mobilePattern = /^[6-9]\d{9}$/;
+    // if (emailPattern.test(value) || mobilePattern.test(value)) {
 
+    //   if (mobilePattern.test(value)) {
+
+    //     SignUpComponent.isMobile = true;
+    //   }
+    //   return null;
+
+    // }
+    if (value.length <= 10 && (emailPattern.test(value) || mobilePattern.test(value))) {
       if (mobilePattern.test(value)) {
-
         SignUpComponent.isMobile = true;
       }
       return null;
-
     }
   }
 

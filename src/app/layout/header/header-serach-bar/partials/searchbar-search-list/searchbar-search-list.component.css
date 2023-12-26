@@ -2,8 +2,12 @@
     color: aliceblue;
     background: var(--white);
     overflow-y: scroll;
-    height: 400px;
-    
+    height: 350px;
+    /* border: 2px solid blue; */
+}
+.container-holder1{
+    height: 200px;
+    border: 2px solid red;
 }
 ::-webkit-scrollbar {
     width: 3px; /* Width of the scrollbar */
