@@ -82,6 +82,7 @@
         "getProductBundleVariant": "api/product-family-variant/",
         "fetchCompareProductsListUrl": "api/product/compare",
         "allSubcategory" : "api/sub-category/get/all",
+        "allSubcategory2" : "api/sub-category-2/get/all",
         "fetchAdmingProduct":"api/admin/product/",
         "editProduct":"api/admin/product/edit",
 
