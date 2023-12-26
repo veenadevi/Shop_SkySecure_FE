@@ -590,21 +590,21 @@ export function emailOrMobileValidator(control: AbstractControl): Observable<Val
     // Regular expression for mobile number validation (adjust it based on your requirements)
     //const mobilePattern = /^\d{10}$/;
     const mobilePattern = /^[6-9]\d{9}$/;
-    // if (emailPattern.test(value) || mobilePattern.test(value)) {
+    if (emailPattern.test(value) || mobilePattern.test(value)) {
 
-    //   if (mobilePattern.test(value)) {
-
-    //     SignUpComponent.isMobile = true;
-    //   }
-    //   return null;
-
-    // }
-    if (value.length <= 10 && (emailPattern.test(value) || mobilePattern.test(value))) {
       if (mobilePattern.test(value)) {
+
         SignUpComponent.isMobile = true;
       }
       return null;
+
     }
+    // if (value.length <= 10 && (emailPattern.test(value) || mobilePattern.test(value))) {
+    //   if (mobilePattern.test(value)) {
+    //     SignUpComponent.isMobile = true;
+    //   }
+    //   return null;
+    // }
   }
 
 
