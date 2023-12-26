@@ -98,6 +98,11 @@ const INTERFACE_ROUTES: Routes = [
         path: 'finance-user-page',
         loadChildren: () => import('../routes/finance-user/finance-user-page.module').then(m=>m.FinanceUserPageModule)
       },
+      {
+        canActivate: [AuthGuard],
+        path: 'ion-view',
+        loadChildren: () => import('../routes/ion-view/ion-view.module').then(m=>m.IonViewModule)
+      },
     ]
   }
 

@@ -64,6 +64,8 @@ export class SidenavWrapperComponent implements OnInit{
 
   public fuSubMenu:boolean=false;
 
+  public ionSubMenu : boolean = false;
+
   constructor(
     private loginService: LoginService,
     private router: Router,
@@ -150,6 +152,9 @@ export class SidenavWrapperComponent implements OnInit{
     if (navVal === 'fu') {
       this.fuSubMenu = true;
     }
+    if (navVal === 'ion') {
+      this.ionSubMenu = true;
+    }
 
     /*if(this.isExpanded === false){
       this.userSubMenu = false;
@@ -230,9 +235,13 @@ export class SidenavWrapperComponent implements OnInit{
         this.cpSubMenu = (this.cpSubMenu) ? false : true;
         return;
 
-        case 'fu':
-          this.fuSubMenu = (this.fuSubMenu) ? false : true;
-          return;
+      case 'fu':
+        this.fuSubMenu = (this.fuSubMenu) ? false : true;
+        return;
+      
+      case 'ion':
+        this.ionSubMenu = (this.ionSubMenu) ? false : true;
+        return;
 
 
       default:
@@ -373,6 +382,11 @@ export class SidenavWrapperComponent implements OnInit{
               this.menuToogled = false;
               this.router.navigate(['finance-user-page/leads']);
               return;
+
+        case 'ionOrders':
+          this.menuToogled = false;
+          this.router.navigate(['ion-view/orders-list']);
+          return;
       default:
         return null;
     }

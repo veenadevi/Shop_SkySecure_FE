@@ -62,6 +62,7 @@ export class EditProductComponent  implements OnInit {
   public selectedCategory: any = {};
   public oemList: OEMDetails[] = [];
   public subCategories: any[] = [];
+  public subCategories2: any[] = [];
   public fileToUpload: File | null = null;
   public productLogo: string;
   // City names
@@ -121,6 +122,7 @@ export class EditProductComponent  implements OnInit {
       mdiscount: [''],
       categories: ['', Validators.required],
       Subcategories: ['', Validators.required],
+      Subcategories2: [''],
       selectedProductIds:[''],
       selectedProductId1:[''],
       OEM: ['', Validators.required],
@@ -170,6 +172,7 @@ export class EditProductComponent  implements OnInit {
     //console.log("_DATA_",productId);
   //  this.getProductDetails(productId);
     this.getSubCategories();
+    this.getSubCategories2();
     this.getCategories();
     this.getOEMs();
   }
@@ -217,6 +220,17 @@ export class EditProductComponent  implements OnInit {
     this.subscriptions.push(
       this.metaDataSvc.fetchSubCategory().subscribe(response => {
         this.subCategories = response.subCategories;
+      })
+
+    );
+    return categoryResponse;
+  }
+
+  private getSubCategories2(): any[] {
+    let categoryResponse = null;
+    this.subscriptions.push(
+      this.metaDataSvc.fetchSubCategory2().subscribe(response => {
+        this.subCategories2 = response.subCategories2;
       })
 
     );
@@ -400,6 +414,16 @@ export class EditProductComponent  implements OnInit {
     })
   }
 
+    // Choose Subcategories 2 using select dropdown
+    changeSubcategories2(e) {
+    
+      this.registrationForm.get('Subcategories2').setValue(e.target.value, {
+        onlySelf: true
+      // this.registrationForm.get('Subcategories').setValue(e.target.value.substring(3), {
+      //   onlySelf: true
+      })
+    }
+
 
 
   // Choose Subcategories using select dropdown
@@ -490,7 +514,7 @@ export class EditProductComponent  implements OnInit {
         shortDescription:productData.productShortDescription,
         oemId: productData.OEM,
         subCategoryId: productData.Subcategories,
-       
+        subCategory2Id : productData.Subcategories2,
         productId: productData.products,
         productSkuId: productData.productSkuId,
         productSkuNumber: productData.productSkuNumber,
@@ -537,6 +561,8 @@ export class EditProductComponent  implements OnInit {
       if(this.createProductPayload.appList && this.createProductPayload.appList.length>0){
 
 
+        
+        
         for(let i=0;i<this.createProductPayload.appList.length;i++){
           const result = this.tempAppArrayImgFiles.filter((obj) => {
             return obj.index === i;
@@ -544,10 +570,16 @@ export class EditProductComponent  implements OnInit {
 
           if(result && result.length>0){
           //  this.createProductPayload.appList[i].File = result[0].val;
+          if(this.createProductPayload.appList[i].imageURL){
             this.createProductPayload.appList[i].imageURL = result[0].val;
           }
+            
+          }
           else{
-            this.createProductPayload.appList[i].imageURL = "";
+            if(this.createProductPayload.appList[i].imageURL){
+              this.createProductPayload.appList[i].imageURL = "";
+            }
+            
           }
         }
 
@@ -555,6 +587,9 @@ export class EditProductComponent  implements OnInit {
       }
       
 
+      console.log("+_+_+_+_ )()( ", this.createProductPayload);
+
+      
      
         this.subscriptions.push(
           this.adminPageService.productEdit(this.createProductPayload).subscribe(
@@ -570,7 +605,7 @@ export class EditProductComponent  implements OnInit {
             this.selectedProductId.reset();
           }
           )
-        )
+        ) 
       
     
       

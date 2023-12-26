@@ -207,6 +207,29 @@
 
                     </div>
 
+                    <div class="section-subCat">
+                       <!-- Subcategories 2 -->
+
+                       <div class="sub-category">
+                        <div class="forms">
+                            <div class="label">
+                                <label>Subcategories 2</label>
+                            </div>
+                            <div class="select">
+                                <select class="custom-select " (change)="changeSubcategories2($event)"
+                                    formControlName="Subcategories2">
+                                    <option value="">Choose...</option>
+                                    <option *ngFor="let subcategory2 of subCategories2" [value]="subcategory2._id">
+                                        {{subcategory2.name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                        
+                    </div>
+
 
                     <div class="section-02">
                         <!-- Product Name -->

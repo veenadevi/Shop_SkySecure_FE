@@ -32,6 +32,7 @@ export class MetadataService {
   private fetchCompareProductsListUrl:string;
   private fetchProductByProductVariant:string;
   private fetchAllSubcategory : string;
+  private fetchAllSubcategory2 : string;
   private fetchAdminProductDetailsUrl:string;
   private customerSupportUrl : string;
   private getUserNotificationsUrl : string;
@@ -62,6 +63,7 @@ export class MetadataService {
     this.fetchProductBundleVariantDetailsUrl = AppService.appUrl.getProductBundleVariant;
     this.fetchCompareProductsListUrl = AppService.appUrl.fetchCompareProductsListUrl
     this.fetchAllSubcategory = AppService.appUrl.allSubcategory;
+    this.fetchAllSubcategory2 = AppService.appUrl.allSubcategory2;
     this.fetchAdminProductDetailsUrl=AppService.appUrl.fetchAdmingProduct;
     this.customerSupportUrl = AppService.appUrl.customerSupport;
     this.getUserNotificationsUrl = AppService.appUrl.getUserNotifications;
@@ -398,6 +400,32 @@ export class MetadataService {
   public fetchSubCategory(): Observable<any> {
 
     let url = this.baseUrl + this.fetchAllSubcategory;
+    //let options = this.getOptions();
+    
+
+    let request$ = this.http.get<any>(url)
+      .pipe(
+        map(response => {
+          if (!response) {
+            
+            return null;
+          }
+          
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling 
+          return (error);
+        })
+      );
+      
+    return request$;
+  }
+
+  public fetchSubCategory2(): Observable<any> {
+
+    //let url = "http://localhost:8002/" + this.fetchAllSubcategory2;
+    let url = this.baseUrl + this.fetchAllSubcategory2;
     //let options = this.getOptions();
     
 

@@ -444,10 +444,10 @@ export  function emailOrMobileValidator(control: AbstractControl):Observable<Val
   const value = control.value;
   //let invalidEmailOrMobile: any = false;
   if (value) {
-    // Regular expression for email validation
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    // Regular expression for mobile number validation (adjust it based on your requirements)
-    const mobilePattern = /^\d{10}$/;
+     
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; 
+    // const mobilePattern = /^\d{10}$/;
+    const mobilePattern = /^[6-9]\d{9}$/;
     if (emailPattern.test(value) || mobilePattern.test(value)) {
 
       if (mobilePattern.test(value)) {

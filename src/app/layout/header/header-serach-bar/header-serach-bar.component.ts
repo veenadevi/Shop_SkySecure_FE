@@ -36,11 +36,12 @@ export class HeaderSerachBarComponent {
     if(this.inputText && this.inputText.length>2){
       this.isOpen = true;
       this.generalSearchOpen = false;
-      this.keywordSearchOpen = true;
+       this.keywordSearchOpen = true;
     }
     else{
       this.isOpen = true;
       this.generalSearchOpen = true;
+      // this.keywordSearchOpen = false;
     }
     
   }
@@ -59,12 +60,12 @@ export class HeaderSerachBarComponent {
     // this.generalSearchOpen = false;
     // this.keywordSearchOpen = true
   }
-
+  public hasPerformedSearch: boolean = false;
   public onSearchQueryInput(event: Event): void {
     this.isOpen = true;
     this.generalSearchOpen = false;
     this.keywordSearchOpen = true;
-    
+    this.hasPerformedSearch = true;
     const searchQuery = (event.target as HTMLInputElement).value;
     this.searchSubject.next(searchQuery?.trim());
   }
@@ -72,7 +73,7 @@ export class HeaderSerachBarComponent {
   public getSearchResults() {
     this.searchSubscription = this.searchSubject
     .pipe(
-      debounceTime(600),
+      // debounceTime(300),
       distinctUntilChanged(),
     )
     .subscribe((results) => {
@@ -81,12 +82,14 @@ export class HeaderSerachBarComponent {
         this.globalSearchSvc.fetchSearchResults(results).subscribe(res => {
           this.searchResults = res;
           this.searchResultsStore.setSearchResults(this.searchResults);
-          this.keywordSearchOpen = true;
+          // this.keywordSearchOpen = true;
+
         });
       }
       else{
         this.generalSearchOpen = true;
         this.keywordSearchOpen = false;
+
       }
 
     });
