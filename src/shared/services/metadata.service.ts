@@ -222,6 +222,7 @@ export class MetadataService {
 
   public fetchSingleProductDetails(productId: string) : Observable<any> {
     let url = this.baseUrl + this.getSingleProductDetails + productId;
+    // let url = "http://localhost:8002/" + this.getSingleProductDetails + productId;
     //let options = this.getOptions();
 
     // return this.http.get(url)
