@@ -2,7 +2,7 @@
     color: aliceblue;
     background: var(--white);
     overflow-y: scroll;
-    height: 350px;
+    height: 400px;
     /* border: 2px solid blue; */
 }
 .container-holder1{
