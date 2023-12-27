@@ -39,7 +39,9 @@ export class SearchListComponent {
       let tempProductBundleVariantsData = this.setProductBundleVariantsData(data?.productBundleVariants || []);
       let tempBundlesData = this.setBundlesData(data?.productBundles || []);
 
-      this.searchResultsProducts = [...tempProducts , ...tempProductsVarients];
+      let tempSubCat2Products = this.setProductsData(data?.subCategory2List[0].products || []);
+
+      this.searchResultsProducts = [...tempProducts , ...tempSubCat2Products, ...tempProductsVarients];
       //this.searchResultsProducts = data?.products || [];
       this.searchResultsCategoryList = data?.categoryList || [];
       this.searchResultsSubCategoryList = data?.subCategoryList || [];
