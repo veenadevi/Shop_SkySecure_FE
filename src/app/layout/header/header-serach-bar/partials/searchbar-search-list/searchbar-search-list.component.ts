@@ -46,7 +46,13 @@ export class SearchbarSearchListComponent {
       //let tempSubCat2Products = data?.subCategory2List || [];
 
 
-      let tempSubCat2Products = this.setProductsData(data?.subCategory2List[0].products || []);
+      //let tempSubCat2Products = this.setProductsData(data?.subCategory2List[0]?.products || []);
+
+      let tempSubCat2Products = [];
+
+      if(data && data.subCategory2List && data.subCategory2List.length>0){
+        tempSubCat2Products = this.setProductsData(data.subCategory2List[0]?.products || []);
+      }
      
 
       this.searchResultsProducts = [...tempProducts, ...tempSubCat2Products, ...tempProductsVarients];
