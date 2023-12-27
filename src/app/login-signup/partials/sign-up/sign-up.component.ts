@@ -578,7 +578,7 @@ export class SignUpComponent {
 }
 
 
-export function emailOrMobileValidator(control: AbstractControl): Observable<ValidationErrors | any> {
+export function emailOrMobileValidator(control: AbstractControl): ValidationErrors | null {
 
 
 
@@ -590,21 +590,26 @@ export function emailOrMobileValidator(control: AbstractControl): Observable<Val
     // Regular expression for mobile number validation (adjust it based on your requirements)
     //const mobilePattern = /^\d{10}$/;
     const mobilePattern = /^[6-9]\d{9}$/;
-    if (emailPattern.test(value) || mobilePattern.test(value)) {
+    // const restrictedPatterns = ["7777777777", "99999999999", "8888888888", "6666666666"];
 
+    if (emailPattern.test(value) || mobilePattern.test(value)) {
+      
       if (mobilePattern.test(value)) {
 
         SignUpComponent.isMobile = true;
       }
+      const consecutiveSameNumericsPattern = /(.)\1{4,}/;
+      if (!consecutiveSameNumericsPattern.test(value)) {
+        console.log("came inside here")
+            
+      } else {
+        // Consecutive repeated digits found, invalid input
+        console.log("came inside here else")
+        return { consecutiveSameNumericsError: true };
+      }
       return null;
 
-    }
-    // if (value.length <= 10 && (emailPattern.test(value) || mobilePattern.test(value))) {
-    //   if (mobilePattern.test(value)) {
-    //     SignUpComponent.isMobile = true;
-    //   }
-    //   return null;
-    // }
+    } 
   }
 
 
