@@ -203,6 +203,38 @@ private options:{headers:HttpHeaders}
   }
 
 
+
+  public saveUplaodedPO(request){
+    //const URL =  this.baseUrlForOrders + this.assignChannelPartnerURL;
+
+    const URL = "http://localhost:8080/api/user/uploadPO";
+  
+
+ // console.log("+++++++ ____ _ InsideCreate assignChannelPartner ", request);
+    let options = this.getOptions();
+    const REQUEST$ = this.http.post<any>(URL, request, options)
+      .pipe(
+        switchMap(response => {
+          if (!response) {
+            return throwError(response);
+          }
+          //this.userAccountStore.setUserProfileDetails(response);
+          return of(response);
+        }),
+        map((response: any) => {
+          //this.userAccountStore.setUserProfileDetails(response);
+          return response;
+        }),
+        catchError(error => {
+          // create operation mapping for http exception handling
+          return error
+        })
+      );
+
+    return REQUEST$;
+  }
+
+
   public getMyChannelPartnerAMList(id:any) : Observable<any> {
 
     let url = this.baseURLForusers + this.getMyChannelAMListURL+"/"+id;

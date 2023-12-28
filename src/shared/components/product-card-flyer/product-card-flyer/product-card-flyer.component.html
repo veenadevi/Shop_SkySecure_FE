@@ -174,7 +174,10 @@
                        
                       
                        <!-- {{ (item.subcategories && item.subcategories.length > 0)? item.subcategories[0].name : ''}} -->
-                       {{item.subcategories.name}}
+                       {{item.subcategories.name}} &nbsp; 
+                       <ng-container *ngIf="(item.subCategories2 && item.subCategories2.length>0)">
+                        | &nbsp; {{item.subCategories2[0].name}}
+                       </ng-container>
                        
                     </div>
                     <div class="text-style" *ngIf="item.type=='productVariants'">

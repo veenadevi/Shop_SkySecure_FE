@@ -15,6 +15,8 @@ import { LoginService } from 'src/shared/services/login.service';
 import { CartStore } from 'src/shared/stores/cart.store';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 import * as CryptoJS from 'crypto-js';
+import { PaymentGatewayService } from 'src/shared/services/payment-gateway.service';
+
 var SHA256 = require("crypto-js/sha256");
 
 @Component({
@@ -93,7 +95,8 @@ export class CartItemsComponent {
     private authService : MsalService,
     private loginService : LoginService,
     private modalService : NgbModal,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private paymentGatewayService : PaymentGatewayService
   ) {}
 
 public cartData : any[] = [];
@@ -747,7 +750,43 @@ public onChangeQuantity(i, price) : void {
     //this.receiveOrderStatus()
     //this.checkout();
 
-    this.paymentGateway();
+    //this.paymentGateway(); //PhonePe
+
+    this.razorPaymentGatewasy();
+
+  }
+
+
+  public razorPaymentGatewasy(){
+    console.log("()()( Hi");
+
+    let samplePayLaod = {
+      "amount": 101,
+      "currency": "INR",
+      "receipt": "order1",
+      "notes": {
+        "notes_key_1": "Test Order",
+        "notes_key_2": "Test Order in Dev"
+      }
+    }
+
+    /*var instance = new Razorpay({ key_id: 'YOUR_KEY_ID', key_secret: 'YOUR_SECRET' })
+
+      instance.orders.create({
+        amount: 50000,
+        currency: "INR",
+        receipt: "receipt#1",
+        notes: {
+          key1: "value3",
+          key2: "value2"
+        }
+      }) */
+
+    /*this.subscriptions.push(
+      this.paymentGatewayService.createOrder(samplePayLaod).subscribe(res=>{
+        console.log("_+_+_ Response atalast ", res);
+      })
+    )*/
 
   }
 
