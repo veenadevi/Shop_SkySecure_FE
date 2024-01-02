@@ -108,7 +108,7 @@ export class LoginComponent {
 
     this.form = this.formBuilder.group(
       {
-        emailOrMobile: [this.emailViaSignup, [Validators.required,emailOrMobileValidator]],
+        emailOrMobile: [this.emailViaSignup, [Validators.required,emailOrMobileValidator] ],
         otp : []
         /*password: [
           '',
@@ -436,7 +436,8 @@ export class LoginComponent {
   }
 }
 
-export  function emailOrMobileValidator(control: AbstractControl):Observable<ValidationErrors | any>  {
+// export  function emailOrMobileValidator(control: AbstractControl)  :Observable<ValidationErrors | any>   {
+  export  function emailOrMobileValidator(control: AbstractControl) :  ValidationErrors | null  {
  // console.log("passing email as====", control.value)
 
   //console.log("is access?", this.isMobile)
@@ -448,14 +449,27 @@ export  function emailOrMobileValidator(control: AbstractControl):Observable<Val
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; 
     // const mobilePattern = /^\d{10}$/;
     const mobilePattern = /^[6-9]\d{9}$/;
-    if (emailPattern.test(value) || mobilePattern.test(value)) {
+    // const restrictedPatterns = ["11111111111", "99999999999", "99999999998", "1234567890"];
+
+    if (emailPattern.test(value) || mobilePattern.test(value) ) {
 
       if (mobilePattern.test(value)) {
 
         LoginComponent.isMobile = true;
-      }
-      return null;
+      } 
 
+      const consecutiveSameNumericsPattern = /(.)\1{4,}/;
+      if (!consecutiveSameNumericsPattern.test(value)) {
+        console.log("came inside here")
+            
+      } else {
+        // Consecutive repeated digits found, invalid input
+        console.log("came inside here else")
+        return { consecutiveSameNumericsError: true };
+      }
+      
+      return null;
+       
     }
   }
   

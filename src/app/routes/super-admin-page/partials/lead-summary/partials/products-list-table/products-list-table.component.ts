@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -7,6 +8,7 @@ import { AddCompareProductModalComponent } from 'src/shared/components/modals/ad
 import { InvoiceDueDateModalComponent } from 'src/shared/components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
 import { IonService } from 'src/shared/services/ion-service/ion-service';
+import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 
@@ -95,7 +97,9 @@ export class ProductsListTableComponent implements OnInit {
     private modalService: NgbModal,
     private userAccountStore: UserAccountStore,
     public spinner: NgxSpinnerService,
-    private ionService : IonService
+    private ionService : IonService,
+    private superAdminService : SuperAdminService,
+    private http: HttpClient,
   ) { }
   userDetails:any;
 
@@ -813,6 +817,52 @@ this.enableinvoice=true
     }
   }
 
+
+  public uplaodPO(event : any){
+
+    
+      const formData: FormData = new FormData();
+      formData.append('file', event.target.files[0], event.target.files[0].name);
+
+      this.saveUploadedPO("https://csg1003200209655332.blob.core.windows.net/images/1703743370-po_sample_template.pdf");
+      //this.spinner.show();
+      
+      //sample https://csg1003200209655332.blob.core.windows.net/images/1703743370-po_sample_template.pdf
+  
+      /*this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
+        .subscribe(
+          (response: any) => {
+            console.log("+_+_+_+__+ The Response we got ", response);
+            this.saveUploadedPO(response.filePath);
+            //this.productLogo = response.filePath;
+          },
+          error => {
+            console.error('Upload error:', error);
+            // Handle the error response
+          }
+        );*/
+    
+    
+  }
+
+  public saveUploadedPO(filePath){
+
+    let payLoad = {
+      "cart_ref_id" : 1234,
+      "file_path": filePath
+    }
+
+
+    let invoiceData = this.setInvoiceRequestData();
+    console.log("+_+_+_+_+_ Req Data ", invoiceData);
+
+    /*
+    this.subscription.push(
+      this.superAdminService.saveUplaodedPO(payLoad).subscribe(res=>{
+        //this.spinner.hide();
+      })
+    )*/
+  }
 
   
 
