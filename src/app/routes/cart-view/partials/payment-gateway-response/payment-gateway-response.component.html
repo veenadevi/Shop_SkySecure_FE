@@ -1,80 +1,178 @@
-<ng-container *ngIf="statusResponse">
+ 
+<ng-container *ngIf="statusResponse; else failureTemplate ">
 
     <div class="payment-status-view-container">
-        <pre>{{statusResponse |json}}</pre>
-    </div>
-    
+        <!-- <pre>{{statusResponse |json}}</pre>   -->
+        <div class="row">
+            <div class="col-xl-6  col-lg-6 col-sm-6 col-md-6 col-xs-12  leftSide  ">
+                <div class="payment">
+                    <img class="success" src="../../.../../../../../assets/icons/Success.png" alt="">
+                    <span class="paymentText">Payment successful</span>
+                </div>
+
+                <!-- border -->
+                <div class="borb_fff"></div>
+
+                <div class="gap row  ">
+                    <div class="paymentsecond">
+                        <div class="col-12">
+                            <span class="text"> Transaction ID: ABC123456789XYZ </span>
+                        </div>
+
+                        <div class="col-12">
+                            <span class="text"> Date and Time: 01-02-2024, 10:50 AM IST</span>
+                        </div>
+
+                        <div class="col-12">
+                            <span class="text"> Amount: $ 567890</span>
+                        </div>
+
+                        <div class="col-12">
+                            <span class="text"> Payment Method: Net Banking</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- border -->
+                <div class="borb_fff"></div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-sm-6 col-md-6 col-xs-12  rightSide">
+
+                <img class="creditCard " src="../../../../../assets/images/successCreditCard.png" alt="">
+            </div>
+
+
+        </div>
+        <div class="col align-self-center pt-4">
+            <button class="btn primary-btn viewbtn " (click)="navigateToQuotationHistory()"> View Quotation</button>
+        </div>
+    </div> 
+
     <!-- <div class="payment-status-view-container">
         <div class="left">
             <div class="billingInfo">
                 <h4 class="hideInMobile">Billing Confirmation</h4>
                 <div class="spacer20 hideInMobile"></div>
                 <div class="borb_fff hideInMobile"></div>
-                <div class="heading rightside"> 
-                    
+                <div class="heading rightside">
+    
                     <p>Amount</p>
                     <h5 class="amount"><span>INR</span>&nbsp;<span>{{statusResponse.totalAmount}}</span></h5>
-                    <span style="display: none;" id="hdfcsurchargelabel">Internet handling fee of <span>INR</span>.<label id="hdfcsurchargefees"></label> will be added to the transaction amount.</span>
-                    <span style="display: none;" id="hdfcsurchargelabelzero">No convenience fee or service charge is payable by the customer on Debit card / UPI transactions.</span>
-                    <span style="display: none;" id="cashBackLabel">Cash back of&nbsp;INR&nbsp;<label id="cashBackValue">0.00</label>&nbsp;applies.</span>
+                    <span style="display: none;" id="hdfcsurchargelabel">Internet handling fee of <span>INR</span>.<label
+                            id="hdfcsurchargefees"></label> will be added to the transaction amount.</span>
+                    <span style="display: none;" id="hdfcsurchargelabelzero">No convenience fee or service charge is payable
+                        by the customer on Debit card / UPI transactions.</span>
+                    <span style="display: none;" id="cashBackLabel">Cash back of&nbsp;INR&nbsp;<label
+                            id="cashBackValue">0.00</label>&nbsp;applies.</span>
                     <span class="error" style="display: none;" id="promoError"></span>
                 </div>
                 <div class="borb_fff hideInMobile emidiscount emidiscountText" style="display: none;"></div>
-                <div class="heading rightside emidiscount emidiscountText" style="display: none;"> <img src="/transaction/images/hdfc/icons/emi_discount.png" class="icon">
+                <div class="heading rightside emidiscount emidiscountText" style="display: none;"> <img
+                        src="/transaction/images/hdfc/icons/emi_discount.png" class="icon">
                     <p>EMI Discount</p>
                     <h5 class="amount"><span>INR</span>&nbsp;<span id="emidiscountText">0.00</span></h5>
                 </div>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <div class="heading rightside remove-coupon" style="display: none;"> <img src="/transaction/images/hdfc/icons/discount.png" class="icon">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                <div class="heading rightside remove-coupon" style="display: none;"> <img
+                        src="/transaction/images/hdfc/icons/discount.png" class="icon">
                     <p>Discount&nbsp;<label id="appliedCouponCode"></label></p>
-                    <h5 class="amount"><span id="amountDisc">INR</span>&nbsp; <span id="discountAmt">0.0</span>&nbsp;<a href="#" class="remove-link removecoupen">Remove</a></h5>
+                    <h5 class="amount"><span id="amountDisc">INR</span>&nbsp; <span id="discountAmt">0.0</span>&nbsp;<a
+                            href="#" class="remove-link removecoupen">Remove</a></h5>
                 </div>
-                
-                
+    
+    
                 <div class="borb_fff hideInMobile"></div>
-                <div class="heading"> 
-                    
-                    
+                <div class="heading">
+    
+    
                     <p>Order No</p>
-                    
-                    
+    
+    
                     <h5 class="orderNo">
                         {{statusResponse.orderId}}
                     </h5>
                 </div>
                 <div class="borb_fff hideInMobile"></div>
-                <div class="heading"> 
-                    
-                    
+                <div class="heading">
+    
+    
                     <p>Order Status</p>
-                    
-                    
+    
+    
                     <h5 class="orderNo">
                         {{statusResponse.orderStatus}}
                     </h5>
                 </div>
             </div>
-            
-            
-        </div>
-    </div> -->
     
+    
+        </div>
+    </div> 
+    </ng-container> -->
+ 
 </ng-container>
+<ng-template #failureTemplate>
+    <div>
+        <h5> Failure</h5>
+    </div>
+    <div class="payment-status-view-container">
+        <!-- <pre>{{statusResponse |json}}</pre>   -->
+        <div class="row">
+            <div class="col-xl-6  col-lg-6 col-sm-6 col-md-6 col-xs-12  leftSide  ">
+                <div class="payment">
+                    <img class="success" src="../../.../../../../../assets/icons/failure.png" alt="">
+                    <span class="paymentText">Payment Declined</span>
+                </div>
 
-<ngx-spinner
-  bdColor="rgba(51,51,51,0.8)"
-  size="medium"
-  color="#fff"
-  type="ball-scale-multiple"
->
-  <p style="font-size: 20px; color: white">Loading...</p>
+                <!-- border -->
+                <div class="borb_fff"></div>
+
+                <div class="gap row  ">
+                    <div class="paymentsecond">
+                        <div class="col-12">
+                            <span class="text"> Transaction ID: ------------------ </span>
+                        </div>
+
+                        <div class="col-12">
+                            <span class="text"> Date and Time: 01-02-2024, 10:50 AM IST</span>
+                        </div>
+
+                        <div class="col-12">
+                            <span class="text"> Amount: $ 567890</span>
+                        </div>
+
+                        <div class="col-12">
+                            <span class="text"> Payment Method: Net Banking</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- border -->
+                <div class="borb_fff"></div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-sm-6 col-md-6 col-xs-12  rightSide">
+
+                <img class="creditCard " src="../../../../../assets/images/failureCreditCard.png" alt="">
+            </div>
+
+
+        </div>
+        <div class="col align-self-center pt-5">
+            <button class="btn primary-btn viewbtn " (click)=" cartFynction()"> Back to Checkout</button>
+        </div>
+    </div>
+
+</ng-template>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>

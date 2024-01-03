@@ -362,9 +362,19 @@ h4 {
     font-family: 'lato', sans-serif;
     font-size: 13px !important;
 }
+
+.pd{
+    padding-left: 0px !important;
+    padding-right: 0px !important; 
+}
 }
 
-
+@media (min-width:480px) and (max-width: 600px) {
+    .pd{
+        padding-left: 0px !important;
+        padding-right: 0px !important; 
+    }
+}
 
 @media (min-width:480px) and (max-width: 770px) {
     .address-row {
@@ -571,4 +581,8 @@ h4 {
 
 
 
+}
+.pd{
+    padding-left: 100px;
+    padding-right: 100px;
 }
