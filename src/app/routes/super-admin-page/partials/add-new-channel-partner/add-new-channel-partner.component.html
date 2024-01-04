@@ -76,7 +76,7 @@
                         <label for="State">State<span class="mandatory">*</span></label>
                         <select formControlName="stateName" class="form-control-01" (change)="onStateChange($event)">
                             <ng-container *ngIf="gstData; else noGstDataState">
-                                <option value="">{{gstResponseData.adress.state}}</option>
+                                <option value="">{{gstResponseData.adress.state}} </option>
                             </ng-container>
                             <ng-template #noGstDataState>
                                 <option disabled value="'Select State'">Select State </option>
@@ -186,7 +186,7 @@
                         </div>
                         <div class="col-sm-6 form-group">
                             <label>Mobile No.<span class="mandatory">*</span></label>
-                            <input formControlName="phoneNo" type="number" class="form-control-01" name="Locality"
+                            <input formControlName="phoneNo" type="number" class="form-control-01" name="Locality" maxlength="10" 
                                 id="firstName" placeholder="Enter Phone Number" required>
 
                                 <div class="error-message commonError" *ngIf="submitted &&myForm.get('phoneNo')?.hasError('required')">
@@ -215,22 +215,27 @@
                     <button class="btn primary" (click)="submitForm()">Add Channel Partner</button>
                 </ng-container>
             </div>
-            <div class="row" *ngIf="showMsg">
-                <div class="col-xs-12">
+            <div class="row"   *ngIf="showMsg">
+                <div class="col-12 d-flex  justify-content-center">
                     <p class="alert alert-success">
-                        <strong>Channal Partner Created Successfully !</strong>
+                        <strong class="pd">Channal Partner Created Successfully !</strong>
+                    </p>
+                </div>
+              </div>
+           
+            <div class="row" *ngIf="duplicate">
+                <div class="col-12 d-flex  justify-content-center">
+                    <p class="alert alert-danger">
+                        <strong class="pd">Channal Partner Already Exist !</strong>
 
                     </p>
                 </div>
-            </div>
-
-            <div class="row" *ngIf="duplicate">
-                <div class="col-xs-12">
+                <!-- <div class="col-xs-12">
                     <p class="alert alert-danger">
                         <strong>Channal Partner Already Exist !</strong>
 
                     </p>
-                </div>
+                </div> -->
             </div>
 
 

@@ -232,20 +232,26 @@ export class AddNewChannelPartnerComponent implements OnInit {
     }
     
     if (this.myForm.invalid || this.countryStateError) {
-     // this.submitErrorMessage = true;
+     // this.submitErrorMessage = true; 
      
     }
    
     else {
 
      
+      
    
+      
         this.CreateChannelPartner()
         console.log("_____++++ Error False");
+        setTimeout(() => {
+          this.showMsg = false;
+        }, 5000);
       
         this.submitted=false
         this.countryStateError = false;
     
+        
     }
 
   }
@@ -261,6 +267,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
     } else {
 
 
+      console.log("+_+_+_+_+ This", this.selectedCity);
 
       var channelPartnerData = this.myForm.value;
 
@@ -276,7 +283,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
           "city":this.selectedCity.name,
           "state": this.selectedState.name,
           "zip": channelPartnerData.postalCode,
-          "country":  this.selectedCountrys.name
+          "country":  "IN"
 
         }],
 
@@ -295,6 +302,8 @@ export class AddNewChannelPartnerComponent implements OnInit {
       }
 
 
+
+      //console.log("+_+_+_+_+_+_+_ ", this.createChannalParterPayload);
       this.savenewChannelPartner(this.createChannalParterPayload)
 
 
@@ -316,16 +325,19 @@ export class AddNewChannelPartnerComponent implements OnInit {
 
       },
 
-        (error) => {
+        (error) => { 
           this.duplicate = true
-          this.showMsg = false
+          this.showMsg = false 
         }
       )
     )
   }
 
   public fetchGST() {
-    
+    if (this.gstResponseData) {
+      console.log("this.gstResponseData",this.gstResponseData) 
+      return;  
+    }
 
     if (this.myForm.value.gstin.length === 15) {
 
@@ -385,6 +397,13 @@ export class AddNewChannelPartnerComponent implements OnInit {
 
           this.selectedState = selectedState;
 
+
+          let cityList = City.getCitiesOfState('IN', this.selectedState.isoCode);
+          this.cityList=City.getCitiesOfState('IN', this.selectedState.isoCode);
+          
+    
+          let selectedCity = cityList.filter(c => c.name === resCity)[0];
+          this.selectedCity = selectedCity;
 
 
           /*let stateList  = State?.getStatesOfCountry('IN');
