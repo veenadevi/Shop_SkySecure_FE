@@ -387,7 +387,7 @@ this.enableinvoice=true
       priceType: ['Year', [Validators.required]],
       distributorPrice: [parseFloat(priceListValues.distributorPrice).toFixed(2), [Validators.min(10)]],
       erp_price: [parseFloat(priceListValues.ERPPrice).toFixed(2), [Validators.min(10)]],
-      bcy_rate: [parseFloat(priceListValues.price.toFixed(2)), [Validators.min(10)]],
+      bcy_rate: [parseFloat(Number(priceListValues.price).toFixed(2)), [Validators.min(10)]],
       tax_name: ['', null],
       item_total: [priceListValues.price, null],
       line_items_id: [data._id + 'temp']
@@ -414,6 +414,7 @@ this.enableinvoice=true
 
 
 
+      console.log("+_+_+_+_+_+_+_+_ ", receivedEntry);
       control.push(this.createNewAppWithValues(receivedEntry));
       this.newlyAddedAppList.push(receivedEntry);
 

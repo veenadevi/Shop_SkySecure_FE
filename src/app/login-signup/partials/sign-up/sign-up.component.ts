@@ -112,7 +112,7 @@ export class SignUpComponent {
     this.form = this.formBuilder.group(
       {
         firstName: ['', Validators.required],
-        email: [],
+        email: ['', [Validators.email]],
         lastName: [],
         password: [],
         confirmPassword: [],
@@ -533,14 +533,17 @@ export class SignUpComponent {
     if (query && query.length >= 3) {
 
 
-
-      for (let i = 0; i < (this.myCustomers as any[]).length; i++) {
-        let country = (this.myCustomers as any[])[i];
-        //  console.log("country  ",country)
-        if (country.company.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-          filtered.push(country);
+      if(this.myCustomers && this.myCustomers.length>0){
+        for (let i = 0; i < (this.myCustomers as any[]).length; i++) {
+          let country = (this.myCustomers as any[])[i];
+          //  console.log("country  ",country)
+          if (country?.company?.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(country);
+          }
         }
       }
+
+      
 
       this.companyListArray = filtered;
     }

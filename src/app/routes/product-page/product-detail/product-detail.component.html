@@ -1336,10 +1336,13 @@
                         <h5 id="similar-prod">Frequently asked Questions</h5>
                     </span>
                     <ng-container *ngFor="let item of faq; let i = index">
-                        <div class="display-faq">
-                            <p class="faq-question">{{i+1}}.&nbsp;{{item.Question}}</p>
-                            <p class="faq-answer">{{item.Answer}}</p>
-                        </div>
+                        <ng-container *ngIf="item && item!== null">
+                            <div class="display-faq">
+                                <p class="faq-question">{{i+1}}.&nbsp;{{item.Question}}</p>
+                                <p class="faq-answer">{{item.Answer}}</p>
+                            </div>
+                        </ng-container>
+                        
                     </ng-container>
     
                 </div>
