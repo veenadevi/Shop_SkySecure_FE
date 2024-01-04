@@ -770,6 +770,8 @@ public onChangeQuantity(i, price) : void {
       }
     }
 
+    console.log("AGDHJV");
+
     /*var instance = new Razorpay({ key_id: 'YOUR_KEY_ID', key_secret: 'YOUR_SECRET' })
 
       instance.orders.create({
@@ -782,11 +784,11 @@ public onChangeQuantity(i, price) : void {
         }
       }) */
 
-    /*this.subscriptions.push(
+    this.subscriptions.push(
       this.paymentGatewayService.createOrder(samplePayLaod).subscribe(res=>{
         console.log("_+_+_ Response atalast ", res);
       })
-    )*/
+    )
 
   }
 
