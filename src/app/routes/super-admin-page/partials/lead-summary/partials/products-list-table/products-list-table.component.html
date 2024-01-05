@@ -92,16 +92,16 @@
       <button [disabled]="enableEdit" (click)="saveChanges()" class="btn primary-btn">Resend Estimate</button>
     </div>
     <div class="add-new-btn">
-      <button  [disabled]="invoiceFlag" class="btn primary-btn" (click)="sendInvoice()">Send Invoice</button>
-      <!-- <button  [disabled]="enableinvoice" class="btn primary-btn" (click)="sendIonInvoice()">Send Invoice</button> -->
+      <!-- <button  [disabled]="invoiceFlag" class="btn primary-btn" (click)="sendInvoice()">Send Invoice</button> -->
+      <button  [disabled]="enableinvoice" class="btn primary-btn" (click)="sendIonInvoice()">Send Invoice</button>
   </div>
 
-  <div class="add-new-btn">
-    <!-- <button class="btn primary-btn" (click)="uplaodPO()">Upload Purchase Order</button> -->
+  <!-- <div class="add-new-btn">
+    
     <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg, .pdf" #fileInput
         (change)="uplaodPO($event)" />
-    <!-- <button  [disabled]="enableinvoice" class="btn primary-btn" (click)="sendIonInvoice()">Send Invoice</button> -->
-</div>
+    
+  </div> -->
   </ng-container>
 
   </div>
