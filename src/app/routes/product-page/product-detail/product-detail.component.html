@@ -405,7 +405,16 @@
     
                         <div class="solution-section">
                             <p class="solution">Solution Category:</p>
-                            <p class="solution-desc">{{product.subcategories.description}}</p>
+                            <p class="solution-desc">{{product.subcategories.description}} 
+                             <span *ngIf="(product.subCategories2 && product.subCategories2.length>0)">
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg> -->
+                                  
+                                  &nbsp; | &nbsp;{{product.subCategories2[0].name}}
+                             </span>   
+
+                            </p>
                         </div>
     
     
@@ -901,7 +910,9 @@
                             <product-reviews [productReviews] = "productReviews"></product-reviews>
                         </ng-container>
                         <ng-template #noReviews>
-                            No reviews for this product as of now !
+                           
+                            <img class="review-img" src="../../../../assets/images/empty state illustration for reviews screen (1).svg">
+                            <p class="noreview">No reviews for this product as of now !</p>
                         </ng-template>
                         
                     </div>

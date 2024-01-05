@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,6 +7,9 @@ import { Subscription } from 'rxjs';
 import { AddCompareProductModalComponent } from 'src/shared/components/modals/add-compare-product-modal/add-compare-product-modal.component';
 import { InvoiceDueDateModalComponent } from 'src/shared/components/modals/invoice-due-date-modal/invoice-due-date-modal.component';
 import { CartService } from 'src/shared/services/cart.service';
+import { IonService } from 'src/shared/services/ion-service/ion-service';
+import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
+import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
 import { UserAccountStore } from 'src/shared/stores/user-account.store';
 
 
@@ -43,7 +47,8 @@ export class ProductsListTableComponent implements OnInit {
 
   public productsList: any[] = [];
   public enableEdit: boolean
-  public enableinvoice:boolean
+  public enableinvoice:boolean;
+  public invoiceFlag : boolean = true;
   public allowAddProduct:boolean
   public isReadOnly:boolean;
 
@@ -94,10 +99,18 @@ export class ProductsListTableComponent implements OnInit {
     private modalService: NgbModal,
     private userAccountStore: UserAccountStore,
     public spinner: NgxSpinnerService,
-  ) { }
+    private ionService : IonService,
+    private superAdminService : SuperAdminService,
+    private http: HttpClient,
+    private toaster : ToasterNotificationService
+  ) { 
+    
+  }
   userDetails:any;
 
   ngOnInit(): void {
+    console.log("+_+_+_+ Came here 1111");
+    
     this.isReadOnly=false
     this.enableEdit = false
     this.enableinvoice=false
@@ -117,10 +130,28 @@ export class ProductsListTableComponent implements OnInit {
     }
 
   
+    
     this.setSampleData();
+    this.getUplaodedPODetailsData();
  
   }
 
+  public getUplaodedPODetailsData(){
+    let invoiceData = this.setInvoiceRequestData();
+    let payLoad = {
+      "cart_ref_id" : invoiceData.cart_ref_id,
+      "customer_id" : invoiceData.customer_id,
+      "account_id" : this.cartData._id
+    }
+
+    console.log("+_+_+_+ Came here 1");
+
+    this.subscription.push(
+      this.superAdminService.getUplaodedPODetails(payLoad).subscribe(res=>{
+        console.log("+_+_+_ Last Res", res);
+      })
+    )
+  }
 
   public setSampleData() {
 
@@ -395,7 +426,13 @@ this.enableinvoice=true
   }
 
   get getFormData(): FormArray {
-    return <FormArray>this.productListForm.get('items');
+    if(this.productListForm){
+      return <FormArray>this.productListForm.get('items');
+    }
+    else{
+      return null;
+    }
+    
   }
 
   addApp() {
@@ -692,8 +729,7 @@ this.enableinvoice=true
     let request = this.setInvoiceRequestData();
 
 
-
-
+    
     const modalRef = this.modalService.open(InvoiceDueDateModalComponent, {size: '700px', windowClass: 'invoice-due-date-modal-custom-class'});
   
 
@@ -718,6 +754,26 @@ this.enableinvoice=true
 
       })
     ) */
+
+
+  }
+
+
+  /**
+   * Function For Testing ION End To End
+   * 
+   */
+
+  public sendIonInvoice(){
+
+    let request = this.setInvoiceRequestData();
+    console.log(")))))))))) ", request);
+
+    this.subscription.push(
+      this.ionService.createIonOrder(request).subscribe(res=> {
+        console.log("+++++ Res For ION", res);
+      })
+    )
 
 
   }
@@ -793,6 +849,55 @@ this.enableinvoice=true
     }
   }
 
+
+  public uplaodPO(event : any){
+
+    
+      const formData: FormData = new FormData();
+      formData.append('file', event.target.files[0], event.target.files[0].name);
+
+      this.spinner.show();
+      //this.saveUploadedPO("https://csg1003200209655332.blob.core.windows.net/images/1703743370-po_sample_template.pdf");
+      
+      
+      //sample https://csg1003200209655332.blob.core.windows.net/images/1703743370-po_sample_template.pdf
+  
+      this.http.post('https://dev-altsys-realize-api.azurewebsites.net/api/file/upload', formData)
+        .subscribe(
+          (response: any) => {
+            console.log("+_+_+_+__+ The Response we got ", response);
+            this.saveUploadedPO(response.filePath);
+            //this.productLogo = response.filePath;
+          },
+          error => {
+            console.error('Upload error:', error);
+            // Handle the error response
+          }
+        );
+    
+    
+  }
+
+  public saveUploadedPO(filePath){
+
+    
+    let invoiceData = this.setInvoiceRequestData();
+    let payLoad = {
+      "cart_ref_id" : invoiceData.cart_ref_id,
+      "file_path": filePath,
+      "customer_id" : invoiceData.customer_id,
+      "account_id" : this.cartData._id
+    }
+    
+    
+    this.subscription.push(
+      this.superAdminService.saveUplaodedPO(payLoad).subscribe(res=>{
+        this.spinner.hide();
+        this.invoiceFlag = false;
+        this.toaster.showSuccess("The file has been uploaded Successfully!",'')
+      })
+    )
+  }
 
   
 

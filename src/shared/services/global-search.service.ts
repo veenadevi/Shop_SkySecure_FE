@@ -36,6 +36,7 @@ export class GlobalSearchService {
   public fetchSearchResults(searchKey : string): Observable<any> {
 
     let url = this.baseUrl + this.globalSearchUrl;
+    //let url = "http://localhost:8002/" + this.globalSearchUrl;
     //let options = this.getOptions();
     const OPTIONS = {
         params: new HttpParams()

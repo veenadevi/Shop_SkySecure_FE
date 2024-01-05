@@ -63,3 +63,16 @@
 :host ::ng-deep .mat-step-text-label{
    position:"bottom !important"
 }
+
+@media  ( min-width: 320px) and (max-width:550px)  {
+    :host ::ng-deep .mat-horizontal-stepper-header {
+        display: flex;
+        height: 75px;
+        overflow: hidden;
+        align-items: center;
+        padding: 0 0px 0px 24px;
+        flex-direction: column;
+    }
+}
+
+

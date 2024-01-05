@@ -7,7 +7,7 @@ import Validation from '../utils/validation';
 import * as CryptoJS from 'crypto-js';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { BlockableUI } from 'primeng/api';
-import { CompressOutlined } from '@mui/icons-material';
+import { CompressOutlined, Pattern } from '@mui/icons-material';
 import { AdminPageService } from 'src/shared/services/admin-service/admin-page.service';
 
 interface AutoCompleteCompleteEvent {
@@ -86,7 +86,9 @@ export class SignUpComponent {
     this.formEmail = this.fb.group(
       {
 
-        emailOrMobile: [this.emailViaSignIn, [Validators.required, emailOrMobileValidator]],
+        emailOrMobile: [this.emailViaSignIn, 
+          [Validators.required, emailOrMobileValidator, ],
+          ],
         // otp: [],
       }
     )
@@ -119,9 +121,8 @@ export class SignUpComponent {
 
         selectedCompanyName: [''],
         mobileNumber: ['', [
-
           Validators.pattern('^[6-9][0-9]{9}$'),
-          Validators.maxLength(10)
+           Validators.maxLength(10)
         ]]
       }
         //acceptTerms: [false, Validators.requiredTrue]
@@ -580,7 +581,7 @@ export class SignUpComponent {
 }
 
 
-export function emailOrMobileValidator(control: AbstractControl): Observable<ValidationErrors | any> {
+export function emailOrMobileValidator(control: AbstractControl): ValidationErrors | null {
 
 
 
@@ -590,16 +591,28 @@ export function emailOrMobileValidator(control: AbstractControl): Observable<Val
     // Regular expression for email validation
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     // Regular expression for mobile number validation (adjust it based on your requirements)
-    const mobilePattern = /^\d{10}$/;
-    if (emailPattern.test(value) || mobilePattern.test(value)) {
+    //const mobilePattern = /^\d{10}$/;
+    const mobilePattern = /^[6-9]\d{9}$/;
+    // const restrictedPatterns = ["7777777777", "99999999999", "8888888888", "6666666666"];
 
+    if (emailPattern.test(value) || mobilePattern.test(value)) {
+      
       if (mobilePattern.test(value)) {
 
         SignUpComponent.isMobile = true;
       }
+      const consecutiveSameNumericsPattern = /(.)\1{4,}/;
+      if (!consecutiveSameNumericsPattern.test(value)) {
+        console.log("came inside here")
+            
+      } else {
+        // Consecutive repeated digits found, invalid input
+        console.log("came inside here else")
+        return { consecutiveSameNumericsError: true };
+      }
       return null;
 
-    }
+    } 
   }
 
 

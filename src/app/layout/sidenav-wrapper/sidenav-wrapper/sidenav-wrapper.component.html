@@ -319,6 +319,34 @@
         
             </ng-container>
           </ng-container>
+
+
+
+          <!-- ION View Options -->
+          <ng-container *ngIf="userRolesList?.includes('PortalAdmin') || userRoleVal === 'PortalAdmin' || userRolesList?.includes('SuperAdmin')">
+            <mat-list-item>
+              <span class="icon-holder" (click)="menuExpansion(isExpanded , 'ion')">
+                <img src="../../../../assets/icons/ManagePortal.svg">
+              </span>
+              <div *ngIf="isExpanded" class="menu-item" (click)="subMenuClick('ion')">
+                  <span class="text-style">
+                    Ion View
+                  </span>
+                  <mat-icon mat-list-icon class="chevron-button">expand_more</mat-icon>
+                </div>
+            </mat-list-item>
+    
+            <!-- Security Sub Menu -->
+            <ng-container *ngIf="ionSubMenu">
+             
+              <mat-list-item>
+                <span *ngIf="isExpanded" class="sub-menu-item" (click) = "routeEvent('ionOrders')" >Orders</span>
+              </mat-list-item>
+           
+
+        
+            </ng-container>
+          </ng-container>
         
 
         </mat-nav-list>

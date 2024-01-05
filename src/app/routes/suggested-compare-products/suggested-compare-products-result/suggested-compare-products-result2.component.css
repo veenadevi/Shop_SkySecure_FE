@@ -220,7 +220,7 @@ border-radius: 5px;
 }
 .price-symbol:hover {
   transform: scale(1.1);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
   color: black;
 }
@@ -294,7 +294,7 @@ max-width: 60px;
 text-align: center;
 }
 
-.margin{
+/* .margin{
   margin: 0px !important;
  
-}
+} */

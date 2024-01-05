@@ -295,10 +295,15 @@ export class CompareProductsResultComponent {
       //let productData = data.products[0];
       let productData = data.products;
    
+      let subCategory2 = "";
+
+      if(productData && productData.subCategories2 && productData.subCategories2.length>0){
+        subCategory2 = "  |  "+productData?.subCategories2[0]?.name;
+      }
       let properties = {
         'productName': productData.name,
         'developedBy': 'Microsoft',
-        'solutionCategory': productData?.subcategories?.name ? productData?.subcategories?.name : '-',
+        'solutionCategory': (productData?.subcategories?.name ? productData?.subcategories?.name : '-') + subCategory2,
         'subscription': productData?.priceList[0]?.priceType ? productData?.priceList[0]?.priceType : '-',
         'entryLevelPricing': productData?.priceList[0]?.ERPPrice ? '₹'+this.decimalTransofrm(productData?.priceList[0].ERPPrice) : '-',
         'price' : productData?.priceList[0]?.price ? '₹'+ this.decimalTransofrm(productData?.priceList[0].price)  : '-',

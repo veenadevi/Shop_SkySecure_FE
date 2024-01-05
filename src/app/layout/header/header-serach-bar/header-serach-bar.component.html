@@ -3,7 +3,7 @@
         <img alt="" class="search-icon" src="../../../assets/icons/Search.svg">
         <input class="search-box" 
                 placeholder="Search by products, categories, brands & more"
-                (click) = "onSearchClicked()"
+                (click) = "onSearchClicked()" 
                 [(ngModel)]="inputText"
                 (focusout)="onFocusOutEvent($event)"
                 
@@ -22,8 +22,8 @@
                     <searchbar-trending-products></searchbar-trending-products>
                     <searchbar-recently-searched></searchbar-recently-searched>
                 </ng-container>
-                <ng-container *ngIf="keywordSearchOpen">
-                    <searchbar-search-list [searchResults] = "searchResults"></searchbar-search-list>
+                <ng-container *ngIf="keywordSearchOpen && hasPerformedSearch ">
+                    <searchbar-search-list [searchResults] = "searchResults"[inputText]="inputText"[hasPerformedSearch]="hasPerformedSearch" ></searchbar-search-list>
                 </ng-container>
                 
             </div>
@@ -35,7 +35,7 @@
 
 
 
-<ng-container>
+<!-- <ng-container> -->
     
     <!-- <div class="form-group search-box">
         <div class="search-box">
@@ -74,7 +74,7 @@
             
         </div>
     </ng-container> -->
-</ng-container>
+<!-- </ng-container> -->
 
 
 

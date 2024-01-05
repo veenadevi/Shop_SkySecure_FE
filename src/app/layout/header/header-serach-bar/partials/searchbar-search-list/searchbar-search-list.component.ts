@@ -14,7 +14,8 @@ export class SearchbarSearchListComponent {
 
   @Input('searchResults')
   public searchResults : any;
-
+  @Input() inputText: string;
+  @Input() hasPerformedSearch: boolean = false;
   searchResultsProducts : ProductsDetails[] = [];
   searchResultsCategoryList : any[] = [];
   searchResultsSubCategoryList : any[] = [];
@@ -38,25 +39,38 @@ export class SearchbarSearchListComponent {
       let tempProducts  = this.setProductsData(data?.products || []);
       let tempProductsVarients  = this.setProductVariantsData(data?.productVariants || []);
 
+
       let tempProductBundleVariantsData = this.setProductBundleVariantsData(data?.productBundleVariants || []);
       let tempBundlesData = this.setBundlesData(data?.productBundles || []);
 
-      this.searchResultsProducts = [...tempProducts , ...tempProductsVarients];
-      //this.searchResultsProducts = data?.products || [];
+      //let tempSubCat2Products = data?.subCategory2List || [];
+
+
+      //let tempSubCat2Products = this.setProductsData(data?.subCategory2List[0]?.products || []);
+
+      let tempSubCat2Products = [];
+
+      if(data && data.subCategory2List && data.subCategory2List.length>0){
+        tempSubCat2Products = this.setProductsData(data.subCategory2List[0]?.products || []);
+      }
+     
+
+      this.searchResultsProducts = [...tempProducts, ...tempSubCat2Products, ...tempProductsVarients];
       this.searchResultsCategoryList = data?.categoryList || [];
       this.searchResultsSubCategoryList = data?.subCategoryList || [];
 
       this.searchResultsSubCategoryList = this.searchResultsSubCategoryList.filter(c => c.products.length>0);
-      //console.log("+_+_+_+_+_+_ ", this.searchResultsSubCategoryList);
+
 
       this.searchResultsProductBundleList = [...tempProductBundleVariantsData , ...tempBundlesData];
       
       //this.searchResultsProductBundleList = data?.productBundles || [];
+      console.log("Data",data,"searchResultsProducts",this.searchResultsProducts);
       return data;
     }
     )
   )
-
+ 
   public ngOnInit() : void{
 
     this.subscriptions.push(this.searchResults$.subscribe());
@@ -87,6 +101,8 @@ export class SearchbarSearchListComponent {
   }
 
   public navigateToProductDetails(product:any){
+
+    console.log("+_+_+_+__ ()()( ", product.type);
 
     switch (product.productType) {
       case 'products':

@@ -67,7 +67,14 @@
     height: 50px;
     width: 50px;
 }
-
+@media   (max-width: 1024px) {
+    .bundle-card-container {
+            padding-right: 98px;
+            display: flex;
+            align-items: stretch;
+            justify-content: space-around;
+    }
+}
 @media (min-width: 1024px) and (max-width: 1440px) {
     .bundle-card-container {
       padding-right: 17px !important;
