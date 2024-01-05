@@ -4,9 +4,9 @@
     flex-direction: column;
     row-gap: 1em;
     padding: 40px;
-    margin-left:13%;
+    margin-left: 18%;
     margin-right: 14%;
-    margin-top: 2%;
+    /* margin-top: 2%; */
 }
 
 /* CSS For Billing Info */
@@ -16,31 +16,162 @@
     float: left;
     background: #e4e4e6;
 }
+
 .billingInfo {
     background: #004a8f;
     color: #fff;
     padding: 20px 35px;
 }
+
 h4 {
     font-size: 22px;
     font-weight: normal;
 }
+
 .heading {
     position: relative;
     font-size: 16px;
     padding: 0 0 0 40px;
 }
+
 .heading p {
     padding-bottom: 5px;
 }
+
 h5 {
     font-size: 25px;
     font-weight: normal;
     word-wrap: break-word;
     width: 250px;
 }
+
 .borb_fff {
-    border-bottom: 1px solid #336ea5;
+    border-bottom: 3px dashed #000000;
     padding: 10px 0 0px 0;
     margin: 0px 0 10px 0;
+}
+
+.payment-container {
+    align-items: center;
+    min-height: 30em;
+    padding: 40px;
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.card {
+    height: 100px;
+    width: 100px;
+}
+
+.paymentLeft {
+    background: #FAFAFA;
+}
+
+.success {
+    width: 131px;
+    height: 131px;
+}
+
+.paymentText {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+}
+
+/* .creditCard {
+    width: 307px;
+    height: 225px;
+    flex-shrink: 0;
+} */
+
+.payment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.paymentsecond {
+    display: flex;
+    flex-direction: column;
+}
+
+.text {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+}
+
+.gap {
+    margin: 10px;
+    /* border: 1px solid black; */
+    /* width: fit-content; */
+    padding: 10px;
+    padding-top: 34px;
+    padding-bottom: 34px;
+}
+
+.leftSide {
+    /* border: 1px solid black; */
+    background: #FAFAFA;
+    box-shadow: 0px 2px 8px 0px #F8F8F8; 
+}
+
+.rightSide {
+    /* border: 1px solid black; */
+}
+
+.viewbtn {
+    height: 44px;
+    font-size: 16px;
+    width: 153px;
+}
+
+.viewQuotationBtn {
+    display: flex;
+    justify-content: center;
+    padding-top: 35px;
+}
+@media (min-width: 320px) and (max-width: 480px) {
+    .payment-status-view-container { 
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+
+    .creditCard { 
+        height: 281px !important; 
+    }
+
+    .rightSide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .gap  { 
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+@media (min-width:480px) and (max-width: 770px) {
+
+    .payment-status-view-container { 
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+
+        
+}
+@media (min-width:580px) and (max-width: 770px) {
+    .rightSide {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        /* border: 1px solid; */
+    }
+    .creditCard{
+        height: 262px;
+    }
 }

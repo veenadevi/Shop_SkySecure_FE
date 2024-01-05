@@ -232,7 +232,7 @@ export class AddNewChannelPartnerComponent implements OnInit {
     }
     
     if (this.myForm.invalid || this.countryStateError) {
-     // this.submitErrorMessage = true;
+     // this.submitErrorMessage = true; 
      
     }
    
@@ -244,6 +244,9 @@ export class AddNewChannelPartnerComponent implements OnInit {
       
         this.CreateChannelPartner()
         console.log("_____++++ Error False");
+        setTimeout(() => {
+          this.showMsg = false;
+        }, 5000);
       
         this.submitted=false
         this.countryStateError = false;
@@ -322,9 +325,9 @@ export class AddNewChannelPartnerComponent implements OnInit {
 
       },
 
-        (error) => {
+        (error) => { 
           this.duplicate = true
-          this.showMsg = false
+          this.showMsg = false 
         }
       )
     )

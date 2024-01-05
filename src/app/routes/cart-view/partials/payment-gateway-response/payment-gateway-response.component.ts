@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/shared/services/cart.service';
@@ -18,7 +18,8 @@ export class PaymentGatewayResponseComponent implements OnInit{
 
 
 constructor(
-  public route : ActivatedRoute,
+  public route : ActivatedRoute, 
+  private router: Router,
   public cartService : CartService,
   private spinner: NgxSpinnerService
 ){}
@@ -63,4 +64,11 @@ constructor(
     console.log("+_+_+_ Status ", id);
   } 
 
+  navigateToQuotationHistory() {
+    this.router.navigate(['/user-profile/quotation-history']);
+  }
+
+  public cartFynction(){
+    this.router.navigate(['/cart']);
+  }
 }
