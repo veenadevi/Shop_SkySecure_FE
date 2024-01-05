@@ -35,6 +35,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 
 /*import {
@@ -150,7 +152,8 @@ import { NgChartsModule } from 'ng2-charts';
     CdkTableModule,
     MatButtonToggleModule,
     MatTooltipModule,
-    NgChartsModule
+    NgChartsModule,
+    MatProgressSpinnerModule,
     
   ] ,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]   

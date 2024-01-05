@@ -74,6 +74,8 @@ export class SignUpComponent {
 
   public selectedCompnayName: any;
 
+  public spinnerFlag : boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -356,13 +358,14 @@ export class SignUpComponent {
         "action": "signUp",
         "isMobile": this.isMobile,
       }
-
+      this.spinnerFlag = true;
       this.subscriptions.push(
         this.userProfileService.sendOTP(req).subscribe(res => {
 
 
           if (res.message) {
 
+            this.spinnerFlag = false;
             if (res.message == 'Error: Invalid Domain') {
 
               this.invalidDomain = true;
@@ -385,8 +388,9 @@ export class SignUpComponent {
             }
 
           }
+          
           else {
-
+            this.spinnerFlag = false;
             this.enableSignInButton = true;
             this.invalidDomain = false;
             this.enableOTPButton = false;

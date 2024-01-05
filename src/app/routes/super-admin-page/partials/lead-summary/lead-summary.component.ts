@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute ,Router} from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs';
@@ -37,15 +38,18 @@ export class LeadSummaryComponent implements OnInit{
     private route : ActivatedRoute,
     private router: Router,
     private superAdminService : SuperAdminService,
-    private primengConfig: PrimeNGConfig
+    private primengConfig: PrimeNGConfig,
+    private spinnerService : NgxSpinnerService
   ){}
 
 
   ngOnInit(): void {
+    
     this.params = this.route.snapshot.queryParamMap;
 
     this.accountDetails = JSON.parse(this.params.params.account);
 
+    
     this.getLeadSummary(this.accountDetails);
 
    
@@ -57,9 +61,11 @@ export class LeadSummaryComponent implements OnInit{
 
   public getLeadSummary(data){
 
+    this.spinnerService.show();
     
     this.subscriptions.push(
       this.superAdminService.getLeadSummaryDetails(data).subscribe(res=>{
+        this.spinnerService.hide();
        // console.log("+_+_+_C Data After Click", res.zohoBookEstimateData);
         this.responseData = res;
         this.cartData=res.cartData;

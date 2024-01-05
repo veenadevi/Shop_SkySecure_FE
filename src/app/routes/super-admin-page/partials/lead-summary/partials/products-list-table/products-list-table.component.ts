@@ -132,7 +132,7 @@ export class ProductsListTableComponent implements OnInit {
   
     
     this.setSampleData();
-    this.getUplaodedPODetailsData();
+    //this.getUplaodedPODetailsData();
  
   }
 
@@ -608,11 +608,11 @@ this.enableinvoice=true
 
        "allow_partial_payments": false,
        "invoiced_estimate_id": cartData.zohoEstimateId,
-       "billing_address_id": zohoBookContactData.billing_address.address_id,
-       "shipping_address_id": zohoBookContactData.shipping_address.address_id,
-       "gst_treatment": zohoBookContactData.gst_treatment,
+       "billing_address_id": zohoBookContactData?.billing_address?.address_id,
+       "shipping_address_id": zohoBookContactData?.shipping_address?.address_id,
+       "gst_treatment": zohoBookContactData?.gst_treatment,
        "gst_no": createdBy.gstinNumber,
-       "place_of_supply": zohoBookContactData.shipping_address.state_code,
+       "place_of_supply": zohoBookContactData?.shipping_address?.state_code,
        "cart_ref_id": cartData.cart_ref_id,
  }
 

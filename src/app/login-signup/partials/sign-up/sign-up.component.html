@@ -77,11 +77,16 @@
             
           </ng-container>
           <ng-container *ngIf="enableOTPButton">
-          <div class="signin-btn" >
             
-       
+          <div class="signin-btn" *ngIf="!spinnerFlag">
+            
             <button type="submit" (click) = "onSubmitEmail()" class="btn primary-btn" >Send OTP</button>
           </div>
+          <ng-container *ngIf="spinnerFlag">
+            <div class="signin-btn" style="margin-top: 10px;display: flex;justify-content: center;">
+              <mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
+            </div>
+          </ng-container>
           <div class="cancel-btn">
             <button (click)="navigateToLogin()" class="btn secondary-btn">Back</button>
           </div>
