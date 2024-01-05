@@ -88,10 +88,16 @@
           </div>
           <div class="button-02">
           <ng-container *ngIf="enableOTPButton">
-              <div class="signin-btn">
+              
+              <div *ngIf="!spinnerFlag" class="signin-btn">
                 <button (click)="onSubmit()" class="btn primary-btn">Send OTP</button>
-             
               </div>
+              <ng-container *ngIf="spinnerFlag">
+                <div class="signin-btn" style="margin-top: 10px;">
+                  <mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
+                </div>
+              </ng-container>
+              
             
 
           

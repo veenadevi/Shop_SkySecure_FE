@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription, map } from 'rxjs';
 import { SuperAdminService } from 'src/shared/services/super-admin-service/super-admin.service';
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
@@ -38,7 +39,8 @@ export class AssignLeadsAmModalComponent implements OnInit{
     private superAdminService : SuperAdminService,
     private superAdminStore : SuperAdminStore,
     private activeModal : NgbActiveModal,
-    private userAccountStore :UserAccountStore
+    private userAccountStore :UserAccountStore,
+    private spinnerService : NgxSpinnerService,
   ){
 
   }
@@ -85,6 +87,7 @@ export class AssignLeadsAmModalComponent implements OnInit{
   public submit(){
     
 
+    this.spinnerService.show();
     let userAccountdetails = this.userAccountStore.getUserDetails();
     //console.log("++_+_+_+_+_+_+_+ _Data here", this.selectedUser);
   
@@ -107,6 +110,7 @@ export class AssignLeadsAmModalComponent implements OnInit{
     this.subscriptions.push(
       this.superAdminService.assignLeadsToChannelPartnerAM(req).subscribe(res=>{
         
+        this.spinnerService.hide();
        // if(res && res.assignownerResult && res.assignownerResult.code === 'SUCCESS'){
         if(res){
          //  res.assignownerResult.ownerName = this.selectedUser;
