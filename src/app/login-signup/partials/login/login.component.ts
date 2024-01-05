@@ -57,6 +57,9 @@ export class LoginComponent {
   static isMobile: boolean;
 
 
+  public spinnerFlag : boolean = false;
+
+
 
 
   display: any;
@@ -181,11 +184,12 @@ export class LoginComponent {
         "action":"login",
         "isMobile": this.isMobile,
       }
+      this.spinnerFlag = true;
       this.subscriptions.push(
         this.userProfileService.sendOTP(req).subscribe(
           res=>{
             
-           
+            this.spinnerFlag = false;
             
             if(res.message){
              
@@ -205,6 +209,7 @@ export class LoginComponent {
             }
           },
           err => {
+              this.spinnerFlag = false;
               this.enableSignInButton = false;
               this.enableOTPButton = true;
               this.newEmailAlert = true;
