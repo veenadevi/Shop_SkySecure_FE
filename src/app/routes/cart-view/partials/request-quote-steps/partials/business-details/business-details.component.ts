@@ -75,7 +75,7 @@ export class BusinessDetailsComponent implements OnInit{
         companyName : [''],
         //phoneNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
         countryCode : [],
-        addressLine1 :[''],
+        addressLine1 :['',Validators.required],
         addressLine2 :['',Validators.required],
         countryName :[],
         stateName :[],
