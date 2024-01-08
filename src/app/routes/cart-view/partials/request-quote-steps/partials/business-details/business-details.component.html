@@ -76,7 +76,7 @@
           <input formControlName="addressLine1" type="address" class="form-control-01" name="Locality"
             id="address-1" placeholder="Locality/House/Street no." >
             <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('addressLine1').hasError('required')">
-                Address is Mandatory.
+                Address-1 is Mandatory.
             </div>
         </div>
         <div class="col col-sm-6 form-group">
@@ -84,7 +84,7 @@
           <input formControlName="addressLine2" type="address" class="form-control-01" name="address" id="address-2"
             placeholder="Village/City Name." required>
             <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('addressLine2').hasError('required')">
-              Address is Mandatory.
+              Address-2 is Mandatory.
           </div>
         </div>
       </div>
@@ -96,6 +96,9 @@
             <option disabled value="'Select Country'">Select Country </option>
             <option *ngFor="let item of countryList" [value]="item | json">{{item.name}}</option>
           </select>
+          <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('countryName').hasError('required')">
+            Country is Mandatory.
+        </div>
         </div>
         <div class="col col-sm-6 form-group">
           <label for="State">State<span class="mandatory">*</span></label>
@@ -103,6 +106,9 @@
             <option disabled value="'Select State'">Select State </option>
             <option *ngFor="let item of stateList" [value]="item | json">{{item.name}}</option>
           </select>
+          <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('stateName').hasError('required')">
+            State is Mandatory.
+        </div>
         </div>
       </div>
 
@@ -114,6 +120,9 @@
             <option *ngFor="let item of cityList" [value]="item | json">{{item.name}}</option>
 
           </select>
+          <div class="error-message" *ngIf="onNextClickFlag && businessDetailsForm.get('cityName').hasError('required')">
+            City is Mandatory.
+        </div>
         </div>
         <div class="col col-sm-6 form-group">
           <label for="zip">Postal-Code</label>
@@ -124,11 +133,11 @@
             </div> -->
         </div>
       </div>
-      <div class="col col-sm-6">
+      <!-- <div class="col col-sm-6">
       <ng-container  *ngIf="countryStateError">
         <span class="error-message">Country, State and City fields are mandatory.</span> 
       </ng-container>
-    </div>
+    </div> -->
       <div class="btn-holder">
         <button class="btn secondary-btn" (click)="goBack()">Back</button>
         <button class="btn primary-btn" (click)="onNextClick()">Next</button>
