@@ -738,3 +738,10 @@ label {
     width: 35%;
 }
 }
+
+.disabled-input {
+    /* background-color: #f0f0f0;   */
+    background-color: #f6f6f6;
+    color: #808080; 
+    cursor: not-allowed;
+  }

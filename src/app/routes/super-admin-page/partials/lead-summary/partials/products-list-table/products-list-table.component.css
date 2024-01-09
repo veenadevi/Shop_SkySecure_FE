@@ -14,13 +14,15 @@
     font-weight: 500;
     border: none;
     outline: none;
-    width: 9rem;
+    /* width: 9rem; */
     border-radius: 8px;
     background: var(--btn-gradient);
     transition: all .3s ease;
     box-shadow: 0 3px 6px #0000001a;
   }
-  
+  .width{
+    width: 10rem !important; 
+  }
 
 thead th{
     text-align: center;

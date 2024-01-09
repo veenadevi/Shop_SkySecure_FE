@@ -364,23 +364,44 @@ export class GstDetailsComponent implements OnInit{
     )
   }
 
-
-  disableGstNOField(){
+  disableGstNOField() {
+    const isCheckGstNilChecked = this.selectedGSTType === 'self'
+      ? this.gstForm.get('checkGstNil').value
+      : this.gstFormOthers.get('checkGstNil').value;
   
-    if(this.selectedGSTType === 'self'){
-      if(this.gstForm.get('checkGstNil').value)
-      this.gstForm.get('gstNo').disable();
-    else
-      this.gstForm.get('gstNo').enable();
+    if (isCheckGstNilChecked) {
+      if (this.selectedGSTType === 'self') {
+        this.gstForm.get('gstNo').disable();
+      } else {
+        this.gstFormOthers.get('gstNo').disable();
+      }
+    } else {
+      if (this.selectedGSTType === 'self') {
+        this.gstForm.get('gstNo').enable();
+      } else {
+        this.gstFormOthers.get('gstNo').enable();
+      }
     }
-    else{
-      if(this.gstFormOthers.get('checkGstNil').value)
-      this.gstFormOthers.get('gstNo').disable();
-    else
-      this.gstFormOthers.get('gstNo').enable();
-    }
-    
+    return isCheckGstNilChecked;
   }
+  
+  // disableGstNOField(){
+  
+  //   if(this.selectedGSTType === 'self'){
+  //     if(this.gstForm.get('checkGstNil').value)
+  //     this.gstForm.get('gstNo').disable();
+       
+  //   else
+  //     this.gstForm.get('gstNo').enable();
+  //   }
+  //   else{
+  //     if(this.gstFormOthers.get('checkGstNil').value)
+  //     this.gstFormOthers.get('gstNo').disable();
+  //   else
+  //     this.gstFormOthers.get('gstNo').enable();
+  //   }
+    
+  // }
   disableCheckGstNil(){
     
     if(this.selectedGSTType === 'self'){
@@ -452,5 +473,6 @@ export class GstDetailsComponent implements OnInit{
     )
 
   }
-
+  
+  
 }

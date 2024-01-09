@@ -67,7 +67,7 @@
 
 
                             <ng-container *ngIf="estimateData.totalEstimateCost; else cartValue">
-                                {{estimateData.totalEstimateCost | number : '1.2-2'}}
+                               <span>&#8377;&nbsp;{{estimateData.totalEstimateCost | number : '1.2-2'}}</span>
                               </ng-container>
                               <ng-template #cartValue>{{ responseData.TotalCartValue | number : '1.2-2'}}</ng-template>
 
