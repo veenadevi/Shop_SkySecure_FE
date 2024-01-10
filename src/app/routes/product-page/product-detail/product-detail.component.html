@@ -77,15 +77,22 @@
                                             src="../../../../../assets/icons/MinusIcon.svg">
                                     </span>
                                     <span>
-                                        <input type="number" min="0" class="input-field" [(ngModel)]="product.quantity"
-                                            (keydown)="onKeyDown($event)">
-                                    </span>
+                                        <input type="number" min="0" class="input-field" [(ngModel)]="product.quantity" 
+                                            (keydown)="onKeyDown($event)">   
+                                        </span>
                                     <span>
                                         <img id="add-minus-quantity" alt="" (click)="addBuyQuantity(product.quantity)" class="add"
                                             src="../../../../assets/icons/AddIcon.svg">
-                                    </span>
+                                    </span> 
                                 </span> 
-                            
+                                
+                                <div class="error-message" *ngIf="product.quantity === null || product.quantity === undefined &&  product.quantity === 0">
+                                    Quantity is required.
+                                </div>
+                                <div *ngIf="errorMessage && product.quantity === 0" class="error-message">
+                                    {{ errorMessage }}
+                                  </div>
+                                  
                                 <button class="btn tertiary-btn" (click)="requestQuote(product)">Add To Cart</button>
                            </div>
                         </ng-container>

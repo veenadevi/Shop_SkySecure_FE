@@ -4762,3 +4762,9 @@ margin-left: 20%;
   font-weight: bold;
   padding-top: 20px;
 }
+
+.error-message { 
+  font-size: 12px;
+  padding-top: 12px;
+  color: #B82727; 
+}
