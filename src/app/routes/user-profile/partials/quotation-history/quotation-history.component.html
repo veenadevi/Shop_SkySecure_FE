@@ -75,10 +75,13 @@
                         <!-- <td>{{ account.createdFor.placeOfSupply}}</td> -->
                    
                          <td>
-                            <ng-container *ngIf="account?.cartData?.assignedChannelPartnerId; else noValuecp">
-                            
-                                {{ account?.cartData.updatedAt | dateFormat }}
-                              </ng-container>
+                            <!-- <ng-container *ngIf="account?.cartData?.updatedAt; else noValuecp">
+                             
+                                {{ account.cartData.updatedAt | dateFormat }}
+                              </ng-container> -->
+                              <ng-container *ngIf="account?.cartData?.assignedChannelPartnerId; else noValuecp">
+                                {{ account.cartData.updatedAt | dateFormat }}
+                             </ng-container>
                               <ng-template #noValuecp>-</ng-template>
                          </td> 
     
