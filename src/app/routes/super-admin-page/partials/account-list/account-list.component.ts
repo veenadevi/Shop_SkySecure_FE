@@ -8,7 +8,7 @@ import { SuperAdminService } from 'src/shared/services/super-admin-service/super
 import { SuperAdminStore } from 'src/shared/stores/super-admin.store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToasterNotificationService } from 'src/shared/services/toaster-notification.service';
-import { GetReasonModalComponent } from 'src/shared/components/modals/get-reason-modal/get-reason-modal.component';
+import { GetReasonModalComponent } from 'src/shared/components/modals/get-reason-modal/get-reason-modal.component'; 
 
 @Component({
   selector: 'account-list',
@@ -39,7 +39,7 @@ export class AccountListComponent implements OnInit{
     private superAdminService : SuperAdminService,
     private superAdminStore : SuperAdminStore,
     public spinner: NgxSpinnerService,
-    private toaster : ToasterNotificationService
+    private toaster : ToasterNotificationService, 
   ){}
 
 
@@ -70,8 +70,7 @@ export class AccountListComponent implements OnInit{
     //this.getAllAccounts();
     //this.getAllCRMUsers();
     this.getAllChannelPartners();
-    this.getAllMarketPlaceAccountList();
-
+    this.getAllMarketPlaceAccountList(); 
   }
 
   public getAllAccounts(){
@@ -104,7 +103,7 @@ export class AccountListComponent implements OnInit{
       //console.log("running here directly==")
       this.allMarketPlaceList=response;
       this.spinner.hide();
-    
+    console.log("response",this.allMarketPlaceList,"data",this.allMarketPlaceList.leadStatusUpdate)
       
 
     },
@@ -129,27 +128,26 @@ export class AccountListComponent implements OnInit{
 
    // this.router.navigate(['/admin-page/accounts-details'], {queryParams: queryParams});
   }
-
-
+ 
+ 
   public assign(account, i){
     const modalRef = this.modalService.open(AssignLeadsModalComponent, {size: 'lg', windowClass: 'assign-leads-modal-custom-class'});
   
-    modalRef.componentInstance.request = account;
-    
-
+    modalRef.componentInstance.request = account; 
     modalRef.componentInstance.passedData.subscribe((res) => {
-      //account.Owner.name
-     
-      //this.accountData[i].Owner.name = res.ownerName.name;
-      //this.allMarketPlaceList[i].assignedChannalpartner=['channelPartner']['name'] = res.assignedName;
+      //account.Owner.name 
+      // this.accountData[i].Owner.name = res.ownerName.name;
+      // this.allMarketPlaceList[i].assignedChannalpartner=['channelPartner']['name'] = res.assignedName;
       this.allMarketPlaceList[i].assignedChannalpartner=
             {
               "channelPartner" : {
-              "name" : res.assignedName
+              "name" : res.assignedName,
+              "status":res.leadStatusUpdate
               }
             }
-   //console.log("after assign",this.allMarketPlaceList[i].assignedChannalpartner)
-
+  //  console.log("after assign",this.allMarketPlaceList[i].assignedChannalpartner,
+  //  "after assign status",this.allMarketPlaceList[i]?.leadStatusUpdate)
+      location.reload();
     })
     
   }
@@ -169,8 +167,7 @@ export class AccountListComponent implements OnInit{
       this.superAdminService.getAllChannelPartners().subscribe( res=> {
        
         if(res.channelPartners.length>0){
-         this.disableAssign=false
-
+         this.disableAssign=false 
         }
         this.superAdminStore.setChannelPartnerList(res);
       })

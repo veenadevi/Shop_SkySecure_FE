@@ -32,7 +32,10 @@
             </div>
             <div class="right-div">
                 <div class="card flex justify-content-center">
-                    <p-calendar [(ngModel)]="closingDate" [showIcon]="true"></p-calendar>
+                    <!-- <p-calendar [(ngModel)]="closingDate"[minDate]="yesterday " [readonlyInput]="true" [showIcon]="true"></p-calendar> -->
+              
+                <p-calendar [(ngModel)]="closingDate" [minDate]="today" [readonlyInput]="true" [showIcon]="true"></p-calendar>
+
                 </div>
             </div>
         </div>

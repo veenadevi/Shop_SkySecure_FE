@@ -2,24 +2,40 @@
     <div class="notification-container">
         <div class="triangle"></div>
         
-        <div class="notification-content-container">
+        <div class="notification-content-container"   >
             <div class="header-container">
                 <span>Notification</span>
                 <!-- <a>View all</a> -->
+                <div class="closeBtn">
+                    <img src="../../../../../assets/icons/failure.png" (click)="closeDropdown()"class="image">
+                    
+                </div>
             </div>
-            <div class="body-container">
-                <div class="notification-card">
-                    <ng-container *ngFor="let item of notificationList; let i=index">
-                        <div class="content-container">
-                            <div class="icon">
-                                <div class="txt">LA</div>
+            <div class="body-container" [ngClass]="{'scrollable': notificationList.length > 8}">
+                <div class="notification-card" >
+                 
+                        <ng-container *ngFor="let item of notificationList; let i=index">
+                            <div class="content-container content-body d-flex;justify-content-center;align-items-center">
+                               <div class="pd-right">
+                                <div class="text">
+                                    <div class="txt">LA</div>
+                                </div>
+                               </div>
+                                <div class="content">{{item.notification.message}} by {{item.createdBy.firstName}}
+                                    <div class="time">{{ formatTime(item.createdBy.updatedAt)}}</div>
+                                </div>
                             </div>
-                              <div class="content">{{item.notification.message}} by {{item.createdBy.firstName}}
-                                  <div class="time">{{ formatTime(item.createdBy.updatedAt)}}</div>
-                              </div>
-                        </div>
-                    </ng-container>
-
+                            <!-- <div >
+                                <div class="content-container">
+                                    <div class="icon">
+                                        <div class="txt">LA</div>
+                                    </div>
+                                    <div class="content">{{item.notification.message}} by {{item.createdBy.firstName}}
+                                        <div class="time">{{ formatTime(item.createdBy.updatedAt)}}</div>
+                                    </div>
+                                </div>
+                            </div>  -->
+                        </ng-container> 
     
                     <!-- <div class="content-container">
                         <div class="icon">
@@ -41,9 +57,12 @@
                 </div>
             </div>
             <div class="footer-container">
-                <a>View all</a>
+                <a (click)="toggleViewAll()">{{ showAllItems ? 'Show less' : 'View all' }}</a>
+           
+                <!-- <a>View all</a> -->
             </div>
         </div>
     </div>
     
 </ng-container>
+

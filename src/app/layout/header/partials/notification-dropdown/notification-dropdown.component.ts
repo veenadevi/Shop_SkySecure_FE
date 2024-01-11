@@ -70,4 +70,21 @@ export class NotificationDropdownComponent implements OnInit{
     
   }
 
+  closeDropdown() {
+    this.isOpen = false;
+  }
+  getNotificationListLength() {
+    return this.notificationList.length;
+  }
+  showAllItems = false;
+
+   
+  toggleViewAll() {
+    this.showAllItems = !this.showAllItems;
+  }
+
+   
+  getVisibleItems() {
+    return this.showAllItems ? this.notificationList : this.notificationList.slice(0, 8);
+  }
 }

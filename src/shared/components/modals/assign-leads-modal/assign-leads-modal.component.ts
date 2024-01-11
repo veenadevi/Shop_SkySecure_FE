@@ -40,8 +40,9 @@ export class AssignLeadsModalComponent implements OnInit{
     private activeModal : NgbActiveModal,
     private userAccountStore :UserAccountStore,
     private spinnerService : NgxSpinnerService,
-  ){
     
+  ){
+    this.yesterday.setDate(this.today.getDate() - 1);
   }
 
    // Cart Click
@@ -141,6 +142,7 @@ export class AssignLeadsModalComponent implements OnInit{
        
          res['assignedName'] = this.selectedUser.channelPartnerMaster.name
            this.passedData.emit(res);
+           console.log("Data in modal",res)
           this.activeModal.close();
         }
         
@@ -160,4 +162,7 @@ export class AssignLeadsModalComponent implements OnInit{
     this.selectedUser = event.value;
 
   }
+  
+  today: Date = new Date();
+  yesterday: Date = new Date(this.today);
 }
