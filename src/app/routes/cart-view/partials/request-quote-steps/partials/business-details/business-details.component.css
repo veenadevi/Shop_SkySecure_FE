@@ -265,3 +265,6 @@ input[type="number"]::-webkit-outer-spin-button {
     }
  
   }
+  .padding{
+    padding: 8px !important;
+  }

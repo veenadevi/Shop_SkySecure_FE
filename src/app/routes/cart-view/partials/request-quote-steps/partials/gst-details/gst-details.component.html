@@ -148,8 +148,8 @@
                   </div>
                   <div class="col  form-group">
                     <label for="tel">Phone<span class="mandatory">*</span></label>
-                    <input formControlName="phoneNo" type="tel" name="phone" class="form-control-01" id="tel" (input)="onInputChanges($event)"
-                      placeholder="Enter Your Phone No." >
+                    <input formControlName="phoneNo" type="tel" maxlength="10" name="phone" class="form-control-01" id="tel"  
+                    (keydown)="onKeyDown($event)" (keydown)="validateKeyDown($event)" placeholder="Enter Your Phone No." >
                       <!-- <div class="error-message" *ngIf="onGSTDetailsCLicked && gstFormOthers.get('phoneNo').hasError('required')">Phone No. is required</div> -->
                       <div *ngIf=" (isCheckedSelf && !isCheckedOthers) || (!isCheckedSelf && isCheckedOthers)">
                         <div class="error-message commonError" *ngIf="isOthers &&gstFormOthers.get('phoneNo')?.hasError('required')">

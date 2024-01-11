@@ -50,10 +50,9 @@
 
           
           <td class="form-group">
-            <input type="text" class="form-control" readonly formControlName="bcy_rate" placeholder="bcy_rate">
-           
+            <input type="text" class="form-control" readonly formControlName="bcy_rate" placeholder="bcy_rate"> 
           </td>
-
+          
 
          
         
@@ -66,10 +65,12 @@
             <!-- <button (click)="remove(i)" class="btn secondary-btn btn-color">Remove</button> -->
             <img class="remove" src=".../../assets/icons/Delete.svg" (click)="remove(i)"/>
           </td>
-        </tr>
+        </tr>  
+         
       </tbody>
     </table>
 </form>
+ 
 
   <div class="action-btn-holder">
       <div class="add-new-btn">
@@ -77,8 +78,9 @@
     </div>
     <ng-container >
     <div class="add-new-btn">
-      <button [disabled]="enableEdit" (click)="saveChanges()" class="btn primary">Request New Quote</button>
+      <button [disabled]="enableEdit || getFormData.controls.length === 0 " (click)="saveChanges()" class="btn primary">Request New Quote</button>
     </div>
+    
     <!-- <div class="add-new-btn">
       <button (click)="uploadPo('upload')" class="btn primary-btn">Upload PO</button>
   </div> -->
@@ -127,7 +129,7 @@
           <td>{{ account.quantity}}</td>
           <td>{{ account.priceType }}</td>
          
-          <td>{{ account.price | number : '1.2-2' }}</td>
+          <td>{{ account.price | number : '1.2-2' }}</td> 
           <td>{{ account.price *  account.quantity | number : '1.2-2' }}</td>
       
        

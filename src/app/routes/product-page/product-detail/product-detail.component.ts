@@ -779,7 +779,7 @@ featureCount=5;
   } */
 
  
-
+errorMessage:string='';
   images: any[] = [1,2,3,4];
 
 
@@ -803,6 +803,9 @@ featureCount=5;
       if(quantity>1){
         this.product.quantity = Number(this.product.quantity) - 1;
        // this.product.quantity = quantity-1;
+      }else{
+        this.product.quantity = 0;
+        this.errorMessage = "Quantity cannot be less than 1";
       }
     }
 

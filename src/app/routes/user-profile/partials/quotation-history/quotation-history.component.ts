@@ -68,7 +68,7 @@ export class QuotationHistoryComponent implements OnInit {
     //console.log("userAccountdetails  ",userAccountdetails._id)
     //this.getAllAccounts();
    // this.getAllCRMUsers();
-
+    // console.log("userAccountdetails",userAccountdetails,"this.userId",this.userId)
     this.getMyMarketplaceAccountList();
    
 
@@ -86,23 +86,35 @@ export class QuotationHistoryComponent implements OnInit {
     this.userProfileService.getMyMarketplaceAccountList(this.userId).subscribe( response => {
       //console.log("running here directly==")
       this.allMarketPlaceList=response;
-    
+      // console.log("response",response,  ) 
+      // console.log("updated date:", response.cartData ) 
+      this.allMarketPlaceList.sort((a, b) => {
+        const dateA = a?.cartData?.updatedAt ? new Date(a.cartData.updatedAt) : null;
+        const dateB = b?.cartData?.updatedAt ? new Date(b.cartData.updatedAt) : null;
+
+        if (dateA && dateB) {
+          return dateB.getTime() - dateA.getTime();
+        } else {
+          return 0;
+        }
+      });
+      
       this.spinner.hide();   
 
     })
    
   )
  
-}
+}  
 
   public getAccountById(account, status){
 
     let acc = JSON.stringify(account);
     let queryParams ={
       account : acc,
-
     }
 
+    // console.log("account",account)
     if(status === 'In Cart'){
       this.router.navigate(['/cart']);
     }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators,ValidationErrors,AbstractControl, } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Country, State } from 'country-state-city';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -64,8 +64,40 @@ export class GstDetailsComponent implements OnInit{
   }
 
 
+  onKeyDown(event: KeyboardEvent): void {
+    const key = event.key;
 
-
+    if (key === '-') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '+') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '*') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === '.') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  
+    if (key === 'e') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+    if (key === 'E') {
+      event.preventDefault(); // Prevent the negative sign from being entered
+    }
+  }
+  validateKeyDown(event: KeyboardEvent): void { 
+    const isNumberKey = event.key === 'Backspace' || event.key === 'Delete' || /^\d$/.test(event.key);
+   
+    if (!isNumberKey) {
+      event.preventDefault();
+      console.log('Invalid input. Only numbers are allowed.');
+       
+    }
+  }
+  
+  
   public setGSTDetailsForm(){
     this.gstForm = this.formBuilder.group(
       {
@@ -86,6 +118,7 @@ export class GstDetailsComponent implements OnInit{
           phoneNo: ['', [Validators.required,Validators.pattern(/^\d{10}$/)]],
         });
   }
+  
 
   public setSelfData(){
     let userDetails = this.userAccountStore.getUserDetails();
