@@ -90,15 +90,15 @@
 
                   <div class="col-sm-6 form-group">
                     <input formControlName="gstNo" type="text" class="form-control " name="gstNo" id="gst-no"
-                      placeholder="Enter your GST NO " [disabled]="disableGstNOField()" [ngClass]="{'disabled-input': disableGstNOField()}"> 
-                      <span class="text-danger" *ngIf="gstForm.get('gstNo').invalid && !disableGstNOField()">Please enter valid GST Number</span>
+                      placeholder="Enter your GST NO " [disabled]="disableGstNOField() " [ngClass]="{'disabled-input': disableGstNOField()}"> 
+                      <span class="text-danger" *ngIf="gstForm.get('gstNo').invalid && !disableGstNOField()  ">Please enter valid GST Number</span>
                   </div>
                   <p class="or ">(Or)</p>
                   <div class="col-sm-12 check-box-holder">
                     <input type="checkbox" formControlName="checkGstNil" class="form-check d-inline" id="chb"  >
                     <div for="chb" class="nogstLable" >&nbsp;I Don't Have Company GST Number.
                       
-                      <!-- {{disableCheckGstNil()}}3 -->
+                      {{disableCheckGstNil()}}
                     </div>
                   </div>
                   
@@ -173,7 +173,7 @@
                     <input formControlName="gstNo" type="text" class="form-control " name="gstNo" id="gst-no"
                       placeholder="Enter your GST NO"[disabled]="disableGstNOField()" [ngClass]="{'disabled-input': disableGstNOField()}" >
                     
-                      <!-- {{disableGstNOField()}}1 -->
+                      <!-- {{disableGstNOField()}} -->
                       <span class="text-danger" *ngIf="gstForm.get('gstNo').invalid && !disableGstNOField()">Please enter valid GST Number</span>
                   </div>
                   <p class="or ">(Or)</p>
@@ -181,9 +181,11 @@
                     <input type="checkbox" formControlName="checkGstNil" class="form-check d-inline" id="chb"  >
                     <div for="chb" class="nogstLable" >&nbsp;I Don't Have Company GST Number.
                       
-                      <!-- {{disableCheckGstNil()}}2 -->
+                      {{disableCheckGstNil()}}
                     </div>
                   </div>
+
+                  
                   
             </form>
         </ng-container>

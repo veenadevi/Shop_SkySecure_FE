@@ -402,19 +402,19 @@ export class GstDetailsComponent implements OnInit{
       ? this.gstForm.get('checkGstNil').value
       : this.gstFormOthers.get('checkGstNil').value;
   
-    if (isCheckGstNilChecked) {
-      if (this.selectedGSTType === 'self') {
-        this.gstForm.get('gstNo').disable();
-      } else {
+    if (  this.selectedGSTType === 'self' ) {
+      if(this.gstForm.get('checkGstNil').value)
+      this.gstForm.get('gstNo').disable();
+       
+    else
+      this.gstForm.get('gstNo').enable();
+    }
+      else{
+        if(this.gstFormOthers.get('checkGstNil').value)
         this.gstFormOthers.get('gstNo').disable();
-      }
-    } else {
-      if (this.selectedGSTType === 'self') {
-        this.gstForm.get('gstNo').enable();
-      } else {
+      else
         this.gstFormOthers.get('gstNo').enable();
       }
-    }
     return isCheckGstNilChecked;
   }
   
@@ -451,6 +451,11 @@ export class GstDetailsComponent implements OnInit{
     }
     
   }
+
+  
+
+  
+  
 
   public handleChange(val){
     if(val === 'self'){
