@@ -263,3 +263,34 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+.rate{
+    display: flex  !important;
+    justify-content: center  !important;
+    /* padding: 2rem 0rem 1rem 0 !important; */
+    padding:1.2rem 0rem 1.4rem 3rem !important;
+}
+.total { 
+    text-align: left !important;
+     padding: 0px !important;
+}
+.left {
+    text-align: left !important; 
+}
+.price{
+    padding:0rem !important;
+}
+.price_total{
+    padding: 1rem 0rem 0rem 5rem!important;
+    /* display: flex !important; */
+}
+ .data{
+    display: flex !important;
+ }
+ @media  ( min-width: 320px) and (max-width: 768px) {
+    .rate{
+       padding: 1.2rem 0rem 1.4rem 1rem !important;
+    }
+    .price_total  {
+        padding: 1.2rem 0rem 0rem 1rem!important;
+    }
+ }

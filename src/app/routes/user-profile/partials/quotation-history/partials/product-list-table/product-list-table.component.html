@@ -49,15 +49,15 @@
        
 
           
-          <td class="form-group">
-            <input type="text" class="form-control" readonly formControlName="bcy_rate" placeholder="bcy_rate"> 
+          <td class="form-group left  price_total">
+          <div class="data" >&#8377;&nbsp;<input type="text" class="form-control total price" readonly formControlName="bcy_rate" placeholder="bcy_rate"> </div>
           </td>
           
 
          
         
-          <td class="form-group">
-            <input type="text" class="form-control" readonly formControlName="item_total" placeholder="item_total" readonly>
+          <td class="form-group rate  left ">
+            &#8377;&nbsp;<input type="text" class="form-control total" readonly formControlName="item_total" placeholder="item_total" readonly>
             <span class="text-danger" *ngIf="group.get('item_total').touched && group.get('item_total')?.hasError('required')">Total required</span>
           </td>
           
