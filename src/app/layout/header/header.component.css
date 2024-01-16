@@ -379,8 +379,7 @@ ul .nav-text:hover {
 /* notification-section */
 .notification-dropdown{
     position: absolute;
-    /* top: 50px; */
-    top: 43px;
+    top: 50px;
     /* right: 82px; */
     right: 59px;
     z-index: 10;
