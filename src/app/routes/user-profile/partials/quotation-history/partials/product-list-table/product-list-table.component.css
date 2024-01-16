@@ -280,8 +280,7 @@ input[type="number"]::-webkit-outer-spin-button {
     padding:0rem !important;
 }
 .price_total{
-    padding: 1rem 0rem 0rem 5rem!important;
-    /* display: flex !important; */
+    padding: 1.4rem 2rem 0rem 4.2rem !important; 
 }
  .data{
     display: flex !important;
