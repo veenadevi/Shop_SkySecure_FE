@@ -223,9 +223,9 @@ export class ProductListTableComponent {
           priceType: [priceType, Validators.required],
           distributorPrice: parseFloat(this.getDistributorPrice(items).toFixed(2)),
           quantity: [items.quantity, [Validators.required]],
-          bcy_rate: [items.bcy_rate, [Validators.min(10)]],
+          bcy_rate: [items.bcy_rate.toFixed(2), [Validators.min(10)]],
           erp_price: parseFloat(this.getERPPrice(items).toFixed(2)),
-          bcy_rate_original: [items.bcy_rate, [Validators.min(10)]],
+          bcy_rate_original: [parseFloat(items.bcy_rate).toFixed(2), [Validators.min(10)]],
           tax_name: [items.tax_name, Validators.required],
           item_total: [parseFloat((items.bcy_rate * items.quantity).toFixed(2)), Validators.required],
           line_items_id: [items.line_item_id, null]
@@ -356,7 +356,7 @@ export class ProductListTableComponent {
       erp_price: [parseFloat(priceListValues.ERPPrice).toFixed(2), [Validators.min(10)]],
       bcy_rate: [parseFloat(priceListValues.price.toFixed(2)), [Validators.min(10)]],
       tax_name: ['', null],
-      item_total: [priceListValues.price, null],
+      item_total: [parseFloat(priceListValues.price.toFixed(2)), null],
       line_items_id: [data._id + 'temp']
     });
   }
@@ -527,7 +527,7 @@ export class ProductListTableComponent {
           "productId": this.cartDetails[index].productId,
           "quantity": element.value.quantity,
           "productName": this.cartDetails[index].productName,
-          "price": element.value.bcy_rate,
+          "price": element.value.bcy_rate ,
           "erpPrice": this.cartDetails[index].priceList[priceIndex].ERPPrice,
           "discountRate": this.cartDetails[index].priceList[priceIndex].discountRate,
           "priceType": element.value.priceType,
@@ -555,7 +555,7 @@ export class ProductListTableComponent {
             "productId": item._id,
             "quantity": element.value.quantity,
             "productName": item.name,
-            "price": element.value.bcy_rate,
+            "price": element.value.bcy_rate ,
             "erpPrice": item.priceList[priceIndex].ERPPrice,
             "discountRate": item.priceList[priceIndex].discountRate,
             "priceType": element.value.priceType,
@@ -575,7 +575,7 @@ export class ProductListTableComponent {
               "productId": item2._id,
               "quantity": element.value.quantity,
               "productName": item2.name,
-              "price": element.value.bcy_rate,
+              "price": element.value.bcy_rate.toFixed(2),
               "erpPrice": item2.priceList[0].ERPPrice,
               "discountRate": item2.priceList[0].discountRate,
               "priceType": item2.priceList[0].priceType,
@@ -618,7 +618,7 @@ export class ProductListTableComponent {
         let currentPrice=this.getPriceByType(lineItemId,type )
       
         let quanTotal = item.get('quantity').value * currentPrice.price;
-        item.get('bcy_rate').setValue(currentPrice.price);
+        item.get('bcy_rate').setValue(currentPrice.price.toFixed(2));
         item.get('distributorPrice').setValue(currentPrice.distributorPrice);
         item.get('erp_price').setValue(currentPrice.ERPPrice);
         item.get('item_total').setValue(quanTotal.toFixed(2));
@@ -628,7 +628,7 @@ export class ProductListTableComponent {
         let currentPrice1=this.getPriceByType(lineItemId,type )
        
         let quanTotal1 = item.get('quantity').value * currentPrice1.price;
-        item.get('bcy_rate').setValue(currentPrice1.price);
+        item.get('bcy_rate').setValue(currentPrice1.price.toFixed(2));
         item.get('distributorPrice').setValue(currentPrice1.distributorPrice);
         item.get('erp_price').setValue(currentPrice1.ERPPrice);
         item.get('item_total').setValue(quanTotal1.toFixed(2));

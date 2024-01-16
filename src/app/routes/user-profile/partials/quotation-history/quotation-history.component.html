@@ -79,9 +79,16 @@
                              
                                 {{ account.cartData.updatedAt | dateFormat }}
                               </ng-container> -->
-                              <ng-container *ngIf="account?.cartData?.assignedChannelPartnerId; else noValuecp">
+                              <!-- <ng-container *ngIf="account?.cartData?.assignedChannelPartnerId; else noValuecp">
                                 {{ account.cartData.updatedAt | dateFormat }}
-                             </ng-container>
+                             </ng-container> -->
+
+                             <ng-container *ngIf="account?.cartData?.updatedAt  && account.cartData.status === 'Estimate Resent' ; else noValuecp">
+                                {{ account.cartData.updatedAt | dateFormat }}
+                              </ng-container>
+                              <ng-container *ngIf="account?.cartData?.assignedChannelPartnerId; else noValuecp">
+                                {{ account.cartData.createdAt | dateFormat }}
+                              </ng-container> 
                               <ng-template #noValuecp>-</ng-template>
                          </td> 
     
