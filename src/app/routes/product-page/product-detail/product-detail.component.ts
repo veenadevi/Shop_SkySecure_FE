@@ -27,10 +27,10 @@ export class ProductDetailComponent implements OnInit{
   discountRate: number =120; 
   monthlyPrice: number = this.discountRate / 12;
   isMonthly: boolean = true;
-  
+  public visible: boolean = false;
   public i: number;
 
-
+  public enableEdit: boolean
   displayPrice:number;
   displayERPPrice:number;
   displayPriceType:number;
@@ -505,6 +505,7 @@ export class ProductDetailComponent implements OnInit{
 featureCount=5;
 
   public ngOnInit() : void {
+    this.enableEdit = false
     const productId = this.route.snapshot.paramMap.get('id');
     this.viewAllFeature=false;
     
@@ -516,7 +517,7 @@ featureCount=5;
     // this.productListToCompare =uniqueElements;
 
   
-   
+  //  this.showDialog();
     this.compareProductsLength$.subscribe();
   }
 
@@ -806,9 +807,14 @@ errorMessage:string='';
       }else{
         this.product.quantity = 0;
         this.errorMessage = "Quantity cannot be less than 1";
+        this.enableEdit = true
+        this.showDialog1();
       }
     }
-
+ 
+ public showDialog1() {
+  this.visible = true;
+}
   public requestQuote (product : any) : void {
 
     
@@ -912,8 +918,7 @@ errorMessage:string='';
         }
       })*/
       
-    }
-
+    }  
 
   }
 

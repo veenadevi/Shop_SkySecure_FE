@@ -4768,3 +4768,8 @@ margin-left: 20%;
   padding-top: 12px;
   color: #B82727; 
 }
+.quantity{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

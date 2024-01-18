@@ -93,7 +93,7 @@
                                     {{ errorMessage }}
                                   </div>
                                   
-                                <button class="btn tertiary-btn" (click)="requestQuote(product)">Add To Cart</button>
+                                <button class="btn tertiary-btn" (click)="requestQuote(product)" [disabled]="enableEdit && product.quantity === 0">Add To Cart</button>
                            </div>
                         </ng-container>
                         <ng-template #second>
@@ -474,7 +474,7 @@
                         <span class="request-btn"><button class="btn secondary"
                             (click)="addToCompare(product, 'fromProd')"
                                            >Add to Compare</button>
-                            <button class="btn primary" (click)="requestQuote(product)"
+                            <button class="btn primary" (click)="requestQuote(product)" [disabled]="enableEdit && product.quantity === 0"
                                 style="margin-left: 4%;">Request Quote</button></span>
     
                         <hr>
@@ -1320,7 +1320,7 @@
                                 <div class="sim-prod-btn-cont">
                                     <span>
                                         <button class="btn primary-btn"
-                                            (click)="requestQuote(item)">Request Quote</button>
+                                            (click)="requestQuote(item)" [disabled]="enableEdit && product.quantity === 0">Request Quote</button>
                                     </span>
                                 </div>
     
@@ -1457,3 +1457,17 @@
 
     <!-- <iframe src="https://web.powerva.microsoft.com/environments/Default-547b64a7-e66e-48df-a146-3e898cbcb60f/bots/crdba_skysecure/webchat?__version__=2" frameborder="0" style="width: 500px; height: 600px; margin-left: 7.25%;"></iframe> -->
 </ng-container>
+
+<div class="card flex justify-content-center align-items-center">
+    <!-- <p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button> -->
+    <p-dialog header="Warning Message" [modal]="true" [dismissableMask]="true" [(visible)]="visible" [style]="{width: '36vw'}" [maximizable]="false">
+        <!-- <ol> 
+            <li>Quantity Should be  atleast 1 </li>
+            </ol> -->
+            <div>
+                <p class="quantity">Quantity cannot be less than 1 </p>
+            </div>
+
+    </p-dialog>
+ </div>
+ 
